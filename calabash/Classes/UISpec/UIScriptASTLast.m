@@ -1,9 +1,7 @@
 //
 //  UIScriptASTLast.m
-//  MobileBank
-//
 //  Created by Karl Krukow on 16/08/11.
-//  Copyright (c) 2011 Trifork. All rights reserved.
+//  Copyright (c) 2011 LessPainful. All rights reserved.
 //
 
 #import "UIScriptASTLast.h"

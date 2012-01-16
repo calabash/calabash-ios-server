@@ -1,9 +1,7 @@
 //
 //  Operation.m
-//  iLessPainfulServer
-//
 //  Created by Karl Krukow on 14/08/11.
-//  Copyright 2011 Trifork. All rights reserved.
+//  Copyright 2011 LessPainful. All rights reserved.
 //
 
 #import "LPOperation.h"
@@ -58,7 +56,7 @@
 	NSMethodSignature *tSig = [target methodSignatureForSelector:_selector];
 	NSUInteger argc = tSig.numberOfArguments - 2;
 	if( argc != [_arguments count] ) {
-        *error = [NSError errorWithDomain:@"iLessPainful Server" code:1 
+        *error = [NSError errorWithDomain:@"iCopyright 2011 LessPainful. All rights reserved. Server" code:1 
                                  userInfo:
                   [NSDictionary dictionaryWithObjectsAndKeys:
                     @"Arity mismatch", @"reason",

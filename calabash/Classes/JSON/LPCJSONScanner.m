@@ -35,7 +35,7 @@
 #define TREAT_COMMENTS_AS_WHITESPACE 0
 #endif // !defined(TREAT_COMMENTS_AS_WHITESPACE)
 
-NSString *const kJSONScannerErrorDomain = @"kJSONScannerErrorDomain";
+NSString *const kLPJSONScannerErrorDomain = @"kJSONScannerErrorDomain";
 
 inline static int HexToInt(char inCharacter)
     {
@@ -135,7 +135,7 @@ static id kNSNO = NULL;
         {
         if (outError)
             {
-            *outError = [self error:kJSONScannerErrorCode_CouldNotDecodeData description:@"Could not scan data. Data wasn't encoded properly?"];
+            *outError = [self error:kLPJSONScannerErrorCode_CouldNotDecodeData description:@"Could not scan data. Data wasn't encoded properly?"];
             }
         return(NO);
         }
@@ -204,12 +204,12 @@ static id kNSNO = NULL;
             theResult = NO;
             if (outError)
                 {
-                *outError = [self error:kJSONScannerErrorCode_CouldNotScanObject description:@"Could not scan object. Character not a valid JSON character."];
+                *outError = [self error:kLPJSONScannerErrorCode_CouldNotScanObject description:@"Could not scan object. Character not a valid JSON character."];
                 NSMutableDictionary *theUserInfo = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                     @"Could not scan object. Character not a valid JSON character.", NSLocalizedDescriptionKey,
                     NULL];
                 [theUserInfo addEntriesFromDictionary:self.userInfoForScanLocation];
-                *outError = [NSError errorWithDomain:kJSONScannerErrorDomain code:kJSONScannerErrorCode_CouldNotScanObject userInfo:theUserInfo];
+                *outError = [NSError errorWithDomain:kLPJSONScannerErrorDomain code:kLPJSONScannerErrorCode_CouldNotScanObject userInfo:theUserInfo];
                 }
             break;
         }
@@ -230,7 +230,7 @@ static id kNSNO = NULL;
         {
         if (outError)
             {
-            *outError = [self error:kJSONScannerErrorCode_DictionaryStartCharacterMissing description:@"Could not scan dictionary. Dictionary that does not start with '{' character."];
+            *outError = [self error:kLPJSONScannerErrorCode_DictionaryStartCharacterMissing description:@"Could not scan dictionary. Dictionary that does not start with '{' character."];
             }
         return(NO);
         }
@@ -250,7 +250,7 @@ static id kNSNO = NULL;
             [self setScanLocation:theScanLocation];
             if (outError)
                 {
-                *outError = [self error:kJSONScannerErrorCode_DictionaryKeyScanFailed description:@"Could not scan dictionary. Failed to scan a key."];
+                *outError = [self error:kLPJSONScannerErrorCode_DictionaryKeyScanFailed description:@"Could not scan dictionary. Failed to scan a key."];
                 }
             [theDictionary release];
             return(NO);
@@ -263,7 +263,7 @@ static id kNSNO = NULL;
             [self setScanLocation:theScanLocation];
             if (outError)
                 {
-                *outError = [self error:kJSONScannerErrorCode_DictionaryKeyNotTerminated description:@"Could not scan dictionary. Key was not terminated with a ':' character."];
+                *outError = [self error:kLPJSONScannerErrorCode_DictionaryKeyNotTerminated description:@"Could not scan dictionary. Key was not terminated with a ':' character."];
                 }
             [theDictionary release];
             return(NO);
@@ -275,7 +275,7 @@ static id kNSNO = NULL;
             [self setScanLocation:theScanLocation];
             if (outError)
                 {
-                *outError = [self error:kJSONScannerErrorCode_DictionaryValueScanFailed description:@"Could not scan dictionary. Failed to scan a value."];
+                *outError = [self error:kLPJSONScannerErrorCode_DictionaryValueScanFailed description:@"Could not scan dictionary. Failed to scan a value."];
                 }
             [theDictionary release];
             return(NO);
@@ -298,7 +298,7 @@ static id kNSNO = NULL;
                 [self setScanLocation:theScanLocation];
                 if (outError)
                     {
-                    *outError = [self error:kJSONScannerErrorCode_DictionaryKeyValuePairNoDelimiter description:@"Could not scan dictionary close delimiter."];
+                    *outError = [self error:kLPJSONScannerErrorCode_DictionaryKeyValuePairNoDelimiter description:@"Could not scan dictionary close delimiter."];
                     }
                 [theDictionary release];
                 return(NO);
@@ -318,7 +318,7 @@ static id kNSNO = NULL;
         [self setScanLocation:theScanLocation];
         if (outError)
             {
-            *outError = [self error:kJSONScannerErrorCode_DictionaryNotTerminated description:@"Could not scan dictionary. Dictionary not terminated by a '}' character."];
+            *outError = [self error:kLPJSONScannerErrorCode_DictionaryNotTerminated description:@"Could not scan dictionary. Dictionary not terminated by a '}' character."];
             }
         [theDictionary release];
         return(NO);
@@ -354,7 +354,7 @@ static id kNSNO = NULL;
         {
         if (outError)
             {
-            *outError = [self error:kJSONScannerErrorCode_ArrayStartCharacterMissing description:@"Could not scan array. Array not started by a '[' character."];
+            *outError = [self error:kLPJSONScannerErrorCode_ArrayStartCharacterMissing description:@"Could not scan array. Array not started by a '[' character."];
             }
         return(NO);
         }
@@ -370,12 +370,12 @@ static id kNSNO = NULL;
             [self setScanLocation:theScanLocation];
             if (outError)
                 {
-                *outError = [self error:kJSONScannerErrorCode_ArrayValueScanFailed description:@"Could not scan array. Could not scan a value."];
+                *outError = [self error:kLPJSONScannerErrorCode_ArrayValueScanFailed description:@"Could not scan array. Could not scan a value."];
                 NSMutableDictionary *theUserInfo = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                     @"Could not scan array. Could not scan a value.", NSLocalizedDescriptionKey,
                     NULL];
                 [theUserInfo addEntriesFromDictionary:self.userInfoForScanLocation];
-                *outError = [NSError errorWithDomain:kJSONScannerErrorDomain code:kJSONScannerErrorCode_ArrayValueScanFailed userInfo:theUserInfo];
+                *outError = [NSError errorWithDomain:kLPJSONScannerErrorDomain code:kLPJSONScannerErrorCode_ArrayValueScanFailed userInfo:theUserInfo];
                 }
             [theArray release];
             return(NO);
@@ -387,7 +387,7 @@ static id kNSNO = NULL;
                 {
                 if (outError)
                     {
-                    *outError = [self error:kJSONScannerErrorCode_ArrayValueIsNull description:@"Could not scan array. Value is NULL."];
+                    *outError = [self error:kLPJSONScannerErrorCode_ArrayValueIsNull description:@"Could not scan array. Value is NULL."];
                     }
                 [theArray release];
                 return(NO);
@@ -407,7 +407,7 @@ static id kNSNO = NULL;
                 [self setScanLocation:theScanLocation];
                 if (outError)
                     {
-                    *outError = [self error:kJSONScannerErrorCode_ArrayNotTerminated description:@"Could not scan array. Array not terminated by a ']' character."];
+                    *outError = [self error:kLPJSONScannerErrorCode_ArrayNotTerminated description:@"Could not scan array. Array not terminated by a ']' character."];
                     }
                 [theArray release];
                 return(NO);
@@ -425,7 +425,7 @@ static id kNSNO = NULL;
         [self setScanLocation:theScanLocation];
         if (outError)
             {
-            *outError = [self error:kJSONScannerErrorCode_ArrayNotTerminated description:@"Could not scan array. Array not terminated by a ']' character."];
+            *outError = [self error:kLPJSONScannerErrorCode_ArrayNotTerminated description:@"Could not scan array. Array not terminated by a ']' character."];
             }
         [theArray release];
         return(NO);
@@ -463,7 +463,7 @@ static id kNSNO = NULL;
         [self setScanLocation:theScanLocation];
         if (outError)
             {
-            *outError = [self error:kJSONScannerErrorCode_StringNotStartedWithBackslash description:@"Could not scan string constant. String not started by a '\"' character."];
+            *outError = [self error:kLPJSONScannerErrorCode_StringNotStartedWithBackslash description:@"Could not scan string constant. String not started by a '\"' character."];
             }
         [theString release];
         return(NO);
@@ -513,7 +513,7 @@ static id kNSNO = NULL;
                             [self setScanLocation:theScanLocation];
                             if (outError)
                                 {
-                                *outError = [self error:kJSONScannerErrorCode_StringUnicodeNotDecoded description:@"Could not scan string constant. Unicode character could not be decoded."];
+                                *outError = [self error:kLPJSONScannerErrorCode_StringUnicodeNotDecoded description:@"Could not scan string constant. Unicode character could not be decoded."];
                                 }
                             [theString release];
                             return(NO);
@@ -529,7 +529,7 @@ static id kNSNO = NULL;
                         [self setScanLocation:theScanLocation];
                         if (outError)
                             {
-                            *outError = [self error:kJSONScannerErrorCode_StringUnknownEscapeCode description:@"Could not scan string constant. Unknown escape code."];
+                            *outError = [self error:kLPJSONScannerErrorCode_StringUnknownEscapeCode description:@"Could not scan string constant. Unknown escape code."];
                             }
                         [theString release];
                         return(NO);
@@ -543,7 +543,7 @@ static id kNSNO = NULL;
             {
             if (outError)
                 {
-                *outError = [self error:kJSONScannerErrorCode_StringNotTerminated description:@"Could not scan string constant. No terminating double quote character."];
+                *outError = [self error:kLPJSONScannerErrorCode_StringNotTerminated description:@"Could not scan string constant. No terminating double quote character."];
                 }
             [theString release];
             return(NO);
@@ -586,7 +586,7 @@ static id kNSNO = NULL;
         {
         if (outError)
             {
-            *outError = [self error:kJSONScannerErrorCode_NumberNotScannable description:@"Could not scan number constant."];
+            *outError = [self error:kLPJSONScannerErrorCode_NumberNotScannable description:@"Could not scan number constant."];
             }
         return(NO);
         }
@@ -634,7 +634,7 @@ static id kNSNO = NULL;
         inDescription, NSLocalizedDescriptionKey,
         NULL];
     [theUserInfo addEntriesFromDictionary:self.userInfoForScanLocation];
-    NSError *theError = [NSError errorWithDomain:kJSONScannerErrorDomain code:inCode userInfo:theUserInfo];
+    NSError *theError = [NSError errorWithDomain:kLPJSONScannerErrorDomain code:inCode userInfo:theUserInfo];
     return(theError);
     }
 
