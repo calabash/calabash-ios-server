@@ -1,12 +1,11 @@
 //
-//  LessPainfulServer.m
-//  iLessPainfulServer
+//  CalabashServer.m
 //
 //  Created by Karl Krukow on 11/08/11.
-//  Copyright 2011 Trifork. All rights reserved.
+//  Copyright 2011 LessPainful. All rights reserved.
 //
 
-#import "LessPainfulServer.h"
+#import "CalabashServer.h"
 #import "HTTPServer.h"
 #import "DDLog.h"
 #import "DDTTYLogger.h"
@@ -18,14 +17,14 @@
 //#import "LPScreencastRoute.h"
 static const int ddLogLevel = LOG_LEVEL_INFO;
 
-@interface LessPainfulServer()
+@interface CalabashServer()
 - (void) start;
 @end
-@implementation LessPainfulServer
+@implementation CalabashServer
 
 
 + (void) start {
-    LessPainfulServer* server = [[LessPainfulServer alloc] init];
+    CalabashServer* server = [[CalabashServer alloc] init];
     [server start];
 }
 
@@ -56,7 +55,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 
 		_httpServer = [[[HTTPServer alloc]init] retain];
 		
-		[_httpServer setName:@"iLessPainful Server"];
+		[_httpServer setName:@"Calabash Server"];
 		[_httpServer setType:@"_http._tcp."];
 		[_httpServer setConnectionClass:[LPRouter class]];
 		[_httpServer setPort:37265];

@@ -1,9 +1,7 @@
 //
 //  UIScriptASTClassName.m
-//  iLessPainfulServer
-//
 //  Created by Karl Krukow on 12/08/11.
-//  Copyright 2011 Trifork. All rights reserved.
+//  Copyright 2011 LessPainful. All rights reserved.
 //
 
 #import "UIScriptASTClassName.h"

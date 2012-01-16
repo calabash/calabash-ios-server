@@ -34,8 +34,8 @@
 extern NSString *const kLPJSONDeserializerErrorDomain /* = @"CJSONDeserializerErrorDomain" */;
 
 enum {
-    kJSONDeserializationOptions_MutableContainers = kLPJSONScannerOptions_MutableContainers,
-    kJSONDeserializationOptions_MutableLeaves = kLPJSONScannerOptions_MutableLeaves,
+    kLPJSONDeserializationOptions_MutableContainers = kLPJSONScannerOptions_MutableContainers,
+    kLPJSONDeserializationOptions_MutableLeaves = kLPJSONScannerOptions_MutableLeaves,
 };
 typedef NSUInteger LPEJSONDeserializationOptions;
 

@@ -58,38 +58,38 @@ typedef NSUInteger LPEJSONScannerOptions;
 
 @end
 
-extern NSString *const kJSONScannerErrorDomain /* = @"kJSONScannerErrorDomain" */;
+extern NSString *const kLPJSONScannerErrorDomain /* = @"kJSONScannerErrorDomain" */;
 
 typedef enum {
     
     // Fundamental scanning errors
-    kJSONScannerErrorCode_NothingToScan = -11, 
-    kJSONScannerErrorCode_CouldNotDecodeData = -12, 
-    kJSONScannerErrorCode_CouldNotSerializeData = -13,
-    kJSONScannerErrorCode_CouldNotSerializeObject = -14, 
-    kJSONScannerErrorCode_CouldNotScanObject = -15, 
+    kLPJSONScannerErrorCode_NothingToScan = -11, 
+    kLPJSONScannerErrorCode_CouldNotDecodeData = -12, 
+    kLPJSONScannerErrorCode_CouldNotSerializeData = -13,
+    kLPJSONScannerErrorCode_CouldNotSerializeObject = -14, 
+    kLPJSONScannerErrorCode_CouldNotScanObject = -15, 
     
     // Dictionary scanning
-    kJSONScannerErrorCode_DictionaryStartCharacterMissing = -101, 
-    kJSONScannerErrorCode_DictionaryKeyScanFailed = -102, 
-    kJSONScannerErrorCode_DictionaryKeyNotTerminated = -103, 
-    kJSONScannerErrorCode_DictionaryValueScanFailed = -104, 
-    kJSONScannerErrorCode_DictionaryKeyValuePairNoDelimiter = -105, 
-    kJSONScannerErrorCode_DictionaryNotTerminated = -106, 
+    kLPJSONScannerErrorCode_DictionaryStartCharacterMissing = -101, 
+    kLPJSONScannerErrorCode_DictionaryKeyScanFailed = -102, 
+    kLPJSONScannerErrorCode_DictionaryKeyNotTerminated = -103, 
+    kLPJSONScannerErrorCode_DictionaryValueScanFailed = -104, 
+    kLPJSONScannerErrorCode_DictionaryKeyValuePairNoDelimiter = -105, 
+    kLPJSONScannerErrorCode_DictionaryNotTerminated = -106, 
     
     // Array scanning
-    kJSONScannerErrorCode_ArrayStartCharacterMissing = -201, 
-    kJSONScannerErrorCode_ArrayValueScanFailed = -202, 
-    kJSONScannerErrorCode_ArrayValueIsNull = -203, 
-    kJSONScannerErrorCode_ArrayNotTerminated = -204,
+    kLPJSONScannerErrorCode_ArrayStartCharacterMissing = -201, 
+    kLPJSONScannerErrorCode_ArrayValueScanFailed = -202, 
+    kLPJSONScannerErrorCode_ArrayValueIsNull = -203, 
+    kLPJSONScannerErrorCode_ArrayNotTerminated = -204,
     
     // String scanning
-    kJSONScannerErrorCode_StringNotStartedWithBackslash = -301, 
-    kJSONScannerErrorCode_StringUnicodeNotDecoded = -302, 
-    kJSONScannerErrorCode_StringUnknownEscapeCode = -303, 
-    kJSONScannerErrorCode_StringNotTerminated = -304,
+    kLPJSONScannerErrorCode_StringNotStartedWithBackslash = -301, 
+    kLPJSONScannerErrorCode_StringUnicodeNotDecoded = -302, 
+    kLPJSONScannerErrorCode_StringUnknownEscapeCode = -303, 
+    kLPJSONScannerErrorCode_StringNotTerminated = -304,
     
     // Number scanning
-    kJSONScannerErrorCode_NumberNotScannable = -401
+    kLPJSONScannerErrorCode_NumberNotScannable = -401
     
-} EJSONScannerErrorCode;
+} LPEJSONScannerErrorCode;

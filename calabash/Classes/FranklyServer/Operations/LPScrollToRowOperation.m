@@ -1,9 +1,9 @@
 //
 //  ScrollOperation.m
-//  MobileBank
+//  Calabash
 //
 //  Created by Karl Krukow on 18/08/11.
-//  Copyright (c) 2011 Trifork. All rights reserved.
+//  Copyright (c) 2011 LessPainful. All rights reserved.
 //
 
 #import "LPScrollToRowOperation.h"
