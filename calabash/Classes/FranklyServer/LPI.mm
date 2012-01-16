@@ -1,20 +1,19 @@
 //
 //  LPI.mm
-//  MobileBank
 //
 //  Created by Karl Krukow on 18/08/11.
-//  Copyright (c) 2011 Trifork. All rights reserved.
+//  Copyright (c) 2011 LessPainful. All rights reserved.
 //
 
-#include <iostream>
-#import "LessPainfulServer.h"
-int ___lesspainfulserverinit();
 
-int ___lesspainfulserver = ___lesspainfulserverinit();
+#import "CalabashServer.h"
+int ___calabashserverinit();
 
-int ___lesspainfulserverinit() {
+int ___lesspainfulserver = ___calabashserverinit();
+
+int ___calabashserverinit() {
     NSAutoreleasePool *ap = [[NSAutoreleasePool alloc] init];
-    [LessPainfulServer start];
+    [CalabashServer start];
     [ap release];
     return 42;
 }
