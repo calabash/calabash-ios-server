@@ -191,9 +191,12 @@ static NSCharacterSet* ping = nil;
 
 - (UIScriptAST*) parseIndexOrProperty:(NSString*) token {
     NSArray* colonSep=[token componentsSeparatedByCharactersInSet:colon];
-    if ([colonSep count] != 2) {
+    if ([colonSep count] < 2) {
+        NSLog(@"Warning: token %@ has no : separator", token);
         return nil;
     }
+    
+    //handle general case...
     //propOrIndex:value
     NSString *propNameOrIndex = [colonSep objectAtIndex:0];
     if ([@"view" isEqualToString:propNameOrIndex]) {
@@ -209,7 +212,7 @@ static NSCharacterSet* ping = nil;
     }
     //general property
     NSString *propName = [colonSep objectAtIndex:0];
-    NSString* propValTok = [colonSep objectAtIndex:1];
+    NSString* propValTok = [[colonSep subarrayWithRange:NSMakeRange(1, [colonSep count]-1)] componentsJoinedByString:@":"];
     UIScriptASTWith* withProp = [[UIScriptASTWith alloc] initWithSelectorName:propName];
     
     [self parseLiteralValue:propValTok addToWithAST:withProp];

@@ -120,7 +120,8 @@
                     }
                     break;
                 case UIScriptLiteralTypeString:
-                    if (val != nil && ([(NSString*)val rangeOfString:(NSString*) self.objectValue options:NSCaseInsensitiveSearch].location != NSNotFound)) {
+                    if (val != nil && 
+                        ([(NSString*)val isEqualToString:(NSString*)self.objectValue])) {
                         [res addObject:v];
                     } 
                     break;
