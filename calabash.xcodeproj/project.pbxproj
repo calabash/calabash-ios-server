@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B111321114D498F800982BBC /* LPNDElementWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B111320F14D498F800982BBC /* LPNDElementWrapper.h */; };
+		B111321214D498F800982BBC /* LPNDElementWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B111321014D498F800982BBC /* LPNDElementWrapper.m */; };
 		B121E79814B6D9FB0034C6A9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		B121E79E14B6D9FB0034C6A9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B121E79C14B6D9FB0034C6A9 /* InfoPlist.strings */; };
 		B184FD8914B6DAE1002A744C /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
@@ -128,6 +130,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B111320F14D498F800982BBC /* LPNDElementWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPNDElementWrapper.h; sourceTree = "<group>"; };
+		B111321014D498F800982BBC /* LPNDElementWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPNDElementWrapper.m; sourceTree = "<group>"; };
 		B121E79414B6D9FB0034C6A9 /* calabash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; path = calabash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B121E79714B6D9FB0034C6A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B121E79B14B6D9FB0034C6A9 /* calabash-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "calabash-Info.plist"; sourceTree = "<group>"; };
@@ -239,7 +243,7 @@
 		B184FE0714B6DB2B002A744C /* UIScriptASTWith.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = UIScriptASTWith.h; sourceTree = "<group>"; };
 		B184FE0814B6DB2B002A744C /* UIScriptASTWith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = UIScriptASTWith.m; sourceTree = "<group>"; };
 		B184FE0914B6DB2B002A744C /* UIScriptParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = UIScriptParser.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		B184FE0A14B6DB2B002A744C /* UIScriptParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = UIScriptParser.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		B184FE0A14B6DB2B002A744C /* UIScriptParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = UIScriptParser.m; sourceTree = "<group>"; };
 		B184FE0C14B6DB2B002A744C /* LPJSONUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LPJSONUtils.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPJSONUtils.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B184FE0E14B6DB2B002A744C /* LPTouchUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPTouchUtils.h; sourceTree = "<group>"; };
@@ -517,6 +521,8 @@
 		B184FDF814B6DB2B002A744C /* UISpec */ = {
 			isa = PBXGroup;
 			children = (
+				B111320F14D498F800982BBC /* LPNDElementWrapper.h */,
+				B111321014D498F800982BBC /* LPNDElementWrapper.m */,
 				B184FDF914B6DB2B002A744C /* UIScriptAST.h */,
 				B184FDFA14B6DB2B002A744C /* UIScriptAST.m */,
 				B184FDFB14B6DB2B002A744C /* UIScriptASTALL.h */,
@@ -619,6 +625,7 @@
 				B184FE8114B6DB2B002A744C /* LPJSONUtils.h in Headers */,
 				B184FE8314B6DB2B002A744C /* LPTouchUtils.h in Headers */,
 				B184FE8C14B6DC80002A744C /* LPMapRoute.h in Headers */,
+				B111321114D498F800982BBC /* LPNDElementWrapper.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -772,6 +779,7 @@
 				B184FE9114B6DD33002A744C /* LPScreenshotRoute.m in Sources */,
 				B184FE9314B6DDA1002A744C /* LPOperation.m in Sources */,
 				B184FE9714B6F64A002A744C /* LPCJSONDeserializer.m in Sources */,
+				B111321214D498F800982BBC /* LPNDElementWrapper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

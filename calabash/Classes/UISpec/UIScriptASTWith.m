@@ -5,6 +5,8 @@
 //
 
 #import "UIScriptASTWith.h"
+#import "NDWebElement.h"
+#import "LPNDElementWrapper.h"
 
 @implementation UIScriptASTWith
 @synthesize selectorName=_selectorName;
@@ -42,6 +44,21 @@
             return @"UIScriptLiteralTypeUnknown";
     }
 }
+
+-(void) handleWebView:(UIWebView *)webView result: (NSMutableArray *) res {
+    if (self.valueType == UIScriptLiteralTypeString) {
+        NSString * query = [NSString stringWithFormat:@"/html//*[contains(text(),'%@')]",self.objectValue];
+        NSArray* arr = [NDWebElement findElementsBy:kByXpath value:query maxCount:kFindEverything webView:webView];
+        for (NDWebElement* el in arr) {
+            if  ([el isDisplayed]) {
+                [res addObject:[[[LPNDElementWrapper alloc] initWithElement: el] autorelease]];
+            }
+        }
+    } else {
+        NSLog(@"Attempting to look for non string in web view");
+    }
+}
+
 
 - (NSMutableArray*) evalWith:(NSArray*) views direction:(UIScriptASTDirectionType) dir {
     NSMutableArray* res = [NSMutableArray arrayWithCapacity:8];
@@ -111,6 +128,16 @@
 //	}
 //
     for (UIView* v in views) {
+        if ([v isHidden]) continue;
+        if (([self.selectorName isEqualToString:@"marked"] 
+            || [self.selectorName isEqualToString:@"accessibilityLabel"]) &&
+            [v isKindOfClass:[UIWebView class]]) {
+            
+            [self handleWebView:(UIWebView *)v result:res];
+            continue;
+            
+        }        
+        
         if ([v respondsToSelector:_selector]) {
             void* val = [v performSelector:_selector];
             switch (self.valueType) {
@@ -119,12 +146,13 @@
                         [res addObject:v];
                     }
                     break;
-                case UIScriptLiteralTypeString:
+                case UIScriptLiteralTypeString: {
                     if (val != nil && 
                         ([(NSString*)val isEqualToString:(NSString*)self.objectValue])) {
                         [res addObject:v];
                     } 
                     break;
+                }
                 case UIScriptLiteralTypeBool:
                     if (self.boolValue == (BOOL)val) {
                         [res addObject:v];
