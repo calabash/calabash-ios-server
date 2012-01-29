@@ -1,9 +1,8 @@
 //
 //  LPNDElementWrapper.h
-//  ProjectX
 //
 //  Created by Karl Krukow on 28/01/12.
-//  Copyright (c) 2012 Danske Bank Group. All rights reserved.
+//  Copyright (c) 2012 LessPainful. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
