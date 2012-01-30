@@ -14,6 +14,7 @@
 #import "LPMapRoute.h"
 #import "LPRecordRoute.h"
 #import "LPPlaybackRoute.h"
+#import "LPAsyncPlaybackRoute.h"
 //#import "LPScreencastRoute.h"
 static const int ddLogLevel = LOG_LEVEL_INFO;
 
@@ -47,6 +48,11 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         LPPlaybackRoute *pr =[LPPlaybackRoute new];
         [LPRouter addRoute:pr forPath:@"/play"];
         [pr release];
+        
+        LPAsyncPlaybackRoute *apr =[LPAsyncPlaybackRoute new];
+        [LPRouter addRoute:apr forPath:@"/aplay"];
+        [apr release];
+
 //        
 //        LPScreencastRoute *scr = [LPScreencastRoute new];
 //        [LPRouter addRoute:scr forPath:@"/screencast"];
