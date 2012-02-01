@@ -9,12 +9,15 @@
 #import "LPRoute.h"
 #import "HTTPResponse.h"
 @interface LPAsyncPlaybackRoute : NSObject<LPRoute,HTTPResponse> 
-{
+{    
     BOOL _done;
     NSArray *_events;
     HTTPConnection *_conn;
     NSDictionary *_data;
     NSDictionary *_jsonResponse;
+    
+    NSData *_bytes;
+    
 }
 
 @property (nonatomic, retain) NSArray *events;
