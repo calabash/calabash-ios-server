@@ -12,11 +12,12 @@
 #import "UIScriptASTFirst.h"
 #import "UIScriptASTLast.h"
 #import "UIScriptASTDirection.h"
+#import "UIScriptASTPredicate.h"
 
 
 @interface UIScriptParser() 
     - (NSString*) parseClassName:(NSString*) token;
-    - (UIScriptAST*) parseIndexOrProperty:(NSString*) token;
+    - (UIScriptAST*) parseIndexPropertyOrPredicate:(NSString*) token;
     - (void) parseLiteralValue:(NSString*) literalToken addToWithAST:(UIScriptASTWith*) ast;
     - (UIScriptASTDirection*) parseDirectionIfPresent:(NSString*) token;
     - (NSString *)findNextToken:(NSUInteger *)index;
@@ -42,11 +43,13 @@
 #pragma mark Parsing
 static NSCharacterSet* colon = nil;
 static NSCharacterSet* ping = nil;
+static NSCharacterSet* curlyBrackets = nil;
 
 - (void) parse {
     
     if (colon==nil) {colon=[[NSCharacterSet characterSetWithCharactersInString:@":"] retain];}
     if (ping==nil) {ping=[[NSCharacterSet characterSetWithCharactersInString:@"'"] retain];}
+    if (curlyBrackets==nil) {curlyBrackets=[[NSCharacterSet characterSetWithCharactersInString:@"{}"] retain];}
     
     NSUInteger index=0;
     NSUInteger N=[_script length];
@@ -90,16 +93,15 @@ static NSCharacterSet* ping = nil;
         token = [self findNextToken:&index];
         if (token==nil) { break; }
         
-        UIScriptAST* indexOrProp = [self parseIndexOrProperty:token];
-        while (indexOrProp != nil) {
+        UIScriptAST* indexPropOrPred = [self parseIndexPropertyOrPredicate:token];
+        while (indexPropOrPred != nil) {
             //token is an index or property
 
-            [_res addObject:indexOrProp];
+            [_res addObject:indexPropOrPred];
              
             if (index == N) {return;}
             token = [self findNextToken:&index];
-            indexOrProp=[self parseIndexOrProperty:token];
-            
+            indexPropOrPred=[self parseIndexPropertyOrPredicate:token];            
             
         }//else lookahead reveals another classname so continue        
     }
@@ -113,12 +115,13 @@ static NSCharacterSet* ping = nil;
         [cs invert];
         notWhite = [cs retain];
     }
-    static NSCharacterSet *whiteSpaceOrPing = nil;
+    static NSCharacterSet *whiteSpaceSquareOrPing = nil;
     
-    if (whiteSpaceOrPing==nil) {
+    if (whiteSpaceSquareOrPing==nil) {
         NSMutableCharacterSet *cs = [NSMutableCharacterSet whitespaceCharacterSet];
         [cs formUnionWithCharacterSet:ping];
-        whiteSpaceOrPing = [cs retain];
+        [cs formUnionWithCharacterSet:curlyBrackets];
+        whiteSpaceSquareOrPing = [cs retain];
     }
     
     NSUInteger i = *index;
@@ -126,12 +129,13 @@ static NSCharacterSet* ping = nil;
     if (i==N) {
         return nil;
     }
-    NSRange range=[_script rangeOfCharacterFromSet:whiteSpaceOrPing options:NSLiteralSearch range:NSMakeRange(i, N-i)];
+    NSRange range=[_script rangeOfCharacterFromSet:whiteSpaceSquareOrPing options:NSLiteralSearch range:NSMakeRange(i, N-i)];
     if (range.location==NSNotFound) {
         //last token
         *index=N;
         return [_script substringFromIndex:i];
     }
+
     NSString *firstChar = [_script substringWithRange:range];
     if ([firstChar isEqualToString:@"'"]) {
         NSRange endPing = [_script rangeOfCharacterFromSet:ping options:NSLiteralSearch range:NSMakeRange(range.location+1, N-range.location-1)];
@@ -140,6 +144,22 @@ static NSCharacterSet* ping = nil;
         }
         NSString *res = [_script substringWithRange:NSMakeRange(i, endPing.location-i+1)];
         *index = endPing.location+1;
+        if (*index < N) {
+            i=*index;
+            NSRange range=[_script rangeOfCharacterFromSet:notWhite options:NSLiteralSearch range:NSMakeRange(i, N-i)];
+            *index = range.location;
+        }
+        return res;
+    } else if ([firstChar isEqualToString:@"}"]) {
+        NSLog(@"Illegal unbalanced [] found %@",_script);
+        return nil;
+    } else if ([firstChar isEqualToString:@"{"]) {
+        NSRange endBrack = [_script rangeOfString:@"}" options:NSLiteralSearch range:NSMakeRange(range.location+1, N-range.location-1)];
+        if (endBrack.location==NSNotFound) {
+            return nil;
+        }
+        NSString *res = [_script substringWithRange:NSMakeRange(i, endBrack.location-i+1)];
+        *index = endBrack.location+1;
         if (*index < N) {
             i=*index;
             NSRange range=[_script rangeOfCharacterFromSet:notWhite options:NSLiteralSearch range:NSMakeRange(i, N-i)];
@@ -189,9 +209,24 @@ static NSCharacterSet* ping = nil;
     }
 }
 
-- (UIScriptAST*) parseIndexOrProperty:(NSString*) token {
+- (UIScriptAST*) parseIndexPropertyOrPredicate:(NSString*) token {
+    NSRange r = [token rangeOfString:@"{"];
+    if (r.location == 0) {
+        NSString *str = [token substringWithRange:NSMakeRange(1, token.length - 2)];
+        NSCharacterSet* white = [NSCharacterSet whitespaceCharacterSet];
+        NSRange range = [str rangeOfCharacterFromSet:white];
+        NSString *selString = [str substringWithRange:NSMakeRange(0, range.location)];
+        SEL sel = NSSelectorFromString(selString);
+
+        NSPredicate *pred = [NSPredicate predicateWithFormat:str];        
+        return [[[UIScriptASTPredicate alloc] initWithPredicate:pred selector:sel] autorelease];
+        
+    }
+
     NSArray* colonSep=[token componentsSeparatedByCharactersInSet:colon];
     if ([colonSep count] < 2) {
+        
+        
         NSLog(@"Warning: token %@ has no : separator", token);
         return nil;
     }

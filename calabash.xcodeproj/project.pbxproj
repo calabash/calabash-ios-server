@@ -129,6 +129,10 @@
 		B184FE9114B6DD33002A744C /* LPScreenshotRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9014B6DD33002A744C /* LPScreenshotRoute.m */; };
 		B184FE9314B6DDA1002A744C /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; };
 		B184FE9714B6F64A002A744C /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; };
+		B1E3603A14D9F4B30087D8D9 /* UIScriptASTPredicate.h in Headers */ = {isa = PBXBuildFile; fileRef = B1E3603814D9F4B30087D8D9 /* UIScriptASTPredicate.h */; };
+		B1E3603B14D9F4B30087D8D9 /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; };
+		B1E3604714DA09D20087D8D9 /* LPBackgroundRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B1E3604514DA09D20087D8D9 /* LPBackgroundRoute.h */; };
+		B1E3604814DA09D20087D8D9 /* LPBackgroundRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3604614DA09D20087D8D9 /* LPBackgroundRoute.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -262,6 +266,10 @@
 		B184FE9214B6DDA1002A744C /* LPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPOperation.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B184FE9414B6DE68002A744C /* LPScreencastRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScreencastRoute.m; sourceTree = "<group>"; };
 		B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCJSONDeserializer.m; sourceTree = "<group>"; };
+		B1E3603814D9F4B30087D8D9 /* UIScriptASTPredicate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScriptASTPredicate.h; sourceTree = "<group>"; };
+		B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScriptASTPredicate.m; sourceTree = "<group>"; };
+		B1E3604514DA09D20087D8D9 /* LPBackgroundRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPBackgroundRoute.h; sourceTree = "<group>"; };
+		B1E3604614DA09D20087D8D9 /* LPBackgroundRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPBackgroundRoute.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -468,6 +476,8 @@
 				B184FE9014B6DD33002A744C /* LPScreenshotRoute.m */,
 				B111321514D5837900982BBC /* LPAsyncPlaybackRoute.h */,
 				B111321614D5837900982BBC /* LPAsyncPlaybackRoute.m */,
+				B1E3604514DA09D20087D8D9 /* LPBackgroundRoute.h */,
+				B1E3604614DA09D20087D8D9 /* LPBackgroundRoute.m */,
 			);
 			path = Routes;
 			sourceTree = "<group>";
@@ -527,6 +537,8 @@
 		B184FDF814B6DB2B002A744C /* UISpec */ = {
 			isa = PBXGroup;
 			children = (
+				B1E3603814D9F4B30087D8D9 /* UIScriptASTPredicate.h */,
+				B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */,
 				B111320F14D498F800982BBC /* LPNDElementWrapper.h */,
 				B111321014D498F800982BBC /* LPNDElementWrapper.m */,
 				B184FDF914B6DB2B002A744C /* UIScriptAST.h */,
@@ -633,6 +645,8 @@
 				B184FE8C14B6DC80002A744C /* LPMapRoute.h in Headers */,
 				B111321114D498F800982BBC /* LPNDElementWrapper.h in Headers */,
 				B111321714D5837B00982BBC /* LPAsyncPlaybackRoute.h in Headers */,
+				B1E3603A14D9F4B30087D8D9 /* UIScriptASTPredicate.h in Headers */,
+				B1E3604714DA09D20087D8D9 /* LPBackgroundRoute.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -788,6 +802,8 @@
 				B184FE9714B6F64A002A744C /* LPCJSONDeserializer.m in Sources */,
 				B111321214D498F800982BBC /* LPNDElementWrapper.m in Sources */,
 				B111321814D5837B00982BBC /* LPAsyncPlaybackRoute.m in Sources */,
+				B1E3603B14D9F4B30087D8D9 /* UIScriptASTPredicate.m in Sources */,
+				B1E3604814DA09D20087D8D9 /* LPBackgroundRoute.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,7 @@
 #import "LPRecordRoute.h"
 #import "LPPlaybackRoute.h"
 #import "LPAsyncPlaybackRoute.h"
+#import "LPBackgroundRoute.h"
 //#import "LPScreencastRoute.h"
 static const int ddLogLevel = LOG_LEVEL_INFO;
 
@@ -45,13 +46,17 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
         [LPRouter addRoute:rr forPath:@"/record"];
         [rr release];
 
-        LPPlaybackRoute *pr =[LPPlaybackRoute new];
-        [LPRouter addRoute:pr forPath:@"/play"];
-        [pr release];
-        
+//        LPPlaybackRoute *pr =[LPPlaybackRoute new];
+//        [LPRouter addRoute:pr forPath:@"/play"];
+//        [pr release];
+//        
         LPAsyncPlaybackRoute *apr =[LPAsyncPlaybackRoute new];
-        [LPRouter addRoute:apr forPath:@"/aplay"];
+        [LPRouter addRoute:apr forPath:@"/play"];
         [apr release];
+
+        LPBackgroundRoute *bgr =[LPBackgroundRoute new];
+        [LPRouter addRoute:bgr forPath:@"/background"];
+        [bgr release];
 
 //        
 //        LPScreencastRoute *scr = [LPScreencastRoute new];

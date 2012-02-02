@@ -56,7 +56,7 @@
 	NSMethodSignature *tSig = [target methodSignatureForSelector:_selector];
 	NSUInteger argc = tSig.numberOfArguments - 2;
 	if( argc != [_arguments count] ) {
-        *error = [NSError errorWithDomain:@"iCopyright 2011 LessPainful. All rights reserved. Server" code:1 
+        *error = [NSError errorWithDomain:@"CalabashServer" code:1 
                                  userInfo:
                   [NSDictionary dictionaryWithObjectsAndKeys:
                     @"Arity mismatch", @"reason",
