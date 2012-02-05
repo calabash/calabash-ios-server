@@ -47,16 +47,16 @@
 
 -(void) handleWebView:(UIWebView *)webView result: (NSMutableArray *) res {
     if (self.valueType == UIScriptLiteralTypeString) {
-        NSString * query = [NSString stringWithFormat:@"/html//*[contains(text(),'%@')]",self.objectValue];
-        NSArray* arr = [NDWebElement findElementsBy:kByXpath value:query maxCount:kFindEverything webView:webView];
-        for (NDWebElement* el in arr) {
-            if  ([el isDisplayed]) {
-                [res addObject:[[[LPNDElementWrapper alloc] initWithElement: el] autorelease]];
-            }
-        }
+        //        NSString * query = [NSString stringWithFormat:@"/html/body//*[contains(text(),'%@')]",self.objectValue];
+        NSString *query = [NSString stringWithFormat:@"window.find('%@');",self.objectValue];
+        NSString *myText = [webView stringByEvaluatingJavaScriptFromString:query];
+        if ([myText isEqualToString:@"true"]) {
+            [res addObject:webView];
+        } 
     } else {
         NSLog(@"Attempting to look for non string in web view");
     }
+
 }
 
 
