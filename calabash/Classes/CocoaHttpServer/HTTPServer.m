@@ -425,7 +425,7 @@
 		success = [asyncSocket acceptOnInterface:interface port:port error:&err];
 		if (success)
 		{
-			//HTTPLogInfo(@"%@: Started HTTP server on port %hu", THIS_FILE, [asyncSocket localPort]);
+			NSLog(@"Started HTTP server on port %hu", [asyncSocket localPort]);
 			
 			isRunning = YES;
 			[self publishBonjour];
@@ -662,7 +662,7 @@
 	// 
 	// Note: This method is invoked on our bonjour thread.
 	
-	//HTTPLogInfo(@"Bonjour Service Published: domain(%@) type(%@) name(%@)", [ns domain], [ns type], [ns name]);
+	NSLog(@"Bonjour Service Published: domain(%@) type(%@) name(%@)", [ns domain], [ns type], [ns name]);
 }
 
 /**
