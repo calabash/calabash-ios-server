@@ -7,8 +7,6 @@
 
 #import "CalabashServer.h"
 #import "HTTPServer.h"
-#import "DDLog.h"
-#import "DDTTYLogger.h"
 #import "LPRouter.h"
 #import "LPScreenshotRoute.h"
 #import "LPMapRoute.h"
@@ -16,8 +14,6 @@
 #import "LPPlaybackRoute.h"
 #import "LPAsyncPlaybackRoute.h"
 #import "LPBackgroundRoute.h"
-//#import "LPScreencastRoute.h"
-static const int ddLogLevel = LOG_LEVEL_INFO;
 
 @interface CalabashServer()
 - (void) start;
@@ -34,7 +30,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 {
 	self = [super init];    
 	if (self != nil) {
-		[DDLog addLogger:[DDTTYLogger sharedInstance]];
+		
         LPMapRoute* mr = [LPMapRoute new];
         [LPRouter addRoute:mr forPath:@"/map"];
         [mr release];
@@ -81,7 +77,7 @@ static const int ddLogLevel = LOG_LEVEL_INFO;
 - (void) start {
     NSError *error=nil;
 	if( ![_httpServer start:&error] ) {
-		DDLogError(@"Error starting HTTP Server: %@",error);// %@", error);
+		NSLog(@"Error starting HTTP Server: %@",error);// %@", error);
 	}
 }
 

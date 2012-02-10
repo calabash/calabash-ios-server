@@ -7,8 +7,6 @@
 #import "LPMapRoute.h"
 #import "UIScriptParser.h"
 #import "LPOperation.h"
-#import "DDLog.h"
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 
 @implementation LPMapRoute
@@ -21,7 +19,7 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
         return [[views copy] autorelease];
     }
     LPOperation *op = [LPOperation operationFromDictionary:operation];
-    DDLogVerbose(@"Applying operation %@ to views...",op);
+    //HTTPLogDDLogVerbose(@"Applying operation %@ to views...",op);
     NSMutableArray* finalRes = [NSMutableArray arrayWithCapacity:[views count]];
     if (views == nil) {
         id res = [op performWithTarget:nil error:error];
@@ -45,14 +43,14 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
     
     id scriptObj = [data objectForKey:@"query"];
     NSDictionary* operation = [data objectForKey:@"operation"];
-    DDLogVerbose(@"MapRoute received command\n%@", data);
+    //DDLogVerbose(@"MapRoute received command\n%@", data);
     NSArray* result = nil;
     if ([NSNull null] != scriptObj) {
         NSString* script = (NSString *)scriptObj;
         UIScriptParser* p = [[UIScriptParser alloc] initWithUIScript:script];
         [p parse];
         NSArray* tokens = [p parsedTokens];
-        DDLogVerbose(@"Parsed UIScript as\n%@", tokens);
+        NSLog(@"Parsed UIScript as\n%@", tokens);
         
         NSMutableArray* views = [NSMutableArray arrayWithCapacity:32];
         for (UIWindow *window in [[UIApplication sharedApplication] windows]) 
@@ -63,9 +61,9 @@ static const int ddLogLevel = LOG_LEVEL_VERBOSE;
             //        }
         }
         result = [p evalWith:views];
-        DDLogVerbose(@"Evaled UIScript as\n%@", result);        
+        //DDLogVerbose(@"Evaled UIScript as\n%@", result);        
     } else {
-        DDLogInfo(@"Received null query.");
+        //DDLogInfo(@"Received null query.");
         result = nil;
     }
     

@@ -1,10 +1,8 @@
 #import "HTTPDynamicFileResponse.h"
 #import "HTTPConnection.h"
-#import "HTTPLogging.h"
 
 // Log levels : off, error, warn, info, verbose
 // Other flags: trace
-static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 
 #define NULL_FD  -1
 
@@ -18,7 +16,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 {
 	if ((self = [super initWithFilePath:fpath forConnection:parent]))
 	{
-		HTTPLogTrace();
+		//HTTPLogTrace();
 		
 		separator = [[separatorStr dataUsingEncoding:NSUTF8StringEncoding] retain];
 		replacementDict = [dict retain];
@@ -28,7 +26,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 
 - (BOOL)isChunked
 {
-	HTTPLogTrace();
+	//HTTPLogTrace();
 	
 	return YES;
 }
@@ -38,7 +36,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 	// This method shouldn't be called since we're using a chunked response.
 	// We override it just to be safe.
 	
-	HTTPLogTrace();
+	//HTTPLogTrace();
 	
 	return 0;
 }
@@ -48,21 +46,21 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 	// This method shouldn't be called since we're using a chunked response.
 	// We override it just to be safe.
 	
-	HTTPLogTrace();
+	//HTTPLogTrace();
 }
 
 - (BOOL)isDone
 {
 	BOOL result = (readOffset == fileLength) && (readBufferOffset == 0);
 	
-	HTTPLogTrace2(@"%@[%p]: isDone - %@", THIS_FILE, self, (result ? @"YES" : @"NO"));
+	//HTTPLogTrace2(@"%@[%p]: isDone - %@", THIS_FILE, self, (result ? @"YES" : @"NO"));
 	
 	return result;
 }
 
 - (void)processReadBuffer
 {
-	HTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// At this point, the readBuffer has readBufferOffset bytes available.
 	// This method is in charge of updating the readBufferOffset.
@@ -105,7 +103,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 				s1 = offset;
 				offset += sepLen;
 				
-				HTTPLogVerbose(@"%@[%p]: Found s1 at %lu", THIS_FILE, self, (unsigned long)s1);
+				//HTTPLogVerbose(@"%@[%p]: Found s1 at %lu", THIS_FILE, self, (unsigned long)s1);
 			}
 			else
 			{
@@ -115,7 +113,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 				s2 = offset;
 				offset += sepLen;
 				
-				HTTPLogVerbose(@"%@[%p]: Found s2 at %lu", THIS_FILE, self, (unsigned long)s2);
+				//HTTPLogVerbose(@"%@[%p]: Found s2 at %lu", THIS_FILE, self, (unsigned long)s2);
 			}
 			
 			if (found1 && found2)
@@ -144,7 +142,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 						// Found the replacement value.
 						// Now perform the replacement in the buffer.
 						
-						HTTPLogVerbose(@"%@[%p]: key(%@) -> value(%@)", THIS_FILE, self, key, value);
+						//HTTPLogVerbose(@"%@[%p]: key(%@) -> value(%@)", THIS_FILE, self, key, value);
 						
 						NSData *v = [value dataUsingEncoding:NSUTF8StringEncoding];
 						NSUInteger vLength = [v length];
@@ -281,7 +279,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 
 - (void)dealloc
 {
-	HTTPLogTrace();
+	//HTTPLogTrace();
 	
 	[separator release];
 	[replacementDict release];

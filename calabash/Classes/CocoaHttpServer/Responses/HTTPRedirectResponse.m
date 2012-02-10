@@ -1,9 +1,7 @@
 #import "HTTPRedirectResponse.h"
-#import "HTTPLogging.h"
 
 // Log levels : off, error, warn, info, verbose
 // Other flags: trace
-static const int httpLogLevel = HTTP_LOG_LEVEL_OFF; // | HTTP_LOG_FLAG_TRACE;
 
 
 @implementation HTTPRedirectResponse
@@ -12,7 +10,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_OFF; // | HTTP_LOG_FLAG_TRACE;
 {
 	if ((self = [super init]))
 	{
-		HTTPLogTrace();
+		//HTTPLogTrace();
 		
 		redirectPath = [path copy];
 	}
@@ -36,7 +34,7 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_OFF; // | HTTP_LOG_FLAG_TRACE;
 
 - (NSData *)readDataOfLength:(NSUInteger)length
 {
-	HTTPLogTrace();
+	//HTTPLogTrace();
 	
 	return nil;
 }
@@ -48,21 +46,21 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_OFF; // | HTTP_LOG_FLAG_TRACE;
 
 - (NSDictionary *)httpHeaders
 {
-	HTTPLogTrace();
+	//HTTPLogTrace();
 	
 	return [NSDictionary dictionaryWithObject:redirectPath forKey:@"Location"];
 }
 
 - (NSInteger)status
 {
-	HTTPLogTrace();
+	//HTTPLogTrace();
 	
 	return 302;
 }
 
 - (void)dealloc
 {
-	HTTPLogTrace();
+	//HTTPLogTrace();
 	
 	[redirectPath release];
 	[super dealloc];
