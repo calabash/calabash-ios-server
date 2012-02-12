@@ -55,6 +55,7 @@ static NSCharacterSet* curlyBrackets = nil;
     NSUInteger N=[_script length];
     NSString* token = [self findNextToken:&index];
     while (token) {
+
         //token should be a direction or classname
         UIScriptASTDirection* direction = [self parseDirectionIfPresent:token];
         if (direction!=nil) {
@@ -141,6 +142,15 @@ static NSCharacterSet* curlyBrackets = nil;
         NSRange endPing = [_script rangeOfCharacterFromSet:ping options:NSLiteralSearch range:NSMakeRange(range.location+1, N-range.location-1)];
         if (endPing.location==NSNotFound) {
             return nil;
+        } else {
+            while (endPing.location > 0 && 
+                   [[_script substringWithRange:NSMakeRange(endPing.location-1,1)] isEqualToString:@"\\"]) {
+                endPing = [_script rangeOfCharacterFromSet:ping options:NSLiteralSearch range:NSMakeRange(endPing.location+1, N-endPing.location-1)];                
+                if (endPing.location == NSNotFound) {
+                    return nil;
+                }                 
+            } 
+            
         }
         NSString *res = [_script substringWithRange:NSMakeRange(i, endPing.location-i+1)];
         *index = endPing.location+1;
@@ -149,7 +159,7 @@ static NSCharacterSet* curlyBrackets = nil;
             NSRange range=[_script rangeOfCharacterFromSet:notWhite options:NSLiteralSearch range:NSMakeRange(i, N-i)];
             *index = range.location;
         }
-        return res;
+        return [res stringByReplacingOccurrencesOfString:@"\\'" withString:@"'"];
     } else if ([firstChar isEqualToString:@"}"]) {
         NSLog(@"Illegal unbalanced [] found %@",_script);
         return nil;
@@ -294,6 +304,7 @@ static NSCharacterSet* curlyBrackets = nil;
     NSUInteger index = 0;
     UIScriptASTDirectionType dir = UIScriptASTDirectionTypeDescendant;
      
+
     //index and first match first = [res objectAtIndex:index];
     //dir is direction or default direction
     NSArray* res = views;

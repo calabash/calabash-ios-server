@@ -2,7 +2,7 @@
 #import <CommonCrypto/CommonDigest.h>
 
 
-@implementation NSData (DDData)
+@implementation NSData (LPDDData)
 
 static char encodingTable[64] = {
 'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P',

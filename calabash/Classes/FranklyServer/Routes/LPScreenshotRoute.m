@@ -5,7 +5,7 @@
 //
 
 #import "LPScreenshotRoute.h"
-#import "HTTPDataResponse.h"
+#import "LPHTTPDataResponse.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation LPScreenshotRoute
@@ -14,8 +14,8 @@
     return [method isEqualToString:@"GET"];
 }
 
-- (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
-    HTTPDataResponse* drsp = [[HTTPDataResponse alloc] initWithData:[self takeScreenshot]];
+- (NSObject<LPHTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
+    LPHTTPDataResponse* drsp = [[LPHTTPDataResponse alloc] initWithData:[self takeScreenshot]];
     return [drsp autorelease];
 }
 

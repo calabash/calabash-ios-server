@@ -2,10 +2,10 @@
 //  Copyright 2011 LessPainful. All rights reserved.
 
 
-@class HTTPServer;
+@class LPHTTPServer;
 
 @interface CalabashServer : NSObject {
-	HTTPServer *_httpServer;
+	LPHTTPServer *_httpServer;
 }
 
 + (void) start;

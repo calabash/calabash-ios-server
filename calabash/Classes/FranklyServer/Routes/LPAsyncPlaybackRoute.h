@@ -7,12 +7,12 @@
 //
 #import <Foundation/Foundation.h>
 #import "LPRoute.h"
-#import "HTTPResponse.h"
-@interface LPAsyncPlaybackRoute : NSObject<LPRoute,HTTPResponse> 
+#import "LPHTTPResponse.h"
+@interface LPAsyncPlaybackRoute : NSObject<LPRoute,LPHTTPResponse> 
 {    
     BOOL _done;
     NSArray *_events;
-    HTTPConnection *_conn;
+    LPHTTPConnection *_conn;
     NSDictionary *_data;
     NSDictionary *_jsonResponse;
     
@@ -22,7 +22,7 @@
 
 @property (nonatomic, retain) NSArray *events;
 @property (nonatomic, assign) BOOL done;
-@property (nonatomic, assign) HTTPConnection *conn;
+@property (nonatomic, assign) LPHTTPConnection *conn;
 @property (nonatomic, retain) NSDictionary *data;
 @property (nonatomic, retain) NSDictionary *jsonResponse;
 

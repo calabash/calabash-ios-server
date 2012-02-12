@@ -1,7 +1,7 @@
 #import "DDNumber.h"
 
 
-@implementation NSNumber (DDNumber)
+@implementation NSNumber (LPDDNumber)
 
 + (BOOL)parseString:(NSString *)str intoSInt64:(SInt64 *)pNum
 {

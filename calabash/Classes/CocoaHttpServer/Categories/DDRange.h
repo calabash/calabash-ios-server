@@ -1,11 +1,11 @@
 /**
- * DDRange is the functional equivalent of a 64 bit NSRange.
+ * LPDDRange is the functional equivalent of a 64 bit NSRange.
  * The HTTP Server is designed to support very large files.
  * On 32 bit architectures (ppc, i386) NSRange uses unsigned 32 bit integers.
  * This only supports a range of up to 4 gigabytes.
  * By defining our own variant, we can support a range up to 16 exabytes.
  * 
- * All effort is given such that DDRange functions EXACTLY the same as NSRange.
+ * All effort is given such that LPDDRange functions EXACTLY the same as NSRange.
 **/
 
 #import <Foundation/NSValue.h>
@@ -13,43 +13,43 @@
 
 @class NSString;
 
-typedef struct _DDRange {
+typedef struct _LPDDRange {
     UInt64 location;
     UInt64 length;
-} DDRange;
+} LPDDRange;
 
-typedef DDRange *DDRangePointer;
+typedef LPDDRange *LPDDRangePointer;
 
-NS_INLINE DDRange DDMakeRange(UInt64 loc, UInt64 len) {
-    DDRange r;
+NS_INLINE LPDDRange LPDDMakeRange(UInt64 loc, UInt64 len) {
+    LPDDRange r;
     r.location = loc;
     r.length = len;
     return r;
 }
 
-NS_INLINE UInt64 DDMaxRange(DDRange range) {
+NS_INLINE UInt64 LPDDMaxRange(LPDDRange range) {
     return (range.location + range.length);
 }
 
-NS_INLINE BOOL DDLocationInRange(UInt64 loc, DDRange range) {
+NS_INLINE BOOL LPDDLocationInRange(UInt64 loc, LPDDRange range) {
     return (loc - range.location < range.length);
 }
 
-NS_INLINE BOOL DDEqualRanges(DDRange range1, DDRange range2) {
+NS_INLINE BOOL LPDDEqualRanges(LPDDRange range1, LPDDRange range2) {
     return ((range1.location == range2.location) && (range1.length == range2.length));
 }
 
-FOUNDATION_EXPORT DDRange DDUnionRange(DDRange range1, DDRange range2);
-FOUNDATION_EXPORT DDRange DDIntersectionRange(DDRange range1, DDRange range2);
-FOUNDATION_EXPORT NSString *DDStringFromRange(DDRange range);
-FOUNDATION_EXPORT DDRange DDRangeFromString(NSString *aString);
+FOUNDATION_EXPORT LPDDRange LPDDUnionRange(LPDDRange range1, LPDDRange range2);
+FOUNDATION_EXPORT LPDDRange LPDDIntersectionRange(LPDDRange range1, LPDDRange range2);
+FOUNDATION_EXPORT NSString *LPDDStringFromRange(LPDDRange range);
+FOUNDATION_EXPORT LPDDRange LPDDRangeFromString(NSString *aString);
 
-NSInteger DDRangeCompare(DDRangePointer pDDRange1, DDRangePointer pDDRange2);
+NSInteger LPDDRangeCompare(LPDDRangePointer pDDRange1, LPDDRangePointer pDDRange2);
 
-@interface NSValue (NSValueDDRangeExtensions)
+@interface NSValue (LPNSValueDDRangeExtensions)
 
-+ (NSValue *)valueWithDDRange:(DDRange)range;
-- (DDRange)ddrangeValue;
++ (NSValue *)valueWithDDRange:(LPDDRange)range;
+- (LPDDRange)ddrangeValue;
 
 - (NSInteger)ddrangeCompare:(NSValue *)ddrangeValue;
 

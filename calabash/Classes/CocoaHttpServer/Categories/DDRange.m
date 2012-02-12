@@ -1,39 +1,39 @@
 #import "DDRange.h"
 #import "DDNumber.h"
 
-DDRange DDUnionRange(DDRange range1, DDRange range2)
+LPDDRange LPDDUnionRange(LPDDRange range1, LPDDRange range2)
 {
-	DDRange result;
+	LPDDRange result;
 	
 	result.location = MIN(range1.location, range2.location);
-	result.length   = MAX(DDMaxRange(range1), DDMaxRange(range2)) - result.location;
+	result.length   = MAX(LPDDMaxRange(range1), LPDDMaxRange(range2)) - result.location;
 	
 	return result;
 }
 
-DDRange DDIntersectionRange(DDRange range1, DDRange range2)
+LPDDRange LPDDIntersectionRange(LPDDRange range1, LPDDRange range2)
 {
-	DDRange result;
+	LPDDRange result;
 	
-	if((DDMaxRange(range1) < range2.location) || (DDMaxRange(range2) < range1.location))
+	if((LPDDMaxRange(range1) < range2.location) || (LPDDMaxRange(range2) < range1.location))
 	{
-		return DDMakeRange(0, 0);
+		return LPDDMakeRange(0, 0);
 	}
 	
 	result.location = MAX(range1.location, range2.location);
-	result.length   = MIN(DDMaxRange(range1), DDMaxRange(range2)) - result.location;
+	result.length   = MIN(LPDDMaxRange(range1), LPDDMaxRange(range2)) - result.location;
 	
 	return result;
 }
 
-NSString *DDStringFromRange(DDRange range)
+NSString *LPDDStringFromRange(LPDDRange range)
 {
 	return [NSString stringWithFormat:@"{%qu, %qu}", range.location, range.length];
 }
 
-DDRange DDRangeFromString(NSString *aString)
+LPDDRange LPDDRangeFromString(NSString *aString)
 {
-	DDRange result = DDMakeRange(0, 0);
+	LPDDRange result = LPDDMakeRange(0, 0);
 	
 	// NSRange will ignore '-' characters, but not '+' characters
 	NSCharacterSet *cset = [NSCharacterSet characterSetWithCharactersInString:@"+0123456789"];
@@ -53,7 +53,7 @@ DDRange DDRangeFromString(NSString *aString)
 	return result;
 }
 
-NSInteger DDRangeCompare(DDRangePointer pDDRange1, DDRangePointer pDDRange2)
+NSInteger LPDDRangeCompare(LPDDRangePointer pDDRange1, LPDDRangePointer pDDRange2)
 {
 	// Comparison basis:
 	// Which range would you encouter first if you started at zero, and began walking towards infinity.
@@ -79,26 +79,26 @@ NSInteger DDRangeCompare(DDRangePointer pDDRange1, DDRangePointer pDDRange2)
 	return NSOrderedSame;
 }
 
-@implementation NSValue (NSValueDDRangeExtensions)
+@implementation NSValue (LPNSValueDDRangeExtensions)
 
-+ (NSValue *)valueWithDDRange:(DDRange)range
++ (NSValue *)valueWithDDRange:(LPDDRange)range
 {
-	return [NSValue valueWithBytes:&range objCType:@encode(DDRange)];
+	return [NSValue valueWithBytes:&range objCType:@encode(LPDDRange)];
 }
 
-- (DDRange)ddrangeValue
+- (LPDDRange)ddrangeValue
 {
-	DDRange result;
+	LPDDRange result;
 	[self getValue:&result];
 	return result;
 }
 
 - (NSInteger)ddrangeCompare:(NSValue *)other
 {
-	DDRange r1 = [self ddrangeValue];
-	DDRange r2 = [other ddrangeValue];
+	LPDDRange r1 = [self ddrangeValue];
+	LPDDRange r2 = [other ddrangeValue];
 	
-	return DDRangeCompare(&r1, &r2);
+	return LPDDRangeCompare(&r1, &r2);
 }
 
 @end

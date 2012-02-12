@@ -6,7 +6,7 @@
 //
 
 #import "CalabashServer.h"
-#import "HTTPServer.h"
+#import "LPHTTPServer.h"
 #import "LPRouter.h"
 #import "LPScreenshotRoute.h"
 #import "LPMapRoute.h"
@@ -60,7 +60,7 @@
 //        [scr release];
 //        
 
-		_httpServer = [[[HTTPServer alloc]init] retain];
+		_httpServer = [[[LPHTTPServer alloc]init] retain];
 		
 		[_httpServer setName:@"Calabash Server"];
 		[_httpServer setType:@"_http._tcp."];
@@ -77,7 +77,7 @@
 - (void) start {
     NSError *error=nil;
 	if( ![_httpServer start:&error] ) {
-		NSLog(@"Error starting HTTP Server: %@",error);// %@", error);
+		NSLog(@"Error starting LPHTTP Server: %@",error);// %@", error);
 	}
 }
 

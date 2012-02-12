@@ -3,9 +3,9 @@
 //  Created by Karl Krukow on 13/08/11.
 //  Copyright 2011 LessPainful. All rights reserved.
 
-#import "HTTPConnection.h"
+#import "LPHTTPConnection.h"
 #import "LPRoute.h"
-@interface LPRouter : HTTPConnection {
+@interface LPRouter : LPHTTPConnection {
     NSMutableData *_postData;
 }
 @property (nonatomic, retain, readonly) NSData *postData;

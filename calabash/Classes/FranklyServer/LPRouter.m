@@ -6,7 +6,7 @@
 
 #import "LPRouter.h"
 #import "LPJSONUtils.h"
-#import "HTTPDataResponse.h"
+#import "LPHTTPDataResponse.h"
 
 @implementation LPRouter
 @synthesize postData=_postData;
@@ -42,7 +42,7 @@ static NSMutableDictionary* routes = nil;
     [super dealloc];
 }
 
-- (NSObject<HTTPResponse> *) responseForJSON:(NSDictionary*) json {
+- (NSObject<LPHTTPResponse> *) responseForJSON:(NSDictionary*) json {
     if (json == nil) {
         json=[NSDictionary dictionaryWithObjectsAndKeys:
               [NSArray array], @"results",
@@ -50,7 +50,7 @@ static NSMutableDictionary* routes = nil;
     }
     NSString* serialized = [LPJSONUtils serializeDictionary:json];
     NSData *data = [serialized dataUsingEncoding:NSUTF8StringEncoding];
-    HTTPDataResponse *rsp = [[HTTPDataResponse alloc] initWithData:data];
+    LPHTTPDataResponse *rsp = [[LPHTTPDataResponse alloc] initWithData:data];
     return [rsp autorelease];
 }
 
@@ -60,7 +60,7 @@ static NSMutableDictionary* routes = nil;
     return ([route supportsMethod:method atPath:path]);
 }
 
-- (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
+- (NSObject<LPHTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
     id<LPRoute> route = [routes objectForKey:path];
     if ([route supportsMethod:method atPath:path]) {
         NSDictionary* params = nil;

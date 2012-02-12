@@ -5,8 +5,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "HTTPResponse.h"
+#import "LPHTTPResponse.h"
 
-@interface LPNoContentResponse : NSObject<HTTPResponse>
+@interface LPNoContentResponse : NSObject<LPHTTPResponse>
 
 @end

@@ -5,7 +5,7 @@
 //
 
 #import "LPRecordRoute.h"
-#import "HTTPDataResponse.h"
+#import "LPHTTPDataResponse.h"
 #import "LPRecorder.h"
 #import "LPNoContentResponse.h"
 
@@ -19,7 +19,7 @@
 - (void) setParameters:(NSDictionary*) parameters {
     _params = [parameters retain];
 }
-- (void) setConnection:(HTTPConnection *)connection {
+- (void) setConnection:(LPHTTPConnection *)connection {
     _conn = connection;
 }
 
@@ -33,7 +33,7 @@
     return [method isEqualToString:@"POST"];
 }
 
-- (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
+- (NSObject<LPHTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
     NSString* action = [_params objectForKey:@"action"];
     if ([action isEqualToString:@"start"]) {
         [self startRecording];
@@ -41,7 +41,7 @@
     }
     else if ([action isEqualToString:@"stop"]) {
         NSData* path = [self stopRecording];
-        return [[[HTTPDataResponse alloc] initWithData:path] autorelease];
+        return [[[LPHTTPDataResponse alloc] initWithData:path] autorelease];
     } else {
         return nil;
     }

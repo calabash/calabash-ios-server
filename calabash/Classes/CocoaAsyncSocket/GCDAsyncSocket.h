@@ -1,5 +1,5 @@
 //  
-//  GCDAsyncSocket.h
+//  LPGCDAsyncSocket.h
 //  
 //  This class is in the public domain.
 //  Originally created by Robbie Hanson in Q3 2010.
@@ -12,36 +12,36 @@
 #import <Security/Security.h>
 #import <dispatch/dispatch.h>
 
-@class GCDAsyncReadPacket;
-@class GCDAsyncWritePacket;
+@class LPGCDAsyncReadPacket;
+@class LPGCDAsyncWritePacket;
 
-extern NSString *const GCDAsyncSocketException;
-extern NSString *const GCDAsyncSocketErrorDomain;
+extern NSString *const LPGCDAsyncSocketException;
+extern NSString *const LPGCDAsyncSocketErrorDomain;
 
 #if !TARGET_OS_IPHONE
-extern NSString *const GCDAsyncSocketSSLCipherSuites;
-extern NSString *const GCDAsyncSocketSSLDiffieHellmanParameters;
+extern NSString *const LPGCDAsyncSocketSSLCipherSuites;
+extern NSString *const LPGCDAsyncSocketSSLDiffieHellmanParameters;
 #endif
 
-enum GCDAsyncSocketError
+enum LPGCDAsyncSocketError
 {
-	GCDAsyncSocketNoError = 0,           // Never used
-	GCDAsyncSocketBadConfigError,        // Invalid configuration
-	GCDAsyncSocketBadParamError,         // Invalid parameter was passed
-	GCDAsyncSocketConnectTimeoutError,   // A connect operation timed out
-	GCDAsyncSocketReadTimeoutError,      // A read operation timed out
-	GCDAsyncSocketWriteTimeoutError,     // A write operation timed out
-	GCDAsyncSocketReadMaxedOutError,     // Reached set maxLength without completing
-	GCDAsyncSocketClosedError,           // The remote peer closed the connection
-	GCDAsyncSocketOtherError,            // Description provided in userInfo
+	LPGCDAsyncSocketNoError = 0,           // Never used
+	LPGCDAsyncSocketBadConfigError,        // Invalid configuration
+	LPGCDAsyncSocketBadParamError,         // Invalid parameter was passed
+	LPGCDAsyncSocketConnectTimeoutError,   // A connect operation timed out
+	LPGCDAsyncSocketReadTimeoutError,      // A read operation timed out
+	LPGCDAsyncSocketWriteTimeoutError,     // A write operation timed out
+	LPGCDAsyncSocketReadMaxedOutError,     // Reached set maxLength without completing
+	LPGCDAsyncSocketClosedError,           // The remote peer closed the connection
+	LPGCDAsyncSocketOtherError,            // Description provided in userInfo
 };
-typedef enum GCDAsyncSocketError GCDAsyncSocketError;
+typedef enum LPGCDAsyncSocketError LPGCDAsyncSocketError;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@interface GCDAsyncSocket : NSObject
+@interface LPGCDAsyncSocket : NSObject
 {
 	UInt16 flags;
 	UInt16 config;
@@ -68,8 +68,8 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
 	NSMutableArray *readQueue;
 	NSMutableArray *writeQueue;
 	
-	GCDAsyncReadPacket *currentRead;
-	GCDAsyncWritePacket *currentWrite;
+	LPGCDAsyncReadPacket *currentRead;
+	LPGCDAsyncWritePacket *currentWrite;
 	
 	unsigned long socketFDBytesAvailable;
 	
@@ -89,7 +89,7 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
 }
 
 /**
- * GCDAsyncSocket uses the standard delegate paradigm,
+ * LPGCDAsyncSocket uses the standard delegate paradigm,
  * but executes all delegate callbacks on a given delegate dispatch queue.
  * This allows for maximum concurrency, while at the same time providing easy thread safety.
  * 
@@ -97,7 +97,7 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
  * use the socket, or you will get an error.
  * 
  * The socket queue is optional.
- * If you pass NULL, GCDAsyncSocket will automatically create it's own socket queue.
+ * If you pass NULL, LPGCDAsyncSocket will automatically create it's own socket queue.
  * If you choose to provide a socket queue, the socket queue must not be a concurrent queue.
  * 
  * The delegate queue and socket queue can optionally be the same.
@@ -157,12 +157,12 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
 /**
  * By default, both IPv4 and IPv6 are enabled.
  * 
- * For accepting incoming connections, this means GCDAsyncSocket automatically supports both protocols,
+ * For accepting incoming connections, this means LPGCDAsyncSocket automatically supports both protocols,
  * and can simulataneously accept incoming connections on either protocol.
  * 
- * For outgoing connections, this means GCDAsyncSocket can connect to remote hosts running either protocol.
- * If a DNS lookup returns only IPv4 results, GCDAsyncSocket will automatically use IPv4.
- * If a DNS lookup returns only IPv6 results, GCDAsyncSocket will automatically use IPv6.
+ * For outgoing connections, this means LPGCDAsyncSocket can connect to remote hosts running either protocol.
+ * If a DNS lookup returns only IPv4 results, LPGCDAsyncSocket will automatically use IPv4.
+ * If a DNS lookup returns only IPv6 results, LPGCDAsyncSocket will automatically use IPv6.
  * If a DNS lookup returns both IPv4 and IPv6 results, the preferred protocol will be chosen.
  * By default, the preferred protocol is IPv4, but may be configured as desired.
 **/
@@ -186,7 +186,7 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
 
 /**
  * Tells the socket to begin listening and accepting connections on the given port.
- * When a connection is accepted, a new instance of GCDAsyncSocket will be spawned to handle it,
+ * When a connection is accepted, a new instance of LPGCDAsyncSocket will be spawned to handle it,
  * and the socket:didAcceptNewSocket: delegate method will be invoked.
  * 
  * The socket will listen on all available interfaces (e.g. wifi, ethernet, etc)
@@ -508,7 +508,7 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
  * If you pass nil or zero-length data as the "data" parameter,
  * the method will do nothing, and the delegate will not be called.
  * 
- * To read a line from the socket, use the line separator (e.g. CRLF for HTTP, see below) as the "data" parameter.
+ * To read a line from the socket, use the line separator (e.g. CRLF for LPHTTP, see below) as the "data" parameter.
  * Note that this method is not character-set aware, so if a separator can occur naturally as part of the encoding for
  * a character, the read will prematurely end.
 **/
@@ -529,7 +529,7 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
  * After completion, the data returned in socket:didReadData:withTag: will be a subset of the given buffer.
  * That is, it will reference the bytes that were appended to the given buffer.
  * 
- * To read a line from the socket, use the line separator (e.g. CRLF for HTTP, see below) as the "data" parameter.
+ * To read a line from the socket, use the line separator (e.g. CRLF for LPHTTP, see below) as the "data" parameter.
  * Note that this method is not character-set aware, so if a separator can occur naturally as part of the encoding for
  * a character, the read will prematurely end.
 **/
@@ -546,7 +546,7 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
  * 
  * If maxLength is zero, no length restriction is enforced.
  * Otherwise if maxLength bytes are read without completing the read,
- * it is treated similarly to a timeout - the socket is closed with a GCDAsyncSocketReadMaxedOutError.
+ * it is treated similarly to a timeout - the socket is closed with a LPGCDAsyncSocketReadMaxedOutError.
  * The read will complete successfully if exactly maxLength bytes are read and the given data is found at the end.
  * 
  * If you pass nil or zero-length data as the "data" parameter,
@@ -554,7 +554,7 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
  * If you pass a maxLength parameter that is less than the length of the data parameter,
  * the method will do nothing, and the delegate will not be called.
  * 
- * To read a line from the socket, use the line separator (e.g. CRLF for HTTP, see below) as the "data" parameter.
+ * To read a line from the socket, use the line separator (e.g. CRLF for LPHTTP, see below) as the "data" parameter.
  * Note that this method is not character-set aware, so if a separator can occur naturally as part of the encoding for
  * a character, the read will prematurely end.
 **/
@@ -570,7 +570,7 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
  * 
  * If maxLength is zero, no length restriction is enforced.
  * Otherwise if maxLength bytes are read without completing the read,
- * it is treated similarly to a timeout - the socket is closed with a GCDAsyncSocketReadMaxedOutError.
+ * it is treated similarly to a timeout - the socket is closed with a LPGCDAsyncSocketReadMaxedOutError.
  * The read will complete successfully if exactly maxLength bytes are read and the given data is found at the end.
  * 
  * If you pass a maxLength parameter that is less than the length of the data parameter,
@@ -582,7 +582,7 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
  * After completion, the data returned in socket:didReadData:withTag: will be a subset of the given buffer.
  * That is, it will reference the bytes that were appended to the given buffer.
  * 
- * To read a line from the socket, use the line separator (e.g. CRLF for HTTP, see below) as the "data" parameter.
+ * To read a line from the socket, use the line separator (e.g. CRLF for LPHTTP, see below) as the "data" parameter.
  * Note that this method is not character-set aware, so if a separator can occur naturally as part of the encoding for
  * a character, the read will prematurely end.
 **/
@@ -728,7 +728,7 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
  * 
  * Example usage:
  * 
- * - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
+ * - (void)socket:(LPGCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
  * {
  *     [asyncSocket performBlock:^{
  *         [asyncSocket enableBackgroundingOnSocket];
@@ -805,7 +805,7 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
 #pragma mark -
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-@protocol GCDAsyncSocketDelegate
+@protocol LPGCDAsyncSocketDelegate
 @optional
 
 /**
@@ -826,7 +826,7 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
  * dispatch_retain(myExistingQueue);
  * return myExistingQueue;
 **/
-- (dispatch_queue_t)newSocketQueueForConnectionFromAddress:(NSData *)address onSocket:(GCDAsyncSocket *)sock;
+- (dispatch_queue_t)newSocketQueueForConnectionFromAddress:(NSData *)address onSocket:(LPGCDAsyncSocket *)sock;
 
 /**
  * Called when a socket accepts a connection.
@@ -838,37 +838,37 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
  * By default the new socket will have the same delegate and delegateQueue.
  * You may, of course, change this at any time.
 **/
-- (void)socket:(GCDAsyncSocket *)sock didAcceptNewSocket:(GCDAsyncSocket *)newSocket;
+- (void)socket:(LPGCDAsyncSocket *)sock didAcceptNewSocket:(LPGCDAsyncSocket *)newSocket;
 
 /**
  * Called when a socket connects and is ready for reading and writing.
  * The host parameter will be an IP address, not a DNS name.
 **/
-- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port;
+- (void)socket:(LPGCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port;
 
 /**
  * Called when a socket has completed reading the requested data into memory.
  * Not called if there is an error.
 **/
-- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag;
+- (void)socket:(LPGCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag;
 
 /**
  * Called when a socket has read in data, but has not yet completed the read.
  * This would occur if using readToData: or readToLength: methods.
  * It may be used to for things such as updating progress bars.
 **/
-- (void)socket:(GCDAsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag;
+- (void)socket:(LPGCDAsyncSocket *)sock didReadPartialDataOfLength:(NSUInteger)partialLength tag:(long)tag;
 
 /**
  * Called when a socket has completed writing the requested data. Not called if there is an error.
 **/
-- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag;
+- (void)socket:(LPGCDAsyncSocket *)sock didWriteDataWithTag:(long)tag;
 
 /**
  * Called when a socket has written some data, but has not yet completed the entire write.
  * It may be used to for things such as updating progress bars.
 **/
-- (void)socket:(GCDAsyncSocket *)sock didWritePartialDataOfLength:(NSUInteger)partialLength tag:(long)tag;
+- (void)socket:(LPGCDAsyncSocket *)sock didWritePartialDataOfLength:(NSUInteger)partialLength tag:(long)tag;
 
 /**
  * Called if a read operation has reached its timeout without completing.
@@ -881,7 +881,7 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
  * 
  * Note that this method may be called multiple times for a single read if you return positive numbers.
 **/
-- (NSTimeInterval)socket:(GCDAsyncSocket *)sock shouldTimeoutReadWithTag:(long)tag
+- (NSTimeInterval)socket:(LPGCDAsyncSocket *)sock shouldTimeoutReadWithTag:(long)tag
                                                                  elapsed:(NSTimeInterval)elapsed
                                                                bytesDone:(NSUInteger)length;
 
@@ -896,7 +896,7 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
  * 
  * Note that this method may be called multiple times for a single write if you return positive numbers.
 **/
-- (NSTimeInterval)socket:(GCDAsyncSocket *)sock shouldTimeoutWriteWithTag:(long)tag
+- (NSTimeInterval)socket:(LPGCDAsyncSocket *)sock shouldTimeoutWriteWithTag:(long)tag
                                                                   elapsed:(NSTimeInterval)elapsed
                                                                 bytesDone:(NSUInteger)length;
 
@@ -906,7 +906,7 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
  * This delegate method is only called if autoDisconnectOnClosedReadStream has been set to NO.
  * See the discussion on the autoDisconnectOnClosedReadStream method for more information.
 **/
-- (void)socketDidCloseReadStream:(GCDAsyncSocket *)sock;
+- (void)socketDidCloseReadStream:(LPGCDAsyncSocket *)sock;
 
 /**
  * Called when a socket disconnects with or without error.
@@ -914,7 +914,7 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
  * If you call the disconnect method, and the socket wasn't already disconnected,
  * this delegate method will be called before the disconnect method returns.
 **/
-- (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err;
+- (void)socketDidDisconnect:(LPGCDAsyncSocket *)sock withError:(NSError *)err;
 
 /**
  * Called after the socket has successfully completed SSL/TLS negotiation.
@@ -923,6 +923,6 @@ typedef enum GCDAsyncSocketError GCDAsyncSocketError;
  * If a SSL/TLS negotiation fails (invalid certificate, etc) then the socket will immediately close,
  * and the socketDidDisconnect:withError: delegate method will be called with the specific SSL error code.
 **/
-- (void)socketDidSecure:(GCDAsyncSocket *)sock;
+- (void)socketDidSecure:(LPGCDAsyncSocket *)sock;
 
 @end

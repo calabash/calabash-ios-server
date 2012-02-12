@@ -5,13 +5,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "HTTPConnection.h"
+#import "LPHTTPConnection.h"
 #import "LPRoute.h"
 #import "ScreenCaptureView.h"
 
 @interface LPLPScreencastRoute : NSObject<LPRoute> {
     NSDictionary *_params;
-    HTTPConnection *_conn;
+    LPHTTPConnection *_conn;
     ScreenCaptureView *_screenCapture;
     
 }

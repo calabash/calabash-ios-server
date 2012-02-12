@@ -19,7 +19,7 @@
         return [[views copy] autorelease];
     }
     LPOperation *op = [LPOperation operationFromDictionary:operation];
-    //HTTPLogDDLogVerbose(@"Applying operation %@ to views...",op);
+    //LPHTTPLogDDLogVerbose(@"Applying operation %@ to views...",op);
     NSMutableArray* finalRes = [NSMutableArray arrayWithCapacity:[views count]];
     if (views == nil) {
         id res = [op performWithTarget:nil error:error];
