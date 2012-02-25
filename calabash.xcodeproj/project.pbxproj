@@ -239,7 +239,7 @@
 		B184FE8A14B6DC7F002A744C /* LPPlaybackRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPlaybackRoute.m; sourceTree = "<group>"; };
 		B184FE8B14B6DC7F002A744C /* LPRecordRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPRecordRoute.m; sourceTree = "<group>"; };
 		B184FE9014B6DD33002A744C /* LPScreenshotRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScreenshotRoute.m; sourceTree = "<group>"; };
-		B184FE9214B6DDA1002A744C /* LPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPOperation.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		B184FE9214B6DDA1002A744C /* LPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPOperation.m; sourceTree = "<group>"; };
 		B184FE9414B6DE68002A744C /* LPScreencastRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScreencastRoute.m; sourceTree = "<group>"; };
 		B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCJSONDeserializer.m; sourceTree = "<group>"; };
 		B1E3603814D9F4B30087D8D9 /* UIScriptASTPredicate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScriptASTPredicate.h; sourceTree = "<group>"; };

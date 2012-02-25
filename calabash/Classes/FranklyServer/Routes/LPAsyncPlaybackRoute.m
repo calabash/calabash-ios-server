@@ -139,7 +139,15 @@
         
         
     } else {
+        NSDictionary *offset = [self.data valueForKey:@"offset"];
+        NSNumber *x = [offset valueForKey:@"x"];
+        NSNumber *y = [offset valueForKey:@"y"];
+        
+        CGPoint offsetPoint = CGPointMake([x floatValue], [y floatValue]);
+        
         self.events = [LPResources eventsFromEncoding:base64Events];
+        self.events = [LPResources transformEvents:self.events 
+                                           toPoint:CGPointMake(offsetPoint.x, offsetPoint.y)];
     }
     
     if ([self.data objectForKey:@"reverse"]) {
