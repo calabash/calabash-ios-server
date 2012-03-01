@@ -112,7 +112,6 @@
 		B184FE8414B6DB2B002A744C /* LPTouchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */; };
 		B184FE8814B6DBAC002A744C /* LPRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8714B6DBAC002A744C /* LPRecorder.m */; };
 		B184FE8C14B6DC80002A744C /* LPMapRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FE8914B6DC7F002A744C /* LPMapRoute.h */; };
-		B184FE8D14B6DC80002A744C /* LPPlaybackRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8A14B6DC7F002A744C /* LPPlaybackRoute.m */; };
 		B184FE8E14B6DC80002A744C /* LPRecordRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8B14B6DC7F002A744C /* LPRecordRoute.m */; };
 		B184FE9114B6DD33002A744C /* LPScreenshotRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9014B6DD33002A744C /* LPScreenshotRoute.m */; };
 		B184FE9314B6DDA1002A744C /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; };
@@ -728,7 +727,6 @@
 				B184FE8214B6DB2B002A744C /* LPJSONUtils.m in Sources */,
 				B184FE8414B6DB2B002A744C /* LPTouchUtils.m in Sources */,
 				B184FE8814B6DBAC002A744C /* LPRecorder.m in Sources */,
-				B184FE8D14B6DC80002A744C /* LPPlaybackRoute.m in Sources */,
 				B184FE8E14B6DC80002A744C /* LPRecordRoute.m in Sources */,
 				B184FE9114B6DD33002A744C /* LPScreenshotRoute.m in Sources */,
 				B184FE9314B6DDA1002A744C /* LPOperation.m in Sources */,
