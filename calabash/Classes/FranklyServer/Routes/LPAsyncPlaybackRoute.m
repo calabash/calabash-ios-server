@@ -144,10 +144,26 @@
         NSNumber *y = [offset valueForKey:@"y"];
         
         CGPoint offsetPoint = CGPointMake([x floatValue], [y floatValue]);
-        
         self.events = [LPResources eventsFromEncoding:base64Events];
-        self.events = [LPResources transformEvents:self.events 
-                                           toPoint:CGPointMake(offsetPoint.x, offsetPoint.y)];
+        if (!self.events || [self.events count] < 1) {
+            NSLog(@"BAD EVENTS: %@", base64Events);
+            self.done = YES;
+            self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [NSString stringWithFormat: @"Bad events %@",base64Events],@"reason",
+                                 @"",@"details",
+                                 @"FAILURE",@"outcome",
+                                 nil];
+            return;
+
+
+        }
+        NSArray* transformed = [LPResources transformEvents:self.events 
+                                            toPoint:CGPointMake(offsetPoint.x, offsetPoint.y)];
+        if ([transformed count] == [self.events count]) {
+            self.events = transformed;
+        }
+
+        
     }
     
     if ([self.data objectForKey:@"reverse"]) {
@@ -156,18 +172,19 @@
     //NSLog(@"PLAY Events:\n%@",self.events);    
     NSDictionary *firstEvent = [self.events objectAtIndex:0];
     NSDictionary* windowLoc = [firstEvent valueForKey:@"WindowLocation"];
-    
+        
     if (!targetView && windowLoc != nil) {
         CGPoint touchPoint = CGPointMake([[windowLoc valueForKey:@"X"] floatValue], 
                                          [[windowLoc valueForKey:@"Y"] floatValue]);
         for (UIWindow *window in [[UIApplication sharedApplication] windows]) {                
-            if (![window respondsToSelector:@selector(screen)] || [window screen] == [UIScreen mainScreen]) {
+           if (![window respondsToSelector:@selector(screen)] || [window screen] == [UIScreen mainScreen]) {
                 targetView = [window hitTest:touchPoint withEvent:nil];
                 break;
-            }
+           }
         }
-        
-    }
+            
+    }        
+    
     
 //    NSString *base64Prototype = [self.data objectForKey:@"prototype"];
 //    if (base64Prototype) {
