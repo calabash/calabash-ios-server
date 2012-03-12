@@ -7,6 +7,7 @@
 #import "UIScriptASTWith.h"
 #import "NDWebElement.h"
 #import "LPNDElementWrapper.h"
+#import "LPJSONUtils.h"
 
 @implementation UIScriptASTWith
 @synthesize selectorName=_selectorName;
@@ -47,12 +48,58 @@
 
 -(void) handleWebView:(UIWebView *)webView result: (NSMutableArray *) res {
     if (self.valueType == UIScriptLiteralTypeString) {
-        //        NSString * query = [NSString stringWithFormat:@"/html/body//*[contains(text(),'%@')]",self.objectValue];
-        NSString *query = [NSString stringWithFormat:@"window.find('%@');",self.objectValue];
-        NSString *myText = [webView stringByEvaluatingJavaScriptFromString:query];
-        if ([myText isEqualToString:@"true"]) {
-            [res addObject:webView];
-        } 
+        NSString *jsString = LP_QUERY_JS;
+        if ([[self selectorName] isEqualToString:@"marked"]) 
+        {
+            jsString = [NSString stringWithFormat:jsString, 
+                        [NSString stringWithFormat:@"//node()[contains(text(),\\\"%@\\\")]", self.objectValue], 
+                        @"xpath"];            
+        }
+        else if ([[self selectorName] isEqualToString:@"xpath"])
+        {
+            jsString = [NSString stringWithFormat:jsString, 
+                        self.objectValue, 
+                        @"xpath"];                        
+        }
+        else if ([[self selectorName] isEqualToString:@"css"])
+        {
+            jsString = [NSString stringWithFormat:jsString, 
+                        self.objectValue, 
+                        @"css"];                        
+        }
+
+        NSLog(@"%@",jsString);
+        
+        NSString *output = [webView stringByEvaluatingJavaScriptFromString:jsString];
+        NSLog(@"OUT: %@",output);
+        NSArray *query = [LPJSONUtils performSelector:@selector(deserializeArray:) withObject:output]; 
+
+        CGPoint webViewPoint = [webView convertPoint:webView.bounds.origin toView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
+        
+
+        NSLog(@"%@", CGPointCreateDictionaryRepresentation(webViewPoint));
+        for (NSDictionary *d in query) 
+        {
+            NSMutableDictionary *dres = [NSMutableDictionary dictionaryWithDictionary:d];
+            CGFloat left = [[dres valueForKeyPath:@"rect.left"] floatValue];
+            CGFloat top = [[dres valueForKeyPath:@"rect.top"] floatValue];
+            CGFloat width =  [[dres valueForKeyPath:@"rect.width"] floatValue];
+            CGFloat height =  [[dres valueForKeyPath:@"rect.height"] floatValue];
+            
+            
+            CGPoint center = CGPointMake(left+width/2.0, top+height/2.0);            
+            CGPoint screenCenter = CGPointMake(webViewPoint.x + center.x, webViewPoint.y + center.y);            
+            if (!CGPointEqualToPoint(CGPointZero, center) && [webView pointInside:center withEvent:nil])
+            {
+                NSDictionary *centerDict = (NSDictionary*)CGPointCreateDictionaryRepresentation(screenCenter);
+                [dres setValue:[centerDict autorelease] forKey:@"center"];
+                [dres setValue:webView forKey:@"webView"];
+                [res addObject:dres];                
+            }
+        }
+        
+        
+        
     } else {
         NSLog(@"Attempting to look for non string in web view");
     }
@@ -129,13 +176,9 @@
 //
     for (UIView* v in views) {
         if ([v isHidden]) continue;
-        if (([self.selectorName isEqualToString:@"marked"] 
-            || [self.selectorName isEqualToString:@"accessibilityLabel"]) &&
-            [v isKindOfClass:[UIWebView class]]) {
-            
+        if ([v isKindOfClass:[UIWebView class]]) {            
             [self handleWebView:(UIWebView *)v result:res];
-            continue;
-            
+            continue;            
         }        
         
         if ([v respondsToSelector:_selector]) {

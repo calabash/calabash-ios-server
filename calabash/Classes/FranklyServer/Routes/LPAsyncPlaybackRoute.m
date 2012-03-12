@@ -106,14 +106,25 @@
         NSArray* result = [parser evalWith:views];
         
         if ([result count] >0) {
-            UIView* v = [result objectAtIndex:0];//autopick first?
+            id v = [result objectAtIndex:0];//autopick first?
+            
             NSDictionary *offset = [self.data valueForKey:@"offset"];
             NSNumber *x = [offset valueForKey:@"x"];
             NSNumber *y = [offset valueForKey:@"y"];
             
             CGPoint offsetPoint = CGPointMake([x floatValue], [y floatValue]);
             
-            CGPoint center = [LPTouchUtils centerOfView:v];
+            CGPoint center;
+            if ([v isKindOfClass:[UIView class]]) 
+            {
+                center = [LPTouchUtils centerOfView:v];                
+            }
+            else                
+            {
+                
+                CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)[v valueForKey:@"center"], &center);
+            }
+
             NSArray* baseEvents = [LPResources eventsFromEncoding:base64Events];
             
             targetView = v;

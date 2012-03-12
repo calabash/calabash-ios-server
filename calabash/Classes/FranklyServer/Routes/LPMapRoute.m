@@ -27,8 +27,8 @@
             [finalRes addObject:res];
         }
     } else {
-        for (UIView* view in views) {
-            if ([view isHidden]) {continue;}            
+        for (id view in views) {
+            if ([view isKindOfClass:[UIView class]] && [view isHidden]) {continue;}            
             id val = [op performWithTarget:view error:error];
             if (val == nil) {
                 [finalRes addObject: @"<VOID>"];

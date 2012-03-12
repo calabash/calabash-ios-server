@@ -12,9 +12,10 @@
 }
 
 - (id) performWithTarget:(UIView*)_view error:(NSError **)error {
+    NSString *dir = [_arguments objectAtIndex:0];
+    
     if ([_view isKindOfClass:[UIScrollView class]]) {
         UIScrollView* sv = (UIScrollView*) _view;
-        NSString *dir = [_arguments objectAtIndex:0];
         CGSize size = sv.frame.size;
         CGPoint offset = sv.contentOffset;
         
@@ -30,6 +31,21 @@
         
         return _view;
         
+    } else if ([_view isKindOfClass:[UIWebView class]]) {
+        UIWebView* wv = (UIWebView*) _view;
+        NSString* scrollJS = @"window.scrollBy(%@,%@);";
+        if ([@"up" isEqualToString:dir]) {
+            scrollJS = [NSString stringWithFormat:scrollJS,@"0",@"-100"];
+        } else if ([@"down" isEqualToString:dir]) {
+            scrollJS = [NSString stringWithFormat:scrollJS,@"0",@"100"];
+        } else if ([@"left" isEqualToString:dir]) {
+            scrollJS = [NSString stringWithFormat:scrollJS,@"-100",@"0"];
+        } else if ([@"right" isEqualToString:dir]) {
+            scrollJS = [NSString stringWithFormat:scrollJS,@"100",@"0"];
+        }
+        NSString *res = [wv stringByEvaluatingJavaScriptFromString:scrollJS];
+        NSLog(@"RES:%@",res);
+        return _view;        
     }
 	return nil;
 }
