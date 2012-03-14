@@ -14,6 +14,7 @@
 #import "LPPlaybackRoute.h"
 #import "LPAsyncPlaybackRoute.h"
 #import "LPBackgroundRoute.h"
+#import "LPInterpolateRoute.h"
 
 @interface CalabashServer()
 - (void) start;
@@ -53,6 +54,10 @@
         LPBackgroundRoute *bgr =[LPBackgroundRoute new];
         [LPRouter addRoute:bgr forPath:@"/background"];
         [bgr release];
+
+        LPInterpolateRoute *panr =[LPInterpolateRoute new];
+        [LPRouter addRoute:panr forPath:@"/interpolate"];
+        [panr release];
 
 //        
 //        LPScreencastRoute *scr = [LPScreencastRoute new];

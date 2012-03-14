@@ -216,4 +216,134 @@ static const short _base64DecodingTable[256] = {
     return transformedEvents;
 }
 
+
++ (NSArray *) interpolateEvents:(NSArray*) baseEvents fromPoint:(CGPoint)startAt toPoint:(CGPoint) endAt
+{
+    NSMutableArray *transformedEvents = [NSMutableArray arrayWithCapacity:[baseEvents count]];
+    
+    NSDictionary *baseStart =  [[baseEvents objectAtIndex:0] valueForKey:@"WindowLocation"];
+    NSDictionary *baseCenter = [[baseEvents objectAtIndex:[baseEvents count]/2] valueForKey:@"WindowLocation"];
+    NSDictionary *baseEnd =    [[baseEvents objectAtIndex:[baseEvents count]-1] valueForKey:@"WindowLocation"];
+    
+    
+    CGPoint centerAt = CGPointMake(startAt.x + (endAt.x-startAt.x)/2 + 3, startAt.y + (endAt.y-startAt.y)/2 + 3);
+    
+    CGPoint p = CGPointMake([[baseStart valueForKey:@"X"] floatValue], 
+                                      [[baseStart valueForKey:@"Y"] floatValue]);
+    
+    CGPoint q = CGPointMake([[baseCenter valueForKey:@"X"] floatValue], 
+                                       [[baseCenter valueForKey:@"Y"] floatValue]);
+
+    CGPoint r = CGPointMake([[baseEnd valueForKey:@"X"] floatValue], 
+                                    [[baseEnd valueForKey:@"Y"] floatValue]);
+
+    CGFloat a1 = q.x - p.x;    
+    CGFloat c1 = r.x - p.x;
+    CGFloat b1 = q.y - p.y;
+    CGFloat d1 = r.y - p.y;
+    
+    CGFloat a2 = centerAt.x - startAt.x;
+    CGFloat c2 = endAt.x - startAt.x;
+    CGFloat b2 = centerAt.y - startAt.y;
+    CGFloat d2 = endAt.y - startAt.y;
+
+    CGAffineTransform f = CGAffineTransformMake(a1, b1, c1, d1, p.x, p.y);
+    
+    CGAffineTransform f_inv = CGAffineTransformInvert(f);
+    
+    CGAffineTransform g = CGAffineTransformMake(a2, b2, c2, d2, startAt.x, startAt.y);
+    
+    
+    NSLog(@"POINTS:");
+    
+    NSLog(@"(p,r,q) = [ %@, %@, %@ ]", CGPointCreateDictionaryRepresentation(p),
+          CGPointCreateDictionaryRepresentation(q),
+          CGPointCreateDictionaryRepresentation(r));
+
+    NSLog(@"(p',r',q') = [ %@, %@, %@ ]", CGPointCreateDictionaryRepresentation(startAt),
+          CGPointCreateDictionaryRepresentation(centerAt),
+          CGPointCreateDictionaryRepresentation(endAt));
+
+    
+    CGAffineTransform interpolate = CGAffineTransformConcat(f_inv,g);    
+
+//    CGPoint should_be_startAt = CGPointApplyAffineTransform(p, interpolate);
+//    CGPoint should_be_centerAt = CGPointApplyAffineTransform(q, interpolate);
+//    CGPoint should_be_endAt = CGPointApplyAffineTransform(r, interpolate);
+//    
+//
+//    NSLog(@"should_be_start_at = [ %@]", CGPointCreateDictionaryRepresentation(should_be_startAt));
+//
+//    NSLog(@"should_be_center_at = [ %@]", CGPointCreateDictionaryRepresentation(should_be_centerAt));
+//    NSLog(@"should_be_should_be_endAt = [ %@]", CGPointCreateDictionaryRepresentation(should_be_endAt));
+    
+
+    NSRange xRange  = NSMakeRange(48, 4);
+    NSRange yRange  = NSMakeRange(52, 4);
+        
+    CGPoint currentPoint,
+            translatedPoint;
+
+    float x_buf[1];
+    float y_buf[1];
+    //    unsigned short *ios_buf[4];
+    for (NSDictionary *d in baseEvents) {
+        
+        NSDictionary* loc = [d valueForKey:@"Location"];
+        NSDictionary* windowLoc = [d valueForKey:@"WindowLocation"];
+        if (loc == nil || windowLoc == nil || [[d valueForKey:@"Type"] integerValue] == 50) {
+            continue;
+        }
+        
+        currentPoint = CGPointMake([[windowLoc valueForKey:@"X"] floatValue], 
+                                   [[windowLoc valueForKey:@"Y"] floatValue]);        
+        
+        NSMutableDictionary* newLoc = [NSMutableDictionary dictionaryWithDictionary:loc];
+        NSMutableDictionary* newWindowLoc = [NSMutableDictionary dictionaryWithDictionary:windowLoc];
+        
+        translatedPoint = CGPointApplyAffineTransform(currentPoint, interpolate);
+        
+        [newLoc setValue:
+         [NSNumber numberWithFloat:translatedPoint.x] forKey:@"X"];
+        [newLoc setValue:
+         [NSNumber numberWithFloat:translatedPoint.y] forKey:@"Y"];
+        
+        [newWindowLoc setValue:
+         [NSNumber numberWithFloat:translatedPoint.x] forKey:@"X"];
+        [newWindowLoc setValue:
+         [NSNumber numberWithFloat:translatedPoint.y] forKey:@"Y"];
+        
+        
+        
+        
+        NSData *data = [d valueForKey:@"Data"];
+        
+        [data getBytes:x_buf   range:xRange];
+        [data getBytes:y_buf   range:yRange];
+        //        [data getBytes:ios_buf   range:iosRange];
+        //        NSData *iosData = [[NSData alloc] initWithBytes:ios_buf length:4];
+        //        NSLog(@"iosData: %@",iosData);
+        //        [iosData release];
+        
+        NSMutableDictionary* newD = [NSMutableDictionary dictionaryWithDictionary:d];
+        NSMutableData *newData = [NSMutableData dataWithData:data];
+        
+        
+        x_buf[0] = translatedPoint.x;
+        y_buf[0] = translatedPoint.y;
+        [newData replaceBytesInRange:xRange withBytes:x_buf];            
+        [newData replaceBytesInRange:yRange withBytes:y_buf]; 
+        
+        
+        [newD setValue:newData forKey:@"Data"];
+        [newD setValue:newLoc forKey:@"Location"];
+        [newD setValue:newWindowLoc forKey:@"WindowLocation"];
+        
+        [transformedEvents addObject:newD];
+        
+        
+    }
+    return transformedEvents;
+}
+
 @end
