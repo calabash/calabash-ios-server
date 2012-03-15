@@ -216,7 +216,8 @@ static const short _base64DecodingTable[256] = {
     return transformedEvents;
 }
 
-
+//https://www.maa.org/EbusPPRO/pdf/meg_ch12.pdf
+//Theorem 12.8 - fundamental theorem of Affine Transformations
 + (NSArray *) interpolateEvents:(NSArray*) baseEvents fromPoint:(CGPoint)startAt toPoint:(CGPoint) endAt
 {
     NSMutableArray *transformedEvents = [NSMutableArray arrayWithCapacity:[baseEvents count]];

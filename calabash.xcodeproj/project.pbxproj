@@ -41,6 +41,8 @@
 		B116C9C514E6565500663205 /* LPHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9BB14E6565500663205 /* LPHTTPServer.m */; };
 		B121E79814B6D9FB0034C6A9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		B121E79E14B6D9FB0034C6A9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B121E79C14B6D9FB0034C6A9 /* InfoPlist.strings */; };
+		B12A04021511546F002FA032 /* LPInterpolateRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B12A04001511546F002FA032 /* LPInterpolateRoute.h */; };
+		B12A04031511546F002FA032 /* LPInterpolateRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A04011511546F002FA032 /* LPInterpolateRoute.m */; };
 		B184FD8914B6DAE1002A744C /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		B184FD8A14B6DAE1002A744C /* CalabashServer.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8814B6DAE1002A744C /* CalabashServer.h */; };
 		B184FD8D14B6DAFB002A744C /* LPCDataScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8B14B6DAFB002A744C /* LPCDataScanner.h */; };
@@ -162,6 +164,8 @@
 		B121E79B14B6D9FB0034C6A9 /* calabash-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "calabash-Info.plist"; sourceTree = "<group>"; };
 		B121E79D14B6D9FB0034C6A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B121E79F14B6D9FB0034C6A9 /* calabash-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "calabash-Prefix.pch"; sourceTree = "<group>"; };
+		B12A04001511546F002FA032 /* LPInterpolateRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPInterpolateRoute.h; sourceTree = "<group>"; };
+		B12A04011511546F002FA032 /* LPInterpolateRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInterpolateRoute.m; sourceTree = "<group>"; };
 		B184FD8714B6DAE1002A744C /* CalabashServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CalabashServer.m; sourceTree = "<group>"; };
 		B184FD8814B6DAE1002A744C /* CalabashServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CalabashServer.h; sourceTree = "<group>"; };
 		B184FD8B14B6DAFB002A744C /* LPCDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCDataScanner.h; sourceTree = "<group>"; };
@@ -432,6 +436,8 @@
 		B184FDD014B6DB2B002A744C /* Routes */ = {
 			isa = PBXGroup;
 			children = (
+				B12A04001511546F002FA032 /* LPInterpolateRoute.h */,
+				B12A04011511546F002FA032 /* LPInterpolateRoute.m */,
 				B184FE8914B6DC7F002A744C /* LPMapRoute.h */,
 				B184FDD514B6DB2B002A744C /* LPPlaybackRoute.h */,
 				B184FE8A14B6DC7F002A744C /* LPPlaybackRoute.m */,
@@ -611,6 +617,7 @@
 				B116C9C114E6565500663205 /* LPHTTPMessage.h in Headers */,
 				B116C9C314E6565500663205 /* LPHTTPResponse.h in Headers */,
 				B116C9C414E6565500663205 /* LPHTTPServer.h in Headers */,
+				B12A04021511546F002FA032 /* LPInterpolateRoute.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,6 +770,7 @@
 				B116C9C514E6565500663205 /* LPHTTPServer.m in Sources */,
 				B10F904A150CD5490063D535 /* calabash.js in Sources */,
 				B10F904C150CD5BE0063D535 /* calabash-min.js in Sources */,
+				B12A04031511546F002FA032 /* LPInterpolateRoute.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
