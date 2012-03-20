@@ -120,6 +120,8 @@
 		B184FE9114B6DD33002A744C /* LPScreenshotRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9014B6DD33002A744C /* LPScreenshotRoute.m */; };
 		B184FE9314B6DDA1002A744C /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; };
 		B184FE9714B6F64A002A744C /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; };
+		B18697A415177FE70066DBEA /* set_text-min.js in Sources */ = {isa = PBXBuildFile; fileRef = B18697A215177FE70066DBEA /* set_text-min.js */; };
+		B18697A515177FE70066DBEA /* set_text.js in Sources */ = {isa = PBXBuildFile; fileRef = B18697A315177FE70066DBEA /* set_text.js */; };
 		B1E3603A14D9F4B30087D8D9 /* UIScriptASTPredicate.h in Headers */ = {isa = PBXBuildFile; fileRef = B1E3603814D9F4B30087D8D9 /* UIScriptASTPredicate.h */; };
 		B1E3603B14D9F4B30087D8D9 /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; };
 		B1E3604714DA09D20087D8D9 /* LPBackgroundRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B1E3604514DA09D20087D8D9 /* LPBackgroundRoute.h */; };
@@ -249,6 +251,8 @@
 		B184FE9214B6DDA1002A744C /* LPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPOperation.m; sourceTree = "<group>"; };
 		B184FE9414B6DE68002A744C /* LPScreencastRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScreencastRoute.m; sourceTree = "<group>"; };
 		B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCJSONDeserializer.m; sourceTree = "<group>"; };
+		B18697A215177FE70066DBEA /* set_text-min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "set_text-min.js"; sourceTree = "<group>"; };
+		B18697A315177FE70066DBEA /* set_text.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = set_text.js; sourceTree = "<group>"; };
 		B1E3603814D9F4B30087D8D9 /* UIScriptASTPredicate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScriptASTPredicate.h; sourceTree = "<group>"; };
 		B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScriptASTPredicate.m; sourceTree = "<group>"; };
 		B1E3604514DA09D20087D8D9 /* LPBackgroundRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPBackgroundRoute.h; sourceTree = "<group>"; };
@@ -270,6 +274,8 @@
 		B10F9032150CD5490063D535 /* calabash-js */ = {
 			isa = PBXGroup;
 			children = (
+				B18697A215177FE70066DBEA /* set_text-min.js */,
+				B18697A315177FE70066DBEA /* set_text.js */,
 				B10F904B150CD5BE0063D535 /* calabash-min.js */,
 				B10F903F150CD5490063D535 /* calabash.js */,
 			);
@@ -771,6 +777,8 @@
 				B10F904A150CD5490063D535 /* calabash.js in Sources */,
 				B10F904C150CD5BE0063D535 /* calabash-min.js in Sources */,
 				B12A04031511546F002FA032 /* LPInterpolateRoute.m in Sources */,
+				B18697A415177FE70066DBEA /* set_text-min.js in Sources */,
+				B18697A515177FE70066DBEA /* set_text.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
