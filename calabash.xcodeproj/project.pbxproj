@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B10F904A150CD5490063D535 /* calabash.js in Sources */ = {isa = PBXBuildFile; fileRef = B10F903F150CD5490063D535 /* calabash.js */; };
-		B10F904C150CD5BE0063D535 /* calabash-min.js in Sources */ = {isa = PBXBuildFile; fileRef = B10F904B150CD5BE0063D535 /* calabash-min.js */; };
 		B111321114D498F800982BBC /* LPNDElementWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B111320F14D498F800982BBC /* LPNDElementWrapper.h */; };
 		B111321214D498F800982BBC /* LPNDElementWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B111321014D498F800982BBC /* LPNDElementWrapper.m */; };
 		B111321714D5837B00982BBC /* LPAsyncPlaybackRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B111321514D5837900982BBC /* LPAsyncPlaybackRoute.h */; };
@@ -43,6 +41,14 @@
 		B121E79E14B6D9FB0034C6A9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B121E79C14B6D9FB0034C6A9 /* InfoPlist.strings */; };
 		B12A04021511546F002FA032 /* LPInterpolateRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B12A04001511546F002FA032 /* LPInterpolateRoute.h */; };
 		B12A04031511546F002FA032 /* LPInterpolateRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A04011511546F002FA032 /* LPInterpolateRoute.m */; };
+		B16C308815191A8C00DAA3FA /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = B16C307D15191A8C00DAA3FA /* .gitignore */; };
+		B16C308915191A8C00DAA3FA /* calabash-min.js in Sources */ = {isa = PBXBuildFile; fileRef = B16C307F15191A8C00DAA3FA /* calabash-min.js */; };
+		B16C308A15191A8C00DAA3FA /* set_text-min.js in Sources */ = {isa = PBXBuildFile; fileRef = B16C308015191A8C00DAA3FA /* set_text-min.js */; };
+		B16C308B15191A8C00DAA3FA /* build.sh in Resources */ = {isa = PBXBuildFile; fileRef = B16C308115191A8C00DAA3FA /* build.sh */; };
+		B16C308C15191A8C00DAA3FA /* yuicompressor-2.4.7.jar in Frameworks */ = {isa = PBXBuildFile; fileRef = B16C308315191A8C00DAA3FA /* yuicompressor-2.4.7.jar */; };
+		B16C308D15191A8C00DAA3FA /* README in Resources */ = {isa = PBXBuildFile; fileRef = B16C308415191A8C00DAA3FA /* README */; };
+		B16C308E15191A8C00DAA3FA /* calabash.js in Sources */ = {isa = PBXBuildFile; fileRef = B16C308615191A8C00DAA3FA /* calabash.js */; };
+		B16C308F15191A8C00DAA3FA /* set_text.js in Sources */ = {isa = PBXBuildFile; fileRef = B16C308715191A8C00DAA3FA /* set_text.js */; };
 		B184FD8914B6DAE1002A744C /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		B184FD8A14B6DAE1002A744C /* CalabashServer.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8814B6DAE1002A744C /* CalabashServer.h */; };
 		B184FD8D14B6DAFB002A744C /* LPCDataScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8B14B6DAFB002A744C /* LPCDataScanner.h */; };
@@ -120,8 +126,6 @@
 		B184FE9114B6DD33002A744C /* LPScreenshotRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9014B6DD33002A744C /* LPScreenshotRoute.m */; };
 		B184FE9314B6DDA1002A744C /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; };
 		B184FE9714B6F64A002A744C /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; };
-		B18697A415177FE70066DBEA /* set_text-min.js in Sources */ = {isa = PBXBuildFile; fileRef = B18697A215177FE70066DBEA /* set_text-min.js */; };
-		B18697A515177FE70066DBEA /* set_text.js in Sources */ = {isa = PBXBuildFile; fileRef = B18697A315177FE70066DBEA /* set_text.js */; };
 		B1E3603A14D9F4B30087D8D9 /* UIScriptASTPredicate.h in Headers */ = {isa = PBXBuildFile; fileRef = B1E3603814D9F4B30087D8D9 /* UIScriptASTPredicate.h */; };
 		B1E3603B14D9F4B30087D8D9 /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; };
 		B1E3604714DA09D20087D8D9 /* LPBackgroundRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B1E3604514DA09D20087D8D9 /* LPBackgroundRoute.h */; };
@@ -129,8 +133,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B10F903F150CD5490063D535 /* calabash.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = calabash.js; sourceTree = "<group>"; };
-		B10F904B150CD5BE0063D535 /* calabash-min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "calabash-min.js"; sourceTree = "<group>"; };
 		B111320F14D498F800982BBC /* LPNDElementWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPNDElementWrapper.h; sourceTree = "<group>"; };
 		B111321014D498F800982BBC /* LPNDElementWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPNDElementWrapper.m; sourceTree = "<group>"; };
 		B111321514D5837900982BBC /* LPAsyncPlaybackRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPAsyncPlaybackRoute.h; sourceTree = "<group>"; };
@@ -168,6 +170,14 @@
 		B121E79F14B6D9FB0034C6A9 /* calabash-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "calabash-Prefix.pch"; sourceTree = "<group>"; };
 		B12A04001511546F002FA032 /* LPInterpolateRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPInterpolateRoute.h; sourceTree = "<group>"; };
 		B12A04011511546F002FA032 /* LPInterpolateRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInterpolateRoute.m; sourceTree = "<group>"; };
+		B16C307D15191A8C00DAA3FA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		B16C307F15191A8C00DAA3FA /* calabash-min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "calabash-min.js"; sourceTree = "<group>"; };
+		B16C308015191A8C00DAA3FA /* set_text-min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "set_text-min.js"; sourceTree = "<group>"; };
+		B16C308115191A8C00DAA3FA /* build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
+		B16C308315191A8C00DAA3FA /* yuicompressor-2.4.7.jar */ = {isa = PBXFileReference; lastKnownFileType = archive.jar; path = "yuicompressor-2.4.7.jar"; sourceTree = "<group>"; };
+		B16C308415191A8C00DAA3FA /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		B16C308615191A8C00DAA3FA /* calabash.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = calabash.js; sourceTree = "<group>"; };
+		B16C308715191A8C00DAA3FA /* set_text.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = set_text.js; sourceTree = "<group>"; };
 		B184FD8714B6DAE1002A744C /* CalabashServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CalabashServer.m; sourceTree = "<group>"; };
 		B184FD8814B6DAE1002A744C /* CalabashServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CalabashServer.h; sourceTree = "<group>"; };
 		B184FD8B14B6DAFB002A744C /* LPCDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCDataScanner.h; sourceTree = "<group>"; };
@@ -251,8 +261,6 @@
 		B184FE9214B6DDA1002A744C /* LPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPOperation.m; sourceTree = "<group>"; };
 		B184FE9414B6DE68002A744C /* LPScreencastRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScreencastRoute.m; sourceTree = "<group>"; };
 		B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCJSONDeserializer.m; sourceTree = "<group>"; };
-		B18697A215177FE70066DBEA /* set_text-min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "set_text-min.js"; sourceTree = "<group>"; };
-		B18697A315177FE70066DBEA /* set_text.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = set_text.js; sourceTree = "<group>"; };
 		B1E3603814D9F4B30087D8D9 /* UIScriptASTPredicate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScriptASTPredicate.h; sourceTree = "<group>"; };
 		B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScriptASTPredicate.m; sourceTree = "<group>"; };
 		B1E3604514DA09D20087D8D9 /* LPBackgroundRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPBackgroundRoute.h; sourceTree = "<group>"; };
@@ -265,23 +273,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B121E79814B6D9FB0034C6A9 /* Foundation.framework in Frameworks */,
+				B16C308C15191A8C00DAA3FA /* yuicompressor-2.4.7.jar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B10F9032150CD5490063D535 /* calabash-js */ = {
-			isa = PBXGroup;
-			children = (
-				B18697A215177FE70066DBEA /* set_text-min.js */,
-				B18697A315177FE70066DBEA /* set_text.js */,
-				B10F904B150CD5BE0063D535 /* calabash-min.js */,
-				B10F903F150CD5490063D535 /* calabash.js */,
-			);
-			path = "calabash-js";
-			sourceTree = "<group>";
-		};
 		B116C98214E5214600663205 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -299,7 +297,7 @@
 		B121E78614B6D9FB0034C6A9 = {
 			isa = PBXGroup;
 			children = (
-				B10F9032150CD5490063D535 /* calabash-js */,
+				B16C307C15191A8C00DAA3FA /* calabash-js */,
 				B121E79914B6D9FB0034C6A9 /* calabash */,
 				B121E79614B6D9FB0034C6A9 /* Frameworks */,
 				B121E79514B6D9FB0034C6A9 /* Products */,
@@ -339,6 +337,45 @@
 				B121E79F14B6D9FB0034C6A9 /* calabash-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B16C307C15191A8C00DAA3FA /* calabash-js */ = {
+			isa = PBXGroup;
+			children = (
+				B16C307D15191A8C00DAA3FA /* .gitignore */,
+				B16C307E15191A8C00DAA3FA /* build */,
+				B16C308115191A8C00DAA3FA /* build.sh */,
+				B16C308215191A8C00DAA3FA /* deps */,
+				B16C308415191A8C00DAA3FA /* README */,
+				B16C308515191A8C00DAA3FA /* src */,
+			);
+			path = "calabash-js";
+			sourceTree = "<group>";
+		};
+		B16C307E15191A8C00DAA3FA /* build */ = {
+			isa = PBXGroup;
+			children = (
+				B16C307F15191A8C00DAA3FA /* calabash-min.js */,
+				B16C308015191A8C00DAA3FA /* set_text-min.js */,
+			);
+			path = build;
+			sourceTree = "<group>";
+		};
+		B16C308215191A8C00DAA3FA /* deps */ = {
+			isa = PBXGroup;
+			children = (
+				B16C308315191A8C00DAA3FA /* yuicompressor-2.4.7.jar */,
+			);
+			path = deps;
+			sourceTree = "<group>";
+		};
+		B16C308515191A8C00DAA3FA /* src */ = {
+			isa = PBXGroup;
+			children = (
+				B16C308615191A8C00DAA3FA /* calabash.js */,
+				B16C308715191A8C00DAA3FA /* set_text.js */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 		B184FD8514B6DACA002A744C /* Classes */ = {
@@ -682,6 +719,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B121E79E14B6D9FB0034C6A9 /* InfoPlist.strings in Resources */,
+				B16C308815191A8C00DAA3FA /* .gitignore in Resources */,
+				B16C308B15191A8C00DAA3FA /* build.sh in Resources */,
+				B16C308D15191A8C00DAA3FA /* README in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -774,11 +814,11 @@
 				B116C9BF14E6565500663205 /* LPHTTPConnection.m in Sources */,
 				B116C9C214E6565500663205 /* LPHTTPMessage.m in Sources */,
 				B116C9C514E6565500663205 /* LPHTTPServer.m in Sources */,
-				B10F904A150CD5490063D535 /* calabash.js in Sources */,
-				B10F904C150CD5BE0063D535 /* calabash-min.js in Sources */,
 				B12A04031511546F002FA032 /* LPInterpolateRoute.m in Sources */,
-				B18697A415177FE70066DBEA /* set_text-min.js in Sources */,
-				B18697A515177FE70066DBEA /* set_text.js in Sources */,
+				B16C308915191A8C00DAA3FA /* calabash-min.js in Sources */,
+				B16C308A15191A8C00DAA3FA /* set_text-min.js in Sources */,
+				B16C308E15191A8C00DAA3FA /* calabash.js in Sources */,
+				B16C308F15191A8C00DAA3FA /* set_text.js in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
