@@ -45,6 +45,40 @@
             return @"UIScriptLiteralTypeUnknown";
     }
 }
+-(BOOL) resultsForWebView:(UIWebView *)webView query:(NSString *)jsString result:(NSMutableArray *)res
+{
+    NSLog(@"%@",jsString);
+    
+    NSString *output = [webView stringByEvaluatingJavaScriptFromString:jsString];
+    NSLog(@"OUT: %@",output);
+    NSArray *query = [LPJSONUtils performSelector:@selector(deserializeArray:) withObject:output]; 
+    
+    CGPoint webViewPoint = [webView convertPoint:webView.bounds.origin toView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
+    
+    BOOL anyResults = NO;
+    NSLog(@"%@", CGPointCreateDictionaryRepresentation(webViewPoint));
+    for (NSDictionary *d in query) 
+    {
+        NSMutableDictionary *dres = [NSMutableDictionary dictionaryWithDictionary:d];
+        CGFloat left = [[dres valueForKeyPath:@"rect.left"] floatValue];
+        CGFloat top = [[dres valueForKeyPath:@"rect.top"] floatValue];
+        CGFloat width =  [[dres valueForKeyPath:@"rect.width"] floatValue];
+        CGFloat height =  [[dres valueForKeyPath:@"rect.height"] floatValue];
+        
+        
+        CGPoint center = CGPointMake(left+width/2.0, top+height/2.0);            
+        CGPoint screenCenter = CGPointMake(webViewPoint.x + center.x, webViewPoint.y + center.y);            
+        if (!CGPointEqualToPoint(CGPointZero, center) && [webView pointInside:center withEvent:nil])
+        {
+            anyResults = YES;
+            NSDictionary *centerDict = (NSDictionary*)CGPointCreateDictionaryRepresentation(screenCenter);
+            [dres setValue:[centerDict autorelease] forKey:@"center"];
+            [dres setValue:webView forKey:@"webView"];
+            [res addObject:dres];                
+        }
+    }
+    return anyResults;
+}
 
 -(void) handleWebView:(UIWebView *)webView result: (NSMutableArray *) res {
     if (self.valueType == UIScriptLiteralTypeString) {
@@ -53,7 +87,7 @@
         {
             jsString = [NSString stringWithFormat:jsString, 
                         [NSString stringWithFormat:@"//node()[contains(text(),\\\"%@\\\")]", self.objectValue], 
-                        @"xpath"];            
+                        @"xpath"];                           
         }
         else if ([[self selectorName] isEqualToString:@"xpath"])
         {
@@ -67,38 +101,15 @@
                         self.objectValue, 
                         @"css"];                        
         }
-
-        NSLog(@"%@",jsString);
-        
-        NSString *output = [webView stringByEvaluatingJavaScriptFromString:jsString];
-        NSLog(@"OUT: %@",output);
-        NSArray *query = [LPJSONUtils performSelector:@selector(deserializeArray:) withObject:output]; 
-
-        CGPoint webViewPoint = [webView convertPoint:webView.bounds.origin toView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
-        
-
-        NSLog(@"%@", CGPointCreateDictionaryRepresentation(webViewPoint));
-        for (NSDictionary *d in query) 
+        BOOL found = [self resultsForWebView: webView query:jsString result:res];
+        if (!found)
         {
-            NSMutableDictionary *dres = [NSMutableDictionary dictionaryWithDictionary:d];
-            CGFloat left = [[dres valueForKeyPath:@"rect.left"] floatValue];
-            CGFloat top = [[dres valueForKeyPath:@"rect.top"] floatValue];
-            CGFloat width =  [[dres valueForKeyPath:@"rect.width"] floatValue];
-            CGFloat height =  [[dres valueForKeyPath:@"rect.height"] floatValue];
+            jsString = [NSString stringWithFormat:LP_QUERY_JS,
+                            [NSString stringWithFormat:@"//text()[contains(.,\\\"%@\\\")]", self.objectValue],
+                            @"xpath"];
             
-            
-            CGPoint center = CGPointMake(left+width/2.0, top+height/2.0);            
-            CGPoint screenCenter = CGPointMake(webViewPoint.x + center.x, webViewPoint.y + center.y);            
-            if (!CGPointEqualToPoint(CGPointZero, center) && [webView pointInside:center withEvent:nil])
-            {
-                NSDictionary *centerDict = (NSDictionary*)CGPointCreateDictionaryRepresentation(screenCenter);
-                [dres setValue:[centerDict autorelease] forKey:@"center"];
-                [dres setValue:webView forKey:@"webView"];
-                [res addObject:dres];                
-            }
-        }
-        
-        
+            [self resultsForWebView: webView query:jsString result:res];
+        }                
         
     } else {
         NSLog(@"Attempting to look for non string in web view");
