@@ -41,6 +41,8 @@
 		B121E79E14B6D9FB0034C6A9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B121E79C14B6D9FB0034C6A9 /* InfoPlist.strings */; };
 		B12A04021511546F002FA032 /* LPInterpolateRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B12A04001511546F002FA032 /* LPInterpolateRoute.h */; };
 		B12A04031511546F002FA032 /* LPInterpolateRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A04011511546F002FA032 /* LPInterpolateRoute.m */; };
+		B160E8EF15321D8F00F69E7A /* LPBackdoorRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B160E8ED15321D8F00F69E7A /* LPBackdoorRoute.h */; };
+		B160E8F015321D8F00F69E7A /* LPBackdoorRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */; };
 		B184FD8914B6DAE1002A744C /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		B184FD8A14B6DAE1002A744C /* CalabashServer.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8814B6DAE1002A744C /* CalabashServer.h */; };
 		B184FD8D14B6DAFB002A744C /* LPCDataScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8B14B6DAFB002A744C /* LPCDataScanner.h */; };
@@ -162,6 +164,8 @@
 		B121E79F14B6D9FB0034C6A9 /* calabash-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "calabash-Prefix.pch"; sourceTree = "<group>"; };
 		B12A04001511546F002FA032 /* LPInterpolateRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPInterpolateRoute.h; sourceTree = "<group>"; };
 		B12A04011511546F002FA032 /* LPInterpolateRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInterpolateRoute.m; sourceTree = "<group>"; };
+		B160E8ED15321D8F00F69E7A /* LPBackdoorRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPBackdoorRoute.h; sourceTree = "<group>"; };
+		B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPBackdoorRoute.m; sourceTree = "<group>"; };
 		B16C307D15191A8C00DAA3FA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		B16C307F15191A8C00DAA3FA /* calabash-min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "calabash-min.js"; sourceTree = "<group>"; };
 		B16C308015191A8C00DAA3FA /* set_text-min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "set_text-min.js"; sourceTree = "<group>"; };
@@ -488,6 +492,8 @@
 				B111321614D5837900982BBC /* LPAsyncPlaybackRoute.m */,
 				B1E3604514DA09D20087D8D9 /* LPBackgroundRoute.h */,
 				B1E3604614DA09D20087D8D9 /* LPBackgroundRoute.m */,
+				B160E8ED15321D8F00F69E7A /* LPBackdoorRoute.h */,
+				B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */,
 			);
 			path = Routes;
 			sourceTree = "<group>";
@@ -652,6 +658,7 @@
 				B116C9C314E6565500663205 /* LPHTTPResponse.h in Headers */,
 				B116C9C414E6565500663205 /* LPHTTPServer.h in Headers */,
 				B12A04021511546F002FA032 /* LPInterpolateRoute.h in Headers */,
+				B160E8EF15321D8F00F69E7A /* LPBackdoorRoute.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -684,7 +691,7 @@
 		B121E78814B6D9FB0034C6A9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0430;
 				ORGANIZATIONNAME = Trifork;
 			};
 			buildConfigurationList = B121E78B14B6D9FB0034C6A9 /* Build configuration list for PBXProject "calabash" */;
@@ -803,6 +810,7 @@
 				B116C9C214E6565500663205 /* LPHTTPMessage.m in Sources */,
 				B116C9C514E6565500663205 /* LPHTTPServer.m in Sources */,
 				B12A04031511546F002FA032 /* LPInterpolateRoute.m in Sources */,
+				B160E8F015321D8F00F69E7A /* LPBackdoorRoute.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -872,6 +880,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "calabash/calabash-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "calabash/calabash-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -892,6 +901,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "calabash/calabash-Prefix.pch";
+				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "calabash/calabash-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

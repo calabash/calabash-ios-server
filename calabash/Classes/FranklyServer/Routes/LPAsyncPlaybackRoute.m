@@ -168,12 +168,29 @@
 
 
         }
-        NSArray* transformed = [LPResources transformEvents:self.events 
-                                            toPoint:CGPointMake(offsetPoint.x, offsetPoint.y)];
-        if ([transformed count] == [self.events count]) {
-            self.events = transformed;
+        if (offset)
+        {
+            NSDictionary *firstEvent = [self.events objectAtIndex:0];
+            NSDictionary* windowLoc = [firstEvent valueForKey:@"WindowLocation"];
+            if (windowLoc == nil || [[firstEvent valueForKey:@"Type"] integerValue] == 50) {
+                NSLog(@"Offset for non window located event: %@", firstEvent);
+                self.done = YES;
+                self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     [NSString stringWithFormat: @"Offset for non window located event: %@", firstEvent],@"reason",
+                                     @"",@"details",
+                                     @"FAILURE",@"outcome",
+                                     nil];
+                return;
+            }
+            
+            CGPoint firstPoint = CGPointMake([[windowLoc valueForKey:@"X"] floatValue], 
+                                       [[windowLoc valueForKey:@"Y"] floatValue]);
+            NSArray* transformed = [LPResources transformEvents:self.events 
+                                                        toPoint:CGPointMake(firstPoint.x + offsetPoint.x, firstPoint.y + offsetPoint.y)];
+            if ([transformed count] == [self.events count]) {
+                self.events = transformed;
+            }
         }
-
         
     }
     
