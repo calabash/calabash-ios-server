@@ -254,17 +254,7 @@ static const short _base64DecodingTable[256] = {
     
     CGAffineTransform g = CGAffineTransformMake(a2, b2, c2, d2, startAt.x, startAt.y);
     
-    
-    NSLog(@"POINTS:");
-    
-    NSLog(@"(p,r,q) = [ %@, %@, %@ ]", CGPointCreateDictionaryRepresentation(p),
-          CGPointCreateDictionaryRepresentation(q),
-          CGPointCreateDictionaryRepresentation(r));
-
-    NSLog(@"(p',r',q') = [ %@, %@, %@ ]", CGPointCreateDictionaryRepresentation(startAt),
-          CGPointCreateDictionaryRepresentation(centerAt),
-          CGPointCreateDictionaryRepresentation(endAt));
-
+      
     
     CGAffineTransform interpolate = CGAffineTransformConcat(f_inv,g);    
 

@@ -38,10 +38,32 @@
     }
     else
     {
-        frameInWindow = [view.window convertRect:view.frame fromView:view.superview];
+        
+        UIWindow *window = nil;
+        UIApplication *app = [UIApplication sharedApplication];
+        if ([app.delegate respondsToSelector:@selector(window)])
+        {
+            window = [app.delegate window];
+        }
+        else 
+        {
+            for (UIWindow *w in [app windows])
+            {
+                if (CGAffineTransformIsIdentity(w.transform))
+                {
+                    window = w;
+                    break;
+                }
+            }
+        }
+        
+        
+        frameInWindow = [window convertRect:view.frame fromView:view.superview];
+        //frameInWindow = [view.window convertRect:view.frame fromView:view.superview];
     }
-    
     CGPoint translated = [self translateToScreenCoords:frameInWindow.origin];
+        
+
     return CGPointMake(translated.x + 0.5 * frameInWindow.size.width,
                        translated.y + 0.5 * frameInWindow.size.height);
 }
