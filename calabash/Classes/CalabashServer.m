@@ -76,6 +76,23 @@
 		
 		[_httpServer setName:@"Calabash Server"];
 		[_httpServer setType:@"_http._tcp."];
+
+		// Advertise this device's capabilities to our listeners inside of the TXT record
+		NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
+		NSMutableDictionary *capabilities = [[NSMutableDictionary alloc]
+		                                     initWithObjectsAndKeys:
+		                                     [[UIDevice currentDevice] name], @"name",
+		                                     [[UIDevice currentDevice] model], @"model",
+		                                     [[UIDevice currentDevice] systemVersion], @"os_version",
+		                                     [info objectForKey:@"CFBundleDisplayName"], @"app",
+		                                     [info objectForKey:@"CFBundleIdentifier"], @"app_id",
+		                                     [info objectForKey:@"CFBundleVersion"], @"app_version",
+		                                     nil];
+		if ([[UIDevice currentDevice] respondsToSelector:@selector(uniqueIdentifier)]) {
+			[capabilities setObject:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"uuid"];
+		}
+
+		[_httpServer setTXTRecordDictionary:capabilities];
 		[_httpServer setConnectionClass:[LPRouter class]];
 		[_httpServer setPort:37265];
         // Serve files from our embedded Web folder
