@@ -18,15 +18,19 @@
         UIScrollView* sv = (UIScrollView*) _view;
         CGSize size = sv.frame.size;
         CGPoint offset = sv.contentOffset;
+        CGFloat fraction = 2.0;
+        if ([sv isPagingEnabled]) {
+            fraction = 1.0;
+        }
         
         if ([@"up" isEqualToString:dir]) {
-            [sv setContentOffset:CGPointMake(offset.x, offset.y - size.height/2.0) animated:YES];
+            [sv setContentOffset:CGPointMake(offset.x, offset.y - size.height/fraction) animated:YES];
         } else if ([@"down" isEqualToString:dir]) {
-            [sv setContentOffset:CGPointMake(offset.x, offset.y + size.height/2.0) animated:YES];            
+            [sv setContentOffset:CGPointMake(offset.x, offset.y + size.height/fraction) animated:YES];            
         } else if ([@"left" isEqualToString:dir]) {
-            [sv setContentOffset:CGPointMake(offset.x - size.width/2.0, offset.y) animated:YES];
+            [sv setContentOffset:CGPointMake(offset.x - size.width/fraction, offset.y) animated:YES];
         } else if ([@"right" isEqualToString:dir]) {
-            [sv setContentOffset:CGPointMake(offset.x+ size.width/2.0, offset.y) animated:YES];            
+            [sv setContentOffset:CGPointMake(offset.x + size.width/fraction, offset.y) animated:YES];            
         }
         
         return _view;
