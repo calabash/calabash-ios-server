@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B111321114D498F800982BBC /* LPNDElementWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = B111320F14D498F800982BBC /* LPNDElementWrapper.h */; };
-		B111321214D498F800982BBC /* LPNDElementWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B111321014D498F800982BBC /* LPNDElementWrapper.m */; };
 		B111321714D5837B00982BBC /* LPAsyncPlaybackRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B111321514D5837900982BBC /* LPAsyncPlaybackRoute.h */; };
 		B111321814D5837B00982BBC /* LPAsyncPlaybackRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B111321614D5837900982BBC /* LPAsyncPlaybackRoute.m */; };
 		B116C98914E5215800663205 /* DDData.h in Headers */ = {isa = PBXBuildFile; fileRef = B116C98314E5215800663205 /* DDData.h */; };
@@ -78,18 +76,6 @@
 		B184FE5E14B6DB2B002A744C /* LPCJSONSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDE414B6DB2B002A744C /* LPCJSONSerializer.h */; };
 		B184FE5F14B6DB2B002A744C /* LPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE514B6DB2B002A744C /* LPCJSONSerializer.m */; };
 		B184FE6014B6DB2B002A744C /* LPJSONRepresentation.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDE614B6DB2B002A744C /* LPJSONRepresentation.h */; };
-		B184FE6114B6DB2B002A744C /* atoms.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDE814B6DB2B002A744C /* atoms.h */; };
-		B184FE6214B6DB2B002A744C /* errorcodes.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDEA14B6DB2B002A744C /* errorcodes.h */; };
-		B184FE6314B6DB2B002A744C /* NDElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDEB14B6DB2B002A744C /* NDElement.h */; };
-		B184FE6414B6DB2B002A744C /* NDElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDEC14B6DB2B002A744C /* NDElement.m */; };
-		B184FE6514B6DB2B002A744C /* NDJavaScriptRunner.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDED14B6DB2B002A744C /* NDJavaScriptRunner.h */; };
-		B184FE6614B6DB2B002A744C /* NDJavaScriptRunner.mm in Sources */ = {isa = PBXBuildFile; fileRef = B184FDEE14B6DB2B002A744C /* NDJavaScriptRunner.mm */; };
-		B184FE6714B6DB2B002A744C /* NDMainThreadRunner.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDEF14B6DB2B002A744C /* NDMainThreadRunner.h */; };
-		B184FE6814B6DB2B002A744C /* NDMainThreadRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDF014B6DB2B002A744C /* NDMainThreadRunner.m */; };
-		B184FE6914B6DB2B002A744C /* NDWebElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDF114B6DB2B002A744C /* NDWebElement.h */; };
-		B184FE6A14B6DB2B002A744C /* NDWebElement.mm in Sources */ = {isa = PBXBuildFile; fileRef = B184FDF214B6DB2B002A744C /* NDWebElement.mm */; };
-		B184FE6B14B6DB2B002A744C /* NSException+WebDriver.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDF314B6DB2B002A744C /* NSException+WebDriver.h */; };
-		B184FE6C14B6DB2B002A744C /* NSException+WebDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDF414B6DB2B002A744C /* NSException+WebDriver.m */; };
 		B184FE6D14B6DB2B002A744C /* LPResources.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDF614B6DB2B002A744C /* LPResources.h */; };
 		B184FE6E14B6DB2B002A744C /* LPResources.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDF714B6DB2B002A744C /* LPResources.m */; };
 		B184FE6F14B6DB2B002A744C /* UIScriptAST.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDF914B6DB2B002A744C /* UIScriptAST.h */; };
@@ -127,8 +113,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B111320F14D498F800982BBC /* LPNDElementWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPNDElementWrapper.h; sourceTree = "<group>"; };
-		B111321014D498F800982BBC /* LPNDElementWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPNDElementWrapper.m; sourceTree = "<group>"; };
 		B111321514D5837900982BBC /* LPAsyncPlaybackRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPAsyncPlaybackRoute.h; sourceTree = "<group>"; };
 		B111321614D5837900982BBC /* LPAsyncPlaybackRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPAsyncPlaybackRoute.m; sourceTree = "<group>"; };
 		B116C98314E5215800663205 /* DDData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDData.h; path = calabash/Classes/CocoaHttpServer/Categories/DDData.h; sourceTree = SOURCE_ROOT; };
@@ -201,7 +185,6 @@
 		B184FDD414B6DB2B002A744C /* LPNoContentResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPNoContentResponse.m; sourceTree = "<group>"; };
 		B184FDD514B6DB2B002A744C /* LPPlaybackRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPPlaybackRoute.h; sourceTree = "<group>"; };
 		B184FDD714B6DB2B002A744C /* LPRecordRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LPRecordRoute.h; sourceTree = "<group>"; };
-		B184FDD914B6DB2B002A744C /* LPScreencastRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPScreencastRoute.h; sourceTree = "<group>"; };
 		B184FDDB14B6DB2B002A744C /* LPScreenshotRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPScreenshotRoute.h; sourceTree = "<group>"; };
 		B184FDDE14B6DB2B002A744C /* CDataScanner_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner_Extensions.h; sourceTree = "<group>"; };
 		B184FDDF14B6DB2B002A744C /* CDataScanner_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner_Extensions.m; sourceTree = "<group>"; };
@@ -211,18 +194,6 @@
 		B184FDE414B6DB2B002A744C /* LPCJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCJSONSerializer.h; sourceTree = "<group>"; };
 		B184FDE514B6DB2B002A744C /* LPCJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCJSONSerializer.m; sourceTree = "<group>"; };
 		B184FDE614B6DB2B002A744C /* LPJSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPJSONRepresentation.h; sourceTree = "<group>"; };
-		B184FDE814B6DB2B002A744C /* atoms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = atoms.h; sourceTree = "<group>"; };
-		B184FDEA14B6DB2B002A744C /* errorcodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = errorcodes.h; sourceTree = "<group>"; };
-		B184FDEB14B6DB2B002A744C /* NDElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDElement.h; sourceTree = "<group>"; };
-		B184FDEC14B6DB2B002A744C /* NDElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDElement.m; sourceTree = "<group>"; };
-		B184FDED14B6DB2B002A744C /* NDJavaScriptRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDJavaScriptRunner.h; sourceTree = "<group>"; };
-		B184FDEE14B6DB2B002A744C /* NDJavaScriptRunner.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NDJavaScriptRunner.mm; sourceTree = "<group>"; };
-		B184FDEF14B6DB2B002A744C /* NDMainThreadRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDMainThreadRunner.h; sourceTree = "<group>"; };
-		B184FDF014B6DB2B002A744C /* NDMainThreadRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDMainThreadRunner.m; sourceTree = "<group>"; };
-		B184FDF114B6DB2B002A744C /* NDWebElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDWebElement.h; sourceTree = "<group>"; };
-		B184FDF214B6DB2B002A744C /* NDWebElement.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NDWebElement.mm; sourceTree = "<group>"; };
-		B184FDF314B6DB2B002A744C /* NSException+WebDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSException+WebDriver.h"; sourceTree = "<group>"; };
-		B184FDF414B6DB2B002A744C /* NSException+WebDriver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSException+WebDriver.m"; sourceTree = "<group>"; };
 		B184FDF614B6DB2B002A744C /* LPResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPResources.h; sourceTree = "<group>"; };
 		B184FDF714B6DB2B002A744C /* LPResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPResources.m; sourceTree = "<group>"; };
 		B184FDF914B6DB2B002A744C /* UIScriptAST.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScriptAST.h; sourceTree = "<group>"; };
@@ -247,15 +218,12 @@
 		B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPJSONUtils.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		B184FE0E14B6DB2B002A744C /* LPTouchUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPTouchUtils.h; sourceTree = "<group>"; };
 		B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPTouchUtils.m; sourceTree = "<group>"; };
-		B184FE1014B6DB2B002A744C /* ScreenCaptureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScreenCaptureView.h; sourceTree = "<group>"; };
-		B184FE1114B6DB2B002A744C /* ScreenCaptureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScreenCaptureView.m; sourceTree = "<group>"; };
 		B184FE8714B6DBAC002A744C /* LPRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPRecorder.m; sourceTree = "<group>"; };
 		B184FE8914B6DC7F002A744C /* LPMapRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LPMapRoute.h; sourceTree = "<group>"; };
 		B184FE8A14B6DC7F002A744C /* LPPlaybackRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPlaybackRoute.m; sourceTree = "<group>"; };
 		B184FE8B14B6DC7F002A744C /* LPRecordRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPRecordRoute.m; sourceTree = "<group>"; };
 		B184FE9014B6DD33002A744C /* LPScreenshotRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScreenshotRoute.m; sourceTree = "<group>"; };
 		B184FE9214B6DDA1002A744C /* LPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPOperation.m; sourceTree = "<group>"; };
-		B184FE9414B6DE68002A744C /* LPScreencastRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScreencastRoute.m; sourceTree = "<group>"; };
 		B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCJSONDeserializer.m; sourceTree = "<group>"; };
 		B1E3603814D9F4B30087D8D9 /* UIScriptASTPredicate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScriptASTPredicate.h; sourceTree = "<group>"; };
 		B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScriptASTPredicate.m; sourceTree = "<group>"; };
@@ -380,7 +348,6 @@
 				B184FD9214B6DB2B002A744C /* CocoaHttpServer */,
 				B184FDBC14B6DB2B002A744C /* FranklyServer */,
 				B184FDDD14B6DB2B002A744C /* JSON */,
-				B184FDE714B6DB2B002A744C /* NativeDriver */,
 				B184FDF514B6DB2B002A744C /* Resources */,
 				B184FDF814B6DB2B002A744C /* UISpec */,
 				B184FE0B14B6DB2B002A744C /* Utils */,
@@ -484,8 +451,6 @@
 				B184FDD214B6DB2B002A744C /* LPMapRoute.m */,
 				B184FDD314B6DB2B002A744C /* LPNoContentResponse.h */,
 				B184FDD414B6DB2B002A744C /* LPNoContentResponse.m */,
-				B184FDD914B6DB2B002A744C /* LPScreencastRoute.h */,
-				B184FE9414B6DE68002A744C /* LPScreencastRoute.m */,
 				B184FDDB14B6DB2B002A744C /* LPScreenshotRoute.h */,
 				B184FE9014B6DD33002A744C /* LPScreenshotRoute.m */,
 				B111321514D5837900982BBC /* LPAsyncPlaybackRoute.h */,
@@ -514,33 +479,6 @@
 			path = JSON;
 			sourceTree = "<group>";
 		};
-		B184FDE714B6DB2B002A744C /* NativeDriver */ = {
-			isa = PBXGroup;
-			children = (
-				B184FDE814B6DB2B002A744C /* atoms.h */,
-				B184FDE914B6DB2B002A744C /* Elements */,
-				B184FDEA14B6DB2B002A744C /* errorcodes.h */,
-				B184FDEB14B6DB2B002A744C /* NDElement.h */,
-				B184FDEC14B6DB2B002A744C /* NDElement.m */,
-				B184FDED14B6DB2B002A744C /* NDJavaScriptRunner.h */,
-				B184FDEE14B6DB2B002A744C /* NDJavaScriptRunner.mm */,
-				B184FDEF14B6DB2B002A744C /* NDMainThreadRunner.h */,
-				B184FDF014B6DB2B002A744C /* NDMainThreadRunner.m */,
-				B184FDF114B6DB2B002A744C /* NDWebElement.h */,
-				B184FDF214B6DB2B002A744C /* NDWebElement.mm */,
-				B184FDF314B6DB2B002A744C /* NSException+WebDriver.h */,
-				B184FDF414B6DB2B002A744C /* NSException+WebDriver.m */,
-			);
-			path = NativeDriver;
-			sourceTree = "<group>";
-		};
-		B184FDE914B6DB2B002A744C /* Elements */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Elements;
-			sourceTree = "<group>";
-		};
 		B184FDF514B6DB2B002A744C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -555,8 +493,6 @@
 			children = (
 				B1E3603814D9F4B30087D8D9 /* UIScriptASTPredicate.h */,
 				B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */,
-				B111320F14D498F800982BBC /* LPNDElementWrapper.h */,
-				B111321014D498F800982BBC /* LPNDElementWrapper.m */,
 				B184FDF914B6DB2B002A744C /* UIScriptAST.h */,
 				B184FDFA14B6DB2B002A744C /* UIScriptAST.m */,
 				B184FDFB14B6DB2B002A744C /* UIScriptASTALL.h */,
@@ -586,8 +522,6 @@
 				B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */,
 				B184FE0E14B6DB2B002A744C /* LPTouchUtils.h */,
 				B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */,
-				B184FE1014B6DB2B002A744C /* ScreenCaptureView.h */,
-				B184FE1114B6DB2B002A744C /* ScreenCaptureView.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -619,13 +553,6 @@
 				B184FE5C14B6DB2B002A744C /* LPCJSONScanner.h in Headers */,
 				B184FE5E14B6DB2B002A744C /* LPCJSONSerializer.h in Headers */,
 				B184FE6014B6DB2B002A744C /* LPJSONRepresentation.h in Headers */,
-				B184FE6114B6DB2B002A744C /* atoms.h in Headers */,
-				B184FE6214B6DB2B002A744C /* errorcodes.h in Headers */,
-				B184FE6314B6DB2B002A744C /* NDElement.h in Headers */,
-				B184FE6514B6DB2B002A744C /* NDJavaScriptRunner.h in Headers */,
-				B184FE6714B6DB2B002A744C /* NDMainThreadRunner.h in Headers */,
-				B184FE6914B6DB2B002A744C /* NDWebElement.h in Headers */,
-				B184FE6B14B6DB2B002A744C /* NSException+WebDriver.h in Headers */,
 				B184FE6D14B6DB2B002A744C /* LPResources.h in Headers */,
 				B184FE6F14B6DB2B002A744C /* UIScriptAST.h in Headers */,
 				B184FE7114B6DB2B002A744C /* UIScriptASTALL.h in Headers */,
@@ -639,7 +566,6 @@
 				B184FE8114B6DB2B002A744C /* LPJSONUtils.h in Headers */,
 				B184FE8314B6DB2B002A744C /* LPTouchUtils.h in Headers */,
 				B184FE8C14B6DC80002A744C /* LPMapRoute.h in Headers */,
-				B111321114D498F800982BBC /* LPNDElementWrapper.h in Headers */,
 				B111321714D5837B00982BBC /* LPAsyncPlaybackRoute.h in Headers */,
 				B1E3603A14D9F4B30087D8D9 /* UIScriptASTPredicate.h in Headers */,
 				B1E3604714DA09D20087D8D9 /* LPBackgroundRoute.h in Headers */,
@@ -771,11 +697,6 @@
 				B184FE5914B6DB2B002A744C /* CDataScanner_Extensions.m in Sources */,
 				B184FE5D14B6DB2B002A744C /* LPCJSONScanner.m in Sources */,
 				B184FE5F14B6DB2B002A744C /* LPCJSONSerializer.m in Sources */,
-				B184FE6414B6DB2B002A744C /* NDElement.m in Sources */,
-				B184FE6614B6DB2B002A744C /* NDJavaScriptRunner.mm in Sources */,
-				B184FE6814B6DB2B002A744C /* NDMainThreadRunner.m in Sources */,
-				B184FE6A14B6DB2B002A744C /* NDWebElement.mm in Sources */,
-				B184FE6C14B6DB2B002A744C /* NSException+WebDriver.m in Sources */,
 				B184FE6E14B6DB2B002A744C /* LPResources.m in Sources */,
 				B184FE7014B6DB2B002A744C /* UIScriptAST.m in Sources */,
 				B184FE7214B6DB2B002A744C /* UIScriptASTALL.m in Sources */,
@@ -793,7 +714,6 @@
 				B184FE9114B6DD33002A744C /* LPScreenshotRoute.m in Sources */,
 				B184FE9314B6DDA1002A744C /* LPOperation.m in Sources */,
 				B184FE9714B6F64A002A744C /* LPCJSONDeserializer.m in Sources */,
-				B111321214D498F800982BBC /* LPNDElementWrapper.m in Sources */,
 				B111321814D5837B00982BBC /* LPAsyncPlaybackRoute.m in Sources */,
 				B1E3603B14D9F4B30087D8D9 /* UIScriptASTPredicate.m in Sources */,
 				B1E3604814DA09D20087D8D9 /* LPBackgroundRoute.m in Sources */,
