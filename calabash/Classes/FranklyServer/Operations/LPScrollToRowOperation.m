@@ -25,10 +25,7 @@
             row -= numberOfSections;
         }
 	}
-	//NSLog(@"sectionList size = %d", sectionList.count);
-	i=numberOfSections-1;
-    NSInteger r = [table numberOfRowsInSection:i]-1;
-    return [NSIndexPath indexPathForRow:r inSection:i];
+	return nil;
 }
 
 - (id) performWithTarget:(UIView*)_view error:(NSError **)error {
@@ -36,7 +33,10 @@
         UITableView* table = (UITableView*) _view;
         NSNumber *idxNum = [_arguments objectAtIndex:0];
         NSIndexPath* indexPathForRow = [self indexPathForRow:[idxNum unsignedIntegerValue] inTable:table];
-        
+        if (!indexPathForRow)
+        {
+            return nil;
+        }
         [table scrollToRowAtIndexPath:indexPathForRow atScrollPosition:UITableViewScrollPositionTop animated:YES];
         return _view;
         
