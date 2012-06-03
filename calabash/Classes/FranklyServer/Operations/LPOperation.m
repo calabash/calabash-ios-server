@@ -6,7 +6,7 @@
 
 #import "LPOperation.h"
 #import "LPScrollToRowOperation.h"
-#import "LPTouchDoneNextOperation.h"
+#import "LPNativeKeyboardOperation.h"
 #import "LPScrollOperation.h"
 #import "LPQueryOperation.h"
 #import "LPSetTextOperation.h"
@@ -22,7 +22,7 @@
     } else if ([opName isEqualToString:@"scroll"]) {
         op = [[LPScrollOperation alloc] initWithOperation:dictionary];
     } else if ([opName isEqualToString:@"touchDone"]) {
-        op = [[LPTouchDoneNextOperation alloc] initWithOperation:dictionary];
+        op = [[LPNativeKeyboardOperation alloc] initWithOperation:dictionary];
     } else if ([opName isEqualToString:@"query"]) {
         op = [[LPQueryOperation alloc] initWithOperation:dictionary];
     } else if ([opName isEqualToString:@"setText"]) {

@@ -10,5 +10,6 @@
 
 +(CGPoint) translateToScreenCoords:(CGPoint) point;
 +(CGPoint) centerOfView:(UIView *) view;
++(CGPoint)centerOfFrame:(CGRect)frame;
 
 @end

@@ -183,10 +183,8 @@
                 return;
             }
             
-            CGPoint firstPoint = CGPointMake([[windowLoc valueForKey:@"X"] floatValue], 
-                                       [[windowLoc valueForKey:@"Y"] floatValue]);
             NSArray* transformed = [LPResources transformEvents:self.events 
-                                                        toPoint:CGPointMake(firstPoint.x + offsetPoint.x, firstPoint.y + offsetPoint.y)];
+                                                        toPoint:CGPointMake(offsetPoint.x, offsetPoint.y)];
             if ([transformed count] == [self.events count]) {
                 self.events = transformed;
             }

@@ -30,6 +30,15 @@
     }
 }
 
++(CGPoint)centerOfFrame:(CGRect)frame
+{
+    CGPoint translated = [self translateToScreenCoords:frame.origin];
+    
+    
+    return CGPointMake(translated.x + 0.5 * frame.size.width,
+                       translated.y + 0.5 * frame.size.height);
+}
+
 +(CGPoint) centerOfView:(UIView *) view {
     CGRect frameInWindow;
     if ([view isKindOfClass:[UIWindow class]])
@@ -60,11 +69,7 @@
         
         frameInWindow = [window convertRect:view.frame fromView:view.superview];
         //frameInWindow = [view.window convertRect:view.frame fromView:view.superview];
-    }
-    CGPoint translated = [self translateToScreenCoords:frameInWindow.origin];
-        
-
-    return CGPointMake(translated.x + 0.5 * frameInWindow.size.width,
-                       translated.y + 0.5 * frameInWindow.size.height);
+    }    
+    return [self centerOfFrame:frameInWindow];
 }
 @end

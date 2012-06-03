@@ -8,7 +8,7 @@
 
 #import "LPOperation.h"
 
-@interface LPTouchDoneNextOperation : LPOperation {
+@interface LPNativeKeyboardOperation : LPOperation {
  
     
 }
