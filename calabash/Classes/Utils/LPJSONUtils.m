@@ -52,5 +52,18 @@
     return res;
 }
 
++(NSString *)serializeObject:(id)obj
+{
+    LPCJSONSerializer* s = [LPCJSONSerializer serializer];
+    NSError* error = nil;
+    NSData* d = [s serializeObject:obj error:&error];
+    if (error) {
+        NSLog(@"Unable to serialize object (%@), %@",error,[obj description]);
+    }
+    NSString* res = [[NSString alloc]  initWithBytes:[d bytes]
+                                              length:[d length] encoding: NSUTF8StringEncoding];
+    return [res autorelease];
+
+}
 
 @end

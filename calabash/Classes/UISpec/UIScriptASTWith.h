@@ -7,6 +7,7 @@
 #import "UIScriptAST.h"
 typedef enum {
     UIScriptLiteralTypeUnknown,
+    UIScriptLiteralTypeIndexPath,
     UIScriptLiteralTypeString,
     UIScriptLiteralTypeInteger,
     UIScriptLiteralTypeBool
@@ -28,9 +29,13 @@ static NSString *LP_QUERY_JS = @"(function(){function isHostMethod(object,proper
 @property (nonatomic,assign) SEL selector;
 @property (nonatomic, assign) NSInteger timeout;
 @property (nonatomic,retain) NSObject *objectValue;
+@property (nonatomic,retain) NSObject *objectValue2;
 @property (nonatomic,assign) BOOL boolValue;
+@property (nonatomic,assign) BOOL boolValue2;
 @property (nonatomic,assign) NSInteger integerValue;
+@property (nonatomic,assign) NSInteger integerValue2;
 @property (nonatomic,assign) UIScriptLiteralType valueType;
+@property (nonatomic,assign) UIScriptLiteralType valueType2;
  
 
 - (id)initWithSelectorName:(NSString *)selectorName;

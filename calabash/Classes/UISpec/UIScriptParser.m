@@ -290,6 +290,20 @@ static NSCharacterSet* curlyBrackets = nil;
             ast.objectValue = [literalToken substringWithRange:NSMakeRange(1, [literalToken length]-2)];
             return;
         }
+        else
+        {
+            NSRange rng = [literalToken rangeOfString:@","];
+            if (rng.location != NSNotFound)
+            {
+                NSString *str1 = [literalToken substringWithRange:NSMakeRange(0, rng.location)];
+                NSString *str2 = [literalToken substringFromIndex:rng.location+1];
+                ast.valueType = UIScriptLiteralTypeIndexPath;
+                ast.objectValue = [NSIndexPath indexPathForRow:[str1 integerValue] inSection:[str2 integerValue]];
+                return;
+                
+                
+            }
+        }
     }
     NSNumberFormatter* nf = [[NSNumberFormatter alloc] init];
     NSNumber* numVal = [nf numberFromString:literalToken];

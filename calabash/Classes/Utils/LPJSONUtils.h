@@ -12,4 +12,5 @@
 + (NSDictionary*) deserializeDictionary:(NSString*) string;
 + (NSString*) serializeArray:(NSArray*) array;
 + (NSArray*) deserializeArray:(NSString*) string;
++(NSString *)serializeObject:(id)obj;
 @end

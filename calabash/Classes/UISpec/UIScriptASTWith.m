@@ -11,15 +11,21 @@
 @synthesize selectorName=_selectorName;
 @synthesize selector=_selector;
 @synthesize objectValue=_objectValue;
+@synthesize objectValue2;
 @synthesize boolValue=_boolValue;
+@synthesize boolValue2;
 @synthesize integerValue=_integerValue;
+@synthesize integerValue2;
 @synthesize timeout;
 
 @synthesize valueType=_valueType;
+@synthesize valueType2;
 
 - (id)initWithSelectorName:(NSString *)selectorName {
         self = [super init];
         if (self) {
+            self.valueType=UIScriptLiteralTypeUnknown;
+            self.valueType2=UIScriptLiteralTypeUnknown;
             self.selectorName = selectorName;
             self.selector = NSSelectorFromString(selectorName);
             self.timeout = 3;
@@ -29,6 +35,12 @@
 - (NSString*) description {
     NSString* fm = [NSString stringWithFormat:@"with %@:",NSStringFromSelector(self.selector)];
     switch (self.valueType) {
+        case UIScriptLiteralTypeIndexPath:
+        {
+            NSIndexPath *ip = (id)[self objectValue];
+            return [NSString stringWithFormat:@"%@%d,%d",fm,[ip row],[ip section]];            
+        }
+
         case UIScriptLiteralTypeString:
             return [NSString stringWithFormat:@"%@'%@'",fm,self.objectValue];
         case UIScriptLiteralTypeInteger:
@@ -140,6 +152,27 @@
             }            
             continue;
         } 
+        if ([v isKindOfClass:[UITableViewCell class]] && 
+               [self.selectorName isEqualToString:@"indexPath"])
+        {
+            UITableViewCell *cell = (UITableViewCell*)v;
+            NSIndexPath *indexPath = (NSIndexPath *) self.objectValue;
+            id tableView = [cell superview];
+            while(tableView && ![tableView isKindOfClass:[UITableView class]])
+            {
+                tableView = [tableView superview];
+            }
+            if (tableView)
+            {
+                UITableView *tv = (UITableView*)tableView;
+                
+                if ([indexPath isEqual:[tv indexPathForCell:cell]])
+                {
+                    [res addObject:cell];
+                }
+            }
+            continue;            
+        }
         
         if ([v respondsToSelector:_selector]) {
             void* val = [v performSelector:_selector];
