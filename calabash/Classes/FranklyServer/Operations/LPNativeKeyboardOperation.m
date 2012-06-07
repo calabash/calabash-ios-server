@@ -1,3 +1,4 @@
+
 //
 //  TouchDoneNextOperation.m
 //  Created by Karl Krukow on 21/08/11.
@@ -107,11 +108,15 @@
     }
     
     if (keyToTap) {
-        UIScriptParser *parser = [[UIScriptParser alloc] initWithUIScript:@"view:'UIPeripheralHostView'"];
+        UIScriptParser *parser = [[UIScriptParser alloc] initWithUIScript:@"view:'UIKeyboardAutomatic'"];
         [parser parse];
         NSMutableArray* views = [NSMutableArray arrayWithObject:view];
         NSArray* result = [parser evalWith:views];
-        CGRect parentFrame = [[result objectAtIndex:0] frame];
+        UIView *v = [result objectAtIndex:0];
+        
+        UIView *sup = [v superview];
+        
+        CGRect parentFrame = [sup convertRect:v.frame toView:nil];//[sup convertRect:v.frame toView:sup];
 
         CGRect frame = [keyToTap frame];
         CGPoint point = CGPointMake(parentFrame.origin.x + frame.origin.x + 0.5 * frame.size.width,

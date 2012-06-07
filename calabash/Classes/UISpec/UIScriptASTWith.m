@@ -128,76 +128,91 @@
     NSMutableArray* res = [NSMutableArray arrayWithCapacity:8];
 
     for (UIView* v in views) {
-        if ([v isHidden]) continue;
-        if ([v isKindOfClass:[UIWebView class]]) {            
-            [self handleWebView:(UIWebView *)v result:res];
-            continue;            
-        }
-        if ([self.selectorName isEqualToString:@"marked"]) 
+        if ([v isKindOfClass:[NSDictionary class]])
         {
-            NSString *val = nil;
-            if ([v respondsToSelector:@selector(accessibilityIdentifier)])
+            NSDictionary *dict = (NSDictionary *)v;
+            NSString *key = NSStringFromSelector(self.selector);
+            if ([[dict valueForKey:key] isEqual:self.objectValue])
             {
-                val = [v accessibilityIdentifier];                
+                [res addObject:dict];
+            }
+            
+        }
+        else
+        {
+            if ([v isHidden]) continue;
+            if ([v isKindOfClass:[UIWebView class]]) {            
+                [self handleWebView:(UIWebView *)v result:res];
+                continue;            
+            }
+            if ([self.selectorName isEqualToString:@"marked"]) 
+            {
+                NSString *val = nil;
+                if ([v respondsToSelector:@selector(accessibilityIdentifier)])
+                {
+                    val = [v accessibilityIdentifier];                
+                    if ([val isEqualToString:(NSString*)self.objectValue])
+                    {
+                        [res addObject:v];
+                        continue;
+                    }
+                }            
+                val = [v accessibilityLabel];
                 if ([val isEqualToString:(NSString*)self.objectValue])
                 {
                     [res addObject:v];
-                    continue;
-                }
-            }            
-            val = [v accessibilityLabel];
-            if ([val isEqualToString:(NSString*)self.objectValue])
+                }            
+                continue;
+            } 
+            if ([v isKindOfClass:[UITableViewCell class]] && 
+                [self.selectorName isEqualToString:@"indexPath"])
             {
-                [res addObject:v];
-            }            
-            continue;
-        } 
-        if ([v isKindOfClass:[UITableViewCell class]] && 
-               [self.selectorName isEqualToString:@"indexPath"])
-        {
-            UITableViewCell *cell = (UITableViewCell*)v;
-            NSIndexPath *indexPath = (NSIndexPath *) self.objectValue;
-            id tableView = [cell superview];
-            while(tableView && ![tableView isKindOfClass:[UITableView class]])
-            {
-                tableView = [tableView superview];
-            }
-            if (tableView)
-            {
-                UITableView *tv = (UITableView*)tableView;
-                
-                if ([indexPath isEqual:[tv indexPathForCell:cell]])
+                UITableViewCell *cell = (UITableViewCell*)v;
+                NSIndexPath *indexPath = (NSIndexPath *) self.objectValue;
+                id tableView = [cell superview];
+                while(tableView && ![tableView isKindOfClass:[UITableView class]])
                 {
-                    [res addObject:cell];
+                    tableView = [tableView superview];
+                }
+                if (tableView)
+                {
+                    UITableView *tv = (UITableView*)tableView;
+                    
+                    if ([indexPath isEqual:[tv indexPathForCell:cell]])
+                    {
+                        [res addObject:cell];
+                    }
+                }
+                continue;            
+            }
+            
+            if ([v respondsToSelector:_selector]) {
+                void* val = [v performSelector:_selector];
+                switch (self.valueType) {
+                    case UIScriptLiteralTypeInteger:
+                        if ((NSInteger) val == self.integerValue) {
+                            [res addObject:v];
+                        }
+                        break;
+                    case UIScriptLiteralTypeString: {
+                        if (val != nil && 
+                            ([(NSString*)val isEqualToString:(NSString*)self.objectValue])) {
+                            [res addObject:v];
+                        } 
+                        break;
+                    }
+                    case UIScriptLiteralTypeBool:
+                        if (self.boolValue == (BOOL)val) {
+                            [res addObject:v];
+                        }
+                        break;
+                    default:
+                        break;
                 }
             }
-            continue;            
+            
         }
         
-        if ([v respondsToSelector:_selector]) {
-            void* val = [v performSelector:_selector];
-            switch (self.valueType) {
-                case UIScriptLiteralTypeInteger:
-                    if ((NSInteger) val == self.integerValue) {
-                        [res addObject:v];
-                    }
-                    break;
-                case UIScriptLiteralTypeString: {
-                    if (val != nil && 
-                        ([(NSString*)val isEqualToString:(NSString*)self.objectValue])) {
-                        [res addObject:v];
-                    } 
-                    break;
-                }
-                case UIScriptLiteralTypeBool:
-                    if (self.boolValue == (BOOL)val) {
-                        [res addObject:v];
-                    }
-                    break;
-                default:
-                    break;
-            }
-        }
     }
     return res;
 }
