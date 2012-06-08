@@ -57,7 +57,7 @@
         {
             long lngVal = [arg longValue];
             *setValue = &lngVal;
-            return;
+            return NO;
         }
         case '*':
             *setValue = arg;
@@ -72,7 +72,7 @@
             return NO;
         }
     }
-    
+    return NO;
  
 }
 
