@@ -7,6 +7,7 @@
 //
 
 #import "UIScriptASTPredicate.h"
+#import "LPTouchUtils.h"
 
 @implementation UIScriptASTPredicate
 @synthesize predicate=_predicate;
@@ -28,7 +29,7 @@
 - (NSMutableArray*) evalWith:(NSArray*) views direction:(UIScriptASTDirectionType) dir {
     NSMutableArray* res = [NSMutableArray arrayWithCapacity:8];    
     for (UIView* v in views) {
-        if ([v isHidden]) continue;
+        if ([v isKindOfClass:[UIView class]] && ![LPTouchUtils isViewVisible:v]) { continue; }
         if ([v respondsToSelector:self.selector])
             if([self.predicate evaluateWithObject:v]) {
                 [res addObject:v];

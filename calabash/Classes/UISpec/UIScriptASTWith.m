@@ -6,6 +6,7 @@
 
 #import "UIScriptASTWith.h"
 #import "LPJSONUtils.h"
+#import "LPTouchUtils.h"
 
 @implementation UIScriptASTWith
 @synthesize selectorName=_selectorName;
@@ -140,7 +141,7 @@
         }
         else
         {
-            if ([v isHidden]) continue;
+            if (![LPTouchUtils isViewVisible:v]) { continue; }
             if ([v isKindOfClass:[UIWebView class]]) {            
                 [self handleWebView:(UIWebView *)v result:res];
                 continue;            
@@ -177,7 +178,6 @@
                 if (tableView)
                 {
                     UITableView *tv = (UITableView*)tableView;
-                    
                     if ([indexPath isEqual:[tv indexPathForCell:cell]])
                     {
                         [res addObject:cell];

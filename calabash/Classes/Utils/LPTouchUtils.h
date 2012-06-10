@@ -12,4 +12,6 @@
 +(CGPoint) centerOfView:(UIView *) view;
 +(CGPoint)centerOfFrame:(CGRect)frame;
 
++(BOOL)isViewVisible:(UIView *)view;
+
 @end

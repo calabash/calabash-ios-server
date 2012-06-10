@@ -7,6 +7,7 @@
 #import "LPMapRoute.h"
 #import "UIScriptParser.h"
 #import "LPOperation.h"
+#import "LPTouchUtils.h"
 
 
 @implementation LPMapRoute
@@ -28,7 +29,7 @@
         }
     } else {
         for (id view in views) {
-            if ([view isKindOfClass:[UIView class]] && [view isHidden]) {continue;}            
+            if ([view isKindOfClass:[UIView class]] && ![LPTouchUtils isViewVisible:view]) {continue;}            
             id val = [op performWithTarget:view error:error];
             if (val == nil) {
                 [finalRes addObject: @"<VOID>"];
