@@ -23,59 +23,6 @@
     return NSSelectorFromString(selStr);
 }
 
--(BOOL)coerceArgument:(id)arg toType:(const char *)cType setValue:(void **)setValue
-{
-    switch(*cType) {
-        case '@':
-            *setValue = arg;
-            return YES;
-        case 'i':
-        {
-            NSInteger intVal = [arg integerValue];
-            *setValue = &intVal;
-            return NO;
-        }            
-        case 's':
-        {
-            short shVal = [arg shortValue];
-            *setValue = &shVal;
-            return NO;
-        }
-        case 'd':
-        {
-            double dbVal = [arg doubleValue];
-            *setValue = &dbVal;
-            return NO;
-        }
-        case 'f':
-        {
-            float fltVal = [arg floatValue];
-            *setValue = &fltVal;
-            return NO;           
-        }
-        case 'l':
-        {
-            long lngVal = [arg longValue];
-            *setValue = &lngVal;
-            return NO;
-        }
-        case '*':
-            *setValue = arg;
-            return NO;
-        case 'c':
-        {
-            char chVal =[arg charValue];
-            *setValue = &chVal;
-            return NO;
-        }
-        case '{': {
-            return NO;
-        }
-    }
-    return NO;
- 
-}
-
 - (id) performWithTarget:(UIView*)_view error:(NSError **)error {
     id target = _view;
     if([_arguments count] <= 0) {
@@ -119,16 +66,55 @@
             [invocation setSelector:sel];
             for (NSInteger i =0, N=[args count]; i<N; i++)
             {
-                void *argToSet;
-                BOOL isObj = [self coerceArgument:[args objectAtIndex:i] 
-                               toType:[sig getArgumentTypeAtIndex:i+2] setValue:&argToSet];
-                if (isObj)
-                {
-                        [invocation setArgument:&argToSet atIndex:i+2];
-                }
-                else
-                {
-                    [invocation setArgument:argToSet atIndex:i+2];
+                id arg = [args objectAtIndex:i];
+                const char *cType = [sig getArgumentTypeAtIndex:i+2];
+                switch(*cType) {
+                    case '@':
+                        [invocation setArgument:&arg atIndex:i+2];
+                        break;                        
+                    case 'i':
+                    {
+                        NSInteger intVal = [arg integerValue];
+                        [invocation setArgument:&intVal atIndex:i+2];
+                        break;
+                    }            
+                    case 's':
+                    {
+                        short shVal = [arg shortValue];
+                        [invocation setArgument:&shVal atIndex:i+2];
+                        break;
+                    }
+                    case 'd':
+                    {
+                        double dbVal = [arg doubleValue];
+                        [invocation setArgument:&dbVal atIndex:i+2];
+                        break;
+                    }
+                    case 'f':
+                    {
+                        float fltVal = [arg floatValue];
+                        [invocation setArgument:&fltVal atIndex:i+2];
+                        break;
+                    }
+                    case 'l':
+                    {
+                        long lngVal = [arg longValue];
+                        [invocation setArgument:&lngVal atIndex:i+2];
+                        break;
+                    }
+                    case '*':
+                        //not supported yet
+                        @throw [NSString stringWithFormat: @"not yet support struct pointers: %@",sig];
+                    case 'c':
+                    {
+                        char chVal =[arg charValue];
+                        [invocation setArgument:&chVal atIndex:i+2];
+                        break;
+                    }
+                    case '{': {
+                        //not supported yet
+                        @throw [NSString stringWithFormat: @"not yet support struct args: %@",sig];
+                    }
                 }
                 
             }
@@ -163,19 +149,19 @@
                 }
             case 'i':
                 [invocation getReturnValue:(void **)&intValue];
-                return [NSString stringWithFormat:@"%i", intValue];
+                return [NSNumber numberWithInt: intValue];
             case 's':
                 [invocation getReturnValue:(void **)&shortValue];
-                return [NSString stringWithFormat:@"%ud", shortValue];
+                return [NSNumber numberWithShort:shortValue];
             case 'd':
                 [invocation getReturnValue:(void **)&doubleValue];
-                return [NSString stringWithFormat:@"%lf", doubleValue];
+                return [NSNumber numberWithDouble: doubleValue];
             case 'f':
                 [invocation getReturnValue:(void **)&floatValue];
-                return [NSString stringWithFormat:@"%f", floatValue];
+                return [NSNumber numberWithFloat:floatValue];
             case 'l':
                 [invocation getReturnValue:(void **)&longValue];
-                return [NSString stringWithFormat:@"%ld", longValue];
+                return [NSNumber numberWithLong: longValue];
             case '*':
                 [invocation getReturnValue:(void **)&charPtrValue];
                 return [NSString stringWithFormat:@"%s", charPtrValue];
@@ -187,7 +173,33 @@
                 void *buffer = (void *)malloc(length);
                 [invocation getReturnValue:buffer];
                 NSValue *value = [[[NSValue alloc] initWithBytes:buffer objCType:type] autorelease];
-                return [value description];
+                
+                if ([returnType rangeOfString:@"{CGRect"].location == 0)
+                {
+                    CGRect *rec = (CGRect*)buffer;
+                    return [NSDictionary dictionaryWithObjectsAndKeys:
+                            [value description], @"description",
+                            [NSNumber numberWithFloat:rec->origin.x],@"x",
+                            [NSNumber numberWithFloat:rec->origin.y],@"y",
+                            [NSNumber numberWithFloat:rec->size.width],@"width",
+                            [NSNumber numberWithFloat:rec->size.height],@"height",
+                            nil];
+                    
+                }
+                else if ([returnType rangeOfString:@"{CGPoint="].location == 0)
+                {
+                    CGPoint *point = (CGPoint*)buffer;
+                    return [NSDictionary dictionaryWithObjectsAndKeys:
+                            [value description], @"description",
+                            [NSNumber numberWithFloat:point->x],@"x",
+                            [NSNumber numberWithFloat:point->y],@"y",
+                            nil];
+                    
+                }
+                else
+                {
+                    return [value description];                    
+                }
             }
         }
 
