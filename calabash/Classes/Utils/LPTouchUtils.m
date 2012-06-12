@@ -58,7 +58,7 @@
 +(BOOL)isViewVisible:(UIView *)view
 {
     if (![view isKindOfClass:[UIView class]] || [view isHidden]) {return NO;}
-    CGPoint center = [self centerOfView:view];
+    CGPoint center = [self centerOfView:view shouldTranslate:NO];
     UIWindow *windowForView = [self windowForView:view];
     if (!windowForView) {return YES;/* what can I do?*/}
 //    NSLog(@"view %@ cent: %@",    [view accessibilityLabel], NSStringFromCGPoint(center));
@@ -77,16 +77,23 @@
     return hitView == view;    
 }
 
-+(CGPoint)centerOfFrame:(CGRect)frame
++(CGPoint)centerOfFrame:(CGRect)frame shouldTranslate:(BOOL)shouldTranslate
 {
-    CGPoint translated = [self translateToScreenCoords:frame.origin];
+    CGPoint translated =  shouldTranslate ? [self translateToScreenCoords:frame.origin] : frame.origin;
     
     
     return CGPointMake(translated.x + 0.5 * frame.size.width,
                        translated.y + 0.5 * frame.size.height);
 }
 
-+(CGPoint) centerOfView:(UIView *) view {
+
++(CGPoint)centerOfFrame:(CGRect)frame
+{
+    return [self centerOfFrame:frame shouldTranslate:YES];
+}
+
++(CGPoint)centerOfView:(UIView *)view shouldTranslate:(BOOL)shouldTranslate
+{
     CGRect frameInWindow;
     if ([view isKindOfClass:[UIWindow class]])
     {
@@ -117,6 +124,10 @@
         frameInWindow = [window convertRect:view.frame fromView:view.superview];
         //frameInWindow = [view.window convertRect:view.frame fromView:view.superview];
     }    
-    return [self centerOfFrame:frameInWindow];
+    return [self centerOfFrame:frameInWindow shouldTranslate:shouldTranslate];
+}
++(CGPoint) centerOfView:(UIView *) view 
+{
+    return [self centerOfView:view shouldTranslate:YES];
 }
 @end
