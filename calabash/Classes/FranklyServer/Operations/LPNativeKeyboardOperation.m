@@ -15,39 +15,47 @@
 	return [NSString stringWithFormat:@"Touch keyboard"];
 }
 
-//cf KIF: https://github.com/square/KIF/blob/master/Classes/KIFTestStep.m
-+ (NSString *)_representedKeyboardStringForCharacter:(NSString *)characterString;
-{
-    // Interpret control characters appropriately
-    if ([characterString isEqual:@"\b"]) {
-        characterString = @"Delete";
-    } 
-    
-    return characterString;
-}
-
 
 -(id)performWithTarget:(UIView *)view error:(NSError **)error
 {
+    NSString *characterString  = nil;
     if ([_arguments count] == 1)
     {
         //support touch done for backwards compat
-        return [self touchDone];
+        characterString = @"Return";
+         
     }
-    NSString *characterString = [_arguments objectAtIndex:1];
-    for (UIWindow *window in [UIApplication sharedApplication].windows) {
-        if ([NSStringFromClass([window class]) isEqual:@"UITextEffectsWindow"]) {
+    else
+    {
+        characterString = [_arguments objectAtIndex:1];
+    }
+        
+
+
+    for (UIWindow *window in [UIApplication sharedApplication].windows) 
+    {
+        if ([NSStringFromClass([window class]) isEqual:@"UITextEffectsWindow"]) 
+        {
             view = window;
             break;
         }
     }
     
-    
+    if (!view) 
+    {
+        return nil;
+    }
+
     UIScriptParser *parser = [[UIScriptParser alloc] initWithUIScript:@"view:'UIKBKeyplaneView'"];
     [parser parse];
     NSMutableArray* views = [NSMutableArray arrayWithObject:view];
     NSArray* result = [parser evalWith:views];
-    
+
+    if ([result count]==0) 
+    {
+        return nil;
+    }
+
 
     //cf KIF: https://github.com/square/KIF/blob/master/Classes/KIFTestStep.m
     UIView *keyboardView = [result objectAtIndex:0];
@@ -69,9 +77,7 @@
     
     NSArray *keys = [keyplane valueForKey:@"keys"];
     
-    // Interpret control characters appropriately
-    characterString = [[self class] _representedKeyboardStringForCharacter:characterString];
-    
+    // Interpret control characters appropriately    
     id keyToTap = nil;
     id modifierKey = nil;
     NSString *selectedModifierRepresentedString = nil;
@@ -83,7 +89,14 @@
             if ([representedString isEqual:characterString]) {
                 keyToTap = key;
             }
-            
+            if ([representedString length]>0)
+            {
+                
+                if ([characterString isEqualToString:@"Return"] && [representedString characterAtIndex:0]==(unichar)10)
+                {
+                    keyToTap = key;
+                }
+            }
             if (!modifierKey && unvisitedForKeyplane.count && [[unvisitedForKeyplane objectAtIndex:0] isEqual:representedString]) {
                 modifierKey = key;
                 selectedModifierRepresentedString = representedString;
@@ -114,18 +127,27 @@
         NSArray* result = [parser evalWith:views];
         UIView *v = [result objectAtIndex:0];
         
+        
         UIView *sup = [v superview];
         
         CGRect parentFrame = [sup convertRect:v.frame toView:nil];//[sup convertRect:v.frame toView:sup];
-
+        
         CGRect frame = [keyToTap frame];
         CGPoint point = CGPointMake(parentFrame.origin.x + frame.origin.x + 0.5 * frame.size.width,
                                     parentFrame.origin.y + frame.origin.y + 0.5 * frame.size.height);
-
+        
+        point = [(UIWindow*)view convertPoint:point toWindow:nil];
+        point=[LPTouchUtils translateToScreenCoords:point];
         _events =  [[LPResources transformEvents: [LPResources eventsFromEncoding:[_arguments objectAtIndex:0]]  
                                          toPoint:point] retain];
         [self play:_events];
         
+        
+        
+        /*
+         
+         
+         */
         
         NSLog(@"Point: %@",NSStringFromCGPoint(point));   
         return keyboardView;

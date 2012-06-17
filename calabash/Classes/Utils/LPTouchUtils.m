@@ -14,13 +14,14 @@
     UIScreenMode* sm =[s currentMode];
     CGRect b = [s bounds];
     CGSize size = sm.size;
+    UIDeviceOrientation o = [[UIDevice currentDevice] orientation];    
     //try and detect "compatabilitity mode"
     CGRect small_vert = CGRectMake(0, 0, 320, 480);
     CGRect small_hori = CGRectMake(0, 0, 480, 320);
     CGSize large_size_vert = CGSizeMake(768.0, 1024);
     CGSize large_size_hori = CGSizeMake(1024, 768.0);
     if ((CGRectEqualToRect(small_vert, b) || CGRectEqualToRect(small_hori, b))  && (CGSizeEqualToSize(large_size_hori, size) || CGSizeEqualToSize(large_size_vert, size))) {
-        UIDeviceOrientation o = [[UIDevice currentDevice] orientation];
+       
         CGSize orientation_size =  UIDeviceOrientationIsPortrait(o) || UIDeviceOrientationFaceUp == o || UIDeviceOrientationUnknown == o ? large_size_vert : large_size_hori;
         float x_offset = orientation_size.width/2.0f - b.size.width/2.0f;
         float y_offset = orientation_size.height/2.0f - b.size.height/2.0f;
@@ -129,5 +130,13 @@
 +(CGPoint) centerOfView:(UIView *) view 
 {
     return [self centerOfView:view shouldTranslate:YES];
+}
++(CGPoint) centerOfView:(id)view 
+          withSuperView:(UIView *)superView
+               inWindow:(id)window
+{
+        
+        CGRect frameInWindow = [window convertRect:[view frame] fromView:superView];
+    return [self centerOfFrame:frameInWindow shouldTranslate:YES];
 }
 @end

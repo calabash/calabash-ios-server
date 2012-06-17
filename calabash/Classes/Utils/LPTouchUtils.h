@@ -11,6 +11,9 @@
 +(CGPoint) translateToScreenCoords:(CGPoint) point;
 +(CGPoint) centerOfView:(UIView *) view;
 +(CGPoint)centerOfFrame:(CGRect)frame;
++(CGPoint) centerOfView:(id)view 
+          withSuperView:(UIView *)superView
+               inWindow:(id)window;
 
 +(BOOL)isViewVisible:(UIView *)view;
 
