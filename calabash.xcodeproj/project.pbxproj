@@ -208,7 +208,7 @@
 		B116C9B914E6565500663205 /* LPHTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPHTTPResponse.h; sourceTree = "<group>"; };
 		B116C9BA14E6565500663205 /* LPHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPHTTPServer.h; sourceTree = "<group>"; };
 		B116C9BB14E6565500663205 /* LPHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPHTTPServer.m; sourceTree = "<group>"; };
-		B121E79414B6D9FB0034C6A9 /* calabash */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = text; path = calabash; sourceTree = BUILT_PRODUCTS_DIR; };
+		B121E79414B6D9FB0034C6A9 /* calabash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; path = calabash.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B121E79714B6D9FB0034C6A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B121E79B14B6D9FB0034C6A9 /* calabash-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "calabash-Info.plist"; sourceTree = "<group>"; };
 		B121E79D14B6D9FB0034C6A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -370,7 +370,7 @@
 		B121E79514B6D9FB0034C6A9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B121E79414B6D9FB0034C6A9 /* calabash */,
+				B121E79414B6D9FB0034C6A9 /* calabash.framework */,
 				F597D6FF158F23FE00BB1BFA /* cornichon.app */,
 			);
 			name = Products;
@@ -752,7 +752,7 @@
 			);
 			name = calabash;
 			productName = calabash;
-			productReference = B121E79414B6D9FB0034C6A9 /* calabash */;
+			productReference = B121E79414B6D9FB0034C6A9 /* calabash.framework */;
 			productType = "com.apple.product-type.framework.static";
 		};
 		F597D6FE158F23FE00BB1BFA /* cornichon */ = {
@@ -1063,6 +1063,7 @@
 				GCC_PREFIX_HEADER = "calabash/calabash-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "calabash/calabash-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1085,6 +1086,7 @@
 				GCC_PREFIX_HEADER = "calabash/calabash-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "calabash/calabash-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1153,6 +1155,7 @@
 				F597D71C158F23FE00BB1BFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
