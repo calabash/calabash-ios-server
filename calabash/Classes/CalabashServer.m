@@ -17,6 +17,9 @@
 #import "LPInterpolateRoute.h"
 #import "LPBackdoorRoute.h"
 #import <dlfcn.h>
+// category for UUID
+#import "UIDevice+IdentifierAddition.h"
+#import "NSString+MD5Addition.h"
 
 @interface CalabashServer()
 - (void) start;
@@ -89,7 +92,8 @@
 		                                     [info objectForKey:@"CFBundleVersion"], @"app_version",
 		                                     nil];
 		if ([[UIDevice currentDevice] respondsToSelector:@selector(uniqueIdentifier)]) {
-			[capabilities setObject:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"uuid"];
+      [capabilities setObject:[[UIDevice currentDevice] uniqueDeviceIdentifier] forKey:@"uuid"];
+			//[capabilities setObject:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"uuid"];
 		}
 
 		[_httpServer setTXTRecordDictionary:capabilities];

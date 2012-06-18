@@ -171,6 +171,12 @@
 		F597D754158F253800BB1BFA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F597D752158F252B00BB1BFA /* Security.framework */; };
 		F597D755158F253800BB1BFA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F597D750158F252000BB1BFA /* CFNetwork.framework */; };
 		F597D756158F255700BB1BFA /* LPMapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD214B6DB2B002A744C /* LPMapRoute.m */; };
+		F597D75C158F266600BB1BFA /* NSString+MD5Addition.h in Headers */ = {isa = PBXBuildFile; fileRef = F597D758158F266600BB1BFA /* NSString+MD5Addition.h */; };
+		F597D75D158F266600BB1BFA /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = F597D759158F266600BB1BFA /* NSString+MD5Addition.m */; };
+		F597D75E158F266600BB1BFA /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = F597D759158F266600BB1BFA /* NSString+MD5Addition.m */; };
+		F597D75F158F266600BB1BFA /* UIDevice+IdentifierAddition.h in Headers */ = {isa = PBXBuildFile; fileRef = F597D75A158F266600BB1BFA /* UIDevice+IdentifierAddition.h */; };
+		F597D760158F266600BB1BFA /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = F597D75B158F266600BB1BFA /* UIDevice+IdentifierAddition.m */; };
+		F597D761158F266600BB1BFA /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = F597D75B158F266600BB1BFA /* UIDevice+IdentifierAddition.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -305,6 +311,10 @@
 		F597D719158F23FE00BB1BFA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LjsViewController_iPad.xib; sourceTree = "<group>"; };
 		F597D750158F252000BB1BFA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F597D752158F252B00BB1BFA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		F597D758158F266600BB1BFA /* NSString+MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5Addition.h"; sourceTree = "<group>"; };
+		F597D759158F266600BB1BFA /* NSString+MD5Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5Addition.m"; sourceTree = "<group>"; };
+		F597D75A158F266600BB1BFA /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
+		F597D75B158F266600BB1BFA /* UIDevice+IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+IdentifierAddition.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -348,6 +358,7 @@
 		B121E78614B6D9FB0034C6A9 = {
 			isa = PBXGroup;
 			children = (
+				F597D757158F266600BB1BFA /* UUID */,
 				B16C307C15191A8C00DAA3FA /* calabash-js */,
 				B121E79914B6D9FB0034C6A9 /* calabash */,
 				F597D706158F23FE00BB1BFA /* cornichon */,
@@ -645,6 +656,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F597D757158F266600BB1BFA /* UUID */ = {
+			isa = PBXGroup;
+			children = (
+				F597D758158F266600BB1BFA /* NSString+MD5Addition.h */,
+				F597D759158F266600BB1BFA /* NSString+MD5Addition.m */,
+				F597D75A158F266600BB1BFA /* UIDevice+IdentifierAddition.h */,
+				F597D75B158F266600BB1BFA /* UIDevice+IdentifierAddition.m */,
+			);
+			name = UUID;
+			path = "UIDevice-with-UniqueIdentifier-for-iOS-5/Classes";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -704,6 +727,8 @@
 				B116C9C414E6565500663205 /* LPHTTPServer.h in Headers */,
 				B12A04021511546F002FA032 /* LPInterpolateRoute.h in Headers */,
 				B160E8EF15321D8F00F69E7A /* LPBackdoorRoute.h in Headers */,
+				F597D75C158F266600BB1BFA /* NSString+MD5Addition.h in Headers */,
+				F597D75F158F266600BB1BFA /* UIDevice+IdentifierAddition.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -878,6 +903,8 @@
 				B116C9C514E6565500663205 /* LPHTTPServer.m in Sources */,
 				B12A04031511546F002FA032 /* LPInterpolateRoute.m in Sources */,
 				B160E8F015321D8F00F69E7A /* LPBackdoorRoute.m in Sources */,
+				F597D75D158F266600BB1BFA /* NSString+MD5Addition.m in Sources */,
+				F597D760158F266600BB1BFA /* UIDevice+IdentifierAddition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -938,6 +965,8 @@
 				F597D74E158F248A00BB1BFA /* LPCDataScanner.m in Sources */,
 				F597D74F158F248A00BB1BFA /* CalabashServer.m in Sources */,
 				F597D756158F255700BB1BFA /* LPMapRoute.m in Sources */,
+				F597D75E158F266600BB1BFA /* NSString+MD5Addition.m in Sources */,
+				F597D761158F266600BB1BFA /* UIDevice+IdentifierAddition.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
