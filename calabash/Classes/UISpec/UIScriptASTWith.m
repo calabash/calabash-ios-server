@@ -63,9 +63,9 @@
     CGPoint webViewPoint = [webView convertPoint:webView.bounds.origin toView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
     
     BOOL anyResults = NO;
-    NSLog(@"%@", CGPointCreateDictionaryRepresentation(webViewPoint));
-    for (NSDictionary *d in query) 
-    {
+    NSLog(@"%@", CFBridgingRelease(CGPointCreateDictionaryRepresentation(webViewPoint)));
+  for (NSDictionary *d in query) 
+  {
         NSMutableDictionary *dres = [NSMutableDictionary dictionaryWithDictionary:d];
         CGFloat left = [[dres valueForKeyPath:@"rect.left"] floatValue];
         CGFloat top = [[dres valueForKeyPath:@"rect.top"] floatValue];
@@ -78,8 +78,8 @@
         if (!CGPointEqualToPoint(CGPointZero, center) && [webView pointInside:center withEvent:nil])
         {
             anyResults = YES;
-            NSDictionary *centerDict = (NSDictionary*)CGPointCreateDictionaryRepresentation(screenCenter);
-            [dres setValue:[centerDict autorelease] forKey:@"center"];
+            NSDictionary *centerDict = (__bridge_transfer NSDictionary*)CGPointCreateDictionaryRepresentation(screenCenter);
+            [dres setValue:centerDict forKey:@"center"];
             [dres setValue:webView forKey:@"webView"];
             [res addObject:dres];                
         }
@@ -187,7 +187,11 @@
             }
             
             if ([v respondsToSelector:_selector]) {
-                void* val = [v performSelector:_selector];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+              void* val = (__bridge void *)[v performSelector:_selector];
+#pragma clang diagnostic pop
+              //void* val = [v performSelector:_selector];
                 switch (self.valueType) {
                     case UIScriptLiteralTypeInteger:
                         if ((NSInteger) val == self.integerValue) {
@@ -196,7 +200,7 @@
                         break;
                     case UIScriptLiteralTypeString: {
                         if (val != nil && 
-                            ([(NSString*)val isEqualToString:(NSString*)self.objectValue])) {
+                            ([(__bridge NSString*)val isEqualToString:(NSString*)self.objectValue])) {
                             [res addObject:v];
                         } 
                         break;
@@ -221,8 +225,6 @@
     
 - (void) dealloc {
     self.selector=nil;
-    [_objectValue release];_objectValue=nil;
-    [super dealloc];
 }
     
 

@@ -30,10 +30,6 @@ static LPRecorder *sharedRecorder = nil;
 	return self;
 }
 
--(void)dealloc {
-	[eventList release];
-	[super dealloc];
-}
 
 -(void)record {
 	[eventList removeAllObjects];
@@ -80,7 +76,7 @@ static LPRecorder *sharedRecorder = nil;
 -(void)playbackWithDelegate: (id)delegate doneSelector:(SEL)doneSelector {
 	NSLog(@"Playback");
 
-	playbackDelegate = [delegate retain];
+	playbackDelegate = delegate;
     
 	playbackDoneSelector = doneSelector;
 
@@ -89,9 +85,12 @@ static LPRecorder *sharedRecorder = nil;
 
 -(void)playbackDone:(NSDictionary *)details {
 	NSLog(@"Playback complete");
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 	[playbackDelegate performSelector: playbackDoneSelector];
-    [playbackDelegate autorelease];
-    playbackDelegate=nil;
+#pragma clang diagnostic pop
+//    [playbackDelegate autorelease];
+//    playbackDelegate=nil;
 }
 
 @end

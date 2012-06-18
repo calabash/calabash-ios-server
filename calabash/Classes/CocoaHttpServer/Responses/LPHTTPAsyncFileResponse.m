@@ -37,7 +37,6 @@
 		if (filePath == nil)
 		{
 			
-			[self release];
 			return nil;
 		}
 		
@@ -45,7 +44,6 @@
 		if (fileAttributes == nil)
 		{
 			
-			[self release];
 			return nil;
 		}
 		
@@ -312,7 +310,7 @@
 		NSData *result = data;
 		data = nil;
 		
-		return [result autorelease];
+		return result;
 	}
 	else
 	{
@@ -386,10 +384,7 @@
 	if (readBuffer)
 		free(readBuffer);
 	
-	[filePath release];
-	[data release];
 	
-	[super dealloc];
 }
 
 @end

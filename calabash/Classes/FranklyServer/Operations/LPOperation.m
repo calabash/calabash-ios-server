@@ -30,22 +30,21 @@
     } else {
         op = [[LPOperation alloc] initWithOperation:dictionary];
     }
-    return [op autorelease];
+    return op;
 }
 
 - (id) initWithOperation:(NSDictionary *)operation {
 	self = [super init];
 	if (self != nil) {
 		_selector =  NSSelectorFromString( [operation objectForKey:@"method_name"] );
-		_arguments = [[operation objectForKey:@"arguments"] retain];
+		_arguments = [operation objectForKey:@"arguments"];
 	}
 	return self;
 }
 
 - (void) dealloc
 {
-	[_arguments release];_arguments=nil;
-	[super dealloc];
+	_arguments=nil;
 }
 
 - (NSString *) description {
@@ -56,29 +55,38 @@
 	NSMethodSignature *tSig = [target methodSignatureForSelector:_selector];
 	NSUInteger argc = tSig.numberOfArguments - 2;
 	if( argc != [_arguments count] ) {
-        *error = [NSError errorWithDomain:@"CalabashServer" code:1 
-                                 userInfo:
-                  [NSDictionary dictionaryWithObjectsAndKeys:
-                    @"Arity mismatch", @"reason",
-                    [NSString stringWithFormat:@"%@ applied to selector %@ with %i args",self,NSStringFromSelector(_selector),argc],@"details"
-                   ,nil]];
-        return nil;
+    if (error != NULL) {
+      *error = [NSError errorWithDomain:@"CalabashServer" code:1 
+                               userInfo:
+                [NSDictionary dictionaryWithObjectsAndKeys:
+                 @"Arity mismatch", @"reason",
+                 [NSString stringWithFormat:@"%@ applied to selector %@ with %i args",self,NSStringFromSelector(_selector),argc],@"details"
+                 ,nil]];
+      return nil;
     }
+  }
 	
 	NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:tSig];
 	[invocation setSelector:_selector];
 	
 	NSInteger index = 2; 
-	for( NSObject* arg in _arguments) {
+	
+  for(__unsafe_unretained NSObject* arg in _arguments) {
 		[invocation setArgument:&arg atIndex:index++];
 	}
-    
+
+  /*
+   for( NSObject* arg in _arguments) {
+   [invocation setArgument:&arg atIndex:index++];
+   }
+   */
+  
 	[invocation invokeWithTarget:target];
     
 	
 	const char *returnType = tSig.methodReturnType;
 	
-	id returnValue;
+	__autoreleasing id returnValue;
 	if( !strcmp(returnType, @encode(void)) )
 		returnValue =  nil;
 	else if( !strcmp(returnType, @encode(id)) ) // retval is an objective c object
@@ -103,7 +111,7 @@
 		{
 			returnValue = [NSNumber numberWithFloat:*((float*)buffer)];
 		}else {
-			returnValue = [[[NSValue valueWithBytes:buffer objCType:returnType] copy] autorelease];
+			returnValue = [[NSValue valueWithBytes:buffer objCType:returnType] copy];
 		}
 		free(buffer);//memory leak here, but apparently NSValue doesn't copy the passed buffer, it just stores the pointer
 	}
@@ -116,7 +124,7 @@
 
 -(void) play:(NSArray *)events {
     _done = NO;
-    _events = [events retain];
+    _events = events;
     [[LPRecorder sharedRecorder] load: events];
     [[LPRecorder sharedRecorder] playbackWithDelegate: self doneSelector: @selector(playbackDone:)];
 }
@@ -129,7 +137,6 @@
 
 -(void) playbackDone:(NSDictionary *)details {
     _done = YES;
-    [_events release];
     _events = nil;
 }
 

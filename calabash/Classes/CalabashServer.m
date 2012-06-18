@@ -39,14 +39,11 @@
 		
         LPMapRoute* mr = [LPMapRoute new];
         [LPRouter addRoute:mr forPath:@"/map"];
-        [mr release];
         LPScreenshotRoute *sr =[LPScreenshotRoute new];
         [LPRouter addRoute:sr forPath:@"/screenshot"];
-        [sr release];
 
         LPRecordRoute *rr =[LPRecordRoute new];
         [LPRouter addRoute:rr forPath:@"/record"];
-        [rr release];
 
 //        LPPlaybackRoute *pr =[LPPlaybackRoute new];
 //        [LPRouter addRoute:pr forPath:@"/play"];
@@ -54,19 +51,15 @@
 //        
         LPAsyncPlaybackRoute *apr =[LPAsyncPlaybackRoute new];
         [LPRouter addRoute:apr forPath:@"/play"];
-        [apr release];
 
         LPBackgroundRoute *bgr =[LPBackgroundRoute new];
         [LPRouter addRoute:bgr forPath:@"/background"];
-        [bgr release];
 
         LPInterpolateRoute *panr =[LPInterpolateRoute new];
         [LPRouter addRoute:panr forPath:@"/interpolate"];
-        [panr release];
         
         LPBackdoorRoute* backdr = [LPBackdoorRoute new];
         [LPRouter addRoute:backdr forPath:@"/backdoor"];
-        [backdr release];
         
 
 //        
@@ -75,7 +68,7 @@
 //        [scr release];
 //        
 
-		_httpServer = [[[LPHTTPServer alloc]init] retain];
+		_httpServer = [[LPHTTPServer alloc]init];
 		
 		[_httpServer setName:@"Calabash Server"];
 		[_httpServer setType:@"_http._tcp."];
@@ -160,11 +153,6 @@
     }
 }
 
-- (void) dealloc
-{
-	[_httpServer release];
-	[super dealloc];
-}
 
 
 @end

@@ -12,8 +12,8 @@ int ___calabashserverinit();
 int ___lesspainfulserver = ___calabashserverinit();
 
 int ___calabashserverinit() {
-    NSAutoreleasePool *ap = [[NSAutoreleasePool alloc] init];
-    [CalabashServer start];
-    [ap release];
+    @autoreleasepool {
+        [CalabashServer start];
+    }
     return 42;
 }

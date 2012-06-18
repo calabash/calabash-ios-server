@@ -38,9 +38,5 @@
     return res;
 }
 
-- (void) dealloc {
-    self.predicate=nil;
-    [super dealloc];
-}
 
 @end

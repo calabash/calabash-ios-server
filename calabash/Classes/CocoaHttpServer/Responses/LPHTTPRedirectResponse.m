@@ -58,12 +58,5 @@
 	return 302;
 }
 
-- (void)dealloc
-{
-	//LPHTTPLogTrace();
-	
-	[redirectPath release];
-	[super dealloc];
-}
 
 @end

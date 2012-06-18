@@ -172,8 +172,8 @@
 		F597D755158F253800BB1BFA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F597D750158F252000BB1BFA /* CFNetwork.framework */; };
 		F597D756158F255700BB1BFA /* LPMapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD214B6DB2B002A744C /* LPMapRoute.m */; };
 		F597D75C158F266600BB1BFA /* NSString+MD5Addition.h in Headers */ = {isa = PBXBuildFile; fileRef = F597D758158F266600BB1BFA /* NSString+MD5Addition.h */; };
-		F597D75D158F266600BB1BFA /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = F597D759158F266600BB1BFA /* NSString+MD5Addition.m */; };
-		F597D75E158F266600BB1BFA /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = F597D759158F266600BB1BFA /* NSString+MD5Addition.m */; };
+		F597D75D158F266600BB1BFA /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = F597D759158F266600BB1BFA /* NSString+MD5Addition.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F597D75E158F266600BB1BFA /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = F597D759158F266600BB1BFA /* NSString+MD5Addition.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F597D75F158F266600BB1BFA /* UIDevice+IdentifierAddition.h in Headers */ = {isa = PBXBuildFile; fileRef = F597D75A158F266600BB1BFA /* UIDevice+IdentifierAddition.h */; };
 		F597D760158F266600BB1BFA /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = F597D75B158F266600BB1BFA /* UIDevice+IdentifierAddition.m */; };
 		F597D761158F266600BB1BFA /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = F597D75B158F266600BB1BFA /* UIDevice+IdentifierAddition.m */; };
@@ -208,7 +208,7 @@
 		B116C9B914E6565500663205 /* LPHTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPHTTPResponse.h; sourceTree = "<group>"; };
 		B116C9BA14E6565500663205 /* LPHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPHTTPServer.h; sourceTree = "<group>"; };
 		B116C9BB14E6565500663205 /* LPHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPHTTPServer.m; sourceTree = "<group>"; };
-		B121E79414B6D9FB0034C6A9 /* calabash.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; name = calabash.framework; path = calabash; sourceTree = BUILT_PRODUCTS_DIR; };
+		B121E79414B6D9FB0034C6A9 /* calabash */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = text; path = calabash; sourceTree = BUILT_PRODUCTS_DIR; };
 		B121E79714B6D9FB0034C6A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B121E79B14B6D9FB0034C6A9 /* calabash-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "calabash-Info.plist"; sourceTree = "<group>"; };
 		B121E79D14B6D9FB0034C6A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -370,7 +370,7 @@
 		B121E79514B6D9FB0034C6A9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B121E79414B6D9FB0034C6A9 /* calabash.framework */,
+				B121E79414B6D9FB0034C6A9 /* calabash */,
 				F597D6FF158F23FE00BB1BFA /* cornichon.app */,
 			);
 			name = Products;
@@ -752,7 +752,7 @@
 			);
 			name = calabash;
 			productName = calabash;
-			productReference = B121E79414B6D9FB0034C6A9 /* calabash.framework */;
+			productReference = B121E79414B6D9FB0034C6A9 /* calabash */;
 			productType = "com.apple.product-type.framework.static";
 		};
 		F597D6FE158F23FE00BB1BFA /* cornichon */ = {
@@ -1055,6 +1055,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
@@ -1076,6 +1077,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
@@ -1093,6 +1095,7 @@
 		F597D71B158F23FE00BB1BFA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "cornichon/cornichon-Prefix.pch";
@@ -1108,6 +1111,7 @@
 		F597D71C158F23FE00BB1BFA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "cornichon/cornichon-Prefix.pch";

@@ -17,16 +17,15 @@
 @implementation LPRecordRoute
 
 - (void) setParameters:(NSDictionary*) parameters {
-    _params = [parameters retain];
+    _params = parameters;
 }
 - (void) setConnection:(LPHTTPConnection *)connection {
     _conn = connection;
 }
 
 - (void) dealloc {
-    [_params release];_params=nil;
+    _params=nil;
     _conn=nil;
-    [super dealloc];
 }
 
 - (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path {
@@ -37,11 +36,11 @@
     NSString* action = [_params objectForKey:@"action"];
     if ([action isEqualToString:@"start"]) {
         [self startRecording];
-        return [[[LPNoContentResponse alloc] init] autorelease];
+        return [[LPNoContentResponse alloc] init];
     }
     else if ([action isEqualToString:@"stop"]) {
         NSData* path = [self stopRecording];
-        return [[[LPHTTPDataResponse alloc] initWithData:path] autorelease];
+        return [[LPHTTPDataResponse alloc] initWithData:path];
     } else {
         return nil;
     }

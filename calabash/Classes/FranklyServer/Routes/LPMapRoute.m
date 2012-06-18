@@ -17,7 +17,7 @@
 }
 - (NSArray*) applyOperation:(NSDictionary *)operation toViews:(NSArray *) views error:(NSError **)error {
     if ([operation valueForKey:@"method_name"] == nil) {
-        return [[views copy] autorelease];
+        return [views copy];
     }
     LPOperation *op = [LPOperation operationFromDictionary:operation];
     //LPHTTPLogDDLogVerbose(@"Applying operation %@ to views...",op);
