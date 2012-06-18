@@ -119,6 +119,58 @@
 		F597D714158F23FE00BB1BFA /* LjsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F597D713158F23FE00BB1BFA /* LjsViewController.m */; };
 		F597D717158F23FE00BB1BFA /* LjsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F597D715158F23FE00BB1BFA /* LjsViewController_iPhone.xib */; };
 		F597D71A158F23FE00BB1BFA /* LjsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F597D718158F23FE00BB1BFA /* LjsViewController_iPad.xib */; };
+		F597D71F158F243800BB1BFA /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; };
+		F597D720158F243800BB1BFA /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; };
+		F597D721158F243800BB1BFA /* LPHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B514E6565500663205 /* LPHTTPConnection.m */; };
+		F597D722158F243800BB1BFA /* LPHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B814E6565500663205 /* LPHTTPMessage.m */; };
+		F597D723158F243800BB1BFA /* LPHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9BB14E6565500663205 /* LPHTTPServer.m */; };
+		F597D724158F244100BB1BFA /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98414E5215800663205 /* DDData.m */; };
+		F597D725158F244100BB1BFA /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* DDNumber.m */; };
+		F597D726158F244100BB1BFA /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98814E5215800663205 /* DDRange.m */; };
+		F597D727158F244900BB1BFA /* LPHTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C99F14E6564200663205 /* LPHTTPAsyncFileResponse.m */; };
+		F597D728158F244900BB1BFA /* LPHTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A114E6564200663205 /* LPHTTPDataResponse.m */; };
+		F597D729158F244900BB1BFA /* LPHTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A314E6564200663205 /* LPHTTPDynamicFileResponse.m */; };
+		F597D72A158F244900BB1BFA /* LPHTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A514E6564200663205 /* LPHTTPFileResponse.m */; };
+		F597D72B158F244900BB1BFA /* LPHTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A714E6564200663205 /* LPHTTPRedirectResponse.m */; };
+		F597D72C158F245000BB1BFA /* LPI.mm in Sources */ = {isa = PBXBuildFile; fileRef = B184FDBD14B6DB2B002A744C /* LPI.mm */; };
+		F597D72D158F245000BB1BFA /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; };
+		F597D72E158F245900BB1BFA /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; };
+		F597D72F158F245900BB1BFA /* LPQueryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC514B6DB2B002A744C /* LPQueryOperation.m */; };
+		F597D730158F245900BB1BFA /* LPScrollOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC714B6DB2B002A744C /* LPScrollOperation.m */; };
+		F597D731158F245900BB1BFA /* LPScrollToRowOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */; };
+		F597D732158F245900BB1BFA /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; };
+		F597D733158F245900BB1BFA /* LPNativeKeyboardOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCD14B6DB2B002A744C /* LPNativeKeyboardOperation.m */; };
+		F597D734158F245900BB1BFA /* LPRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8714B6DBAC002A744C /* LPRecorder.m */; };
+		F597D735158F246500BB1BFA /* LPInterpolateRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A04011511546F002FA032 /* LPInterpolateRoute.m */; };
+		F597D736158F246500BB1BFA /* LPPlaybackRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8A14B6DC7F002A744C /* LPPlaybackRoute.m */; };
+		F597D737158F246500BB1BFA /* LPRecordRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8B14B6DC7F002A744C /* LPRecordRoute.m */; };
+		F597D738158F246500BB1BFA /* LPNoContentResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD414B6DB2B002A744C /* LPNoContentResponse.m */; };
+		F597D739158F246500BB1BFA /* LPScreenshotRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9014B6DD33002A744C /* LPScreenshotRoute.m */; };
+		F597D73A158F246500BB1BFA /* LPAsyncPlaybackRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B111321614D5837900982BBC /* LPAsyncPlaybackRoute.m */; };
+		F597D73B158F246500BB1BFA /* LPBackgroundRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3604614DA09D20087D8D9 /* LPBackgroundRoute.m */; };
+		F597D73C158F246500BB1BFA /* LPBackdoorRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */; };
+		F597D73D158F246900BB1BFA /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDDF14B6DB2B002A744C /* CDataScanner_Extensions.m */; };
+		F597D73E158F247000BB1BFA /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; };
+		F597D73F158F247000BB1BFA /* LPCJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE314B6DB2B002A744C /* LPCJSONScanner.m */; };
+		F597D740158F247000BB1BFA /* LPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE514B6DB2B002A744C /* LPCJSONSerializer.m */; };
+		F597D741158F247600BB1BFA /* LPResources.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDF714B6DB2B002A744C /* LPResources.m */; };
+		F597D742158F248200BB1BFA /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; };
+		F597D743158F248200BB1BFA /* UIScriptAST.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFA14B6DB2B002A744C /* UIScriptAST.m */; };
+		F597D744158F248200BB1BFA /* UIScriptASTALL.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFC14B6DB2B002A744C /* UIScriptASTALL.m */; };
+		F597D745158F248200BB1BFA /* UIScriptASTClassName.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFE14B6DB2B002A744C /* UIScriptASTClassName.m */; };
+		F597D746158F248200BB1BFA /* UIScriptASTDirection.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0014B6DB2B002A744C /* UIScriptASTDirection.m */; };
+		F597D747158F248200BB1BFA /* UIScriptASTFirst.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0214B6DB2B002A744C /* UIScriptASTFirst.m */; };
+		F597D748158F248200BB1BFA /* UIScriptASTIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0414B6DB2B002A744C /* UIScriptASTIndex.m */; };
+		F597D749158F248200BB1BFA /* UIScriptASTLast.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0614B6DB2B002A744C /* UIScriptASTLast.m */; };
+		F597D74A158F248200BB1BFA /* UIScriptASTWith.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0814B6DB2B002A744C /* UIScriptASTWith.m */; };
+		F597D74B158F248200BB1BFA /* UIScriptParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0A14B6DB2B002A744C /* UIScriptParser.m */; };
+		F597D74C158F248A00BB1BFA /* LPJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */; };
+		F597D74D158F248A00BB1BFA /* LPTouchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */; };
+		F597D74E158F248A00BB1BFA /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8C14B6DAFB002A744C /* LPCDataScanner.m */; };
+		F597D74F158F248A00BB1BFA /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
+		F597D754158F253800BB1BFA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F597D752158F252B00BB1BFA /* Security.framework */; };
+		F597D755158F253800BB1BFA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F597D750158F252000BB1BFA /* CFNetwork.framework */; };
+		F597D756158F255700BB1BFA /* LPMapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD214B6DB2B002A744C /* LPMapRoute.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -251,6 +303,8 @@
 		F597D713158F23FE00BB1BFA /* LjsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LjsViewController.m; sourceTree = "<group>"; };
 		F597D716158F23FE00BB1BFA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LjsViewController_iPhone.xib; sourceTree = "<group>"; };
 		F597D719158F23FE00BB1BFA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LjsViewController_iPad.xib; sourceTree = "<group>"; };
+		F597D750158F252000BB1BFA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		F597D752158F252B00BB1BFA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,6 +322,8 @@
 			files = (
 				F597D702158F23FE00BB1BFA /* UIKit.framework in Frameworks */,
 				F597D703158F23FE00BB1BFA /* Foundation.framework in Frameworks */,
+				F597D754158F253800BB1BFA /* Security.framework in Frameworks */,
+				F597D755158F253800BB1BFA /* CFNetwork.framework in Frameworks */,
 				F597D705158F23FE00BB1BFA /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -312,6 +368,8 @@
 		B121E79614B6D9FB0034C6A9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F597D752158F252B00BB1BFA /* Security.framework */,
+				F597D750158F252000BB1BFA /* CFNetwork.framework */,
 				B121E79714B6D9FB0034C6A9 /* Foundation.framework */,
 				F597D701158F23FE00BB1BFA /* UIKit.framework */,
 				F597D704158F23FE00BB1BFA /* CoreGraphics.framework */,
@@ -830,6 +888,56 @@
 				F597D70D158F23FE00BB1BFA /* main.m in Sources */,
 				F597D711158F23FE00BB1BFA /* LjsAppDelegate.m in Sources */,
 				F597D714158F23FE00BB1BFA /* LjsViewController.m in Sources */,
+				F597D71F158F243800BB1BFA /* GCDAsyncSocket.m in Sources */,
+				F597D720158F243800BB1BFA /* LPHTTPAuthenticationRequest.m in Sources */,
+				F597D721158F243800BB1BFA /* LPHTTPConnection.m in Sources */,
+				F597D722158F243800BB1BFA /* LPHTTPMessage.m in Sources */,
+				F597D723158F243800BB1BFA /* LPHTTPServer.m in Sources */,
+				F597D724158F244100BB1BFA /* DDData.m in Sources */,
+				F597D725158F244100BB1BFA /* DDNumber.m in Sources */,
+				F597D726158F244100BB1BFA /* DDRange.m in Sources */,
+				F597D727158F244900BB1BFA /* LPHTTPAsyncFileResponse.m in Sources */,
+				F597D728158F244900BB1BFA /* LPHTTPDataResponse.m in Sources */,
+				F597D729158F244900BB1BFA /* LPHTTPDynamicFileResponse.m in Sources */,
+				F597D72A158F244900BB1BFA /* LPHTTPFileResponse.m in Sources */,
+				F597D72B158F244900BB1BFA /* LPHTTPRedirectResponse.m in Sources */,
+				F597D72C158F245000BB1BFA /* LPI.mm in Sources */,
+				F597D72D158F245000BB1BFA /* LPRouter.m in Sources */,
+				F597D72E158F245900BB1BFA /* LPOperation.m in Sources */,
+				F597D72F158F245900BB1BFA /* LPQueryOperation.m in Sources */,
+				F597D730158F245900BB1BFA /* LPScrollOperation.m in Sources */,
+				F597D731158F245900BB1BFA /* LPScrollToRowOperation.m in Sources */,
+				F597D732158F245900BB1BFA /* LPSetTextOperation.m in Sources */,
+				F597D733158F245900BB1BFA /* LPNativeKeyboardOperation.m in Sources */,
+				F597D734158F245900BB1BFA /* LPRecorder.m in Sources */,
+				F597D735158F246500BB1BFA /* LPInterpolateRoute.m in Sources */,
+				F597D736158F246500BB1BFA /* LPPlaybackRoute.m in Sources */,
+				F597D737158F246500BB1BFA /* LPRecordRoute.m in Sources */,
+				F597D738158F246500BB1BFA /* LPNoContentResponse.m in Sources */,
+				F597D739158F246500BB1BFA /* LPScreenshotRoute.m in Sources */,
+				F597D73A158F246500BB1BFA /* LPAsyncPlaybackRoute.m in Sources */,
+				F597D73B158F246500BB1BFA /* LPBackgroundRoute.m in Sources */,
+				F597D73C158F246500BB1BFA /* LPBackdoorRoute.m in Sources */,
+				F597D73D158F246900BB1BFA /* CDataScanner_Extensions.m in Sources */,
+				F597D73E158F247000BB1BFA /* LPCJSONDeserializer.m in Sources */,
+				F597D73F158F247000BB1BFA /* LPCJSONScanner.m in Sources */,
+				F597D740158F247000BB1BFA /* LPCJSONSerializer.m in Sources */,
+				F597D741158F247600BB1BFA /* LPResources.m in Sources */,
+				F597D742158F248200BB1BFA /* UIScriptASTPredicate.m in Sources */,
+				F597D743158F248200BB1BFA /* UIScriptAST.m in Sources */,
+				F597D744158F248200BB1BFA /* UIScriptASTALL.m in Sources */,
+				F597D745158F248200BB1BFA /* UIScriptASTClassName.m in Sources */,
+				F597D746158F248200BB1BFA /* UIScriptASTDirection.m in Sources */,
+				F597D747158F248200BB1BFA /* UIScriptASTFirst.m in Sources */,
+				F597D748158F248200BB1BFA /* UIScriptASTIndex.m in Sources */,
+				F597D749158F248200BB1BFA /* UIScriptASTLast.m in Sources */,
+				F597D74A158F248200BB1BFA /* UIScriptASTWith.m in Sources */,
+				F597D74B158F248200BB1BFA /* UIScriptParser.m in Sources */,
+				F597D74C158F248A00BB1BFA /* LPJSONUtils.m in Sources */,
+				F597D74D158F248A00BB1BFA /* LPTouchUtils.m in Sources */,
+				F597D74E158F248A00BB1BFA /* LPCDataScanner.m in Sources */,
+				F597D74F158F248A00BB1BFA /* CalabashServer.m in Sources */,
+				F597D756158F255700BB1BFA /* LPMapRoute.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
