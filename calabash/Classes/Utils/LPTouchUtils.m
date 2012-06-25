@@ -104,6 +104,7 @@
     {
         
         UIWindow *window = nil;
+        /*
         UIApplication *app = [UIApplication sharedApplication];
         if ([app.delegate respondsToSelector:@selector(window)])
         {
@@ -120,9 +121,22 @@
                 }
             }
         }
+        */
+        window = [self windowForView:view];
         
+        NSLog(@"view -> %@",view);
         
-        frameInWindow = [window convertRect:view.frame fromView:view.superview];
+        NSLog(@"window -> %@", window);
+        
+        if (window)
+        {
+            frameInWindow = [window convertRect:view.frame fromView:view.superview];            
+        }
+        else
+        {
+            frameInWindow = view.frame;//give up?
+        }
+
         //frameInWindow = [view.window convertRect:view.frame fromView:view.superview];
     }    
     return [self centerOfFrame:frameInWindow shouldTranslate:shouldTranslate];

@@ -7,6 +7,7 @@
 
 
 #import "CalabashServer.h"
+
 int ___calabashserverinit();
 
 int ___lesspainfulserver = ___calabashserverinit();

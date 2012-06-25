@@ -21,7 +21,7 @@
         op = [[LPScrollToRowOperation alloc] initWithOperation:dictionary];
     } else if ([opName isEqualToString:@"scroll"]) {
         op = [[LPScrollOperation alloc] initWithOperation:dictionary];
-    } else if ([opName isEqualToString:@"touchDone"]) {
+    } else if ([opName isEqualToString:@"keyboard"]) {
         op = [[LPNativeKeyboardOperation alloc] initWithOperation:dictionary];
     } else if ([opName isEqualToString:@"query"]) {
         op = [[LPQueryOperation alloc] initWithOperation:dictionary];

@@ -16,6 +16,7 @@
 #import "LPBackgroundRoute.h"
 #import "LPInterpolateRoute.h"
 #import "LPBackdoorRoute.h"
+#import "LPVersionRoute.h"
 #import <dlfcn.h>
 
 @interface CalabashServer()
@@ -27,6 +28,31 @@
 + (void) start {
     CalabashServer* server = [[CalabashServer alloc] init];
     [server start];
+    
+    NSAutoreleasePool *autoreleasePool = [[NSAutoreleasePool alloc] init];
+    NSString *appSupportLocation = @"/System/Library/PrivateFrameworks/AppSupport.framework/AppSupport";
+    
+    NSDictionary *environment = [[NSProcessInfo processInfo] environment];
+    NSString *simulatorRoot = [environment objectForKey:@"IPHONE_SIMULATOR_ROOT"];
+    if (simulatorRoot) {
+        appSupportLocation = [simulatorRoot stringByAppendingString:appSupportLocation];
+    }
+    
+    void *appSupportLibrary = dlopen([appSupportLocation fileSystemRepresentation], RTLD_LAZY);
+    
+    CFStringRef (*copySharedResourcesPreferencesDomainForDomain)(CFStringRef domain) = dlsym(appSupportLibrary, "CPCopySharedResourcesPreferencesDomainForDomain");    
+    
+    if (copySharedResourcesPreferencesDomainForDomain) {
+        CFStringRef accessibilityDomain = copySharedResourcesPreferencesDomainForDomain(CFSTR("com.apple.Accessibility"));
+        
+        if (accessibilityDomain) {
+            CFPreferencesSetValue(CFSTR("ApplicationAccessibilityEnabled"), kCFBooleanTrue, accessibilityDomain, kCFPreferencesAnyUser, kCFPreferencesAnyHost);
+            CFRelease(accessibilityDomain);
+        }
+    }
+    
+    [autoreleasePool drain];
+
 }
 
 - (id) init
@@ -64,7 +90,11 @@
         LPBackdoorRoute* backdr = [LPBackdoorRoute new];
         [LPRouter addRoute:backdr forPath:@"/backdoor"];
         [backdr release];
-        
+
+        LPVersionRoute* verr = [LPVersionRoute new];
+        [LPRouter addRoute:verr forPath:@"/version"];
+        [backdr release];
+
 
 //        
 //        LPScreencastRoute *scr = [LPScreencastRoute new];

@@ -32,7 +32,7 @@
             if ([view isKindOfClass:[UIView class]] && ![LPTouchUtils isViewVisible:view]) {continue;}            
             id val = [op performWithTarget:view error:error];
             if (val == nil) {
-                [finalRes addObject: @"<VOID>"];
+                [finalRes addObject: [NSNull null]];
             } else {
                 [finalRes addObject: val];
             }            
