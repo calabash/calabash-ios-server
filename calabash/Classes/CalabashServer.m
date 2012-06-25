@@ -93,7 +93,7 @@
 
         LPVersionRoute* verr = [LPVersionRoute new];
         [LPRouter addRoute:verr forPath:@"/version"];
-        [backdr release];
+        [verr release];
 
 
 //        
