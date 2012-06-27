@@ -69,13 +69,33 @@
     if ([self canFindView: view asSubViewInView:hitView])
     {
         return YES;
-    }    
+    } 
+    UIView *hitSuperView = hitView;
     
-    while (hitView && hitView != view)
+    while (hitSuperView && hitSuperView != view)
     {
-        hitView = [hitView superview];
+        hitSuperView = [hitSuperView superview];
     }
-    return hitView == view;    
+    if (hitSuperView == view)
+    {
+        return YES;
+    }
+    
+    if (![view isKindOfClass:[UIControl class]])
+    {
+        //there may be a case with a non-control (e.g., label)
+        //on top of a control visually but not logically
+        UIWindow *viewWin = [self windowForView:view];
+        UIWindow *hitWin = [self windowForView:hitView];
+        if (viewWin == hitWin)//common window
+        {
+            CGRect ctrlRect = [viewWin convertRect:hitView.frame fromView:hitView.superview];            
+            return CGRectContainsPoint(ctrlRect, center);
+            //
+            
+        }
+    }
+    return NO;
 }
 
 +(CGPoint)centerOfFrame:(CGRect)frame shouldTranslate:(BOOL)shouldTranslate
@@ -123,10 +143,6 @@
         }
         */
         window = [self windowForView:view];
-        
-        NSLog(@"view -> %@",view);
-        
-        NSLog(@"window -> %@", window);
         
         if (window)
         {
