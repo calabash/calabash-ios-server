@@ -26,6 +26,12 @@
 @synthesize data=_data;
 @synthesize jsonResponse=_jsonResponse;
 
+
+-(void) dealloc {
+    self.conn = nil;
+}
+
+
 -(id) init {
     self = [super init];
     if (self) {
@@ -295,9 +301,6 @@
     return route;
 }
 
--(void) dealloc {
-    self.conn = nil;
-}
 
 @end
 

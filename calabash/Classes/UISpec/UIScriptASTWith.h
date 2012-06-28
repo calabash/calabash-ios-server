@@ -15,6 +15,7 @@ typedef enum {
 
 
 @interface UIScriptASTWith : UIScriptAST {
+   /*
     NSString *__weak _selectorName;
     SEL _selector;
     NSObject* _objectValue;
@@ -22,9 +23,10 @@ typedef enum {
     NSInteger _integerValue;
     
     UIScriptLiteralType _valueType;
+    */
     
 }
-@property (nonatomic, weak) NSString *selectorName;
+@property (nonatomic, unsafe_unretained) NSString *selectorName;
 @property (nonatomic,assign) SEL selector;
 @property (nonatomic, assign) NSInteger timeout;
 @property (nonatomic) NSObject *objectValue;

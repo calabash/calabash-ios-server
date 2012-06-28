@@ -23,6 +23,12 @@
 @synthesize valueType=_valueType;
 @synthesize valueType2;
 
+- (void) dealloc {
+    self.selector = nil;
+    self.selectorName = nil;
+}
+
+
 - (id)initWithSelectorName:(NSString *)selectorName {
         self = [super init];
         if (self) {
@@ -175,11 +181,6 @@
     return res;
 }
 
-
-    
-- (void) dealloc {
-    self.selector=nil;
-}
     
 
 @end
