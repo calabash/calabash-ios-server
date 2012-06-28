@@ -114,73 +114,10 @@
 		F52166D9159C796000BB5EB9 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F52166D7159C796000BB5EB9 /* LPWebQuery.m */; };
 		F52166E9159C81DE00BB5EB9 /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; };
 		F52166EA159C827C00BB5EB9 /* LPVersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B153F55B15949F3D00867E12 /* LPVersionRoute.m */; };
-		F597D702158F23FE00BB1BFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F597D701158F23FE00BB1BFA /* UIKit.framework */; };
-		F597D703158F23FE00BB1BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
-		F597D705158F23FE00BB1BFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F597D704158F23FE00BB1BFA /* CoreGraphics.framework */; };
-		F597D70B158F23FE00BB1BFA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F597D709158F23FE00BB1BFA /* InfoPlist.strings */; };
-		F597D70D158F23FE00BB1BFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F597D70C158F23FE00BB1BFA /* main.m */; };
-		F597D711158F23FE00BB1BFA /* LjsAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F597D710158F23FE00BB1BFA /* LjsAppDelegate.m */; };
-		F597D714158F23FE00BB1BFA /* LjsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F597D713158F23FE00BB1BFA /* LjsViewController.m */; };
-		F597D717158F23FE00BB1BFA /* LjsViewController_iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = F597D715158F23FE00BB1BFA /* LjsViewController_iPhone.xib */; };
-		F597D71A158F23FE00BB1BFA /* LjsViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = F597D718158F23FE00BB1BFA /* LjsViewController_iPad.xib */; };
-		F597D71F158F243800BB1BFA /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; };
-		F597D720158F243800BB1BFA /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; };
-		F597D721158F243800BB1BFA /* LPHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B514E6565500663205 /* LPHTTPConnection.m */; };
-		F597D722158F243800BB1BFA /* LPHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B814E6565500663205 /* LPHTTPMessage.m */; };
-		F597D723158F243800BB1BFA /* LPHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9BB14E6565500663205 /* LPHTTPServer.m */; };
-		F597D724158F244100BB1BFA /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98414E5215800663205 /* DDData.m */; };
-		F597D725158F244100BB1BFA /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* DDNumber.m */; };
-		F597D726158F244100BB1BFA /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98814E5215800663205 /* DDRange.m */; };
-		F597D727158F244900BB1BFA /* LPHTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C99F14E6564200663205 /* LPHTTPAsyncFileResponse.m */; };
-		F597D728158F244900BB1BFA /* LPHTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A114E6564200663205 /* LPHTTPDataResponse.m */; };
-		F597D729158F244900BB1BFA /* LPHTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A314E6564200663205 /* LPHTTPDynamicFileResponse.m */; };
-		F597D72A158F244900BB1BFA /* LPHTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A514E6564200663205 /* LPHTTPFileResponse.m */; };
-		F597D72B158F244900BB1BFA /* LPHTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A714E6564200663205 /* LPHTTPRedirectResponse.m */; };
-		F597D72C158F245000BB1BFA /* LPI.mm in Sources */ = {isa = PBXBuildFile; fileRef = B184FDBD14B6DB2B002A744C /* LPI.mm */; };
-		F597D72D158F245000BB1BFA /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; };
-		F597D72E158F245900BB1BFA /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; };
-		F597D72F158F245900BB1BFA /* LPQueryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC514B6DB2B002A744C /* LPQueryOperation.m */; };
-		F597D730158F245900BB1BFA /* LPScrollOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC714B6DB2B002A744C /* LPScrollOperation.m */; };
-		F597D731158F245900BB1BFA /* LPScrollToRowOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */; };
-		F597D732158F245900BB1BFA /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; };
-		F597D733158F245900BB1BFA /* LPNativeKeyboardOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCD14B6DB2B002A744C /* LPNativeKeyboardOperation.m */; };
-		F597D734158F245900BB1BFA /* LPRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8714B6DBAC002A744C /* LPRecorder.m */; };
-		F597D735158F246500BB1BFA /* LPInterpolateRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A04011511546F002FA032 /* LPInterpolateRoute.m */; };
-		F597D736158F246500BB1BFA /* LPPlaybackRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8A14B6DC7F002A744C /* LPPlaybackRoute.m */; };
-		F597D737158F246500BB1BFA /* LPRecordRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8B14B6DC7F002A744C /* LPRecordRoute.m */; };
-		F597D738158F246500BB1BFA /* LPNoContentResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD414B6DB2B002A744C /* LPNoContentResponse.m */; };
-		F597D739158F246500BB1BFA /* LPScreenshotRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9014B6DD33002A744C /* LPScreenshotRoute.m */; };
-		F597D73A158F246500BB1BFA /* LPAsyncPlaybackRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B111321614D5837900982BBC /* LPAsyncPlaybackRoute.m */; };
-		F597D73B158F246500BB1BFA /* LPBackgroundRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3604614DA09D20087D8D9 /* LPBackgroundRoute.m */; };
-		F597D73C158F246500BB1BFA /* LPBackdoorRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */; };
-		F597D73D158F246900BB1BFA /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDDF14B6DB2B002A744C /* CDataScanner_Extensions.m */; };
-		F597D73E158F247000BB1BFA /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; };
-		F597D73F158F247000BB1BFA /* LPCJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE314B6DB2B002A744C /* LPCJSONScanner.m */; };
-		F597D740158F247000BB1BFA /* LPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE514B6DB2B002A744C /* LPCJSONSerializer.m */; };
-		F597D741158F247600BB1BFA /* LPResources.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDF714B6DB2B002A744C /* LPResources.m */; };
-		F597D742158F248200BB1BFA /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; };
-		F597D743158F248200BB1BFA /* UIScriptAST.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFA14B6DB2B002A744C /* UIScriptAST.m */; };
-		F597D744158F248200BB1BFA /* UIScriptASTALL.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFC14B6DB2B002A744C /* UIScriptASTALL.m */; };
-		F597D745158F248200BB1BFA /* UIScriptASTClassName.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFE14B6DB2B002A744C /* UIScriptASTClassName.m */; };
-		F597D746158F248200BB1BFA /* UIScriptASTDirection.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0014B6DB2B002A744C /* UIScriptASTDirection.m */; };
-		F597D747158F248200BB1BFA /* UIScriptASTFirst.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0214B6DB2B002A744C /* UIScriptASTFirst.m */; };
-		F597D748158F248200BB1BFA /* UIScriptASTIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0414B6DB2B002A744C /* UIScriptASTIndex.m */; };
-		F597D749158F248200BB1BFA /* UIScriptASTLast.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0614B6DB2B002A744C /* UIScriptASTLast.m */; };
-		F597D74A158F248200BB1BFA /* UIScriptASTWith.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0814B6DB2B002A744C /* UIScriptASTWith.m */; };
-		F597D74B158F248200BB1BFA /* UIScriptParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0A14B6DB2B002A744C /* UIScriptParser.m */; };
-		F597D74C158F248A00BB1BFA /* LPJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */; };
-		F597D74D158F248A00BB1BFA /* LPTouchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */; };
-		F597D74E158F248A00BB1BFA /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8C14B6DAFB002A744C /* LPCDataScanner.m */; };
-		F597D74F158F248A00BB1BFA /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
-		F597D754158F253800BB1BFA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F597D752158F252B00BB1BFA /* Security.framework */; };
-		F597D755158F253800BB1BFA /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F597D750158F252000BB1BFA /* CFNetwork.framework */; };
-		F597D756158F255700BB1BFA /* LPMapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD214B6DB2B002A744C /* LPMapRoute.m */; };
 		F597D75C158F266600BB1BFA /* NSString+MD5Addition.h in Headers */ = {isa = PBXBuildFile; fileRef = F597D758158F266600BB1BFA /* NSString+MD5Addition.h */; };
 		F597D75D158F266600BB1BFA /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = F597D759158F266600BB1BFA /* NSString+MD5Addition.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		F597D75E158F266600BB1BFA /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = F597D759158F266600BB1BFA /* NSString+MD5Addition.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		F597D75F158F266600BB1BFA /* UIDevice+IdentifierAddition.h in Headers */ = {isa = PBXBuildFile; fileRef = F597D75A158F266600BB1BFA /* UIDevice+IdentifierAddition.h */; };
 		F597D760158F266600BB1BFA /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = F597D75B158F266600BB1BFA /* UIDevice+IdentifierAddition.m */; };
-		F597D761158F266600BB1BFA /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = F597D75B158F266600BB1BFA /* UIDevice+IdentifierAddition.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -304,19 +241,8 @@
 		B1E3604614DA09D20087D8D9 /* LPBackgroundRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPBackgroundRoute.m; sourceTree = "<group>"; };
 		F52166D6159C796000BB5EB9 /* LPWebQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPWebQuery.h; sourceTree = "<group>"; };
 		F52166D7159C796000BB5EB9 /* LPWebQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPWebQuery.m; sourceTree = "<group>"; };
-		F597D6FF158F23FE00BB1BFA /* cornichon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cornichon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F597D701158F23FE00BB1BFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F597D704158F23FE00BB1BFA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		F597D708158F23FE00BB1BFA /* cornichon-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "cornichon-Info.plist"; sourceTree = "<group>"; };
-		F597D70A158F23FE00BB1BFA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		F597D70C158F23FE00BB1BFA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F597D70E158F23FE00BB1BFA /* cornichon-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "cornichon-Prefix.pch"; sourceTree = "<group>"; };
-		F597D70F158F23FE00BB1BFA /* LjsAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LjsAppDelegate.h; sourceTree = "<group>"; };
-		F597D710158F23FE00BB1BFA /* LjsAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LjsAppDelegate.m; sourceTree = "<group>"; };
-		F597D712158F23FE00BB1BFA /* LjsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LjsViewController.h; sourceTree = "<group>"; };
-		F597D713158F23FE00BB1BFA /* LjsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LjsViewController.m; sourceTree = "<group>"; };
-		F597D716158F23FE00BB1BFA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LjsViewController_iPhone.xib; sourceTree = "<group>"; };
-		F597D719158F23FE00BB1BFA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/LjsViewController_iPad.xib; sourceTree = "<group>"; };
 		F597D750158F252000BB1BFA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F597D752158F252B00BB1BFA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		F597D758158F266600BB1BFA /* NSString+MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5Addition.h"; sourceTree = "<group>"; };
@@ -331,18 +257,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B121E79814B6D9FB0034C6A9 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F597D6FC158F23FE00BB1BFA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F597D702158F23FE00BB1BFA /* UIKit.framework in Frameworks */,
-				F597D703158F23FE00BB1BFA /* Foundation.framework in Frameworks */,
-				F597D754158F253800BB1BFA /* Security.framework in Frameworks */,
-				F597D755158F253800BB1BFA /* CFNetwork.framework in Frameworks */,
-				F597D705158F23FE00BB1BFA /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,7 +283,6 @@
 				F597D757158F266600BB1BFA /* UUID */,
 				B16C307C15191A8C00DAA3FA /* calabash-js */,
 				B121E79914B6D9FB0034C6A9 /* calabash */,
-				F597D706158F23FE00BB1BFA /* cornichon */,
 				B121E79614B6D9FB0034C6A9 /* Frameworks */,
 				B121E79514B6D9FB0034C6A9 /* Products */,
 			);
@@ -381,7 +294,6 @@
 			isa = PBXGroup;
 			children = (
 				B121E79414B6D9FB0034C6A9 /* calabash.framework */,
-				F597D6FF158F23FE00BB1BFA /* cornichon.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -654,31 +566,6 @@
 			path = CalabashJS/CalabashJSLib;
 			sourceTree = "<group>";
 		};
-		F597D706158F23FE00BB1BFA /* cornichon */ = {
-			isa = PBXGroup;
-			children = (
-				F597D70F158F23FE00BB1BFA /* LjsAppDelegate.h */,
-				F597D710158F23FE00BB1BFA /* LjsAppDelegate.m */,
-				F597D712158F23FE00BB1BFA /* LjsViewController.h */,
-				F597D713158F23FE00BB1BFA /* LjsViewController.m */,
-				F597D715158F23FE00BB1BFA /* LjsViewController_iPhone.xib */,
-				F597D718158F23FE00BB1BFA /* LjsViewController_iPad.xib */,
-				F597D707158F23FE00BB1BFA /* Supporting Files */,
-			);
-			path = cornichon;
-			sourceTree = "<group>";
-		};
-		F597D707158F23FE00BB1BFA /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				F597D708158F23FE00BB1BFA /* cornichon-Info.plist */,
-				F597D709158F23FE00BB1BFA /* InfoPlist.strings */,
-				F597D70C158F23FE00BB1BFA /* main.m */,
-				F597D70E158F23FE00BB1BFA /* cornichon-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		F597D757158F266600BB1BFA /* UUID */ = {
 			isa = PBXGroup;
 			children = (
@@ -780,23 +667,6 @@
 			productReference = B121E79414B6D9FB0034C6A9 /* calabash.framework */;
 			productType = "com.apple.product-type.framework.static";
 		};
-		F597D6FE158F23FE00BB1BFA /* cornichon */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F597D71D158F23FE00BB1BFA /* Build configuration list for PBXNativeTarget "cornichon" */;
-			buildPhases = (
-				F597D6FB158F23FE00BB1BFA /* Sources */,
-				F597D6FC158F23FE00BB1BFA /* Frameworks */,
-				F597D6FD158F23FE00BB1BFA /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = cornichon;
-			productName = cornichon;
-			productReference = F597D6FF158F23FE00BB1BFA /* cornichon.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -819,7 +689,6 @@
 			projectRoot = "";
 			targets = (
 				B121E79314B6D9FB0034C6A9 /* calabash */,
-				F597D6FE158F23FE00BB1BFA /* cornichon */,
 			);
 		};
 /* End PBXProject section */
@@ -830,16 +699,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B121E79E14B6D9FB0034C6A9 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F597D6FD158F23FE00BB1BFA /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F597D70B158F23FE00BB1BFA /* InfoPlist.strings in Resources */,
-				F597D717158F23FE00BB1BFA /* LjsViewController_iPhone.xib in Resources */,
-				F597D71A158F23FE00BB1BFA /* LjsViewController_iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -935,68 +794,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F597D6FB158F23FE00BB1BFA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F597D70D158F23FE00BB1BFA /* main.m in Sources */,
-				F597D711158F23FE00BB1BFA /* LjsAppDelegate.m in Sources */,
-				F597D714158F23FE00BB1BFA /* LjsViewController.m in Sources */,
-				F597D71F158F243800BB1BFA /* GCDAsyncSocket.m in Sources */,
-				F597D720158F243800BB1BFA /* LPHTTPAuthenticationRequest.m in Sources */,
-				F597D721158F243800BB1BFA /* LPHTTPConnection.m in Sources */,
-				F597D722158F243800BB1BFA /* LPHTTPMessage.m in Sources */,
-				F597D723158F243800BB1BFA /* LPHTTPServer.m in Sources */,
-				F597D724158F244100BB1BFA /* DDData.m in Sources */,
-				F597D725158F244100BB1BFA /* DDNumber.m in Sources */,
-				F597D726158F244100BB1BFA /* DDRange.m in Sources */,
-				F597D727158F244900BB1BFA /* LPHTTPAsyncFileResponse.m in Sources */,
-				F597D728158F244900BB1BFA /* LPHTTPDataResponse.m in Sources */,
-				F597D729158F244900BB1BFA /* LPHTTPDynamicFileResponse.m in Sources */,
-				F597D72A158F244900BB1BFA /* LPHTTPFileResponse.m in Sources */,
-				F597D72B158F244900BB1BFA /* LPHTTPRedirectResponse.m in Sources */,
-				F597D72C158F245000BB1BFA /* LPI.mm in Sources */,
-				F597D72D158F245000BB1BFA /* LPRouter.m in Sources */,
-				F597D72E158F245900BB1BFA /* LPOperation.m in Sources */,
-				F597D72F158F245900BB1BFA /* LPQueryOperation.m in Sources */,
-				F597D730158F245900BB1BFA /* LPScrollOperation.m in Sources */,
-				F597D731158F245900BB1BFA /* LPScrollToRowOperation.m in Sources */,
-				F597D732158F245900BB1BFA /* LPSetTextOperation.m in Sources */,
-				F597D733158F245900BB1BFA /* LPNativeKeyboardOperation.m in Sources */,
-				F597D734158F245900BB1BFA /* LPRecorder.m in Sources */,
-				F597D735158F246500BB1BFA /* LPInterpolateRoute.m in Sources */,
-				F597D736158F246500BB1BFA /* LPPlaybackRoute.m in Sources */,
-				F597D737158F246500BB1BFA /* LPRecordRoute.m in Sources */,
-				F597D738158F246500BB1BFA /* LPNoContentResponse.m in Sources */,
-				F597D739158F246500BB1BFA /* LPScreenshotRoute.m in Sources */,
-				F597D73A158F246500BB1BFA /* LPAsyncPlaybackRoute.m in Sources */,
-				F597D73B158F246500BB1BFA /* LPBackgroundRoute.m in Sources */,
-				F597D73C158F246500BB1BFA /* LPBackdoorRoute.m in Sources */,
-				F597D73D158F246900BB1BFA /* CDataScanner_Extensions.m in Sources */,
-				F597D73E158F247000BB1BFA /* LPCJSONDeserializer.m in Sources */,
-				F597D73F158F247000BB1BFA /* LPCJSONScanner.m in Sources */,
-				F597D740158F247000BB1BFA /* LPCJSONSerializer.m in Sources */,
-				F597D741158F247600BB1BFA /* LPResources.m in Sources */,
-				F597D742158F248200BB1BFA /* UIScriptASTPredicate.m in Sources */,
-				F597D743158F248200BB1BFA /* UIScriptAST.m in Sources */,
-				F597D744158F248200BB1BFA /* UIScriptASTALL.m in Sources */,
-				F597D745158F248200BB1BFA /* UIScriptASTClassName.m in Sources */,
-				F597D746158F248200BB1BFA /* UIScriptASTDirection.m in Sources */,
-				F597D747158F248200BB1BFA /* UIScriptASTFirst.m in Sources */,
-				F597D748158F248200BB1BFA /* UIScriptASTIndex.m in Sources */,
-				F597D749158F248200BB1BFA /* UIScriptASTLast.m in Sources */,
-				F597D74A158F248200BB1BFA /* UIScriptASTWith.m in Sources */,
-				F597D74B158F248200BB1BFA /* UIScriptParser.m in Sources */,
-				F597D74C158F248A00BB1BFA /* LPJSONUtils.m in Sources */,
-				F597D74D158F248A00BB1BFA /* LPTouchUtils.m in Sources */,
-				F597D74E158F248A00BB1BFA /* LPCDataScanner.m in Sources */,
-				F597D74F158F248A00BB1BFA /* CalabashServer.m in Sources */,
-				F597D756158F255700BB1BFA /* LPMapRoute.m in Sources */,
-				F597D75E158F266600BB1BFA /* NSString+MD5Addition.m in Sources */,
-				F597D761158F266600BB1BFA /* UIDevice+IdentifierAddition.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -1006,30 +803,6 @@
 				B121E79D14B6D9FB0034C6A9 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		F597D709158F23FE00BB1BFA /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F597D70A158F23FE00BB1BFA /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		F597D715158F23FE00BB1BFA /* LjsViewController_iPhone.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F597D716158F23FE00BB1BFA /* en */,
-			);
-			name = LjsViewController_iPhone.xib;
-			sourceTree = "<group>";
-		};
-		F597D718158F23FE00BB1BFA /* LjsViewController_iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F597D719158F23FE00BB1BFA /* en */,
-			);
-			name = LjsViewController_iPad.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1125,39 +898,6 @@
 			};
 			name = Release;
 		};
-		F597D71B158F23FE00BB1BFA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "cornichon/cornichon-Prefix.pch";
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				INFOPLIST_FILE = "cornichon/cornichon-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		F597D71C158F23FE00BB1BFA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "cornichon/cornichon-Prefix.pch";
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				INFOPLIST_FILE = "cornichon/cornichon-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1175,15 +915,6 @@
 			buildConfigurations = (
 				B121E7A314B6D9FB0034C6A9 /* Debug */,
 				B121E7A414B6D9FB0034C6A9 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F597D71D158F23FE00BB1BFA /* Build configuration list for PBXNativeTarget "cornichon" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F597D71B158F23FE00BB1BFA /* Debug */,
-				F597D71C158F23FE00BB1BFA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
