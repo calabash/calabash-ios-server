@@ -37,10 +37,6 @@ static NSMutableDictionary* routes = nil;
 	
 }
 
-- (void) dealloc {
-    [_postData release];_postData=nil;
-    [super dealloc];
-}
 
 - (NSObject<LPHTTPResponse> *) responseForJSON:(NSDictionary*) json {
     if (json == nil) {
@@ -51,7 +47,7 @@ static NSMutableDictionary* routes = nil;
     NSString* serialized = [LPJSONUtils serializeDictionary:json];
     NSData *data = [serialized dataUsingEncoding:NSUTF8StringEncoding];
     LPHTTPDataResponse *rsp = [[LPHTTPDataResponse alloc] initWithData:data];
-    return [rsp autorelease];
+    return rsp;
 }
 
 - (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path
@@ -71,7 +67,6 @@ static NSMutableDictionary* routes = nil;
             if (_postData != nil && [_postData length]>0) {
                 NSString* postDataAsString = [[NSString alloc] initWithBytes:[_postData bytes] length:[_postData length] encoding:NSUTF8StringEncoding];
                 params=[LPJSONUtils deserializeDictionary:postDataAsString];
-                [postDataAsString release];                    
             } 
         }
         if ([route respondsToSelector:@selector(setConnection:)]) {
@@ -83,7 +78,11 @@ static NSMutableDictionary* routes = nil;
         
         SEL raw = @selector(httpResponseForMethod:URI:);
         if ([route respondsToSelector:raw]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
             return [route performSelector:raw withObject:method withObject:path];
+#pragma clang diagnostic pop
+
         }
         
         NSDictionary* json = [route JSONResponseForMethod:method URI:path data:params];

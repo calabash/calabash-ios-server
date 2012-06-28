@@ -28,6 +28,11 @@
 @synthesize data=_data;
 @synthesize jsonResponse=_jsonResponse;
 
+-(void) dealloc {
+    self.conn = nil;
+}
+
+
 -(id) init {
     self = [super init];
     if (self) {
@@ -154,7 +159,7 @@
     }    
     else                
     {        
-       CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)[startAt valueForKey:@"center"], &centerStart);
+       CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)[startAt valueForKey:@"center"], &centerStart);
     }
     centerStart = CGPointMake(centerStart.x + offsetPointStart.x, centerStart.y + offsetPointStart.y);
             
@@ -167,7 +172,7 @@
     else                
     {
         
-        CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)[startAt valueForKey:@"center"], &centerEnd);
+        CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)[startAt valueForKey:@"center"], &centerEnd);
     }
     centerEnd = CGPointMake(centerEnd.x + offsetPointEnd.x, centerEnd.y + offsetPointEnd.y);
     
@@ -228,7 +233,7 @@
 
 
 - (NSObject<LPHTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {    
-    LPInterpolateRoute* route = [[[LPInterpolateRoute alloc] init] autorelease];
+    LPInterpolateRoute* route = [[LPInterpolateRoute alloc] init];
     [route setParameters:self.data];
     [route setConnection:self.conn];
     self.data = nil;
@@ -236,13 +241,6 @@
     return route;
 }
 
--(void) dealloc {
-    self.data = nil;
-    self.conn = nil;
-    self.events = nil;
-    self.jsonResponse = nil;
-    [super dealloc];
-}
 
 @end
 

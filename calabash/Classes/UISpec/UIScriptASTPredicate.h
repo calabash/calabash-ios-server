@@ -13,7 +13,7 @@
     NSPredicate *_predicate;
     SEL _selector;
 }
-@property (nonatomic, retain) NSPredicate *predicate;
+@property (nonatomic) NSPredicate *predicate;
 @property (nonatomic, assign) SEL selector;
 
 -(id) initWithPredicate:(NSPredicate *)pred selector:(SEL) sel;

@@ -11,7 +11,7 @@
     NSArray *_events;
 }
 
-@property (nonatomic, retain) NSArray *events;
+@property (nonatomic) NSArray *events;
 @property (nonatomic, assign) BOOL done;
 
 -(void) play:(NSArray *)events;

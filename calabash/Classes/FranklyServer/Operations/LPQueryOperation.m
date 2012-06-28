@@ -75,7 +75,6 @@
     }
     for (NSInteger i=0;i<[_arguments count];i++) {
         id selObj = [_arguments objectAtIndex:i];
-        id objValue;
         int intValue;
         long longValue;
         char *charPtrValue; 
@@ -111,7 +110,7 @@
             [invocation setSelector:sel];
             for (NSInteger i =0, N=[args count]; i<N; i++)
             {
-                id arg = [args objectAtIndex:i];
+                __unsafe_unretained id arg = [args objectAtIndex:i];
                 const char *cType = [sig getArgumentTypeAtIndex:i+2];
                 switch(*cType) {
                     case '@':
@@ -179,19 +178,33 @@
         NSString *returnType = [NSString stringWithFormat:@"%s", type];
         const char* trimmedType = [[returnType substringToIndex:1] cStringUsingEncoding:NSASCIIStringEncoding];
         switch(*trimmedType) {
-            case '@':
-                [invocation getReturnValue:(void **)&objValue];
-                if (objValue == nil) {
-                    return nil;
-                } else {
-                    if (i == [_arguments count]-1) {                                                 
-                        return [self jsonifyObject:objValue];
-                    } else {
-                        target = objValue;
-                        continue;
-                    }
-                    
-                }
+          case '@': {
+            /*
+             When the return value is an object, pass a pointer to the variable 
+             (or memory) into which the object should be placed:
+             
+             ex 1
+             id anObject;
+             [invocation1 getReturnValue:&anObject];
+             ex 2
+             NSArray *anArray;
+             [invocation2 getReturnValue:&anArray];
+             */
+            __unsafe_unretained id objValue;
+            [invocation getReturnValue:&objValue];
+            //[invocation getReturnValue:(void **)&objValue];
+            if (objValue == nil) {
+              return nil;
+            } else {
+              if (i == [_arguments count]-1) {                                                 
+                return objValue;
+              } else {
+                target = objValue;
+                continue;
+              }
+              
+            }
+          }
             case 'i':
                 [invocation getReturnValue:(void **)&intValue];
                 return [NSNumber numberWithInt: intValue];
@@ -217,8 +230,8 @@
                 unsigned int length = [[invocation methodSignature] methodReturnLength];
                 void *buffer = (void *)malloc(length);
                 [invocation getReturnValue:buffer];
-                NSValue *value = [[[NSValue alloc] initWithBytes:buffer objCType:type] autorelease];
-                
+                NSValue *value = [[NSValue alloc] initWithBytes:buffer objCType:type];
+              
                 if ([returnType rangeOfString:@"{CGRect"].location == 0)
                 {
                     CGRect *rec = (CGRect*)buffer;
@@ -245,6 +258,9 @@
                 {
                     return [value description];                    
                 }
+                //memory leak here, but apparently NSValue doesn't copy the passed buffer, it just stores the pointer
+                // @Karl <== jjm: is this still leaking?
+                free(buffer);
             }
         }
 

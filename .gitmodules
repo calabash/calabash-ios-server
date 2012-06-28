@@ -1,3 +1,6 @@
 [submodule "calabash-js"]
 	path = calabash-js
 	url = git@github.com:calabash/calabash-js.git
+[submodule "UIDevice-with-UniqueIdentifier-for-iOS-5"]
+	path = UIDevice-with-UniqueIdentifier-for-iOS-5
+	url = https://github.com/gekitz/UIDevice-with-UniqueIdentifier-for-iOS-5.git

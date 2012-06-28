@@ -19,7 +19,7 @@
 - (id) initWithClassName:(NSString *)className {
     self = [super init];
     if (self) {
-        _className = [className retain];
+        _className = className;
         _class = NSClassFromString(self.className);
     }
     return self;
@@ -68,8 +68,12 @@ static NSInteger sortFunction(UIView* v1, UIView* v2, void *ctx) {
     if ([view isKindOfClass:_class]) {
         [res addObject:view];
     }
-    
-    for (UIView* subview in [[view subviews] sortedArrayUsingFunction:sortFunction context:view] ) {
+
+  for (UIView* subview in [[view subviews] sortedArrayUsingFunction:sortFunction 
+                                                            context:(__bridge void *)view] ) {
+
+//    for (UIView* subview in [[view subviews] sortedArrayUsingFunction:sortFunction 
+//                                                              context:view] ) {
         [self evalDescWith:subview result:res];
     }
     
@@ -104,8 +108,6 @@ static NSInteger sortFunction(UIView* v1, UIView* v2, void *ctx) {
 
 - (void) dealloc {
     _class = NULL;
-    [_className dealloc];_className=nil;
-    [super dealloc];
 }
 
 @end

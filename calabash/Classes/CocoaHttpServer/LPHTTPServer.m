@@ -103,23 +103,10 @@
 	//dispatch_release(connectionQueue);
 	
 	[asyncSocket setDelegate:nil delegateQueue:NULL];
-	[asyncSocket release];
 	
-	[documentRoot release];
-	[interface release];
 	
-	[netService release];
-	[domain release];
-	[name release];
-	[type release];
-	[txtRecordDictionary release];
 	
-	[connections release];
-	[webSockets release];
-	[connectionsLock release];
-	[webSocketsLock release];
 	
-	[super dealloc];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -136,10 +123,10 @@
 	__block NSString *result;
 	
 	dispatch_sync(serverQueue, ^{
-		result = [documentRoot retain];
+		result = documentRoot;
 	});
 	
-	return [result autorelease];
+	return result;
 }
 
 - (void)setDocumentRoot:(NSString *)value
@@ -159,11 +146,9 @@
 	NSString *valueCopy = [value copy];
 	
 	dispatch_async(serverQueue, ^{
-		[documentRoot release];
-		documentRoot = [valueCopy retain];
+		documentRoot = valueCopy;
 	});
 	
-	[valueCopy release];
 }
 
 /**
@@ -200,10 +185,10 @@
 	__block NSString *result;
 	
 	dispatch_sync(serverQueue, ^{
-		result = [interface retain];
+		result = interface;
 	});
 	
-	return [result autorelease];
+	return result;
 }
 
 - (void)setInterface:(NSString *)value
@@ -211,11 +196,9 @@
 	NSString *valueCopy = [value copy];
 	
 	dispatch_async(serverQueue, ^{
-		[interface release];
-		interface = [valueCopy retain];
+		interface = valueCopy;
 	});
 	
-	[valueCopy release];
 }
 
 /**
@@ -266,10 +249,10 @@
 	__block NSString *result;
 	
 	dispatch_sync(serverQueue, ^{
-		result = [domain retain];
+		result = domain;
 	});
 	
-    return [domain autorelease];
+    return domain;
 }
 
 - (void)setDomain:(NSString *)value
@@ -279,11 +262,9 @@
 	NSString *valueCopy = [value copy];
 	
 	dispatch_async(serverQueue, ^{
-		[domain release];
-		domain = [valueCopy retain];
+		domain = valueCopy;
 	});
 	
-	[valueCopy release];
 }
 
 /**
@@ -296,10 +277,10 @@
 	__block NSString *result;
 	
 	dispatch_sync(serverQueue, ^{
-		result = [name retain];
+		result = name;
 	});
 	
-	return [name autorelease];
+	return name;
 }
 
 - (NSString *)publishedName
@@ -323,7 +304,7 @@
 		}
 	});
 	
-	return [result autorelease];
+	return result;
 }
 
 - (void)setName:(NSString *)value
@@ -331,11 +312,9 @@
 	NSString *valueCopy = [value copy];
 	
 	dispatch_async(serverQueue, ^{
-		[name release];
-		name = [valueCopy retain];
+		name = valueCopy;
 	});
 	
-	[valueCopy release];
 }
 
 /**
@@ -347,10 +326,10 @@
 	__block NSString *result;
 	
 	dispatch_sync(serverQueue, ^{
-		result = [type retain];
+		result = type;
 	});
 	
-	return [result autorelease];
+	return result;
 }
 
 - (void)setType:(NSString *)value
@@ -358,11 +337,9 @@
 	NSString *valueCopy = [value copy];
 	
 	dispatch_async(serverQueue, ^{
-		[type release];
-		type = [valueCopy retain];
+		type = valueCopy;
 	});
 	
-	[valueCopy release];
 }
 
 /**
@@ -373,10 +350,10 @@
 	__block NSDictionary *result;
 	
 	dispatch_sync(serverQueue, ^{
-		result = [txtRecordDictionary retain];
+		result = txtRecordDictionary;
 	});
 	
-	return [result autorelease];
+	return result;
 }
 - (void)setTXTRecordDictionary:(NSDictionary *)value
 {
@@ -386,8 +363,7 @@
 	
 	dispatch_async(serverQueue, ^{
 	
-		[txtRecordDictionary release];
-		txtRecordDictionary = [valueCopy retain];
+		txtRecordDictionary = valueCopy;
 		
 		// Update the txtRecord of the netService if it has already been published
 		if (netService)
@@ -405,7 +381,6 @@
 		}
 	});
 	
-	[valueCopy release];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -420,29 +395,28 @@
 	__block NSError *err = nil;
 	
 	dispatch_sync(serverQueue, ^{
-		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+		@autoreleasepool {
 		
-		success = [asyncSocket acceptOnInterface:interface port:port error:&err];
-		if (success)
-		{
-			NSLog(@"Started LPHTTP server on port %hu", [asyncSocket localPort]);
-			
-			isRunning = YES;
-			[self publishBonjour];
-		}
-		else
-		{
-			//LPHTTPLogError(@"%@: Failed to start LPHTTP Server: %@", THIS_FILE, err);
-			[err retain];
-		}
+			success = [asyncSocket acceptOnInterface:interface port:port error:&err];
+			if (success)
+			{
+				NSLog(@"Started LPHTTP server on port %hu", [asyncSocket localPort]);
+				
+				isRunning = YES;
+				[self publishBonjour];
+			}
+			else
+			{
+				//LPHTTPLogError(@"%@: Failed to start LPHTTP Server: %@", THIS_FILE, err);
+			}
 		
-		[pool drain];
+		}
 	});
 	
 	if (errPtr)
-		*errPtr = [err autorelease];
+		*errPtr = err;
 	else
-		[err release];
+		;
 	
 	return success;
 }
@@ -457,31 +431,31 @@
 	//LPHTTPLogTrace();
 	
 	dispatch_sync(serverQueue, ^{
-		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+		@autoreleasepool {
 		
 		// First stop publishing the service via bonjour
-		[self unpublishBonjour];
-		
-		// Stop listening / accepting incoming connections
-		[asyncSocket disconnect];
-		isRunning = NO;
-		
-		if (!keepExistingConnections)
-		{
-			// Stop all LPHTTP connections the server owns
-			[connectionsLock lock];
-			for (LPHTTPConnection *connection in connections)
+			[self unpublishBonjour];
+			
+			// Stop listening / accepting incoming connections
+			[asyncSocket disconnect];
+			isRunning = NO;
+			
+			if (!keepExistingConnections)
 			{
-				[connection stop];
+				// Stop all LPHTTP connections the server owns
+				[connectionsLock lock];
+				for (LPHTTPConnection *connection in connections)
+				{
+					[connection stop];
+				}
+				[connections removeAllObjects];
+				[connectionsLock unlock];
+				
+				// Stop all WebSocket connections the server owns
+				
 			}
-			[connections removeAllObjects];
-			[connectionsLock unlock];
-			
-			// Stop all WebSocket connections the server owns
-			
-		}
 		
-		[pool drain];
+		}
 	});
 }
 
@@ -546,7 +520,7 @@
 	// Try the apache benchmark tool (already installed on your Mac):
 	// $  ab -n 1000 -c 1 http://localhost:<port>/some_path.html
 	
-	return [[[LPHTTPConfig alloc] initWithServer:self documentRoot:documentRoot queue:connectionQueue] autorelease];
+	return [[LPHTTPConfig alloc] initWithServer:self documentRoot:documentRoot queue:connectionQueue];
 }
 
 - (void)socket:(LPGCDAsyncSocket *)sock didAcceptNewSocket:(LPGCDAsyncSocket *)newSocket
@@ -558,7 +532,6 @@
 	[connectionsLock unlock];
 	
 	[newConnection start];
-	[newConnection release];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -613,7 +586,6 @@
 		dispatch_block_t bonjourBlock = ^{
 			
 			[theNetService stop];
-			[theNetService release];
 		};
 		
 		[[self class] performBonjourBlock:bonjourBlock];
@@ -735,20 +707,20 @@ static NSThread *bonjourThread;
 
 + (void)bonjourThread
 {
-	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	@autoreleasepool {
 	
 	//LPHTTPLogVerbose(@"%@: BonjourThread: Started", THIS_FILE);
 	
 	// We can't run the run loop unless it has an associated input source or a timer.
 	// So we'll just create a timer that will never fire - unless the server runs for 10,000 years.
 	
-	[NSTimer scheduledTimerWithTimeInterval:DBL_MAX target:self selector:@selector(ignore:) userInfo:nil repeats:YES];
-	
-	[[NSRunLoop currentRunLoop] run];
+		[NSTimer scheduledTimerWithTimeInterval:DBL_MAX target:self selector:@selector(ignore:) userInfo:nil repeats:YES];
+		
+		[[NSRunLoop currentRunLoop] run];
 	
 	//LPHTTPLogVerbose(@"%@: BonjourThread: Aborted", THIS_FILE);
 	
-	[pool drain];
+	}
 }
 
 + (void)executeBonjourBlock:(dispatch_block_t)block

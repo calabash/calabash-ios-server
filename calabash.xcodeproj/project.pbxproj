@@ -39,8 +39,6 @@
 		B121E79E14B6D9FB0034C6A9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B121E79C14B6D9FB0034C6A9 /* InfoPlist.strings */; };
 		B12A04021511546F002FA032 /* LPInterpolateRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B12A04001511546F002FA032 /* LPInterpolateRoute.h */; };
 		B12A04031511546F002FA032 /* LPInterpolateRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A04011511546F002FA032 /* LPInterpolateRoute.m */; };
-		B153F55C15949F3E00867E12 /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; };
-		B153F55D15949F3E00867E12 /* LPVersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B153F55B15949F3D00867E12 /* LPVersionRoute.m */; };
 		B160E8EF15321D8F00F69E7A /* LPBackdoorRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B160E8ED15321D8F00F69E7A /* LPBackdoorRoute.h */; };
 		B160E8F015321D8F00F69E7A /* LPBackdoorRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */; };
 		B184FD8914B6DAE1002A744C /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
@@ -108,12 +106,18 @@
 		B184FE9114B6DD33002A744C /* LPScreenshotRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9014B6DD33002A744C /* LPScreenshotRoute.m */; };
 		B184FE9314B6DDA1002A744C /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; };
 		B184FE9714B6F64A002A744C /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; };
-		B1914DDC159C228500CB928D /* LPWebQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = B1914DB7159C228500CB928D /* LPWebQuery.h */; };
-		B1914DDD159C228500CB928D /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; };
 		B1E3603A14D9F4B30087D8D9 /* UIScriptASTPredicate.h in Headers */ = {isa = PBXBuildFile; fileRef = B1E3603814D9F4B30087D8D9 /* UIScriptASTPredicate.h */; };
 		B1E3603B14D9F4B30087D8D9 /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; };
 		B1E3604714DA09D20087D8D9 /* LPBackgroundRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B1E3604514DA09D20087D8D9 /* LPBackgroundRoute.h */; };
 		B1E3604814DA09D20087D8D9 /* LPBackgroundRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3604614DA09D20087D8D9 /* LPBackgroundRoute.m */; };
+		F52166D8159C796000BB5EB9 /* LPWebQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = F52166D6159C796000BB5EB9 /* LPWebQuery.h */; };
+		F52166D9159C796000BB5EB9 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F52166D7159C796000BB5EB9 /* LPWebQuery.m */; };
+		F52166E9159C81DE00BB5EB9 /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; };
+		F52166EA159C827C00BB5EB9 /* LPVersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B153F55B15949F3D00867E12 /* LPVersionRoute.m */; };
+		F597D75C158F266600BB1BFA /* NSString+MD5Addition.h in Headers */ = {isa = PBXBuildFile; fileRef = F597D758158F266600BB1BFA /* NSString+MD5Addition.h */; };
+		F597D75D158F266600BB1BFA /* NSString+MD5Addition.m in Sources */ = {isa = PBXBuildFile; fileRef = F597D759158F266600BB1BFA /* NSString+MD5Addition.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		F597D75F158F266600BB1BFA /* UIDevice+IdentifierAddition.h in Headers */ = {isa = PBXBuildFile; fileRef = F597D75A158F266600BB1BFA /* UIDevice+IdentifierAddition.h */; };
+		F597D760158F266600BB1BFA /* UIDevice+IdentifierAddition.m in Sources */ = {isa = PBXBuildFile; fileRef = F597D75B158F266600BB1BFA /* UIDevice+IdentifierAddition.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -231,12 +235,20 @@
 		B184FE9014B6DD33002A744C /* LPScreenshotRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScreenshotRoute.m; sourceTree = "<group>"; };
 		B184FE9214B6DDA1002A744C /* LPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPOperation.m; sourceTree = "<group>"; };
 		B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCJSONDeserializer.m; sourceTree = "<group>"; };
-		B1914DB7159C228500CB928D /* LPWebQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPWebQuery.h; sourceTree = "<group>"; };
-		B1914DB8159C228500CB928D /* LPWebQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPWebQuery.m; sourceTree = "<group>"; };
 		B1E3603814D9F4B30087D8D9 /* UIScriptASTPredicate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScriptASTPredicate.h; sourceTree = "<group>"; };
 		B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScriptASTPredicate.m; sourceTree = "<group>"; };
 		B1E3604514DA09D20087D8D9 /* LPBackgroundRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPBackgroundRoute.h; sourceTree = "<group>"; };
 		B1E3604614DA09D20087D8D9 /* LPBackgroundRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPBackgroundRoute.m; sourceTree = "<group>"; };
+		F52166D6159C796000BB5EB9 /* LPWebQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPWebQuery.h; sourceTree = "<group>"; };
+		F52166D7159C796000BB5EB9 /* LPWebQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPWebQuery.m; sourceTree = "<group>"; };
+		F597D701158F23FE00BB1BFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F597D704158F23FE00BB1BFA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F597D750158F252000BB1BFA /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		F597D752158F252B00BB1BFA /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		F597D758158F266600BB1BFA /* NSString+MD5Addition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+MD5Addition.h"; sourceTree = "<group>"; };
+		F597D759158F266600BB1BFA /* NSString+MD5Addition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MD5Addition.m"; sourceTree = "<group>"; };
+		F597D75A158F266600BB1BFA /* UIDevice+IdentifierAddition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+IdentifierAddition.h"; sourceTree = "<group>"; };
+		F597D75B158F266600BB1BFA /* UIDevice+IdentifierAddition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+IdentifierAddition.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,12 +280,15 @@
 		B121E78614B6D9FB0034C6A9 = {
 			isa = PBXGroup;
 			children = (
+				F597D757158F266600BB1BFA /* UUID */,
 				B16C307C15191A8C00DAA3FA /* calabash-js */,
 				B121E79914B6D9FB0034C6A9 /* calabash */,
 				B121E79614B6D9FB0034C6A9 /* Frameworks */,
 				B121E79514B6D9FB0034C6A9 /* Products */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		B121E79514B6D9FB0034C6A9 /* Products */ = {
 			isa = PBXGroup;
@@ -286,7 +301,11 @@
 		B121E79614B6D9FB0034C6A9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F597D752158F252B00BB1BFA /* Security.framework */,
+				F597D750158F252000BB1BFA /* CFNetwork.framework */,
 				B121E79714B6D9FB0034C6A9 /* Foundation.framework */,
+				F597D701158F23FE00BB1BFA /* UIKit.framework */,
+				F597D704158F23FE00BB1BFA /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -313,7 +332,7 @@
 		B16C307C15191A8C00DAA3FA /* calabash-js */ = {
 			isa = PBXGroup;
 			children = (
-				B1914DA6159C228500CB928D /* CalabashJS */,
+				F52166D5159C796000BB5EB9 /* CalabashJSLib */,
 				B16C307D15191A8C00DAA3FA /* .gitignore */,
 				B16C307E15191A8C00DAA3FA /* build */,
 				B16C308115191A8C00DAA3FA /* build.sh */,
@@ -537,21 +556,26 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		B1914DA6159C228500CB928D /* CalabashJS */ = {
+		F52166D5159C796000BB5EB9 /* CalabashJSLib */ = {
 			isa = PBXGroup;
 			children = (
-				B1914DB6159C228500CB928D /* CalabashJSLib */,
+				F52166D6159C796000BB5EB9 /* LPWebQuery.h */,
+				F52166D7159C796000BB5EB9 /* LPWebQuery.m */,
 			);
-			path = CalabashJS;
+			name = CalabashJSLib;
+			path = CalabashJS/CalabashJSLib;
 			sourceTree = "<group>";
 		};
-		B1914DB6159C228500CB928D /* CalabashJSLib */ = {
+		F597D757158F266600BB1BFA /* UUID */ = {
 			isa = PBXGroup;
 			children = (
-				B1914DB7159C228500CB928D /* LPWebQuery.h */,
-				B1914DB8159C228500CB928D /* LPWebQuery.m */,
+				F597D758158F266600BB1BFA /* NSString+MD5Addition.h */,
+				F597D759158F266600BB1BFA /* NSString+MD5Addition.m */,
+				F597D75A158F266600BB1BFA /* UIDevice+IdentifierAddition.h */,
+				F597D75B158F266600BB1BFA /* UIDevice+IdentifierAddition.m */,
 			);
-			path = CalabashJSLib;
+			name = UUID;
+			path = "UIDevice-with-UniqueIdentifier-for-iOS-5/Classes";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -561,6 +585,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F52166E9159C81DE00BB5EB9 /* LPVersionRoute.h in Headers */,
 				B184FD8A14B6DAE1002A744C /* CalabashServer.h in Headers */,
 				B184FD8D14B6DAFB002A744C /* LPCDataScanner.h in Headers */,
 				B184FE1214B6DB2B002A744C /* GCDAsyncSocket.h in Headers */,
@@ -613,8 +638,9 @@
 				B116C9C414E6565500663205 /* LPHTTPServer.h in Headers */,
 				B12A04021511546F002FA032 /* LPInterpolateRoute.h in Headers */,
 				B160E8EF15321D8F00F69E7A /* LPBackdoorRoute.h in Headers */,
-				B153F55C15949F3E00867E12 /* LPVersionRoute.h in Headers */,
-				B1914DDC159C228500CB928D /* LPWebQuery.h in Headers */,
+				F597D75C158F266600BB1BFA /* NSString+MD5Addition.h in Headers */,
+				F597D75F158F266600BB1BFA /* UIDevice+IdentifierAddition.h in Headers */,
+				F52166D8159C796000BB5EB9 /* LPWebQuery.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -761,8 +787,10 @@
 				B116C9C514E6565500663205 /* LPHTTPServer.m in Sources */,
 				B12A04031511546F002FA032 /* LPInterpolateRoute.m in Sources */,
 				B160E8F015321D8F00F69E7A /* LPBackdoorRoute.m in Sources */,
-				B153F55D15949F3E00867E12 /* LPVersionRoute.m in Sources */,
-				B1914DDD159C228500CB928D /* LPWebQuery.m in Sources */,
+				F597D75D158F266600BB1BFA /* NSString+MD5Addition.m in Sources */,
+				F597D760158F266600BB1BFA /* UIDevice+IdentifierAddition.m in Sources */,
+				F52166D9159C796000BB5EB9 /* LPWebQuery.m in Sources */,
+				F52166EA159C827C00BB5EB9 /* LPVersionRoute.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -798,7 +826,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -814,7 +842,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -827,6 +855,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
@@ -838,6 +867,7 @@
 				);
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "calabash/calabash-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -852,6 +882,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				CLANG_ENABLE_OBJC_ARC = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
@@ -859,6 +890,7 @@
 				GCC_PREFIX_HEADER = "calabash/calabash-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "calabash/calabash-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";

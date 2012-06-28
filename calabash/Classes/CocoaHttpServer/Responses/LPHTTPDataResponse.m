@@ -13,18 +13,11 @@
 		//LPHTTPLogTrace();
 		
 		offset = 0;
-		data = [dataParam retain];
+		data = dataParam;
 	}
 	return self;
 }
 
-- (void)dealloc
-{
-	//LPHTTPLogTrace();
-	
-	[data release];
-	[super dealloc];
-}
 
 - (UInt64)contentLength
 {

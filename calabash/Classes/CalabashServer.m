@@ -16,8 +16,11 @@
 #import "LPBackgroundRoute.h"
 #import "LPInterpolateRoute.h"
 #import "LPBackdoorRoute.h"
-#import "LPVersionRoute.h"
 #import <dlfcn.h>
+// category for UUID
+#import "UIDevice+IdentifierAddition.h"
+#import "NSString+MD5Addition.h"
+#import "LPVersionRoute.h"
 
 @interface CalabashServer()
 - (void) start;
@@ -29,13 +32,13 @@
     CalabashServer* server = [[CalabashServer alloc] init];
     [server start];
     
-    NSAutoreleasePool *autoreleasePool = [[NSAutoreleasePool alloc] init];
+  @autoreleasepool {
     NSString *appSupportLocation = @"/System/Library/PrivateFrameworks/AppSupport.framework/AppSupport";
     
     NSDictionary *environment = [[NSProcessInfo processInfo] environment];
     NSString *simulatorRoot = [environment objectForKey:@"IPHONE_SIMULATOR_ROOT"];
     if (simulatorRoot) {
-        appSupportLocation = [simulatorRoot stringByAppendingString:appSupportLocation];
+      appSupportLocation = [simulatorRoot stringByAppendingString:appSupportLocation];
     }
     
     void *appSupportLibrary = dlopen([appSupportLocation fileSystemRepresentation], RTLD_LAZY);
@@ -43,16 +46,14 @@
     CFStringRef (*copySharedResourcesPreferencesDomainForDomain)(CFStringRef domain) = dlsym(appSupportLibrary, "CPCopySharedResourcesPreferencesDomainForDomain");    
     
     if (copySharedResourcesPreferencesDomainForDomain) {
-        CFStringRef accessibilityDomain = copySharedResourcesPreferencesDomainForDomain(CFSTR("com.apple.Accessibility"));
-        
-        if (accessibilityDomain) {
-            CFPreferencesSetValue(CFSTR("ApplicationAccessibilityEnabled"), kCFBooleanTrue, accessibilityDomain, kCFPreferencesAnyUser, kCFPreferencesAnyHost);
-            CFRelease(accessibilityDomain);
-        }
+      CFStringRef accessibilityDomain = copySharedResourcesPreferencesDomainForDomain(CFSTR("com.apple.Accessibility"));
+      
+      if (accessibilityDomain) {
+        CFPreferencesSetValue(CFSTR("ApplicationAccessibilityEnabled"), kCFBooleanTrue, accessibilityDomain, kCFPreferencesAnyUser, kCFPreferencesAnyHost);
+        CFRelease(accessibilityDomain);
+      }
     }
-    
-    [autoreleasePool drain];
-
+  }
 }
 
 - (id) init
@@ -62,14 +63,11 @@
 		
         LPMapRoute* mr = [LPMapRoute new];
         [LPRouter addRoute:mr forPath:@"/map"];
-        [mr release];
         LPScreenshotRoute *sr =[LPScreenshotRoute new];
         [LPRouter addRoute:sr forPath:@"/screenshot"];
-        [sr release];
 
         LPRecordRoute *rr =[LPRecordRoute new];
         [LPRouter addRoute:rr forPath:@"/record"];
-        [rr release];
 
 //        LPPlaybackRoute *pr =[LPPlaybackRoute new];
 //        [LPRouter addRoute:pr forPath:@"/play"];
@@ -77,32 +75,27 @@
 //        
         LPAsyncPlaybackRoute *apr =[LPAsyncPlaybackRoute new];
         [LPRouter addRoute:apr forPath:@"/play"];
-        [apr release];
 
         LPBackgroundRoute *bgr =[LPBackgroundRoute new];
         [LPRouter addRoute:bgr forPath:@"/background"];
-        [bgr release];
 
         LPInterpolateRoute *panr =[LPInterpolateRoute new];
         [LPRouter addRoute:panr forPath:@"/interpolate"];
-        [panr release];
         
         LPBackdoorRoute* backdr = [LPBackdoorRoute new];
         [LPRouter addRoute:backdr forPath:@"/backdoor"];
-        [backdr release];
+       
 
         LPVersionRoute* verr = [LPVersionRoute new];
         [LPRouter addRoute:verr forPath:@"/version"];
-        [verr release];
 
-
-//        
+  
 //        LPScreencastRoute *scr = [LPScreencastRoute new];
 //        [LPRouter addRoute:scr forPath:@"/screencast"];
 //        [scr release];
 //        
 
-		_httpServer = [[[LPHTTPServer alloc]init] retain];
+		_httpServer = [[LPHTTPServer alloc]init];
 		
 		[_httpServer setName:@"Calabash Server"];
 		[_httpServer setType:@"_http._tcp."];
@@ -119,7 +112,8 @@
 		                                     [info objectForKey:@"CFBundleVersion"], @"app_version",
 		                                     nil];
 		if ([[UIDevice currentDevice] respondsToSelector:@selector(uniqueIdentifier)]) {
-			[capabilities setObject:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"uuid"];
+      [capabilities setObject:[[UIDevice currentDevice] uniqueDeviceIdentifier] forKey:@"uuid"];
+			//[capabilities setObject:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"uuid"];
 		}
 
 		[_httpServer setTXTRecordDictionary:capabilities];
@@ -186,11 +180,6 @@
     }
 }
 
-- (void) dealloc
-{
-	[_httpServer release];
-	[super dealloc];
-}
 
 
 @end

@@ -18,8 +18,8 @@
 	{
 		//LPHTTPLogTrace();
 		
-		separator = [[separatorStr dataUsingEncoding:NSUTF8StringEncoding] retain];
-		replacementDict = [dict retain];
+		separator = [separatorStr dataUsingEncoding:NSUTF8StringEncoding];
+		replacementDict = dict;
 	}
 	return self;
 }
@@ -210,7 +210,6 @@
 						}
 					}
 					
-					[key release];
 				}
 				
 				found1 = found2 = NO;
@@ -277,14 +276,5 @@
 	[connection responseHasAvailableData:self];
 }
 
-- (void)dealloc
-{
-	//LPHTTPLogTrace();
-	
-	[separator release];
-	[replacementDict release];
-	
-	[super dealloc];
-}
 
 @end

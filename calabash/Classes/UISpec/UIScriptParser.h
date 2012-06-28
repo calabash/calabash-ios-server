@@ -11,7 +11,7 @@
     NSString *_script;
 }
 
-@property (nonatomic, retain) NSString* script;
+@property (nonatomic) NSString* script;
 
 - (id) initWithUIScript:(NSString*) script;
 

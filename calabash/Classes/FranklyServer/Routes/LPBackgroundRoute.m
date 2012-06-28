@@ -22,7 +22,6 @@
                                           cancelButtonTitle:@"OK"
                                           otherButtonTitles:nil];
     [alert show];
-    [alert release];
     return [NSDictionary dictionaryWithObjectsAndKeys:
             [NSArray array], @"results",
             @"SUCCESS",@"outcome",

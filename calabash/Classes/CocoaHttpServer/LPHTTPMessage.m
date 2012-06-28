@@ -16,7 +16,11 @@
 {
 	if ((self = [super init]))
 	{
-		message = CFHTTPMessageCreateRequest(NULL, (CFStringRef)method, (CFURLRef)url, (CFStringRef)version);
+    CFStringRef mRef = (__bridge CFStringRef) method;
+    CFURLRef uRef = (__bridge CFURLRef) url;
+    CFStringRef vRef = (__bridge CFStringRef) version;
+		message = CFHTTPMessageCreateRequest(NULL, mRef, uRef, vRef);
+//		message = CFHTTPMessageCreateRequest(NULL, (CFStringRef)method, (CFURLRef)url, (CFStringRef)version);
 	}
 	return self;
 }
@@ -25,7 +29,11 @@
 {
 	if ((self = [super init]))
 	{
-		message = CFHTTPMessageCreateResponse(NULL, (CFIndex)code, (CFStringRef)description, (CFStringRef)version);
+    message = CFHTTPMessageCreateResponse(NULL, 
+                                          (CFIndex)code, 
+                                          (__bridge CFStringRef)description, 
+                                          (__bridge CFStringRef)version);
+    // message = CFHTTPMessageCreateResponse(NULL, (CFIndex)code, (CFStringRef)description, (CFStringRef)version);
 	}
 	return self;
 }
@@ -36,7 +44,6 @@
 	{
 		CFRelease(message);
 	}
-	[super dealloc];
 }
 
 - (BOOL)appendData:(NSData *)data
@@ -51,17 +58,23 @@
 
 - (NSString *)version
 {
-	return [NSMakeCollectable(CFHTTPMessageCopyVersion(message)) autorelease];
+  NSString *result = CFBridgingRelease(CFHTTPMessageCopyVersion(message));
+  return result;
+//	return [NSMakeCollectable(CFHTTPMessageCopyVersion(message)) autorelease];
 }
 
 - (NSString *)method
 {
-	return [NSMakeCollectable(CFHTTPMessageCopyRequestMethod(message)) autorelease];
+  NSString *result = CFBridgingRelease(CFHTTPMessageCopyRequestMethod(message));
+  return result;
+//	return [NSMakeCollectable(CFHTTPMessageCopyRequestMethod(message)) autorelease];
 }
 
 - (NSURL *)url
 {
-	return [NSMakeCollectable(CFHTTPMessageCopyRequestURL(message)) autorelease];
+  NSURL *result = CFBridgingRelease(CFHTTPMessageCopyRequestURL(message));
+  return result;
+//	return [NSMakeCollectable(CFHTTPMessageCopyRequestURL(message)) autorelease];
 }
 
 - (NSInteger)statusCode
@@ -71,32 +84,46 @@
 
 - (NSDictionary *)allHeaderFields
 {
-	return [NSMakeCollectable(CFHTTPMessageCopyAllHeaderFields(message)) autorelease];
+  NSDictionary *result = CFBridgingRelease(CFHTTPMessageCopyAllHeaderFields(message));
+  return result;
+  // return [NSMakeCollectable(CFHTTPMessageCopyAllHeaderFields(message)) autorelease];
 }
 
 - (NSString *)headerField:(NSString *)headerField
 {
-	return [NSMakeCollectable(CFHTTPMessageCopyHeaderFieldValue(message, (CFStringRef)headerField)) autorelease];
+  NSString *result = CFBridgingRelease(CFHTTPMessageCopyHeaderFieldValue(message, 
+                                                                         (__bridge CFStringRef)headerField));
+  return result;
+//	return [NSMakeCollectable(CFHTTPMessageCopyHeaderFieldValue(message, (CFStringRef)headerField)) autorelease];
 }
 
 - (void)setHeaderField:(NSString *)headerField value:(NSString *)headerFieldValue
 {
-	CFHTTPMessageSetHeaderFieldValue(message, (CFStringRef)headerField, (CFStringRef)headerFieldValue);
+  CFHTTPMessageSetHeaderFieldValue(message, 
+                                   (__bridge CFStringRef)headerField, 
+                                   (__bridge CFStringRef)headerFieldValue);
+	//CFHTTPMessageSetHeaderFieldValue(message, (CFStringRef)headerField, (CFStringRef)headerFieldValue);
 }
 
 - (NSData *)messageData
 {
-	return [NSMakeCollectable(CFHTTPMessageCopySerializedMessage(message)) autorelease];
+  NSData *result = CFBridgingRelease(CFHTTPMessageCopySerializedMessage(message));
+  return result;
+//	return [NSMakeCollectable(CFHTTPMessageCopySerializedMessage(message)) autorelease];
 }
 
 - (NSData *)body
 {
-	return [NSMakeCollectable(CFHTTPMessageCopyBody(message)) autorelease];
+  NSData *result = CFBridgingRelease(CFHTTPMessageCopyBody(message));
+  return result;
+//	return [NSMakeCollectable(CFHTTPMessageCopyBody(message)) autorelease];
 }
 
 - (void)setBody:(NSData *)body
 {
-	CFHTTPMessageSetBody(message, (CFDataRef)body);
+  CFHTTPMessageSetBody(message, 
+                       (__bridge CFDataRef)body);
+//  CFHTTPMessageSetBody(message, (CFDataRef)body);
 }
 
 @end

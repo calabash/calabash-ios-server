@@ -10,21 +10,21 @@
 #import "LPHTTPResponse.h"
 @interface LPAsyncPlaybackRoute : NSObject<LPRoute,LPHTTPResponse> 
 {    
+    /*
     BOOL _done;
     NSArray *_events;
-    LPHTTPConnection *_conn;
+    LPHTTPConnection *__unsafe_unretained _conn;
     NSDictionary *_data;
     NSDictionary *_jsonResponse;
-    
+    */
     NSData *_bytes;
-    
 }
 
-@property (nonatomic, retain) NSArray *events;
+@property (nonatomic) NSArray *events;
 @property (nonatomic, assign) BOOL done;
-@property (nonatomic, assign) LPHTTPConnection *conn;
-@property (nonatomic, retain) NSDictionary *data;
-@property (nonatomic, retain) NSDictionary *jsonResponse;
+@property (nonatomic, unsafe_unretained) LPHTTPConnection *conn;
+@property (nonatomic) NSDictionary *data;
+@property (nonatomic) NSDictionary *jsonResponse;
 
 - (void) play:(NSArray *)events;
 

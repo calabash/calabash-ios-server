@@ -23,6 +23,12 @@
 @synthesize valueType=_valueType;
 @synthesize valueType2;
 
+- (void) dealloc {
+    self.selector = nil;
+    self.selectorName = nil;
+}
+
+
 - (id)initWithSelectorName:(NSString *)selectorName {
         self = [super init];
         if (self) {
@@ -56,7 +62,7 @@
 
 -(NSArray *)handleWebView:(UIWebView *)webView {
     if (self.valueType == UIScriptLiteralTypeString) {
-        LPWebQueryType type = LPWebQueryTypeCSS;
+      LPWebQueryType type = LPWebQueryTypeCSS;
         if ([[self selectorName] isEqualToString:@"marked"]) 
         {
             type = LPWebQueryTypeFreeText;                           
@@ -140,9 +146,12 @@
                 continue;            
             }
             
-            if ([v respondsToSelector:_selector]) 
-            {
-                void* val = [v performSelector:_selector];
+            if ([v respondsToSelector:_selector]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+              void* val = (__bridge void *)[v performSelector:_selector];
+#pragma clang diagnostic pop
+              //void* val = [v performSelector:_selector];
                 switch (self.valueType) {
                     case UIScriptLiteralTypeInteger:
                         if ((NSInteger) val == self.integerValue) {
@@ -151,7 +160,7 @@
                         break;
                     case UIScriptLiteralTypeString: {
                         if (val != nil && 
-                            ([(NSString*)val isEqualToString:(NSString*)self.objectValue])) {
+                            ([(__bridge NSString*)val isEqualToString:(NSString*)self.objectValue])) {
                             [res addObject:v];
                         } 
                         break;
@@ -172,13 +181,6 @@
     return res;
 }
 
-
-    
-- (void) dealloc {
-    self.selector=nil;
-    [_objectValue release];_objectValue=nil;
-    [super dealloc];
-}
     
 
 @end

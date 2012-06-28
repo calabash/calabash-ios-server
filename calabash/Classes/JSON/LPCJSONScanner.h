@@ -44,7 +44,7 @@ typedef NSUInteger LPEJSONScannerOptions;
 }
 
 @property (readwrite, nonatomic, assign) BOOL strictEscapeCodes;
-@property (readwrite, nonatomic, retain) id nullObject;
+@property (readwrite, nonatomic) id nullObject;
 @property (readwrite, nonatomic, assign) NSStringEncoding allowedEncoding;
 @property (readwrite, nonatomic, assign) LPEJSONScannerOptions options;
 
