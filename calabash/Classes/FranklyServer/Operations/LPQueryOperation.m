@@ -23,15 +23,58 @@
     return NSSelectorFromString(selStr);
 }
 
+-(id)jsonifyObject:(id)object
+{
+    if (!object) {return nil;}
+    if ([object isKindOfClass:[UIColor class]]) 
+    {
+        //todo special handling
+        return [object description];        
+    }
+    if ([object isKindOfClass:[UIView class]])
+    {
+        NSMutableDictionary *result = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+         NSStringFromClass([object class]),@"class",
+            
+         nil];
+        
+        NSString* type = nil;
+        if ([object isKindOfClass:[UIControl class]])
+        {
+            type = @"UIControl";
+        }
+        else
+        {
+            type = @"UIView";
+        }
+        [result setObject:type forKey:@"UIType"];
+
+        CGRect frame = [object frame];
+        NSDictionary *frameDic =  
+        [NSDictionary dictionaryWithObjectsAndKeys:
+         [NSNumber numberWithFloat:frame.origin.x],@"x",
+         [NSNumber numberWithFloat:frame.origin.y],@"y",
+         [NSNumber numberWithFloat:frame.size.width],@"width",
+         [NSNumber numberWithFloat:frame.size.height],@"height",
+         nil];
+
+        [result setObject:frameDic forKey:@"frame"];
+        
+        [result setObject:[object description] forKey:@"description"];
+        
+        return result;
+    }
+    return object;
+         
+         
+}
 - (id) performWithTarget:(UIView*)_view error:(NSError **)error {
     id target = _view;
     if([_arguments count] <= 0) {
-        return _view;
+        return [self jsonifyObject: _view];
     }
     for (NSInteger i=0;i<[_arguments count];i++) {
         id selObj = [_arguments objectAtIndex:i];
-      // moved down
-      //id objValue;
         int intValue;
         long longValue;
         char *charPtrValue; 
@@ -188,7 +231,7 @@
                 void *buffer = (void *)malloc(length);
                 [invocation getReturnValue:buffer];
                 NSValue *value = [[NSValue alloc] initWithBytes:buffer objCType:type];
-                
+              
                 if ([returnType rangeOfString:@"{CGRect"].location == 0)
                 {
                     CGRect *rec = (CGRect*)buffer;
@@ -215,6 +258,9 @@
                 {
                     return [value description];                    
                 }
+                //memory leak here, but apparently NSValue doesn't copy the passed buffer, it just stores the pointer
+                // @Karl <== jjm: is this still leaking?
+                free(buffer);
             }
         }
 

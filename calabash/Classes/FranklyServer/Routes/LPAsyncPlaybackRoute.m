@@ -112,6 +112,8 @@
             NSNumber *x = [offset valueForKey:@"x"];
             NSNumber *y = [offset valueForKey:@"y"];
             
+        
+            
             CGPoint offsetPoint = CGPointMake([x floatValue], [y floatValue]);
             
             CGPoint center;
@@ -125,6 +127,23 @@
                 CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)[v valueForKey:@"center"], &center);
             }
 
+            NSString *centerView = NSStringFromCGPoint(center);
+            
+            NSLog(@"Center %@", centerView);
+            
+            id win = v;
+            if ([win isKindOfClass:[UIView class]])
+            {
+                if ([win isKindOfClass:[UIWindow class]])
+                {
+                    CGPoint newCenter = [win convertPoint:center toWindow:nil];
+                    NSLog(@"Window center:%@",NSStringFromCGPoint(newCenter));
+                }
+                
+            }
+            
+
+            
             NSArray* baseEvents = [LPResources eventsFromEncoding:base64Events];
             
             targetView = v;

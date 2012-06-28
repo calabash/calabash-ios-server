@@ -110,6 +110,10 @@
 		B1E3603B14D9F4B30087D8D9 /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; };
 		B1E3604714DA09D20087D8D9 /* LPBackgroundRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B1E3604514DA09D20087D8D9 /* LPBackgroundRoute.h */; };
 		B1E3604814DA09D20087D8D9 /* LPBackgroundRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3604614DA09D20087D8D9 /* LPBackgroundRoute.m */; };
+		F52166D8159C796000BB5EB9 /* LPWebQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = F52166D6159C796000BB5EB9 /* LPWebQuery.h */; };
+		F52166D9159C796000BB5EB9 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F52166D7159C796000BB5EB9 /* LPWebQuery.m */; };
+		F52166E9159C81DE00BB5EB9 /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; };
+		F52166EA159C827C00BB5EB9 /* LPVersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B153F55B15949F3D00867E12 /* LPVersionRoute.m */; };
 		F597D702158F23FE00BB1BFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F597D701158F23FE00BB1BFA /* UIKit.framework */; };
 		F597D703158F23FE00BB1BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		F597D705158F23FE00BB1BFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F597D704158F23FE00BB1BFA /* CoreGraphics.framework */; };
@@ -215,6 +219,8 @@
 		B121E79F14B6D9FB0034C6A9 /* calabash-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "calabash-Prefix.pch"; sourceTree = "<group>"; };
 		B12A04001511546F002FA032 /* LPInterpolateRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPInterpolateRoute.h; sourceTree = "<group>"; };
 		B12A04011511546F002FA032 /* LPInterpolateRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInterpolateRoute.m; sourceTree = "<group>"; };
+		B153F55A15949F3D00867E12 /* LPVersionRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPVersionRoute.h; sourceTree = "<group>"; };
+		B153F55B15949F3D00867E12 /* LPVersionRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPVersionRoute.m; sourceTree = "<group>"; };
 		B160E8ED15321D8F00F69E7A /* LPBackdoorRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPBackdoorRoute.h; sourceTree = "<group>"; };
 		B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPBackdoorRoute.m; sourceTree = "<group>"; };
 		B16C307D15191A8C00DAA3FA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -281,8 +287,8 @@
 		B184FE0814B6DB2B002A744C /* UIScriptASTWith.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = UIScriptASTWith.m; sourceTree = "<group>"; };
 		B184FE0914B6DB2B002A744C /* UIScriptParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = UIScriptParser.h; sourceTree = "<group>"; };
 		B184FE0A14B6DB2B002A744C /* UIScriptParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = UIScriptParser.m; sourceTree = "<group>"; };
-		B184FE0C14B6DB2B002A744C /* LPJSONUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LPJSONUtils.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPJSONUtils.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		B184FE0C14B6DB2B002A744C /* LPJSONUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LPJSONUtils.h; sourceTree = "<group>"; };
+		B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPJSONUtils.m; sourceTree = "<group>"; };
 		B184FE0E14B6DB2B002A744C /* LPTouchUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPTouchUtils.h; sourceTree = "<group>"; };
 		B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPTouchUtils.m; sourceTree = "<group>"; };
 		B184FE8714B6DBAC002A744C /* LPRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPRecorder.m; sourceTree = "<group>"; };
@@ -296,6 +302,8 @@
 		B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScriptASTPredicate.m; sourceTree = "<group>"; };
 		B1E3604514DA09D20087D8D9 /* LPBackgroundRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPBackgroundRoute.h; sourceTree = "<group>"; };
 		B1E3604614DA09D20087D8D9 /* LPBackgroundRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPBackgroundRoute.m; sourceTree = "<group>"; };
+		F52166D6159C796000BB5EB9 /* LPWebQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPWebQuery.h; sourceTree = "<group>"; };
+		F52166D7159C796000BB5EB9 /* LPWebQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPWebQuery.m; sourceTree = "<group>"; };
 		F597D6FF158F23FE00BB1BFA /* cornichon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cornichon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F597D701158F23FE00BB1BFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F597D704158F23FE00BB1BFA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -365,7 +373,9 @@
 				B121E79614B6D9FB0034C6A9 /* Frameworks */,
 				B121E79514B6D9FB0034C6A9 /* Products */,
 			);
+			indentWidth = 4;
 			sourceTree = "<group>";
+			tabWidth = 4;
 		};
 		B121E79514B6D9FB0034C6A9 /* Products */ = {
 			isa = PBXGroup;
@@ -410,6 +420,7 @@
 		B16C307C15191A8C00DAA3FA /* calabash-js */ = {
 			isa = PBXGroup;
 			children = (
+				F52166D5159C796000BB5EB9 /* CalabashJSLib */,
 				B16C307D15191A8C00DAA3FA /* .gitignore */,
 				B16C307E15191A8C00DAA3FA /* build */,
 				B16C308115191A8C00DAA3FA /* build.sh */,
@@ -564,6 +575,8 @@
 				B1E3604614DA09D20087D8D9 /* LPBackgroundRoute.m */,
 				B160E8ED15321D8F00F69E7A /* LPBackdoorRoute.h */,
 				B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */,
+				B153F55A15949F3D00867E12 /* LPVersionRoute.h */,
+				B153F55B15949F3D00867E12 /* LPVersionRoute.m */,
 			);
 			path = Routes;
 			sourceTree = "<group>";
@@ -631,6 +644,16 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		F52166D5159C796000BB5EB9 /* CalabashJSLib */ = {
+			isa = PBXGroup;
+			children = (
+				F52166D6159C796000BB5EB9 /* LPWebQuery.h */,
+				F52166D7159C796000BB5EB9 /* LPWebQuery.m */,
+			);
+			name = CalabashJSLib;
+			path = CalabashJS/CalabashJSLib;
+			sourceTree = "<group>";
+		};
 		F597D706158F23FE00BB1BFA /* cornichon */ = {
 			isa = PBXGroup;
 			children = (
@@ -675,6 +698,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F52166E9159C81DE00BB5EB9 /* LPVersionRoute.h in Headers */,
 				B184FD8A14B6DAE1002A744C /* CalabashServer.h in Headers */,
 				B184FD8D14B6DAFB002A744C /* LPCDataScanner.h in Headers */,
 				B184FE1214B6DB2B002A744C /* GCDAsyncSocket.h in Headers */,
@@ -729,6 +753,7 @@
 				B160E8EF15321D8F00F69E7A /* LPBackdoorRoute.h in Headers */,
 				F597D75C158F266600BB1BFA /* NSString+MD5Addition.h in Headers */,
 				F597D75F158F266600BB1BFA /* UIDevice+IdentifierAddition.h in Headers */,
+				F52166D8159C796000BB5EB9 /* LPWebQuery.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -905,6 +930,8 @@
 				B160E8F015321D8F00F69E7A /* LPBackdoorRoute.m in Sources */,
 				F597D75D158F266600BB1BFA /* NSString+MD5Addition.m in Sources */,
 				F597D760158F266600BB1BFA /* UIDevice+IdentifierAddition.m in Sources */,
+				F52166D9159C796000BB5EB9 /* LPWebQuery.m in Sources */,
+				F52166EA159C827C00BB5EB9 /* LPVersionRoute.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1061,6 +1088,10 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "calabash/calabash-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "calabash/calabash-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;

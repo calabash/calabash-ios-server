@@ -91,6 +91,7 @@
             if ([representedString isEqual:characterString]) {
                 keyToTap = key;
             }
+
             if ([representedString length]>0)
             {
                 

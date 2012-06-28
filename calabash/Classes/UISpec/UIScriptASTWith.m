@@ -7,6 +7,7 @@
 #import "UIScriptASTWith.h"
 #import "LPJSONUtils.h"
 #import "LPTouchUtils.h"
+#import "LPWebQuery.h"
 
 @implementation UIScriptASTWith
 @synthesize selectorName=_selectorName;
@@ -52,80 +53,32 @@
             return @"UIScriptLiteralTypeUnknown";
     }
 }
--(BOOL) resultsForWebView:(UIWebView *)webView query:(NSString *)jsString result:(NSMutableArray *)res
-{
-    NSLog(@"%@",jsString);
-    
-    NSString *output = [webView stringByEvaluatingJavaScriptFromString:jsString];
-    NSLog(@"OUT: %@",output);
-    NSArray *query = [LPJSONUtils performSelector:@selector(deserializeArray:) withObject:output]; 
-    
-    CGPoint webViewPoint = [webView convertPoint:webView.bounds.origin toView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
-    
-    BOOL anyResults = NO;
-    NSLog(@"%@", CFBridgingRelease(CGPointCreateDictionaryRepresentation(webViewPoint)));
-  for (NSDictionary *d in query) 
-  {
-        NSMutableDictionary *dres = [NSMutableDictionary dictionaryWithDictionary:d];
-        CGFloat left = [[dres valueForKeyPath:@"rect.left"] floatValue];
-        CGFloat top = [[dres valueForKeyPath:@"rect.top"] floatValue];
-        CGFloat width =  [[dres valueForKeyPath:@"rect.width"] floatValue];
-        CGFloat height =  [[dres valueForKeyPath:@"rect.height"] floatValue];
-        
-        
-        CGPoint center = CGPointMake(left+width/2.0, top+height/2.0);            
-        CGPoint screenCenter = CGPointMake(webViewPoint.x + center.x, webViewPoint.y + center.y);            
-        if (!CGPointEqualToPoint(CGPointZero, center) && [webView pointInside:center withEvent:nil])
-        {
-            anyResults = YES;
-            NSDictionary *centerDict = (__bridge_transfer NSDictionary*)CGPointCreateDictionaryRepresentation(screenCenter);
-            [dres setValue:centerDict forKey:@"center"];
-            [dres setValue:webView forKey:@"webView"];
-            [res addObject:dres];                
-        }
-    }
-    return anyResults;
-}
 
--(void) handleWebView:(UIWebView *)webView result: (NSMutableArray *) res {
+-(NSArray *)handleWebView:(UIWebView *)webView {
     if (self.valueType == UIScriptLiteralTypeString) {
-        NSString *jsString = LP_QUERY_JS;
+      LPWebQueryType type = LPWebQueryTypeCSS;
         if ([[self selectorName] isEqualToString:@"marked"]) 
         {
-            jsString = [NSString stringWithFormat:jsString, 
-                        [NSString stringWithFormat:@"//node()[contains(text(),\\\"%@\\\")]", self.objectValue], 
-                        @"xpath"];                           
+            type = LPWebQueryTypeFreeText;                           
         }
         else if ([[self selectorName] isEqualToString:@"xpath"])
         {
-            jsString = [NSString stringWithFormat:jsString, 
-                        self.objectValue, 
-                        @"xpath"];                        
+            type = LPWebQueryTypeXPATH;
         }
         else if ([[self selectorName] isEqualToString:@"css"])
         {
-            jsString = [NSString stringWithFormat:jsString, 
-                        self.objectValue, 
-                        @"css"];                        
+            type = LPWebQueryTypeCSS;
         }
-        BOOL found = [self resultsForWebView: webView query:jsString result:res];
-        if (!found)
-        {
-            jsString = [NSString stringWithFormat:LP_QUERY_JS,
-                            [NSString stringWithFormat:@"//text()[contains(.,\\\"%@\\\")]", self.objectValue],
-                            @"xpath"];
-            
-            [self resultsForWebView: webView query:jsString result:res];
-        }                
-        
+        return [LPWebQuery evaluateQuery:(NSString*)self.objectValue ofType:type inWebView:webView];                
     } else {
         NSLog(@"Attempting to look for non string in web view");
+        return [NSMutableArray array];
     }
 
 }
 
 
-- (NSMutableArray*) evalWith:(NSArray*) views direction:(UIScriptASTDirectionType) dir {
+- (NSMutableArray *)evalWith:(NSArray*) views direction:(UIScriptASTDirectionType) dir {
     NSMutableArray* res = [NSMutableArray arrayWithCapacity:8];
 
     for (UIView* v in views) {
@@ -142,8 +95,9 @@
         else
         {
             if (![LPTouchUtils isViewVisible:v]) { continue; }
-            if ([v isKindOfClass:[UIWebView class]]) {            
-                [self handleWebView:(UIWebView *)v result:res];
+            if ([v isKindOfClass:[UIWebView class]]) 
+            {            
+                [res addObjectsFromArray: [self handleWebView:(UIWebView *)v]];
                 continue;            
             }
             if ([self.selectorName isEqualToString:@"marked"]) 

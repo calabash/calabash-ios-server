@@ -21,7 +21,7 @@
         op = [[LPScrollToRowOperation alloc] initWithOperation:dictionary];
     } else if ([opName isEqualToString:@"scroll"]) {
         op = [[LPScrollOperation alloc] initWithOperation:dictionary];
-    } else if ([opName isEqualToString:@"touchDone"]) {
+    } else if ([opName isEqualToString:@"keyboard"]) {
         op = [[LPNativeKeyboardOperation alloc] initWithOperation:dictionary];
     } else if ([opName isEqualToString:@"query"]) {
         op = [[LPQueryOperation alloc] initWithOperation:dictionary];
@@ -113,7 +113,9 @@
 		}else {
 			returnValue = [[NSValue valueWithBytes:buffer objCType:returnType] copy];
 		}
-		free(buffer);//memory leak here, but apparently NSValue doesn't copy the passed buffer, it just stores the pointer
+        //memory leak here, but apparently NSValue doesn't copy the passed buffer, it just stores the pointer
+        // @Karl <== jjm: is this still leaking?
+		free(buffer);
 	}
 	return returnValue;	
 }
