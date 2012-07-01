@@ -114,6 +114,58 @@
 		B1E3603B14D9F4B30087D8D9 /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; };
 		B1E3604714DA09D20087D8D9 /* LPBackgroundRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B1E3604514DA09D20087D8D9 /* LPBackgroundRoute.h */; };
 		B1E3604814DA09D20087D8D9 /* LPBackgroundRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3604614DA09D20087D8D9 /* LPBackgroundRoute.m */; };
+		F53D790215A0651F005B0D0B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F53D790115A0651F005B0D0B /* UIKit.framework */; };
+		F53D790315A0651F005B0D0B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
+		F53D790515A0651F005B0D0B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F53D790415A0651F005B0D0B /* CoreGraphics.framework */; };
+		F53D790B15A0651F005B0D0B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F53D790915A0651F005B0D0B /* InfoPlist.strings */; };
+		F53D790D15A0651F005B0D0B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F53D790C15A0651F005B0D0B /* main.m */; };
+		F53D791115A0651F005B0D0B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F53D791015A0651F005B0D0B /* AppDelegate.m */; };
+		F53D791415A0651F005B0D0B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F53D791315A0651F005B0D0B /* ViewController.m */; };
+		F53D791715A0651F005B0D0B /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F53D791515A0651F005B0D0B /* ViewController.xib */; };
+		F53D791B15A06FB1005B0D0B /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; };
+		F53D791C15A06FBF005B0D0B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; };
+		F53D791D15A06FC7005B0D0B /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; };
+		F53D791E15A06FC7005B0D0B /* LPHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B514E6565500663205 /* LPHTTPConnection.m */; };
+		F53D791F15A06FC7005B0D0B /* LPHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B814E6565500663205 /* LPHTTPMessage.m */; };
+		F53D792015A06FC7005B0D0B /* LPHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9BB14E6565500663205 /* LPHTTPServer.m */; };
+		F53D792115A06FD8005B0D0B /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98414E5215800663205 /* DDData.m */; };
+		F53D792215A06FD8005B0D0B /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* DDNumber.m */; };
+		F53D792315A06FD8005B0D0B /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98814E5215800663205 /* DDRange.m */; };
+		F53D792915A06FE6005B0D0B /* LPHTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C99F14E6564200663205 /* LPHTTPAsyncFileResponse.m */; };
+		F53D792A15A06FE6005B0D0B /* LPHTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A114E6564200663205 /* LPHTTPDataResponse.m */; };
+		F53D792B15A06FE6005B0D0B /* LPHTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A314E6564200663205 /* LPHTTPDynamicFileResponse.m */; };
+		F53D792C15A06FE6005B0D0B /* LPHTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A514E6564200663205 /* LPHTTPFileResponse.m */; };
+		F53D792D15A06FE6005B0D0B /* LPHTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A714E6564200663205 /* LPHTTPRedirectResponse.m */; };
+		F53D792E15A07001005B0D0B /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; };
+		F53D792F15A07004005B0D0B /* LPRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8714B6DBAC002A744C /* LPRecorder.m */; };
+		F56BE9C615A0706C00A687A6 /* LPInterpolateRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A04011511546F002FA032 /* LPInterpolateRoute.m */; };
+		F56BE9C715A0706C00A687A6 /* LPPlaybackRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8A14B6DC7F002A744C /* LPPlaybackRoute.m */; };
+		F56BE9C815A0706C00A687A6 /* LPRecordRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8B14B6DC7F002A744C /* LPRecordRoute.m */; };
+		F56BE9C915A0706C00A687A6 /* LPNoContentResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD414B6DB2B002A744C /* LPNoContentResponse.m */; };
+		F56BE9CA15A0706C00A687A6 /* LPScreenshotRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9014B6DD33002A744C /* LPScreenshotRoute.m */; };
+		F56BE9CB15A0706C00A687A6 /* LPAsyncPlaybackRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B111321614D5837900982BBC /* LPAsyncPlaybackRoute.m */; };
+		F56BE9CC15A0706C00A687A6 /* LPBackgroundRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3604614DA09D20087D8D9 /* LPBackgroundRoute.m */; };
+		F56BE9CD15A0706C00A687A6 /* LPBackdoorRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */; };
+		F56BE9CE15A0706C00A687A6 /* LPVersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B153F55B15949F3D00867E12 /* LPVersionRoute.m */; };
+		F56BE9D015A0707400A687A6 /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDDF14B6DB2B002A744C /* CDataScanner_Extensions.m */; };
+		F56BE9D115A0707400A687A6 /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; };
+		F56BE9D215A0707400A687A6 /* LPCJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE314B6DB2B002A744C /* LPCJSONScanner.m */; };
+		F56BE9D315A0707400A687A6 /* LPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE514B6DB2B002A744C /* LPCJSONSerializer.m */; };
+		F56BE9D415A0707A00A687A6 /* LPResources.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDF714B6DB2B002A744C /* LPResources.m */; };
+		F56BE9D515A0708C00A687A6 /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; };
+		F56BE9D615A0708C00A687A6 /* UIScriptAST.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFA14B6DB2B002A744C /* UIScriptAST.m */; };
+		F56BE9D715A0708C00A687A6 /* UIScriptASTALL.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFC14B6DB2B002A744C /* UIScriptASTALL.m */; };
+		F56BE9D815A0708C00A687A6 /* UIScriptASTClassName.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFE14B6DB2B002A744C /* UIScriptASTClassName.m */; };
+		F56BE9D915A0708C00A687A6 /* UIScriptASTDirection.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0014B6DB2B002A744C /* UIScriptASTDirection.m */; };
+		F56BE9DA15A0708C00A687A6 /* UIScriptASTFirst.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0214B6DB2B002A744C /* UIScriptASTFirst.m */; };
+		F56BE9DB15A0708C00A687A6 /* UIScriptASTIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0414B6DB2B002A744C /* UIScriptASTIndex.m */; };
+		F56BE9DC15A0708C00A687A6 /* UIScriptASTLast.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0614B6DB2B002A744C /* UIScriptASTLast.m */; };
+		F56BE9DD15A0708C00A687A6 /* UIScriptASTWith.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0814B6DB2B002A744C /* UIScriptASTWith.m */; };
+		F56BE9DE15A0708C00A687A6 /* UIScriptParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0A14B6DB2B002A744C /* UIScriptParser.m */; };
+		F56BE9DF15A0709500A687A6 /* LPJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */; };
+		F56BE9E015A0709500A687A6 /* LPTouchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */; };
+		F56BE9E115A0709B00A687A6 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8C14B6DAFB002A744C /* LPCDataScanner.m */; };
+		F56BE9E215A0709B00A687A6 /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -237,6 +289,18 @@
 		B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScriptASTPredicate.m; sourceTree = "<group>"; };
 		B1E3604514DA09D20087D8D9 /* LPBackgroundRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPBackgroundRoute.h; sourceTree = "<group>"; };
 		B1E3604614DA09D20087D8D9 /* LPBackgroundRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPBackgroundRoute.m; sourceTree = "<group>"; };
+		F53D78FF15A0651F005B0D0B /* calabash_arc_target.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calabash_arc_target.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F53D790115A0651F005B0D0B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		F53D790415A0651F005B0D0B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		F53D790815A0651F005B0D0B /* calabash_arc_target-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "calabash_arc_target-Info.plist"; sourceTree = "<group>"; };
+		F53D790A15A0651F005B0D0B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		F53D790C15A0651F005B0D0B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F53D790E15A0651F005B0D0B /* calabash_arc_target-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "calabash_arc_target-Prefix.pch"; sourceTree = "<group>"; };
+		F53D790F15A0651F005B0D0B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F53D791015A0651F005B0D0B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F53D791215A0651F005B0D0B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		F53D791315A0651F005B0D0B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		F53D791615A0651F005B0D0B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +309,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				B121E79814B6D9FB0034C6A9 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F53D78FC15A0651F005B0D0B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F53D790215A0651F005B0D0B /* UIKit.framework in Frameworks */,
+				F53D790315A0651F005B0D0B /* Foundation.framework in Frameworks */,
+				F53D790515A0651F005B0D0B /* CoreGraphics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +344,7 @@
 			children = (
 				B16C307C15191A8C00DAA3FA /* calabash-js */,
 				B121E79914B6D9FB0034C6A9 /* calabash */,
+				F53D790615A0651F005B0D0B /* calabash_arc_target */,
 				B121E79614B6D9FB0034C6A9 /* Frameworks */,
 				B121E79514B6D9FB0034C6A9 /* Products */,
 			);
@@ -279,6 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				B121E79414B6D9FB0034C6A9 /* calabash.framework */,
+				F53D78FF15A0651F005B0D0B /* calabash_arc_target.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -287,6 +363,8 @@
 			isa = PBXGroup;
 			children = (
 				B121E79714B6D9FB0034C6A9 /* Foundation.framework */,
+				F53D790115A0651F005B0D0B /* UIKit.framework */,
+				F53D790415A0651F005B0D0B /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -554,6 +632,30 @@
 			path = CalabashJSLib;
 			sourceTree = "<group>";
 		};
+		F53D790615A0651F005B0D0B /* calabash_arc_target */ = {
+			isa = PBXGroup;
+			children = (
+				F53D790F15A0651F005B0D0B /* AppDelegate.h */,
+				F53D791015A0651F005B0D0B /* AppDelegate.m */,
+				F53D791215A0651F005B0D0B /* ViewController.h */,
+				F53D791315A0651F005B0D0B /* ViewController.m */,
+				F53D791515A0651F005B0D0B /* ViewController.xib */,
+				F53D790715A0651F005B0D0B /* Supporting Files */,
+			);
+			path = calabash_arc_target;
+			sourceTree = "<group>";
+		};
+		F53D790715A0651F005B0D0B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F53D790815A0651F005B0D0B /* calabash_arc_target-Info.plist */,
+				F53D790915A0651F005B0D0B /* InfoPlist.strings */,
+				F53D790C15A0651F005B0D0B /* main.m */,
+				F53D790E15A0651F005B0D0B /* calabash_arc_target-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -641,6 +743,23 @@
 			productReference = B121E79414B6D9FB0034C6A9 /* calabash.framework */;
 			productType = "com.apple.product-type.framework.static";
 		};
+		F53D78FE15A0651F005B0D0B /* calabash_arc_target */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F53D791815A0651F005B0D0B /* Build configuration list for PBXNativeTarget "calabash_arc_target" */;
+			buildPhases = (
+				F53D78FB15A0651F005B0D0B /* Sources */,
+				F53D78FC15A0651F005B0D0B /* Frameworks */,
+				F53D78FD15A0651F005B0D0B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = calabash_arc_target;
+			productName = calabash_arc_target;
+			productReference = F53D78FF15A0651F005B0D0B /* calabash_arc_target.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -663,6 +782,7 @@
 			projectRoot = "";
 			targets = (
 				B121E79314B6D9FB0034C6A9 /* calabash */,
+				F53D78FE15A0651F005B0D0B /* calabash_arc_target */,
 			);
 		};
 /* End PBXProject section */
@@ -673,6 +793,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				B121E79E14B6D9FB0034C6A9 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F53D78FD15A0651F005B0D0B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F53D790B15A0651F005B0D0B /* InfoPlist.strings in Resources */,
+				F53D791715A0651F005B0D0B /* ViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -766,6 +895,60 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F53D78FB15A0651F005B0D0B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F53D790D15A0651F005B0D0B /* main.m in Sources */,
+				F53D791115A0651F005B0D0B /* AppDelegate.m in Sources */,
+				F53D791415A0651F005B0D0B /* ViewController.m in Sources */,
+				F53D791B15A06FB1005B0D0B /* LPWebQuery.m in Sources */,
+				F53D791C15A06FBF005B0D0B /* GCDAsyncSocket.m in Sources */,
+				F53D791D15A06FC7005B0D0B /* LPHTTPAuthenticationRequest.m in Sources */,
+				F53D791E15A06FC7005B0D0B /* LPHTTPConnection.m in Sources */,
+				F53D791F15A06FC7005B0D0B /* LPHTTPMessage.m in Sources */,
+				F53D792015A06FC7005B0D0B /* LPHTTPServer.m in Sources */,
+				F53D792115A06FD8005B0D0B /* DDData.m in Sources */,
+				F53D792215A06FD8005B0D0B /* DDNumber.m in Sources */,
+				F53D792315A06FD8005B0D0B /* DDRange.m in Sources */,
+				F53D792915A06FE6005B0D0B /* LPHTTPAsyncFileResponse.m in Sources */,
+				F53D792A15A06FE6005B0D0B /* LPHTTPDataResponse.m in Sources */,
+				F53D792B15A06FE6005B0D0B /* LPHTTPDynamicFileResponse.m in Sources */,
+				F53D792C15A06FE6005B0D0B /* LPHTTPFileResponse.m in Sources */,
+				F53D792D15A06FE6005B0D0B /* LPHTTPRedirectResponse.m in Sources */,
+				F53D792E15A07001005B0D0B /* LPRouter.m in Sources */,
+				F53D792F15A07004005B0D0B /* LPRecorder.m in Sources */,
+				F56BE9C615A0706C00A687A6 /* LPInterpolateRoute.m in Sources */,
+				F56BE9C715A0706C00A687A6 /* LPPlaybackRoute.m in Sources */,
+				F56BE9C815A0706C00A687A6 /* LPRecordRoute.m in Sources */,
+				F56BE9C915A0706C00A687A6 /* LPNoContentResponse.m in Sources */,
+				F56BE9CA15A0706C00A687A6 /* LPScreenshotRoute.m in Sources */,
+				F56BE9CB15A0706C00A687A6 /* LPAsyncPlaybackRoute.m in Sources */,
+				F56BE9CC15A0706C00A687A6 /* LPBackgroundRoute.m in Sources */,
+				F56BE9CD15A0706C00A687A6 /* LPBackdoorRoute.m in Sources */,
+				F56BE9CE15A0706C00A687A6 /* LPVersionRoute.m in Sources */,
+				F56BE9D015A0707400A687A6 /* CDataScanner_Extensions.m in Sources */,
+				F56BE9D115A0707400A687A6 /* LPCJSONDeserializer.m in Sources */,
+				F56BE9D215A0707400A687A6 /* LPCJSONScanner.m in Sources */,
+				F56BE9D315A0707400A687A6 /* LPCJSONSerializer.m in Sources */,
+				F56BE9D415A0707A00A687A6 /* LPResources.m in Sources */,
+				F56BE9D515A0708C00A687A6 /* UIScriptASTPredicate.m in Sources */,
+				F56BE9D615A0708C00A687A6 /* UIScriptAST.m in Sources */,
+				F56BE9D715A0708C00A687A6 /* UIScriptASTALL.m in Sources */,
+				F56BE9D815A0708C00A687A6 /* UIScriptASTClassName.m in Sources */,
+				F56BE9D915A0708C00A687A6 /* UIScriptASTDirection.m in Sources */,
+				F56BE9DA15A0708C00A687A6 /* UIScriptASTFirst.m in Sources */,
+				F56BE9DB15A0708C00A687A6 /* UIScriptASTIndex.m in Sources */,
+				F56BE9DC15A0708C00A687A6 /* UIScriptASTLast.m in Sources */,
+				F56BE9DD15A0708C00A687A6 /* UIScriptASTWith.m in Sources */,
+				F56BE9DE15A0708C00A687A6 /* UIScriptParser.m in Sources */,
+				F56BE9DF15A0709500A687A6 /* LPJSONUtils.m in Sources */,
+				F56BE9E015A0709500A687A6 /* LPTouchUtils.m in Sources */,
+				F56BE9E115A0709B00A687A6 /* LPCDataScanner.m in Sources */,
+				F56BE9E215A0709B00A687A6 /* CalabashServer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -775,6 +958,22 @@
 				B121E79D14B6D9FB0034C6A9 /* en */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F53D790915A0651F005B0D0B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F53D790A15A0651F005B0D0B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		F53D791515A0651F005B0D0B /* ViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F53D791615A0651F005B0D0B /* en */,
+			);
+			name = ViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -827,6 +1026,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
@@ -837,6 +1037,9 @@
 					"$(inherited)",
 				);
 				GCC_THUMB_SUPPORT = NO;
+				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
+				GCC_WARN_UNDECLARED_SELECTOR = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				INFOPLIST_FILE = "calabash/calabash-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -852,17 +1055,58 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = NO;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "calabash/calabash-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
+				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
+				GCC_WARN_UNDECLARED_SELECTOR = NO;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				INFOPLIST_FILE = "calabash/calabash-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
+		F53D791915A0651F005B0D0B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD_32_BIT)",
+					armv6,
+				);
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "calabash_arc_target/calabash_arc_target-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "calabash_arc_target/calabash_arc_target-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		F53D791A15A0651F005B0D0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					"$(ARCHS_STANDARD_32_BIT)",
+					armv6,
+				);
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "calabash_arc_target/calabash_arc_target-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "calabash_arc_target/calabash_arc_target-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
@@ -883,6 +1127,15 @@
 			buildConfigurations = (
 				B121E7A314B6D9FB0034C6A9 /* Debug */,
 				B121E7A414B6D9FB0034C6A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F53D791815A0651F005B0D0B /* Build configuration list for PBXNativeTarget "calabash_arc_target" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F53D791915A0651F005B0D0B /* Debug */,
+				F53D791A15A0651F005B0D0B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
