@@ -166,6 +166,17 @@
 		F56BE9E015A0709500A687A6 /* LPTouchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */; };
 		F56BE9E115A0709B00A687A6 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8C14B6DAFB002A744C /* LPCDataScanner.m */; };
 		F56BE9E215A0709B00A687A6 /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
+		F56BE9E615A072FC00A687A6 /* NSString+Calabash.h in Headers */ = {isa = PBXBuildFile; fileRef = F56BE9E415A072FC00A687A6 /* NSString+Calabash.h */; };
+		F56BE9E715A072FC00A687A6 /* NSString+Calabash.m in Sources */ = {isa = PBXBuildFile; fileRef = F56BE9E515A072FC00A687A6 /* NSString+Calabash.m */; };
+		F56BE9E815A072FC00A687A6 /* NSString+Calabash.m in Sources */ = {isa = PBXBuildFile; fileRef = F56BE9E515A072FC00A687A6 /* NSString+Calabash.m */; };
+		F56BE9EA15A0741E00A687A6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F56BE9E915A0741E00A687A6 /* CFNetwork.framework */; };
+		F56BE9EB15A0744500A687A6 /* LPMapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD214B6DB2B002A744C /* LPMapRoute.m */; };
+		F56BE9EC15A0745B00A687A6 /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; };
+		F56BE9ED15A0747900A687A6 /* LPQueryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC514B6DB2B002A744C /* LPQueryOperation.m */; };
+		F56BE9EE15A0747900A687A6 /* LPScrollOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC714B6DB2B002A744C /* LPScrollOperation.m */; };
+		F56BE9EF15A0747900A687A6 /* LPScrollToRowOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */; };
+		F56BE9F015A0747900A687A6 /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; };
+		F56BE9F115A0747900A687A6 /* LPNativeKeyboardOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCD14B6DB2B002A744C /* LPNativeKeyboardOperation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -301,6 +312,9 @@
 		F53D791215A0651F005B0D0B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		F53D791315A0651F005B0D0B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		F53D791615A0651F005B0D0B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		F56BE9E415A072FC00A687A6 /* NSString+Calabash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Calabash.h"; sourceTree = "<group>"; };
+		F56BE9E515A072FC00A687A6 /* NSString+Calabash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Calabash.m"; sourceTree = "<group>"; };
+		F56BE9E915A0741E00A687A6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,6 +330,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F56BE9EA15A0741E00A687A6 /* CFNetwork.framework in Frameworks */,
 				F53D790215A0651F005B0D0B /* UIKit.framework in Frameworks */,
 				F53D790315A0651F005B0D0B /* Foundation.framework in Frameworks */,
 				F53D790515A0651F005B0D0B /* CoreGraphics.framework in Frameworks */,
@@ -342,6 +357,7 @@
 		B121E78614B6D9FB0034C6A9 = {
 			isa = PBXGroup;
 			children = (
+				F56BE9E915A0741E00A687A6 /* CFNetwork.framework */,
 				B16C307C15191A8C00DAA3FA /* calabash-js */,
 				B121E79914B6D9FB0034C6A9 /* calabash */,
 				F53D790615A0651F005B0D0B /* calabash_arc_target */,
@@ -431,6 +447,7 @@
 		B184FD8514B6DACA002A744C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F56BE9E315A072FC00A687A6 /* Categories */,
 				B184FD8F14B6DB2B002A744C /* CocoaAsyncSocket */,
 				B184FD9214B6DB2B002A744C /* CocoaHttpServer */,
 				B184FDBC14B6DB2B002A744C /* FranklyServer */,
@@ -656,6 +673,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F56BE9E315A072FC00A687A6 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				F56BE9E415A072FC00A687A6 /* NSString+Calabash.h */,
+				F56BE9E515A072FC00A687A6 /* NSString+Calabash.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -717,6 +743,7 @@
 				B160E8EF15321D8F00F69E7A /* LPBackdoorRoute.h in Headers */,
 				B153F55C15949F3E00867E12 /* LPVersionRoute.h in Headers */,
 				B1914DDC159C228500CB928D /* LPWebQuery.h in Headers */,
+				F56BE9E615A072FC00A687A6 /* NSString+Calabash.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -892,6 +919,7 @@
 				B160E8F015321D8F00F69E7A /* LPBackdoorRoute.m in Sources */,
 				B153F55D15949F3E00867E12 /* LPVersionRoute.m in Sources */,
 				B1914DDD159C228500CB928D /* LPWebQuery.m in Sources */,
+				F56BE9E715A072FC00A687A6 /* NSString+Calabash.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -946,6 +974,14 @@
 				F56BE9E015A0709500A687A6 /* LPTouchUtils.m in Sources */,
 				F56BE9E115A0709B00A687A6 /* LPCDataScanner.m in Sources */,
 				F56BE9E215A0709B00A687A6 /* CalabashServer.m in Sources */,
+				F56BE9E815A072FC00A687A6 /* NSString+Calabash.m in Sources */,
+				F56BE9EB15A0744500A687A6 /* LPMapRoute.m in Sources */,
+				F56BE9EC15A0745B00A687A6 /* LPOperation.m in Sources */,
+				F56BE9ED15A0747900A687A6 /* LPQueryOperation.m in Sources */,
+				F56BE9EE15A0747900A687A6 /* LPScrollOperation.m in Sources */,
+				F56BE9EF15A0747900A687A6 /* LPScrollToRowOperation.m in Sources */,
+				F56BE9F015A0747900A687A6 /* LPSetTextOperation.m in Sources */,
+				F56BE9F115A0747900A687A6 /* LPNativeKeyboardOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
