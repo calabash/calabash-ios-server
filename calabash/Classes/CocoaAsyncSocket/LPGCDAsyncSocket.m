@@ -95,18 +95,18 @@ static const int logLevel = LOG_LEVEL_VERBOSE;
 
 // Logging Disabled
 
-#define LogError(frmt, ...)     {}
-#define LogWarn(frmt, ...)      {}
-#define LogInfo(frmt, ...)      {}
-#define LogVerbose(frmt, ...)   {}
+#define LPLogError(frmt, ...)     {}
+#define LPLogWarn(frmt, ...)      {}
+#define LPLogInfo(frmt, ...)      {}
+#define LPLogVerbose(frmt, ...)   {}
 
-#define LogCError(frmt, ...)    {}
-#define LogCWarn(frmt, ...)     {}
-#define LogCInfo(frmt, ...)     {}
-#define LogCVerbose(frmt, ...)  {}
+#define LPLogCError(frmt, ...)    {}
+#define LPLogCWarn(frmt, ...)     {}
+#define LPLogCInfo(frmt, ...)     {}
+#define LPLogCVerbose(frmt, ...)  {}
 
-#define LogTrace()              {}
-#define LogCTrace(frmt, ...)    {}
+#define LPLogTrace()              {}
+#define LPLogCTrace(frmt, ...)    {}
 
 #endif
 
@@ -1040,7 +1040,7 @@ enum LPGCDAsyncSocketConfig
 
 - (void)dealloc
 {
-	LogInfo(@"%@ - %@ (start)", THIS_METHOD, self);
+	LPLogInfo(@"%@ - %@ (start)", THIS_METHOD, self);
 	
 	if (dispatch_get_current_queue() == socketQueue)
 	{
@@ -1065,7 +1065,7 @@ enum LPGCDAsyncSocketConfig
 	#endif
 	socketQueue = NULL;
 	
-	LogInfo(@"%@ - %@ (finish)", THIS_METHOD, self);
+	LPLogInfo(@"%@ - %@ (finish)", THIS_METHOD, self);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1421,7 +1421,7 @@ enum LPGCDAsyncSocketConfig
 
 - (BOOL)acceptOnInterface:(NSString *)inInterface port:(uint16_t)port error:(NSError **)errPtr
 {
-	LogTrace();
+	LPLogTrace();
 	
 	// Just in-case interface parameter is immutable.
 	NSString *interface = [inInterface copy];
@@ -1454,7 +1454,7 @@ enum LPGCDAsyncSocketConfig
 			NSString *reason = @"Error enabling non-blocking IO on socket (fcntl)";
 			err = [self errnoErrorWithReason:reason];
 			
-			LogVerbose(@"close(socketFD)");
+			LPLogVerbose(@"close(socketFD)");
 			close(socketFD);
 			return SOCKET_NULL;
 		}
@@ -1466,7 +1466,7 @@ enum LPGCDAsyncSocketConfig
 			NSString *reason = @"Error enabling address reuse (setsockopt)";
 			err = [self errnoErrorWithReason:reason];
 			
-			LogVerbose(@"close(socketFD)");
+			LPLogVerbose(@"close(socketFD)");
 			close(socketFD);
 			return SOCKET_NULL;
 		}
@@ -1479,7 +1479,7 @@ enum LPGCDAsyncSocketConfig
 			NSString *reason = @"Error in bind() function";
 			err = [self errnoErrorWithReason:reason];
 			
-			LogVerbose(@"close(socketFD)");
+			LPLogVerbose(@"close(socketFD)");
 			close(socketFD);
 			return SOCKET_NULL;
 		}
@@ -1492,7 +1492,7 @@ enum LPGCDAsyncSocketConfig
 			NSString *reason = @"Error in listen() function";
 			err = [self errnoErrorWithReason:reason];
 			
-			LogVerbose(@"close(socketFD)");
+			LPLogVerbose(@"close(socketFD)");
 			close(socketFD);
 			return SOCKET_NULL;
 		}
@@ -1581,7 +1581,7 @@ enum LPGCDAsyncSocketConfig
 		
 		if (enableIPv4)
 		{
-			LogVerbose(@"Creating IPv4 socket");
+			LPLogVerbose(@"Creating IPv4 socket");
 			socket4FD = createSocket(AF_INET, interface4);
 			
 			if (socket4FD == SOCKET_NULL)
@@ -1592,7 +1592,7 @@ enum LPGCDAsyncSocketConfig
 		
 		if (enableIPv6)
 		{
-			LogVerbose(@"Creating IPv6 socket");
+			LPLogVerbose(@"Creating IPv6 socket");
 			
 			if (enableIPv4 && (port == 0))
 			{
@@ -1609,7 +1609,7 @@ enum LPGCDAsyncSocketConfig
 			{
 				if (socket4FD != SOCKET_NULL)
 				{
-					LogVerbose(@"close(socket4FD)");
+					LPLogVerbose(@"close(socket4FD)");
 					close(socket4FD);
 				}
 				
@@ -1628,12 +1628,12 @@ enum LPGCDAsyncSocketConfig
 			
 			dispatch_source_set_event_handler(accept4Source, ^{ @autoreleasepool {
 				
-				LogVerbose(@"event4Block");
+				LPLogVerbose(@"event4Block");
 				
 				unsigned long i = 0;
 				unsigned long numPendingConnections = dispatch_source_get_data(acceptSource);
 				
-				LogVerbose(@"numPendingConnections: %lu", numPendingConnections);
+				LPLogVerbose(@"numPendingConnections: %lu", numPendingConnections);
 				
 				while ([self doAccept:socketFD] && (++i < numPendingConnections));
 			}});
@@ -1641,15 +1641,15 @@ enum LPGCDAsyncSocketConfig
 			dispatch_source_set_cancel_handler(accept4Source, ^{
 				
 				#if NEEDS_DISPATCH_RETAIN_RELEASE
-				LogVerbose(@"dispatch_release(accept4Source)");
+				LPLogVerbose(@"dispatch_release(accept4Source)");
 				dispatch_release(acceptSource);
 				#endif
 				
-				LogVerbose(@"close(socket4FD)");
+				LPLogVerbose(@"close(socket4FD)");
 				close(socketFD);
 			});
 			
-			LogVerbose(@"dispatch_resume(accept4Source)");
+			LPLogVerbose(@"dispatch_resume(accept4Source)");
 			dispatch_resume(accept4Source);
 		}
 		
@@ -1662,12 +1662,12 @@ enum LPGCDAsyncSocketConfig
 			
 			dispatch_source_set_event_handler(accept6Source, ^{ @autoreleasepool {
 				
-				LogVerbose(@"event6Block");
+				LPLogVerbose(@"event6Block");
 				
 				unsigned long i = 0;
 				unsigned long numPendingConnections = dispatch_source_get_data(acceptSource);
 				
-				LogVerbose(@"numPendingConnections: %lu", numPendingConnections);
+				LPLogVerbose(@"numPendingConnections: %lu", numPendingConnections);
 				
 				while ([self doAccept:socketFD] && (++i < numPendingConnections));
 			}});
@@ -1675,15 +1675,15 @@ enum LPGCDAsyncSocketConfig
 			dispatch_source_set_cancel_handler(accept6Source, ^{
 				
 				#if NEEDS_DISPATCH_RETAIN_RELEASE
-				LogVerbose(@"dispatch_release(accept6Source)");
+				LPLogVerbose(@"dispatch_release(accept6Source)");
 				dispatch_release(acceptSource);
 				#endif
 				
-				LogVerbose(@"close(socket6FD)");
+				LPLogVerbose(@"close(socket6FD)");
 				close(socketFD);
 			});
 			
-			LogVerbose(@"dispatch_resume(accept6Source)");
+			LPLogVerbose(@"dispatch_resume(accept6Source)");
 			dispatch_resume(accept6Source);
 		}
 		
@@ -1699,7 +1699,7 @@ enum LPGCDAsyncSocketConfig
 	
 	if (result == NO)
 	{
-		LogInfo(@"Error in accept: %@", err);
+		LPLogInfo(@"Error in accept: %@", err);
 		
 		if (errPtr)
 			*errPtr = err;
@@ -1710,7 +1710,7 @@ enum LPGCDAsyncSocketConfig
 
 - (BOOL)doAccept:(int)parentSocketFD
 {
-	LogTrace();
+	LPLogTrace();
 	
 	BOOL isIPv4;
 	int childSocketFD;
@@ -1727,7 +1727,7 @@ enum LPGCDAsyncSocketConfig
 		
 		if (childSocketFD == -1)
 		{
-			LogWarn(@"Accept failed with error: %@", [self errnoError]);
+			LPLogWarn(@"Accept failed with error: %@", [self errnoError]);
 			return NO;
 		}
 		
@@ -1744,7 +1744,7 @@ enum LPGCDAsyncSocketConfig
 		
 		if (childSocketFD == -1)
 		{
-			LogWarn(@"Accept failed with error: %@", [self errnoError]);
+			LPLogWarn(@"Accept failed with error: %@", [self errnoError]);
 			return NO;
 		}
 		
@@ -1756,7 +1756,7 @@ enum LPGCDAsyncSocketConfig
 	int result = fcntl(childSocketFD, F_SETFL, O_NONBLOCK);
 	if (result == -1)
 	{
-		LogWarn(@"Error enabling non-blocking IO on accepted socket (fcntl)");
+		LPLogWarn(@"Error enabling non-blocking IO on accepted socket (fcntl)");
 		return NO;
 	}
 	
@@ -1946,7 +1946,7 @@ enum LPGCDAsyncSocketConfig
           withTimeout:(NSTimeInterval)timeout
                 error:(NSError **)errPtr
 {
-	LogTrace();
+	LPLogTrace();
 	
 	// Just in case immutable objects were passed
 	NSString *host = [inHost copy];
@@ -1979,7 +1979,7 @@ enum LPGCDAsyncSocketConfig
 		
 		flags |= kSocketStarted;
 		
-		LogVerbose(@"Dispatching DNS lookup...");
+		LPLogVerbose(@"Dispatching DNS lookup...");
 		
 		// It's possible that the given host parameter is actually a NSMutableString.
 		// So we want to copy it now, within this block that will be executed synchronously.
@@ -2028,7 +2028,7 @@ enum LPGCDAsyncSocketConfig
              withTimeout:(NSTimeInterval)timeout
                    error:(NSError **)errPtr
 {
-	LogTrace();
+	LPLogTrace();
 	
 	// Just in case immutable objects were passed
 	NSData *remoteAddr = [inRemoteAddr copy];
@@ -2129,7 +2129,7 @@ enum LPGCDAsyncSocketConfig
 
 - (void)lookup:(int)aConnectIndex host:(NSString *)host port:(uint16_t)port
 {
-	LogTrace();
+	LPLogTrace();
 	
 	// This method is executed on a global concurrent queue.
 	// It posts the results back to the socket queue.
@@ -2224,14 +2224,14 @@ enum LPGCDAsyncSocketConfig
 
 - (void)lookup:(int)aConnectIndex didSucceedWithAddress4:(NSData *)address4 address6:(NSData *)address6
 {
-	LogTrace();
+	LPLogTrace();
 	
 	NSAssert(dispatch_get_current_queue() == socketQueue, @"Must be dispatched on socketQueue");
 	NSAssert(address4 || address6, @"Expected at least one valid address");
 	
 	if (aConnectIndex != connectIndex)
 	{
-		LogInfo(@"Ignoring lookupDidSucceed, already disconnected");
+		LPLogInfo(@"Ignoring lookupDidSucceed, already disconnected");
 		
 		// The connect operation has been cancelled.
 		// That is, socket was disconnected, or connection has already timed out.
@@ -2278,14 +2278,14 @@ enum LPGCDAsyncSocketConfig
 **/
 - (void)lookup:(int)aConnectIndex didFail:(NSError *)error
 {
-	LogTrace();
+	LPLogTrace();
 	
 	NSAssert(dispatch_get_current_queue() == socketQueue, @"Must be dispatched on socketQueue");
 	
 	
 	if (aConnectIndex != connectIndex)
 	{
-		LogInfo(@"Ignoring lookup:didFail: - already disconnected");
+		LPLogInfo(@"Ignoring lookup:didFail: - already disconnected");
 		
 		// The connect operation has been cancelled.
 		// That is, socket was disconnected, or connection has already timed out.
@@ -2298,12 +2298,12 @@ enum LPGCDAsyncSocketConfig
 
 - (BOOL)connectWithAddress4:(NSData *)address4 address6:(NSData *)address6 error:(NSError **)errPtr
 {
-	LogTrace();
+	LPLogTrace();
 	
 	NSAssert(dispatch_get_current_queue() == socketQueue, @"Must be dispatched on socketQueue");
 	
-	LogVerbose(@"IPv4: %@:%hu", [[self class] hostFromAddress:address4], [[self class] portFromAddress:address4]);
-	LogVerbose(@"IPv6: %@:%hu", [[self class] hostFromAddress:address6], [[self class] portFromAddress:address6]);
+	LPLogVerbose(@"IPv4: %@:%hu", [[self class] hostFromAddress:address4], [[self class] portFromAddress:address4]);
+	LPLogVerbose(@"IPv6: %@:%hu", [[self class] hostFromAddress:address6], [[self class] portFromAddress:address6]);
 	
 	// Determine socket type
 	
@@ -2319,7 +2319,7 @@ enum LPGCDAsyncSocketConfig
 	
 	if (useIPv6)
 	{
-		LogVerbose(@"Creating IPv6 socket");
+		LPLogVerbose(@"Creating IPv6 socket");
 		
 		socket6FD = socket(AF_INET6, SOCK_STREAM, 0);
 		
@@ -2329,7 +2329,7 @@ enum LPGCDAsyncSocketConfig
 	}
 	else
 	{
-		LogVerbose(@"Creating IPv4 socket");
+		LPLogVerbose(@"Creating IPv4 socket");
 		
 		socket4FD = socket(AF_INET, SOCK_STREAM, 0);
 		
@@ -2350,7 +2350,7 @@ enum LPGCDAsyncSocketConfig
 	
 	if (connectInterface)
 	{
-		LogVerbose(@"Binding socket...");
+		LPLogVerbose(@"Binding socket...");
 		
 		if ([[self class] portFromAddress:connectInterface] > 0)
 		{
@@ -2404,21 +2404,21 @@ enum LPGCDAsyncSocketConfig
 		}
 	});
 	
-	LogVerbose(@"Connecting...");
+	LPLogVerbose(@"Connecting...");
 	
 	return YES;
 }
 
 - (void)didConnect:(int)aConnectIndex
 {
-	LogTrace();
+	LPLogTrace();
 	
 	NSAssert(dispatch_get_current_queue() == socketQueue, @"Must be dispatched on socketQueue");
 	
 	
 	if (aConnectIndex != connectIndex)
 	{
-		LogInfo(@"Ignoring didConnect, already disconnected");
+		LPLogInfo(@"Ignoring didConnect, already disconnected");
 		
 		// The connect operation has been cancelled.
 		// That is, socket was disconnected, or connection has already timed out.
@@ -2538,14 +2538,14 @@ enum LPGCDAsyncSocketConfig
 
 - (void)didNotConnect:(int)aConnectIndex error:(NSError *)error
 {
-	LogTrace();
+	LPLogTrace();
 	
 	NSAssert(dispatch_get_current_queue() == socketQueue, @"Must be dispatched on socketQueue");
 	
 	
 	if (aConnectIndex != connectIndex)
 	{
-		LogInfo(@"Ignoring didNotConnect, already disconnected");
+		LPLogInfo(@"Ignoring didNotConnect, already disconnected");
 		
 		// The connect operation has been cancelled.
 		// That is, socket was disconnected, or connection has already timed out.
@@ -2569,7 +2569,7 @@ enum LPGCDAsyncSocketConfig
 		#if NEEDS_DISPATCH_RETAIN_RELEASE
 		dispatch_source_t theConnectTimer = connectTimer;
 		dispatch_source_set_cancel_handler(connectTimer, ^{
-			LogVerbose(@"dispatch_release(connectTimer)");
+			LPLogVerbose(@"dispatch_release(connectTimer)");
 			dispatch_release(theConnectTimer);
 		});
 		#endif
@@ -2583,7 +2583,7 @@ enum LPGCDAsyncSocketConfig
 
 - (void)endConnectTimeout
 {
-	LogTrace();
+	LPLogTrace();
 	
 	if (connectTimer)
 	{
@@ -2611,7 +2611,7 @@ enum LPGCDAsyncSocketConfig
 
 - (void)doConnectTimeout
 {
-	LogTrace();
+	LPLogTrace();
 	
 	[self endConnectTimeout];
 	[self closeWithError:[self connectTimeoutError]];
@@ -2623,7 +2623,7 @@ enum LPGCDAsyncSocketConfig
 
 - (void)closeWithError:(NSError *)error
 {
-	LogTrace();
+	LPLogTrace();
 	
 	NSAssert(dispatch_get_current_queue() == socketQueue, @"Must be dispatched on socketQueue");
 	
@@ -2691,18 +2691,18 @@ enum LPGCDAsyncSocketConfig
 	
 	if (!accept4Source && !accept6Source && !readSource && !writeSource)
 	{
-		LogVerbose(@"manually closing close");
+		LPLogVerbose(@"manually closing close");
 
 		if (socket4FD != SOCKET_NULL)
 		{
-			LogVerbose(@"close(socket4FD)");
+			LPLogVerbose(@"close(socket4FD)");
 			close(socket4FD);
 			socket4FD = SOCKET_NULL;
 		}
 
 		if (socket6FD != SOCKET_NULL)
 		{
-			LogVerbose(@"close(socket6FD)");
+			LPLogVerbose(@"close(socket6FD)");
 			close(socket6FD);
 			socket6FD = SOCKET_NULL;
 		}
@@ -2711,7 +2711,7 @@ enum LPGCDAsyncSocketConfig
 	{
 		if (accept4Source)
 		{
-			LogVerbose(@"dispatch_source_cancel(accept4Source)");
+			LPLogVerbose(@"dispatch_source_cancel(accept4Source)");
 			dispatch_source_cancel(accept4Source);
 			
 			// We never suspend accept4Source
@@ -2721,7 +2721,7 @@ enum LPGCDAsyncSocketConfig
 		
 		if (accept6Source)
 		{
-			LogVerbose(@"dispatch_source_cancel(accept6Source)");
+			LPLogVerbose(@"dispatch_source_cancel(accept6Source)");
 			dispatch_source_cancel(accept6Source);
 			
 			// We never suspend accept6Source
@@ -2731,7 +2731,7 @@ enum LPGCDAsyncSocketConfig
 	
 		if (readSource)
 		{
-			LogVerbose(@"dispatch_source_cancel(readSource)");
+			LPLogVerbose(@"dispatch_source_cancel(readSource)");
 			dispatch_source_cancel(readSource);
 			
 			[self resumeReadSource];
@@ -2741,7 +2741,7 @@ enum LPGCDAsyncSocketConfig
 		
 		if (writeSource)
 		{
-			LogVerbose(@"dispatch_source_cancel(writeSource)");
+			LPLogVerbose(@"dispatch_source_cancel(writeSource)");
 			dispatch_source_cancel(writeSource);
 			
 			[self resumeWriteSource];
@@ -3610,10 +3610,10 @@ enum LPGCDAsyncSocketConfig
 	
 	dispatch_source_set_event_handler(readSource, ^{ @autoreleasepool {
 		
-		LogVerbose(@"readEventBlock");
+		LPLogVerbose(@"readEventBlock");
 		
 		socketFDBytesAvailable = dispatch_source_get_data(readSource);
-		LogVerbose(@"socketFDBytesAvailable: %lu", socketFDBytesAvailable);
+		LPLogVerbose(@"socketFDBytesAvailable: %lu", socketFDBytesAvailable);
 		
 		if (socketFDBytesAvailable > 0)
 			[self doReadData];
@@ -3623,7 +3623,7 @@ enum LPGCDAsyncSocketConfig
 	
 	dispatch_source_set_event_handler(writeSource, ^{ @autoreleasepool {
 		
-		LogVerbose(@"writeEventBlock");
+		LPLogVerbose(@"writeEventBlock");
 		
 		flags |= kSocketCanAcceptBytes;
 		[self doWriteData];
@@ -3640,32 +3640,32 @@ enum LPGCDAsyncSocketConfig
 	
 	dispatch_source_set_cancel_handler(readSource, ^{
 		
-		LogVerbose(@"readCancelBlock");
+		LPLogVerbose(@"readCancelBlock");
 		
 		#if NEEDS_DISPATCH_RETAIN_RELEASE
-		LogVerbose(@"dispatch_release(readSource)");
+		LPLogVerbose(@"dispatch_release(readSource)");
 		dispatch_release(theReadSource);
 		#endif
 		
 		if (--socketFDRefCount == 0)
 		{
-			LogVerbose(@"close(socketFD)");
+			LPLogVerbose(@"close(socketFD)");
 			close(socketFD);
 		}
 	});
 	
 	dispatch_source_set_cancel_handler(writeSource, ^{
 		
-		LogVerbose(@"writeCancelBlock");
+		LPLogVerbose(@"writeCancelBlock");
 		
 		#if NEEDS_DISPATCH_RETAIN_RELEASE
-		LogVerbose(@"dispatch_release(writeSource)");
+		LPLogVerbose(@"dispatch_release(writeSource)");
 		dispatch_release(theWriteSource);
 		#endif
 		
 		if (--socketFDRefCount == 0)
 		{
-			LogVerbose(@"close(socketFD)");
+			LPLogVerbose(@"close(socketFD)");
 			close(socketFD);
 		}
 	});
@@ -3676,7 +3676,7 @@ enum LPGCDAsyncSocketConfig
 	socketFDBytesAvailable = 0;
 	flags &= ~kReadSourceSuspended;
 	
-	LogVerbose(@"dispatch_resume(readSource)");
+	LPLogVerbose(@"dispatch_resume(readSource)");
 	dispatch_resume(readSource);
 	
 	flags |= kSocketCanAcceptBytes;
@@ -3717,7 +3717,7 @@ enum LPGCDAsyncSocketConfig
 {
 	if (!(flags & kReadSourceSuspended))
 	{
-		LogVerbose(@"dispatch_suspend(readSource)");
+		LPLogVerbose(@"dispatch_suspend(readSource)");
 		
 		dispatch_suspend(readSource);
 		flags |= kReadSourceSuspended;
@@ -3728,7 +3728,7 @@ enum LPGCDAsyncSocketConfig
 {
 	if (flags & kReadSourceSuspended)
 	{
-		LogVerbose(@"dispatch_resume(readSource)");
+		LPLogVerbose(@"dispatch_resume(readSource)");
 		
 		dispatch_resume(readSource);
 		flags &= ~kReadSourceSuspended;
@@ -3739,7 +3739,7 @@ enum LPGCDAsyncSocketConfig
 {
 	if (!(flags & kWriteSourceSuspended))
 	{
-		LogVerbose(@"dispatch_suspend(writeSource)");
+		LPLogVerbose(@"dispatch_suspend(writeSource)");
 		
 		dispatch_suspend(writeSource);
 		flags |= kWriteSourceSuspended;
@@ -3750,7 +3750,7 @@ enum LPGCDAsyncSocketConfig
 {
 	if (flags & kWriteSourceSuspended)
 	{
-		LogVerbose(@"dispatch_resume(writeSource)");
+		LPLogVerbose(@"dispatch_resume(writeSource)");
 		
 		dispatch_resume(writeSource);
 		flags &= ~kWriteSourceSuspended;
@@ -3781,7 +3781,7 @@ enum LPGCDAsyncSocketConfig
                         tag:(long)tag
 {
 	if (offset > [buffer length]) {
-		LogWarn(@"Cannot read: offset > [buffer length]");
+		LPLogWarn(@"Cannot read: offset > [buffer length]");
 		return;
 	}
 	
@@ -3795,7 +3795,7 @@ enum LPGCDAsyncSocketConfig
 	
 	dispatch_async(socketQueue, ^{ @autoreleasepool {
 		
-		LogTrace();
+		LPLogTrace();
 		
 		if ((flags & kSocketStarted) && !(flags & kForbidReadsWrites))
 		{
@@ -3820,11 +3820,11 @@ enum LPGCDAsyncSocketConfig
                      tag:(long)tag
 {
 	if (length == 0) {
-		LogWarn(@"Cannot read: length == 0");
+		LPLogWarn(@"Cannot read: length == 0");
 		return;
 	}
 	if (offset > [buffer length]) {
-		LogWarn(@"Cannot read: offset > [buffer length]");
+		LPLogWarn(@"Cannot read: offset > [buffer length]");
 		return;
 	}
 	
@@ -3838,7 +3838,7 @@ enum LPGCDAsyncSocketConfig
 	
 	dispatch_async(socketQueue, ^{ @autoreleasepool {
 		
-		LogTrace();
+		LPLogTrace();
 		
 		if ((flags & kSocketStarted) && !(flags & kForbidReadsWrites))
 		{
@@ -3878,15 +3878,15 @@ enum LPGCDAsyncSocketConfig
                    tag:(long)tag
 {
 	if ([data length] == 0) {
-		LogWarn(@"Cannot read: [data length] == 0");
+		LPLogWarn(@"Cannot read: [data length] == 0");
 		return;
 	}
 	if (offset > [buffer length]) {
-		LogWarn(@"Cannot read: offset > [buffer length]");
+		LPLogWarn(@"Cannot read: offset > [buffer length]");
 		return;
 	}
 	if (maxLength > 0 && maxLength < [data length]) {
-		LogWarn(@"Cannot read: maxLength > 0 && maxLength < [data length]");
+		LPLogWarn(@"Cannot read: maxLength > 0 && maxLength < [data length]");
 		return;
 	}
 	
@@ -3900,7 +3900,7 @@ enum LPGCDAsyncSocketConfig
 	
 	dispatch_async(socketQueue, ^{ @autoreleasepool {
 		
-		LogTrace();
+		LPLogTrace();
 		
 		if ((flags & kSocketStarted) && !(flags & kForbidReadsWrites))
 		{
@@ -3969,7 +3969,7 @@ enum LPGCDAsyncSocketConfig
 **/
 - (void)maybeDequeueRead
 {
-	LogTrace();
+	LPLogTrace();
 	NSAssert(dispatch_get_current_queue() == socketQueue, @"Must be dispatched on socketQueue");
 	
 	// If we're not currently processing a read AND we have an available read stream
@@ -3984,7 +3984,7 @@ enum LPGCDAsyncSocketConfig
 			
 			if ([currentRead isKindOfClass:[LPGCDAsyncSpecialPacket class]])
 			{
-				LogVerbose(@"Dequeued LPGCDAsyncSpecialPacket");
+				LPLogVerbose(@"Dequeued LPGCDAsyncSpecialPacket");
 				
 				// Attempt to start TLS
 				flags |= kStartingReadTLS;
@@ -3994,7 +3994,7 @@ enum LPGCDAsyncSocketConfig
 			}
 			else
 			{
-				LogVerbose(@"Dequeued LPGCDAsyncReadPacket");
+				LPLogVerbose(@"Dequeued LPGCDAsyncReadPacket");
 				
 				// Setup read timer (if needed)
 				[self setupReadTimerWithTimeout:currentRead->timeout];
@@ -4046,7 +4046,7 @@ enum LPGCDAsyncSocketConfig
 
 - (void)flushSSLBuffers
 {
-	LogTrace();
+	LPLogTrace();
 	
 	NSAssert((flags & kSocketSecure), @"Cannot flush ssl buffers on non-secure socket");
 	
@@ -4064,7 +4064,7 @@ enum LPGCDAsyncSocketConfig
 	{
 		if ((flags & kSecureSocketHasBytesAvailable) && CFReadStreamHasBytesAvailable(readStream))
 		{
-			LogVerbose(@"%@ - Flushing ssl buffers into prebuffer...", THIS_METHOD);
+			LPLogVerbose(@"%@ - Flushing ssl buffers into prebuffer...", THIS_METHOD);
 			
 			CFIndex defaultBytesToRead = (1024 * 4);
 			
@@ -4073,7 +4073,7 @@ enum LPGCDAsyncSocketConfig
 			uint8_t *buffer = [preBuffer writeBuffer];
 			
 			CFIndex result = CFReadStreamRead(readStream, buffer, defaultBytesToRead);
-			LogVerbose(@"%@ - CFReadStreamRead(): result = %i", THIS_METHOD, (int)result);
+			LPLogVerbose(@"%@ - CFReadStreamRead(): result = %i", THIS_METHOD, (int)result);
 			
 			if (result > 0)
 			{
@@ -4115,12 +4115,12 @@ enum LPGCDAsyncSocketConfig
 	
 	if (estimatedBytesAvailable > 0)
 	{
-		LogVerbose(@"%@ - Flushing ssl buffers into prebuffer...", THIS_METHOD);
+		LPLogVerbose(@"%@ - Flushing ssl buffers into prebuffer...", THIS_METHOD);
 		
 		BOOL done = NO;
 		do
 		{
-			LogVerbose(@"%@ - estimatedBytesAvailable = %lu", THIS_METHOD, (unsigned long)estimatedBytesAvailable);
+			LPLogVerbose(@"%@ - estimatedBytesAvailable = %lu", THIS_METHOD, (unsigned long)estimatedBytesAvailable);
 			
 			// Make sure there's enough room in the prebuffer
 			
@@ -4132,14 +4132,14 @@ enum LPGCDAsyncSocketConfig
 			size_t bytesRead = 0;
 			
 			OSStatus result = SSLRead(sslContext, buffer, (size_t)estimatedBytesAvailable, &bytesRead);
-			LogVerbose(@"%@ - read from secure socket = %u", THIS_METHOD, (unsigned)bytesRead);
+			LPLogVerbose(@"%@ - read from secure socket = %u", THIS_METHOD, (unsigned)bytesRead);
 			
 			if (bytesRead > 0)
 			{
 				[preBuffer didWrite:bytesRead];
 			}
 			
-			LogVerbose(@"%@ - prebuffer.length = %zu", THIS_METHOD, [preBuffer availableBytes]);
+			LPLogVerbose(@"%@ - prebuffer.length = %zu", THIS_METHOD, [preBuffer availableBytes]);
 			
 			if (result != noErr)
 			{
@@ -4158,14 +4158,14 @@ enum LPGCDAsyncSocketConfig
 
 - (void)doReadData
 {
-	LogTrace();
+	LPLogTrace();
 	
 	// This method is called on the socketQueue.
 	// It might be called directly, or via the readSource when data is available to be read.
 	
 	if ((currentRead == nil) || (flags & kReadsPaused))
 	{
-		LogVerbose(@"No currentRead or kReadsPaused");
+		LPLogVerbose(@"No currentRead or kReadsPaused");
 		
 		// Unable to read at this time
 		
@@ -4275,7 +4275,7 @@ enum LPGCDAsyncSocketConfig
 	
 	if ((hasBytesAvailable == NO) && ([preBuffer availableBytes] == 0))
 	{
-		LogVerbose(@"No data available to read...");
+		LPLogVerbose(@"No data available to read...");
 		
 		// No data available to read.
 		
@@ -4291,7 +4291,7 @@ enum LPGCDAsyncSocketConfig
 	
 	if (flags & kStartingReadTLS)
 	{
-		LogVerbose(@"Waiting for SSL/TLS handshake to complete");
+		LPLogVerbose(@"Waiting for SSL/TLS handshake to complete");
 		
 		// The readQueue is waiting for SSL/TLS handshake to complete.
 		
@@ -4371,7 +4371,7 @@ enum LPGCDAsyncSocketConfig
 		// Remove the copied bytes from the preBuffer
 		[preBuffer didRead:bytesToCopy];
 		
-		LogVerbose(@"copied(%lu) preBufferLength(%zu)", (unsigned long)bytesToCopy, [preBuffer availableBytes]);
+		LPLogVerbose(@"copied(%lu) preBufferLength(%zu)", (unsigned long)bytesToCopy, [preBuffer availableBytes]);
 		
 		// Update totals
 		
@@ -4505,7 +4505,7 @@ enum LPGCDAsyncSocketConfig
 				#if TARGET_OS_IPHONE
 				
 				CFIndex result = CFReadStreamRead(readStream, buffer, (CFIndex)bytesToRead);
-				LogVerbose(@"CFReadStreamRead(): result = %i", (int)result);
+				LPLogVerbose(@"CFReadStreamRead(): result = %i", (int)result);
 				
 				if (result < 0)
 				{
@@ -4548,7 +4548,7 @@ enum LPGCDAsyncSocketConfig
 					size_t loop_bytesRead = 0;
 					
 					result = SSLRead(sslContext, loop_buffer, loop_bytesToRead, &loop_bytesRead);
-					LogVerbose(@"read from secure socket = %u", (unsigned)bytesRead);
+					LPLogVerbose(@"read from secure socket = %u", (unsigned)bytesRead);
 					
 					bytesRead += loop_bytesRead;
 					
@@ -4594,7 +4594,7 @@ enum LPGCDAsyncSocketConfig
 			int socketFD = (socket4FD == SOCKET_NULL) ? socket6FD : socket4FD;
 			
 			ssize_t result = read(socketFD, buffer, (size_t)bytesToRead);
-			LogVerbose(@"read from socket = %i", (int)result);
+			LPLogVerbose(@"read from socket = %i", (int)result);
 			
 			if (result < 0)
 			{
@@ -4662,12 +4662,12 @@ enum LPGCDAsyncSocketConfig
 					// We just read a big chunk of data into the preBuffer
 					
 					[preBuffer didWrite:bytesRead];
-					LogVerbose(@"read data into preBuffer - preBuffer.length = %zu", [preBuffer availableBytes]);
+					LPLogVerbose(@"read data into preBuffer - preBuffer.length = %zu", [preBuffer availableBytes]);
 					
 					// Search for the terminating sequence
 					
 					bytesToRead = [currentRead readLengthForTermWithPreBuffer:preBuffer found:&done];
-					LogVerbose(@"copying %lu bytes from preBuffer", (unsigned long)bytesToRead);
+					LPLogVerbose(@"copying %lu bytes from preBuffer", (unsigned long)bytesToRead);
 					
 					// Ensure there's room on the read packet's buffer
 					
@@ -4682,7 +4682,7 @@ enum LPGCDAsyncSocketConfig
 					
 					// Remove the copied bytes from the prebuffer
 					[preBuffer didRead:bytesToRead];
-					LogVerbose(@"preBuffer.length = %zu", [preBuffer availableBytes]);
+					LPLogVerbose(@"preBuffer.length = %zu", [preBuffer availableBytes]);
 					
 					// Update totals
 					currentRead->bytesDone += bytesToRead;
@@ -4717,14 +4717,14 @@ enum LPGCDAsyncSocketConfig
 						
 						// Copy excess data into preBuffer
 						
-						LogVerbose(@"copying %ld overflow bytes into preBuffer", (long)overflow);
+						LPLogVerbose(@"copying %ld overflow bytes into preBuffer", (long)overflow);
 						[preBuffer ensureCapacityForWrite:overflow];
 						
 						uint8_t *overflowBuffer = buffer + underflow;
 						memcpy([preBuffer writeBuffer], overflowBuffer, overflow);
 						
 						[preBuffer didWrite:overflow];
-						LogVerbose(@"preBuffer.length = %zu", [preBuffer availableBytes]);
+						LPLogVerbose(@"preBuffer.length = %zu", [preBuffer availableBytes]);
 						
 						// Note: The completeCurrentRead method will trim the buffer for us.
 						
@@ -4860,7 +4860,7 @@ enum LPGCDAsyncSocketConfig
 
 - (void)doReadEOF
 {
-	LogTrace();
+	LPLogTrace();
 	
 	// This method may be called more than once.
 	// If the EOF is read while there is still data in the preBuffer,
@@ -4906,7 +4906,7 @@ enum LPGCDAsyncSocketConfig
 	}
 	else if ([preBuffer availableBytes] > 0)
 	{
-		LogVerbose(@"Socket reached EOF, but there is still data available in prebuffer");
+		LPLogVerbose(@"Socket reached EOF, but there is still data available in prebuffer");
 		
 		// Although we won't be able to read any more data from the socket,
 		// there is existing data that has been prebuffered that we can read.
@@ -4997,7 +4997,7 @@ enum LPGCDAsyncSocketConfig
 
 - (void)completeCurrentRead
 {
-	LogTrace();
+	LPLogTrace();
 	
 	NSAssert(currentRead, @"Trying to complete current read when there is no current read.");
 	
@@ -5072,7 +5072,7 @@ enum LPGCDAsyncSocketConfig
 		#if NEEDS_DISPATCH_RETAIN_RELEASE
 		dispatch_source_t theReadTimer = readTimer;
 		dispatch_source_set_cancel_handler(readTimer, ^{
-			LogVerbose(@"dispatch_release(readTimer)");
+			LPLogVerbose(@"dispatch_release(readTimer)");
 			dispatch_release(theReadTimer);
 		});
 		#endif
@@ -5136,7 +5136,7 @@ enum LPGCDAsyncSocketConfig
 		}
 		else
 		{
-			LogVerbose(@"ReadTimeout");
+			LPLogVerbose(@"ReadTimeout");
 			
 			[self closeWithError:[self readTimeoutError]];
 		}
@@ -5155,7 +5155,7 @@ enum LPGCDAsyncSocketConfig
 	
 	dispatch_async(socketQueue, ^{ @autoreleasepool {
 		
-		LogTrace();
+		LPLogTrace();
 		
 		if ((flags & kSocketStarted) && !(flags & kForbidReadsWrites))
 		{
@@ -5217,7 +5217,7 @@ enum LPGCDAsyncSocketConfig
 **/
 - (void)maybeDequeueWrite
 {
-	LogTrace();
+	LPLogTrace();
 	NSAssert(dispatch_get_current_queue() == socketQueue, @"Must be dispatched on socketQueue");
 	
 	
@@ -5233,7 +5233,7 @@ enum LPGCDAsyncSocketConfig
 			
 			if ([currentWrite isKindOfClass:[LPGCDAsyncSpecialPacket class]])
 			{
-				LogVerbose(@"Dequeued LPGCDAsyncSpecialPacket");
+				LPLogVerbose(@"Dequeued LPGCDAsyncSpecialPacket");
 				
 				// Attempt to start TLS
 				flags |= kStartingWriteTLS;
@@ -5243,7 +5243,7 @@ enum LPGCDAsyncSocketConfig
 			}
 			else
 			{
-				LogVerbose(@"Dequeued LPGCDAsyncWritePacket");
+				LPLogVerbose(@"Dequeued LPGCDAsyncWritePacket");
 				
 				// Setup write timer (if needed)
 				[self setupWriteTimerWithTimeout:currentWrite->timeout];
@@ -5271,13 +5271,13 @@ enum LPGCDAsyncSocketConfig
 
 - (void)doWriteData
 {
-	LogTrace();
+	LPLogTrace();
 	
 	// This method is called by the writeSource via the socketQueue
 	
 	if ((currentWrite == nil) || (flags & kWritesPaused))
 	{
-		LogVerbose(@"No currentWrite or kWritesPaused");
+		LPLogVerbose(@"No currentWrite or kWritesPaused");
 		
 		// Unable to write at this time
 		
@@ -5301,7 +5301,7 @@ enum LPGCDAsyncSocketConfig
 	
 	if (!(flags & kSocketCanAcceptBytes))
 	{
-		LogVerbose(@"No space available to write...");
+		LPLogVerbose(@"No space available to write...");
 		
 		// No space available to write.
 		
@@ -5317,7 +5317,7 @@ enum LPGCDAsyncSocketConfig
 	
 	if (flags & kStartingWriteTLS)
 	{
-		LogVerbose(@"Waiting for SSL/TLS handshake to complete");
+		LPLogVerbose(@"Waiting for SSL/TLS handshake to complete");
 		
 		// The writeQueue is waiting for SSL/TLS handshake to complete.
 		
@@ -5377,7 +5377,7 @@ enum LPGCDAsyncSocketConfig
 			}
 		
 			CFIndex result = CFWriteStreamWrite(writeStream, buffer, (CFIndex)bytesToWrite);
-			LogVerbose(@"CFWriteStreamWrite(%lu) = %li", bytesToWrite, result);
+			LPLogVerbose(@"CFWriteStreamWrite(%lu) = %li", bytesToWrite, result);
 		
 			if (result < 0)
 			{
@@ -5550,7 +5550,7 @@ enum LPGCDAsyncSocketConfig
 		}
 		
 		ssize_t result = write(socketFD, buffer, (size_t)bytesToWrite);
-		LogVerbose(@"wrote to socket = %zd", result);
+		LPLogVerbose(@"wrote to socket = %zd", result);
 		
 		// Check results
 		if (result < 0)
@@ -5597,7 +5597,7 @@ enum LPGCDAsyncSocketConfig
 	{
 		// Update total amount read for the current write
 		currentWrite->bytesDone += bytesWritten;
-		LogVerbose(@"currentWrite->bytesDone = %lu", currentWrite->bytesDone);
+		LPLogVerbose(@"currentWrite->bytesDone = %lu", currentWrite->bytesDone);
 		
 		// Is packet done?
 		done = (currentWrite->bytesDone == [currentWrite->buffer length]);
@@ -5658,7 +5658,7 @@ enum LPGCDAsyncSocketConfig
 
 - (void)completeCurrentWrite
 {
-	LogTrace();
+	LPLogTrace();
 	
 	NSAssert(currentWrite, @"Trying to complete current write when there is no current write.");
 	
@@ -5702,7 +5702,7 @@ enum LPGCDAsyncSocketConfig
 		#if NEEDS_DISPATCH_RETAIN_RELEASE
 		dispatch_source_t theWriteTimer = writeTimer;
 		dispatch_source_set_cancel_handler(writeTimer, ^{
-			LogVerbose(@"dispatch_release(writeTimer)");
+			LPLogVerbose(@"dispatch_release(writeTimer)");
 			dispatch_release(theWriteTimer);
 		});
 		#endif
@@ -5766,7 +5766,7 @@ enum LPGCDAsyncSocketConfig
 		}
 		else
 		{
-			LogVerbose(@"WriteTimeout");
+			LPLogVerbose(@"WriteTimeout");
 			
 			[self closeWithError:[self writeTimeoutError]];
 		}
@@ -5779,7 +5779,7 @@ enum LPGCDAsyncSocketConfig
 
 - (void)startTLS:(NSDictionary *)tlsSettings
 {
-	LogTrace();
+	LPLogTrace();
 	
 	if (tlsSettings == nil)
     {
@@ -5872,11 +5872,11 @@ enum LPGCDAsyncSocketConfig
 
 - (OSStatus)sslReadWithBuffer:(void *)buffer length:(size_t *)bufferLength
 {
-	LogVerbose(@"sslReadWithBuffer:%p length:%lu", buffer, (unsigned long)*bufferLength);
+	LPLogVerbose(@"sslReadWithBuffer:%p length:%lu", buffer, (unsigned long)*bufferLength);
 	
 	if ((socketFDBytesAvailable == 0) && ([sslPreBuffer availableBytes] == 0))
 	{
-		LogVerbose(@"%@ - No data available to read...", THIS_METHOD);
+		LPLogVerbose(@"%@ - No data available to read...", THIS_METHOD);
 		
 		// No data available to read.
 		// 
@@ -5903,7 +5903,7 @@ enum LPGCDAsyncSocketConfig
 	
 	if (sslPreBufferLength > 0)
 	{
-		LogVerbose(@"%@: Reading from SSL pre buffer...", THIS_METHOD);
+		LPLogVerbose(@"%@: Reading from SSL pre buffer...", THIS_METHOD);
 		
 		size_t bytesToCopy;
 		if (sslPreBufferLength > totalBytesLeftToBeRead)
@@ -5911,19 +5911,19 @@ enum LPGCDAsyncSocketConfig
 		else
 			bytesToCopy = sslPreBufferLength;
 		
-		LogVerbose(@"%@: Copying %zu bytes from sslPreBuffer", THIS_METHOD, bytesToCopy);
+		LPLogVerbose(@"%@: Copying %zu bytes from sslPreBuffer", THIS_METHOD, bytesToCopy);
 		
 		memcpy(buffer, [sslPreBuffer readBuffer], bytesToCopy);
 		[sslPreBuffer didRead:bytesToCopy];
 		
-		LogVerbose(@"%@: sslPreBuffer.length = %zu", THIS_METHOD, [sslPreBuffer availableBytes]);
+		LPLogVerbose(@"%@: sslPreBuffer.length = %zu", THIS_METHOD, [sslPreBuffer availableBytes]);
 		
 		totalBytesRead += bytesToCopy;
 		totalBytesLeftToBeRead -= bytesToCopy;
 		
 		done = (totalBytesLeftToBeRead == 0);
 		
-		if (done) LogVerbose(@"%@: Complete", THIS_METHOD);
+		if (done) LPLogVerbose(@"%@: Complete", THIS_METHOD);
 	}
 	
 	// 
@@ -5932,7 +5932,7 @@ enum LPGCDAsyncSocketConfig
 	
 	if (!done && (socketFDBytesAvailable > 0))
 	{
-		LogVerbose(@"%@: Reading from socket...", THIS_METHOD);
+		LPLogVerbose(@"%@: Reading from socket...", THIS_METHOD);
 		
 		int socketFD = (socket6FD == SOCKET_NULL) ? socket4FD : socket6FD;
 		
@@ -5945,7 +5945,7 @@ enum LPGCDAsyncSocketConfig
 			// Read all available data from socket into sslPreBuffer.
 			// Then copy requested amount into dataBuffer.
 			
-			LogVerbose(@"%@: Reading into sslPreBuffer...", THIS_METHOD);
+			LPLogVerbose(@"%@: Reading into sslPreBuffer...", THIS_METHOD);
 			
 			[sslPreBuffer ensureCapacityForWrite:socketFDBytesAvailable];
 			
@@ -5957,7 +5957,7 @@ enum LPGCDAsyncSocketConfig
 		{
 			// Read available data from socket directly into dataBuffer.
 			
-			LogVerbose(@"%@: Reading directly into dataBuffer...", THIS_METHOD);
+			LPLogVerbose(@"%@: Reading directly into dataBuffer...", THIS_METHOD);
 			
 			readIntoPreBuffer = NO;
 			bytesToRead = totalBytesLeftToBeRead;
@@ -5965,11 +5965,11 @@ enum LPGCDAsyncSocketConfig
 		}
 		
 		ssize_t result = read(socketFD, buf, bytesToRead);
-		LogVerbose(@"%@: read from socket = %zd", THIS_METHOD, result);
+		LPLogVerbose(@"%@: read from socket = %zd", THIS_METHOD, result);
 		
 		if (result < 0)
 		{
-			LogVerbose(@"%@: read errno = %i", THIS_METHOD, errno);
+			LPLogVerbose(@"%@: read errno = %i", THIS_METHOD, errno);
 			
 			if (errno != EWOULDBLOCK)
 			{
@@ -5980,7 +5980,7 @@ enum LPGCDAsyncSocketConfig
 		}
 		else if (result == 0)
 		{
-			LogVerbose(@"%@: read EOF", THIS_METHOD);
+			LPLogVerbose(@"%@: read EOF", THIS_METHOD);
 			
 			socketError = YES;
 			socketFDBytesAvailable = 0;
@@ -6000,7 +6000,7 @@ enum LPGCDAsyncSocketConfig
 				
 				size_t bytesToCopy = MIN(totalBytesLeftToBeRead, bytesReadFromSocket);
 				
-				LogVerbose(@"%@: Copying %zu bytes out of sslPreBuffer", THIS_METHOD, bytesToCopy);
+				LPLogVerbose(@"%@: Copying %zu bytes out of sslPreBuffer", THIS_METHOD, bytesToCopy);
 				
 				memcpy((uint8_t *)buffer + totalBytesRead, [sslPreBuffer readBuffer], bytesToCopy);
 				[sslPreBuffer didRead:bytesToCopy];
@@ -6008,7 +6008,7 @@ enum LPGCDAsyncSocketConfig
 				totalBytesRead += bytesToCopy;
 				totalBytesLeftToBeRead -= bytesToCopy;
 				
-				LogVerbose(@"%@: sslPreBuffer.length = %zu", THIS_METHOD, [sslPreBuffer availableBytes]);
+				LPLogVerbose(@"%@: sslPreBuffer.length = %zu", THIS_METHOD, [sslPreBuffer availableBytes]);
 			}
 			else
 			{
@@ -6018,7 +6018,7 @@ enum LPGCDAsyncSocketConfig
 			
 			done = (totalBytesLeftToBeRead == 0);
 			
-			if (done) LogVerbose(@"%@: Complete", THIS_METHOD);
+			if (done) LPLogVerbose(@"%@: Complete", THIS_METHOD);
 		}
 	}
 	
@@ -6109,9 +6109,9 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 
 - (void)ssl_startTLS
 {
-	LogTrace();
+	LPLogTrace();
 	
-	LogVerbose(@"Starting TLS (via SecureTransport)...");
+	LPLogVerbose(@"Starting TLS (via SecureTransport)...");
 		
 	OSStatus status;
 	
@@ -6305,7 +6305,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 		{
 			if (sslMinLevel || sslMaxLevel)
 			{
-				LogWarn(@"kCFStreamSSLLevel security option ignored. Overriden by "
+				LPLogWarn(@"kCFStreamSSLLevel security option ignored. Overriden by "
 						@"LPGCDAsyncSocketSSLProtocolVersionMin and/or LPGCDAsyncSocketSSLProtocolVersionMax");
 			}
 			else
@@ -6320,7 +6320,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 				}
 				else
 				{
-					LogWarn(@"Unable to match kCFStreamSSLLevel security option to valid SSL protocol min/max");
+					LPLogWarn(@"Unable to match kCFStreamSSLLevel security option to valid SSL protocol min/max");
 				}
 			}
 		}
@@ -6485,7 +6485,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 
 - (void)ssl_continueSSLHandshake
 {
-	LogTrace();
+	LPLogTrace();
 	
 	// If the return value is noErr, the session is ready for normal secure communication.
 	// If the return value is errSSLWouldBlock, the SSLHandshake function must be called again.
@@ -6495,7 +6495,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	
 	if (status == noErr)
 	{
-		LogVerbose(@"SSLHandshake complete");
+		LPLogVerbose(@"SSLHandshake complete");
 		
 		flags &= ~kStartingReadTLS;
 		flags &= ~kStartingWriteTLS;
@@ -6520,7 +6520,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	}
 	else if (status == errSSLWouldBlock)
 	{
-		LogVerbose(@"SSLHandshake continues...");
+		LPLogVerbose(@"SSLHandshake continues...");
 		
 		// Handshake continues...
 		// 
@@ -6542,7 +6542,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 
 - (void)cf_finishSSLHandshake
 {
-	LogTrace();
+	LPLogTrace();
 	
 	if ((flags & kStartingReadTLS) && (flags & kStartingWriteTLS))
 	{
@@ -6571,7 +6571,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 
 - (void)cf_abortSSLHandshake:(NSError *)error
 {
-	LogTrace();
+	LPLogTrace();
 	
 	if ((flags & kStartingReadTLS) && (flags & kStartingWriteTLS))
 	{
@@ -6584,9 +6584,9 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 
 - (void)cf_startTLS
 {
-	LogTrace();
+	LPLogTrace();
 	
-	LogVerbose(@"Starting TLS (via CFStream)...");
+	LPLogVerbose(@"Starting TLS (via CFStream)...");
 	
 	if ([preBuffer availableBytes] > 0)
 	{
@@ -6666,7 +6666,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 		return;
 	}
 	
-	LogVerbose(@"Waiting for SSL Handshake to complete...");
+	LPLogVerbose(@"Waiting for SSL Handshake to complete...");
 }
 
 #endif
@@ -6693,7 +6693,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 {
 	[[NSThread currentThread] setName:LPGCDAsyncSocketThreadName];
 	
-	LogInfo(@"CFStreamThread: Started");
+	LPLogInfo(@"CFStreamThread: Started");
 	
 	// We can't run the run loop unless it has an associated input source or a timer.
 	// So we'll just create a timer that will never fire - unless the server runs for decades.
@@ -6705,12 +6705,12 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 	
 	[[NSRunLoop currentRunLoop] run];
 	
-	LogInfo(@"CFStreamThread: Stopped");
+	LPLogInfo(@"CFStreamThread: Stopped");
 }}
 
 + (void)scheduleCFStreams:(LPGCDAsyncSocket *)asyncSocket
 {
-	LogTrace();
+	LPLogTrace();
 	NSAssert([NSThread currentThread] == cfstreamThread, @"Invoked on wrong thread");
 	
 	CFRunLoopRef runLoop = CFRunLoopGetCurrent();
@@ -6724,7 +6724,7 @@ static OSStatus SSLWriteFunction(SSLConnectionRef connection, const void *data, 
 
 + (void)unscheduleCFStreams:(LPGCDAsyncSocket *)asyncSocket
 {
-	LogTrace();
+	LPLogTrace();
 	NSAssert([NSThread currentThread] == cfstreamThread, @"Invoked on wrong thread");
 	
 	CFRunLoopRef runLoop = CFRunLoopGetCurrent();
@@ -6746,7 +6746,7 @@ static void CFReadStreamCallback (CFReadStreamRef stream, CFStreamEventType type
 		{
 			dispatch_async(asyncSocket->socketQueue, ^{ @autoreleasepool {
 				
-				LogCVerbose(@"CFReadStreamCallback - HasBytesAvailable");
+				LPLogCVerbose(@"CFReadStreamCallback - HasBytesAvailable");
 				
 				if (asyncSocket->readStream != stream)
 					return_from_block;
@@ -6782,7 +6782,7 @@ static void CFReadStreamCallback (CFReadStreamRef stream, CFStreamEventType type
 			
 			dispatch_async(asyncSocket->socketQueue, ^{ @autoreleasepool {
 				
-				LogCVerbose(@"CFReadStreamCallback - Other");
+				LPLogCVerbose(@"CFReadStreamCallback - Other");
 				
 				if (asyncSocket->readStream != stream)
 					return_from_block;
@@ -6813,7 +6813,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 		{
 			dispatch_async(asyncSocket->socketQueue, ^{ @autoreleasepool {
 				
-				LogCVerbose(@"CFWriteStreamCallback - CanAcceptBytes");
+				LPLogCVerbose(@"CFWriteStreamCallback - CanAcceptBytes");
 				
 				if (asyncSocket->writeStream != stream)
 					return_from_block;
@@ -6849,7 +6849,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 			
 			dispatch_async(asyncSocket->socketQueue, ^{ @autoreleasepool {
 				
-				LogCVerbose(@"CFWriteStreamCallback - Other");
+				LPLogCVerbose(@"CFWriteStreamCallback - Other");
 				
 				if (asyncSocket->writeStream != stream)
 					return_from_block;
@@ -6872,7 +6872,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 
 - (BOOL)createReadAndWriteStream
 {
-	LogTrace();
+	LPLogTrace();
 	
 	NSAssert(dispatch_get_current_queue() == socketQueue, @"Must be dispatched on socketQueue");
 	
@@ -6897,7 +6897,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 		return NO;
 	}
 	
-	LogVerbose(@"Creating read and write stream...");
+	LPLogVerbose(@"Creating read and write stream...");
 	
 	CFStreamCreatePairWithSocket(NULL, (CFSocketNativeHandle)socketFD, &readStream, &writeStream);
 	
@@ -6911,7 +6911,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 	
 	if ((readStream == NULL) || (writeStream == NULL))
 	{
-		LogWarn(@"Unable to create read and write stream...");
+		LPLogWarn(@"Unable to create read and write stream...");
 		
 		if (readStream)
 		{
@@ -6934,7 +6934,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 
 - (BOOL)registerForStreamCallbacksIncludingReadWrite:(BOOL)includeReadWrite
 {
-	LogVerbose(@"%@ %@", THIS_METHOD, (includeReadWrite ? @"YES" : @"NO"));
+	LPLogVerbose(@"%@ %@", THIS_METHOD, (includeReadWrite ? @"YES" : @"NO"));
 	
 	NSAssert(dispatch_get_current_queue() == socketQueue, @"Must be dispatched on socketQueue");
 	NSAssert((readStream != NULL && writeStream != NULL), @"Read/Write stream is null");
@@ -6968,14 +6968,14 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 
 - (BOOL)addStreamsToRunLoop
 {
-	LogTrace();
+	LPLogTrace();
 	
 	NSAssert(dispatch_get_current_queue() == socketQueue, @"Must be dispatched on socketQueue");
 	NSAssert((readStream != NULL && writeStream != NULL), @"Read/Write stream is null");
 	
 	if (!(flags & kAddedStreamsToRunLoop))
 	{
-		LogVerbose(@"Adding streams to runloop...");
+		LPLogVerbose(@"Adding streams to runloop...");
 		
 		[[self class] startCFStreamThreadIfNeeded];
 		[[self class] performSelector:@selector(scheduleCFStreams:)
@@ -6991,14 +6991,14 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 
 - (void)removeStreamsFromRunLoop
 {
-	LogTrace();
+	LPLogTrace();
 	
 	NSAssert(dispatch_get_current_queue() == socketQueue, @"Must be dispatched on socketQueue");
 	NSAssert((readStream != NULL && writeStream != NULL), @"Read/Write stream is null");
 	
 	if (flags & kAddedStreamsToRunLoop)
 	{
-		LogVerbose(@"Removing streams from runloop...");
+		LPLogVerbose(@"Removing streams from runloop...");
 		
 		[[self class] performSelector:@selector(unscheduleCFStreams:)
 		                     onThread:cfstreamThread
@@ -7011,7 +7011,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 
 - (BOOL)openStreams
 {
-	LogTrace();
+	LPLogTrace();
 	
 	NSAssert(dispatch_get_current_queue() == socketQueue, @"Must be dispatched on socketQueue");
 	NSAssert((readStream != NULL && writeStream != NULL), @"Read/Write stream is null");
@@ -7021,14 +7021,14 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 	
 	if ((readStatus == kCFStreamStatusNotOpen) || (writeStatus == kCFStreamStatusNotOpen))
 	{
-		LogVerbose(@"Opening read and write stream...");
+		LPLogVerbose(@"Opening read and write stream...");
 		
 		BOOL r1 = CFReadStreamOpen(readStream);
 		BOOL r2 = CFWriteStreamOpen(writeStream);
 		
 		if (!r1 || !r2)
 		{
-			LogError(@"Error in CFStreamOpen");
+			LPLogError(@"Error in CFStreamOpen");
 			return NO;
 		}
 	}
@@ -7051,7 +7051,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 {
 	if (dispatch_get_current_queue() != socketQueue)
 	{
-		LogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
+		LPLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
 		return SOCKET_NULL;
 	}
 	
@@ -7065,7 +7065,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 {
 	if (dispatch_get_current_queue() != socketQueue)
 	{
-		LogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
+		LPLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
 		return SOCKET_NULL;
 	}
 	
@@ -7076,7 +7076,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 {
 	if (dispatch_get_current_queue() != socketQueue)
 	{
-		LogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
+		LPLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
 		return SOCKET_NULL;
 	}
 	
@@ -7089,7 +7089,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 {
 	if (dispatch_get_current_queue() != socketQueue)
 	{
-		LogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
+		LPLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
 		return NULL;
 	}
 	
@@ -7103,7 +7103,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 {
 	if (dispatch_get_current_queue() != socketQueue)
 	{
-		LogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
+		LPLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
 		return NULL;
 	}
 	
@@ -7123,7 +7123,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 	
 	BOOL r1, r2;
 	
-	LogVerbose(@"Enabling backgrouding on socket");
+	LPLogVerbose(@"Enabling backgrouding on socket");
 	
 	r1 = CFReadStreamSetProperty(readStream, kCFStreamNetworkServiceType, kCFStreamNetworkServiceTypeVoIP);
 	r2 = CFWriteStreamSetProperty(writeStream, kCFStreamNetworkServiceType, kCFStreamNetworkServiceTypeVoIP);
@@ -7146,11 +7146,11 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 
 - (BOOL)enableBackgroundingOnSocket
 {
-	LogTrace();
+	LPLogTrace();
 	
 	if (dispatch_get_current_queue() != socketQueue)
 	{
-		LogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
+		LPLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
 		return NO;
 	}
 	
@@ -7163,11 +7163,11 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 	// Apple has since fixed this bug.
 	// I'm not entirely sure which version of iOS they fixed it in...
 	
-	LogTrace();
+	LPLogTrace();
 	
 	if (dispatch_get_current_queue() != socketQueue)
 	{
-		LogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
+		LPLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
 		return NO;
 	}
 	
@@ -7180,7 +7180,7 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 {
 	if (dispatch_get_current_queue() != socketQueue)
 	{
-		LogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
+		LPLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
 		return NULL;
 	}
 	

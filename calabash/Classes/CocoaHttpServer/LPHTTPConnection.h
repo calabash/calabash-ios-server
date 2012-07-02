@@ -3,7 +3,7 @@
 @class LPGCDAsyncSocket;
 @class LPHTTPMessage;
 @class LPHTTPServer;
-
+@class LPWebSocket;
 @protocol LPHTTPResponse;
 
 
@@ -15,16 +15,16 @@
 
 @interface LPHTTPConfig : NSObject
 {
-	LPHTTPServer *__unsafe_unretained server;
-	NSString *__unsafe_unretained documentRoot;
+	LPHTTPServer __unsafe_unretained *server;
+	NSString __strong *documentRoot;
 	dispatch_queue_t queue;
 }
 
 - (id)initWithServer:(LPHTTPServer *)server documentRoot:(NSString *)documentRoot;
 - (id)initWithServer:(LPHTTPServer *)server documentRoot:(NSString *)documentRoot queue:(dispatch_queue_t)q;
 
-@property (unsafe_unretained, nonatomic, readonly) LPHTTPServer *server;
-@property (unsafe_unretained, nonatomic, readonly) NSString *documentRoot;
+@property (nonatomic, unsafe_unretained, readonly) LPHTTPServer *server;
+@property (nonatomic, strong, readonly) NSString *documentRoot;
 @property (nonatomic, readonly) dispatch_queue_t queue;
 
 @end
@@ -91,6 +91,7 @@
 - (NSString *)filePathForURI:(NSString *)path;
 - (NSString *)filePathForURI:(NSString *)path allowDirectory:(BOOL)allowDirectory;
 - (NSObject<LPHTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path;
+- (LPWebSocket *)webSocketForURI:(NSString *)path;
 
 - (void)prepareForBodyWithSize:(UInt64)contentLength;
 - (void)processBodyData:(NSData *)postDataChunk;

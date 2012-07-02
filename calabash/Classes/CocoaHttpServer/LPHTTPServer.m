@@ -1,10 +1,41 @@
 #import "LPHTTPServer.h"
 #import "LPGCDAsyncSocket.h"
 #import "LPHTTPConnection.h"
+#import "LPWebSocket.h"
+#import "LPHTTPLogging.h"
 
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
+// Does ARC support support LPGCD objects?
+// It does if the minimum deployment target is iOS 6+ or Mac OS X 8+
+
+#if TARGET_OS_IPHONE
+
+  // Compiling for iOS
+
+  #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000 // iOS 6.0 or later
+    #define NEEDS_DISPATCH_RETAIN_RELEASE 0
+  #else                                         // iOS 5.X or earlier
+    #define NEEDS_DISPATCH_RETAIN_RELEASE 1
+  #endif
+
+#else
+
+  // Compiling for Mac OS X
+
+  #if MAC_OS_X_VERSION_MIN_REQUIRED >= 1080     // Mac OS X 10.8 or later
+    #define NEEDS_DISPATCH_RETAIN_RELEASE 0
+  #else
+    #define NEEDS_DISPATCH_RETAIN_RELEASE 1     // Mac OS X 10.7 or earlier
+  #endif
+
+#endif
 
 // Log levels: off, error, warn, info, verbose
 // Other flags: trace
+//static const int httpLogLevel = HTTP_LOG_LEVEL_INFO; // | HTTP_LOG_FLAG_TRACE;
 
 @interface LPHTTPServer (PrivateAPI)
 
@@ -30,15 +61,14 @@
 {
 	if ((self = [super init]))
 	{
-		//LPHTTPLogTrace();
+        //HTTPLogTrace();
 		
 		// Initialize underlying dispatch queue and LPGCD based tcp socket
 		serverQueue = dispatch_queue_create("LPHTTPServer", NULL);
 		asyncSocket = [[LPGCDAsyncSocket alloc] initWithDelegate:self delegateQueue:serverQueue];
 		
 		// Use default connection class of LPHTTPConnection
-//		connectionQueue = dispatch_queue_create("LPHTTPConnection", NULL);
-        connectionQueue=dispatch_get_main_queue();
+		connectionQueue = dispatch_queue_create("LPHTTPConnection", NULL);
 		connectionClass = [LPHTTPConnection self];
 		
 		// By default bind on all available interfaces, en1, wifi etc
@@ -73,10 +103,10 @@
 		                                           object:nil];
 		
 		// Register for notifications of closed websocket connections
-//		[[NSNotificationCenter defaultCenter] addObserver:self
-//		                                         selector:@selector(webSocketDidDie:)
-//		                                             name:WebSocketDidDieNotification
-//		                                           object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self
+		                                         selector:@selector(webSocketDidDie:)
+		                                             name:LPWebSocketDidDieNotification
+		                                           object:nil];
 		
 		isRunning = NO;
 	}
@@ -89,7 +119,7 @@
 **/
 - (void)dealloc
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Remove notification observer
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -99,14 +129,12 @@
 	
 	// Release all instance variables
 	
+	#if NEEDS_DISPATCH_RETAIN_RELEASE
 	dispatch_release(serverQueue);
-	//dispatch_release(connectionQueue);
+	dispatch_release(connectionQueue);
+	#endif
 	
 	[asyncSocket setDelegate:nil delegateQueue:NULL];
-	
-	
-	
-	
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -131,14 +159,14 @@
 
 - (void)setDocumentRoot:(NSString *)value
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Document root used to be of type NSURL.
 	// Add type checking for early warning to developers upgrading from older versions.
 	
 	if (value && ![value isKindOfClass:[NSString class]])
 	{
-		//LPHTTPLogWarn(@"%@: %@ - Expecting NSString parameter, received %@ parameter",
+		//HTTPLogWarn(@"%@: %@ - Expecting NSString parameter, received %@ parameter",
 		//			THIS_FILE, THIS_METHOD, NSStringFromClass([value class]));
 		return;
 	}
@@ -170,7 +198,7 @@
 
 - (void)setConnectionClass:(Class)value
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	dispatch_async(serverQueue, ^{
 		connectionClass = value;
@@ -233,7 +261,7 @@
 
 - (void)setPort:(UInt16)value
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	dispatch_async(serverQueue, ^{
 		port = value;
@@ -257,7 +285,7 @@
 
 - (void)setDomain:(NSString *)value
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	NSString *valueCopy = [value copy];
 	
@@ -357,7 +385,7 @@
 }
 - (void)setTXTRecordDictionary:(NSDictionary *)value
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	NSDictionary *valueCopy = [value copy];
 	
@@ -389,34 +417,29 @@
 
 - (BOOL)start:(NSError **)errPtr
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	__block BOOL success = YES;
 	__block NSError *err = nil;
 	
-	dispatch_sync(serverQueue, ^{
-		@autoreleasepool {
+	dispatch_sync(serverQueue, ^{ @autoreleasepool {
 		
-			success = [asyncSocket acceptOnInterface:interface port:port error:&err];
-			if (success)
-			{
-				NSLog(@"Started LPHTTP server on port %hu", [asyncSocket localPort]);
-				
-				isRunning = YES;
-				[self publishBonjour];
-			}
-			else
-			{
-				//LPHTTPLogError(@"%@: Failed to start LPHTTP Server: %@", THIS_FILE, err);
-			}
-		
+		success = [asyncSocket acceptOnInterface:interface port:port error:&err];
+		if (success)
+		{
+			//HTTPLogInfo(@"%@: Started LPHTTP server on port %hu", THIS_FILE, [asyncSocket localPort]);
+			
+			isRunning = YES;
+			[self publishBonjour];
 		}
-	});
+		else
+		{
+			//HTTPLogError(@"%@: Failed to start LPHTTP Server: %@", THIS_FILE, err);
+		}
+	}});
 	
 	if (errPtr)
 		*errPtr = err;
-	else
-		;
 	
 	return success;
 }
@@ -428,35 +451,38 @@
 
 - (void)stop:(BOOL)keepExistingConnections
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
-	dispatch_sync(serverQueue, ^{
-		@autoreleasepool {
+	dispatch_sync(serverQueue, ^{ @autoreleasepool {
 		
 		// First stop publishing the service via bonjour
-			[self unpublishBonjour];
-			
-			// Stop listening / accepting incoming connections
-			[asyncSocket disconnect];
-			isRunning = NO;
-			
-			if (!keepExistingConnections)
-			{
-				// Stop all LPHTTP connections the server owns
-				[connectionsLock lock];
-				for (LPHTTPConnection *connection in connections)
-				{
-					[connection stop];
-				}
-				[connections removeAllObjects];
-				[connectionsLock unlock];
-				
-				// Stop all WebSocket connections the server owns
-				
-			}
+		[self unpublishBonjour];
 		
+		// Stop listening / accepting incoming connections
+		[asyncSocket disconnect];
+		isRunning = NO;
+		
+		if (!keepExistingConnections)
+		{
+			// Stop all LPHTTP connections the server owns
+			[connectionsLock lock];
+			for (LPHTTPConnection *connection in connections)
+			{
+				[connection stop];
+			}
+			[connections removeAllObjects];
+			[connectionsLock unlock];
+			
+			// Stop all LPWebSocket connections the server owns
+			[webSocketsLock lock];
+			for (LPWebSocket *webSocket in webSockets)
+			{
+				[webSocket stop];
+			}
+			[webSockets removeAllObjects];
+			[webSocketsLock unlock];
 		}
-	});
+	}});
 }
 
 - (BOOL)isRunning
@@ -470,6 +496,15 @@
 	return result;
 }
 
+- (void)addWebSocket:(LPWebSocket *)ws
+{
+	[webSocketsLock lock];
+	
+	//HTTPLogTrace();
+	[webSockets addObject:ws];
+	
+	[webSocketsLock unlock];
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark Server Status
@@ -540,7 +575,7 @@
 
 - (void)publishBonjour
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	NSAssert(dispatch_get_current_queue() == serverQueue, @"Invalid queue");
 	
@@ -575,7 +610,7 @@
 
 - (void)unpublishBonjour
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	NSAssert(dispatch_get_current_queue() == serverQueue, @"Invalid queue");
 	
@@ -600,7 +635,7 @@
 **/
 - (void)republishBonjour
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	dispatch_async(serverQueue, ^{
 		
@@ -619,7 +654,7 @@
 	// 
 	// Note: This method is invoked on our bonjour thread.
 	
-	NSLog(@"Bonjour Service Published: domain(%@) type(%@) name(%@)", [ns domain], [ns type], [ns name]);
+	//HTTPLogInfo(@"Bonjour Service Published: domain(%@) type(%@) name(%@)", [ns domain], [ns type], [ns name]);
 }
 
 /**
@@ -632,8 +667,8 @@
 	// 
 	// Note: This method in invoked on our bonjour thread.
 	
-	//LPHTTPLogWarn(@"Failed to Publish Service: domain(%@) type(%@) name(%@) - %@",
-//	                                         [ns domain], [ns type], [ns name], errorDict);
+	//HTTPLogWarn(@"Failed to Publish Service: domain(%@) type(%@) name(%@) - %@",
+	//                                        [ns domain], [ns type], [ns name], errorDict);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -650,14 +685,14 @@
 	
 	[connectionsLock lock];
 	
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	[connections removeObject:[notification object]];
 	
 	[connectionsLock unlock];
 }
 
 /**
- * This method is automatically called when a notification of type WebSocketDidDieNotification is posted.
+ * This method is automatically called when a notification of type LPWebSocketDidDieNotification is posted.
  * It allows us to remove the websocket from our array.
 **/
 - (void)webSocketDidDie:(NSNotification *)notification
@@ -666,7 +701,7 @@
 	
 	[webSocketsLock lock];
 	
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	[webSockets removeObject:[notification object]];
 	
 	[webSocketsLock unlock];
@@ -691,12 +726,12 @@ static NSThread *bonjourThread;
 
 + (void)startBonjourThreadIfNeeded
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	static dispatch_once_t predicate;
 	dispatch_once(&predicate, ^{
 		
-		//LPHTTPLogVerbose(@"%@: Starting bonjour thread...", THIS_FILE);
+		//HTTPLogVerbose(@"%@: Starting bonjour thread...", THIS_FILE);
 		
 		bonjourThread = [[NSThread alloc] initWithTarget:self
 		                                        selector:@selector(bonjourThread)
@@ -709,23 +744,27 @@ static NSThread *bonjourThread;
 {
 	@autoreleasepool {
 	
-	//LPHTTPLogVerbose(@"%@: BonjourThread: Started", THIS_FILE);
-	
-	// We can't run the run loop unless it has an associated input source or a timer.
-	// So we'll just create a timer that will never fire - unless the server runs for 10,000 years.
-	
-		[NSTimer scheduledTimerWithTimeInterval:DBL_MAX target:self selector:@selector(ignore:) userInfo:nil repeats:YES];
+		//HTTPLogVerbose(@"%@: BonjourThread: Started", THIS_FILE);
+		
+		// We can't run the run loop unless it has an associated input source or a timer.
+		// So we'll just create a timer that will never fire - unless the server runs for 10,000 years.
+		
+		[NSTimer scheduledTimerWithTimeInterval:[[NSDate distantFuture] timeIntervalSinceNow]
+		                                 target:self
+		                               selector:@selector(donothingatall:)
+		                               userInfo:nil
+		                                repeats:YES];
 		
 		[[NSRunLoop currentRunLoop] run];
-	
-	//LPHTTPLogVerbose(@"%@: BonjourThread: Aborted", THIS_FILE);
+		
+		//HTTPLogVerbose(@"%@: BonjourThread: Aborted", THIS_FILE);
 	
 	}
 }
 
 + (void)executeBonjourBlock:(dispatch_block_t)block
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	NSAssert([NSThread currentThread] == bonjourThread, @"Executed on incorrect thread");
 	
@@ -734,7 +773,7 @@ static NSThread *bonjourThread;
 
 + (void)performBonjourBlock:(dispatch_block_t)block
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	[self performSelector:@selector(executeBonjourBlock:)
 	             onThread:bonjourThread

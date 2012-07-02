@@ -1,5 +1,9 @@
 #import "LPHTTPMessage.h"
 
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
 
 @implementation LPHTTPMessage
 
@@ -16,7 +20,10 @@
 {
 	if ((self = [super init]))
 	{
-		message = CFHTTPMessageCreateRequest(NULL, (__bridge CFStringRef)method, (__bridge CFURLRef)url, (__bridge CFStringRef)version);
+		message = CFHTTPMessageCreateRequest(NULL,
+		                                    (__bridge CFStringRef)method,
+		                                    (__bridge CFURLRef)url,
+		                                    (__bridge CFStringRef)version);
 	}
 	return self;
 }
@@ -25,7 +32,10 @@
 {
 	if ((self = [super init]))
 	{
-		message = CFHTTPMessageCreateResponse(NULL, (CFIndex)code, (__bridge CFStringRef)description, (__bridge CFStringRef)version);
+		message = CFHTTPMessageCreateResponse(NULL,
+		                                      (CFIndex)code,
+		                                      (__bridge CFStringRef)description,
+		                                      (__bridge CFStringRef)version);
 	}
 	return self;
 }
@@ -50,17 +60,17 @@
 
 - (NSString *)version
 {
-	return CFBridgingRelease(CFHTTPMessageCopyVersion(message));
+	return (__bridge_transfer NSString *)CFHTTPMessageCopyVersion(message);
 }
 
 - (NSString *)method
 {
-	return CFBridgingRelease(CFHTTPMessageCopyRequestMethod(message));
+	return (__bridge_transfer NSString *)CFHTTPMessageCopyRequestMethod(message);
 }
 
 - (NSURL *)url
 {
-	return CFBridgingRelease(CFHTTPMessageCopyRequestURL(message));
+	return (__bridge_transfer NSURL *)CFHTTPMessageCopyRequestURL(message);
 }
 
 - (NSInteger)statusCode
@@ -70,27 +80,29 @@
 
 - (NSDictionary *)allHeaderFields
 {
-	return CFBridgingRelease(CFHTTPMessageCopyAllHeaderFields(message));
+	return (__bridge_transfer NSDictionary *)CFHTTPMessageCopyAllHeaderFields(message);
 }
 
 - (NSString *)headerField:(NSString *)headerField
 {
-	return CFBridgingRelease(CFHTTPMessageCopyHeaderFieldValue(message, (__bridge CFStringRef)headerField));
+	return (__bridge_transfer NSString *)CFHTTPMessageCopyHeaderFieldValue(message, (__bridge CFStringRef)headerField);
 }
 
 - (void)setHeaderField:(NSString *)headerField value:(NSString *)headerFieldValue
 {
-	CFHTTPMessageSetHeaderFieldValue(message, (__bridge CFStringRef)headerField, (__bridge CFStringRef)headerFieldValue);
+	CFHTTPMessageSetHeaderFieldValue(message,
+	                                 (__bridge CFStringRef)headerField,
+	                                 (__bridge CFStringRef)headerFieldValue);
 }
 
 - (NSData *)messageData
 {
-	return CFBridgingRelease(CFHTTPMessageCopySerializedMessage(message));
+	return (__bridge_transfer NSData *)CFHTTPMessageCopySerializedMessage(message);
 }
 
 - (NSData *)body
 {
-	return CFBridgingRelease(CFHTTPMessageCopyBody(message));
+	return (__bridge_transfer NSData *)CFHTTPMessageCopyBody(message);
 }
 
 - (void)setBody:(NSData *)body

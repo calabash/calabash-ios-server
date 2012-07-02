@@ -1,4 +1,4 @@
-#import "DDNumber.h"
+#import "LPDDNumber.h"
 
 
 @implementation NSNumber (LPDDNumber)

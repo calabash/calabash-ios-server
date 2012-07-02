@@ -1,7 +1,13 @@
 #import "LPHTTPDataResponse.h"
+#import "LPHTTPLogging.h"
+
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
 
 // Log levels : off, error, warn, info, verbose
 // Other flags: trace
+//static const int httpLogLevel = HTTP_LOG_LEVEL_OFF; // | HTTP_LOG_FLAG_TRACE;
 
 
 @implementation LPHTTPDataResponse
@@ -10,7 +16,7 @@
 {
 	if((self = [super init]))
 	{
-		//LPHTTPLogTrace();
+		//HTTPLogTrace();
 		
 		offset = 0;
 		data = dataParam;
@@ -18,33 +24,38 @@
 	return self;
 }
 
+- (void)dealloc
+{
+	//HTTPLogTrace();
+	
+}
 
 - (UInt64)contentLength
 {
 	UInt64 result = (UInt64)[data length];
 	
-	//LPHTTPLogTrace2(@"%@[%p]: contentLength - %llu", THIS_FILE, self, result);
+	//HTTPLogTrace2(@"%@[%p]: contentLength - %llu", THIS_FILE, self, result);
 	
 	return result;
 }
 
 - (UInt64)offset
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	return offset;
 }
 
 - (void)setOffset:(UInt64)offsetParam
 {
-	//LPHTTPLogTrace2(@"%@[%p]: setOffset:%llu", THIS_FILE, self, offset);
+	//HTTPLogTrace2(@"%@[%p]: setOffset:%lu", THIS_FILE, self, (unsigned long)offset);
 	
 	offset = (NSUInteger)offsetParam;
 }
 
 - (NSData *)readDataOfLength:(NSUInteger)lengthParameter
 {
-	//LPHTTPLogTrace2(@"%@[%p]: readDataOfLength:%lu", THIS_FILE, self, (unsigned long)lengthParameter);
+	//HTTPLogTrace2(@"%@[%p]: readDataOfLength:%lu", THIS_FILE, self, (unsigned long)lengthParameter);
 	
 	NSUInteger remaining = [data length] - offset;
 	NSUInteger length = lengthParameter < remaining ? lengthParameter : remaining;
@@ -60,7 +71,7 @@
 {
 	BOOL result = (offset == [data length]);
 	
-	//LPHTTPLogTrace2(@"%@[%p]: isDone - %@", THIS_FILE, self, (result ? @"YES" : @"NO"));
+	//HTTPLogTrace2(@"%@[%p]: isDone - %@", THIS_FILE, self, (result ? @"YES" : @"NO"));
 	
 	return result;
 }

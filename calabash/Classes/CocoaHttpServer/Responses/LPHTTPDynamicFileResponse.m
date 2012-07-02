@@ -1,8 +1,14 @@
 #import "LPHTTPDynamicFileResponse.h"
 #import "LPHTTPConnection.h"
+#import "LPHTTPLogging.h"
+
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
 
 // Log levels : off, error, warn, info, verbose
 // Other flags: trace
+//static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 
 #define NULL_FD  -1
 
@@ -16,7 +22,7 @@
 {
 	if ((self = [super initWithFilePath:fpath forConnection:parent]))
 	{
-		//LPHTTPLogTrace();
+		//HTTPLogTrace();
 		
 		separator = [separatorStr dataUsingEncoding:NSUTF8StringEncoding];
 		replacementDict = dict;
@@ -26,7 +32,7 @@
 
 - (BOOL)isChunked
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	return YES;
 }
@@ -36,7 +42,7 @@
 	// This method shouldn't be called since we're using a chunked response.
 	// We override it just to be safe.
 	
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	return 0;
 }
@@ -46,21 +52,21 @@
 	// This method shouldn't be called since we're using a chunked response.
 	// We override it just to be safe.
 	
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 }
 
 - (BOOL)isDone
 {
 	BOOL result = (readOffset == fileLength) && (readBufferOffset == 0);
 	
-	//LPHTTPLogTrace2(@"%@[%p]: isDone - %@", THIS_FILE, self, (result ? @"YES" : @"NO"));
+	//HTTPLogTrace2(@"%@[%p]: isDone - %@", THIS_FILE, self, (result ? @"YES" : @"NO"));
 	
 	return result;
 }
 
 - (void)processReadBuffer
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// At this point, the readBuffer has readBufferOffset bytes available.
 	// This method is in charge of updating the readBufferOffset.
@@ -103,7 +109,7 @@
 				s1 = offset;
 				offset += sepLen;
 				
-				//LPHTTPLogVerbose(@"%@[%p]: Found s1 at %lu", THIS_FILE, self, (unsigned long)s1);
+				//HTTPLogVerbose(@"%@[%p]: Found s1 at %lu", THIS_FILE, self, (unsigned long)s1);
 			}
 			else
 			{
@@ -113,7 +119,7 @@
 				s2 = offset;
 				offset += sepLen;
 				
-				//LPHTTPLogVerbose(@"%@[%p]: Found s2 at %lu", THIS_FILE, self, (unsigned long)s2);
+				//HTTPLogVerbose(@"%@[%p]: Found s2 at %lu", THIS_FILE, self, (unsigned long)s2);
 			}
 			
 			if (found1 && found2)
@@ -136,15 +142,15 @@
 				{
 					// Is there a given replacement for this key?
 					
-					NSString *value = [replacementDict objectForKey:key];
+					id value = [replacementDict objectForKey:key];
 					if (value)
 					{
 						// Found the replacement value.
 						// Now perform the replacement in the buffer.
 						
-						//LPHTTPLogVerbose(@"%@[%p]: key(%@) -> value(%@)", THIS_FILE, self, key, value);
+						//HTTPLogVerbose(@"%@[%p]: key(%@) -> value(%@)", THIS_FILE, self, key, value);
 						
-						NSData *v = [value dataUsingEncoding:NSUTF8StringEncoding];
+						NSData *v = [[value description] dataUsingEncoding:NSUTF8StringEncoding];
 						NSUInteger vLength = [v length];
 						
 						if (fullRange.length == vLength)
@@ -276,5 +282,11 @@
 	[connection responseHasAvailableData:self];
 }
 
+- (void)dealloc
+{
+	//HTTPLogTrace();
+	
+	
+}
 
 @end

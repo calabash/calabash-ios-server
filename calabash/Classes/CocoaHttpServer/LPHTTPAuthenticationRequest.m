@@ -1,6 +1,9 @@
 #import "LPHTTPAuthenticationRequest.h"
 #import "LPHTTPMessage.h"
-#import "NSString+Calabash.h"
+
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
 
 @interface LPHTTPAuthenticationRequest (PrivateAPI)
 - (NSString *)quotedSubHeaderFieldValue:(NSString *)param fromHeaderFieldValue:(NSString *)header;
@@ -31,7 +34,9 @@
 		if (isBasic)
 		{
 			NSMutableString *temp = [[authInfo substringFromIndex:6] mutableCopy];
-            base64Credentials = [temp trimmed];
+			CFStringTrimWhitespace((__bridge CFMutableStringRef)temp);
+			
+			base64Credentials = [temp copy];
 		}
 		
 		if (isDigest)
