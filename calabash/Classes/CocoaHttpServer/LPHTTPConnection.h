@@ -15,16 +15,16 @@
 
 @interface LPHTTPConfig : NSObject
 {
-	LPHTTPServer *server;
-	NSString *documentRoot;
+	LPHTTPServer *__unsafe_unretained server;
+	NSString *__unsafe_unretained documentRoot;
 	dispatch_queue_t queue;
 }
 
 - (id)initWithServer:(LPHTTPServer *)server documentRoot:(NSString *)documentRoot;
 - (id)initWithServer:(LPHTTPServer *)server documentRoot:(NSString *)documentRoot queue:(dispatch_queue_t)q;
 
-@property (nonatomic, readonly) LPHTTPServer *server;
-@property (nonatomic, readonly) NSString *documentRoot;
+@property (unsafe_unretained, nonatomic, readonly) LPHTTPServer *server;
+@property (unsafe_unretained, nonatomic, readonly) NSString *documentRoot;
 @property (nonatomic, readonly) dispatch_queue_t queue;
 
 @end

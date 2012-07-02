@@ -7,11 +7,11 @@
 #import "UIScriptAST.h"
 
 @interface UIScriptASTClassName : UIScriptAST {
-    NSString *_className;
+    NSString *__unsafe_unretained _className;
     Class _class;
 }
 
-@property (nonatomic,retain, readonly) NSString *className;
+@property (unsafe_unretained, nonatomic, readonly) NSString *className;
 - (id) initWithClassName:(NSString*) className;
 
 @end

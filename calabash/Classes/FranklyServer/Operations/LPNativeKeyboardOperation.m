@@ -80,8 +80,7 @@
     // Interpret control characters appropriately    
     id keyToTap = nil;
     id modifierKey = nil;
-    NSString *selectedModifierRepresentedString = nil;
-    
+       
     while (YES) {
         for (id/*UIKBKey*/ key in keys) {
             NSString *representedString = [key valueForKey:@"representedString"];
@@ -100,7 +99,6 @@
             }
             if (!modifierKey && unvisitedForKeyplane.count && [[unvisitedForKeyplane objectAtIndex:0] isEqual:representedString]) {
                 modifierKey = key;
-                selectedModifierRepresentedString = representedString;
                 [unvisitedForKeyplane removeObjectAtIndex:0];
             }
         }
@@ -114,7 +112,7 @@
         }
         
         if (!unvisitedForKeyplane.count) {
-            return NO;
+            return nil;
         }
         
         // If we didn't find the key or the modifier, then this modifier must not exist on this keyboard. Remove it.
@@ -139,8 +137,8 @@
         
         point = [(UIWindow*)view convertPoint:point toWindow:nil];
         point=[LPTouchUtils translateToScreenCoords:point];
-        _events =  [[LPResources transformEvents: [LPResources eventsFromEncoding:[_arguments objectAtIndex:0]]  
-                                         toPoint:point] retain];
+        _events =  [LPResources transformEvents: [LPResources eventsFromEncoding:[_arguments objectAtIndex:0]]  
+                                         toPoint:point];
         [self play:_events];
         
         
@@ -182,8 +180,8 @@
     
     UIView* theView = [result objectAtIndex:maxPointIndex];
 
-    _events =  [[LPResources transformEvents: [LPResources eventsFromEncoding:[_arguments objectAtIndex:0]]  
-                            toPoint:[LPTouchUtils centerOfView: theView ]] retain];
+    _events =  [LPResources transformEvents: [LPResources eventsFromEncoding:[_arguments objectAtIndex:0]]  
+                            toPoint:[LPTouchUtils centerOfView: theView ]];
     [self play:_events];
         
 	return theView;
@@ -204,7 +202,6 @@
 
 -(void) playbackDone:(NSDictionary *)details {
     _done = YES;
-    [_events release];
     _events=nil;
 }
 @end

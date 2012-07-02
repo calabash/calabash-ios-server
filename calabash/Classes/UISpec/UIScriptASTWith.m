@@ -142,7 +142,10 @@
             
             if ([v respondsToSelector:_selector]) 
             {
-                void* val = [v performSelector:_selector];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+                id val = [v performSelector:_selector];
+#pragma clang diagnostic pop
                 switch (self.valueType) {
                     case UIScriptLiteralTypeInteger:
                         if ((NSInteger) val == self.integerValue) {
@@ -176,8 +179,6 @@
     
 - (void) dealloc {
     self.selector=nil;
-    [_objectValue release];_objectValue=nil;
-    [super dealloc];
 }
     
 

@@ -19,7 +19,7 @@
     }
     NSString* res = [[NSString alloc]  initWithBytes:[d bytes]
                               length:[d length] encoding: NSUTF8StringEncoding];
-    return [res autorelease];
+    return res;
 }
 + (NSDictionary*) deserializeDictionary:(NSString*) string {
     LPCJSONDeserializer* ds = [LPCJSONDeserializer deserializer];
@@ -40,7 +40,7 @@
     }
     NSString* res = [[NSString alloc]  initWithBytes:[d bytes]
                                               length:[d length] encoding: NSUTF8StringEncoding];
-    return [res autorelease];
+    return res;
 }
 + (NSArray*) deserializeArray:(NSString*) string {
     LPCJSONDeserializer* ds = [LPCJSONDeserializer deserializer];
@@ -62,7 +62,7 @@
     }
     NSString* res = [[NSString alloc]  initWithBytes:[d bytes]
                                               length:[d length] encoding: NSUTF8StringEncoding];
-    return [res autorelease];
+    return res;
 
 }
 

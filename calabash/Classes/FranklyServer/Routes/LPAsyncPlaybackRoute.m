@@ -124,7 +124,7 @@
             else                
             {
                 
-                CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)[v valueForKey:@"center"], &center);
+                CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)[v valueForKey:@"center"], &center);
             }
 
             NSString *centerView = NSStringFromCGPoint(center);
@@ -287,7 +287,7 @@
 
 
 - (NSObject<LPHTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {    
-    LPAsyncPlaybackRoute* route = [[[LPAsyncPlaybackRoute alloc] init] autorelease];
+    LPAsyncPlaybackRoute* route = [[LPAsyncPlaybackRoute alloc] init];
     [route setParameters:self.data];
     [route setConnection:self.conn];
     self.data = nil;
@@ -296,11 +296,7 @@
 }
 
 -(void) dealloc {
-    self.data = nil;
     self.conn = nil;
-    self.events = nil;
-    self.jsonResponse = nil;
-    [super dealloc];
 }
 
 @end

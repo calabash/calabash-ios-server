@@ -24,7 +24,6 @@
 		{
 			//LPHTTPLogWarn(@"%@: Init failed - Nil filePath", THIS_FILE);
 			
-			[self release];
 			return nil;
 		}
 		
@@ -33,7 +32,6 @@
 		{
 			//LPHTTPLogWarn(@"%@: Init failed - Unable to get file attributes. filePath: %@", THIS_FILE, filePath);
 			
-			[self release];
 			return nil;
 		}
 		
@@ -226,8 +224,6 @@
 	if (buffer)
 		free(buffer);
 	
-	[filePath release];
-	[super dealloc];
 }
 
 @end

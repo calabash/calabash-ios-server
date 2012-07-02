@@ -1,5 +1,6 @@
 #import "LPHTTPAuthenticationRequest.h"
 #import "LPHTTPMessage.h"
+#import "NSString+Calabash.h"
 
 @interface LPHTTPAuthenticationRequest (PrivateAPI)
 - (NSString *)quotedSubHeaderFieldValue:(NSString *)param fromHeaderFieldValue:(NSString *)header;
@@ -29,18 +30,16 @@
 		
 		if (isBasic)
 		{
-			NSMutableString *temp = [[[authInfo substringFromIndex:6] mutableCopy] autorelease];
-			CFStringTrimWhitespace((CFMutableStringRef)temp);
-			
-			base64Credentials = [temp copy];
+			NSMutableString *temp = [[authInfo substringFromIndex:6] mutableCopy];
+            base64Credentials = [temp trimmed];
 		}
 		
 		if (isDigest)
 		{
-			username = [[self quotedSubHeaderFieldValue:@"username" fromHeaderFieldValue:authInfo] retain];
-			realm    = [[self quotedSubHeaderFieldValue:@"realm" fromHeaderFieldValue:authInfo] retain];
-			nonce    = [[self quotedSubHeaderFieldValue:@"nonce" fromHeaderFieldValue:authInfo] retain];
-			uri      = [[self quotedSubHeaderFieldValue:@"uri" fromHeaderFieldValue:authInfo] retain];
+			username = [self quotedSubHeaderFieldValue:@"username" fromHeaderFieldValue:authInfo];
+			realm    = [self quotedSubHeaderFieldValue:@"realm" fromHeaderFieldValue:authInfo];
+			nonce    = [self quotedSubHeaderFieldValue:@"nonce" fromHeaderFieldValue:authInfo];
+			uri      = [self quotedSubHeaderFieldValue:@"uri" fromHeaderFieldValue:authInfo];
 			
 			// It appears from RFC 2617 that the qop is to be given unquoted
 			// Tests show that Firefox performs this way, but Safari does not
@@ -50,29 +49,15 @@
 			{
 				qop  = [self quotedSubHeaderFieldValue:@"qop" fromHeaderFieldValue:authInfo];
 			}
-			[qop retain];
 			
-			nc       = [[self nonquotedSubHeaderFieldValue:@"nc" fromHeaderFieldValue:authInfo] retain];
-			cnonce   = [[self quotedSubHeaderFieldValue:@"cnonce" fromHeaderFieldValue:authInfo] retain];
-			response = [[self quotedSubHeaderFieldValue:@"response" fromHeaderFieldValue:authInfo] retain];
+			nc       = [self nonquotedSubHeaderFieldValue:@"nc" fromHeaderFieldValue:authInfo];
+			cnonce   = [self quotedSubHeaderFieldValue:@"cnonce" fromHeaderFieldValue:authInfo];
+			response = [self quotedSubHeaderFieldValue:@"response" fromHeaderFieldValue:authInfo];
 		}
 	}
 	return self;
 }
 
-- (void)dealloc
-{
-	[base64Credentials release];
-	[username release];
-	[realm release];
-	[nonce release];
-	[uri release];
-	[qop release];
-	[nc release];
-	[cnonce release];
-	[response release];
-	[super dealloc];
-}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark Accessors:

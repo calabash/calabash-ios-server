@@ -8,10 +8,10 @@
 
 @interface UIScriptParser : NSObject {
     NSMutableArray *_res;
-    NSString *_script;
+    NSString *__unsafe_unretained _script;
 }
 
-@property (nonatomic, retain) NSString* script;
+@property (unsafe_unretained, nonatomic) NSString* script;
 
 - (id) initWithUIScript:(NSString*) script;
 
