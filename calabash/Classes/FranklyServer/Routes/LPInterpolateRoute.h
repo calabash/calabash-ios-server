@@ -13,20 +13,20 @@
 @interface LPInterpolateRoute : NSObject<LPRoute,LPHTTPResponse> 
 {    
     BOOL _done;
-    NSArray *_events;
-    LPHTTPConnection *_conn;
-    NSDictionary *_data;
-    NSDictionary *_jsonResponse;
+    NSArray *__unsafe_unretained _events;
+    LPHTTPConnection *__unsafe_unretained _conn;
+    NSDictionary *__unsafe_unretained _data;
+    NSDictionary *__unsafe_unretained _jsonResponse;
     
     NSData *_bytes;
     
 }
 
-@property (nonatomic, retain) NSArray *events;
+@property (unsafe_unretained, nonatomic) NSArray *events;
 @property (nonatomic, assign) BOOL done;
-@property (nonatomic, assign) LPHTTPConnection *conn;
-@property (nonatomic, retain) NSDictionary *data;
-@property (nonatomic, retain) NSDictionary *jsonResponse;
+@property (nonatomic, unsafe_unretained) LPHTTPConnection *conn;
+@property (unsafe_unretained, nonatomic) NSDictionary *data;
+@property (unsafe_unretained, nonatomic) NSDictionary *jsonResponse;
 
 - (void) play:(NSArray *)events;
 

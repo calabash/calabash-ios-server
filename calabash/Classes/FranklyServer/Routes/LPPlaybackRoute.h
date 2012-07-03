@@ -8,10 +8,10 @@
 #import "LPRoute.h"
 @interface LPPlaybackRoute : NSObject<LPRoute> {
     BOOL _done;
-    NSArray *_events;
+    NSArray *__unsafe_unretained _events;
 }
 
-@property (nonatomic, retain) NSArray *events;
+@property (unsafe_unretained, nonatomic) NSArray *events;
 @property (nonatomic, assign) BOOL done;
 
 -(void) play:(NSArray *)events;

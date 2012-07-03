@@ -128,7 +128,7 @@ static const short _base64DecodingTable[256] = {
 	}
     
 	// Cleanup and setup the return NSData
-	return [[[NSData alloc] initWithBytesNoCopy:objResult length:j freeWhenDone:YES] autorelease];
+	return [[NSData alloc] initWithBytesNoCopy:objResult length:j freeWhenDone:YES];
 }
 + (NSArray*) eventsFromEncoding:(NSString *) encoded {
     NSData* data = [self decodeBase64WithString: encoded];

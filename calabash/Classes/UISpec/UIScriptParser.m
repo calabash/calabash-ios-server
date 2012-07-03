@@ -36,8 +36,7 @@
 }
 
 - (void) dealloc {
-    [_res release];_res=nil;
-    [super dealloc];
+    _res=nil;
 }
 
 #pragma mark Parsing
@@ -47,9 +46,9 @@ static NSCharacterSet* curlyBrackets = nil;
 
 - (void) parse {
     
-    if (colon==nil) {colon=[[NSCharacterSet characterSetWithCharactersInString:@":"] retain];}
-    if (ping==nil) {ping=[[NSCharacterSet characterSetWithCharactersInString:@"'"] retain];}
-    if (curlyBrackets==nil) {curlyBrackets=[[NSCharacterSet characterSetWithCharactersInString:@"{}"] retain];}
+    if (colon==nil) {colon=[NSCharacterSet characterSetWithCharactersInString:@":"];}
+    if (ping==nil) {ping=[NSCharacterSet characterSetWithCharactersInString:@"'"];}
+    if (curlyBrackets==nil) {curlyBrackets=[NSCharacterSet characterSetWithCharactersInString:@"{}"];}
     
     NSUInteger index=0;
     NSUInteger N=[_script length];
@@ -69,17 +68,14 @@ static NSCharacterSet* curlyBrackets = nil;
         if ([token isEqualToString:@"all"]) {
             UIScriptASTALL* all = [UIScriptASTALL new];
             [_res addObject:all];
-            [all release];
             return;//ignore everything past all
         } else if ([token isEqualToString:@"last"]) {
             UIScriptAST* last = [UIScriptASTLast new];
             [_res addObject:last];
-            [last release];
             return;//ignore everything past last
         } else if ([token isEqualToString:@"first"]) {
             UIScriptAST* first = [UIScriptASTFirst new];
             [_res addObject:first];
-            [first release];
             return;//ignore everything past first
         }
         
@@ -88,7 +84,6 @@ static NSCharacterSet* curlyBrackets = nil;
         NSString* clzName = [self parseClassName:token];
         UIScriptASTClassName* c = [[UIScriptASTClassName alloc] initWithClassName:clzName];
         [_res addObject:c];
-        [c release];
         
         if (index == N) {return;}
         token = [self findNextToken:&index];
@@ -114,7 +109,7 @@ static NSCharacterSet* curlyBrackets = nil;
     if (notWhite==nil) {
         NSMutableCharacterSet *cs = [NSMutableCharacterSet whitespaceCharacterSet];
         [cs invert];
-        notWhite = [cs retain];
+        notWhite = cs;
     }
     static NSCharacterSet *whiteSpaceSquareOrPing = nil;
     
@@ -122,7 +117,7 @@ static NSCharacterSet* curlyBrackets = nil;
         NSMutableCharacterSet *cs = [NSMutableCharacterSet whitespaceCharacterSet];
         [cs formUnionWithCharacterSet:ping];
         [cs formUnionWithCharacterSet:curlyBrackets];
-        whiteSpaceSquareOrPing = [cs retain];
+        whiteSpaceSquareOrPing = cs;
     }
     
     NSUInteger i = *index;
@@ -183,20 +178,20 @@ static NSCharacterSet* curlyBrackets = nil;
     }
 }
 
-- (NSArray*) parsedTokens {return [[_res mutableCopy] autorelease];}
+- (NSArray*) parsedTokens {return [_res mutableCopy];}
 
 - (UIScriptASTDirection*) parseDirectionIfPresent:(NSString*) token {
     if ([token isEqualToString:@"parent"]) {
         UIScriptASTDirection* d = [[UIScriptASTDirection alloc] initWithDirection:UIScriptASTDirectionTypeParent];
-        return [d autorelease];
+        return d;
     }
     if ([token isEqualToString:@"find"] || [token isEqualToString:@"descendant"]) {
         UIScriptASTDirection* d = [[UIScriptASTDirection alloc] initWithDirection:UIScriptASTDirectionTypeDescendant];
-        return [d autorelease];
+        return d;
     }
     if ([token isEqualToString:@"child"]) {
         UIScriptASTDirection* d = [[UIScriptASTDirection alloc] initWithDirection:UIScriptASTDirectionTypeChild];
-        return [d autorelease];
+        return d;
     }
     return nil;
 }
@@ -229,7 +224,7 @@ static NSCharacterSet* curlyBrackets = nil;
         SEL sel = NSSelectorFromString(selString);
 
         NSPredicate *pred = [NSPredicate predicateWithFormat:str];        
-        return [[[UIScriptASTPredicate alloc] initWithPredicate:pred selector:sel] autorelease];
+        return [[UIScriptASTPredicate alloc] initWithPredicate:pred selector:sel];
         
     }
 
@@ -251,9 +246,8 @@ static NSCharacterSet* curlyBrackets = nil;
         NSString* value = [colonSep objectAtIndex:1];
         NSNumberFormatter* nf = [[NSNumberFormatter alloc] init];
         NSNumber* numVal = [nf numberFromString:value];
-        [nf release];
         NSUInteger val = [numVal unsignedIntegerValue];
-        return [[[UIScriptASTIndex alloc] initWithIndex:val] autorelease];
+        return [[UIScriptASTIndex alloc] initWithIndex:val];
     }
     //general property
     NSString *propName = [colonSep objectAtIndex:0];
@@ -262,7 +256,7 @@ static NSCharacterSet* curlyBrackets = nil;
     
     [self parseLiteralValue:propValTok addToWithAST:withProp];
     
-    return [withProp autorelease];
+    return withProp;
 }
 
 - (void) parseLiteralValue:(NSString*) literalToken addToWithAST:(UIScriptASTWith*) ast {
@@ -307,7 +301,6 @@ static NSCharacterSet* curlyBrackets = nil;
     }
     NSNumberFormatter* nf = [[NSNumberFormatter alloc] init];
     NSNumber* numVal = [nf numberFromString:literalToken];
-    [nf release];
     ast.valueType = UIScriptLiteralTypeInteger;
     ast.integerValue = [numVal integerValue];
     //does not handle float/double

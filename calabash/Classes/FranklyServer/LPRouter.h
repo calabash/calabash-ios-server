@@ -8,7 +8,7 @@
 @interface LPRouter : LPHTTPConnection {
     NSMutableData *_postData;
 }
-@property (nonatomic, retain, readonly) NSData *postData;
+@property (nonatomic, readonly) NSData *postData;
 
 + (void) addRoute:(id<LPRoute>) route forPath:(NSString*) path;
 @end
