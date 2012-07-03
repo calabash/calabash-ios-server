@@ -22,13 +22,16 @@
 @interface CalabashServer()
 - (void) start;
 @end
+
 @implementation CalabashServer
+
+@synthesize httpServer;
 
 
 + (void) start {
     CalabashServer* server = [[CalabashServer alloc] init];
     [server start];
-    
+    NSLog(@"server started");
     @autoreleasepool {
         NSString *appSupportLocation = @"/System/Library/PrivateFrameworks/AppSupport.framework/AppSupport";
         
@@ -93,11 +96,10 @@
 //        [LPRouter addRoute:scr forPath:@"/screencast"];
 //        [scr release];
 //        
-
-		_httpServer = [[LPHTTPServer alloc]init];
+        self.httpServer = [[LPHTTPServer alloc]init];
 		
-		[_httpServer setName:@"Calabash Server"];
-		[_httpServer setType:@"_http._tcp."];
+		[self.httpServer setName:@"Calabash Server"];
+		[self.httpServer setType:@"_http._tcp."];
 
 		// Advertise this device's capabilities to our listeners inside of the TXT record
 		NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
@@ -114,13 +116,13 @@
 			[capabilities setObject:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"uuid"];
 		}
 
-		[_httpServer setTXTRecordDictionary:capabilities];
-		[_httpServer setConnectionClass:[LPRouter class]];
-		[_httpServer setPort:37265];
+		[self.httpServer setTXTRecordDictionary:capabilities];
+		[self.httpServer setConnectionClass:[LPRouter class]];
+		[self.httpServer setPort:37265];
         // Serve files from our embedded Web folder
 //        NSString *webPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Web"];
 //        [_httpServer setDocumentRoot:webPath];
-		NSLog( @"Creating the server: %@", _httpServer );
+		NSLog( @"Creating the server: %@", self.httpServer );
 	}
 	return self;
 }
@@ -129,7 +131,7 @@
     [self enableAccessibility];
 
     NSError *error=nil;
-	if( ![_httpServer start:&error] ) {
+	if( ![self.httpServer start:&error] ) {
 		NSLog(@"Error starting LPHTTP Server: %@",error);// %@", error);
 	}
 }

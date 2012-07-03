@@ -67,8 +67,14 @@
 		serverQueue = dispatch_queue_create("LPHTTPServer", NULL);
 		asyncSocket = [[LPGCDAsyncSocket alloc] initWithDelegate:self delegateQueue:serverQueue];
 		
-		// Use default connection class of LPHTTPConnection
-		connectionQueue = dispatch_queue_create("LPHTTPConnection", NULL);
+		
+
+        /*
+         // Use default connection class of LPHTTPConnection
+         connectionQueue = dispatch_queue_create("LPHTTPConnection", NULL);
+         */
+        
+        connectionQueue=dispatch_get_main_queue();
 		connectionClass = [LPHTTPConnection self];
 		
 		// By default bind on all available interfaces, en1, wifi etc
@@ -102,11 +108,13 @@
 		                                             name:LPHTTPConnectionDidDieNotification
 		                                           object:nil];
 		
+        /*
 		// Register for notifications of closed websocket connections
 		[[NSNotificationCenter defaultCenter] addObserver:self
 		                                         selector:@selector(webSocketDidDie:)
 		                                             name:LPWebSocketDidDieNotification
 		                                           object:nil];
+         */
 		
 		isRunning = NO;
 	}
@@ -428,7 +436,7 @@
 		if (success)
 		{
 			//HTTPLogInfo(@"%@: Started LPHTTP server on port %hu", THIS_FILE, [asyncSocket localPort]);
-			
+			NSLog(@"Started LPHTTP server on port %hu", [asyncSocket localPort]);
 			isRunning = YES;
 			[self publishBonjour];
 		}
@@ -582,8 +590,10 @@
 	if (type)
 	{
 		netService = [[NSNetService alloc] initWithDomain:domain type:type name:name port:[asyncSocket localPort]];
-		[netService setDelegate:self];
+		NSLog(@"domain = %@", domain);
+        [netService setDelegate:self];
 		
+        NSLog(@"net service = %@", netService);
 		NSNetService *theNetService = netService;
 		NSData *txtRecordData = nil;
 		if (txtRecordDictionary)
@@ -601,17 +611,22 @@
 			{
 				[theNetService setTXTRecordData:txtRecordData];
 			}
+            
 		};
 		
 		[[self class] startBonjourThreadIfNeeded];
 		[[self class] performBonjourBlock:bonjourBlock];
+        
+        
 	}
+    
 }
 
 - (void)unpublishBonjour
 {
 	//HTTPLogTrace();
-	
+
+	NSLog(@"unpublishing bonjour");
 	NSAssert(dispatch_get_current_queue() == serverQueue, @"Invalid queue");
 	
 	if (netService)
@@ -627,6 +642,7 @@
 		
 		netService = nil;
 	}
+
 }
 
 /**
@@ -636,7 +652,7 @@
 - (void)republishBonjour
 {
 	//HTTPLogTrace();
-	
+    NSLog(@"republishing bonjour");
 	dispatch_async(serverQueue, ^{
 		
 		[self unpublishBonjour];
@@ -655,6 +671,7 @@
 	// Note: This method is invoked on our bonjour thread.
 	
 	//HTTPLogInfo(@"Bonjour Service Published: domain(%@) type(%@) name(%@)", [ns domain], [ns type], [ns name]);
+    NSLog(@"Bonjour Service Published: domain(%@) type(%@) name(%@)", [ns domain], [ns type], [ns name]);
 }
 
 /**
@@ -669,6 +686,8 @@
 	
 	//HTTPLogWarn(@"Failed to Publish Service: domain(%@) type(%@) name(%@) - %@",
 	//                                        [ns domain], [ns type], [ns name], errorDict);
+    NSLog(@"Failed to Publish Service: domain(%@) type(%@) name(%@) - %@",
+                                                  [ns domain], [ns type], [ns name], errorDict);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -727,22 +746,26 @@ static NSThread *bonjourThread;
 + (void)startBonjourThreadIfNeeded
 {
 	//HTTPLogTrace();
+   
 	
 	static dispatch_once_t predicate;
 	dispatch_once(&predicate, ^{
 		
 		//HTTPLogVerbose(@"%@: Starting bonjour thread...", THIS_FILE);
-		
+		 NSLog(@"start bonjour thread if needed");
 		bonjourThread = [[NSThread alloc] initWithTarget:self
 		                                        selector:@selector(bonjourThread)
 		                                          object:nil];
+        
 		[bonjourThread start];
 	});
+    NSLog(@"bonjour thread = %@", bonjourThread);
 }
 
 + (void)bonjourThread
 {
-	@autoreleasepool {
+	
+    @autoreleasepool {
 	
 		//HTTPLogVerbose(@"%@: BonjourThread: Started", THIS_FILE);
 		

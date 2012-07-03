@@ -36,7 +36,7 @@
     NSError* error = nil;
     NSData* d = [s serializeArray:array error:&error];
     if (error) {
-        NSLog(@"Unable to serialize arrayy (%@), %@",error,array);
+        NSLog(@"Unable to serialize array (%@), %@",error,array);
     }
     NSString* res = [[NSString alloc]  initWithBytes:[d bytes]
                                               length:[d length] encoding: NSUTF8StringEncoding];
