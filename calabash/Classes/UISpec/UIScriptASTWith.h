@@ -15,22 +15,13 @@ typedef enum {
 
 
 @interface UIScriptASTWith : UIScriptAST {
-    NSString *__unsafe_unretained _selectorName;
-    SEL _selector;
-    NSObject* __unsafe_unretained _objectValue;
-    BOOL _boolValue;
-    NSInteger _integerValue;
-    
-    UIScriptLiteralType _valueType;
-    
+
+      
 }
-@property (nonatomic, unsafe_unretained) NSString *selectorName;
-@property (nonatomic,assign) SEL selector;
+@property (nonatomic, copy) NSString *selectorName;
 @property (nonatomic, assign) NSInteger timeout;
-@property (unsafe_unretained, nonatomic) NSObject *objectValue;
-@property (unsafe_unretained, nonatomic) NSObject *objectValue2;
+@property (strong, nonatomic) NSObject *objectValue;
 @property (nonatomic,assign) BOOL boolValue;
-@property (nonatomic,assign) BOOL boolValue2;
 @property (nonatomic,assign) NSInteger integerValue;
 @property (nonatomic,assign) NSInteger integerValue2;
 @property (nonatomic,assign) UIScriptLiteralType valueType;

@@ -9,7 +9,7 @@
 #import "LPHTTPDataResponse.h"
 
 @implementation LPRouter
-@synthesize postData=_postData;
+@synthesize postData;
 
 static NSMutableDictionary* routes = nil;
 
@@ -29,10 +29,10 @@ static NSMutableDictionary* routes = nil;
 }
 
 - (void)processBodyData:(NSData *)postDataChunk {
-    if (_postData == nil) {
-        _postData = [[NSMutableData alloc] initWithData:postDataChunk];
+    if (self.postData == nil) {
+        self.postData = [[NSMutableData alloc] initWithData:postDataChunk];
     } else {
-        [_postData appendData:postDataChunk];
+        [self.postData appendData:postDataChunk];
     }
 	
 }
@@ -64,8 +64,10 @@ static NSMutableDictionary* routes = nil;
             params=[super parseGetParams];
         }
         if ([method isEqualToString:@"POST"]) {
-            if (_postData != nil && [_postData length]>0) {
-                NSString* postDataAsString = [[NSString alloc] initWithBytes:[_postData bytes] length:[_postData length] encoding:NSUTF8StringEncoding];
+            if (self.postData != nil && [self.postData length]>0) {
+                NSString* postDataAsString = [[NSString alloc] initWithBytes:[self.postData bytes] 
+                                                                      length:[self.postData length]
+                                                                    encoding:NSUTF8StringEncoding];
                 params=[LPJSONUtils deserializeDictionary:postDataAsString];
             } 
         }
@@ -76,12 +78,10 @@ static NSMutableDictionary* routes = nil;
             [route setParameters:params];
         }
         
-        SEL raw = @selector(httpResponseForMethod:URI:);
-        if ([route respondsToSelector:raw]) {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-            return [route performSelector:raw withObject:method withObject:path];
-#pragma clang diagnostic pop
+        if ([route respondsToSelector:@selector(httpResponseForMethod:URI:)]) {
+            return [route performSelector:@selector(httpResponseForMethod:URI:) 
+                               withObject:method 
+                               withObject:path];
         }
         
         NSDictionary* json = [route JSONResponseForMethod:method URI:path data:params];

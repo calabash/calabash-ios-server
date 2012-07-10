@@ -48,7 +48,7 @@ typedef NSUInteger LPEJSONDeserializationOptions;
 
 @property (readwrite, nonatomic) LPCJSONScanner *scanner;
 /// Object to return instead when a null encountered in the JSON. Defaults to NSNull. Setting to null causes the scanner to skip null values.
-@property (unsafe_unretained, readwrite, nonatomic) id nullObject;
+//@property (strong, readwrite, nonatomic) id nullObject;
 /// JSON must be encoded in Unicode (UTF-8, UTF-16 or UTF-32). Use this if you expect to get the JSON in another encoding.
 @property (readwrite, nonatomic, assign) NSStringEncoding allowedEncoding;
 @property (readwrite, nonatomic, assign) LPEJSONDeserializationOptions options;
@@ -59,5 +59,9 @@ typedef NSUInteger LPEJSONDeserializationOptions;
 
 - (id)deserializeAsDictionary:(NSData *)inData error:(NSError **)outError;
 - (id)deserializeAsArray:(NSData *)inData error:(NSError **)outError;
+
+- (id)nullObject;
+- (void)setNullObject:(id)inNullObject;
+
 
 @end

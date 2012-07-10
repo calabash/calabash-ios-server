@@ -73,6 +73,7 @@
 		if (filePath == nil)
 		{
 			//HTTPLogWarn(@"%@: Init failed - Nil filePath", THIS_FILE);
+            NSLog(@"init failed - nil filepath");
 			
 			return nil;
 		}
@@ -81,7 +82,7 @@
 		if (fileAttributes == nil)
 		{
 			//HTTPLogWarn(@"%@: Init failed - Unable to get file attributes. filePath: %@", THIS_FILE, filePath);
-			
+			NSLog(@"init failed - unable to get the file attributed. file path: %@", filePath);
 			return nil;
 		}
 		

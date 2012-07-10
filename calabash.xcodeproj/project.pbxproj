@@ -129,9 +129,6 @@
 		F56BE9E015A0709500A687A6 /* LPTouchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */; };
 		F56BE9E115A0709B00A687A6 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8C14B6DAFB002A744C /* LPCDataScanner.m */; };
 		F56BE9E215A0709B00A687A6 /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
-		F56BE9E615A072FC00A687A6 /* NSString+Calabash.h in Headers */ = {isa = PBXBuildFile; fileRef = F56BE9E415A072FC00A687A6 /* NSString+Calabash.h */; };
-		F56BE9E715A072FC00A687A6 /* NSString+Calabash.m in Sources */ = {isa = PBXBuildFile; fileRef = F56BE9E515A072FC00A687A6 /* NSString+Calabash.m */; };
-		F56BE9E815A072FC00A687A6 /* NSString+Calabash.m in Sources */ = {isa = PBXBuildFile; fileRef = F56BE9E515A072FC00A687A6 /* NSString+Calabash.m */; };
 		F56BE9EA15A0741E00A687A6 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F56BE9E915A0741E00A687A6 /* CFNetwork.framework */; };
 		F56BE9EB15A0744500A687A6 /* LPMapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD214B6DB2B002A744C /* LPMapRoute.m */; };
 		F56BE9EC15A0745B00A687A6 /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; };
@@ -327,8 +324,6 @@
 		F53D791215A0651F005B0D0B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		F53D791315A0651F005B0D0B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		F53D791615A0651F005B0D0B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
-		F56BE9E415A072FC00A687A6 /* NSString+Calabash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Calabash.h"; sourceTree = "<group>"; };
-		F56BE9E515A072FC00A687A6 /* NSString+Calabash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Calabash.m"; sourceTree = "<group>"; };
 		F56BE9E915A0741E00A687A6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F5C0F9C715A1A640005E2915 /* LPDDData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDDData.h; sourceTree = "<group>"; };
 		F5C0F9C815A1A640005E2915 /* LPDDData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDDData.m; sourceTree = "<group>"; };
@@ -520,7 +515,6 @@
 			isa = PBXGroup;
 			children = (
 				F5C0F9C515A1A640005E2915 /* CocoaHttpServer */,
-				F56BE9E315A072FC00A687A6 /* Categories */,
 				B184FD8F14B6DB2B002A744C /* CocoaAsyncSocket */,
 				B184FDBC14B6DB2B002A744C /* FranklyServer */,
 				B184FDDD14B6DB2B002A744C /* JSON */,
@@ -584,11 +578,11 @@
 				B12A04001511546F002FA032 /* LPInterpolateRoute.h */,
 				B12A04011511546F002FA032 /* LPInterpolateRoute.m */,
 				B184FE8914B6DC7F002A744C /* LPMapRoute.h */,
+				B184FDD214B6DB2B002A744C /* LPMapRoute.m */,
 				B184FDD514B6DB2B002A744C /* LPPlaybackRoute.h */,
 				B184FE8A14B6DC7F002A744C /* LPPlaybackRoute.m */,
 				B184FDD714B6DB2B002A744C /* LPRecordRoute.h */,
 				B184FE8B14B6DC7F002A744C /* LPRecordRoute.m */,
-				B184FDD214B6DB2B002A744C /* LPMapRoute.m */,
 				B184FDD314B6DB2B002A744C /* LPNoContentResponse.h */,
 				B184FDD414B6DB2B002A744C /* LPNoContentResponse.m */,
 				B184FDDB14B6DB2B002A744C /* LPScreenshotRoute.h */,
@@ -707,15 +701,6 @@
 				F53D790E15A0651F005B0D0B /* calabash_arc_target-Prefix.pch */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		F56BE9E315A072FC00A687A6 /* Categories */ = {
-			isa = PBXGroup;
-			children = (
-				F56BE9E415A072FC00A687A6 /* NSString+Calabash.h */,
-				F56BE9E515A072FC00A687A6 /* NSString+Calabash.m */,
-			);
-			path = Categories;
 			sourceTree = "<group>";
 		};
 		F5C0F9C515A1A640005E2915 /* CocoaHttpServer */ = {
@@ -862,7 +847,6 @@
 				B160E8EF15321D8F00F69E7A /* LPBackdoorRoute.h in Headers */,
 				B153F55C15949F3E00867E12 /* LPVersionRoute.h in Headers */,
 				B1914DDC159C228500CB928D /* LPWebQuery.h in Headers */,
-				F56BE9E615A072FC00A687A6 /* NSString+Calabash.h in Headers */,
 				F5C0F9EB15A1A640005E2915 /* LPDDData.h in Headers */,
 				F5C0F9EE15A1A640005E2915 /* LPDDNumber.h in Headers */,
 				F5C0F9F115A1A640005E2915 /* LPDDRange.h in Headers */,
@@ -1079,7 +1063,6 @@
 				B160E8F015321D8F00F69E7A /* LPBackdoorRoute.m in Sources */,
 				B153F55D15949F3E00867E12 /* LPVersionRoute.m in Sources */,
 				B1914DDD159C228500CB928D /* LPWebQuery.m in Sources */,
-				F56BE9E715A072FC00A687A6 /* NSString+Calabash.m in Sources */,
 				F5C0F9EC15A1A640005E2915 /* LPDDData.m in Sources */,
 				F5C0F9EF15A1A640005E2915 /* LPDDNumber.m in Sources */,
 				F5C0F9F215A1A640005E2915 /* LPDDRange.m in Sources */,
@@ -1138,7 +1121,6 @@
 				F56BE9E015A0709500A687A6 /* LPTouchUtils.m in Sources */,
 				F56BE9E115A0709B00A687A6 /* LPCDataScanner.m in Sources */,
 				F56BE9E215A0709B00A687A6 /* CalabashServer.m in Sources */,
-				F56BE9E815A072FC00A687A6 /* NSString+Calabash.m in Sources */,
 				F56BE9EB15A0744500A687A6 /* LPMapRoute.m in Sources */,
 				F56BE9EC15A0745B00A687A6 /* LPOperation.m in Sources */,
 				F56BE9ED15A0747900A687A6 /* LPQueryOperation.m in Sources */,

@@ -16,24 +16,23 @@
 
 @implementation LPRecordRoute
 
+@synthesize params;
+@synthesize conn;
+
 - (void) setParameters:(NSDictionary*) parameters {
-    _params = parameters;
+    self.params = parameters;
 }
 - (void) setConnection:(LPHTTPConnection *)connection {
-    _conn = connection;
+    self.conn = connection;
 }
 
-- (void) dealloc {
-    _params=nil;
-    _conn=nil;
-}
 
 - (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path {
     return [method isEqualToString:@"POST"];
 }
 
 - (NSObject<LPHTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
-    NSString* action = [_params objectForKey:@"action"];
+    NSString* action = [self.params objectForKey:@"action"];
     if ([action isEqualToString:@"start"]) {
         [self startRecording];
         return [[LPNoContentResponse alloc] init];

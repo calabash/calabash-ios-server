@@ -963,7 +963,7 @@ static NSMutableArray *recentNonces;
     			if ([asyncSocket delegate] == self)
     			{
     				//HTTPLogWarn(@"%@[%p]: LPWebSocket forgot to set itself as socket delegate", THIS_FILE, self);
-    				
+    				NSLog(@"LPWebSocket forgot to set itself as socket delegate: %@", self);
     				// Disconnect the socket.
                     // The socketDidDisconnect delegate method will handle everything else.
     				[asyncSocket disconnect];
@@ -1599,6 +1599,7 @@ static NSMutableArray *recentNonces;
 	if (documentRoot == nil)
 	{
 		//HTTPLogWarn(@"%@[%p]: No configured document root", THIS_FILE, self);
+        //NSLog(@"document root is not configured");
 		return nil;
 	}
 	
@@ -1610,6 +1611,7 @@ static NSMutableArray *recentNonces;
 	if (docRoot == nil)
 	{
 		//HTTPLogWarn(@"%@[%p]: Document root is invalid file path", THIS_FILE, self);
+        //NSLog(@"document root is invalid");
 		return nil;
 	}
 	
@@ -1652,6 +1654,7 @@ static NSMutableArray *recentNonces;
 	if (![fullPath hasPrefix:documentRoot])
 	{
 		//HTTPLogWarn(@"%@[%p]: Request for file outside document root", THIS_FILE, self);
+        //NSLog(@"request for file outside of document root");
 		return nil;
 	}
 	
@@ -1784,7 +1787,7 @@ static NSMutableArray *recentNonces;
 	// You can also use preprocessErrorResponse: to add an optional HTML body.
 	
 	//HTTPLogWarn(@"LPHTTP Server: Error 505 - Version Not Supported: %@ (%@)", version, [self requestURI]);
-	
+	NSLog(@"LPHTTP Server: Error 505 - Version Not Supported: %@ (%@)", version, [self requestURI]);
 	LPHTTPMessage *response = [[LPHTTPMessage alloc] initResponseWithStatusCode:505 description:nil version:LPHTTPVersion1_1];
 	[response setHeaderField:@"Content-Length" value:@"0"];
     
@@ -1834,7 +1837,7 @@ static NSMutableArray *recentNonces;
 	// You can also use preprocessErrorResponse: to add an optional HTML body.
 	
 	//HTTPLogWarn(@"LPHTTP Server: Error 400 - Bad Request (%@)", [self requestURI]);
-	
+	NSLog(@"LPHTTP Server: Error 400 - Bad Request (%@)", [self requestURI]);
 	// Status Code 400 - Bad Request
 	LPHTTPMessage *response = [[LPHTTPMessage alloc] initResponseWithStatusCode:400 description:nil version:LPHTTPVersion1_1];
 	[response setHeaderField:@"Content-Length" value:@"0"];
@@ -1862,6 +1865,7 @@ static NSMutableArray *recentNonces;
 	// See also: supportsMethod:atPath:
 	
 	//HTTPLogWarn(@"LPHTTP Server: Error 405 - Method Not Allowed: %@ (%@)", method, [self requestURI]);
+    NSLog(@"LPHTTP Server: Error 405 - Method Not Allowed: %@ (%@)", method, [self requestURI]);
 	
 	// Status code 405 - Method Not Allowed
 	LPHTTPMessage *response = [[LPHTTPMessage alloc] initResponseWithStatusCode:405 description:nil version:LPHTTPVersion1_1];
@@ -2046,6 +2050,7 @@ static NSMutableArray *recentNonces;
 		if (!result)
 		{
 			//HTTPLogWarn(@"%@[%p]: Malformed request", THIS_FILE, self);
+            NSLog(@"Malformed request %@", self);
 			
 			[self handleInvalidRequest:data];
 		}
@@ -2102,6 +2107,8 @@ static NSMutableArray *recentNonces;
 					{
 						//HTTPLogWarn(@"%@[%p]: Method expects request body, but had no specified Content-Length",
 						//			THIS_FILE, self);
+                        NSLog(@"Method expects request body, but had no specified Content-Length");
+                        
 						
 						[self handleInvalidRequest:nil];
 						return;
@@ -2111,6 +2118,7 @@ static NSMutableArray *recentNonces;
 					{
 						//HTTPLogWarn(@"%@[%p]: Unable to parse Content-Length header into a valid number",
 						//			THIS_FILE, self);
+                        NSLog(@"Unable to parse Content-Length header into a valid number");
 						
 						[self handleInvalidRequest:nil];
 						return;
@@ -2128,7 +2136,8 @@ static NSMutableArray *recentNonces;
 					{
 						//HTTPLogWarn(@"%@[%p]: Unable to parse Content-Length header into a valid number",
 						//			THIS_FILE, self);
-						
+						NSLog(@"Unable to parse Content-Length header into a valid number");
+                             
 						[self handleInvalidRequest:nil];
 						return;
 					}
@@ -2137,7 +2146,8 @@ static NSMutableArray *recentNonces;
 					{
 						//HTTPLogWarn(@"%@[%p]: Method not expecting request body had non-zero Content-Length",
 						//			THIS_FILE, self);
-						
+						NSLog(@"Method not expecting request body had non-zero Content-Length");
+
 						[self handleInvalidRequest:nil];
 						return;
 					}
@@ -2240,6 +2250,7 @@ static NSMutableArray *recentNonces;
 			if (errno != 0)
 			{
 				//HTTPLogWarn(@"%@[%p]: Method expects chunk size, but received something else", THIS_FILE, self);
+                NSLog(@"Method expects chunk size, but received something else");
 				
 				[self handleInvalidRequest:nil];
 				return;
@@ -2305,7 +2316,8 @@ static NSMutableArray *recentNonces;
 			if (![data isEqualToData:[LPGCDAsyncSocket CRLFData]])
 			{
 				//HTTPLogWarn(@"%@[%p]: Method expects chunk trailer, but is missing", THIS_FILE, self);
-				
+                NSLog(@"Method expects chunk trailer, but is missing");
+            
 				[self handleInvalidRequest:nil];
 				return;
 			}
@@ -2530,6 +2542,8 @@ static NSMutableArray *recentNonces;
 		if (sender != httpResponse)
 		{
 			//HTTPLogWarn(@"%@[%p]: %@ - Sender is not current httpResponse", THIS_FILE, self, THIS_METHOD);
+            NSLog(@"Sender is not current httpResponse");
+            
 			return;
 		}
 		
@@ -2573,6 +2587,7 @@ static NSMutableArray *recentNonces;
 		if (sender != httpResponse)
 		{
 			//HTTPLogWarn(@"%@[%p]: %@ - Sender is not current httpResponse", THIS_FILE, self, THIS_METHOD);
+            NSLog(@"Sender is not current httpResponse");
 			return;
 		}
 		

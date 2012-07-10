@@ -7,11 +7,11 @@
 #import <Foundation/Foundation.h>
 
 @interface UIScriptParser : NSObject {
-    NSMutableArray *_res;
-    NSString *__unsafe_unretained _script;
+
 }
 
-@property (unsafe_unretained, nonatomic) NSString* script;
+@property (copy, nonatomic) NSString* script;
+@property (nonatomic, strong) NSMutableArray *res;
 
 - (id) initWithUIScript:(NSString*) script;
 

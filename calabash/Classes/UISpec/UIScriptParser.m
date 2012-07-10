@@ -25,19 +25,17 @@
 
 @implementation UIScriptParser
 @synthesize script=_script;
+@synthesize res = _res;
 
 - (id) initWithUIScript:(NSString*) script {
     self = [super init];
     if (self) {
         self.script = script;
-        _res = [[NSMutableArray alloc] initWithCapacity:8];
+        self.res = [[NSMutableArray alloc] initWithCapacity:8];
     }
     return self;
 }
 
-- (void) dealloc {
-    _res=nil;
-}
 
 #pragma mark Parsing
 static NSCharacterSet* colon = nil;

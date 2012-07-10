@@ -20,16 +20,18 @@
 @end
 
 @implementation LPAsyncPlaybackRoute
-@synthesize events=_events;
-@synthesize done=_done;
-@synthesize conn=_conn;
-@synthesize data=_data;
-@synthesize jsonResponse=_jsonResponse;
+@synthesize events;
+@synthesize done;
+@synthesize conn;
+@synthesize data;
+@synthesize jsonResponse;
+@synthesize bytes;
 
 -(id) init {
     self = [super init];
     if (self) {
-        _bytes = nil;
+      self.bytes = nil;
+      self.conn = nil;
     }
     return self;
 }
@@ -57,17 +59,17 @@
         return nil;//Data generated async.
     }
     else {//done is set to YES only after events and jsonResponse is set (playbackDone)
-        if (!_bytes) {
+        if (!self.bytes) {
             NSString* serialized = [LPJSONUtils serializeDictionary:self.jsonResponse];
             self.events = nil;        
             self.jsonResponse = nil;
-            _bytes = [serialized dataUsingEncoding:NSUTF8StringEncoding];    
+            self.bytes = [serialized dataUsingEncoding:NSUTF8StringEncoding];    
         }
-        if (length >= [_bytes length]) {
-            return _bytes;
+        if (length >= [self.bytes length]) {
+            return self.bytes;
         } else {//length < [_bytes length]
-            NSData *toReturn = [_bytes subdataWithRange:NSMakeRange(0, length)];
-            _bytes = [_bytes subdataWithRange:NSMakeRange(length, _bytes.length - length)];//the rest
+            NSData *toReturn = [self.bytes subdataWithRange:NSMakeRange(0, length)];
+            self.bytes = [self.bytes subdataWithRange:NSMakeRange(length, self.bytes.length - length)];//the rest
             return toReturn;
         }                
     }
@@ -212,7 +214,7 @@
     }
     
     if ([self.data objectForKey:@"reverse"]) {
-        self.events = [[_events reverseObjectEnumerator] allObjects];
+      self.events = [[self.events reverseObjectEnumerator] allObjects];
     }
     //NSLog(@"PLAY Events:\n%@",self.events);    
     NSDictionary *firstEvent = [self.events objectAtIndex:0];
@@ -260,7 +262,7 @@
 
 
 - (void) play:(NSArray *)events {
-    [[LPRecorder sharedRecorder] load: self.events];
+    [[LPRecorder sharedRecorder] load: self.events]; 
     [[LPRecorder sharedRecorder] playbackWithDelegate: self doneSelector: @selector(playbackDone:)];
     
 }
@@ -281,6 +283,8 @@
 -(void) setConnection:(LPHTTPConnection *)connection{
     self.conn = connection;
 }
+
+// part of the protocol?
 -(void) setParameters:(NSDictionary *) params {
     self.data = params;
 }

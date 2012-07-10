@@ -18,6 +18,7 @@
     NSString *selStr = [data objectForKey:@"selector"];
     SEL sel = NSSelectorFromString(selStr);
     id arg = [data objectForKey:@"arg"];
+    
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     NSString* res = [[[UIApplication sharedApplication] delegate] performSelector:sel withObject:arg];

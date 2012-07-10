@@ -176,6 +176,8 @@
 	{
 		//HTTPLogWarn(@"%@: %@ - Expecting NSString parameter, received %@ parameter",
 		//			THIS_FILE, THIS_METHOD, NSStringFromClass([value class]));
+        NSLog(@"Expecting NSString parameter, received %@ parameter", 
+              NSStringFromClass([value class]));
 		return;
 	}
 	
@@ -423,13 +425,14 @@
 #pragma mark Server Control
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
 - (BOOL)start:(NSError **)errPtr
 {
 	//HTTPLogTrace();
 	
 	__block BOOL success = YES;
 	__block NSError *err = nil;
-	
+
 	dispatch_sync(serverQueue, ^{ @autoreleasepool {
 		
 		success = [asyncSocket acceptOnInterface:interface port:port error:&err];
@@ -439,10 +442,12 @@
 			NSLog(@"Started LPHTTP server on port %hu", [asyncSocket localPort]);
 			isRunning = YES;
 			[self publishBonjour];
+            
 		}
 		else
 		{
 			//HTTPLogError(@"%@: Failed to start LPHTTP Server: %@", THIS_FILE, err);
+            NSLog(@"Failed to start LPHTTP Server: %@", err);
 		}
 	}});
 	
@@ -460,7 +465,7 @@
 - (void)stop:(BOOL)keepExistingConnections
 {
 	//HTTPLogTrace();
-	
+	NSLog(@"stopping server");
 	dispatch_sync(serverQueue, ^{ @autoreleasepool {
 		
 		// First stop publishing the service via bonjour
@@ -506,6 +511,7 @@
 
 - (void)addWebSocket:(LPWebSocket *)ws
 {
+    NSLog(@"adding web socket: %@", ws);
 	[webSocketsLock lock];
 	
 	//HTTPLogTrace();
@@ -528,7 +534,7 @@
 	[connectionsLock lock];
 	result = [connections count];
 	[connectionsLock unlock];
-	
+
 	return result;
 }
 
@@ -542,7 +548,7 @@
 	[webSocketsLock lock];
 	result = [webSockets count];
 	[webSocketsLock unlock];
-	
+
 	return result;
 }
 
@@ -590,10 +596,9 @@
 	if (type)
 	{
 		netService = [[NSNetService alloc] initWithDomain:domain type:type name:name port:[asyncSocket localPort]];
-		NSLog(@"domain = %@", domain);
+
         [netService setDelegate:self];
 		
-        NSLog(@"net service = %@", netService);
 		NSNetService *theNetService = netService;
 		NSData *txtRecordData = nil;
 		if (txtRecordDictionary)
@@ -616,8 +621,6 @@
 		
 		[[self class] startBonjourThreadIfNeeded];
 		[[self class] performBonjourBlock:bonjourBlock];
-        
-        
 	}
     
 }
@@ -701,7 +704,6 @@
 - (void)connectionDidDie:(NSNotification *)notification
 {
 	// Note: This method is called on the connection queue that posted the notification
-	
 	[connectionsLock lock];
 	
 	//HTTPLogTrace();
@@ -717,7 +719,6 @@
 - (void)webSocketDidDie:(NSNotification *)notification
 {
 	// Note: This method is called on the connection queue that posted the notification
-	
 	[webSocketsLock lock];
 	
 	//HTTPLogTrace();
@@ -752,14 +753,13 @@ static NSThread *bonjourThread;
 	dispatch_once(&predicate, ^{
 		
 		//HTTPLogVerbose(@"%@: Starting bonjour thread...", THIS_FILE);
-		 NSLog(@"start bonjour thread if needed");
 		bonjourThread = [[NSThread alloc] initWithTarget:self
 		                                        selector:@selector(bonjourThread)
 		                                          object:nil];
         
 		[bonjourThread start];
 	});
-    NSLog(@"bonjour thread = %@", bonjourThread);
+
 }
 
 + (void)bonjourThread

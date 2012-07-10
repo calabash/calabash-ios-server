@@ -31,7 +31,6 @@
 + (void) start {
     CalabashServer* server = [[CalabashServer alloc] init];
     [server start];
-    NSLog(@"server started");
     @autoreleasepool {
         NSString *appSupportLocation = @"/System/Library/PrivateFrameworks/AppSupport.framework/AppSupport";
         
@@ -120,20 +119,30 @@
 		[self.httpServer setConnectionClass:[LPRouter class]];
 		[self.httpServer setPort:37265];
         // Serve files from our embedded Web folder
-//        NSString *webPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Web"];
-//        [_httpServer setDocumentRoot:webPath];
+        //NSString *webPath = [[NSBundle mainBundle] resourcePath];
+        //[self.httpServer setDocumentRoot:webPath];
 		NSLog( @"Creating the server: %@", self.httpServer );
 	}
 	return self;
 }
 
 - (void) start {
+    
+  
+    // we need to create a retain cycle so the server will stay alive
+    __strong static id _sharedObject = nil;
+    static dispatch_once_t pred = 0;
+    
+    dispatch_once(&pred, ^{
+        _sharedObject = self;
+    });
+    
     [self enableAccessibility];
-
     NSError *error=nil;
 	if( ![self.httpServer start:&error] ) {
-		NSLog(@"Error starting LPHTTP Server: %@",error);// %@", error);
-	}
+		NSLog(@"Error starting LPHTTP Server: %@",error);
+	} 
+    
 }
 
 - (void) enableAccessibility

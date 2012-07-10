@@ -10,32 +10,29 @@
 #import "LPWebQuery.h"
 
 @implementation UIScriptASTWith
-@synthesize selectorName=_selectorName;
-@synthesize selector=_selector;
-@synthesize objectValue=_objectValue;
-@synthesize objectValue2;
-@synthesize boolValue=_boolValue;
-@synthesize boolValue2;
-@synthesize integerValue=_integerValue;
+@synthesize selectorName;
+@synthesize objectValue;
+
+@synthesize boolValue;
+
+@synthesize integerValue;
 @synthesize integerValue2;
 @synthesize timeout;
-
-@synthesize valueType=_valueType;
+@synthesize valueType;
 @synthesize valueType2;
 
-- (id)initWithSelectorName:(NSString *)selectorName {
+- (id)initWithSelectorName:(NSString *) aSelectorName {
         self = [super init];
         if (self) {
             self.valueType=UIScriptLiteralTypeUnknown;
             self.valueType2=UIScriptLiteralTypeUnknown;
-            self.selectorName = selectorName;
-            self.selector = NSSelectorFromString(selectorName);
+            self.selectorName = aSelectorName;
             self.timeout = 3;
         }
         return self;
 }
 - (NSString*) description {
-    NSString* fm = [NSString stringWithFormat:@"with %@:",NSStringFromSelector(self.selector)];
+    NSString* fm = [NSString stringWithFormat:@"with %@:", self.selectorName];
     switch (self.valueType) {
         case UIScriptLiteralTypeIndexPath:
         {
@@ -85,8 +82,7 @@
         if ([v isKindOfClass:[NSDictionary class]])
         {
             NSDictionary *dict = (NSDictionary *)v;
-            NSString *key = NSStringFromSelector(self.selector);
-            if ([[dict valueForKey:key] isEqual:self.objectValue])
+            if ([[dict valueForKey:self.selectorName] isEqual:self.objectValue])
             {
                 [res addObject:dict];
             }
@@ -140,11 +136,12 @@
                 continue;            
             }
             
-            if ([v respondsToSelector:_selector]) 
+            SEL sel = NSSelectorFromString(self.selectorName);
+            if ([v respondsToSelector:sel]) 
             {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-                id val = [v performSelector:_selector];
+                id val = [v performSelector:sel];
 #pragma clang diagnostic pop
                 switch (self.valueType) {
                     case UIScriptLiteralTypeInteger:
@@ -174,12 +171,5 @@
     }
     return res;
 }
-
-
-    
-- (void) dealloc {
-    self.selector=nil;
-}
-    
 
 @end

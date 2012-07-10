@@ -5,10 +5,9 @@
 
 #import "LPHTTPConnection.h"
 #import "LPRoute.h"
-@interface LPRouter : LPHTTPConnection {
-    NSMutableData *_postData;
-}
-@property (nonatomic, readonly) NSData *postData;
+@interface LPRouter : LPHTTPConnection 
+
+@property (nonatomic, strong) NSMutableData *postData;
 
 + (void) addRoute:(id<LPRoute>) route forPath:(NSString*) path;
 @end

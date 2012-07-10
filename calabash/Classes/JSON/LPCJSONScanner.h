@@ -38,13 +38,13 @@ typedef NSUInteger LPEJSONScannerOptions;
 /// CDataScanner subclass that understands JSON syntax natively. You should generally use CJSONDeserializer instead of this class. (TODO - this could have been a category?)
 @interface LPCJSONScanner : LPCDataScanner {
 	BOOL strictEscapeCodes;
-    id __unsafe_unretained nullObject;
+    
 	NSStringEncoding allowedEncoding;
     LPEJSONScannerOptions options;
 }
 
 @property (readwrite, nonatomic, assign) BOOL strictEscapeCodes;
-@property (unsafe_unretained, readwrite, nonatomic) id nullObject;
+@property (strong, nonatomic) id nullObject;
 @property (readwrite, nonatomic, assign) NSStringEncoding allowedEncoding;
 @property (readwrite, nonatomic, assign) LPEJSONScannerOptions options;
 
