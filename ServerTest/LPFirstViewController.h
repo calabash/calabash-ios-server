@@ -10,4 +10,7 @@
 
 @interface LPFirstViewController : UIViewController
 
+- (IBAction)buttonTouched:(id)sender forEvent:(UIEvent *)event;
+@property (unsafe_unretained, nonatomic) IBOutlet UIButton *button;
+
 @end

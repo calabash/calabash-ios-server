@@ -269,6 +269,7 @@ static NSCharacterSet* curlyBrackets = nil;
         return;
     }     
     if ([literalToken length] >= 2) {
+        NSLog(@"literal token = %@", literalToken);
         NSString* startChar = [literalToken substringToIndex:1];    
         NSString* endChar = [literalToken substringFromIndex:[literalToken length]-1];
         if ([startChar isEqualToString:@"'"]) {

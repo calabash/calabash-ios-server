@@ -8,6 +8,7 @@
 #import "LPJSONUtils.h"
 #import "LPTouchUtils.h"
 #import "LPWebQuery.h"
+#import "NSObject+LPAdditions.h"
 
 @implementation UIScriptASTWith
 @synthesize selectorName;
@@ -16,16 +17,14 @@
 @synthesize boolValue;
 
 @synthesize integerValue;
-@synthesize integerValue2;
 @synthesize timeout;
 @synthesize valueType;
-@synthesize valueType2;
+
 
 - (id)initWithSelectorName:(NSString *) aSelectorName {
         self = [super init];
         if (self) {
             self.valueType=UIScriptLiteralTypeUnknown;
-            self.valueType2=UIScriptLiteralTypeUnknown;
             self.selectorName = aSelectorName;
             self.timeout = 3;
         }
@@ -36,16 +35,23 @@
     switch (self.valueType) {
         case UIScriptLiteralTypeIndexPath:
         {
+            NSLog(@"return value type is index path");
             NSIndexPath *ip = (id)[self objectValue];
             return [NSString stringWithFormat:@"%@%d,%d",fm,[ip row],[ip section]];            
         }
 
-        case UIScriptLiteralTypeString:
+        case UIScriptLiteralTypeString: {
+            NSLog(@"return value type is string");
             return [NSString stringWithFormat:@"%@'%@'",fm,self.objectValue];
-        case UIScriptLiteralTypeInteger:
+        }
+        case UIScriptLiteralTypeInteger: {
+            NSLog(@"return value type is integer");
             return [NSString stringWithFormat:@"%@%d",fm,self.integerValue];
-        case UIScriptLiteralTypeBool:
+        }
+        case UIScriptLiteralTypeBool: {
+            NSLog(@"return value type is bool");
             return [NSString stringWithFormat:@"%@%@",fm,self.boolValue?@"YES":@"NO"];
+        }
         default:
             return @"UIScriptLiteralTypeUnknown";
     }
@@ -139,36 +145,52 @@
             SEL sel = NSSelectorFromString(self.selectorName);
             if ([v respondsToSelector:sel]) 
             {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-                id val = [v performSelector:sel];
-#pragma clang diagnostic pop
-                switch (self.valueType) {
-                    case UIScriptLiteralTypeInteger:
-                        if ((NSInteger) val == self.integerValue) {
-                            [res addObject:v];
-                        }
-                        break;
-                    case UIScriptLiteralTypeString: {
-                        if (val != nil && 
+              
+                if ([v selectorReturnsObjectOrVoid:sel]) {
+                    //NSLog(@"selector named: %@ returns void or an object: %@", self.selectorName, self);
+                    id val = [v performSelectorSafely:sel];
+                    if (self.valueType == UIScriptLiteralTypeString) {
+                        if ((val != nil) &&
                             ([(NSString*)val isEqualToString:(NSString*)self.objectValue])) {
                             [res addObject:v];
-                        } 
-                        break;
-                    }
-                    case UIScriptLiteralTypeBool:
-                        if (self.boolValue == (BOOL)val) {
-                            [res addObject:v];
                         }
-                        break;
-                    default:
-                        break;
+                    } else {
+                        continue;
+                    }
+                } else {
+                    //NSLog(@"selector named: %@ returns non object and non-void: %@", self.selectorName, self);
+                    NSMethodSignature *msig = [[v class] instanceMethodSignatureForSelector:sel];
+                    NSInvocation *inv = [NSInvocation invocationWithMethodSignature:msig];
+                    [inv setSelector:sel];
+                    [inv setTarget:v];
+                    [inv invoke];
+                                        
+                    switch (self.valueType) {
+                        case UIScriptLiteralTypeInteger: {
+                            NSInteger intVal;
+                            [inv getReturnValue:(void **)&intVal];
+                            //NSLog(@"int val = %d and self.integer value = %d", intVal, self.integerValue);
+                            if (intVal == self.integerValue) [res addObject:v];
+                            break;
+                        }
+                        case UIScriptLiteralTypeBool: {
+                            BOOL boolVal;
+                            [inv getReturnValue:(void **)&boolVal];
+                            //NSLog(@"bool val = %d and self.boolValue value = %d", boolVal, self.boolValue);
+                            if (boolVal == self.boolValue) [res addObject:v];
+                            break;
+                        }
+                        default:
+                            break;
+                    }
+        
                 }
+              
             }
             
         }
-        
     }
+
     return res;
 }
 

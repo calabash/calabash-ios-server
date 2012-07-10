@@ -13,6 +13,7 @@
 @end
 
 @implementation LPFirstViewController
+@synthesize button;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,10 +29,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    self.button.accessibilityIdentifier = @"button";
 }
 
 - (void)viewDidUnload
 {
+    [self setButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -41,4 +44,7 @@
   return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
+- (IBAction)buttonTouched:(id)sender forEvent:(UIEvent *)event {
+    NSLog(@"button touched");
+}
 @end

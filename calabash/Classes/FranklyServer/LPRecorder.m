@@ -1,6 +1,7 @@
 #import <UIKit/UIKit.h>
 
 #import "LPRecorder.h"
+#import "NSObject+LPAdditions.h"
 
 
 @interface UIApplication (Recording)
@@ -92,10 +93,24 @@
 -(void)playbackDone:(NSDictionary *)details {
 	NSLog(@"Playback complete");
     SEL doneSelector = NSSelectorFromString(self.playbackDoneSelectorName);
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-    [self.playbackDelegate performSelector:doneSelector];
-#pragma clang diagnostic pop
+    if ([self.playbackDelegate respondsToSelector:(doneSelector)]) {
+        //[s`elf.playbackDelegate performSelectorSafely:doneSelector];
+        NSMethodSignature *msig = [[self.playbackDelegate class] 
+                                   instanceMethodSignatureForSelector:doneSelector];
+        NSInvocation *inv = [NSInvocation invocationWithMethodSignature:msig];
+        [inv setSelector:doneSelector];
+        [inv setTarget:self.playbackDelegate];
+        //[inv setArgument:&details atIndex:0];
+        [inv invoke];
+    }
+
+    /*
+    if ([self.playbackDelegate selectorReturnsObjectOrVoid:doneSelector]) {
+        [self.playbackDelegate performSelectorSafely:doneSelector];
+    } else {
+        // unsure what to say here
+    }
+     */
 }
 
 - (void) dealloc {

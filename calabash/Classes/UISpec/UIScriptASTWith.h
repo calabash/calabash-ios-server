@@ -23,10 +23,8 @@ typedef enum {
 @property (strong, nonatomic) NSObject *objectValue;
 @property (nonatomic,assign) BOOL boolValue;
 @property (nonatomic,assign) NSInteger integerValue;
-@property (nonatomic,assign) NSInteger integerValue2;
 @property (nonatomic,assign) UIScriptLiteralType valueType;
-@property (nonatomic,assign) UIScriptLiteralType valueType2;
- 
 
+ 
 - (id)initWithSelectorName:(NSString *)selectorName;
 @end

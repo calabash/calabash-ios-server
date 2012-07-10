@@ -101,6 +101,10 @@
 		F53D791C15A06FBF005B0D0B /* LPGCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* LPGCDAsyncSocket.m */; };
 		F53D792E15A07001005B0D0B /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; };
 		F53D792F15A07004005B0D0B /* LPRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8714B6DBAC002A744C /* LPRecorder.m */; };
+		F5456A7615AC3D38005633C0 /* NSObject+LPAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = F5456A7415AC3D38005633C0 /* NSObject+LPAdditions.h */; };
+		F5456A7715AC3D38005633C0 /* NSObject+LPAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F5456A7515AC3D38005633C0 /* NSObject+LPAdditions.m */; };
+		F5456A7815AC3D38005633C0 /* NSObject+LPAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F5456A7515AC3D38005633C0 /* NSObject+LPAdditions.m */; };
+		F5456A7915AC3D38005633C0 /* NSObject+LPAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = F5456A7515AC3D38005633C0 /* NSObject+LPAdditions.m */; };
 		F56BE9C615A0706C00A687A6 /* LPInterpolateRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A04011511546F002FA032 /* LPInterpolateRoute.m */; };
 		F56BE9C715A0706C00A687A6 /* LPPlaybackRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8A14B6DC7F002A744C /* LPPlaybackRoute.m */; };
 		F56BE9C815A0706C00A687A6 /* LPRecordRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8B14B6DC7F002A744C /* LPRecordRoute.m */; };
@@ -324,6 +328,8 @@
 		F53D791215A0651F005B0D0B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		F53D791315A0651F005B0D0B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		F53D791615A0651F005B0D0B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		F5456A7415AC3D38005633C0 /* NSObject+LPAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LPAdditions.h"; sourceTree = "<group>"; };
+		F5456A7515AC3D38005633C0 /* NSObject+LPAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LPAdditions.m"; sourceTree = "<group>"; };
 		F56BE9E915A0741E00A687A6 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		F5C0F9C715A1A640005E2915 /* LPDDData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDDData.h; sourceTree = "<group>"; };
 		F5C0F9C815A1A640005E2915 /* LPDDData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDDData.m; sourceTree = "<group>"; };
@@ -521,6 +527,7 @@
 				B184FDF514B6DB2B002A744C /* Resources */,
 				B184FDF814B6DB2B002A744C /* UISpec */,
 				B184FE0B14B6DB2B002A744C /* Utils */,
+				F5456A7215AC3D06005633C0 /* Categories */,
 				B184FD8B14B6DAFB002A744C /* LPCDataScanner.h */,
 				B184FD8C14B6DAFB002A744C /* LPCDataScanner.m */,
 				B184FD8714B6DAE1002A744C /* CalabashServer.m */,
@@ -703,6 +710,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F5456A7215AC3D06005633C0 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				F5456A7415AC3D38005633C0 /* NSObject+LPAdditions.h */,
+				F5456A7515AC3D38005633C0 /* NSObject+LPAdditions.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 		F5C0F9C515A1A640005E2915 /* CocoaHttpServer */ = {
 			isa = PBXGroup;
 			children = (
@@ -865,6 +881,7 @@
 				F5C0FA1415A1A640005E2915 /* LPHTTPDynamicFileResponse.h in Headers */,
 				F5C0FA1715A1A640005E2915 /* LPHTTPFileResponse.h in Headers */,
 				F5C0FA1A15A1A640005E2915 /* LPHTTPRedirectResponse.h in Headers */,
+				F5456A7615AC3D38005633C0 /* NSObject+LPAdditions.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1079,6 +1096,7 @@
 				F5C0FA1515A1A640005E2915 /* LPHTTPDynamicFileResponse.m in Sources */,
 				F5C0FA1815A1A640005E2915 /* LPHTTPFileResponse.m in Sources */,
 				F5C0FA1B15A1A640005E2915 /* LPHTTPRedirectResponse.m in Sources */,
+				F5456A7715AC3D38005633C0 /* NSObject+LPAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1144,6 +1162,7 @@
 				F5C0FA1615A1A640005E2915 /* LPHTTPDynamicFileResponse.m in Sources */,
 				F5C0FA1915A1A640005E2915 /* LPHTTPFileResponse.m in Sources */,
 				F5C0FA1C15A1A640005E2915 /* LPHTTPRedirectResponse.m in Sources */,
+				F5456A7815AC3D38005633C0 /* NSObject+LPAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1155,6 +1174,7 @@
 				F5C0FA6E15A1DB71005E2915 /* LPAppDelegate.m in Sources */,
 				F5C0FA7115A1DB71005E2915 /* LPFirstViewController.m in Sources */,
 				F5C0FA7815A1DB71005E2915 /* LPSecondViewController.m in Sources */,
+				F5456A7915AC3D38005633C0 /* NSObject+LPAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

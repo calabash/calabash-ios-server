@@ -217,34 +217,41 @@
                 return [NSString stringWithFormat:@"%d", charValue];
             case '{': {
                 unsigned int length = [[invocation methodSignature] methodReturnLength];
+                /* straight up leak */
                 void *buffer = (void *)malloc(length);
                 [invocation getReturnValue:buffer];
                 NSValue *value = [[NSValue alloc] initWithBytes:buffer objCType:type];
+               
                 
                 if ([returnType rangeOfString:@"{CGRect"].location == 0)
                 {
                     CGRect *rec = (CGRect*)buffer;
-                    return [NSDictionary dictionaryWithObjectsAndKeys:
-                            [value description], @"description",
-                            [NSNumber numberWithFloat:rec->origin.x],@"x",
-                            [NSNumber numberWithFloat:rec->origin.y],@"y",
-                            [NSNumber numberWithFloat:rec->size.width],@"width",
-                            [NSNumber numberWithFloat:rec->size.height],@"height",
-                            nil];
+                    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                          [value description], @"description",
+                                          [NSNumber numberWithFloat:rec->origin.x],@"x",
+                                          [NSNumber numberWithFloat:rec->origin.y],@"y",
+                                          [NSNumber numberWithFloat:rec->size.width],@"width",
+                                          [NSNumber numberWithFloat:rec->size.height],@"height",
+                                          nil];
+                    free(buffer);
+                    return dict;
                     
                 }
                 else if ([returnType rangeOfString:@"{CGPoint="].location == 0)
                 {
                     CGPoint *point = (CGPoint*)buffer;
-                    return [NSDictionary dictionaryWithObjectsAndKeys:
-                            [value description], @"description",
-                            [NSNumber numberWithFloat:point->x],@"x",
-                            [NSNumber numberWithFloat:point->y],@"y",
-                            nil];
+                    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                          [value description], @"description",
+                                          [NSNumber numberWithFloat:point->x],@"x",
+                                          [NSNumber numberWithFloat:point->y],@"y",
+                                          nil];
+                    free(buffer);
+                    return dict;
                     
                 }
                 else
                 {
+                    free(buffer);
                     return [value description];                    
                 }
             }
