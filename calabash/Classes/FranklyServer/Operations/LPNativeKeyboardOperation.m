@@ -31,7 +31,7 @@
     }
         
 
-
+    NSLog(@"Preparing to enter: %@",characterString);
     for (UIWindow *window in [UIApplication sharedApplication].windows) 
     {
         if ([NSStringFromClass([window class]) isEqual:@"UITextEffectsWindow"]) 
@@ -41,6 +41,8 @@
         }
     }
     
+    NSLog(@"Target window: %@",view);
+    
     if (!view) 
     {
         return nil;
@@ -48,13 +50,18 @@
 
     UIScriptParser *parser = [[UIScriptParser alloc] initWithUIScript:@"view:'UIKBKeyplaneView'"];
     [parser parse];
+    
+    
     NSMutableArray* views = [NSMutableArray arrayWithObject:view];
     NSArray* result = [parser evalWith:views];
 
     if ([result count]==0) 
     {
+        NSLog(@"Found not UIKBKeyplaneView...");
+
         return nil;
     }
+    NSLog(@"Target KBKeyplane: %@",view);
 
 
     //cf KIF: https://github.com/square/KIF/blob/master/Classes/KIFTestStep.m
@@ -86,6 +93,7 @@
             NSString *representedString = [key valueForKey:@"representedString"];
             // Find the key based on the key's represented string
             if ([representedString isEqual:characterString]) {
+                NSLog(@"Target key: %@",key);
                 keyToTap = key;
             }
 
@@ -126,6 +134,7 @@
         NSArray* result = [parser evalWith:views];
         UIView *v = [result objectAtIndex:0];
         
+        NSLog(@"Entering with keyboard: %@",v);
         
         UIView *sup = [v superview];
         
@@ -150,6 +159,9 @@
         
         NSLog(@"Point: %@",NSStringFromCGPoint(point));   
         return keyboardView;
+    }
+    else {
+        NSLog(@"Found no key: %@",characterString);
     }
     return nil;
 }

@@ -1203,7 +1203,7 @@ static NSMutableArray *recentNonces;
 		{
 			status = [httpResponse status];
 		}
-		response = [[LPHTTPMessage alloc] initResponseWithStatusCode:status description:nil version:LPHTTPVersion1_1];
+		response = [[LPHTTPMessage alloc] initResponseWithStatusCode:status description:@"OK" version:LPHTTPVersion1_1];
 		
 		if (isChunked)
 		{
