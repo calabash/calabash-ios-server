@@ -3,4 +3,4 @@ calabash.xcodeproj/xcuserdata/
 Markdown.pl
 .irb-history
 screenshot_*.png
-
+*.framework
