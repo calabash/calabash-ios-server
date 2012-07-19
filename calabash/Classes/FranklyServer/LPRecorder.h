@@ -1,12 +1,15 @@
 #import <Foundation/Foundation.h>
 
 @interface LPRecorder : NSObject {
-	NSMutableArray* eventList;
-	id playbackDelegate;
-	SEL playbackDoneSelector;
-    BOOL _isRecording;
+
 }
-@property (nonatomic, readonly) BOOL isRecording;
+
+
+@property (nonatomic, strong) id playbackDelegate;
+@property (nonatomic, strong) NSMutableArray *eventList;
+@property (nonatomic, copy) NSString *playbackDoneSelectorName;
+@property (nonatomic, assign) BOOL isRecording;
+
 +(LPRecorder *)sharedRecorder;
 -(void)record;
 -(void)saveToFile:(NSString*)path;

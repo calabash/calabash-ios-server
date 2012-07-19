@@ -22,36 +22,38 @@
 @interface CalabashServer()
 - (void) start;
 @end
+
 @implementation CalabashServer
+
+@synthesize httpServer;
 
 
 + (void) start {
     CalabashServer* server = [[CalabashServer alloc] init];
     [server start];
-    
-    NSAutoreleasePool *autoreleasePool = [[NSAutoreleasePool alloc] init];
-    NSString *appSupportLocation = @"/System/Library/PrivateFrameworks/AppSupport.framework/AppSupport";
-    
-    NSDictionary *environment = [[NSProcessInfo processInfo] environment];
-    NSString *simulatorRoot = [environment objectForKey:@"IPHONE_SIMULATOR_ROOT"];
-    if (simulatorRoot) {
-        appSupportLocation = [simulatorRoot stringByAppendingString:appSupportLocation];
-    }
-    
-    void *appSupportLibrary = dlopen([appSupportLocation fileSystemRepresentation], RTLD_LAZY);
-    
-    CFStringRef (*copySharedResourcesPreferencesDomainForDomain)(CFStringRef domain) = dlsym(appSupportLibrary, "CPCopySharedResourcesPreferencesDomainForDomain");    
-    
-    if (copySharedResourcesPreferencesDomainForDomain) {
-        CFStringRef accessibilityDomain = copySharedResourcesPreferencesDomainForDomain(CFSTR("com.apple.Accessibility"));
+    @autoreleasepool {
+        NSString *appSupportLocation = @"/System/Library/PrivateFrameworks/AppSupport.framework/AppSupport";
         
-        if (accessibilityDomain) {
-            CFPreferencesSetValue(CFSTR("ApplicationAccessibilityEnabled"), kCFBooleanTrue, accessibilityDomain, kCFPreferencesAnyUser, kCFPreferencesAnyHost);
-            CFRelease(accessibilityDomain);
+        NSDictionary *environment = [[NSProcessInfo processInfo] environment];
+        NSString *simulatorRoot = [environment objectForKey:@"IPHONE_SIMULATOR_ROOT"];
+        if (simulatorRoot) {
+            appSupportLocation = [simulatorRoot stringByAppendingString:appSupportLocation];
         }
-    }
+        
+        void *appSupportLibrary = dlopen([appSupportLocation fileSystemRepresentation], RTLD_LAZY);
+        
+        CFStringRef (*copySharedResourcesPreferencesDomainForDomain)(CFStringRef domain) = dlsym(appSupportLibrary, "CPCopySharedResourcesPreferencesDomainForDomain");    
+        
+        if (copySharedResourcesPreferencesDomainForDomain) {
+            CFStringRef accessibilityDomain = copySharedResourcesPreferencesDomainForDomain(CFSTR("com.apple.Accessibility"));
+            
+            if (accessibilityDomain) {
+                CFPreferencesSetValue(CFSTR("ApplicationAccessibilityEnabled"), kCFBooleanTrue, accessibilityDomain, kCFPreferencesAnyUser, kCFPreferencesAnyHost);
+                CFRelease(accessibilityDomain);
+            }
+        }
     
-    [autoreleasePool drain];
+    }
 
 }
 
@@ -62,14 +64,11 @@
 		
         LPMapRoute* mr = [LPMapRoute new];
         [LPRouter addRoute:mr forPath:@"/map"];
-        [mr release];
         LPScreenshotRoute *sr =[LPScreenshotRoute new];
         [LPRouter addRoute:sr forPath:@"/screenshot"];
-        [sr release];
 
         LPRecordRoute *rr =[LPRecordRoute new];
         [LPRouter addRoute:rr forPath:@"/record"];
-        [rr release];
 
 //        LPPlaybackRoute *pr =[LPPlaybackRoute new];
 //        [LPRouter addRoute:pr forPath:@"/play"];
@@ -77,23 +76,18 @@
 //        
         LPAsyncPlaybackRoute *apr =[LPAsyncPlaybackRoute new];
         [LPRouter addRoute:apr forPath:@"/play"];
-        [apr release];
 
         LPBackgroundRoute *bgr =[LPBackgroundRoute new];
         [LPRouter addRoute:bgr forPath:@"/background"];
-        [bgr release];
 
         LPInterpolateRoute *panr =[LPInterpolateRoute new];
         [LPRouter addRoute:panr forPath:@"/interpolate"];
-        [panr release];
         
         LPBackdoorRoute* backdr = [LPBackdoorRoute new];
         [LPRouter addRoute:backdr forPath:@"/backdoor"];
-        [backdr release];
 
         LPVersionRoute* verr = [LPVersionRoute new];
         [LPRouter addRoute:verr forPath:@"/version"];
-        [verr release];
 
 
 //        
@@ -101,11 +95,10 @@
 //        [LPRouter addRoute:scr forPath:@"/screencast"];
 //        [scr release];
 //        
-
-		_httpServer = [[[LPHTTPServer alloc]init] retain];
+        self.httpServer = [[LPHTTPServer alloc]init];
 		
-		[_httpServer setName:@"Calabash Server"];
-		[_httpServer setType:@"_http._tcp."];
+		[self.httpServer setName:@"Calabash Server"];
+		[self.httpServer setType:@"_http._tcp."];
 
 		// Advertise this device's capabilities to our listeners inside of the TXT record
 		NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
@@ -122,24 +115,34 @@
 			[capabilities setObject:[[UIDevice currentDevice] uniqueIdentifier] forKey:@"uuid"];
 		}
 
-		[_httpServer setTXTRecordDictionary:capabilities];
-		[_httpServer setConnectionClass:[LPRouter class]];
-		[_httpServer setPort:37265];
+		[self.httpServer setTXTRecordDictionary:capabilities];
+		[self.httpServer setConnectionClass:[LPRouter class]];
+		[self.httpServer setPort:37265];
         // Serve files from our embedded Web folder
-//        NSString *webPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Web"];
-//        [_httpServer setDocumentRoot:webPath];
-		NSLog( @"Creating the server: %@", _httpServer );
+        //NSString *webPath = [[NSBundle mainBundle] resourcePath];
+        //[self.httpServer setDocumentRoot:webPath];
+		NSLog( @"Creating the server: %@", self.httpServer );
 	}
 	return self;
 }
 
 - (void) start {
+    
+  
+    // we need to create a retain cycle so the server will stay alive
+    __strong static id _sharedObject = nil;
+    static dispatch_once_t pred = 0;
+    
+    dispatch_once(&pred, ^{
+        _sharedObject = self;
+    });
+    
     [self enableAccessibility];
-
     NSError *error=nil;
-	if( ![_httpServer start:&error] ) {
-		NSLog(@"Error starting LPHTTP Server: %@",error);// %@", error);
-	}
+	if( ![self.httpServer start:&error] ) {
+		NSLog(@"Error starting LPHTTP Server: %@",error);
+	} 
+    
 }
 
 - (void) enableAccessibility
@@ -186,11 +189,6 @@
     }
 }
 
-- (void) dealloc
-{
-	[_httpServer release];
-	[super dealloc];
-}
 
 
 @end

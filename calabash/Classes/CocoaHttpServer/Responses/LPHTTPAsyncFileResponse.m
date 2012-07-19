@@ -1,9 +1,44 @@
 #import "LPHTTPAsyncFileResponse.h"
 #import "LPHTTPConnection.h"
-
+#import "LPHTTPLogging.h"
 
 #import <unistd.h>
 #import <fcntl.h>
+
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
+/**
+ * Does ARC support support LPGCD objects?
+ * It does if the minimum deployment target is iOS 6+ or Mac OS X 8+
+**/
+#if TARGET_OS_IPHONE
+
+  // Compiling for iOS
+
+  #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000 // iOS 6.0 or later
+    #define NEEDS_DISPATCH_RETAIN_RELEASE 0
+  #else                                         // iOS 5.X or earlier
+    #define NEEDS_DISPATCH_RETAIN_RELEASE 1
+  #endif
+
+#else
+
+  // Compiling for Mac OS X
+
+  #if MAC_OS_X_VERSION_MIN_REQUIRED >= 1080     // Mac OS X 10.8 or later
+    #define NEEDS_DISPATCH_RETAIN_RELEASE 0
+  #else
+    #define NEEDS_DISPATCH_RETAIN_RELEASE 1     // Mac OS X 10.7 or earlier
+  #endif
+
+#endif
+
+// Log levels : off, error, warn, info, verbose
+// Other flags: trace
+//static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
+
 #define NULL_FD  -1
 
 /**
@@ -29,6 +64,7 @@
 {
 	if ((self = [super init]))
 	{
+		//HTTPLogTrace();
 		
 		connection = parent; // Parents retain children, children do NOT retain parents
 		
@@ -36,16 +72,17 @@
 		filePath = [fpath copy];
 		if (filePath == nil)
 		{
+			//HTTPLogWarn(@"%@: Init failed - Nil filePath", THIS_FILE);
+            NSLog(@"init failed - nil filepath");
 			
-			[self release];
 			return nil;
 		}
 		
 		NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:NULL];
 		if (fileAttributes == nil)
 		{
-			
-			[self release];
+			//HTTPLogWarn(@"%@: Init failed - Unable to get file attributes. filePath: %@", THIS_FILE, filePath);
+			NSLog(@"init failed - unable to get the file attributed. file path: %@", filePath);
 			return nil;
 		}
 		
@@ -62,7 +99,7 @@
 
 - (void)abort
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	[connection responseDidAbort:self];
 	aborted = YES;
@@ -91,7 +128,7 @@
 {
 	if (!readSourceSuspended)
 	{
-		//LPHTTPLogVerbose(@"%@[%p]: Suspending readSource", THIS_FILE, self);
+		//HTTPLogVerbose(@"%@[%p]: Suspending readSource", THIS_FILE, self);
 		
 		readSourceSuspended = YES;
 		dispatch_suspend(readSource);
@@ -102,7 +139,7 @@
 {
 	if (readSourceSuspended)
 	{
-		//LPHTTPLogVerbose(@"%@[%p]: Resuming readSource", THIS_FILE, self);
+		//HTTPLogVerbose(@"%@[%p]: Resuming readSource", THIS_FILE, self);
 		
 		readSourceSuspended = NO;
 		dispatch_resume(readSource);
@@ -111,7 +148,7 @@
 
 - (void)cancelReadSource
 {
-	//LPHTTPLogVerbose(@"%@[%p]: Canceling readSource", THIS_FILE, self);
+	//HTTPLogVerbose(@"%@[%p]: Canceling readSource", THIS_FILE, self);
 	
 	dispatch_source_cancel(readSource);
 	
@@ -127,17 +164,17 @@
 
 - (BOOL)openFileAndSetupReadSource
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	fileFD = open([filePath UTF8String], (O_RDONLY | O_NONBLOCK));
 	if (fileFD == NULL_FD)
 	{
-		//LPHTTPLogError(@"%@: Unable to open file. filePath: %@", THIS_FILE, filePath);
+		//HTTPLogError(@"%@: Unable to open file. filePath: %@", THIS_FILE, filePath);
 		
 		return NO;
 	}
 	
-	//LPHTTPLogVerbose(@"%@[%p]: Open fd[%i] -> %@", THIS_FILE, self, fileFD, filePath);
+	//HTTPLogVerbose(@"%@[%p]: Open fd[%i] -> %@", THIS_FILE, self, fileFD, filePath);
 	
 	readQueue = dispatch_queue_create("LPHTTPAsyncFileResponse", NULL);
 	readSource = dispatch_source_create(DISPATCH_SOURCE_TYPE_READ, fileFD, 0, readQueue);
@@ -145,7 +182,7 @@
 	
 	dispatch_source_set_event_handler(readSource, ^{
 		
-		//LPHTTPLogTrace2(@"%@: eventBlock - fd[%i]", THIS_FILE, fileFD);
+		//HTTPLogTrace2(@"%@: eventBlock - fd[%i]", THIS_FILE, fileFD);
 		
 		// Determine how much data we should read.
 		// 
@@ -178,7 +215,7 @@
 			
 			if (readBuffer == NULL)
 			{
-				//LPHTTPLogError(@"%@[%p]: Unable to allocate buffer", THIS_FILE, self);
+				//HTTPLogError(@"%@[%p]: Unable to allocate buffer", THIS_FILE, self);
 				
 				[self pauseReadSource];
 				[self abort];
@@ -189,28 +226,28 @@
 		
 		// Perform the read
 		
-		//LPHTTPLogVerbose(@"%@[%p]: Attempting to read %lu bytes from file", THIS_FILE, self, bytesToRead);
+		//HTTPLogVerbose(@"%@[%p]: Attempting to read %lu bytes from file", THIS_FILE, self, (unsigned long)bytesToRead);
 		
 		ssize_t result = read(fileFD, readBuffer + readBufferOffset, (size_t)bytesToRead);
 		
 		// Check the results
 		if (result < 0)
 		{
-			//LPHTTPLogError(@"%@: Error(%i) reading file(%@)", THIS_FILE, errno, filePath);
+			//HTTPLogError(@"%@: Error(%i) reading file(%@)", THIS_FILE, errno, filePath);
 			
 			[self pauseReadSource];
 			[self abort];
 		}
 		else if (result == 0)
 		{
-			//LPHTTPLogError(@"%@: Read EOF on file(%@)", THIS_FILE, filePath);
+			//HTTPLogError(@"%@: Read EOF on file(%@)", THIS_FILE, filePath);
 			
 			[self pauseReadSource];
 			[self abort];
 		}
 		else // (result > 0)
 		{
-			//LPHTTPLogVerbose(@"%@[%p]: Read %d bytes from file", THIS_FILE, self, result);
+			//HTTPLogVerbose(@"%@[%p]: Read %lu bytes from file", THIS_FILE, self, (unsigned long)result);
 			
 			readOffset += result;
 			readBufferOffset += result;
@@ -222,7 +259,9 @@
 	});
 	
 	int theFileFD = fileFD;
+	#if NEEDS_DISPATCH_RETAIN_RELEASE
 	dispatch_source_t theReadSource = readSource;
+	#endif
 	
 	dispatch_source_set_cancel_handler(readSource, ^{
 		
@@ -230,9 +269,11 @@
 		// 
 		// Note: You access self if you reference an iVar.
 		
-		//LPHTTPLogTrace2(@"%@: cancelBlock - Close fd[%i]", THIS_FILE, theFileFD);
+		//HTTPLogTrace2(@"%@: cancelBlock - Close fd[%i]", THIS_FILE, theFileFD);
 		
+		#if NEEDS_DISPATCH_RETAIN_RELEASE
 		dispatch_release(theReadSource);
+		#endif
 		close(theFileFD);
 	});
 	
@@ -262,21 +303,21 @@
 
 - (UInt64)contentLength
 {
-	//LPHTTPLogTrace2(@"%@[%p]: contentLength - %llu", THIS_FILE, self, fileLength);
+	//HTTPLogTrace2(@"%@[%p]: contentLength - %llu", THIS_FILE, self, fileLength);
 	
 	return fileLength;
 }
 
 - (UInt64)offset
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	return fileOffset;
 }
 
 - (void)setOffset:(UInt64)offset
 {
-	//LPHTTPLogTrace2(@"%@[%p]: setOffset:%llu", THIS_FILE, self, offset);
+	//HTTPLogTrace2(@"%@[%p]: setOffset:%llu", THIS_FILE, self, offset);
 	
 	if (![self openFileIfNeeded])
 	{
@@ -291,7 +332,7 @@
 	off_t result = lseek(fileFD, (off_t)offset, SEEK_SET);
 	if (result == -1)
 	{
-		//LPHTTPLogError(@"%@[%p]: lseek failed - errno(%i) filePath(%@)", THIS_FILE, self, errno, filePath);
+		//HTTPLogError(@"%@[%p]: lseek failed - errno(%i) filePath(%@)", THIS_FILE, self, errno, filePath);
 		
 		[self abort];
 	}
@@ -299,20 +340,20 @@
 
 - (NSData *)readDataOfLength:(NSUInteger)length
 {
-	//LPHTTPLogTrace2(@"%@[%p]: readDataOfLength:%lu", THIS_FILE, self, (unsigned long)length);
+	//HTTPLogTrace2(@"%@[%p]: readDataOfLength:%lu", THIS_FILE, self, (unsigned long)length);
 	
 	if (data)
 	{
 		NSUInteger dataLength = [data length];
 		
-		//LPHTTPLogVerbose(@"%@[%p]: Returning data of length %lu", THIS_FILE, self, dataLength);
+		//HTTPLogVerbose(@"%@[%p]: Returning data of length %lu", THIS_FILE, self, (unsigned long)dataLength);
 		
 		fileOffset += dataLength;
 		
 		NSData *result = data;
 		data = nil;
 		
-		return [result autorelease];
+		return result;
 	}
 	else
 	{
@@ -339,7 +380,7 @@
 {
 	BOOL result = (fileOffset == fileLength);
 	
-	//LPHTTPLogTrace2(@"%@[%p]: isDone - %@", THIS_FILE, self, (result ? @"YES" : @"NO"));
+	//HTTPLogTrace2(@"%@[%p]: isDone - %@", THIS_FILE, self, (result ? @"YES" : @"NO"));
 	
 	return result;
 }
@@ -351,14 +392,14 @@
 
 - (BOOL)isAsynchronous
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	return YES;
 }
 
 - (void)connectionDidClose
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	if (fileFD != NULL_FD)
 	{
@@ -378,18 +419,14 @@
 
 - (void)dealloc
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
-	if (readQueue)
-		dispatch_release(readQueue);
+	#if NEEDS_DISPATCH_RETAIN_RELEASE
+	if (readQueue) dispatch_release(readQueue);
+	#endif
 	
 	if (readBuffer)
 		free(readBuffer);
-	
-	[filePath release];
-	[data release];
-	
-	[super dealloc];
 }
 
 @end

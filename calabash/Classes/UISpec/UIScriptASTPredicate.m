@@ -10,8 +10,8 @@
 #import "LPTouchUtils.h"
 
 @implementation UIScriptASTPredicate
-@synthesize predicate=_predicate;
-@synthesize selector=_selector;
+@synthesize predicate;
+@synthesize selector;
 
 -(id) initWithPredicate:(NSPredicate *)pred selector:(SEL) sel {
     self = [super init];
@@ -38,9 +38,5 @@
     return res;
 }
 
-- (void) dealloc {
-    self.predicate=nil;
-    [super dealloc];
-}
 
 @end

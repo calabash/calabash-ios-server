@@ -10,8 +10,8 @@
 #import "UIScriptParser.h"
 #import "LPTouchUtils.h"
 @implementation LPPlaybackRoute
-@synthesize events=_events;
-@synthesize done=_done;
+@synthesize events;
+@synthesize done;
 
 - (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path {
     return [method isEqualToString:@"POST"];
@@ -68,7 +68,7 @@
     }
     
     if ([data objectForKey:@"reverse"]) {
-        self.events = [[_events reverseObjectEnumerator] allObjects];
+        self.events = [[self.events reverseObjectEnumerator] allObjects];
     }
 //NSLog(@"PLAY Events:\n%@",self.events);    
     NSDictionary *firstEvent = [self.events objectAtIndex:0];
@@ -112,7 +112,7 @@
                               
 }
 -(void) play:(NSArray *)events {
-    _done = NO;
+    self.done = NO;
     [[LPRecorder sharedRecorder] load: self.events];
     [[LPRecorder sharedRecorder] playbackWithDelegate: self doneSelector: @selector(playbackDone:)];
 //    [self waitUntilPlaybackDone];
@@ -125,7 +125,7 @@
 //}
      
 -(void) playbackDone:(NSDictionary *)details {
-    _done = YES;
+    self.done = YES;
     self.events=nil;
 }
      

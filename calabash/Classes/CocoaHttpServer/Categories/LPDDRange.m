@@ -1,5 +1,5 @@
-#import "DDRange.h"
-#import "DDNumber.h"
+#import "LPDDRange.h"
+#import "LPDDNumber.h"
 
 LPDDRange LPDDUnionRange(LPDDRange range1, LPDDRange range2)
 {
@@ -79,7 +79,7 @@ NSInteger LPDDRangeCompare(LPDDRangePointer pDDRange1, LPDDRangePointer pDDRange
 	return NSOrderedSame;
 }
 
-@implementation NSValue (LPNSValueDDRangeExtensions)
+@implementation NSValue (NSValueDDRangeExtensions)
 
 + (NSValue *)valueWithDDRange:(LPDDRange)range
 {

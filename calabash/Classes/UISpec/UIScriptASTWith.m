@@ -8,47 +8,50 @@
 #import "LPJSONUtils.h"
 #import "LPTouchUtils.h"
 #import "LPWebQuery.h"
+#import "NSObject+LPAdditions.h"
 
 @implementation UIScriptASTWith
-@synthesize selectorName=_selectorName;
-@synthesize selector=_selector;
-@synthesize objectValue=_objectValue;
-@synthesize objectValue2;
-@synthesize boolValue=_boolValue;
-@synthesize boolValue2;
-@synthesize integerValue=_integerValue;
-@synthesize integerValue2;
+@synthesize selectorName;
+@synthesize objectValue;
+
+@synthesize boolValue;
+
+@synthesize integerValue;
 @synthesize timeout;
+@synthesize valueType;
 
-@synthesize valueType=_valueType;
-@synthesize valueType2;
 
-- (id)initWithSelectorName:(NSString *)selectorName {
+- (id)initWithSelectorName:(NSString *) aSelectorName {
         self = [super init];
         if (self) {
             self.valueType=UIScriptLiteralTypeUnknown;
-            self.valueType2=UIScriptLiteralTypeUnknown;
-            self.selectorName = selectorName;
-            self.selector = NSSelectorFromString(selectorName);
+            self.selectorName = aSelectorName;
             self.timeout = 3;
         }
         return self;
 }
 - (NSString*) description {
-    NSString* fm = [NSString stringWithFormat:@"with %@:",NSStringFromSelector(self.selector)];
+    NSString* fm = [NSString stringWithFormat:@"with %@:", self.selectorName];
     switch (self.valueType) {
         case UIScriptLiteralTypeIndexPath:
         {
+            NSLog(@"return value type is index path");
             NSIndexPath *ip = (id)[self objectValue];
             return [NSString stringWithFormat:@"%@%d,%d",fm,[ip row],[ip section]];            
         }
 
-        case UIScriptLiteralTypeString:
+        case UIScriptLiteralTypeString: {
+            NSLog(@"return value type is string");
             return [NSString stringWithFormat:@"%@'%@'",fm,self.objectValue];
-        case UIScriptLiteralTypeInteger:
+        }
+        case UIScriptLiteralTypeInteger: {
+            NSLog(@"return value type is integer");
             return [NSString stringWithFormat:@"%@%d",fm,self.integerValue];
-        case UIScriptLiteralTypeBool:
+        }
+        case UIScriptLiteralTypeBool: {
+            NSLog(@"return value type is bool");
             return [NSString stringWithFormat:@"%@%@",fm,self.boolValue?@"YES":@"NO"];
+        }
         default:
             return @"UIScriptLiteralTypeUnknown";
     }
@@ -85,8 +88,7 @@
         if ([v isKindOfClass:[NSDictionary class]])
         {
             NSDictionary *dict = (NSDictionary *)v;
-            NSString *key = NSStringFromSelector(self.selector);
-            if ([[dict valueForKey:key] isEqual:self.objectValue])
+            if ([[dict valueForKey:self.selectorName] isEqual:self.objectValue])
             {
                 [res addObject:dict];
             }
@@ -140,45 +142,56 @@
                 continue;            
             }
             
-            if ([v respondsToSelector:_selector]) 
+            SEL sel = NSSelectorFromString(self.selectorName);
+            if ([v respondsToSelector:sel]) 
             {
-                void* val = [v performSelector:_selector];
-                switch (self.valueType) {
-                    case UIScriptLiteralTypeInteger:
-                        if ((NSInteger) val == self.integerValue) {
-                            [res addObject:v];
-                        }
-                        break;
-                    case UIScriptLiteralTypeString: {
-                        if (val != nil && 
+              
+                if ([v selectorReturnsObjectOrVoid:sel]) {
+                    //NSLog(@"selector named: %@ returns void or an object: %@", self.selectorName, self);
+                    id val = [v performSelectorSafely:sel];
+                    if (self.valueType == UIScriptLiteralTypeString) {
+                        if ((val != nil) &&
                             ([(NSString*)val isEqualToString:(NSString*)self.objectValue])) {
                             [res addObject:v];
-                        } 
-                        break;
-                    }
-                    case UIScriptLiteralTypeBool:
-                        if (self.boolValue == (BOOL)val) {
-                            [res addObject:v];
                         }
-                        break;
-                    default:
-                        break;
+                    } else {
+                        continue;
+                    }
+                } else {
+                    //NSLog(@"selector named: %@ returns non object and non-void: %@", self.selectorName, self);
+                    NSMethodSignature *msig = [[v class] instanceMethodSignatureForSelector:sel];
+                    NSInvocation *inv = [NSInvocation invocationWithMethodSignature:msig];
+                    [inv setSelector:sel];
+                    [inv setTarget:v];
+                    [inv invoke];
+                                        
+                    switch (self.valueType) {
+                        case UIScriptLiteralTypeInteger: {
+                            NSInteger intVal;
+                            [inv getReturnValue:(void **)&intVal];
+                            //NSLog(@"int val = %d and self.integer value = %d", intVal, self.integerValue);
+                            if (intVal == self.integerValue) [res addObject:v];
+                            break;
+                        }
+                        case UIScriptLiteralTypeBool: {
+                            BOOL boolVal;
+                            [inv getReturnValue:(void **)&boolVal];
+                            //NSLog(@"bool val = %d and self.boolValue value = %d", boolVal, self.boolValue);
+                            if (boolVal == self.boolValue) [res addObject:v];
+                            break;
+                        }
+                        default:
+                            break;
+                    }
+        
                 }
+              
             }
             
         }
-        
     }
+
     return res;
 }
-
-
-    
-- (void) dealloc {
-    self.selector=nil;
-    [_objectValue release];_objectValue=nil;
-    [super dealloc];
-}
-    
 
 @end

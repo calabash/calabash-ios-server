@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 
 @class LPGCDAsyncSocket;
-
+@class LPWebSocket;
 
 #if TARGET_OS_IPHONE
   #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 40000 // iPhone 4.0
@@ -193,7 +193,7 @@
 
 - (BOOL)isRunning;
 
-
+- (void)addWebSocket:(LPWebSocket *)ws;
 
 - (NSUInteger)numberOfHTTPConnections;
 - (NSUInteger)numberOfWebSocketConnections;

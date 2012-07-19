@@ -14,13 +14,12 @@
 @end
 
 @implementation UIScriptASTClassName
-@synthesize className=_className;
+@synthesize className;
 
-- (id) initWithClassName:(NSString *)className {
+- (id) initWithClassName:(NSString *) aClassName {
     self = [super init];
     if (self) {
-        _className = [className retain];
-        _class = NSClassFromString(self.className);
+        self.className = aClassName;
     }
     return self;
 }
@@ -65,18 +64,44 @@ static NSInteger sortFunction(UIView* v1, UIView* v2, void *ctx) {
     
 }
 - (void) evalDescWith:(UIView*) view result:(NSMutableArray*) res {
-    if ([view isKindOfClass:_class]) {
+    if ([view isKindOfClass:NSClassFromString(self.className)]) {
         [res addObject:view];
     }
     
+    NSArray *subviews = [view subviews];
+    NSArray *sorted = [subviews sortedArrayUsingComparator:^NSComparisonResult(UIView* v1, UIView* v2) {
+        CGPoint p1 = v1.frame.origin;
+        CGPoint p2 = v2.frame.origin;
+        if (p1.x < p2.x) {
+            return -1;
+        } else if (p1.x == p2.x) {
+            if (p1.y < p2.y) {
+                return -1;
+            } else if (p1.y == p2.y) {
+                return 0;
+            } else {
+                return 1;
+            }
+        } else {
+            return 1;
+        }
+    }];
+    
+    [sorted enumerateObjectsUsingBlock:^(UIView *sv, NSUInteger idx, BOOL *stop) {
+        [self evalDescWith:sv result:res]; 
+    }];
+    
+    /*
     for (UIView* subview in [[view subviews] sortedArrayUsingFunction:sortFunction context:view] ) {
         [self evalDescWith:subview result:res];
     }
+     */
     
 }
 - (void) evalChildWith:(UIView*) view result:(NSMutableArray*) res {
+    Class theClass = NSClassFromString(self.className);
     for (UIView* childView in [view subviews]) {
-        if ([childView isKindOfClass:_class]) {
+        if ([childView isKindOfClass:theClass]) {
             [res addObject:childView];
         }
     }
@@ -85,9 +110,10 @@ static NSInteger sortFunction(UIView* v1, UIView* v2, void *ctx) {
 //    if ([view isKindOfClass:_class]) {
 //        [res addObject:view];
 //    }
+    Class theClass = NSClassFromString(self.className);
     //I guess view itself isnt part of parents.
     UIView* parentView = [view superview];
-    if ([parentView isKindOfClass:_class]) {
+    if ([parentView isKindOfClass:theClass]) {
         [res addObject:parentView];
     }
     
@@ -100,12 +126,6 @@ static NSInteger sortFunction(UIView* v1, UIView* v2, void *ctx) {
 
 - (NSString*) description {
     return [NSString stringWithFormat:@"view:'%@'",self.className];
-}
-
-- (void) dealloc {
-    _class = NULL;
-    [_className dealloc];_className=nil;
-    [super dealloc];
 }
 
 @end

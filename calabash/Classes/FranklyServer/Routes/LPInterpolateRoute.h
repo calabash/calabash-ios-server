@@ -12,21 +12,16 @@
 
 @interface LPInterpolateRoute : NSObject<LPRoute,LPHTTPResponse> 
 {    
-    BOOL _done;
-    NSArray *_events;
-    LPHTTPConnection *_conn;
-    NSDictionary *_data;
-    NSDictionary *_jsonResponse;
-    
-    NSData *_bytes;
     
 }
 
-@property (nonatomic, retain) NSArray *events;
+
+@property (strong, nonatomic) NSArray *events;
 @property (nonatomic, assign) BOOL done;
-@property (nonatomic, assign) LPHTTPConnection *conn;
-@property (nonatomic, retain) NSDictionary *data;
-@property (nonatomic, retain) NSDictionary *jsonResponse;
+@property (nonatomic, strong) LPHTTPConnection *conn;
+@property (strong, nonatomic) NSDictionary *data;
+@property (strong, nonatomic) NSDictionary *jsonResponse;
+@property (strong, nonatomic) NSData *bytes;
 
 - (void) play:(NSArray *)events;
 

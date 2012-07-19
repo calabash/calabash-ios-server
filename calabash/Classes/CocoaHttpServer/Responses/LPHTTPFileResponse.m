@@ -1,9 +1,17 @@
 #import "LPHTTPFileResponse.h"
 #import "LPHTTPConnection.h"
+#import "LPHTTPLogging.h"
 
 #import <unistd.h>
 #import <fcntl.h>
 
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
+// Log levels : off, error, warn, info, verbose
+// Other flags: trace
+//static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 
 #define NULL_FD  -1
 
@@ -14,26 +22,26 @@
 {
 	if((self = [super init]))
 	{
-		//LPHTTPLogTrace();
+		//HTTPLogTrace();
 		
 		connection = parent; // Parents retain children, children do NOT retain parents
 		
 		fileFD = NULL_FD;
-		filePath = [fpath copy];
+		filePath = [[fpath copy] stringByResolvingSymlinksInPath];
 		if (filePath == nil)
 		{
-			//LPHTTPLogWarn(@"%@: Init failed - Nil filePath", THIS_FILE);
+			//HTTPLogWarn(@"%@: Init failed - Nil filePath", THIS_FILE);
+            NSLog(@"Init failed - Nil filePath");
 			
-			[self release];
 			return nil;
 		}
 		
 		NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
 		if (fileAttributes == nil)
 		{
-			//LPHTTPLogWarn(@"%@: Init failed - Unable to get file attributes. filePath: %@", THIS_FILE, filePath);
+			//HTTPLogWarn(@"%@: Init failed - Unable to get file attributes. filePath: %@", THIS_FILE, filePath);
+            NSLog(@"Init failed - Unable to get file attributes. filePath");
 			
-			[self release];
 			return nil;
 		}
 		
@@ -50,7 +58,7 @@
 
 - (void)abort
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	[connection responseDidAbort:self];
 	aborted = YES;
@@ -58,18 +66,18 @@
 
 - (BOOL)openFile
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	fileFD = open([filePath UTF8String], O_RDONLY);
 	if (fileFD == NULL_FD)
 	{
-		//LPHTTPLogError(@"%@[%p]: Unable to open file. filePath: %@", THIS_FILE, self, filePath);
+		//HTTPLogError(@"%@[%p]: Unable to open file. filePath: %@", THIS_FILE, self, filePath);
 		
 		[self abort];
 		return NO;
 	}
 	
-	//LPHTTPLogVerbose(@"%@[%p]: Open fd[%i] -> %@", THIS_FILE, self, fileFD, filePath);
+	//HTTPLogVerbose(@"%@[%p]: Open fd[%i] -> %@", THIS_FILE, self, fileFD, filePath);
 	
 	return YES;
 }
@@ -95,21 +103,21 @@
 
 - (UInt64)contentLength
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	return fileLength;
 }
 
 - (UInt64)offset
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	return fileOffset;
 }
 
 - (void)setOffset:(UInt64)offset
 {
-	//LPHTTPLogTrace2(@"%@[%p]: setOffset:%llu", THIS_FILE, self, offset);
+	//HTTPLogTrace2(@"%@[%p]: setOffset:%llu", THIS_FILE, self, offset);
 	
 	if (![self openFileIfNeeded])
 	{
@@ -123,7 +131,7 @@
 	off_t result = lseek(fileFD, (off_t)offset, SEEK_SET);
 	if (result == -1)
 	{
-		//LPHTTPLogError(@"%@[%p]: lseek failed - errno(%i) filePath(%@)", THIS_FILE, self, errno, filePath);
+		//HTTPLogError(@"%@[%p]: lseek failed - errno(%i) filePath(%@)", THIS_FILE, self, errno, filePath);
 		
 		[self abort];
 	}
@@ -131,7 +139,7 @@
 
 - (NSData *)readDataOfLength:(NSUInteger)length
 {
-	//LPHTTPLogTrace2(@"%@[%p]: readDataOfLength:%lu", THIS_FILE, self, (unsigned long)length);
+	//HTTPLogTrace2(@"%@[%p]: readDataOfLength:%lu", THIS_FILE, self, (unsigned long)length);
 	
 	if (![self openFileIfNeeded])
 	{
@@ -159,7 +167,7 @@
 		
 		if (buffer == NULL)
 		{
-			//LPHTTPLogError(@"%@[%p]: Unable to allocate buffer", THIS_FILE, self);
+			//HTTPLogError(@"%@[%p]: Unable to allocate buffer", THIS_FILE, self);
 			
 			[self abort];
 			return nil;
@@ -168,7 +176,7 @@
 	
 	// Perform the read
 	
-	//LPHTTPLogVerbose(@"%@[%p]: Attempting to read %lu bytes from file", THIS_FILE, self, bytesToRead);
+	//HTTPLogVerbose(@"%@[%p]: Attempting to read %lu bytes from file", THIS_FILE, self, (unsigned long)bytesToRead);
 	
 	ssize_t result = read(fileFD, buffer, bytesToRead);
 	
@@ -176,21 +184,21 @@
 	
 	if (result < 0)
 	{
-		//LPHTTPLogError(@"%@: Error(%i) reading file(%@)", THIS_FILE, errno, filePath);
+		//HTTPLogError(@"%@: Error(%i) reading file(%@)", THIS_FILE, errno, filePath);
 		
 		[self abort];
 		return nil;
 	}
 	else if (result == 0)
 	{
-		//LPHTTPLogError(@"%@: Read EOF on file(%@)", THIS_FILE, filePath);
+		//HTTPLogError(@"%@: Read EOF on file(%@)", THIS_FILE, filePath);
 		
 		[self abort];
 		return nil;
 	}
 	else // (result > 0)
 	{
-		//LPHTTPLogVerbose(@"%@[%p]: Read %d bytes from file", THIS_FILE, self, result);
+		//HTTPLogVerbose(@"%@[%p]: Read %ld bytes from file", THIS_FILE, self, (long)result);
 		
 		fileOffset += result;
 		
@@ -202,7 +210,7 @@
 {
 	BOOL result = (fileOffset == fileLength);
 	
-	//LPHTTPLogTrace2(@"%@[%p]: isDone - %@", THIS_FILE, self, (result ? @"YES" : @"NO"));
+	//HTTPLogTrace2(@"%@[%p]: isDone - %@", THIS_FILE, self, (result ? @"YES" : @"NO"));
 	
 	return result;
 }
@@ -214,11 +222,11 @@
 
 - (void)dealloc
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	if (fileFD != NULL_FD)
 	{
-		//LPHTTPLogVerbose(@"%@[%p]: Close fd[%i]", THIS_FILE, self, fileFD);
+		//HTTPLogVerbose(@"%@[%p]: Close fd[%i]", THIS_FILE, self, fileFD);
 		
 		close(fileFD);
 	}
@@ -226,8 +234,6 @@
 	if (buffer)
 		free(buffer);
 	
-	[filePath release];
-	[super dealloc];
 }
 
 @end

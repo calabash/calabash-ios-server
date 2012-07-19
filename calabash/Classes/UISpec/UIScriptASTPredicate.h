@@ -10,10 +10,9 @@
 #import "UIScriptAST.h"
 
 @interface UIScriptASTPredicate : UIScriptAST {
-    NSPredicate *_predicate;
-    SEL _selector;
+
 }
-@property (nonatomic, retain) NSPredicate *predicate;
+@property (strong, nonatomic) NSPredicate *predicate;
 @property (nonatomic, assign) SEL selector;
 
 -(id) initWithPredicate:(NSPredicate *)pred selector:(SEL) sel;

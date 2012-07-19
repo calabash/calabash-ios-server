@@ -1,18 +1,49 @@
-#import "GCDAsyncSocket.h"
+#import "LPGCDAsyncSocket.h"
 #import "LPHTTPServer.h"
 #import "LPHTTPConnection.h"
 #import "LPHTTPMessage.h"
 #import "LPHTTPResponse.h"
 #import "LPHTTPAuthenticationRequest.h"
-#import "DDNumber.h"
-#import "DDRange.h"
-#import "DDData.h"
+#import "LPDDNumber.h"
+#import "LPDDRange.h"
+#import "LPDDData.h"
 #import "LPHTTPFileResponse.h"
 #import "LPHTTPAsyncFileResponse.h"
+#import "LPWebSocket.h"
+#import "LPHTTPLogging.h"
 
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
+// Does ARC support support LPGCD objects?
+// It does if the minimum deployment target is iOS 6+ or Mac OS X 8+
+
+#if TARGET_OS_IPHONE
+
+  // Compiling for iOS
+
+  #if __IPHONE_OS_VERSION_MIN_REQUIRED >= 60000 // iOS 6.0 or later
+    #define NEEDS_DISPATCH_RETAIN_RELEASE 0
+  #else                                         // iOS 5.X or earlier
+    #define NEEDS_DISPATCH_RETAIN_RELEASE 1
+  #endif
+
+#else
+
+  // Compiling for Mac OS X
+
+  #if MAC_OS_X_VERSION_MIN_REQUIRED >= 1080     // Mac OS X 10.8 or later
+    #define NEEDS_DISPATCH_RETAIN_RELEASE 0
+  #else
+    #define NEEDS_DISPATCH_RETAIN_RELEASE 1     // Mac OS X 10.7 or earlier
+  #endif
+
+#endif
 
 // Log levels: off, error, warn, info, verbose
 // Other flags: trace
+//static const int httpLogLevel = HTTP_LOG_LEVEL_WARN; // | HTTP_LOG_FLAG_TRACE;
 
 // Define chunk size used to read in data for responses
 // This is how much data will be read from disk into RAM at a time
@@ -87,6 +118,7 @@
 
 @implementation LPHTTPConnection
 
+static dispatch_queue_t recentNonceQueue;
 static NSMutableArray *recentNonces;
 
 /**
@@ -95,23 +127,66 @@ static NSMutableArray *recentNonces;
 **/
 + (void)initialize
 {
-	static BOOL initialized = NO;
-	if(!initialized)
-	{
-		// Initialize class variables
-		recentNonces = [[NSMutableArray alloc] initWithCapacity:5];
+	static dispatch_once_t onceToken;
+	dispatch_once(&onceToken, ^{
 		
-		initialized = YES;
-	}
+		// Initialize class variables
+		recentNonceQueue = dispatch_queue_create("LPHTTPConnection-Nonce", NULL);
+		recentNonces = [[NSMutableArray alloc] initWithCapacity:5];
+	});
 }
 
 /**
- * This method is designed to be called by a scheduled timer, and will remove a nonce from the recent nonce list.
- * The nonce to remove should be set as the timer's userInfo.
+ * Generates and returns an authentication nonce.
+ * A nonce is a  server-specified string uniquely generated for each 401 response.
+ * The default implementation uses a single nonce for each session.
 **/
-+ (void)removeRecentNonce:(NSTimer *)aTimer
++ (NSString *)generateNonce
 {
-	[recentNonces removeObject:[aTimer userInfo]];
+	// We use the Core Foundation UUID class to generate a nonce value for us
+	// UUIDs (Universally Unique Identifiers) are 128-bit values guaranteed to be unique.
+	CFUUIDRef theUUID = CFUUIDCreate(NULL);
+	NSString *newNonce = (__bridge_transfer NSString *)CFUUIDCreateString(NULL, theUUID);
+	CFRelease(theUUID);
+	
+	// We have to remember that the LPHTTP protocol is stateless.
+	// Even though with version 1.1 persistent connections are the norm, they are not guaranteed.
+	// Thus if we generate a nonce for this connection,
+	// it should be honored for other connections in the near future.
+	// 
+	// In fact, this is absolutely necessary in order to support QuickTime.
+	// When QuickTime makes it's initial connection, it will be unauthorized, and will receive a nonce.
+	// It then disconnects, and creates a new connection with the nonce, and proper authentication.
+	// If we don't honor the nonce for the second connection, QuickTime will repeat the process and never connect.
+	
+	dispatch_async(recentNonceQueue, ^{ @autoreleasepool {
+		
+		[recentNonces addObject:newNonce];
+	}});
+	
+	double delayInSeconds = TIMEOUT_NONCE;
+	dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+	dispatch_after(popTime, recentNonceQueue, ^{ @autoreleasepool {
+		
+		[recentNonces removeObject:newNonce];
+	}});
+	
+	return newNonce;
+}
+
+/**
+ * Returns whether or not the given nonce is in the list of recently generated nonce's.
+**/
++ (BOOL)hasRecentNonce:(NSString *)recentNonce
+{
+	__block BOOL result = NO;
+	
+	dispatch_sync(recentNonceQueue, ^{ @autoreleasepool {
+		
+		result = [recentNonces containsObject:recentNonce];
+	}});
+	
+	return result;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -127,24 +202,26 @@ static NSMutableArray *recentNonces;
 {
 	if ((self = [super init]))
 	{
-		////LPHTTPLogTrace();
+		//HTTPLogTrace();
 		
 		if (aConfig.queue)
 		{
 			connectionQueue = aConfig.queue;
+			#if NEEDS_DISPATCH_RETAIN_RELEASE
 			dispatch_retain(connectionQueue);
+			#endif
 		}
 		else
 		{
 			connectionQueue = dispatch_queue_create("LPHTTPConnection", NULL);
-		}
+        }
 		
 		// Take over ownership of the socket
-		asyncSocket = [newSocket retain];
+		asyncSocket = newSocket;
 		[asyncSocket setDelegate:self delegateQueue:connectionQueue];
 		
 		// Store configuration
-		config = [aConfig retain];
+		config = aConfig;
 		
 		// Initialize lastNC (last nonce count).
 		// Used with digest access authentication.
@@ -166,33 +243,19 @@ static NSMutableArray *recentNonces;
 **/
 - (void)dealloc
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
+	#if NEEDS_DISPATCH_RETAIN_RELEASE
 	dispatch_release(connectionQueue);
+	#endif
 	
 	[asyncSocket setDelegate:nil delegateQueue:NULL];
 	[asyncSocket disconnect];
-	[asyncSocket release];
-	
-	[config release];
-	
-	[request release];
-	
-	[nonce release];
 	
 	if ([httpResponse respondsToSelector:@selector(connectionDidClose)])
 	{
 		[httpResponse connectionDidClose];
 	}
-	[httpResponse release];
-	
-	[ranges release];
-	[ranges_headers release];
-	[ranges_boundry release];
-	
-	[responseDataSizes release];
-	
-	[super dealloc];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -205,7 +268,7 @@ static NSMutableArray *recentNonces;
 **/
 - (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Override me to support methods such as POST.
 	// 
@@ -238,7 +301,7 @@ static NSMutableArray *recentNonces;
 **/
 - (BOOL)expectsRequestBodyFromMethod:(NSString *)method atPath:(NSString *)path
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Override me to add support for other methods that expect the client
 	// to send a body along with the request header.
@@ -271,7 +334,7 @@ static NSMutableArray *recentNonces;
 **/
 - (BOOL)isSecureServer
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Override me to create an https server...
 	
@@ -284,7 +347,7 @@ static NSMutableArray *recentNonces;
 **/
 - (NSArray *)sslIdentityAndCertificates
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Override me to provide the proper required SSL identity.
 	
@@ -301,7 +364,7 @@ static NSMutableArray *recentNonces;
 **/
 - (BOOL)isPasswordProtected:(NSString *)path
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Override me to provide password protection...
 	// You can configure it for the entire server, or based on the current request
@@ -318,7 +381,7 @@ static NSMutableArray *recentNonces;
 **/
 - (BOOL)useDigestAccessAuthentication
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Override me to customize the authentication scheme
 	// Make sure you understand the security risks of using the weaker basic authentication
@@ -332,7 +395,7 @@ static NSMutableArray *recentNonces;
 **/
 - (NSString *)realm
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Override me to provide a custom realm...
 	// You can configure it for the entire server, or based on the current request
@@ -345,7 +408,7 @@ static NSMutableArray *recentNonces;
 **/
 - (NSString *)passwordForUser:(NSString *)username
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Override me to provide proper password authentication
 	// You can configure a password for the entire server, or custom passwords for users and/or resources
@@ -358,49 +421,14 @@ static NSMutableArray *recentNonces;
 }
 
 /**
- * Generates and returns an authentication nonce.
- * A nonce is a  server-specified string uniquely generated for each 401 response.
- * The default implementation uses a single nonce for each session.
-**/
-- (NSString *)generateNonce
-{
-	//LPHTTPLogTrace();
-	
-	// We use the Core Foundation UUID class to generate a nonce value for us
-	// UUIDs (Universally Unique Identifiers) are 128-bit values guaranteed to be unique.
-	CFUUIDRef theUUID = CFUUIDCreate(NULL);
-	NSString *newNonce = [NSMakeCollectable(CFUUIDCreateString(NULL, theUUID)) autorelease];
-	CFRelease(theUUID);
-	
-	// We have to remember that the LPHTTP protocol is stateless.
-	// Even though with version 1.1 persistent connections are the norm, they are not guaranteed.
-	// Thus if we generate a nonce for this connection,
-	// it should be honored for other connections in the near future.
-	// 
-	// In fact, this is absolutely necessary in order to support QuickTime.
-	// When QuickTime makes it's initial connection, it will be unauthorized, and will receive a nonce.
-	// It then disconnects, and creates a new connection with the nonce, and proper authentication.
-	// If we don't honor the nonce for the second connection, QuickTime will repeat the process and never connect.
-	
-	[recentNonces addObject:newNonce];
-	
-	[NSTimer scheduledTimerWithTimeInterval:TIMEOUT_NONCE
-	                                 target:[LPHTTPConnection class]
-	                               selector:@selector(removeRecentNonce:)
-	                               userInfo:newNonce
-	                                repeats:NO];
-	return newNonce;
-}
-
-/**
  * Returns whether or not the user is properly authenticated.
 **/
 - (BOOL)isAuthenticated
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Extract the authentication information from the Authorization header
-	LPHTTPAuthenticationRequest *auth = [[[LPHTTPAuthenticationRequest alloc] initWithRequest:request] autorelease];
+	LPHTTPAuthenticationRequest *auth = [[LPHTTPAuthenticationRequest alloc] initWithRequest:request];
 	
 	if ([self useDigestAccessAuthentication])
 	{
@@ -441,10 +469,9 @@ static NSMutableArray *recentNonces;
 		{
 			// The given nonce may be from another connection
 			// We need to search our list of recent nonce strings that have been recently distributed
-			if ([recentNonces containsObject:[auth nonce]])
+			if ([[self class] hasRecentNonce:[auth nonce]])
 			{
 				// Store nonce in local (cached) nonce variable to prevent array searches in the future
-				[nonce release];
 				nonce = [[auth nonce] copy];
 				
 				// The client has switched to using a different nonce value
@@ -501,7 +528,7 @@ static NSMutableArray *recentNonces;
 		
 		NSData *temp = [[base64Credentials dataUsingEncoding:NSUTF8StringEncoding] base64Decoded];
 		
-		NSString *credentials = [[[NSString alloc] initWithData:temp encoding:NSUTF8StringEncoding] autorelease];
+		NSString *credentials = [[NSString alloc] initWithData:temp encoding:NSUTF8StringEncoding];
 		
 		// The credentials should be of the form "username:password"
 		// The username is not allowed to contain a colon
@@ -533,10 +560,10 @@ static NSMutableArray *recentNonces;
 **/
 - (void)addDigestAuthChallenge:(LPHTTPMessage *)response
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	NSString *authFormat = @"Digest realm=\"%@\", qop=\"auth\", nonce=\"%@\"";
-	NSString *authInfo = [NSString stringWithFormat:authFormat, [self realm], [self generateNonce]];
+	NSString *authInfo = [NSString stringWithFormat:authFormat, [self realm], [[self class] generateNonce]];
 	
 	[response setHeaderField:@"WWW-Authenticate" value:authInfo];
 }
@@ -546,7 +573,7 @@ static NSMutableArray *recentNonces;
 **/
 - (void)addBasicAuthChallenge:(LPHTTPMessage *)response
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	NSString *authFormat = @"Basic realm=\"%@\"";
 	NSString *authInfo = [NSString stringWithFormat:authFormat, [self realm]];
@@ -564,17 +591,14 @@ static NSMutableArray *recentNonces;
 **/
 - (void)start
 {
-	dispatch_async(connectionQueue, ^{
+	dispatch_async(connectionQueue, ^{ @autoreleasepool {
 		
-		if (started) return;
-		started = YES;
-		
-		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-		
-		[self startConnection];
-		
-		[pool drain];
-	});
+		if (!started)
+		{
+			started = YES;
+			[self startConnection];
+		}
+	}});
 }
 
 /**
@@ -583,15 +607,12 @@ static NSMutableArray *recentNonces;
 **/
 - (void)stop
 {
-	dispatch_async(connectionQueue, ^{
-		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	dispatch_async(connectionQueue, ^{ @autoreleasepool {
 		
 		// Disconnect the socket.
 		// The socketDidDisconnect delegate method will handle everything else.
 		[asyncSocket disconnect];
-		
-		[pool drain];
-	});
+	}});
 }
 
 /**
@@ -603,7 +624,7 @@ static NSMutableArray *recentNonces;
 	// 
 	// Be sure to invoke [super startConnection] when you're done.
 	
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	if ([self isSecureServer])
 	{
@@ -640,7 +661,7 @@ static NSMutableArray *recentNonces;
 **/
 - (void)startReadingRequest
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	[asyncSocket readDataToData:[LPGCDAsyncSocket CRLFData]
 	                withTimeout:TIMEOUT_READ_FIRST_HEADER_LINE
@@ -679,13 +700,13 @@ static NSMutableArray *recentNonces;
 				{
 					CFStringRef k, v;
 					
-					k = CFURLCreateStringByReplacingPercentEscapes(NULL, (CFStringRef)escapedKey, CFSTR(""));
-					v = CFURLCreateStringByReplacingPercentEscapes(NULL, (CFStringRef)escapedValue, CFSTR(""));
+					k = CFURLCreateStringByReplacingPercentEscapes(NULL, (__bridge CFStringRef)escapedKey, CFSTR(""));
+					v = CFURLCreateStringByReplacingPercentEscapes(NULL, (__bridge CFStringRef)escapedValue, CFSTR(""));
 					
 					NSString *key, *value;
 					
-					key   = [NSMakeCollectable(k) autorelease];
-					value = [NSMakeCollectable(v) autorelease];
+					key   = (__bridge_transfer NSString *)k;
+					value = (__bridge_transfer NSString *)v;
 					
 					if (key)
 					{
@@ -738,7 +759,7 @@ static NSMutableArray *recentNonces;
  **/
 - (BOOL)parseRangeRequest:(NSString *)rangeHeader withContentLength:(UInt64)contentLength
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Examples of byte-ranges-specifier values (assuming an entity-body of length 10000):
 	// 
@@ -764,11 +785,11 @@ static NSMutableArray *recentNonces;
 	NSUInteger tIndex = eqsignRange.location;
 	NSUInteger fIndex = eqsignRange.location + eqsignRange.length;
 	
-	NSString *rangeType  = [[[rangeHeader substringToIndex:tIndex] mutableCopy] autorelease];
-	NSString *rangeValue = [[[rangeHeader substringFromIndex:fIndex] mutableCopy] autorelease];
+	NSMutableString *rangeType  = [[rangeHeader substringToIndex:tIndex] mutableCopy];
+	NSMutableString *rangeValue = [[rangeHeader substringFromIndex:fIndex] mutableCopy];
 	
-	CFStringTrimWhitespace((CFMutableStringRef)rangeType);
-	CFStringTrimWhitespace((CFMutableStringRef)rangeValue);
+	CFStringTrimWhitespace((__bridge CFMutableStringRef)rangeType);
+	CFStringTrimWhitespace((__bridge CFMutableStringRef)rangeValue);
 	
 	if([rangeType caseInsensitiveCompare:@"bytes"] != NSOrderedSame) return NO;
 	
@@ -776,7 +797,6 @@ static NSMutableArray *recentNonces;
 	
 	if([rangeComponents count] == 0) return NO;
 	
-	[ranges release];
 	ranges = [[NSMutableArray alloc] initWithCapacity:[rangeComponents count]];
 	
 	rangeIndex = 0;
@@ -896,8 +916,17 @@ static NSMutableArray *recentNonces;
 **/
 - (void)replyToHTTPRequest
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
+	/*
+    if (HTTP_LOG_VERBOSE)
+	{
+		NSData *tempData = [request messageData];
+		
+		NSString *tempStr = [[NSString alloc] initWithData:tempData encoding:NSUTF8StringEncoding];
+		HTTPLogVerbose(@"%@[%p]: Received LPHTTP request:\n%@", THIS_FILE, self, tempStr);
+	}
+     */
 	
 	// Check the LPHTTP version
 	// We only support version 1.0 and 1.1
@@ -912,67 +941,66 @@ static NSMutableArray *recentNonces;
 	// Extract requested URI
 	NSString *uri = [self requestURI];
 	
-	// Check for WebSocket request
-//	if (0)
-//	{
-//		//LPHTTPLogVerbose(@"isWebSocket");
-//		
-//		WebSocket *ws = [self webSocketForURI:uri];
-//		
-//		if (ws == nil)
-//		{
-//			[self handleResourceNotFound];
-//		}
-//		else
-//		{
-//			[ws start];
-//			
-//			[[config server] addWebSocket:ws];
-//			
-//			// The WebSocket should now be the delegate of the underlying socket.
-//			// But gracefully handle the situation if it forgot.
-//			if ([asyncSocket delegate] == self)
-//			{
-//				//LPHTTPLogWarn(@"%@[%p]: WebSocket forgot to set itself as socket delegate", THIS_FILE, self);
-//				
-//				// Disconnect the socket.
-//				// The socketDidDisconnect delegate method will handle everything else.
-//				[asyncSocket disconnect];
-//			}
-//			else
-//			{
-//				// The WebSocket is using the socket,
-//				// so make sure we don't disconnect it in the dealloc method.
-//				[asyncSocket release];
-//				asyncSocket = nil;
-//				
-//				[self die];
-//				
-//				// Note: There is a timing issue here that should be pointed out.
-//				// 
-//				// A bug that existed in previous versions happend like so:
-//				// - We invoked [self die]
-//				// - This caused us to get released, and our dealloc method to start executing
-//				// - Meanwhile, AsyncSocket noticed a disconnect, and began to dispatch a socketDidDisconnect at us
-//				// - The dealloc method finishes execution, and our instance gets freed
-//				// - The socketDidDisconnect gets run, and a crash occurs
-//				// 
-//				// So the issue we want to avoid is releasing ourself when there is a possibility
-//				// that AsyncSocket might be gearing up to queue a socketDidDisconnect for us.
-//				// 
-//				// In this particular situation notice that we invoke [asyncSocket delegate].
-//				// This method is synchronous concerning AsyncSocket's internal socketQueue.
-//				// Which means we can be sure, when it returns, that AsyncSocket has already
-//				// queued any delegate methods for us if it was going to.
-//				// And if the delegate methods are queued, then we've been properly retained.
-//				// Meaning we won't get released / dealloc'd until the delegate method has finished executing.
-//				// 
-//				// In this rare situation, the die method will get invoked twice.
-//			}
-//		}
-//		
-//		return;
-//	}
+	// Check for LPWebSocket request
+    	if ([LPWebSocket isWebSocketRequest:request])
+    	{
+    		//HTTPLogVerbose(@"isWebSocket");
+    		
+    		LPWebSocket *ws = [self webSocketForURI:uri];
+    		
+    		if (ws == nil)
+    		{
+    			[self handleResourceNotFound];
+    		}
+    		else
+    		{
+    			[ws start];
+    			
+    			[[config server] addWebSocket:ws];
+    			
+    			// The LPWebSocket should now be the delegate of the underlying socket.
+    			// But gracefully handle the situation if it forgot.
+    			if ([asyncSocket delegate] == self)
+    			{
+    				//HTTPLogWarn(@"%@[%p]: LPWebSocket forgot to set itself as socket delegate", THIS_FILE, self);
+    				NSLog(@"LPWebSocket forgot to set itself as socket delegate: %@", self);
+    				// Disconnect the socket.
+                    // The socketDidDisconnect delegate method will handle everything else.
+    				[asyncSocket disconnect];
+    		}
+                else
+    			{
+    				// The LPWebSocket is using the socket,
+    				// so make sure we don't disconnect it in the dealloc method.
+    				asyncSocket = nil;
+    				
+    				[self die];
+    				
+    				// Note: There is a timing issue here that should be pointed out.
+                    // 
+    				// A bug that existed in previous versions happend like so:
+    				// - We invoked [self die]
+    				// - This caused us to get released, and our dealloc method to start executing
+    				// - Meanwhile, AsyncSocket noticed a disconnect, and began to dispatch a socketDidDisconnect at us
+    				// - The dealloc method finishes execution, and our instance gets freed
+    				// - The socketDidDisconnect gets run, and a crash occurs
+    				// 
+    				// So the issue we want to avoid is releasing ourself when there is a possibility
+    				// that AsyncSocket might be gearing up to queue a socketDidDisconnect for us.
+    				// 
+    				// In this particular situation notice that we invoke [asyncSocket delegate].
+    				// This method is synchronous concerning AsyncSocket's internal socketQueue.
+    				// Which means we can be sure, when it returns, that AsyncSocket has already
+    				// queued any delegate methods for us if it was going to.
+    				// And if the delegate methods are queued, then we've been properly retained.
+    				// Meaning we won't get released / dealloc'd until the delegate method has finished executing.
+    				// 
+    				// In this rare situation, the die method will get invoked twice.
+    			}
+    		}
+    		
+    		return;
+    	}
 	
 	// Check Authentication (if needed)
 	// If not properly authenticated for resource, issue Unauthorized response
@@ -988,7 +1016,7 @@ static NSMutableArray *recentNonces;
 	// Note: We already checked to ensure the method was supported in onSocket:didReadData:withTag:
 	
 	// Respond properly to LPHTTP 'GET' and 'HEAD' commands
-	httpResponse = [[self httpResponseForMethod:method URI:uri] retain];
+	httpResponse = [self httpResponseForMethod:method URI:uri];
 	
 	if (httpResponse == nil)
 	{
@@ -1006,7 +1034,7 @@ static NSMutableArray *recentNonces;
 **/
 - (LPHTTPMessage *)newUniRangeResponse:(UInt64)contentLength
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Status Code 206 - Partial Content
 	LPHTTPMessage *response = [[LPHTTPMessage alloc] initResponseWithStatusCode:206 description:nil version:LPHTTPVersion1_1];
@@ -1030,7 +1058,7 @@ static NSMutableArray *recentNonces;
 **/
 - (LPHTTPMessage *)newMultiRangeResponse:(UInt64)contentLength
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Status Code 206 - Partial Content
 	LPHTTPMessage *response = [[LPHTTPMessage alloc] initResponseWithStatusCode:206 description:nil version:LPHTTPVersion1_1];
@@ -1057,7 +1085,7 @@ static NSMutableArray *recentNonces;
 	ranges_headers = [[NSMutableArray alloc] initWithCapacity:[ranges count]];
 	
 	CFUUIDRef theUUID = CFUUIDCreate(NULL);
-	ranges_boundry = NSMakeCollectable(CFUUIDCreateString(NULL, theUUID));
+	ranges_boundry = (__bridge_transfer NSString *)CFUUIDCreateString(NULL, theUUID);
 	CFRelease(theUUID);
 	
 	NSString *startingBoundryStr = [NSString stringWithFormat:@"\r\n--%@\r\n", ranges_boundry];
@@ -1121,9 +1149,9 @@ static NSMutableArray *recentNonces;
 
 - (void)sendResponseHeadersAndBody
 {
-	if ([httpResponse respondsToSelector:@selector(delayResponeHeaders)])
+	if ([httpResponse respondsToSelector:@selector(delayResponseHeaders)])
 	{
-		if ([httpResponse delayResponeHeaders])
+		if ([httpResponse delayResponseHeaders])
 		{
 			return;
 		}
@@ -1305,7 +1333,6 @@ static NSMutableArray *recentNonces;
 		}
 	}
 	
-	[response release];
 }
 
 /**
@@ -1335,7 +1362,7 @@ static NSMutableArray *recentNonces;
 **/
 - (void)continueSendingStandardResponseBody
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// This method is called when either asyncSocket has finished writing one of the response data chunks,
 	// or when an asynchronous LPHTTPResponse object informs us that it has more available data for us to send.
@@ -1403,7 +1430,7 @@ static NSMutableArray *recentNonces;
 **/
 - (void)continueSendingSingleRangeResponseBody
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// This method is called when either asyncSocket has finished writing one of the response data chunks,
 	// or when an asynchronous response informs us that is has more available data for us to send.
@@ -1454,7 +1481,7 @@ static NSMutableArray *recentNonces;
 **/
 - (void)continueSendingMultiRangeResponseBody
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// This method is called when either asyncSocket has finished writing one of the response data chunks,
 	// or when an asynchronous LPHTTPResponse object informs us that is has more available data for us to send.
@@ -1540,7 +1567,7 @@ static NSMutableArray *recentNonces;
 **/
 - (NSArray *)directoryIndexFileNames
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Override me to support other index pages.
 	
@@ -1557,7 +1584,7 @@ static NSMutableArray *recentNonces;
 **/
 - (NSString *)filePathForURI:(NSString *)path allowDirectory:(BOOL)allowDirectory
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Override me to perform custom path mapping.
 	// For example you may want to use a default file other than index.html, or perhaps support multiple types.
@@ -1571,7 +1598,8 @@ static NSMutableArray *recentNonces;
 	
 	if (documentRoot == nil)
 	{
-		//LPHTTPLogWarn(@"%@[%p]: No configured document root", THIS_FILE, self);
+		//HTTPLogWarn(@"%@[%p]: No configured document root", THIS_FILE, self);
+        //NSLog(@"document root is not configured");
 		return nil;
 	}
 	
@@ -1582,7 +1610,8 @@ static NSMutableArray *recentNonces;
 	NSURL *docRoot = [NSURL fileURLWithPath:documentRoot isDirectory:YES];
 	if (docRoot == nil)
 	{
-		//LPHTTPLogWarn(@"%@[%p]: Document root is invalid file path", THIS_FILE, self);
+		//HTTPLogWarn(@"%@[%p]: Document root is invalid file path", THIS_FILE, self);
+        //NSLog(@"document root is invalid");
 		return nil;
 	}
 	
@@ -1624,7 +1653,8 @@ static NSMutableArray *recentNonces;
 	
 	if (![fullPath hasPrefix:documentRoot])
 	{
-		//LPHTTPLogWarn(@"%@[%p]: Request for file outside document root", THIS_FILE, self);
+		//HTTPLogWarn(@"%@[%p]: Request for file outside document root", THIS_FILE, self);
+        //NSLog(@"request for file outside of document root");
 		return nil;
 	}
 	
@@ -1663,7 +1693,7 @@ static NSMutableArray *recentNonces;
 **/
 - (NSObject<LPHTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Override me to provide custom responses.
 	
@@ -1673,7 +1703,7 @@ static NSMutableArray *recentNonces;
 	
 	if (filePath && [[NSFileManager defaultManager] fileExistsAtPath:filePath isDirectory:&isDir] && !isDir)
 	{
-		return [[[LPHTTPFileResponse alloc] initWithFilePath:filePath forConnection:self] autorelease];
+		return [[LPHTTPFileResponse alloc] initWithFilePath:filePath forConnection:self];
 	
 		// Use me instead for asynchronous file IO.
 		// Generally better for larger files.
@@ -1684,6 +1714,26 @@ static NSMutableArray *recentNonces;
 	return nil;
 }
 
+
+- (LPWebSocket *)webSocketForURI:(NSString *)path
+{
+	//HTTPLogTrace();
+	
+	// Override me to provide custom LPWebSocket responses.
+	// To do so, simply override the base LPWebSocket implementation, and add your custom functionality.
+	// Then return an instance of your custom LPWebSocket here.
+	// 
+	// For example:
+	// 
+	// if ([path isEqualToString:@"/myAwesomeWebSocketStream"])
+	// {
+	//     return [[[MyWebSocket alloc] initWithRequest:request socket:asyncSocket] autorelease];
+	// }
+	// 
+	// return [super webSocketForURI:path];
+	
+	return nil;
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark Uploads
@@ -1736,15 +1786,14 @@ static NSMutableArray *recentNonces;
 	// If you simply want to add a few extra header fields, see the preprocessErrorResponse: method.
 	// You can also use preprocessErrorResponse: to add an optional HTML body.
 	
-	//LPHTTPLogWarn(@"LPHTTP Server: Error 505 - Version Not Supported: %@ (%@)", version, [self requestURI]);
-	
+	//HTTPLogWarn(@"LPHTTP Server: Error 505 - Version Not Supported: %@ (%@)", version, [self requestURI]);
+	NSLog(@"LPHTTP Server: Error 505 - Version Not Supported: %@ (%@)", version, [self requestURI]);
 	LPHTTPMessage *response = [[LPHTTPMessage alloc] initResponseWithStatusCode:505 description:nil version:LPHTTPVersion1_1];
 	[response setHeaderField:@"Content-Length" value:@"0"];
     
 	NSData *responseData = [self preprocessErrorResponse:response];
 	[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:LPHTTP_RESPONSE];
 	
-	[response release];
 }
 
 /**
@@ -1756,7 +1805,7 @@ static NSMutableArray *recentNonces;
 	// If you simply want to add a few extra header fields, see the preprocessErrorResponse: method.
 	// You can also use preprocessErrorResponse: to add an optional HTML body.
 	
-	//LPHTTPLogInfo(@"LPHTTP Server: Error 401 - Unauthorized (%@)", [self requestURI]);
+	//HTTPLogInfo(@"LPHTTP Server: Error 401 - Unauthorized (%@)", [self requestURI]);
 		
 	// Status Code 401 - Unauthorized
 	LPHTTPMessage *response = [[LPHTTPMessage alloc] initResponseWithStatusCode:401 description:nil version:LPHTTPVersion1_1];
@@ -1774,7 +1823,6 @@ static NSMutableArray *recentNonces;
 	NSData *responseData = [self preprocessErrorResponse:response];
 	[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:LPHTTP_RESPONSE];
 	
-	[response release];
 }
 
 /**
@@ -1788,8 +1836,8 @@ static NSMutableArray *recentNonces;
 	// If you simply want to add a few extra header fields, see the preprocessErrorResponse: method.
 	// You can also use preprocessErrorResponse: to add an optional HTML body.
 	
-	//LPHTTPLogWarn(@"LPHTTP Server: Error 400 - Bad Request (%@)", [self requestURI]);
-	
+	//HTTPLogWarn(@"LPHTTP Server: Error 400 - Bad Request (%@)", [self requestURI]);
+	NSLog(@"LPHTTP Server: Error 400 - Bad Request (%@)", [self requestURI]);
 	// Status Code 400 - Bad Request
 	LPHTTPMessage *response = [[LPHTTPMessage alloc] initResponseWithStatusCode:400 description:nil version:LPHTTPVersion1_1];
 	[response setHeaderField:@"Content-Length" value:@"0"];
@@ -1798,7 +1846,6 @@ static NSMutableArray *recentNonces;
 	NSData *responseData = [self preprocessErrorResponse:response];
 	[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:LPHTTP_FINAL_RESPONSE];
 	
-	[response release];
 	
 	// Note: We used the LPHTTP_FINAL_RESPONSE tag to disconnect after the response is sent.
 	// We do this because we couldn't parse the request,
@@ -1817,7 +1864,8 @@ static NSMutableArray *recentNonces;
 	// 
 	// See also: supportsMethod:atPath:
 	
-	//LPHTTPLogWarn(@"LPHTTP Server: Error 405 - Method Not Allowed: %@ (%@)", method, [self requestURI]);
+	//HTTPLogWarn(@"LPHTTP Server: Error 405 - Method Not Allowed: %@ (%@)", method, [self requestURI]);
+    NSLog(@"LPHTTP Server: Error 405 - Method Not Allowed: %@ (%@)", method, [self requestURI]);
 	
 	// Status code 405 - Method Not Allowed
 	LPHTTPMessage *response = [[LPHTTPMessage alloc] initResponseWithStatusCode:405 description:nil version:LPHTTPVersion1_1];
@@ -1827,7 +1875,6 @@ static NSMutableArray *recentNonces;
 	NSData *responseData = [self preprocessErrorResponse:response];
 	[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:LPHTTP_FINAL_RESPONSE];
     
-	[response release];
 	
 	// Note: We used the LPHTTP_FINAL_RESPONSE tag to disconnect after the response is sent.
 	// We do this because the method may include an http body.
@@ -1843,7 +1890,7 @@ static NSMutableArray *recentNonces;
 	// If you simply want to add a few extra header fields, see the preprocessErrorResponse: method.
 	// You can also use preprocessErrorResponse: to add an optional HTML body.
 	
-	//LPHTTPLogInfo(@"LPHTTP Server: Error 404 - Not Found (%@)", [self requestURI]);
+	//HTTPLogInfo(@"LPHTTP Server: Error 404 - Not Found (%@)", [self requestURI]);
 	
 	// Status Code 404 - Not Found
 	LPHTTPMessage *response = [[LPHTTPMessage alloc] initResponseWithStatusCode:404 description:nil version:LPHTTPVersion1_1];
@@ -1852,7 +1899,6 @@ static NSMutableArray *recentNonces;
 	NSData *responseData = [self preprocessErrorResponse:response];
 	[asyncSocket writeData:responseData withTimeout:TIMEOUT_WRITE_ERROR tag:LPHTTP_RESPONSE];
 	
-	[response release];
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1889,7 +1935,7 @@ static NSMutableArray *recentNonces;
 		[df setFormatterBehavior:NSDateFormatterBehavior10_4];
 		[df setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"GMT"]];
 		[df setDateFormat:@"EEE, dd MMM y HH:mm:ss 'GMT'"];
-		[df setLocale:[[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"] autorelease]];
+		[df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
 		
 		// For some reason, using zzz in the format string produces GMT+00:00
 	});
@@ -1903,7 +1949,7 @@ static NSMutableArray *recentNonces;
 **/
 - (NSData *)preprocessResponse:(LPHTTPMessage *)response
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Override me to customize the response headers
 	// You'll likely want to add your own custom headers, and then return [super preprocessResponse:response]
@@ -1940,7 +1986,7 @@ static NSMutableArray *recentNonces;
 **/
 - (NSData *)preprocessErrorResponse:(LPHTTPMessage *)response;
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Override me to customize the error response headers
 	// You'll likely want to add your own custom headers, and then return [super preprocessErrorResponse:response]
@@ -2003,7 +2049,8 @@ static NSMutableArray *recentNonces;
 		BOOL result = [request appendData:data];
 		if (!result)
 		{
-			//LPHTTPLogWarn(@"%@[%p]: Malformed request", THIS_FILE, self);
+			//HTTPLogWarn(@"%@[%p]: Malformed request", THIS_FILE, self);
+            NSLog(@"Malformed request %@", self);
 			
 			[self handleInvalidRequest:data];
 		}
@@ -2058,8 +2105,10 @@ static NSMutableArray *recentNonces;
 				{
 					if (contentLength == nil)
 					{
-						//LPHTTPLogWarn(@"%@[%p]: Method expects request body, but had no specified Content-Length",
-	//								THIS_FILE, self);
+						//HTTPLogWarn(@"%@[%p]: Method expects request body, but had no specified Content-Length",
+						//			THIS_FILE, self);
+                        NSLog(@"Method expects request body, but had no specified Content-Length");
+                        
 						
 						[self handleInvalidRequest:nil];
 						return;
@@ -2067,8 +2116,9 @@ static NSMutableArray *recentNonces;
 					
 					if (![NSNumber parseString:(NSString *)contentLength intoUInt64:&requestContentLength])
 					{
-						//LPHTTPLogWarn(@"%@[%p]: Unable to parse Content-Length header into a valid number",
-//									THIS_FILE, self);
+						//HTTPLogWarn(@"%@[%p]: Unable to parse Content-Length header into a valid number",
+						//			THIS_FILE, self);
+                        NSLog(@"Unable to parse Content-Length header into a valid number");
 						
 						[self handleInvalidRequest:nil];
 						return;
@@ -2084,18 +2134,20 @@ static NSMutableArray *recentNonces;
 					
 					if (![NSNumber parseString:(NSString *)contentLength intoUInt64:&requestContentLength])
 					{
-						//LPHTTPLogWarn(@"%@[%p]: Unable to parse Content-Length header into a valid number",
-//									THIS_FILE, self);
-						
+						//HTTPLogWarn(@"%@[%p]: Unable to parse Content-Length header into a valid number",
+						//			THIS_FILE, self);
+						NSLog(@"Unable to parse Content-Length header into a valid number");
+                             
 						[self handleInvalidRequest:nil];
 						return;
 					}
 					
 					if (requestContentLength > 0)
 					{
-						//LPHTTPLogWarn(@"%@[%p]: Method not expecting request body had non-zero Content-Length",
-//									THIS_FILE, self);
-						
+						//HTTPLogWarn(@"%@[%p]: Method not expecting request body had non-zero Content-Length",
+						//			THIS_FILE, self);
+						NSLog(@"Method not expecting request body had non-zero Content-Length");
+
 						[self handleInvalidRequest:nil];
 						return;
 					}
@@ -2189,14 +2241,16 @@ static NSMutableArray *recentNonces;
 			// possibly followed by a semicolon and extra parameters that can be ignored,
 			// and ending with CRLF.
 			
-			NSString *sizeLine = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+			NSString *sizeLine = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 			
+			errno = 0;  // Reset errno before calling strtoull() to ensure it is always zero on success
 			requestChunkSize = (UInt64)strtoull([sizeLine UTF8String], NULL, 16);
 			requestChunkSizeReceived = 0;
 			
 			if (errno != 0)
 			{
-				//LPHTTPLogWarn(@"%@[%p]: Method expects chunk size, but received something else", THIS_FILE, self);
+				//HTTPLogWarn(@"%@[%p]: Method expects chunk size, but received something else", THIS_FILE, self);
+                NSLog(@"Method expects chunk size, but received something else");
 				
 				[self handleInvalidRequest:nil];
 				return;
@@ -2261,8 +2315,9 @@ static NSMutableArray *recentNonces;
 			
 			if (![data isEqualToData:[LPGCDAsyncSocket CRLFData]])
 			{
-				//LPHTTPLogWarn(@"%@[%p]: Method expects chunk trailer, but is missing", THIS_FILE, self);
-				
+				//HTTPLogWarn(@"%@[%p]: Method expects chunk trailer, but is missing", THIS_FILE, self);
+                NSLog(@"Method expects chunk trailer, but is missing");
+            
 				[self handleInvalidRequest:nil];
 				return;
 			}
@@ -2402,29 +2457,36 @@ static NSMutableArray *recentNonces;
 			[httpResponse connectionDidClose];
 		}
 		
-		// Cleanup after the last request
-		[self finishResponse];
-		
 		
 		if (tag == LPHTTP_FINAL_RESPONSE)
 		{
+			// Cleanup after the last request
+			[self finishResponse];
+			
 			// Terminate the connection
 			[asyncSocket disconnect];
 			
-			// Explictly return to ensure we don't do anything after the socket disconnect
+			// Explictly return to ensure we don't do anything after the socket disconnects
 			return;
 		}
 		else
 		{
 			if ([self shouldDie])
 			{
+				// Cleanup after the last request
+				// Note: Don't do this before calling shouldDie, as it needs the request object still.
+				[self finishResponse];
+				
 				// The only time we should invoke [self die] is from socketDidDisconnect,
-				// or if the socket gets taken over by someone else like a WebSocket.
+				// or if the socket gets taken over by someone else like a LPWebSocket.
 				
 				[asyncSocket disconnect];
 			}
 			else
 			{
+				// Cleanup after the last request
+				[self finishResponse];
+				
 				// Prepare for the next request
 				
 				// If this assertion fails, it likely means you overrode the
@@ -2448,9 +2510,8 @@ static NSMutableArray *recentNonces;
 **/
 - (void)socketDidDisconnect:(LPGCDAsyncSocket *)sock withError:(NSError *)err;
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
-	[asyncSocket release];
 	asyncSocket = nil;
 	
 	[self die];
@@ -2468,7 +2529,7 @@ static NSMutableArray *recentNonces;
 **/
 - (void)responseHasAvailableData:(NSObject<LPHTTPResponse> *)sender
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// We always dispatch this asynchronously onto our connectionQueue,
 	// even if the connectionQueue is the current queue.
@@ -2476,15 +2537,15 @@ static NSMutableArray *recentNonces;
 	// We do this to give the LPHTTPResponse classes the flexibility to call
 	// this method whenever they want, even from within a readDataOfLength method.
 	
-	dispatch_async(connectionQueue, ^{
+	dispatch_async(connectionQueue, ^{ @autoreleasepool {
 		
 		if (sender != httpResponse)
 		{
-			//LPHTTPLogWarn(@"%@[%p]: %@ - Sender is not current httpResponse", THIS_FILE, self, THIS_METHOD);
+			//HTTPLogWarn(@"%@[%p]: %@ - Sender is not current httpResponse", THIS_FILE, self, THIS_METHOD);
+            NSLog(@"Sender is not current httpResponse");
+            
 			return;
 		}
-		
-		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 		
 		if (!sentResponseHeaders)
 		{
@@ -2504,9 +2565,7 @@ static NSMutableArray *recentNonces;
 					[self continueSendingMultiRangeResponseBody];
 			}
 		}
-		
-		[pool drain];
-	});
+	}});
 }
 
 /**
@@ -2515,7 +2574,7 @@ static NSMutableArray *recentNonces;
 **/
 - (void)responseDidAbort:(NSObject<LPHTTPResponse> *)sender
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// We always dispatch this asynchronously onto our connectionQueue,
 	// even if the connectionQueue is the current queue.
@@ -2523,20 +2582,17 @@ static NSMutableArray *recentNonces;
 	// We do this to give the LPHTTPResponse classes the flexibility to call
 	// this method whenever they want, even from within a readDataOfLength method.
 	
-	dispatch_async(connectionQueue, ^{
+	dispatch_async(connectionQueue, ^{ @autoreleasepool {
 		
 		if (sender != httpResponse)
 		{
-			//LPHTTPLogWarn(@"%@[%p]: %@ - Sender is not current httpResponse", THIS_FILE, self, THIS_METHOD);
+			//HTTPLogWarn(@"%@[%p]: %@ - Sender is not current httpResponse", THIS_FILE, self, THIS_METHOD);
+            NSLog(@"Sender is not current httpResponse");
 			return;
 		}
 		
-		NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-		
 		[asyncSocket disconnectAfterWriting];
-		
-		[pool drain];
-	});
+	}});
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2550,22 +2606,17 @@ static NSMutableArray *recentNonces;
 **/
 - (void)finishResponse
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Override me if you want to perform any custom actions after a response has been fully sent.
 	// This is the place to release memory or resources associated with the last request.
 	// 
 	// If you override this method, you should take care to invoke [super finishResponse] at some point.
 	
-	[request release];
 	request = nil;
 	
-	[httpResponse release];
 	httpResponse = nil;
 	
-	[ranges release];
-	[ranges_headers release];
-	[ranges_boundry release];
 	ranges = nil;
 	ranges_headers = nil;
 	ranges_boundry = nil;
@@ -2577,7 +2628,7 @@ static NSMutableArray *recentNonces;
 **/
 - (BOOL)shouldDie
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Override me if you have any need to force close the connection.
 	// You may do so by simply returning YES.
@@ -2616,7 +2667,7 @@ static NSMutableArray *recentNonces;
 
 - (void)die
 {
-	//LPHTTPLogTrace();
+	//HTTPLogTrace();
 	
 	// Override me if you want to perform any custom actions when a connection is closed.
 	// Then call [super die] when you're done.
@@ -2633,7 +2684,6 @@ static NSMutableArray *recentNonces;
 	}
 	
 	// Release the http response so we don't call it's connectionDidClose method again in our dealloc method
-	[httpResponse release];
 	httpResponse = nil;
 	
 	// Post notification of dead connection
@@ -2657,8 +2707,8 @@ static NSMutableArray *recentNonces;
 {
 	if ((self = [super init]))
 	{
-		server = [aServer retain];
-		documentRoot = [aDocumentRoot retain];
+		server = aServer;
+		documentRoot = aDocumentRoot;
 	}
 	return self;
 }
@@ -2667,19 +2717,20 @@ static NSMutableArray *recentNonces;
 {
 	if ((self = [super init]))
 	{
-		server = [aServer retain];
+		server = aServer;
 		
 		documentRoot = [aDocumentRoot stringByStandardizingPath];
 		if ([documentRoot hasSuffix:@"/"])
 		{
 			documentRoot = [documentRoot stringByAppendingString:@"/"];
 		}
-		[documentRoot retain];
 		
 		if (q)
 		{
-			dispatch_retain(q);
 			queue = q;
+			#if NEEDS_DISPATCH_RETAIN_RELEASE
+			dispatch_retain(queue);
+			#endif
 		}
 	}
 	return self;
@@ -2687,13 +2738,9 @@ static NSMutableArray *recentNonces;
 
 - (void)dealloc
 {
-	[server release];
-	[documentRoot release];
-	
-	if (queue)
-		dispatch_release(queue);
-	
-	[super dealloc];
+	#if NEEDS_DISPATCH_RETAIN_RELEASE
+	if (queue) dispatch_release(queue);
+	#endif
 }
 
 @end

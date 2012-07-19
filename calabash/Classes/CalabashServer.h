@@ -4,9 +4,11 @@
 
 @class LPHTTPServer;
 
-@interface CalabashServer : NSObject {
-	LPHTTPServer *_httpServer;
+@interface CalabashServer : NSObject {    
+
 }
+
+@property(strong) LPHTTPServer *httpServer;
 
 + (void) start;
 

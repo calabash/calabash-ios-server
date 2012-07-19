@@ -32,7 +32,7 @@
 // NSScanner
 
 @interface LPCDataScanner : NSObject {
-	NSData *data;
+    //NSData *data;
 
 	u_int8_t *start;
 	u_int8_t *end;
@@ -40,7 +40,8 @@
 	NSUInteger length;
 }
 
-@property (readwrite, nonatomic, retain) NSData *data;
+
+@property (strong, nonatomic) NSData *data;
 @property (readwrite, nonatomic, assign) NSUInteger scanLocation;
 @property (readonly, nonatomic, assign) NSUInteger bytesRemaining;
 @property (readonly, nonatomic, assign) BOOL isAtEnd;

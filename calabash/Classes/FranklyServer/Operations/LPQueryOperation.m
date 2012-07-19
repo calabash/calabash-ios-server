@@ -75,7 +75,6 @@
     }
     for (NSInteger i=0;i<[_arguments count];i++) {
         id selObj = [_arguments objectAtIndex:i];
-        id objValue;
         int intValue;
         long longValue;
         char *charPtrValue; 
@@ -111,7 +110,7 @@
             [invocation setSelector:sel];
             for (NSInteger i =0, N=[args count]; i<N; i++)
             {
-                id arg = [args objectAtIndex:i];
+                __unsafe_unretained id arg = [args objectAtIndex:i];
                 const char *cType = [sig getArgumentTypeAtIndex:i+2];
                 switch(*cType) {
                     case '@':
@@ -179,8 +178,10 @@
         NSString *returnType = [NSString stringWithFormat:@"%s", type];
         const char* trimmedType = [[returnType substringToIndex:1] cStringUsingEncoding:NSASCIIStringEncoding];
         switch(*trimmedType) {
-            case '@':
-                [invocation getReturnValue:(void **)&objValue];
+            case '@': {
+                __unsafe_unretained id objValue;
+                [invocation getReturnValue:&objValue];
+                //[invocation getReturnValue:(void **)&objValue];
                 if (objValue == nil) {
                     return nil;
                 } else {
@@ -192,6 +193,7 @@
                     }
                     
                 }
+            }
             case 'i':
                 [invocation getReturnValue:(void **)&intValue];
                 return [NSNumber numberWithInt: intValue];
@@ -215,34 +217,41 @@
                 return [NSString stringWithFormat:@"%d", charValue];
             case '{': {
                 unsigned int length = [[invocation methodSignature] methodReturnLength];
+                /* straight up leak */
                 void *buffer = (void *)malloc(length);
                 [invocation getReturnValue:buffer];
-                NSValue *value = [[[NSValue alloc] initWithBytes:buffer objCType:type] autorelease];
+                NSValue *value = [[NSValue alloc] initWithBytes:buffer objCType:type];
+               
                 
                 if ([returnType rangeOfString:@"{CGRect"].location == 0)
                 {
                     CGRect *rec = (CGRect*)buffer;
-                    return [NSDictionary dictionaryWithObjectsAndKeys:
-                            [value description], @"description",
-                            [NSNumber numberWithFloat:rec->origin.x],@"x",
-                            [NSNumber numberWithFloat:rec->origin.y],@"y",
-                            [NSNumber numberWithFloat:rec->size.width],@"width",
-                            [NSNumber numberWithFloat:rec->size.height],@"height",
-                            nil];
+                    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                          [value description], @"description",
+                                          [NSNumber numberWithFloat:rec->origin.x],@"x",
+                                          [NSNumber numberWithFloat:rec->origin.y],@"y",
+                                          [NSNumber numberWithFloat:rec->size.width],@"width",
+                                          [NSNumber numberWithFloat:rec->size.height],@"height",
+                                          nil];
+                    free(buffer);
+                    return dict;
                     
                 }
                 else if ([returnType rangeOfString:@"{CGPoint="].location == 0)
                 {
                     CGPoint *point = (CGPoint*)buffer;
-                    return [NSDictionary dictionaryWithObjectsAndKeys:
-                            [value description], @"description",
-                            [NSNumber numberWithFloat:point->x],@"x",
-                            [NSNumber numberWithFloat:point->y],@"y",
-                            nil];
+                    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                          [value description], @"description",
+                                          [NSNumber numberWithFloat:point->x],@"x",
+                                          [NSNumber numberWithFloat:point->y],@"y",
+                                          nil];
+                    free(buffer);
+                    return dict;
                     
                 }
                 else
                 {
+                    free(buffer);
                     return [value description];                    
                 }
             }

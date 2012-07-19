@@ -9,7 +9,7 @@
 #import "LPHTTPDataResponse.h"
 
 @implementation LPRouter
-@synthesize postData=_postData;
+@synthesize postData;
 
 static NSMutableDictionary* routes = nil;
 
@@ -29,18 +29,14 @@ static NSMutableDictionary* routes = nil;
 }
 
 - (void)processBodyData:(NSData *)postDataChunk {
-    if (_postData == nil) {
-        _postData = [[NSMutableData alloc] initWithData:postDataChunk];
+    if (self.postData == nil) {
+        self.postData = [[NSMutableData alloc] initWithData:postDataChunk];
     } else {
-        [_postData appendData:postDataChunk];
+        [self.postData appendData:postDataChunk];
     }
 	
 }
 
-- (void) dealloc {
-    [_postData release];_postData=nil;
-    [super dealloc];
-}
 
 - (NSObject<LPHTTPResponse> *) responseForJSON:(NSDictionary*) json {
     if (json == nil) {
@@ -51,7 +47,7 @@ static NSMutableDictionary* routes = nil;
     NSString* serialized = [LPJSONUtils serializeDictionary:json];
     NSData *data = [serialized dataUsingEncoding:NSUTF8StringEncoding];
     LPHTTPDataResponse *rsp = [[LPHTTPDataResponse alloc] initWithData:data];
-    return [rsp autorelease];
+    return rsp;
 }
 
 - (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path
@@ -68,10 +64,11 @@ static NSMutableDictionary* routes = nil;
             params=[super parseGetParams];
         }
         if ([method isEqualToString:@"POST"]) {
-            if (_postData != nil && [_postData length]>0) {
-                NSString* postDataAsString = [[NSString alloc] initWithBytes:[_postData bytes] length:[_postData length] encoding:NSUTF8StringEncoding];
+            if (self.postData != nil && [self.postData length]>0) {
+                NSString* postDataAsString = [[NSString alloc] initWithBytes:[self.postData bytes] 
+                                                                      length:[self.postData length]
+                                                                    encoding:NSUTF8StringEncoding];
                 params=[LPJSONUtils deserializeDictionary:postDataAsString];
-                [postDataAsString release];                    
             } 
         }
         if ([route respondsToSelector:@selector(setConnection:)]) {
@@ -81,9 +78,10 @@ static NSMutableDictionary* routes = nil;
             [route setParameters:params];
         }
         
-        SEL raw = @selector(httpResponseForMethod:URI:);
-        if ([route respondsToSelector:raw]) {
-            return [route performSelector:raw withObject:method withObject:path];
+        if ([route respondsToSelector:@selector(httpResponseForMethod:URI:)]) {
+            return [route performSelector:@selector(httpResponseForMethod:URI:) 
+                               withObject:method 
+                               withObject:path];
         }
         
         NSDictionary* json = [route JSONResponseForMethod:method URI:path data:params];

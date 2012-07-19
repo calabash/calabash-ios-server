@@ -7,11 +7,11 @@
 #import <Foundation/Foundation.h>
 #import "LPRoute.h"
 @interface LPPlaybackRoute : NSObject<LPRoute> {
-    BOOL _done;
-    NSArray *_events;
+ 
 }
 
-@property (nonatomic, retain) NSArray *events;
+
+@property (strong, nonatomic) NSArray *events;
 @property (nonatomic, assign) BOOL done;
 
 -(void) play:(NSArray *)events;

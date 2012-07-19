@@ -7,7 +7,10 @@
 
 #import <Foundation/Foundation.h>
 @class LPHTTPConnection;
+@protocol LPHTTPResponse;
+
 @protocol LPRoute <NSObject>
+
 
 @optional
 - (void) setParameters:(NSDictionary*) parameters;

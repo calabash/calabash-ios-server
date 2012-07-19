@@ -1,6 +1,7 @@
 #import <UIKit/UIKit.h>
 
 #import "LPRecorder.h"
+#import "NSObject+LPAdditions.h"
 
 
 @interface UIApplication (Recording)
@@ -11,87 +12,111 @@
 
 @end
 
-static LPRecorder *sharedRecorder = nil;
+
 
 @implementation LPRecorder
-@synthesize isRecording=_isRecording;
+@synthesize isRecording;
+@synthesize playbackDelegate;
+@synthesize playbackDoneSelectorName;
+@synthesize eventList;
+
 +(LPRecorder *)sharedRecorder {
-	if (sharedRecorder == nil) {
-		sharedRecorder = [[super allocWithZone:NULL] init];
-	}
-	return sharedRecorder;
+    
+    static dispatch_once_t pred = 0;
+    __strong static id _sharedRecorder = nil;
+    dispatch_once(&pred, ^{
+        _sharedRecorder = [[self alloc] init]; 
+    });
+    return _sharedRecorder;
 }
 
 -(id)init {
 	self = [super init];
 
-	eventList = [[NSMutableArray alloc] init];
+	self.eventList = [[NSMutableArray alloc] init];
 
 	return self;
 }
 
--(void)dealloc {
-	[eventList release];
-	[super dealloc];
-}
 
 -(void)record {
-	[eventList removeAllObjects];
+	[self.eventList removeAllObjects];
 
 	NSLog(@"Starting recording");
-    _isRecording = YES;
+    self.isRecording = YES;
 	[[UIApplication sharedApplication] _addRecorder: self];
 }
 -(NSArray*)events {
-    return eventList;
+    return self.eventList;
 }
 -(void)saveToFile:(NSString*)path {
 	NSLog(@"Saving events to file: %@", path);
     
-	if ([eventList writeToFile: path atomically: YES]) {
+	if ([self.eventList writeToFile: path atomically: YES]) {
         NSLog(@"succeeded");
     }
 }
 
 -(void)stop {
 	NSLog(@"Stopping recording");
-    _isRecording = NO;
+    self.isRecording = NO;
 	[[UIApplication sharedApplication] _removeRecorder: self];
 }
 
 -(void)recordApplicationEvent:(NSDictionary*)event {
 	NSLog(@"Recorded event: %@", event);
 
-	[eventList addObject:event];
+	[self.eventList addObject:event];
 }
 
 -(void)load:(NSArray*)events {
 	NSLog(@"Loading events");
 
-	[eventList setArray: events];
+	[self.eventList setArray: events];
 }
 
 -(void)loadFromFile:(NSString*)path {
 	NSLog(@"Loading events from file: %@", path);
 
-	[eventList setArray: [NSMutableArray arrayWithContentsOfFile: path]];
+	[self.eventList setArray: [NSMutableArray arrayWithContentsOfFile: path]];
 }
 
 -(void)playbackWithDelegate: (id)delegate doneSelector:(SEL)doneSelector {
 	NSLog(@"Playback");
 
-	playbackDelegate = [delegate retain];
+	self.playbackDelegate = delegate;
     
-	playbackDoneSelector = doneSelector;
-
-	[[UIApplication sharedApplication] _playbackEvents: eventList atPlaybackRate: 1.0f messageWhenDone: self withSelector: @selector(playbackDone:)];
+    self.playbackDoneSelectorName = NSStringFromSelector(doneSelector);
+	[[UIApplication sharedApplication] _playbackEvents: self.eventList atPlaybackRate: 1.0f messageWhenDone: self withSelector: @selector(playbackDone:)];
 }
 
 -(void)playbackDone:(NSDictionary *)details {
 	NSLog(@"Playback complete");
-	[playbackDelegate performSelector: playbackDoneSelector];
-    [playbackDelegate autorelease];
-    playbackDelegate=nil;
+    SEL doneSelector = NSSelectorFromString(self.playbackDoneSelectorName);
+    if ([self.playbackDelegate respondsToSelector:(doneSelector)]) {
+        //[s`elf.playbackDelegate performSelectorSafely:doneSelector];
+        NSMethodSignature *msig = [[self.playbackDelegate class] 
+                                   instanceMethodSignatureForSelector:doneSelector];
+        NSInvocation *inv = [NSInvocation invocationWithMethodSignature:msig];
+        [inv setSelector:doneSelector];
+        [inv setTarget:self.playbackDelegate];
+        //[inv setArgument:&details atIndex:0];
+        [inv invoke];
+    }
+
+    /*
+    if ([self.playbackDelegate selectorReturnsObjectOrVoid:doneSelector]) {
+        [self.playbackDelegate performSelectorSafely:doneSelector];
+    } else {
+        // unsure what to say here
+    }
+     */
 }
+
+- (void) dealloc {
+  self.playbackDelegate = nil;
+}
+
+
 
 @end

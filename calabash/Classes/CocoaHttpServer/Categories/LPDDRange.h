@@ -1,6 +1,6 @@
 /**
  * LPDDRange is the functional equivalent of a 64 bit NSRange.
- * The HTTP Server is designed to support very large files.
+ * The LPHTTP Server is designed to support very large files.
  * On 32 bit architectures (ppc, i386) NSRange uses unsigned 32 bit integers.
  * This only supports a range of up to 4 gigabytes.
  * By defining our own variant, we can support a range up to 16 exabytes.
@@ -13,7 +13,7 @@
 
 @class NSString;
 
-typedef struct _LPDDRange {
+typedef struct _DDRange {
     UInt64 location;
     UInt64 length;
 } LPDDRange;
@@ -46,7 +46,7 @@ FOUNDATION_EXPORT LPDDRange LPDDRangeFromString(NSString *aString);
 
 NSInteger LPDDRangeCompare(LPDDRangePointer pDDRange1, LPDDRangePointer pDDRange2);
 
-@interface NSValue (LPNSValueDDRangeExtensions)
+@interface NSValue (NSValueDDRangeExtensions)
 
 + (NSValue *)valueWithDDRange:(LPDDRange)range;
 - (LPDDRange)ddrangeValue;

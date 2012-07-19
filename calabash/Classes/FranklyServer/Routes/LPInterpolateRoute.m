@@ -22,16 +22,17 @@
 
 @implementation LPInterpolateRoute
 
-@synthesize events=_events;
-@synthesize done=_done;
-@synthesize conn=_conn;
-@synthesize data=_data;
-@synthesize jsonResponse=_jsonResponse;
+@synthesize events;
+@synthesize done;
+@synthesize conn;
+@synthesize data;
+@synthesize jsonResponse;
+@synthesize bytes;
 
 -(id) init {
     self = [super init];
     if (self) {
-        _bytes = nil;
+        self.bytes = nil;
     }
     return self;
 }
@@ -59,17 +60,17 @@
         return nil;//Data generated async.
     }
     else {//done is set to YES only after events and jsonResponse is set (playbackDone)
-        if (!_bytes) {
+        if (!self.bytes) {
             NSString* serialized = [LPJSONUtils serializeDictionary:self.jsonResponse];
             self.events = nil;        
             self.jsonResponse = nil;
-            _bytes = [serialized dataUsingEncoding:NSUTF8StringEncoding];    
+            self.bytes = [serialized dataUsingEncoding:NSUTF8StringEncoding];    
         }
-        if (length >= [_bytes length]) {
-            return _bytes;
+        if (length >= [self.bytes length]) {
+            return self.bytes;
         } else {//length < [_bytes length]
-            NSData *toReturn = [_bytes subdataWithRange:NSMakeRange(0, length)];
-            _bytes = [_bytes subdataWithRange:NSMakeRange(length, _bytes.length - length)];//the rest
+            NSData *toReturn = [self.bytes subdataWithRange:NSMakeRange(0, length)];
+            self.bytes = [self.bytes subdataWithRange:NSMakeRange(length, self.bytes.length - length)];//the rest
             return toReturn;
         }                
     }
@@ -154,7 +155,7 @@
     }    
     else                
     {        
-       CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)[startAt valueForKey:@"center"], &centerStart);
+       CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)[startAt valueForKey:@"center"], &centerStart);
     }
     centerStart = CGPointMake(centerStart.x + offsetPointStart.x, centerStart.y + offsetPointStart.y);
             
@@ -167,7 +168,7 @@
     else                
     {
         
-        CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)[startAt valueForKey:@"center"], &centerEnd);
+        CGPointMakeWithDictionaryRepresentation((__bridge CFDictionaryRef)[startAt valueForKey:@"center"], &centerEnd);
     }
     centerEnd = CGPointMake(centerEnd.x + offsetPointEnd.x, centerEnd.y + offsetPointEnd.y);
     
@@ -228,7 +229,7 @@
 
 
 - (NSObject<LPHTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {    
-    LPInterpolateRoute* route = [[[LPInterpolateRoute alloc] init] autorelease];
+    LPInterpolateRoute* route = [[LPInterpolateRoute alloc] init];
     [route setParameters:self.data];
     [route setConnection:self.conn];
     self.data = nil;
@@ -237,11 +238,7 @@
 }
 
 -(void) dealloc {
-    self.data = nil;
     self.conn = nil;
-    self.events = nil;
-    self.jsonResponse = nil;
-    [super dealloc];
 }
 
 @end

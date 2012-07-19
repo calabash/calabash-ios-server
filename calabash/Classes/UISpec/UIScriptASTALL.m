@@ -12,7 +12,7 @@
     return @"all";
 }
 - (NSMutableArray*) evalWith:(NSArray*) views direction:(UIScriptASTDirectionType) dir {
-    return [[views mutableCopy]autorelease];
+    return [views mutableCopy];
 }
 
 @end
