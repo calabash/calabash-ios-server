@@ -17,6 +17,8 @@
 #import "LPInterpolateRoute.h"
 #import "LPBackdoorRoute.h"
 #import "LPVersionRoute.h"
+#import "LPConditionRoute.h"
+#import "LPKeyboardRoute.h"
 #import <dlfcn.h>
 
 @interface CalabashServer()
@@ -94,6 +96,16 @@
         LPVersionRoute* verr = [LPVersionRoute new];
         [LPRouter addRoute:verr forPath:@"/version"];
         [verr release];
+
+        LPConditionRoute* cond = [LPConditionRoute new];
+        [LPRouter addRoute:cond forPath:@"/condition"];
+        [cond release];
+
+        LPKeyboardRoute* keyboard = [LPKeyboardRoute new];
+        [LPRouter addRoute:keyboard forPath:@"/keyboard"];
+        [keyboard release];
+
+        
 
 
 //        

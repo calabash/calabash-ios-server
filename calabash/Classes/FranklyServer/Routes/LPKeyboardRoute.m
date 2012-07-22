@@ -1,36 +1,31 @@
-
 //
-//  TouchDoneNextOperation.m
-//  Created by Karl Krukow on 21/08/11.
-//  Copyright (c) 2011 LessPainful. All rights reserved.
+//  LPKeyboardRoute.m
+//  calabash
+//
+//  Created by Karl Krukow on 29/01/12.
+//  Copyright (c) 2012 LessPainful. All rights reserved.
+//
 
-#import "LPNativeKeyboardOperation.h"
-#import "UIScriptParser.h"
-#import "LPRecorder.h"
+#import "LPKeyboardRoute.h"
+#import "LPHTTPResponse.h"
+#import "LPHTTPConnection.h"
 #import "LPResources.h"
+#import "LPRecorder.h"
+#import "UIScriptParser.h"
 #import "LPTouchUtils.h"
-
-@implementation LPNativeKeyboardOperation
-- (NSString *) description {
-	return [NSString stringWithFormat:@"Touch keyboard"];
-}
+#import "LPJSONUtils.h"
+#import <QuartzCore/QuartzCore.h>
 
 
--(id)performWithTarget:(UIView *)view error:(NSError **)error
+@implementation LPKeyboardRoute
+
+-(void)beginOperation
 {
-    NSString *characterString  = nil;
-    if ([_arguments count] == 1)
-    {
-        //support touch done for backwards compat
-        characterString = @"Return";
-         
-    }
-    else
-    {
-        characterString = [_arguments objectAtIndex:1];
-    }
-        
-
+    _events = nil;
+    _playbackDone = NO;
+    NSString *characterString = [self.data objectForKey:@"key"];
+    NSArray *events = [LPResources eventsFromEncoding:[self.data objectForKey:@"events"]]; 
+    UIView *view = nil;
     NSLog(@"Preparing to enter: %@",characterString);
     for (UIWindow *window in [UIApplication sharedApplication].windows) 
     {
@@ -45,25 +40,24 @@
     
     if (!view) 
     {
-        return nil;
+        _playbackDone = YES;
+        return [self failWithMessageFormat:@"No keyboard displaying..." message:nil];
     }
-
+    
     UIScriptParser *parser = [[UIScriptParser alloc] initWithUIScript:@"view:'UIKBKeyplaneView'"];
     [parser parse];
-    
-    
+        
     NSMutableArray* views = [NSMutableArray arrayWithObject:view];
     NSArray* result = [parser evalWith:views];
-
+    
     if ([result count]==0) 
     {
-        NSLog(@"Found not UIKBKeyplaneView...");
-
-        return nil;
+        _playbackDone = YES;
+        return [self failWithMessageFormat:@"Found not UIKBKeyplaneView..." message:nil];        
     }
     NSLog(@"Target KBKeyplane: %@",view);
-
-
+    
+    
     //cf KIF: https://github.com/square/KIF/blob/master/Classes/KIFTestStep.m
     UIView *keyboardView = [result objectAtIndex:0];
     
@@ -82,10 +76,10 @@
             NSLog(@"Target key: %@",key);
             keyToTap = key;
         }
-
+        
         if ([representedString length]>0)
         {
-                
+            
             if ([characterString isEqualToString:@"Return"] && [representedString characterAtIndex:0]==(unichar)10)
             {
                 keyToTap = key;
@@ -93,13 +87,14 @@
         }
     }             
     
-    if (keyToTap) {
+    if (keyToTap) 
+    {
         UIScriptParser *parser = [[UIScriptParser alloc] initWithUIScript:@"view:'UIKeyboardAutomatic'"];
         [parser parse];
         NSMutableArray* views = [NSMutableArray arrayWithObject:view];
         NSArray* result = [parser evalWith:views];
         UIView *v = [result objectAtIndex:0];
-                
+        
         UIView *sup = [v superview];
         
         CGRect parentFrame = [sup convertRect:v.frame toView:nil];//[sup convertRect:v.frame toView:sup];
@@ -110,57 +105,29 @@
         
         point = [(UIWindow*)view convertPoint:point toWindow:nil];
         point=[LPTouchUtils translateToScreenCoords:point];
-        _events =  [[LPResources transformEvents: 
-                            [LPResources eventsFromEncoding:[_arguments objectAtIndex:0]]  
-                                         toPoint:point] retain];
+        _events =  [[LPResources transformEvents:events toPoint:point] retain];
+        self.done = YES;
+        self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:
+                             result, @"results",
+                             @"SUCCESS",@"outcome",
+                             nil];
+
         [self play:_events];
-        
-        return [keyToTap description];
+                
     }
-    else {
-        NSLog(@"Found no key: %@",characterString);
-    }
-    return nil;
-}
-
-
-- (id) touchDone {
-    UIScriptParser* p=[[UIScriptParser alloc]initWithUIScript:@"view:'UIKBKeyView'"];
-    [p parse];
-    NSMutableArray* views = [NSMutableArray arrayWithCapacity:32];
-    for (UIWindow *window in [[UIApplication sharedApplication] windows]) 
+    else 
     {
-        [views addObjectsFromArray:[window subviews]];
+        _playbackDone = YES;
+        [self failWithMessageFormat:@"Found no key: %@" message:characterString];        
     }
-    NSArray* result = [p evalWith:views];
 
-    NSUInteger index=-1;
-    NSUInteger maxPointIndex=-1;
-    CGPoint maxPoint = CGPointZero;
-    for (UIView* view in result) {
-        index++;
-        CGPoint vp = CGPointMake(view.frame.origin.x + view.frame.size.width, view.frame.origin.y + view.frame.size.height);
-        
-        if (vp.x >= maxPoint.x && vp.y >= maxPoint.y) {
-            maxPoint = vp;
-            maxPointIndex = index;
-        }
-    }
-    
-    UIView* theView = [result objectAtIndex:maxPointIndex];
-
-    _events =  [[LPResources transformEvents: [LPResources eventsFromEncoding:[_arguments objectAtIndex:0]]  
-                            toPoint:[LPTouchUtils centerOfView: theView ]] retain];
-    [self play:_events];
-        
-	return theView;
 }
 
 -(void) play:(NSArray *)events {
-    _done = NO;
+    _playbackDone = NO;
     [[LPRecorder sharedRecorder] load: _events];
     [[LPRecorder sharedRecorder] playbackWithDelegate: self doneSelector: @selector(playbackDone:)];
-
+    
 }
 
 //-(void) waitUntilPlaybackDone {
@@ -170,8 +137,19 @@
 //}
 
 -(void) playbackDone:(NSDictionary *)details {
-    _done = YES;
+    _playbackDone = YES;
     [_events release];
     _events=nil;
+    [self.conn responseHasAvailableData:self];
+
 }
+
+// Should only return YES after the LPHTTPConnection has read all available data.
+- (BOOL)isDone 
+{
+    return _playbackDone && [super isDone];
+}
+
+
+
 @end

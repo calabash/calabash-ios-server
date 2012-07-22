@@ -5,6 +5,7 @@
 //
 
 #import "LPQueryOperation.h"
+#import "LPCJSONSerializer.h"
 
 @implementation LPQueryOperation
 - (NSString *) description {
@@ -64,6 +65,13 @@
         
         return result;
     }
+    
+    LPCJSONSerializer* s = [LPCJSONSerializer serializer];
+    NSError* error = nil;
+    if (![s serializeObject:object error:&error] || error) 
+    {
+        return [object description];
+    }    
     return object;
          
          

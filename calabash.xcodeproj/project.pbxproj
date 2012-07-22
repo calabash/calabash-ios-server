@@ -43,6 +43,12 @@
 		B153F55D15949F3E00867E12 /* LPVersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B153F55B15949F3D00867E12 /* LPVersionRoute.m */; };
 		B160E8EF15321D8F00F69E7A /* LPBackdoorRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B160E8ED15321D8F00F69E7A /* LPBackdoorRoute.h */; };
 		B160E8F015321D8F00F69E7A /* LPBackdoorRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */; };
+		B163213515BBF13200408364 /* LPConditionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B163213315BBF13200408364 /* LPConditionRoute.h */; };
+		B163213615BBF13200408364 /* LPConditionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B163213415BBF13200408364 /* LPConditionRoute.m */; };
+		B16321F415BC1ECD00408364 /* LPGenericAsyncRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B16321F215BC1ECD00408364 /* LPGenericAsyncRoute.h */; };
+		B16321F515BC1ECD00408364 /* LPGenericAsyncRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F315BC1ECD00408364 /* LPGenericAsyncRoute.m */; };
+		B16321F815BC200300408364 /* LPKeyboardRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B16321F615BC200300408364 /* LPKeyboardRoute.h */; };
+		B16321F915BC200300408364 /* LPKeyboardRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F715BC200300408364 /* LPKeyboardRoute.m */; };
 		B184FD8914B6DAE1002A744C /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		B184FD8A14B6DAE1002A744C /* CalabashServer.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8814B6DAE1002A744C /* CalabashServer.h */; };
 		B184FD8D14B6DAFB002A744C /* LPCDataScanner.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8B14B6DAFB002A744C /* LPCDataScanner.h */; };
@@ -156,6 +162,12 @@
 		B153F55B15949F3D00867E12 /* LPVersionRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPVersionRoute.m; sourceTree = "<group>"; };
 		B160E8ED15321D8F00F69E7A /* LPBackdoorRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPBackdoorRoute.h; sourceTree = "<group>"; };
 		B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPBackdoorRoute.m; sourceTree = "<group>"; };
+		B163213315BBF13200408364 /* LPConditionRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPConditionRoute.h; sourceTree = "<group>"; };
+		B163213415BBF13200408364 /* LPConditionRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPConditionRoute.m; sourceTree = "<group>"; };
+		B16321F215BC1ECD00408364 /* LPGenericAsyncRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPGenericAsyncRoute.h; sourceTree = "<group>"; };
+		B16321F315BC1ECD00408364 /* LPGenericAsyncRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPGenericAsyncRoute.m; sourceTree = "<group>"; };
+		B16321F615BC200300408364 /* LPKeyboardRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPKeyboardRoute.h; sourceTree = "<group>"; };
+		B16321F715BC200300408364 /* LPKeyboardRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPKeyboardRoute.m; sourceTree = "<group>"; };
 		B16C307D15191A8C00DAA3FA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		B16C307F15191A8C00DAA3FA /* calabash-min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "calabash-min.js"; sourceTree = "<group>"; };
 		B16C308015191A8C00DAA3FA /* set_text-min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "set_text-min.js"; sourceTree = "<group>"; };
@@ -450,6 +462,12 @@
 		B184FDD014B6DB2B002A744C /* Routes */ = {
 			isa = PBXGroup;
 			children = (
+				B16321F615BC200300408364 /* LPKeyboardRoute.h */,
+				B16321F715BC200300408364 /* LPKeyboardRoute.m */,
+				B16321F215BC1ECD00408364 /* LPGenericAsyncRoute.h */,
+				B16321F315BC1ECD00408364 /* LPGenericAsyncRoute.m */,
+				B163213315BBF13200408364 /* LPConditionRoute.h */,
+				B163213415BBF13200408364 /* LPConditionRoute.m */,
 				B12A04001511546F002FA032 /* LPInterpolateRoute.h */,
 				B12A04011511546F002FA032 /* LPInterpolateRoute.m */,
 				B184FE8914B6DC7F002A744C /* LPMapRoute.h */,
@@ -615,6 +633,9 @@
 				B160E8EF15321D8F00F69E7A /* LPBackdoorRoute.h in Headers */,
 				B153F55C15949F3E00867E12 /* LPVersionRoute.h in Headers */,
 				B1914DDC159C228500CB928D /* LPWebQuery.h in Headers */,
+				B163213515BBF13200408364 /* LPConditionRoute.h in Headers */,
+				B16321F415BC1ECD00408364 /* LPGenericAsyncRoute.h in Headers */,
+				B16321F815BC200300408364 /* LPKeyboardRoute.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -763,6 +784,9 @@
 				B160E8F015321D8F00F69E7A /* LPBackdoorRoute.m in Sources */,
 				B153F55D15949F3E00867E12 /* LPVersionRoute.m in Sources */,
 				B1914DDD159C228500CB928D /* LPWebQuery.m in Sources */,
+				B163213615BBF13200408364 /* LPConditionRoute.m in Sources */,
+				B16321F515BC1ECD00408364 /* LPGenericAsyncRoute.m in Sources */,
+				B16321F915BC200300408364 /* LPKeyboardRoute.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

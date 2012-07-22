@@ -72,6 +72,7 @@ static NSMutableDictionary* routes = nil;
                 NSString* postDataAsString = [[NSString alloc] initWithBytes:[_postData bytes] length:[_postData length] encoding:NSUTF8StringEncoding];
                 params=[LPJSONUtils deserializeDictionary:postDataAsString];
                 [postDataAsString release];                    
+                _postData = nil;
             } 
         }
         if ([route respondsToSelector:@selector(setConnection:)]) {
