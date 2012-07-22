@@ -68,8 +68,6 @@
 		B184FE4514B6DB2B002A744C /* LPScrollToRowOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */; };
 		B184FE4614B6DB2B002A744C /* LPSetTextOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDCA14B6DB2B002A744C /* LPSetTextOperation.h */; };
 		B184FE4714B6DB2B002A744C /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; };
-		B184FE4814B6DB2B002A744C /* LPNativeKeyboardOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDCC14B6DB2B002A744C /* LPNativeKeyboardOperation.h */; };
-		B184FE4914B6DB2B002A744C /* LPNativeKeyboardOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCD14B6DB2B002A744C /* LPNativeKeyboardOperation.m */; };
 		B184FE4A14B6DB2B002A744C /* LPRecorder.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDCE14B6DB2B002A744C /* LPRecorder.h */; };
 		B184FE4D14B6DB2B002A744C /* LPMapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD214B6DB2B002A744C /* LPMapRoute.m */; };
 		B184FE4E14B6DB2B002A744C /* LPNoContentResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDD314B6DB2B002A744C /* LPNoContentResponse.h */; };
@@ -195,8 +193,6 @@
 		B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScrollToRowOperation.m; sourceTree = "<group>"; };
 		B184FDCA14B6DB2B002A744C /* LPSetTextOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPSetTextOperation.h; sourceTree = "<group>"; };
 		B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSetTextOperation.m; sourceTree = "<group>"; };
-		B184FDCC14B6DB2B002A744C /* LPNativeKeyboardOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPNativeKeyboardOperation.h; sourceTree = "<group>"; };
-		B184FDCD14B6DB2B002A744C /* LPNativeKeyboardOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPNativeKeyboardOperation.m; sourceTree = "<group>"; };
 		B184FDCE14B6DB2B002A744C /* LPRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPRecorder.h; sourceTree = "<group>"; };
 		B184FDD214B6DB2B002A744C /* LPMapRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPMapRoute.m; sourceTree = "<group>"; };
 		B184FDD314B6DB2B002A744C /* LPNoContentResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LPNoContentResponse.h; sourceTree = "<group>"; };
@@ -453,8 +449,6 @@
 				B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */,
 				B184FDCA14B6DB2B002A744C /* LPSetTextOperation.h */,
 				B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */,
-				B184FDCC14B6DB2B002A744C /* LPNativeKeyboardOperation.h */,
-				B184FDCD14B6DB2B002A744C /* LPNativeKeyboardOperation.m */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -589,7 +583,6 @@
 				B184FE4214B6DB2B002A744C /* LPScrollOperation.h in Headers */,
 				B184FE4414B6DB2B002A744C /* LPScrollToRowOperation.h in Headers */,
 				B184FE4614B6DB2B002A744C /* LPSetTextOperation.h in Headers */,
-				B184FE4814B6DB2B002A744C /* LPNativeKeyboardOperation.h in Headers */,
 				B184FE4A14B6DB2B002A744C /* LPRecorder.h in Headers */,
 				B184FE4E14B6DB2B002A744C /* LPNoContentResponse.h in Headers */,
 				B184FE5014B6DB2B002A744C /* LPPlaybackRoute.h in Headers */,
@@ -742,7 +735,6 @@
 				B184FE4314B6DB2B002A744C /* LPScrollOperation.m in Sources */,
 				B184FE4514B6DB2B002A744C /* LPScrollToRowOperation.m in Sources */,
 				B184FE4714B6DB2B002A744C /* LPSetTextOperation.m in Sources */,
-				B184FE4914B6DB2B002A744C /* LPNativeKeyboardOperation.m in Sources */,
 				B184FE4D14B6DB2B002A744C /* LPMapRoute.m in Sources */,
 				B184FE4F14B6DB2B002A744C /* LPNoContentResponse.m in Sources */,
 				B184FE5914B6DB2B002A744C /* CDataScanner_Extensions.m in Sources */,

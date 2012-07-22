@@ -22,8 +22,10 @@
 -(void)beginOperation
 {
     _events = nil;
-    _playbackDone = NO;
+    _playbackDone = NO;    
     NSString *characterString = [self.data objectForKey:@"key"];
+    
+    
     NSArray *events = [LPResources eventsFromEncoding:[self.data objectForKey:@"events"]]; 
     UIView *view = nil;
     NSLog(@"Preparing to enter: %@",characterString);

@@ -14,7 +14,6 @@
     LPHTTPConnection *_conn;
     NSDictionary *_data;
     NSDictionary *_jsonResponse;
-    NSTimer *_timer;
     NSData *_bytes;
     
 }

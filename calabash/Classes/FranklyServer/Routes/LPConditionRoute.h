@@ -8,21 +8,12 @@
 #import <Foundation/Foundation.h>
 #import "LPRoute.h"
 #import "LPHTTPResponse.h"
-@interface LPConditionRoute : NSObject<LPRoute,LPHTTPResponse> 
+#import "LPGenericAsyncRoute.h"
+@interface LPConditionRoute : LPGenericAsyncRoute
 {    
-    BOOL _done;
-    LPHTTPConnection *_conn;
-    NSDictionary *_data;
-    NSDictionary *_jsonResponse;
-    NSTimer *_timer;
-    NSData *_bytes;
-    
+    NSTimer *_timer;    
 }
 
-@property (nonatomic, assign) BOOL done;
-@property (nonatomic, assign) LPHTTPConnection *conn;
-@property (nonatomic, retain) NSDictionary *data;
-@property (nonatomic, retain) NSDictionary *jsonResponse;
 @property (nonatomic, retain) NSTimer *timer;
 @property (nonatomic, assign) NSInteger maxCount;
 @property (nonatomic, assign) NSInteger curCount;

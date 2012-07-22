@@ -6,7 +6,6 @@
 
 #import "LPOperation.h"
 #import "LPScrollToRowOperation.h"
-#import "LPNativeKeyboardOperation.h"
 #import "LPScrollOperation.h"
 #import "LPQueryOperation.h"
 #import "LPSetTextOperation.h"
@@ -21,8 +20,6 @@
         op = [[LPScrollToRowOperation alloc] initWithOperation:dictionary];
     } else if ([opName isEqualToString:@"scroll"]) {
         op = [[LPScrollOperation alloc] initWithOperation:dictionary];
-    } else if ([opName isEqualToString:@"keyboard"]) {
-        op = [[LPNativeKeyboardOperation alloc] initWithOperation:dictionary];
     } else if ([opName isEqualToString:@"query"]) {
         op = [[LPQueryOperation alloc] initWithOperation:dictionary];
     } else if ([opName isEqualToString:@"setText"]) {
