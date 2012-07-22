@@ -1,9 +1,9 @@
 //
-//  LPPanningRoute.m
+//  LPInterpolateRoute.m
 //  LPSimpleExample
 //
 //  Created by Karl Krukow on 14/03/12.
-//  Copyright (c) 2012 Trifork. All rights reserved.
+//  Copyright (c) 2012 LessPainful. All rights reserved.
 //
 
 #import "LPAsyncPlaybackRoute.h"
@@ -23,11 +23,12 @@
 
 // Should only return YES after the LPHTTPConnection has read all available data.
 - (BOOL)isDone {
-    return self.done && self.events == nil && self.jsonResponse == nil;
+    return !self.events && [super isDone];
 }
 
 
--(void) playbackEvents {
+-(void)beginOperation 
+{
     self.done = NO;
     NSString *base64Events = [self.data objectForKey:@"events"];
     NSString *queryStart = [self.data objectForKey:@"start"];

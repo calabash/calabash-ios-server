@@ -3,7 +3,7 @@
 //  LPSimpleExample
 //
 //  Created by Karl Krukow on 14/03/12.
-//  Copyright (c) 2012 Trifork. All rights reserved.
+//  Copyright (c) 2012 LessPainful. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

@@ -3,7 +3,7 @@
 //  calabash
 //
 //  Created by Karl Krukow on 02/02/12.
-//  Copyright (c) 2012 Trifork. All rights reserved.
+//  Copyright (c) 2012 LessPainful. All rights reserved.
 //
 
 #import "LPBackgroundRoute.h"
