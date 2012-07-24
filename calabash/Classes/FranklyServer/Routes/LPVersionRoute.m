@@ -8,7 +8,7 @@
 
 #import "LPVersionRoute.h"
 
-#define kLPCALABASHVERSION @"0.9.80.pre.1"
+#define kLPCALABASHVERSION @"0.9.80.pre.2"
 
 @implementation LPVersionRoute
 
