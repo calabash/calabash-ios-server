@@ -1,3 +1,4 @@
+
 //
 //  LPConditionRoute.m
 //  calabash
@@ -45,7 +46,6 @@
         NSLog(@"condition not specified");
         [self failWithMessageFormat: @"condition parameter missing" message:nil];            
         return;
-
     }
     NSNumber *count = [self.data objectForKey:@"count"];
     if (!count)
@@ -84,7 +84,6 @@
                                 parser,@"parser",
                             nil];
         
-    NSLog(@"Starting timer...");
     self.timer = [NSTimer scheduledTimerWithTimeInterval:[freq doubleValue] 
                                                       target:self 
                                                     selector:@selector(checkConditionWithTimer:) 

@@ -31,29 +31,7 @@
     CalabashServer* server = [[CalabashServer alloc] init];
     [server start];
     
-    NSAutoreleasePool *autoreleasePool = [[NSAutoreleasePool alloc] init];
-    NSString *appSupportLocation = @"/System/Library/PrivateFrameworks/AppSupport.framework/AppSupport";
-    
-    NSDictionary *environment = [[NSProcessInfo processInfo] environment];
-    NSString *simulatorRoot = [environment objectForKey:@"IPHONE_SIMULATOR_ROOT"];
-    if (simulatorRoot) {
-        appSupportLocation = [simulatorRoot stringByAppendingString:appSupportLocation];
-    }
-    
-    void *appSupportLibrary = dlopen([appSupportLocation fileSystemRepresentation], RTLD_LAZY);
-    
-    CFStringRef (*copySharedResourcesPreferencesDomainForDomain)(CFStringRef domain) = dlsym(appSupportLibrary, "CPCopySharedResourcesPreferencesDomainForDomain");    
-    
-    if (copySharedResourcesPreferencesDomainForDomain) {
-        CFStringRef accessibilityDomain = copySharedResourcesPreferencesDomainForDomain(CFSTR("com.apple.Accessibility"));
-        
-        if (accessibilityDomain) {
-            CFPreferencesSetValue(CFSTR("ApplicationAccessibilityEnabled"), kCFBooleanTrue, accessibilityDomain, kCFPreferencesAnyUser, kCFPreferencesAnyHost);
-            CFRelease(accessibilityDomain);
-        }
-    }
-    
-    [autoreleasePool drain];
+    dlopen([@"/Developer/Library/PrivateFrameworks/UIAutomation.framework/UIAutomation" fileSystemRepresentation], RTLD_LOCAL);
 
 }
 
@@ -158,12 +136,15 @@
 {
     // Approach described at:
     // http://sgleadow.github.com/blog/2011/11/16/enabling-accessibility-programatically-on-ios-devices/
-    @autoreleasepool {
+    NSAutoreleasePool *autoreleasePool = [[NSAutoreleasePool alloc] init];
+    
+
         NSString *appSupportPath = @"/System/Library/PrivateFrameworks/AppSupport.framework/AppSupport";
 
         // If we're on the simulator, make sure we're using the sim's copy of AppSupport
         NSDictionary *environment = [[NSProcessInfo processInfo] environment];
         NSString *simulatorRoot = [environment objectForKey:@"IPHONE_SIMULATOR_ROOT"];
+    NSLog(@"simroot: %@",simulatorRoot);
         if (simulatorRoot) {
             appSupportPath = [simulatorRoot stringByAppendingString:appSupportPath];
         }
@@ -195,7 +176,9 @@
                               kCFPreferencesAnyUser,
                               kCFPreferencesAnyHost);
         CFRelease(accessibilityDomain);
-    }
+    
+    [autoreleasePool drain];
+
 }
 
 - (void) dealloc
