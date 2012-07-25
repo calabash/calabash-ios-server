@@ -56,11 +56,16 @@ static NSMutableDictionary* routes = nil;
 
 - (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path
 {
+    NSArray *components = [path componentsSeparatedByString:@"?"];
+    path = [components objectAtIndex:0];
+
     id<LPRoute> route = [routes objectForKey:path];
     return ([route supportsMethod:method atPath:path]);
 }
 
 - (NSObject<LPHTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
+    NSArray *components = [path componentsSeparatedByString:@"?"];
+    path = [components objectAtIndex:0];
     id<LPRoute> route = [routes objectForKey:path];
     if ([route supportsMethod:method atPath:path]) {
         NSDictionary* params = nil;

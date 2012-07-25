@@ -13,4 +13,8 @@
 + (NSString*) serializeArray:(NSArray*) array;
 + (NSArray*) deserializeArray:(NSString*) string;
 +(NSString *)serializeObject:(id)obj;
+
++(id)jsonifyObject:(id)obj;
+
+
 @end

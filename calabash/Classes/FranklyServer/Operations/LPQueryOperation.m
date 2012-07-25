@@ -5,7 +5,8 @@
 //
 
 #import "LPQueryOperation.h"
-#import "LPCJSONSerializer.h"
+#import "LPJSONUtils.h"
+
 
 @implementation LPQueryOperation
 - (NSString *) description {
@@ -24,62 +25,10 @@
     return NSSelectorFromString(selStr);
 }
 
--(id)jsonifyObject:(id)object
-{
-    if (!object) {return nil;}
-    if ([object isKindOfClass:[UIColor class]]) 
-    {
-        //todo special handling
-        return [object description];        
-    }
-    if ([object isKindOfClass:[UIView class]])
-    {
-        NSMutableDictionary *result = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-         NSStringFromClass([object class]),@"class",
-            
-         nil];
-        
-        NSString* type = nil;
-        if ([object isKindOfClass:[UIControl class]])
-        {
-            type = @"UIControl";
-        }
-        else
-        {
-            type = @"UIView";
-        }
-        [result setObject:type forKey:@"UIType"];
-
-        CGRect frame = [object frame];
-        NSDictionary *frameDic =  
-        [NSDictionary dictionaryWithObjectsAndKeys:
-         [NSNumber numberWithFloat:frame.origin.x],@"x",
-         [NSNumber numberWithFloat:frame.origin.y],@"y",
-         [NSNumber numberWithFloat:frame.size.width],@"width",
-         [NSNumber numberWithFloat:frame.size.height],@"height",
-         nil];
-
-        [result setObject:frameDic forKey:@"frame"];
-        
-        [result setObject:[object description] forKey:@"description"];
-        
-        return result;
-    }
-    
-    LPCJSONSerializer* s = [LPCJSONSerializer serializer];
-    NSError* error = nil;
-    if (![s serializeObject:object error:&error] || error) 
-    {
-        return [object description];
-    }    
-    return object;
-         
-         
-}
 - (id) performWithTarget:(UIView*)_view error:(NSError **)error {
     id target = _view;
     if([_arguments count] <= 0) {
-        return [self jsonifyObject: _view];
+        return [LPJSONUtils jsonifyObject: _view];
     }
     for (NSInteger i=0;i<[_arguments count];i++) {
         id selObj = [_arguments objectAtIndex:i];
@@ -193,7 +142,7 @@
                     return nil;
                 } else {
                     if (i == [_arguments count]-1) {                                                 
-                        return [self jsonifyObject:objValue];
+                        return [LPJSONUtils jsonifyObject:objValue];
                     } else {
                         target = objValue;
                         continue;

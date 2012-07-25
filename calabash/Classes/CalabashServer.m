@@ -13,11 +13,12 @@
 #import "LPRecordRoute.h"
 #import "LPPlaybackRoute.h"
 #import "LPAsyncPlaybackRoute.h"
-#import "LPBackgroundRoute.h"
+#import "LPUserPrefRoute.h"
 #import "LPInterpolateRoute.h"
 #import "LPBackdoorRoute.h"
 #import "LPVersionRoute.h"
 #import "LPConditionRoute.h"
+#import "LPUIARoute.h"
 #import "LPKeyboardRoute.h"
 #import <dlfcn.h>
 
@@ -59,8 +60,8 @@
         [LPRouter addRoute:apr forPath:@"/play"];
         [apr release];
 
-        LPBackgroundRoute *bgr =[LPBackgroundRoute new];
-        [LPRouter addRoute:bgr forPath:@"/background"];
+        LPUserPrefRoute *bgr =[LPUserPrefRoute new];
+        [LPRouter addRoute:bgr forPath:@"/userprefs"];
         [bgr release];
 
         LPInterpolateRoute *panr =[LPInterpolateRoute new];
@@ -82,8 +83,12 @@
         LPKeyboardRoute* keyboard = [LPKeyboardRoute new];
         [LPRouter addRoute:keyboard forPath:@"/keyboard"];
         [keyboard release];
-
         
+        LPUIARoute* uia = [LPUIARoute new];
+        [LPRouter addRoute:uia forPath:@"/uia"];
+        [uia release];
+        
+    
 
 
 //        

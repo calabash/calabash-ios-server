@@ -1,5 +1,5 @@
 //
-//  LPBackgroundRoute.h
+//  LPUserPrefRoute.h
 //  calabash
 //
 //  Created by Karl Krukow on 02/02/12.
@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "LPRoute.h"
 
-@interface LPBackgroundRoute : NSObject<LPRoute> 
+@interface LPUserPrefRoute : NSObject<LPRoute> 
 
 @end
