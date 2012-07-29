@@ -5,7 +5,8 @@
 //
 
 #import "LPOperation.h"
+#import "LPQueryAllOperation.h"
 
-@interface LPQueryOperation : LPOperation
+@interface LPQueryOperation : LPQueryAllOperation
 
 @end

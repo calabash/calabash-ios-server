@@ -94,7 +94,6 @@
         }
         else
         {
-            if (![LPTouchUtils isViewVisible:v]) { continue; }
             if ([v isKindOfClass:[UIWebView class]]) 
             {            
                 [res addObjectsFromArray: [self handleWebView:(UIWebView *)v]];

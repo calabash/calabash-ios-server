@@ -28,12 +28,14 @@
 
 - (NSMutableArray*) evalWith:(NSArray*) views direction:(UIScriptASTDirectionType) dir {
     NSMutableArray* res = [NSMutableArray arrayWithCapacity:8];    
-    for (UIView* v in views) {
-        if ([v isKindOfClass:[UIView class]] && ![LPTouchUtils isViewVisible:v]) { continue; }
-        if ([v respondsToSelector:self.selector])
+    for (id v in views) {
+        if ([v isKindOfClass:[NSDictionary class]] || [v respondsToSelector:self.selector])
+        {
             if([self.predicate evaluateWithObject:v]) {
                 [res addObject:v];
             }
+        }
+            
     }
     return res;
 }

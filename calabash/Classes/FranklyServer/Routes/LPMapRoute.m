@@ -29,8 +29,10 @@
         }
     } else {
         for (id view in views) {
-            if ([view isKindOfClass:[UIView class]] && ![LPTouchUtils isViewVisible:view]) {continue;}            
-            id val = [op performWithTarget:view error:error];
+//            if ([view isKindOfClass:[UIView class]] && ![LPTouchUtils isViewVisible:view]) {continue;}            
+            NSError *err = nil;
+            id val = [op performWithTarget:view error:&err];
+            if (err) {continue;}
             if (val == nil) {
                 [finalRes addObject: [NSNull null]];
             } else {

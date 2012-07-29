@@ -62,10 +62,10 @@
     CGPoint center = [self centerOfView:view shouldTranslate:NO];
     UIWindow *windowForView = [self windowForView:view];
     if (!windowForView) {return YES;/* what can I do?*/}
-//    NSLog(@"view %@ cent: %@",    [view accessibilityLabel], NSStringFromCGPoint(center));
+    NSLog(@"view %@ cent: %@",    [view accessibilityLabel], NSStringFromCGPoint(center));
     UIView *hitView = [windowForView hitTest:center withEvent:nil];
-//    NSLog(@"hit test -> %@",hitView);
-//    NSLog(@"window rect: %@",    NSStringFromCGRect([windowForView bounds]));
+    NSLog(@"hit test -> %@",hitView);
+    NSLog(@"window rect: %@",    NSStringFromCGRect([windowForView bounds]));
     if ([self canFindView: view asSubViewInView:hitView])
     {
         return YES;

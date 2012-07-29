@@ -9,6 +9,7 @@
 #import "LPScrollOperation.h"
 #import "LPQueryOperation.h"
 #import "LPSetTextOperation.h"
+#import "LPQueryAllOperation.h"
 #import "LPRecorder.h"
 
 @implementation LPOperation
@@ -22,6 +23,8 @@
         op = [[LPScrollOperation alloc] initWithOperation:dictionary];
     } else if ([opName isEqualToString:@"query"]) {
         op = [[LPQueryOperation alloc] initWithOperation:dictionary];
+    } else if ([opName isEqualToString:@"query_all"]) {
+        op = [[LPQueryAllOperation alloc] initWithOperation:dictionary];
     } else if ([opName isEqualToString:@"setText"]) {
         op = [[LPSetTextOperation alloc] initWithOperation:dictionary];
     } else {

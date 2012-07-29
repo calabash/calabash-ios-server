@@ -41,6 +41,8 @@
 		B12A04031511546F002FA032 /* LPInterpolateRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A04011511546F002FA032 /* LPInterpolateRoute.m */; };
 		B153F55C15949F3E00867E12 /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; };
 		B153F55D15949F3E00867E12 /* LPVersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B153F55B15949F3D00867E12 /* LPVersionRoute.m */; };
+		B15DA5E515C5D80A009E6CFE /* LPQueryAllOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = B15DA5E315C5D80A009E6CFE /* LPQueryAllOperation.h */; };
+		B15DA5E615C5D80A009E6CFE /* LPQueryAllOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */; };
 		B160E8EF15321D8F00F69E7A /* LPBackdoorRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B160E8ED15321D8F00F69E7A /* LPBackdoorRoute.h */; };
 		B160E8F015321D8F00F69E7A /* LPBackdoorRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */; };
 		B163213515BBF13200408364 /* LPConditionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B163213315BBF13200408364 /* LPConditionRoute.h */; };
@@ -118,6 +120,7 @@
 		B1DDE6CE15C06CB500BBE2BE /* LPUIARoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CA15C06CB500BBE2BE /* LPUIARoute.m */; };
 		B1DDE6CF15C06CB500BBE2BE /* LPUserPrefRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B1DDE6CB15C06CB500BBE2BE /* LPUserPrefRoute.h */; };
 		B1DDE6D015C06CB500BBE2BE /* LPUserPrefRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CC15C06CB500BBE2BE /* LPUserPrefRoute.m */; };
+		B1DDE6D215C0701D00BBE2BE /* UIAutomation.h in Headers */ = {isa = PBXBuildFile; fileRef = B1DDE6D115C0701D00BBE2BE /* UIAutomation.h */; };
 		B1E3603A14D9F4B30087D8D9 /* UIScriptASTPredicate.h in Headers */ = {isa = PBXBuildFile; fileRef = B1E3603814D9F4B30087D8D9 /* UIScriptASTPredicate.h */; };
 		B1E3603B14D9F4B30087D8D9 /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; };
 /* End PBXBuildFile section */
@@ -160,6 +163,8 @@
 		B12A04011511546F002FA032 /* LPInterpolateRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInterpolateRoute.m; sourceTree = "<group>"; };
 		B153F55A15949F3D00867E12 /* LPVersionRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPVersionRoute.h; sourceTree = "<group>"; };
 		B153F55B15949F3D00867E12 /* LPVersionRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPVersionRoute.m; sourceTree = "<group>"; };
+		B15DA5E315C5D80A009E6CFE /* LPQueryAllOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPQueryAllOperation.h; sourceTree = "<group>"; };
+		B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPQueryAllOperation.m; sourceTree = "<group>"; };
 		B160E8ED15321D8F00F69E7A /* LPBackdoorRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPBackdoorRoute.h; sourceTree = "<group>"; };
 		B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPBackdoorRoute.m; sourceTree = "<group>"; };
 		B163213315BBF13200408364 /* LPConditionRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPConditionRoute.h; sourceTree = "<group>"; };
@@ -247,6 +252,7 @@
 		B1DDE6CA15C06CB500BBE2BE /* LPUIARoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUIARoute.m; sourceTree = "<group>"; };
 		B1DDE6CB15C06CB500BBE2BE /* LPUserPrefRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUserPrefRoute.h; sourceTree = "<group>"; };
 		B1DDE6CC15C06CB500BBE2BE /* LPUserPrefRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUserPrefRoute.m; sourceTree = "<group>"; };
+		B1DDE6D115C0701D00BBE2BE /* UIAutomation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAutomation.h; sourceTree = "<group>"; };
 		B1E3603814D9F4B30087D8D9 /* UIScriptASTPredicate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScriptASTPredicate.h; sourceTree = "<group>"; };
 		B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScriptASTPredicate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -443,6 +449,8 @@
 		B184FDC114B6DB2B002A744C /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				B15DA5E315C5D80A009E6CFE /* LPQueryAllOperation.h */,
+				B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */,
 				B184FDC214B6DB2B002A744C /* LPOperation.h */,
 				B184FE9214B6DDA1002A744C /* LPOperation.m */,
 				B184FDC414B6DB2B002A744C /* LPQueryOperation.h */,
@@ -547,6 +555,7 @@
 		B184FE0B14B6DB2B002A744C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B1DDE6D115C0701D00BBE2BE /* UIAutomation.h */,
 				B184FE0C14B6DB2B002A744C /* LPJSONUtils.h */,
 				B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */,
 				B184FE0E14B6DB2B002A744C /* LPTouchUtils.h */,
@@ -636,6 +645,8 @@
 				B16321F815BC200300408364 /* LPKeyboardRoute.h in Headers */,
 				B1DDE6CD15C06CB500BBE2BE /* LPUIARoute.h in Headers */,
 				B1DDE6CF15C06CB500BBE2BE /* LPUserPrefRoute.h in Headers */,
+				B1DDE6D215C0701D00BBE2BE /* UIAutomation.h in Headers */,
+				B15DA5E515C5D80A009E6CFE /* LPQueryAllOperation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -787,6 +798,7 @@
 				B16321F915BC200300408364 /* LPKeyboardRoute.m in Sources */,
 				B1DDE6CE15C06CB500BBE2BE /* LPUIARoute.m in Sources */,
 				B1DDE6D015C06CB500BBE2BE /* LPUserPrefRoute.m in Sources */,
+				B15DA5E615C5D80A009E6CFE /* LPQueryAllOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
