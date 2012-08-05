@@ -4,44 +4,44 @@
 
 #import "MKMapView+ZoomLevel.h"
 
-#define MERCATOR_OFFSET 268435456
-#define MERCATOR_RADIUS 85445659.44705395
+#define CAL_MERCATOR_OFFSET 268435456
+#define CAL_MERCATOR_RADIUS 85445659.44705395
 
 @implementation MKMapView (ZoomLevel)
 
 #pragma mark -
 #pragma mark Map conversion methods
 
-- (double)longitudeToPixelSpaceX:(double)longitude
+- (double)calLongitudeToPixelSpaceX:(double)longitude
 {
-    return round(MERCATOR_OFFSET + MERCATOR_RADIUS * longitude * M_PI / 180.0);
+    return round(CAL_MERCATOR_OFFSET + CAL_MERCATOR_RADIUS * longitude * M_PI / 180.0);
 }
 
-- (double)latitudeToPixelSpaceY:(double)latitude
+- (double)calLatitudeToPixelSpaceY:(double)latitude
 {
-    return round(MERCATOR_OFFSET - MERCATOR_RADIUS * logf((1 + sinf(latitude * M_PI / 180.0)) / (1 - sinf(latitude * M_PI / 180.0))) / 2.0);
+    return round(CAL_MERCATOR_OFFSET - CAL_MERCATOR_RADIUS * logf((1 + sinf(latitude * M_PI / 180.0)) / (1 - sinf(latitude * M_PI / 180.0))) / 2.0);
 }
 
-- (double)pixelSpaceXToLongitude:(double)pixelX
+- (double)calPixelSpaceXToLongitude:(double)pixelX
 {
-    return ((round(pixelX) - MERCATOR_OFFSET) / MERCATOR_RADIUS) * 180.0 / M_PI;
+    return ((round(pixelX) - CAL_MERCATOR_OFFSET) / CAL_MERCATOR_RADIUS) * 180.0 / M_PI;
 }
 
-- (double)pixelSpaceYToLatitude:(double)pixelY
+- (double)calPixelSpaceYToLatitude:(double)pixelY
 {
-    return (M_PI / 2.0 - 2.0 * atan(exp((round(pixelY) - MERCATOR_OFFSET) / MERCATOR_RADIUS))) * 180.0 / M_PI;
+    return (M_PI / 2.0 - 2.0 * atan(exp((round(pixelY) - CAL_MERCATOR_OFFSET) / CAL_MERCATOR_RADIUS))) * 180.0 / M_PI;
 }
 
 #pragma mark -
 #pragma mark Helper methods
 
-- (MKCoordinateSpan)coordinateSpanWithMapView:(MKMapView *)mapView
+- (MKCoordinateSpan)calCoordinateSpanWithMapView:(MKMapView *)mapView
                              centerCoordinate:(CLLocationCoordinate2D)centerCoordinate
                                  andZoomLevel:(NSUInteger)zoomLevel
 {
     // convert center coordiate to pixel space
-    double centerPixelX = [self longitudeToPixelSpaceX:centerCoordinate.longitude];
-    double centerPixelY = [self latitudeToPixelSpaceY:centerCoordinate.latitude];
+    double centerPixelX = [self calLongitudeToPixelSpaceX:centerCoordinate.longitude];
+    double centerPixelY = [self calLatitudeToPixelSpaceY:centerCoordinate.latitude];
     
     // determine the scale value from the zoom level
     NSInteger zoomExponent = 20 - zoomLevel;
@@ -57,13 +57,13 @@
     double topLeftPixelY = centerPixelY - (scaledMapHeight / 2);
     
     // find delta between left and right longitudes
-    CLLocationDegrees minLng = [self pixelSpaceXToLongitude:topLeftPixelX];
-    CLLocationDegrees maxLng = [self pixelSpaceXToLongitude:topLeftPixelX + scaledMapWidth];
+    CLLocationDegrees minLng = [self calPixelSpaceXToLongitude:topLeftPixelX];
+    CLLocationDegrees maxLng = [self calPixelSpaceXToLongitude:topLeftPixelX + scaledMapWidth];
     CLLocationDegrees longitudeDelta = maxLng - minLng;
     
     // find delta between top and bottom latitudes
-    CLLocationDegrees minLat = [self pixelSpaceYToLatitude:topLeftPixelY];
-    CLLocationDegrees maxLat = [self pixelSpaceYToLatitude:topLeftPixelY + scaledMapHeight];
+    CLLocationDegrees minLat = [self calPixelSpaceYToLatitude:topLeftPixelY];
+    CLLocationDegrees maxLat = [self calPixelSpaceYToLatitude:topLeftPixelY + scaledMapHeight];
     CLLocationDegrees latitudeDelta = -1 * (maxLat - minLat);
     
     // create and return the lat/lng span
@@ -71,11 +71,11 @@
     return span;
 }
 
-- (NSUInteger) zoomLevelWithMapView: (MKMapView*) mapView {
+- (NSUInteger) calZoomLevelWithMapView: (MKMapView*) mapView {
     MKCoordinateRegion region = self.region;
     
-    double centerPixelX = [self longitudeToPixelSpaceX: region.center.longitude];
-    double topLeftPixelX = [self longitudeToPixelSpaceX: region.center.longitude - region.span.longitudeDelta / 2];
+    double centerPixelX = [self calLongitudeToPixelSpaceX: region.center.longitude];
+    double topLeftPixelX = [self calLongitudeToPixelSpaceX: region.center.longitude - region.span.longitudeDelta / 2];
     
     double scaledMapWidth = (centerPixelX - topLeftPixelX) * 2;
     CGSize mapSizeInPixels = mapView.bounds.size;
@@ -89,7 +89,7 @@
 #pragma mark -
 #pragma mark Public methods
 
-- (void)setCenterCoordinate:(CLLocationCoordinate2D)centerCoordinate
+- (void)calSetCenterCoordinate:(CLLocationCoordinate2D)centerCoordinate
                   zoomLevel:(NSUInteger)zoomLevel
                    animated:(BOOL)animated
 {
@@ -97,36 +97,36 @@
     zoomLevel = MIN(zoomLevel, 28);
     
     // use the zoom level to compute the region
-    MKCoordinateSpan span = [self coordinateSpanWithMapView:self centerCoordinate:centerCoordinate andZoomLevel:zoomLevel];
+    MKCoordinateSpan span = [self calCoordinateSpanWithMapView:self centerCoordinate:centerCoordinate andZoomLevel:zoomLevel];
     MKCoordinateRegion region = MKCoordinateRegionMake(centerCoordinate, span);
     
     // set the region like normal
     [self setRegion:region animated:animated];
 }
 
-- (NSNumber*) setZoomLevel:(int)zoomLevel {
+- (NSNumber*) calSetZoomLevel:(int)zoomLevel {
     CLLocationCoordinate2D center = self.centerCoordinate;	
-    [self setCenterCoordinate:center zoomLevel:zoomLevel animated:NO];
+    [self calSetCenterCoordinate:center zoomLevel:zoomLevel animated:NO];
     
-    NSUInteger newZoomLevel = [self zoomLevel];
+    NSUInteger newZoomLevel = [self calZoomLevel];
     BOOL success = (newZoomLevel == zoomLevel);
     return [NSNumber numberWithBool:success];
 }
 
-- (NSNumber*) zoomIn {
-    NSUInteger prevZoomLevel = [self zoomLevel];
+- (NSNumber*) calZoomIn {
+    NSUInteger prevZoomLevel = [self calZoomLevel];
     NSUInteger reqZoomLevel = prevZoomLevel + 1;
-    return [self setZoomLevel:reqZoomLevel];
+    return [self calSetZoomLevel:reqZoomLevel];
 }
 
-- (NSNumber*) zoomOut {
-    NSUInteger prevZoomLevel = [self zoomLevel];
+- (NSNumber*) calZoomOut {
+    NSUInteger prevZoomLevel = [self calZoomLevel];
     NSUInteger reqZoomLevel = prevZoomLevel - 1;
-    return [self setZoomLevel:reqZoomLevel];
+    return [self calSetZoomLevel:reqZoomLevel];
 }
 
-- (NSUInteger) zoomLevel {
-    NSUInteger zoom = [self zoomLevelWithMapView:self];
+- (NSUInteger) calZoomLevel {
+    NSUInteger zoom = [self calZoomLevelWithMapView:self];
     return zoom;
 }
 

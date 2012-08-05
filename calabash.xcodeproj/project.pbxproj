@@ -123,6 +123,12 @@
 		B1DDE6D215C0701D00BBE2BE /* UIAutomation.h in Headers */ = {isa = PBXBuildFile; fileRef = B1DDE6D115C0701D00BBE2BE /* UIAutomation.h */; };
 		B1E3603A14D9F4B30087D8D9 /* UIScriptASTPredicate.h in Headers */ = {isa = PBXBuildFile; fileRef = B1E3603814D9F4B30087D8D9 /* UIScriptASTPredicate.h */; };
 		B1E3603B14D9F4B30087D8D9 /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; };
+		B1FF22B815CF002500F3A17B /* MKMapView+Test.h in Headers */ = {isa = PBXBuildFile; fileRef = B1FF22B215CF002500F3A17B /* MKMapView+Test.h */; };
+		B1FF22B915CF002500F3A17B /* MKMapView+Test.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FF22B315CF002500F3A17B /* MKMapView+Test.m */; };
+		B1FF22BA15CF002500F3A17B /* MKMapView+ZoomLevel.h in Headers */ = {isa = PBXBuildFile; fileRef = B1FF22B415CF002500F3A17B /* MKMapView+ZoomLevel.h */; };
+		B1FF22BB15CF002500F3A17B /* MKMapView+ZoomLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FF22B515CF002500F3A17B /* MKMapView+ZoomLevel.m */; };
+		B1FF22BC15CF002500F3A17B /* MKPolylineView+Test.h in Headers */ = {isa = PBXBuildFile; fileRef = B1FF22B615CF002500F3A17B /* MKPolylineView+Test.h */; };
+		B1FF22BD15CF002500F3A17B /* MKPolylineView+Test.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FF22B715CF002500F3A17B /* MKPolylineView+Test.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -255,6 +261,12 @@
 		B1DDE6D115C0701D00BBE2BE /* UIAutomation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAutomation.h; sourceTree = "<group>"; };
 		B1E3603814D9F4B30087D8D9 /* UIScriptASTPredicate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScriptASTPredicate.h; sourceTree = "<group>"; };
 		B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScriptASTPredicate.m; sourceTree = "<group>"; };
+		B1FF22B215CF002500F3A17B /* MKMapView+Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+Test.h"; sourceTree = "<group>"; };
+		B1FF22B315CF002500F3A17B /* MKMapView+Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+Test.m"; sourceTree = "<group>"; };
+		B1FF22B415CF002500F3A17B /* MKMapView+ZoomLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+ZoomLevel.h"; sourceTree = "<group>"; };
+		B1FF22B515CF002500F3A17B /* MKMapView+ZoomLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+ZoomLevel.m"; sourceTree = "<group>"; };
+		B1FF22B615CF002500F3A17B /* MKPolylineView+Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKPolylineView+Test.h"; sourceTree = "<group>"; };
+		B1FF22B715CF002500F3A17B /* MKPolylineView+Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKPolylineView+Test.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -371,6 +383,7 @@
 		B184FD8514B6DACA002A744C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B1FF22B115CF002500F3A17B /* MapKit */,
 				B184FD8F14B6DB2B002A744C /* CocoaAsyncSocket */,
 				B184FD9214B6DB2B002A744C /* CocoaHttpServer */,
 				B184FDBC14B6DB2B002A744C /* FranklyServer */,
@@ -581,6 +594,19 @@
 			path = CalabashJSLib;
 			sourceTree = "<group>";
 		};
+		B1FF22B115CF002500F3A17B /* MapKit */ = {
+			isa = PBXGroup;
+			children = (
+				B1FF22B215CF002500F3A17B /* MKMapView+Test.h */,
+				B1FF22B315CF002500F3A17B /* MKMapView+Test.m */,
+				B1FF22B415CF002500F3A17B /* MKMapView+ZoomLevel.h */,
+				B1FF22B515CF002500F3A17B /* MKMapView+ZoomLevel.m */,
+				B1FF22B615CF002500F3A17B /* MKPolylineView+Test.h */,
+				B1FF22B715CF002500F3A17B /* MKPolylineView+Test.m */,
+			);
+			path = MapKit;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -647,6 +673,9 @@
 				B1DDE6CF15C06CB500BBE2BE /* LPUserPrefRoute.h in Headers */,
 				B1DDE6D215C0701D00BBE2BE /* UIAutomation.h in Headers */,
 				B15DA5E515C5D80A009E6CFE /* LPQueryAllOperation.h in Headers */,
+				B1FF22B815CF002500F3A17B /* MKMapView+Test.h in Headers */,
+				B1FF22BA15CF002500F3A17B /* MKMapView+ZoomLevel.h in Headers */,
+				B1FF22BC15CF002500F3A17B /* MKPolylineView+Test.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -799,6 +828,9 @@
 				B1DDE6CE15C06CB500BBE2BE /* LPUIARoute.m in Sources */,
 				B1DDE6D015C06CB500BBE2BE /* LPUserPrefRoute.m in Sources */,
 				B15DA5E615C5D80A009E6CFE /* LPQueryAllOperation.m in Sources */,
+				B1FF22B915CF002500F3A17B /* MKMapView+Test.m in Sources */,
+				B1FF22BB15CF002500F3A17B /* MKMapView+ZoomLevel.m in Sources */,
+				B1FF22BD15CF002500F3A17B /* MKPolylineView+Test.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

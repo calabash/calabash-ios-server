@@ -9,8 +9,6 @@
 
 
 @protocol UIAXElement
-+ (BOOL)registerObserver:(struct __AXObserver *)arg1 forAXNotifications:(BOOL)arg2;
-+ (id)uiaxElementWithAXUIElementRef:(struct __AXUIElement *)arg1;
 + (id)uiaxElementAtPosition:(struct CGPoint)arg1;
 + (id)uiaxSystemWideElement;
 + (id)uiaxFocusedApplicationElement;
@@ -55,7 +53,6 @@
 + (void)initialize;
 + (void)_raiseAXErrorAPIDisabled;
 + (void)_raiseIfAXErrorAPIDisabled:(long)arg1;
-+ (BOOL)registerObserver:(struct __AXObserver *)arg1 forAXNotifications:(BOOL)arg2;
 + (id)uiaxElementWithAXUIElementRef:(struct __AXUIElement *)arg1;
 + (id)_regularAttributeNumbers;
 + (id)_regularAttributeStrings;
@@ -858,7 +855,6 @@
 
 + (id)sharedEventGenerator;
 - (id)init;
-- (int)_sendEventMessage:(struct _EventMessage *)arg1;
 - (void)_sendHandEventWithPointArray:(struct CGPoint *)arg1 indentifierArray:(int *)arg2 pointCount:(int)arg3;
 - (struct CGPoint)_convertLocation:(struct CGPoint)arg1;
 - (float)_doubleTapSpeedFromDefaults;
@@ -1060,7 +1056,7 @@
 - (void)flushDragExpressions:(id)arg1;
 - (void)flushKeystrokes:(id)arg1;
 @property double lastActionTime; // @synthesize lastActionTime=_lastActionTime;
-@property id delegate; // @synthesize delegate=_delegate;
+@property(assign)id delegate; // @synthesize delegate=_delegate;
 @property BOOL isRecording; // @synthesize isRecording=_isRecording;
 @property(retain) NSArray *pendingTapExpression; // @synthesize pendingTapExpression=_pendingTapExpression;
 @property(retain) UIAXElement *previousAXElement; // @synthesize previousAXElement=_previousAXElement;
