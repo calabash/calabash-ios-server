@@ -42,14 +42,14 @@
 	if (self != nil) {
 		
         LPMapRoute* mr = [LPMapRoute new];
-        [LPRouter addRoute:mr forPath:@"/map"];
+        [LPRouter addRoute:mr forPath:@"map"];
         [mr release];
         LPScreenshotRoute *sr =[LPScreenshotRoute new];
-        [LPRouter addRoute:sr forPath:@"/screenshot"];
+        [LPRouter addRoute:sr forPath:@"screenshot"];
         [sr release];
 
         LPRecordRoute *rr =[LPRecordRoute new];
-        [LPRouter addRoute:rr forPath:@"/record"];
+        [LPRouter addRoute:rr forPath:@"record"];
         [rr release];
 
 //        LPPlaybackRoute *pr =[LPPlaybackRoute new];
@@ -57,35 +57,35 @@
 //        [pr release];
 //        
         LPAsyncPlaybackRoute *apr =[LPAsyncPlaybackRoute new];
-        [LPRouter addRoute:apr forPath:@"/play"];
+        [LPRouter addRoute:apr forPath:@"play"];
         [apr release];
 
         LPUserPrefRoute *bgr =[LPUserPrefRoute new];
-        [LPRouter addRoute:bgr forPath:@"/userprefs"];
+        [LPRouter addRoute:bgr forPath:@"userprefs"];
         [bgr release];
 
         LPInterpolateRoute *panr =[LPInterpolateRoute new];
-        [LPRouter addRoute:panr forPath:@"/interpolate"];
+        [LPRouter addRoute:panr forPath:@"interpolate"];
         [panr release];
         
         LPBackdoorRoute* backdr = [LPBackdoorRoute new];
-        [LPRouter addRoute:backdr forPath:@"/backdoor"];
+        [LPRouter addRoute:backdr forPath:@"backdoor"];
         [backdr release];
 
         LPVersionRoute* verr = [LPVersionRoute new];
-        [LPRouter addRoute:verr forPath:@"/version"];
+        [LPRouter addRoute:verr forPath:@"version"];
         [verr release];
 
         LPConditionRoute* cond = [LPConditionRoute new];
-        [LPRouter addRoute:cond forPath:@"/condition"];
+        [LPRouter addRoute:cond forPath:@"condition"];
         [cond release];
 
         LPKeyboardRoute* keyboard = [LPKeyboardRoute new];
-        [LPRouter addRoute:keyboard forPath:@"/keyboard"];
+        [LPRouter addRoute:keyboard forPath:@"keyboard"];
         [keyboard release];
         
         LPUIARoute* uia = [LPUIARoute new];
-        [LPRouter addRoute:uia forPath:@"/uia"];
+        [LPRouter addRoute:uia forPath:@"uia"];
         [uia release];
         
     

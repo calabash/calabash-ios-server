@@ -57,16 +57,26 @@ static NSMutableDictionary* routes = nil;
 - (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path
 {
     NSArray *components = [path componentsSeparatedByString:@"?"];
-    path = [components objectAtIndex:0];
+    NSArray *pathComponents = [[components objectAtIndex:0] componentsSeparatedByString:@"/"];
+    NSString *lastSegment = [pathComponents lastObject];
+    
 
-    id<LPRoute> route = [routes objectForKey:path];
-    return ([route supportsMethod:method atPath:path]);
+    id<LPRoute> route = [routes objectForKey:lastSegment];
+    BOOL supported = [route supportsMethod:method atPath:lastSegment];
+    NSLog(@"Supports Method %@ at Path %@ (segment %@): %d",method,path,lastSegment,supported);
+    
+    
+    return supported;
 }
 
 - (NSObject<LPHTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
     NSArray *components = [path componentsSeparatedByString:@"?"];
-    path = [components objectAtIndex:0];
-    id<LPRoute> route = [routes objectForKey:path];
+    NSArray *pathComponents = [[components objectAtIndex:0] componentsSeparatedByString:@"/"];
+    NSString *lastSegment = [pathComponents lastObject];
+    
+    
+    id<LPRoute> route = [routes objectForKey:lastSegment];
+
     if ([route supportsMethod:method atPath:path]) {
         NSDictionary* params = nil;
         if ([method isEqualToString:@"GET"]) {

@@ -8,7 +8,7 @@
 
 #import "LPVersionRoute.h"
 
-#define kLPCALABASHVERSION @"0.9.80.pre.6"
+#define kLPCALABASHVERSION @"0.9.80"
 
 @implementation LPVersionRoute
 
@@ -18,8 +18,27 @@
 }
 
 - (NSDictionary *)JSONResponseForMethod:(NSString *)method URI:(NSString *)path data:(NSDictionary*)data {    
+    NSString *versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];//
+    if (!versionString)
+    {
+        versionString = @"Unknown";
+    }
+    NSString *idString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"];//
+    if (!idString)
+    {
+        idString = @"Unknown";
+    }
+    NSString *nameString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];//
+    if (!nameString)
+    {
+        nameString = @"Unknown";
+    }
+    
     return [NSDictionary dictionaryWithObjectsAndKeys:
                 kLPCALABASHVERSION , @"version",
+                idString,@"app_id",
+                nameString,@"app_name",
+                versionString,@"app_version",
                 @"SUCCESS",@"outcome",
                 //device, os, serial?, other?
                 nil];
