@@ -9,14 +9,17 @@
 #import "LPRoute.h"
 #import "LPHTTPResponse.h"
 #import "LPGenericAsyncRoute.h"
+#import "UIScriptParser.h"
 @interface LPConditionRoute : LPGenericAsyncRoute
 {    
     NSTimer *_timer;    
 }
 
+@property (nonatomic, retain) UIScriptParser *parser;
 @property (nonatomic, retain) NSTimer *timer;
 @property (nonatomic, assign) NSInteger maxCount;
 @property (nonatomic, assign) NSInteger curCount;
+
 
 
 @end

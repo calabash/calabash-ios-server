@@ -20,6 +20,9 @@
 @implementation LPInterpolateRoute
 
 @synthesize events=_events;
+@synthesize parser1;
+@synthesize parser2;
+
 
 // Should only return YES after the LPHTTPConnection has read all available data.
 - (BOOL)isDone {
@@ -31,8 +34,8 @@
 {
     self.done = NO;
     NSString *base64Events = [self.data objectForKey:@"events"];
-    NSString *queryStart = [self.data objectForKey:@"start"];
-    NSString *queryEnd = [self.data objectForKey:@"end"];
+    id queryStart = [self.data objectForKey:@"start"];
+    id queryEnd = [self.data objectForKey:@"end"];
 
     NSDictionary *offset_start = [self.data valueForKey:@"offset_start"];
     NSNumber *off_start_x = [offset_start valueForKey:@"x"];
@@ -47,17 +50,17 @@
     CGPoint offsetPointEnd = CGPointMake([off_end_x floatValue], [off_end_y floatValue]);
 
     UIView *targetView = nil;
-    UIScriptParser *parseStart = [[UIScriptParser alloc] initWithUIScript:queryStart];
-    UIScriptParser *parseEnd = [[UIScriptParser alloc] initWithUIScript:queryEnd];
-    [parseStart parse];
-    [parseEnd parse];
+    self.parser1 = [UIScriptParser scriptParserWithObject: queryStart];
+    self.parser2 = [UIScriptParser scriptParserWithObject: queryEnd];
+    [self.parser1 parse];
+    [self.parser2 parse];
     NSMutableArray* views = [NSMutableArray arrayWithCapacity:32];
     for (UIWindow *window in [[UIApplication sharedApplication] windows]) 
     {
         [views addObjectsFromArray:[window subviews]];
     }
-    NSArray* resultStart = [parseStart evalWith:views];
-    NSArray* resultEnd = [parseEnd evalWith:views];
+    NSArray* resultStart = [self.parser1 evalWith:views];
+    NSArray* resultEnd = [self.parser2 evalWith:views];
     if (resultStart == nil || [resultStart count] == 0)
     {
         self.done = YES;
@@ -150,11 +153,15 @@
 {
     self.done = YES;
     self.events = nil;
+    self.parser1 = nil;
+    self.parser2 = nil;
     [self.conn responseHasAvailableData:self];
 }
 
 -(void) dealloc 
 {
+    self.parser1 = nil;
+    self.parser2 = nil;
     self.events = nil;
     [super dealloc];
 }

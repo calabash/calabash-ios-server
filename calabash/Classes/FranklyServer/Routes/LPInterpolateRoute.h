@@ -17,4 +17,6 @@
 }
 
 @property (nonatomic, retain) NSArray *events;
+@property (nonatomic, retain) UIScriptParser *parser1;
+@property (nonatomic, retain) UIScriptParser *parser2;
 @end

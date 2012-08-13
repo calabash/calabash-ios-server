@@ -11,6 +11,7 @@
 
 
 @implementation LPMapRoute
+@synthesize parser;
 
 - (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path {
     return [method isEqualToString:@"POST"];
@@ -49,10 +50,10 @@
     //DDLogVerbose(@"MapRoute received command\n%@", data);
     NSArray* result = nil;
     if ([NSNull null] != scriptObj) {
-        NSString* script = (NSString *)scriptObj;
-        UIScriptParser* p = [[UIScriptParser alloc] initWithUIScript:script];
-        [p parse];
-        NSArray* tokens = [p parsedTokens];
+        
+        self.parser = [UIScriptParser scriptParserWithObject:scriptObj];
+        [self.parser parse];
+        NSArray* tokens = [self.parser parsedTokens];
         NSLog(@"Parsed UIScript as\n%@", tokens);
         
         NSMutableArray* views = [NSMutableArray arrayWithCapacity:32];
@@ -63,7 +64,7 @@
             //            break;
             //        }
         }
-        result = [p evalWith:views];
+        result = [self.parser evalWith:views];
         //DDLogVerbose(@"Evaled UIScript as\n%@", result);        
     } else {
         //DDLogInfo(@"Received null query.");
@@ -72,7 +73,6 @@
     
     NSError* error = nil;
     NSArray* resultArray = [self applyOperation:operation toViews:result error:&error];
-//todo    [p release];
     
     if (resultArray) {
         return [NSDictionary dictionaryWithObjectsAndKeys:
@@ -86,6 +86,12 @@
                 @"",@"details",
                 nil];
     } 
+}
+
+-(void)dealloc
+{
+    self.parser = nil;
+    [super dealloc];
 }
 
 @end

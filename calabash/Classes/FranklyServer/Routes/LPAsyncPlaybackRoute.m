@@ -18,6 +18,7 @@
 
 @implementation LPAsyncPlaybackRoute
 @synthesize events=_events;
+@synthesize parser=_parser;
 
 - (BOOL)isDone 
 {
@@ -30,11 +31,11 @@
 {
     self.done = NO;
     NSString *base64Events = [self.data objectForKey:@"events"];
-    NSString *query = [self.data objectForKey:@"query"];
+    id query = [self.data objectForKey:@"query"];
     UIView *targetView = nil;
     if (query != nil) {
-        UIScriptParser *parser = [[UIScriptParser alloc] initWithUIScript:query];
-        [parser parse];
+        self.parser = [UIScriptParser scriptParserWithObject:query];
+        [self.parser parse];
         NSMutableArray* views = [NSMutableArray arrayWithCapacity:32];
         for (UIWindow *window in [[UIApplication sharedApplication] windows]) 
         {
@@ -43,7 +44,7 @@
             //            break;
             //        }
         }
-        NSArray* result = [parser evalWith:views];
+        NSArray* result = [self.parser evalWith:views];
         
         if ([result count] >0) {
             id v = [result objectAtIndex:0];//autopick first?
@@ -211,6 +212,7 @@
 {
     self.done = YES;
     self.events = nil;
+    self.parser = nil;
     [self.conn responseHasAvailableData:self];
 }
 
@@ -218,6 +220,7 @@
 -(void) dealloc 
 {
     self.events = nil;
+    self.parser = nil;    
     [super dealloc];
 }
 

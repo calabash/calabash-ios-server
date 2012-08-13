@@ -15,7 +15,7 @@
 #import "UIScriptASTPredicate.h"
 
 
-@interface UIScriptParser() 
+@interface UIScriptParser()
     - (NSString*) parseClassName:(NSString*) token;
     - (UIScriptAST*) parseIndexPropertyOrPredicate:(NSString*) token;
     - (void) parseLiteralValue:(NSString*) literalToken addToWithAST:(UIScriptASTWith*) ast;
@@ -26,10 +26,32 @@
 @implementation UIScriptParser
 @synthesize script=_script;
 
++(UIScriptParser*)scriptParserWithObject:(id)obj
+{
+    if ([obj isKindOfClass:[NSString class]])
+    {
+        return [[[UIScriptParser alloc] initWithUIScript:(NSString*) obj] autorelease];
+    }
+    else if ([obj isKindOfClass:[NSArray class]])
+    {
+        return [[[UIScriptParser alloc] initWithQuery:(NSArray*) obj] autorelease];
+    }
+    return nil;
+}
+
 - (id) initWithUIScript:(NSString*) script {
     self = [super init];
     if (self) {
         self.script = script;
+        _res = [[NSMutableArray alloc] initWithCapacity:8];
+    }
+    return self;
+}
+
+- (id) initWithQuery:(NSArray*) aq {
+    self = [super init];
+    if (self) {
+        self.arrayQuery = aq;
         _res = [[NSMutableArray alloc] initWithCapacity:8];
     }
     return self;
@@ -51,15 +73,123 @@ static NSCharacterSet* curlyBrackets = nil;
     if (ping==nil) {ping=[[NSCharacterSet characterSetWithCharactersInString:@"'"] retain];}
     if (curlyBrackets==nil) {curlyBrackets=[[NSCharacterSet characterSetWithCharactersInString:@"{}"] retain];}
     
+    if (self.script)
+    {
+        [self parseString];
+    }
+    else
+    {
+        [self parseArray];
+    }
+    
+}
+
+-(void)parseArray
+{
+    for (NSObject *obj in self.arrayQuery)
+    {
+        //each object can be one of
+        //String/Symbol/keyword
+        //Example direction: descendant, child, parent
+        //Example classname: UITableView
+        if ([obj isKindOfClass:[NSString class]])
+        {
+            NSString* token = (NSString*)obj;
+            UIScriptASTDirection* direction = nil;
+            direction = [self parseDirectionIfPresent:token];
+            if (direction)
+            {
+                [_res addObject:direction];
+            } else {// default is descendant
+                //should be a classname
+                UIScriptASTClassName *cn = [[[UIScriptASTClassName alloc] initWithClassName:token] autorelease];
+                [_res addObject:cn];
+            }
+            
+        }
+        else if ([obj isKindOfClass:[NSDictionary class]])
+        {//NSDictionary
+            //Example direction: {:text "Karl, :length 42}
+            NSDictionary *dic = (NSDictionary*)obj;
+            for (NSString *key in [dic keyEnumerator])
+            {
+                id val = [dic valueForKey:key];
+                UIScriptASTWith *w = [[[UIScriptASTWith alloc] initWithSelectorName:key] autorelease];
+                
+                if ([val isKindOfClass:[NSString class]])
+                {
+                    w.valueType = UIScriptLiteralTypeString;
+                    w.objectValue = val;
+                }
+                else if ([val isKindOfClass:[NSNumber class]])
+                {
+                    w.valueType = UIScriptLiteralTypeInteger;
+                    w.integerValue = [val integerValue];
+                }
+                else if ([val isKindOfClass:[NSArray class]])
+                {
+                    NSNumber *i1 = [val objectAtIndex:0];
+                    NSNumber *i2 = [val objectAtIndex:1];
+                    
+                    w.valueType = UIScriptLiteralTypeIndexPath;
+                    w.objectValue = [NSIndexPath indexPathForRow: [i1 integerValue]
+                                                       inSection:[i2 integerValue]];
+
+                } else
+                {
+                    NSLog(@"Unknown value type %@",val);
+                }
+                [_res addObject:w];
+                
+            }
+            
+        }
+        else if ([obj isKindOfClass:[NSArray class]])
+        {
+            NSArray *arr = (NSArray*)obj;
+            if ([arr count] == 2)
+            {//type selector value
+//                id selObj = [arr objectAtIndex:0];
+//                id val = [arr objectAtIndex:1];
+                NSLog(@"TODO...%@",arr);
+            }
+            if ([arr count] == 3)
+            {//relation/NSPredicate
+                NSString *selStr = [arr objectAtIndex:0];
+                NSString *rel = [arr objectAtIndex:1];
+                id val = [arr objectAtIndex:2];
+                SEL sel = NSSelectorFromString(selStr);
+                NSPredicate *pred = nil;
+                if ([val isKindOfClass:[NSString class]])
+                {
+                    pred = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"%@ %@ '%@'",selStr,rel,val]];
+                }
+                else
+                {
+                    pred = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"%@ %@ %@",selStr,rel,val]];
+                }
+                [_res addObject:[[[UIScriptASTPredicate alloc] initWithPredicate:pred selector:sel] autorelease]];
+
+            }
+            
+        }
+        
+        
+
+    }
+}
+
+-(void)parseString
+{
     NSUInteger index=0;
     NSUInteger N=[_script length];
     NSString* token = [self findNextToken:&index];
     while (token) {
-
+        
         //token should be a direction or classname
         UIScriptASTDirection* direction = [self parseDirectionIfPresent:token];
         if (direction!=nil) {
-            [_res addObject:direction];    
+            [_res addObject:direction];
             if (index == N) {return;}
             token = [self findNextToken:&index];
         } else {// default is descendant
@@ -97,15 +227,16 @@ static NSCharacterSet* curlyBrackets = nil;
         UIScriptAST* indexPropOrPred = [self parseIndexPropertyOrPredicate:token];
         while (indexPropOrPred != nil) {
             //token is an index or property
-
+            
             [_res addObject:indexPropOrPred];
-             
+            
             if (index == N) {return;}
             token = [self findNextToken:&index];
-            indexPropOrPred=[self parseIndexPropertyOrPredicate:token];            
+            indexPropOrPred=[self parseIndexPropertyOrPredicate:token];
             
-        }//else lookahead reveals another classname so continue        
+        }//else lookahead reveals another classname so continue
     }
+
 }
 
 - (NSString *)findNextToken:(NSUInteger *)index {

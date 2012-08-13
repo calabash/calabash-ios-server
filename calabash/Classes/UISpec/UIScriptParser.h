@@ -12,7 +12,9 @@
 }
 
 @property (nonatomic, retain) NSString* script;
+@property (nonatomic, retain) NSArray* arrayQuery;
 
++(UIScriptParser*)scriptParserWithObject:(id)obj;
 - (id) initWithUIScript:(NSString*) script;
 
 - (void) parse;

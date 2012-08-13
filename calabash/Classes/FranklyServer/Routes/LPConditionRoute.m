@@ -22,7 +22,7 @@
 @synthesize timer=_timer;
 @synthesize maxCount;
 @synthesize curCount;
-
+@synthesize parser;
 
 
 // Should only return YES after the LPHTTPConnection has read all available data.
@@ -33,7 +33,7 @@
 
 -(void) beginOperation {
     self.done = NO;
-    NSString *query = [self.data objectForKey:@"query"];
+    id query = [self.data objectForKey:@"query"];
     if (!query)
     {
         NSLog(@"query not specified");
@@ -67,8 +67,8 @@
 
     
     NSArray* result = nil;
-    UIScriptParser *parser = [[UIScriptParser alloc] initWithUIScript:query];
-    [parser parse];
+    self.parser = [UIScriptParser scriptParserWithObject:query];
+    [self.parser parse];
     
     NSMutableArray* views = [NSMutableArray arrayWithCapacity:32];
     for (UIWindow *window in [[UIApplication sharedApplication] windows]) 
@@ -76,12 +76,12 @@
         [views addObjectsFromArray:[window subviews]];
     }
 
-    result = [parser evalWith:views];                
+    result = [self.parser evalWith:views];
         
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                                 condition,@"condition",
                                 result,@"views", 
-                                parser,@"parser",
+                                self.parser,@"parser",
                             nil];
         
     self.timer = [NSTimer scheduledTimerWithTimeInterval:[freq doubleValue] 
@@ -98,14 +98,14 @@
     NSString *condition = [aTimer.userInfo objectForKey:@"condition"];
     if ([condition isEqualToString:@"NONE_ANIMATING"])
     {
-        UIScriptParser *parser = [aTimer.userInfo objectForKey:@"parser"];        
+        UIScriptParser *parse = [aTimer.userInfo objectForKey:@"parser"];
         NSMutableArray* initialViews = [NSMutableArray arrayWithCapacity:32];
         for (UIWindow *window in [[UIApplication sharedApplication] windows]) 
         {
             [initialViews addObjectsFromArray:[window subviews]];
         }
         
-        NSArray *views = [parser evalWith:initialViews];                        
+        NSArray *views = [parse evalWith:initialViews];
         
         for (id v in views)
         {
@@ -135,19 +135,22 @@
 {
     [self.timer invalidate];    
     self.timer = nil;
+    self.parser = nil;
     [super failWithMessageFormat:messageFmt message:message];
 }
 
 -(void)succeedWithResult:(NSArray *)result
 {
     [self.timer invalidate];    
-    self.timer = nil;    
+    self.timer = nil;
+    self.parser = nil;
     [super succeedWithResult:result];
 }
 
 -(void) dealloc 
 {
     self.timer = nil;
+    self.parser = nil;    
     [super dealloc];
 }
 

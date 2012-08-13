@@ -9,6 +9,7 @@
 #import "LPRoute.h"
 #import "LPHTTPResponse.h"
 #import "LPGenericAsyncRoute.h"
+#import "UIScriptParser.h"
 
 @interface LPAsyncPlaybackRoute : LPGenericAsyncRoute
 {    
@@ -16,5 +17,6 @@
 }
 
 @property (nonatomic, retain) NSArray *events;
+@property (nonatomic, retain) UIScriptParser *parser;
 
 @end
