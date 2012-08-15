@@ -34,13 +34,7 @@
 -(void) beginOperation {
     self.done = NO;
     id query = [self.data objectForKey:@"query"];
-    if (!query)
-    {
-        NSLog(@"query not specified");
-        [self failWithMessageFormat: @"query parameter missing" message:nil];            
-        return;
-    }
-    NSString *condition = [self.data objectForKey:@"condition"];    
+    NSString *condition = [self.data objectForKey:@"condition"];
     if (!condition)
     {
         NSLog(@"condition not specified");
@@ -67,22 +61,27 @@
 
     
     NSArray* result = nil;
-    self.parser = [UIScriptParser scriptParserWithObject:query];
-    [self.parser parse];
-    
-    NSMutableArray* views = [NSMutableArray arrayWithCapacity:32];
-    for (UIWindow *window in [[UIApplication sharedApplication] windows]) 
+    if (query)
     {
-        [views addObjectsFromArray:[window subviews]];
-    }
-
-    result = [self.parser evalWith:views];
+        self.parser = [UIScriptParser scriptParserWithObject:query];
+        [self.parser parse];
         
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                                condition,@"condition",
-                                result,@"views", 
-                                self.parser,@"parser",
-                            nil];
+        NSMutableArray* views = [NSMutableArray arrayWithCapacity:32];
+        for (UIWindow *window in [[UIApplication sharedApplication] windows])
+        {
+            [views addObjectsFromArray:[window subviews]];
+        }
+        
+        result = [self.parser evalWith:views];
+    }
+        
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:condition forKey:@"condition" ];
+    if (result)
+    {
+        [params setObject:result forKey:@"views"];
+        [params setObject:self.parser  forKey:@"parser"];
+        
+    }
         
     self.timer = [NSTimer scheduledTimerWithTimeInterval:[freq doubleValue] 
                                                       target:self 
@@ -127,7 +126,21 @@
         return;
         
     }
-    [self failWithMessageFormat:@"Unknown condition %@" message:condition];    
+    else if ([condition isEqualToString:@"NO_NETWORK_INDICATOR"])
+    {
+        if ([[UIApplication sharedApplication] isNetworkActivityIndicatorVisible])
+        {
+            [self failWithMessageFormat:@"Network activity indicator visible" message:nil];
+            return;
+        }
+        if (self.curCount == self.maxCount)
+        {
+            [self succeedWithResult:[NSArray array]];
+        }
+        return;
+        
+    }
+    [self failWithMessageFormat:@"Unknown condition %@" message:condition];
     
 }
 

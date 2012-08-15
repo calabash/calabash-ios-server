@@ -13,6 +13,7 @@
 #import "UIScriptASTLast.h"
 #import "UIScriptASTDirection.h"
 #import "UIScriptASTPredicate.h"
+#import "LPReflectUtils.h"
 
 
 @interface UIScriptParser()
@@ -151,7 +152,36 @@ static NSCharacterSet* curlyBrackets = nil;
             {//type selector value
 //                id selObj = [arr objectAtIndex:0];
 //                id val = [arr objectAtIndex:1];
-                NSLog(@"TODO...%@",arr);
+                NSArray *spec = [arr objectAtIndex:0];
+                id val = [arr objectAtIndex:1];
+                UIScriptASTWith *w = [[UIScriptASTWith alloc] initWithSelectorSpec:spec];
+                if ([val isKindOfClass:[NSString class]])
+                {
+                    w.valueType = UIScriptLiteralTypeString;
+                    w.objectValue = val;
+                }
+                else if ([val isKindOfClass:[NSNumber class]])
+                {
+                    w.valueType = UIScriptLiteralTypeInteger;
+                    w.integerValue = [val integerValue];
+                }
+                else if ([val isKindOfClass:[NSArray class]])
+                {
+                    NSNumber *i1 = [val objectAtIndex:0];
+                    NSNumber *i2 = [val objectAtIndex:1];
+                    
+                    w.valueType = UIScriptLiteralTypeIndexPath;
+                    w.objectValue = [NSIndexPath indexPathForRow: [i1 integerValue]
+                                                       inSection:[i2 integerValue]];
+                    
+                } else
+                {
+                    NSLog(@"Unknown value type %@",val);
+                }
+
+                [_res addObject:w];
+                
+                
             }
             if ([arr count] == 3)
             {//relation/NSPredicate

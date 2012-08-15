@@ -8,6 +8,7 @@
 #import "LPJSONUtils.h"
 #import "LPTouchUtils.h"
 #import "LPWebQuery.h"
+#import "LPReflectUtils.h"
 
 @implementation UIScriptASTWith
 @synthesize selectorName=_selectorName;
@@ -19,6 +20,7 @@
 @synthesize integerValue=_integerValue;
 @synthesize integerValue2;
 @synthesize timeout;
+@synthesize selectorSpec;
 
 @synthesize valueType=_valueType;
 @synthesize valueType2;
@@ -34,8 +36,24 @@
         }
         return self;
 }
+- (id)initWithSelectorSpec:(NSArray *)selectorSpec_ {
+    self = [super init];
+    if (self) {
+        self.valueType=UIScriptLiteralTypeUnknown;
+        self.valueType2=UIScriptLiteralTypeUnknown;
+        self.selectorSpec = selectorSpec_;
+        self.timeout = 3;
+    }
+    return self;
+}
+
 - (NSString*) description {
-    NSString* fm = [NSString stringWithFormat:@"with %@:",NSStringFromSelector(self.selector)];
+    NSString* fm = nil;
+    if (self.selectorName)
+        fm = [NSString stringWithFormat:@"with %@:",NSStringFromSelector(self.selector)];
+    else
+        fm = [NSString stringWithFormat:@"with %@:",self.selectorSpec];
+    
     switch (self.valueType) {
         case UIScriptLiteralTypeIndexPath:
         {
@@ -55,6 +73,12 @@
 }
 
 -(NSArray *)handleWebView:(UIWebView *)webView {
+    if (!self.selectorName)
+    {
+        NSLog(@"WebView only supports css/xpath selectors");
+        return [NSMutableArray array];
+    }
+
     if (self.valueType == UIScriptLiteralTypeString) {
         LPWebQueryType type = LPWebQueryTypeCSS;
         if ([[self selectorName] isEqualToString:@"marked"]) 
@@ -139,29 +163,69 @@
                 continue;            
             }
             
-            if ([v respondsToSelector:_selector]) 
+            if (self.selectorName)
             {
-                void* val = [v performSelector:_selector];
-                switch (self.valueType) {
-                    case UIScriptLiteralTypeInteger:
-                        if ((NSInteger) val == self.integerValue) {
-                            [res addObject:v];
+                if ([v respondsToSelector:_selector])
+                {
+                    void* val = [v performSelector:_selector];
+                    switch (self.valueType) {
+                        case UIScriptLiteralTypeInteger:
+                            if ((NSInteger) val == self.integerValue) {
+                                [res addObject:v];
+                            }
+                            break;
+                        case UIScriptLiteralTypeString: {
+                            if (val != nil &&
+                                ([(NSString*)val isEqualToString:(NSString*)self.objectValue])) {
+                                [res addObject:v];
+                            }
+                            break;
                         }
-                        break;
-                    case UIScriptLiteralTypeString: {
-                        if (val != nil && 
-                            ([(NSString*)val isEqualToString:(NSString*)self.objectValue])) {
-                            [res addObject:v];
-                        } 
-                        break;
+                        case UIScriptLiteralTypeBool:
+                            if (self.boolValue == (BOOL)val) {
+                                [res addObject:v];
+                            }
+                            break;
+                        default:
+                            break;
                     }
-                    case UIScriptLiteralTypeBool:
-                        if (self.boolValue == (BOOL)val) {
-                            [res addObject:v];
+                }
+            }
+            else
+            {
+                NSError *error = nil;
+                id val = [LPReflectUtils invokeSpec:self.selectorSpec onTarget:v withError:&error];
+                if (val && !error)
+                {
+                    switch (self.valueType) {
+                        case UIScriptLiteralTypeInteger:
+                        {
+                            NSInteger i = [val integerValue];
+                            if (i == self.integerValue) {
+                                [res addObject:v];
+                            }
+                            break;                            
                         }
-                        break;
-                    default:
-                        break;
+                        case UIScriptLiteralTypeString: {
+                            if (val != nil &&
+                                ([(NSString*)val isEqualToString:(NSString*)self.objectValue])) {
+                                [res addObject:v];
+                            }
+                            break;
+                        }
+                        case UIScriptLiteralTypeBool:
+                        {
+                            BOOL b = [val boolValue];
+                            if (self.boolValue == b) {
+                                [res addObject:v];
+                            }
+                            break;
+
+                        }
+                        default:
+                            break;
+                    }
+
                 }
             }
             

@@ -22,6 +22,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		B1296FC015DC1F4B005DDF5C /* LPReflectUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = B1296FBF15DC1F4B005DDF5C /* LPReflectUtils.h */; };
+		B1296FC315DC1F5B005DDF5C /* LPReflectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B1296FC215DC1F5B005DDF5C /* LPReflectUtils.m */; };
 		B13D5F8A15D43A3900504726 /* LPI.mm in Sources */ = {isa = PBXBuildFile; fileRef = B184FDBD14B6DB2B002A744C /* LPI.mm */; };
 		B17E756E15D433A40066550B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		B17E757B15D434D00066550B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E757A15D434D00066550B /* CFNetwork.framework */; };
@@ -138,6 +140,8 @@
 		B121E79B14B6D9FB0034C6A9 /* calabash-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "calabash-Info.plist"; sourceTree = "<group>"; };
 		B121E79D14B6D9FB0034C6A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B121E79F14B6D9FB0034C6A9 /* calabash-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "calabash-Prefix.pch"; sourceTree = "<group>"; };
+		B1296FBF15DC1F4B005DDF5C /* LPReflectUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPReflectUtils.h; sourceTree = "<group>"; };
+		B1296FC215DC1F5B005DDF5C /* LPReflectUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPReflectUtils.m; sourceTree = "<group>"; };
 		B12A04001511546F002FA032 /* LPInterpolateRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPInterpolateRoute.h; sourceTree = "<group>"; };
 		B12A04011511546F002FA032 /* LPInterpolateRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInterpolateRoute.m; sourceTree = "<group>"; };
 		B153F55A15949F3D00867E12 /* LPVersionRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPVersionRoute.h; sourceTree = "<group>"; };
@@ -548,6 +552,8 @@
 				B1DDE6D115C0701D00BBE2BE /* UIAutomation.h */,
 				B184FE0C14B6DB2B002A744C /* LPJSONUtils.h */,
 				B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */,
+				B1296FBF15DC1F4B005DDF5C /* LPReflectUtils.h */,
+				B1296FC215DC1F5B005DDF5C /* LPReflectUtils.m */,
 				B184FE0E14B6DB2B002A744C /* LPTouchUtils.h */,
 				B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */,
 			);
@@ -592,6 +598,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B17E75B615D436100066550B /* CalabashServer.h in Headers */,
+				B1296FC015DC1F4B005DDF5C /* LPReflectUtils.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -736,6 +743,7 @@
 				B17E75B115D4357F0066550B /* LPCDataScanner.m in Sources */,
 				B17E75B215D4357F0066550B /* CalabashServer.m in Sources */,
 				B13D5F8A15D43A3900504726 /* LPI.mm in Sources */,
+				B1296FC315DC1F5B005DDF5C /* LPReflectUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
