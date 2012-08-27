@@ -14,6 +14,7 @@
 #import "UIScriptParser.h"
 #import "LPTouchUtils.h"
 #import "LPJSONUtils.h"
+#import "LPOperation.h"
 
 
 @implementation LPAsyncPlaybackRoute
@@ -34,17 +35,8 @@
     id query = [self.data objectForKey:@"query"];
     UIView *targetView = nil;
     if (query != nil) {
-        self.parser = [UIScriptParser scriptParserWithObject:query];
-        [self.parser parse];
-        NSMutableArray* views = [NSMutableArray arrayWithCapacity:32];
-        for (UIWindow *window in [[UIApplication sharedApplication] windows]) 
-        {
-            [views addObjectsFromArray:[window subviews]];
-            //        if (![window respondsToSelector:@selector(screen)] || [window screen] == [UIScreen mainScreen]) {
-            //            break;
-            //        }
-        }
-        NSArray* result = [self.parser evalWith:views];
+        NSArray* result = [LPOperation performQueryAll:query];
+                           
         
         if ([result count] >0) {
             id v = [result objectAtIndex:0];//autopick first?

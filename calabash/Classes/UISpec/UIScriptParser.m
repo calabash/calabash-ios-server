@@ -15,6 +15,8 @@
 #import "UIScriptASTPredicate.h"
 #import "LPReflectUtils.h"
 
+#define CALABASH_TYPE_KEY @"_calabash-type"
+
 
 @interface UIScriptParser()
     - (NSString*) parseClassName:(NSString*) token;
@@ -59,7 +61,7 @@
 }
 
 - (void) dealloc {
-    [_res release];_res=nil;
+//    [_res autorelease];_res=nil;
     [super dealloc];
 }
 
@@ -111,36 +113,72 @@ static NSCharacterSet* curlyBrackets = nil;
         else if ([obj isKindOfClass:[NSDictionary class]])
         {//NSDictionary
             //Example direction: {:text "Karl, :length 42}
+            
             NSDictionary *dic = (NSDictionary*)obj;
-            for (NSString *key in [dic keyEnumerator])
+            NSString *typeIfPresent = [dic valueForKey:CALABASH_TYPE_KEY];
+            if (typeIfPresent)
             {
-                id val = [dic valueForKey:key];
-                UIScriptASTWith *w = [[[UIScriptASTWith alloc] initWithSelectorName:key] autorelease];
-                
-                if ([val isKindOfClass:[NSString class]])
+                if ([@"index" isEqualToString:typeIfPresent])
                 {
+                    NSNumber* numVal = [dic objectForKey:@"index"];
+                    if (!numVal)
+                    {
+                        @throw [NSException exceptionWithName:@"Bad query" reason:@"Bad query of type index should have an index key" userInfo:nil];
+                    }
+                    NSUInteger val = [numVal unsignedIntegerValue];
+                    [_res addObject: [[[UIScriptASTIndex alloc] initWithIndex:val] autorelease]];
+    
+                }
+                else if ([@"css" isEqualToString:typeIfPresent] || [@"xpath" isEqualToString:typeIfPresent])
+                {
+                    UIScriptASTWith *w = [[[UIScriptASTWith alloc] initWithSelectorName:typeIfPresent] autorelease];
                     w.valueType = UIScriptLiteralTypeString;
-                    w.objectValue = val;
-                }
-                else if ([val isKindOfClass:[NSNumber class]])
-                {
-                    w.valueType = UIScriptLiteralTypeInteger;
-                    w.integerValue = [val integerValue];
-                }
-                else if ([val isKindOfClass:[NSArray class]])
-                {
-                    NSNumber *i1 = [val objectAtIndex:0];
-                    NSNumber *i2 = [val objectAtIndex:1];
+                    NSString* strVal = [dic objectForKey:typeIfPresent];
+                    if (!strVal)
+                    {
+                        @throw [NSException exceptionWithName:@"Bad query" reason:
+                                [NSString stringWithFormat:@"Bad query of type %@ should have an %@ key",typeIfPresent,typeIfPresent] userInfo:nil];
+                    }
+                    w.objectValue = strVal;
                     
-                    w.valueType = UIScriptLiteralTypeIndexPath;
-                    w.objectValue = [NSIndexPath indexPathForRow: [i1 integerValue]
+                    [_res addObject:w];
+
+                }
+            }
+            else
+            {
+
+                for (NSString *key in [dic keyEnumerator])
+                {
+                    id val = [dic valueForKey:key];
+                    UIScriptASTWith *w = [[[UIScriptASTWith alloc] initWithSelectorName:key] autorelease];
+                
+                    if ([val isKindOfClass:[NSString class]])
+                    {
+                        w.valueType = UIScriptLiteralTypeString;
+                        w.objectValue = val;
+                    }
+                    else if ([val isKindOfClass:[NSNumber class]])
+                    {
+                        w.valueType = UIScriptLiteralTypeInteger;
+                        w.integerValue = [val integerValue];
+                    }
+                    else if ([val isKindOfClass:[NSArray class]])
+                    {
+                        NSNumber *i1 = [val objectAtIndex:0];
+                        NSNumber *i2 = [val objectAtIndex:1];
+                    
+                        w.valueType = UIScriptLiteralTypeIndexPath;
+                        w.objectValue = [NSIndexPath indexPathForRow: [i1 integerValue]
                                                        inSection:[i2 integerValue]];
 
-                } else
-                {
-                    NSLog(@"Unknown value type %@",val);
+                    } else
+                    {
+                        NSLog(@"Unknown value type %@",val);
+                    }
+                    [_res addObject:w];
+                
                 }
-                [_res addObject:w];
                 
             }
             

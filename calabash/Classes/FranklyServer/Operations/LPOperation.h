@@ -5,6 +5,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UIScriptParser.h"
 
 @interface LPOperation : NSObject {
     SEL _selector;
@@ -13,6 +14,10 @@
     NSArray *_events;
 }
 + (id) operationFromDictionary:(NSDictionary*) dictionary;
+
++(NSArray*)performQuery:(id)query;
++(NSArray*)performQueryAll:(id)query;
+
 
 - (id) initWithOperation:(NSDictionary *)operation;
 
