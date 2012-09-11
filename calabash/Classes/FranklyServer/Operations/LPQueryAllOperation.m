@@ -19,9 +19,27 @@
     NSMutableString *selStr = [NSMutableString stringWithCapacity:32];
     for (NSDictionary *selPart in arr)
     {
+        NSObject *as = [selPart objectForKey:@"as"];
+        if (as)
+        {
+            NSMutableDictionary *mdict = [selPart mutableCopy];
+            [mdict removeObjectForKey:@"as"];
+            selPart = mdict;
+        }
+
         NSString *key = [[selPart keyEnumerator] nextObject];
+
         [selStr appendFormat:@"%@:",key];
-        [args addObject:[selPart objectForKey:key]];        
+        id tgt = [selPart objectForKey:key];
+        if (as)
+        {
+            if ([@"UIColor" isEqual:as])
+            {
+                tgt = [[UIColor class] performSelector:NSSelectorFromString(tgt)];
+            }
+            //TODO more
+        }
+        [args addObject:tgt];
     }
     return NSSelectorFromString(selStr);
 }
@@ -116,6 +134,24 @@
                     }
                     case '{': {
                         //not supported yet
+                        if (strcmp(cType,"{CGPoint=ff}") == 0)
+                        {
+                            CGPoint point;
+                            CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)arg, &point);
+                            [invocation setArgument:&point atIndex:i+2];
+                            break;
+
+                        }
+                        else if (strcmp(cType,"{CGRect={CGPoint=ff}{CGSize=ff}}") == 0)
+                        {
+                            CGRect rect;
+                            CGRectMakeWithDictionaryRepresentation((CFDictionaryRef)arg, &rect);
+                            [invocation setArgument:&rect atIndex:i+2];
+                            break;
+
+                        }
+
+
                         @throw [NSString stringWithFormat: @"not yet support struct args: %@",sig];
                     }
                 }
@@ -182,10 +218,10 @@
                     CGRect *rec = (CGRect*)buffer;
                     return [NSDictionary dictionaryWithObjectsAndKeys:
                             [value description], @"description",
-                            [NSNumber numberWithFloat:rec->origin.x],@"x",
-                            [NSNumber numberWithFloat:rec->origin.y],@"y",
-                            [NSNumber numberWithFloat:rec->size.width],@"width",
-                            [NSNumber numberWithFloat:rec->size.height],@"height",
+                            [NSNumber numberWithFloat:rec->origin.x],@"X",
+                            [NSNumber numberWithFloat:rec->origin.y],@"Y",
+                            [NSNumber numberWithFloat:rec->size.width],@"Width",
+                            [NSNumber numberWithFloat:rec->size.height],@"Height",
                             nil];
                     
                 }
@@ -194,8 +230,8 @@
                     CGPoint *point = (CGPoint*)buffer;
                     return [NSDictionary dictionaryWithObjectsAndKeys:
                             [value description], @"description",
-                            [NSNumber numberWithFloat:point->x],@"x",
-                            [NSNumber numberWithFloat:point->y],@"y",
+                            [NSNumber numberWithFloat:point->x],@"X",
+                            [NSNumber numberWithFloat:point->y],@"Y",
                             nil];
                     
                 }
