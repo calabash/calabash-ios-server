@@ -15,6 +15,8 @@
           withSuperView:(UIView *)superView
                inWindow:(id)window;
 
++(UIWindow*)windowForView:(UIView*)view;
+
 +(BOOL)isViewVisible:(UIView *)view;
 
 @end

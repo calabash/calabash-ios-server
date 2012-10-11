@@ -28,6 +28,7 @@
 //
 
 #import "LPCJSONSerializer.h"
+#import "LPISO8601DateFormatter.h"
 
 #import "LPJSONRepresentation.h"
 
@@ -124,6 +125,26 @@ static NSData *kTrue = NULL;
         NSString *theString = [[[NSString alloc] initWithData:inObject encoding:NSUTF8StringEncoding] autorelease];
         theResult = [self serializeString:theString error:outError];
         }
+    else if ([inObject isKindOfClass:[NSDate class]])
+    {
+        
+        static LPISO8601DateFormatter *dateFormat = nil;
+        if (dateFormat == nil)
+        {
+            dateFormat = [[LPISO8601DateFormatter alloc] init];
+            [dateFormat setIncludeTime:YES];
+        }
+
+        NSString *str = [dateFormat stringFromDate:(NSDate*)inObject];
+        NSArray *comps = [str componentsSeparatedByString:@"+"];
+        NSString *dt = [comps objectAtIndex:0];
+        NSString *tz = [comps objectAtIndex:1];
+        NSRange rStart = NSMakeRange(0, 2);
+        NSString *first = [tz substringWithRange:rStart];
+        NSString *rest = [tz substringFromIndex:2];
+        str = [NSString stringWithFormat:@"%@+%@:%@",dt,first,rest];
+        theResult = [self serializeString:str error:outError];
+    }
     else if ([inObject respondsToSelector:@selector(JSONDataRepresentation)])
         {
         theResult = [inObject JSONDataRepresentation];

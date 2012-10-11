@@ -28,6 +28,7 @@
 //
 
 #import "LPCJSONScanner.h"
+#import "LPISO8601DateFormatter.h"
 
 #import "CDataScanner_Extensions.h"
 
@@ -180,6 +181,10 @@ static id kNSNO = NULL;
         case '\"':
         case '\'':
             theResult = [self scanJSONStringConstant:&theObject error:outError];
+            if (theResult && theObject && [theObject isKindOfClass:[NSString class]])
+            {
+                theObject = [self asDateOrString:theObject];
+            }
             break;
         case '0':
         case '1':
@@ -213,12 +218,31 @@ static id kNSNO = NULL;
                 }
             break;
         }
+    
 
     if (outObject != NULL)
         *outObject = theObject;
 
     return(theResult);
     }
+
+-(id)asDateOrString:(NSString*) str
+{
+    static LPISO8601DateFormatter *dateFormat = nil;
+    if (dateFormat == nil)
+    {
+        dateFormat = [[LPISO8601DateFormatter alloc] init];
+        dateFormat.parsesStrictly = YES;
+    }
+    NSRange range;
+    NSDate *date = [dateFormat dateFromString:str timeZone:nil range:&range];
+    if (range.location != NSNotFound)
+    {
+        return date;
+    }
+    return str;    
+    
+}
 
 - (BOOL)scanJSONDictionary:(NSDictionary **)outDictionary error:(NSError **)outError
     {

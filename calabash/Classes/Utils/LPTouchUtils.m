@@ -30,7 +30,7 @@
         return point;
     }
 }
-+(UIWindow*)windowForView:(UIView*)view;
++(UIWindow*)windowForView:(UIView*)view
 {
     id v = view;
     while (v && ![v isKindOfClass:[UIWindow class]])
