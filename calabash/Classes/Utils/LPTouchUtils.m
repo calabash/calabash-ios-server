@@ -9,6 +9,7 @@
 @implementation LPTouchUtils
 
 +(CGPoint) translateToScreenCoords:(CGPoint) point {
+    return point;
     UIScreen*  s = [UIScreen mainScreen];
     
     UIScreenMode* sm =[s currentMode];
@@ -115,47 +116,30 @@
 
 +(CGPoint)centerOfView:(UIView *)view shouldTranslate:(BOOL)shouldTranslate
 {
-    CGRect frameInWindow;
+    UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
+    
+    CGRect bounds;
     if ([view isKindOfClass:[UIWindow class]])
     {
-        frameInWindow = view.frame;
+        bounds = view.bounds;
+        bounds = [frontWindow convertRect:bounds fromWindow:(UIWindow*)view];
     }
     else
     {
-        
-        UIWindow *window = nil;
-        /*
-        UIApplication *app = [UIApplication sharedApplication];
-        if ([app.delegate respondsToSelector:@selector(window)])
-        {
-            window = [app.delegate window];
-        }
-        else 
-        {
-            for (UIWindow *w in [app windows])
-            {
-                if (CGAffineTransformIsIdentity(w.transform))
-                {
-                    window = w;
-                    break;
-                }
-            }
-        }
-        */
-        window = [self windowForView:view];
-        
+        UIWindow *window = [self windowForView:view];
         if (window)
         {
-            frameInWindow = [window convertRect:view.frame fromView:view.superview];            
+            bounds = [window convertRect:view.bounds fromView:view];
+            bounds = [frontWindow convertRect:bounds fromWindow:window];
         }
         else
-        {
-            frameInWindow = view.frame;//give up?
+        { ///not sure if this could even happen...
+            bounds = view.bounds;
+            bounds = [frontWindow convertRect:bounds fromView:view];
         }
 
-        //frameInWindow = [view.window convertRect:view.frame fromView:view.superview];
     }    
-    return [self centerOfFrame:frameInWindow shouldTranslate:shouldTranslate];
+    return [self centerOfFrame:bounds shouldTranslate:shouldTranslate];
 }
 +(CGPoint) centerOfView:(UIView *) view 
 {

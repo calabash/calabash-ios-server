@@ -62,19 +62,7 @@
 
             NSString *centerView = NSStringFromCGPoint(center);
             
-            NSLog(@"Center %@", centerView);
-            
-            id win = v;
-            if ([win isKindOfClass:[UIView class]])
-            {
-                if ([win isKindOfClass:[UIWindow class]])
-                {
-                    CGPoint newCenter = [win convertPoint:center toWindow:nil];
-                    NSLog(@"Window center:%@",NSStringFromCGPoint(newCenter));
-                }
-                
-            }
-            
+            NSLog(@"Center %@", centerView);                     
 
             
             NSArray* baseEvents = [LPResources eventsFromEncoding:base64Events];
