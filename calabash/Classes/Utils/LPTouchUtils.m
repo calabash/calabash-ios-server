@@ -3,20 +3,69 @@
 //  Created by Karl Krukow on 14/08/11.
 //  Copyright 2011 LessPainful. All rights reserved.
 //
+#import <sys/utsname.h>
+
+static NSString* lp_deviceName()
+{
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    
+    return [NSString stringWithCString:systemInfo.machine
+                              encoding:NSUTF8StringEncoding];
+}
+#define LPiPHONE4INCHOFFSET 44
 
 #import "LPTouchUtils.h"
+
 
 @implementation LPTouchUtils
 
 +(CGPoint) translateToScreenCoords:(CGPoint) point {
-    return point;
     UIScreen*  s = [UIScreen mainScreen];
     
+    UIDevice *device = [UIDevice currentDevice];
+    BOOL inch5Phone = NO;
+    if([@"iPhone Simulator" isEqualToString: [device model]])
+    {
+        NSDictionary *env = [[NSProcessInfo processInfo]environment];
+        NSPredicate *inch5PhonePred = [NSPredicate predicateWithFormat:@"IPHONE_SIMULATOR_VERSIONS LIKE '*iPhone (Retina 4-inch)*'"];
+        inch5Phone = [inch5PhonePred evaluateWithObject:env];
+    }
+    else if ([[device model] hasPrefix:@"iPhone"])
+    {
+        inch5Phone = [lp_deviceName() isEqualToString:@"iPhone5,2"];
+    }
+    
+
+    
+    
+
     UIScreenMode* sm =[s currentMode];
     CGRect b = [s bounds];
     CGSize size = sm.size;
-    UIDeviceOrientation o = [[UIDevice currentDevice] orientation];    
-    //try and detect "compatabilitity mode"
+    UIDeviceOrientation o = [[UIDevice currentDevice] orientation];
+    
+    if(UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone){
+        if ([UIScreen mainScreen].scale == 2.0f) {
+            CGSize result = [[UIScreen mainScreen] bounds].size;
+            CGFloat scale = [UIScreen mainScreen].scale;
+            result = CGSizeMake(result.width * scale, result.height * scale);
+            
+            if(result.height == 960 && inch5Phone)
+            {//detect Letterbox
+                return CGPointMake(point.x, point.y + LPiPHONE4INCHOFFSET);
+            }
+            
+            if(result.height == 1136){
+                //NSLog(@"iPhone 5 Resolution");
+                //iPhone 5 full 
+                return point;
+            }
+        } 
+    }
+    
+    
+    //try and detect iPad "compatabilitity mode"
     CGRect small_vert = CGRectMake(0, 0, 320, 480);
     CGRect small_hori = CGRectMake(0, 0, 480, 320);
     CGSize large_size_vert = CGSizeMake(768.0, 1024);
