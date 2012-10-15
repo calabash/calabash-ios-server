@@ -10,7 +10,7 @@
 #ifndef DEFAULT_TIME_SEPARATOR
 #	define DEFAULT_TIME_SEPARATOR ':'
 #endif
-unichar ISO8601DefaultTimeSeparatorCharacter = DEFAULT_TIME_SEPARATOR;
+unichar LPISO8601DefaultTimeSeparatorCharacter = DEFAULT_TIME_SEPARATOR;
 
 //Unicode date formats.
 #define ISO_CALENDAR_DATE_FORMAT @"yyyy-MM-dd"
@@ -60,7 +60,7 @@ static NSMutableDictionary *timeZonesByOffset;
 		unparsingCalendar = [[self makeCalendarWithDesiredConfiguration] retain];
 
 		format = LPISO8601DateFormatCalendar;
-		timeSeparator = ISO8601DefaultTimeSeparatorCharacter;
+		timeSeparator = LPISO8601DefaultTimeSeparatorCharacter;
 		includeTime = NO;
 		parsesStrictly = NO;
 	}
@@ -182,7 +182,7 @@ static BOOL is_leap_year(NSUInteger year);
 	BOOL strict = self.parsesStrictly;
 	unichar timeSep = self.timeSeparator;
 
-	if (strict) timeSep = ISO8601DefaultTimeSeparatorCharacter;
+	if (strict) timeSep = LPISO8601DefaultTimeSeparatorCharacter;
 	NSAssert(timeSep != '\0', @"Time separator must not be NUL.");
 
 	BOOL isValidDate = ([string length] > 0U);
@@ -778,7 +778,7 @@ static BOOL is_leap_year(NSUInteger year);
 	if(includeTime) {
 		NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 		unichar timeSep = self.timeSeparator;
-		if (!timeSep) timeSep = ISO8601DefaultTimeSeparatorCharacter;
+		if (!timeSep) timeSep = LPISO8601DefaultTimeSeparatorCharacter;
 		formatter.dateFormat = [self replaceColonsInString:ISO_TIME_WITH_TIMEZONE_FORMAT withTimeSeparator:timeSep];
 
 		timeString = [formatter stringForObjectValue:date];
