@@ -32,7 +32,7 @@ enum {
 typedef NSUInteger LPISO8601DateFormat;
 
 //The default separator for time values. Currently, this is ':'.
-extern unichar ISO8601DefaultTimeSeparatorCharacter;
+extern unichar LPISO8601DefaultTimeSeparatorCharacter;
 
 @interface LPISO8601DateFormatter: NSFormatter
 {
