@@ -31,7 +31,13 @@
     }
     else if ([_view respondsToSelector:@selector(setText:)]) 
     {
-        NSString *txt = [_arguments objectAtIndex:0];        
+        NSString *txt = nil;
+        id argument = [_arguments objectAtIndex:0];
+        if ( [ argument isKindOfClass: [ NSString class ] ] ) {
+            txt = argument;
+        } else {
+            txt = [argument description];
+        }
         [_view performSelector:@selector(setText:) withObject:txt];
         return _view;
     }
