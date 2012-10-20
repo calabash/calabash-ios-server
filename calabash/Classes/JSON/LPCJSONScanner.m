@@ -229,18 +229,33 @@ static id kNSNO = NULL;
 -(id)asDateOrString:(NSString*) str
 {
     static LPISO8601DateFormatter *dateFormat = nil;
-    if (dateFormat == nil)
+    if (!dateFormat)
     {
         dateFormat = [[LPISO8601DateFormatter alloc] init];
         dateFormat.parsesStrictly = YES;
     }
-    NSRange range;
-    NSDate *date = [dateFormat dateFromString:str timeZone:nil range:&range];
-    if (range.location != NSNotFound)
+    NSError *error = NULL;
+    NSRegularExpression *regex = nil;
+    if (!regex)
     {
-        return date;
+        regex = [NSRegularExpression regularExpressionWithPattern:@"^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\+\\d{2}:\\d{2}$"
+                                                  options:NSRegularExpressionCaseInsensitive
+                                                    error:&error];
+        
     }
-    return str;    
+    NSTextCheckingResult *match = [regex firstMatchInString:str
+                                                    options:0
+                                                      range:NSMakeRange(0, [str length])];
+    
+    if (match) {     
+        NSRange range;
+        NSDate *date = [dateFormat dateFromString:str timeZone:nil range:&range];
+        if ( range.location != NSNotFound)
+        {
+            return date;
+        }
+    }
+    return str;
     
 }
 
