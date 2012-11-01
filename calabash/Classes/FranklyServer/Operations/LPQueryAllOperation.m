@@ -91,6 +91,10 @@
                 const char *cType = [sig getArgumentTypeAtIndex:i+2];
                 switch(*cType) {
                     case '@':
+                        if ([arg isEqual:@"__self__"])
+                        {
+                            arg = _view;
+                        }
                         [invocation setArgument:&arg atIndex:i+2];
                         break;                        
                     case 'i':

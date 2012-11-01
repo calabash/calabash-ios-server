@@ -135,14 +135,17 @@ static NSData *kTrue = NULL;
             [dateFormat setIncludeTime:YES];
         }
 
+        
+        
+       
         NSString *str = [dateFormat stringFromDate:(NSDate*)inObject];
-        NSArray *comps = [str componentsSeparatedByString:@"+"];
-        NSString *dt = [comps objectAtIndex:0];
-        NSString *tz = [comps objectAtIndex:1];
-        NSRange rStart = NSMakeRange(0, 2);
-        NSString *first = [tz substringWithRange:rStart];
-        NSString *rest = [tz substringFromIndex:2];
-        str = [NSString stringWithFormat:@"%@+%@:%@",dt,first,rest];
+        NSRange rangeButLastTwo = NSMakeRange(0, [str length]-2);
+        NSRange rangeLastTwo = NSMakeRange([str length]-2, 2);
+        
+        NSString *firstPart = [str substringWithRange:rangeButLastTwo];
+        NSString *lastPart = [str substringWithRange:rangeLastTwo];
+        
+        str = [NSString stringWithFormat:@"%@:%@",firstPart,lastPart];
         theResult = [self serializeString:str error:outError];
     }
     else if ([inObject respondsToSelector:@selector(JSONDataRepresentation)])

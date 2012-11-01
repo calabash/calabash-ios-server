@@ -44,7 +44,7 @@
     NSNumber *count = [self.data objectForKey:@"count"];
     if (!count)
     {
-        count = [NSNumber numberWithInt:5];
+        count = [NSNumber numberWithInt:1];
     }
     if ([count integerValue] <= 0)
     {

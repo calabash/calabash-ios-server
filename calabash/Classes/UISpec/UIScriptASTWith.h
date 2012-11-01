@@ -24,8 +24,8 @@ typedef enum {
     UIScriptLiteralType _valueType;
     
 }
-@property (nonatomic, assign) NSArray *selectorSpec;
-@property (nonatomic, assign) NSString *selectorName;
+@property (nonatomic, retain) NSArray *selectorSpec;
+@property (nonatomic, retain) NSString *selectorName;
 @property (nonatomic,assign) SEL selector;
 @property (nonatomic, assign) NSInteger timeout;
 @property (nonatomic,retain) NSObject *objectValue;

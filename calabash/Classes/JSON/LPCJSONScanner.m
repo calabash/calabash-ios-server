@@ -238,7 +238,7 @@ static id kNSNO = NULL;
     NSRegularExpression *regex = nil;
     if (!regex)
     {
-        regex = [NSRegularExpression regularExpressionWithPattern:@"^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\+\\d{2}:\\d{2}$"
+        regex = [NSRegularExpression regularExpressionWithPattern:@"^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}[\+-]\\d{2}:\\d{2}$"
                                                   options:NSRegularExpressionCaseInsensitive
                                                     error:&error];
         
