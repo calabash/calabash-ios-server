@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 LessPainful. All rights reserved.
 //
 #import <Foundation/Foundation.h>
-#import "LPRoute.h"
+#import "RequestRouter.h"
 #import "LPHTTPResponse.h"
 #import "LPGenericAsyncRoute.h"
 #import "UIScriptParser.h"

@@ -6,12 +6,14 @@
 //  Copyright (c) 2012 LessPainful. All rights reserved.
 //
 #import <Foundation/Foundation.h>
+#import "RequestRouter.h"
+#import "HTTPResponse.h"
+#import "HTTPConnection.h"
 #import "LPRoute.h"
-#import "LPHTTPResponse.h"
-@interface LPGenericAsyncRoute : NSObject<LPRoute,LPHTTPResponse> 
+@interface LPGenericAsyncRoute : NSObject<Route,HTTPResponse>
 {    
     BOOL _done;
-    LPHTTPConnection *_conn;
+    HTTPConnection *_conn;
     NSDictionary *_data;
     NSDictionary *_jsonResponse;
     NSData *_bytes;
@@ -19,7 +21,7 @@
 }
 
 @property (nonatomic, assign) BOOL done;
-@property (nonatomic, assign) LPHTTPConnection *conn;
+@property (nonatomic, assign) HTTPConnection *conn;
 @property (nonatomic, retain) NSDictionary *data;
 @property (nonatomic, retain) NSDictionary *jsonResponse;
 

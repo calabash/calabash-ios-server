@@ -1,5 +1,5 @@
 //
-//  LPGenericAsyncRoute.m
+//  GenericAsyncRoute.m
 //  calabash
 //
 //  Created by Karl Krukow on 29/01/12.
@@ -7,11 +7,14 @@
 //
 
 #import "LPGenericAsyncRoute.h"
-#import "LPHTTPResponse.h"
-#import "LPHTTPConnection.h"
+
+#import "HTTPResponse.h"
+#import "HTTPConnection.h"
+#import "RoutingHTTPConnection.h"
 #import "LPResources.h"
 #import "LPRecorder.h"
 #import "UIScriptParser.h"
+#import "JSON.h"
 #import "LPTouchUtils.h"
 #import "LPJSONUtils.h"
 
@@ -30,6 +33,20 @@
         _bytes = nil;
     }
     return self;
+}
+
+
+- (NSObject<HTTPResponse> *) handleRequestForPath: (NSArray *)path withConnection:(RoutingHTTPConnection *)connection_
+{
+    self.data = [LPJSONUtils deserializeDictionary:[connection_ postDataAsString]];
+    self.conn = connection_;
+
+    return [self httpResponseForMethod:@"POST" URI:@"asd"];
+
+}
+- (BOOL) canHandlePostForPath: (NSArray *)path
+{
+    return YES;
 }
 
 - (UInt64)offset {return 0;}
@@ -52,7 +69,8 @@
 - (NSData *)readDataOfLength:(NSUInteger)length {
     if (!self.done) 
     {
-        [self beginOperation]; 
+        
+        [self beginOperation];        
         return nil;//Data generated async.
     }
     else {//done is set to YES only after events and jsonResponse is set (playbackDone)
@@ -81,17 +99,17 @@
     
 }
 
-// Should only return YES after the LPHTTPConnection has read all available data.
+// Should only return YES after the HTTPConnection has read all available data.
 - (BOOL)isDone 
 {
     return _done && !self.jsonResponse;
 }
 
 
-// This method is called from the LPHTTPConnection class when the connection is closed,
+// This method is called from the HTTPConnection class when the connection is closed,
 // or when the connection is finished with the response.
 // If your response is asynchronous, you should implement this method so you can be sure not to
-// invoke LPHTTPConnection's responseHasAvailableData method after this method is called.
+// invoke HTTPConnection's responseHasAvailableData method after this method is called.
 - (void)connectionDidClose 
 {
     self.conn = nil;
@@ -126,7 +144,7 @@
     return [method isEqualToString:@"POST"];
 }
 
--(void) setConnection:(LPHTTPConnection *)connection
+-(void) setConnection:(HTTPConnection *)connection
 {
     self.conn = connection;
 }
@@ -136,7 +154,7 @@
 }
 
 
-- (NSObject<LPHTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path 
+- (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path 
 {    
     id route = [[[[self class] alloc] init] autorelease];
     [route setParameters:self.data];
@@ -159,40 +177,40 @@
 //From CocoaHTTPServer
 // Important notice to those implementing custom asynchronous and/or chunked responses:
 // 
-// LPHTTPConnection supports asynchronous responses.  All you have to do in your custom response class is
-// asynchronously generate the response, and invoke LPHTTPConnection's responseHasAvailableData method.
+// HTTPConnection supports asynchronous responses.  All you have to do in your custom response class is
+// asynchronously generate the response, and invoke HTTPConnection's responseHasAvailableData method.
 // You don't have to wait until you have all of the response ready to invoke this method.  For example, if you
 // generate the response in incremental chunks, you could call responseHasAvailableData after generating
 // each chunk.  You MUST invoke the responseHasAvailableData method on the proper thread/runloop.  That is,
-// the thread/runloop that the LPHTTPConnection is operating in.  Please see the LPHTTPAsyncFileResponse class
+// the thread/runloop that the HTTPConnection is operating in.  Please see the HTTPAsyncFileResponse class
 // for an example of how to properly do this.
 // 
-// The normal flow of events for an LPHTTPConnection while responding to a request is like this:
+// The normal flow of events for an HTTPConnection while responding to a request is like this:
 // - Get data from response via readDataOfLength method.
 // - Add data to asyncSocket's write queue.
 // - Wait for asyncSocket to notify it that the data has been sent.
 // - Get more data from response via readDataOfLength method.
 // ... continue this cycle until it has sent the entire response.
 // 
-// With an asynchronous response, the flow is a little different.  When LPHTTPConnection calls your
+// With an asynchronous response, the flow is a little different.  When HTTPConnection calls your
 // readDataOfLength method, you may or may not have any available data.  If you don't, then simply return nil.
-// You should later invoke LPHTTPConnection's responseHasAvailableData when you have data to send.
+// You should later invoke HTTPConnection's responseHasAvailableData when you have data to send.
 // 
 // You don't have to keep track of when you return nil in the readDataOfLength method, or how many times you've invoked
 // responseHasAvailableData. Just simply call responseHasAvailableData whenever you've generated new data, and
 // return nil in your readDataOfLength whenever you don't have any available data in the requested range.
-// LPHTTPConnection will automatically detect when it should be requesting new data and will act appropriately.
+// HTTPConnection will automatically detect when it should be requesting new data and will act appropriately.
 // 
-// It's important that you also keep in mind that the LPHTTP server supports range requests.
+// It's important that you also keep in mind that the HTTP server supports range requests.
 // The setOffset method is mandatory, and should not be ignored.
 // Make sure you take into account the offset within the readDataOfLength method.
-// You should also be aware that the LPHTTPConnection automatically sorts any range requests.
+// You should also be aware that the HTTPConnection automatically sorts any range requests.
 // So if your setOffset method is called with a value of 100, then you can safely release bytes 0-98.
 // 
-// LPHTTPConnection can also help you keep your memory footprint small.
+// HTTPConnection can also he you keep your memory footprint small.
 // Imagine you're dynamically generating a 10 MB response.  You probably don't want to load all this data into
-// RAM, and sit around waiting for LPHTTPConnection to slowly send it out over the network.  All you need to do
-// is pay attention to when LPHTTPConnection requests more data via readDataOfLength.  This is because LPHTTPConnection
+// RAM, and sit around waiting for HTTPConnection to slowly send it out over the network.  All you need to do
+// is pay attention to when HTTPConnection requests more data via readDataOfLength.  This is because HTTPConnection
 // will never allow asyncSocket's write queue to get much bigger than READ_CHUNKSIZE bytes.  You should
 // consider how you might be able to take advantage of this fact to generate your asynchronous response on demand,
 // while at the same time keeping your memory footprint small, and your application lightning fast.

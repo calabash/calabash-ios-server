@@ -83,7 +83,7 @@
         LPWebQueryType type = LPWebQueryTypeCSS;
         if ([[self selectorName] isEqualToString:@"marked"]) 
         {
-            type = LPWebQueryTypeFreeText;                           
+//            type = LPWebQueryTypeFreeText;
         }
         else if ([[self selectorName] isEqualToString:@"xpath"])
         {

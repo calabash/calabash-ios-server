@@ -5,7 +5,8 @@
 //  Copyright 2011 LessPainful. All rights reserved.
 //
 
-#import "CalabashServer.h"
+#import "CalabashLoader.h"
+#import "RequestRouter.h"
 #import "LPHTTPServer.h"
 #import "LPRouter.h"
 #import "LPScreenshotRoute.h"
@@ -16,26 +17,44 @@
 #import "LPUserPrefRoute.h"
 #import "LPInterpolateRoute.h"
 #import "LPBackdoorRoute.h"
+#import "CalabashUISpecSelectorEngine.h"
 #import "LPVersionRoute.h"
 #import "LPConditionRoute.h"
 #import "LPUIARoute.h"
 #import "LPKeyboardRoute.h"
 #import <dlfcn.h>
 
-@interface CalabashServer()
-- (void) start;
+
+@interface SelectorEngineRegistry
++(void)registerSelectorEngine:(id <SelectorEngine>)engine WithName:(NSString *)name;
 @end
-@implementation CalabashServer
 
 
-+ (void) start {
-    CalabashServer* server = [[CalabashServer alloc] init];
-    [server start];
+@implementation CalabashLoader
+
+
++ (void)applicationDidBecomeActive:(NSNotification *)notification {
+    [SelectorEngineRegistry registerSelectorEngine:[[CalabashUISpecSelectorEngine alloc] init] WithName:@"calabash_uispec"];
+    NSLog(@"Calabash 0.9.200 registered with Frank as selector engine named 'calabash_uispec'");
+    LPAsyncPlaybackRoute *apr =[LPAsyncPlaybackRoute new];
     
-    dlopen([@"/Developer/Library/PrivateFrameworks/UIAutomation.framework/UIAutomation" fileSystemRepresentation], RTLD_LOCAL);
-
+    [[RequestRouter singleton] registerRoute:apr];
+    [apr release];
+    
+    
+    
 }
 
++ (void)load {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(applicationDidBecomeActive:)
+                                                 name:@"UIApplicationDidBecomeActiveNotification"
+                                               object:nil];
+    dlopen([@"/Developer/Library/PrivateFrameworks/UIAutomation.framework/UIAutomation" fileSystemRepresentation], RTLD_LOCAL);
+}
+
+
+/*
 - (id) init
 {
 	self = [super init];    
@@ -127,70 +146,7 @@
 	}
 	return self;
 }
-
-- (void) start {
-    [self enableAccessibility];
-
-    NSError *error=nil;
-	if( ![_httpServer start:&error] ) {
-		NSLog(@"Error starting LPHTTP Server: %@",error);// %@", error);
-	}
-}
-
-- (void) enableAccessibility
-{
-    // Approach described at:
-    // http://sgleadow.github.com/blog/2011/11/16/enabling-accessibility-programatically-on-ios-devices/
-    NSAutoreleasePool *autoreleasePool = [[NSAutoreleasePool alloc] init];
-    
-
-        NSString *appSupportPath = @"/System/Library/PrivateFrameworks/AppSupport.framework/AppSupport";
-
-        // If we're on the simulator, make sure we're using the sim's copy of AppSupport
-        NSDictionary *environment = [[NSProcessInfo processInfo] environment];
-        NSString *simulatorRoot = [environment objectForKey:@"IPHONE_SIMULATOR_ROOT"];
-    NSLog(@"simroot: %@",simulatorRoot);
-        if (simulatorRoot) {
-            appSupportPath = [simulatorRoot stringByAppendingString:appSupportPath];
-        }
-
-        void *appSupport = dlopen([appSupportPath fileSystemRepresentation], RTLD_LAZY);
-        if (!appSupport) {
-            NSLog(@"ERROR: Unable to dlopen AppSupport. Cannot automatically enable accessibility.");
-            return;
-        }
-
-        CFStringRef (*copySharedResourcesPreferencesDomainForDomain)(CFStringRef domain)
-            = dlsym(appSupport, "CPCopySharedResourcesPreferencesDomainForDomain");
-        if (!copySharedResourcesPreferencesDomainForDomain) {
-            NSLog(@"ERROR: Unable to dlsym CPCopySharedResourcesPreferencesDomainForDomain. "
-                   "Cannot automatically enable accessibility.");
-            return;
-        }
-
-        CFStringRef accessibilityDomain
-            = copySharedResourcesPreferencesDomainForDomain(CFSTR("com.apple.Accessibility"));
-        if (!accessibilityDomain) {
-            NSLog(@"ERROR: Unable to cop accessibility preferences. Cannot automatically enable accessibility.");
-            return;
-        }
-
-        CFPreferencesSetValue(CFSTR("ApplicationAccessibilityEnabled"),
-                              kCFBooleanTrue,
-                              accessibilityDomain,
-                              kCFPreferencesAnyUser,
-                              kCFPreferencesAnyHost);
-        CFRelease(accessibilityDomain);
-    
-    [autoreleasePool drain];
-
-}
-
-- (void) dealloc
-{
-	[_httpServer release];
-	[super dealloc];
-}
+*/
 
 
 @end
