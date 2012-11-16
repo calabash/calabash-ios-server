@@ -43,7 +43,6 @@
 		B17E759115D4357F0066550B /* LPRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8714B6DBAC002A744C /* LPRecorder.m */; };
 		B17E759B15D4357F0066550B /* LPNoContentResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD414B6DB2B002A744C /* LPNoContentResponse.m */; };
 		B17E759D15D4357F0066550B /* LPAsyncPlaybackRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B111321614D5837900982BBC /* LPAsyncPlaybackRoute.m */; };
-		B17E759F15D4357F0066550B /* LPVersionCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = B153F55B15949F3D00867E12 /* LPVersionCommand.m */; };
 		B17E75A015D4357F0066550B /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDDF14B6DB2B002A744C /* CDataScanner_Extensions.m */; };
 		B17E75A115D4357F0066550B /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; };
 		B17E75A215D4357F0066550B /* LPCJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE314B6DB2B002A744C /* LPCJSONScanner.m */; };
@@ -64,9 +63,12 @@
 		B17E75B115D4357F0066550B /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8C14B6DAFB002A744C /* LPCDataScanner.m */; };
 		B17E75B215D4357F0066550B /* CalabashLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashLoader.m */; };
 		B17E75B615D436100066550B /* CalabashLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8814B6DAE1002A744C /* CalabashLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B1BDD8E2165628B7009432BE /* LPUserPrefCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = B1DDE6CB15C06CB500BBE2BE /* LPUserPrefCommand.h */; };
-		B1BDD8E316562975009432BE /* LPUserPrefCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CC15C06CB500BBE2BE /* LPUserPrefCommand.m */; };
 		B1BDD8EA1656316F009432BE /* LPGenericAsyncRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F315BC1ECD00408364 /* LPGenericAsyncRoute.m */; };
+		B1BDDB551656493E009432BE /* LPRecordRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8B14B6DC7F002A744C /* LPRecordRoute.m */; };
+		B1BDDB5A16564DC2009432BE /* LPUserPrefCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = B1BDDB5616564DC2009432BE /* LPUserPrefCommand.h */; };
+		B1BDDB5B16564DC2009432BE /* LPUserPrefCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = B1BDDB5716564DC2009432BE /* LPUserPrefCommand.m */; };
+		B1BDDB5C16564DC2009432BE /* LPVersionCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = B1BDDB5816564DC2009432BE /* LPVersionCommand.h */; };
+		B1BDDB5D16564DC2009432BE /* LPVersionCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = B1BDDB5916564DC2009432BE /* LPVersionCommand.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -244,12 +246,8 @@
 		B12A04011511546F002FA032 /* LPInterpolateRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInterpolateRoute.m; sourceTree = "<group>"; };
 		B13B29231627389500433F6C /* LPISO8601DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPISO8601DateFormatter.h; sourceTree = "<group>"; };
 		B13B29241627389500433F6C /* LPISO8601DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPISO8601DateFormatter.m; sourceTree = "<group>"; };
-		B153F55A15949F3D00867E12 /* LPVersionCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPVersionCommand.h; sourceTree = "<group>"; };
-		B153F55B15949F3D00867E12 /* LPVersionCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPVersionCommand.m; sourceTree = "<group>"; };
 		B15DA5E315C5D80A009E6CFE /* LPQueryAllOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPQueryAllOperation.h; sourceTree = "<group>"; };
 		B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPQueryAllOperation.m; sourceTree = "<group>"; };
-		B160E8ED15321D8F00F69E7A /* LPBackdoorRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPBackdoorRoute.h; sourceTree = "<group>"; };
-		B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPBackdoorRoute.m; sourceTree = "<group>"; };
 		B163213315BBF13200408364 /* LPConditionRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPConditionRoute.h; sourceTree = "<group>"; };
 		B163213415BBF13200408364 /* LPConditionRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPConditionRoute.m; sourceTree = "<group>"; };
 		B16321F215BC1ECD00408364 /* LPGenericAsyncRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPGenericAsyncRoute.h; sourceTree = "<group>"; };
@@ -993,11 +991,12 @@
 		B1A4FE411645571300B1809B /* tutorial.feature */ = {isa = PBXFileReference; lastKnownFileType = text; path = tutorial.feature; sourceTree = "<group>"; };
 		B1A4FE421645571300B1809B /* Tutorial.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = Tutorial.md; sourceTree = "<group>"; };
 		B1A4FE431645571300B1809B /* tutorial_steps.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = tutorial_steps.rb; sourceTree = "<group>"; };
+		B1BDDB5616564DC2009432BE /* LPUserPrefCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUserPrefCommand.h; sourceTree = "<group>"; };
+		B1BDDB5716564DC2009432BE /* LPUserPrefCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUserPrefCommand.m; sourceTree = "<group>"; };
+		B1BDDB5816564DC2009432BE /* LPVersionCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPVersionCommand.h; sourceTree = "<group>"; };
+		B1BDDB5916564DC2009432BE /* LPVersionCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPVersionCommand.m; sourceTree = "<group>"; };
 		B1DDE6C915C06CB500BBE2BE /* LPUIARoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUIARoute.h; sourceTree = "<group>"; };
 		B1DDE6CA15C06CB500BBE2BE /* LPUIARoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUIARoute.m; sourceTree = "<group>"; };
-		B1DDE6CB15C06CB500BBE2BE /* LPUserPrefCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUserPrefCommand.h; sourceTree = "<group>"; };
-		B1DDE6CC15C06CB500BBE2BE /* LPUserPrefCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUserPrefCommand.m; sourceTree = "<group>"; };
-		B1DDE6D115C0701D00BBE2BE /* UIAutomation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAutomation.h; sourceTree = "<group>"; };
 		B1E3603814D9F4B30087D8D9 /* UIScriptASTPredicate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScriptASTPredicate.h; sourceTree = "<group>"; };
 		B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScriptASTPredicate.m; sourceTree = "<group>"; };
 		B1FF22B215CF002500F3A17B /* MKMapView+Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+Test.h"; sourceTree = "<group>"; };
@@ -1197,8 +1196,6 @@
 			children = (
 				B1DDE6C915C06CB500BBE2BE /* LPUIARoute.h */,
 				B1DDE6CA15C06CB500BBE2BE /* LPUIARoute.m */,
-				B1DDE6CB15C06CB500BBE2BE /* LPUserPrefCommand.h */,
-				B1DDE6CC15C06CB500BBE2BE /* LPUserPrefCommand.m */,
 				B16321F615BC200300408364 /* LPKeyboardRoute.h */,
 				B16321F715BC200300408364 /* LPKeyboardRoute.m */,
 				B16321F215BC1ECD00408364 /* LPGenericAsyncRoute.h */,
@@ -1217,10 +1214,6 @@
 				B184FE9014B6DD33002A744C /* LPScreenshotRoute.m */,
 				B111321514D5837900982BBC /* LPAsyncPlaybackRoute.h */,
 				B111321614D5837900982BBC /* LPAsyncPlaybackRoute.m */,
-				B160E8ED15321D8F00F69E7A /* LPBackdoorRoute.h */,
-				B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */,
-				B153F55A15949F3D00867E12 /* LPVersionCommand.h */,
-				B153F55B15949F3D00867E12 /* LPVersionCommand.m */,
 			);
 			path = Routes;
 			sourceTree = "<group>";
@@ -1284,7 +1277,6 @@
 		B184FE0B14B6DB2B002A744C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				B1DDE6D115C0701D00BBE2BE /* UIAutomation.h */,
 				B184FE0C14B6DB2B002A744C /* LPJSONUtils.h */,
 				B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */,
 				B1296FBF15DC1F4B005DDF5C /* LPReflectUtils.h */,
@@ -2876,6 +2868,10 @@
 		B1BDD8E1165626A5009432BE /* Commands */ = {
 			isa = PBXGroup;
 			children = (
+				B1BDDB5616564DC2009432BE /* LPUserPrefCommand.h */,
+				B1BDDB5716564DC2009432BE /* LPUserPrefCommand.m */,
+				B1BDDB5816564DC2009432BE /* LPVersionCommand.h */,
+				B1BDDB5916564DC2009432BE /* LPVersionCommand.m */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -2907,7 +2903,8 @@
 				B171A8B01645288200E120FE /* JSON.h in Headers */,
 				B171A8B416452BB500E120FE /* CalabashUISpecSelectorEngine.h in Headers */,
 				B171A8B816452EE200E120FE /* HTTPResponse.h in Headers */,
-				B1BDD8E2165628B7009432BE /* LPUserPrefCommand.h in Headers */,
+				B1BDDB5A16564DC2009432BE /* LPUserPrefCommand.h in Headers */,
+				B1BDDB5C16564DC2009432BE /* LPVersionCommand.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3216,7 +3213,6 @@
 				B17E759115D4357F0066550B /* LPRecorder.m in Sources */,
 				B17E759B15D4357F0066550B /* LPNoContentResponse.m in Sources */,
 				B17E759D15D4357F0066550B /* LPAsyncPlaybackRoute.m in Sources */,
-				B17E759F15D4357F0066550B /* LPVersionCommand.m in Sources */,
 				B17E75A015D4357F0066550B /* CDataScanner_Extensions.m in Sources */,
 				B17E75A115D4357F0066550B /* LPCJSONDeserializer.m in Sources */,
 				B17E75A215D4357F0066550B /* LPCJSONScanner.m in Sources */,
@@ -3239,8 +3235,10 @@
 				B1296FC315DC1F5B005DDF5C /* LPReflectUtils.m in Sources */,
 				B13B29261627389500433F6C /* LPISO8601DateFormatter.m in Sources */,
 				B171A8B516452BB500E120FE /* CalabashUISpecSelectorEngine.m in Sources */,
-				B1BDD8E316562975009432BE /* LPUserPrefCommand.m in Sources */,
 				B1BDD8EA1656316F009432BE /* LPGenericAsyncRoute.m in Sources */,
+				B1BDDB551656493E009432BE /* LPRecordRoute.m in Sources */,
+				B1BDDB5B16564DC2009432BE /* LPUserPrefCommand.m in Sources */,
+				B1BDDB5D16564DC2009432BE /* LPVersionCommand.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

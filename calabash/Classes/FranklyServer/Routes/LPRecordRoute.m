@@ -7,52 +7,52 @@
 #import "LPRecordRoute.h"
 #import "HTTPDataResponse.h"
 #import "LPRecorder.h"
-#import "NoContentResponse.h"
+#import "LPNoContentResponse.h"
+#import "RoutingHTTPConnection.h"
+#import "JSON.h"
 
-@interface LPRecordRoute()
-- (void) startRecording;
-- (NSData *) stopRecording;
-@end
 
 @implementation LPRecordRoute
 
-- (void) setParameters:(NSDictionary*) parameters {
-    _params = [parameters retain];
-}
-- (void) setConnection:(LPHTTPConnection *)connection {
-    _conn = connection;
-}
 
-- (void) dealloc {
-    [_params release];_params=nil;
-    _conn=nil;
-    [super dealloc];
-}
 
-- (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path {
-    return [method isEqualToString:@"POST"];
-}
-
-- (NSObject<LPHTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path {
+- (NSObject<HTTPResponse> *) handleRequestForPath: (NSArray *)path withConnection:(RoutingHTTPConnection *)conn
+{
+    if (![self matchesPath:path]) { return nil; }
+    NSDictionary *_params = FROM_JSON([conn postDataAsString]);
     NSString* action = [_params objectForKey:@"action"];
     if ([action isEqualToString:@"start"]) {
         [self startRecording];
         return [[[LPNoContentResponse alloc] init] autorelease];
     }
     else if ([action isEqualToString:@"stop"]) {
-        NSData* path = [self stopRecording];
-        return [[[LPHTTPDataResponse alloc] initWithData:path] autorelease];
+        NSData* data = [self stopRecording];
+        return [[[HTTPDataResponse alloc] initWithData:data] autorelease];
     } else {
         return nil;
     }
+
     
 }
 
+- (BOOL) canHandlePostForPath: (NSArray *)path
+{
+    return [self matchesPath:path];
+}
 
-- (void) startRecording {
+-(BOOL)matchesPath:(NSArray *)path
+{
+    return [path containsObject:@"record"];
+}
+
+
+- (void) startRecording
+{
     [[LPRecorder sharedRecorder] record];
 }
-- (NSData *) stopRecording {
+
+- (NSData *) stopRecording
+{
     [[LPRecorder sharedRecorder] stop];
     
     NSString *error=nil;
@@ -65,24 +65,8 @@
         return nil;
     } else {
         return plistData;
+    //
     }
-//
-//    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-//    
-//    NSString* appID = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
-//    static NSDateFormatter *fm = nil;
-//    if (!fm) {
-//        fm=[[NSDateFormatter alloc] init];
-//        [fm setDateFormat:@"ddMM'-'HH':'mm':'SSSS"];
-//    }
-//    NSString* timestamp = [fm stringFromDate:[NSDate date]];
-//    NSString* tempFile = [NSString stringWithFormat:@"record_%@_%@.plist",appID,timestamp,nil];
-//    
-//    NSString *plistPath = [rootPath stringByAppendingPathComponent:tempFile];
-//    
-//
-//    [[Recorder sharedRecorder] saveToFile:plistPath];
-//    return tempFile;
 }
 
 @end

@@ -11,6 +11,7 @@
 #import "CalabashUISpecSelectorEngine.h"
 #import "LPUserPrefCommand.h"
 #import "LPVersionCommand.h"
+#import "LPRecordRoute.h"
 #import "FrankCommandRoute.h"
 #import <dlfcn.h>
 
@@ -26,10 +27,17 @@
 + (void)applicationDidBecomeActive:(NSNotification *)notification {
     [SelectorEngineRegistry registerSelectorEngine:[[CalabashUISpecSelectorEngine alloc] init] WithName:@"calabash_uispec"];
     NSLog(@"Calabash 0.9.200 registered with Frank as selector engine named 'calabash_uispec'");
-    LPAsyncPlaybackRoute *apr =[LPAsyncPlaybackRoute new];
+
     
+    LPRecordRoute *recordRoute = [LPRecordRoute new];
+    [[RequestRouter singleton] registerRoute:recordRoute];
+    [recordRoute release];
+
+    
+    LPAsyncPlaybackRoute *apr =[LPAsyncPlaybackRoute new];
     [[RequestRouter singleton] registerRoute:apr];
     [apr release];
+    
     
     
     [[FrankCommandRoute singleton] registerCommand:[[[LPUserPrefCommand alloc] init] autorelease]

@@ -50,6 +50,7 @@
 }
 - (BOOL) canHandlePostForPath: (NSArray *)path
 {
+    if (![self matchesPath:path]) { return NO; }
     return YES;
 }
 
