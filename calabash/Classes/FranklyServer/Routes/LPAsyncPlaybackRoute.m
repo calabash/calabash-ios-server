@@ -7,8 +7,8 @@
 //
 
 #import "LPAsyncPlaybackRoute.h"
-#import "LPHTTPResponse.h"
-#import "LPHTTPConnection.h"
+#import "HTTPResponse.h"
+#import "HTTPConnection.h"
 #import "LPResources.h"
 #import "LPRecorder.h"
 #import "UIScriptParser.h"

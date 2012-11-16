@@ -5,9 +5,9 @@
 //
 
 #import "LPRecordRoute.h"
-#import "LPHTTPDataResponse.h"
+#import "HTTPDataResponse.h"
 #import "LPRecorder.h"
-#import "LPNoContentResponse.h"
+#import "NoContentResponse.h"
 
 @interface LPRecordRoute()
 - (void) startRecording;

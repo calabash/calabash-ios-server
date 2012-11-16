@@ -7,7 +7,7 @@
 //
 #import <Foundation/Foundation.h>
 #import "RequestRouter.h"
-#import "LPHTTPResponse.h"
+#import "HTTPResponse.h"
 #import "LPGenericAsyncRoute.h"
 #import "UIScriptParser.h"
 

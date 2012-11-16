@@ -7,8 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LPRoute.h"
-
-@interface LPBackdoorRoute : NSObject<LPRoute>
+#import "RequestRouter.h"
+@interface LPBackdoorRoute : NSObject<Route>
 
 @end
