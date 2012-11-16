@@ -34,14 +34,18 @@
     }
     return self;
 }
-
+-(BOOL)matchesPath:(NSArray *)path 
+{
+    return NO;
+}
 
 - (NSObject<HTTPResponse> *) handleRequestForPath: (NSArray *)path withConnection:(RoutingHTTPConnection *)connection_
 {
+    if (![self matchesPath:path]) { return nil; }
     self.data = [LPJSONUtils deserializeDictionary:[connection_ postDataAsString]];
     self.conn = connection_;
 
-    return [self httpResponseForMethod:@"POST" URI:@"asd"];
+    return [self httpResponse];
 
 }
 - (BOOL) canHandlePostForPath: (NSArray *)path
@@ -138,12 +142,6 @@
 }
 
 
-// Callbacks from router.
-- (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path 
-{
-    return [method isEqualToString:@"POST"];
-}
-
 -(void) setConnection:(HTTPConnection *)connection
 {
     self.conn = connection;
@@ -154,7 +152,7 @@
 }
 
 
-- (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path 
+- (NSObject<HTTPResponse> *)httpResponse 
 {    
     id route = [[[[self class] alloc] init] autorelease];
     [route setParameters:self.data];

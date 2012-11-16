@@ -10,6 +10,17 @@
 
 @implementation LPBackdoorRoute
 
+
+- (NSObject<HTTPResponse> *) handleRequestForPath: (NSArray *)path withConnection:(RoutingHTTPConnection *)connection
+{
+    
+}
+- (BOOL) canHandlePostForPath: (NSArray *)path
+{
+    
+}
+
+
 - (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path {
     return [method isEqualToString:@"POST"];
 }

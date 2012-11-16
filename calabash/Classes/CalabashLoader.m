@@ -9,6 +9,9 @@
 #import "RequestRouter.h"
 #import "LPAsyncPlaybackRoute.h"
 #import "CalabashUISpecSelectorEngine.h"
+#import "LPUserPrefCommand.h"
+#import "LPVersionCommand.h"
+#import "FrankCommandRoute.h"
 #import <dlfcn.h>
 
 
@@ -28,6 +31,11 @@
     [[RequestRouter singleton] registerRoute:apr];
     [apr release];
     
+    
+    [[FrankCommandRoute singleton] registerCommand:[[[LPUserPrefCommand alloc] init] autorelease]
+                                          withName:@"userprefs"];
+    [[FrankCommandRoute singleton] registerCommand:[[[LPVersionCommand alloc] init] autorelease]
+                                          withName:@"version"];
     
     
 }

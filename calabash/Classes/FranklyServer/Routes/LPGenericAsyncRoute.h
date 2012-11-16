@@ -27,6 +27,7 @@
 
 -(void)beginOperation;
 - (BOOL)isDone;
+-(BOOL)matchesPath:(NSArray *)path;
 -(void)failWithMessageFormat:(NSString *)messageFmt message:(NSString *)message;
 -(void)succeedWithResult:(NSArray *)result;
 

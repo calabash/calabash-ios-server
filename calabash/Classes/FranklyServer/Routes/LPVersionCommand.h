@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RequestRouter.h"
+#import "FrankCommandRoute.h"
 
-@interface LPVersionRoute : NSObject<Route>
+@interface LPVersionCommand : NSObject<FrankCommand>
 
 @end

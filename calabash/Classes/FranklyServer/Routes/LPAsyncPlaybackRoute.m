@@ -34,6 +34,10 @@
 }
 
 
+-(BOOL)matchesPath:(NSArray *)path
+{
+    return [path containsObject:@"play"];
+}
 
 -(void) beginOperation 
 {
