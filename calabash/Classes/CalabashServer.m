@@ -16,6 +16,7 @@
 #import "LPUserPrefRoute.h"
 #import "LPInterpolateRoute.h"
 #import "LPBackdoorRoute.h"
+#import "LPExitRoute.h"
 #import "LPVersionRoute.h"
 #import "LPConditionRoute.h"
 #import "LPUIARoute.h"
@@ -72,6 +73,10 @@
         [LPRouter addRoute:backdr forPath:@"backdoor"];
         [backdr release];
 
+        LPExitRoute* exit_route = [LPExitRoute new];
+        [LPRouter addRoute:exit_route forPath:@"exit"];
+        [exit_route release];
+    
         LPVersionRoute* verr = [LPVersionRoute new];
         [LPRouter addRoute:verr forPath:@"version"];
         [verr release];
