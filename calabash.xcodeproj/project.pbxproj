@@ -22,6 +22,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		692D77A01657010000DE3E53 /* LPExitRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 692D779E1657010000DE3E53 /* LPExitRoute.h */; };
+		692D77A11657010000DE3E53 /* LPExitRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 692D779F1657010000DE3E53 /* LPExitRoute.m */; };
 		B1296FC015DC1F4B005DDF5C /* LPReflectUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = B1296FBF15DC1F4B005DDF5C /* LPReflectUtils.h */; };
 		B1296FC315DC1F5B005DDF5C /* LPReflectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B1296FC215DC1F5B005DDF5C /* LPReflectUtils.m */; };
 		B13B29251627389500433F6C /* LPISO8601DateFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = B13B29231627389500433F6C /* LPISO8601DateFormatter.h */; };
@@ -110,6 +112,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		692D779E1657010000DE3E53 /* LPExitRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPExitRoute.h; sourceTree = "<group>"; };
+		692D779F1657010000DE3E53 /* LPExitRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPExitRoute.m; sourceTree = "<group>"; };
 		B111321514D5837900982BBC /* LPAsyncPlaybackRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPAsyncPlaybackRoute.h; sourceTree = "<group>"; };
 		B111321614D5837900982BBC /* LPAsyncPlaybackRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPAsyncPlaybackRoute.m; sourceTree = "<group>"; };
 		B116C98314E5215800663205 /* DDData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDData.h; path = calabash/Classes/CocoaHttpServer/Categories/DDData.h; sourceTree = SOURCE_ROOT; };
@@ -492,6 +496,8 @@
 				B111321614D5837900982BBC /* LPAsyncPlaybackRoute.m */,
 				B160E8ED15321D8F00F69E7A /* LPBackdoorRoute.h */,
 				B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */,
+				692D779E1657010000DE3E53 /* LPExitRoute.h */,
+				692D779F1657010000DE3E53 /* LPExitRoute.m */,
 				B153F55A15949F3D00867E12 /* LPVersionRoute.h */,
 				B153F55B15949F3D00867E12 /* LPVersionRoute.m */,
 			);
@@ -606,6 +612,7 @@
 				B17E75B615D436100066550B /* CalabashServer.h in Headers */,
 				B1296FC015DC1F4B005DDF5C /* LPReflectUtils.h in Headers */,
 				B13B29251627389500433F6C /* LPISO8601DateFormatter.h in Headers */,
+				692D77A01657010000DE3E53 /* LPExitRoute.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -752,6 +759,7 @@
 				B13D5F8A15D43A3900504726 /* LPI.mm in Sources */,
 				B1296FC315DC1F5B005DDF5C /* LPReflectUtils.m in Sources */,
 				B13B29261627389500433F6C /* LPISO8601DateFormatter.m in Sources */,
+				692D77A11657010000DE3E53 /* LPExitRoute.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
