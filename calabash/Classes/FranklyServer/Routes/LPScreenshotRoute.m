@@ -8,6 +8,8 @@
 #import "LPHTTPDataResponse.h"
 #import <QuartzCore/QuartzCore.h>
 
+
+// UIGetScreenImage violates t
 @implementation LPScreenshotRoute
 
 - (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path {
@@ -62,6 +64,7 @@
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     
     UIGraphicsEndImageContext();
+
     
 //    NSString* appID = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
 //    static NSDateFormatter *fm = nil;
