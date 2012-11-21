@@ -11,7 +11,7 @@
 @implementation LPExitRoute
 
 - (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path {
-  return [method isEqualToString:@"GET"];
+  return [method isEqualToString:@"GET"] || [method isEqualToString:@"POST"];
 }
 
 - (NSDictionary *)JSONResponseForMethod:(NSString *)method
