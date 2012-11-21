@@ -35,7 +35,7 @@
     id query = [self.data objectForKey:@"query"];
     UIView *targetView = nil;
     if (query != nil) {
-        NSArray* result = [LPOperation performQueryAll:query];
+        NSArray* result = [LPOperation performQuery:query];
                            
         
         if ([result count] >0) {

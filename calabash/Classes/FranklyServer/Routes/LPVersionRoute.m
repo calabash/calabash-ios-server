@@ -7,8 +7,9 @@
 //
 
 #import "LPVersionRoute.h"
+#import <sys/utsname.h>
 
-#define kLPCALABASHVERSION @"0.9.117"
+#define kLPCALABASHVERSION @"0.9.123"
 
 @implementation LPVersionRoute
 
@@ -33,15 +34,20 @@
     {
         nameString = @"Unknown";
     }
+    struct utsname systemInfo;
+    uname(&systemInfo);
     
-    return [NSDictionary dictionaryWithObjectsAndKeys:
-                kLPCALABASHVERSION , @"version",
-                idString,@"app_id",
-                nameString,@"app_name",
-                versionString,@"app_version",
-                @"SUCCESS",@"outcome",
-                //device, os, serial?, other?
-                nil];
+    NSDictionary* res = [NSDictionary dictionaryWithObjectsAndKeys:
+                         kLPCALABASHVERSION , @"version",
+                         idString,@"app_id",
+                         [UIDevice currentDevice].systemVersion, @"iOS_version",
+                         nameString,@"app_name",
+                         [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding], @"system",
+                         versionString,@"app_version",
+                         @"SUCCESS",@"outcome",
+                         //device, os, serial?, other?
+                         nil];
+    return res;
     
 }
 
