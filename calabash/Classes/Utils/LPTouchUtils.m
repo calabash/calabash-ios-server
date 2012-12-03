@@ -20,9 +20,7 @@ static NSString* lp_deviceName()
 
 @implementation LPTouchUtils
 
-+(CGPoint) translateToScreenCoords:(CGPoint) point {
-    UIScreen*  s = [UIScreen mainScreen];
-    
++(BOOL)is5InchPhone {
     UIDevice *device = [UIDevice currentDevice];
     BOOL inch5Phone = NO;
     if([@"iPhone Simulator" isEqualToString: [device model]])
@@ -35,7 +33,14 @@ static NSString* lp_deviceName()
     {
         inch5Phone = [lp_deviceName() isEqualToString:@"iPhone5,2"];
     }
+    return inch5Phone;
+}
+
++(CGPoint) translateToScreenCoords:(CGPoint) point {
+    UIScreen*  s = [UIScreen mainScreen];
     
+
+    BOOL inch5Phone = [LPTouchUtils is5InchPhone];
 
     
     
