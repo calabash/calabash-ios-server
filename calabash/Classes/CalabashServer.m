@@ -15,6 +15,7 @@
 #import "LPPlaybackRoute.h"
 #import "LPAsyncPlaybackRoute.h"
 #import "LPUserPrefRoute.h"
+#import "LPQueryLogRoute.h"
 #import "LPInterpolateRoute.h"
 #import "LPBackdoorRoute.h"
 #import "LPExitRoute.h"
@@ -70,6 +71,10 @@
         [LPRouter addRoute:bgr forPath:@"userprefs"];
         [bgr release];
 
+        LPQueryLogRoute *qlr =[LPQueryLogRoute new];
+        [LPRouter addRoute:qlr forPath:@"querylog"];
+        [qlr release];
+		
         LPInterpolateRoute *panr =[LPInterpolateRoute new];
         [LPRouter addRoute:panr forPath:@"interpolate"];
         [panr release];
