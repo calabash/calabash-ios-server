@@ -10,8 +10,6 @@
 #import "JSON.h"
 #import <sys/utsname.h>
 
-#define kLPCALABASHVERSION @"0.9.200"
-
 @implementation LPVersionCommand
 
 
@@ -31,22 +29,51 @@
     if (!nameString)
     {
         nameString = @"Unknown";
-    }    
+    }
     struct utsname systemInfo;
     uname(&systemInfo);
-     
+    
+    NSString *system = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+    
+    UIDevice *device = [UIDevice currentDevice];
+    NSDictionary *env = [[NSProcessInfo processInfo]environment];
+    
+    BOOL inch5Phone = NO;
+    if([@"iPhone Simulator" isEqualToString: [device model]])
+    {
+        
+        NSPredicate *inch5PhonePred = [NSPredicate predicateWithFormat:@"IPHONE_SIMULATOR_VERSIONS LIKE '*iPhone (Retina 4-inch)*'"];
+        inch5Phone = [inch5PhonePred evaluateWithObject:env];
+    }
+    else if ([[device model] hasPrefix:@"iPhone"])
+    {
+        inch5Phone = [system isEqualToString:@"iPhone5,2"];
+    }
+    
+    NSString *dev = [env objectForKey:@"IPHONE_SIMULATOR_DEVICE"];
+    if (!dev) {
+        dev = @"";
+    }
+    
+    NSString *sim = [env objectForKey:@"IPHONE_SIMULATOR_VERSIONS"];
+    if (!sim) {
+        sim = @"";
+    }
+    
+    
     NSDictionary* res = [NSDictionary dictionaryWithObjectsAndKeys:
                          kLPCALABASHVERSION , @"version",
                          idString,@"app_id",
                          [UIDevice currentDevice].systemVersion, @"iOS_version",
                          nameString,@"app_name",
-                         [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding], @"system",
+                         system, @"system",
+                         dev, @"simulator_device",
+                         sim, @"simulator",
                          versionString,@"app_version",
                          @"SUCCESS",@"outcome",
-     //device, os, serial?, other?
+                         //device, os, serial?, other?
                          nil];
-    return TO_JSON(res);
-    
+    return TO_JSON(res);        
     
 }
 

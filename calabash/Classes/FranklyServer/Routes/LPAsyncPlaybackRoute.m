@@ -48,9 +48,8 @@
         if (query != nil) {
             __block NSArray* result;
             dispatch_sync(dispatch_get_main_queue(), ^{
-                result = [[LPOperation performQueryAll:query] retain];
+                result = [[LPOperation performQuery:query] retain];
             });
-            
             if ([result count] >0) {
                 id v = [result objectAtIndex:0];//autopick first?
                 
