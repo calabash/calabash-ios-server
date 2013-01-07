@@ -91,6 +91,8 @@
 		B17E75B615D436100066550B /* CalabashServer.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8814B6DAE1002A744C /* CalabashServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		BCB6CA8B168BCCA400C4F3D3 /* LPQueryLogRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB6CA89168BCCA400C4F3D3 /* LPQueryLogRoute.h */; };
 		BCB6CA8C168BCCA400C4F3D3 /* LPQueryLogRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB6CA8A168BCCA400C4F3D3 /* LPQueryLogRoute.m */; };
+		BCB6CBFD1695FB8400C4F3D3 /* LPAppPropertyRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = BCB6CBFB1695FB8400C4F3D3 /* LPAppPropertyRoute.h */; };
+		BCB6CBFE1695FB8400C4F3D3 /* LPAppPropertyRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = BCB6CBFC1695FB8400C4F3D3 /* LPAppPropertyRoute.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -262,6 +264,8 @@
 		B1FF22B715CF002500F3A17B /* MKPolylineView+Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKPolylineView+Test.m"; sourceTree = "<group>"; };
 		BCB6CA89168BCCA400C4F3D3 /* LPQueryLogRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPQueryLogRoute.h; sourceTree = "<group>"; };
 		BCB6CA8A168BCCA400C4F3D3 /* LPQueryLogRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPQueryLogRoute.m; sourceTree = "<group>"; };
+		BCB6CBFB1695FB8400C4F3D3 /* LPAppPropertyRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPAppPropertyRoute.h; sourceTree = "<group>"; };
+		BCB6CBFC1695FB8400C4F3D3 /* LPAppPropertyRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPAppPropertyRoute.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -480,6 +484,8 @@
 		B184FDD014B6DB2B002A744C /* Routes */ = {
 			isa = PBXGroup;
 			children = (
+				BCB6CBFB1695FB8400C4F3D3 /* LPAppPropertyRoute.h */,
+				BCB6CBFC1695FB8400C4F3D3 /* LPAppPropertyRoute.m */,
 				B1DDE6C915C06CB500BBE2BE /* LPUIARoute.h */,
 				B1DDE6CA15C06CB500BBE2BE /* LPUIARoute.m */,
 				B1DDE6CB15C06CB500BBE2BE /* LPUserPrefRoute.h */,
@@ -627,6 +633,7 @@
 				692D77A01657010000DE3E53 /* LPExitRoute.h in Headers */,
 				B12179A8165D613100B6DA43 /* LPScreenshotRoute2.h in Headers */,
 				BCB6CA8B168BCCA400C4F3D3 /* LPQueryLogRoute.h in Headers */,
+				BCB6CBFD1695FB8400C4F3D3 /* LPAppPropertyRoute.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -776,6 +783,7 @@
 				692D77A11657010000DE3E53 /* LPExitRoute.m in Sources */,
 				B12179A9165D613100B6DA43 /* LPScreenshotRoute2.m in Sources */,
 				BCB6CA8C168BCCA400C4F3D3 /* LPQueryLogRoute.m in Sources */,
+				BCB6CBFE1695FB8400C4F3D3 /* LPAppPropertyRoute.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
