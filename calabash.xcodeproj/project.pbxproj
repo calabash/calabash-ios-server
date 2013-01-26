@@ -847,8 +847,6 @@
 		B1A4FD9A1645571300B1809B /* ImageCaptureRoute.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageCaptureRoute.h; sourceTree = "<group>"; };
 		B1A4FD9B1645571300B1809B /* ImageCaptureRoute.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageCaptureRoute.m; sourceTree = "<group>"; };
 		B1A4FD9C1645571300B1809B /* JSON.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
-		B1A4FD9D1645571300B1809B /* KeyboardCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyboardCommand.h; sourceTree = "<group>"; };
-		B1A4FD9E1645571300B1809B /* KeyboardCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KeyboardCommand.m; sourceTree = "<group>"; };
 		B1A4FD9F1645571300B1809B /* LocationCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationCommand.h; sourceTree = "<group>"; };
 		B1A4FDA01645571300B1809B /* LocationCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocationCommand.m; sourceTree = "<group>"; };
 		B1A4FDA11645571300B1809B /* MapOperationCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapOperationCommand.h; sourceTree = "<group>"; };
@@ -2649,8 +2647,6 @@
 				B1A4FD9A1645571300B1809B /* ImageCaptureRoute.h */,
 				B1A4FD9B1645571300B1809B /* ImageCaptureRoute.m */,
 				B1A4FD9C1645571300B1809B /* JSON.h */,
-				B1A4FD9D1645571300B1809B /* KeyboardCommand.h */,
-				B1A4FD9E1645571300B1809B /* KeyboardCommand.m */,
 				B1A4FD9F1645571300B1809B /* LocationCommand.h */,
 				B1A4FDA01645571300B1809B /* LocationCommand.m */,
 				B1A4FDA11645571300B1809B /* MapOperationCommand.h */,
