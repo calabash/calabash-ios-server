@@ -102,7 +102,10 @@
 }
 
 
-- (NSMutableArray *)evalWith:(NSArray*) views direction:(UIScriptASTDirectionType) dir {
+- (NSMutableArray*) evalWith:(NSArray*) views
+                   direction:(UIScriptASTDirectionType) dir
+                  visibility:(UIScriptASTVisibilityType)visibility {
+
     NSMutableArray* res = [NSMutableArray arrayWithCapacity:8];
 
     for (UIView* v in views) {

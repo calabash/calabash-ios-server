@@ -11,8 +11,16 @@ typedef enum {
     UIScriptASTDirectionTypeChild
 } UIScriptASTDirectionType;
 
+typedef enum {
+    UIScriptASTVisibilityTypeVisible,
+    UIScriptASTVisibilityTypeAll
+} UIScriptASTVisibilityType;
+
 @interface UIScriptAST : NSObject
 
-- (NSMutableArray*) evalWith:(NSArray*) views direction:(UIScriptASTDirectionType) dir;
+- (NSMutableArray*) evalWith:(NSArray*) views
+                   direction:(UIScriptASTDirectionType) dir
+                  visibility:(UIScriptASTVisibilityType)visibility;
+
 
 @end

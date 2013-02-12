@@ -16,11 +16,6 @@
 
 
 - (id) performWithTarget:(UIView*)_view error:(NSError **)error {
-    if (!_view || ([_view isKindOfClass:[UIView class]] && ![LPTouchUtils isViewVisible:_view]))
-    {
-        *error = [[[NSError alloc] initWithDomain:@"Calabash" code:404 userInfo:nil] autorelease];
-        return nil;
-    }
     return [super performWithTarget:_view error:error];    
 }
 

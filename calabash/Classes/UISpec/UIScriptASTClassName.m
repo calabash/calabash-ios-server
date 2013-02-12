@@ -6,6 +6,9 @@
 
 #import "UIScriptASTClassName.h"
 #import "UIScriptASTDirection.h"
+#import "UIScriptASTVisibility.h"
+#import "LPTouchUtils.h"
+
 
 @interface UIScriptASTClassName()
 - (void) evalDescWith:(UIView*) view result:(NSMutableArray*) res;
@@ -25,19 +28,22 @@
     return self;
 }
 
-- (NSMutableArray*) evalWith:(NSArray*) views direction:(UIScriptASTDirectionType) dir {
+- (NSMutableArray*) evalWith:(NSArray*) views
+                   direction:(UIScriptASTDirectionType) dir
+                  visibility:(UIScriptASTVisibilityType)visibility {
+
     NSMutableArray* res = [NSMutableArray arrayWithCapacity:8];
     
     for (UIView* view in views) {
         switch (dir) {
             case UIScriptASTDirectionTypeDescendant:
-                [self evalDescWith: view result:res];
+                [self evalDescWith: view result:res visibility:visibility];
                 break;
             case UIScriptASTDirectionTypeChild:
-                [self evalChildWith: view result:res];
+                [self evalChildWith: view result:res visibility:visibility];
                 break;
             case UIScriptASTDirectionTypeParent:
-                [self evalParentsWith: view result:res];
+                [self evalParentsWith: view result:res visibility:visibility];
                 break;
         }
     }
@@ -62,37 +68,43 @@ static NSInteger sortFunction(UIView* v1, UIView* v2, void *ctx) {
     } else {
         return 1;
     }
-    
 }
-- (void) evalDescWith:(UIView*) view result:(NSMutableArray*) res {
-    if ([view isKindOfClass:_class]) {
+
+-(void)addView:(UIView*)view toArray:(NSMutableArray*) res ifMatchesVisibility:(UIScriptASTVisibilityType)visibility {
+    if (visibility == UIScriptASTVisibilityTypeAll || [LPTouchUtils isViewVisible:view]) {
         [res addObject:view];
+    }    
+}
+
+- (void) evalDescWith:(UIView*) view result:(NSMutableArray*) res visibility:(UIScriptASTVisibilityType)visibility{
+    if ([view isKindOfClass:_class]) {
+        [self addView: view toArray:res ifMatchesVisibility:visibility];
     }
     
     for (UIView* subview in [[view subviews] sortedArrayUsingFunction:sortFunction context:view] ) {
-        [self evalDescWith:subview result:res];
+        [self evalDescWith:subview result:res visibility:visibility];
     }
     
 }
-- (void) evalChildWith:(UIView*) view result:(NSMutableArray*) res {
+- (void) evalChildWith:(UIView*) view result:(NSMutableArray*) res visibility:(UIScriptASTVisibilityType)visibility {
     for (UIView* childView in [view subviews]) {
         if ([childView isKindOfClass:_class]) {
-            [res addObject:childView];
+            [self addView: childView toArray:res ifMatchesVisibility:visibility];            
         }
     }
 }
-- (void) evalParentsWith:(UIView*) view result:(NSMutableArray*) res {
+- (void) evalParentsWith:(UIView*) view result:(NSMutableArray*) res visibility:(UIScriptASTVisibilityType)visibility{
 //    if ([view isKindOfClass:_class]) {
 //        [res addObject:view];
 //    }
     //I guess view itself isnt part of parents.
     UIView* parentView = [view superview];
     if ([parentView isKindOfClass:_class]) {
-        [res addObject:parentView];
+        [self addView: parentView toArray:res ifMatchesVisibility:visibility];
     }
     
     if (parentView) {
-        [self evalParentsWith:parentView result:res];
+        [self evalParentsWith:parentView result:res visibility:visibility];
     }
     
 }

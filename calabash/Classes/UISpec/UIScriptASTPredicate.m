@@ -26,7 +26,10 @@
     return [NSString stringWithFormat:@"UIScriptASTPredicate: %@",[self.predicate description]];
 }
 
-- (NSMutableArray*) evalWith:(NSArray*) views direction:(UIScriptASTDirectionType) dir {
+- (NSMutableArray*) evalWith:(NSArray*) views
+                   direction:(UIScriptASTDirectionType) dir
+                  visibility:(UIScriptASTVisibilityType)visibility {
+
     NSMutableArray* res = [NSMutableArray arrayWithCapacity:8];    
     for (id v in views) {
         if ([v isKindOfClass:[NSDictionary class]] || [v respondsToSelector:self.selector])

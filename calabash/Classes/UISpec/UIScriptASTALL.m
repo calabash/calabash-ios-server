@@ -11,7 +11,10 @@
 - (NSString*) description {
     return @"all";
 }
-- (NSMutableArray*) evalWith:(NSArray*) views direction:(UIScriptASTDirectionType) dir {
+- (NSMutableArray*) evalWith:(NSArray*) views
+                   direction:(UIScriptASTDirectionType) dir
+                  visibility:(UIScriptASTVisibilityType)visibility {
+
     return [[views mutableCopy]autorelease];
 }
 

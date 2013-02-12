@@ -18,7 +18,10 @@
     return self;
 }
 
-- (NSMutableArray*) evalWith:(NSArray*) views direction:(UIScriptASTDirectionType) dir {
+- (NSMutableArray*) evalWith:(NSArray*) views
+                   direction:(UIScriptASTDirectionType) dir
+                  visibility:(UIScriptASTVisibilityType)visibility {
+
     if (_index >= [views count]) {return nil;}
     return [NSMutableArray arrayWithObject:[views objectAtIndex:self.index]];
 }

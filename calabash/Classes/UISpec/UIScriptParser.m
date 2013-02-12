@@ -12,6 +12,7 @@
 #import "UIScriptASTFirst.h"
 #import "UIScriptASTLast.h"
 #import "UIScriptASTDirection.h"
+#import "UIScriptASTVisibility.h"
 #import "UIScriptASTPredicate.h"
 #import "LPReflectUtils.h"
 
@@ -253,7 +254,14 @@ static NSCharacterSet* curlyBrackets = nil;
     NSUInteger N=[_script length];
     NSString* token = [self findNextToken:&index];
     while (token) {
-        
+
+        UIScriptASTVisibility* visibility = [self parseVisibilityIfPresent:token];
+        if (visibility!=nil) {
+            [_res addObject:visibility];
+            if (index == N) {return;}
+            token = [self findNextToken:&index];
+        } 
+
         //token should be a direction or classname
         UIScriptASTDirection* direction = [self parseDirectionIfPresent:token];
         if (direction!=nil) {
@@ -264,12 +272,7 @@ static NSCharacterSet* curlyBrackets = nil;
             
         }
         
-        if ([token isEqualToString:@"all"]) {
-            UIScriptASTALL* all = [UIScriptASTALL new];
-            [_res addObject:all];
-            [all release];
-            return;//ignore everything past all
-        } else if ([token isEqualToString:@"last"]) {
+        if ([token isEqualToString:@"last"]) {
             UIScriptAST* last = [UIScriptASTLast new];
             [_res addObject:last];
             [last release];
@@ -383,6 +386,19 @@ static NSCharacterSet* curlyBrackets = nil;
 }
 
 - (NSArray*) parsedTokens {return [[_res mutableCopy] autorelease];}
+
+- (UIScriptASTVisibility*) parseVisibilityIfPresent:(NSString*) token {
+    if ([token isEqualToString:@"all"]) {
+        UIScriptASTVisibility* d = [[UIScriptASTVisibility alloc] initWithVisibility:UIScriptASTVisibilityTypeAll];
+        return [d autorelease];
+    }
+    if ([token isEqualToString:@"visible"]) {
+        UIScriptASTVisibility* d = [[UIScriptASTVisibility alloc] initWithVisibility:UIScriptASTVisibilityTypeVisible];
+        return [d autorelease];
+    }
+    return nil;
+}
+
 
 - (UIScriptASTDirection*) parseDirectionIfPresent:(NSString*) token {
     if ([token isEqualToString:@"parent"]) {
@@ -516,7 +532,8 @@ static NSCharacterSet* curlyBrackets = nil;
     if ([_res count] == 0) {return nil;}
     NSUInteger index = 0;
     UIScriptASTDirectionType dir = UIScriptASTDirectionTypeDescendant;
-     
+    UIScriptASTVisibilityType visibility = UIScriptASTVisibilityTypeVisible;
+    
 
     //index and first match first = [res objectAtIndex:index];
     //dir is direction or default direction
@@ -526,8 +543,12 @@ static NSCharacterSet* curlyBrackets = nil;
         UIScriptAST* cur = [_res objectAtIndex:index++];
         if ([cur isKindOfClass:[UIScriptASTDirection class]]) {
             dir = [(UIScriptASTDirection*)cur directionType];
-        } else {
-            res = [cur evalWith:res direction:dir];
+        }
+        else if ([cur isKindOfClass:[UIScriptASTVisibility class]]) {
+            visibility = [(UIScriptASTVisibility*)cur visibilityType];
+        }
+        else {
+            res = [cur evalWith:res direction:dir visibility:visibility];
         }
     }
     return res;
