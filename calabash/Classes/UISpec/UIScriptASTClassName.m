@@ -10,12 +10,6 @@
 #import "LPTouchUtils.h"
 
 
-@interface UIScriptASTClassName()
-- (void) evalDescWith:(UIView*) view result:(NSMutableArray*) res;
-- (void) evalChildWith:(UIView*) view result:(NSMutableArray*) res;
-- (void) evalParentsWith:(UIView*) view result:(NSMutableArray*) res;
-@end
-
 @implementation UIScriptASTClassName
 @synthesize className=_className;
 
