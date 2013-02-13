@@ -7,6 +7,7 @@
 #import "LPJSONUtils.h"
 #import "LPCJSONSerializer.h"
 #import "LPCJSONDeserializer.h"
+#import "LPTouchUtils.h"
 
 @implementation LPJSONUtils
 
@@ -76,6 +77,7 @@
         }
         if ([object isKindOfClass:[UIView class]])
         {
+            UIView *v = (UIView*)object;
             NSMutableDictionary *result = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                            NSStringFromClass([object class]),@"class",
                                            
@@ -92,7 +94,35 @@
             }
             [result setObject:type forKey:@"UIType"];
             
+            
+            
+            
+            
+            
             CGRect frame = [object frame];
+            
+            UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
+            UIWindow *window = [LPTouchUtils windowForView:v];
+            if (window)
+            {
+                CGRect rect = [window convertRect:v.bounds fromView:v];
+                rect = [frontWindow convertRect:rect fromWindow:window];
+                CGPoint center = [LPTouchUtils centerOfFrame:rect shouldTranslate:NO];
+                NSDictionary *rectDic =
+                [NSDictionary dictionaryWithObjectsAndKeys:
+                 [NSNumber numberWithFloat:center.x], @"center_x",
+                 [NSNumber numberWithFloat:center.y], @"center_y",
+                 [NSNumber numberWithFloat:rect.origin.x],@"x",
+                 [NSNumber numberWithFloat:rect.origin.y],@"y",
+                 [NSNumber numberWithFloat:rect.size.width],@"width",
+                 [NSNumber numberWithFloat:rect.size.height],@"height",
+                 nil];
+                
+                [result setObject:rectDic forKey:@"rect"];
+                
+                
+            }
+            
             NSDictionary *frameDic =  
             [NSDictionary dictionaryWithObjectsAndKeys:
              [NSNumber numberWithFloat:frame.origin.x],@"x",

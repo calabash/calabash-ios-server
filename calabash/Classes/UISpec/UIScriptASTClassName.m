@@ -22,6 +22,9 @@
 - (id) initWithClassName:(NSString *)className {
     self = [super init];
     if (self) {
+        if ([@"*" isEqualToString:className]) {
+            className = @"UIView";
+        }
         _className = [className retain];
         _class = NSClassFromString(self.className);
     }

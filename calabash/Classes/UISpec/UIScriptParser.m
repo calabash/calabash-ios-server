@@ -428,6 +428,9 @@ static NSCharacterSet* curlyBrackets = nil;
         return [nameArr objectAtIndex:1];
     } else {
         NSString* smallCaseName = [colonSep objectAtIndex:0];
+        if ([@"*" isEqualToString:smallCaseName]) {
+            return @"UIView";
+        }
         //tableView
         NSString* upCaseFirst = [[smallCaseName substringToIndex:1] uppercaseString];
         return [NSString stringWithFormat:@"UI%@%@",upCaseFirst,[smallCaseName substringFromIndex:1]];

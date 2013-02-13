@@ -110,17 +110,28 @@ static NSString* lp_deviceName()
     return NO;
     
 }
-
++(BOOL)isViewOrParentsHidden:(UIView*)view
+{
+    if ([view alpha] <= 0.05) {
+        return YES;
+    }
+    UIView* superView = view;
+    while (superView)
+    {
+        if ([superView isHidden]) {
+            return YES;
+        }
+        superView = [superView superview];
+    }
+    return NO;    
+}
 +(BOOL)isViewVisible:(UIView *)view
 {
-    if (![view isKindOfClass:[UIView class]] || [view isHidden]) {return NO;}
+    if (![view isKindOfClass:[UIView class]] || [self isViewOrParentsHidden:view]) {return NO;}
     CGPoint center = [self centerOfView:view shouldTranslate:NO];
     UIWindow *windowForView = [self windowForView:view];
     if (!windowForView) {return YES;/* what can I do?*/}
-    NSLog(@"view %@ cent: %@",    [view accessibilityLabel], NSStringFromCGPoint(center));
     UIView *hitView = [windowForView hitTest:center withEvent:nil];
-    NSLog(@"hit test -> %@",hitView);
-    NSLog(@"window rect: %@",    NSStringFromCGRect([windowForView bounds]));
     if ([self canFindView: view asSubViewInView:hitView])
     {
         return YES;
