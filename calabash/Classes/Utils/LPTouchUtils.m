@@ -191,18 +191,7 @@ static NSString* lp_deviceName()
     }
     else
     {
-        UIWindow *window = [self windowForView:view];
-        if (window)
-        {
-            bounds = [window convertRect:view.bounds fromView:view];
-            bounds = [frontWindow convertRect:bounds fromWindow:window];
-        }
-        else
-        { ///not sure if this could even happen...
-            bounds = view.bounds;
-            bounds = [frontWindow convertRect:bounds fromView:view];
-        }
-
+        bounds = [[UIApplication sharedApplication].delegate.window convertRect:view.frame fromView:view.superview];
     }    
     return [self centerOfFrame:bounds shouldTranslate:shouldTranslate];
 }
