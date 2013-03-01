@@ -89,6 +89,8 @@
 		B17E75B115D4357F0066550B /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8C14B6DAFB002A744C /* LPCDataScanner.m */; };
 		B17E75B215D4357F0066550B /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		B17E75B615D436100066550B /* CalabashServer.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8814B6DAE1002A744C /* CalabashServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B1B19DC816D162CF00D3D80B /* UIScriptASTVisibility.h in Headers */ = {isa = PBXBuildFile; fileRef = B1B19DC616D162CF00D3D80B /* UIScriptASTVisibility.h */; };
+		B1B19DC916D162CF00D3D80B /* UIScriptASTVisibility.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B19DC716D162CF00D3D80B /* UIScriptASTVisibility.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -245,6 +247,8 @@
 		B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCJSONDeserializer.m; sourceTree = "<group>"; };
 		B1914DB7159C228500CB928D /* LPWebQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPWebQuery.h; sourceTree = "<group>"; };
 		B1914DB8159C228500CB928D /* LPWebQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPWebQuery.m; sourceTree = "<group>"; };
+		B1B19DC616D162CF00D3D80B /* UIScriptASTVisibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScriptASTVisibility.h; sourceTree = "<group>"; };
+		B1B19DC716D162CF00D3D80B /* UIScriptASTVisibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScriptASTVisibility.m; sourceTree = "<group>"; };
 		B1DDE6C915C06CB500BBE2BE /* LPUIARoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUIARoute.h; sourceTree = "<group>"; };
 		B1DDE6CA15C06CB500BBE2BE /* LPUIARoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUIARoute.m; sourceTree = "<group>"; };
 		B1DDE6CB15C06CB500BBE2BE /* LPUserPrefRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUserPrefRoute.h; sourceTree = "<group>"; };
@@ -540,6 +544,8 @@
 		B184FDF814B6DB2B002A744C /* UISpec */ = {
 			isa = PBXGroup;
 			children = (
+				B1B19DC616D162CF00D3D80B /* UIScriptASTVisibility.h */,
+				B1B19DC716D162CF00D3D80B /* UIScriptASTVisibility.m */,
 				B1E3603814D9F4B30087D8D9 /* UIScriptASTPredicate.h */,
 				B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */,
 				B184FDF914B6DB2B002A744C /* UIScriptAST.h */,
@@ -620,6 +626,7 @@
 				B13B29251627389500433F6C /* LPISO8601DateFormatter.h in Headers */,
 				692D77A01657010000DE3E53 /* LPExitRoute.h in Headers */,
 				B12179A8165D613100B6DA43 /* LPScreenshotRoute2.h in Headers */,
+				B1B19DC816D162CF00D3D80B /* UIScriptASTVisibility.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -651,7 +658,7 @@
 		B121E78814B6D9FB0034C6A9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = LessPainful;
 			};
 			buildConfigurationList = B121E78B14B6D9FB0034C6A9 /* Build configuration list for PBXProject "calabash" */;
@@ -768,6 +775,7 @@
 				B13B29261627389500433F6C /* LPISO8601DateFormatter.m in Sources */,
 				692D77A11657010000DE3E53 /* LPExitRoute.m in Sources */,
 				B12179A9165D613100B6DA43 /* LPScreenshotRoute2.m in Sources */,
+				B1B19DC916D162CF00D3D80B /* UIScriptASTVisibility.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -798,6 +806,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -810,6 +822,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				SDKROOT = iphoneos;
@@ -821,11 +834,16 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				SDKROOT = iphoneos;
