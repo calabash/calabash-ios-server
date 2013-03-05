@@ -23,6 +23,10 @@
 #import "LPConditionRoute.h"
 #import "LPUIARoute.h"
 #import "LPKeyboardRoute.h"
+#import "LPDumpRoute.h"
+#import "LPOrientationRoute.h"
+#import "LPStaticResourcesRoute.h"
+
 #import <dlfcn.h>
 
 @interface CalabashServer()
@@ -107,8 +111,15 @@
         [LPRouter addRoute:uia forPath:@"uia"];
         [uia release];
         
-    
+		// symbiote stuff
+		LPDumpRoute *dump = [[[LPDumpRoute alloc] init] autorelease];
+		[LPRouter addRoute: dump forPath: @"dump"];
+		
+		LPOrientationRoute *orientation = [[[LPOrientationRoute alloc] init] autorelease];
+		[LPRouter addRoute: orientation forPath: @"orientation"];
 
+		LPStaticResourcesRoute *route = [[[LPStaticResourcesRoute alloc] initWithStaticResourceSubDir: @"symbiote_static_resources.bundle"] autorelease];
+		[LPRouter setDefaultRoute: route];
 
 //        
 //        LPScreencastRoute *scr = [LPScreencastRoute new];

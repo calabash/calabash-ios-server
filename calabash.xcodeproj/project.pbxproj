@@ -22,6 +22,14 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		00D3143716E65AA900C5E484 /* LPDumpRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D3142F16E65AA900C5E484 /* LPDumpRoute.h */; };
+		00D3143816E65AA900C5E484 /* LPDumpRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3143016E65AA900C5E484 /* LPDumpRoute.m */; };
+		00D3143916E65AA900C5E484 /* LPOrientationRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D3143116E65AA900C5E484 /* LPOrientationRoute.h */; };
+		00D3143A16E65AA900C5E484 /* LPOrientationRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3143216E65AA900C5E484 /* LPOrientationRoute.m */; };
+		00D3143B16E65AA900C5E484 /* LPStaticResourcesRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D3143316E65AA900C5E484 /* LPStaticResourcesRoute.h */; };
+		00D3143C16E65AA900C5E484 /* LPStaticResourcesRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3143416E65AA900C5E484 /* LPStaticResourcesRoute.m */; };
+		00D3143D16E65AA900C5E484 /* LPViewJSONSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D3143516E65AA900C5E484 /* LPViewJSONSerializer.h */; };
+		00D3143E16E65AA900C5E484 /* LPViewJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3143616E65AA900C5E484 /* LPViewJSONSerializer.m */; };
 		692D77A01657010000DE3E53 /* LPExitRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 692D779E1657010000DE3E53 /* LPExitRoute.h */; };
 		692D77A11657010000DE3E53 /* LPExitRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 692D779F1657010000DE3E53 /* LPExitRoute.m */; };
 		B12179A8165D613100B6DA43 /* LPScreenshotRoute2.h in Headers */ = {isa = PBXBuildFile; fileRef = B12179A6165D613100B6DA43 /* LPScreenshotRoute2.h */; };
@@ -123,6 +131,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		00D3142F16E65AA900C5E484 /* LPDumpRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDumpRoute.h; sourceTree = "<group>"; };
+		00D3143016E65AA900C5E484 /* LPDumpRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDumpRoute.m; sourceTree = "<group>"; };
+		00D3143116E65AA900C5E484 /* LPOrientationRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPOrientationRoute.h; sourceTree = "<group>"; };
+		00D3143216E65AA900C5E484 /* LPOrientationRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPOrientationRoute.m; sourceTree = "<group>"; };
+		00D3143316E65AA900C5E484 /* LPStaticResourcesRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPStaticResourcesRoute.h; sourceTree = "<group>"; };
+		00D3143416E65AA900C5E484 /* LPStaticResourcesRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPStaticResourcesRoute.m; sourceTree = "<group>"; };
+		00D3143516E65AA900C5E484 /* LPViewJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPViewJSONSerializer.h; sourceTree = "<group>"; };
+		00D3143616E65AA900C5E484 /* LPViewJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPViewJSONSerializer.m; sourceTree = "<group>"; };
+		00D3144016E67F6C00C5E484 /* symbiote_static_resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = symbiote_static_resources.bundle; sourceTree = "<group>"; };
 		692D779E1657010000DE3E53 /* LPExitRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPExitRoute.h; sourceTree = "<group>"; };
 		692D779F1657010000DE3E53 /* LPExitRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPExitRoute.m; sourceTree = "<group>"; };
 		B111321514D5837900982BBC /* LPAsyncPlaybackRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPAsyncPlaybackRoute.h; sourceTree = "<group>"; };
@@ -290,6 +307,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00D3142E16E65AA900C5E484 /* Symbiote */ = {
+			isa = PBXGroup;
+			children = (
+				00D3142F16E65AA900C5E484 /* LPDumpRoute.h */,
+				00D3143016E65AA900C5E484 /* LPDumpRoute.m */,
+				00D3143116E65AA900C5E484 /* LPOrientationRoute.h */,
+				00D3143216E65AA900C5E484 /* LPOrientationRoute.m */,
+				00D3143316E65AA900C5E484 /* LPStaticResourcesRoute.h */,
+				00D3143416E65AA900C5E484 /* LPStaticResourcesRoute.m */,
+				00D3143516E65AA900C5E484 /* LPViewJSONSerializer.h */,
+				00D3143616E65AA900C5E484 /* LPViewJSONSerializer.m */,
+			);
+			path = Symbiote;
+			sourceTree = "<group>";
+		};
+		00D3143F16E67F6C00C5E484 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				00D3144016E67F6C00C5E484 /* symbiote_static_resources.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		B116C98214E5214600663205 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,6 +351,7 @@
 				B121E79914B6D9FB0034C6A9 /* calabash */,
 				B121E79614B6D9FB0034C6A9 /* Frameworks */,
 				B121E79514B6D9FB0034C6A9 /* Products */,
+				00D3143F16E67F6C00C5E484 /* Resources */,
 			);
 			sourceTree = "<group>";
 		};
@@ -802,6 +843,10 @@
 				B1EBF08B16EE63A000AE4D40 /* LPQueryLogRoute.m in Sources */,
 				B19440451725C70A00EE1B25 /* LPFlashOperation.m in Sources */,
 				F5AE0BC7174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m in Sources */,
+				00D3143816E65AA900C5E484 /* LPDumpRoute.m in Sources */,
+				00D3143A16E65AA900C5E484 /* LPOrientationRoute.m in Sources */,
+				00D3143C16E65AA900C5E484 /* LPStaticResourcesRoute.m in Sources */,
+				00D3143E16E65AA900C5E484 /* LPViewJSONSerializer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
