@@ -23,15 +23,18 @@
 
 /* Begin PBXBuildFile section */
 		00D3143716E65AA900C5E484 /* LPDumpRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D3142F16E65AA900C5E484 /* LPDumpRoute.h */; };
-		00D3143816E65AA900C5E484 /* LPDumpRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3143016E65AA900C5E484 /* LPDumpRoute.m */; };
 		00D3143916E65AA900C5E484 /* LPOrientationRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D3143116E65AA900C5E484 /* LPOrientationRoute.h */; };
-		00D3143A16E65AA900C5E484 /* LPOrientationRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3143216E65AA900C5E484 /* LPOrientationRoute.m */; };
 		00D3143B16E65AA900C5E484 /* LPStaticResourcesRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D3143316E65AA900C5E484 /* LPStaticResourcesRoute.h */; };
-		00D3143C16E65AA900C5E484 /* LPStaticResourcesRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3143416E65AA900C5E484 /* LPStaticResourcesRoute.m */; };
 		00D3144E16E7B75900C5E484 /* UIView+HierarchyDump.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D3144C16E7B75900C5E484 /* UIView+HierarchyDump.h */; };
 		00D3144F16E7B75900C5E484 /* UIView+HierarchyDump.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3144D16E7B75900C5E484 /* UIView+HierarchyDump.m */; };
 		00D314FA16E7EAFE00C5E484 /* UIView+Flash.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D314F816E7EAFE00C5E484 /* UIView+Flash.h */; };
 		00D314FB16E7EAFE00C5E484 /* UIView+Flash.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D314F916E7EAFE00C5E484 /* UIView+Flash.m */; };
+		00D3150316E8033000C5E484 /* LPDumpRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D314FD16E8033000C5E484 /* LPDumpRoute.h */; };
+		00D3150416E8033000C5E484 /* LPDumpRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D314FE16E8033000C5E484 /* LPDumpRoute.m */; };
+		00D3150516E8033000C5E484 /* LPOrientationRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D314FF16E8033000C5E484 /* LPOrientationRoute.h */; };
+		00D3150616E8033000C5E484 /* LPOrientationRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3150016E8033000C5E484 /* LPOrientationRoute.m */; };
+		00D3150716E8033000C5E484 /* LPStaticResourcesRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D3150116E8033000C5E484 /* LPStaticResourcesRoute.h */; };
+		00D3150816E8033000C5E484 /* LPStaticResourcesRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3150216E8033000C5E484 /* LPStaticResourcesRoute.m */; };
 		692D77A01657010000DE3E53 /* LPExitRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 692D779E1657010000DE3E53 /* LPExitRoute.h */; };
 		692D77A11657010000DE3E53 /* LPExitRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 692D779F1657010000DE3E53 /* LPExitRoute.m */; };
 		B12179A8165D613100B6DA43 /* LPScreenshotRoute2.h in Headers */ = {isa = PBXBuildFile; fileRef = B12179A6165D613100B6DA43 /* LPScreenshotRoute2.h */; };
@@ -134,11 +137,8 @@
 
 /* Begin PBXFileReference section */
 		00D3142F16E65AA900C5E484 /* LPDumpRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDumpRoute.h; sourceTree = "<group>"; };
-		00D3143016E65AA900C5E484 /* LPDumpRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDumpRoute.m; sourceTree = "<group>"; };
 		00D3143116E65AA900C5E484 /* LPOrientationRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPOrientationRoute.h; sourceTree = "<group>"; };
-		00D3143216E65AA900C5E484 /* LPOrientationRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPOrientationRoute.m; sourceTree = "<group>"; };
 		00D3143316E65AA900C5E484 /* LPStaticResourcesRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPStaticResourcesRoute.h; sourceTree = "<group>"; };
-		00D3143416E65AA900C5E484 /* LPStaticResourcesRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPStaticResourcesRoute.m; sourceTree = "<group>"; };
 		00D3144C16E7B75900C5E484 /* UIView+HierarchyDump.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HierarchyDump.h"; sourceTree = "<group>"; };
 		00D3144D16E7B75900C5E484 /* UIView+HierarchyDump.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HierarchyDump.m"; sourceTree = "<group>"; };
 		00D3145916E7CD6E00C5E484 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -232,53 +232,59 @@
 		00D314B916E7CD6E00C5E484 /* ViewAttributeMappingMac.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ViewAttributeMappingMac.plist; sourceTree = "<group>"; };
 		00D314BA16E7CD6E00C5E484 /* config.ru */ = {isa = PBXFileReference; lastKnownFileType = text; path = config.ru; sourceTree = "<group>"; };
 		00D314BC16E7CD6E00C5E484 /* fake_dump_response.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = fake_dump_response.json; sourceTree = "<group>"; };
-		00D314BD16E7CD6E00C5E484 /* fake_screenshot */ = {isa = PBXFileReference; lastKnownFileType = file; path = fake_screenshot; sourceTree = "<group>"; };
-		00D314BF16E7CD6E00C5E484 /* 110370032 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 110370032; sourceTree = "<group>"; };
-		00D314C016E7CD6E00C5E484 /* 110510976 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 110510976; sourceTree = "<group>"; };
-		00D314C116E7CD6E00C5E484 /* 110552016 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 110552016; sourceTree = "<group>"; };
-		00D314C216E7CD6E00C5E484 /* 110556272 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 110556272; sourceTree = "<group>"; };
-		00D314C316E7CD6E00C5E484 /* 110566144 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 110566144; sourceTree = "<group>"; };
-		00D314C416E7CD6E00C5E484 /* 112605664 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 112605664; sourceTree = "<group>"; };
-		00D314C516E7CD6E00C5E484 /* 112616048 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 112616048; sourceTree = "<group>"; };
-		00D314C616E7CD6E00C5E484 /* 112619072 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 112619072; sourceTree = "<group>"; };
-		00D314C716E7CD6E00C5E484 /* 113373072 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113373072; sourceTree = "<group>"; };
-		00D314C816E7CD6E00C5E484 /* 113374064 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113374064; sourceTree = "<group>"; };
-		00D314C916E7CD6E00C5E484 /* 113375968 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113375968; sourceTree = "<group>"; };
-		00D314CA16E7CD6E00C5E484 /* 113376016 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113376016; sourceTree = "<group>"; };
-		00D314CB16E7CD6E00C5E484 /* 113377312 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113377312; sourceTree = "<group>"; };
-		00D314CC16E7CD6E00C5E484 /* 113377616 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113377616; sourceTree = "<group>"; };
-		00D314CD16E7CD6E00C5E484 /* 113381616 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113381616; sourceTree = "<group>"; };
-		00D314CE16E7CD6E00C5E484 /* 113382256 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113382256; sourceTree = "<group>"; };
-		00D314CF16E7CD6E00C5E484 /* 113382528 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113382528; sourceTree = "<group>"; };
-		00D314D016E7CD6E00C5E484 /* 113383472 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113383472; sourceTree = "<group>"; };
-		00D314D116E7CD6E00C5E484 /* 113387712 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113387712; sourceTree = "<group>"; };
-		00D314D216E7CD6E00C5E484 /* 113387824 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113387824; sourceTree = "<group>"; };
-		00D314D316E7CD6E00C5E484 /* 113387936 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113387936; sourceTree = "<group>"; };
-		00D314D416E7CD6E00C5E484 /* 113388048 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113388048; sourceTree = "<group>"; };
-		00D314D516E7CD6E00C5E484 /* 113403280 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113403280; sourceTree = "<group>"; };
-		00D314D616E7CD6E00C5E484 /* 113403584 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113403584; sourceTree = "<group>"; };
-		00D314D716E7CD6E00C5E484 /* 113404176 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113404176; sourceTree = "<group>"; };
-		00D314D816E7CD6E00C5E484 /* 113404288 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113404288; sourceTree = "<group>"; };
-		00D314D916E7CD6E00C5E484 /* 113404400 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113404400; sourceTree = "<group>"; };
-		00D314DA16E7CD6E00C5E484 /* 113409200 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113409200; sourceTree = "<group>"; };
-		00D314DB16E7CD6E00C5E484 /* 113410256 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113410256; sourceTree = "<group>"; };
-		00D314DC16E7CD6E00C5E484 /* 113411200 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113411200; sourceTree = "<group>"; };
-		00D314DD16E7CD6E00C5E484 /* 113417792 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113417792; sourceTree = "<group>"; };
-		00D314DE16E7CD6E00C5E484 /* 113419696 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113419696; sourceTree = "<group>"; };
-		00D314DF16E7CD6E00C5E484 /* 113419920 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113419920; sourceTree = "<group>"; };
-		00D314E016E7CD6E00C5E484 /* 113420224 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113420224; sourceTree = "<group>"; };
-		00D314E116E7CD6E00C5E484 /* 113423616 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113423616; sourceTree = "<group>"; };
-		00D314E216E7CD6E00C5E484 /* 113424080 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113424080; sourceTree = "<group>"; };
-		00D314E316E7CD6E00C5E484 /* 113424736 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113424736; sourceTree = "<group>"; };
-		00D314E416E7CD6E00C5E484 /* 113427104 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113427104; sourceTree = "<group>"; };
-		00D314E516E7CD6E00C5E484 /* 113427248 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 113427248; sourceTree = "<group>"; };
-		00D314E616E7CD6E00C5E484 /* 126154240 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 126154240; sourceTree = "<group>"; };
+		00D314BD16E7CD6E00C5E484 /* fake_screenshot */ = {isa = PBXFileReference; lastKnownFileType = text; path = fake_screenshot; sourceTree = "<group>"; };
+		00D314BF16E7CD6E00C5E484 /* 110370032 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 110370032; sourceTree = "<group>"; };
+		00D314C016E7CD6E00C5E484 /* 110510976 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 110510976; sourceTree = "<group>"; };
+		00D314C116E7CD6E00C5E484 /* 110552016 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 110552016; sourceTree = "<group>"; };
+		00D314C216E7CD6E00C5E484 /* 110556272 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 110556272; sourceTree = "<group>"; };
+		00D314C316E7CD6E00C5E484 /* 110566144 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 110566144; sourceTree = "<group>"; };
+		00D314C416E7CD6E00C5E484 /* 112605664 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 112605664; sourceTree = "<group>"; };
+		00D314C516E7CD6E00C5E484 /* 112616048 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 112616048; sourceTree = "<group>"; };
+		00D314C616E7CD6E00C5E484 /* 112619072 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 112619072; sourceTree = "<group>"; };
+		00D314C716E7CD6E00C5E484 /* 113373072 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113373072; sourceTree = "<group>"; };
+		00D314C816E7CD6E00C5E484 /* 113374064 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113374064; sourceTree = "<group>"; };
+		00D314C916E7CD6E00C5E484 /* 113375968 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113375968; sourceTree = "<group>"; };
+		00D314CA16E7CD6E00C5E484 /* 113376016 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113376016; sourceTree = "<group>"; };
+		00D314CB16E7CD6E00C5E484 /* 113377312 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113377312; sourceTree = "<group>"; };
+		00D314CC16E7CD6E00C5E484 /* 113377616 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113377616; sourceTree = "<group>"; };
+		00D314CD16E7CD6E00C5E484 /* 113381616 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113381616; sourceTree = "<group>"; };
+		00D314CE16E7CD6E00C5E484 /* 113382256 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113382256; sourceTree = "<group>"; };
+		00D314CF16E7CD6E00C5E484 /* 113382528 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113382528; sourceTree = "<group>"; };
+		00D314D016E7CD6E00C5E484 /* 113383472 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113383472; sourceTree = "<group>"; };
+		00D314D116E7CD6E00C5E484 /* 113387712 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113387712; sourceTree = "<group>"; };
+		00D314D216E7CD6E00C5E484 /* 113387824 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113387824; sourceTree = "<group>"; };
+		00D314D316E7CD6E00C5E484 /* 113387936 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113387936; sourceTree = "<group>"; };
+		00D314D416E7CD6E00C5E484 /* 113388048 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113388048; sourceTree = "<group>"; };
+		00D314D516E7CD6E00C5E484 /* 113403280 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113403280; sourceTree = "<group>"; };
+		00D314D616E7CD6E00C5E484 /* 113403584 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113403584; sourceTree = "<group>"; };
+		00D314D716E7CD6E00C5E484 /* 113404176 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113404176; sourceTree = "<group>"; };
+		00D314D816E7CD6E00C5E484 /* 113404288 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113404288; sourceTree = "<group>"; };
+		00D314D916E7CD6E00C5E484 /* 113404400 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113404400; sourceTree = "<group>"; };
+		00D314DA16E7CD6E00C5E484 /* 113409200 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113409200; sourceTree = "<group>"; };
+		00D314DB16E7CD6E00C5E484 /* 113410256 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113410256; sourceTree = "<group>"; };
+		00D314DC16E7CD6E00C5E484 /* 113411200 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113411200; sourceTree = "<group>"; };
+		00D314DD16E7CD6E00C5E484 /* 113417792 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113417792; sourceTree = "<group>"; };
+		00D314DE16E7CD6E00C5E484 /* 113419696 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113419696; sourceTree = "<group>"; };
+		00D314DF16E7CD6E00C5E484 /* 113419920 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113419920; sourceTree = "<group>"; };
+		00D314E016E7CD6E00C5E484 /* 113420224 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113420224; sourceTree = "<group>"; };
+		00D314E116E7CD6E00C5E484 /* 113423616 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113423616; sourceTree = "<group>"; };
+		00D314E216E7CD6E00C5E484 /* 113424080 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113424080; sourceTree = "<group>"; };
+		00D314E316E7CD6E00C5E484 /* 113424736 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113424736; sourceTree = "<group>"; };
+		00D314E416E7CD6E00C5E484 /* 113427104 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113427104; sourceTree = "<group>"; };
+		00D314E516E7CD6E00C5E484 /* 113427248 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 113427248; sourceTree = "<group>"; };
+		00D314E616E7CD6E00C5E484 /* 126154240 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 126154240; sourceTree = "<group>"; };
 		00D314E716E7CD6E00C5E484 /* Gemfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Gemfile; sourceTree = "<group>"; };
 		00D314E816E7CD6E00C5E484 /* Gemfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Gemfile.lock; sourceTree = "<group>"; };
 		00D314E916E7CD6E00C5E484 /* Guardfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Guardfile; sourceTree = "<group>"; };
 		00D314EA16E7CD6E00C5E484 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		00D314F816E7EAFE00C5E484 /* UIView+Flash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Flash.h"; sourceTree = "<group>"; };
 		00D314F916E7EAFE00C5E484 /* UIView+Flash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Flash.m"; sourceTree = "<group>"; };
+		00D314FD16E8033000C5E484 /* LPDumpRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDumpRoute.h; sourceTree = "<group>"; };
+		00D314FE16E8033000C5E484 /* LPDumpRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDumpRoute.m; sourceTree = "<group>"; };
+		00D314FF16E8033000C5E484 /* LPOrientationRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPOrientationRoute.h; sourceTree = "<group>"; };
+		00D3150016E8033000C5E484 /* LPOrientationRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPOrientationRoute.m; sourceTree = "<group>"; };
+		00D3150116E8033000C5E484 /* LPStaticResourcesRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPStaticResourcesRoute.h; sourceTree = "<group>"; };
+		00D3150216E8033000C5E484 /* LPStaticResourcesRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPStaticResourcesRoute.m; sourceTree = "<group>"; };
 		692D779E1657010000DE3E53 /* LPExitRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPExitRoute.h; sourceTree = "<group>"; };
 		692D779F1657010000DE3E53 /* LPExitRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPExitRoute.m; sourceTree = "<group>"; };
 		B111321514D5837900982BBC /* LPAsyncPlaybackRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPAsyncPlaybackRoute.h; sourceTree = "<group>"; };
@@ -446,19 +452,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		00D3142E16E65AA900C5E484 /* Symbiote */ = {
-			isa = PBXGroup;
-			children = (
-				00D3142F16E65AA900C5E484 /* LPDumpRoute.h */,
-				00D3143016E65AA900C5E484 /* LPDumpRoute.m */,
-				00D3143116E65AA900C5E484 /* LPOrientationRoute.h */,
-				00D3143216E65AA900C5E484 /* LPOrientationRoute.m */,
-				00D3143316E65AA900C5E484 /* LPStaticResourcesRoute.h */,
-				00D3143416E65AA900C5E484 /* LPStaticResourcesRoute.m */,
-			);
-			path = Symbiote;
-			sourceTree = "<group>";
-		};
 		00D3143F16E67F6C00C5E484 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -701,6 +694,20 @@
 			path = fake_view_snapshots;
 			sourceTree = "<group>";
 		};
+		00D314FC16E8033000C5E484 /* Symbiote */ = {
+			isa = PBXGroup;
+			children = (
+				00D314FD16E8033000C5E484 /* LPDumpRoute.h */,
+				00D314FE16E8033000C5E484 /* LPDumpRoute.m */,
+				00D314FF16E8033000C5E484 /* LPOrientationRoute.h */,
+				00D3150016E8033000C5E484 /* LPOrientationRoute.m */,
+				00D3150116E8033000C5E484 /* LPStaticResourcesRoute.h */,
+				00D3150216E8033000C5E484 /* LPStaticResourcesRoute.m */,
+			);
+			name = Symbiote;
+			path = Routes/Symbiote;
+			sourceTree = "<group>";
+		};
 		B116C98214E5214600663205 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -869,6 +876,7 @@
 		B184FDBC14B6DB2B002A744C /* FranklyServer */ = {
 			isa = PBXGroup;
 			children = (
+				00D314FC16E8033000C5E484 /* Symbiote */,
 				00D3144B16E7B73D00C5E484 /* Categories */,
 				B184FDBD14B6DB2B002A744C /* LPI.mm */,
 				B184FDBE14B6DB2B002A744C /* LPRoute.h */,
@@ -1068,6 +1076,9 @@
 				00D3143B16E65AA900C5E484 /* LPStaticResourcesRoute.h in Headers */,
 				00D3144E16E7B75900C5E484 /* UIView+HierarchyDump.h in Headers */,
 				00D314FA16E7EAFE00C5E484 /* UIView+Flash.h in Headers */,
+				00D3150316E8033000C5E484 /* LPDumpRoute.h in Headers */,
+				00D3150516E8033000C5E484 /* LPOrientationRoute.h in Headers */,
+				00D3150716E8033000C5E484 /* LPStaticResourcesRoute.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
