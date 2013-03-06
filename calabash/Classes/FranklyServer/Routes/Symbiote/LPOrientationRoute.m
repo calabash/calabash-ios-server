@@ -55,36 +55,14 @@
 	}
 }
 
-- (NSString *)getOrientationDescriptionViaDevice{
-    switch ( [UIDevice currentDevice].orientation ) {
-		case UIDeviceOrientationLandscapeRight:
-		case UIDeviceOrientationLandscapeLeft:
-			return @"landscape";
-		case UIDeviceOrientationPortrait:
-		case UIDeviceOrientationPortraitUpsideDown:
-			return @"portrait";
-        case UIDeviceOrientationFaceUp:
-            NSLog(@"Device orientation is face up");
-            //fall thru
-        case UIDeviceOrientationFaceDown:
-            NSLog(@"Device orientation is face down");
-            //fall thru
-        case UIDeviceOrientationUnknown:
-            NSLog(@"Device orientation is unknown");
-            //fall thru
-		default:
-            return nil;
-	}
-}
-
-- (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path {
-    return [method isEqualToString:@"GET"];
-}
-
 #pragma mark Route implementation
+- (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path {
+    return [method isEqualToString:@"GET"] || [method isEqualToString:@"POST"];
+}
+
 - (NSObject<LPHTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path{
 
-   	NSDictionary *orientationDescription = [self getOrientationRepresentationViaDevice];
+   	NSDictionary *orientationDescription = [self getOrientationRepresentationViaStatusBar];
     if( !orientationDescription ) {
         orientationDescription = [self getOrientationRepresentationViaDevice];
 	}

@@ -1,3 +1,6 @@
 [submodule "calabash-js"]
 	path = calabash-js
 	url = https://github.com/calabash/calabash-js.git
+[submodule "Symbiote"]
+	path = Resources/Symbiote
+	url = https://github.com/TestingWithFrank/symbiote.git

@@ -9,8 +9,6 @@
 
 #import "LPRoute.h"
 
-@interface LPDumpRoute : NSObject<LPRoute> {
-    NSMutableDictionary *classMapping;
-}
+@interface LPDumpRoute : NSObject<LPRoute>
 
 @end

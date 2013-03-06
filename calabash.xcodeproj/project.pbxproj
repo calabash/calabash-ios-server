@@ -28,8 +28,8 @@
 		00D3143A16E65AA900C5E484 /* LPOrientationRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3143216E65AA900C5E484 /* LPOrientationRoute.m */; };
 		00D3143B16E65AA900C5E484 /* LPStaticResourcesRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D3143316E65AA900C5E484 /* LPStaticResourcesRoute.h */; };
 		00D3143C16E65AA900C5E484 /* LPStaticResourcesRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3143416E65AA900C5E484 /* LPStaticResourcesRoute.m */; };
-		00D3143D16E65AA900C5E484 /* LPViewJSONSerializer.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D3143516E65AA900C5E484 /* LPViewJSONSerializer.h */; };
-		00D3143E16E65AA900C5E484 /* LPViewJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3143616E65AA900C5E484 /* LPViewJSONSerializer.m */; };
+		00D3144E16E7B75900C5E484 /* UIView+HierarchyDump.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D3144C16E7B75900C5E484 /* UIView+HierarchyDump.h */; };
+		00D3144F16E7B75900C5E484 /* UIView+HierarchyDump.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3144D16E7B75900C5E484 /* UIView+HierarchyDump.m */; };
 		692D77A01657010000DE3E53 /* LPExitRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 692D779E1657010000DE3E53 /* LPExitRoute.h */; };
 		692D77A11657010000DE3E53 /* LPExitRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 692D779F1657010000DE3E53 /* LPExitRoute.m */; };
 		B12179A8165D613100B6DA43 /* LPScreenshotRoute2.h in Headers */ = {isa = PBXBuildFile; fileRef = B12179A6165D613100B6DA43 /* LPScreenshotRoute2.h */; };
@@ -137,9 +137,9 @@
 		00D3143216E65AA900C5E484 /* LPOrientationRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPOrientationRoute.m; sourceTree = "<group>"; };
 		00D3143316E65AA900C5E484 /* LPStaticResourcesRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPStaticResourcesRoute.h; sourceTree = "<group>"; };
 		00D3143416E65AA900C5E484 /* LPStaticResourcesRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPStaticResourcesRoute.m; sourceTree = "<group>"; };
-		00D3143516E65AA900C5E484 /* LPViewJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPViewJSONSerializer.h; sourceTree = "<group>"; };
-		00D3143616E65AA900C5E484 /* LPViewJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPViewJSONSerializer.m; sourceTree = "<group>"; };
 		00D3144016E67F6C00C5E484 /* symbiote_static_resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = symbiote_static_resources.bundle; sourceTree = "<group>"; };
+		00D3144C16E7B75900C5E484 /* UIView+HierarchyDump.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HierarchyDump.h"; sourceTree = "<group>"; };
+		00D3144D16E7B75900C5E484 /* UIView+HierarchyDump.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HierarchyDump.m"; sourceTree = "<group>"; };
 		692D779E1657010000DE3E53 /* LPExitRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPExitRoute.h; sourceTree = "<group>"; };
 		692D779F1657010000DE3E53 /* LPExitRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPExitRoute.m; sourceTree = "<group>"; };
 		B111321514D5837900982BBC /* LPAsyncPlaybackRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPAsyncPlaybackRoute.h; sourceTree = "<group>"; };
@@ -316,8 +316,6 @@
 				00D3143216E65AA900C5E484 /* LPOrientationRoute.m */,
 				00D3143316E65AA900C5E484 /* LPStaticResourcesRoute.h */,
 				00D3143416E65AA900C5E484 /* LPStaticResourcesRoute.m */,
-				00D3143516E65AA900C5E484 /* LPViewJSONSerializer.h */,
-				00D3143616E65AA900C5E484 /* LPViewJSONSerializer.m */,
 			);
 			path = Symbiote;
 			sourceTree = "<group>";
@@ -328,6 +326,15 @@
 				00D3144016E67F6C00C5E484 /* symbiote_static_resources.bundle */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		00D3144B16E7B73D00C5E484 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				00D3144C16E7B75900C5E484 /* UIView+HierarchyDump.h */,
+				00D3144D16E7B75900C5E484 /* UIView+HierarchyDump.m */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 		B116C98214E5214600663205 /* Categories */ = {
@@ -498,6 +505,7 @@
 		B184FDBC14B6DB2B002A744C /* FranklyServer */ = {
 			isa = PBXGroup;
 			children = (
+				00D3144B16E7B73D00C5E484 /* Categories */,
 				B184FDBD14B6DB2B002A744C /* LPI.mm */,
 				B184FDBE14B6DB2B002A744C /* LPRoute.h */,
 				B184FDBF14B6DB2B002A744C /* LPRouter.h */,
@@ -691,6 +699,10 @@
 				B1EBF08A16EE63A000AE4D40 /* LPQueryLogRoute.h in Headers */,
 				B19440441725C70A00EE1B25 /* LPFlashOperation.h in Headers */,
 				F5AE0BC6174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h in Headers */,
+				00D3143716E65AA900C5E484 /* LPDumpRoute.h in Headers */,
+				00D3143916E65AA900C5E484 /* LPOrientationRoute.h in Headers */,
+				00D3143B16E65AA900C5E484 /* LPStaticResourcesRoute.h in Headers */,
+				00D3144E16E7B75900C5E484 /* UIView+HierarchyDump.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -846,7 +858,7 @@
 				00D3143816E65AA900C5E484 /* LPDumpRoute.m in Sources */,
 				00D3143A16E65AA900C5E484 /* LPOrientationRoute.m in Sources */,
 				00D3143C16E65AA900C5E484 /* LPStaticResourcesRoute.m in Sources */,
-				00D3143E16E65AA900C5E484 /* LPViewJSONSerializer.m in Sources */,
+				00D3144F16E7B75900C5E484 /* UIView+HierarchyDump.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
