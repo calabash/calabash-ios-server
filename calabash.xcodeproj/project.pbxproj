@@ -30,6 +30,8 @@
 		00D3143C16E65AA900C5E484 /* LPStaticResourcesRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3143416E65AA900C5E484 /* LPStaticResourcesRoute.m */; };
 		00D3144E16E7B75900C5E484 /* UIView+HierarchyDump.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D3144C16E7B75900C5E484 /* UIView+HierarchyDump.h */; };
 		00D3144F16E7B75900C5E484 /* UIView+HierarchyDump.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3144D16E7B75900C5E484 /* UIView+HierarchyDump.m */; };
+		00D314FA16E7EAFE00C5E484 /* UIView+Flash.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D314F816E7EAFE00C5E484 /* UIView+Flash.h */; };
+		00D314FB16E7EAFE00C5E484 /* UIView+Flash.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D314F916E7EAFE00C5E484 /* UIView+Flash.m */; };
 		692D77A01657010000DE3E53 /* LPExitRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 692D779E1657010000DE3E53 /* LPExitRoute.h */; };
 		692D77A11657010000DE3E53 /* LPExitRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 692D779F1657010000DE3E53 /* LPExitRoute.m */; };
 		B12179A8165D613100B6DA43 /* LPScreenshotRoute2.h in Headers */ = {isa = PBXBuildFile; fileRef = B12179A6165D613100B6DA43 /* LPScreenshotRoute2.h */; };
@@ -275,6 +277,8 @@
 		00D314E816E7CD6E00C5E484 /* Gemfile.lock */ = {isa = PBXFileReference; lastKnownFileType = text; path = Gemfile.lock; sourceTree = "<group>"; };
 		00D314E916E7CD6E00C5E484 /* Guardfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Guardfile; sourceTree = "<group>"; };
 		00D314EA16E7CD6E00C5E484 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		00D314F816E7EAFE00C5E484 /* UIView+Flash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Flash.h"; sourceTree = "<group>"; };
+		00D314F916E7EAFE00C5E484 /* UIView+Flash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Flash.m"; sourceTree = "<group>"; };
 		692D779E1657010000DE3E53 /* LPExitRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPExitRoute.h; sourceTree = "<group>"; };
 		692D779F1657010000DE3E53 /* LPExitRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPExitRoute.m; sourceTree = "<group>"; };
 		B111321514D5837900982BBC /* LPAsyncPlaybackRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPAsyncPlaybackRoute.h; sourceTree = "<group>"; };
@@ -468,6 +472,8 @@
 			children = (
 				00D3144C16E7B75900C5E484 /* UIView+HierarchyDump.h */,
 				00D3144D16E7B75900C5E484 /* UIView+HierarchyDump.m */,
+				00D314F816E7EAFE00C5E484 /* UIView+Flash.h */,
+				00D314F916E7EAFE00C5E484 /* UIView+Flash.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -1061,6 +1067,7 @@
 				00D3143916E65AA900C5E484 /* LPOrientationRoute.h in Headers */,
 				00D3143B16E65AA900C5E484 /* LPStaticResourcesRoute.h in Headers */,
 				00D3144E16E7B75900C5E484 /* UIView+HierarchyDump.h in Headers */,
+				00D314FA16E7EAFE00C5E484 /* UIView+Flash.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1217,6 +1224,7 @@
 				00D3143A16E65AA900C5E484 /* LPOrientationRoute.m in Sources */,
 				00D3143C16E65AA900C5E484 /* LPStaticResourcesRoute.m in Sources */,
 				00D3144F16E7B75900C5E484 /* UIView+HierarchyDump.m in Sources */,
+				00D314FB16E7EAFE00C5E484 /* UIView+Flash.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
