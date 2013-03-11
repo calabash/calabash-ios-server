@@ -181,18 +181,31 @@ static NSString* lp_deviceName()
 
 +(CGPoint)centerOfView:(UIView *)view shouldTranslate:(BOOL)shouldTranslate
 {
-    UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
+ 
+    UIWindow *delegateWindow = nil;
+    NSString *iosVersion = [UIDevice currentDevice].systemVersion;
     
-    CGRect bounds;
-    if ([view isKindOfClass:[UIWindow class]])
+    if ([[iosVersion substringToIndex:1] isEqualToString:@"4"])
     {
-        bounds = view.bounds;
-        bounds = [frontWindow convertRect:bounds fromWindow:(UIWindow*)view];
+        id<UIApplicationDelegate> appDelegate = [UIApplication sharedApplication].delegate;
+        if ([appDelegate respondsToSelector:@selector(window)]) {
+            delegateWindow = [appDelegate window];
+        }
+
+        if (!delegateWindow)
+        {
+            NSArray *allWindows = [[UIApplication sharedApplication] windows];
+            delegateWindow = [allWindows objectAtIndex:0];
+        }
     }
     else
     {
-        bounds = [[UIApplication sharedApplication].delegate.window convertRect:view.frame fromView:view.superview];
-    }    
+        delegateWindow = [UIApplication sharedApplication].delegate.window;
+    }
+    UIWindow *viewWindow = [self windowForView:view];
+    CGRect bounds = [viewWindow convertRect:view.bounds fromView:view];
+    bounds = [delegateWindow convertRect:bounds fromWindow:viewWindow];
+        
     return [self centerOfFrame:bounds shouldTranslate:shouldTranslate];
 }
 +(CGPoint) centerOfView:(UIView *) view 
