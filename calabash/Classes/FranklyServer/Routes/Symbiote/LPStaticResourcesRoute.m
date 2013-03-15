@@ -27,6 +27,10 @@
 }
 
 - (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path {
+	if([path isEqualToString: @"/"] || path.length == 0) {
+		return NO;
+	}
+	
     return [method isEqualToString:@"GET"];
 }
 
