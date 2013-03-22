@@ -70,12 +70,18 @@ static NSString* lp_deviceName()
     }
     
     
-    //try and detect iPad "compatabilitity mode"
+        
     CGRect small_vert = CGRectMake(0, 0, 320, 480);
     CGRect small_hori = CGRectMake(0, 0, 480, 320);
-    CGSize large_size_vert = CGSizeMake(768.0, 1024);
-    CGSize large_size_hori = CGSizeMake(1024, 768.0);
-    if ((CGRectEqualToRect(small_vert, b) || CGRectEqualToRect(small_hori, b))  && (CGSizeEqualToSize(large_size_hori, size) || CGSizeEqualToSize(large_size_vert, size))) {
+    CGSize large_size_vert = CGSizeMake(768, 1024);
+    CGSize large_size_hori = CGSizeMake(1024, 768);
+    CGSize retina_ipad_vert = CGSizeMake(1536, 2048);
+    CGSize retina_ipad_hori = CGSizeMake(2048, 1536);
+    
+    
+    if ((CGRectEqualToRect(small_vert, b) || CGRectEqualToRect(small_hori, b))  &&
+        (CGSizeEqualToSize(large_size_hori, size) || CGSizeEqualToSize(large_size_vert, size) ||
+         CGSizeEqualToSize(retina_ipad_hori, size) || CGSizeEqualToSize(retina_ipad_vert, size))) {
        
         CGSize orientation_size =  UIDeviceOrientationIsPortrait(o) || UIDeviceOrientationFaceUp == o || UIDeviceOrientationUnknown == o ? large_size_vert : large_size_hori;
         float x_offset = orientation_size.width/2.0f - b.size.width/2.0f;
@@ -184,10 +190,11 @@ static NSString* lp_deviceName()
  
     UIWindow *delegateWindow = nil;
     NSString *iosVersion = [UIDevice currentDevice].systemVersion;
+    id<UIApplicationDelegate> appDelegate = [UIApplication sharedApplication].delegate;
     
-    if ([[iosVersion substringToIndex:1] isEqualToString:@"4"])
+    if ([[iosVersion substringToIndex:1] isEqualToString:@"4"] || !([appDelegate respondsToSelector:@selector(window)]))
     {
-        id<UIApplicationDelegate> appDelegate = [UIApplication sharedApplication].delegate;
+        
         if ([appDelegate respondsToSelector:@selector(window)]) {
             delegateWindow = [appDelegate window];
         }
@@ -200,8 +207,9 @@ static NSString* lp_deviceName()
     }
     else
     {
-        delegateWindow = [UIApplication sharedApplication].delegate.window;
+        delegateWindow = appDelegate.window;
     }
+    
     UIWindow *viewWindow = [self windowForView:view];
     CGRect bounds = [viewWindow convertRect:view.bounds fromView:view];
     bounds = [delegateWindow convertRect:bounds fromWindow:viewWindow];

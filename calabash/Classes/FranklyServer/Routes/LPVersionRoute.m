@@ -9,7 +9,7 @@
 #import "LPVersionRoute.h"
 #import <sys/utsname.h>
 
-#define kLPCALABASHVERSION @"0.9.134"
+#define kLPCALABASHVERSION @"0.9.136"
 
 @implementation LPVersionRoute
 
