@@ -8,7 +8,8 @@
 typedef enum {
     UIScriptASTDirectionTypeDescendant,
     UIScriptASTDirectionTypeParent,
-    UIScriptASTDirectionTypeChild
+    UIScriptASTDirectionTypeChild,
+    UIScriptASTDirectionTypeSibling
 } UIScriptASTDirectionType;
 
 typedef enum {

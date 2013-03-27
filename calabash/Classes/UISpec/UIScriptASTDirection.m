@@ -26,6 +26,8 @@
             return @"parent";
         case UIScriptASTDirectionTypeChild:
             return @"child";
+        case UIScriptASTDirectionTypeSibling:
+            return @"sibling";
         default:
             return @"<UNKNOWNDIRECTION";
     }

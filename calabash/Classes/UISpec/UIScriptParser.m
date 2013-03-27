@@ -401,19 +401,20 @@ static NSCharacterSet* curlyBrackets = nil;
 
 
 - (UIScriptASTDirection*) parseDirectionIfPresent:(NSString*) token {
+    UIScriptASTDirection* d = nil;
     if ([token isEqualToString:@"parent"]) {
-        UIScriptASTDirection* d = [[UIScriptASTDirection alloc] initWithDirection:UIScriptASTDirectionTypeParent];
-        return [d autorelease];
+        d = [[UIScriptASTDirection alloc] initWithDirection:UIScriptASTDirectionTypeParent];
     }
-    if ([token isEqualToString:@"find"] || [token isEqualToString:@"descendant"]) {
-        UIScriptASTDirection* d = [[UIScriptASTDirection alloc] initWithDirection:UIScriptASTDirectionTypeDescendant];
-        return [d autorelease];
+    else if ([token isEqualToString:@"find"] || [token isEqualToString:@"descendant"]) {
+        d = [[UIScriptASTDirection alloc] initWithDirection:UIScriptASTDirectionTypeDescendant];
     }
-    if ([token isEqualToString:@"child"]) {
-        UIScriptASTDirection* d = [[UIScriptASTDirection alloc] initWithDirection:UIScriptASTDirectionTypeChild];
-        return [d autorelease];
+    else if ([token isEqualToString:@"child"]) {
+        d = [[UIScriptASTDirection alloc] initWithDirection:UIScriptASTDirectionTypeChild];
     }
-    return nil;
+    else if ([token isEqualToString:@"sibling"]) {
+        d = [[UIScriptASTDirection alloc] initWithDirection:UIScriptASTDirectionTypeSibling];
+    }
+    return d ? [d autorelease] : nil;
 }
 
 - (NSString*) parseClassName:(NSString*) token {

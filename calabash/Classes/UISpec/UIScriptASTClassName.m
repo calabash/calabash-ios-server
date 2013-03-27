@@ -42,6 +42,9 @@
             case UIScriptASTDirectionTypeParent:
                 [self evalParentsWith: view result:res visibility:visibility];
                 break;
+            case UIScriptASTDirectionTypeSibling:
+                [self evalSiblingsWith: view result:res visibility:visibility];
+                break;
         }
     }
     
@@ -105,6 +108,17 @@ static NSInteger sortFunction(UIView* v1, UIView* v2, void *ctx) {
     }
     
 }
+
+- (void) evalSiblingsWith:(UIView*) view result:(NSMutableArray*) res visibility:(UIScriptASTVisibilityType)visibility{
+    UIView* parentView = [view superview];
+    NSArray* children = [parentView subviews];
+    for (UIView *siblingOrSelf in children) {
+        if (siblingOrSelf != view && [siblingOrSelf isKindOfClass:_class]) {
+            [self addView: siblingOrSelf toArray:res ifMatchesVisibility:visibility];
+        }
+    }
+}
+
 
 
 - (NSString*) description {
