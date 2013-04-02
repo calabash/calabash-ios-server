@@ -53,6 +53,7 @@
         id selObj = [_arguments objectAtIndex:i];
         id objValue;
         int intValue;
+        unsigned int uintValue;
         long longValue;
         char *charPtrValue; 
         char charValue;
@@ -103,6 +104,12 @@
                         [invocation setArgument:&intVal atIndex:i+2];
                         break;
                     }            
+                    case 'I':
+                    {
+                        NSInteger uIntVal = [arg unsignedIntegerValue];
+                        [invocation setArgument:&uIntVal atIndex:i+2];
+                        break;
+                    }
                     case 's':
                     {
                         short shVal = [arg shortValue];
@@ -128,8 +135,13 @@
                         break;
                     }
                     case '*':
-                        //not supported yet
-                        @throw [NSString stringWithFormat: @"not yet support struct pointers: %@",sig];
+                    {
+                        const char *cstringValue = [arg cStringUsingEncoding:NSUTF8StringEncoding];
+                        [invocation setArgument:&cstringValue atIndex:i+2];
+                        break;
+                        
+                        
+                    }
                     case 'c':
                     {
                         char chVal =[arg charValue];
@@ -193,6 +205,9 @@
             case 'i':
                 [invocation getReturnValue:(void **)&intValue];
                 return [NSNumber numberWithInt: intValue];
+            case 'I':
+                [invocation getReturnValue:(void **)& uintValue];
+                return [NSNumber numberWithUnsignedInteger: uintValue];
             case 's':
                 [invocation getReturnValue:(void **)&shortValue];
                 return [NSNumber numberWithShort:shortValue];
