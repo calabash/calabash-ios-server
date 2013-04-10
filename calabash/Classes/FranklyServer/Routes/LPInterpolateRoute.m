@@ -61,62 +61,52 @@
     }
     NSArray* resultStart = [self.parser1 evalWith:views];
     NSArray* resultEnd = [self.parser2 evalWith:views];
-    if (resultStart == nil || [resultStart count] == 0)
-    {
-        self.done = YES;
-        self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSString stringWithFormat: @"start %@ found no views. Is accessibility enabled?",queryStart],@"reason",
-                             @"",@"details",
-                             @"FAILURE",@"outcome",
-                             nil];
-        self.events = nil;
-        [self.conn responseHasAvailableData:self];
-        return;
-    }
-    id startAt = [resultStart objectAtIndex:0];
-
-    if (resultEnd == nil || [resultEnd count] == 0)
-    {
-        self.done = YES;
-        self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSString stringWithFormat: @"end %@ found no views. Is accessibility enabled?",queryEnd],@"reason",
-                             @"",@"details",
-                             @"FAILURE",@"outcome",
-                             nil];
-        self.events = nil;
-        [self.conn responseHasAvailableData:self];
-        return;
-    }
-    id endAt = [resultEnd objectAtIndex:0];
 
     CGPoint centerStart;
-    if ([startAt isKindOfClass:[UIView class]]) 
+    if (resultStart == nil || [resultStart count] == 0)
     {
-       centerStart = [LPTouchUtils centerOfView:startAt];         
-    }    
-    else                
-    {        
-       CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)[startAt valueForKey:@"center"], &centerStart);
+        centerStart = CGPointMake(0,0);
+    }
+    else
+    {
+        id startAt = [resultStart objectAtIndex:0];
+        if ([startAt isKindOfClass:[UIView class]])
+        {
+            centerStart = [LPTouchUtils centerOfView:startAt];
+        }
+        else
+        {
+            CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)[startAt valueForKey:@"center"], &centerStart);
+        }
+
     }
     centerStart = CGPointMake(centerStart.x + offsetPointStart.x, centerStart.y + offsetPointStart.y);
             
         
     CGPoint centerEnd;
-    if ([endAt isKindOfClass:[UIView class]]) 
+    if (resultEnd == nil || [resultEnd count] == 0)
     {
-        centerEnd = [LPTouchUtils centerOfView:endAt];                
+        centerEnd = CGPointMake(0,0);
     }
-    else                
-    {
-        
-        CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)[startAt valueForKey:@"center"], &centerEnd);
+    else {
+        id endAt = [resultEnd objectAtIndex:0];
+        targetView = endAt;
+        if ([endAt isKindOfClass:[UIView class]])
+        {
+            centerEnd = [LPTouchUtils centerOfView:endAt];
+        }
+        else
+        {
+            CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)[endAt valueForKey:@"center"], &centerEnd);
+        }
     }
+
     centerEnd = CGPointMake(centerEnd.x + offsetPointEnd.x, centerEnd.y + offsetPointEnd.y);
-    
-            
+
+
     NSArray* baseEvents = [LPResources eventsFromEncoding:base64Events];
-            
-    targetView = endAt;
+    
+    
     self.events = [LPResources interpolateEvents:baseEvents 
                                        fromPoint:centerStart
                                          toPoint:centerEnd];
