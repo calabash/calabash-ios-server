@@ -9,8 +9,6 @@
 #import "LPVersionRoute.h"
 #import <sys/utsname.h>
 
-#define kLPCALABASHVERSION @"0.9.139"
-
 @implementation LPVersionRoute
 
 - (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path 

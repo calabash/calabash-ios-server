@@ -144,6 +144,7 @@
 //        NSString *webPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Web"];
 //        [_httpServer setDocumentRoot:webPath];
 		NSLog( @"Creating the server: %@", _httpServer );
+        NSLog( @"Calabash iOS server version: %@", kLPCALABASHVERSION );
 	}
 	return self;
 }
