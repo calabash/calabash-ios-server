@@ -16,7 +16,6 @@
 #import "LPJSONUtils.h"
 #import <QuartzCore/QuartzCore.h>
 
-
 @implementation LPKeyboardRoute
 
 -(void)beginOperation
@@ -27,41 +26,39 @@
     
     
     NSArray *events = [LPResources eventsFromEncoding:[self.data objectForKey:@"events"]]; 
-    UIView *view = nil;
+    UIWindow *keyboardWindow = nil;
     NSLog(@"Preparing to enter: %@",characterString);
     for (UIWindow *window in [UIApplication sharedApplication].windows) 
     {
         if ([NSStringFromClass([window class]) isEqual:@"UITextEffectsWindow"]) 
         {
-            view = window;
+            keyboardWindow = window;
             break;
         }
     }
+
+    NSLog(@"Target window: %@",keyboardWindow);
     
-    NSLog(@"Target window: %@",view);
-    
-    if (!view) 
+    if (!keyboardWindow) 
     {
         _playbackDone = YES;
         return [self failWithMessageFormat:@"No keyboard displaying..." message:nil];
     }
+
     
-    UIScriptParser *parser = [[UIScriptParser alloc] initWithUIScript:@"view:'UIKBKeyplaneView'"];
-    [parser parse];
-        
-    NSMutableArray* views = [NSMutableArray arrayWithObject:view];
-    NSArray* result = [parser evalWith:views];
+
+    UIView *keyboardView = [UIScriptParser findViewByClass:@"UIKBKeyplaneView" fromView:keyboardWindow];
     
-    if ([result count]==0) 
+    
+    if (!keyboardView)
     {
         _playbackDone = YES;
         return [self failWithMessageFormat:@"Found not UIKBKeyplaneView..." message:nil];        
     }
-    NSLog(@"Target KBKeyplane: %@",view);
+    NSLog(@"Target KBKeyplane: %@",keyboardView);
     
     
     //cf KIF: https://github.com/square/KIF/blob/master/Classes/KIFTestStep.m
-    UIView *keyboardView = [result objectAtIndex:0];
     
     // If we didn't find the standard keyboard view, then we may have a custom keyboard
     
@@ -91,12 +88,7 @@
     
     if (keyToTap) 
     {
-        UIScriptParser *parser = [[UIScriptParser alloc] initWithUIScript:@"view:'UIKeyboardAutomatic'"];
-        [parser parse];
-        NSMutableArray* views = [NSMutableArray arrayWithObject:view];
-        NSArray* result = [parser evalWith:views];
-        UIView *v = [result objectAtIndex:0];
-        
+        UIView *v = [UIScriptParser findViewByClass:@"UIKeyboardAutomatic" fromView:keyboardWindow];
         UIView *sup = [v superview];
         
         CGRect parentFrame = [sup convertRect:v.frame toView:nil];//[sup convertRect:v.frame toView:sup];
@@ -105,17 +97,17 @@
         CGPoint point = CGPointMake(parentFrame.origin.x + frame.origin.x + 0.5 * frame.size.width,
                                     parentFrame.origin.y + frame.origin.y + 0.5 * frame.size.height);
         
-        point = [(UIWindow*)view convertPoint:point toWindow:nil];
+        point = [(UIWindow*)keyboardWindow convertPoint:point toWindow:nil];
         point=[LPTouchUtils translateToScreenCoords:point];
         _events =  [[LPResources transformEvents:events toPoint:point] retain];
         self.done = YES;
         self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:
-                             result, @"results",
+                             [NSArray arrayWithObject:v], @"results",
                              @"SUCCESS",@"outcome",
                              nil];
 
         [self play:_events];
-                
+        
     }
     else 
     {

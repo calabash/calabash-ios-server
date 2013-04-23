@@ -19,7 +19,7 @@
         if ([@"*" isEqualToString:className]) {
             className = @"UIView";
         }
-        _className = [className retain];
+        self.className = [[className copy] autorelease];
         _class = NSClassFromString(self.className);
     }
     return self;

@@ -14,7 +14,6 @@
 @synthesize selectorName=_selectorName;
 @synthesize selector=_selector;
 @synthesize objectValue=_objectValue;
-@synthesize objectValue2;
 @synthesize boolValue=_boolValue;
 @synthesize boolValue2;
 @synthesize integerValue=_integerValue;
@@ -242,6 +241,8 @@
     
 - (void) dealloc {
     self.selector=nil;
+    self.selectorName = nil;
+    self.selectorSpec = nil;
     [_objectValue release];_objectValue=nil;
     [super dealloc];
 }

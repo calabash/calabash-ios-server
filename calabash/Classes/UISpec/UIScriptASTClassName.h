@@ -11,7 +11,7 @@
     Class _class;
 }
 
-@property (nonatomic,retain, readonly) NSString *className;
+@property (nonatomic,retain) NSString *className;
 - (id) initWithClassName:(NSString*) className;
 
 @end

@@ -8,6 +8,7 @@
 #import "LPScrollToRowOperation.h"
 #import "LPScrollOperation.h"
 #import "LPQueryOperation.h"
+#import "LPFlashOperation.h"
 #import "LPSetTextOperation.h"
 #import "LPQueryAllOperation.h"
 #import "LPRecorder.h"
@@ -17,17 +18,28 @@
 + (id) operationFromDictionary:(NSDictionary*) dictionary {
     NSString *opName = [dictionary valueForKey:@"method_name"];
     LPOperation* op = nil;
-    if ([opName isEqualToString:@"scrollToRow"]) {
+    if ([opName isEqualToString:@"scrollToRow"])
+    {
         op = [[LPScrollToRowOperation alloc] initWithOperation:dictionary];
-    } else if ([opName isEqualToString:@"scroll"]) {
+    } else if ([opName isEqualToString:@"scroll"])
+    {
         op = [[LPScrollOperation alloc] initWithOperation:dictionary];
-    } else if ([opName isEqualToString:@"query"]) {
+    } else if ([opName isEqualToString:@"query"])
+    {
         op = [[LPQueryOperation alloc] initWithOperation:dictionary];
-    } else if ([opName isEqualToString:@"query_all"]) {
+    } else if ([opName isEqualToString:@"query_all"])
+    {
         op = [[LPQueryAllOperation alloc] initWithOperation:dictionary];
-    } else if ([opName isEqualToString:@"setText"]) {
+    } else if ([opName isEqualToString:@"setText"])
+    {
         op = [[LPSetTextOperation alloc] initWithOperation:dictionary];
-    } else {
+    }
+    else if ([opName isEqualToString:@"flash"])
+    {
+        op = [[LPFlashOperation alloc] initWithOperation:dictionary];
+    }
+    else
+    {
         op = [[LPOperation alloc] initWithOperation:dictionary];
     }
     return [op autorelease];
@@ -63,6 +75,7 @@
             [finalResult addObject: v];
         }
     }
+    [op release];
     
     return finalResult;
 }
@@ -103,7 +116,7 @@
 - (id) performWithTarget:(UIView*)target error:(NSError **)error {
 	NSMethodSignature *tSig = [target methodSignatureForSelector:_selector];
 	NSUInteger argc = tSig.numberOfArguments - 2;
-	if( argc != [_arguments count] ) {
+	if( argc != [_arguments count]  && *error != NULL) {
         *error = [NSError errorWithDomain:@"CalabashServer" code:1 
                                  userInfo:
                   [NSDictionary dictionaryWithObjectsAndKeys:

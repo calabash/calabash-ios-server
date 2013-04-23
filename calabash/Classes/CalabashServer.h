@@ -2,6 +2,7 @@
 //  Copyright 2011 LessPainful. All rights reserved.
 
 
+#import "LPHTTPServer.h"
 @class LPHTTPServer;
 
 @interface CalabashServer : NSObject {

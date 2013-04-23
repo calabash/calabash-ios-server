@@ -19,7 +19,7 @@ static NSMutableDictionary* routes = nil;
 	if(!initialized)
 	{
 		// Initialize class variables
-		routes = [[NSMutableDictionary alloc] initWithCapacity:5];
+		routes = [[NSMutableDictionary alloc] initWithCapacity:16];
 		initialized = YES;
 	}
 }
@@ -86,7 +86,8 @@ static NSMutableDictionary* routes = nil;
             if (_postData != nil && [_postData length]>0) {
                 NSString* postDataAsString = [[NSString alloc] initWithBytes:[_postData bytes] length:[_postData length] encoding:NSUTF8StringEncoding];
                 params=[LPJSONUtils deserializeDictionary:postDataAsString];
-                [postDataAsString release];                    
+                [postDataAsString release];
+                [_postData release];
                 _postData = nil;
             } 
         }

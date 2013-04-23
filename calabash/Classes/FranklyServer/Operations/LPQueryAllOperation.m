@@ -22,7 +22,7 @@
         NSObject *as = [selPart objectForKey:@"as"];
         if (as)
         {
-            NSMutableDictionary *mdict = [selPart mutableCopy];
+            NSMutableDictionary *mdict = [[selPart mutableCopy] autorelease];
             [mdict removeObjectForKey:@"as"];
             selPart = mdict;
         }

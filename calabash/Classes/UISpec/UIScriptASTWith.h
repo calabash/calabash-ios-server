@@ -29,7 +29,6 @@ typedef enum {
 @property (nonatomic,assign) SEL selector;
 @property (nonatomic, assign) NSInteger timeout;
 @property (nonatomic,retain) NSObject *objectValue;
-@property (nonatomic,retain) NSObject *objectValue2;
 @property (nonatomic,assign) BOOL boolValue;
 @property (nonatomic,assign) BOOL boolValue2;
 @property (nonatomic,assign) NSInteger integerValue;

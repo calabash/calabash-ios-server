@@ -68,9 +68,10 @@ NSString *const kLPJSONDeserializerErrorDomain  = @"CJSONDeserializerErrorDomain
 - (LPCJSONScanner *)scanner
     {
     if (scanner == NULL)
-        {
+    {
         scanner = [[LPCJSONScanner alloc] init];
-        }
+        scanner.options = kLPJSONScannerOptions_MutableContainers | kLPJSONScannerOptions_MutableLeaves;
+    }
     return(scanner);
     }
 

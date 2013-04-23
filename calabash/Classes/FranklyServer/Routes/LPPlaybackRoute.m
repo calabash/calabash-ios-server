@@ -33,6 +33,7 @@
             //        }
         }
         NSArray* result = [parser evalWith:views];
+        [parser release];
         
         if ([result count] >0) {
             UIView* v = [result objectAtIndex:0];//autopick first

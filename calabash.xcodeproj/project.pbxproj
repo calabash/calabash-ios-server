@@ -89,6 +89,8 @@
 		B17E75B115D4357F0066550B /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8C14B6DAFB002A744C /* LPCDataScanner.m */; };
 		B17E75B215D4357F0066550B /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		B17E75B615D436100066550B /* CalabashServer.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8814B6DAE1002A744C /* CalabashServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B19440441725C70A00EE1B25 /* LPFlashOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = B19440421725C70A00EE1B25 /* LPFlashOperation.h */; };
+		B19440451725C70A00EE1B25 /* LPFlashOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B19440431725C70A00EE1B25 /* LPFlashOperation.m */; };
 		B1B19DC816D162CF00D3D80B /* UIScriptASTVisibility.h in Headers */ = {isa = PBXBuildFile; fileRef = B1B19DC616D162CF00D3D80B /* UIScriptASTVisibility.h */; };
 		B1B19DC916D162CF00D3D80B /* UIScriptASTVisibility.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B19DC716D162CF00D3D80B /* UIScriptASTVisibility.m */; };
 		B1EBF08816EE63A000AE4D40 /* LPAppPropertyRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B1EBF08416EE63A000AE4D40 /* LPAppPropertyRoute.h */; };
@@ -251,6 +253,8 @@
 		B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCJSONDeserializer.m; sourceTree = "<group>"; };
 		B1914DB7159C228500CB928D /* LPWebQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPWebQuery.h; sourceTree = "<group>"; };
 		B1914DB8159C228500CB928D /* LPWebQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPWebQuery.m; sourceTree = "<group>"; };
+		B19440421725C70A00EE1B25 /* LPFlashOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPFlashOperation.h; sourceTree = "<group>"; };
+		B19440431725C70A00EE1B25 /* LPFlashOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPFlashOperation.m; sourceTree = "<group>"; };
 		B1B19DC616D162CF00D3D80B /* UIScriptASTVisibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScriptASTVisibility.h; sourceTree = "<group>"; };
 		B1B19DC716D162CF00D3D80B /* UIScriptASTVisibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScriptASTVisibility.m; sourceTree = "<group>"; };
 		B1DDE6C915C06CB500BBE2BE /* LPUIARoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUIARoute.h; sourceTree = "<group>"; };
@@ -469,6 +473,8 @@
 		B184FDC114B6DB2B002A744C /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				B19440421725C70A00EE1B25 /* LPFlashOperation.h */,
+				B19440431725C70A00EE1B25 /* LPFlashOperation.m */,
 				B15DA5E315C5D80A009E6CFE /* LPQueryAllOperation.h */,
 				B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */,
 				B184FDC214B6DB2B002A744C /* LPOperation.h */,
@@ -641,6 +647,7 @@
 				B1B19DC816D162CF00D3D80B /* UIScriptASTVisibility.h in Headers */,
 				B1EBF08816EE63A000AE4D40 /* LPAppPropertyRoute.h in Headers */,
 				B1EBF08A16EE63A000AE4D40 /* LPQueryLogRoute.h in Headers */,
+				B19440441725C70A00EE1B25 /* LPFlashOperation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -792,6 +799,7 @@
 				B1B19DC916D162CF00D3D80B /* UIScriptASTVisibility.m in Sources */,
 				B1EBF08916EE63A000AE4D40 /* LPAppPropertyRoute.m in Sources */,
 				B1EBF08B16EE63A000AE4D40 /* LPQueryLogRoute.m in Sources */,
+				B19440451725C70A00EE1B25 /* LPFlashOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

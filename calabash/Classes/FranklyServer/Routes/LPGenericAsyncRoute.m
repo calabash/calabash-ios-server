@@ -150,6 +150,7 @@
 {
     self.data = nil;
     self.conn = nil;
+    _bytes = nil;
     self.jsonResponse = nil;
     [super dealloc];
 }

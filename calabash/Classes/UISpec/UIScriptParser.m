@@ -15,6 +15,7 @@
 #import "UIScriptASTVisibility.h"
 #import "UIScriptASTPredicate.h"
 #import "LPReflectUtils.h"
+#import <UIKit/UIKit.h>
 
 #define CALABASH_TYPE_KEY @"_calabash-type"
 
@@ -43,6 +44,27 @@
     return nil;
 }
 
++(UIView*)findViewByClass:(NSString*) className fromView:(UIView*) parent
+{
+    
+    for (UIView *viewCandidate in [parent subviews])
+    {
+        if ([NSStringFromClass([viewCandidate class]) isEqual:className])
+        {
+            return viewCandidate;
+        }
+        else
+        {
+            UIView *result = [UIScriptParser findViewByClass:className fromView:viewCandidate];
+            if (result)
+            {
+                return result;
+            }
+        }
+    }
+    return nil;
+}
+
 - (id) initWithUIScript:(NSString*) script {
     self = [super init];
     if (self) {
@@ -62,7 +84,8 @@
 }
 
 - (void) dealloc {
-//    [_res autorelease];_res=nil;
+    [_res autorelease];_res=nil;
+    self.script = nil;
     [super dealloc];
 }
 
@@ -219,6 +242,7 @@ static NSCharacterSet* curlyBrackets = nil;
                 }
 
                 [_res addObject:w];
+                [w release];
                 
                 
             }

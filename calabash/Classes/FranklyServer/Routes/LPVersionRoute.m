@@ -8,6 +8,7 @@
 
 #import "LPVersionRoute.h"
 #import <sys/utsname.h>
+@class UIDevice;
 
 @implementation LPVersionRoute
 
@@ -66,9 +67,10 @@
     NSDictionary* res = [NSDictionary dictionaryWithObjectsAndKeys:
                          kLPCALABASHVERSION , @"version",
                          idString,@"app_id",
-                         [UIDevice currentDevice].systemVersion, @"iOS_version",
+                         [[UIDevice currentDevice] systemVersion], @"iOS_version",
                          nameString,@"app_name",
                          system, @"system",
+                         [NSNumber numberWithBool:inch5Phone], @"4inch",
                          dev, @"simulator_device",
                          sim, @"simulator",
                          versionString,@"app_version",

@@ -70,7 +70,7 @@
         //DDLogInfo(@"Received null query.");
         result = nil;
     }
-    
+    self.parser = nil;
     NSError* error = nil;
     NSArray* resultArray = [self applyOperation:operation toViews:result error:&error];
     

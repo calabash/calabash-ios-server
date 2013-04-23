@@ -140,6 +140,7 @@
 		[_httpServer setTXTRecordDictionary:capabilities];
 		[_httpServer setConnectionClass:[LPRouter class]];
 		[_httpServer setPort:37265];
+        [capabilities release];
         // Serve files from our embedded Web folder
 //        NSString *webPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Web"];
 //        [_httpServer setDocumentRoot:webPath];

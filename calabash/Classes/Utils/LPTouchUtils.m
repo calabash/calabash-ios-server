@@ -228,4 +228,44 @@ static NSString* lp_deviceName()
         CGRect frameInWindow = [window convertRect:[view frame] fromView:superView];
     return [self centerOfFrame:frameInWindow shouldTranslate:YES];
 }
+
+
+//  Created by Olivier Larivain on 3/6/13.
+//  Copyright (c) 2013 LessPainful. All rights reserved.
+//  Contribution by kra: https://github.com/calabash/calabash-ios-server/pull/15/files
+//  Modified 22.04.2013 by Karl Krukow, Xamarin (karl.krukow@xamarin.com)
+//      refactor from category method
+//
+
++(void)flashView:(id) viewOrDom forDuration:(NSUInteger) duration
+{
+    if ([viewOrDom isKindOfClass: [UIView class]])
+    {
+        UIView *view = (UIView*) viewOrDom;
+        
+        UIColor *originalBackgroundColor = [view.backgroundColor retain];
+        CGFloat orginalAlpha = view.alpha;
+        for (NSUInteger i = 0; i < 5; i++) {
+            view.backgroundColor = [UIColor yellowColor];
+            CFRunLoopRunInMode(kCFRunLoopDefaultMode, .05, false);
+            view.alpha = 0;
+            CFRunLoopRunInMode(kCFRunLoopDefaultMode, .05, false);
+            
+            view.backgroundColor = [UIColor blueColor];
+            CFRunLoopRunInMode(kCFRunLoopDefaultMode, .05, false);
+            
+            view.alpha = 1;
+            CFRunLoopRunInMode(kCFRunLoopDefaultMode, .05, false);
+        }
+        view.alpha = orginalAlpha;
+        view.backgroundColor = originalBackgroundColor;
+        [originalBackgroundColor release];
+    }
+    else
+    {
+        //TODO implement flash in JavaScript
+    }
+
+}
+
 @end
