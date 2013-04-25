@@ -30,11 +30,11 @@
 		00D314FA16E7EAFE00C5E484 /* UIView+Flash.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D314F816E7EAFE00C5E484 /* UIView+Flash.h */; };
 		00D314FB16E7EAFE00C5E484 /* UIView+Flash.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D314F916E7EAFE00C5E484 /* UIView+Flash.m */; };
 		00D3150316E8033000C5E484 /* LPDumpRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D314FD16E8033000C5E484 /* LPDumpRoute.h */; };
-		00D3150416E8033000C5E484 /* LPDumpRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D314FE16E8033000C5E484 /* LPDumpRoute.m */; };
 		00D3150516E8033000C5E484 /* LPOrientationRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D314FF16E8033000C5E484 /* LPOrientationRoute.h */; };
-		00D3150616E8033000C5E484 /* LPOrientationRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3150016E8033000C5E484 /* LPOrientationRoute.m */; };
 		00D3150716E8033000C5E484 /* LPStaticResourcesRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D3150116E8033000C5E484 /* LPStaticResourcesRoute.h */; };
-		00D3150816E8033000C5E484 /* LPStaticResourcesRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3150216E8033000C5E484 /* LPStaticResourcesRoute.m */; };
+		00EF273217149E62001B41C6 /* LPStaticResourcesRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3150216E8033000C5E484 /* LPStaticResourcesRoute.m */; };
+		00EF273317149E65001B41C6 /* LPOrientationRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3150016E8033000C5E484 /* LPOrientationRoute.m */; };
+		00EF273417149E67001B41C6 /* LPDumpRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D314FE16E8033000C5E484 /* LPDumpRoute.m */; };
 		692D77A01657010000DE3E53 /* LPExitRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 692D779E1657010000DE3E53 /* LPExitRoute.h */; };
 		692D77A11657010000DE3E53 /* LPExitRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 692D779F1657010000DE3E53 /* LPExitRoute.m */; };
 		B12179A8165D613100B6DA43 /* LPScreenshotRoute2.h in Headers */ = {isa = PBXBuildFile; fileRef = B12179A6165D613100B6DA43 /* LPScreenshotRoute2.h */; };
@@ -1144,7 +1144,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/${FRAMEWORK_VERSION}/Headers\"\n\n# Link the \"Current\" version to \"${FRAMEWORK_VERSION}\"\nln -sfh ${FRAMEWORK_VERSION} \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current\"\nln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers\"\nln -sfh \"Versions/Current/${PRODUCT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"\n\n# The -a ensures that the headers maintain the source modification date so that we don't constantly\n# cause propagating rebuilds of files that import these headers.\ncp -a \"${BUILT_PRODUCTS_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/${FRAMEWORK_VERSION}/Headers\"";
+			shellScript = "set -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/${FRAMEWORK_VERSION}/Headers\"\n\n# Link the \"Current\" version to \"${FRAMEWORK_VERSION}\"\nln -sfh ${FRAMEWORK_VERSION} \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/Current\"\nln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Headers\"\nln -sfh \"Versions/Current/${PRODUCT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/${PRODUCT_NAME}\"\n\n# The -a ensures that the headers maintain the source modification date so that we don't constantly\n# cause propagating rebuilds of files that import these headers.\ncp -a \"${BUILT_PRODUCTS_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.framework/Versions/${FRAMEWORK_VERSION}/Headers\"\n\n# also copy the symbiote resource bundle\n#cp -a \\\"${SRCROOT}/Resources/symbiote_static_resources.bundle\\\"";
 		};
 		B17E75BD15D436A50066550B /* Framework */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1229,13 +1229,12 @@
 				B1B19DC916D162CF00D3D80B /* UIScriptASTVisibility.m in Sources */,
 				B1EBF08916EE63A000AE4D40 /* LPAppPropertyRoute.m in Sources */,
 				B1EBF08B16EE63A000AE4D40 /* LPQueryLogRoute.m in Sources */,
-				B19440451725C70A00EE1B25 /* LPFlashOperation.m in Sources */,
 				F5AE0BC7174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m in Sources */,
-				00D3143816E65AA900C5E484 /* LPDumpRoute.m in Sources */,
-				00D3143A16E65AA900C5E484 /* LPOrientationRoute.m in Sources */,
-				00D3143C16E65AA900C5E484 /* LPStaticResourcesRoute.m in Sources */,
 				00D3144F16E7B75900C5E484 /* UIView+HierarchyDump.m in Sources */,
 				00D314FB16E7EAFE00C5E484 /* UIView+Flash.m in Sources */,
+				00EF273217149E62001B41C6 /* LPStaticResourcesRoute.m in Sources */,
+				00EF273317149E65001B41C6 /* LPOrientationRoute.m in Sources */,
+				00EF273417149E67001B41C6 /* LPDumpRoute.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
