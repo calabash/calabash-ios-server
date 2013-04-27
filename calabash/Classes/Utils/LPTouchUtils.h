@@ -18,6 +18,8 @@
 
 +(UIWindow*)windowForView:(UIView*)view;
 
++(UIWindow*)appDelegateWindow;
+
 +(BOOL)isViewVisible:(UIView *)view;
 
 +(void)flashView:(id) viewOrDom forDuration:(NSUInteger) duration;

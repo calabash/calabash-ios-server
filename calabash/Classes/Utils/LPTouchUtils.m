@@ -4,6 +4,7 @@
 //  Copyright 2011 LessPainful. All rights reserved.
 //
 #import <sys/utsname.h>
+#import <QuartzCore/QuartzCore.h>
 
 static NSString* lp_deviceName()
 {
@@ -101,21 +102,30 @@ static NSString* lp_deviceName()
     return v;
 }
 
++(NSInteger)indexOfView:(UIView *)viewToFind asSubViewInView:(UIView *)viewToSearch
+{
+    //Assume viewToFind != viewToSearch
+    if (viewToFind == nil || viewToSearch == nil) {return  -1;}
+    NSArray *subViews = [viewToSearch subviews];
+    for (NSInteger i=0;i<[subViews count];i++)
+    {
+        UIView *subView = [subViews objectAtIndex:i];
+        if ([self canFindView:viewToFind asSubViewInView:subView])
+        {
+            return i;
+        }
+    }
+    return -1;
+}
+
 +(BOOL)canFindView:(UIView *)viewToFind asSubViewInView:(UIView *)viewToSearch
 {
     if (viewToFind == viewToSearch) { return YES; }
     if (viewToFind == nil || viewToSearch == nil) {return  NO; }
-        
-    for (UIView *subView  in [viewToSearch subviews])
-    {
-        if ([self canFindView:viewToFind asSubViewInView:subView])
-        {
-            return YES;
-        }
-    }
-    return NO;
-    
+    NSInteger index = [self indexOfView:viewToFind asSubViewInView:viewToSearch];
+    return index != -1;    
 }
+
 +(BOOL)isViewOrParentsHidden:(UIView*)view
 {
     if ([view alpha] <= 0.05) {
@@ -131,6 +141,39 @@ static NSString* lp_deviceName()
     }
     return NO;    
 }
+
++(UIView*) findCommonAncestorForView:(UIView*)viewToCheck andView:(UIView*)otherView firstIndex:(NSInteger*)firstIndexPtr secondIndex:(NSInteger*)secondIndexPtr
+{
+    UIView *parent = [otherView superview];
+    NSInteger parentIndex = [[parent subviews] indexOfObject:otherView];
+    NSInteger viewToCheckIndex = [self indexOfView:viewToCheck asSubViewInView:parent];
+    while (parent && (viewToCheckIndex == -1))
+    {
+        UIView *nextParent = [parent superview];
+        parentIndex = [[nextParent subviews] indexOfObject:parent];
+        parent = nextParent;
+        viewToCheckIndex = [self indexOfView:viewToCheck asSubViewInView:parent];
+    }
+    if (viewToCheckIndex && parent)
+    {
+        *firstIndexPtr = viewToCheckIndex;
+        *secondIndexPtr = parentIndex;        
+        return parent;
+    }
+    return nil;
+}
+                                      
+                                      
++(BOOL)isView:(UIView*)viewToCheck zIndexAboveView:(UIView*)otherView
+{
+    NSInteger firstIndex = -1;
+    NSInteger secondIndex = -1;
+    
+    UIView *commonAncestor = [self findCommonAncestorForView: viewToCheck andView:otherView firstIndex:&firstIndex secondIndex:&secondIndex];
+    if (!commonAncestor || firstIndex == -1 || secondIndex == -1) {return NO;}
+    return firstIndex > secondIndex;    
+}
+
 +(BOOL)isViewVisible:(UIView *)view
 {
     if (![view isKindOfClass:[UIView class]] || [self isViewOrParentsHidden:view]) {return NO;}
@@ -153,7 +196,8 @@ static NSString* lp_deviceName()
         return YES;
     }
     
-    if (![view isKindOfClass:[UIControl class]] && ![hitView isKindOfClass:[UINavigationBar class]])
+    
+    if (![view isKindOfClass:[UIControl class]])
     {
         //there may be a case with a non-control (e.g., label)
         //on top of a control visually but not logically
@@ -161,6 +205,18 @@ static NSString* lp_deviceName()
         UIWindow *hitWin = [self windowForView:hitView];
         if (viewWin == hitWin)//common window
         {
+            
+            CGRect hitViewBounds = [viewWin convertRect:hitView.bounds fromView:hitView];
+            CGRect viewBounds = [viewWin convertRect:view.bounds fromView:view];
+            
+            if (CGRectContainsRect(hitViewBounds, viewBounds) && [self isView:hitView zIndexAboveView:view])
+            {
+                //In this case the hitView (which we're not asking about)
+                //is completely overlapping the view and "above" it in the container.
+                return NO;
+            }
+            
+                                    
             CGRect ctrlRect = [viewWin convertRect:hitView.frame fromView:hitView.superview];            
             return CGRectContainsPoint(ctrlRect, center);
             //
@@ -188,6 +244,15 @@ static NSString* lp_deviceName()
 +(CGPoint)centerOfView:(UIView *)view shouldTranslate:(BOOL)shouldTranslate
 {
  
+    UIWindow *delegateWindow = [LPTouchUtils appDelegateWindow];
+    UIWindow *viewWindow = [self windowForView:view];
+    CGRect bounds = [viewWindow convertRect:view.bounds fromView:view];
+    bounds = [delegateWindow convertRect:bounds fromWindow:viewWindow];
+    return [self centerOfFrame:bounds shouldTranslate:shouldTranslate];
+}
+
++(UIWindow*)appDelegateWindow
+{
     UIWindow *delegateWindow = nil;
     NSString *iosVersion = [UIDevice currentDevice].systemVersion;
     id<UIApplicationDelegate> appDelegate = [UIApplication sharedApplication].delegate;
@@ -198,7 +263,7 @@ static NSString* lp_deviceName()
         if ([appDelegate respondsToSelector:@selector(window)]) {
             delegateWindow = [appDelegate window];
         }
-
+        
         if (!delegateWindow)
         {
             NSArray *allWindows = [[UIApplication sharedApplication] windows];
@@ -209,13 +274,9 @@ static NSString* lp_deviceName()
     {
         delegateWindow = appDelegate.window;
     }
-    
-    UIWindow *viewWindow = [self windowForView:view];
-    CGRect bounds = [viewWindow convertRect:view.bounds fromView:view];
-    bounds = [delegateWindow convertRect:bounds fromWindow:viewWindow];
-        
-    return [self centerOfFrame:bounds shouldTranslate:shouldTranslate];
+    return delegateWindow;
 }
+
 +(CGPoint) centerOfView:(UIView *) view 
 {
     return [self centerOfView:view shouldTranslate:YES];
