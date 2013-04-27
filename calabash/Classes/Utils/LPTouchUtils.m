@@ -153,7 +153,7 @@ static NSString* lp_deviceName()
         return YES;
     }
     
-    if (![view isKindOfClass:[UIControl class]])
+    if (![view isKindOfClass:[UIControl class]] && ![hitView isKindOfClass:[UINavigationBar class]])
     {
         //there may be a case with a non-control (e.g., label)
         //on top of a control visually but not logically

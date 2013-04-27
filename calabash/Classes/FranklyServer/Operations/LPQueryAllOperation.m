@@ -254,6 +254,16 @@
                             nil];
                     
                 }
+                else if ([returnType isEqualToString:@"{?=dd}"])
+                {
+                    double *doubles = (double*)buffer;
+                    double d1 = *doubles;
+                    doubles++;
+                    double d2 = *doubles;
+                    return [NSArray arrayWithObjects:[NSNumber numberWithDouble:d1],
+                            [NSNumber numberWithDouble:d2],
+                            nil];
+                }
                 else
                 {
                     return [value description];                    
