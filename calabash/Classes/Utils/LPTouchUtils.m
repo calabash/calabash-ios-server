@@ -177,9 +177,11 @@ static NSString* lp_deviceName()
 +(BOOL)isViewVisible:(UIView *)view
 {
     if (![view isKindOfClass:[UIView class]] || [self isViewOrParentsHidden:view]) {return NO;}
-    CGPoint center = [self centerOfView:view shouldTranslate:NO];
     UIWindow *windowForView = [self windowForView:view];
     if (!windowForView) {return YES;/* what can I do?*/}
+
+    CGPoint center = [self centerOfView:view inWindow:windowForView];    
+
     UIView *hitView = [windowForView hitTest:center withEvent:nil];
     if ([self canFindView: view asSubViewInView:hitView])
     {
@@ -249,6 +251,12 @@ static NSString* lp_deviceName()
     CGRect bounds = [viewWindow convertRect:view.bounds fromView:view];
     bounds = [delegateWindow convertRect:bounds fromWindow:viewWindow];
     return [self centerOfFrame:bounds shouldTranslate:shouldTranslate];
+}
+
++(CGPoint)centerOfView:(UIView*)view inWindow:(UIWindow*)windowForView
+{
+    CGRect bounds = [windowForView convertRect:view.bounds fromView:view];
+    return [self centerOfFrame:bounds shouldTranslate:NO];
 }
 
 +(UIWindow*)appDelegateWindow

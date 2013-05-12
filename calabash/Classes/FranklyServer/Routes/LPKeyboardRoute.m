@@ -69,6 +69,7 @@
     
     for (id/*UIKBKey*/ key in keys) {
         NSString *representedString = [key valueForKey:@"representedString"];
+         NSLog(@"represented key: %@",representedString);
         // Find the key based on the key's represented string
         if ([representedString isEqual:characterString]) 
         {
