@@ -233,6 +233,48 @@
 			remoteGlobalIDString = 8D1107320486CEB800E47090;
 			remoteInfo = WebDAVServer;
 		};
+		B1AA1AF617402FBF005A679E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1A4FBFE1645571300B1809B /* Frank.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65DBDD9216A89CCA007D3D43;
+			remoteInfo = CocoaAsyncSocket;
+		};
+		B1AA1AF817402FBF005A679E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1A4FBFE1645571300B1809B /* Frank.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65DBDDB516A89CDC007D3D43;
+			remoteInfo = CocoaLumberjack;
+		};
+		B1AA1AFA17402FBF005A679E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1A4FBFE1645571300B1809B /* Frank.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65DBDDDA16A89E5B007D3D43;
+			remoteInfo = CocoaAsyncSocketMac;
+		};
+		B1AA1AFC17402FBF005A679E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1A4FBFE1645571300B1809B /* Frank.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65DBDDFB16A89E72007D3D43;
+			remoteInfo = CocoaLumberjackMac;
+		};
+		B1AA1B0817402FBF005A679E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1A4FD6F1645571300B1809B /* Shelley.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3009123716A599960023CC56;
+			remoteInfo = ShelleyMac;
+		};
+		B1AA1B0A17402FBF005A679E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1A4FD6F1645571300B1809B /* Shelley.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3009124916A599960023CC56;
+			remoteInfo = ShelleyMacTests;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -1011,12 +1053,6 @@
 		B1DDE6CA15C06CB500BBE2BE /* LPUIARoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUIARoute.m; sourceTree = "<group>"; };
 		B1E3603814D9F4B30087D8D9 /* UIScriptASTPredicate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScriptASTPredicate.h; sourceTree = "<group>"; };
 		B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScriptASTPredicate.m; sourceTree = "<group>"; };
-		B1FF22B215CF002500F3A17B /* MKMapView+Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+Test.h"; sourceTree = "<group>"; };
-		B1FF22B315CF002500F3A17B /* MKMapView+Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+Test.m"; sourceTree = "<group>"; };
-		B1FF22B415CF002500F3A17B /* MKMapView+ZoomLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+ZoomLevel.h"; sourceTree = "<group>"; };
-		B1FF22B515CF002500F3A17B /* MKMapView+ZoomLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+ZoomLevel.m"; sourceTree = "<group>"; };
-		B1FF22B615CF002500F3A17B /* MKPolylineView+Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKPolylineView+Test.h"; sourceTree = "<group>"; };
-		B1FF22B715CF002500F3A17B /* MKPolylineView+Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKPolylineView+Test.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1158,7 +1194,6 @@
 		B184FD8514B6DACA002A744C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				B1FF22B115CF002500F3A17B /* MapKit */,
 				B184FDBC14B6DB2B002A744C /* FranklyServer */,
 				B184FDDD14B6DB2B002A744C /* JSON */,
 				B184FDF514B6DB2B002A744C /* Resources */,
@@ -1846,6 +1881,10 @@
 				B1A4FE9D1645571400B1809B /* libCocoaHTTPServer.a */,
 				B17DCA89169997EE004A3B51 /* libFrankMac.a */,
 				B17DCA8B169997EE004A3B51 /* libCocoaHTTPServerMac.a */,
+				B1AA1AF717402FBF005A679E /* libCocoaAsyncSocket.a */,
+				B1AA1AF917402FBF005A679E /* libCocoaLumberjack.a */,
+				B1AA1AFB17402FBF005A679E /* libCocoaAsyncSocketMac.a */,
+				B1AA1AFD17402FBF005A679E /* libCocoaLumberjackMac.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2596,6 +2635,8 @@
 			children = (
 				B1A4FEB31645571500B1809B /* libShelley.a */,
 				B1A4FEB51645571500B1809B /* Unit Tests.octest */,
+				B1AA1B0917402FBF005A679E /* libShellyMac.a */,
+				B1AA1B0B17402FBF005A679E /* ShellyMacTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2888,19 +2929,6 @@
 			path = Commands;
 			sourceTree = "<group>";
 		};
-		B1FF22B115CF002500F3A17B /* MapKit */ = {
-			isa = PBXGroup;
-			children = (
-				B1FF22B215CF002500F3A17B /* MKMapView+Test.h */,
-				B1FF22B315CF002500F3A17B /* MKMapView+Test.m */,
-				B1FF22B415CF002500F3A17B /* MKMapView+ZoomLevel.h */,
-				B1FF22B515CF002500F3A17B /* MKMapView+ZoomLevel.m */,
-				B1FF22B615CF002500F3A17B /* MKPolylineView+Test.h */,
-				B1FF22B715CF002500F3A17B /* MKPolylineView+Test.m */,
-			);
-			path = MapKit;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -3189,6 +3217,50 @@
 			fileType = wrapper.application;
 			path = WebDAVServer.app;
 			remoteRef = B1A4FEC01645571500B1809B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B1AA1AF717402FBF005A679E /* libCocoaAsyncSocket.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCocoaAsyncSocket.a;
+			remoteRef = B1AA1AF617402FBF005A679E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B1AA1AF917402FBF005A679E /* libCocoaLumberjack.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCocoaLumberjack.a;
+			remoteRef = B1AA1AF817402FBF005A679E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B1AA1AFB17402FBF005A679E /* libCocoaAsyncSocketMac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCocoaAsyncSocketMac.a;
+			remoteRef = B1AA1AFA17402FBF005A679E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B1AA1AFD17402FBF005A679E /* libCocoaLumberjackMac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libCocoaLumberjackMac.a;
+			remoteRef = B1AA1AFC17402FBF005A679E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B1AA1B0917402FBF005A679E /* libShellyMac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			name = libShellyMac.a;
+			path = libShelleyMac.a;
+			remoteRef = B1AA1B0817402FBF005A679E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B1AA1B0B17402FBF005A679E /* ShellyMacTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			name = ShellyMacTests.octest;
+			path = ShelleyMacTests.octest;
+			remoteRef = B1AA1B0A17402FBF005A679E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
