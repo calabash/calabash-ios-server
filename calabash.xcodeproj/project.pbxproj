@@ -33,7 +33,6 @@
 		B171A8B816452EE200E120FE /* HTTPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B171A8B716452EE200E120FE /* HTTPResponse.h */; };
 		B17E756E15D433A40066550B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		B17E757B15D434D00066550B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E757A15D434D00066550B /* CFNetwork.framework */; };
-		B17E757C15D4357F0066550B /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; };
 		B17E758B15D4357F0066550B /* LPQueryAllOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */; };
 		B17E758C15D4357F0066550B /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; };
 		B17E758D15D4357F0066550B /* LPQueryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC514B6DB2B002A744C /* LPQueryOperation.m */; };
@@ -63,6 +62,8 @@
 		B17E75B115D4357F0066550B /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8C14B6DAFB002A744C /* LPCDataScanner.m */; };
 		B17E75B215D4357F0066550B /* CalabashLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashLoader.m */; };
 		B17E75B615D436100066550B /* CalabashLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8814B6DAE1002A744C /* CalabashLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B1AA1B121740D294005A679E /* LPWebQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = B1AA1B101740D294005A679E /* LPWebQuery.h */; };
+		B1AA1B131740D294005A679E /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1AA1B111740D294005A679E /* LPWebQuery.m */; };
 		B1BDD8EA1656316F009432BE /* LPGenericAsyncRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F315BC1ECD00408364 /* LPGenericAsyncRoute.m */; };
 		B1BDDB551656493E009432BE /* LPRecordRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8B14B6DC7F002A744C /* LPRecordRoute.m */; };
 		B1BDDB5A16564DC2009432BE /* LPUserPrefCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = B1BDDB5616564DC2009432BE /* LPUserPrefCommand.h */; };
@@ -383,8 +384,6 @@
 		B184FE9014B6DD33002A744C /* LPScreenshotRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScreenshotRoute.m; sourceTree = "<group>"; };
 		B184FE9214B6DDA1002A744C /* LPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPOperation.m; sourceTree = "<group>"; };
 		B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCJSONDeserializer.m; sourceTree = "<group>"; };
-		B1914DB7159C228500CB928D /* LPWebQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPWebQuery.h; sourceTree = "<group>"; };
-		B1914DB8159C228500CB928D /* LPWebQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPWebQuery.m; sourceTree = "<group>"; };
 		B1A4FB181645571300B1809B /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		B1A4FB191645571300B1809B /* .gitmodules */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitmodules; sourceTree = "<group>"; };
 		B1A4FB1A1645571300B1809B /* .yardopts */ = {isa = PBXFileReference; lastKnownFileType = text; path = .yardopts; sourceTree = "<group>"; };
@@ -1045,6 +1044,8 @@
 		B1A4FE411645571300B1809B /* tutorial.feature */ = {isa = PBXFileReference; lastKnownFileType = text; path = tutorial.feature; sourceTree = "<group>"; };
 		B1A4FE421645571300B1809B /* Tutorial.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = Tutorial.md; sourceTree = "<group>"; };
 		B1A4FE431645571300B1809B /* tutorial_steps.rb */ = {isa = PBXFileReference; lastKnownFileType = text.script.ruby; path = tutorial_steps.rb; sourceTree = "<group>"; };
+		B1AA1B101740D294005A679E /* LPWebQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPWebQuery.h; sourceTree = "<group>"; };
+		B1AA1B111740D294005A679E /* LPWebQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPWebQuery.m; sourceTree = "<group>"; };
 		B1BDDB5616564DC2009432BE /* LPUserPrefCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUserPrefCommand.h; sourceTree = "<group>"; };
 		B1BDDB5716564DC2009432BE /* LPUserPrefCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUserPrefCommand.m; sourceTree = "<group>"; };
 		B1BDDB5816564DC2009432BE /* LPVersionCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPVersionCommand.h; sourceTree = "<group>"; };
@@ -1345,8 +1346,8 @@
 		B1914DB6159C228500CB928D /* CalabashJSLib */ = {
 			isa = PBXGroup;
 			children = (
-				B1914DB7159C228500CB928D /* LPWebQuery.h */,
-				B1914DB8159C228500CB928D /* LPWebQuery.m */,
+				B1AA1B101740D294005A679E /* LPWebQuery.h */,
+				B1AA1B111740D294005A679E /* LPWebQuery.m */,
 			);
 			path = CalabashJSLib;
 			sourceTree = "<group>";
@@ -2945,6 +2946,7 @@
 				B171A8B816452EE200E120FE /* HTTPResponse.h in Headers */,
 				B1BDDB5A16564DC2009432BE /* LPUserPrefCommand.h in Headers */,
 				B1BDDB5C16564DC2009432BE /* LPVersionCommand.h in Headers */,
+				B1AA1B121740D294005A679E /* LPWebQuery.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3301,7 +3303,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B17E757C15D4357F0066550B /* LPWebQuery.m in Sources */,
 				B17E758B15D4357F0066550B /* LPQueryAllOperation.m in Sources */,
 				B17E758C15D4357F0066550B /* LPOperation.m in Sources */,
 				B17E758D15D4357F0066550B /* LPQueryOperation.m in Sources */,
@@ -3337,6 +3338,7 @@
 				B1BDDB551656493E009432BE /* LPRecordRoute.m in Sources */,
 				B1BDDB5B16564DC2009432BE /* LPUserPrefCommand.m in Sources */,
 				B1BDDB5D16564DC2009432BE /* LPVersionCommand.m in Sources */,
+				B1AA1B131740D294005A679E /* LPWebQuery.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

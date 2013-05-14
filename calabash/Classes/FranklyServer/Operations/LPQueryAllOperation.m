@@ -22,13 +22,13 @@
         NSObject *as = [selPart objectForKey:@"as"];
         if (as)
         {
-            NSMutableDictionary *mdict = [selPart mutableCopy];
+            NSMutableDictionary *mdict = [[selPart mutableCopy] autorelease];
             [mdict removeObjectForKey:@"as"];
             selPart = mdict;
         }
-
+        
         NSString *key = [[selPart keyEnumerator] nextObject];
-
+        
         [selStr appendFormat:@"%@:",key];
         id tgt = [selPart objectForKey:key];
         if (as)
@@ -53,8 +53,9 @@
         id selObj = [_arguments objectAtIndex:i];
         id objValue;
         int intValue;
+        unsigned int uintValue;
         long longValue;
-        char *charPtrValue; 
+        char *charPtrValue;
         char charValue;
         short shortValue;
         float floatValue;
@@ -78,101 +79,112 @@
         }
         
         NSMethodSignature *sig = [target methodSignatureForSelector:sel];
-        if (!sig || ![target respondsToSelector:sel]) 
+        if (!sig || ![target respondsToSelector:sel])
         {
             return @"*****";
-        } 
+        }
         NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sig];
-
-            [invocation setSelector:sel];
-            for (NSInteger i =0, N=[args count]; i<N; i++)
-            {
-                id arg = [args objectAtIndex:i];
-                const char *cType = [sig getArgumentTypeAtIndex:i+2];
-                switch(*cType) {
-                    case '@':
-                        if ([arg isEqual:@"__self__"])
-                        {
-                            arg = _view;
-                        }
-                        [invocation setArgument:&arg atIndex:i+2];
-                        break;                        
-                    case 'i':
+        
+        [invocation setSelector:sel];
+        for (NSInteger i =0, N=[args count]; i<N; i++)
+        {
+            id arg = [args objectAtIndex:i];
+            const char *cType = [sig getArgumentTypeAtIndex:i+2];
+            switch(*cType) {
+                case '@':
+                    if ([arg isEqual:@"__self__"])
                     {
-                        NSInteger intVal = [arg integerValue];
-                        [invocation setArgument:&intVal atIndex:i+2];
-                        break;
-                    }            
-                    case 's':
-                    {
-                        short shVal = [arg shortValue];
-                        [invocation setArgument:&shVal atIndex:i+2];
-                        break;
+                        arg = _view;
                     }
-                    case 'd':
-                    {
-                        double dbVal = [arg doubleValue];
-                        [invocation setArgument:&dbVal atIndex:i+2];
-                        break;
-                    }
-                    case 'f':
-                    {
-                        float fltVal = [arg floatValue];
-                        [invocation setArgument:&fltVal atIndex:i+2];
-                        break;
-                    }
-                    case 'l':
-                    {
-                        long lngVal = [arg longValue];
-                        [invocation setArgument:&lngVal atIndex:i+2];
-                        break;
-                    }
-                    case '*':
-                        //not supported yet
-                        @throw [NSString stringWithFormat: @"not yet support struct pointers: %@",sig];
-                    case 'c':
-                    {
-                        char chVal =[arg charValue];
-                        [invocation setArgument:&chVal atIndex:i+2];
-                        break;
-                    }
-                    case '{': {
-                        //not supported yet
-                        if (strcmp(cType,"{CGPoint=ff}") == 0)
-                        {
-                            CGPoint point;
-                            CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)arg, &point);
-                            [invocation setArgument:&point atIndex:i+2];
-                            break;
-
-                        }
-                        else if (strcmp(cType,"{CGRect={CGPoint=ff}{CGSize=ff}}") == 0)
-                        {
-                            CGRect rect;
-                            CGRectMakeWithDictionaryRepresentation((CFDictionaryRef)arg, &rect);
-                            [invocation setArgument:&rect atIndex:i+2];
-                            break;
-
-                        }
-
-
-                        @throw [NSString stringWithFormat: @"not yet support struct args: %@",sig];
-                    }
+                    [invocation setArgument:&arg atIndex:i+2];
+                    break;
+                case 'i':
+                {
+                    NSInteger intVal = [arg integerValue];
+                    [invocation setArgument:&intVal atIndex:i+2];
+                    break;
                 }
-                
-            }
-            [invocation setTarget:target];
-            @try {
-                [invocation invoke];
-            }
-            @catch (NSException *exception) {
-                NSLog(@"Perform %@ with target %@ caught %@: %@", selObj, target, [exception name], [exception reason]);
-                return nil;
+                case 'I':
+                {
+                    NSInteger uIntVal = [arg unsignedIntegerValue];
+                    [invocation setArgument:&uIntVal atIndex:i+2];
+                    break;
+                }
+                case 's':
+                {
+                    short shVal = [arg shortValue];
+                    [invocation setArgument:&shVal atIndex:i+2];
+                    break;
+                }
+                case 'd':
+                {
+                    double dbVal = [arg doubleValue];
+                    [invocation setArgument:&dbVal atIndex:i+2];
+                    break;
+                }
+                case 'f':
+                {
+                    float fltVal = [arg floatValue];
+                    [invocation setArgument:&fltVal atIndex:i+2];
+                    break;
+                }
+                case 'l':
+                {
+                    long lngVal = [arg longValue];
+                    [invocation setArgument:&lngVal atIndex:i+2];
+                    break;
+                }
+                case '*':
+                {
+                    const char *cstringValue = [arg cStringUsingEncoding:NSUTF8StringEncoding];
+                    [invocation setArgument:&cstringValue atIndex:i+2];
+                    break;
+                    
+                    
+                }
+                case 'c':
+                {
+                    char chVal =[arg charValue];
+                    [invocation setArgument:&chVal atIndex:i+2];
+                    break;
+                }
+                case '{': {
+                    //not supported yet
+                    if (strcmp(cType,"{CGPoint=ff}") == 0)
+                    {
+                        CGPoint point;
+                        CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)arg, &point);
+                        [invocation setArgument:&point atIndex:i+2];
+                        break;
+                        
+                    }
+                    else if (strcmp(cType,"{CGRect={CGPoint=ff}{CGSize=ff}}") == 0)
+                    {
+                        CGRect rect;
+                        CGRectMakeWithDictionaryRepresentation((CFDictionaryRef)arg, &rect);
+                        [invocation setArgument:&rect atIndex:i+2];
+                        break;
+                        
+                    }
+                    
+                    
+                    @throw [NSString stringWithFormat: @"not yet support struct args: %@",sig];
+                }
             }
             
+        }
+        [invocation setTarget:target];
+        @try {
+            [invocation invoke];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"Perform %@ with target %@ caught %@: %@", selObj, target, [exception name], [exception reason]);
+            return nil;
+        }
         
-
-
+        
+        
+        
         const char* type = [[invocation methodSignature] methodReturnType];
         NSString *returnType = [NSString stringWithFormat:@"%s", type];
         const char* trimmedType = [[returnType substringToIndex:1] cStringUsingEncoding:NSASCIIStringEncoding];
@@ -182,7 +194,7 @@
                 if (objValue == nil) {
                     return nil;
                 } else {
-                    if (i == [_arguments count]-1) {                                                 
+                    if (i == [_arguments count]-1) {
                         return [LPJSONUtils jsonifyObject:objValue];
                     } else {
                         target = objValue;
@@ -193,6 +205,9 @@
             case 'i':
                 [invocation getReturnValue:(void **)&intValue];
                 return [NSNumber numberWithInt: intValue];
+            case 'I':
+                [invocation getReturnValue:(void **)& uintValue];
+                return [NSNumber numberWithUnsignedInteger: uintValue];
             case 's':
                 [invocation getReturnValue:(void **)&shortValue];
                 return [NSNumber numberWithShort:shortValue];
@@ -239,15 +254,25 @@
                             nil];
                     
                 }
+                else if ([returnType isEqualToString:@"{?=dd}"])
+                {
+                    double *doubles = (double*)buffer;
+                    double d1 = *doubles;
+                    doubles++;
+                    double d2 = *doubles;
+                    return [NSArray arrayWithObjects:[NSNumber numberWithDouble:d1],
+                            [NSNumber numberWithDouble:d2],
+                            nil];
+                }
                 else
                 {
-                    return [value description];                    
+                    return [value description];
                 }
             }
         }
-
         
-    
+        
+        
     }
     
     
@@ -257,6 +282,4 @@
 	return nil;
 }
 
-            
-                 
 @end

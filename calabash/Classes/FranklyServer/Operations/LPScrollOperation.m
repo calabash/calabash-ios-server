@@ -26,11 +26,11 @@
         if ([@"up" isEqualToString:dir]) {
             [sv setContentOffset:CGPointMake(offset.x, offset.y - size.height/fraction) animated:YES];
         } else if ([@"down" isEqualToString:dir]) {
-            [sv setContentOffset:CGPointMake(offset.x, offset.y + size.height/fraction) animated:YES];            
+            [sv setContentOffset:CGPointMake(offset.x, offset.y + size.height/fraction) animated:YES];
         } else if ([@"left" isEqualToString:dir]) {
             [sv setContentOffset:CGPointMake(offset.x - size.width/fraction, offset.y) animated:YES];
         } else if ([@"right" isEqualToString:dir]) {
-            [sv setContentOffset:CGPointMake(offset.x + size.width/fraction, offset.y) animated:YES];            
+            [sv setContentOffset:CGPointMake(offset.x + size.width/fraction, offset.y) animated:YES];
         }
         
         return _view;
@@ -49,7 +49,7 @@
         }
         NSString *res = [wv stringByEvaluatingJavaScriptFromString:scrollJS];
         NSLog(@"RES:%@",res);
-        return _view;        
+        return _view;
     }
 	return nil;
 }
