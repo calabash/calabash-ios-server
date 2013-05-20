@@ -12,10 +12,16 @@
 @implementation CalabashUISpecSelectorEngine
 - (NSArray *)selectViewsWithSelector:(NSString *)query
 {
-    UIView *window = [[UIApplication sharedApplication] keyWindow];
     
     UIScriptParser *parser = [[UIScriptParser alloc] initWithUIScript:query];
     [parser parse];
-    return [parser evalWith:window.subviews];    
+    
+    NSMutableArray* views = [NSMutableArray arrayWithCapacity:32];
+    for (UIWindow *window in [[UIApplication sharedApplication] windows])
+    {
+        [views addObjectsFromArray:[window subviews]];
+    }
+   
+    return [parser evalWith:views];
 }
 @end
