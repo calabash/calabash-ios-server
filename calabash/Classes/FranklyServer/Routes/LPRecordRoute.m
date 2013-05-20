@@ -14,8 +14,6 @@
 
 @implementation LPRecordRoute
 
-
-
 - (NSObject<HTTPResponse> *) handleRequestForPath: (NSArray *)path withConnection:(RoutingHTTPConnection *)conn
 {
     if (![self matchesPath:path]) { return nil; }

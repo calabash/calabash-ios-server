@@ -70,6 +70,8 @@
 		B1BDDB5B16564DC2009432BE /* LPUserPrefCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = B1BDDB5716564DC2009432BE /* LPUserPrefCommand.m */; };
 		B1BDDB5C16564DC2009432BE /* LPVersionCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = B1BDDB5816564DC2009432BE /* LPVersionCommand.h */; };
 		B1BDDB5D16564DC2009432BE /* LPVersionCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = B1BDDB5916564DC2009432BE /* LPVersionCommand.m */; };
+		B1FC26C3174A62B700CCA0F9 /* LPConditionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B163213415BBF13200408364 /* LPConditionRoute.m */; };
+		B1FC2727174A798E00CCA0F9 /* NSDictionary+Frank.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FC2725174A798E00CCA0F9 /* NSDictionary+Frank.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -870,8 +872,6 @@
 		B1A4FD881645571300B1809B /* AccessibilityCheckCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AccessibilityCheckCommand.m; sourceTree = "<group>"; };
 		B1A4FD891645571300B1809B /* AppCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppCommand.h; sourceTree = "<group>"; };
 		B1A4FD8A1645571300B1809B /* AppCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppCommand.m; sourceTree = "<group>"; };
-		B1A4FD8B1645571300B1809B /* DumpCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DumpCommand.h; sourceTree = "<group>"; };
-		B1A4FD8C1645571300B1809B /* DumpCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DumpCommand.m; sourceTree = "<group>"; };
 		B1A4FD8D1645571300B1809B /* EnginesCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EnginesCommand.h; sourceTree = "<group>"; };
 		B1A4FD8E1645571300B1809B /* EnginesCommand.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EnginesCommand.m; sourceTree = "<group>"; };
 		B1A4FD8F1645571300B1809B /* ExitCommand.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExitCommand.h; sourceTree = "<group>"; };
@@ -1050,10 +1050,9 @@
 		B1BDDB5716564DC2009432BE /* LPUserPrefCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUserPrefCommand.m; sourceTree = "<group>"; };
 		B1BDDB5816564DC2009432BE /* LPVersionCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPVersionCommand.h; sourceTree = "<group>"; };
 		B1BDDB5916564DC2009432BE /* LPVersionCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPVersionCommand.m; sourceTree = "<group>"; };
-		B1DDE6C915C06CB500BBE2BE /* LPUIARoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUIARoute.h; sourceTree = "<group>"; };
-		B1DDE6CA15C06CB500BBE2BE /* LPUIARoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUIARoute.m; sourceTree = "<group>"; };
 		B1E3603814D9F4B30087D8D9 /* UIScriptASTPredicate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScriptASTPredicate.h; sourceTree = "<group>"; };
 		B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScriptASTPredicate.m; sourceTree = "<group>"; };
+		B1FC2725174A798E00CCA0F9 /* NSDictionary+Frank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Frank.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1211,6 +1210,7 @@
 		B184FDBC14B6DB2B002A744C /* FranklyServer */ = {
 			isa = PBXGroup;
 			children = (
+				B1FC2723174A795E00CCA0F9 /* Categories */,
 				B1BDD8E1165626A5009432BE /* Commands */,
 				B184FDC114B6DB2B002A744C /* Operations */,
 				B184FDCE14B6DB2B002A744C /* LPRecorder.h */,
@@ -1242,8 +1242,6 @@
 		B184FDD014B6DB2B002A744C /* Routes */ = {
 			isa = PBXGroup;
 			children = (
-				B1DDE6C915C06CB500BBE2BE /* LPUIARoute.h */,
-				B1DDE6CA15C06CB500BBE2BE /* LPUIARoute.m */,
 				B16321F615BC200300408364 /* LPKeyboardRoute.h */,
 				B16321F715BC200300408364 /* LPKeyboardRoute.m */,
 				B16321F215BC1ECD00408364 /* LPGenericAsyncRoute.h */,
@@ -2671,8 +2669,6 @@
 				B1A4FD881645571300B1809B /* AccessibilityCheckCommand.m */,
 				B1A4FD891645571300B1809B /* AppCommand.h */,
 				B1A4FD8A1645571300B1809B /* AppCommand.m */,
-				B1A4FD8B1645571300B1809B /* DumpCommand.h */,
-				B1A4FD8C1645571300B1809B /* DumpCommand.m */,
 				B1A4FD8D1645571300B1809B /* EnginesCommand.h */,
 				B1A4FD8E1645571300B1809B /* EnginesCommand.m */,
 				B1A4FD8F1645571300B1809B /* ExitCommand.h */,
@@ -2930,6 +2926,14 @@
 			path = Commands;
 			sourceTree = "<group>";
 		};
+		B1FC2723174A795E00CCA0F9 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				B1FC2725174A798E00CCA0F9 /* NSDictionary+Frank.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -2978,7 +2982,7 @@
 		B121E78814B6D9FB0034C6A9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = LessPainful;
 			};
 			buildConfigurationList = B121E78B14B6D9FB0034C6A9 /* Build configuration list for PBXProject "calabash" */;
@@ -3339,6 +3343,8 @@
 				B1BDDB5B16564DC2009432BE /* LPUserPrefCommand.m in Sources */,
 				B1BDDB5D16564DC2009432BE /* LPVersionCommand.m in Sources */,
 				B1AA1B131740D294005A679E /* LPWebQuery.m in Sources */,
+				B1FC26C3174A62B700CCA0F9 /* LPConditionRoute.m in Sources */,
+				B1FC2727174A798E00CCA0F9 /* NSDictionary+Frank.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3561,6 +3567,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -3573,6 +3583,7 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				SDKROOT = iphoneos;
@@ -3584,11 +3595,16 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				SDKROOT = iphoneos;
@@ -3607,6 +3623,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "calabash/calabash-Prefix.pch";
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				HEADER_SEARCH_PATHS = "lib/frank/lib/PublicAutomation/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3632,6 +3649,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "calabash/calabash-Prefix.pch";
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				HEADER_SEARCH_PATHS = "lib/frank/lib/PublicAutomation/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

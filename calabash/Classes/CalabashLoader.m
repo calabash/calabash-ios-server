@@ -11,6 +11,7 @@
 #import "CalabashUISpecSelectorEngine.h"
 #import "LPUserPrefCommand.h"
 #import "LPVersionCommand.h"
+#import "LPConditionRoute.h"
 #import "LPRecordRoute.h"
 #import "FrankCommandRoute.h"
 #import <dlfcn.h>
@@ -37,13 +38,17 @@
     LPAsyncPlaybackRoute *apr =[LPAsyncPlaybackRoute new];
     [[RequestRouter singleton] registerRoute:apr];
     [apr release];
-    
+
+    LPConditionRoute *condition =[LPConditionRoute new];
+    [[RequestRouter singleton] registerRoute:condition];
+    [condition release];
+
     
     
     [[FrankCommandRoute singleton] registerCommand:[[[LPUserPrefCommand alloc] init] autorelease]
                                           withName:@"userprefs"];
     [[FrankCommandRoute singleton] registerCommand:[[[LPVersionCommand alloc] init] autorelease]
-                                          withName:@"version"];
+                                          withName:@"calabash_version"];
     
     
 }

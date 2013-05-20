@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 LessPainful. All rights reserved.
 //
 #import <Foundation/Foundation.h>
-#import "LPRoute.h"
-#import "LPHTTPResponse.h"
+#import "RequestRouter.h"
+#import "HTTPResponse.h"
 #import "LPGenericAsyncRoute.h"
 #import "UIScriptParser.h"
 @interface LPConditionRoute : LPGenericAsyncRoute
@@ -15,7 +15,7 @@
     NSTimer *_timer;    
 }
 
-@property (nonatomic, retain) UIScriptParser *parser;
+@property (nonatomic, retain) NSString *query;
 @property (nonatomic, retain) NSTimer *timer;
 @property (nonatomic, assign) NSInteger maxCount;
 @property (nonatomic, assign) NSInteger curCount;

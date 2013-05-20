@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "FrankCommandRoute.h"
-static const NSString *kLPCALABASHVERSION = @"1.0.0.pre1";
+static const NSString *kLPCALABASHVERSION = @"0.10.0";
 
 @interface LPVersionCommand : NSObject<FrankCommand>
 

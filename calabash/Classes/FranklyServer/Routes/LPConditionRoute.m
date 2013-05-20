@@ -8,10 +8,9 @@
 //
 
 #import "LPConditionRoute.h"
-#import "LPHTTPResponse.h"
-#import "LPHTTPConnection.h"
 #import "LPResources.h"
 #import "LPRecorder.h"
+#import "LPOperation.h"
 #import "UIScriptParser.h"
 #import "LPTouchUtils.h"
 #import "LPJSONUtils.h"
@@ -22,7 +21,7 @@
 @synthesize timer=_timer;
 @synthesize maxCount;
 @synthesize curCount;
-@synthesize parser;
+@synthesize query;
 
 
 // Should only return YES after the LPHTTPConnection has read all available data.
@@ -30,10 +29,10 @@
 {
     return !self.timer && [super isDone];
 }
-
+    
 -(void) beginOperation {
     self.done = NO;
-    id query = [self.data objectForKey:@"query"];
+    self.query = [self.data objectForKey:@"query"];
     NSString *condition = [self.data objectForKey:@"condition"];
     if (!condition)
     {
@@ -60,28 +59,21 @@
     }
 
     
+    
     NSArray* result = nil;
-    if (query)
+    if (self.query)
     {
-        self.parser = [UIScriptParser scriptParserWithObject:query];
-        [self.parser parse];
-        
-        NSMutableArray* views = [NSMutableArray arrayWithCapacity:32];
-        for (UIWindow *window in [[UIApplication sharedApplication] windows])
-        {
-            [views addObjectsFromArray:[window subviews]];
-        }
-        
-        result = [self.parser evalWith:views];
+     
+        result = [[LPOperation performQuery:self.query] retain];
     }
         
     NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObject:condition forKey:@"condition" ];
     if (result)
     {
         [params setObject:result forKey:@"views"];
-        [params setObject:self.parser  forKey:@"parser"];
-        
+        [result release];
     }
+
         
     self.timer = [NSTimer scheduledTimerWithTimeInterval:[freq doubleValue] 
                                                       target:self 
@@ -91,21 +83,14 @@
     
 
 }
+
 -(void)checkConditionWithTimer:(NSTimer *)aTimer
 {
     self.curCount += 1;
     NSString *condition = [aTimer.userInfo objectForKey:@"condition"];
     if ([condition isEqualToString:@"NONE_ANIMATING"])
     {
-        UIScriptParser *parse = [aTimer.userInfo objectForKey:@"parser"];
-        NSMutableArray* initialViews = [NSMutableArray arrayWithCapacity:32];
-        for (UIWindow *window in [[UIApplication sharedApplication] windows]) 
-        {
-            [initialViews addObjectsFromArray:[window subviews]];
-        }
-        
-        NSArray *views = [parse evalWith:initialViews];
-        
+        NSArray *views = [[LPOperation performQuery:self.query] retain];
         for (id v in views)
         {
             if ([v isKindOfClass:[UIView class]])
@@ -113,16 +98,17 @@
                 UIView *view = (UIView *)v;
                 if ([[view.layer animationKeys] count] > 0)
                 {
-                    [self failWithMessageFormat:@"Found animating view: %@" message:v];
+                    [self failWithMessageFormat:@"Found animating view: %@" message: [view description]];
                     return;
                 }
             }
-            
         }
         if (self.curCount == self.maxCount)
         {
             [self succeedWithResult:[NSArray array]];
         }
+
+        
         return;
         
     }
@@ -148,7 +134,7 @@
 {
     [self.timer invalidate];    
     self.timer = nil;
-    self.parser = nil;
+    self.query = nil;
     [super failWithMessageFormat:messageFmt message:message];
 }
 
@@ -156,14 +142,14 @@
 {
     [self.timer invalidate];    
     self.timer = nil;
-    self.parser = nil;
+    self.query = nil;
     [super succeedWithResult:result];
 }
 
 -(void) dealloc 
 {
     self.timer = nil;
-    self.parser = nil;    
+    self.query = nil;    
     [super dealloc];
 }
 

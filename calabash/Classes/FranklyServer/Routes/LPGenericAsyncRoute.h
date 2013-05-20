@@ -16,11 +16,11 @@
     HTTPConnection *_conn;
     NSDictionary *_data;
     NSDictionary *_jsonResponse;
-    NSData *_bytes;
+    volatile NSData *_bytes;
     
 }
 
-@property (nonatomic, assign) BOOL done;
+@property (nonatomic, assign) volatile BOOL done;
 @property (nonatomic, assign) HTTPConnection *conn;
 @property (nonatomic, retain) NSDictionary *data;
 @property (nonatomic, retain) NSDictionary *jsonResponse;

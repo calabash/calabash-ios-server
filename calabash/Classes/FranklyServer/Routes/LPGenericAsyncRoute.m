@@ -20,6 +20,7 @@
 
 
 @implementation LPGenericAsyncRoute
+
 @synthesize done=_done;
 @synthesize conn=_conn;
 @synthesize data=_data;
@@ -74,20 +75,29 @@
 - (NSData *)readDataOfLength:(NSUInteger)length {
     if (!self.done) 
     {
-        
-        [self beginOperation];        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            
+            [self beginOperation];
+
+        });
         return nil;//Data generated async.
     }
     else {//done is set to YES only after events and jsonResponse is set (playbackDone)
         if (!_bytes) 
         {
-            NSString* serialized = [LPJSONUtils serializeDictionary:self.jsonResponse];
+            __block NSString* serialized;
+            dispatch_sync(dispatch_get_main_queue(), ^{
+
+                serialized = [[LPJSONUtils serializeDictionary:self.jsonResponse] retain];
+            });
             self.jsonResponse = nil;
-            _bytes = [serialized dataUsingEncoding:NSUTF8StringEncoding];    
+            _bytes = [serialized dataUsingEncoding:NSUTF8StringEncoding];
+            [serialized release];
+            
         }
         if (length >= [_bytes length]) 
         {
-            return _bytes;
+            return [[_bytes mutableCopy] autorelease];
         } 
         else 
         {//length < [_bytes length]

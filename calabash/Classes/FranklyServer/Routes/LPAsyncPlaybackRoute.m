@@ -11,18 +11,15 @@
 #import "HTTPConnection.h"
 #import "LPResources.h"
 #import "LPRecorder.h"
-#import "UIScriptParser.h"
 #import "LPTouchUtils.h"
 #import "LPJSONUtils.h"
 #import "LPOperation.h"
 
 
 @implementation LPAsyncPlaybackRoute
-{
-    dispatch_queue_t queue;
-}
+
 @synthesize events=_events;
-@synthesize parser=_parser;
+
 
 - (BOOL)isDone 
 {
@@ -46,10 +43,8 @@
         id query = [self.data objectForKey:@"query"];
         UIView *targetView = nil;
         if (query != nil) {
-            __block NSArray* result;
-            dispatch_sync(dispatch_get_main_queue(), ^{
-                result = [[LPOperation performQuery:query] retain];
-            });
+            NSArray* result = [[LPOperation performQuery:query] retain];
+            
             if ([result count] >0) {
                 id v = [result objectAtIndex:0];//autopick first?
                 
@@ -196,33 +191,24 @@
 - (void) play:(NSArray *)events 
 {
 
-    queue = dispatch_get_current_queue();
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
         [[LPRecorder sharedRecorder] load: self.events];
         [[LPRecorder sharedRecorder] playbackWithDelegate: self doneSelector: @selector(playbackDone:)];
         
-    });
     
 }
 
 //When this event occurs, jsonResponse has already been determined.
 -(void) playbackDone:(NSDictionary *)details 
 {
-    dispatch_async(queue, ^{
         self.done = YES;
         self.events = nil;
-        self.parser = nil;
         [self.conn responseHasAvailableData:self];
-
-    });
 }
 
 
 -(void) dealloc 
 {
     self.events = nil;
-    self.parser = nil;    
     [super dealloc];
 }
 
