@@ -15,7 +15,7 @@ def build_cmd(arch)
   %Q[xcodebuild -scheme Framework -configuration Debug -sdk #{arch}#{discover_latest_sdk_version} BUILD_DIR=\"#{build_dir}\" GCC_PREPROCESSOR_DEFINITIONS="\\$(inherited) DEBUG=0" clean build]
 end
 
-desc "Build the arm library"
+desc "Build the universal library"
 task :build_lib do
   sh build_cmd(:iphoneos)
 end
