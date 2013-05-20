@@ -1,10 +1,24 @@
-DOCUMENTATION COMING
---------------------
+libCalabash
+-----------
 
+For general information about Calabash see [Calaba.sh](http://calaba.sh).
 
-## master branch contains the 0.10.x line. 
-This is intended to be integrated into the Frank project, although unfortunately for various reasons I've not been able to work on this recently. It should build however.
+# Building libCalabash
 
-## the calabash-ios-server branch is the 0.9.x line
-This is Calabash as is currently used. The easiest way to build is to checkout calabash-ios-server and calabash-ios
-(client) and look at the Rakefile inside calabash-ios/calabash-cucumber. Alternatively just build from xcode.
+Clone this repo and checkout the master branch.
+
+Update git submodules
+
+    git submodule update --init --recursive
+
+Run
+
+    rake
+
+to build the library.
+
+## Branches
+
+The branch calabash-ios-server is used for Calabash iOS 0.9.x.
+
+Please refer to the readme of this branch for instructions on how to build that.
