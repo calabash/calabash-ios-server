@@ -6,11 +6,13 @@
 
 #import "LPOperation.h"
 #import "LPScrollToRowOperation.h"
+#import "LPScrollToRowWithIdOperation.h"
 #import "LPScrollOperation.h"
 #import "LPQueryOperation.h"
 #import "LPSetTextOperation.h"
 #import "LPQueryAllOperation.h"
 #import "LPRecorder.h"
+
 
 @implementation LPOperation
 
@@ -19,6 +21,8 @@
     LPOperation* op = nil;
     if ([opName isEqualToString:@"scrollToRow"]) {
         op = [[LPScrollToRowOperation alloc] initWithOperation:dictionary];
+    } else if ([opName isEqualToString:@"scrollToRowWithId"]) {
+      op = [[LPScrollToRowWithIdOperation alloc] initWithOperation:dictionary];
     } else if ([opName isEqualToString:@"scroll"]) {
         op = [[LPScrollOperation alloc] initWithOperation:dictionary];
     } else if ([opName isEqualToString:@"query"]) {

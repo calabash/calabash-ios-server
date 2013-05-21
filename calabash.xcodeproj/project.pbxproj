@@ -95,6 +95,8 @@
 		B1EBF08916EE63A000AE4D40 /* LPAppPropertyRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EBF08516EE63A000AE4D40 /* LPAppPropertyRoute.m */; };
 		B1EBF08A16EE63A000AE4D40 /* LPQueryLogRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B1EBF08616EE63A000AE4D40 /* LPQueryLogRoute.h */; };
 		B1EBF08B16EE63A000AE4D40 /* LPQueryLogRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EBF08716EE63A000AE4D40 /* LPQueryLogRoute.m */; };
+		F5CB30F8174BA62400F02F11 /* LPScrollToRowWithIdOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = F5CB30F6174BA62300F02F11 /* LPScrollToRowWithIdOperation.h */; };
+		F5CB30F9174BA62400F02F11 /* LPScrollToRowWithIdOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5CB30F7174BA62400F02F11 /* LPScrollToRowWithIdOperation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -270,6 +272,8 @@
 		B1FF22B515CF002500F3A17B /* MKMapView+ZoomLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+ZoomLevel.m"; sourceTree = "<group>"; };
 		B1FF22B615CF002500F3A17B /* MKPolylineView+Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKPolylineView+Test.h"; sourceTree = "<group>"; };
 		B1FF22B715CF002500F3A17B /* MKPolylineView+Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKPolylineView+Test.m"; sourceTree = "<group>"; };
+		F5CB30F6174BA62300F02F11 /* LPScrollToRowWithIdOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPScrollToRowWithIdOperation.h; sourceTree = "<group>"; };
+		F5CB30F7174BA62400F02F11 /* LPScrollToRowWithIdOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScrollToRowWithIdOperation.m; sourceTree = "<group>"; tabWidth = 2; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -479,6 +483,8 @@
 				B184FDC714B6DB2B002A744C /* LPScrollOperation.m */,
 				B184FDC814B6DB2B002A744C /* LPScrollToRowOperation.h */,
 				B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */,
+				F5CB30F6174BA62300F02F11 /* LPScrollToRowWithIdOperation.h */,
+				F5CB30F7174BA62400F02F11 /* LPScrollToRowWithIdOperation.m */,
 				B184FDCA14B6DB2B002A744C /* LPSetTextOperation.h */,
 				B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */,
 			);
@@ -641,6 +647,7 @@
 				B1B19DC816D162CF00D3D80B /* UIScriptASTVisibility.h in Headers */,
 				B1EBF08816EE63A000AE4D40 /* LPAppPropertyRoute.h in Headers */,
 				B1EBF08A16EE63A000AE4D40 /* LPQueryLogRoute.h in Headers */,
+				F5CB30F8174BA62400F02F11 /* LPScrollToRowWithIdOperation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -792,6 +799,7 @@
 				B1B19DC916D162CF00D3D80B /* UIScriptASTVisibility.m in Sources */,
 				B1EBF08916EE63A000AE4D40 /* LPAppPropertyRoute.m in Sources */,
 				B1EBF08B16EE63A000AE4D40 /* LPQueryLogRoute.m in Sources */,
+				F5CB30F9174BA62400F02F11 /* LPScrollToRowWithIdOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
