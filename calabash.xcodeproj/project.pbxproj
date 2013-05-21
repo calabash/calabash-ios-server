@@ -152,8 +152,8 @@
 		B116C9B914E6565500663205 /* LPHTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPHTTPResponse.h; sourceTree = "<group>"; };
 		B116C9BA14E6565500663205 /* LPHTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPHTTPServer.h; sourceTree = "<group>"; };
 		B116C9BB14E6565500663205 /* LPHTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPHTTPServer.m; sourceTree = "<group>"; };
-		B12179A6165D613100B6DA43 /* LPScreenshotRoute2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPScreenshotRoute2.h; path = calabash/Classes/FranklyServer/Routes/LPScreenshotRoute2.h; sourceTree = "<group>"; };
-		B12179A7165D613100B6DA43 /* LPScreenshotRoute2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPScreenshotRoute2.m; path = calabash/Classes/FranklyServer/Routes/LPScreenshotRoute2.m; sourceTree = "<group>"; };
+		B12179A6165D613100B6DA43 /* LPScreenshotRoute2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPScreenshotRoute2.h; sourceTree = "<group>"; };
+		B12179A7165D613100B6DA43 /* LPScreenshotRoute2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScreenshotRoute2.m; sourceTree = "<group>"; };
 		B121E79714B6D9FB0034C6A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B121E79B14B6D9FB0034C6A9 /* calabash-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "calabash-Info.plist"; sourceTree = "<group>"; };
 		B121E79D14B6D9FB0034C6A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -306,8 +306,6 @@
 		B121E78614B6D9FB0034C6A9 = {
 			isa = PBXGroup;
 			children = (
-				B12179A6165D613100B6DA43 /* LPScreenshotRoute2.h */,
-				B12179A7165D613100B6DA43 /* LPScreenshotRoute2.m */,
 				B16C307C15191A8C00DAA3FA /* calabash-js */,
 				B121E79914B6D9FB0034C6A9 /* calabash */,
 				B121E79614B6D9FB0034C6A9 /* Frameworks */,
@@ -494,6 +492,8 @@
 		B184FDD014B6DB2B002A744C /* Routes */ = {
 			isa = PBXGroup;
 			children = (
+				B12179A6165D613100B6DA43 /* LPScreenshotRoute2.h */,
+				B12179A7165D613100B6DA43 /* LPScreenshotRoute2.m */,
 				B1EBF08416EE63A000AE4D40 /* LPAppPropertyRoute.h */,
 				B1EBF08516EE63A000AE4D40 /* LPAppPropertyRoute.m */,
 				B1EBF08616EE63A000AE4D40 /* LPQueryLogRoute.h */,
