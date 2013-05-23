@@ -11,7 +11,6 @@
 #import "LPHTTPConnection.h"
 #import "LPResources.h"
 #import "LPRecorder.h"
-#import "UIScriptParser.h"
 #import "LPTouchUtils.h"
 #import "LPJSONUtils.h"
 #import "LPOperation.h"
@@ -19,7 +18,7 @@
 
 @implementation LPAsyncPlaybackRoute
 @synthesize events=_events;
-@synthesize parser=_parser;
+
 
 - (BOOL)isDone 
 {
@@ -192,15 +191,13 @@
 {
     self.done = YES;
     self.events = nil;
-    self.parser = nil;
     [self.conn responseHasAvailableData:self];
 }
 
 
 -(void) dealloc 
 {
-    self.events = nil;
-    self.parser = nil;    
+    self.events = nil;    
     [super dealloc];
 }
 

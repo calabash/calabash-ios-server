@@ -17,6 +17,7 @@
 +(UIScriptParser*)scriptParserWithObject:(id)obj;
 +(UIView*)findViewByClass:(NSString*) className fromView:(UIView*) parent;
 - (id) initWithUIScript:(NSString*) script;
+- (id) initWithQuery:(NSArray*) aq;
 
 - (void) parse;
 - (NSArray*) parsedTokens;

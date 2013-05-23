@@ -60,14 +60,9 @@
         for (UIWindow *window in [[UIApplication sharedApplication] windows]) 
         {
             [views addObjectsFromArray:[window subviews]];
-            //        if (![window respondsToSelector:@selector(screen)] || [window screen] == [UIScreen mainScreen]) {
-            //            break;
-            //        }
         }
         result = [self.parser evalWith:views];
-        //DDLogVerbose(@"Evaled UIScript as\n%@", result);        
     } else {
-        //DDLogInfo(@"Received null query.");
         result = nil;
     }
     self.parser = nil;

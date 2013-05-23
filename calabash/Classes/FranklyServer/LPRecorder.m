@@ -90,7 +90,7 @@ static LPRecorder *sharedRecorder = nil;
 -(void)playbackDone:(NSDictionary *)details {
 	NSLog(@"Playback complete");
 	[playbackDelegate performSelector: playbackDoneSelector];
-    [playbackDelegate autorelease];
+    [playbackDelegate release];
     playbackDelegate=nil;
 }
 

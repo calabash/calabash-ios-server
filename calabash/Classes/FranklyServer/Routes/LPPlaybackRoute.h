@@ -15,6 +15,6 @@
 @property (nonatomic, assign) BOOL done;
 
 -(void) play:(NSArray *)events;
-//-(void) waitUntilPlaybackDone;
+
     
 @end

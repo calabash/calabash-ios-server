@@ -11,7 +11,6 @@
 #import "LPHTTPConnection.h"
 #import "LPResources.h"
 #import "LPRecorder.h"
-#import "UIScriptParser.h"
 #import "LPTouchUtils.h"
 #import "LPJSONUtils.h"
 

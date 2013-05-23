@@ -48,8 +48,18 @@
 +(NSArray*)performQuery:(id)query
 {
     
-    UIScriptParser* parser = [UIScriptParser scriptParserWithObject:query];
-    [parser parse];
+    UIScriptParser *parser = nil;
+    if ([query isKindOfClass:[NSString class]])
+    {
+        parser = [[UIScriptParser alloc] initWithUIScript:(NSString*) query];
+    }
+    else if ([query isKindOfClass:[NSArray class]])
+    {
+        parser = [[UIScriptParser alloc] initWithQuery:(NSArray*) query];
+    }
+    else {
+        return nil;
+    }
     
     NSMutableArray* views = [NSMutableArray arrayWithCapacity:32];
     for (UIWindow *window in [[UIApplication sharedApplication] windows])
@@ -57,40 +67,9 @@
         [views addObjectsFromArray:[window subviews]];
     }
     NSArray* result = [parser evalWith:views];
-
-    LPOperation* op = [[LPQueryOperation alloc] initWithOperation:
-                         [NSDictionary dictionaryWithObjectsAndKeys:
-                            @"query",@"method_name",
-                            [NSArray array],@"arguments",
-                            nil]];
+    [parser release];
     
-    NSMutableArray *finalResult = [NSMutableArray arrayWithCapacity:[result count]];
-    for (id v in result)
-    {
-        NSError *err = nil;
-        [op performWithTarget:v error:&err];
-        if (err) {continue;}
-        else
-        {
-            [finalResult addObject: v];
-        }
-    }
-    [op release];
-    
-    return finalResult;
-}
-+(NSArray*)performQueryAll:(id)query
-{
-    
-    UIScriptParser* parser = [UIScriptParser scriptParserWithObject:query];
-    [parser parse];
-    
-    NSMutableArray* views = [NSMutableArray arrayWithCapacity:32];
-    for (UIWindow *window in [[UIApplication sharedApplication] windows])
-    {
-        [views addObjectsFromArray:[window subviews]];
-    }
-    return [parser evalWith:views];
+    return result;
 }
 
 

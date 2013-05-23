@@ -16,8 +16,6 @@
 + (id) operationFromDictionary:(NSDictionary*) dictionary;
 
 +(NSArray*)performQuery:(id)query;
-+(NSArray*)performQueryAll:(id)query;
-
 
 - (id) initWithOperation:(NSDictionary *)operation;
 

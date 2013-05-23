@@ -7,7 +7,7 @@
 #import "LPPlaybackRoute.h"
 #import "LPResources.h"
 #import "LPRecorder.h"
-#import "UIScriptParser.h"
+#import "LPOperation.h"
 #import "LPTouchUtils.h"
 @implementation LPPlaybackRoute
 @synthesize events=_events;
@@ -22,18 +22,8 @@
     NSString *query = [data objectForKey:@"query"];
     UIView *targetView = nil;
     if (query != nil) {
-        UIScriptParser *parser = [[UIScriptParser alloc] initWithUIScript:query];
-        [parser parse];
-        NSMutableArray* views = [NSMutableArray arrayWithCapacity:32];
-        for (UIWindow *window in [[UIApplication sharedApplication] windows]) 
-        {
-            [views addObjectsFromArray:[window subviews]];
-            //        if (![window respondsToSelector:@selector(screen)] || [window screen] == [UIScreen mainScreen]) {
-            //            break;
-            //        }
-        }
-        NSArray* result = [parser evalWith:views];
-        [parser release];
+        
+        NSArray* result = [LPOperation performQuery:query];
         
         if ([result count] >0) {
             UIView* v = [result objectAtIndex:0];//autopick first
