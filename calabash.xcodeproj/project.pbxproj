@@ -61,7 +61,6 @@
 		B17E759515D4357F0066550B /* LPGenericAsyncRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F315BC1ECD00408364 /* LPGenericAsyncRoute.m */; };
 		B17E759615D4357F0066550B /* LPConditionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B163213415BBF13200408364 /* LPConditionRoute.m */; };
 		B17E759715D4357F0066550B /* LPInterpolateRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A04011511546F002FA032 /* LPInterpolateRoute.m */; };
-		B17E759815D4357F0066550B /* LPPlaybackRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8A14B6DC7F002A744C /* LPPlaybackRoute.m */; };
 		B17E759915D4357F0066550B /* LPRecordRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8B14B6DC7F002A744C /* LPRecordRoute.m */; };
 		B17E759A15D4357F0066550B /* LPMapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD214B6DB2B002A744C /* LPMapRoute.m */; };
 		B17E759B15D4357F0066550B /* LPNoContentResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD414B6DB2B002A744C /* LPNoContentResponse.m */; };
@@ -209,7 +208,6 @@
 		B184FDD214B6DB2B002A744C /* LPMapRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPMapRoute.m; sourceTree = "<group>"; };
 		B184FDD314B6DB2B002A744C /* LPNoContentResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LPNoContentResponse.h; sourceTree = "<group>"; };
 		B184FDD414B6DB2B002A744C /* LPNoContentResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPNoContentResponse.m; sourceTree = "<group>"; };
-		B184FDD514B6DB2B002A744C /* LPPlaybackRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPPlaybackRoute.h; sourceTree = "<group>"; };
 		B184FDD714B6DB2B002A744C /* LPRecordRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LPRecordRoute.h; sourceTree = "<group>"; };
 		B184FDDB14B6DB2B002A744C /* LPScreenshotRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPScreenshotRoute.h; sourceTree = "<group>"; };
 		B184FDDE14B6DB2B002A744C /* CDataScanner_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner_Extensions.h; sourceTree = "<group>"; };
@@ -246,7 +244,6 @@
 		B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPTouchUtils.m; sourceTree = "<group>"; };
 		B184FE8714B6DBAC002A744C /* LPRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPRecorder.m; sourceTree = "<group>"; };
 		B184FE8914B6DC7F002A744C /* LPMapRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LPMapRoute.h; sourceTree = "<group>"; };
-		B184FE8A14B6DC7F002A744C /* LPPlaybackRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPlaybackRoute.m; sourceTree = "<group>"; };
 		B184FE8B14B6DC7F002A744C /* LPRecordRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPRecordRoute.m; sourceTree = "<group>"; };
 		B184FE9014B6DD33002A744C /* LPScreenshotRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScreenshotRoute.m; sourceTree = "<group>"; };
 		B184FE9214B6DDA1002A744C /* LPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPOperation.m; sourceTree = "<group>"; };
@@ -511,8 +508,6 @@
 				B12A04001511546F002FA032 /* LPInterpolateRoute.h */,
 				B12A04011511546F002FA032 /* LPInterpolateRoute.m */,
 				B184FE8914B6DC7F002A744C /* LPMapRoute.h */,
-				B184FDD514B6DB2B002A744C /* LPPlaybackRoute.h */,
-				B184FE8A14B6DC7F002A744C /* LPPlaybackRoute.m */,
 				B184FDD714B6DB2B002A744C /* LPRecordRoute.h */,
 				B184FE8B14B6DC7F002A744C /* LPRecordRoute.m */,
 				B184FDD214B6DB2B002A744C /* LPMapRoute.m */,
@@ -764,7 +759,6 @@
 				B17E759515D4357F0066550B /* LPGenericAsyncRoute.m in Sources */,
 				B17E759615D4357F0066550B /* LPConditionRoute.m in Sources */,
 				B17E759715D4357F0066550B /* LPInterpolateRoute.m in Sources */,
-				B17E759815D4357F0066550B /* LPPlaybackRoute.m in Sources */,
 				B17E759915D4357F0066550B /* LPRecordRoute.m in Sources */,
 				B17E759A15D4357F0066550B /* LPMapRoute.m in Sources */,
 				B17E759B15D4357F0066550B /* LPNoContentResponse.m in Sources */,

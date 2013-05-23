@@ -150,28 +150,4 @@
 	return returnValue;	
 }
 
--(void) wait:(CFTimeInterval)seconds {
-    CFRunLoopRunInMode(kCFRunLoopDefaultMode, seconds, false);
-}
-
--(void) play:(NSArray *)events {
-    _done = NO;
-    _events = [events retain];
-    [[LPRecorder sharedRecorder] load: events];
-    [[LPRecorder sharedRecorder] playbackWithDelegate: self doneSelector: @selector(playbackDone:)];
-}
-
-//-(void) waitUntilPlaybackDone {
-//    while(!_done) {
-//        CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.5, false);
-//    }
-//}
-
--(void) playbackDone:(NSDictionary *)details {
-    _done = YES;
-    [_events release];
-    _events = nil;
-}
-
-
 @end
