@@ -127,7 +127,7 @@ static NSInteger sortFunction(UIView* v1, UIView* v2, void *ctx) {
 
 - (void) dealloc {
     _class = NULL;
-    [_className dealloc];_className=nil;
+    [_className release];_className=nil;
     [super dealloc];
 }
 

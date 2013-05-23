@@ -60,6 +60,7 @@
     else {
         return nil;
     }
+    [parser parse];
     
     NSMutableArray* views = [NSMutableArray arrayWithCapacity:32];
     for (UIWindow *window in [[UIApplication sharedApplication] windows])
