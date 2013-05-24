@@ -6,6 +6,7 @@
 
 #import "LPOperation.h"
 #import "LPScrollToRowOperation.h"
+#import "LPScrollToRowWithMarkOperation.h"
 #import "LPScrollOperation.h"
 #import "LPQueryOperation.h"
 #import "LPFlashOperation.h"
@@ -21,7 +22,9 @@
     if ([opName isEqualToString:@"scrollToRow"])
     {
         op = [[LPScrollToRowOperation alloc] initWithOperation:dictionary];
-    } else if ([opName isEqualToString:@"scroll"])
+    } else if ([opName isEqualToString:@"scrollToRowWithMark"]) {
+      op = [[LPScrollToRowWithMarkOperation alloc] initWithOperation:dictionary];
+    }  else if ([opName isEqualToString:@"scroll"])
     {
         op = [[LPScrollOperation alloc] initWithOperation:dictionary];
     } else if ([opName isEqualToString:@"query"])
