@@ -98,6 +98,8 @@
 		B1EBF08B16EE63A000AE4D40 /* LPQueryLogRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EBF08716EE63A000AE4D40 /* LPQueryLogRoute.m */; };
 		F5AE0BC6174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = F5AE0BC4174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h */; };
 		F5AE0BC7174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */; };
+		F5FDE7901755D56B002A3749 /* LPDatePickerOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = F5FDE78E1755D56B002A3749 /* LPDatePickerOperation.h */; };
+		F5FDE7911755D56B002A3749 /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5FDE78F1755D56B002A3749 /* LPDatePickerOperation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -275,6 +277,8 @@
 		B1FF22B715CF002500F3A17B /* MKPolylineView+Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKPolylineView+Test.m"; sourceTree = "<group>"; };
 		F5AE0BC4174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPScrollToRowWithMarkOperation.h; sourceTree = "<group>"; };
 		F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScrollToRowWithMarkOperation.m; sourceTree = "<group>"; };
+		F5FDE78E1755D56B002A3749 /* LPDatePickerOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDatePickerOperation.h; sourceTree = "<group>"; };
+		F5FDE78F1755D56B002A3749 /* LPDatePickerOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDatePickerOperation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -472,6 +476,8 @@
 		B184FDC114B6DB2B002A744C /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				F5FDE78E1755D56B002A3749 /* LPDatePickerOperation.h */,
+				F5FDE78F1755D56B002A3749 /* LPDatePickerOperation.m */,
 				F5AE0BC4174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h */,
 				F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */,
 				B19440421725C70A00EE1B25 /* LPFlashOperation.h */,
@@ -650,6 +656,7 @@
 				B1EBF08A16EE63A000AE4D40 /* LPQueryLogRoute.h in Headers */,
 				B19440441725C70A00EE1B25 /* LPFlashOperation.h in Headers */,
 				F5AE0BC6174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h in Headers */,
+				F5FDE7901755D56B002A3749 /* LPDatePickerOperation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -802,6 +809,7 @@
 				B1EBF08B16EE63A000AE4D40 /* LPQueryLogRoute.m in Sources */,
 				B19440451725C70A00EE1B25 /* LPFlashOperation.m in Sources */,
 				F5AE0BC7174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m in Sources */,
+				F5FDE7911755D56B002A3749 /* LPDatePickerOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

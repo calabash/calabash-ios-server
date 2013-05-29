@@ -12,6 +12,7 @@
 #import "LPFlashOperation.h"
 #import "LPSetTextOperation.h"
 #import "LPQueryAllOperation.h"
+#import "LPDatePickerOperation.h"
 #import "LPRecorder.h"
 
 @implementation LPOperation
@@ -40,8 +41,10 @@
     else if ([opName isEqualToString:@"flash"])
     {
         op = [[LPFlashOperation alloc] initWithOperation:dictionary];
-    }
-    else
+    } else if ([opName isEqualToString:@"changeDatePickerDate"])
+    {
+        op = [[LPDatePickerOperation alloc] initWithOperation:dictionary];
+    } else
     {
         op = [[LPOperation alloc] initWithOperation:dictionary];
     }
