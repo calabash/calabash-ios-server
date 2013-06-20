@@ -14,6 +14,9 @@
 #import "LPTouchUtils.h"
 #import "LPJSONUtils.h"
 #import "LPOperation.h"
+#import "UIAutomation.h"
+
+@class UIDevice;
 
 
 @implementation LPAsyncPlaybackRoute
@@ -30,6 +33,7 @@
 -(void) beginOperation 
 {
     self.done = NO;
+    NSString *gesture = [self.data objectForKey:@"uia_gesture"];
     NSString *base64Events = [self.data objectForKey:@"events"];
     id query = [self.data objectForKey:@"query"];
     UIView *targetView = nil;
@@ -58,6 +62,25 @@
                 
                 CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)[v valueForKey:@"center"], &center);
             }
+            
+            targetView = v;
+            
+            
+            if ([gesture isEqualToString:@"tap"]) {
+                    //this is not so pretty, but just a temporary solution
+                    // until full merge with Frank
+                    UIASyntheticEvents *gen= [NSClassFromString(@"UIASyntheticEvents") sharedEventGenerator];
+                    [gen sendTap:center];
+                    self.done = YES;
+                    self.events = nil;
+                    self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:
+                                         [NSArray arrayWithObject:targetView], @"results",
+                                         @"SUCCESS",@"outcome",
+                                         nil];
+                    [self.conn responseHasAvailableData:self];
+                    return;
+            }
+
 
             NSString *centerView = NSStringFromCGPoint(center);
             
@@ -66,7 +89,7 @@
             
             NSArray* baseEvents = [LPResources eventsFromEncoding:base64Events];
             
-            targetView = v;
+            
             self.events = [LPResources transformEvents:baseEvents 
                                                toPoint:CGPointMake(center.x+offsetPoint.x, center.y+offsetPoint.y)];
             
