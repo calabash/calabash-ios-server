@@ -83,20 +83,30 @@
                                            
                                            nil];
             
-            NSString* type = nil;
-            if ([object isKindOfClass:[UIControl class]])
+
+            NSString *lbl = [object accessibilityLabel];
+            if (lbl)
             {
-                type = @"UIControl";
+                [result setObject:lbl forKey:@"label"];
             }
             else
             {
-                type = @"UIView";
+                [result setObject:[NSNull null] forKey:@"label"];                
             }
-            [result setObject:type forKey:@"UIType"];
-            
-            
-            
-            
+
+            if ([result respondsToSelector:@selector(accessibilityIdentifier)]) {
+
+                NSString *aid = [object accessibilityIdentifier];
+                if (aid)
+                {
+                    [result setObject:aid forKey:@"id"];
+                }
+                else
+                {
+                    [result setObject:[NSNull null] forKey:@"id"];
+                }
+
+            }
             
             
             CGRect frame = [object frame];
