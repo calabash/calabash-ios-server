@@ -37,17 +37,21 @@
     
     UIDevice *device = [UIDevice currentDevice];
     NSDictionary *env = [[NSProcessInfo processInfo]environment];
-    
-    BOOL inch5Phone = NO;
+
+    BOOL iphone5Like = NO;
     if([@"iPhone Simulator" isEqualToString: [device model]])
     {
         
         NSPredicate *inch5PhonePred = [NSPredicate predicateWithFormat:@"IPHONE_SIMULATOR_VERSIONS LIKE '*iPhone (Retina 4-inch)*'"];
-        inch5Phone = [inch5PhonePred evaluateWithObject:env];
+        iphone5Like = [inch5PhonePred evaluateWithObject:env];
     }
     else if ([[device model] hasPrefix:@"iPhone"])
     {
-        inch5Phone = [system isEqualToString:@"iPhone5,2"];
+        iphone5Like = [system hasPrefix:@"iPhone5"];
+    }
+    else if ([[device model] hasPrefix:@"iPod"])
+    {
+        iphone5Like = [system hasPrefix:@"iPod5"];
     }
     
     NSString *dev = [env objectForKey:@"IPHONE_SIMULATOR_DEVICE"];
@@ -67,7 +71,7 @@
                          [[UIDevice currentDevice] systemVersion], @"iOS_version",
                          nameString,@"app_name",
                          system, @"system",
-                         [NSNumber numberWithBool:inch5Phone], @"4inch",
+                         [NSNumber numberWithBool:iphone5Like], @"4inch",
                          dev, @"simulator_device",
                          sim, @"simulator",
                          versionString,@"app_version",
