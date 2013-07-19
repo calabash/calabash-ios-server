@@ -141,7 +141,22 @@
                     [res addObject:v];
                 }            
                 continue;
-            } 
+            }
+            if ([self.selectorName isEqualToString:@"id"])
+            {
+                NSString *val = nil;
+                if ([v respondsToSelector:@selector(accessibilityIdentifier)])
+                {
+                    val = [v accessibilityIdentifier];
+                    if ([val isEqualToString:(NSString*)self.objectValue])
+                    {
+                        [res addObject:v];
+                        continue;
+                    }
+                }
+                continue;
+            }
+            
             if ([v isKindOfClass:[UITableViewCell class]] && 
                 [self.selectorName isEqualToString:@"indexPath"])
             {
