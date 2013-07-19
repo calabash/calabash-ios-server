@@ -9,7 +9,6 @@
 #import "LPScrollToRowWithMarkOperation.h"
 #import "LPScrollOperation.h"
 #import "LPQueryOperation.h"
-#import "LPFlashOperation.h"
 #import "LPSetTextOperation.h"
 #import "LPQueryAllOperation.h"
 #import "LPRecorder.h"
@@ -36,10 +35,6 @@
     } else if ([opName isEqualToString:@"setText"])
     {
         op = [[LPSetTextOperation alloc] initWithOperation:dictionary];
-    }
-    else if ([opName isEqualToString:@"flash"])
-    {
-        op = [[LPFlashOperation alloc] initWithOperation:dictionary];
     }
     else
     {
