@@ -11,18 +11,12 @@
     SEL _selector;
 	NSArray *_arguments;
     BOOL _done;
-    NSArray *_events;
 }
 + (id) operationFromDictionary:(NSDictionary*) dictionary;
 
 +(NSArray*)performQuery:(id)query;
-+(NSArray*)performQueryAll:(id)query;
-
 
 - (id) initWithOperation:(NSDictionary *)operation;
 
 - (id) performWithTarget:(UIView*) view error:(NSError **)error;
--(void) wait:(CFTimeInterval)seconds;
-//-(void) waitUntilPlaybackDone;
--(void) play:(NSArray *)events;
 @end

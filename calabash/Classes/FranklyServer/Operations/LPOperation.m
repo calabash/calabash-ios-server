@@ -9,6 +9,7 @@
 #import "LPScrollToRowWithMarkOperation.h"
 #import "LPScrollOperation.h"
 #import "LPQueryOperation.h"
+#import "LPFlashOperation.h"
 #import "LPSetTextOperation.h"
 #import "LPQueryAllOperation.h"
 #import "LPRecorder.h"
@@ -18,20 +19,30 @@
 + (id) operationFromDictionary:(NSDictionary*) dictionary {
     NSString *opName = [dictionary valueForKey:@"method_name"];
     LPOperation* op = nil;
-    if ([opName isEqualToString:@"scrollToRow"]) {
+    if ([opName isEqualToString:@"scrollToRow"])
+    {
         op = [[LPScrollToRowOperation alloc] initWithOperation:dictionary];
     } else if ([opName isEqualToString:@"scrollToRowWithMark"]) {
-      op = [[LPScrollToRowWithMarkOperation alloc] initWithOperation:dictionary];
+        op = [[LPScrollToRowWithMarkOperation alloc] initWithOperation:dictionary];
     }  else if ([opName isEqualToString:@"scroll"])
     {
         op = [[LPScrollOperation alloc] initWithOperation:dictionary];
-    } else if ([opName isEqualToString:@"query"]) {
+    } else if ([opName isEqualToString:@"query"])
+    {
         op = [[LPQueryOperation alloc] initWithOperation:dictionary];
-    } else if ([opName isEqualToString:@"query_all"]) {
+    } else if ([opName isEqualToString:@"query_all"])
+    {
         op = [[LPQueryAllOperation alloc] initWithOperation:dictionary];
-    } else if ([opName isEqualToString:@"setText"]) {
+    } else if ([opName isEqualToString:@"setText"])
+    {
         op = [[LPSetTextOperation alloc] initWithOperation:dictionary];
-    } else {
+    }
+    else if ([opName isEqualToString:@"flash"])
+    {
+        op = [[LPFlashOperation alloc] initWithOperation:dictionary];
+    }
+    else
+    {
         op = [[LPOperation alloc] initWithOperation:dictionary];
     }
     return [op autorelease];
@@ -40,7 +51,18 @@
 +(NSArray*)performQuery:(id)query
 {
     
-    UIScriptParser* parser = [UIScriptParser scriptParserWithObject:query];
+    UIScriptParser *parser = nil;
+    if ([query isKindOfClass:[NSString class]])
+    {
+        parser = [[UIScriptParser alloc] initWithUIScript:(NSString*) query];
+    }
+    else if ([query isKindOfClass:[NSArray class]])
+    {
+        parser = [[UIScriptParser alloc] initWithQuery:(NSArray*) query];
+    }
+    else {
+        return nil;
+    }
     [parser parse];
     
     NSMutableArray* views = [NSMutableArray arrayWithCapacity:32];
@@ -49,39 +71,9 @@
         [views addObjectsFromArray:[window subviews]];
     }
     NSArray* result = [parser evalWith:views];
-
-    LPOperation* op = [[LPQueryOperation alloc] initWithOperation:
-                         [NSDictionary dictionaryWithObjectsAndKeys:
-                            @"query",@"method_name",
-                            [NSArray array],@"arguments",
-                            nil]];
+    [parser release];
     
-    NSMutableArray *finalResult = [NSMutableArray arrayWithCapacity:[result count]];
-    for (id v in result)
-    {
-        NSError *err = nil;
-        [op performWithTarget:v error:&err];
-        if (err) {continue;}
-        else
-        {
-            [finalResult addObject: v];
-        }
-    }
-    
-    return finalResult;
-}
-+(NSArray*)performQueryAll:(id)query
-{
-    
-    UIScriptParser* parser = [UIScriptParser scriptParserWithObject:query];
-    [parser parse];
-    
-    NSMutableArray* views = [NSMutableArray arrayWithCapacity:32];
-    for (UIWindow *window in [[UIApplication sharedApplication] windows])
-    {
-        [views addObjectsFromArray:[window subviews]];
-    }
-    return [parser evalWith:views];
+    return result;
 }
 
 
@@ -107,12 +99,12 @@
 - (id) performWithTarget:(UIView*)target error:(NSError **)error {
 	NSMethodSignature *tSig = [target methodSignatureForSelector:_selector];
 	NSUInteger argc = tSig.numberOfArguments - 2;
-	if( argc != [_arguments count] ) {
-        *error = [NSError errorWithDomain:@"CalabashServer" code:1 
+	if( argc != [_arguments count]  && *error != NULL) {
+        *error = [NSError errorWithDomain:@"CalabashServer" code:1
                                  userInfo:
                   [NSDictionary dictionaryWithObjectsAndKeys:
-                    @"Arity mismatch", @"reason",
-                    [NSString stringWithFormat:@"%@ applied to selector %@ with %i args",self,NSStringFromSelector(_selector),argc],@"details"
+                   @"Arity mismatch", @"reason",
+                   [NSString stringWithFormat:@"%@ applied to selector %@ with %i args",self,NSStringFromSelector(_selector),argc],@"details"
                    ,nil]];
         return nil;
     }
@@ -120,7 +112,7 @@
 	NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:tSig];
 	[invocation setSelector:_selector];
 	
-	NSInteger index = 2; 
+	NSInteger index = 2;
 	for( NSObject* arg in _arguments) {
 		[invocation setArgument:&arg atIndex:index++];
 	}
@@ -143,9 +135,9 @@
 		void *buffer = (void *)malloc(length);
 		[invocation getReturnValue:buffer];
 		
-		// for some reason using [NSValue valueWithBytes:returnType] is creating instances of NSConcreteValue rather than NSValue, so 
+		// for some reason using [NSValue valueWithBytes:returnType] is creating instances of NSConcreteValue rather than NSValue, so
 		//I'm fudging it here with case-by-case logic
-		if( !strcmp(returnType, @encode(BOOL)) ) 
+		if( !strcmp(returnType, @encode(BOOL)) )
 		{
 			returnValue = [NSNumber numberWithBool:*((BOOL*)buffer)];
 		}else if( !strcmp(returnType, @encode(NSInteger)) )
@@ -159,31 +151,7 @@
 		}
 		free(buffer);//memory leak here, but apparently NSValue doesn't copy the passed buffer, it just stores the pointer
 	}
-	return returnValue;	
+	return returnValue;
 }
-
--(void) wait:(CFTimeInterval)seconds {
-    CFRunLoopRunInMode(kCFRunLoopDefaultMode, seconds, false);
-}
-
--(void) play:(NSArray *)events {
-    _done = NO;
-    _events = [events retain];
-    [[LPRecorder sharedRecorder] load: events];
-    [[LPRecorder sharedRecorder] playbackWithDelegate: self doneSelector: @selector(playbackDone:)];
-}
-
-//-(void) waitUntilPlaybackDone {
-//    while(!_done) {
-//        CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.5, false);
-//    }
-//}
-
--(void) playbackDone:(NSDictionary *)details {
-    _done = YES;
-    [_events release];
-    _events = nil;
-}
-
 
 @end
