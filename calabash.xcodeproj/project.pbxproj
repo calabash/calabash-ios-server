@@ -70,6 +70,8 @@
 		B1BDDB5B16564DC2009432BE /* LPUserPrefCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = B1BDDB5716564DC2009432BE /* LPUserPrefCommand.m */; };
 		B1BDDB5C16564DC2009432BE /* LPVersionCommand.h in Headers */ = {isa = PBXBuildFile; fileRef = B1BDDB5816564DC2009432BE /* LPVersionCommand.h */; };
 		B1BDDB5D16564DC2009432BE /* LPVersionCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = B1BDDB5916564DC2009432BE /* LPVersionCommand.m */; };
+		B1CB535B1799E7BF000CD9A8 /* LPScrollToRowWithMarkOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = B1CB53591799E7BF000CD9A8 /* LPScrollToRowWithMarkOperation.h */; };
+		B1CB535C1799E7BF000CD9A8 /* LPScrollToRowWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B1CB535A1799E7BF000CD9A8 /* LPScrollToRowWithMarkOperation.m */; };
 		B1FC26C3174A62B700CCA0F9 /* LPConditionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B163213415BBF13200408364 /* LPConditionRoute.m */; };
 		B1FC2727174A798E00CCA0F9 /* NSDictionary+Frank.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FC2725174A798E00CCA0F9 /* NSDictionary+Frank.m */; };
 /* End PBXBuildFile section */
@@ -1050,6 +1052,8 @@
 		B1BDDB5716564DC2009432BE /* LPUserPrefCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUserPrefCommand.m; sourceTree = "<group>"; };
 		B1BDDB5816564DC2009432BE /* LPVersionCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPVersionCommand.h; sourceTree = "<group>"; };
 		B1BDDB5916564DC2009432BE /* LPVersionCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPVersionCommand.m; sourceTree = "<group>"; };
+		B1CB53591799E7BF000CD9A8 /* LPScrollToRowWithMarkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPScrollToRowWithMarkOperation.h; sourceTree = "<group>"; };
+		B1CB535A1799E7BF000CD9A8 /* LPScrollToRowWithMarkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScrollToRowWithMarkOperation.m; sourceTree = "<group>"; };
 		B1E3603814D9F4B30087D8D9 /* UIScriptASTPredicate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScriptASTPredicate.h; sourceTree = "<group>"; };
 		B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScriptASTPredicate.m; sourceTree = "<group>"; };
 		B1FC2725174A798E00CCA0F9 /* NSDictionary+Frank.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Frank.m"; sourceTree = "<group>"; };
@@ -1223,6 +1227,8 @@
 		B184FDC114B6DB2B002A744C /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				B1CB53591799E7BF000CD9A8 /* LPScrollToRowWithMarkOperation.h */,
+				B1CB535A1799E7BF000CD9A8 /* LPScrollToRowWithMarkOperation.m */,
 				B15DA5E315C5D80A009E6CFE /* LPQueryAllOperation.h */,
 				B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */,
 				B184FDC214B6DB2B002A744C /* LPOperation.h */,
@@ -2951,6 +2957,7 @@
 				B1BDDB5A16564DC2009432BE /* LPUserPrefCommand.h in Headers */,
 				B1BDDB5C16564DC2009432BE /* LPVersionCommand.h in Headers */,
 				B1AA1B121740D294005A679E /* LPWebQuery.h in Headers */,
+				B1CB535B1799E7BF000CD9A8 /* LPScrollToRowWithMarkOperation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3345,6 +3352,7 @@
 				B1AA1B131740D294005A679E /* LPWebQuery.m in Sources */,
 				B1FC26C3174A62B700CCA0F9 /* LPConditionRoute.m in Sources */,
 				B1FC2727174A798E00CCA0F9 /* NSDictionary+Frank.m in Sources */,
+				B1CB535C1799E7BF000CD9A8 /* LPScrollToRowWithMarkOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
