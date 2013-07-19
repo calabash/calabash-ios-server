@@ -30,98 +30,88 @@
 }
 
 
--(void)beginOperation 
+-(void)beginOperation
 {
     self.done = NO;
     NSString *base64Events = [self.data objectForKey:@"events"];
     id queryStart = [self.data objectForKey:@"start"];
     id queryEnd = [self.data objectForKey:@"end"];
-
+    
     NSDictionary *offset_start = [self.data valueForKey:@"offset_start"];
     NSNumber *off_start_x = [offset_start valueForKey:@"x"];
-    NSNumber *off_start_y = [offset_start valueForKey:@"y"];    
-        
+    NSNumber *off_start_y = [offset_start valueForKey:@"y"];
+    
     CGPoint offsetPointStart = CGPointMake([off_start_x floatValue], [off_start_y floatValue]);
-
+    
     NSDictionary *offset_end = [self.data valueForKey:@"offset_end"];
     NSNumber *off_end_x = [offset_end valueForKey:@"x"];
-    NSNumber *off_end_y = [offset_end valueForKey:@"y"];    
+    NSNumber *off_end_y = [offset_end valueForKey:@"y"];
     
     CGPoint offsetPointEnd = CGPointMake([off_end_x floatValue], [off_end_y floatValue]);
-
+    
     UIView *targetView = nil;
     self.parser1 = [UIScriptParser scriptParserWithObject: queryStart];
     self.parser2 = [UIScriptParser scriptParserWithObject: queryEnd];
     [self.parser1 parse];
     [self.parser2 parse];
     NSMutableArray* views = [NSMutableArray arrayWithCapacity:32];
-    for (UIWindow *window in [[UIApplication sharedApplication] windows]) 
+    for (UIWindow *window in [[UIApplication sharedApplication] windows])
     {
         [views addObjectsFromArray:[window subviews]];
     }
     NSArray* resultStart = [self.parser1 evalWith:views];
     NSArray* resultEnd = [self.parser2 evalWith:views];
+    
+    CGPoint centerStart;
     if (resultStart == nil || [resultStart count] == 0)
     {
-        self.done = YES;
-        self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSString stringWithFormat: @"start %@ found no views. Is accessibility enabled?",queryStart],@"reason",
-                             @"",@"details",
-                             @"FAILURE",@"outcome",
-                             nil];
-        self.events = nil;
-        [self.conn responseHasAvailableData:self];
-        return;
+        centerStart = CGPointMake(0,0);
     }
-    id startAt = [resultStart objectAtIndex:0];
-
-    if (resultEnd == nil || [resultEnd count] == 0)
+    else
     {
-        self.done = YES;
-        self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSString stringWithFormat: @"end %@ found no views. Is accessibility enabled?",queryEnd],@"reason",
-                             @"",@"details",
-                             @"FAILURE",@"outcome",
-                             nil];
-        self.events = nil;
-        [self.conn responseHasAvailableData:self];
-        return;
-    }
-    id endAt = [resultEnd objectAtIndex:0];
-
-    CGPoint centerStart;
-    if ([startAt isKindOfClass:[UIView class]]) 
-    {
-       centerStart = [LPTouchUtils centerOfView:startAt];         
-    }    
-    else                
-    {        
-       CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)[startAt valueForKey:@"center"], &centerStart);
+        id startAt = [resultStart objectAtIndex:0];
+        if ([startAt isKindOfClass:[UIView class]])
+        {
+            centerStart = [LPTouchUtils centerOfView:startAt];
+        }
+        else
+        {
+            CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)[startAt valueForKey:@"center"], &centerStart);
+        }
+        
     }
     centerStart = CGPointMake(centerStart.x + offsetPointStart.x, centerStart.y + offsetPointStart.y);
-            
-        
+    
+    
     CGPoint centerEnd;
-    if ([endAt isKindOfClass:[UIView class]]) 
+    if (resultEnd == nil || [resultEnd count] == 0)
     {
-        centerEnd = [LPTouchUtils centerOfView:endAt];                
+        centerEnd = CGPointMake(0,0);
     }
-    else                
-    {
-        
-        CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)[startAt valueForKey:@"center"], &centerEnd);
+    else {
+        id endAt = [resultEnd objectAtIndex:0];
+        targetView = endAt;
+        if ([endAt isKindOfClass:[UIView class]])
+        {
+            centerEnd = [LPTouchUtils centerOfView:endAt];
+        }
+        else
+        {
+            CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)[endAt valueForKey:@"center"], &centerEnd);
+        }
     }
+    
     centerEnd = CGPointMake(centerEnd.x + offsetPointEnd.x, centerEnd.y + offsetPointEnd.y);
     
-            
+    
     NSArray* baseEvents = [LPResources eventsFromEncoding:base64Events];
-            
-    targetView = endAt;
-    self.events = [LPResources interpolateEvents:baseEvents 
+    
+    
+    self.events = [LPResources interpolateEvents:baseEvents
                                        fromPoint:centerStart
                                          toPoint:centerEnd];
     
-    //NSLog(@"PLAY Events:\n%@",self.events);    
+    //NSLog(@"PLAY Events:\n%@",self.events);
     
     [self play:self.events];
     NSArray *resultArray = nil;
@@ -142,14 +132,14 @@
 
 
 
-- (void) play:(NSArray *)events 
+- (void) play:(NSArray *)events
 {
     [[LPRecorder sharedRecorder] load: self.events];
-    [[LPRecorder sharedRecorder] playbackWithDelegate: self doneSelector: @selector(playbackDone:)];    
+    [[LPRecorder sharedRecorder] playbackWithDelegate: self doneSelector: @selector(playbackDone:)];
 }
 
 //When this event occurs, jsonResponse has already been determined.
--(void) playbackDone:(NSDictionary *)details 
+-(void) playbackDone:(NSDictionary *)details
 {
     self.done = YES;
     self.events = nil;
@@ -158,12 +148,11 @@
     [self.conn responseHasAvailableData:self];
 }
 
--(void) dealloc 
+-(void) dealloc
 {
     self.parser1 = nil;
     self.parser2 = nil;
     self.events = nil;
     [super dealloc];
 }
-
 @end
