@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>DC688D7E-6E8C-421E-8751-77948E822FA7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>calabash</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>213E8007-977A-4BF7-AD1A-64D54F2C93DF</key>
+		<string>https://github.com/TestingWithFrank/symbiote.git</string>
+		<key>3811D8BD-5B60-4B20-8A01-8214BF7A1467</key>
+		<string>ssh://github.com/olarivain/calabash-ios-server.git</string>
+		<key>D64746FC-898F-44F0-90B1-691A34CDFE6F</key>
+		<string>https://github.com/calabash/calabash-js.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>calabash.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>213E8007-977A-4BF7-AD1A-64D54F2C93DF</key>
+		<string>../../Resources/Symbiote</string>
+		<key>3811D8BD-5B60-4B20-8A01-8214BF7A1467</key>
+		<string>../..</string>
+		<key>D64746FC-898F-44F0-90B1-691A34CDFE6F</key>
+		<string>../../calabash-js</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/olarivain/calabash-ios-server.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>3811D8BD-5B60-4B20-8A01-8214BF7A1467</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>3811D8BD-5B60-4B20-8A01-8214BF7A1467</string>
+			<key>IDESourceControlWCCName</key>
+			<string>calabash-ios-server</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>213E8007-977A-4BF7-AD1A-64D54F2C93DF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Symbiote</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D64746FC-898F-44F0-90B1-691A34CDFE6F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>calabash-js</string>
+		</dict>
+	</array>
+</dict>
+</plist>

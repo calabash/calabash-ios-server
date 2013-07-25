@@ -22,9 +22,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		00D3143716E65AA900C5E484 /* LPDumpRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D3142F16E65AA900C5E484 /* LPDumpRoute.h */; };
-		00D3143916E65AA900C5E484 /* LPOrientationRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D3143116E65AA900C5E484 /* LPOrientationRoute.h */; };
-		00D3143B16E65AA900C5E484 /* LPStaticResourcesRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D3143316E65AA900C5E484 /* LPStaticResourcesRoute.h */; };
+		000A991917A0F7CE00AA3C5B /* LPFlashOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B19440431725C70A00EE1B25 /* LPFlashOperation.m */; };
 		00D3144E16E7B75900C5E484 /* UIView+HierarchyDump.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D3144C16E7B75900C5E484 /* UIView+HierarchyDump.h */; };
 		00D3144F16E7B75900C5E484 /* UIView+HierarchyDump.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3144D16E7B75900C5E484 /* UIView+HierarchyDump.m */; };
 		00D314FA16E7EAFE00C5E484 /* UIView+Flash.h in Headers */ = {isa = PBXBuildFile; fileRef = 00D314F816E7EAFE00C5E484 /* UIView+Flash.h */; };
@@ -135,9 +133,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		00D3142F16E65AA900C5E484 /* LPDumpRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDumpRoute.h; sourceTree = "<group>"; };
-		00D3143116E65AA900C5E484 /* LPOrientationRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPOrientationRoute.h; sourceTree = "<group>"; };
-		00D3143316E65AA900C5E484 /* LPStaticResourcesRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPStaticResourcesRoute.h; sourceTree = "<group>"; };
 		00D3144C16E7B75900C5E484 /* UIView+HierarchyDump.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+HierarchyDump.h"; sourceTree = "<group>"; };
 		00D3144D16E7B75900C5E484 /* UIView+HierarchyDump.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+HierarchyDump.m"; sourceTree = "<group>"; };
 		00D3145916E7CD6E00C5E484 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
@@ -1070,9 +1065,6 @@
 				B1EBF08A16EE63A000AE4D40 /* LPQueryLogRoute.h in Headers */,
 				B19440441725C70A00EE1B25 /* LPFlashOperation.h in Headers */,
 				F5AE0BC6174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h in Headers */,
-				00D3143716E65AA900C5E484 /* LPDumpRoute.h in Headers */,
-				00D3143916E65AA900C5E484 /* LPOrientationRoute.h in Headers */,
-				00D3143B16E65AA900C5E484 /* LPStaticResourcesRoute.h in Headers */,
 				00D3144E16E7B75900C5E484 /* UIView+HierarchyDump.h in Headers */,
 				00D314FA16E7EAFE00C5E484 /* UIView+Flash.h in Headers */,
 				00D3150316E8033000C5E484 /* LPDumpRoute.h in Headers */,
@@ -1209,6 +1201,7 @@
 				B17E75A515D4357F0066550B /* UIScriptASTPredicate.m in Sources */,
 				B17E75A615D4357F0066550B /* UIScriptAST.m in Sources */,
 				B17E75A715D4357F0066550B /* UIScriptASTALL.m in Sources */,
+				000A991917A0F7CE00AA3C5B /* LPFlashOperation.m in Sources */,
 				B17E75A815D4357F0066550B /* UIScriptASTClassName.m in Sources */,
 				B17E75A915D4357F0066550B /* UIScriptASTDirection.m in Sources */,
 				B17E75AA15D4357F0066550B /* UIScriptASTFirst.m in Sources */,
