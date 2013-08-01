@@ -3,7 +3,7 @@
 //  FoodFinder
 //
 //  Created by Karl Krukow on 11/09/11.
-//  Copyright (c) 2011 LessPainful. All rights reserved.
+//  Copyright (c) 2011 Xamarin. All rights reserved.
 //
 
 #import "LPOperation.h"

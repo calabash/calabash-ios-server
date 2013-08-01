@@ -3,11 +3,12 @@
 //  calabash
 //
 //  Created by Karl Krukow on 03/11/12.
-//  Copyright (c) 2012 LessPainful. All rights reserved.
+//  Copyright (c) 2012 Xamarin. All rights reserved.
 //
 
 #import "CalabashUISpecSelectorEngine.h"
 #import "UIScriptParser.h"
+#import "LPVersionCommand.h"
 
 @implementation CalabashUISpecSelectorEngine
 - (NSArray *)selectViewsWithSelector:(NSString *)query
@@ -23,5 +24,8 @@
     }
    
     return [parser evalWith:views];
+}
+-(NSString *) version {
+    return (NSString*)kLPCALABASHVERSION;
 }
 @end

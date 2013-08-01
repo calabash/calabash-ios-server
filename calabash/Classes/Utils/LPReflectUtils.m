@@ -1,7 +1,7 @@
 //
 //  LPReflectUtils.m
 //  Created by Karl Krukow on 08/15/12.
-//  Copyright 2012 LessPainful. All rights reserved.
+//  Copyright 2012 Xamarin. All rights reserved.
 //
 
 #import "LPReflectUtils.h"

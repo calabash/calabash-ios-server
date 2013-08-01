@@ -846,7 +846,7 @@
 		B1A4FD671645571300B1809B /* SYNthElementFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SYNthElementFilter.m; sourceTree = "<group>"; };
 		B1A4FD681645571300B1809B /* SYParents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYParents.h; sourceTree = "<group>"; };
 		B1A4FD691645571300B1809B /* SYParents.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SYParents.m; sourceTree = "<group>"; };
-		B1A4FD6A1645571300B1809B /* SYParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYParser.h; sourceTree = "<group>"; };
+		B1A4FD6A1645571300B1809B /* SYParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYParser.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		B1A4FD6B1645571300B1809B /* SYParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SYParser.m; sourceTree = "<group>"; };
 		B1A4FD6C1645571300B1809B /* SYPredicateFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SYPredicateFilter.h; sourceTree = "<group>"; };
 		B1A4FD6D1645571300B1809B /* SYPredicateFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SYPredicateFilter.m; sourceTree = "<group>"; };
