@@ -71,7 +71,7 @@
 	// instead in the -keyWindow property. To fix that, check if the array of windows contains the key window, and
 	// explicitly add it if needed.
 	//
-	NSMutableArray *allWindows = [[[UIApplication sharedApplication] windows] mutableCopy];
+	NSMutableArray *allWindows = [[[[UIApplication sharedApplication] windows] mutableCopy] autorelease];
 	UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
 	if(![allWindows containsObject: keyWindow] && keyWindow != nil) {
 		[allWindows addObject: keyWindow];
