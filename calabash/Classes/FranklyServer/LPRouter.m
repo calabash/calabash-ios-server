@@ -8,10 +8,14 @@
 #import "LPJSONUtils.h"
 #import "LPHTTPDataResponse.h"
 
+#import "LPStaticResourcesRoute.h"
+
 @implementation LPRouter
+
 @synthesize postData=_postData;
 
 static NSMutableDictionary* routes = nil;
+static id<LPRoute> defaultRoute;
 
 + (void)initialize
 {
@@ -26,6 +30,10 @@ static NSMutableDictionary* routes = nil;
 
 + (void) addRoute:(id<LPRoute>) route forPath:(NSString*) path {
     [routes setObject:route forKey:path];
+}
+
++ (void) setDefaultRoute: (id<LPRoute>) route {
+	defaultRoute = [route retain];
 }
 
 - (void)processBodyData:(NSData *)postDataChunk {
@@ -62,6 +70,9 @@ static NSMutableDictionary* routes = nil;
     
 
     id<LPRoute> route = [routes objectForKey:lastSegment];
+	if(route == nil) {
+		route = defaultRoute;
+	}
     BOOL supported = [route supportsMethod:method atPath:lastSegment];
     NSLog(@"Supports Method %@ at Path %@ (segment %@): %d",method,path,lastSegment,supported);
     
@@ -76,6 +87,10 @@ static NSMutableDictionary* routes = nil;
     
     
     id<LPRoute> route = [routes objectForKey:lastSegment];
+	
+	if(route == nil) {
+		route = defaultRoute;
+	}
 
     if ([route supportsMethod:method atPath:path]) {
         NSDictionary* params = nil;

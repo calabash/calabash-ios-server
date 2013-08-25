@@ -11,4 +11,6 @@
 @property (nonatomic, retain, readonly) NSData *postData;
 
 + (void) addRoute:(id<LPRoute>) route forPath:(NSString*) path;
++ (void) setDefaultRoute: (id<LPRoute>) route;
+
 @end
