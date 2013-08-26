@@ -71,7 +71,18 @@
     [parser parse];
     
     NSMutableArray* views = [NSMutableArray arrayWithCapacity:32];
-    for (UIWindow *window in [[UIApplication sharedApplication] windows])
+	
+	// iOS flatdacted apparenlty doesn't list the "real" window containing alerts in the windows list, but stores it
+	// instead in the -keyWindow property. To fix that, check if the array of windows contains the key window, and
+	// explicitly add it if needed.
+	//
+	NSMutableArray *allWindows = [[[[UIApplication sharedApplication] windows] mutableCopy] autorelease];
+	UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+	if(![allWindows containsObject: keyWindow] && keyWindow != nil) {
+		[allWindows addObject: keyWindow];
+	}
+	
+    for (UIWindow *window in allWindows)
     {
         [views addObjectsFromArray:[window subviews]];
     }
