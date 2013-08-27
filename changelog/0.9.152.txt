@@ -1,0 +1,5 @@
+* (pull 20) Alert View support for iOS 7 (credit to Kra Larivain @
+  OpenTable)
+  https://github.com/calabash/calabash-ios-server/pull/20
+
+
