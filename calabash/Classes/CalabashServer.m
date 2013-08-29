@@ -150,6 +150,7 @@
 }
 
 - (void) start {
+    
     [self enableAccessibility];
 
     NSError *error=nil;
@@ -209,8 +210,9 @@
 
 - (void) dealloc
 {
-	[_httpServer release];
-	[super dealloc];
+
+    [_httpServer release];
+    [super dealloc];
 }
 
 
