@@ -13,6 +13,7 @@
 #import "LPSetTextOperation.h"
 #import "LPQueryAllOperation.h"
 #import "LPRecorder.h"
+#import "LPDatePickerOperation.h"
 
 @implementation LPOperation
 
@@ -22,17 +23,23 @@
     if ([opName isEqualToString:@"scrollToRow"])
     {
         op = [[LPScrollToRowOperation alloc] initWithOperation:dictionary];
-    } else if ([opName isEqualToString:@"scrollToRowWithMark"]) {
+      
+    } else if ([opName isEqualToString:@"scrollToRowWithMark"])
+    {
       op = [[LPScrollToRowWithMarkOperation alloc] initWithOperation:dictionary];
+    
     }  else if ([opName isEqualToString:@"scroll"])
     {
         op = [[LPScrollOperation alloc] initWithOperation:dictionary];
+    
     } else if ([opName isEqualToString:@"query"])
     {
         op = [[LPQueryOperation alloc] initWithOperation:dictionary];
+    
     } else if ([opName isEqualToString:@"query_all"])
     {
         op = [[LPQueryAllOperation alloc] initWithOperation:dictionary];
+    
     } else if ([opName isEqualToString:@"setText"])
     {
         op = [[LPSetTextOperation alloc] initWithOperation:dictionary];
@@ -40,6 +47,10 @@
     else if ([opName isEqualToString:@"flash"])
     {
         op = [[LPFlashOperation alloc] initWithOperation:dictionary];
+    }
+    else if ([opName isEqualToString:@"changeDatePickerDate"])
+    {
+      op = [[LPDatePickerOperation alloc] initWithOperation:dictionary];
     }
     else
     {
