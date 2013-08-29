@@ -96,6 +96,8 @@
 		B1EBF08916EE63A000AE4D40 /* LPAppPropertyRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EBF08516EE63A000AE4D40 /* LPAppPropertyRoute.m */; };
 		B1EBF08A16EE63A000AE4D40 /* LPQueryLogRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B1EBF08616EE63A000AE4D40 /* LPQueryLogRoute.h */; };
 		B1EBF08B16EE63A000AE4D40 /* LPQueryLogRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EBF08716EE63A000AE4D40 /* LPQueryLogRoute.m */; };
+		F533172817CF319C005A286C /* LPDatePickerOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = F533172617CF319C005A286C /* LPDatePickerOperation.h */; };
+		F533172917CF319C005A286C /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F533172717CF319C005A286C /* LPDatePickerOperation.m */; };
 		F5AE0BC6174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = F5AE0BC4174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h */; };
 		F5AE0BC7174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */; };
 /* End PBXBuildFile section */
@@ -273,6 +275,8 @@
 		B1FF22B515CF002500F3A17B /* MKMapView+ZoomLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+ZoomLevel.m"; sourceTree = "<group>"; };
 		B1FF22B615CF002500F3A17B /* MKPolylineView+Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKPolylineView+Test.h"; sourceTree = "<group>"; };
 		B1FF22B715CF002500F3A17B /* MKPolylineView+Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKPolylineView+Test.m"; sourceTree = "<group>"; };
+		F533172617CF319C005A286C /* LPDatePickerOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDatePickerOperation.h; sourceTree = "<group>"; };
+		F533172717CF319C005A286C /* LPDatePickerOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDatePickerOperation.m; sourceTree = "<group>"; };
 		F5AE0BC4174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPScrollToRowWithMarkOperation.h; sourceTree = "<group>"; };
 		F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScrollToRowWithMarkOperation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -472,6 +476,8 @@
 		B184FDC114B6DB2B002A744C /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				F533172617CF319C005A286C /* LPDatePickerOperation.h */,
+				F533172717CF319C005A286C /* LPDatePickerOperation.m */,
 				F5AE0BC4174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h */,
 				F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */,
 				B19440421725C70A00EE1B25 /* LPFlashOperation.h */,
@@ -650,6 +656,7 @@
 				B1EBF08A16EE63A000AE4D40 /* LPQueryLogRoute.h in Headers */,
 				B19440441725C70A00EE1B25 /* LPFlashOperation.h in Headers */,
 				F5AE0BC6174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h in Headers */,
+				F533172817CF319C005A286C /* LPDatePickerOperation.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -802,6 +809,7 @@
 				B1EBF08B16EE63A000AE4D40 /* LPQueryLogRoute.m in Sources */,
 				B19440451725C70A00EE1B25 /* LPFlashOperation.m in Sources */,
 				F5AE0BC7174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m in Sources */,
+				F533172917CF319C005A286C /* LPDatePickerOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
