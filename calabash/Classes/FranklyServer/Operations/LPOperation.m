@@ -15,6 +15,7 @@
 #import "LPRecorder.h"
 #import "LPDatePickerOperation.h"
 #import "LPOrientationOperation.h"
+#import "LPTouchUtils.h"
 
 @implementation LPOperation
 
