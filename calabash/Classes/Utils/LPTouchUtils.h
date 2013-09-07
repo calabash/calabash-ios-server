@@ -16,6 +16,8 @@
           withSuperView:(UIView *)superView
                inWindow:(id)window;
 
++(NSArray*)applicationWindows;
+
 +(UIWindow*)windowForView:(UIView*)view;
 
 +(UIWindow*)appDelegateWindow;

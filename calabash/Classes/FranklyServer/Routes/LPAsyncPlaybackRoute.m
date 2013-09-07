@@ -63,24 +63,7 @@
                 CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)[v valueForKey:@"center"], &center);
             }
             
-            targetView = v;
-            
-            
-            if ([gesture isEqualToString:@"tap"]) {
-                    //this is not so pretty, but just a temporary solution
-                    // until full merge with Frank
-                    UIASyntheticEvents *gen= [NSClassFromString(@"UIASyntheticEvents") sharedEventGenerator];
-                    [gen sendTap:center];
-                    self.done = YES;
-                    self.events = nil;
-                    self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:
-                                         [NSArray arrayWithObject:targetView], @"results",
-                                         @"SUCCESS",@"outcome",
-                                         nil];
-                    [self.conn responseHasAvailableData:self];
-                    return;
-            }
-
+            targetView = v;        
 
             NSString *centerView = NSStringFromCGPoint(center);
             
@@ -164,7 +147,7 @@
     if (!targetView && windowLoc != nil) {
         CGPoint touchPoint = CGPointMake([[windowLoc valueForKey:@"X"] floatValue], 
                                          [[windowLoc valueForKey:@"Y"] floatValue]);
-        for (UIWindow *window in [[UIApplication sharedApplication] windows]) {                
+        for (UIWindow *window in [LPTouchUtils applicationWindows]) {
            if (![window respondsToSelector:@selector(screen)] || [window screen] == [UIScreen mainScreen]) {
                 targetView = [window hitTest:touchPoint withEvent:nil];
                 break;

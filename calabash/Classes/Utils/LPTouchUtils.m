@@ -92,6 +92,21 @@ static NSString* lp_deviceName()
         return point;
     }
 }
+
++(NSArray*)applicationWindows {
+    // iOS flatdacted apparenlty doesn't list the "real" window containing alerts in the windows list, but stores it
+    // instead in the -keyWindow property. To fix that, check if the array of windows contains the key window, and
+    // explicitly add it if needed.
+    //
+    NSMutableArray *allWindows = [[[[UIApplication sharedApplication] windows] mutableCopy] autorelease];
+    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+    if(keyWindow && ![allWindows containsObject: keyWindow]) {
+        [allWindows addObject: keyWindow];
+    }
+    
+    return allWindows;
+}
+
 +(UIWindow*)windowForView:(UIView*)view
 {
     id v = view;
@@ -274,7 +289,7 @@ static NSString* lp_deviceName()
         
         if (!delegateWindow)
         {
-            NSArray *allWindows = [[UIApplication sharedApplication] windows];
+            NSArray *allWindows = [LPTouchUtils applicationWindows];
             delegateWindow = [allWindows objectAtIndex:0];
         }
     }

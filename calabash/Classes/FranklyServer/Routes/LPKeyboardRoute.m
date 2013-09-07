@@ -28,7 +28,7 @@
     NSArray *events = [LPResources eventsFromEncoding:[self.data objectForKey:@"events"]]; 
     UIWindow *keyboardWindow = nil;
     NSLog(@"Preparing to enter: %@",characterString);
-    for (UIWindow *window in [UIApplication sharedApplication].windows) 
+    for (UIWindow *window in [LPTouchUtils applicationWindows])
     {
         if ([NSStringFromClass([window class]) isEqual:@"UITextEffectsWindow"]) 
         {

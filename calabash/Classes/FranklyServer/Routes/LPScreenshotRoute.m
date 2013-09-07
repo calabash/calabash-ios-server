@@ -6,6 +6,7 @@
 
 #import "LPScreenshotRoute.h"
 #import "LPHTTPDataResponse.h"
+#import "LPTouchUtils.h"
 #import <QuartzCore/QuartzCore.h>
 
 
@@ -36,7 +37,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     // Iterate over every window from back to front
-    for (UIWindow *window in [[UIApplication sharedApplication] windows]) 
+    for (UIWindow *window in [LPTouchUtils applicationWindows])
     {
         if (![window respondsToSelector:@selector(screen)] || [window screen] == [UIScreen mainScreen])
         {
