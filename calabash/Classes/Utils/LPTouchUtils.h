@@ -16,6 +16,7 @@
           withSuperView:(UIView *)superView
                inWindow:(id)window;
 
++(BOOL)is4InchDevice;
 +(NSArray*)applicationWindows;
 
 +(UIWindow*)windowForView:(UIView*)view;

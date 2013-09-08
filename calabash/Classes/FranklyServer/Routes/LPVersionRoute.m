@@ -7,6 +7,7 @@
 //
 
 #import "LPVersionRoute.h"
+#import "LPTouchUtils.h"
 #import <sys/utsname.h>
 @class UIDevice;
 
@@ -38,24 +39,10 @@
     
     NSString *system = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
     
-    UIDevice *device = [UIDevice currentDevice];
+
     NSDictionary *env = [[NSProcessInfo processInfo]environment];
 
-    BOOL iphone5Like = NO;
-    if([@"iPhone Simulator" isEqualToString: [device model]])
-    {
-        
-        NSPredicate *inch5PhonePred = [NSPredicate predicateWithFormat:@"IPHONE_SIMULATOR_VERSIONS LIKE '*iPhone (Retina 4-inch)*'"];
-        iphone5Like = [inch5PhonePred evaluateWithObject:env];
-    }
-    else if ([[device model] hasPrefix:@"iPhone"])
-    {
-        iphone5Like = [system hasPrefix:@"iPhone5"];
-    }
-    else if ([[device model] hasPrefix:@"iPod"])
-    {
-        iphone5Like = [system hasPrefix:@"iPod5"];
-    }
+    BOOL iphone5Like = [LPTouchUtils is4InchDevice];
 
     NSString *dev = [env objectForKey:@"IPHONE_SIMULATOR_DEVICE"];
     if (!dev) {

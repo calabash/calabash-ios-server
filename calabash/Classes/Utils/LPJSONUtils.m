@@ -117,7 +117,7 @@
             {
                 CGRect rect = [window convertRect:v.bounds fromView:v];
                 rect = [frontWindow convertRect:rect fromWindow:window];
-                CGPoint center = [LPTouchUtils centerOfFrame:rect shouldTranslate:NO];
+                CGPoint center = [LPTouchUtils centerOfFrame:rect shouldTranslate:YES];
                 NSDictionary *rectDic =
                 [NSDictionary dictionaryWithObjectsAndKeys:
                  [NSNumber numberWithFloat:center.x], @"center_x",

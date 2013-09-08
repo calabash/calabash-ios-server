@@ -21,31 +21,37 @@ static NSString* lp_deviceName()
 
 @implementation LPTouchUtils
 
-+(BOOL)is5InchPhone {
++(BOOL)is4InchDevice {
     UIDevice *device = [UIDevice currentDevice];
-    BOOL inch5Phone = NO;
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    
+    NSString *system = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+    NSDictionary *env = [[NSProcessInfo processInfo]environment];
+
+    
+    BOOL iphone5Like = NO;
     if([@"iPhone Simulator" isEqualToString: [device model]])
     {
-        NSDictionary *env = [[NSProcessInfo processInfo]environment];
+        
         NSPredicate *inch5PhonePred = [NSPredicate predicateWithFormat:@"IPHONE_SIMULATOR_VERSIONS LIKE '*iPhone (Retina 4-inch)*'"];
-        inch5Phone = [inch5PhonePred evaluateWithObject:env];
+        iphone5Like = [inch5PhonePred evaluateWithObject:env];
     }
     else if ([[device model] hasPrefix:@"iPhone"])
     {
-        inch5Phone = [lp_deviceName() isEqualToString:@"iPhone5,2"];
+        iphone5Like = [system hasPrefix:@"iPhone5"];
     }
-    return inch5Phone;
+    else if ([[device model] hasPrefix:@"iPod"])
+    {
+        iphone5Like = [system hasPrefix:@"iPod5"];
+    }
+    
+    return iphone5Like;
 }
 
 +(CGPoint) translateToScreenCoords:(CGPoint) point {
     UIScreen*  s = [UIScreen mainScreen];
     
-
-    BOOL inch5Phone = [LPTouchUtils is5InchPhone];
-
-    
-    
-
     UIScreenMode* sm =[s currentMode];
     CGRect b = [s bounds];
     CGSize size = sm.size;
@@ -57,7 +63,7 @@ static NSString* lp_deviceName()
             CGFloat scale = [UIScreen mainScreen].scale;
             result = CGSizeMake(result.width * scale, result.height * scale);
             
-            if(result.height == 960 && inch5Phone)
+            if(result.height == 960 && [LPTouchUtils is4InchDevice])
             {//detect Letterbox
                 return CGPointMake(point.x, point.y + LPiPHONE4INCHOFFSET);
             }
