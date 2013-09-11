@@ -34,7 +34,7 @@ static NSString* lp_deviceName()
     if([@"iPhone Simulator" isEqualToString: [device model]])
     {
         
-        NSPredicate *inch5PhonePred = [NSPredicate predicateWithFormat:@"IPHONE_SIMULATOR_VERSIONS LIKE '*iPhone (Retina 4-inch)*'"];
+        NSPredicate *inch5PhonePred = [NSPredicate predicateWithFormat:@"IPHONE_SIMULATOR_VERSIONS LIKE '*iPhone*Retina*4-inch*'"];
         iphone5Like = [inch5PhonePred evaluateWithObject:env];
     }
     else if ([[device model] hasPrefix:@"iPhone"])
