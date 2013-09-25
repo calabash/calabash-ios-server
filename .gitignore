@@ -1,5 +1,6 @@
 calabash.xcodeproj/project.xcworkspace/xcuserdata
 calabash.xcodeproj/xcuserdata/
+*.xccheckout
 Markdown.pl
 build
 calabash.framework
