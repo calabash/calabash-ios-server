@@ -11,6 +11,40 @@
 #import <sys/utsname.h>
 @class UIDevice;
 
+
+/*** UNEXPECTED ***
+ adds git version and branch information to the server_version route
+ 
+ helps developers know exactly which server framework is installed in an ipa
+ 
+ the two defines:
+ 
+ #define LP_GIT_SHORT_REVISION <rev>  // ex. @"4fdb203"
+ #define LP_GIT_BRANCH <branch>       // ex. @"0.9.x"
+ 
+ are generated before compilation and erased after to avoid git conflicts in
+ LPGitVersionDefines.h
+ 
+ to see how LPGitVersionDefines.h is managed see:
+ 
+ 1. Run Script - git versioning 1 of 2
+ 2. Run Script - git versioning 2 of 2
+ 
+ ******************/
+#import "LPGitVersionDefines.h"
+
+#ifdef LP_GIT_SHORT_REVISION
+static NSString *const kLPGitShortRevision = LP_GIT_SHORT_REVISION;
+#else
+static NSString *const kLPGitShortRevision = @"Unknown";
+#endif
+
+#ifdef LP_GIT_BRANCH
+static NSString *const kLPGitBranch = LP_GIT_BRANCH;
+#else
+static NSString *const kLPGitBranch = @"Unknown";
+#endif
+
 @implementation LPVersionRoute
 
 - (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path 
@@ -54,7 +88,6 @@
         sim = @"";
     }
     
-    
     NSDictionary* res = [NSDictionary dictionaryWithObjectsAndKeys:
                          kLPCALABASHVERSION , @"version",
                          idString,@"app_id",
@@ -66,7 +99,8 @@
                          sim, @"simulator",
                          versionString,@"app_version",
                          @"SUCCESS",@"outcome",
-                         //device, os, serial?, other?
+                         kLPGitShortRevision, @"git revision",
+                         kLPGitBranch, @"git branch",
                          nil];
     return res;
     
