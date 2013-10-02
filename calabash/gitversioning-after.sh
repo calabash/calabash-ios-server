@@ -9,4 +9,4 @@ LP_INFO_PLIST="${1}"
 gitpath=`which git`
 
 echo "INFO: resetting content of ${LP_INFO_PLIST}"
-`$gitpath co -- ${LP_INFO_PLIST}`
+`$gitpath checkout -- ${LP_INFO_PLIST}`
