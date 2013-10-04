@@ -66,19 +66,16 @@ static LPRecorder *sharedRecorder = nil;
 }
 
 -(void)load:(NSArray*)events {
-	NSLog(@"Loading events");
 
 	[eventList setArray: events];
 }
 
 -(void)loadFromFile:(NSString*)path {
-	NSLog(@"Loading events from file: %@", path);
 
 	[eventList setArray: [NSMutableArray arrayWithContentsOfFile: path]];
 }
 
 -(void)playbackWithDelegate: (id)delegate doneSelector:(SEL)doneSelector {
-	NSLog(@"Playback");
 
 	playbackDelegate = [delegate retain];
     
@@ -88,7 +85,7 @@ static LPRecorder *sharedRecorder = nil;
 }
 
 -(void)playbackDone:(NSDictionary *)details {
-	NSLog(@"Playback complete");
+
 	[playbackDelegate performSelector: playbackDoneSelector];
     [playbackDelegate release];
     playbackDelegate=nil;

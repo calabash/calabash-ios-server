@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "LPRoute.h"
-#define kLPCALABASHVERSION @"0.9.159"
+#define kLPCALABASHVERSION @"0.9.160"
 @interface LPVersionRoute : NSObject<LPRoute>
 
 @end

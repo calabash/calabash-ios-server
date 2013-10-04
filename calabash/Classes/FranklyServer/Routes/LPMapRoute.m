@@ -54,7 +54,7 @@
         self.parser = [UIScriptParser scriptParserWithObject:scriptObj];
         [self.parser parse];
         NSArray* tokens = [self.parser parsedTokens];
-        NSLog(@"Parsed UIScript as\n%@", tokens);
+        NSLog(@"Map %@, %@ Parsed UIScript as\n%@", method, path, tokens);
 
 		//
         NSArray *allWindows = [LPTouchUtils applicationWindows];

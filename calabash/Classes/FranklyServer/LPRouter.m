@@ -63,8 +63,6 @@ static NSMutableDictionary* routes = nil;
 
     id<LPRoute> route = [routes objectForKey:lastSegment];
     BOOL supported = [route supportsMethod:method atPath:lastSegment];
-    NSLog(@"Supports Method %@ at Path %@ (segment %@): %d",method,path,lastSegment,supported);
-    
     
     return supported;
 }

@@ -27,7 +27,7 @@
     
     NSArray *events = [LPResources eventsFromEncoding:[self.data objectForKey:@"events"]]; 
     UIWindow *keyboardWindow = nil;
-    NSLog(@"Preparing to enter: %@",characterString);
+
     for (UIWindow *window in [LPTouchUtils applicationWindows])
     {
         if ([NSStringFromClass([window class]) isEqual:@"UITextEffectsWindow"]) 
@@ -36,8 +36,6 @@
             break;
         }
     }
-
-    NSLog(@"Target window: %@",keyboardWindow);
     
     if (!keyboardWindow) 
     {
@@ -55,7 +53,7 @@
         _playbackDone = YES;
         return [self failWithMessageFormat:@"Found not UIKBKeyplaneView..." message:nil];        
     }
-    NSLog(@"Target KBKeyplane: %@",keyboardView);
+
     
     
     //cf KIF: https://github.com/square/KIF/blob/master/Classes/KIFTestStep.m
@@ -69,11 +67,9 @@
     
     for (id/*UIKBKey*/ key in keys) {
         NSString *representedString = [key valueForKey:@"representedString"];
-         NSLog(@"represented key: %@",representedString);
         // Find the key based on the key's represented string
         if ([representedString isEqual:characterString]) 
         {
-            NSLog(@"Target key: %@",key);
             keyToTap = key;
         }
         
