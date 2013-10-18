@@ -102,6 +102,8 @@
 		F591380517C39128007B2BE4 /* LPOrientationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F591380317C39128007B2BE4 /* LPOrientationOperation.m */; };
 		F5AE0BC6174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = F5AE0BC4174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h */; };
 		F5AE0BC7174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */; };
+		F5CAC06C180D499600E23F03 /* LPSliderOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = F5CAC06A180D499600E23F03 /* LPSliderOperation.h */; };
+		F5CAC06D180D499600E23F03 /* LPSliderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5CAC06B180D499600E23F03 /* LPSliderOperation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -284,6 +286,8 @@
 		F591380317C39128007B2BE4 /* LPOrientationOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPOrientationOperation.m; sourceTree = "<group>"; };
 		F5AE0BC4174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPScrollToRowWithMarkOperation.h; sourceTree = "<group>"; };
 		F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScrollToRowWithMarkOperation.m; sourceTree = "<group>"; };
+		F5CAC06A180D499600E23F03 /* LPSliderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPSliderOperation.h; sourceTree = "<group>"; };
+		F5CAC06B180D499600E23F03 /* LPSliderOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSliderOperation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -484,6 +488,8 @@
 		B184FDC114B6DB2B002A744C /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				F5CAC06A180D499600E23F03 /* LPSliderOperation.h */,
+				F5CAC06B180D499600E23F03 /* LPSliderOperation.m */,
 				F55A350F17CF8F8F0001E8B4 /* LPDatePickerOperation.h */,
 				F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */,
 				F591380217C39128007B2BE4 /* LPOrientationOperation.h */,
@@ -656,6 +662,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5CAC06C180D499600E23F03 /* LPSliderOperation.h in Headers */,
 				B17E75B615D436100066550B /* CalabashServer.h in Headers */,
 				B1296FC015DC1F4B005DDF5C /* LPReflectUtils.h in Headers */,
 				B13B29251627389500433F6C /* LPISO8601DateFormatter.h in Headers */,
@@ -847,6 +854,7 @@
 				B1296FC315DC1F5B005DDF5C /* LPReflectUtils.m in Sources */,
 				B13B29261627389500433F6C /* LPISO8601DateFormatter.m in Sources */,
 				692D77A11657010000DE3E53 /* LPExitRoute.m in Sources */,
+				F5CAC06D180D499600E23F03 /* LPSliderOperation.m in Sources */,
 				B12179A9165D613100B6DA43 /* LPScreenshotRoute2.m in Sources */,
 				B1B19DC916D162CF00D3D80B /* UIScriptASTVisibility.m in Sources */,
 				B1EBF08916EE63A000AE4D40 /* LPAppPropertyRoute.m in Sources */,

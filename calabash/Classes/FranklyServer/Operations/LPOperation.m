@@ -16,6 +16,7 @@
 #import "LPDatePickerOperation.h"
 #import "LPOrientationOperation.h"
 #import "LPTouchUtils.h"
+#import "LPSliderOperation.h"
 
 @implementation LPOperation
 
@@ -28,7 +29,7 @@
       
     } else if ([opName isEqualToString:@"scrollToRowWithMark"])
     {
-      op = [[LPScrollToRowWithMarkOperation alloc] initWithOperation:dictionary];
+        op = [[LPScrollToRowWithMarkOperation alloc] initWithOperation:dictionary];
     
     }  else if ([opName isEqualToString:@"scroll"])
     {
@@ -56,7 +57,11 @@
     }
     else if ([opName isEqualToString:@"changeDatePickerDate"])
     {
-      op = [[LPDatePickerOperation alloc] initWithOperation:dictionary];
+        op = [[LPDatePickerOperation alloc] initWithOperation:dictionary];
+    }
+    else if ([opName isEqualToString:@"changeSlider"])
+    {
+        op = [[LPSliderOperation alloc] initWithOperation:dictionary];
     }
     else
     {
