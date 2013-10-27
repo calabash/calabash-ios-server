@@ -6,14 +6,6 @@
 #import <sys/utsname.h>
 #import <QuartzCore/QuartzCore.h>
 
-static NSString* lp_deviceName()
-{
-    struct utsname systemInfo;
-    uname(&systemInfo);
-    
-    return [NSString stringWithCString:systemInfo.machine
-                              encoding:NSUTF8StringEncoding];
-}
 #define LPiPHONE4INCHOFFSET 44
 
 #import "LPTouchUtils.h"
@@ -39,7 +31,7 @@ static NSString* lp_deviceName()
     }
     else if ([[device model] hasPrefix:@"iPhone"])
     {
-        iphone5Like = [system hasPrefix:@"iPhone5"];
+        iphone5Like = [system hasPrefix:@"iPhone5"] || [system hasPrefix:@"iPhone6"];
     }
     else if ([[device model] hasPrefix:@"iPod"])
     {
