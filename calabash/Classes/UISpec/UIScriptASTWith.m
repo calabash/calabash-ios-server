@@ -71,7 +71,7 @@
     }
 }
 
--(NSArray *)handleWebView:(UIWebView *)webView {
+-(NSArray *)handleWebView:(UIWebView *)webView visibility:(UIScriptASTVisibilityType)visibility {
     if (!self.selectorName)
     {
         NSLog(@"WebView only supports css/xpath selectors");
@@ -92,7 +92,11 @@
         {
             type = LPWebQueryTypeCSS;
         }
-        return [LPWebQuery evaluateQuery:(NSString*)self.objectValue ofType:type inWebView:webView];                
+
+        return [LPWebQuery evaluateQuery:(NSString*)self.objectValue
+                                  ofType:type
+                               inWebView:webView
+                        includeInvisible: visibility == UIScriptASTVisibilityTypeAll];
     } else {
         NSLog(@"Attempting to look for non string in web view");
         return [NSMutableArray array];
@@ -122,7 +126,7 @@
         {
             if ([v isKindOfClass:[UIWebView class]]) 
             {            
-                [res addObjectsFromArray: [self handleWebView:(UIWebView *)v]];
+                [res addObjectsFromArray: [self handleWebView:(UIWebView *)v visibility: visibility]];
                 continue;            
             }
             if ([self.selectorName isEqualToString:@"marked"]) 

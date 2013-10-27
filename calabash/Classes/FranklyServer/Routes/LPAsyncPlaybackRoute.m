@@ -33,7 +33,6 @@
 -(void) beginOperation 
 {
     self.done = NO;
-    NSString *gesture = [self.data objectForKey:@"uia_gesture"];
     NSString *base64Events = [self.data objectForKey:@"events"];
     id query = [self.data objectForKey:@"query"];
     UIView *targetView = nil;
@@ -64,11 +63,6 @@
             }
             
             targetView = v;        
-
-            NSString *centerView = NSStringFromCGPoint(center);
-            
-            NSLog(@"Center %@", centerView);                     
-
             
             NSArray* baseEvents = [LPResources eventsFromEncoding:base64Events];
             
@@ -92,7 +86,7 @@
             [self.conn responseHasAvailableData:self];
             return;
         }
-        
+    
         
     } else {
         NSDictionary *offset = [self.data valueForKey:@"offset"];
