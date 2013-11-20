@@ -96,6 +96,8 @@
 		B1EBF08916EE63A000AE4D40 /* LPAppPropertyRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EBF08516EE63A000AE4D40 /* LPAppPropertyRoute.m */; };
 		B1EBF08A16EE63A000AE4D40 /* LPQueryLogRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B1EBF08616EE63A000AE4D40 /* LPQueryLogRoute.h */; };
 		B1EBF08B16EE63A000AE4D40 /* LPQueryLogRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EBF08716EE63A000AE4D40 /* LPQueryLogRoute.m */; };
+		B1F279AF183D5B3000A922BC /* LPUIAChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F279AD183D5B3000A922BC /* LPUIAChannel.h */; };
+		B1F279B0183D5B3000A922BC /* LPUIAChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F279AE183D5B3000A922BC /* LPUIAChannel.m */; };
 		F55A351117CF8F8F0001E8B4 /* LPDatePickerOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = F55A350F17CF8F8F0001E8B4 /* LPDatePickerOperation.h */; };
 		F55A351217CF8F8F0001E8B4 /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */; };
 		F591380417C39128007B2BE4 /* LPOrientationOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = F591380217C39128007B2BE4 /* LPOrientationOperation.h */; };
@@ -273,6 +275,8 @@
 		B1EBF08516EE63A000AE4D40 /* LPAppPropertyRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPAppPropertyRoute.m; sourceTree = "<group>"; };
 		B1EBF08616EE63A000AE4D40 /* LPQueryLogRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPQueryLogRoute.h; sourceTree = "<group>"; };
 		B1EBF08716EE63A000AE4D40 /* LPQueryLogRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPQueryLogRoute.m; sourceTree = "<group>"; };
+		B1F279AD183D5B3000A922BC /* LPUIAChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUIAChannel.h; sourceTree = "<group>"; };
+		B1F279AE183D5B3000A922BC /* LPUIAChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUIAChannel.m; sourceTree = "<group>"; };
 		B1FF22B215CF002500F3A17B /* MKMapView+Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+Test.h"; sourceTree = "<group>"; };
 		B1FF22B315CF002500F3A17B /* MKMapView+Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+Test.m"; sourceTree = "<group>"; };
 		B1FF22B415CF002500F3A17B /* MKMapView+ZoomLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+ZoomLevel.h"; sourceTree = "<group>"; };
@@ -614,6 +618,8 @@
 		B184FE0B14B6DB2B002A744C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B1F279AD183D5B3000A922BC /* LPUIAChannel.h */,
+				B1F279AE183D5B3000A922BC /* LPUIAChannel.m */,
 				B1DDE6D115C0701D00BBE2BE /* UIAutomation.h */,
 				B184FE0C14B6DB2B002A744C /* LPJSONUtils.h */,
 				B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */,
@@ -662,6 +668,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1F279AF183D5B3000A922BC /* LPUIAChannel.h in Headers */,
 				F5CAC06C180D499600E23F03 /* LPSliderOperation.h in Headers */,
 				B17E75B615D436100066550B /* CalabashServer.h in Headers */,
 				B1296FC015DC1F4B005DDF5C /* LPReflectUtils.h in Headers */,
@@ -817,6 +824,7 @@
 				B17E758E15D4357F0066550B /* LPScrollOperation.m in Sources */,
 				B17E758F15D4357F0066550B /* LPScrollToRowOperation.m in Sources */,
 				B17E759015D4357F0066550B /* LPSetTextOperation.m in Sources */,
+				B1F279B0183D5B3000A922BC /* LPUIAChannel.m in Sources */,
 				B17E759115D4357F0066550B /* LPRecorder.m in Sources */,
 				B17E759215D4357F0066550B /* LPUIARoute.m in Sources */,
 				B17E759315D4357F0066550B /* LPUserPrefRoute.m in Sources */,
