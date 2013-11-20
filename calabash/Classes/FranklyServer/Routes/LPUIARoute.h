@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LPRoute.h"
+#import "LPGenericAsyncRoute.h"
 
-@interface LPUIARoute : NSObject<LPRoute>
+@interface LPUIARoute : LPGenericAsyncRoute
 
 @end
