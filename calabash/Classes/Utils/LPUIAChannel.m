@@ -1,6 +1,5 @@
 //
 //  LPUIAChannel.m
-//  LPSimpleExample
 //
 //  Created by Karl Krukow on 11/16/13.
 //  Copyright (c) 2013 Xamarin. All rights reserved.
@@ -27,18 +26,14 @@
 //  by Karl Krukow <karl.krukow@xamarin.com>
 
 #import "LPUIAChannel.h"
+#define MAX_LOOP_COUNT 1200
 
 const static NSString *LPUIAChannelUIAPrefsRequestKey               = @"__calabashRequest";
 const static NSString *LPUIAChannelUIAPrefsResponseKey              = @"__calabashResponse";
 const static NSString *LPUIAChannelUIAPrefsIndexKey                 = @"index";
 const static NSString *LPUIAChannelUIAPrefsCommandKey               = @"command";
 const static NSTimeInterval LPUIAChannelUIADelay                    = 0.1;
-    
-// This is calibrated with respect to errors reported on Travis.
-// It should be a comfortable margin--the actual discrepancy between
-// Travis' execution times, and what we (had) thought would suffice,
-// is closer to 0.05.
-const NSTimeInterval SLTerminalEvaluationDelay = 0.075;
+
     
 @implementation LPUIAChannel {
     dispatch_queue_t _uiaQueue;
@@ -84,6 +79,7 @@ const NSTimeInterval SLTerminalEvaluationDelay = 0.075;
         [self requestExecutionOf:command];
         
         NSDictionary *result = nil;
+        NSUInteger loopCount = 0;
         while (1) {//Loop waiting for response
             NSDictionary *resultPrefs = [self userPreferences];
             NSDictionary *currentResponse = [resultPrefs objectForKey: LPUIAChannelUIAPrefsResponseKey];
@@ -97,6 +93,11 @@ const NSTimeInterval SLTerminalEvaluationDelay = 0.075;
                 }
             }
             [NSThread sleepForTimeInterval: LPUIAChannelUIADelay];
+            loopCount++;
+            if (loopCount >= MAX_LOOP_COUNT) {
+                result = nil;
+                break;
+            }
         }
         _scriptIndex++;
         
@@ -134,15 +135,14 @@ const NSTimeInterval SLTerminalEvaluationDelay = 0.075;
     NSDictionary *uiaRequest   = [self requestForCommand:command];
     
     [prefs setObject:uiaRequest forKey:LPUIAChannelUIAPrefsRequestKey];
-    BOOL success = [prefs writeToFile:[self simulatorPreferencesPath] atomically:YES];
-    NSLog(@"Success..");
+    [prefs writeToFile:[self simulatorPreferencesPath] atomically:YES];
+
     
     
 }
 
 -(void)deviceRequestExecutionOf:(NSString*)command {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults synchronize];
     NSDictionary *uiaRequest   = [self requestForCommand:command];
     
     [defaults setObject:uiaRequest forKey:(NSString*)LPUIAChannelUIAPrefsRequestKey];
@@ -157,73 +157,6 @@ const NSTimeInterval SLTerminalEvaluationDelay = 0.075;
 }
 
 #pragma mark - Communication
-
-/**
- Performs a round trip to `SLTerminal.js` by evaluating the script and returning the
- result of `eval()` or throwing an exception.
- 
- `SLTerminal` and `SLTerminal.js` execute in lock-step order by waiting for each other
- to update their respective keys within the application's preferences. `SLTerminal.js`
- polls the "scriptIndex" key and waits for it to increment before evaluating the
- "script" key. `SLTerminal` waits for the result by polling for the existence of the
- "resultIndex" key. `SLTerminal` then checks the "result" and "exception" keys for
- the result of `eval()`.
- 
- Preferences Keys
- ----------------
- 
- Application
- "scriptIndex": SLTerminal.js waits for this number to increment
- "script": The input to eval()
- 
- Script
- "resultIndex": The app waits for this number to appear
- "result": The output of eval(), may be empty
- "exception": The textual representation of a javascript exception, will be empty if no exceptions occurred.
- 
- */
-
-/*
-- (NSString *)evalWithFormat:(NSString *)script, ... {
-    NSParameterAssert(script);
-    
-    va_list args;
-    va_start(args, script);
-    NSString *statement = [[NSString alloc] initWithFormat:script arguments:args];
-    va_end(args);
-    
-    return [self eval:statement];
-}
-*/
-
-
-- (void)setScriptLoggingEnabled:(BOOL)scriptLoggingEnabled {
-    if (scriptLoggingEnabled != _scriptLoggingEnabled) {
-        [self enableScriptLogging:scriptLoggingEnabled];
-        _scriptLoggingEnabled = scriptLoggingEnabled;
-    }
-}
-
-- (void)enableScriptLogging:(BOOL)enableScriptLogging {
-    /*
-    if (dispatch_get_current_queue() != self.evalQueue) {
-        // dispatch_async so that this can be called by the application
-        // before testing has started
-        dispatch_async(self.evalQueue, ^{
-            [self enableScriptLogging:enableScriptLogging];
-        });
-        return;
-    }
-    [self evalWithFormat:@"%@.%@ = %@",
-     self.scriptNamespace, SLTerminalScriptLoggingEnabledVariable,
-     (enableScriptLogging ? @"true" : @"false")];
-     */
-}
-
-- (void)shutDown {
-//    [self evalWithFormat:@"%@.%@ = true;", self.scriptNamespace, SLTerminalHasShutDownVariable];
-}
-
 
 #if TARGET_IPHONE_SIMULATOR
 // in the simulator, UIAutomation uses a target-specific plist in ~/Library/Application Support/iPhone Simulator/[system version]/Library/Preferences/[bundle ID].plist
@@ -246,9 +179,9 @@ const NSTimeInterval SLTerminalEvaluationDelay = 0.075;
         
         // 4. and unescape spaces, if necessary (i.e. in the simulator)
         NSString *unsanitizedPlistPath = [plistRootPath stringByAppendingPathComponent:relativePlistPath];
-        path = [unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        path = [[unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] copy];
     });
-    return [path retain];
+    return path;
 }
 #endif // TARGET_IPHONE_SIMULATOR
 

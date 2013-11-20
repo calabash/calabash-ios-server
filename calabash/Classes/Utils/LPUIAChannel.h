@@ -1,9 +1,8 @@
 //
 //  LPUIAChannel.h
-//  LPSimpleExample
 //
 //  Created by Karl Krukow on 11/16/13.
-//  Copyright (c) 2013 Trifork. All rights reserved.
+//  Copyright (c) 2013 Xamarin. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

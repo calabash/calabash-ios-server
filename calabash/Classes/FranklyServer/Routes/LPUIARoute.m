@@ -3,7 +3,7 @@
 //  calabash
 //
 //  Created by Karl Krukow on 08/04/12.
-//  Copyright (c) 2012 LessPainful. All rights reserved.
+//  Copyright (c) 2013 Xamarin. All rights reserved.
 //
 
 #import "LPUIARoute.h"
@@ -20,8 +20,14 @@
     
     NSString *command = [self.data objectForKey:@"command"];
     [LPUIAChannel runAutomationCommand: command
-                                  then:  ^(NSDictionary *result) {
-            [self succeedWithResult:[NSArray arrayWithObject:[[result copy] autorelease]]];
+                                  then:  ^(NSDictionary *result)
+    {
+            if (!result) {
+                [self failWithMessageFormat:@"Timed out running command %@" message:command];
+            }
+            else {
+                [self succeedWithResult:[NSArray arrayWithObject:[[result copy] autorelease]]];
+            }
     }];
 
     
