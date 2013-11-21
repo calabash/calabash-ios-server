@@ -92,6 +92,8 @@
 		B19440451725C70A00EE1B25 /* LPFlashOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B19440431725C70A00EE1B25 /* LPFlashOperation.m */; };
 		B1B19DC816D162CF00D3D80B /* UIScriptASTVisibility.h in Headers */ = {isa = PBXBuildFile; fileRef = B1B19DC616D162CF00D3D80B /* UIScriptASTVisibility.h */; };
 		B1B19DC916D162CF00D3D80B /* UIScriptASTVisibility.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B19DC716D162CF00D3D80B /* UIScriptASTVisibility.m */; };
+		B1CED0FB183E9551004793B9 /* LPLocationRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1CED0FA183E9551004793B9 /* LPLocationRoute.m */; };
+		B1CED0FD183E9562004793B9 /* LPLocationRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B1CED0FC183E9562004793B9 /* LPLocationRoute.h */; };
 		B1EBF08816EE63A000AE4D40 /* LPAppPropertyRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B1EBF08416EE63A000AE4D40 /* LPAppPropertyRoute.h */; };
 		B1EBF08916EE63A000AE4D40 /* LPAppPropertyRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EBF08516EE63A000AE4D40 /* LPAppPropertyRoute.m */; };
 		B1EBF08A16EE63A000AE4D40 /* LPQueryLogRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B1EBF08616EE63A000AE4D40 /* LPQueryLogRoute.h */; };
@@ -264,6 +266,8 @@
 		B19440431725C70A00EE1B25 /* LPFlashOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPFlashOperation.m; sourceTree = "<group>"; };
 		B1B19DC616D162CF00D3D80B /* UIScriptASTVisibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScriptASTVisibility.h; sourceTree = "<group>"; };
 		B1B19DC716D162CF00D3D80B /* UIScriptASTVisibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScriptASTVisibility.m; sourceTree = "<group>"; };
+		B1CED0FA183E9551004793B9 /* LPLocationRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPLocationRoute.m; sourceTree = "<group>"; };
+		B1CED0FC183E9562004793B9 /* LPLocationRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPLocationRoute.h; sourceTree = "<group>"; };
 		B1DDE6C915C06CB500BBE2BE /* LPUIARoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUIARoute.h; sourceTree = "<group>"; };
 		B1DDE6CA15C06CB500BBE2BE /* LPUIARoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUIARoute.m; sourceTree = "<group>"; };
 		B1DDE6CB15C06CB500BBE2BE /* LPUserPrefRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUserPrefRoute.h; sourceTree = "<group>"; };
@@ -529,6 +533,8 @@
 				B1EBF08716EE63A000AE4D40 /* LPQueryLogRoute.m */,
 				B1DDE6C915C06CB500BBE2BE /* LPUIARoute.h */,
 				B1DDE6CA15C06CB500BBE2BE /* LPUIARoute.m */,
+				B1CED0FC183E9562004793B9 /* LPLocationRoute.h */,
+				B1CED0FA183E9551004793B9 /* LPLocationRoute.m */,
 				B1DDE6CB15C06CB500BBE2BE /* LPUserPrefRoute.h */,
 				B1DDE6CC15C06CB500BBE2BE /* LPUserPrefRoute.m */,
 				B16321F615BC200300408364 /* LPKeyboardRoute.h */,
@@ -675,6 +681,7 @@
 				B13B29251627389500433F6C /* LPISO8601DateFormatter.h in Headers */,
 				692D77A01657010000DE3E53 /* LPExitRoute.h in Headers */,
 				B12179A8165D613100B6DA43 /* LPScreenshotRoute2.h in Headers */,
+				B1CED0FD183E9562004793B9 /* LPLocationRoute.h in Headers */,
 				B1B19DC816D162CF00D3D80B /* UIScriptASTVisibility.h in Headers */,
 				B1EBF08816EE63A000AE4D40 /* LPAppPropertyRoute.h in Headers */,
 				B1EBF08A16EE63A000AE4D40 /* LPQueryLogRoute.h in Headers */,
@@ -867,6 +874,7 @@
 				B1B19DC916D162CF00D3D80B /* UIScriptASTVisibility.m in Sources */,
 				B1EBF08916EE63A000AE4D40 /* LPAppPropertyRoute.m in Sources */,
 				B1EBF08B16EE63A000AE4D40 /* LPQueryLogRoute.m in Sources */,
+				B1CED0FB183E9551004793B9 /* LPLocationRoute.m in Sources */,
 				B19440451725C70A00EE1B25 /* LPFlashOperation.m in Sources */,
 				F5AE0BC7174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m in Sources */,
 				F591380517C39128007B2BE4 /* LPOrientationOperation.m in Sources */,

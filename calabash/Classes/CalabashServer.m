@@ -23,6 +23,7 @@
 #import "LPConditionRoute.h"
 #import "LPUIARoute.h"
 #import "LPKeyboardRoute.h"
+#import "LPLocationRoute.h"
 #import <dlfcn.h>
 
 @interface CalabashServer()
@@ -106,7 +107,11 @@
         LPUIARoute* uia = [LPUIARoute new];
         [LPRouter addRoute:uia forPath:@"uia"];
         [uia release];
-        
+
+        LPLocationRoute* location = [LPLocationRoute new];
+        [LPRouter addRoute:location forPath:@"location"];
+        [location release];
+
         
         
         
