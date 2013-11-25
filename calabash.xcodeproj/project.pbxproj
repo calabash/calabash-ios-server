@@ -427,8 +427,8 @@
 				B184FE0B14B6DB2B002A744C /* Utils */,
 				B184FD8B14B6DAFB002A744C /* LPCDataScanner.h */,
 				B184FD8C14B6DAFB002A744C /* LPCDataScanner.m */,
-				B184FD8714B6DAE1002A744C /* CalabashServer.m */,
 				B184FD8814B6DAE1002A744C /* CalabashServer.h */,
+				B184FD8714B6DAE1002A744C /* CalabashServer.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";

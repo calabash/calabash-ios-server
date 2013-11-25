@@ -34,10 +34,6 @@ static NSString *const kFaceUp = @"face up";
 }
 
 - (NSString *) deviceOrientation {
-    UIViewController *con = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-    NSLog(@" controller = '%@'", [con class]);
-    NSLog(@"orientation = '%d'", con.interfaceOrientation);
-    
     
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
