@@ -8,6 +8,7 @@
 #import "UIScriptParser.h"
 #import "LPOperation.h"
 #import "LPTouchUtils.h"
+#import "LPOrientationOperation.h"
 
 
 @implementation LPMapRoute
@@ -73,6 +74,7 @@
     
     if (resultArray) {
         return [NSDictionary dictionaryWithObjectsAndKeys:
+                [LPOrientationOperation statusBarOrientation] , @"status_bar_orientation",
                 resultArray , @"results",
                 @"SUCCESS",@"outcome",
                 nil];

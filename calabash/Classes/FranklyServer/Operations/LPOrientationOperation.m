@@ -1,9 +1,8 @@
 //
-//  ScrollOperation.m
+//  LPOrientationOperation.m
 //  Calabash
 //
-//  Created by Karl Krukow on 18/08/11.
-//  Copyright (c) 2011 LessPainful. All rights reserved.
+//  Copyright (c) 2013 Xamarin. All rights reserved.
 //
 
 #import "LPOrientationOperation.h"
@@ -20,20 +19,13 @@ static NSString *const kFaceDown = @"face down";
 static NSString *const kFaceUp = @"face up";
 
 
-@interface LPOrientationOperation ()
-
-- (NSString *) deviceOrientation;
-- (NSString *) statusBarOrientation;
-
-@end
-
 @implementation LPOrientationOperation
 
 - (NSString *) description {
     return [NSString stringWithFormat:@"Orientation: %@",_arguments];
 }
 
-- (NSString *) deviceOrientation {
++ (NSString *) deviceOrientation {
     
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
     UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
@@ -65,12 +57,7 @@ static NSString *const kFaceUp = @"face up";
     }
 }
 
-- (NSString *) statusBarOrientation {
-    UIViewController *con = [[[UIApplication sharedApplication] keyWindow] rootViewController];
-    NSLog(@" controller = '%@'", [con class]);
-    NSLog(@"orientation = '%d'", con.interfaceOrientation);
-
-    
++ (NSString *) statusBarOrientation {
     UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
     switch (orientation) {
         case UIInterfaceOrientationPortrait: return kDown;
@@ -115,9 +102,9 @@ static NSString *const kFaceUp = @"face up";
     }
 
     if ([kDevice isEqualToString:firstArg]) {
-        return [self deviceOrientation];
+        return [LPOrientationOperation deviceOrientation];
     } else if ([kStatusBar isEqualToString:firstArg]) {
-        return [self statusBarOrientation];
+        return [LPOrientationOperation statusBarOrientation];
     } else {
         NSLog(@"Warning: feel through conditional for arguments: '[%@]'",
               [_arguments componentsJoinedByString:@", "]);
