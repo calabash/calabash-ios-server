@@ -45,25 +45,38 @@ static NSString *const kLPGitBranch = LP_GIT_BRANCH;
 static NSString *const kLPGitBranch = @"Unknown";
 #endif
 
+@interface LPVersionRoute ()
+
+- (BOOL) isIPhoneAppEmulatedOnIPad;
+
+@end
+
 @implementation LPVersionRoute
 
-- (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path 
+- (BOOL) isIPhoneAppEmulatedOnIPad {
+    UIUserInterfaceIdiom idiom = UI_USER_INTERFACE_IDIOM();
+    NSString *model = [[UIDevice currentDevice] model];
+    return idiom == UIUserInterfaceIdiomPhone && [model hasPrefix:@"iPad"];
+}
+
+
+- (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path
 {
     return [method isEqualToString:@"GET"];
 }
 
 - (NSDictionary *)JSONResponseForMethod:(NSString *)method URI:(NSString *)path data:(NSDictionary*)data {    
-    NSString *versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];//
+    NSString *versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     if (!versionString)
     {
         versionString = @"Unknown";
     }
-    NSString *idString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"];//
+    NSString *idString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"];
     if (!idString)
     {
         idString = @"Unknown";
     }
-    NSString *nameString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];//
+    NSString *nameString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
     if (!nameString)
     {
         nameString = @"Unknown";
@@ -88,6 +101,8 @@ static NSString *const kLPGitBranch = @"Unknown";
         sim = @"";
     }
     
+    BOOL isIphoneAppEmulated = [self isIPhoneAppEmulatedOnIPad];
+    
     NSDictionary* res = [NSDictionary dictionaryWithObjectsAndKeys:
                          kLPCALABASHVERSION , @"version",
                          idString,@"app_id",
@@ -99,6 +114,7 @@ static NSString *const kLPGitBranch = @"Unknown";
                          sim, @"simulator",
                          versionString,@"app_version",
                          @"SUCCESS",@"outcome",
+                         [NSNumber numberWithBool:isIphoneAppEmulated], @"iphone_app_emulated_on_ipad",
                          kLPGitShortRevision, @"git revision",
                          kLPGitBranch, @"git branch",
                          nil];
