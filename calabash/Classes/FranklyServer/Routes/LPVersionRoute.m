@@ -45,6 +45,12 @@ static NSString *const kLPGitBranch = LP_GIT_BRANCH;
 static NSString *const kLPGitBranch = @"Unknown";
 #endif
 
+#ifdef LP_GIT_REMOTE_ORIGIN
+static NSString *const kLPGitRemoteOrigin = LP_GIT_REMOTE_ORIGIN;
+#else
+static NSString *const kLPGitRemoteOrigin = @"Unknown";
+#endif
+
 @implementation LPVersionRoute
 
 - (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path 
@@ -88,6 +94,10 @@ static NSString *const kLPGitBranch = @"Unknown";
         sim = @"";
     }
     
+    NSDictionary *git = @{@"revision" : kLPGitShortRevision,
+                          @"branch" : kLPGitBranch,
+                          @"remote_origin" : kLPGitRemoteOrigin};
+    
     NSDictionary* res = [NSDictionary dictionaryWithObjectsAndKeys:
                          kLPCALABASHVERSION , @"version",
                          idString,@"app_id",
@@ -99,8 +109,7 @@ static NSString *const kLPGitBranch = @"Unknown";
                          sim, @"simulator",
                          versionString,@"app_version",
                          @"SUCCESS",@"outcome",
-                         kLPGitShortRevision, @"git revision",
-                         kLPGitBranch, @"git branch",
+                         git, @"git",
                          nil];
     return res;
     
