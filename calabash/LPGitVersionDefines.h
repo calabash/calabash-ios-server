@@ -4,8 +4,9 @@
 
  the contents are updated before compile time with the following defines:
 
- #define LP_GIT_SHORT_REVISION <rev>  // ex. @"4fdb203"
- #define LP_GIT_BRANCH <branch>       // ex. @"0.9.x"
+ #define LP_GIT_SHORT_REVISION <rev>    // ex. @"4fdb203"
+ #define LP_GIT_BRANCH <branch>         // ex. @"0.9.x"
+ #define LP_GIT_REMOTE_ORIGIN <origin>  // ex. @"git@github.com:jmoody/calabash-ios-server.git"
 
  after compilation, the contents are reset using: 
 
@@ -20,5 +21,6 @@
  4. gitversioning-after.sh
 
 ****************************************************************/
-#define LP_GIT_SHORT_REVISION @"7192800"
-#define LP_GIT_BRANCH @"0.9.x-add-git-versioning-information"
+#define LP_GIT_SHORT_REVISION @"6cc289a"
+#define LP_GIT_BRANCH @"0.9.x-include-git-remote-origin"
+#define LP_GIT_REMOTE_ORIGIN @"git@github.com:jmoody/calabash-ios-server.git"

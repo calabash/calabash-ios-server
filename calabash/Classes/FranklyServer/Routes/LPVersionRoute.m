@@ -50,6 +50,11 @@ static NSString *const kLPGitBranch = @"Unknown";
 - (BOOL) isIPhoneAppEmulatedOnIPad;
 
 @end
+#ifdef LP_GIT_REMOTE_ORIGIN
+static NSString *const kLPGitRemoteOrigin = LP_GIT_REMOTE_ORIGIN;
+#else
+static NSString *const kLPGitRemoteOrigin = @"Unknown";
+#endif
 
 @implementation LPVersionRoute
 
@@ -102,6 +107,9 @@ static NSString *const kLPGitBranch = @"Unknown";
     }
     
     BOOL isIphoneAppEmulated = [self isIPhoneAppEmulatedOnIPad];
+    NSDictionary *git = @{@"revision" : kLPGitShortRevision,
+                          @"branch" : kLPGitBranch,
+                          @"remote_origin" : kLPGitRemoteOrigin};
     
     NSDictionary* res = [NSDictionary dictionaryWithObjectsAndKeys:
                          kLPCALABASHVERSION , @"version",
@@ -115,8 +123,7 @@ static NSString *const kLPGitBranch = @"Unknown";
                          versionString,@"app_version",
                          @"SUCCESS",@"outcome",
                          [NSNumber numberWithBool:isIphoneAppEmulated], @"iphone_app_emulated_on_ipad",
-                         kLPGitShortRevision, @"git revision",
-                         kLPGitBranch, @"git branch",
+                         git, @"git",
                          nil];
     return res;
     
