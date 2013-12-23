@@ -45,16 +45,17 @@ static NSString *const kLPGitBranch = LP_GIT_BRANCH;
 static NSString *const kLPGitBranch = @"Unknown";
 #endif
 
-@interface LPVersionRoute ()
-
-- (BOOL) isIPhoneAppEmulatedOnIPad;
-
-@end
 #ifdef LP_GIT_REMOTE_ORIGIN
 static NSString *const kLPGitRemoteOrigin = LP_GIT_REMOTE_ORIGIN;
 #else
 static NSString *const kLPGitRemoteOrigin = @"Unknown";
 #endif
+
+@interface LPVersionRoute ()
+
+- (BOOL) isIPhoneAppEmulatedOnIPad;
+
+@end
 
 @implementation LPVersionRoute
 
