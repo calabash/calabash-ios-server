@@ -127,6 +127,8 @@ const static NSTimeInterval LPUIAChannelUIADelay                    = 0.1;
 #endif
     return prefs;
 }
+
+#if TARGET_IPHONE_SIMULATOR
 -(void)simulatorRequestExecutionOf:(NSString *)command {
     NSMutableDictionary *prefs = [NSMutableDictionary dictionaryWithContentsOfFile:[self simulatorPreferencesPath]];
     if (!prefs) {
@@ -140,6 +142,7 @@ const static NSTimeInterval LPUIAChannelUIADelay                    = 0.1;
     
     
 }
+#endif // TARGET_IPHONE_SIMULATOR
 
 -(void)deviceRequestExecutionOf:(NSString*)command {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
