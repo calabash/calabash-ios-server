@@ -32,6 +32,8 @@
 		B12DCD76189A82DF00F8DF87 /* LPEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DCD74189A82DF00F8DF87 /* LPEnv.m */; };
 		B12DCD79189A833000F8DF87 /* LPLog.h in Headers */ = {isa = PBXBuildFile; fileRef = B12DCD77189A833000F8DF87 /* LPLog.h */; };
 		B12DCD7A189A833000F8DF87 /* LPLog.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DCD78189A833000F8DF87 /* LPLog.m */; };
+		B12DCD85189A997B00F8DF87 /* LPDebugRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DCD84189A997B00F8DF87 /* LPDebugRoute.m */; };
+		B12DCD87189A998400F8DF87 /* LPDebugRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B12DCD86189A998400F8DF87 /* LPDebugRoute.h */; };
 		B13B29251627389500433F6C /* LPISO8601DateFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = B13B29231627389500433F6C /* LPISO8601DateFormatter.h */; };
 		B13B29261627389500433F6C /* LPISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B29241627389500433F6C /* LPISO8601DateFormatter.m */; };
 		B13D5F8A15D43A3900504726 /* LPI.mm in Sources */ = {isa = PBXBuildFile; fileRef = B184FDBD14B6DB2B002A744C /* LPI.mm */; };
@@ -181,6 +183,8 @@
 		B12DCD74189A82DF00F8DF87 /* LPEnv.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPEnv.m; sourceTree = "<group>"; };
 		B12DCD77189A833000F8DF87 /* LPLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPLog.h; sourceTree = "<group>"; };
 		B12DCD78189A833000F8DF87 /* LPLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPLog.m; sourceTree = "<group>"; };
+		B12DCD84189A997B00F8DF87 /* LPDebugRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDebugRoute.m; sourceTree = "<group>"; };
+		B12DCD86189A998400F8DF87 /* LPDebugRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDebugRoute.h; sourceTree = "<group>"; };
 		B13B29231627389500433F6C /* LPISO8601DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPISO8601DateFormatter.h; sourceTree = "<group>"; };
 		B13B29241627389500433F6C /* LPISO8601DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPISO8601DateFormatter.m; sourceTree = "<group>"; };
 		B153F55A15949F3D00867E12 /* LPVersionRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPVersionRoute.h; sourceTree = "<group>"; };
@@ -537,6 +541,8 @@
 		B184FDD014B6DB2B002A744C /* Routes */ = {
 			isa = PBXGroup;
 			children = (
+				B12DCD86189A998400F8DF87 /* LPDebugRoute.h */,
+				B12DCD84189A997B00F8DF87 /* LPDebugRoute.m */,
 				B12179A6165D613100B6DA43 /* LPScreenshotRoute2.h */,
 				B12179A7165D613100B6DA43 /* LPScreenshotRoute2.m */,
 				B1EBF08416EE63A000AE4D40 /* LPAppPropertyRoute.h */,
@@ -690,6 +696,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B12DCD87189A998400F8DF87 /* LPDebugRoute.h in Headers */,
 				B1F279AF183D5B3000A922BC /* LPUIAChannel.h in Headers */,
 				F5CAC06C180D499600E23F03 /* LPSliderOperation.h in Headers */,
 				B12DCD75189A82DF00F8DF87 /* LPEnv.h in Headers */,
@@ -871,6 +878,7 @@
 				B17E75A415D4357F0066550B /* LPResources.m in Sources */,
 				B17E75A515D4357F0066550B /* UIScriptASTPredicate.m in Sources */,
 				B17E75A615D4357F0066550B /* UIScriptAST.m in Sources */,
+				B12DCD85189A997B00F8DF87 /* LPDebugRoute.m in Sources */,
 				B17E75A715D4357F0066550B /* UIScriptASTALL.m in Sources */,
 				B17E75A815D4357F0066550B /* UIScriptASTClassName.m in Sources */,
 				B17E75A915D4357F0066550B /* UIScriptASTDirection.m in Sources */,
