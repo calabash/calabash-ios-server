@@ -28,6 +28,10 @@
 		B12179A9165D613100B6DA43 /* LPScreenshotRoute2.m in Sources */ = {isa = PBXBuildFile; fileRef = B12179A7165D613100B6DA43 /* LPScreenshotRoute2.m */; };
 		B1296FC015DC1F4B005DDF5C /* LPReflectUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = B1296FBF15DC1F4B005DDF5C /* LPReflectUtils.h */; };
 		B1296FC315DC1F5B005DDF5C /* LPReflectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B1296FC215DC1F5B005DDF5C /* LPReflectUtils.m */; };
+		B12DCD75189A82DF00F8DF87 /* LPEnv.h in Headers */ = {isa = PBXBuildFile; fileRef = B12DCD73189A82DF00F8DF87 /* LPEnv.h */; };
+		B12DCD76189A82DF00F8DF87 /* LPEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DCD74189A82DF00F8DF87 /* LPEnv.m */; };
+		B12DCD79189A833000F8DF87 /* LPLog.h in Headers */ = {isa = PBXBuildFile; fileRef = B12DCD77189A833000F8DF87 /* LPLog.h */; };
+		B12DCD7A189A833000F8DF87 /* LPLog.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DCD78189A833000F8DF87 /* LPLog.m */; };
 		B13B29251627389500433F6C /* LPISO8601DateFormatter.h in Headers */ = {isa = PBXBuildFile; fileRef = B13B29231627389500433F6C /* LPISO8601DateFormatter.h */; };
 		B13B29261627389500433F6C /* LPISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B29241627389500433F6C /* LPISO8601DateFormatter.m */; };
 		B13D5F8A15D43A3900504726 /* LPI.mm in Sources */ = {isa = PBXBuildFile; fileRef = B184FDBD14B6DB2B002A744C /* LPI.mm */; };
@@ -173,6 +177,10 @@
 		B1296FC215DC1F5B005DDF5C /* LPReflectUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPReflectUtils.m; sourceTree = "<group>"; };
 		B12A04001511546F002FA032 /* LPInterpolateRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPInterpolateRoute.h; sourceTree = "<group>"; };
 		B12A04011511546F002FA032 /* LPInterpolateRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInterpolateRoute.m; sourceTree = "<group>"; };
+		B12DCD73189A82DF00F8DF87 /* LPEnv.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPEnv.h; sourceTree = "<group>"; };
+		B12DCD74189A82DF00F8DF87 /* LPEnv.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPEnv.m; sourceTree = "<group>"; };
+		B12DCD77189A833000F8DF87 /* LPLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPLog.h; sourceTree = "<group>"; };
+		B12DCD78189A833000F8DF87 /* LPLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPLog.m; sourceTree = "<group>"; };
 		B13B29231627389500433F6C /* LPISO8601DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPISO8601DateFormatter.h; sourceTree = "<group>"; };
 		B13B29241627389500433F6C /* LPISO8601DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPISO8601DateFormatter.m; sourceTree = "<group>"; };
 		B153F55A15949F3D00867E12 /* LPVersionRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPVersionRoute.h; sourceTree = "<group>"; };
@@ -550,9 +558,9 @@
 				B12A04001511546F002FA032 /* LPInterpolateRoute.h */,
 				B12A04011511546F002FA032 /* LPInterpolateRoute.m */,
 				B184FE8914B6DC7F002A744C /* LPMapRoute.h */,
+				B184FDD214B6DB2B002A744C /* LPMapRoute.m */,
 				B184FDD714B6DB2B002A744C /* LPRecordRoute.h */,
 				B184FE8B14B6DC7F002A744C /* LPRecordRoute.m */,
-				B184FDD214B6DB2B002A744C /* LPMapRoute.m */,
 				B184FDD314B6DB2B002A744C /* LPNoContentResponse.h */,
 				B184FDD414B6DB2B002A744C /* LPNoContentResponse.m */,
 				B184FDDB14B6DB2B002A744C /* LPScreenshotRoute.h */,
@@ -637,6 +645,10 @@
 				B1296FC215DC1F5B005DDF5C /* LPReflectUtils.m */,
 				B184FE0E14B6DB2B002A744C /* LPTouchUtils.h */,
 				B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */,
+				B12DCD73189A82DF00F8DF87 /* LPEnv.h */,
+				B12DCD74189A82DF00F8DF87 /* LPEnv.m */,
+				B12DCD77189A833000F8DF87 /* LPLog.h */,
+				B12DCD78189A833000F8DF87 /* LPLog.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -680,11 +692,13 @@
 			files = (
 				B1F279AF183D5B3000A922BC /* LPUIAChannel.h in Headers */,
 				F5CAC06C180D499600E23F03 /* LPSliderOperation.h in Headers */,
+				B12DCD75189A82DF00F8DF87 /* LPEnv.h in Headers */,
 				B17E75B615D436100066550B /* CalabashServer.h in Headers */,
 				B1296FC015DC1F4B005DDF5C /* LPReflectUtils.h in Headers */,
 				B13B29251627389500433F6C /* LPISO8601DateFormatter.h in Headers */,
 				692D77A01657010000DE3E53 /* LPExitRoute.h in Headers */,
 				B12179A8165D613100B6DA43 /* LPScreenshotRoute2.h in Headers */,
+				B12DCD79189A833000F8DF87 /* LPLog.h in Headers */,
 				B1CED0FD183E9562004793B9 /* LPLocationRoute.h in Headers */,
 				B1B19DC816D162CF00D3D80B /* UIScriptASTVisibility.h in Headers */,
 				B1EBF08816EE63A000AE4D40 /* LPAppPropertyRoute.h in Headers */,
@@ -863,6 +877,7 @@
 				B17E75AA15D4357F0066550B /* UIScriptASTFirst.m in Sources */,
 				B17E75AB15D4357F0066550B /* UIScriptASTIndex.m in Sources */,
 				B17E75AC15D4357F0066550B /* UIScriptASTLast.m in Sources */,
+				B12DCD76189A82DF00F8DF87 /* LPEnv.m in Sources */,
 				B17E75AD15D4357F0066550B /* UIScriptASTWith.m in Sources */,
 				B17E75AE15D4357F0066550B /* UIScriptParser.m in Sources */,
 				B17E75AF15D4357F0066550B /* LPJSONUtils.m in Sources */,
@@ -876,6 +891,7 @@
 				F5CAC06D180D499600E23F03 /* LPSliderOperation.m in Sources */,
 				B12179A9165D613100B6DA43 /* LPScreenshotRoute2.m in Sources */,
 				B1B19DC916D162CF00D3D80B /* UIScriptASTVisibility.m in Sources */,
+				B12DCD7A189A833000F8DF87 /* LPLog.m in Sources */,
 				B1EBF08916EE63A000AE4D40 /* LPAppPropertyRoute.m in Sources */,
 				B1EBF08B16EE63A000AE4D40 /* LPQueryLogRoute.m in Sources */,
 				B1CED0FB183E9551004793B9 /* LPLocationRoute.m in Sources */,

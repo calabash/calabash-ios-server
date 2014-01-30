@@ -24,6 +24,7 @@
 #import "LPUIARoute.h"
 #import "LPKeyboardRoute.h"
 #import "LPLocationRoute.h"
+#import "LPDebugRoute.h"
 #import <dlfcn.h>
 
 @interface CalabashServer()
@@ -111,6 +112,10 @@
         LPLocationRoute* location = [LPLocationRoute new];
         [LPRouter addRoute:location forPath:@"location"];
         [location release];
+
+        LPDebugRoute* debugRoute = [LPDebugRoute new];
+        [LPRouter addRoute:debugRoute forPath:@"debug"];
+        [debugRoute release];
 
         
         

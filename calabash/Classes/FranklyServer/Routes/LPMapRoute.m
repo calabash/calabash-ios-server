@@ -9,7 +9,7 @@
 #import "LPOperation.h"
 #import "LPTouchUtils.h"
 #import "LPOrientationOperation.h"
-
+#import "LPLog.h"
 
 @implementation LPMapRoute
 @synthesize parser;
@@ -72,19 +72,23 @@
     NSError* error = nil;
     NSArray* resultArray = [self applyOperation:operation toViews:result error:&error];
     
+    NSDictionary *resultDict = nil;
     if (resultArray) {
-        return [NSDictionary dictionaryWithObjectsAndKeys:
-                [LPOrientationOperation statusBarOrientation] , @"status_bar_orientation",
-                resultArray , @"results",
-                @"SUCCESS",@"outcome",
-                nil];
+        resultDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                   [LPOrientationOperation statusBarOrientation] , @"status_bar_orientation",
+                   resultArray , @"results",
+                   @"SUCCESS",@"outcome",
+                  nil];
     } else {
-        return [NSDictionary dictionaryWithObjectsAndKeys:
-                @"FAILURE",@"outcome",
-                @"",@"reason",
-                @"",@"details",
-                nil];
-    } 
+        resultDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                  @"FAILURE",@"outcome",
+                  @"",@"reason",
+                  @"",@"details",
+                  nil];
+    }
+    [LPLog debug:@"Map results %@", resultDict];
+    
+    return resultDict;
 }
 
 -(void)dealloc
