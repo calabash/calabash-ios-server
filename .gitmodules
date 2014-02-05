@@ -1,6 +1,3 @@
 [submodule "calabash-js"]
 	path = calabash-js
 	url = https://github.com/calabash/calabash-js.git
-[submodule "lib/frank"]
-	path = lib/frank
-	url = https://github.com/calabash/Frank.git
