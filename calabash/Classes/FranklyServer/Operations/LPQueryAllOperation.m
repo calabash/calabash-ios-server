@@ -19,7 +19,7 @@
     NSMutableString *selStr = [NSMutableString stringWithCapacity:32];
     for (NSDictionary *selPart in arr)
     {
-        NSObject *as = [selPart objectForKey:@"as"];
+        NSString *as = [selPart objectForKey:@"as"];
         if (as)
         {
             NSMutableDictionary *mdict = [[selPart mutableCopy] autorelease];
@@ -33,11 +33,32 @@
         id tgt = [selPart objectForKey:key];
         if (as)
         {
-            if ([@"UIColor" isEqual:as])
+            Class asClass = NSClassFromString(as);
+            if (asClass != Nil)
             {
-                tgt = [[UIColor class] performSelector:NSSelectorFromString(tgt)];
+                if ([tgt isKindOfClass: [NSArray class]])
+                {
+                    NSMutableArray * subArgs = [NSMutableArray array];
+                    SEL sel = [self parseValuesFromArray:tgt withArgs:subArgs];
+                    
+                    NSMethodSignature *sig = [asClass methodSignatureForSelector:sel];
+                    if (!sig || ![asClass respondsToSelector:sel])
+                    {
+                        NSLog(@"*****");
+                        return nil;
+                    }
+                    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sig];
+                    
+                    [self invoke: invocation withTarget: asClass args: subArgs selector: sel signature: sig];
+                    
+                    id objValue;
+                    [invocation getReturnValue:(void **)&objValue];
+                    tgt = objValue ? objValue : [NSNull null];
+                    
+                }
+                else
+                    tgt = [asClass performSelector:NSSelectorFromString(tgt)];
             }
-            //TODO more
         }
         [args addObject:tgt];
     }
@@ -46,6 +67,7 @@
 
 - (id) performWithTarget:(UIView*)_view error:(NSError **)error {
     id target = _view;
+
     if([_arguments count] <= 0) {
         return [LPJSONUtils jsonifyObject: _view];
     }
@@ -60,7 +82,7 @@
         short shortValue;
         float floatValue;
         double doubleValue;
-        SEL sel;
+        SEL sel = nil;
         
         NSMutableArray *args = [NSMutableArray array];
         
@@ -85,104 +107,7 @@
         } 
         NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sig];
 
-            [invocation setSelector:sel];
-            for (NSInteger i =0, N=[args count]; i<N; i++)
-            {
-                id arg = [args objectAtIndex:i];
-                const char *cType = [sig getArgumentTypeAtIndex:i+2];
-                switch(*cType) {
-                    case '@':
-                        if ([arg isEqual:@"__self__"])
-                        {
-                            arg = _view;
-                        }
-                        [invocation setArgument:&arg atIndex:i+2];
-                        break;                        
-                    case 'i':
-                    {
-                        NSInteger intVal = [arg integerValue];
-                        [invocation setArgument:&intVal atIndex:i+2];
-                        break;
-                    }            
-                    case 'I':
-                    {
-                        NSInteger uIntVal = [arg unsignedIntegerValue];
-                        [invocation setArgument:&uIntVal atIndex:i+2];
-                        break;
-                    }
-                    case 's':
-                    {
-                        short shVal = [arg shortValue];
-                        [invocation setArgument:&shVal atIndex:i+2];
-                        break;
-                    }
-                    case 'd':
-                    {
-                        double dbVal = [arg doubleValue];
-                        [invocation setArgument:&dbVal atIndex:i+2];
-                        break;
-                    }
-                    case 'f':
-                    {
-                        float fltVal = [arg floatValue];
-                        [invocation setArgument:&fltVal atIndex:i+2];
-                        break;
-                    }
-                    case 'l':
-                    {
-                        long lngVal = [arg longValue];
-                        [invocation setArgument:&lngVal atIndex:i+2];
-                        break;
-                    }
-                    case '*':
-                    {
-                        const char *cstringValue = [arg cStringUsingEncoding:NSUTF8StringEncoding];
-                        [invocation setArgument:&cstringValue atIndex:i+2];
-                        break;
-                        
-                        
-                    }
-                    case 'c':
-                    {
-                        char chVal =[arg charValue];
-                        [invocation setArgument:&chVal atIndex:i+2];
-                        break;
-                    }
-                    case '{': {
-                        //not supported yet
-                        if (strcmp(cType,"{CGPoint=ff}") == 0)
-                        {
-                            CGPoint point;
-                            CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)arg, &point);
-                            [invocation setArgument:&point atIndex:i+2];
-                            break;
-
-                        }
-                        else if (strcmp(cType,"{CGRect={CGPoint=ff}{CGSize=ff}}") == 0)
-                        {
-                            CGRect rect;
-                            CGRectMakeWithDictionaryRepresentation((CFDictionaryRef)arg, &rect);
-                            [invocation setArgument:&rect atIndex:i+2];
-                            break;
-
-                        }
-
-
-                        @throw [NSString stringWithFormat: @"not yet support struct args: %@",sig];
-                    }
-                }
-                
-            }
-            [invocation setTarget:target];
-            @try {
-                [invocation invoke];
-            }
-            @catch (NSException *exception) {
-                NSLog(@"Perform %@ with target %@ caught %@: %@", selObj, target, [exception name], [exception reason]);
-                return nil;
-            }
-            
-        
+        [self invoke: invocation withTarget: target args: args selector: sel signature: sig];
 
 
         const char* type = [[invocation methodSignature] methodReturnType];
@@ -270,18 +195,112 @@
                 }
             }
         }
-
-        
     
     }
-    
-    
-    
-    
     
 	return nil;
 }
 
-            
-                 
+- (id)invoke:(NSInvocation *)invocation withTarget:(id)target args:(NSMutableArray *)args selector:(SEL)sel signature:(NSMethodSignature *)sig
+{
+    [invocation setSelector:sel];
+    for (NSInteger i =0, N=[args count]; i<N; i++)
+    {
+        id arg = [args objectAtIndex:i];
+        const char *cType = [sig getArgumentTypeAtIndex:i+2];
+        switch(*cType) {
+            case '@':
+            if ([arg isEqual:@"__self__"])
+            {
+                arg = target;
+            }
+            [invocation setArgument:&arg atIndex:i+2];
+            break;
+            case 'i':
+            {
+                NSInteger intVal = [arg integerValue];
+                [invocation setArgument:&intVal atIndex:i+2];
+                break;
+            }
+            case 'I':
+            {
+                NSInteger uIntVal = [arg unsignedIntegerValue];
+                [invocation setArgument:&uIntVal atIndex:i+2];
+                break;
+            }
+            case 's':
+            {
+                short shVal = [arg shortValue];
+                [invocation setArgument:&shVal atIndex:i+2];
+                break;
+            }
+            case 'd':
+            {
+                double dbVal = [arg doubleValue];
+                [invocation setArgument:&dbVal atIndex:i+2];
+                break;
+            }
+            case 'f':
+            {
+                float fltVal = [arg floatValue];
+                [invocation setArgument:&fltVal atIndex:i+2];
+                break;
+            }
+            case 'l':
+            {
+                long lngVal = [arg longValue];
+                [invocation setArgument:&lngVal atIndex:i+2];
+                break;
+            }
+            case '*':
+            {
+                const char *cstringValue = [arg cStringUsingEncoding:NSUTF8StringEncoding];
+                [invocation setArgument:&cstringValue atIndex:i+2];
+                break;
+                
+                
+            }
+            case 'c':
+            {
+                char chVal =[arg charValue];
+                [invocation setArgument:&chVal atIndex:i+2];
+                break;
+            }
+            case '{': {
+                //not supported yet
+                if (strcmp(cType,"{CGPoint=ff}") == 0)
+                {
+                    CGPoint point;
+                    CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)arg, &point);
+                    [invocation setArgument:&point atIndex:i+2];
+                    break;
+                    
+                }
+                else if (strcmp(cType,"{CGRect={CGPoint=ff}{CGSize=ff}}") == 0)
+                {
+                    CGRect rect;
+                    CGRectMakeWithDictionaryRepresentation((CFDictionaryRef)arg, &rect);
+                    [invocation setArgument:&rect atIndex:i+2];
+                    break;
+                    
+                }
+                
+                
+                @throw [NSString stringWithFormat: @"not yet support struct args: %@",sig];
+            }
+        }
+        
+    }
+    [invocation setTarget:target];
+    @try {
+        [invocation invoke];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Perform %@ with target %@ caught %@: %@", NSStringFromSelector(sel), target, [exception name], [exception reason]);
+        return nil;
+    }
+}
+
+
+
 @end
