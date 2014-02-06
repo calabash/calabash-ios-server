@@ -17,6 +17,7 @@
 #import "LPOrientationOperation.h"
 #import "LPTouchUtils.h"
 #import "LPSliderOperation.h"
+#import "LPCollectionViewScrollToItemOperation.h"
 
 @implementation LPOperation
 
@@ -62,6 +63,10 @@
     else if ([opName isEqualToString:@"changeSlider"])
     {
         op = [[LPSliderOperation alloc] initWithOperation:dictionary];
+    }
+    else if ([opName isEqualToString:@"collectionViewScroll"])
+    {
+        op = [[LPCollectionViewScrollToItemOperation alloc] initWithOperation:dictionary];
     }
     else
     {
