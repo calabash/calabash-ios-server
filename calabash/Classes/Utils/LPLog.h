@@ -8,16 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum { LPLogLevelDebug=1, LPLogLevelInfo=5, LPLogLevelError=10 } LPLogLevel;
+typedef enum {LPLogLevelDebug = 1, LPLogLevelInfo = 5, LPLogLevelError = 10} LPLogLevel;
 
 @interface LPLog : NSObject
 
-+(LPLogLevel)currentLevel;
-+(NSString*)currentLevelString;
-+(void)setLevelFromString:(NSString*)logLevel;
++ (LPLogLevel) currentLevel;
 
-+(void)debug:(NSString *)formatString, ...;
-+(void)info:(NSString *)formatString, ...;
-+(void)error:(NSString *)formatString, ...;
++ (NSString *) currentLevelString;
+
++ (void) setLevelFromString:(NSString *) logLevel;
+
++ (void) debug:(NSString *) formatString, ...;
+
++ (void) info:(NSString *) formatString, ...;
+
++ (void) error:(NSString *) formatString, ...;
 
 @end
