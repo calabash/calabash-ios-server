@@ -51,7 +51,8 @@
 - (NSString *) description {
   NSString *fm = nil;
   if (self.selectorName) {
-    fm = [NSString stringWithFormat:@"with %@:", NSStringFromSelector(self.selector)];
+    fm = [NSString stringWithFormat:@"with %@:",
+                                    NSStringFromSelector(self.selector)];
   } else {
     fm = [NSString stringWithFormat:@"with %@:", self.selectorSpec];
   }
@@ -62,9 +63,13 @@
       return [NSString stringWithFormat:@"%@%d,%d", fm, [ip row], [ip section]];
     }
 
-    case UIScriptLiteralTypeString:return [NSString stringWithFormat:@"%@'%@'", fm, self.objectValue];
-    case UIScriptLiteralTypeInteger:return [NSString stringWithFormat:@"%@%d", fm, self.integerValue];
-    case UIScriptLiteralTypeBool:return [NSString stringWithFormat:@"%@%@", fm, self.boolValue ? @"YES" : @"NO"];
+    case UIScriptLiteralTypeString:
+      return [NSString stringWithFormat:@"%@'%@'", fm, self.objectValue];
+    case UIScriptLiteralTypeInteger:
+      return [NSString stringWithFormat:@"%@%d", fm, self.integerValue];
+    case UIScriptLiteralTypeBool:
+      return [NSString stringWithFormat:@"%@%@", fm,
+                                        self.boolValue ? @"YES" : @"NO"];
     default:return @"UIScriptLiteralTypeUnknown";
   }
 }
@@ -86,7 +91,9 @@
       type = LPWebQueryTypeCSS;
     }
 
-    return [LPWebQuery evaluateQuery:(NSString *) self.objectValue ofType:type inWebView:webView includeInvisible:visibility == UIScriptASTVisibilityTypeAll];
+    return [LPWebQuery evaluateQuery:(NSString *) self.objectValue ofType:type
+                           inWebView:webView
+                    includeInvisible:visibility == UIScriptASTVisibilityTypeAll];
   } else {
     NSLog(@"Attempting to look for non string in web view");
     return [NSMutableArray array];
@@ -107,7 +114,8 @@
       }
     } else {
       if ([v isKindOfClass:[UIWebView class]]) {
-        [res addObjectsFromArray:[self handleWebView:(UIWebView *) v visibility:visibility]];
+        [res addObjectsFromArray:[self handleWebView:(UIWebView *) v
+                                          visibility:visibility]];
         continue;
       }
       if ([self.selectorName isEqualToString:@"marked"]) {
@@ -178,7 +186,8 @@
         }
       } else {
         NSError *error = nil;
-        id val = [LPReflectUtils invokeSpec:self.selectorSpec onTarget:v withError:&error];
+        id val = [LPReflectUtils invokeSpec:self.selectorSpec onTarget:v
+                                  withError:&error];
         if (val && !error) {
           switch (self.valueType) {
             case UIScriptLiteralTypeInteger: {

@@ -22,9 +22,11 @@
   NSString *command = [self.data objectForKey:@"command"];
   [LPUIAChannel runAutomationCommand:command then:^(NSDictionary *result) {
     if (!result) {
-      [self failWithMessageFormat:@"Timed out running command %@" message:command];
+      [self failWithMessageFormat:@"Timed out running command %@"
+                          message:command];
     } else {
-      [self succeedWithResult:[NSArray arrayWithObject:[[result copy] autorelease]]];
+      [self succeedWithResult:[NSArray arrayWithObject:[[result copy]
+              autorelease]]];
     }
   }];
 }

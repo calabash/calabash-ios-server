@@ -73,13 +73,20 @@
   }
   self.parser = nil;
   NSError *error = nil;
-  NSArray *resultArray = [self applyOperation:operation toViews:result error:&error];
+  NSArray *resultArray = [self applyOperation:operation toViews:result
+                                        error:&error];
 
   NSDictionary *resultDict = nil;
   if (resultArray) {
-    resultDict = [NSDictionary dictionaryWithObjectsAndKeys:[LPOrientationOperation statusBarOrientation], @"status_bar_orientation", resultArray, @"results", @"SUCCESS", @"outcome", nil];
+    resultDict = [NSDictionary dictionaryWithObjectsAndKeys:[LPOrientationOperation statusBarOrientation], @"status_bar_orientation",
+                                                            resultArray, @"results",
+                                                            @"SUCCESS", @"outcome",
+                                                            nil];
   } else {
-    resultDict = [NSDictionary dictionaryWithObjectsAndKeys:@"FAILURE", @"outcome", @"", @"reason", @"", @"details", nil];
+    resultDict = [NSDictionary dictionaryWithObjectsAndKeys:@"FAILURE", @"outcome",
+                                                            @"", @"reason",
+                                                            @"", @"details",
+                                                            nil];
   }
   [LPLog debug:@"Map results %@", resultDict];
 

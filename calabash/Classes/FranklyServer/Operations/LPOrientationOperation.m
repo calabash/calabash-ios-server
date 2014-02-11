@@ -59,7 +59,8 @@ static NSString *const kFaceUp = @"face up";
 
 
 + (NSString *) statusBarOrientation {
-  UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+  UIInterfaceOrientation orientation = [[UIApplication sharedApplication]
+          statusBarOrientation];
   switch (orientation) {
     case UIInterfaceOrientationPortrait: return kDown;
     case UIInterfaceOrientationPortraitUpsideDown: return kUp;
@@ -86,18 +87,21 @@ static NSString *const kFaceUp = @"face up";
 
   NSUInteger argCount = [_arguments count];
   if (argCount == 0) {
-    NSLog(@"Warning: requires exactly one argument: {'%@' | '%@'} found none", kDevice, kStatusBar);
+    NSLog(@"Warning: requires exactly one argument: {'%@' | '%@'} found none",
+            kDevice, kStatusBar);
     return nil;
   }
 
   if (argCount > 1) {
-    NSLog(@"Warning: argument should be {'%@' | '%@'} - found '[%@']", kDevice, kStatusBar, [_arguments componentsJoinedByString:@", "]);
+    NSLog(@"Warning: argument should be {'%@' | '%@'} - found '[%@']", kDevice,
+            kStatusBar, [_arguments componentsJoinedByString:@", "]);
     return nil;
   }
 
   NSString *firstArg = [_arguments objectAtIndex:0];
   if ([@[kDevice, kStatusBar] containsObject:firstArg] == NO) {
-    NSLog(@"Warning: argument should be {'%@' | '%@'} - found '%@'", kDevice, kStatusBar, firstArg);
+    NSLog(@"Warning: argument should be {'%@' | '%@'} - found '%@'", kDevice,
+            kStatusBar, firstArg);
   }
 
   if ([kDevice isEqualToString:firstArg]) {
@@ -105,7 +109,8 @@ static NSString *const kFaceUp = @"face up";
   } else if ([kStatusBar isEqualToString:firstArg]) {
     return [LPOrientationOperation statusBarOrientation];
   } else {
-    NSLog(@"Warning: feel through conditional for arguments: '[%@]'", [_arguments componentsJoinedByString:@", "]);
+    NSLog(@"Warning: feel through conditional for arguments: '[%@]'",
+            [_arguments componentsJoinedByString:@", "]);
     return nil;
   }
 }

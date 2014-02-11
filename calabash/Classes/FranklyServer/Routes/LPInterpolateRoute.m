@@ -38,13 +38,15 @@
   NSNumber *off_start_x = [offset_start valueForKey:@"x"];
   NSNumber *off_start_y = [offset_start valueForKey:@"y"];
 
-  CGPoint offsetPointStart = CGPointMake([off_start_x floatValue], [off_start_y floatValue]);
+  CGPoint offsetPointStart = CGPointMake([off_start_x floatValue],
+          [off_start_y floatValue]);
 
   NSDictionary *offset_end = [self.data valueForKey:@"offset_end"];
   NSNumber *off_end_x = [offset_end valueForKey:@"x"];
   NSNumber *off_end_y = [offset_end valueForKey:@"y"];
 
-  CGPoint offsetPointEnd = CGPointMake([off_end_x floatValue], [off_end_y floatValue]);
+  CGPoint offsetPointEnd = CGPointMake([off_end_x floatValue],
+          [off_end_y floatValue]);
 
   UIView *targetView = nil;
   self.parser1 = [UIScriptParser scriptParserWithObject:queryStart];
@@ -66,10 +68,12 @@
     if ([startAt isKindOfClass:[UIView class]]) {
       centerStart = [LPTouchUtils centerOfView:startAt];
     } else {
-      CGPointMakeWithDictionaryRepresentation((CFDictionaryRef) [startAt valueForKey:@"center"], &centerStart);
+      CGPointMakeWithDictionaryRepresentation(
+              (CFDictionaryRef) [startAt valueForKey:@"center"], &centerStart);
     }
   }
-  centerStart = CGPointMake(centerStart.x + offsetPointStart.x, centerStart.y + offsetPointStart.y);
+  centerStart = CGPointMake(centerStart.x + offsetPointStart.x,
+          centerStart.y + offsetPointStart.y);
 
 
   CGPoint centerEnd;
@@ -81,17 +85,20 @@
     if ([endAt isKindOfClass:[UIView class]]) {
       centerEnd = [LPTouchUtils centerOfView:endAt];
     } else {
-      CGPointMakeWithDictionaryRepresentation((CFDictionaryRef) [endAt valueForKey:@"center"], &centerEnd);
+      CGPointMakeWithDictionaryRepresentation(
+              (CFDictionaryRef) [endAt valueForKey:@"center"], &centerEnd);
     }
   }
 
-  centerEnd = CGPointMake(centerEnd.x + offsetPointEnd.x, centerEnd.y + offsetPointEnd.y);
+  centerEnd = CGPointMake(centerEnd.x + offsetPointEnd.x,
+          centerEnd.y + offsetPointEnd.y);
 
 
   NSArray *baseEvents = [LPResources eventsFromEncoding:base64Events];
 
 
-  self.events = [LPResources interpolateEvents:baseEvents fromPoint:centerStart toPoint:centerEnd];
+  self.events = [LPResources interpolateEvents:baseEvents fromPoint:centerStart
+                                       toPoint:centerEnd];
 
   //NSLog(@"PLAY Events:\n%@",self.events);
 
@@ -103,13 +110,16 @@
     resultArray = [NSArray arrayWithObject:targetView];
   }
 
-  self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:resultArray, @"results", @"SUCCESS", @"outcome", nil];
+  self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:resultArray, @"results",
+                                                                 @"SUCCESS", @"outcome",
+                                                                 nil];
 }
 
 
 - (void) play:(NSArray *) events {
   [[LPRecorder sharedRecorder] load:self.events];
-  [[LPRecorder sharedRecorder] playbackWithDelegate:self doneSelector:@selector(playbackDone:)];
+  [[LPRecorder sharedRecorder]
+          playbackWithDelegate:self doneSelector:@selector(playbackDone:)];
 }
 
 

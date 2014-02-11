@@ -19,7 +19,8 @@ CGImageRef UIGetScreenImage(void);
 
 
 - (NSObject <LPHTTPResponse> *) httpResponseForMethod:(NSString *) method URI:(NSString *) path {
-  LPHTTPDataResponse *drsp = [[LPHTTPDataResponse alloc] initWithData:[self takeScreenshot]];
+  LPHTTPDataResponse *drsp = [[LPHTTPDataResponse alloc]
+          initWithData:[self takeScreenshot]];
   return [drsp autorelease];
 }
 

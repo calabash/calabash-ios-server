@@ -4,7 +4,8 @@
 @implementation LPCollectionViewScrollToItemOperation
 
 - (NSString *) description {
-  return [NSString stringWithFormat:@"CollectionViewScrollToRow: %@", _arguments];
+  return [NSString stringWithFormat:@"CollectionViewScrollToRow: %@",
+                                    _arguments];
 }
 
 
@@ -15,19 +16,22 @@
   // UICollectionView appears in iOS 6
   Class clz = NSClassFromString(@"UICollectionView");
   if (clz == nil) {
-    NSLog(@"Warning UICollectionView is not supported on this version of iOS:  '%@'", [[UIDevice currentDevice] systemVersion]);
+    NSLog(@"Warning UICollectionView is not supported on this version of iOS:  '%@'",
+            [[UIDevice currentDevice] systemVersion]);
     return nil;
   }
 
   if ([aView isKindOfClass:[UICollectionView class]] == NO) {
-    NSLog(@"Warning view: %@ should be an instance of UICollectionView but found '%@'", aView, aView == nil ? nil : [aView class]);
+    NSLog(@"Warning view: %@ should be an instance of UICollectionView but found '%@'",
+            aView, aView == nil ? nil : [aView class]);
     return nil;
   }
 
   UICollectionView *collection = (UICollectionView *) aView;
 
   if ([_arguments count] != 4) {
-    NSLog(@"Warning:  required 4 args but found only '%d' - %@", [_arguments count], _arguments);
+    NSLog(@"Warning:  required 4 args but found only '%d' - %@",
+            [_arguments count], _arguments);
     return nil;
   }
 
@@ -36,13 +40,15 @@
 
   NSInteger numSections = [collection numberOfSections];
   if (section >= numSections) {
-    NSLog(@"Warning:  requested to scroll to section '%d' but view only has '%d' sections", section, numSections);
+    NSLog(@"Warning:  requested to scroll to section '%d' but view only has '%d' sections",
+            section, numSections);
     return nil;
   }
 
   NSInteger numItemInSection = [collection numberOfItemsInSection:section];
   if (itemIndex >= numItemInSection) {
-    NSLog(@"Warning:  requested to scroll to item '%d' in section '%d' but that section on has '%d' items", itemIndex, section, numItemInSection);
+    NSLog(@"Warning:  requested to scroll to item '%d' in section '%d' but that section on has '%d' items",
+            itemIndex, section, numItemInSection);
     return nil;
   }
 
@@ -53,7 +59,8 @@
 
   NSNumber *posNum = [opts objectForKey:position];
   if (posNum == nil) {
-    NSLog(@"Warning:  requesting to scroll to position '%@' but that is not one of these valid positions: '%@'", position, [opts allKeys]);
+    NSLog(@"Warning:  requesting to scroll to position '%@' but that is not one of these valid positions: '%@'",
+            position, [opts allKeys]);
     return nil;
   }
 
@@ -65,7 +72,8 @@
 
   NSIndexPath *ip = [NSIndexPath indexPathForItem:itemIndex inSection:section];
 
-  [collection scrollToItemAtIndexPath:ip atScrollPosition:scrollPosition animated:animate];
+  [collection scrollToItemAtIndexPath:ip atScrollPosition:scrollPosition
+                             animated:animate];
 
   return collection;
 }

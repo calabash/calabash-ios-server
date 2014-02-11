@@ -17,7 +17,8 @@
   struct utsname systemInfo;
   uname(&systemInfo);
 
-  NSString *system = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+  NSString *system = [NSString stringWithCString:systemInfo.machine
+                                        encoding:NSUTF8StringEncoding];
   NSDictionary *env = [[NSProcessInfo processInfo] environment];
 
   BOOL iphone5Like = NO;
@@ -70,7 +71,10 @@
   CGSize retina_ipad_hori = CGSizeMake(2048, 1536);
 
 
-  if ((CGRectEqualToRect(small_vert, b) || CGRectEqualToRect(small_hori, b)) && (CGSizeEqualToSize(large_size_hori, size) || CGSizeEqualToSize(large_size_vert, size) || CGSizeEqualToSize(retina_ipad_hori, size) || CGSizeEqualToSize(retina_ipad_vert, size))) {
+  if ((CGRectEqualToRect(small_vert, b) || CGRectEqualToRect(small_hori,
+          b)) && (CGSizeEqualToSize(large_size_hori, size) || CGSizeEqualToSize(
+          large_size_vert, size) || CGSizeEqualToSize(retina_ipad_hori,
+          size) || CGSizeEqualToSize(retina_ipad_vert, size))) {
 
     CGSize orientation_size = UIDeviceOrientationIsPortrait(o) || UIDeviceOrientationFaceUp == o || UIDeviceOrientationUnknown == o ? large_size_vert : large_size_hori;
     float x_offset = orientation_size.width / 2.0f - b.size.width / 2.0f;
@@ -87,7 +91,8 @@
   // instead in the -keyWindow property. To fix that, check if the array of windows contains the key window, and
   // explicitly add it if needed.
   //
-  NSMutableArray *allWindows = [[[[UIApplication sharedApplication] windows] mutableCopy] autorelease];
+  NSMutableArray *allWindows = [[[[UIApplication sharedApplication] windows]
+          mutableCopy] autorelease];
   UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
   if (keyWindow && ![allWindows containsObject:keyWindow]) {
     [allWindows addObject:keyWindow];
@@ -146,7 +151,8 @@
 + (UIView *) findCommonAncestorForView:(UIView *) viewToCheck andView:(UIView *) otherView firstIndex:(NSInteger *) firstIndexPtr secondIndex:(NSInteger *) secondIndexPtr {
   UIView *parent = [otherView superview];
   NSInteger parentIndex = [[parent subviews] indexOfObject:otherView];
-  NSInteger viewToCheckIndex = [self indexOfView:viewToCheck asSubViewInView:parent];
+  NSInteger viewToCheckIndex = [self indexOfView:viewToCheck
+                                 asSubViewInView:parent];
   while (parent && (viewToCheckIndex == -1)) {
     UIView *nextParent = [parent superview];
     parentIndex = [[nextParent subviews] indexOfObject:parent];
@@ -166,7 +172,10 @@
   NSInteger firstIndex = -1;
   NSInteger secondIndex = -1;
 
-  UIView *commonAncestor = [self findCommonAncestorForView:viewToCheck andView:otherView firstIndex:&firstIndex secondIndex:&secondIndex];
+  UIView *commonAncestor = [self findCommonAncestorForView:viewToCheck
+                                                   andView:otherView
+                                                firstIndex:&firstIndex
+                                               secondIndex:&secondIndex];
   if (!commonAncestor || firstIndex == -1 || secondIndex == -1) {return NO;}
   return firstIndex > secondIndex;
 }
@@ -200,17 +209,20 @@
     if (viewWin == hitWin)//common window
     {
 
-      CGRect hitViewBounds = [viewWin convertRect:hitView.bounds fromView:hitView];
+      CGRect hitViewBounds = [viewWin convertRect:hitView.bounds
+                                         fromView:hitView];
       CGRect viewBounds = [viewWin convertRect:view.bounds fromView:view];
 
-      if (CGRectContainsRect(hitViewBounds, viewBounds) && [self isView:hitView zIndexAboveView:view]) {
+      if (CGRectContainsRect(hitViewBounds, viewBounds) && [self isView:hitView
+                                                        zIndexAboveView:view]) {
         //In this case the hitView (which we're not asking about)
         //is completely overlapping the view and "above" it in the container.
         return NO;
       }
 
 
-      CGRect ctrlRect = [viewWin convertRect:hitView.frame fromView:hitView.superview];
+      CGRect ctrlRect = [viewWin convertRect:hitView.frame
+                                    fromView:hitView.superview];
       return CGRectContainsPoint(ctrlRect, center);
     }
   }
@@ -220,7 +232,8 @@
 
 + (CGPoint) centerOfFrame:(CGRect) frame shouldTranslate:(BOOL) shouldTranslate {
   CGPoint translated = shouldTranslate ? [self translateToScreenCoords:frame.origin] : frame.origin;
-  return CGPointMake(translated.x + 0.5 * frame.size.width, translated.y + 0.5 * frame.size.height);
+  return CGPointMake(translated.x + 0.5 * frame.size.width,
+          translated.y + 0.5 * frame.size.height);
 }
 
 
@@ -250,7 +263,8 @@
   NSString *iosVersion = [UIDevice currentDevice].systemVersion;
   id <UIApplicationDelegate> appDelegate = [UIApplication sharedApplication].delegate;
 
-  if ([[iosVersion substringToIndex:1] isEqualToString:@"4"] || !([appDelegate respondsToSelector:@selector(window)])) {
+  if ([[iosVersion substringToIndex:1]
+          isEqualToString:@"4"] || !([appDelegate respondsToSelector:@selector(window)])) {
 
     if ([appDelegate respondsToSelector:@selector(window)]) {
       delegateWindow = [appDelegate window];

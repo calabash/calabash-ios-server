@@ -64,7 +64,8 @@
       return _bytes;
     } else {//length < [_bytes length]
       NSData *toReturn = [_bytes subdataWithRange:NSMakeRange(0, length)];
-      _bytes = [_bytes subdataWithRange:NSMakeRange(length, _bytes.length - length)];//the rest
+      _bytes = [_bytes subdataWithRange:NSMakeRange(length,
+              _bytes.length - length)];//the rest
       return toReturn;
     }
   }
@@ -93,16 +94,22 @@
 
 - (void) failWithMessageFormat:(NSString *) messageFmt message:(NSString *) message {
   self.done = YES;
-  NSString *msg = !message ? messageFmt : [NSString stringWithFormat:messageFmt, message];
+  NSString *msg = !message ? messageFmt : [NSString stringWithFormat:messageFmt,
+                                                                     message];
 
-  self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"reason", @"", @"details", @"FAILURE", @"outcome", nil];
+  self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"reason",
+                                                                 @"", @"details",
+                                                                 @"FAILURE", @"outcome",
+                                                                 nil];
   [self.conn responseHasAvailableData:self];
 }
 
 
 - (void) succeedWithResult:(NSArray *) result {
   self.done = YES;
-  self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:result, @"results", @"SUCCESS", @"outcome", nil];
+  self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:result, @"results",
+                                                                 @"SUCCESS", @"outcome",
+                                                                 nil];
   [self.conn responseHasAvailableData:self];
 }
 

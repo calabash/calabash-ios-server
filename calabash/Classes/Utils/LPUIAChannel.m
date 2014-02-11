@@ -54,7 +54,8 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
 - (id) init {
   self = [super init];
   if (self) {
-    _uiaQueue = dispatch_queue_create("calabash.uia_queue", DISPATCH_QUEUE_SERIAL);
+    _uiaQueue = dispatch_queue_create(
+            "calabash.uia_queue", DISPATCH_QUEUE_SERIAL);
   }
   return self;
 }
@@ -67,13 +68,16 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
 }
 
 
-+ (void) runAutomationCommand:(NSString *) command then:(void (^)(NSDictionary *result)) resultHandler {
++ (void) runAutomationCommand:(NSString *) command then:(void (^)(
+        NSDictionary *result)) resultHandler {
 
-  [[LPUIAChannel sharedChannel] runAutomationCommand:command then:resultHandler];
+  [[LPUIAChannel sharedChannel]
+          runAutomationCommand:command then:resultHandler];
 }
 
 
-- (void) runAutomationCommand:(NSString *) command then:(void (^)(NSDictionary *)) resultHandler {
+- (void) runAutomationCommand:(NSString *) command then:(void (^)(
+        NSDictionary *)) resultHandler {
 
   dispatch_async(_uiaQueue, ^{
     [self requestExecutionOf:command];
@@ -147,13 +151,16 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   NSDictionary *uiaRequest = [self requestForCommand:command];
 
-  [defaults setObject:uiaRequest forKey:(NSString *) LPUIAChannelUIAPrefsRequestKey];
+  [defaults setObject:uiaRequest
+               forKey:(NSString *) LPUIAChannelUIAPrefsRequestKey];
   [defaults synchronize];
 }
 
 
 - (NSDictionary *) requestForCommand:(NSString *) command {
-  return [NSDictionary dictionaryWithObjectsAndKeys:@(_scriptIndex), LPUIAChannelUIAPrefsIndexKey, command, LPUIAChannelUIAPrefsCommandKey, nil];
+  return [NSDictionary dictionaryWithObjectsAndKeys:@(_scriptIndex), LPUIAChannelUIAPrefsIndexKey,
+                                                    command, LPUIAChannelUIAPrefsCommandKey,
+                                                    nil];
 }
 
 #pragma mark - Communication

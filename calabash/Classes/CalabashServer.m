@@ -129,11 +129,21 @@
 
     // Advertise this device's capabilities to our listeners inside of the TXT record
     NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
-    NSMutableDictionary *capabilities = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[[UIDevice currentDevice] name], @"name", [[UIDevice currentDevice] model], @"model", [[UIDevice currentDevice] systemVersion], @"os_version", [info objectForKey:@"CFBundleDisplayName"], @"app", [info objectForKey:@"CFBundleIdentifier"], @"app_id", [info objectForKey:@"CFBundleVersion"], @"app_version", nil];
+    NSMutableDictionary *capabilities = [[NSMutableDictionary alloc]
+            initWithObjectsAndKeys:[[UIDevice currentDevice] name], @"name",
+                                   [[UIDevice currentDevice] model], @"model",
+                                   [[UIDevice currentDevice]
+                                           systemVersion], @"os_version",
+                                   [info objectForKey:@"CFBundleDisplayName"], @"app",
+                                   [info objectForKey:@"CFBundleIdentifier"], @"app_id",
+                                   [info objectForKey:@"CFBundleVersion"], @"app_version",
+                                   nil];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
-    if ([[UIDevice currentDevice] respondsToSelector:@selector(uniqueIdentifier)]) {
-      id uuid = [[UIDevice currentDevice] performSelector:@selector(uniqueIdentifier) withObject:nil];
+    if ([[UIDevice currentDevice]
+            respondsToSelector:@selector(uniqueIdentifier)]) {
+      id uuid = [[UIDevice currentDevice]
+              performSelector:@selector(uniqueIdentifier) withObject:nil];
       [capabilities setObject:uuid forKey:@"uuid"];
     }
 #pragma clang diagnostic pop
@@ -177,13 +187,16 @@
     appSupportPath = [simulatorRoot stringByAppendingString:appSupportPath];
   }
 
-  void *appSupport = dlopen([appSupportPath fileSystemRepresentation], RTLD_LAZY);
+  void *appSupport = dlopen(
+          [appSupportPath fileSystemRepresentation], RTLD_LAZY);
   if (!appSupport) {
     NSLog(@"ERROR: Unable to dlopen AppSupport. Cannot automatically enable accessibility.");
     return;
   }
 
-  CFStringRef (*copySharedResourcesPreferencesDomainForDomain)(CFStringRef domain) = dlsym(appSupport, "CPCopySharedResourcesPreferencesDomainForDomain");
+  CFStringRef (*copySharedResourcesPreferencesDomainForDomain)(
+          CFStringRef domain) = dlsym(appSupport,
+          "CPCopySharedResourcesPreferencesDomainForDomain");
   if (!copySharedResourcesPreferencesDomainForDomain) {
     NSLog(@"ERROR: Unable to dlsym CPCopySharedResourcesPreferencesDomainForDomain. "
             "Cannot automatically enable accessibility.");
@@ -196,7 +209,9 @@
     return;
   }
 
-  CFPreferencesSetValue(CFSTR("ApplicationAccessibilityEnabled"), kCFBooleanTrue, accessibilityDomain, kCFPreferencesAnyUser, kCFPreferencesAnyHost);
+  CFPreferencesSetValue(CFSTR("ApplicationAccessibilityEnabled"),
+          kCFBooleanTrue, accessibilityDomain, kCFPreferencesAnyUser,
+          kCFPreferencesAnyHost);
   CFRelease(accessibilityDomain);
 
   [autoreleasePool drain];

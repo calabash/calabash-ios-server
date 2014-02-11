@@ -43,7 +43,8 @@
   } else if ([opName isEqualToString:@"changeSlider"]) {
     op = [[LPSliderOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"collectionViewScroll"]) {
-    op = [[LPCollectionViewScrollToItemOperation alloc] initWithOperation:dictionary];
+    op = [[LPCollectionViewScrollToItemOperation alloc]
+            initWithOperation:dictionary];
   } else {
     op = [[LPOperation alloc] initWithOperation:dictionary];
   }
@@ -93,7 +94,9 @@
 
 
 - (NSString *) description {
-  return [NSString stringWithFormat:@"Operation<SEL=%@,Args=%@>", NSStringFromSelector(_selector), _arguments];
+  return [NSString stringWithFormat:@"Operation<SEL=%@,Args=%@>",
+                                    NSStringFromSelector(_selector),
+                                    _arguments];
 }
 
 
@@ -101,7 +104,14 @@
   NSMethodSignature *tSig = [target methodSignatureForSelector:_selector];
   NSUInteger argc = tSig.numberOfArguments - 2;
   if (argc != [_arguments count] && *error != NULL) {
-    *error = [NSError errorWithDomain:@"CalabashServer" code:1 userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Arity mismatch", @"reason", [NSString stringWithFormat:@"%@ applied to selector %@ with %i args", self, NSStringFromSelector(_selector), argc], @"details", nil]];
+    *error = [NSError errorWithDomain:@"CalabashServer" code:1
+                             userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Arity mismatch", @"reason",
+                                                                                 [NSString stringWithFormat:@"%@ applied to selector %@ with %i args",
+                                                                                                            self,
+                                                                                                            NSStringFromSelector(
+                                                                                                                    _selector),
+                                                                                                            argc], @"details",
+                                                                                 nil]];
     return nil;
   }
 
@@ -121,7 +131,8 @@
   id returnValue;
   if (!strcmp(returnType, @encode(void))) {
     returnValue = nil;
-  } else if (!strcmp(returnType, @encode(id))) // retval is an objective c object
+  } else if (!strcmp(returnType,
+          @encode(id))) // retval is an objective c object
   {
     [invocation getReturnValue:&returnValue];
   } else {
@@ -140,7 +151,8 @@
     } else if (!strcmp(returnType, @encode(float))) {
       returnValue = [NSNumber numberWithFloat:*((float *) buffer)];
     } else {
-      returnValue = [[[NSValue valueWithBytes:buffer objCType:returnType] copy] autorelease];
+      returnValue = [[[NSValue valueWithBytes:buffer objCType:returnType] copy]
+              autorelease];
     }
     free(buffer);//memory leak here, but apparently NSValue doesn't copy the passed buffer, it just stores the pointer
   }

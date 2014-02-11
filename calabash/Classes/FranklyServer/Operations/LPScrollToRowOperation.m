@@ -57,22 +57,26 @@
           animate = [ani boolValue];
         }
 
-        [table scrollToRowAtIndexPath:path atScrollPosition:sp animated:animate];
+        [table scrollToRowAtIndexPath:path atScrollPosition:sp
+                             animated:animate];
         return _view;
       } else {
         NSLog(@"Warning: table doesn't contain indexPath: %@", path);
         return nil;
       }
     } else {
-      NSIndexPath *indexPathForRow = [self indexPathForRow:[rowNum unsignedIntegerValue] inTable:table];
+      NSIndexPath *indexPathForRow = [self indexPathForRow:[rowNum unsignedIntegerValue]
+                                                   inTable:table];
       if (!indexPathForRow) {
         return nil;
       }
-      [table scrollToRowAtIndexPath:indexPathForRow atScrollPosition:UITableViewScrollPositionTop animated:YES];
+      [table scrollToRowAtIndexPath:indexPathForRow
+                   atScrollPosition:UITableViewScrollPositionTop animated:YES];
       return _view;
     }
   }
-  NSLog(@"Warning view: %@ should be a table view for scrolling to row/cell to make sense", _view);
+  NSLog(@"Warning view: %@ should be a table view for scrolling to row/cell to make sense",
+          _view);
   return nil;
 }
 @end

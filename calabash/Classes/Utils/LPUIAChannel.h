@@ -11,8 +11,10 @@
 
 + (LPUIAChannel *) sharedChannel;
 
-+ (void) runAutomationCommand:(NSString *) command then:(void (^)(NSDictionary *result)) resultHandler;
++ (void) runAutomationCommand:(NSString *) command then:(void (^)(
+        NSDictionary *result)) resultHandler;
 
-- (void) runAutomationCommand:(NSString *) command then:(void (^)(NSDictionary *result)) resultHandler;
+- (void) runAutomationCommand:(NSString *) command then:(void (^)(
+        NSDictionary *result)) resultHandler;
 
 @end

@@ -33,16 +33,19 @@
 
   if (!keyboardWindow) {
     _playbackDone = YES;
-    return [self failWithMessageFormat:@"No keyboard displaying..." message:nil];
+    return [self failWithMessageFormat:@"No keyboard displaying..."
+                               message:nil];
   }
 
 
-  UIView *keyboardView = [UIScriptParser findViewByClass:@"UIKBKeyplaneView" fromView:keyboardWindow];
+  UIView *keyboardView = [UIScriptParser findViewByClass:@"UIKBKeyplaneView"
+                                                fromView:keyboardWindow];
 
 
   if (!keyboardView) {
     _playbackDone = YES;
-    return [self failWithMessageFormat:@"Found not UIKBKeyplaneView..." message:nil];
+    return [self failWithMessageFormat:@"Found not UIKBKeyplaneView..."
+                               message:nil];
   }
 
 
@@ -72,19 +75,25 @@
   }
 
   if (keyToTap) {
-    UIView *v = [UIScriptParser findViewByClass:@"UIKeyboardAutomatic" fromView:keyboardWindow];
+    UIView *v = [UIScriptParser findViewByClass:@"UIKeyboardAutomatic"
+                                       fromView:keyboardWindow];
     UIView *sup = [v superview];
 
-    CGRect parentFrame = [sup convertRect:v.frame toView:nil];//[sup convertRect:v.frame toView:sup];
+    CGRect parentFrame = [sup convertRect:v.frame
+                                   toView:nil];//[sup convertRect:v.frame toView:sup];
 
     CGRect frame = [keyToTap frame];
-    CGPoint point = CGPointMake(parentFrame.origin.x + frame.origin.x + 0.5 * frame.size.width, parentFrame.origin.y + frame.origin.y + 0.5 * frame.size.height);
+    CGPoint point = CGPointMake(
+            parentFrame.origin.x + frame.origin.x + 0.5 * frame.size.width,
+            parentFrame.origin.y + frame.origin.y + 0.5 * frame.size.height);
 
     point = [(UIWindow *) keyboardWindow convertPoint:point toWindow:nil];
     point = [LPTouchUtils translateToScreenCoords:point];
     _events = [[LPResources transformEvents:events toPoint:point] retain];
     self.done = YES;
-    self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithObject:v], @"results", @"SUCCESS", @"outcome", nil];
+    self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithObject:v], @"results",
+                                                                   @"SUCCESS", @"outcome",
+                                                                   nil];
 
     [self play:_events];
   } else {
@@ -97,7 +106,8 @@
 - (void) play:(NSArray *) events {
   _playbackDone = NO;
   [[LPRecorder sharedRecorder] load:_events];
-  [[LPRecorder sharedRecorder] playbackWithDelegate:self doneSelector:@selector(playbackDone:)];
+  [[LPRecorder sharedRecorder]
+          playbackWithDelegate:self doneSelector:@selector(playbackDone:)];
 }
 
 //-(void) waitUntilPlaybackDone {

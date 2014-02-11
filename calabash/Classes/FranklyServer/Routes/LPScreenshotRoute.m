@@ -18,7 +18,8 @@
 
 
 - (NSObject <LPHTTPResponse> *) httpResponseForMethod:(NSString *) method URI:(NSString *) path {
-  LPHTTPDataResponse *drsp = [[LPHTTPDataResponse alloc] initWithData:[self takeScreenshot]];
+  LPHTTPDataResponse *drsp = [[LPHTTPDataResponse alloc]
+          initWithData:[self takeScreenshot]];
   return [drsp autorelease];
 }
 
@@ -47,7 +48,9 @@
       // Apply the window's transform about the anchor point
       CGContextConcatCTM(context, [window transform]);
       // Offset by the portion of the bounds left of and above the anchor point
-      CGContextTranslateCTM(context, -[window bounds].size.width * [[window layer] anchorPoint].x, -[window bounds].size.height * [[window layer] anchorPoint].y);
+      CGContextTranslateCTM(context,
+              -[window bounds].size.width * [[window layer] anchorPoint].x,
+              -[window bounds].size.height * [[window layer] anchorPoint].y);
 
       // Render the layer hierarchy to the current context
       [[window layer] renderInContext:context];

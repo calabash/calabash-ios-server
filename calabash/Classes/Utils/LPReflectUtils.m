@@ -46,14 +46,20 @@
   if ([selObj isKindOfClass:[NSString class]]) {
     sel = NSSelectorFromString(selObj);
   } else if ([selObj isKindOfClass:[NSDictionary class]]) {
-    sel = [self parseSpecFromArray:[NSArray arrayWithObject:selObj] withArgs:args];
+    sel = [self parseSpecFromArray:[NSArray arrayWithObject:selObj]
+                          withArgs:args];
   } else if ([selObj isKindOfClass:[NSArray class]]) {
     sel = [self parseSpecFromArray:selObj withArgs:args];
   }
 
   NSMethodSignature *sig = [target methodSignatureForSelector:sel];
   if (!sig || ![target respondsToSelector:sel]) {
-    *error = [NSError errorWithDomain:@"Calabash" code:2 userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"target does not respond to selector", @"reason", [NSString stringWithFormat:@"applied to selector %@", NSStringFromSelector(sel)], @"details", nil]];
+    *error = [NSError errorWithDomain:@"Calabash" code:2
+                             userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"target does not respond to selector", @"reason",
+                                                                                 [NSString stringWithFormat:@"applied to selector %@",
+                                                                                                            NSStringFromSelector(
+                                                                                                                    sel)], @"details",
+                                                                                 nil]];
     return nil;
   }
   NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sig];
@@ -97,7 +103,8 @@
       }
       case '*':
         //not supported yet
-        @throw [NSString stringWithFormat:@"not yet support struct pointers: %@", sig];
+        @throw [NSString stringWithFormat:@"not yet support struct pointers: %@",
+                                          sig];
       case 'c': {
         char chVal = [arg charValue];
         [invocation setArgument:&chVal atIndex:i + 2];
@@ -105,7 +112,8 @@
       }
       case '{': {
         //not supported yet
-        @throw [NSString stringWithFormat:@"not yet support struct args: %@", sig];
+        @throw [NSString stringWithFormat:@"not yet support struct args: %@",
+                                          sig];
       }
     }
   }
@@ -114,14 +122,16 @@
     [invocation invoke];
   }
   @catch (NSException *exception) {
-    NSLog(@"Perform %@ with target %@ caught %@: %@", selObj, target, [exception name], [exception reason]);
+    NSLog(@"Perform %@ with target %@ caught %@: %@", selObj, target,
+            [exception name], [exception reason]);
     NSLog(@"not supported");
     return nil;
   }
 
   const char *type = [[invocation methodSignature] methodReturnType];
   NSString *returnType = [NSString stringWithFormat:@"%s", type];
-  const char *trimmedType = [[returnType substringToIndex:1] cStringUsingEncoding:NSASCIIStringEncoding];
+  const char *trimmedType = [[returnType substringToIndex:1]
+          cStringUsingEncoding:NSASCIIStringEncoding];
   // TODO default switch statement is not handled in LPReflectUtils.m
   switch (*trimmedType) {
     case '@':[invocation getReturnValue:(void **) &objValue];
@@ -148,14 +158,23 @@
       unsigned int length = [[invocation methodSignature] methodReturnLength];
       void *buffer = (void *) malloc(length);
       [invocation getReturnValue:buffer];
-      NSValue *value = [[[NSValue alloc] initWithBytes:buffer objCType:type] autorelease];
+      NSValue *value = [[[NSValue alloc] initWithBytes:buffer objCType:type]
+              autorelease];
 
       if ([returnType rangeOfString:@"{CGRect"].location == 0) {
         CGRect *rec = (CGRect *) buffer;
-        return [NSDictionary dictionaryWithObjectsAndKeys:[value description], @"description", [NSNumber numberWithFloat:rec->origin.x], @"x", [NSNumber numberWithFloat:rec->origin.y], @"y", [NSNumber numberWithFloat:rec->size.width], @"width", [NSNumber numberWithFloat:rec->size.height], @"height", nil];
+        return [NSDictionary dictionaryWithObjectsAndKeys:[value description], @"description",
+                                                          [NSNumber numberWithFloat:rec->origin.x], @"x",
+                                                          [NSNumber numberWithFloat:rec->origin.y], @"y",
+                                                          [NSNumber numberWithFloat:rec->size.width], @"width",
+                                                          [NSNumber numberWithFloat:rec->size.height], @"height",
+                                                          nil];
       } else if ([returnType rangeOfString:@"{CGPoint="].location == 0) {
         CGPoint *point = (CGPoint *) buffer;
-        return [NSDictionary dictionaryWithObjectsAndKeys:[value description], @"description", [NSNumber numberWithFloat:point->x], @"x", [NSNumber numberWithFloat:point->y], @"y", nil];
+        return [NSDictionary dictionaryWithObjectsAndKeys:[value description], @"description",
+                                                          [NSNumber numberWithFloat:point->x], @"x",
+                                                          [NSNumber numberWithFloat:point->y], @"y",
+                                                          nil];
       } else {
         return [value description];
       }

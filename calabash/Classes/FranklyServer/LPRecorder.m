@@ -91,7 +91,9 @@ static LPRecorder *sharedRecorder = nil;
   playbackDelegate = [delegate retain];
   playbackDoneSelector = doneSelector;
 
-  [[UIApplication sharedApplication] _playbackEvents:eventList atPlaybackRate:1.0f messageWhenDone:self withSelector:@selector(playbackDone:)];
+  [[UIApplication sharedApplication]
+          _playbackEvents:eventList atPlaybackRate:1.0f messageWhenDone:self
+             withSelector:@selector(playbackDone:)];
 }
 
 

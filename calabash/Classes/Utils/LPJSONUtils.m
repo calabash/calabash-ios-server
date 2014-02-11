@@ -18,7 +18,8 @@
   if (error) {
     NSLog(@"Unable to serialize dictionary (%@), %@", error, dictionary);
   }
-  NSString *res = [[NSString alloc] initWithBytes:[d bytes] length:[d length] encoding:NSUTF8StringEncoding];
+  NSString *res = [[NSString alloc] initWithBytes:[d bytes] length:[d length]
+                                         encoding:NSUTF8StringEncoding];
   return [res autorelease];
 }
 
@@ -26,7 +27,8 @@
 + (NSDictionary *) deserializeDictionary:(NSString *) string {
   LPCJSONDeserializer *ds = [LPCJSONDeserializer deserializer];
   NSError *error = nil;
-  NSDictionary *res = [ds deserializeAsDictionary:[string dataUsingEncoding:NSUTF8StringEncoding] error:&error];
+  NSDictionary *res = [ds deserializeAsDictionary:[string dataUsingEncoding:NSUTF8StringEncoding]
+                                            error:&error];
   if (error) {
     NSLog(@"Unable to deserialize  %@", string);
   }
@@ -41,7 +43,8 @@
   if (error) {
     NSLog(@"Unable to serialize arrayy (%@), %@", error, array);
   }
-  NSString *res = [[NSString alloc] initWithBytes:[d bytes] length:[d length] encoding:NSUTF8StringEncoding];
+  NSString *res = [[NSString alloc] initWithBytes:[d bytes] length:[d length]
+                                         encoding:NSUTF8StringEncoding];
   return [res autorelease];
 }
 
@@ -49,7 +52,8 @@
 + (NSArray *) deserializeArray:(NSString *) string {
   LPCJSONDeserializer *ds = [LPCJSONDeserializer deserializer];
   NSError *error = nil;
-  NSArray *res = [ds deserializeAsArray:[string dataUsingEncoding:NSUTF8StringEncoding] error:&error];
+  NSArray *res = [ds deserializeAsArray:[string dataUsingEncoding:NSUTF8StringEncoding]
+                                  error:&error];
   if (error) {
     NSLog(@"Unable to deserialize  %@", string);
   }
@@ -64,7 +68,8 @@
   if (error) {
     NSLog(@"Unable to serialize object (%@), %@", error, [obj description]);
   }
-  NSString *res = [[NSString alloc] initWithBytes:[d bytes] length:[d length] encoding:NSUTF8StringEncoding];
+  NSString *res = [[NSString alloc] initWithBytes:[d bytes] length:[d length]
+                                         encoding:NSUTF8StringEncoding];
   return [res autorelease];
 }
 
@@ -77,7 +82,8 @@
   }
   if ([object isKindOfClass:[UIView class]]) {
     UIView *v = (UIView *) object;
-    NSMutableDictionary *result = [NSMutableDictionary dictionaryWithObjectsAndKeys:NSStringFromClass([object class]), @"class", nil];
+    NSMutableDictionary *result = [NSMutableDictionary dictionaryWithObjectsAndKeys:NSStringFromClass(
+            [object class]), @"class", nil];
 
     NSString *lbl = [object accessibilityLabel];
     if (lbl) {
@@ -106,12 +112,22 @@
       CGRect rect = [window convertRect:v.bounds fromView:v];
       rect = [frontWindow convertRect:rect fromWindow:window];
       CGPoint center = [LPTouchUtils centerOfFrame:rect shouldTranslate:YES];
-      NSDictionary *rectDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:center.x], @"center_x", [NSNumber numberWithFloat:center.y], @"center_y", [NSNumber numberWithFloat:rect.origin.x], @"x", [NSNumber numberWithFloat:rect.origin.y], @"y", [NSNumber numberWithFloat:rect.size.width], @"width", [NSNumber numberWithFloat:rect.size.height], @"height", nil];
+      NSDictionary *rectDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:center.x], @"center_x",
+                                                                         [NSNumber numberWithFloat:center.y], @"center_y",
+                                                                         [NSNumber numberWithFloat:rect.origin.x], @"x",
+                                                                         [NSNumber numberWithFloat:rect.origin.y], @"y",
+                                                                         [NSNumber numberWithFloat:rect.size.width], @"width",
+                                                                         [NSNumber numberWithFloat:rect.size.height], @"height",
+                                                                         nil];
 
       [result setObject:rectDic forKey:@"rect"];
     }
 
-    NSDictionary *frameDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:frame.origin.x], @"x", [NSNumber numberWithFloat:frame.origin.y], @"y", [NSNumber numberWithFloat:frame.size.width], @"width", [NSNumber numberWithFloat:frame.size.height], @"height", nil];
+    NSDictionary *frameDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:frame.origin.x], @"x",
+                                                                        [NSNumber numberWithFloat:frame.origin.y], @"y",
+                                                                        [NSNumber numberWithFloat:frame.size.width], @"width",
+                                                                        [NSNumber numberWithFloat:frame.size.height], @"height",
+                                                                        nil];
 
     [result setObject:frameDic forKey:@"frame"];
 

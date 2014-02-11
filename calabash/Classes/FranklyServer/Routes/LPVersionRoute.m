@@ -73,15 +73,18 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
 
 
 - (NSDictionary *) JSONResponseForMethod:(NSString *) method URI:(NSString *) path data:(NSDictionary *) data {
-  NSString *versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+  NSString *versionString = [[NSBundle mainBundle]
+          objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
   if (!versionString) {
     versionString = @"Unknown";
   }
-  NSString *idString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"];
+  NSString *idString = [[NSBundle mainBundle]
+          objectForInfoDictionaryKey:@"CFBundleIdentifier"];
   if (!idString) {
     idString = @"Unknown";
   }
-  NSString *nameString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+  NSString *nameString = [[NSBundle mainBundle]
+          objectForInfoDictionaryKey:@"CFBundleDisplayName"];
 
   if (!nameString) {
     nameString = @"Unknown";
@@ -89,7 +92,8 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
   struct utsname systemInfo;
   uname(&systemInfo);
 
-  NSString *system = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+  NSString *system = [NSString stringWithCString:systemInfo.machine
+                                        encoding:NSUTF8StringEncoding];
 
   NSDictionary *env = [[NSProcessInfo processInfo] environment];
 
@@ -108,7 +112,20 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
   BOOL isIphoneAppEmulated = [self isIPhoneAppEmulatedOnIPad];
   NSDictionary *git = @{@"revision" : kLPGitShortRevision, @"branch" : kLPGitBranch, @"remote_origin" : kLPGitRemoteOrigin};
 
-  NSDictionary *res = [NSDictionary dictionaryWithObjectsAndKeys:kLPCALABASHVERSION , @"version", idString, @"app_id", [[UIDevice currentDevice] systemVersion], @"iOS_version", nameString, @"app_name", system, @"system", [NSNumber numberWithBool:iphone5Like], @"4inch", dev, @"simulator_device", sim, @"simulator", versionString, @"app_version", @"SUCCESS", @"outcome", [NSNumber numberWithBool:isIphoneAppEmulated], @"iphone_app_emulated_on_ipad", git, @"git", nil];
+  NSDictionary *res = [NSDictionary dictionaryWithObjectsAndKeys:kLPCALABASHVERSION , @"version",
+                                                                 idString, @"app_id",
+                                                                 [[UIDevice currentDevice]
+                                                                         systemVersion], @"iOS_version",
+                                                                 nameString, @"app_name",
+                                                                 system, @"system",
+                                                                 [NSNumber numberWithBool:iphone5Like], @"4inch",
+                                                                 dev, @"simulator_device",
+                                                                 sim, @"simulator",
+                                                                 versionString, @"app_version",
+                                                                 @"SUCCESS", @"outcome",
+                                                                 [NSNumber numberWithBool:isIphoneAppEmulated], @"iphone_app_emulated_on_ipad",
+                                                                 git, @"git",
+                                                                 nil];
   return res;
 }
 

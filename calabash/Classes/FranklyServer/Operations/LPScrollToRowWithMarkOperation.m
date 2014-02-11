@@ -86,7 +86,8 @@
 // _arguments ==> [row mark, scroll position, animated]
 - (id) performWithTarget:(UIView *) _view error:(NSError **) error {
   if ([_view isKindOfClass:[UITableView class]] == NO) {
-    NSLog(@"Warning view: %@ should be a table view for scrolling to row/cell to make sense", _view);
+    NSLog(@"Warning view: %@ should be a table view for scrolling to row/cell to make sense",
+            _view);
     return nil;
   }
 

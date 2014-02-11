@@ -24,7 +24,8 @@
 
 
 - (NSString *) description {
-  return [NSString stringWithFormat:@"UIScriptASTPredicate: %@", [self.predicate description]];
+  return [NSString stringWithFormat:@"UIScriptASTPredicate: %@",
+                                    [self.predicate description]];
 }
 
 

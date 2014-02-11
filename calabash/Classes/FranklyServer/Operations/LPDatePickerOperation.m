@@ -63,19 +63,24 @@
   [formatter setDateFormat:dateFormat];
   NSDate *date = [formatter dateFromString:dateStr];
   if (date == nil) {
-    NSLog(@"Warning: could not create date from '%@' and format '%@'", dateStr, dateFormat);
+    NSLog(@"Warning: could not create date from '%@' and format '%@'", dateStr,
+            dateFormat);
     return nil;
   }
 
   NSDate *minDate = picker.minimumDate;
   if (minDate != nil && [date compare:minDate] == NSOrderedAscending) {
-    NSLog(@"Warning: could not set the date to '%@' because is earlier than the minimum date '%@'", date, [minDate descriptionWithLocale:[NSLocale autoupdatingCurrentLocale]]);
+    NSLog(@"Warning: could not set the date to '%@' because is earlier than the minimum date '%@'",
+            date,
+            [minDate descriptionWithLocale:[NSLocale autoupdatingCurrentLocale]]);
     return nil;
   }
 
   NSDate *maxDate = picker.maximumDate;
   if (maxDate != nil && [date compare:maxDate] == NSOrderedDescending) {
-    NSLog(@"Warning: could not set the date to '%@' because is later than the maximum date '%@'", date, [maxDate descriptionWithLocale:[NSLocale autoupdatingCurrentLocale]]);
+    NSLog(@"Warning: could not set the date to '%@' because is later than the maximum date '%@'",
+            date,
+            [maxDate descriptionWithLocale:[NSLocale autoupdatingCurrentLocale]]);
     return nil;
   }
 
@@ -84,7 +89,8 @@
   if (notifyTargets) {
     NSSet *targets = [picker allTargets];
     for (id target in targets) {
-      NSArray *actions = [picker actionsForTarget:target forControlEvent:UIControlEventValueChanged];
+      NSArray *actions = [picker actionsForTarget:target
+                                  forControlEvent:UIControlEventValueChanged];
       for (NSString *action in actions) {
         SEL sel = NSSelectorFromString(action);
 #pragma clang diagnostic push

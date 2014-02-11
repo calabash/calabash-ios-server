@@ -63,7 +63,8 @@
     if ([selObj isKindOfClass:[NSString class]]) {
       sel = NSSelectorFromString(selObj);
     } else if ([selObj isKindOfClass:[NSDictionary class]]) {
-      sel = [self parseValuesFromArray:[NSArray arrayWithObject:selObj] withArgs:args];
+      sel = [self parseValuesFromArray:[NSArray arrayWithObject:selObj]
+                              withArgs:args];
     } else if ([selObj isKindOfClass:[NSArray class]]) {
       sel = [self parseValuesFromArray:selObj withArgs:args];
     }
@@ -129,18 +130,21 @@
           //not supported yet
           if (strcmp(cType, "{CGPoint=ff}") == 0) {
             CGPoint point;
-            CGPointMakeWithDictionaryRepresentation((CFDictionaryRef) arg, &point);
+            CGPointMakeWithDictionaryRepresentation((CFDictionaryRef) arg,
+                    &point);
             [invocation setArgument:&point atIndex:i + 2];
             break;
           } else if (strcmp(cType, "{CGRect={CGPoint=ff}{CGSize=ff}}") == 0) {
             CGRect rect;
-            CGRectMakeWithDictionaryRepresentation((CFDictionaryRef) arg, &rect);
+            CGRectMakeWithDictionaryRepresentation((CFDictionaryRef) arg,
+                    &rect);
             [invocation setArgument:&rect atIndex:i + 2];
             break;
           }
 
 
-          @throw [NSString stringWithFormat:@"not yet support struct args: %@", sig];
+          @throw [NSString stringWithFormat:@"not yet support struct args: %@",
+                                            sig];
         }
       }
     }
@@ -149,14 +153,16 @@
       [invocation invoke];
     }
     @catch (NSException *exception) {
-      NSLog(@"Perform %@ with target %@ caught %@: %@", selObj, target, [exception name], [exception reason]);
+      NSLog(@"Perform %@ with target %@ caught %@: %@", selObj, target,
+              [exception name], [exception reason]);
       return nil;
     }
 
 
     const char *type = [[invocation methodSignature] methodReturnType];
     NSString *returnType = [NSString stringWithFormat:@"%s", type];
-    const char *trimmedType = [[returnType substringToIndex:1] cStringUsingEncoding:NSASCIIStringEncoding];
+    const char *trimmedType = [[returnType substringToIndex:1]
+            cStringUsingEncoding:NSASCIIStringEncoding];
     switch (*trimmedType) {
       case '@':[invocation getReturnValue:(void **) &objValue];
         if (objValue == nil) {
@@ -189,20 +195,30 @@
         unsigned int length = [[invocation methodSignature] methodReturnLength];
         void *buffer = (void *) malloc(length);
         [invocation getReturnValue:buffer];
-        NSValue *value = [[[NSValue alloc] initWithBytes:buffer objCType:type] autorelease];
+        NSValue *value = [[[NSValue alloc] initWithBytes:buffer objCType:type]
+                autorelease];
 
         if ([returnType rangeOfString:@"{CGRect"].location == 0) {
           CGRect *rec = (CGRect *) buffer;
-          return [NSDictionary dictionaryWithObjectsAndKeys:[value description], @"description", [NSNumber numberWithFloat:rec->origin.x], @"X", [NSNumber numberWithFloat:rec->origin.y], @"Y", [NSNumber numberWithFloat:rec->size.width], @"Width", [NSNumber numberWithFloat:rec->size.height], @"Height", nil];
+          return [NSDictionary dictionaryWithObjectsAndKeys:[value description], @"description",
+                                                            [NSNumber numberWithFloat:rec->origin.x], @"X",
+                                                            [NSNumber numberWithFloat:rec->origin.y], @"Y",
+                                                            [NSNumber numberWithFloat:rec->size.width], @"Width",
+                                                            [NSNumber numberWithFloat:rec->size.height], @"Height",
+                                                            nil];
         } else if ([returnType rangeOfString:@"{CGPoint="].location == 0) {
           CGPoint *point = (CGPoint *) buffer;
-          return [NSDictionary dictionaryWithObjectsAndKeys:[value description], @"description", [NSNumber numberWithFloat:point->x], @"X", [NSNumber numberWithFloat:point->y], @"Y", nil];
+          return [NSDictionary dictionaryWithObjectsAndKeys:[value description], @"description",
+                                                            [NSNumber numberWithFloat:point->x], @"X",
+                                                            [NSNumber numberWithFloat:point->y], @"Y",
+                                                            nil];
         } else if ([returnType isEqualToString:@"{?=dd}"]) {
           double *doubles = (double *) buffer;
           double d1 = *doubles;
           doubles++;
           double d2 = *doubles;
-          return [NSArray arrayWithObjects:[NSNumber numberWithDouble:d1], [NSNumber numberWithDouble:d2], nil];
+          return [NSArray arrayWithObjects:[NSNumber numberWithDouble:d1],
+                                           [NSNumber numberWithDouble:d2], nil];
         } else {
           return [value description];
         }

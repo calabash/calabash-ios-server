@@ -105,7 +105,8 @@ static const short _base64DecodingTable[256] = {-2, -2, -2, -2, -2, -2, -2, -2, 
   }
 
   // Cleanup and setup the return NSData
-  return [[[NSData alloc] initWithBytesNoCopy:objResult length:j freeWhenDone:YES] autorelease];
+  return [[[NSData alloc]
+          initWithBytesNoCopy:objResult length:j freeWhenDone:YES] autorelease];
 }
 
 
@@ -113,7 +114,10 @@ static const short _base64DecodingTable[256] = {-2, -2, -2, -2, -2, -2, -2, -2, 
   NSData *data = [self decodeBase64WithString:encoded];
   NSString *err = nil;
   NSPropertyListFormat format;
-  return [NSPropertyListSerialization propertyListFromData:data mutabilityOption:NSPropertyListImmutable format:&format errorDescription:&err];
+  return [NSPropertyListSerialization propertyListFromData:data
+                                          mutabilityOption:NSPropertyListImmutable
+                                                    format:&format
+                                          errorDescription:&err];
 }
 
 
@@ -134,24 +138,31 @@ static const short _base64DecodingTable[256] = {-2, -2, -2, -2, -2, -2, -2, -2, 
 
     NSDictionary *loc = [d valueForKey:@"Location"];
     NSDictionary *windowLoc = [d valueForKey:@"WindowLocation"];
-    if (loc == nil || windowLoc == nil || [[d valueForKey:@"Type"] integerValue] == 50) {
+    if (loc == nil || windowLoc == nil || [[d valueForKey:@"Type"]
+            integerValue] == 50) {
       continue;
     }
 
-    currentPoint = CGPointMake([[windowLoc valueForKey:@"X"] floatValue], [[windowLoc valueForKey:@"Y"] floatValue]);
+    currentPoint = CGPointMake([[windowLoc valueForKey:@"X"] floatValue],
+            [[windowLoc valueForKey:@"Y"] floatValue]);
     if (!CGPointEqualToPoint(CGRectNull.origin, lastPoint)) {
-      delta = CGPointMake(delta.x + (currentPoint.x - lastPoint.x), delta.y + (currentPoint.y - lastPoint.y));
+      delta = CGPointMake(delta.x + (currentPoint.x - lastPoint.x),
+              delta.y + (currentPoint.y - lastPoint.y));
     }
 
 
     NSMutableDictionary *newLoc = [NSMutableDictionary dictionaryWithDictionary:loc];
     NSMutableDictionary *newWindowLoc = [NSMutableDictionary dictionaryWithDictionary:windowLoc];
 
-    [newLoc setValue:[NSNumber numberWithFloat:_viewCenter.x + delta.x] forKey:@"X"];
-    [newLoc setValue:[NSNumber numberWithFloat:_viewCenter.y + delta.y] forKey:@"Y"];
+    [newLoc setValue:[NSNumber numberWithFloat:_viewCenter.x + delta.x]
+              forKey:@"X"];
+    [newLoc setValue:[NSNumber numberWithFloat:_viewCenter.y + delta.y]
+              forKey:@"Y"];
 
-    [newWindowLoc setValue:[NSNumber numberWithFloat:_viewCenter.x + delta.x] forKey:@"X"];
-    [newWindowLoc setValue:[NSNumber numberWithFloat:_viewCenter.y + delta.y] forKey:@"Y"];
+    [newWindowLoc setValue:[NSNumber numberWithFloat:_viewCenter.x + delta.x]
+                    forKey:@"X"];
+    [newWindowLoc setValue:[NSNumber numberWithFloat:_viewCenter.y + delta.y]
+                    forKey:@"Y"];
 
 
     NSData *data = [d valueForKey:@"Data"];
@@ -189,17 +200,24 @@ static const short _base64DecodingTable[256] = {-2, -2, -2, -2, -2, -2, -2, -2, 
 + (NSArray *) interpolateEvents:(NSArray *) baseEvents fromPoint:(CGPoint) startAt toPoint:(CGPoint) endAt {
   NSMutableArray *transformedEvents = [NSMutableArray arrayWithCapacity:[baseEvents count]];
 
-  NSDictionary *baseStart = [[baseEvents objectAtIndex:0] valueForKey:@"WindowLocation"];
-  NSDictionary *baseCenter = [[baseEvents objectAtIndex:[baseEvents count] / 2] valueForKey:@"WindowLocation"];
-  NSDictionary *baseEnd = [[baseEvents objectAtIndex:[baseEvents count] - 1] valueForKey:@"WindowLocation"];
+  NSDictionary *baseStart = [[baseEvents objectAtIndex:0]
+          valueForKey:@"WindowLocation"];
+  NSDictionary *baseCenter = [[baseEvents objectAtIndex:[baseEvents count] / 2]
+          valueForKey:@"WindowLocation"];
+  NSDictionary *baseEnd = [[baseEvents objectAtIndex:[baseEvents count] - 1]
+          valueForKey:@"WindowLocation"];
 
-  CGPoint centerAt = CGPointMake(startAt.x + (endAt.x - startAt.x) / 2 + 3, startAt.y + (endAt.y - startAt.y) / 2 + 3);
+  CGPoint centerAt = CGPointMake(startAt.x + (endAt.x - startAt.x) / 2 + 3,
+          startAt.y + (endAt.y - startAt.y) / 2 + 3);
 
-  CGPoint p = CGPointMake([[baseStart valueForKey:@"X"] floatValue], [[baseStart valueForKey:@"Y"] floatValue]);
+  CGPoint p = CGPointMake([[baseStart valueForKey:@"X"] floatValue],
+          [[baseStart valueForKey:@"Y"] floatValue]);
 
-  CGPoint q = CGPointMake([[baseCenter valueForKey:@"X"] floatValue], [[baseCenter valueForKey:@"Y"] floatValue]);
+  CGPoint q = CGPointMake([[baseCenter valueForKey:@"X"] floatValue],
+          [[baseCenter valueForKey:@"Y"] floatValue]);
 
-  CGPoint r = CGPointMake([[baseEnd valueForKey:@"X"] floatValue], [[baseEnd valueForKey:@"Y"] floatValue]);
+  CGPoint r = CGPointMake([[baseEnd valueForKey:@"X"] floatValue],
+          [[baseEnd valueForKey:@"Y"] floatValue]);
 
   CGFloat a1 = q.x - p.x;
   CGFloat c1 = r.x - p.x;
@@ -215,7 +233,8 @@ static const short _base64DecodingTable[256] = {-2, -2, -2, -2, -2, -2, -2, -2, 
 
   CGAffineTransform f_inv = CGAffineTransformInvert(f);
 
-  CGAffineTransform g = CGAffineTransformMake(a2, b2, c2, d2, startAt.x, startAt.y);
+  CGAffineTransform g = CGAffineTransformMake(a2, b2, c2, d2, startAt.x,
+          startAt.y);
 
   CGAffineTransform interpolate = CGAffineTransformConcat(f_inv, g);
 
@@ -242,11 +261,13 @@ static const short _base64DecodingTable[256] = {-2, -2, -2, -2, -2, -2, -2, -2, 
 
     NSDictionary *loc = [d valueForKey:@"Location"];
     NSDictionary *windowLoc = [d valueForKey:@"WindowLocation"];
-    if (loc == nil || windowLoc == nil || [[d valueForKey:@"Type"] integerValue] == 50) {
+    if (loc == nil || windowLoc == nil || [[d valueForKey:@"Type"]
+            integerValue] == 50) {
       continue;
     }
 
-    currentPoint = CGPointMake([[windowLoc valueForKey:@"X"] floatValue], [[windowLoc valueForKey:@"Y"] floatValue]);
+    currentPoint = CGPointMake([[windowLoc valueForKey:@"X"] floatValue],
+            [[windowLoc valueForKey:@"Y"] floatValue]);
 
     NSMutableDictionary *newLoc = [NSMutableDictionary dictionaryWithDictionary:loc];
     NSMutableDictionary *newWindowLoc = [NSMutableDictionary dictionaryWithDictionary:windowLoc];
@@ -256,8 +277,10 @@ static const short _base64DecodingTable[256] = {-2, -2, -2, -2, -2, -2, -2, -2, 
     [newLoc setValue:[NSNumber numberWithFloat:translatedPoint.x] forKey:@"X"];
     [newLoc setValue:[NSNumber numberWithFloat:translatedPoint.y] forKey:@"Y"];
 
-    [newWindowLoc setValue:[NSNumber numberWithFloat:translatedPoint.x] forKey:@"X"];
-    [newWindowLoc setValue:[NSNumber numberWithFloat:translatedPoint.y] forKey:@"Y"];
+    [newWindowLoc setValue:[NSNumber numberWithFloat:translatedPoint.x]
+                    forKey:@"X"];
+    [newWindowLoc setValue:[NSNumber numberWithFloat:translatedPoint.y]
+                    forKey:@"Y"];
 
 
     NSData *data = [d valueForKey:@"Data"];

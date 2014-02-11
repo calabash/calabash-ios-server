@@ -47,7 +47,9 @@ static NSMutableDictionary *routes = nil;
 
 - (NSObject <LPHTTPResponse> *) responseForJSON:(NSDictionary *) json {
   if (json == nil) {
-    json = [NSDictionary dictionaryWithObjectsAndKeys:[NSArray array], @"results", @"SUCCESS", @"outcome", nil];
+    json = [NSDictionary dictionaryWithObjectsAndKeys:[NSArray array], @"results",
+                                                      @"SUCCESS", @"outcome",
+                                                      nil];
   }
   NSString *serialized = [LPJSONUtils serializeDictionary:json];
   NSData *data = [serialized dataUsingEncoding:NSUTF8StringEncoding];
@@ -58,7 +60,8 @@ static NSMutableDictionary *routes = nil;
 
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
   NSArray *components = [path componentsSeparatedByString:@"?"];
-  NSArray *pathComponents = [[components objectAtIndex:0] componentsSeparatedByString:@"/"];
+  NSArray *pathComponents = [[components objectAtIndex:0]
+          componentsSeparatedByString:@"/"];
   NSString *lastSegment = [pathComponents lastObject];
 
   id <LPRoute> route = [routes objectForKey:lastSegment];
@@ -70,7 +73,8 @@ static NSMutableDictionary *routes = nil;
 
 - (NSObject <LPHTTPResponse> *) httpResponseForMethod:(NSString *) method URI:(NSString *) path {
   NSArray *components = [path componentsSeparatedByString:@"?"];
-  NSArray *pathComponents = [[components objectAtIndex:0] componentsSeparatedByString:@"/"];
+  NSArray *pathComponents = [[components objectAtIndex:0]
+          componentsSeparatedByString:@"/"];
   NSString *lastSegment = [pathComponents lastObject];
 
   id <LPRoute> route = [routes objectForKey:lastSegment];
@@ -82,7 +86,9 @@ static NSMutableDictionary *routes = nil;
     }
     if ([method isEqualToString:@"POST"]) {
       if (_postData != nil && [_postData length] > 0) {
-        NSString *postDataAsString = [[NSString alloc] initWithBytes:[_postData bytes] length:[_postData length] encoding:NSUTF8StringEncoding];
+        NSString *postDataAsString = [[NSString alloc]
+                initWithBytes:[_postData bytes] length:[_postData length]
+                     encoding:NSUTF8StringEncoding];
         params = [LPJSONUtils deserializeDictionary:postDataAsString];
         [postDataAsString release];
         [_postData release];
@@ -101,7 +107,8 @@ static NSMutableDictionary *routes = nil;
       return [route performSelector:raw withObject:method withObject:path];
     }
 
-    NSDictionary *json = [route JSONResponseForMethod:method URI:path data:params];
+    NSDictionary *json = [route JSONResponseForMethod:method URI:path
+                                                 data:params];
     return [self responseForJSON:json];
   }
   return nil;

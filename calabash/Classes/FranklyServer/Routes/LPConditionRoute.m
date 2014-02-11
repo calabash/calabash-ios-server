@@ -46,7 +46,10 @@
   }
 
 
-  self.timer = [NSTimer scheduledTimerWithTimeInterval:[freq doubleValue] target:self selector:@selector(checkConditionWithTimer:) userInfo:nil repeats:YES];
+  self.timer = [NSTimer scheduledTimerWithTimeInterval:[freq doubleValue]
+                                                target:self
+                                              selector:@selector(checkConditionWithTimer:)
+                                              userInfo:nil repeats:YES];
   [self checkConditionWithTimer:self.timer];
 }
 
@@ -79,7 +82,8 @@
     return;
   } else if ([condition isEqualToString:@"NO_NETWORK_INDICATOR"]) {
     if ([[UIApplication sharedApplication] isNetworkActivityIndicatorVisible]) {
-      [self failWithMessageFormat:@"Network activity indicator visible" message:nil];
+      [self failWithMessageFormat:@"Network activity indicator visible"
+                          message:nil];
       return;
     }
     if (self.curCount == self.maxCount) {

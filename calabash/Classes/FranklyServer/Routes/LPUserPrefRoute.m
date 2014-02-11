@@ -34,8 +34,15 @@
 
     [ud synchronize];
 
-    return [NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithObjects:val, curVal, nil], @"results", @"SUCCESS", @"outcome", nil];
+    return [NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithObjects:val,
+                                                                                curVal,
+                                                                                nil], @"results",
+                                                      @"SUCCESS", @"outcome",
+                                                      nil];
   }
-  return [NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithObjects:curVal, nil], @"results", @"SUCCESS", @"outcome", nil];
+  return [NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithObjects:curVal,
+                                                                              nil], @"results",
+                                                    @"SUCCESS", @"outcome",
+                                                    nil];
 }
 @end

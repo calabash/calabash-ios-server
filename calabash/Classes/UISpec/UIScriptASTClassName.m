@@ -31,13 +31,17 @@
 
   for (UIView *view in views) {
     switch (dir) {
-      case UIScriptASTDirectionTypeDescendant:[self evalDescWith:view result:res visibility:visibility];
+      case UIScriptASTDirectionTypeDescendant:
+        [self evalDescWith:view result:res visibility:visibility];
         break;
-      case UIScriptASTDirectionTypeChild:[self evalChildWith:view result:res visibility:visibility];
+      case UIScriptASTDirectionTypeChild:
+        [self evalChildWith:view result:res visibility:visibility];
         break;
-      case UIScriptASTDirectionTypeParent:[self evalParentsWith:view result:res visibility:visibility];
+      case UIScriptASTDirectionTypeParent:
+        [self evalParentsWith:view result:res visibility:visibility];
         break;
-      case UIScriptASTDirectionTypeSibling:[self evalSiblingsWith:view result:res visibility:visibility];
+      case UIScriptASTDirectionTypeSibling:
+        [self evalSiblingsWith:view result:res visibility:visibility];
         break;
     }
   }
@@ -78,7 +82,8 @@ static NSInteger sortFunction(UIView *v1, UIView *v2, void *ctx) {
     [self addView:view toArray:res ifMatchesVisibility:visibility];
   }
 
-  for (UIView *subview in [[view subviews] sortedArrayUsingFunction:sortFunction context:view]) {
+  for (UIView *subview in [[view subviews]
+          sortedArrayUsingFunction:sortFunction context:view]) {
     [self evalDescWith:subview result:res visibility:visibility];
   }
 }

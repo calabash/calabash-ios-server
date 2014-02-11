@@ -29,17 +29,29 @@
       }
       NSError *kerror;
       if (!([delegate validateValue:&kval forKeyPath:key error:&kerror])) {
-        return [NSDictionary dictionaryWithObjectsAndKeys:@"FAILURE", @"outcome", @"value is invalid", @"reason", [kerror description], @"description", nil];
+        return [NSDictionary dictionaryWithObjectsAndKeys:@"FAILURE", @"outcome",
+                                                          @"value is invalid", @"reason",
+                                                          [kerror description], @"description",
+                                                          nil];
       }
       [delegate setValue:kval forKeyPath:key];
 
-      return [NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithObjects:val, curVal, nil], @"results", @"SUCCESS", @"outcome", nil];
+      return [NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithObjects:val,
+                                                                                  curVal,
+                                                                                  nil], @"results",
+                                                        @"SUCCESS", @"outcome",
+                                                        nil];
     } else {
-      return [NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithObjects:curVal, nil], @"results", @"SUCCESS", @"outcome", nil];
+      return [NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithObjects:curVal,
+                                                                                  nil], @"results",
+                                                        @"SUCCESS", @"outcome",
+                                                        nil];
     }
   }
   @catch (NSException *exception) {
-    return [NSDictionary dictionaryWithObjectsAndKeys:@"FAILURE", @"outcome", [exception reason], @"reason", @"", @"description", nil];
+    return [NSDictionary dictionaryWithObjectsAndKeys:@"FAILURE", @"outcome",
+                                                      [exception reason], @"reason",
+                                                      @"", @"description", nil];
   }
 }
 

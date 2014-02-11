@@ -88,7 +88,8 @@
     NSMutableDictionary *msgDict = [[NSMutableDictionary alloc] init];
     for (unsigned i = 0U; (k = asl_key(msg, i)); ++i) {
       const char *v = asl_get(msg, k);
-      [msgDict setObject:[NSString stringWithUTF8String:v] forKey:[NSString stringWithUTF8String:k]];
+      [msgDict setObject:[NSString stringWithUTF8String:v]
+                  forKey:[NSString stringWithUTF8String:k]];
     }
     [messages addObject:msgDict];
   }
@@ -97,7 +98,9 @@
 
   NSArray *results = [NSArray arrayWithArray:messages];
 
-  return [NSDictionary dictionaryWithObjectsAndKeys:results, @"results", @"SUCCESS", @"outcome", nil];
+  return [NSDictionary dictionaryWithObjectsAndKeys:results, @"results",
+                                                    @"SUCCESS", @"outcome",
+                                                    nil];
 }
 
 @end

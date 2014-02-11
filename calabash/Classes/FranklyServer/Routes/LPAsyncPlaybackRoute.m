@@ -48,7 +48,8 @@
         center = [LPTouchUtils centerOfView:v];
       } else {
 
-        CGPointMakeWithDictionaryRepresentation((CFDictionaryRef) [v valueForKey:@"center"], &center);
+        CGPointMakeWithDictionaryRepresentation(
+                (CFDictionaryRef) [v valueForKey:@"center"], &center);
       }
 
       targetView = v;
@@ -56,11 +57,16 @@
       NSArray *baseEvents = [LPResources eventsFromEncoding:base64Events];
 
 
-      self.events = [LPResources transformEvents:baseEvents toPoint:CGPointMake(center.x + offsetPoint.x, center.y + offsetPoint.y)];
+      self.events = [LPResources transformEvents:baseEvents toPoint:CGPointMake(
+              center.x + offsetPoint.x, center.y + offsetPoint.y)];
     } else {
       NSLog(@"query %@ found no views. NO-OP.", query);
       self.done = YES;
-      self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"query %@ found no views. Is accessibility enabled?", query], @"reason", @"", @"details", @"FAILURE", @"outcome", nil];
+      self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"query %@ found no views. Is accessibility enabled?",
+                                                                                                query], @"reason",
+                                                                     @"", @"details",
+                                                                     @"FAILURE", @"outcome",
+                                                                     nil];
       self.events = nil;
       [self.conn responseHasAvailableData:self];
       return;
@@ -75,20 +81,32 @@
     if (!self.events || [self.events count] < 1) {
       NSLog(@"BAD EVENTS: %@", base64Events);
       self.done = YES;
-      self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Bad events %@", base64Events], @"reason", @"", @"details", @"FAILURE", @"outcome", nil];
+      self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Bad events %@",
+                                                                                                base64Events], @"reason",
+                                                                     @"", @"details",
+                                                                     @"FAILURE", @"outcome",
+                                                                     nil];
       return;
     }
     if (offset) {
       NSDictionary *firstEvent = [self.events objectAtIndex:0];
       NSDictionary *windowLoc = [firstEvent valueForKey:@"WindowLocation"];
-      if (windowLoc == nil || [[firstEvent valueForKey:@"Type"] integerValue] == 50) {
+      if (windowLoc == nil || [[firstEvent valueForKey:@"Type"]
+              integerValue] == 50) {
         NSLog(@"Offset for non window located event: %@", firstEvent);
         self.done = YES;
-        self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Offset for non window located event: %@", firstEvent], @"reason", @"", @"details", @"FAILURE", @"outcome", nil];
+        self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Offset for non window located event: %@",
+                                                                                                  firstEvent], @"reason",
+                                                                       @"", @"details",
+                                                                       @"FAILURE", @"outcome",
+                                                                       nil];
         return;
       }
 
-      NSArray *transformed = [LPResources transformEvents:self.events toPoint:CGPointMake(offsetPoint.x, offsetPoint.y)];
+      NSArray *transformed = [LPResources transformEvents:self.events
+                                                  toPoint:CGPointMake(
+                                                          offsetPoint.x,
+                                                          offsetPoint.y)];
       if ([transformed count] == [self.events count]) {
         self.events = transformed;
       }
@@ -103,7 +121,8 @@
   NSDictionary *windowLoc = [firstEvent valueForKey:@"WindowLocation"];
 
   if (!targetView && windowLoc != nil) {
-    CGPoint touchPoint = CGPointMake([[windowLoc valueForKey:@"X"] floatValue], [[windowLoc valueForKey:@"Y"] floatValue]);
+    CGPoint touchPoint = CGPointMake([[windowLoc valueForKey:@"X"] floatValue],
+            [[windowLoc valueForKey:@"Y"] floatValue]);
     for (UIWindow *window in [LPTouchUtils applicationWindows]) {
       if (![window respondsToSelector:@selector(screen)] || [window screen] == [UIScreen mainScreen]) {
         targetView = [window hitTest:touchPoint withEvent:nil];
@@ -129,13 +148,16 @@
     resultArray = [NSArray arrayWithObject:targetView];
   }
 
-  self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:resultArray, @"results", @"SUCCESS", @"outcome", nil];
+  self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:resultArray, @"results",
+                                                                 @"SUCCESS", @"outcome",
+                                                                 nil];
 }
 
 
 - (void) play:(NSArray *) events {
   [[LPRecorder sharedRecorder] load:self.events];
-  [[LPRecorder sharedRecorder] playbackWithDelegate:self doneSelector:@selector(playbackDone:)];
+  [[LPRecorder sharedRecorder]
+          playbackWithDelegate:self doneSelector:@selector(playbackDone:)];
 }
 
 
