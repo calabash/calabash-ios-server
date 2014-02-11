@@ -351,7 +351,7 @@
 				B121E79614B6D9FB0034C6A9 /* Frameworks */,
 				B121E79514B6D9FB0034C6A9 /* Products */,
 			);
-			indentWidth = 4;
+			indentWidth = 2;
 			sourceTree = "<group>";
 			tabWidth = 2;
 		};
