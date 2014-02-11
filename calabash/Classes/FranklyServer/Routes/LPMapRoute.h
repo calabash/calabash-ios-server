@@ -7,7 +7,9 @@
 #import <Foundation/Foundation.h>
 #import "LPRoute.h"
 #import "UIScriptParser.h"
-@interface LPMapRoute : NSObject<LPRoute>
 
-@property (nonatomic, retain) UIScriptParser *parser;
+@interface LPMapRoute : NSObject <LPRoute>
+
+@property(nonatomic, retain) UIScriptParser *parser;
+
 @end
