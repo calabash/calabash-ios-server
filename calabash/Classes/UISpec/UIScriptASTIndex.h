@@ -7,8 +7,10 @@
 #import "UIScriptAST.h"
 
 @interface UIScriptASTIndex : UIScriptAST {
-    NSUInteger _index;
+  NSUInteger _index;
 }
-@property (nonatomic,assign) NSUInteger index;
-- (id)initWithIndex:(NSUInteger)index;
+@property(nonatomic, assign) NSUInteger index;
+
+- (id) initWithIndex:(NSUInteger) index;
+
 @end
