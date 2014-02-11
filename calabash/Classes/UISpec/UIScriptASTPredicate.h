@@ -16,7 +16,6 @@
 @property(nonatomic, retain) NSPredicate *predicate;
 @property(nonatomic, assign) SEL selector;
 
-
 - (id) initWithPredicate:(NSPredicate *) pred selector:(SEL) sel;
 
 @end

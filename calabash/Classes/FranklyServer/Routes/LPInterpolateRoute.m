@@ -68,7 +68,6 @@
     } else {
       CGPointMakeWithDictionaryRepresentation((CFDictionaryRef) [startAt valueForKey:@"center"], &centerStart);
     }
-
   }
   centerStart = CGPointMake(centerStart.x + offsetPointStart.x, centerStart.y + offsetPointStart.y);
 
@@ -105,7 +104,6 @@
   }
 
   self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:resultArray, @"results", @"SUCCESS", @"outcome", nil];
-
 }
 
 

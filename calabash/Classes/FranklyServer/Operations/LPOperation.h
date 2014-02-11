@@ -14,12 +14,9 @@
 }
 + (id) operationFromDictionary:(NSDictionary *) dictionary;
 
-
 + (NSArray *) performQuery:(id) query;
 
-
 - (id) initWithOperation:(NSDictionary *) operation;
-
 
 - (id) performWithTarget:(UIView *) view error:(NSError **) error;
 

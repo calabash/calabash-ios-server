@@ -25,7 +25,6 @@
     NSLog(@"script: %@", [NSString stringWithFormat:LP_SET_TEXT_JS, json, [_arguments objectAtIndex:0]]);
     NSString *res = [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:LP_SET_TEXT_JS, json]];
     NSLog(@"RESULT: %@", res);
-
   } else if ([_view respondsToSelector:@selector(setText:)]) {
     NSString *txt = nil;
     id argument = [_arguments objectAtIndex:0];

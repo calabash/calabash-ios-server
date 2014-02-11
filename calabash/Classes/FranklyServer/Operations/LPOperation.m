@@ -11,8 +11,6 @@
 #import "LPQueryOperation.h"
 #import "LPFlashOperation.h"
 #import "LPSetTextOperation.h"
-#import "LPQueryAllOperation.h"
-#import "LPRecorder.h"
 #import "LPDatePickerOperation.h"
 #import "LPOrientationOperation.h"
 #import "LPTouchUtils.h"
@@ -21,58 +19,35 @@
 
 @implementation LPOperation
 
-+ (id) operationFromDictionary:(NSDictionary*) dictionary {
-    NSString *opName = [dictionary valueForKey:@"method_name"];
-    LPOperation* op = nil;
-    if ([opName isEqualToString:@"scrollToRow"])
-    {
-        op = [[LPScrollToRowOperation alloc] initWithOperation:dictionary];
-      
-    } else if ([opName isEqualToString:@"scrollToRowWithMark"])
-    {
-        op = [[LPScrollToRowWithMarkOperation alloc] initWithOperation:dictionary];
-    
-    }  else if ([opName isEqualToString:@"scroll"])
-    {
-        op = [[LPScrollOperation alloc] initWithOperation:dictionary];
-    
-    } else if ([opName isEqualToString:@"query"])
-    {
-        op = [[LPQueryOperation alloc] initWithOperation:dictionary];
-    
-    } else if ([opName isEqualToString:@"query_all"])
-    {
-        op = [[LPQueryAllOperation alloc] initWithOperation:dictionary];
-    
-    } else if ([opName isEqualToString:@"setText"])
-    {
-        op = [[LPSetTextOperation alloc] initWithOperation:dictionary];
-    }
-    else if ([opName isEqualToString:@"flash"])
-    {
-        op = [[LPFlashOperation alloc] initWithOperation:dictionary];
-    }
-    else if ([opName isEqualToString:@"orientation"])
-    {
-        op = [[LPOrientationOperation alloc] initWithOperation:dictionary];
-    }
-    else if ([opName isEqualToString:@"changeDatePickerDate"])
-    {
-        op = [[LPDatePickerOperation alloc] initWithOperation:dictionary];
-    }
-    else if ([opName isEqualToString:@"changeSlider"])
-    {
-        op = [[LPSliderOperation alloc] initWithOperation:dictionary];
-    }
-    else if ([opName isEqualToString:@"collectionViewScroll"])
-    {
-        op = [[LPCollectionViewScrollToItemOperation alloc] initWithOperation:dictionary];
-    }
-    else
-    {
-        op = [[LPOperation alloc] initWithOperation:dictionary];
-    }
-    return [op autorelease];
++ (id) operationFromDictionary:(NSDictionary *) dictionary {
+  NSString *opName = [dictionary valueForKey:@"method_name"];
+  LPOperation *op = nil;
+  if ([opName isEqualToString:@"scrollToRow"]) {
+    op = [[LPScrollToRowOperation alloc] initWithOperation:dictionary];
+  } else if ([opName isEqualToString:@"scrollToRowWithMark"]) {
+    op = [[LPScrollToRowWithMarkOperation alloc] initWithOperation:dictionary];
+  } else if ([opName isEqualToString:@"scroll"]) {
+    op = [[LPScrollOperation alloc] initWithOperation:dictionary];
+  } else if ([opName isEqualToString:@"query"]) {
+    op = [[LPQueryOperation alloc] initWithOperation:dictionary];
+  } else if ([opName isEqualToString:@"query_all"]) {
+    op = [[LPQueryAllOperation alloc] initWithOperation:dictionary];
+  } else if ([opName isEqualToString:@"setText"]) {
+    op = [[LPSetTextOperation alloc] initWithOperation:dictionary];
+  } else if ([opName isEqualToString:@"flash"]) {
+    op = [[LPFlashOperation alloc] initWithOperation:dictionary];
+  } else if ([opName isEqualToString:@"orientation"]) {
+    op = [[LPOrientationOperation alloc] initWithOperation:dictionary];
+  } else if ([opName isEqualToString:@"changeDatePickerDate"]) {
+    op = [[LPDatePickerOperation alloc] initWithOperation:dictionary];
+  } else if ([opName isEqualToString:@"changeSlider"]) {
+    op = [[LPSliderOperation alloc] initWithOperation:dictionary];
+  } else if ([opName isEqualToString:@"collectionViewScroll"]) {
+    op = [[LPCollectionViewScrollToItemOperation alloc] initWithOperation:dictionary];
+  } else {
+    op = [[LPOperation alloc] initWithOperation:dictionary];
+  }
+  return [op autorelease];
 }
 
 
@@ -145,8 +120,8 @@
 
   id returnValue;
   if (!strcmp(returnType, @encode(void))) {
-      returnValue = nil;
-    } else if (!strcmp(returnType, @encode(id))) // retval is an objective c object
+    returnValue = nil;
+  } else if (!strcmp(returnType, @encode(id))) // retval is an objective c object
   {
     [invocation getReturnValue:&returnValue];
   } else {

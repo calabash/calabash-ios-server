@@ -41,7 +41,6 @@
 
   NSUInteger argcount = [_arguments count];
 
-
   BOOL notifyTargets = YES;
   if (argcount > 1) {
     notifyTargets = [_arguments[1] boolValue];

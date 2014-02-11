@@ -10,7 +10,6 @@
 
 CGImageRef UIGetScreenImage(void);
 
-
 // UIGetScreenImage violates t
 @implementation LPScreenshotRoute2
 

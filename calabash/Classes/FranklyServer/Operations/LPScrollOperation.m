@@ -35,7 +35,6 @@
     }
 
     return _view;
-
   } else if ([_view isKindOfClass:[UIWebView class]]) {
     UIWebView *wv = (UIWebView *) _view;
     NSString *scrollJS = @"window.scrollBy(%@,%@);";

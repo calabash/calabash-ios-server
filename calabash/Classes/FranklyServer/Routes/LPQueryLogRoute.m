@@ -39,31 +39,31 @@
       for (int i = 1; i < [keyParts count]; i++) {
         NSString *modifier = [[keyParts objectAtIndex:i] lowercaseString];
         if ([modifier isEqualToString:@"equal"]) {
-                  op = ASL_QUERY_OP_EQUAL;
-                } else if ([modifier isEqualToString:@"greater"]) {
-                          op = ASL_QUERY_OP_GREATER;
-                        } else if ([modifier isEqualToString:@"greater_equal"]) {
-                                  op = ASL_QUERY_OP_GREATER_EQUAL;
-                                } else if ([modifier isEqualToString:@"less"]) {
-                                          op = ASL_QUERY_OP_LESS;
-                                        } else if ([modifier isEqualToString:@"less_equal"]) {
-                                                  op = ASL_QUERY_OP_LESS_EQUAL;
-                                                } else if ([modifier isEqualToString:@"not_equal"]) {
-                                                          op = ASL_QUERY_OP_NOT_EQUAL;
-                                                        } else if ([modifier isEqualToString:@"regex"]) {
-                                                                  op = ASL_QUERY_OP_REGEX;
-                                                                } else if ([modifier isEqualToString:@"true"]) {
-                                                                          op = ASL_QUERY_OP_TRUE;
-                                                                        } else if ([modifier isEqualToString:@"casefold"]) {
-                                                                                  op |= ASL_QUERY_OP_CASEFOLD;
-                                                                                } else if ([modifier isEqualToString:@"prefix"]) {
-                                                                                          op |= ASL_QUERY_OP_PREFIX;
-                                                                                        } else if ([modifier isEqualToString:@"suffix"]) {
-                                                                                                  op |= ASL_QUERY_OP_SUFFIX;
-                                                                                                } else if ([modifier isEqualToString:@"substring"]) {
-                                                                                                          op |= ASL_QUERY_OP_SUBSTRING;
-                                                                                                        } else if ([modifier isEqualToString:@"numeric"]) {
-                                                                                                                  op |= ASL_QUERY_OP_NUMERIC;
+          op = ASL_QUERY_OP_EQUAL;
+        } else if ([modifier isEqualToString:@"greater"]) {
+          op = ASL_QUERY_OP_GREATER;
+        } else if ([modifier isEqualToString:@"greater_equal"]) {
+          op = ASL_QUERY_OP_GREATER_EQUAL;
+        } else if ([modifier isEqualToString:@"less"]) {
+          op = ASL_QUERY_OP_LESS;
+        } else if ([modifier isEqualToString:@"less_equal"]) {
+          op = ASL_QUERY_OP_LESS_EQUAL;
+        } else if ([modifier isEqualToString:@"not_equal"]) {
+          op = ASL_QUERY_OP_NOT_EQUAL;
+        } else if ([modifier isEqualToString:@"regex"]) {
+          op = ASL_QUERY_OP_REGEX;
+        } else if ([modifier isEqualToString:@"true"]) {
+          op = ASL_QUERY_OP_TRUE;
+        } else if ([modifier isEqualToString:@"casefold"]) {
+          op |= ASL_QUERY_OP_CASEFOLD;
+        } else if ([modifier isEqualToString:@"prefix"]) {
+          op |= ASL_QUERY_OP_PREFIX;
+        } else if ([modifier isEqualToString:@"suffix"]) {
+          op |= ASL_QUERY_OP_SUFFIX;
+        } else if ([modifier isEqualToString:@"substring"]) {
+          op |= ASL_QUERY_OP_SUBSTRING;
+        } else if ([modifier isEqualToString:@"numeric"]) {
+          op |= ASL_QUERY_OP_NUMERIC;
         }
         //ignore unknown values
       }

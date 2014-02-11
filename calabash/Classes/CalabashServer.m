@@ -40,6 +40,7 @@
   dlopen([@"/Developer/Library/PrivateFrameworks/UIAutomation.framework/UIAutomation" fileSystemRepresentation], RTLD_LOCAL);
 }
 
+
 - (id) init {
   self = [super init];
   if (self != nil) {
@@ -149,6 +150,7 @@
   return self;
 }
 
+
 - (void) start {
 
   [self enableAccessibility];
@@ -159,11 +161,11 @@
   }
 }
 
+
 - (void) enableAccessibility {
   // Approach described at:
   // http://sgleadow.github.com/blog/2011/11/16/enabling-accessibility-programatically-on-ios-devices/
   NSAutoreleasePool *autoreleasePool = [[NSAutoreleasePool alloc] init];
-
 
   NSString *appSupportPath = @"/System/Library/PrivateFrameworks/AppSupport.framework/AppSupport";
 
@@ -198,8 +200,8 @@
   CFRelease(accessibilityDomain);
 
   [autoreleasePool drain];
-
 }
+
 
 - (void) dealloc {
   [_httpServer release];

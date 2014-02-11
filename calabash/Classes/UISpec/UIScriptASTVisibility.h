@@ -12,7 +12,6 @@
 
 @property(nonatomic, assign) UIScriptASTVisibilityType visibilityType;
 
-
 - (id) initWithVisibility:(UIScriptASTVisibilityType) visibility;
 
 

@@ -18,7 +18,6 @@ static NSString *const kUnknown = @"unknown";
 static NSString *const kFaceDown = @"face down";
 static NSString *const kFaceUp = @"face up";
 
-
 @implementation LPOrientationOperation
 
 - (NSString *) description {

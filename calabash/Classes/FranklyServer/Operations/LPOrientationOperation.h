@@ -9,7 +9,6 @@
 
 + (NSString *) deviceOrientation;
 
-
 + (NSString *) statusBarOrientation;
 
 @end

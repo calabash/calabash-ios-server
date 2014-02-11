@@ -21,6 +21,7 @@
   return sharedEnv;
 }
 
+
 - (id) init {
   self = [super init];
   if (self) {
@@ -29,19 +30,23 @@
   return self;
 }
 
+
 // TODO LPEnv.m [super dealloc] must be called _last_
 - (void) dealloc {
   [super dealloc];
   [_env release];
 }
 
+
 - (BOOL) isSet:(NSString *) key {
   return [_env valueForKey:key] != nil;
 }
 
+
 - (id) valueForKey:(NSString *) key {
   return [_env valueForKey:key];
 }
+
 
 + (BOOL) calabashDebugEnabled {
   NSString *debugVal = [[LPEnv sharedEnv] valueForKey:@"CALABASH_DEBUG"];

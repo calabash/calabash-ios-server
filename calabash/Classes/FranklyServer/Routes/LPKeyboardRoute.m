@@ -21,7 +21,6 @@
   _playbackDone = NO;
   NSString *characterString = [self.data objectForKey:@"key"];
 
-
   NSArray *events = [LPResources eventsFromEncoding:[self.data objectForKey:@"events"]];
   UIWindow *keyboardWindow = nil;
 
@@ -88,12 +87,10 @@
     self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithObject:v], @"results", @"SUCCESS", @"outcome", nil];
 
     [self play:_events];
-
   } else {
     _playbackDone = YES;
     [self failWithMessageFormat:@"Found no key: %@" message:characterString];
   }
-
 }
 
 
@@ -101,7 +98,6 @@
   _playbackDone = NO;
   [[LPRecorder sharedRecorder] load:_events];
   [[LPRecorder sharedRecorder] playbackWithDelegate:self doneSelector:@selector(playbackDone:)];
-
 }
 
 //-(void) waitUntilPlaybackDone {
@@ -115,7 +111,6 @@
   [_events release];
   _events = nil;
   [self.conn responseHasAvailableData:self];
-
 }
 
 

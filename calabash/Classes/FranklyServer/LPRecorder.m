@@ -5,9 +5,7 @@
 
 - (void) _addRecorder:(id) recorder;
 
-
 - (void) _removeRecorder:(id) recorder;
-
 
 - (void) _playbackEvents:(NSArray *) events atPlaybackRate:(float) playbackRate messageWhenDone:(id) target withSelector:(SEL) selector;
 
@@ -34,6 +32,7 @@ static LPRecorder *sharedRecorder = nil;
 
   return self;
 }
+
 
 // todo dealloc does not playbackDelegate but it retains it
 - (void) dealloc {

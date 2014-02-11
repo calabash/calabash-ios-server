@@ -34,7 +34,6 @@
       [delegate setValue:kval forKeyPath:key];
 
       return [NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithObjects:val, curVal, nil], @"results", @"SUCCESS", @"outcome", nil];
-
     } else {
       return [NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithObjects:curVal, nil], @"results", @"SUCCESS", @"outcome", nil];
     }

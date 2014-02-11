@@ -23,13 +23,16 @@
   return sharedLog;
 }
 
+
 + (LPLogLevel) currentLevel {
   return [[LPLog sharedLog] currentLevel];
 }
 
+
 + (void) setLevelFromString:(NSString *) logLevel {
   [[LPLog sharedLog] setLevelFromString:logLevel];
 }
+
 
 - (void) setLevelFromString:(NSString *) logLevel {
   if ([@"debug" isEqualToString:[logLevel lowercaseString]]) {
@@ -41,9 +44,11 @@
   }
 }
 
+
 - (LPLogLevel) currentLevel {
   return _logLevel;
 }
+
 
 + (NSString *) currentLevelString {
   switch ([LPLog currentLevel]) {
@@ -54,6 +59,7 @@
   }
 }
 
+
 - (id) init {
   self = [super init];
   if (self) {
@@ -61,6 +67,7 @@
   }
   return self;
 }
+
 
 - (BOOL) shouldLogAtLevel:(LPLogLevel) level {
   return (level >= _logLevel);
@@ -83,8 +90,8 @@
   va_start(args, formatString);
   NSLogv(formatString, args);
   va_end(args);
-
 }
+
 
 + (void) error:(NSString *) formatString, ... {
   if (![[LPLog sharedLog] shouldLogAtLevel:LPLogLevelError]) {return;}

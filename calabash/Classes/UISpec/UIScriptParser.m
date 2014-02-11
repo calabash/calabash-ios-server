@@ -101,7 +101,6 @@ static NSCharacterSet *curlyBrackets = nil;
   } else {
     [self parseArray];
   }
-
 }
 
 
@@ -122,7 +121,6 @@ static NSCharacterSet *curlyBrackets = nil;
         UIScriptASTClassName *cn = [[[UIScriptASTClassName alloc] initWithClassName:token] autorelease];
         [_res addObject:cn];
       }
-
     } else if ([obj isKindOfClass:[NSDictionary class]]) {//NSDictionary
       //Example direction: {:text "Karl, :length 42}
 
@@ -136,7 +134,6 @@ static NSCharacterSet *curlyBrackets = nil;
           }
           NSUInteger val = [numVal unsignedIntegerValue];
           [_res addObject:[[[UIScriptASTIndex alloc] initWithIndex:val] autorelease]];
-
         } else if ([@"css" isEqualToString:typeIfPresent] || [@"xpath" isEqualToString:typeIfPresent]) {
           UIScriptASTWith *w = [[[UIScriptASTWith alloc] initWithSelectorName:typeIfPresent] autorelease];
           w.valueType = UIScriptLiteralTypeString;
@@ -147,7 +144,6 @@ static NSCharacterSet *curlyBrackets = nil;
           w.objectValue = strVal;
 
           [_res addObject:w];
-
         }
       } else {
 
@@ -167,16 +163,12 @@ static NSCharacterSet *curlyBrackets = nil;
 
             w.valueType = UIScriptLiteralTypeIndexPath;
             w.objectValue = [NSIndexPath indexPathForRow:[i1 integerValue] inSection:[i2 integerValue]];
-
           } else {
             NSLog(@"Unknown value type %@", val);
           }
           [_res addObject:w];
-
         }
-
       }
-
     } else if ([obj isKindOfClass:[NSArray class]]) {
       NSArray *arr = (NSArray *) obj;
       if ([arr count] == 2) {//type selector value
@@ -197,14 +189,12 @@ static NSCharacterSet *curlyBrackets = nil;
 
           w.valueType = UIScriptLiteralTypeIndexPath;
           w.objectValue = [NSIndexPath indexPathForRow:[i1 integerValue] inSection:[i2 integerValue]];
-
         } else {
           NSLog(@"Unknown value type %@", val);
         }
 
         [_res addObject:w];
         [w release];
-
       }
       if ([arr count] == 3) {//relation/NSPredicate
         NSString *selStr = [arr objectAtIndex:0];
@@ -218,11 +208,8 @@ static NSCharacterSet *curlyBrackets = nil;
           pred = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"%@ %@ %@", selStr, rel, val]];
         }
         [_res addObject:[[[UIScriptASTPredicate alloc] initWithPredicate:pred selector:sel] autorelease]];
-
       }
-
     }
-
   }
 }
 
@@ -282,10 +269,8 @@ static NSCharacterSet *curlyBrackets = nil;
       if (index == N) {return;}
       token = [self findNextToken:&index];
       indexPropOrPred = [self parseIndexPropertyOrPredicate:token];
-
     }//else lookahead reveals another classname so continue
   }
-
 }
 
 
@@ -330,7 +315,6 @@ static NSCharacterSet *curlyBrackets = nil;
           return nil;
         }
       }
-
     }
     NSString *res = [_script substringWithRange:NSMakeRange(i, endPing.location - i + 1)];
     *index = endPing.location + 1;
@@ -428,7 +412,6 @@ static NSCharacterSet *curlyBrackets = nil;
 
     NSPredicate *pred = [NSPredicate predicateWithFormat:str];
     return [[[UIScriptASTPredicate alloc] initWithPredicate:pred selector:sel] autorelease];
-
   }
 
   NSArray *colonSep = [token componentsSeparatedByCharactersInSet:colon];
@@ -496,7 +479,6 @@ static NSCharacterSet *curlyBrackets = nil;
         ast.valueType = UIScriptLiteralTypeIndexPath;
         ast.objectValue = [NSIndexPath indexPathForRow:[str1 integerValue] inSection:[str2 integerValue]];
         return;
-
       }
     }
   }

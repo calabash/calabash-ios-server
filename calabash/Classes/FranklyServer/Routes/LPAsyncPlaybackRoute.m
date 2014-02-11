@@ -16,7 +16,6 @@
 
 @class UIDevice;
 
-
 @implementation LPAsyncPlaybackRoute
 @synthesize events = _events;
 
@@ -42,7 +41,6 @@
       NSNumber *x = [offset valueForKey:@"x"];
       NSNumber *y = [offset valueForKey:@"y"];
 
-
       CGPoint offsetPoint = CGPointMake([x floatValue], [y floatValue]);
 
       CGPoint center;
@@ -59,7 +57,6 @@
 
 
       self.events = [LPResources transformEvents:baseEvents toPoint:CGPointMake(center.x + offsetPoint.x, center.y + offsetPoint.y)];
-
     } else {
       NSLog(@"query %@ found no views. NO-OP.", query);
       self.done = YES;
@@ -68,7 +65,6 @@
       [self.conn responseHasAvailableData:self];
       return;
     }
-
   } else {
     NSDictionary *offset = [self.data valueForKey:@"offset"];
     NSNumber *x = [offset valueForKey:@"x"];
@@ -81,7 +77,6 @@
       self.done = YES;
       self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Bad events %@", base64Events], @"reason", @"", @"details", @"FAILURE", @"outcome", nil];
       return;
-
     }
     if (offset) {
       NSDictionary *firstEvent = [self.events objectAtIndex:0];
@@ -98,7 +93,6 @@
         self.events = transformed;
       }
     }
-
   }
 
   if ([self.data objectForKey:@"reverse"]) {
@@ -116,14 +110,13 @@
         break;
       }
     }
-
   }
 
 
 //    NSString *base64Prototype = [self.data objectForKey:@"prototype"];
 //    if (base64Prototype) {
 //        NSArray* protoEvents = [LPResources eventsFromEncoding:base64Prototype];
-//        
+//
 //        NSLog(@"Prototype Events\n%@",protoEvents);
 //
 //    }
@@ -137,14 +130,12 @@
   }
 
   self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:resultArray, @"results", @"SUCCESS", @"outcome", nil];
-
 }
 
 
 - (void) play:(NSArray *) events {
   [[LPRecorder sharedRecorder] load:self.events];
   [[LPRecorder sharedRecorder] playbackWithDelegate:self doneSelector:@selector(playbackDone:)];
-
 }
 
 

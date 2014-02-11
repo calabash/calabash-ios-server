@@ -12,7 +12,6 @@
 @interface LPRecordRoute ()
 - (void) startRecording;
 
-
 - (NSData *) stopRecording;
 @end
 
@@ -52,7 +51,6 @@
   } else {
     return nil;
   }
-
 }
 
 
@@ -75,7 +73,7 @@
   }
 //
 //    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-//    
+//
 //    NSString* appID = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
 //    static NSDateFormatter *fm = nil;
 //    if (!fm) {
@@ -84,9 +82,9 @@
 //    }
 //    NSString* timestamp = [fm stringFromDate:[NSDate date]];
 //    NSString* tempFile = [NSString stringWithFormat:@"record_%@_%@.plist",appID,timestamp,nil];
-//    
+//
 //    NSString *plistPath = [rootPath stringByAppendingPathComponent:tempFile];
-//    
+//
 //
 //    [[Recorder sharedRecorder] saveToFile:plistPath];
 //    return tempFile;

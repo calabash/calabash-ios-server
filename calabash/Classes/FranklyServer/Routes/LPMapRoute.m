@@ -33,7 +33,7 @@
     }
   } else {
     for (id view in views) {
-    // if ([view isKindOfClass:[UIView class]] && ![LPTouchUtils isViewVisible:view]) {continue;}
+      // if ([view isKindOfClass:[UIView class]] && ![LPTouchUtils isViewVisible:view]) {continue;}
       NSError *err = nil;
       id val = [op performWithTarget:view error:&err];
       if (err) {continue;}

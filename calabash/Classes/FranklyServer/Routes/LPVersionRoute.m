@@ -15,22 +15,22 @@
 
 /*** UNEXPECTED ***
  adds git version and branch information to the server_version route
- 
+
  helps developers know exactly which server framework is installed in an ipa
- 
+
  the two defines:
- 
+
  #define LP_GIT_SHORT_REVISION <rev>  // ex. @"4fdb203"
  #define LP_GIT_BRANCH <branch>       // ex. @"0.9.x"
- 
+
  are generated before compilation and erased after to avoid git conflicts in
  LPGitVersionDefines.h
- 
+
  to see how LPGitVersionDefines.h is managed see:
- 
+
  1. Run Script - git versioning 1 of 2
  2. Run Script - git versioning 2 of 2
- 
+
  ******************/
 #import "LPGitVersionDefines.h"
 
@@ -91,7 +91,6 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
 
   NSString *system = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
 
-
   NSDictionary *env = [[NSProcessInfo processInfo] environment];
 
   BOOL iphone5Like = [LPTouchUtils is4InchDevice];
@@ -111,7 +110,6 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
 
   NSDictionary *res = [NSDictionary dictionaryWithObjectsAndKeys:kLPCALABASHVERSION , @"version", idString, @"app_id", [[UIDevice currentDevice] systemVersion], @"iOS_version", nameString, @"app_name", system, @"system", [NSNumber numberWithBool:iphone5Like], @"4inch", dev, @"simulator_device", sim, @"simulator", versionString, @"app_version", @"SUCCESS", @"outcome", [NSNumber numberWithBool:isIphoneAppEmulated], @"iphone_app_emulated_on_ipad", git, @"git", nil];
   return res;
-
 }
 
 

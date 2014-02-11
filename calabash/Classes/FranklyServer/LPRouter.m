@@ -61,7 +61,6 @@ static NSMutableDictionary *routes = nil;
   NSArray *pathComponents = [[components objectAtIndex:0] componentsSeparatedByString:@"/"];
   NSString *lastSegment = [pathComponents lastObject];
 
-
   id <LPRoute> route = [routes objectForKey:lastSegment];
   BOOL supported = [route supportsMethod:method atPath:lastSegment];
 
@@ -73,7 +72,6 @@ static NSMutableDictionary *routes = nil;
   NSArray *components = [path componentsSeparatedByString:@"?"];
   NSArray *pathComponents = [[components objectAtIndex:0] componentsSeparatedByString:@"/"];
   NSString *lastSegment = [pathComponents lastObject];
-
 
   id <LPRoute> route = [routes objectForKey:lastSegment];
 

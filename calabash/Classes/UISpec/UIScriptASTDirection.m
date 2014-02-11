@@ -9,6 +9,7 @@
 @implementation UIScriptASTDirection
 @synthesize directionType = _directionType;
 
+
 - (id) initWithDirection:(UIScriptASTDirectionType) direction {
   self = [super init];
   if (self) {

@@ -81,7 +81,6 @@ static NSInteger sortFunction(UIView *v1, UIView *v2, void *ctx) {
   for (UIView *subview in [[view subviews] sortedArrayUsingFunction:sortFunction context:view]) {
     [self evalDescWith:subview result:res visibility:visibility];
   }
-
 }
 
 
@@ -107,7 +106,6 @@ static NSInteger sortFunction(UIView *v1, UIView *v2, void *ctx) {
   if (parentView) {
     [self evalParentsWith:parentView result:res visibility:visibility];
   }
-
 }
 
 

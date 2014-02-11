@@ -51,9 +51,9 @@
 - (NSString *) description {
   NSString *fm = nil;
   if (self.selectorName) {
-      fm = [NSString stringWithFormat:@"with %@:", NSStringFromSelector(self.selector)];
-    } else {
-        fm = [NSString stringWithFormat:@"with %@:", self.selectorSpec];
+    fm = [NSString stringWithFormat:@"with %@:", NSStringFromSelector(self.selector)];
+  } else {
+    fm = [NSString stringWithFormat:@"with %@:", self.selectorSpec];
   }
 
   switch (self.valueType) {
@@ -91,7 +91,6 @@
     NSLog(@"Attempting to look for non string in web view");
     return [NSMutableArray array];
   }
-
 }
 
 
@@ -106,7 +105,6 @@
       if ([[dict valueForKey:key] isEqual:self.objectValue]) {
         [res addObject:dict];
       }
-
     } else {
       if ([v isKindOfClass:[UIWebView class]]) {
         [res addObjectsFromArray:[self handleWebView:(UIWebView *) v visibility:visibility]];
@@ -202,16 +200,12 @@
                 [res addObject:v];
               }
               break;
-
             }
             default:break;
           }
-
         }
       }
-
     }
-
   }
   return res;
 }

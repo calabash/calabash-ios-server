@@ -63,7 +63,6 @@
         NSLog(@"Warning: table doesn't contain indexPath: %@", path);
         return nil;
       }
-
     } else {
       NSIndexPath *indexPathForRow = [self indexPathForRow:[rowNum unsignedIntegerValue] inTable:table];
       if (!indexPathForRow) {

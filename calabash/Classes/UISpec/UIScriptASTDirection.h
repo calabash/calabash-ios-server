@@ -12,7 +12,6 @@
 
 @property(nonatomic, assign) UIScriptASTDirectionType directionType;
 
-
 - (id) initWithDirection:(UIScriptASTDirectionType) direction;
 
 

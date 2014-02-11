@@ -35,7 +35,6 @@ const static NSString *LPUIAChannelUIAPrefsIndexKey = @"index";
 const static NSString *LPUIAChannelUIAPrefsCommandKey = @"command";
 const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
 
-
 @implementation LPUIAChannel {
   dispatch_queue_t _uiaQueue;
   NSUInteger _scriptIndex;
@@ -51,6 +50,7 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
   return sharedChannel;
 }
 
+
 - (id) init {
   self = [super init];
   if (self) {
@@ -58,6 +58,7 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
   }
   return self;
 }
+
 
 // todo LPUIAChannel.m [super dealloc] should be called _last_
 - (void) dealloc {
@@ -70,6 +71,7 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
 
   [[LPUIAChannel sharedChannel] runAutomationCommand:command then:resultHandler];
 }
+
 
 - (void) runAutomationCommand:(NSString *) command then:(void (^)(NSDictionary *)) resultHandler {
 
@@ -101,9 +103,9 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
     dispatch_async(dispatch_get_main_queue(), ^{
       resultHandler(result);
     });
-
   });
 }
+
 
 - (void) requestExecutionOf:(NSString *) command {
 #if TARGET_IPHONE_SIMULATOR
@@ -112,6 +114,7 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
   [self deviceRequestExecutionOf:command];
 #endif
 }
+
 
 - (NSDictionary *) userPreferences {
   NSDictionary *prefs = nil;
@@ -125,6 +128,7 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
   return prefs;
 }
 
+
 #if TARGET_IPHONE_SIMULATOR
 -(void)simulatorRequestExecutionOf:(NSString *)command {
     NSMutableDictionary *prefs = [NSMutableDictionary dictionaryWithContentsOfFile:[self simulatorPreferencesPath]];
@@ -132,11 +136,12 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
         prefs = [NSMutableDictionary dictionary];
     }
     NSDictionary *uiaRequest   = [self requestForCommand:command];
-    
+
     [prefs setObject:uiaRequest forKey:LPUIAChannelUIAPrefsRequestKey];
     [prefs writeToFile:[self simulatorPreferencesPath] atomically:YES];
 }
 #endif // TARGET_IPHONE_SIMULATOR
+
 
 - (void) deviceRequestExecutionOf:(NSString *) command {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -145,6 +150,7 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
   [defaults setObject:uiaRequest forKey:(NSString *) LPUIAChannelUIAPrefsRequestKey];
   [defaults synchronize];
 }
+
 
 - (NSDictionary *) requestForCommand:(NSString *) command {
   return [NSDictionary dictionaryWithObjectsAndKeys:@(_scriptIndex), LPUIAChannelUIAPrefsIndexKey, command, LPUIAChannelUIAPrefsCommandKey, nil];
@@ -162,15 +168,15 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
     dispatch_once(&onceToken, ^{
         NSString *plistRootPath = nil, *relativePlistPath = nil;
         NSString *plistName = [NSString stringWithFormat:@"%@.plist", [[NSBundle mainBundle] bundleIdentifier]];
-        
+
         // 1. get into the simulator's app support directory by fetching the sandboxed Library's path
         NSString *userDirectoryPath = [[[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask] lastObject] path];
         // 2. get out of our application directory, back to the root support directory for this system version
         plistRootPath = [userDirectoryPath substringToIndex:([userDirectoryPath rangeOfString:@"Applications"].location)];
-        
+
         // 3. locate, relative to here, /Library/Preferences/[bundle ID].plist
         relativePlistPath = [NSString stringWithFormat:@"Library/Preferences/%@", plistName];
-        
+
         // 4. and unescape spaces, if necessary (i.e. in the simulator)
         NSString *unsanitizedPlistPath = [plistRootPath stringByAppendingPathComponent:relativePlistPath];
         path = [[unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] copy];

@@ -73,7 +73,6 @@
 
 //Abstract
 - (void) beginOperation {
-
 }
 
 
@@ -146,7 +145,7 @@
 
 //From CocoaHTTPServer
 // Important notice to those implementing custom asynchronous and/or chunked responses:
-// 
+//
 // LPHTTPConnection supports asynchronous responses.  All you have to do in your custom response class is
 // asynchronously generate the response, and invoke LPHTTPConnection's responseHasAvailableData method.
 // You don't have to wait until you have all of the response ready to invoke this method.  For example, if you
@@ -154,29 +153,29 @@
 // each chunk.  You MUST invoke the responseHasAvailableData method on the proper thread/runloop.  That is,
 // the thread/runloop that the LPHTTPConnection is operating in.  Please see the LPHTTPAsyncFileResponse class
 // for an example of how to properly do this.
-// 
+//
 // The normal flow of events for an LPHTTPConnection while responding to a request is like this:
 // - Get data from response via readDataOfLength method.
 // - Add data to asyncSocket's write queue.
 // - Wait for asyncSocket to notify it that the data has been sent.
 // - Get more data from response via readDataOfLength method.
 // ... continue this cycle until it has sent the entire response.
-// 
+//
 // With an asynchronous response, the flow is a little different.  When LPHTTPConnection calls your
 // readDataOfLength method, you may or may not have any available data.  If you don't, then simply return nil.
 // You should later invoke LPHTTPConnection's responseHasAvailableData when you have data to send.
-// 
+//
 // You don't have to keep track of when you return nil in the readDataOfLength method, or how many times you've invoked
 // responseHasAvailableData. Just simply call responseHasAvailableData whenever you've generated new data, and
 // return nil in your readDataOfLength whenever you don't have any available data in the requested range.
 // LPHTTPConnection will automatically detect when it should be requesting new data and will act appropriately.
-// 
+//
 // It's important that you also keep in mind that the LPHTTP server supports range requests.
 // The setOffset method is mandatory, and should not be ignored.
 // Make sure you take into account the offset within the readDataOfLength method.
 // You should also be aware that the LPHTTPConnection automatically sorts any range requests.
 // So if your setOffset method is called with a value of 100, then you can safely release bytes 0-98.
-// 
+//
 // LPHTTPConnection can also help you keep your memory footprint small.
 // Imagine you're dynamically generating a 10 MB response.  You probably don't want to load all this data into
 // RAM, and sit around waiting for LPHTTPConnection to slowly send it out over the network.  All you need to do
@@ -184,7 +183,7 @@
 // will never allow asyncSocket's write queue to get much bigger than READ_CHUNKSIZE bytes.  You should
 // consider how you might be able to take advantage of this fact to generate your asynchronous response on demand,
 // while at the same time keeping your memory footprint small, and your application lightning fast.
-// 
+//
 // If you don't know the content-length in advanced, you should also implement the isChunked method.
 // This means the response will not include a Content-Length header, and will instead use "Transfer-Encoding: chunked".
 // There's a good chance that if your response is asynchronous and dynamic, it's also chunked.

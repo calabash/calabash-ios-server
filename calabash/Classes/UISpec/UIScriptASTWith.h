@@ -10,7 +10,6 @@ typedef enum {
   UIScriptLiteralTypeUnknown, UIScriptLiteralTypeIndexPath, UIScriptLiteralTypeString, UIScriptLiteralTypeInteger, UIScriptLiteralTypeBool
 } UIScriptLiteralType;
 
-
 @interface UIScriptASTWith : UIScriptAST {
   NSString *_selectorName;
   SEL _selector;
@@ -31,7 +30,6 @@ typedef enum {
 @property(nonatomic, assign) NSInteger integerValue2;
 @property(nonatomic, assign) UIScriptLiteralType valueType;
 @property(nonatomic, assign) UIScriptLiteralType valueType2;
-
 
 - (id) initWithSelectorName:(NSString *) selectorName;
 - (id) initWithSelectorSpec:(NSArray *) selectorSpec;

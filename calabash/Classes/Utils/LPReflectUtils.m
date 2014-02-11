@@ -28,6 +28,7 @@
   return NSSelectorFromString(selStr);
 }
 
+
 + (id) invokeSpec:(id) object onTarget:(id) target withError:(NSError **) error {
   id selObj = object;
   id objValue;
@@ -48,14 +49,12 @@
     sel = [self parseSpecFromArray:[NSArray arrayWithObject:selObj] withArgs:args];
   } else if ([selObj isKindOfClass:[NSArray class]]) {
     sel = [self parseSpecFromArray:selObj withArgs:args];
-
   }
 
   NSMethodSignature *sig = [target methodSignatureForSelector:sel];
   if (!sig || ![target respondsToSelector:sel]) {
     *error = [NSError errorWithDomain:@"Calabash" code:2 userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"target does not respond to selector", @"reason", [NSString stringWithFormat:@"applied to selector %@", NSStringFromSelector(sel)], @"details", nil]];
     return nil;
-
   }
   NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sig];
 
@@ -109,7 +108,6 @@
         @throw [NSString stringWithFormat:@"not yet support struct args: %@", sig];
       }
     }
-
   }
   [invocation setTarget:target];
   @try {
@@ -155,11 +153,9 @@
       if ([returnType rangeOfString:@"{CGRect"].location == 0) {
         CGRect *rec = (CGRect *) buffer;
         return [NSDictionary dictionaryWithObjectsAndKeys:[value description], @"description", [NSNumber numberWithFloat:rec->origin.x], @"x", [NSNumber numberWithFloat:rec->origin.y], @"y", [NSNumber numberWithFloat:rec->size.width], @"width", [NSNumber numberWithFloat:rec->size.height], @"height", nil];
-
       } else if ([returnType rangeOfString:@"{CGPoint="].location == 0) {
         CGPoint *point = (CGPoint *) buffer;
         return [NSDictionary dictionaryWithObjectsAndKeys:[value description], @"description", [NSNumber numberWithFloat:point->x], @"x", [NSNumber numberWithFloat:point->y], @"y", nil];
-
       } else {
         return [value description];
       }

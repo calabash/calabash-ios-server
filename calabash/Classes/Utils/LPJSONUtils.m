@@ -22,6 +22,7 @@
   return [res autorelease];
 }
 
+
 + (NSDictionary *) deserializeDictionary:(NSString *) string {
   LPCJSONDeserializer *ds = [LPCJSONDeserializer deserializer];
   NSError *error = nil;
@@ -31,6 +32,7 @@
   }
   return res;
 }
+
 
 + (NSString *) serializeArray:(NSArray *) array {
   LPCJSONSerializer *s = [LPCJSONSerializer serializer];
@@ -43,6 +45,7 @@
   return [res autorelease];
 }
 
+
 + (NSArray *) deserializeArray:(NSString *) string {
   LPCJSONDeserializer *ds = [LPCJSONDeserializer deserializer];
   NSError *error = nil;
@@ -53,6 +56,7 @@
   return res;
 }
 
+
 + (NSString *) serializeObject:(id) obj {
   LPCJSONSerializer *s = [LPCJSONSerializer serializer];
   NSError *error = nil;
@@ -62,8 +66,8 @@
   }
   NSString *res = [[NSString alloc] initWithBytes:[d bytes] length:[d length] encoding:NSUTF8StringEncoding];
   return [res autorelease];
-
 }
+
 
 + (id) jsonifyObject:(id) object {
   if (!object) {return nil;}
@@ -73,8 +77,7 @@
   }
   if ([object isKindOfClass:[UIView class]]) {
     UIView *v = (UIView *) object;
-    NSMutableDictionary *result = [NSMutableDictionary dictionaryWithObjectsAndKeys:NSStringFromClass([object class]), @"class",  nil];
-
+    NSMutableDictionary *result = [NSMutableDictionary dictionaryWithObjectsAndKeys:NSStringFromClass([object class]), @"class", nil];
 
     NSString *lbl = [object accessibilityLabel];
     if (lbl) {
@@ -92,7 +95,6 @@
       } else {
         [result setObject:[NSNull null] forKey:@"id"];
       }
-
     }
 
 
@@ -107,8 +109,6 @@
       NSDictionary *rectDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:center.x], @"center_x", [NSNumber numberWithFloat:center.y], @"center_y", [NSNumber numberWithFloat:rect.origin.x], @"x", [NSNumber numberWithFloat:rect.origin.y], @"y", [NSNumber numberWithFloat:rect.size.width], @"width", [NSNumber numberWithFloat:rect.size.height], @"height", nil];
 
       [result setObject:rectDic forKey:@"rect"];
-
-
     }
 
     NSDictionary *frameDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:frame.origin.x], @"x", [NSNumber numberWithFloat:frame.origin.y], @"y", [NSNumber numberWithFloat:frame.size.width], @"width", [NSNumber numberWithFloat:frame.size.height], @"height", nil];

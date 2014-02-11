@@ -9,1054 +9,1014 @@
 
 
 @protocol UIAXElement
-+ (id)uiaxElementAtPosition:(struct CGPoint)arg1;
-+ (id)uiaxSystemWideElement;
-+ (id)uiaxFocusedApplicationElement;
-+ (id)stringForAXError:(long)arg1;
-+ (id)stringForAXNotification:(int)arg1;
-+ (id)stringForTraits:(unsigned long long)arg1;
-- (struct __AXUIElement *)axuiElementRef;
-- (id)valueForAttribute:(int)arg1;
-- (BOOL)setValue:(id)arg1 forAttribute:(int)arg2;
-- (id)valuesForAttributes:(id)arg1;
-- (id)valueForAttribute:(int)arg1 parameter:(id)arg2;
-- (BOOL)performAXAction:(int)arg1;
-- (BOOL)performAXAction:(int)arg1 withValue:(id)arg2;
-- (int)pid;
-- (long)axError;
-- (BOOL)isValid;
-- (BOOL)checkIsValid;
-- (id)valuesForAllKnownAttributes;
-- (id)stringForAttributes:(id)arg1;
-- (id)stringForAllKnownAttributes;
-- (id)traitsNumber;
-- (unsigned long long)traits;
-- (id)rect;
-- (id)centerPoint;
-- (id)description;
-- (id)firstElementOfAttribute:(int)arg1 withValue:(id)arg2 forAttribute:(int)arg3;
-- (id)parent;
-- (id)children;
-- (id)childWithTestingTrait:(id)arg1;
-- (id)ancestry;
++ (id) uiaxElementAtPosition:(struct CGPoint) arg1;
++ (id) uiaxSystemWideElement;
++ (id) uiaxFocusedApplicationElement;
++ (id) stringForAXError:(long) arg1;
++ (id) stringForAXNotification:(int) arg1;
++ (id) stringForTraits:(unsigned long long) arg1;
+- (struct __AXUIElement *) axuiElementRef;
+- (id) valueForAttribute:(int) arg1;
+- (BOOL) setValue:(id) arg1 forAttribute:(int) arg2;
+- (id) valuesForAttributes:(id) arg1;
+- (id) valueForAttribute:(int) arg1 parameter:(id) arg2;
+- (BOOL) performAXAction:(int) arg1;
+- (BOOL) performAXAction:(int) arg1 withValue:(id) arg2;
+- (int) pid;
+- (long) axError;
+- (BOOL) isValid;
+- (BOOL) checkIsValid;
+- (id) valuesForAllKnownAttributes;
+- (id) stringForAttributes:(id) arg1;
+- (id) stringForAllKnownAttributes;
+- (id) traitsNumber;
+- (unsigned long long) traits;
+- (id) rect;
+- (id) centerPoint;
+- (id) description;
+- (id) firstElementOfAttribute:(int) arg1 withValue:(id) arg2 forAttribute:(int) arg3;
+- (id) parent;
+- (id) children;
+- (id) childWithTestingTrait:(id) arg1;
+- (id) ancestry;
 @end
 
-@interface UIAXElement : NSObject <UIAXElement>
-{
-    struct __AXUIElement *_axuiElementRef;
-    double _creationTime;
-    double _lastAccessedTime;
-    BOOL _isValid;
-    int _axError;
+@interface UIAXElement : NSObject <UIAXElement> {
+  struct __AXUIElement *_axuiElementRef;
+  double _creationTime;
+  double _lastAccessedTime;
+  BOOL _isValid;
+  int _axError;
 }
 
-+ (void)initialize;
-+ (void)_raiseAXErrorAPIDisabled;
-+ (void)_raiseIfAXErrorAPIDisabled:(long)arg1;
-+ (id)uiaxElementWithAXUIElementRef:(struct __AXUIElement *)arg1;
-+ (id)_regularAttributeNumbers;
-+ (id)_regularAttributeStrings;
-+ (id)_parameterizedAttributeNumbers;
-+ (id)_parameterizedAttributeStrings;
-+ (id)_traitNumbers;
-+ (id)_traitStrings;
-+ (id)_stringsForRegularAttributesDictionary;
-+ (id)_regularAttributesForStringsDictionary;
-+ (id)_stringsForParameterizedAttributesDictionary;
-+ (id)_parameterizedAttributesForStringsDictionary;
-+ (id)_stringsForTraitsDictionary;
-+ (id)_stringForAttribute:(int)arg1;
-+ (int)_attributeForString:(id)arg1;
-+ (id)_stringForParameterizedAttribute:(int)arg1;
-+ (int)_parameterizedAttributeForString:(id)arg1;
-+ (id)_objectForCFTypeRef:(void *)arg1;
-+ (id)uiaxElementAtPosition:(struct CGPoint)arg1;
-+ (id)uiaxSystemWideElement;
-+ (id)uiaxFocusedApplicationElement;
-+ (id)stringForAXError:(long)arg1;
-+ (id)stringForAXNotification:(int)arg1;
-+ (id)stringForTraits:(unsigned long long)arg1;
-- (void)_invalidate;
-- (void)_setValidForAXError:(long)arg1;
-- (id)_initWithAXUIElementRef:(struct __AXUIElement *)arg1;
-- (double)_creationTime;
-- (double)_lastAccessedTime;
-- (void)_setLastAccessedTime:(double)arg1;
-- (void)dealloc;
-- (void)finalize;
-- (BOOL)isEqual:(id)arg1;
-- (unsigned int)hash;
-- (struct __AXUIElement *)axuiElementRef;
-- (id)valueForAttribute:(int)arg1;
-- (BOOL)setValue:(id)arg1 forAttribute:(int)arg2;
-- (id)valuesForAttributes:(id)arg1;
-- (id)valueForAttribute:(int)arg1 parameter:(id)arg2;
-- (id)valueForKey:(id)arg1;
-- (id)valueForUndefinedKey:(id)arg1;
-- (BOOL)performAXAction:(int)arg1;
-- (BOOL)performAXAction:(int)arg1 withValue:(id)arg2;
-- (int)pid;
-- (long)axError;
-- (BOOL)isValid;
-- (BOOL)checkIsValid;
-- (id)valuesForAllKnownAttributes;
-- (id)stringForAttributes:(id)arg1;
-- (id)stringForAllKnownAttributes;
-- (id)_copyTraitsNumber;
-- (id)traitsNumber;
-- (unsigned long long)traits;
-- (id)description;
-- (id)rect;
-- (id)centerPoint;
-- (id)uiaxElementAtCenterPoint;
-- (id)firstElementOfAttribute:(int)arg1 withValue:(id)arg2 forAttribute:(int)arg3;
-- (id)parent;
-- (id)children;
-- (id)childWithTestingTrait:(id)arg1;
-- (id)ancestry;
-- (BOOL)_hasNonzeroSize;
-- (void)logAXInfo;
-- (void)logAXAncestry;
-- (void)logAXTree;
-
-@end
-
-@interface UIAElement : NSObject <NSCopying>
-{
-    UIAXElement *_uiaxElement;
-    UIAElement *_parentElement;
-    NSInvocation *_selfPatienceInvocation;
-    double _createdTime;
-    double _lastAccessedTime;
-    BOOL _isValid;
-    NSDictionary *_elementClassIndexSets;
-}
-
-+ (void)initialize;
-+ (BOOL)_delayForTimeInterval:(double)arg1;
-+ (void)_logVerbosity:(unsigned int)arg1 format:(id)arg2;
-+ (int)_liveCount;
-+ (int)_maxCount;
-+ (id)_countsString;
-+ (id)_elementWithUIAXElement:(id)arg1 parent:(id)arg2;
-+ (id)attributeKeys;
-+ (id)toOneRelationshipKeys;
-+ (id)toManyRelationshipKeys;
-+ (id)allKeys;
-+ (struct CGAffineTransform)_transformToRotateFromInterfaceOrientation:(int)arg1;
-+ (struct CGAffineTransform)_transformToRotateToInterfaceOrientation:(int)arg1;
-+ (struct CGRect)_convertRectToCurrentInterfaceOrientation:(struct CGRect)arg1;
-+ (struct CGRect)_convertRectFromCurrentInterfaceOrientation:(struct CGRect)arg1;
-+ (struct CGPoint)_convertPointFromCurrentInterfaceOrientation:(struct CGPoint)arg1;
-+ (struct CGPoint)_convertPointToCurrentInterfaceOrientation:(struct CGPoint)arg1;
-+ (id)_nameForAXElement:(id)arg1;
-+ (id)_valueForAXElement:(id)arg1;
-+ (id)_hitPointFromDictionary:(id)arg1;
-+ (id)_hitPointForObject:(id)arg1;
-+ (id)_rectFromDictionary:(id)arg1;
-+ (double)_patienceRetryInterval;
-+ (void)_setPatienceRetryInterval:(double)arg1;
-+ (double)patience;
-+ (void)setPatience:(double)arg1;
-+ (void)pushPatience:(double)arg1;
-+ (double)popPatience;
-+ (id)_invocationForInvoker:(id)arg1 selector:(SEL)arg2 arguments:(void *)arg3;
-+ (id)_patienceInvocationPathForUIAObject:(id)arg1;
-+ (id)_performInvocationPath:(id)arg1;
-+ (id)_waitForInvocationPath:(id)arg1;
-+ (id)_setPatienceInvocation:(id)arg1 forUIAObject:(id)arg2;
-+ (id)_jsMethodNameForSelector:(SEL)arg1;
-+ (id)_jsEscapedStringForString:(id)arg1;
-+ (id)_jsStringForString:(id)arg1;
-+ (id)_jsStringForDictionary:(id)arg1;
-+ (id)_jsStringForObject:(id)arg1;
-+ (id)_jsStringForRect:(struct CGRect)arg1;
-+ (id)_jsStringForInvocation:(id)arg1;
-+ (id)_jsMethodCallStringForInvoker:(id)arg1 selector:(SEL)arg2;
-+ (id)_jsStringForInvocationPath:(id)arg1;
-+ (id)_jsStringForUIAElement:(id)arg1;
-+ (Class)_uiaClassForClass:(Class)arg1;
-+ (Class)_classForSimpleUIAXElement:(id)arg1;
-+ (id)elementForUIAXElement:(id)arg1;
-+ (id)elementAtPosition:(struct CGPoint)arg1;
-+ (id)_predicateForPredicateOrString:(id)arg1;
-- (id)init;
-- (id)_initWithUIAXElement:(id)arg1 parent:(id)arg2;
-- (void)dealloc;
-- (void)_emptyCaches;
-- (void)_invalidate;
-- (BOOL)isEqual:(id)arg1;
-- (unsigned int)hash;
-- (id)description;
-- (id)copyWithZone:(struct _NSZone *)arg1;
-- (double)_createdTime;
-- (double)_lastAccessedTime;
-- (void)_setLastAccessedTime:(double)arg1;
-- (BOOL)isValid;
-- (BOOL)checkIsValid;
-- (BOOL)waitForInvalid;
-- (id)attributeKeys;
-- (id)toOneRelationshipKeys;
-- (id)toManyRelationshipKeys;
-- (id)allKeys;
-- (id)_synonymToManyRelationshipKeys;
-- (id)valueForUndefinedKey:(id)arg1;
-- (id)attributes;
-- (id)toOneRelationships;
-- (id)toManyRelationships;
-- (id)uiaxElement;
-- (id)parentElement;
-- (id)ancestry;
-- (id)_logInfo;
-- (id)_logInfoWithChildren;
-- (void)logElement;
-- (void)logElementTree;
-- (void)logAXInfo;
-- (void)logAXTree;
-- (id)pid;
-- (id)hint;
-- (id)label;
-- (id)rect;
-- (id)_uiaRect;
-- (id)_tryHitpoint:(struct CGPoint)arg1;
-- (id)_hitpoint;
-- (id)hitpoint;
-- (id)_uiaHitpoint;
-- (id)isEnabled;
-- (id)hasKeyboardFocus;
-- (id)isVisible;
-- (id)target;
-- (id)name;
-- (id)value;
-- (BOOL)_shouldAllowSettingValue;
-- (void)setValue:(id)arg1;
-- (id)url;
-- (id)dom;
-- (id)className;
-- (id)type;
-- (void)undo;
-- (void)redo;
-- (void)_delayForAnimationsInProgress;
-- (void)_prepareForAction:(SEL)arg1;
-- (void)tap;
-- (void)doubleTap;
-- (void)twoFingerTap;
-- (void)tapWithOptions:(id)arg1;
-- (void)touchAndHold:(id)arg1;
-- (void)_dragInsideWithOptions:(id)arg1 withFlick:(BOOL)arg2;
-- (void)dragInsideWithOptions:(id)arg1;
-- (void)flickInsideWithOptions:(id)arg1;
-- (void)_rotateWithOptions:(id)arg1;
-- (void)rotateWithOptions:(id)arg1;
-- (void)activate;
-- (void)scrollUp;
-- (void)scrollDown;
-- (void)scrollLeft;
-- (void)scrollRight;
-- (id)scrollToVisible;
-- (id)scrollToElementWithName:(id)arg1;
-- (id)scrollToElementWithPredicate:(id)arg1;
-- (id)scrollToElementWithValue:(id)arg1 forKey:(id)arg2;
-- (id)_selfPatienceInvocation;
-- (void)_setSelfPatienceInvocation:(id)arg1;
-- (void)chopPatience;
-- (id)_objectWithPatienceInvocationFromUIAObject:(id)arg1 selector:(SEL)arg2;
-- (id)_patienceForAttribute:(SEL)arg1 value:(id)arg2;
-- (id)scriptingActionExpressionShouldFavorTapOffset;
-- (id)scriptingInvocationString;
-- (id)scriptingInvocationFullExpressionString;
-- (id)_scriptingSynonymsForSubElement:(id)arg1 maxCount:(unsigned int)arg2;
-- (id)scriptingFavoredSynonymString;
-- (id)scriptingSynonymStrings;
-- (id)scriptingSynonymFullExpressionString;
-- (id)_elementForSimpleUIAXElement:(id)arg1;
-- (id)_elementsForUIAXElements:(id)arg1 axFilter:(SEL)arg2;
-- (id)_elementsForUIAXElements:(id)arg1;
-- (BOOL)_inspectConfirmElement:(id)arg1 forAXAncestry:(id)arg2 index:(unsigned int *)arg3;
-- (id)_inspectedToOneRelationship:(id)arg1 forAXAncestry:(id)arg2 index:(unsigned int *)arg3;
-- (id)_inspectedToManyRelationship:(id)arg1 forAXAncestry:(id)arg2 index:(unsigned int *)arg3;
-- (id)_inspectedElementForAXAncestry:(id)arg1 index:(unsigned int *)arg2 triedKeys:(id)arg3;
-- (id)_elementForUIAXElement:(id)arg1;
-- (id)_elementAtPosition:(struct CGPoint)arg1;
-- (id)elementAtPoint:(id)arg1;
-- (id)withName:(id)arg1;
-- (id)withValue:(id)arg1 forKey:(id)arg2;
-- (id)withPredicate:(id)arg1;
-- (id)elements;
-- (id)_elementsOfClass:(Class)arg1 forSelector:(SEL)arg2;
-- (id)actionSheets;
-- (id)actionSheet;
-- (id)activityIndicators;
-- (id)buttons;
-- (id)editingMenus;
-- (id)images;
-- (id)keyboards;
-- (id)keyboard;
-- (id)keys;
-- (id)links;
-- (id)navigationBars;
-- (id)navigationBar;
-- (id)pageIndicators;
-- (id)pickers;
-- (id)popovers;
-- (id)popover;
-- (id)progressIndicators;
-- (id)scrollViews;
-- (id)segmentedControls;
-- (id)sliders;
-- (id)switches;
-- (id)staticTexts;
-- (id)tableViews;
-- (id)textFields;
-- (id)secureTextFields;
-- (id)searchBars;
-- (id)tabBars;
-- (id)tabBar;
-- (id)toolbars;
-- (id)toolbar;
-- (id)textViews;
-- (id)webViews;
++ (void) initialize;
++ (void) _raiseAXErrorAPIDisabled;
++ (void) _raiseIfAXErrorAPIDisabled:(long) arg1;
++ (id) uiaxElementWithAXUIElementRef:(struct __AXUIElement *) arg1;
++ (id) _regularAttributeNumbers;
++ (id) _regularAttributeStrings;
++ (id) _parameterizedAttributeNumbers;
++ (id) _parameterizedAttributeStrings;
++ (id) _traitNumbers;
++ (id) _traitStrings;
++ (id) _stringsForRegularAttributesDictionary;
++ (id) _regularAttributesForStringsDictionary;
++ (id) _stringsForParameterizedAttributesDictionary;
++ (id) _parameterizedAttributesForStringsDictionary;
++ (id) _stringsForTraitsDictionary;
++ (id) _stringForAttribute:(int) arg1;
++ (int) _attributeForString:(id) arg1;
++ (id) _stringForParameterizedAttribute:(int) arg1;
++ (int) _parameterizedAttributeForString:(id) arg1;
++ (id) _objectForCFTypeRef:(void *) arg1;
++ (id) uiaxElementAtPosition:(struct CGPoint) arg1;
++ (id) uiaxSystemWideElement;
++ (id) uiaxFocusedApplicationElement;
++ (id) stringForAXError:(long) arg1;
++ (id) stringForAXNotification:(int) arg1;
++ (id) stringForTraits:(unsigned long long) arg1;
+- (void) _invalidate;
+- (void) _setValidForAXError:(long) arg1;
+- (id) _initWithAXUIElementRef:(struct __AXUIElement *) arg1;
+- (double) _creationTime;
+- (double) _lastAccessedTime;
+- (void) _setLastAccessedTime:(double) arg1;
+- (void) dealloc;
+- (void) finalize;
+- (BOOL) isEqual:(id) arg1;
+- (unsigned int) hash;
+- (struct __AXUIElement *) axuiElementRef;
+- (id) valueForAttribute:(int) arg1;
+- (BOOL) setValue:(id) arg1 forAttribute:(int) arg2;
+- (id) valuesForAttributes:(id) arg1;
+- (id) valueForAttribute:(int) arg1 parameter:(id) arg2;
+- (id) valueForKey:(id) arg1;
+- (id) valueForUndefinedKey:(id) arg1;
+- (BOOL) performAXAction:(int) arg1;
+- (BOOL) performAXAction:(int) arg1 withValue:(id) arg2;
+- (int) pid;
+- (long) axError;
+- (BOOL) isValid;
+- (BOOL) checkIsValid;
+- (id) valuesForAllKnownAttributes;
+- (id) stringForAttributes:(id) arg1;
+- (id) stringForAllKnownAttributes;
+- (id) _copyTraitsNumber;
+- (id) traitsNumber;
+- (unsigned long long) traits;
+- (id) description;
+- (id) rect;
+- (id) centerPoint;
+- (id) uiaxElementAtCenterPoint;
+- (id) firstElementOfAttribute:(int) arg1 withValue:(id) arg2 forAttribute:(int) arg3;
+- (id) parent;
+- (id) children;
+- (id) childWithTestingTrait:(id) arg1;
+- (id) ancestry;
+- (BOOL) _hasNonzeroSize;
+- (void) logAXInfo;
+- (void) logAXAncestry;
+- (void) logAXTree;
 
 @end
 
-@interface UIAElementArray : NSArray
-{
-    NSArray *_array;
-    NSInvocation *_selfPatienceInvocation;
-    double _refreshedTime;
-    double _lastAccessedTime;
+@interface UIAElement : NSObject <NSCopying> {
+  UIAXElement *_uiaxElement;
+  UIAElement *_parentElement;
+  NSInvocation *_selfPatienceInvocation;
+  double _createdTime;
+  double _lastAccessedTime;
+  BOOL _isValid;
+  NSDictionary *_elementClassIndexSets;
 }
 
-+ (void)initialize;
-+ (int)_liveCount;
-+ (int)_maxCount;
-+ (id)_arrayWithArray:(id)arg1;
-+ (id)_cachedArrayAtPtr:(const id *)arg1;
-+ (void)_cacheArray:(id)arg1 atPtr:(const id *)arg2;
-+ (void)_removeCachedArrayAtPtr:(const id *)arg1;
-- (id)_initWithArray:(id)arg1;
-- (void)dealloc;
-- (unsigned int)count;
-- (id)objectAtIndex:(unsigned int)arg1;
-- (BOOL)isEqualToArray:(id)arg1;
-- (BOOL)isEqual:(id)arg1;
-- (unsigned int)hash;
-- (id)description;
-- (id)_selfPatienceInvocation;
-- (void)_setSelfPatienceInvocation:(id)arg1;
-- (id)_objectWithPatienceInvocationFromUIAObject:(id)arg1 selector:(SEL)arg2;
-- (id)nsArray;
-- (void)_setArray:(id)arg1;
-- (double)_refreshedTime;
-- (double)_lastAccessedTime;
-- (void)_setLastAccessedTime:(double)arg1;
-- (BOOL)_isStillFreshAtTime:(double)arg1;
-- (id)_withClass:(Class)arg1;
-- (id)_withName:(id)arg1;
-- (id)_withValue:(id)arg1 forKey:(id)arg2;
-- (id)_withPredicate:(id)arg1;
-- (id)withClass:(Class)arg1;
-- (id)withName:(id)arg1;
-- (id)withValue:(id)arg1 forKey:(id)arg2;
-- (id)withPredicate:(id)arg1;
-- (id)firstWithName:(id)arg1;
-- (id)firstWithValue:(id)arg1 forKey:(id)arg2;
-- (id)firstWithPredicate:(id)arg1;
-- (void)logElements;
-- (void)logElementTrees;
-- (id)elementOfClass:(Class)arg1 atIndex:(unsigned int)arg2;
-- (id)_scriptingIndexSynonymsForElement:(id)arg1 maxCount:(unsigned int)arg2;
-- (id)scriptingFavoredIndexSynonymForElement:(id)arg1;
-- (id)scriptingIndexSynonymsForElement:(id)arg1;
-- (id)scriptingInvocationString;
-- (id)scriptingInvocationFullExpressionString;
-- (BOOL)isValid;
++ (void) initialize;
++ (BOOL) _delayForTimeInterval:(double) arg1;
++ (void) _logVerbosity:(unsigned int) arg1 format:(id) arg2;
++ (int) _liveCount;
++ (int) _maxCount;
++ (id) _countsString;
++ (id) _elementWithUIAXElement:(id) arg1 parent:(id) arg2;
++ (id) attributeKeys;
++ (id) toOneRelationshipKeys;
++ (id) toManyRelationshipKeys;
++ (id) allKeys;
++ (struct CGAffineTransform) _transformToRotateFromInterfaceOrientation:(int) arg1;
++ (struct CGAffineTransform) _transformToRotateToInterfaceOrientation:(int) arg1;
++ (struct CGRect) _convertRectToCurrentInterfaceOrientation:(struct CGRect) arg1;
++ (struct CGRect) _convertRectFromCurrentInterfaceOrientation:(struct CGRect) arg1;
++ (struct CGPoint) _convertPointFromCurrentInterfaceOrientation:(struct CGPoint) arg1;
++ (struct CGPoint) _convertPointToCurrentInterfaceOrientation:(struct CGPoint) arg1;
++ (id) _nameForAXElement:(id) arg1;
++ (id) _valueForAXElement:(id) arg1;
++ (id) _hitPointFromDictionary:(id) arg1;
++ (id) _hitPointForObject:(id) arg1;
++ (id) _rectFromDictionary:(id) arg1;
++ (double) _patienceRetryInterval;
++ (void) _setPatienceRetryInterval:(double) arg1;
++ (double) patience;
++ (void) setPatience:(double) arg1;
++ (void) pushPatience:(double) arg1;
++ (double) popPatience;
++ (id) _invocationForInvoker:(id) arg1 selector:(SEL) arg2 arguments:(void *) arg3;
++ (id) _patienceInvocationPathForUIAObject:(id) arg1;
++ (id) _performInvocationPath:(id) arg1;
++ (id) _waitForInvocationPath:(id) arg1;
++ (id) _setPatienceInvocation:(id) arg1 forUIAObject:(id) arg2;
++ (id) _jsMethodNameForSelector:(SEL) arg1;
++ (id) _jsEscapedStringForString:(id) arg1;
++ (id) _jsStringForString:(id) arg1;
++ (id) _jsStringForDictionary:(id) arg1;
++ (id) _jsStringForObject:(id) arg1;
++ (id) _jsStringForRect:(struct CGRect) arg1;
++ (id) _jsStringForInvocation:(id) arg1;
++ (id) _jsMethodCallStringForInvoker:(id) arg1 selector:(SEL) arg2;
++ (id) _jsStringForInvocationPath:(id) arg1;
++ (id) _jsStringForUIAElement:(id) arg1;
++ (Class) _uiaClassForClass:(Class) arg1;
++ (Class) _classForSimpleUIAXElement:(id) arg1;
++ (id) elementForUIAXElement:(id) arg1;
++ (id) elementAtPosition:(struct CGPoint) arg1;
++ (id) _predicateForPredicateOrString:(id) arg1;
+- (id) init;
+- (id) _initWithUIAXElement:(id) arg1 parent:(id) arg2;
+- (void) dealloc;
+- (void) _emptyCaches;
+- (void) _invalidate;
+- (BOOL) isEqual:(id) arg1;
+- (unsigned int) hash;
+- (id) description;
+- (id) copyWithZone:(struct _NSZone *) arg1;
+- (double) _createdTime;
+- (double) _lastAccessedTime;
+- (void) _setLastAccessedTime:(double) arg1;
+- (BOOL) isValid;
+- (BOOL) checkIsValid;
+- (BOOL) waitForInvalid;
+- (id) attributeKeys;
+- (id) toOneRelationshipKeys;
+- (id) toManyRelationshipKeys;
+- (id) allKeys;
+- (id) _synonymToManyRelationshipKeys;
+- (id) valueForUndefinedKey:(id) arg1;
+- (id) attributes;
+- (id) toOneRelationships;
+- (id) toManyRelationships;
+- (id) uiaxElement;
+- (id) parentElement;
+- (id) ancestry;
+- (id) _logInfo;
+- (id) _logInfoWithChildren;
+- (void) logElement;
+- (void) logElementTree;
+- (void) logAXInfo;
+- (void) logAXTree;
+- (id) pid;
+- (id) hint;
+- (id) label;
+- (id) rect;
+- (id) _uiaRect;
+- (id) _tryHitpoint:(struct CGPoint) arg1;
+- (id) _hitpoint;
+- (id) hitpoint;
+- (id) _uiaHitpoint;
+- (id) isEnabled;
+- (id) hasKeyboardFocus;
+- (id) isVisible;
+- (id) target;
+- (id) name;
+- (id) value;
+- (BOOL) _shouldAllowSettingValue;
+- (void) setValue:(id) arg1;
+- (id) url;
+- (id) dom;
+- (id) className;
+- (id) type;
+- (void) undo;
+- (void) redo;
+- (void) _delayForAnimationsInProgress;
+- (void) _prepareForAction:(SEL) arg1;
+- (void) tap;
+- (void) doubleTap;
+- (void) twoFingerTap;
+- (void) tapWithOptions:(id) arg1;
+- (void) touchAndHold:(id) arg1;
+- (void) _dragInsideWithOptions:(id) arg1 withFlick:(BOOL) arg2;
+- (void) dragInsideWithOptions:(id) arg1;
+- (void) flickInsideWithOptions:(id) arg1;
+- (void) _rotateWithOptions:(id) arg1;
+- (void) rotateWithOptions:(id) arg1;
+- (void) activate;
+- (void) scrollUp;
+- (void) scrollDown;
+- (void) scrollLeft;
+- (void) scrollRight;
+- (id) scrollToVisible;
+- (id) scrollToElementWithName:(id) arg1;
+- (id) scrollToElementWithPredicate:(id) arg1;
+- (id) scrollToElementWithValue:(id) arg1 forKey:(id) arg2;
+- (id) _selfPatienceInvocation;
+- (void) _setSelfPatienceInvocation:(id) arg1;
+- (void) chopPatience;
+- (id) _objectWithPatienceInvocationFromUIAObject:(id) arg1 selector:(SEL) arg2;
+- (id) _patienceForAttribute:(SEL) arg1 value:(id) arg2;
+- (id) scriptingActionExpressionShouldFavorTapOffset;
+- (id) scriptingInvocationString;
+- (id) scriptingInvocationFullExpressionString;
+- (id) _scriptingSynonymsForSubElement:(id) arg1 maxCount:(unsigned int) arg2;
+- (id) scriptingFavoredSynonymString;
+- (id) scriptingSynonymStrings;
+- (id) scriptingSynonymFullExpressionString;
+- (id) _elementForSimpleUIAXElement:(id) arg1;
+- (id) _elementsForUIAXElements:(id) arg1 axFilter:(SEL) arg2;
+- (id) _elementsForUIAXElements:(id) arg1;
+- (BOOL) _inspectConfirmElement:(id) arg1 forAXAncestry:(id) arg2 index:(unsigned int *) arg3;
+- (id) _inspectedToOneRelationship:(id) arg1 forAXAncestry:(id) arg2 index:(unsigned int *) arg3;
+- (id) _inspectedToManyRelationship:(id) arg1 forAXAncestry:(id) arg2 index:(unsigned int *) arg3;
+- (id) _inspectedElementForAXAncestry:(id) arg1 index:(unsigned int *) arg2 triedKeys:(id) arg3;
+- (id) _elementForUIAXElement:(id) arg1;
+- (id) _elementAtPosition:(struct CGPoint) arg1;
+- (id) elementAtPoint:(id) arg1;
+- (id) withName:(id) arg1;
+- (id) withValue:(id) arg1 forKey:(id) arg2;
+- (id) withPredicate:(id) arg1;
+- (id) elements;
+- (id) _elementsOfClass:(Class) arg1 forSelector:(SEL) arg2;
+- (id) actionSheets;
+- (id) actionSheet;
+- (id) activityIndicators;
+- (id) buttons;
+- (id) editingMenus;
+- (id) images;
+- (id) keyboards;
+- (id) keyboard;
+- (id) keys;
+- (id) links;
+- (id) navigationBars;
+- (id) navigationBar;
+- (id) pageIndicators;
+- (id) pickers;
+- (id) popovers;
+- (id) popover;
+- (id) progressIndicators;
+- (id) scrollViews;
+- (id) segmentedControls;
+- (id) sliders;
+- (id) switches;
+- (id) staticTexts;
+- (id) tableViews;
+- (id) textFields;
+- (id) secureTextFields;
+- (id) searchBars;
+- (id) tabBars;
+- (id) tabBar;
+- (id) toolbars;
+- (id) toolbar;
+- (id) textViews;
+- (id) webViews;
 
 @end
 
-@interface UIAElementNil : NSObject <NSFastEnumeration>
-{
-    NSInvocation *_selfPatienceInvocation;
-    double _refreshedTime;
-    double _lastAccessedTime;
+@interface UIAElementArray : NSArray {
+  NSArray *_array;
+  NSInvocation *_selfPatienceInvocation;
+  double _refreshedTime;
+  double _lastAccessedTime;
 }
 
-+ (int)_liveCount;
-+ (int)_maxCount;
-+ (id)_elementNilWithInvocation:(id)arg1;
-- (id)_selfPatienceInvocation;
-- (void)_setSelfPatienceInvocation:(id)arg1;
-- (id)_objectWithPatienceInvocationFromUIAObject:(id)arg1 selector:(SEL)arg2;
-- (id)_initWithInvocation:(id)arg1;
-- (void)dealloc;
-- (double)_refreshedTime;
-- (double)_lastAccessedTime;
-- (void)_setLastAccessedTime:(double)arg1;
-- (BOOL)_isStillFreshAtTime:(double)arg1;
-- (id)_elementNilWithPatienceInvocation:(SEL)arg1;
-- (id)scriptingInvocationString;
-- (id)scriptingInvocationFullExpressionString;
-- (BOOL)isValid;
-- (BOOL)checkIsValid;
-- (BOOL)waitForInvalid;
-- (id)withName:(id)arg1;
-- (id)withValue:(id)arg1 forKey:(id)arg2;
-- (id)withPredicate:(id)arg1;
-- (unsigned int)count;
-- (id)objectAtIndex:(unsigned int)arg1;
-- (id)nsArray;
-- (BOOL)containsObject:(id)arg1;
-- (unsigned int)indexOfObject:(id)arg1;
-- (id)objectEnumerator;
-- (id)reverseObjectEnumerator;
-- (id)firstWithName:(id)arg1;
-- (id)firstWithValue:(id)arg1 forKey:(id)arg2;
-- (id)firstWithPredicate:(id)arg1;
-- (id)elementOfClass:(Class)arg1 atIndex:(unsigned int)arg2;
-- (void)_raiseInvalidElementAction;
-- (void)tap;
-- (void)doubleTap;
-- (void)twoFingerTap;
-- (void)tapWithOptions:(id)arg1;
-- (void)touchAndHold:(id)arg1;
-- (void)choose;
-- (void)dragToValue:(id)arg1;
-- (void)selectValue:(id)arg1;
-- (void)dismiss;
-- (void)goToNextPage;
-- (void)goToPreviousPage;
-- (void)selectPage:(id)arg1;
-- (void)dragInsideWithOptions:(id)arg1;
-- (void)flickInsideWithOptions:(id)arg1;
-- (void)rotateWithOptions:(id)arg1;
-- (void)activate;
-- (void)scrollUp;
-- (void)scrollDown;
-- (void)scrollLeft;
-- (void)scrollRight;
-- (void)scrollToVisible;
-- (id)scrollToElementWithName:(id)arg1;
-- (id)scrollToElementWithPredicate:(id)arg1;
-- (id)scrollToElementWithValue:(id)arg1 forKey:(id)arg2;
-- (id)elements;
-- (id)activityIndicators;
-- (id)buttons;
-- (id)editingMenus;
-- (id)images;
-- (id)keyboards;
-- (id)keys;
-- (id)links;
-- (id)pageIndicators;
-- (id)pickers;
-- (id)popover;
-- (id)progressIndicators;
-- (id)scrollViews;
-- (id)segmentedControls;
-- (id)staticTexts;
-- (id)switches;
-- (id)sliders;
-- (id)textFields;
-- (id)secureTextFields;
-- (id)tableViews;
-- (id)searchBars;
-- (id)textViews;
-- (id)webViews;
-- (id)parentElement;
-- (id)ancestry;
-- (id)windows;
-- (id)keyWindow;
-- (id)mainWindow;
-- (id)actionSheets;
-- (id)actionSheet;
-- (id)alert;
-- (id)editingMenu;
-- (id)switcherScrollView;
-- (id)keyboard;
-- (id)statusBar;
-- (id)navigationBars;
-- (id)navigationBar;
-- (id)tabBars;
-- (id)tabBar;
-- (id)toolbars;
-- (id)toolbar;
-- (id)leftButton;
-- (id)rightButton;
-- (id)selectedButton;
-- (id)wheels;
-- (id)headers;
-- (id)cells;
-- (id)visibleCells;
-- (id)groups;
-- (id)visibleGroups;
-- (id)rect;
-- (id)hitpoint;
-- (id)name;
-- (id)label;
-- (id)hint;
-- (id)value;
-- (id)url;
-- (id)dom;
-- (void)setValue:(id)arg1;
-- (id)pid;
-- (id)helpTag;
-- (id)isEnabled;
-- (id)isVisible;
-- (id)isCameraIrisOpen;
-- (id)hasKeyboardFocus;
-- (id)hasOpenMenu;
-- (id)target;
-- (id)depth;
-- (id)visibleFrame;
-- (id)bundlePath;
-- (id)version;
-- (id)bundleID;
-- (id)bundleVersion;
-- (id)localizedStringForKey:(id)arg1 value:(id)arg2 table:(id)arg3;
-- (id)localizations;
-- (id)stateDescription;
-- (id)architecture;
-- (id)isFront;
-- (id)isBackgroundApp;
-- (id)cancelButton;
-- (id)defaultButton;
-- (id)isSeparatorItem;
-- (id)keyEquivalent;
-- (id)keyEquivalentModifiers;
-- (id)contentArea;
-- (id)orientation;
-- (id)minValue;
-- (id)maxValue;
-- (id)textLength;
-- (id)numberOfCells;
-- (id)values;
-- (id)selectedValue;
-- (id)pageCount;
-- (id)pageIndex;
-- (id)_logInfoWithChildren;
-- (void)logElement;
-- (void)logElementTree;
-- (void)logAXInfo;
-- (void)logAXTree;
++ (void) initialize;
++ (int) _liveCount;
++ (int) _maxCount;
++ (id) _arrayWithArray:(id) arg1;
++ (id) _cachedArrayAtPtr:(const id *) arg1;
++ (void) _cacheArray:(id) arg1 atPtr:(const id *) arg2;
++ (void) _removeCachedArrayAtPtr:(const id *) arg1;
+- (id) _initWithArray:(id) arg1;
+- (void) dealloc;
+- (unsigned int) count;
+- (id) objectAtIndex:(unsigned int) arg1;
+- (BOOL) isEqualToArray:(id) arg1;
+- (BOOL) isEqual:(id) arg1;
+- (unsigned int) hash;
+- (id) description;
+- (id) _selfPatienceInvocation;
+- (void) _setSelfPatienceInvocation:(id) arg1;
+- (id) _objectWithPatienceInvocationFromUIAObject:(id) arg1 selector:(SEL) arg2;
+- (id) nsArray;
+- (void) _setArray:(id) arg1;
+- (double) _refreshedTime;
+- (double) _lastAccessedTime;
+- (void) _setLastAccessedTime:(double) arg1;
+- (BOOL) _isStillFreshAtTime:(double) arg1;
+- (id) _withClass:(Class) arg1;
+- (id) _withName:(id) arg1;
+- (id) _withValue:(id) arg1 forKey:(id) arg2;
+- (id) _withPredicate:(id) arg1;
+- (id) withClass:(Class) arg1;
+- (id) withName:(id) arg1;
+- (id) withValue:(id) arg1 forKey:(id) arg2;
+- (id) withPredicate:(id) arg1;
+- (id) firstWithName:(id) arg1;
+- (id) firstWithValue:(id) arg1 forKey:(id) arg2;
+- (id) firstWithPredicate:(id) arg1;
+- (void) logElements;
+- (void) logElementTrees;
+- (id) elementOfClass:(Class) arg1 atIndex:(unsigned int) arg2;
+- (id) _scriptingIndexSynonymsForElement:(id) arg1 maxCount:(unsigned int) arg2;
+- (id) scriptingFavoredIndexSynonymForElement:(id) arg1;
+- (id) scriptingIndexSynonymsForElement:(id) arg1;
+- (id) scriptingInvocationString;
+- (id) scriptingInvocationFullExpressionString;
+- (BOOL) isValid;
 
 @end
 
-@interface UIAScreen : UIAElement
-{
-    UIScreen *_uiScreen;
+@interface UIAElementNil : NSObject <NSFastEnumeration> {
+  NSInvocation *_selfPatienceInvocation;
+  double _refreshedTime;
+  double _lastAccessedTime;
 }
 
-+ (id)attributeKeys;
-- (id)_initWithUIScreen:(id)arg1 parent:(id)arg2;
-- (void)dealloc;
-- (id)_uiScreen;
-- (id)description;
-- (id)copyWithZone:(struct _NSZone *)arg1;
-- (id)bounds;
-- (id)scale;
-- (id)applicationFrame;
-- (id)_uiaApplicationFrame;
-- (id)uiScreen;
++ (int) _liveCount;
++ (int) _maxCount;
++ (id) _elementNilWithInvocation:(id) arg1;
+- (id) _selfPatienceInvocation;
+- (void) _setSelfPatienceInvocation:(id) arg1;
+- (id) _objectWithPatienceInvocationFromUIAObject:(id) arg1 selector:(SEL) arg2;
+- (id) _initWithInvocation:(id) arg1;
+- (void) dealloc;
+- (double) _refreshedTime;
+- (double) _lastAccessedTime;
+- (void) _setLastAccessedTime:(double) arg1;
+- (BOOL) _isStillFreshAtTime:(double) arg1;
+- (id) _elementNilWithPatienceInvocation:(SEL) arg1;
+- (id) scriptingInvocationString;
+- (id) scriptingInvocationFullExpressionString;
+- (BOOL) isValid;
+- (BOOL) checkIsValid;
+- (BOOL) waitForInvalid;
+- (id) withName:(id) arg1;
+- (id) withValue:(id) arg1 forKey:(id) arg2;
+- (id) withPredicate:(id) arg1;
+- (unsigned int) count;
+- (id) objectAtIndex:(unsigned int) arg1;
+- (id) nsArray;
+- (BOOL) containsObject:(id) arg1;
+- (unsigned int) indexOfObject:(id) arg1;
+- (id) objectEnumerator;
+- (id) reverseObjectEnumerator;
+- (id) firstWithName:(id) arg1;
+- (id) firstWithValue:(id) arg1 forKey:(id) arg2;
+- (id) firstWithPredicate:(id) arg1;
+- (id) elementOfClass:(Class) arg1 atIndex:(unsigned int) arg2;
+- (void) _raiseInvalidElementAction;
+- (void) tap;
+- (void) doubleTap;
+- (void) twoFingerTap;
+- (void) tapWithOptions:(id) arg1;
+- (void) touchAndHold:(id) arg1;
+- (void) choose;
+- (void) dragToValue:(id) arg1;
+- (void) selectValue:(id) arg1;
+- (void) dismiss;
+- (void) goToNextPage;
+- (void) goToPreviousPage;
+- (void) selectPage:(id) arg1;
+- (void) dragInsideWithOptions:(id) arg1;
+- (void) flickInsideWithOptions:(id) arg1;
+- (void) rotateWithOptions:(id) arg1;
+- (void) activate;
+- (void) scrollUp;
+- (void) scrollDown;
+- (void) scrollLeft;
+- (void) scrollRight;
+- (void) scrollToVisible;
+- (id) scrollToElementWithName:(id) arg1;
+- (id) scrollToElementWithPredicate:(id) arg1;
+- (id) scrollToElementWithValue:(id) arg1 forKey:(id) arg2;
+- (id) elements;
+- (id) activityIndicators;
+- (id) buttons;
+- (id) editingMenus;
+- (id) images;
+- (id) keyboards;
+- (id) keys;
+- (id) links;
+- (id) pageIndicators;
+- (id) pickers;
+- (id) popover;
+- (id) progressIndicators;
+- (id) scrollViews;
+- (id) segmentedControls;
+- (id) staticTexts;
+- (id) switches;
+- (id) sliders;
+- (id) textFields;
+- (id) secureTextFields;
+- (id) tableViews;
+- (id) searchBars;
+- (id) textViews;
+- (id) webViews;
+- (id) parentElement;
+- (id) ancestry;
+- (id) windows;
+- (id) keyWindow;
+- (id) mainWindow;
+- (id) actionSheets;
+- (id) actionSheet;
+- (id) alert;
+- (id) editingMenu;
+- (id) switcherScrollView;
+- (id) keyboard;
+- (id) statusBar;
+- (id) navigationBars;
+- (id) navigationBar;
+- (id) tabBars;
+- (id) tabBar;
+- (id) toolbars;
+- (id) toolbar;
+- (id) leftButton;
+- (id) rightButton;
+- (id) selectedButton;
+- (id) wheels;
+- (id) headers;
+- (id) cells;
+- (id) visibleCells;
+- (id) groups;
+- (id) visibleGroups;
+- (id) rect;
+- (id) hitpoint;
+- (id) name;
+- (id) label;
+- (id) hint;
+- (id) value;
+- (id) url;
+- (id) dom;
+- (void) setValue:(id) arg1;
+- (id) pid;
+- (id) helpTag;
+- (id) isEnabled;
+- (id) isVisible;
+- (id) isCameraIrisOpen;
+- (id) hasKeyboardFocus;
+- (id) hasOpenMenu;
+- (id) target;
+- (id) depth;
+- (id) visibleFrame;
+- (id) bundlePath;
+- (id) version;
+- (id) bundleID;
+- (id) bundleVersion;
+- (id) localizedStringForKey:(id) arg1 value:(id) arg2 table:(id) arg3;
+- (id) localizations;
+- (id) stateDescription;
+- (id) architecture;
+- (id) isFront;
+- (id) isBackgroundApp;
+- (id) cancelButton;
+- (id) defaultButton;
+- (id) isSeparatorItem;
+- (id) keyEquivalent;
+- (id) keyEquivalentModifiers;
+- (id) contentArea;
+- (id) orientation;
+- (id) minValue;
+- (id) maxValue;
+- (id) textLength;
+- (id) numberOfCells;
+- (id) values;
+- (id) selectedValue;
+- (id) pageCount;
+- (id) pageIndex;
+- (id) _logInfoWithChildren;
+- (void) logElement;
+- (void) logElementTree;
+- (void) logAXInfo;
+- (void) logAXTree;
 
 @end
 
-@interface UIAHost : NSObject
-{
+@interface UIAScreen : UIAElement {
+  UIScreen *_uiScreen;
 }
 
-- (id)performTaskWithPath:(id)arg1 arguments:(id)arg2 timeout:(id)arg3;
++ (id) attributeKeys;
+- (id) _initWithUIScreen:(id) arg1 parent:(id) arg2;
+- (void) dealloc;
+- (id) _uiScreen;
+- (id) description;
+- (id) copyWithZone:(struct _NSZone *) arg1;
+- (id) bounds;
+- (id) scale;
+- (id) applicationFrame;
+- (id) _uiaApplicationFrame;
+- (id) uiScreen;
 
 @end
 
-@interface UIATarget : UIAElement
-{
+@interface UIAHost : NSObject {
 }
 
-+ (id)localTarget;
-+ (id)_locationForObject:(id)arg1 withOptions:(id)arg2;
-+ (id)attributeKeys;
-+ (id)toOneRelationshipKeys;
-+ (id)toManyRelationshipKeys;
-- (id)_systemVersionDictionary;
-- (id)init;
-- (void)dealloc;
-- (void)_invalidate;
-- (void)_updateInterfaceOrientation;
-- (int)_interfaceOrientation;
-- (double)_lastAnimationEndedTime;
-- (void)_setLastAnimationEndedTime:(double)arg1;
-- (BOOL)isEqual:(id)arg1;
-- (unsigned int)hash;
-- (BOOL)isValid;
-- (BOOL)checkIsValid;
-- (id)rect;
-- (id)name;
-- (id)model;
-- (id)systemName;
-- (id)systemVersion;
-- (id)systemBuild;
-- (id)uniqueIdentifier;
-- (id)deviceOrientation;
-- (BOOL)setDeviceOrientation:(id)arg1;
-- (BOOL)setLocation:(id)arg1;
-- (BOOL)setLocation:(id)arg1 withOptions:(id)arg2;
-- (id)startupDate;
-- (double)upTime;
-- (id)lastCommandTime;
-- (void)captureScreenWithName:(id)arg1;
-- (id)imageFromRect:(struct CGRect)arg1;
-- (void)captureRect:(id)arg1 withName:(id)arg2;
-- (id)targetClipboard;
-- (void)setTargetClipboard:(id)arg1;
-- (int)textViewValueMaxLength;
-- (void)setTextViewValueMaxLength:(int)arg1;
-- (id)host;
-- (id)applications;
-- (id)frontMostApp;
-- (id)mainScreen;
-- (id)elements;
-- (id)uiaxSystemWideElement;
-- (double)patience;
-- (void)setPatience:(double)arg1;
-- (void)pushPatience:(double)arg1;
-- (double)popPatience;
-- (BOOL)delayForTimeInterval:(double)arg1;
-- (void)setVerboseOptions:(unsigned int)arg1;
-- (unsigned int)verboseOptions;
-- (void)setDelegate:(id)arg1;
-- (id)delegate;
-- (void)setPassiveEventListeningMode:(id)arg1 withDelay:(id)arg2;
-- (BOOL)_handleAlert;
-- (id)scriptingFavoredSynonymString;
-- (id)scriptingSynonymStrings;
-- (id)localizedStringForKey:(id)arg1 value:(id)arg2 table:(id)arg3 bundlePath:(id)arg4;
-- (BOOL)_tapOptionalObject:(id)arg1 tapCount:(double)arg2 touchCount:(double)arg3 tapOffset:(id)arg4;
-- (BOOL)_tapRequiredObject:(id)arg1 tapCount:(double)arg2 touchCount:(double)arg3;
-- (BOOL)_dragFrom:(id)arg1 to:(id)arg2 forDuration:(double)arg3 withTouchCount:(int)arg4 withFlick:(BOOL)arg5;
-- (void)tap:(id)arg1;
-- (void)doubleTap:(id)arg1;
-- (void)twoFingerTap:(id)arg1;
-- (void)tap:(id)arg1 withOptions:(id)arg2;
-- (void)touch:(id)arg1 andHold:(id)arg2;
-- (void)dragFrom:(id)arg1 to:(id)arg2 forDuration:(id)arg3;
-- (void)flickFrom:(id)arg1 to:(id)arg2;
-- (void)pinchCloseFrom:(id)arg1 to:(id)arg2 forDuration:(id)arg3;
-- (void)pinchOpenFrom:(id)arg1 to:(id)arg2 forDuration:(id)arg3;
-- (void)rotate:(id)arg1 withOptions:(id)arg2;
-- (void)shake;
-- (void)clickMenu;
-- (void)holdMenu:(id)arg1;
-- (void)clickLock;
-- (void)holdLock:(id)arg1;
-- (void)clickVolumeUp;
-- (void)holdVolumeUp:(id)arg1;
-- (void)clickVolumeDown;
-- (void)holdVolumeDown:(id)arg1;
-- (void)setRinger:(id)arg1;
-- (BOOL)_screenIsLocked;
-- (id)_lockBar;
-- (BOOL)_screenIsOff;
-- (BOOL)lockForDuration:(id)arg1;
-- (BOOL)lock;
-- (BOOL)unlock;
-- (BOOL)deactivateAppForDuration:(id)arg1;
-- (BOOL)deactivateApp;
-- (BOOL)reactivateApp;
+- (id) performTaskWithPath:(id) arg1 arguments:(id) arg2 timeout:(id) arg3;
+
+@end
+
+@interface UIATarget : UIAElement {
+}
+
++ (id) localTarget;
++ (id) _locationForObject:(id) arg1 withOptions:(id) arg2;
++ (id) attributeKeys;
++ (id) toOneRelationshipKeys;
++ (id) toManyRelationshipKeys;
+- (id) _systemVersionDictionary;
+- (id) init;
+- (void) dealloc;
+- (void) _invalidate;
+- (void) _updateInterfaceOrientation;
+- (int) _interfaceOrientation;
+- (double) _lastAnimationEndedTime;
+- (void) _setLastAnimationEndedTime:(double) arg1;
+- (BOOL) isEqual:(id) arg1;
+- (unsigned int) hash;
+- (BOOL) isValid;
+- (BOOL) checkIsValid;
+- (id) rect;
+- (id) name;
+- (id) model;
+- (id) systemName;
+- (id) systemVersion;
+- (id) systemBuild;
+- (id) uniqueIdentifier;
+- (id) deviceOrientation;
+- (BOOL) setDeviceOrientation:(id) arg1;
+- (BOOL) setLocation:(id) arg1;
+- (BOOL) setLocation:(id) arg1 withOptions:(id) arg2;
+- (id) startupDate;
+- (double) upTime;
+- (id) lastCommandTime;
+- (void) captureScreenWithName:(id) arg1;
+- (id) imageFromRect:(struct CGRect) arg1;
+- (void) captureRect:(id) arg1 withName:(id) arg2;
+- (id) targetClipboard;
+- (void) setTargetClipboard:(id) arg1;
+- (int) textViewValueMaxLength;
+- (void) setTextViewValueMaxLength:(int) arg1;
+- (id) host;
+- (id) applications;
+- (id) frontMostApp;
+- (id) mainScreen;
+- (id) elements;
+- (id) uiaxSystemWideElement;
+- (double) patience;
+- (void) setPatience:(double) arg1;
+- (void) pushPatience:(double) arg1;
+- (double) popPatience;
+- (BOOL) delayForTimeInterval:(double) arg1;
+- (void) setVerboseOptions:(unsigned int) arg1;
+- (unsigned int) verboseOptions;
+- (void) setDelegate:(id) arg1;
+- (id) delegate;
+- (void) setPassiveEventListeningMode:(id) arg1 withDelay:(id) arg2;
+- (BOOL) _handleAlert;
+- (id) scriptingFavoredSynonymString;
+- (id) scriptingSynonymStrings;
+- (id) localizedStringForKey:(id) arg1 value:(id) arg2 table:(id) arg3 bundlePath:(id) arg4;
+- (BOOL) _tapOptionalObject:(id) arg1 tapCount:(double) arg2 touchCount:(double) arg3 tapOffset:(id) arg4;
+- (BOOL) _tapRequiredObject:(id) arg1 tapCount:(double) arg2 touchCount:(double) arg3;
+- (BOOL) _dragFrom:(id) arg1 to:(id) arg2 forDuration:(double) arg3 withTouchCount:(int) arg4 withFlick:(BOOL) arg5;
+- (void) tap:(id) arg1;
+- (void) doubleTap:(id) arg1;
+- (void) twoFingerTap:(id) arg1;
+- (void) tap:(id) arg1 withOptions:(id) arg2;
+- (void) touch:(id) arg1 andHold:(id) arg2;
+- (void) dragFrom:(id) arg1 to:(id) arg2 forDuration:(id) arg3;
+- (void) flickFrom:(id) arg1 to:(id) arg2;
+- (void) pinchCloseFrom:(id) arg1 to:(id) arg2 forDuration:(id) arg3;
+- (void) pinchOpenFrom:(id) arg1 to:(id) arg2 forDuration:(id) arg3;
+- (void) rotate:(id) arg1 withOptions:(id) arg2;
+- (void) shake;
+- (void) clickMenu;
+- (void) holdMenu:(id) arg1;
+- (void) clickLock;
+- (void) holdLock:(id) arg1;
+- (void) clickVolumeUp;
+- (void) holdVolumeUp:(id) arg1;
+- (void) clickVolumeDown;
+- (void) holdVolumeDown:(id) arg1;
+- (void) setRinger:(id) arg1;
+- (BOOL) _screenIsLocked;
+- (id) _lockBar;
+- (BOOL) _screenIsOff;
+- (BOOL) lockForDuration:(id) arg1;
+- (BOOL) lock;
+- (BOOL) unlock;
+- (BOOL) deactivateAppForDuration:(id) arg1;
+- (BOOL) deactivateApp;
+- (BOOL) reactivateApp;
 @property BOOL logElementTakesScreenshot; // @synthesize logElementTakesScreenshot=_logElementTakesScreenshot;
 
 @end
 
-@interface UIATextView : UIAElement
-{
+@interface UIATextView : UIAElement {
 }
 
 @end
 
-
-@interface UIATextField : UIAElement
-{
+@interface UIATextField : UIAElement {
 }
 
-- (BOOL)_textFieldShouldAcceptAXElement:(id)arg1;
-- (id)elements;
-- (id)scriptingActionExpressionShouldFavorTapOffset;
+- (BOOL) _textFieldShouldAcceptAXElement:(id) arg1;
+- (id) elements;
+- (id) scriptingActionExpressionShouldFavorTapOffset;
 
 @end
 
-@interface UIATableCell : UIAElement
-{
+@interface UIATableCell : UIAElement {
 }
 
-+ (Class)_classForSimpleUIAXElement:(id)arg1;
-- (id)name;
-- (id)value;
-- (id)scriptingActionExpressionShouldFavorTapOffset;
++ (Class) _classForSimpleUIAXElement:(id) arg1;
+- (id) name;
+- (id) value;
+- (id) scriptingActionExpressionShouldFavorTapOffset;
 
 @end
 
-@interface UIATableGroup : UIAElement
-{
+@interface UIATableGroup : UIAElement {
 }
 
-+ (Class)_classForSimpleUIAXElement:(id)arg1;
-- (id)name;
++ (Class) _classForSimpleUIAXElement:(id) arg1;
+- (id) name;
 
 @end
 
-@interface UIATableView : UIAElement
-{
-    UIAElementArray *_cells;
+@interface UIATableView : UIAElement {
+  UIAElementArray *_cells;
 }
 
-+ (Class)_classForSimpleUIAXElement:(id)arg1;
-+ (id)_moreToManyRelationshipKeys;
-+ (id)toManyRelationshipKeys;
-- (void)_emptyCaches;
-- (id)value;
-- (id)firstVisibleCellIndex;
-- (id)lastVisibleCellIndex;
-- (id)cellCount;
-- (id)cells;
-- (id)groups;
-- (id)visibleCells;
-- (id)visibleGroups;
++ (Class) _classForSimpleUIAXElement:(id) arg1;
++ (id) _moreToManyRelationshipKeys;
++ (id) toManyRelationshipKeys;
+- (void) _emptyCaches;
+- (id) value;
+- (id) firstVisibleCellIndex;
+- (id) lastVisibleCellIndex;
+- (id) cellCount;
+- (id) cells;
+- (id) groups;
+- (id) visibleCells;
+- (id) visibleGroups;
 
 @end
 
-@interface UIASwitch : UIAElement
-{
+@interface UIASwitch : UIAElement {
 }
 
-- (id)elements;
-- (id)value;
-- (void)setValue:(id)arg1;
+- (id) elements;
+- (id) value;
+- (void) setValue:(id) arg1;
 
 @end
 
-@interface UIASlider : UIAElement
-{
+@interface UIASlider : UIAElement {
 }
 
-- (id)elements;
-- (void)dragToValue:(id)arg1;
+- (id) elements;
+- (void) dragToValue:(id) arg1;
 
 @end
 
-@interface UIAStaticText : UIAElement
-{
+@interface UIAStaticText : UIAElement {
 }
 
-- (BOOL)_shouldAllowSettingValue;
+- (BOOL) _shouldAllowSettingValue;
 
 @end
 
-@interface UIASegmentedControl : UIAElement
-{
+@interface UIASegmentedControl : UIAElement {
 }
 
-- (id)selectedButton;
+- (id) selectedButton;
 
 @end
 
-@interface UIAPopover : UIAElement
-{
+@interface UIAPopover : UIAElement {
 }
 
-- (void)dismiss;
+- (void) dismiss;
 
 @end
 
-@interface UIAScrollView : UIAElement
-{
+@interface UIAScrollView : UIAElement {
 }
 
 @end
 
-@interface UIAProgressIndicator : UIAElement
-{
+@interface UIAProgressIndicator : UIAElement {
 }
 
 @end
 
-@interface UIAPickerWheel : UIAElement
-{
+@interface UIAPickerWheel : UIAElement {
 }
 
-- (id)elements;
-- (id)values;
-- (BOOL)_spinWheel:(int)arg1;
-- (void)selectValue:(id)arg1;
+- (id) elements;
+- (id) values;
+- (BOOL) _spinWheel:(int) arg1;
+- (void) selectValue:(id) arg1;
 
 @end
 
-@interface UIAPicker : UIAElement
-{
+@interface UIAPicker : UIAElement {
 }
 
-+ (id)_moreToManyRelationshipKeys;
-+ (id)toManyRelationshipKeys;
-- (id)wheels;
++ (id) _moreToManyRelationshipKeys;
++ (id) toManyRelationshipKeys;
+- (id) wheels;
 
 @end
 
-@interface UIAPageIndicator : UIAElement
-{
+@interface UIAPageIndicator : UIAElement {
 }
 
-- (id)pageIndex;
-- (id)pageCount;
-- (BOOL)_flipPages:(int)arg1;
-- (void)goToNextPage;
-- (void)goToPreviousPage;
-- (void)selectPage:(id)arg1;
+- (id) pageIndex;
+- (id) pageCount;
+- (BOOL) _flipPages:(int) arg1;
+- (void) goToNextPage;
+- (void) goToPreviousPage;
+- (void) selectPage:(id) arg1;
 
 @end
 
-@interface UIALink : UIAElement
-{
+@interface UIALink : UIAElement {
 }
 
-- (id)scriptingActionExpressionShouldFavorTapOffset;
+- (id) scriptingActionExpressionShouldFavorTapOffset;
 
 @end
 
-@interface UIAKey : UIAElement
-{
+@interface UIAKey : UIAElement {
 }
 
-- (void)_delayForAnimationsInProgress;
-- (id)scriptingActionExpressionShouldFavorTapOffset;
+- (void) _delayForAnimationsInProgress;
+- (id) scriptingActionExpressionShouldFavorTapOffset;
 
 @end
 
-@interface UIAImage : UIAElement
-{
+@interface UIAImage : UIAElement {
 }
 
 @end
 
-@interface UIAButton : UIAElement
-{
+@interface UIAButton : UIAElement {
 }
 
-- (id)value;
-- (id)scriptingActionExpressionShouldFavorTapOffset;
+- (id) value;
+- (id) scriptingActionExpressionShouldFavorTapOffset;
 
 @end
 
-@interface UIAActivityIndicator : UIAElement
-{
-}
-
-@end
-
-@interface UIASyntheticEvents : NSObject
-{
-}
-
-+ (id)sharedEventGenerator;
-- (id)init;
-- (void)_sendHandEventWithPointArray:(struct CGPoint *)arg1 indentifierArray:(int *)arg2 pointCount:(int)arg3;
-- (struct CGPoint)_convertLocation:(struct CGPoint)arg1;
-- (float)_doubleTapSpeedFromDefaults;
-- (void)sendAccelerometerX:(float)arg1 Y:(float)arg2 Z:(float)arg3;
-- (void)sendAccelerometerX:(float)arg1 Y:(float)arg2 Z:(float)arg3 duration:(double)arg4;
-- (void)setOrientation:(int)arg1;
-- (void)_sendSimpleEvent:(int)arg1;
-- (void)_sendDownEvent:(int)arg1 upEvent:(int)arg2;
-- (void)_sendDownEvent:(int)arg1 upEvent:(int)arg2 duration:(double)arg3;
-- (void)clickMenu;
-- (void)holdMenu:(double)arg1;
-- (void)lockDevice;
-- (void)clickLock;
-- (void)holdLock:(double)arg1;
-- (void)clickVolumeUp;
-- (void)holdVolumeUp:(double)arg1;
-- (void)clickVolumeDown;
-- (void)holdVolumeDown:(double)arg1;
-- (void)setRinger:(BOOL)arg1;
-- (void)shake;
-- (void)touchDown:(struct CGPoint)arg1;
-- (void)liftUp:(struct CGPoint)arg1;
-- (void)_moveLastTouchPoint:(struct CGPoint)arg1;
-- (void)sendTap:(struct CGPoint)arg1;
-- (void)sendDoubleTap:(struct CGPoint)arg1;
-- (void)sendDoubleFingerTap:(struct CGPoint)arg1;
-- (void)sendTaps:(int)arg1 location:(struct CGPoint)arg2 withNumberOfTouches:(int)arg3 inRect:(struct CGRect)arg4;
-- (void)sendDragWithStartPoint:(struct CGPoint)arg1 endPoint:(struct CGPoint)arg2 duration:(double)arg3;
-- (void)sendFlickWithStartPoint:(struct CGPoint)arg1 endPoint:(struct CGPoint)arg2 duration:(double)arg3;
-- (void)sendPinchOpenWithStartPoint:(struct CGPoint)arg1 endPoint:(struct CGPoint)arg2 duration:(double)arg3;
-- (void)sendPinchCloseWithStartPoint:(struct CGPoint)arg1 endPoint:(struct CGPoint)arg2 duration:(double)arg3;
-- (void)sendMultifingerDragWithPointArray:(struct CGPoint *)arg1 numPoints:(int)arg2 duration:(double)arg3 numFingers:(int)arg4;
-- (void)sendRotate:(struct CGPoint)arg1 withRadius:(float)arg2 rotation:(float)arg3 duration:(float)arg4 touchCount:(unsigned int)arg5;
-- (void)sendDragWithStartPoint:(struct CGPoint)arg1 endPoint:(struct CGPoint)arg2 duration:(double)arg3 withFlick:(BOOL)arg4 inRect:(struct CGRect)arg5;
-- (void)sendPinchOpenWithStartPoint:(struct CGPoint)arg1 endPoint:(struct CGPoint)arg2 duration:(double)arg3 inRect:(struct CGRect)arg4;
-- (void)sendPinchCloseWithStartPoint:(struct CGPoint)arg1 endPoint:(struct CGPoint)arg2 duration:(double)arg3 inRect:(struct CGRect)arg4;
-
-@end
-
-@interface UIAActionSheet : UIAElement
-{
-}
-
-+ (id)toOneRelationshipKeys;
-- (id)cancelButton;
-
-@end
-
-@interface UIAAlert : UIAElement
-{
-}
-
-+ (id)_moreToOneRelationshipKeys;
-+ (id)toOneRelationshipKeys;
-- (id)name;
-- (id)cancelButton;
-- (id)defaultButton;
-
-@end
-
-@interface UIAEditingMenu : UIAElement
-{
+@interface UIAActivityIndicator : UIAElement {
 }
 
 @end
 
-@interface UIAStatusBar : UIAElement
-{
+@interface UIASyntheticEvents : NSObject {
+}
+
++ (id) sharedEventGenerator;
+- (id) init;
+- (void) _sendHandEventWithPointArray:(struct CGPoint *) arg1 indentifierArray:(int *) arg2 pointCount:(int) arg3;
+- (struct CGPoint) _convertLocation:(struct CGPoint) arg1;
+- (float) _doubleTapSpeedFromDefaults;
+- (void) sendAccelerometerX:(float) arg1 Y:(float) arg2 Z:(float) arg3;
+- (void) sendAccelerometerX:(float) arg1 Y:(float) arg2 Z:(float) arg3 duration:(double) arg4;
+- (void) setOrientation:(int) arg1;
+- (void) _sendSimpleEvent:(int) arg1;
+- (void) _sendDownEvent:(int) arg1 upEvent:(int) arg2;
+- (void) _sendDownEvent:(int) arg1 upEvent:(int) arg2 duration:(double) arg3;
+- (void) clickMenu;
+- (void) holdMenu:(double) arg1;
+- (void) lockDevice;
+- (void) clickLock;
+- (void) holdLock:(double) arg1;
+- (void) clickVolumeUp;
+- (void) holdVolumeUp:(double) arg1;
+- (void) clickVolumeDown;
+- (void) holdVolumeDown:(double) arg1;
+- (void) setRinger:(BOOL) arg1;
+- (void) shake;
+- (void) touchDown:(struct CGPoint) arg1;
+- (void) liftUp:(struct CGPoint) arg1;
+- (void) _moveLastTouchPoint:(struct CGPoint) arg1;
+- (void) sendTap:(struct CGPoint) arg1;
+- (void) sendDoubleTap:(struct CGPoint) arg1;
+- (void) sendDoubleFingerTap:(struct CGPoint) arg1;
+- (void) sendTaps:(int) arg1 location:(struct CGPoint) arg2 withNumberOfTouches:(int) arg3 inRect:(struct CGRect) arg4;
+- (void) sendDragWithStartPoint:(struct CGPoint) arg1 endPoint:(struct CGPoint) arg2 duration:(double) arg3;
+- (void) sendFlickWithStartPoint:(struct CGPoint) arg1 endPoint:(struct CGPoint) arg2 duration:(double) arg3;
+- (void) sendPinchOpenWithStartPoint:(struct CGPoint) arg1 endPoint:(struct CGPoint) arg2 duration:(double) arg3;
+- (void) sendPinchCloseWithStartPoint:(struct CGPoint) arg1 endPoint:(struct CGPoint) arg2 duration:(double) arg3;
+- (void) sendMultifingerDragWithPointArray:(struct CGPoint *) arg1 numPoints:(int) arg2 duration:(double) arg3 numFingers:(int) arg4;
+- (void) sendRotate:(struct CGPoint) arg1 withRadius:(float) arg2 rotation:(float) arg3 duration:(float) arg4 touchCount:(unsigned int) arg5;
+- (void) sendDragWithStartPoint:(struct CGPoint) arg1 endPoint:(struct CGPoint) arg2 duration:(double) arg3 withFlick:(BOOL) arg4 inRect:(struct CGRect) arg5;
+- (void) sendPinchOpenWithStartPoint:(struct CGPoint) arg1 endPoint:(struct CGPoint) arg2 duration:(double) arg3 inRect:(struct CGRect) arg4;
+- (void) sendPinchCloseWithStartPoint:(struct CGPoint) arg1 endPoint:(struct CGPoint) arg2 duration:(double) arg3 inRect:(struct CGRect) arg4;
+
+@end
+
+@interface UIAActionSheet : UIAElement {
+}
+
++ (id) toOneRelationshipKeys;
+- (id) cancelButton;
+
+@end
+
+@interface UIAAlert : UIAElement {
+}
+
++ (id) _moreToOneRelationshipKeys;
++ (id) toOneRelationshipKeys;
+- (id) name;
+- (id) cancelButton;
+- (id) defaultButton;
+
+@end
+
+@interface UIAEditingMenu : UIAElement {
 }
 
 @end
 
-@interface UIAKeyboard : UIAElement
-{
-    double _interKeyDelay;
-    double _interKeyDelayVariance;
+@interface UIAStatusBar : UIAElement {
 }
 
-- (id)init;
-- (void)_typeKeyForString:(id)arg1;
-- (void)typeString:(id)arg1;
+@end
+
+@interface UIAKeyboard : UIAElement {
+  double _interKeyDelay;
+  double _interKeyDelayVariance;
+}
+
+- (id) init;
+- (void) _typeKeyForString:(id) arg1;
+- (void) typeString:(id) arg1;
 @property double interKeyDelayVariance; // @synthesize interKeyDelayVariance=_interKeyDelayVariance;
 @property double interKeyDelay; // @synthesize interKeyDelay=_interKeyDelay;
 
 @end
 
-@interface UIAToolbar : UIAElement
-{
+@interface UIAToolbar : UIAElement {
 }
 
 @end
 
-@interface UIATabBar : UIAElement
-{
+@interface UIATabBar : UIAElement {
 }
 
-- (id)selectedButton;
+- (id) selectedButton;
 
 @end
 
-@interface UIANavigationBar : UIAElement
-{
+@interface UIANavigationBar : UIAElement {
 }
 
-+ (id)_moreToOneRelationshipKeys;
-+ (id)toOneRelationshipKeys;
-- (id)name;
-- (id)leftButton;
-- (id)rightButton;
-- (BOOL)_navBarShouldAcceptAXElement:(id)arg1;
-- (id)elements;
++ (id) _moreToOneRelationshipKeys;
++ (id) toOneRelationshipKeys;
+- (id) name;
+- (id) leftButton;
+- (id) rightButton;
+- (BOOL) _navBarShouldAcceptAXElement:(id) arg1;
+- (id) elements;
 
 @end
 
-@interface UIAWindow : UIAElement
-{
+@interface UIAWindow : UIAElement {
 }
 
-- (id)contentArea;
-- (id)_uiaContentArea;
-- (BOOL)_windowShouldAcceptAXElement:(id)arg1;
-- (id)elements;
+- (id) contentArea;
+- (id) _uiaContentArea;
+- (BOOL) _windowShouldAcceptAXElement:(id) arg1;
+- (id) elements;
 
 @end
 
-@interface UIAApplication : UIAElement
-{
-    UIAElementArray *_windows;
-    void *_privateRef;
+@interface UIAApplication : UIAElement {
+  UIAElementArray *_windows;
+  void *_privateRef;
 }
 
-+ (id)attributeKeys;
-+ (id)toOneRelationshipKeys;
-+ (id)toManyRelationshipKeys;
-- (id)init;
-- (void)dealloc;
-- (void)_invalidate;
-- (id)name;
-- (id)bundlePath;
-- (id)_bundle;
-- (id)version;
-- (id)bundleVersion;
-- (id)bundleID;
-- (id)stateDescription;
-- (id)isVisible;
-- (id)isCameraIrisOpen;
-- (void)setPreferencesValue:(id)arg1 forKey:(id)arg2;
-- (id)preferencesValueForKey:(id)arg1;
-- (int)interfaceOrientation;
-- (id)windows;
-- (id)keyWindow;
-- (id)_axMainWindow;
-- (id)mainWindow;
-- (id)keyboard;
-- (id)actionSheet;
-- (id)alert;
-- (id)statusBar;
-- (id)editingMenu;
-- (id)switcherScrollView;
-- (id)navigationBar;
-- (id)tabBar;
-- (id)toolbar;
-- (id)scriptingSynonymStrings;
++ (id) attributeKeys;
++ (id) toOneRelationshipKeys;
++ (id) toManyRelationshipKeys;
+- (id) init;
+- (void) dealloc;
+- (void) _invalidate;
+- (id) name;
+- (id) bundlePath;
+- (id) _bundle;
+- (id) version;
+- (id) bundleVersion;
+- (id) bundleID;
+- (id) stateDescription;
+- (id) isVisible;
+- (id) isCameraIrisOpen;
+- (void) setPreferencesValue:(id) arg1 forKey:(id) arg2;
+- (id) preferencesValueForKey:(id) arg1;
+- (int) interfaceOrientation;
+- (id) windows;
+- (id) keyWindow;
+- (id) _axMainWindow;
+- (id) mainWindow;
+- (id) keyboard;
+- (id) actionSheet;
+- (id) alert;
+- (id) statusBar;
+- (id) editingMenu;
+- (id) switcherScrollView;
+- (id) navigationBar;
+- (id) tabBar;
+- (id) toolbar;
+- (id) scriptingSynonymStrings;
 
 @end
 
-@interface UIARecorder : NSObject
-{
-    UIATarget *_uiaTarget;
-    double _lastActionTime;
-    double _lastEventReleaseTime;
-    UIAXElement *_previousAXElement;
-    NSArray *_pendingTapExpression;
-    NSMutableArray *_pendingDragExpressions;
-    unsigned int _tapCount;
-    NSTimer *_keystrokeFlushTimer;
-    NSTimer *_expressionFlushTimer;
-    NSMutableString *_keystrokes;
-    BOOL _isRecording;
-    id _delegate;
+@interface UIARecorder : NSObject {
+  UIATarget *_uiaTarget;
+  double _lastActionTime;
+  double _lastEventReleaseTime;
+  UIAXElement *_previousAXElement;
+  NSArray *_pendingTapExpression;
+  NSMutableArray *_pendingDragExpressions;
+  unsigned int _tapCount;
+  NSTimer *_keystrokeFlushTimer;
+  NSTimer *_expressionFlushTimer;
+  NSMutableString *_keystrokes;
+  BOOL _isRecording;
+  id _delegate;
 }
 
-+ (id)defaultRecorder;
-- (id)init;
-- (void)dealloc;
-- (void)start;
-- (void)stop;
-- (void)postRecordedExpression:(id)arg1;
-- (void)postElementNotFoundAtPoint:(struct CGPoint)arg1 description:(id)arg2;
-- (void)postStaleEventMessage;
-- (void)postMutlitouchGestureDetected;
-- (void)handleAlert;
-- (void)handleOrientationChange;
-- (void)_releaseEvents;
-- (id)_scriptingStringForPoint:(struct CGPoint)arg1;
-- (id)_scriptingStringForOffsetWithScreenPoint:(struct CGPoint)arg1 inRect:(struct CGRect)arg2;
-- (void)markNewActionAndLog:(BOOL)arg1;
-- (void)flushTapExpression:(id)arg1;
-- (void)flushDragExpressions:(id)arg1;
-- (void)flushKeystrokes:(id)arg1;
++ (id) defaultRecorder;
+- (id) init;
+- (void) dealloc;
+- (void) start;
+- (void) stop;
+- (void) postRecordedExpression:(id) arg1;
+- (void) postElementNotFoundAtPoint:(struct CGPoint) arg1 description:(id) arg2;
+- (void) postStaleEventMessage;
+- (void) postMutlitouchGestureDetected;
+- (void) handleAlert;
+- (void) handleOrientationChange;
+- (void) _releaseEvents;
+- (id) _scriptingStringForPoint:(struct CGPoint) arg1;
+- (id) _scriptingStringForOffsetWithScreenPoint:(struct CGPoint) arg1 inRect:(struct CGRect) arg2;
+- (void) markNewActionAndLog:(BOOL) arg1;
+- (void) flushTapExpression:(id) arg1;
+- (void) flushDragExpressions:(id) arg1;
+- (void) flushKeystrokes:(id) arg1;
 @property double lastActionTime; // @synthesize lastActionTime=_lastActionTime;
-@property(assign)id delegate; // @synthesize delegate=_delegate;
+@property(assign) id delegate; // @synthesize delegate=_delegate;
 @property BOOL isRecording; // @synthesize isRecording=_isRecording;
 @property(retain) NSArray *pendingTapExpression; // @synthesize pendingTapExpression=_pendingTapExpression;
 @property(retain) UIAXElement *previousAXElement; // @synthesize previousAXElement=_previousAXElement;
@@ -1064,16 +1024,17 @@
 @property(readonly) UIATarget *uiaTarget; // @synthesize uiaTarget=_uiaTarget;
 
 @end
+
 @interface NSValue (UIAutomation)
-- (id)origin;
-- (id)x;
-- (id)y;
-- (id)size;
-- (id)width;
-- (id)height;
+- (id) origin;
+- (id) x;
+- (id) y;
+- (id) size;
+- (id) width;
+- (id) height;
 @end
 
 @interface NSArray (UIAExtras)
-- (unsigned int)_uiaUniqueIndexOfObject:(id)arg1;
+- (unsigned int) _uiaUniqueIndexOfObject:(id) arg1;
 @end
 
