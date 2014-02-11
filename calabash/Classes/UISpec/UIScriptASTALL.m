@@ -8,14 +8,14 @@
 
 @implementation UIScriptASTALL
 
-- (NSString*) description {
-    return @"all";
+- (NSString *) description {
+  return @"all";
 }
-- (NSMutableArray*) evalWith:(NSArray*) views
-                   direction:(UIScriptASTDirectionType) dir
-                  visibility:(UIScriptASTVisibilityType)visibility {
 
-    return [[views mutableCopy]autorelease];
+
+- (NSMutableArray *) evalWith:(NSArray *) views direction:(UIScriptASTDirectionType) dir visibility:(UIScriptASTVisibilityType) visibility {
+
+  return [[views mutableCopy] autorelease];
 }
 
 @end
