@@ -9,6 +9,7 @@
 #import "LPVersionRoute.h"
 #import "LPTouchUtils.h"
 #import <sys/utsname.h>
+
 @class UIDevice;
 
 
@@ -60,74 +61,57 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
 @implementation LPVersionRoute
 
 - (BOOL) isIPhoneAppEmulatedOnIPad {
-    UIUserInterfaceIdiom idiom = UI_USER_INTERFACE_IDIOM();
-    NSString *model = [[UIDevice currentDevice] model];
-    return idiom == UIUserInterfaceIdiomPhone && [model hasPrefix:@"iPad"];
+  UIUserInterfaceIdiom idiom = UI_USER_INTERFACE_IDIOM();
+  NSString *model = [[UIDevice currentDevice] model];
+  return idiom == UIUserInterfaceIdiomPhone && [model hasPrefix:@"iPad"];
 }
 
-- (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path
-{
-    return [method isEqualToString:@"GET"];
+
+- (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
+  return [method isEqualToString:@"GET"];
 }
 
-- (NSDictionary *)JSONResponseForMethod:(NSString *)method URI:(NSString *)path data:(NSDictionary*)data {    
-    NSString *versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-    if (!versionString)
-    {
-        versionString = @"Unknown";
-    }
-    NSString *idString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"];
-    if (!idString)
-    {
-        idString = @"Unknown";
-    }
-    NSString *nameString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
 
-    if (!nameString)
-    {
-        nameString = @"Unknown";
-    }
-    struct utsname systemInfo;
-    uname(&systemInfo);
-    
-    NSString *system = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
-    
+- (NSDictionary *) JSONResponseForMethod:(NSString *) method URI:(NSString *) path data:(NSDictionary *) data {
+  NSString *versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+  if (!versionString) {
+    versionString = @"Unknown";
+  }
+  NSString *idString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"];
+  if (!idString) {
+    idString = @"Unknown";
+  }
+  NSString *nameString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
 
-    NSDictionary *env = [[NSProcessInfo processInfo]environment];
+  if (!nameString) {
+    nameString = @"Unknown";
+  }
+  struct utsname systemInfo;
+  uname(&systemInfo);
 
-    BOOL iphone5Like = [LPTouchUtils is4InchDevice];
+  NSString *system = [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
 
-    NSString *dev = [env objectForKey:@"IPHONE_SIMULATOR_DEVICE"];
-    if (!dev) {
-        dev = @"";
-    }
-    
-    NSString *sim = [env objectForKey:@"IPHONE_SIMULATOR_VERSIONS"];
-    if (!sim) {
-        sim = @"";
-    }
-    
-    BOOL isIphoneAppEmulated = [self isIPhoneAppEmulatedOnIPad];
-    NSDictionary *git = @{@"revision" : kLPGitShortRevision,
-                          @"branch" : kLPGitBranch,
-                          @"remote_origin" : kLPGitRemoteOrigin};
-    
-    NSDictionary* res = [NSDictionary dictionaryWithObjectsAndKeys:
-                         kLPCALABASHVERSION , @"version",
-                         idString,@"app_id",
-                         [[UIDevice currentDevice] systemVersion], @"iOS_version",
-                         nameString,@"app_name",
-                         system, @"system",
-                         [NSNumber numberWithBool:iphone5Like], @"4inch",
-                         dev, @"simulator_device",
-                         sim, @"simulator",
-                         versionString,@"app_version",
-                         @"SUCCESS",@"outcome",
-                         [NSNumber numberWithBool:isIphoneAppEmulated], @"iphone_app_emulated_on_ipad",
-                         git, @"git",
-                         nil];
-    return res;
-    
+
+  NSDictionary *env = [[NSProcessInfo processInfo] environment];
+
+  BOOL iphone5Like = [LPTouchUtils is4InchDevice];
+
+  NSString *dev = [env objectForKey:@"IPHONE_SIMULATOR_DEVICE"];
+  if (!dev) {
+    dev = @"";
+  }
+
+  NSString *sim = [env objectForKey:@"IPHONE_SIMULATOR_VERSIONS"];
+  if (!sim) {
+    sim = @"";
+  }
+
+  BOOL isIphoneAppEmulated = [self isIPhoneAppEmulatedOnIPad];
+  NSDictionary *git = @{@"revision" : kLPGitShortRevision, @"branch" : kLPGitBranch, @"remote_origin" : kLPGitRemoteOrigin};
+
+  NSDictionary *res = [NSDictionary dictionaryWithObjectsAndKeys:kLPCALABASHVERSION , @"version", idString, @"app_id", [[UIDevice currentDevice] systemVersion], @"iOS_version", nameString, @"app_name", system, @"system", [NSNumber numberWithBool:iphone5Like], @"4inch", dev, @"simulator_device", sim, @"simulator", versionString, @"app_version", @"SUCCESS", @"outcome", [NSNumber numberWithBool:isIphoneAppEmulated], @"iphone_app_emulated_on_ipad", git, @"git", nil];
+  return res;
+
 }
 
 
