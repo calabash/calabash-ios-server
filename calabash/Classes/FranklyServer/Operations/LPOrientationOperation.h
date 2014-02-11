@@ -8,6 +8,8 @@
 @interface LPOrientationOperation : LPOperation
 
 + (NSString *) deviceOrientation;
+
+
 + (NSString *) statusBarOrientation;
 
 @end
