@@ -8,25 +8,32 @@
 #import <Foundation/Foundation.h>
 #import "LPRoute.h"
 #import "LPHTTPResponse.h"
-@interface LPGenericAsyncRoute : NSObject<LPRoute,LPHTTPResponse> 
-{    
-    BOOL _done;
-    LPHTTPConnection *_conn;
-    NSDictionary *_data;
-    NSDictionary *_jsonResponse;
-    NSData *_bytes;
-    
+
+@interface LPGenericAsyncRoute : NSObject <LPRoute, LPHTTPResponse> {
+  BOOL _done;
+  LPHTTPConnection *_conn;
+  NSDictionary *_data;
+  NSDictionary *_jsonResponse;
+  NSData *_bytes;
+
 }
 
-@property (nonatomic, assign) BOOL done;
-@property (nonatomic, assign) LPHTTPConnection *conn;
-@property (nonatomic, retain) NSDictionary *data;
-@property (nonatomic, retain) NSDictionary *jsonResponse;
+@property(nonatomic, assign) BOOL done;
+@property(nonatomic, assign) LPHTTPConnection *conn;
+@property(nonatomic, retain) NSDictionary *data;
+@property(nonatomic, retain) NSDictionary *jsonResponse;
 
--(void)beginOperation;
-- (BOOL)isDone;
--(void)failWithMessageFormat:(NSString *)messageFmt message:(NSString *)message;
--(void)succeedWithResult:(NSArray *)result;
+
+- (void) beginOperation;
+
+
+- (BOOL) isDone;
+
+
+- (void) failWithMessageFormat:(NSString *) messageFmt message:(NSString *) message;
+
+
+- (void) succeedWithResult:(NSArray *) result;
 
 
 @end

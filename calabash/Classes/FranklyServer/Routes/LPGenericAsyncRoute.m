@@ -7,83 +7,79 @@
 //
 
 #import "LPGenericAsyncRoute.h"
-#import "LPHTTPResponse.h"
 #import "LPHTTPConnection.h"
-#import "LPResources.h"
-#import "LPRecorder.h"
-#import "LPTouchUtils.h"
 #import "LPJSONUtils.h"
 
 
 @implementation LPGenericAsyncRoute
-@synthesize done=_done;
-@synthesize conn=_conn;
-@synthesize data=_data;
-@synthesize jsonResponse=_jsonResponse;
+@synthesize done = _done;
+@synthesize conn = _conn;
+@synthesize data = _data;
+@synthesize jsonResponse = _jsonResponse;
 
--(id) init 
-{
-    self = [super init];
-    if (self) 
-    {
-        _bytes = nil;
-    }
-    return self;
+
+- (id) init {
+  self = [super init];
+  if (self) {
+    _bytes = nil;
+  }
+  return self;
 }
 
-- (UInt64)offset {return 0;}
-- (void)setOffset:(UInt64)offset {
-    //this is not handled - we know our client wont use range requests
+
+- (UInt64) offset {return 0;}
+
+
+- (void) setOffset:(UInt64) offset {
+  //this is not handled - we know our client wont use range requests
 }
 
 
 // Returns the length of the data in bytes.
 // If you don't know the length in advance, implement the isChunked method and have it return YES.
-- (UInt64)contentLength {
-    return -1;
+- (UInt64) contentLength {
+  // todo suspicious conversion of UInt64 to -1 in LPGenericAsync
+  return -1;
 }
+
+
 // Important: You should read the discussion at the bottom of this header.
-- (BOOL)isChunked {
-    return YES;
+- (BOOL) isChunked {
+  return YES;
 }
+
 
 // To support asynchronous responses, read the discussion at the bottom of this header.
-- (NSData *)readDataOfLength:(NSUInteger)length {
-    if (!self.done) 
-    {
-        [self beginOperation]; 
-        return nil;//Data generated async.
+- (NSData *) readDataOfLength:(NSUInteger) length {
+  if (!self.done) {
+    [self beginOperation];
+    return nil;//Data generated async.
+  } else {//done is set to YES only after events and jsonResponse is set (playbackDone)
+    if (!_bytes) {
+      NSString *serialized = [LPJSONUtils serializeDictionary:self.jsonResponse];
+      self.jsonResponse = nil;
+      _bytes = [serialized dataUsingEncoding:NSUTF8StringEncoding];
     }
-    else {//done is set to YES only after events and jsonResponse is set (playbackDone)
-        if (!_bytes) 
-        {
-            NSString* serialized = [LPJSONUtils serializeDictionary:self.jsonResponse];
-            self.jsonResponse = nil;
-            _bytes = [serialized dataUsingEncoding:NSUTF8StringEncoding];    
-        }
-        if (length >= [_bytes length]) 
-        {
-            return _bytes;
-        } 
-        else 
-        {//length < [_bytes length]
-            NSData *toReturn = [_bytes subdataWithRange:NSMakeRange(0, length)];
-            _bytes = [_bytes subdataWithRange:NSMakeRange(length, _bytes.length - length)];//the rest
-            return toReturn;
-        }                
+    if (length >= [_bytes length]) {
+      return _bytes;
+    } else {//length < [_bytes length]
+      NSData *toReturn = [_bytes subdataWithRange:NSMakeRange(0, length)];
+      _bytes = [_bytes subdataWithRange:NSMakeRange(length, _bytes.length - length)];//the rest
+      return toReturn;
     }
+  }
 }
+
 
 //Abstract
--(void)beginOperation
-{
-    
+- (void) beginOperation {
+
 }
 
+
 // Should only return YES after the LPHTTPConnection has read all available data.
-- (BOOL)isDone 
-{
-    return _done && !self.jsonResponse;
+- (BOOL) isDone {
+  return _done && !self.jsonResponse;
 }
 
 
@@ -91,67 +87,59 @@
 // or when the connection is finished with the response.
 // If your response is asynchronous, you should implement this method so you can be sure not to
 // invoke LPHTTPConnection's responseHasAvailableData method after this method is called.
-- (void)connectionDidClose 
-{
-    self.conn = nil;
+- (void) connectionDidClose {
+  self.conn = nil;
 }
 
--(void)failWithMessageFormat:(NSString *)messageFmt message:(NSString *)message
-{
-    self.done = YES;
-    NSString *msg = !message ? messageFmt : [NSString stringWithFormat: messageFmt,message];
-    
-    self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:
-                         msg,@"reason",
-                         @"",@"details",
-                         @"FAILURE",@"outcome",
-                         nil];
-    [self.conn responseHasAvailableData:self];
+
+- (void) failWithMessageFormat:(NSString *) messageFmt message:(NSString *) message {
+  self.done = YES;
+  NSString *msg = !message ? messageFmt : [NSString stringWithFormat:messageFmt, message];
+
+  self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:msg, @"reason", @"", @"details", @"FAILURE", @"outcome", nil];
+  [self.conn responseHasAvailableData:self];
 }
--(void)succeedWithResult:(NSArray *)result
-{
-    self.done = YES;
-    self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:
-                         result, @"results",
-                         @"SUCCESS",@"outcome",
-                         nil];
-    [self.conn responseHasAvailableData:self];
+
+
+- (void) succeedWithResult:(NSArray *) result {
+  self.done = YES;
+  self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:result, @"results", @"SUCCESS", @"outcome", nil];
+  [self.conn responseHasAvailableData:self];
 }
 
 
 // Callbacks from router.
-- (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path 
-{
-    return [method isEqualToString:@"POST"];
-}
-
--(void) setConnection:(LPHTTPConnection *)connection
-{
-    self.conn = connection;
-}
--(void) setParameters:(NSDictionary *) params 
-{
-    self.data = params;
+- (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
+  return [method isEqualToString:@"POST"];
 }
 
 
-- (NSObject<LPHTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path 
-{    
-    id route = [[[[self class] alloc] init] autorelease];
-    [route setParameters:self.data];
-    [route setConnection:self.conn];
-    self.data = nil;
-    self.conn = nil;
-    return route;
+- (void) setConnection:(LPHTTPConnection *) connection {
+  self.conn = connection;
 }
 
--(void) dealloc 
-{
-    self.data = nil;
-    self.conn = nil;
-    _bytes = nil;
-    self.jsonResponse = nil;
-    [super dealloc];
+
+- (void) setParameters:(NSDictionary *) params {
+  self.data = params;
+}
+
+
+- (NSObject <LPHTTPResponse> *) httpResponseForMethod:(NSString *) method URI:(NSString *) path {
+  id route = [[[[self class] alloc] init] autorelease];
+  [route setParameters:self.data];
+  [route setConnection:self.conn];
+  self.data = nil;
+  self.conn = nil;
+  return route;
+}
+
+
+- (void) dealloc {
+  self.data = nil;
+  self.conn = nil;
+  _bytes = nil;
+  self.jsonResponse = nil;
+  [super dealloc];
 }
 
 @end
