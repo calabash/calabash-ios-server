@@ -754,8 +754,9 @@
 		B121E78814B6D9FB0034C6A9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = LP;
 				LastUpgradeCheck = 0500;
-				ORGANIZATIONNAME = LessPainful;
+				ORGANIZATIONNAME = Xamarin;
 			};
 			buildConfigurationList = B121E78B14B6D9FB0034C6A9 /* Build configuration list for PBXProject "calabash" */;
 			compatibilityVersion = "Xcode 3.2";
