@@ -7,12 +7,13 @@
 #import "UIScriptAST.h"
 
 @interface UIScriptASTDirection : UIScriptAST {
-    UIScriptASTDirectionType _directionType;
+  UIScriptASTDirectionType _directionType;
 }
 
-@property (nonatomic, assign) UIScriptASTDirectionType directionType;
+@property(nonatomic, assign) UIScriptASTDirectionType directionType;
 
-- (id)initWithDirection:(UIScriptASTDirectionType) direction;
+
+- (id) initWithDirection:(UIScriptASTDirectionType) direction;
 
 
 @end
