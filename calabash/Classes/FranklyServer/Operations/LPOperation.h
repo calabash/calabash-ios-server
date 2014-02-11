@@ -8,15 +8,19 @@
 #import "UIScriptParser.h"
 
 @interface LPOperation : NSObject {
-    SEL _selector;
-	NSArray *_arguments;
-    BOOL _done;
+  SEL _selector;
+  NSArray *_arguments;
+  BOOL _done;
 }
-+ (id) operationFromDictionary:(NSDictionary*) dictionary;
++ (id) operationFromDictionary:(NSDictionary *) dictionary;
 
-+(NSArray*)performQuery:(id)query;
 
-- (id) initWithOperation:(NSDictionary *)operation;
++ (NSArray *) performQuery:(id) query;
 
-- (id) performWithTarget:(UIView*) view error:(NSError **)error;
+
+- (id) initWithOperation:(NSDictionary *) operation;
+
+
+- (id) performWithTarget:(UIView *) view error:(NSError **) error;
+
 @end
