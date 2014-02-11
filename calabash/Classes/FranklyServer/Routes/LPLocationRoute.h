@@ -7,9 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "LPLocationRoute.h"
 #import "LPRoute.h"
 
-@interface LPLocationRoute  : NSObject<LPRoute>
+@interface LPLocationRoute : NSObject <LPRoute>
 
 @end

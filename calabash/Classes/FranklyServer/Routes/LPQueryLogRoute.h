@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "LPRoute.h"
 
-@interface LPQueryLogRoute : NSObject<LPRoute>
+@interface LPQueryLogRoute : NSObject <LPRoute>
 
 @end

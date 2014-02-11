@@ -10,11 +10,10 @@
 #import "LPHTTPResponse.h"
 #import "LPGenericAsyncRoute.h"
 
-@interface LPAsyncPlaybackRoute : LPGenericAsyncRoute
-{    
-    NSArray *_events;    
+@interface LPAsyncPlaybackRoute : LPGenericAsyncRoute {
+  NSArray *_events;
 }
 
-@property (nonatomic, retain) NSArray *events;
+@property(nonatomic, retain) NSArray *events;
 
 @end

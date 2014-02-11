@@ -4,17 +4,19 @@
 //  Copyright 2011 LessPainful. All rights reserved.
 //
 
-
-
 @interface LPJSONUtils : NSObject
 
-+ (NSString*) serializeDictionary:(NSDictionary*) dictionary;
-+ (NSDictionary*) deserializeDictionary:(NSString*) string;
-+ (NSString*) serializeArray:(NSArray*) array;
-+ (NSArray*) deserializeArray:(NSString*) string;
-+(NSString *)serializeObject:(id)obj;
++ (NSString *) serializeDictionary:(NSDictionary *) dictionary;
 
-+(id)jsonifyObject:(id)obj;
++ (NSDictionary *) deserializeDictionary:(NSString *) string;
+
++ (NSString *) serializeArray:(NSArray *) array;
+
++ (NSArray *) deserializeArray:(NSString *) string;
+
++ (NSString *) serializeObject:(id) obj;
+
++ (id) jsonifyObject:(id) obj;
 
 
 @end

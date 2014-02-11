@@ -7,12 +7,12 @@
 #import "UIScriptAST.h"
 
 @interface UIScriptASTVisibility : UIScriptAST {
-    UIScriptASTVisibilityType _visibilityType;
+  UIScriptASTVisibilityType _visibilityType;
 }
 
-@property (nonatomic, assign) UIScriptASTVisibilityType visibilityType;
+@property(nonatomic, assign) UIScriptASTVisibilityType visibilityType;
 
-- (id)initWithVisibility:(UIScriptASTVisibilityType) visibility;
+- (id) initWithVisibility:(UIScriptASTVisibilityType) visibility;
 
 
 @end
