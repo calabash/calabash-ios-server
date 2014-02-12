@@ -34,13 +34,13 @@
         if (as)
         {
             Class asClass = NSClassFromString(as);
-            if (asClass != Nil)
+            if (asClass)
             {
                 if ([tgt isKindOfClass: [NSArray class]])
                 {
                     NSMutableArray * subArgs = [NSMutableArray array];
                     SEL sel = [self parseValuesFromArray:tgt withArgs:subArgs];
-                    
+
                     NSMethodSignature *sig = [asClass methodSignatureForSelector:sel];
                     if (!sig || ![asClass respondsToSelector:sel])
                     {
@@ -48,16 +48,18 @@
                         return nil;
                     }
                     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sig];
-                    
+
                     [self invoke: invocation withTarget: asClass args: subArgs selector: sel signature: sig];
-                    
+
                     id objValue;
                     [invocation getReturnValue:(void **)&objValue];
                     tgt = objValue ? objValue : [NSNull null];
-                    
+
                 }
                 else
+                {
                     tgt = [asClass performSelector:NSSelectorFromString(tgt)];
+                }
             }
         }
         [args addObject:tgt];
@@ -107,7 +109,10 @@
         } 
         NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sig];
 
-        [self invoke: invocation withTarget: target args: args selector: sel signature: sig];
+        if (![self invoke: invocation withTarget: target args: args selector: sel signature: sig])
+        {
+            return nil;
+        }
 
 
         const char* type = [[invocation methodSignature] methodReturnType];
@@ -201,7 +206,7 @@
 	return nil;
 }
 
-- (id)invoke:(NSInvocation *)invocation withTarget:(id)target args:(NSMutableArray *)args selector:(SEL)sel signature:(NSMethodSignature *)sig
+- (BOOL)invoke:(NSInvocation *)invocation withTarget:(id)target args:(NSMutableArray *)args selector:(SEL)sel signature:(NSMethodSignature *)sig
 {
     [invocation setSelector:sel];
     for (NSInteger i =0, N=[args count]; i<N; i++)
@@ -210,12 +215,14 @@
         const char *cType = [sig getArgumentTypeAtIndex:i+2];
         switch(*cType) {
             case '@':
-            if ([arg isEqual:@"__self__"])
             {
-                arg = target;
+                if ([arg isEqual:@"__self__"])
+                {
+                    arg = target;
+                }
+                [invocation setArgument:&arg atIndex:i+2];
+                break;
             }
-            [invocation setArgument:&arg atIndex:i+2];
-            break;
             case 'i':
             {
                 NSInteger intVal = [arg integerValue];
@@ -257,8 +264,6 @@
                 const char *cstringValue = [arg cStringUsingEncoding:NSUTF8StringEncoding];
                 [invocation setArgument:&cstringValue atIndex:i+2];
                 break;
-                
-                
             }
             case 'c':
             {
@@ -274,7 +279,6 @@
                     CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)arg, &point);
                     [invocation setArgument:&point atIndex:i+2];
                     break;
-                    
                 }
                 else if (strcmp(cType,"{CGRect={CGPoint=ff}{CGSize=ff}}") == 0)
                 {
@@ -282,14 +286,10 @@
                     CGRectMakeWithDictionaryRepresentation((CFDictionaryRef)arg, &rect);
                     [invocation setArgument:&rect atIndex:i+2];
                     break;
-                    
                 }
-                
-                
                 @throw [NSString stringWithFormat: @"not yet support struct args: %@",sig];
             }
         }
-        
     }
     [invocation setTarget:target];
     @try {
@@ -297,8 +297,9 @@
     }
     @catch (NSException *exception) {
         NSLog(@"Perform %@ with target %@ caught %@: %@", NSStringFromSelector(sel), target, [exception name], [exception reason]);
-        return nil;
+        return NO;
     }
+    return YES;
 }
 
 
