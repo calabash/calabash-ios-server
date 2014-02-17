@@ -7,7 +7,9 @@
 #import <Foundation/Foundation.h>
 #import "LPRoute.h"
 
-@interface LPScreenshotRoute2 : NSObject<LPRoute>
+// todo why does LPScreenshotRoute2 exist?
+@interface LPScreenshotRoute2 : NSObject <LPRoute>
 
-- (NSData*)takeScreenshot;
+- (NSData *) takeScreenshot;
+
 @end

@@ -7,7 +7,8 @@
 #import <Foundation/Foundation.h>
 #import "LPRoute.h"
 
-@interface LPScreenshotRoute : NSObject<LPRoute>
+@interface LPScreenshotRoute : NSObject <LPRoute>
 
-- (NSData*)takeScreenshot;
+- (NSData *) takeScreenshot;
+
 @end

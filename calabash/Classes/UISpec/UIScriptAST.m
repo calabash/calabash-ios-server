@@ -5,13 +5,11 @@
 //
 
 #import "UIScriptAST.h"
-#import "UIScriptASTDirection.h"
+
 @implementation UIScriptAST
 
-- (NSMutableArray*) evalWith:(NSArray*) views
-                   direction:(UIScriptASTDirectionType) dir
-                  visibility:(UIScriptASTVisibilityType)visibility {
-    return nil;
+- (NSMutableArray *) evalWith:(NSArray *) views direction:(UIScriptASTDirectionType) dir visibility:(UIScriptASTVisibilityType) visibility {
+  return nil;
 }
 
 @end

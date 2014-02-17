@@ -8,5 +8,6 @@
 
 @interface LPReflectUtils : NSObject
 
-+(id)invokeSpec:(id)object onTarget:(id)target withError:(NSError**)error;
++ (id) invokeSpec:(id) object onTarget:(id) target withError:(NSError **) error;
+
 @end

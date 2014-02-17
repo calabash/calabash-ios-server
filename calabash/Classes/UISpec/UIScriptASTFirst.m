@@ -7,18 +7,17 @@
 #import "UIScriptASTFirst.h"
 
 @implementation UIScriptASTFirst
-- (NSString*) description {
-    return @"first";
+- (NSString *) description {
+  return @"first";
 }
 
-- (NSMutableArray*) evalWith:(NSArray*) views
-                   direction:(UIScriptASTDirectionType) dir
-                  visibility:(UIScriptASTVisibilityType)visibility {
 
-    if ([views count] > 0) {
-        return [NSMutableArray arrayWithObject:[views objectAtIndex:0]];
-    }
-    return [NSMutableArray array];
+- (NSMutableArray *) evalWith:(NSArray *) views direction:(UIScriptASTDirectionType) dir visibility:(UIScriptASTVisibilityType) visibility {
+
+  if ([views count] > 0) {
+    return [NSMutableArray arrayWithObject:[views objectAtIndex:0]];
+  }
+  return [NSMutableArray array];
 }
 
 @end

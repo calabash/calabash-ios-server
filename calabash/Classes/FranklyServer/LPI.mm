@@ -8,13 +8,15 @@
 
 #import "CalabashServer.h"
 
+
 int ___calabashserverinit();
 
 int ___lesspainfulserver = ___calabashserverinit();
 
+
 int ___calabashserverinit() {
-    NSAutoreleasePool *ap = [[NSAutoreleasePool alloc] init];
-    [CalabashServer start];
-    [ap release];
-    return 42;
+  NSAutoreleasePool *ap = [[NSAutoreleasePool alloc] init];
+  [CalabashServer start];
+  [ap release];
+  return 42;
 }

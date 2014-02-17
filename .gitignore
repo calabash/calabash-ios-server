@@ -4,3 +4,6 @@ calabash.xcodeproj/xcuserdata/
 Markdown.pl
 build
 calabash.framework
+
+# AppCode
+.idea

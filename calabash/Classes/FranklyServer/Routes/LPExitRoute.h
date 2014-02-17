@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "LPRoute.h"
 
-@interface LPExitRoute : NSObject<LPRoute>
+@interface LPExitRoute : NSObject <LPRoute>
 
 @end

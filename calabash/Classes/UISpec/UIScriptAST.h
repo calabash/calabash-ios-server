@@ -5,23 +5,17 @@
 //
 
 #import <Foundation/Foundation.h>
+
 typedef enum {
-    UIScriptASTDirectionTypeDescendant,
-    UIScriptASTDirectionTypeParent,
-    UIScriptASTDirectionTypeChild,
-    UIScriptASTDirectionTypeSibling
+  UIScriptASTDirectionTypeDescendant, UIScriptASTDirectionTypeParent, UIScriptASTDirectionTypeChild, UIScriptASTDirectionTypeSibling
 } UIScriptASTDirectionType;
 
 typedef enum {
-    UIScriptASTVisibilityTypeVisible,
-    UIScriptASTVisibilityTypeAll
+  UIScriptASTVisibilityTypeVisible, UIScriptASTVisibilityTypeAll
 } UIScriptASTVisibilityType;
 
 @interface UIScriptAST : NSObject
 
-- (NSMutableArray*) evalWith:(NSArray*) views
-                   direction:(UIScriptASTDirectionType) dir
-                  visibility:(UIScriptASTVisibilityType)visibility;
-
+- (NSMutableArray *) evalWith:(NSArray *) views direction:(UIScriptASTDirectionType) dir visibility:(UIScriptASTVisibilityType) visibility;
 
 @end

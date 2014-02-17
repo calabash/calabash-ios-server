@@ -7,11 +7,12 @@
 #import "UIScriptAST.h"
 
 @interface UIScriptASTClassName : UIScriptAST {
-    NSString *_className;
-    Class _class;
+  NSString *_className;
+  Class _class;
 }
 
-@property (nonatomic,retain) NSString *className;
-- (id) initWithClassName:(NSString*) className;
+@property(nonatomic, retain) NSString *className;
+
+- (id) initWithClassName:(NSString *) className;
 
 @end

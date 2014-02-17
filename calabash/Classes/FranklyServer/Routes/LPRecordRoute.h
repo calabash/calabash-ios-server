@@ -6,8 +6,9 @@
 
 #import <Foundation/Foundation.h>
 #import "LPRoute.h"
-@interface LPRecordRoute : NSObject<LPRoute> {
-    NSDictionary *_params;
-    LPHTTPConnection *_conn;
+
+@interface LPRecordRoute : NSObject <LPRoute> {
+  NSDictionary *_params;
+  LPHTTPConnection *_conn;
 }
 @end

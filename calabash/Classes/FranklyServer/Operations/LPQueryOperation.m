@@ -5,20 +5,17 @@
 //
 
 #import "LPQueryOperation.h"
-#import "LPJSONUtils.h"
-#import "LPTouchUtils.h"
 
 
 @implementation LPQueryOperation
 - (NSString *) description {
-	return [NSString stringWithFormat:@"Query: %@",_arguments];
+  return [NSString stringWithFormat:@"Query: %@", _arguments];
 }
 
 
-- (id) performWithTarget:(UIView*)_view error:(NSError **)error {
-    return [super performWithTarget:_view error:error];    
+- (id) performWithTarget:(UIView *) _view error:(NSError **) error {
+  return [super performWithTarget:_view error:error];
 }
 
-            
-                 
+
 @end

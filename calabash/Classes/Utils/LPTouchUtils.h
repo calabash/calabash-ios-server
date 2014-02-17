@@ -8,23 +8,26 @@
 
 @interface LPTouchUtils : NSObject
 
-+(CGPoint) translateToScreenCoords:(CGPoint) point;
-+(CGPoint) centerOfView:(UIView *) view;
-+(CGPoint)centerOfFrame:(CGRect)frame;
-+(CGPoint)centerOfFrame:(CGRect)frame shouldTranslate:(BOOL)shouldTranslate;
-+(CGPoint) centerOfView:(id)view 
-          withSuperView:(UIView *)superView
-               inWindow:(id)window;
++ (CGPoint) translateToScreenCoords:(CGPoint) point;
 
-+(BOOL)is4InchDevice;
-+(NSArray*)applicationWindows;
++ (CGPoint) centerOfView:(UIView *) view;
 
-+(UIWindow*)windowForView:(UIView*)view;
++ (CGPoint) centerOfFrame:(CGRect) frame;
 
-+(UIWindow*)appDelegateWindow;
++ (CGPoint) centerOfFrame:(CGRect) frame shouldTranslate:(BOOL) shouldTranslate;
 
-+(BOOL)isViewVisible:(UIView *)view;
++ (CGPoint) centerOfView:(id) view withSuperView:(UIView *) superView inWindow:(id) window;
 
-+(void)flashView:(id) viewOrDom forDuration:(NSUInteger) duration;
++ (BOOL) is4InchDevice;
+
++ (NSArray *) applicationWindows;
+
++ (UIWindow *) windowForView:(UIView *) view;
+
++ (UIWindow *) appDelegateWindow;
+
++ (BOOL) isViewVisible:(UIView *) view;
+
++ (void) flashView:(id) viewOrDom forDuration:(NSUInteger) duration;
 
 @end
