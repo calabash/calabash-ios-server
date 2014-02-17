@@ -9,9 +9,9 @@
 #import "LPRoute.h"
 #import "LPHTTPResponse.h"
 #import "LPGenericAsyncRoute.h"
-@interface LPKeyboardRoute : LPGenericAsyncRoute
-{    
-    BOOL _playbackDone;
-    NSArray *_events;
+
+@interface LPKeyboardRoute : LPGenericAsyncRoute {
+  BOOL _playbackDone;
+  NSArray *_events;
 }
 @end

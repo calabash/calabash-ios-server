@@ -9,14 +9,20 @@
 @implementation LPNoContentResponse
 
 
-- (UInt64)contentLength {return 0;}
+- (UInt64) contentLength {return 0;}
 
-- (UInt64)offset {return 0;}
-- (void)setOffset:(UInt64)offset{}
 
-- (NSData *)readDataOfLength:(NSUInteger)length {return nil;}
+- (UInt64) offset {return 0;}
 
-- (BOOL)isDone {return YES;}
 
-- (NSInteger)status {return 203;}
+- (void) setOffset:(UInt64) offset {}
+
+
+- (NSData *) readDataOfLength:(NSUInteger) length {return nil;}
+
+
+- (BOOL) isDone {return YES;}
+
+
+- (NSInteger) status {return 203;}
 @end

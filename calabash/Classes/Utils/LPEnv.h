@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface LPEnv : NSObject
-+(LPEnv *)sharedEnv;
--(BOOL)isSet:(NSString *)key;
-+(BOOL)calabashDebugEnabled ;
++ (LPEnv *) sharedEnv;
+
+- (BOOL) isSet:(NSString *) key;
+
++ (BOOL) calabashDebugEnabled;
 @end

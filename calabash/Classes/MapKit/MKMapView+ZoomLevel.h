@@ -7,9 +7,7 @@
 
 @interface MKMapView (ZoomLevel)
 
-- (void)calSetCenterCoordinate:(CLLocationCoordinate2D)centerCoordinate
-                  zoomLevel:(NSUInteger)zoomLevel
-                   animated:(BOOL)animated;
+- (void) calSetCenterCoordinate:(CLLocationCoordinate2D) centerCoordinate zoomLevel:(NSUInteger) zoomLevel animated:(BOOL) animated;
 
 - (NSUInteger) calZoomLevel;
 

@@ -5,11 +5,12 @@
 //
 
 #import <Foundation/Foundation.h>
+
 @interface LPResources : NSObject
 
 
-+ (NSArray*) eventsFromEncoding:(NSString *) encoded;
-+ (NSArray *) transformEvents:(NSArray*) eventsRecord toPoint:(CGPoint) viewCenter;
-+ (NSArray *) interpolateEvents:(NSArray*) baseEvents fromPoint:(CGPoint)startAt toPoint:(CGPoint) endAt;
++ (NSArray *) eventsFromEncoding:(NSString *) encoded;
++ (NSArray *) transformEvents:(NSArray *) eventsRecord toPoint:(CGPoint) viewCenter;
++ (NSArray *) interpolateEvents:(NSArray *) baseEvents fromPoint:(CGPoint) startAt toPoint:(CGPoint) endAt;
 
 @end

@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "LPRoute.h"
 
-@interface LPUserPrefRoute : NSObject<LPRoute> 
+@interface LPUserPrefRoute : NSObject <LPRoute>
 
 @end
