@@ -10,6 +10,11 @@
 
 @implementation LPCollectionViewScrollToItemWithMarkOperation
 
+- (NSString *) description {
+  return [NSString stringWithFormat:@"CollectionViewScrollToItem: %@",
+          _arguments];
+}
+
 - (NSIndexPath *) indexPathForItemWithMark:(NSString *) aMark inCollection:(UICollectionView *) aCollection {
   NSUInteger numberOfSections = [aCollection numberOfSections];
   for (NSUInteger section = 0; section < numberOfSections; section++) {
