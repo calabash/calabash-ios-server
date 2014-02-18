@@ -22,6 +22,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		5BFF97A418B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BFF97A218B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.h */; };
+		5BFF97A518B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A318B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m */; };
+		5BFF97A818B392370094E71E /* LPScrollToMarkOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 5BFF97A618B392370094E71E /* LPScrollToMarkOperation.h */; };
+		5BFF97A918B392370094E71E /* LPScrollToMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A718B392370094E71E /* LPScrollToMarkOperation.m */; };
 		692D77A01657010000DE3E53 /* LPExitRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 692D779E1657010000DE3E53 /* LPExitRoute.h */; };
 		692D77A11657010000DE3E53 /* LPExitRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 692D779F1657010000DE3E53 /* LPExitRoute.m */; };
 		B12179A8165D613100B6DA43 /* LPScreenshotRoute2.h in Headers */ = {isa = PBXBuildFile; fileRef = B12179A6165D613100B6DA43 /* LPScreenshotRoute2.h */; };
@@ -141,6 +145,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5BFF97A218B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCollectionViewScrollToItemWithMarkOperation.h; sourceTree = "<group>"; };
+		5BFF97A318B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCollectionViewScrollToItemWithMarkOperation.m; sourceTree = "<group>"; };
+		5BFF97A618B392370094E71E /* LPScrollToMarkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPScrollToMarkOperation.h; sourceTree = "<group>"; };
+		5BFF97A718B392370094E71E /* LPScrollToMarkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScrollToMarkOperation.m; sourceTree = "<group>"; };
 		692D779E1657010000DE3E53 /* LPExitRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPExitRoute.h; sourceTree = "<group>"; };
 		692D779F1657010000DE3E53 /* LPExitRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPExitRoute.m; sourceTree = "<group>"; };
 		B111321514D5837900982BBC /* LPAsyncPlaybackRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPAsyncPlaybackRoute.h; sourceTree = "<group>"; };
@@ -526,6 +534,8 @@
 				F591380317C39128007B2BE4 /* LPOrientationOperation.m */,
 				F5AE0BC4174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h */,
 				F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */,
+				5BFF97A218B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.h */,
+				5BFF97A318B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m */,
 				B19440421725C70A00EE1B25 /* LPFlashOperation.h */,
 				B19440431725C70A00EE1B25 /* LPFlashOperation.m */,
 				B15DA5E315C5D80A009E6CFE /* LPQueryAllOperation.h */,
@@ -540,6 +550,8 @@
 				B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */,
 				B184FDCA14B6DB2B002A744C /* LPSetTextOperation.h */,
 				B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */,
+				5BFF97A618B392370094E71E /* LPScrollToMarkOperation.h */,
+				5BFF97A718B392370094E71E /* LPScrollToMarkOperation.m */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -707,12 +719,14 @@
 				B1F279AF183D5B3000A922BC /* LPUIAChannel.h in Headers */,
 				F5CAC06C180D499600E23F03 /* LPSliderOperation.h in Headers */,
 				B12DCD75189A82DF00F8DF87 /* LPEnv.h in Headers */,
+				5BFF97A418B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.h in Headers */,
 				B17E75B615D436100066550B /* CalabashServer.h in Headers */,
 				B1296FC015DC1F4B005DDF5C /* LPReflectUtils.h in Headers */,
 				B13B29251627389500433F6C /* LPISO8601DateFormatter.h in Headers */,
 				692D77A01657010000DE3E53 /* LPExitRoute.h in Headers */,
 				B12179A8165D613100B6DA43 /* LPScreenshotRoute2.h in Headers */,
 				B12DCD79189A833000F8DF87 /* LPLog.h in Headers */,
+				5BFF97A818B392370094E71E /* LPScrollToMarkOperation.h in Headers */,
 				B1CED0FD183E9562004793B9 /* LPLocationRoute.h in Headers */,
 				B1B19DC816D162CF00D3D80B /* UIScriptASTVisibility.h in Headers */,
 				B1EBF08816EE63A000AE4D40 /* LPAppPropertyRoute.h in Headers */,
@@ -855,8 +869,10 @@
 				B17E758515D4357F0066550B /* LPHTTPAsyncFileResponse.m in Sources */,
 				B17E758615D4357F0066550B /* LPHTTPDataResponse.m in Sources */,
 				B17E758715D4357F0066550B /* LPHTTPDynamicFileResponse.m in Sources */,
+				5BFF97A518B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
 				B17E758815D4357F0066550B /* LPHTTPFileResponse.m in Sources */,
 				B17E758915D4357F0066550B /* LPHTTPRedirectResponse.m in Sources */,
+				5BFF97A918B392370094E71E /* LPScrollToMarkOperation.m in Sources */,
 				B17E758A15D4357F0066550B /* LPRouter.m in Sources */,
 				B17E758B15D4357F0066550B /* LPQueryAllOperation.m in Sources */,
 				B17E758C15D4357F0066550B /* LPOperation.m in Sources */,

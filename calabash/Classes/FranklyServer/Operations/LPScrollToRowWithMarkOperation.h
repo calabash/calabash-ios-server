@@ -4,8 +4,8 @@
 //  Copyright (c) 2011 LessPainful. All rights reserved.
 //
 
-#import "LPOperation.h"
+#import "LPScrollToMarkOperation.h"
 
-@interface LPScrollToRowWithMarkOperation : LPOperation
+@interface LPScrollToRowWithMarkOperation : LPScrollToMarkOperation
 
 @end
