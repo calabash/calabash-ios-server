@@ -15,47 +15,12 @@
 }
 
 
-- (BOOL) view:(UIView *) aView hasMark:(NSString *) aMark {
-  // iOS 5+
-  NSString *idenififer = nil;
-  if ([aView respondsToSelector:@selector(accessibilityIdentifier)]) {
-    idenififer = aView.accessibilityIdentifier;
-  }
-
-  if (idenififer != nil && [idenififer isEqualToString:aMark]) {
-    return YES;
-  }
-
-  if ([aView.accessibilityLabel isEqualToString:aMark]) {
-    return YES;
-  }
-
-  if ([aView isKindOfClass:[UILabel class]]) {
-    UILabel *label = (UILabel *) aView;
-    if ([label.text isEqualToString:aMark]) {return YES;}
-  }
-
-  if ([aView isKindOfClass:[UITextView class]]) {
-    UITextView *textView = (UITextView *) aView;
-    if ([textView.text isEqualToString:aMark]) {return YES;}
-  }
-
-  return NO;
-}
-
 
 - (BOOL) cell:(UITableViewCell *) aCell hasSubviewMarked:(NSString *) aMark {
   // check the textLabel first
   if ([self view:aCell.textLabel hasMark:aMark]) {return YES;}
 
-  // skip the details text label
-  // if ([self view:aCell.detailTextLabel hasMark:aMark]) { return YES; }
-  UIView *contentView = aCell.contentView;
-  for (UIView *subview in [contentView subviews]) {
-    if ([self view:subview hasMark:aMark]) {return YES;}
-  }
-
-  return NO;
+  return [super cell:aCell hasSubviewMarked:aMark];
 }
 
 
