@@ -11,96 +11,95 @@
 #import "LPSSKeychain.h"
 
 @implementation LPKeychainRoute
-- (BOOL)supportsMethod:(NSString *)method atPath:(NSString *)path {
+
+- (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
     return [method isEqualToString:@"POST"] ||[method isEqualToString:@"GET"];
 }
-- (NSDictionary *)JSONResponseForMethod:(NSString *)method URI:(NSString *)path data:(NSDictionary*)data {
-    NSError *error;
 
-    if ([method isEqualToString:@"POST"])
-    {
-        NSString *service = data[@"service"];
-        if (!service) {
-            // no service - clear out the entire keychain
-            for (NSDictionary *d in [LPSSKeychain allAccounts]) {
-                NSString *service = d[kLPSSKeychainWhereKey];
-                NSString *account = d[kLPSSKeychainAccountKey];
-                if (![LPSSKeychain deletePasswordForService:service account:account error:&error]) {
-                    return @{@"outcome": @"FAILURE",
-                             @"reason": [NSString stringWithFormat:@"Error deleting password for %@ in service %@", account, service],
-                             @"details": error.localizedDescription};
+- (NSDictionary *) JSONResponseForMethod: (NSString *)method URI: (NSString *)path data: (NSDictionary*)data {
+  NSError *error;
 
-                }
-            }
-            return @{@"outcome": @"SUCCESS", @"results": @[]};
-        }
-
-        NSString *account = data[@"account"];
-        if (!account) {
-            // no account - clear out all accounts for this service
-            for (NSDictionary *d in [LPSSKeychain accountsForService:service]) {
-                NSString *service = d[kLPSSKeychainWhereKey];
-                NSString *account = d[kLPSSKeychainAccountKey];
-                if (![LPSSKeychain deletePasswordForService:service account:account error:&error]) {
-                    return @{@"outcome": @"FAILURE",
-                             @"reason": [NSString stringWithFormat:@"Error deleting password for %@ in service %@", account, service],
-                             @"details": error.localizedDescription};
-
-                }
-            }
-            return @{@"outcome": @"SUCCESS", @"results": @[]};
-            return @{@"outcome": @"FAILURE",
-                     @"reason":  @"Not yet implemented",
-                     @"details": @""};
-        }
-
-        NSString *password = data[@"password"];
-        if (!password) {
-            // no password - delete this account's password
-            if ([LPSSKeychain deletePasswordForService:service account:account error:&error]) {
-                return @{@"outcome": @"SUCCESS", @"results": @[]};
-            } else {
-                return @{@"outcome": @"FAILURE",
-                         @"reason": [NSString stringWithFormat:@"Error deleting password for %@ in service %@", account, service],
-                         @"details": error.localizedDescription};
-            }
-        }
-
-        // Got service, account, and password - set it!
-        if ([LPSSKeychain setPassword:password forService:service account:account error:&error]) {
-            return @{@"outcome": @"SUCCESS", @"results": @[]};
-        } else {
-            return @{@"outcome": @"FAILURE",
-                     @"reason": [NSString stringWithFormat:@"Error setting password for %@ in service %@", account, service],
-                     @"details": error.localizedDescription};
-        }
-    }
-
+  if ([method isEqualToString:@"POST"]) {
     NSString *service = data[@"service"];
     if (!service) {
-        // not even a service - return all accounts
-        return @{@"outcome": @"SUCCESS",
-                 @"results": [LPSSKeychain allAccounts] ?: @[]};
+      // no service - clear out the entire keychain
+      for (NSDictionary *d in [LPSSKeychain allAccounts]) {
+        NSString *service = d[kLPSSKeychainWhereKey];
+        NSString *account = d[kLPSSKeychainAccountKey];
+        if (![LPSSKeychain deletePasswordForService:service account:account error:&error]) {
+          return @{@"outcome": @"FAILURE",
+                   @"reason": [NSString stringWithFormat:@"Error deleting password for %@ in service %@", account, service],
+                   @"details": error.localizedDescription};
+
+        }
+      }
+      return @{@"outcome": @"SUCCESS", @"results": @[]};
     }
 
     NSString *account = data[@"account"];
     if (!account) {
-        // got a service but no account - return list of accounts
-        // for this service
-        return @{@"outcome": @"SUCCESS",
-                 @"results": [LPSSKeychain accountsForService:service] ?: @[]};
+      // no account - clear out all accounts for this service
+      for (NSDictionary *d in [LPSSKeychain accountsForService:service]) {
+        NSString *service = d[kLPSSKeychainWhereKey];
+        NSString *account = d[kLPSSKeychainAccountKey];
+        if (![LPSSKeychain deletePasswordForService:service account:account error:&error]) {
+          return @{@"outcome": @"FAILURE",
+                   @"reason": [NSString stringWithFormat:@"Error deleting password for %@ in service %@", account, service],
+                   @"details": error.localizedDescription};
+
+        }
+      }
+      return @{@"outcome": @"SUCCESS", @"results": @[]};
     }
 
-    // Got a service and an account; send back the password
-    NSString *password = [LPSSKeychain passwordForService:service
-                                                  account:account
-                                                    error:&error];
-    if (password) {
-        return @{@"outcome": @"SUCCESS", @"results": @[password]};
-    } else {
+    NSString *password = data[@"password"];
+    if (!password) {
+      // no password - delete this account's password
+      if ([LPSSKeychain deletePasswordForService:service account:account error:&error]) {
+        return @{@"outcome": @"SUCCESS", @"results": @[]};
+      } else {
         return @{@"outcome": @"FAILURE",
-                 @"reason": [NSString stringWithFormat:@"Error looking up password for %@ in service %@", account, service],
+                 @"reason": [NSString stringWithFormat:@"Error deleting password for %@ in service %@", account, service],
                  @"details": error.localizedDescription};
+      }
     }
+
+    // Got service, account, and password - set it!
+    if ([LPSSKeychain setPassword:password forService:service account:account error:&error]) {
+      return @{@"outcome": @"SUCCESS", @"results": @[]};
+    } else {
+      return @{@"outcome": @"FAILURE",
+               @"reason": [NSString stringWithFormat:@"Error setting password for %@ in service %@", account, service],
+               @"details": error.localizedDescription};
+    }
+  }
+
+  NSString *service = data[@"service"];
+  if (!service) {
+    // not even a service - return all accounts
+    return @{@"outcome": @"SUCCESS",
+             @"results": [LPSSKeychain allAccounts] ?: @[]};
+  }
+
+  NSString *account = data[@"account"];
+  if (!account) {
+    // got a service but no account - return list of accounts
+    // for this service
+    return @{@"outcome": @"SUCCESS",
+             @"results": [LPSSKeychain accountsForService:service] ?: @[]};
+  }
+
+  // Got a service and an account; send back the password
+  NSString *password = [LPSSKeychain passwordForService:service
+                                                account:account
+                                                  error:&error];
+  if (password) {
+    return @{@"outcome": @"SUCCESS", @"results": @[password]};
+  } else {
+    return @{@"outcome": @"FAILURE",
+             @"reason": [NSString stringWithFormat:@"Error looking up password for %@ in service %@", account, service],
+             @"details": error.localizedDescription};
+  }
 }
+
 @end
