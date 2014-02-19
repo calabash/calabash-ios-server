@@ -351,7 +351,7 @@
 				52AB9FB618AFF46E00FA3C67 /* LPSSKeychainQuery.m */,
 				52AB9FBB18AFF47C00FA3C67 /* SSKeychain.LICENSE */,
 			);
-			name = SSKeychain;
+			path = SSKeychain;
 			sourceTree = "<group>";
 		};
 		B116C98214E5214600663205 /* Categories */ = {
@@ -469,6 +469,7 @@
 				B184FDDD14B6DB2B002A744C /* JSON */,
 				B184FDF514B6DB2B002A744C /* Resources */,
 				B184FDF814B6DB2B002A744C /* UISpec */,
+				52AB9FB218AFF45F00FA3C67 /* SSKeychain */,
 				B184FE0B14B6DB2B002A744C /* Utils */,
 				B184FD8B14B6DAFB002A744C /* LPCDataScanner.h */,
 				B184FD8C14B6DAFB002A744C /* LPCDataScanner.m */,
@@ -675,7 +676,6 @@
 		B184FE0B14B6DB2B002A744C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				52AB9FB218AFF45F00FA3C67 /* SSKeychain */,
 				B1F279AD183D5B3000A922BC /* LPUIAChannel.h */,
 				B1F279AE183D5B3000A922BC /* LPUIAChannel.m */,
 				B1DDE6D115C0701D00BBE2BE /* UIAutomation.h */,
