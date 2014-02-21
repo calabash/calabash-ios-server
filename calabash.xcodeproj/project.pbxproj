@@ -524,6 +524,7 @@
 		B184FDC114B6DB2B002A744C /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				F52149EE18B50A1C005BB4F3 /* ScrollToMark */,
 				F5C3A62D18A2EA0800DB7E42 /* LPCollectionViewScrollToItemOperation.h */,
 				F5C3A62E18A2EA0800DB7E42 /* LPCollectionViewScrollToItemOperation.m */,
 				F5CAC06A180D499600E23F03 /* LPSliderOperation.h */,
@@ -532,10 +533,6 @@
 				F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */,
 				F591380217C39128007B2BE4 /* LPOrientationOperation.h */,
 				F591380317C39128007B2BE4 /* LPOrientationOperation.m */,
-				F5AE0BC4174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h */,
-				F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */,
-				5BFF97A218B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.h */,
-				5BFF97A318B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m */,
 				B19440421725C70A00EE1B25 /* LPFlashOperation.h */,
 				B19440431725C70A00EE1B25 /* LPFlashOperation.m */,
 				B15DA5E315C5D80A009E6CFE /* LPQueryAllOperation.h */,
@@ -550,8 +547,6 @@
 				B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */,
 				B184FDCA14B6DB2B002A744C /* LPSetTextOperation.h */,
 				B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */,
-				5BFF97A618B392370094E71E /* LPScrollToMarkOperation.h */,
-				5BFF97A718B392370094E71E /* LPScrollToMarkOperation.m */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -705,6 +700,19 @@
 				B1FF22B715CF002500F3A17B /* MKPolylineView+Test.m */,
 			);
 			path = MapKit;
+			sourceTree = "<group>";
+		};
+		F52149EE18B50A1C005BB4F3 /* ScrollToMark */ = {
+			isa = PBXGroup;
+			children = (
+				5BFF97A618B392370094E71E /* LPScrollToMarkOperation.h */,
+				5BFF97A718B392370094E71E /* LPScrollToMarkOperation.m */,
+				F5AE0BC4174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h */,
+				F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */,
+				5BFF97A218B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.h */,
+				5BFF97A318B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m */,
+			);
+			name = ScrollToMark;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

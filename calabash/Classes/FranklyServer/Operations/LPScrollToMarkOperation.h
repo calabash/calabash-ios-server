@@ -11,6 +11,6 @@
 @interface LPScrollToMarkOperation : LPOperation
 
 - (BOOL) view:(UIView *) aView hasMark:(NSString *) aMark;
-- (BOOL) cell:(UIView *) aCell hasSubviewMarked:(NSString *) aMark;
+- (BOOL) cell:(UIView *) aCell contentViewHasSubviewMarked:(NSString *) aMark;
 
 @end

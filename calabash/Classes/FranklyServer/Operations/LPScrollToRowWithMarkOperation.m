@@ -16,11 +16,11 @@
 
 
 
-- (BOOL) cell:(UITableViewCell *) aCell hasSubviewMarked:(NSString *) aMark {
+- (BOOL) cell:(UITableViewCell *) aCell contentViewHasSubviewMarked:(NSString *) aMark {
   // check the textLabel first
   if ([self view:aCell.textLabel hasMark:aMark]) {return YES;}
 
-  return [super cell:aCell hasSubviewMarked:aMark];
+  return [super cell:aCell contentViewHasSubviewMarked:aMark];
 }
 
 
@@ -40,7 +40,7 @@
       // is the cell itself marked?
       if ([self view:cell hasMark:aMark]) {return path;}
       // are any of it's subviews marked?
-      if ([self cell:cell hasSubviewMarked:aMark]) {return path;}
+      if ([self cell:cell contentViewHasSubviewMarked:aMark]) {return path;}
     }
   }
   return nil;

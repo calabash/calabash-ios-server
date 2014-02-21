@@ -31,7 +31,7 @@
       // is the cell itself marked?
       if ([self view:cell hasMark:aMark]) {return path;}
       // are any of it's subviews marked?
-      if ([self cell:cell hasSubviewMarked:aMark]) {return path;}
+      if ([self cell:cell contentViewHasSubviewMarked:aMark]) {return path;}
     }
   }
   return nil;
