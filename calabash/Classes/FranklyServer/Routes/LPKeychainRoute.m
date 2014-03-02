@@ -13,7 +13,7 @@
 @implementation LPKeychainRoute
 
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
-    return [method isEqualToString:@"POST"] ||[method isEqualToString:@"GET"];
+  return [method isEqualToString:@"POST"] ||[method isEqualToString:@"GET"];
 }
 
 - (NSDictionary *) JSONResponseForMethod: (NSString *)method URI: (NSString *)path data: (NSDictionary*)data {
