@@ -7,7 +7,6 @@
 
 #import "LPOrientationOperation.h"
 
-static NSString *const kSuccess = @"success";
 static NSString *const kDevice = @"device";
 static NSString *const kStatusBar = @"status_bar";
 static NSString *const kLeft = @"left";
