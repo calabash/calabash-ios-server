@@ -60,13 +60,13 @@
   switch (self.valueType) {
     case UIScriptLiteralTypeIndexPath: {
       NSIndexPath *ip = (id) [self objectValue];
-      return [NSString stringWithFormat:@"%@%d,%d", fm, [ip row], [ip section]];
+      return [NSString stringWithFormat:@"%@%@,%@", fm, @([ip row]), @([ip section])];
     }
 
     case UIScriptLiteralTypeString:
       return [NSString stringWithFormat:@"%@'%@'", fm, self.objectValue];
     case UIScriptLiteralTypeInteger:
-      return [NSString stringWithFormat:@"%@%d", fm, self.integerValue];
+      return [NSString stringWithFormat:@"%@%@", fm, @(self.integerValue)];
     case UIScriptLiteralTypeBool:
       return [NSString stringWithFormat:@"%@%@", fm,
                                         self.boolValue ? @"YES" : @"NO"];

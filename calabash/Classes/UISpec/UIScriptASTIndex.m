@@ -28,7 +28,7 @@
 
 
 - (NSString *) description {
-  return [NSString stringWithFormat:@"index:%d", self.index];
+  return [NSString stringWithFormat:@"index:%@", @(self.index)];
 }
 
 @end

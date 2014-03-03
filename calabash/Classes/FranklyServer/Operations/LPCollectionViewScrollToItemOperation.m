@@ -30,8 +30,8 @@
   UICollectionView *collection = (UICollectionView *) aView;
 
   if ([_arguments count] != 4) {
-    NSLog(@"Warning:  required 4 args but found only '%d' - %@",
-            [_arguments count], _arguments);
+    NSLog(@"Warning:  required 4 args but found only '%@' - %@",
+            @([_arguments count]), _arguments);
     return nil;
   }
 
@@ -40,15 +40,15 @@
 
   NSInteger numSections = [collection numberOfSections];
   if (section >= numSections) {
-    NSLog(@"Warning:  requested to scroll to section '%d' but view only has '%d' sections",
-            section, numSections);
+    NSLog(@"Warning:  requested to scroll to section '%@' but view only has '%@' sections",
+            @(section), @(numSections));
     return nil;
   }
 
   NSInteger numItemInSection = [collection numberOfItemsInSection:section];
   if (itemIndex >= numItemInSection) {
-    NSLog(@"Warning:  requested to scroll to item '%d' in section '%d' but that section on has '%d' items",
-            itemIndex, section, numItemInSection);
+    NSLog(@"Warning:  requested to scroll to item '%@' in section '%@' but that section on has '%@' items",
+            @(itemIndex), @(section), @(numItemInSection));
     return nil;
   }
 
