@@ -6,7 +6,7 @@
 
 #import "LPRouter.h"
 #import "LPJSONUtils.h"
-#import "LPHTTPDataResponse.h"
+#import "LPCORSResponse.h"
 
 @implementation LPRouter
 @synthesize postData = _postData;
@@ -53,12 +53,15 @@ static NSMutableDictionary *routes = nil;
   }
   NSString *serialized = [LPJSONUtils serializeDictionary:json];
   NSData *data = [serialized dataUsingEncoding:NSUTF8StringEncoding];
-  LPHTTPDataResponse *rsp = [[LPHTTPDataResponse alloc] initWithData:data];
+  LPCORSResponse *rsp = [[LPCORSResponse alloc] initWithData:data];
   return [rsp autorelease];
 }
 
 
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
+  if ([method isEqualToString: @"OPTIONS"]) {
+    return YES;
+  }
   NSArray *components = [path componentsSeparatedByString:@"?"];
   NSArray *pathComponents = [[components objectAtIndex:0]
           componentsSeparatedByString:@"/"];
@@ -72,6 +75,11 @@ static NSMutableDictionary *routes = nil;
 
 
 - (NSObject <LPHTTPResponse> *) httpResponseForMethod:(NSString *) method URI:(NSString *) path {
+  if ([method isEqualToString: @"OPTIONS"]) {
+      LPCORSResponse *rsp = [[LPCORSResponse alloc] initWithData:[NSData data]];
+      return [rsp autorelease];
+  }
+    
   NSArray *components = [path componentsSeparatedByString:@"?"];
   NSArray *pathComponents = [[components objectAtIndex:0]
           componentsSeparatedByString:@"/"];
