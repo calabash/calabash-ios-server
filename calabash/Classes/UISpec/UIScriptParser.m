@@ -62,7 +62,7 @@
 - (id) initWithUIScript:(NSString *) script {
   self = [super init];
   if (self) {
-    self.script = script;
+    self.script = [script stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     _res = [[NSMutableArray alloc] initWithCapacity:8];
   }
   return self;
@@ -389,8 +389,18 @@ static NSCharacterSet *curlyBrackets = nil;
     }
     return res;
   } else {//whitespace
-    *index = range.location + range.length;
     NSRange txtRange = NSMakeRange(i, range.location - i);
+
+    NSUInteger startOfWhite = range.location;
+    NSRange nextNonWhite = [_script rangeOfCharacterFromSet:notWhite
+                                                       options:NSLiteralSearch
+                                                         range:NSMakeRange(startOfWhite, N - startOfWhite)];
+    if (nextNonWhite.location == NSNotFound) {
+      *index = N;
+    }
+    else {
+      *index = nextNonWhite.location;
+    }
     return [_script substringWithRange:txtRange];
   }
 }
