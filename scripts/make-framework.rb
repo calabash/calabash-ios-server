@@ -97,8 +97,8 @@ def lipo_put_info(lib)
 
   unless result.success?
     puts 'FAIL: could not check the combined lib'
-    puts "FAIL: '#{lipo_info}'"
-    exit result
+    puts "FAIL: '#{lipo_info.strip}'"
+    exit result.to_i
   end
 end
 
@@ -117,10 +117,10 @@ def lipo_verify_arches(lib, arches=['i386', 'x86_64', 'armv7', 'armv7s', 'arm64'
       if lipo_verify != nil and lipo_verify != ''
         puts "FAIL: could not verify lib contains arch '#{arch}'"
         puts "FAIL: '#{lipo_verify}'"
-        exit result
+        exit result.to_i
       else
         puts "FAIL: lib '#{lib}' does not contain arch '#{arch}'"
-        exit result
+        exit result.to_i
       end
     end
   end
@@ -140,8 +140,8 @@ def lipo_combine_libs
 
   unless result.success?
     puts 'FAIL: could not create combined lib'
-    puts "FAIL: '#{lipo_create}'"
-    exit result
+    puts "FAIL: '#{lipo_create.strip}'"
+    exit result.to_i
   end
 
   lipo_put_info(output)
@@ -166,8 +166,6 @@ def make_framework(opts = {})
 
   puts "INFO: making framework at '#{directory}'"
 
-
-
   framework_name = framework_product_name
 
   FileUtils.mkdir_p(File.join(directory, 'Versions/A/Headers'))
@@ -185,6 +183,7 @@ def make_framework(opts = {})
       puts "FAIL: could not find '#{File.join(Dir.pwd, lib)}'"
       exit 1
     end
+    
     FileUtils.cp(lib, "./Versions/A/#{framework_name}")
     `ln -sfh Versions/Current/#{framework_name} #{framework_name}`
 
