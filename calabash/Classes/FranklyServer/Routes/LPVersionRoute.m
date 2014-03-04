@@ -66,66 +66,57 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
   return idiom == UIUserInterfaceIdiomPhone && [model hasPrefix:@"iPad"];
 }
 
-
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
   return [method isEqualToString:@"GET"];
 }
 
-
 - (NSDictionary *) JSONResponseForMethod:(NSString *) method URI:(NSString *) path data:(NSDictionary *) data {
   NSString *versionString = [[NSBundle mainBundle]
-          objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+                             objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
   if (!versionString) {
     versionString = @"Unknown";
   }
   NSString *idString = [[NSBundle mainBundle]
-          objectForInfoDictionaryKey:@"CFBundleIdentifier"];
-  if (!idString) {
-    idString = @"Unknown";
-  }
-  NSString *nameString = [[NSBundle mainBundle]
-          objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+                        objectForInfoDictionaryKey:@"CFBundleIdentifier"];
 
-  if (!nameString) {
-    nameString = @"Unknown";
-  }
+  if (!idString) { idString = @"Unknown";  }
+
+  NSString *nameString = [[NSBundle mainBundle]
+                          objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+
+  if (!nameString) { nameString = @"Unknown";  }
+
   struct utsname systemInfo;
   uname(&systemInfo);
 
-  NSString *system = [NSString stringWithCString:systemInfo.machine
-                                        encoding:NSUTF8StringEncoding];
+  NSString *machine = @(systemInfo.machine);
 
   NSDictionary *env = [[NSProcessInfo processInfo] environment];
 
   BOOL iphone5Like = [LPTouchUtils is4InchDevice];
 
-  NSString *dev = [env objectForKey:@"IPHONE_SIMULATOR_DEVICE"];
-  if (!dev) {
-    dev = @"";
-  }
+  NSString *dev = env[@"IPHONE_SIMULATOR_DEVICE"];
+  if (!dev) {  dev = @"";  }
 
-  NSString *sim = [env objectForKey:@"IPHONE_SIMULATOR_VERSIONS"];
-  if (!sim) {
-    sim = @"";
-  }
+  NSString *sim = env[@"IPHONE_SIMULATOR_VERSIONS"];
+  if (!sim) {  sim = @"";  }
 
   BOOL isIphoneAppEmulated = [self isIPhoneAppEmulatedOnIPad];
   NSDictionary *git = @{@"revision" : kLPGitShortRevision, @"branch" : kLPGitBranch, @"remote_origin" : kLPGitRemoteOrigin};
 
-  NSDictionary *res = [NSDictionary dictionaryWithObjectsAndKeys:kLPCALABASHVERSION , @"version",
-                                                                 idString, @"app_id",
-                                                                 [[UIDevice currentDevice]
-                                                                         systemVersion], @"iOS_version",
-                                                                 nameString, @"app_name",
-                                                                 system, @"system",
-                                                                 [NSNumber numberWithBool:iphone5Like], @"4inch",
-                                                                 dev, @"simulator_device",
-                                                                 sim, @"simulator",
-                                                                 versionString, @"app_version",
-                                                                 @"SUCCESS", @"outcome",
-                                                                 [NSNumber numberWithBool:isIphoneAppEmulated], @"iphone_app_emulated_on_ipad",
-                                                                 git, @"git",
-                                                                 nil];
+  NSDictionary *res = @{@"version": kLPCALABASHVERSION,
+                        @"app_id": idString,
+                        @"iOS_version": [[UIDevice currentDevice]
+                                         systemVersion],
+                        @"app_name": nameString,
+                        @"system": machine,
+                        @"4inch": @(iphone5Like),
+                        @"simulator_device": dev,
+                        @"simulator": sim,
+                        @"app_version": versionString,
+                        @"outcome": @"SUCCESS",
+                        @"iphone_app_emulated_on_ipad": @(isIphoneAppEmulated),
+                        @"git": git};
   return res;
 }
 
