@@ -174,6 +174,8 @@
 		F5821A5E18C4E27400293508 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		F5B27B9118C5884D0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		F5B27B9218C5884E0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
+		F5F53D6A18C619CB00BD9731 /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; };
+		F5F53D6B18C619CB00BD9731 /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -573,8 +575,8 @@
 		B184FDBC14B6DB2B002A744C /* FranklyServer */ = {
 			isa = PBXGroup;
 			children = (
-				B1059F0418C546EB005A0262 /* LPCORSResponse.m */,
 				B1059F0518C546EB005A0262 /* LPCORSResponse.h */,
+				B1059F0418C546EB005A0262 /* LPCORSResponse.m */,
 				B184FDBD14B6DB2B002A744C /* LPI.mm */,
 				B184FDBE14B6DB2B002A744C /* LPRoute.h */,
 				B184FDBF14B6DB2B002A744C /* LPRouter.h */,
@@ -1011,6 +1013,7 @@
 				F5091C2318C4E1D700C85307 /* LPFlashOperation.m in Sources */,
 				F5091C2418C4E1D700C85307 /* LPScrollToRowWithMarkOperation.m in Sources */,
 				F5091C2518C4E1D700C85307 /* LPOrientationOperation.m in Sources */,
+				F5F53D6B18C619CB00BD9731 /* LPCORSResponse.m in Sources */,
 				F5091C2618C4E1D700C85307 /* LPDatePickerOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1092,6 +1095,7 @@
 				F5821A4118C4E27400293508 /* LPFlashOperation.m in Sources */,
 				F5821A4218C4E27400293508 /* LPScrollToRowWithMarkOperation.m in Sources */,
 				F5821A4318C4E27400293508 /* LPOrientationOperation.m in Sources */,
+				F5F53D6A18C619CB00BD9731 /* LPCORSResponse.m in Sources */,
 				F5821A4418C4E27400293508 /* LPDatePickerOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
