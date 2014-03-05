@@ -6,6 +6,10 @@
 //  Copyright (c) 2013 Sam Soffes. All rights reserved.
 //
 
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
 #import "LPSSKeychainQuery.h"
 #import "LPSSKeychain.h"
 
