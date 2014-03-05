@@ -76,23 +76,80 @@ static NSInteger sortFunction(UIView *v1, UIView *v2, void *ctx) {
   }
 }
 
+- (NSMutableArray *)cellsForCollectionView:(UICollectionView *)collectionView
+{
+  NSMutableArray * cells = [[NSMutableArray alloc] initWithCapacity: 30];
+  id<UICollectionViewDataSource> dataSource = [collectionView dataSource];
+  if (dataSource)
+  {
+    NSInteger sections = [dataSource numberOfSectionsInCollectionView: collectionView];
+    for (NSInteger section = 0; section < sections; section++)
+    {
+      NSInteger rows = [dataSource collectionView: collectionView numberOfItemsInSection: section];
+      for (NSInteger row = 0; row < rows; row++)
+      {
+        UICollectionViewCell * cell = [dataSource collectionView: collectionView cellForItemAtIndexPath: [NSIndexPath indexPathForRow: row inSection: section]];
+        if (cell)
+          [cells addObject: cell];
+      }
+    }
+  }
+  
+  return cells;
+}
+
+- (NSMutableArray *)cellsForTableView:(UITableView *)tableView
+{
+  NSMutableArray * cells = [[NSMutableArray alloc] initWithCapacity: 30];
+  id<UITableViewDataSource> dataSource = [tableView dataSource];
+  if (dataSource)
+  {
+    NSInteger sections = [dataSource numberOfSectionsInTableView: tableView];
+    for (NSInteger section = 0; section < sections; section++)
+    {
+      NSInteger rows = [dataSource tableView: tableView numberOfRowsInSection: section];
+      for (NSInteger row = 0; row < rows; row++)
+      {
+        UITableViewCell * cell = [dataSource tableView: tableView cellForRowAtIndexPath: [NSIndexPath indexPathForRow: row inSection: section]];
+        if (cell)
+          [cells addObject: cell];
+      }
+    }
+  }
+  
+  return cells;
+}
 
 - (void) evalDescWith:(UIView *) view result:(NSMutableArray *) res visibility:(UIScriptASTVisibilityType) visibility {
   if ([view isKindOfClass:_class]) {
     [self addView:view toArray:res ifMatchesVisibility:visibility];
   }
 
-  for (UIView *subview in [[view subviews]
-          sortedArrayUsingFunction:sortFunction context:view]) {
-    [self evalDescWith:subview result:res visibility:visibility];
+  if (visibility == UIScriptASTVisibilityTypeAll && [view isKindOfClass: [UICollectionView class]] && [_class isSubclassOfClass: [UICollectionViewCell class]])
+    [res addObjectsFromArray: [self cellsForCollectionView: (UICollectionView *)view]];
+  else if (visibility == UIScriptASTVisibilityTypeAll && [view isKindOfClass: [UITableView class]] && [_class isSubclassOfClass: [UITableViewCell class]])
+    [res addObjectsFromArray: [self cellsForTableView: (UITableView *)view]];
+  else
+  {
+    for (UIView *subview in [[view subviews]
+            sortedArrayUsingFunction:sortFunction context:view]) {
+      [self evalDescWith:subview result:res visibility:visibility];
+    }
   }
 }
 
-
 - (void) evalChildWith:(UIView *) view result:(NSMutableArray *) res visibility:(UIScriptASTVisibilityType) visibility {
-  for (UIView *childView in [view subviews]) {
-    if ([childView isKindOfClass:_class]) {
-      [self addView:childView toArray:res ifMatchesVisibility:visibility];
+  
+  if (visibility == UIScriptASTVisibilityTypeAll && [view isKindOfClass: [UICollectionView class]] && [_class isSubclassOfClass: [UICollectionViewCell class]])
+    [res addObjectsFromArray: [self cellsForCollectionView: (UICollectionView *)view]];
+  else if (visibility == UIScriptASTVisibilityTypeAll && [view isKindOfClass: [UITableView class]] && [_class isSubclassOfClass: [UITableViewCell class]])
+    [res addObjectsFromArray: [self cellsForTableView: (UITableView *)view]];
+  else
+  {
+    for (UIView *childView in [view subviews]) {
+      if ([childView isKindOfClass:_class]) {
+        [self addView:childView toArray:res ifMatchesVisibility:visibility];
+      }
     }
   }
 }
@@ -116,10 +173,18 @@ static NSInteger sortFunction(UIView *v1, UIView *v2, void *ctx) {
 
 - (void) evalSiblingsWith:(UIView *) view result:(NSMutableArray *) res visibility:(UIScriptASTVisibilityType) visibility {
   UIView *parentView = [view superview];
-  NSArray *children = [parentView subviews];
-  for (UIView *siblingOrSelf in children) {
-    if (siblingOrSelf != view && [siblingOrSelf isKindOfClass:_class]) {
-      [self addView:siblingOrSelf toArray:res ifMatchesVisibility:visibility];
+  
+  if (visibility == UIScriptASTVisibilityTypeAll && [parentView isKindOfClass: [UICollectionView class]] && [_class isSubclassOfClass: [UICollectionViewCell class]])
+    [res addObjectsFromArray: [self cellsForCollectionView: (UICollectionView *)view]];
+  else if (visibility == UIScriptASTVisibilityTypeAll && [parentView isKindOfClass: [UITableView class]] && [_class isSubclassOfClass: [UITableViewCell class]])
+    [res addObjectsFromArray: [self cellsForTableView: (UITableView *)view]];
+  else
+  {
+    NSArray *children = [parentView subviews];
+    for (UIView *siblingOrSelf in children) {
+      if (siblingOrSelf != view && [siblingOrSelf isKindOfClass:_class]) {
+        [self addView:siblingOrSelf toArray:res ifMatchesVisibility:visibility];
+      }
     }
   }
 }
