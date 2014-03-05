@@ -89,6 +89,8 @@
              @"results": [LPSSKeychain accountsForService:service] ?: @[]};
   }
 
+  // see http://goo.gl/JrFJMM
+  // for details about why this reports 'FAILURE' and what can be done on the client side
   // Got a service and an account; send back the password
   NSString *password = [LPSSKeychain passwordForService:service
                                                 account:account
