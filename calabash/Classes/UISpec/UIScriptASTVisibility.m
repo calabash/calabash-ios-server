@@ -23,7 +23,11 @@
   switch (self.visibilityType) {
     case UIScriptASTVisibilityTypeVisible:return @"visible";
     case UIScriptASTVisibilityTypeAll:return @"all";
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunreachable-code"
     default:return @"<UNKNOWN_VISIBILITY>";
+#pragma clang diagnostic pop
   }
 }
 
