@@ -5,5 +5,7 @@ Markdown.pl
 build
 calabash.framework
 
+!scripts/test/build
+
 # AppCode
 .idea

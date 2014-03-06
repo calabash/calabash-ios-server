@@ -155,7 +155,7 @@
     case 'c':[invocation getReturnValue:(void **) &charValue];
       return [NSNumber numberWithChar:charValue];
     case '{': {
-      unsigned int length = [[invocation methodSignature] methodReturnLength];
+      NSUInteger length = [[invocation methodSignature] methodReturnLength];
       void *buffer = (void *) malloc(length);
       [invocation getReturnValue:buffer];
       NSValue *value = [[[NSValue alloc] initWithBytes:buffer objCType:type]

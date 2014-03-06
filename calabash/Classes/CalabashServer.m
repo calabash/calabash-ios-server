@@ -8,7 +8,6 @@
 #import "CalabashServer.h"
 #import "LPRouter.h"
 #import "LPScreenshotRoute.h"
-#import "LPScreenshotRoute2.h"
 #import "LPMapRoute.h"
 #import "LPRecordRoute.h"
 #import "LPAsyncPlaybackRoute.h"
@@ -51,10 +50,6 @@
     LPScreenshotRoute *sr = [LPScreenshotRoute new];
     [LPRouter addRoute:sr forPath:@"screenshot"];
     [sr release];
-
-    LPScreenshotRoute2 *sr2 = [LPScreenshotRoute2 new];
-    [LPRouter addRoute:sr2 forPath:@"screenshot2"];
-    [sr2 release];
 
     LPRecordRoute *rr = [LPRecordRoute new];
     [LPRouter addRoute:rr forPath:@"record"];

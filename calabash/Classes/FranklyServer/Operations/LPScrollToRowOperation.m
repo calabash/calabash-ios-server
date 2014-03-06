@@ -16,8 +16,8 @@
 
 
 - (NSIndexPath *) indexPathForRow:(NSUInteger) row inTable:(UITableView *) table {
-  int numberOfSections = [table numberOfSections];
-  int i = 0;
+  NSInteger numberOfSections = [table numberOfSections];
+  NSInteger i = 0;
   for (; i < numberOfSections; i++) {
     NSInteger numberOfRowsInSection = [table numberOfRowsInSection:i];
     if (row < numberOfRowsInSection) {
