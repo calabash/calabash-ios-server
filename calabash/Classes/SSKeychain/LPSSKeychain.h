@@ -16,9 +16,9 @@
 typedef enum {
 
 	/** Some of the arguments were invalid. */
-	SSKeychainErrorBadArguments = -1001,
+	LPSSKeychainErrorBadArguments = -1001,
 
-} SSKeychainErrorCode;
+} LPSSKeychainErrorCode;
 
 /** SSKeychain error domain */
 extern NSString *const kLPSSKeychainErrorDomain;

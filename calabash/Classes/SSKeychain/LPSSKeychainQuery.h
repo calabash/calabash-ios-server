@@ -9,9 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <Security/Security.h>
 
-#ifdef __MAC_10_9
-	#define SSKEYCHAIN_SYNCHRONIZABLE_AVAILABLE 1
-#endif
+typedef enum : NSUInteger {
+  LPSSKeychainQuerySynchronizationModeNo = 0,
+	LPSSKeychainQuerySynchronizationModeYes,
+  LPSSKeychainQuerySynchronizationModeAny,
+  LPSSKeychainQuerySynchronizationModeNotAvailable = NSNotFound
+} LPSSKeychainQuerySynchronizationMode;
 
 /**
  Simple interface for querying or modifying keychain items.
@@ -32,10 +35,8 @@
 @property (nonatomic, copy) NSString *accessGroup;
 #endif
 
-#ifdef SSKEYCHAIN_SYNCHRONIZABLE_AVAILABLE
 /** kSecAttrSynchronizable */
-@property (nonatomic, getter = isSynchronizable) BOOL synchronizable;
-#endif
+@property (nonatomic) LPSSKeychainQuerySynchronizationMode synchronizationMode;
 
 /** Root storage for password information */
 @property (nonatomic, copy) NSData *passwordData;
