@@ -24,7 +24,7 @@
     if (!service) {
       // no service - clear out the entire keychain
       for (NSDictionary *d in [LPSSKeychain allAccounts]) {
-        NSString *service = d[kLPSSKeychainWhereKey];
+        service = d[kLPSSKeychainWhereKey];
         NSString *account = d[kLPSSKeychainAccountKey];
         if (![LPSSKeychain deletePasswordForService:service account:account error:&error]) {
           return @{@"outcome": @"FAILURE",
@@ -40,8 +40,8 @@
     if (!account) {
       // no account - clear out all accounts for this service
       for (NSDictionary *d in [LPSSKeychain accountsForService:service]) {
-        NSString *service = d[kLPSSKeychainWhereKey];
-        NSString *account = d[kLPSSKeychainAccountKey];
+        service = d[kLPSSKeychainWhereKey];
+        account = d[kLPSSKeychainAccountKey];
         if (![LPSSKeychain deletePasswordForService:service account:account error:&error]) {
           return @{@"outcome": @"FAILURE",
                    @"reason": [NSString stringWithFormat:@"Error deleting password for %@ in service %@", account, service],

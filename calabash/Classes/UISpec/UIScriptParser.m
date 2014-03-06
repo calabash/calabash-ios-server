@@ -361,10 +361,10 @@ static NSCharacterSet *curlyBrackets = nil;
     *index = endPing.location + 1;
     if (*index < N) {
       i = *index;
-      NSRange range = [_script rangeOfCharacterFromSet:notWhite
+      NSRange innerRange = [_script rangeOfCharacterFromSet:notWhite
                                                options:NSLiteralSearch
                                                  range:NSMakeRange(i, N - i)];
-      *index = range.location;
+      *index = innerRange.location;
     }
     return [res stringByReplacingOccurrencesOfString:@"\\'" withString:@"'"];
   } else if ([firstChar isEqualToString:@"}"]) {
@@ -382,10 +382,10 @@ static NSCharacterSet *curlyBrackets = nil;
     *index = endBrack.location + 1;
     if (*index < N) {
       i = *index;
-      NSRange range = [_script rangeOfCharacterFromSet:notWhite
+      NSRange innerRange = [_script rangeOfCharacterFromSet:notWhite
                                                options:NSLiteralSearch
                                                  range:NSMakeRange(i, N - i)];
-      *index = range.location;
+      *index = innerRange.location;
     }
     return res;
   } else {//whitespace
