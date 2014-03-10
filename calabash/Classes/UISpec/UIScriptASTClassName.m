@@ -85,10 +85,10 @@ static NSInteger sortFunction(UIView *v1, UIView *v2, void *ctx) {
     NSInteger sections = [dataSource numberOfSectionsInCollectionView: collectionView];
     for (NSInteger section = 0; section < sections; section++)
     {
-      NSInteger rows = [dataSource collectionView: collectionView numberOfItemsInSection: section];
-      for (NSInteger row = 0; row < rows; row++)
+      NSInteger items = [dataSource collectionView: collectionView numberOfItemsInSection: section];
+      for (NSInteger item = 0; item < items; item++)
       {
-        UICollectionViewCell * cell = [dataSource collectionView: collectionView cellForItemAtIndexPath: [NSIndexPath indexPathForRow: row inSection: section]];
+        UICollectionViewCell * cell = [dataSource collectionView: collectionView cellForItemAtIndexPath: [NSIndexPath indexPathForItem: item inSection: section]];
         if (cell)
           [cells addObject: cell];
       }
