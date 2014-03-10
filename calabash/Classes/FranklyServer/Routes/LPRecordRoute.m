@@ -46,8 +46,8 @@
     [self startRecording];
     return [[[LPNoContentResponse alloc] init] autorelease];
   } else if ([action isEqualToString:@"stop"]) {
-    NSData *path = [self stopRecording];
-    return [[[LPHTTPDataResponse alloc] initWithData:path] autorelease];
+    NSData *data = [self stopRecording];
+    return [[[LPHTTPDataResponse alloc] initWithData:data] autorelease];
   } else {
     return nil;
   }

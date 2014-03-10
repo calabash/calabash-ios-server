@@ -20,7 +20,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		F5091BDC18C4E1D700C85307 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; };
+		F5091BDC18C4E1D700C85307 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code"; }; };
 		F5091BDD18C4E1D700C85307 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; };
 		F5091BDE18C4E1D700C85307 /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; };
 		F5091BDF18C4E1D700C85307 /* LPHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B514E6565500663205 /* LPHTTPConnection.m */; };
@@ -96,7 +96,9 @@
 		F5091C2F18C4E1D700C85307 /* CalabashServer.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8814B6DAE1002A744C /* CalabashServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5091C3F18C4E1D700C85307 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E757A15D434D00066550B /* CFNetwork.framework */; };
 		F5091C4018C4E1D700C85307 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
-		F58219FA18C4E27400293508 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; };
+		F55D412418C9130100813F78 /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; };
+		F55D412518C9130100813F78 /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; };
+		F58219FA18C4E27400293508 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code"; }; };
 		F58219FB18C4E27400293508 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; };
 		F58219FC18C4E27400293508 /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; };
 		F58219FD18C4E27400293508 /* LPHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B514E6565500663205 /* LPHTTPConnection.m */; };
@@ -174,6 +176,10 @@
 		F5821A5E18C4E27400293508 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		F5B27B9118C5884D0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		F5B27B9218C5884E0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
+		F5E2D1E018C9120E00A0D9B6 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5E2D1E118C9120E00A0D9B6 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5E2D1E418C9120E00A0D9B6 /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5E2D1E518C9120E00A0D9B6 /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5F53D6A18C619CB00BD9731 /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; };
 		F5F53D6B18C619CB00BD9731 /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; };
 /* End PBXBuildFile section */
@@ -367,6 +373,8 @@
 		F5091C4618C4E1D700C85307 /* libcalabash-device.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcalabash-device.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F55A350F17CF8F8F0001E8B4 /* LPDatePickerOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDatePickerOperation.h; sourceTree = "<group>"; };
 		F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDatePickerOperation.m; sourceTree = "<group>"; };
+		F55D412018C9130100813F78 /* LPKeychainRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPKeychainRoute.h; sourceTree = "<group>"; };
+		F55D412118C9130100813F78 /* LPKeychainRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPKeychainRoute.m; sourceTree = "<group>"; };
 		F5821A6418C4E27400293508 /* libcalabash-simulator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcalabash-simulator.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F58B6DE8186847F70042191C /* gitversioning-after.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "gitversioning-after.sh"; sourceTree = "<group>"; };
 		F58B6DE9186847F70042191C /* gitversioning-before.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "gitversioning-before.sh"; sourceTree = "<group>"; };
@@ -378,6 +386,11 @@
 		F5C3A62E18A2EA0800DB7E42 /* LPCollectionViewScrollToItemOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCollectionViewScrollToItemOperation.m; sourceTree = "<group>"; tabWidth = 4; };
 		F5CAC06A180D499600E23F03 /* LPSliderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPSliderOperation.h; sourceTree = "<group>"; };
 		F5CAC06B180D499600E23F03 /* LPSliderOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSliderOperation.m; sourceTree = "<group>"; };
+		F5E2D1D918C9120E00A0D9B6 /* LPSSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPSSKeychain.h; sourceTree = "<group>"; };
+		F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSSKeychain.m; sourceTree = "<group>"; };
+		F5E2D1DB18C9120E00A0D9B6 /* LPSSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPSSKeychainQuery.h; sourceTree = "<group>"; };
+		F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSSKeychainQuery.m; sourceTree = "<group>"; };
+		F5E2D1DD18C9120E00A0D9B6 /* SSKeychain.LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SSKeychain.LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -511,6 +524,7 @@
 		B184FD8514B6DACA002A744C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F5E2D1D818C9120E00A0D9B6 /* SSKeychain */,
 				B1FF22B115CF002500F3A17B /* MapKit */,
 				B184FD8F14B6DB2B002A744C /* CocoaAsyncSocket */,
 				B184FD9214B6DB2B002A744C /* CocoaHttpServer */,
@@ -622,6 +636,8 @@
 		B184FDD014B6DB2B002A744C /* Routes */ = {
 			isa = PBXGroup;
 			children = (
+				F55D412018C9130100813F78 /* LPKeychainRoute.h */,
+				F55D412118C9130100813F78 /* LPKeychainRoute.m */,
 				B12DCD86189A998400F8DF87 /* LPDebugRoute.h */,
 				B12DCD84189A997B00F8DF87 /* LPDebugRoute.m */,
 				B1EBF08416EE63A000AE4D40 /* LPAppPropertyRoute.h */,
@@ -779,6 +795,18 @@
 				5BFF97A318B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m */,
 			);
 			name = ScrollToMark;
+			sourceTree = "<group>";
+		};
+		F5E2D1D818C9120E00A0D9B6 /* SSKeychain */ = {
+			isa = PBXGroup;
+			children = (
+				F5E2D1D918C9120E00A0D9B6 /* LPSSKeychain.h */,
+				F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */,
+				F5E2D1DB18C9120E00A0D9B6 /* LPSSKeychainQuery.h */,
+				F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */,
+				F5E2D1DD18C9120E00A0D9B6 /* SSKeychain.LICENSE */,
+			);
+			path = SSKeychain;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -952,6 +980,7 @@
 				F5091BE518C4E1D700C85307 /* LPHTTPAsyncFileResponse.m in Sources */,
 				F5091BE618C4E1D700C85307 /* LPHTTPDataResponse.m in Sources */,
 				F5091BE718C4E1D700C85307 /* LPHTTPDynamicFileResponse.m in Sources */,
+				F5E2D1E418C9120E00A0D9B6 /* LPSSKeychainQuery.m in Sources */,
 				F5091BE818C4E1D700C85307 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
 				F5091BE918C4E1D700C85307 /* LPHTTPFileResponse.m in Sources */,
 				F5091BEA18C4E1D700C85307 /* LPHTTPRedirectResponse.m in Sources */,
@@ -995,8 +1024,10 @@
 				F5091C0F18C4E1D700C85307 /* UIScriptASTLast.m in Sources */,
 				F5091C1018C4E1D700C85307 /* LPEnv.m in Sources */,
 				F5091C1118C4E1D700C85307 /* UIScriptASTWith.m in Sources */,
+				F5E2D1E018C9120E00A0D9B6 /* LPSSKeychain.m in Sources */,
 				F5091C1218C4E1D700C85307 /* UIScriptParser.m in Sources */,
 				F5091C1318C4E1D700C85307 /* LPJSONUtils.m in Sources */,
+				F55D412418C9130100813F78 /* LPKeychainRoute.m in Sources */,
 				F5091C1418C4E1D700C85307 /* LPTouchUtils.m in Sources */,
 				F5091C1518C4E1D700C85307 /* LPCDataScanner.m in Sources */,
 				F5091C1718C4E1D700C85307 /* LPI.mm in Sources */,
@@ -1034,6 +1065,7 @@
 				F5821A0318C4E27400293508 /* LPHTTPAsyncFileResponse.m in Sources */,
 				F5821A0418C4E27400293508 /* LPHTTPDataResponse.m in Sources */,
 				F5821A0518C4E27400293508 /* LPHTTPDynamicFileResponse.m in Sources */,
+				F5E2D1E518C9120E00A0D9B6 /* LPSSKeychainQuery.m in Sources */,
 				F5821A0618C4E27400293508 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
 				F5821A0718C4E27400293508 /* LPHTTPFileResponse.m in Sources */,
 				F5821A0818C4E27400293508 /* LPHTTPRedirectResponse.m in Sources */,
@@ -1077,8 +1109,10 @@
 				F5821A2D18C4E27400293508 /* UIScriptASTLast.m in Sources */,
 				F5821A2E18C4E27400293508 /* LPEnv.m in Sources */,
 				F5821A2F18C4E27400293508 /* UIScriptASTWith.m in Sources */,
+				F5E2D1E118C9120E00A0D9B6 /* LPSSKeychain.m in Sources */,
 				F5821A3018C4E27400293508 /* UIScriptParser.m in Sources */,
 				F5821A3118C4E27400293508 /* LPJSONUtils.m in Sources */,
+				F55D412518C9130100813F78 /* LPKeychainRoute.m in Sources */,
 				F5821A3218C4E27400293508 /* LPTouchUtils.m in Sources */,
 				F5821A3318C4E27400293508 /* LPCDataScanner.m in Sources */,
 				F5821A3518C4E27400293508 /* LPI.mm in Sources */,
@@ -1178,16 +1212,36 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_ENABLE_MODULES = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = NO;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/calabash.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "calabash/calabash-Prefix.pch";
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_VERSION = "";
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_SHADOW = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = "-ObjC";
@@ -1198,6 +1252,11 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
 				VALID_ARCHS = "armv7 armv7s arm64";
+				WARNING_CFLAGS = (
+					"-Wunreachable-code",
+					"-fcolor-diagnostics",
+					"-Warc-retain-cycles",
+				);
 			};
 			name = Debug;
 		};
@@ -1205,16 +1264,36 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_ENABLE_MODULES = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = NO;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/calabash.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "calabash/calabash-Prefix.pch";
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_VERSION = "";
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_SHADOW = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = "-ObjC";
@@ -1225,6 +1304,11 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
 				VALID_ARCHS = "armv7 armv7s arm64";
+				WARNING_CFLAGS = (
+					"-Wunreachable-code",
+					"-fcolor-diagnostics",
+					"-Warc-retain-cycles",
+				);
 			};
 			name = Release;
 		};
@@ -1232,15 +1316,36 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = NO;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/calabash.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "calabash/calabash-Prefix.pch";
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_VERSION = "";
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_SHADOW = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = "-ObjC";
@@ -1252,6 +1357,11 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
 				VALID_ARCHS = "i386 x86_64";
+				WARNING_CFLAGS = (
+					"-Wunreachable-code",
+					"-fcolor-diagnostics",
+					"-Warc-retain-cycles",
+				);
 			};
 			name = Debug;
 		};
@@ -1259,15 +1369,36 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = NO;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/calabash.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "calabash/calabash-Prefix.pch";
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
 				GCC_VERSION = "";
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_SHADOW = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = "-ObjC";
@@ -1279,6 +1410,11 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
 				VALID_ARCHS = "i386 x86_64";
+				WARNING_CFLAGS = (
+					"-Wunreachable-code",
+					"-fcolor-diagnostics",
+					"-Warc-retain-cycles",
+				);
 			};
 			name = Release;
 		};

@@ -177,7 +177,11 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
         NSString *plistName = [NSString stringWithFormat:@"%@.plist", [[NSBundle mainBundle] bundleIdentifier]];
 
         // 1. get into the simulator's app support directory by fetching the sandboxed Library's path
-        NSString *userDirectoryPath = [[[[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask] lastObject] path];
+
+        NSArray *userLibDirURLs = [[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask];
+        NSURL *userDirURL = [userLibDirURLs lastObject];
+        NSString *userDirectoryPath = [userDirURL path];
+
         // 2. get out of our application directory, back to the root support directory for this system version
         plistRootPath = [userDirectoryPath substringToIndex:([userDirectoryPath rangeOfString:@"Applications"].location)];
 
