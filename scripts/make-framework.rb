@@ -78,13 +78,13 @@ end
 # @param [Object] output the combined library
 # @return [String] lipo create command
 def lipo_cmd(inputs, output)
-  "lipo -create #{inputs.join(' ')} -output #{output}"
+  "xcrun lipo -create #{inputs.join(' ')} -output #{output}"
 end
 
 # @return [String] lipo info command
 # @param [String] lib path to a library or executable binary
 def lipo_info(lib)
-  "lipo -info #{lib}"
+  "xcrun lipo -info #{lib}"
 end
 
 
@@ -102,13 +102,14 @@ def lipo_put_info(lib)
   end
 end
 
-def lipo_verify(lib, arch)
-  "lipo #{lib} -verify_arch '#{arch}'"
+def lipo_verify(lib, arch, sdk)
+  "xcrun -sdk #{sdk} lipo #{lib} -verify_arch '#{arch}'"
 end
 
 def lipo_verify_arches(lib, arches=['i386', 'x86_64', 'armv7', 'armv7s', 'arm64'])
   arches.each do |arch|
-    cmd = lipo_verify(lib, arch)
+    sdk = /i386|x86_64/.match(arch) ? 'iphonesimulator' : 'iphoneos'
+    cmd = lipo_verify(lib, arch, sdk)
     lipo_verify = `#{cmd}`
     result = $?
     if result.success?
@@ -183,7 +184,7 @@ def make_framework(opts = {})
       puts "FAIL: could not find '#{File.join(Dir.pwd, lib)}'"
       exit 1
     end
-    
+
     FileUtils.cp(lib, "./Versions/A/#{framework_name}")
     `ln -sfh Versions/Current/#{framework_name} #{framework_name}`
 
