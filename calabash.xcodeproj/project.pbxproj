@@ -96,6 +96,8 @@
 		F5091C2F18C4E1D700C85307 /* CalabashServer.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8814B6DAE1002A744C /* CalabashServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5091C3F18C4E1D700C85307 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E757A15D434D00066550B /* CFNetwork.framework */; };
 		F5091C4018C4E1D700C85307 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
+		F537397318E5200C004133FA /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F537397418E52014004133FA /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F55D412418C9130100813F78 /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; };
 		F55D412518C9130100813F78 /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; };
 		F58219FA18C4E27400293508 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code"; }; };
@@ -838,6 +840,7 @@
 				F59C5CFC18E0BBAE0087B51D /* LPHTTPDataResponse.h in Headers */,
 				F59C5CFD18E0BBAE0087B51D /* LPHTTPDynamicFileResponse.h in Headers */,
 				F59C5CFE18E0BBAE0087B51D /* LPHTTPFileResponse.h in Headers */,
+				F537397418E52014004133FA /* LPVersionRoute.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -853,6 +856,7 @@
 				F59C5D0418E0C1E60087B51D /* LPHTTPAsyncFileResponse.h in Headers */,
 				F59C5D0618E0C1EF0087B51D /* LPHTTPDynamicFileResponse.h in Headers */,
 				F59C5D0718E0C1F30087B51D /* LPHTTPFileResponse.h in Headers */,
+				F537397318E5200C004133FA /* LPVersionRoute.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
