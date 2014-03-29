@@ -99,7 +99,7 @@
 		F537397318E5200C004133FA /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F537397418E52014004133FA /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F537398D18E5253B004133FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
-		F537399018E5253B004133FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F537398F18E5253B004133FA /* main.m */; };
+		F537399B18E6E0BE004133FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F537399918E6E0BE004133FA /* main.m */; };
 		F55D412418C9130100813F78 /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; };
 		F55D412518C9130100813F78 /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; };
 		F58219FA18C4E27400293508 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code"; }; };
@@ -390,8 +390,7 @@
 		F500459D17D249D000B72386 /* LPGitVersionDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPGitVersionDefines.h; sourceTree = "<group>"; };
 		F5091C4618C4E1D700C85307 /* libcalabash-device.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcalabash-device.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F537398C18E5253B004133FA /* version */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = version; sourceTree = BUILT_PRODUCTS_DIR; };
-		F537398F18E5253B004133FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F537399218E5253B004133FA /* version-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "version-Prefix.pch"; sourceTree = "<group>"; };
+		F537399918E6E0BE004133FA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F55A350F17CF8F8F0001E8B4 /* LPDatePickerOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDatePickerOperation.h; sourceTree = "<group>"; };
 		F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDatePickerOperation.m; sourceTree = "<group>"; };
 		F55D412018C9130100813F78 /* LPKeychainRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPKeychainRoute.h; sourceTree = "<group>"; };
@@ -461,9 +460,9 @@
 		B121E78614B6D9FB0034C6A9 = {
 			isa = PBXGroup;
 			children = (
+				F537399818E6E0BE004133FA /* calabash-version */,
 				B16C307C15191A8C00DAA3FA /* calabash-js */,
 				B121E79914B6D9FB0034C6A9 /* calabash */,
-				F537398E18E5253B004133FA /* version */,
 				B121E79614B6D9FB0034C6A9 /* Frameworks */,
 				B121E79514B6D9FB0034C6A9 /* Products */,
 			);
@@ -828,21 +827,12 @@
 			name = ScrollToMark;
 			sourceTree = "<group>";
 		};
-		F537398E18E5253B004133FA /* version */ = {
+		F537399818E6E0BE004133FA /* calabash-version */ = {
 			isa = PBXGroup;
 			children = (
-				F537398F18E5253B004133FA /* main.m */,
-				F537399118E5253B004133FA /* Supporting Files */,
+				F537399918E6E0BE004133FA /* main.m */,
 			);
-			path = version;
-			sourceTree = "<group>";
-		};
-		F537399118E5253B004133FA /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				F537399218E5253B004133FA /* version-Prefix.pch */,
-			);
-			name = "Supporting Files";
+			path = "calabash-version";
 			sourceTree = "<group>";
 		};
 		F5E2D1D818C9120E00A0D9B6 /* SSKeychain */ = {
@@ -1134,7 +1124,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F537399018E5253B004133FA /* main.m in Sources */,
+				F537399B18E6E0BE004133FA /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1412,8 +1402,8 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "version/version-Prefix.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
@@ -1437,8 +1427,8 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "version/version-Prefix.pch";
+				GCC_PRECOMPILE_PREFIX_HEADER = NO;
+				GCC_PREFIX_HEADER = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
