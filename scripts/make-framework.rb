@@ -199,6 +199,18 @@ def make_framework(opts = {})
   lipo_verify_arches(lib)
 end
 
+def copy_version_binary(opts={})
+  default_opts = {:source => './build/Debug/version',
+                  :target => './build/Debug-combined/calabash.framework/Resources'}
+  merged = default_opts.merge(opts)
+  source = merged[:source]
+  target = merged[:target]
+  puts "INFO: staging version binary from '#{source}' to '#{target}'"
+  FileUtils.mkdir_p(target)
+  FileUtils.cp(source, target)
+end
+
+
 def stage_framework(opts = {})
   default_opts = {:source => './build/Debug-combined/calabash.framework',
                   :target => './'}
@@ -232,6 +244,7 @@ end
 if ARGV[0] == 'verify'
   lipo_combine_libs
   make_framework
+  copy_version_binary
   stage_framework
   exit 0
 end
