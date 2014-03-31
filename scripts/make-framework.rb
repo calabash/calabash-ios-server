@@ -156,7 +156,8 @@ end
 
 def make_framework(opts = {})
   default_opts = {:directory => './build/Debug-combined/calabash.framework',
-                  :combined_lib => combined_lib_name}
+                  :combined_lib => combined_lib_name,
+                  :version_exe => './build/Debug/version'}
 
   merged = default_opts.merge(opts)
 
@@ -169,7 +170,7 @@ def make_framework(opts = {})
 
   framework_name = framework_product_name
 
-  FileUtils.mkdir_p(File.join(directory, 'Versions/A/Headers'))
+  #FileUtils.mkdir_p(File.join(directory, 'Versions/A/Headers'))
 
   combined_lib = merged[:combined_lib]
   puts "INFO: installing combined lib '#{combined_lib}' in '#{directory}'"
@@ -191,6 +192,28 @@ def make_framework(opts = {})
     `ln -sfh Versions/Current/Headers Headers`
 
     `cp -a ../../Debug-iphoneos/calabashHeaders/* Versions/A/Headers`
+
+  end
+
+
+  version_exe = merged[:version_exe]
+  puts "INFO: installing Resources to '#{directory}'"
+  resource_path = File.join(directory, 'Versions/A/Resources')
+  FileUtils.mkdir_p(resource_path)
+  FileUtils.cp(version_exe, resource_path)
+
+
+  Dir.chdir(directory) do
+    FileUtils.mkdir_p('Versions/A/Resources')
+
+    FileUtils.cp(, "./Versions/A/#{framework_name}")
+    `ln -sfh Versions/Current/#{framework_name} #{framework_name}`
+
+    `ln -sfh Versions/Current/Headers Headers`
+
+    `cp -a ../../Debug-iphoneos/calabashHeaders/* Versions/A/Headers`
+
+
 
   end
 
