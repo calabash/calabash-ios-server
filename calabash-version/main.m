@@ -12,7 +12,8 @@
 int main(int argc, const char * argv[]) {
 
   @autoreleasepool {
-    printf("%s\n", [kLPCALABASHVERSION cStringUsingEncoding:NSASCIIStringEncoding]);
+    NSString *calabashVersion = [kLPCALABASHVERSION componentsSeparatedByString:@" "].lastObject;
+    printf("%s\n", [calabashVersion cStringUsingEncoding:NSASCIIStringEncoding]);
   }
   return 0;
 }
