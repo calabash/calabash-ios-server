@@ -203,6 +203,8 @@ def make_framework(opts = {})
   Dir.chdir(directory) do
     `ln -sfh Versions/Current/Resources Resources`
 
+    version = `Resources/version`.chomp!
+    `ln -sfh A Versions/#{version}`
   end
 
   puts 'INFO: verifying framework'
