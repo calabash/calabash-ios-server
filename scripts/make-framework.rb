@@ -170,13 +170,12 @@ def make_framework(opts = {})
 
   framework_name = framework_product_name
 
-  #FileUtils.mkdir_p(File.join(directory, 'Versions/A/Headers'))
+  FileUtils.mkdir_p(File.join(directory, 'Versions/A/Headers'))
 
   combined_lib = merged[:combined_lib]
   puts "INFO: installing combined lib '#{combined_lib}' in '#{directory}'"
 
   Dir.chdir(directory) do
-    FileUtils.mkdir_p('Versions/A/Headers')
     `ln -sfh A Versions/Current`
 
     lib = "../#{combined_lib}"
@@ -192,7 +191,6 @@ def make_framework(opts = {})
     `ln -sfh Versions/Current/Headers Headers`
 
     `cp -a ../../Debug-iphoneos/calabashHeaders/* Versions/A/Headers`
-
   end
 
 
@@ -202,18 +200,8 @@ def make_framework(opts = {})
   FileUtils.mkdir_p(resource_path)
   FileUtils.cp(version_exe, resource_path)
 
-
   Dir.chdir(directory) do
-    FileUtils.mkdir_p('Versions/A/Resources')
-
-    FileUtils.cp(, "./Versions/A/#{framework_name}")
-    `ln -sfh Versions/Current/#{framework_name} #{framework_name}`
-
-    `ln -sfh Versions/Current/Headers Headers`
-
-    `cp -a ../../Debug-iphoneos/calabashHeaders/* Versions/A/Headers`
-
-
+    `ln -sfh Versions/Current/Resources Resources`
 
   end
 
@@ -221,18 +209,6 @@ def make_framework(opts = {})
   lib = "#{directory}/#{framework_name}"
   lipo_verify_arches(lib)
 end
-
-def copy_version_binary(opts={})
-  default_opts = {:source => './build/Debug/version',
-                  :target => './build/Debug-combined/calabash.framework/Resources'}
-  merged = default_opts.merge(opts)
-  source = merged[:source]
-  target = merged[:target]
-  puts "INFO: staging version binary from '#{source}' to '#{target}'"
-  FileUtils.mkdir_p(target)
-  FileUtils.cp(source, target)
-end
-
 
 def stage_framework(opts = {})
   default_opts = {:source => './build/Debug-combined/calabash.framework',
@@ -267,7 +243,6 @@ end
 if ARGV[0] == 'verify'
   lipo_combine_libs
   make_framework
-  copy_version_binary
   stage_framework
   exit 0
 end
