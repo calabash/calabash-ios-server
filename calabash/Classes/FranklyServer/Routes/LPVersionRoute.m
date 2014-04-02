@@ -104,7 +104,10 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
   BOOL isIphoneAppEmulated = [self isIPhoneAppEmulatedOnIPad];
   NSDictionary *git = @{@"revision" : kLPGitShortRevision, @"branch" : kLPGitBranch, @"remote_origin" : kLPGitRemoteOrigin};
 
-  NSDictionary *res = @{@"version": kLPCALABASHVERSION,
+
+  NSString *calabashVersion = [kLPCALABASHVERSION componentsSeparatedByString:@" "].lastObject;
+
+  NSDictionary *res = @{@"version": calabashVersion,
                         @"app_id": idString,
                         @"iOS_version": [[UIDevice currentDevice]
                                          systemVersion],

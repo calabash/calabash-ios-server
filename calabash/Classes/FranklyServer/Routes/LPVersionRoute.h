@@ -9,7 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "LPRoute.h"
 
-#define kLPCALABASHVERSION @"0.9.169.pre-framework-reports-version"
+/*** UNEXPECTED ***
+ We have tools that search the strings in the compiled binary for a match on
+ 'CALABASH VERSION'.
+
+ eg. $ strings Briar-cal.app/Briar-cal | grep -E 'CALABASH VERSION'
+
+ We use this information to determine the version of the server that is compiled
+ into binary.
+
+ Do not change the 'CALABASH VERSION' portion of the following constant without
+ updating the ruby API.
+ ******************/
+#define kLPCALABASHVERSION @"CALABASH VERSION: 0.9.169.pre"
 
 @interface LPVersionRoute : NSObject <LPRoute>
 
