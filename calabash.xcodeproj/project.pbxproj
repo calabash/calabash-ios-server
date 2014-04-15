@@ -22,6 +22,8 @@
 /* Begin PBXBuildFile section */
 		B164575718FDCE4900CAA25A /* LPUIATapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B164575518FDCE4900CAA25A /* LPUIATapRoute.m */; };
 		B164575818FDCE4900CAA25A /* LPUIATapRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B164575618FDCE4900CAA25A /* LPUIATapRoute.h */; };
+		B164575B18FDD60700CAA25A /* LPUIATapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B164575518FDCE4900CAA25A /* LPUIATapRoute.m */; };
+		B164575C18FDD60B00CAA25A /* LPUIATapRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B164575618FDCE4900CAA25A /* LPUIATapRoute.h */; };
 		F5091BDC18C4E1D700C85307 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code"; }; };
 		F5091BDD18C4E1D700C85307 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; };
 		F5091BDE18C4E1D700C85307 /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; };
@@ -857,6 +859,7 @@
 				F59C5D0218E0C1D90087B51D /* LPRouter.h in Headers */,
 				F59C5D0318E0C1DF0087B51D /* LPHTTPResponse.h in Headers */,
 				F59C5D0518E0C1EA0087B51D /* LPHTTPDataResponse.h in Headers */,
+				B164575C18FDD60B00CAA25A /* LPUIATapRoute.h in Headers */,
 				F59C5D0418E0C1E60087B51D /* LPHTTPAsyncFileResponse.h in Headers */,
 				F59C5D0618E0C1EF0087B51D /* LPHTTPDynamicFileResponse.h in Headers */,
 				F59C5D0718E0C1F30087B51D /* LPHTTPFileResponse.h in Headers */,
@@ -1111,6 +1114,7 @@
 				F5821A0C18C4E27400293508 /* LPOperation.m in Sources */,
 				F5821A0D18C4E27400293508 /* LPQueryOperation.m in Sources */,
 				F5821A0E18C4E27400293508 /* LPScrollOperation.m in Sources */,
+				B164575B18FDD60700CAA25A /* LPUIATapRoute.m in Sources */,
 				F5821A0F18C4E27400293508 /* LPScrollToRowOperation.m in Sources */,
 				F5821A1018C4E27400293508 /* LPSetTextOperation.m in Sources */,
 				F5821A1118C4E27400293508 /* LPUIAChannel.m in Sources */,
