@@ -20,6 +20,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		B164575718FDCE4900CAA25A /* LPUIATapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B164575518FDCE4900CAA25A /* LPUIATapRoute.m */; };
+		B164575818FDCE4900CAA25A /* LPUIATapRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B164575618FDCE4900CAA25A /* LPUIATapRoute.h */; };
 		F5091BDC18C4E1D700C85307 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code"; }; };
 		F5091BDD18C4E1D700C85307 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; };
 		F5091BDE18C4E1D700C85307 /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; };
@@ -284,6 +286,8 @@
 		B16321F315BC1ECD00408364 /* LPGenericAsyncRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPGenericAsyncRoute.m; sourceTree = "<group>"; };
 		B16321F615BC200300408364 /* LPKeyboardRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPKeyboardRoute.h; sourceTree = "<group>"; };
 		B16321F715BC200300408364 /* LPKeyboardRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPKeyboardRoute.m; sourceTree = "<group>"; };
+		B164575518FDCE4900CAA25A /* LPUIATapRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUIATapRoute.m; sourceTree = "<group>"; };
+		B164575618FDCE4900CAA25A /* LPUIATapRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUIATapRoute.h; sourceTree = "<group>"; };
 		B16C307D15191A8C00DAA3FA /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		B16C307F15191A8C00DAA3FA /* calabash-min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "calabash-min.js"; sourceTree = "<group>"; };
 		B16C308015191A8C00DAA3FA /* set_text-min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "set_text-min.js"; sourceTree = "<group>"; };
@@ -661,6 +665,8 @@
 				B1DDE6C915C06CB500BBE2BE /* LPUIARoute.h */,
 				B1DDE6CA15C06CB500BBE2BE /* LPUIARoute.m */,
 				B1CED0FC183E9562004793B9 /* LPLocationRoute.h */,
+				B164575618FDCE4900CAA25A /* LPUIATapRoute.h */,
+				B164575518FDCE4900CAA25A /* LPUIATapRoute.m */,
 				B1CED0FA183E9551004793B9 /* LPLocationRoute.m */,
 				B1DDE6CB15C06CB500BBE2BE /* LPUserPrefRoute.h */,
 				B1DDE6CC15C06CB500BBE2BE /* LPUserPrefRoute.m */,
@@ -835,6 +841,7 @@
 				F59C5CF918E0BB290087B51D /* LPRouter.h in Headers */,
 				F59C5CFA18E0BBAE0087B51D /* LPHTTPResponse.h in Headers */,
 				F59C5CFB18E0BBAE0087B51D /* LPHTTPAsyncFileResponse.h in Headers */,
+				B164575818FDCE4900CAA25A /* LPUIATapRoute.h in Headers */,
 				F59C5CFC18E0BBAE0087B51D /* LPHTTPDataResponse.h in Headers */,
 				F59C5CFD18E0BBAE0087B51D /* LPHTTPDynamicFileResponse.h in Headers */,
 				F59C5CFE18E0BBAE0087B51D /* LPHTTPFileResponse.h in Headers */,
@@ -1018,6 +1025,7 @@
 				F5091BEE18C4E1D700C85307 /* LPOperation.m in Sources */,
 				F5091BEF18C4E1D700C85307 /* LPQueryOperation.m in Sources */,
 				F5091BF018C4E1D700C85307 /* LPScrollOperation.m in Sources */,
+				B164575718FDCE4900CAA25A /* LPUIATapRoute.m in Sources */,
 				F5091BF118C4E1D700C85307 /* LPScrollToRowOperation.m in Sources */,
 				F5091BF218C4E1D700C85307 /* LPSetTextOperation.m in Sources */,
 				F5091BF318C4E1D700C85307 /* LPUIAChannel.m in Sources */,

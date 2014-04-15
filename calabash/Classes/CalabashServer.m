@@ -21,6 +21,7 @@
 #import "LPVersionRoute.h"
 #import "LPConditionRoute.h"
 #import "LPUIARoute.h"
+#import "LPUIATapRoute.h"
 #import "LPKeyboardRoute.h"
 #import "LPLocationRoute.h"
 #import "LPDebugRoute.h"
@@ -107,6 +108,10 @@
     LPUIARoute *uia = [LPUIARoute new];
     [LPRouter addRoute:uia forPath:@"uia"];
     [uia release];
+
+    LPUIATapRoute *uiaTap = [LPUIATapRoute new];
+    [LPRouter addRoute:uiaTap forPath:@"uia-tap"];
+    [uiaTap release];
 
     LPLocationRoute *location = [LPLocationRoute new];
     [LPRouter addRoute:location forPath:@"location"];
