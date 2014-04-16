@@ -156,7 +156,8 @@ end
 
 def make_framework(opts = {})
   default_opts = {:directory => './build/Debug-combined/calabash.framework',
-                  :combined_lib => combined_lib_name}
+                  :combined_lib => combined_lib_name,
+                  :version_exe => './build/Debug/version'}
 
   merged = default_opts.merge(opts)
 
@@ -175,7 +176,6 @@ def make_framework(opts = {})
   puts "INFO: installing combined lib '#{combined_lib}' in '#{directory}'"
 
   Dir.chdir(directory) do
-    FileUtils.mkdir_p('Versions/A/Headers')
     `ln -sfh A Versions/Current`
 
     lib = "../#{combined_lib}"
@@ -191,7 +191,20 @@ def make_framework(opts = {})
     `ln -sfh Versions/Current/Headers Headers`
 
     `cp -a ../../Debug-iphoneos/calabashHeaders/* Versions/A/Headers`
+  end
 
+
+  version_exe = merged[:version_exe]
+  puts "INFO: installing Resources to '#{directory}'"
+  resource_path = File.join(directory, 'Versions/A/Resources')
+  FileUtils.mkdir_p(resource_path)
+  FileUtils.cp(version_exe, resource_path)
+
+  Dir.chdir(directory) do
+    `ln -sfh Versions/Current/Resources Resources`
+
+    version = `Resources/version`.chomp!
+    `ln -sfh A Versions/#{version}`
   end
 
   puts 'INFO: verifying framework'
