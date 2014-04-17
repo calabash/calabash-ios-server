@@ -74,6 +74,7 @@
 
 
 - (void) checkConditionWithTimer:(NSTimer *) aTimer {
+  if (!self.timer) {return;}
   NSString *condition = [self.data objectForKey:@"condition"];
 
   if (self.curCount == self.maxCount) {
