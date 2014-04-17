@@ -65,6 +65,7 @@
 
 
 - (void) checkConditionWithTimer:(NSTimer *) aTimer {
+  if (self.timer == nil) {return;}
   if (self.curCount == self.maxCount) {
     [self failWithMessageFormat:@"Timed out waiting for view to not animate." message:nil];
   }
@@ -89,6 +90,8 @@
           }
         }
       }
+      [self.timer invalidate];
+      self.timer = nil;
       [self performTapOnView: v];
       
     }
