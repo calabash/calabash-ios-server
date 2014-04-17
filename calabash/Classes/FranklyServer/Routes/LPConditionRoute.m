@@ -77,7 +77,7 @@
   NSString *condition = [self.data objectForKey:@"condition"];
 
   if (self.curCount == self.maxCount) {
-    [self failWithMessageFormat:@"Timed out waitinf for condition %@" message:condition];
+    [self failWithMessageFormat:@"Timed out waiting for condition %@" message:condition];
   }
 
   self.curCount += 1;
