@@ -327,11 +327,11 @@ static NSCharacterSet *curlyBrackets = nil;
 }
 
 -(BOOL)string:(NSString*)string beginsWith:(NSString*)prefix {
-  if (!string) {
+  if (!string || [prefix length]>[string length]) {
     return NO;
   }
   string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-  return [prefix isEqualToString: [string substringWithRange:NSMakeRange(0, 1)]];
+  return [prefix isEqualToString: [string substringWithRange:NSMakeRange(0, [prefix length])]];
 }
 
 -(BOOL)tokenContainsNoColon:(NSString*)token {
