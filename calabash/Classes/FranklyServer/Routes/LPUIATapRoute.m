@@ -35,11 +35,27 @@
 
 - (void) beginOperation {
   self.done = NO;
-  self.maxCount = 60;
   self.curCount = 0;
-  NSNumber *freq = [NSNumber numberWithDouble:0.2];
   
-  self.timer = [NSTimer scheduledTimerWithTimeInterval:[freq doubleValue]
+  NSNumber *timeoutInSecs = [self.data objectForKey:@"timeout"];
+  if (!timeoutInSecs) {
+    timeoutInSecs = [NSNumber numberWithUnsignedInteger:30];
+  }
+  NSUInteger timeoutInSecsUI = [timeoutInSecs unsignedIntegerValue];
+
+  NSNumber *freq = [self.data objectForKey:@"frequency"];
+  if (!freq) {
+    freq = [NSNumber numberWithDouble:0.2];
+  }
+
+  double freq_d = [freq doubleValue];
+  if (freq_d <= 0.1) {
+    freq_d = 0.1;
+  }
+
+  self.maxCount = ceil(timeoutInSecsUI / freq_d);
+
+  self.timer = [NSTimer scheduledTimerWithTimeInterval:freq_d
                                                 target:self
                                               selector:@selector(checkConditionWithTimer:)
                                               userInfo:nil repeats:YES];
@@ -68,7 +84,7 @@
         }
         else {
           if (self.curCount < kLPUIATapRouteModalWaitIterationCount) {
-            return;
+            return; //wait
           }
         }
       }
