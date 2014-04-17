@@ -172,7 +172,7 @@
 
   NSError *error = nil;
   if (![_httpServer start:&error]) {
-    NSLog(@"Error starting LPHTTP Server: %@", error);// %@", error);
+    NSLog(@"Error starting Calabash LPHTTP Server: %@", error);// %@", error);
   }
 }
 
