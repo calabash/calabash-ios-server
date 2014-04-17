@@ -290,6 +290,29 @@ static NSCharacterSet *curlyBrackets = nil;
     token = [self findNextToken:&index];
     if (token == nil) {break;}
 
+
+    if ([self tokenContainsNoColon:token]) {
+
+      NSUInteger oldIndex = index;
+      NSString *lookAheadToken = [self findNextToken:&index];
+      if ([lookAheadToken isEqualToString:@":"]) {
+        NSString *lookAheadVal = [self findNextToken:&index];
+        if (!lookAheadVal) {break;}
+        token = [NSString stringWithFormat:@"%@:%@",token,lookAheadVal];
+      }
+      else if ([self string: lookAheadToken beginsWith: @":"]) {
+        token = [NSString stringWithFormat:@"%@%@",token,lookAheadToken];
+      } else {
+        index = oldIndex; //rewind scan
+      }
+    } else if ([self tokenEndsWithColon:token]) {
+      NSUInteger oldIndex = index;
+      NSString *lookAheadToken = [self findNextToken:&index];
+      if (!lookAheadToken) {break;}
+
+      token = [NSString stringWithFormat:@"%@%@",token,lookAheadToken];
+    }
+
     UIScriptAST *indexPropOrPred = [self parseIndexPropertyOrPredicate:token];
     while (indexPropOrPred != nil) {
       //token is an index or property
@@ -303,6 +326,29 @@ static NSCharacterSet *curlyBrackets = nil;
   }
 }
 
+-(BOOL)string:(NSString*)string beginsWith:(NSString*)prefix {
+  if (!string) {
+    return NO;
+  }
+  string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+  return [prefix isEqualToString: [string substringWithRange:NSMakeRange(0, 1)]];
+}
+
+-(BOOL)tokenContainsNoColon:(NSString*)token {
+  NSRange colonRange = [token rangeOfString:@":"];
+  if (colonRange.location == NSNotFound) {
+    return YES;
+  }
+
+  NSRange pingRange = [token rangeOfString:@"'"];
+  if (pingRange.location == NSNotFound) {
+    return NO;
+  }
+  return colonRange.location > pingRange.location;
+}
+-(BOOL)tokenEndsWithColon:(NSString*)token {
+  return [token rangeOfString:@":" options:NSBackwardsSearch].location == [token length]-1;
+}
 
 - (NSString *) findNextToken:(NSUInteger *) index {
   static NSCharacterSet *notWhite = nil;
@@ -506,6 +552,7 @@ static NSCharacterSet *curlyBrackets = nil;
   }
   //general property
   NSString *propName = [colonSep objectAtIndex:0];
+
   NSString *propValTok = [[colonSep subarrayWithRange:NSMakeRange(1,
           [colonSep count] - 1)] componentsJoinedByString:@":"];
   UIScriptASTWith *withProp = [[UIScriptASTWith alloc]
@@ -518,6 +565,7 @@ static NSCharacterSet *curlyBrackets = nil;
 
 
 - (void) parseLiteralValue:(NSString *) literalToken addToWithAST:(UIScriptASTWith *) ast {
+  literalToken = [literalToken stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
   if ([@"NO" isEqualToString:literalToken]) {
     ast.valueType = UIScriptLiteralTypeBool;
     [ast setBoolValue:NO];
