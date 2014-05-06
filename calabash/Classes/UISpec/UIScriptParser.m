@@ -484,6 +484,12 @@ static NSCharacterSet *curlyBrackets = nil;
   } else if ([token isEqualToString:@"sibling"]) {
     d = [[UIScriptASTDirection alloc]
             initWithDirection:UIScriptASTDirectionTypeSibling];
+  } else if ([token isEqualToString:@"acc"]) {
+    d = [[UIScriptASTDirection alloc]
+         initWithDirection:UIScriptASTDirectionTypeAcc];
+  } else if ([token isEqualToString:@"accParent"]) {
+    d = [[UIScriptASTDirection alloc]
+         initWithDirection:UIScriptASTDirectionTypeAccParent];
   }
   return d ? [d autorelease] : nil;
 }
@@ -500,15 +506,24 @@ static NSCharacterSet *curlyBrackets = nil;
     if ([nameArr count] != 3) {return nil;}
     return [nameArr objectAtIndex:1];
   } else {
-    NSString *smallCaseName = [colonSep objectAtIndex:0];
-    if ([@"*" isEqualToString:smallCaseName]) {
+    NSString *classNameOrAbbreviation = [colonSep objectAtIndex:0];
+    if ([@"*" isEqualToString:classNameOrAbbreviation]) {
       return @"UIView";
     }
-    //tableView
-    NSString *upCaseFirst = [[smallCaseName substringToIndex:1]
-            uppercaseString];
-    return [NSString stringWithFormat:@"UI%@%@", upCaseFirst,
-                                      [smallCaseName substringFromIndex:1]];
+    unichar ch = [classNameOrAbbreviation characterAtIndex:0];
+    
+    if (ch >= 'A' && ch <= 'Z') {
+      //initial Uppercase class-names interpreted as is
+      return classNameOrAbbreviation;
+    } else {
+      //initial lower-case classnames interpreted as abbreviations:
+      //tableView -> UITableView
+      NSString *upCaseFirst = [[classNameOrAbbreviation substringToIndex:1]
+                               uppercaseString];
+      return [NSString stringWithFormat:@"UI%@%@", upCaseFirst,
+              [classNameOrAbbreviation substringFromIndex:1]];
+    }
+
   }
 }
 
