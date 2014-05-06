@@ -64,10 +64,7 @@
     //
     NSArray *allWindows = [LPTouchUtils applicationWindows];
     NSMutableArray *views = [NSMutableArray arrayWithCapacity:32];
-    for (UIWindow *window in allWindows) {
-      [views addObjectsFromArray:[window subviews]];
-    }
-    result = [self.parser evalWith:views];
+    result = [self.parser evalWith:allWindows];
   } else {
     result = nil;
   }

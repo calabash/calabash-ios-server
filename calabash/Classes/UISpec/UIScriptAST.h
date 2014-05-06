@@ -7,7 +7,8 @@
 #import <Foundation/Foundation.h>
 
 typedef enum {
-  UIScriptASTDirectionTypeDescendant, UIScriptASTDirectionTypeParent, UIScriptASTDirectionTypeChild, UIScriptASTDirectionTypeSibling
+  UIScriptASTDirectionTypeDescendant, UIScriptASTDirectionTypeParent, UIScriptASTDirectionTypeChild, UIScriptASTDirectionTypeSibling,
+      UIScriptASTDirectionTypeAcc, UIScriptASTDirectionTypeAccParent
 } UIScriptASTDirectionType;
 
 typedef enum {

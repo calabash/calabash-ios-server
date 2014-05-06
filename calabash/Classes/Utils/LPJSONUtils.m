@@ -93,7 +93,7 @@
     }
 
     // TODO LPJSONUtils.h has bug around accessibilityIdentifier
-    if ([result respondsToSelector:@selector(accessibilityIdentifier)]) {
+    if ([object respondsToSelector:@selector(accessibilityIdentifier)]) {
 
       NSString *aid = [object accessibilityIdentifier];
       if (aid) {
@@ -135,6 +135,66 @@
 
     return result;
   }
+  if ([object respondsToSelector:@selector(isAccessibilityElement)] && [object isAccessibilityElement]) {
+    NSMutableDictionary *result = [NSMutableDictionary dictionaryWithObjectsAndKeys:NSStringFromClass([object class]), @"class", nil];
+    
+    NSString *lbl = [object accessibilityLabel];
+    if (lbl) {
+      [result setObject:lbl forKey:@"label"];
+    } else {
+      [result setObject:[NSNull null] forKey:@"label"];
+    }
+    
+    if ([object respondsToSelector:@selector(accessibilityIdentifier)]) {
+      
+      NSString *aid = [object accessibilityIdentifier];
+      if (aid) {
+        [result setObject:aid forKey:@"id"];
+      } else {
+        [result setObject:[NSNull null] forKey:@"id"];
+      }
+    }
+
+    if ([object respondsToSelector:@selector(accessibilityHint)]) {
+      
+      NSString *accHint = [object accessibilityHint];
+      if (accHint) {
+        [result setObject:accHint forKey:@"hint"];
+      } else {
+        [result setObject:[NSNull null] forKey:@"hint"];
+      }
+    }
+    if ([object respondsToSelector:@selector(accessibilityValue)]) {
+      
+      NSString *accVal = [object accessibilityValue];
+      if (accVal) {
+        [result setObject:accVal forKey:@"value"];
+      } else {
+        [result setObject:[NSNull null] forKey:@"hint"];
+      }
+    }
+
+    CGRect frame = [object accessibilityFrame];
+    CGPoint center = [LPTouchUtils centerOfFrame:frame shouldTranslate:YES];
+    NSDictionary *frameDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:frame.origin.x], @"x",
+                              [NSNumber numberWithFloat:frame.origin.y], @"y",
+                              [NSNumber numberWithFloat:frame.size.width], @"width",
+                              [NSNumber numberWithFloat:frame.size.height], @"height",
+                              [NSNumber numberWithFloat:center.x], @"center_x",
+                              [NSNumber numberWithFloat:center.y], @"center_y",
+                              nil];
+    
+    [result setObject:frameDic forKey:@"rect"];
+    
+    [result setObject:[object description] forKey:@"description"];
+
+
+    return result;
+
+
+    
+  }
+
 
   LPCJSONSerializer *s = [LPCJSONSerializer serializer];
   NSError *error = nil;
