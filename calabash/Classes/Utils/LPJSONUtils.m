@@ -102,6 +102,16 @@
         [result setObject:[NSNull null] forKey:@"id"];
       }
     }
+    if ([object respondsToSelector:@selector(text)]) {
+
+      NSString *text = [object text];
+      if (text) {
+        [result setObject:text forKey:@"text"];
+      } else {
+        [result setObject:[NSNull null] forKey:@"text"];
+      }
+    }
+
 
 
     CGRect frame = [object frame];
@@ -170,7 +180,16 @@
       if (accVal) {
         [result setObject:accVal forKey:@"value"];
       } else {
-        [result setObject:[NSNull null] forKey:@"hint"];
+        [result setObject:[NSNull null] forKey:@"value"];
+      }
+    }
+    if ([object respondsToSelector:@selector(text)]) {
+
+      NSString *text = [object text];
+      if (text) {
+        [result setObject:text forKey:@"text"];
+      } else {
+        [result setObject:[NSNull null] forKey:@"text"];
       }
     }
 
