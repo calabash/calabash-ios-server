@@ -16,3 +16,11 @@ or from the calabash-ios/calabash-cucumber directory:
 # see the calabash-ios/calabash-cucumber/Rakefile for details
 $ rake build_server
 ```
+
+### testing
+
+```
+# test building the framework
+$ cd scripts
+$ ./make-framework.rb
+```

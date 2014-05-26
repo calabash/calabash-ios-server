@@ -313,7 +313,7 @@ if __FILE__ == $0
     def test_lipo_cmd
       inputs = ['one-lib.a', 'two-lib.a']
       cmd = lipo_cmd(inputs, 'combined.lib')
-      expected = 'lipo -create one-lib.a two-lib.a -output combined.lib'
+      expected = 'xcrun lipo -create one-lib.a two-lib.a -output combined.lib'
       assert_equal(expected, cmd)
     end
 

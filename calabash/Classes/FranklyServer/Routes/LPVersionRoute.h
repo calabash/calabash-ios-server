@@ -21,7 +21,7 @@
  Do not change the 'CALABASH VERSION' portion of the following constant without
  updating the ruby API.
  ******************/
-#define kLPCALABASHVERSION @"CALABASH VERSION: 0.9.169.pre6"
+#define kLPCALABASHVERSION @"CALABASH VERSION: 0.9.169"
 
 @interface LPVersionRoute : NSObject <LPRoute>
 
