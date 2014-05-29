@@ -98,6 +98,11 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
       [NSThread sleepForTimeInterval:LPUIAChannelUIADelay];
       loopCount++;
       if (loopCount >= MAX_LOOP_COUNT) {
+        NSLog(@"Timed out running command %@", command);
+        NSLog(@"Server current index: %lu",(unsigned long) _scriptIndex);
+        NSDictionary *prefs = [self userPreferences];
+        NSLog(@"Current request: %@", [prefs objectForKey:LPUIAChannelUIAPrefsRequestKey]);
+        NSLog(@"Current response: %@", [prefs objectForKey:LPUIAChannelUIAPrefsRequestKey]);
         result = nil;
         break;
       }
@@ -148,12 +153,37 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
 
 
 - (void) deviceRequestExecutionOf:(NSString *) command {
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  NSDictionary *uiaRequest = [self requestForCommand:command];
+  NSInteger i=0;
+  while (i<MAX_LOOP_COUNT) {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *uiaRequest = [self requestForCommand:command];
+    
+    [defaults setObject:uiaRequest
+                 forKey:(NSString *) LPUIAChannelUIAPrefsRequestKey];
+    [defaults synchronize];
+    
+    if ([self validateRequestWritten: uiaRequest]) {
+      return;
+    }
+    else {
+      [NSThread sleepForTimeInterval:LPUIAChannelUIADelay];
+      i++;
+    }
+    
+  }
+}
 
-  [defaults setObject:uiaRequest
-               forKey:(NSString *) LPUIAChannelUIAPrefsRequestKey];
-  [defaults synchronize];
+-(BOOL)validateRequestWritten:(NSDictionary*)uiaRequest {
+  NSDictionary *defaults = [self userPreferences];
+  NSDictionary *written = [defaults objectForKey:(NSString*)LPUIAChannelUIAPrefsRequestKey];
+  if (!written) {
+    return NO;
+  }
+  id indexWritten =[written objectForKey:LPUIAChannelUIAPrefsIndexKey];
+  if (!indexWritten) {
+    return NO;
+  }
+  return [indexWritten unsignedIntegerValue] == _scriptIndex;
 }
 
 
