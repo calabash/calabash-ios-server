@@ -8,6 +8,7 @@
 #import "LPJSONUtils.h"
 #import "LPCORSResponse.h"
 
+
 @implementation LPRouter
 @synthesize postData = _postData;
 
@@ -110,14 +111,40 @@ static NSMutableDictionary *routes = nil;
       [route setParameters:params];
     }
 
-    SEL raw = @selector(httpResponseForMethod:URI:);
-    if ([route respondsToSelector:raw]) {
-      return [route performSelector:raw withObject:method withObject:path];
+    BOOL inMainThread = YES;
+    SEL inNetworkThreadSel = @selector(inNetworkThread);
+    if ([route respondsToSelector:inNetworkThreadSel]) {
+      inMainThread = NO;
     }
 
-    NSDictionary *json = [route JSONResponseForMethod:method URI:path
-                                                 data:params];
-    return [self responseForJSON:json];
+    SEL raw = @selector(httpResponseForMethod:URI:);
+    if ([route respondsToSelector:raw]) {
+      if (inMainThread) {
+        __block NSObject <LPHTTPResponse> * response = nil;
+        dispatch_sync(dispatch_get_main_queue(), ^ {
+          response = [[route performSelector:raw withObject:method withObject:path] retain];
+        });
+        return [response autorelease];
+      }
+      else {
+        return [route performSelector:raw withObject:method withObject:path];
+      }
+
+    }
+
+    __block NSDictionary *json = nil;
+    if (inMainThread) {
+      dispatch_sync(dispatch_get_main_queue(), ^ {
+        json = [[route JSONResponseForMethod:method
+                                        URI:path
+                                       data:params] retain];
+      });
+    }
+    else {
+      json = [[route JSONResponseForMethod:method URI:path
+                                                   data:params] retain];
+    }
+    return [self responseForJSON:[json autorelease]];
   }
   return nil;
 }

@@ -17,6 +17,7 @@
   return [method isEqualToString:@"GET"] || [method isEqualToString:@"POST"];
 }
 
+-(BOOL)inNetworkThread{return YES;}
 
 - (NSDictionary *) JSONResponseForMethod:(NSString *) method
                                      URI:(NSString *) path
@@ -24,22 +25,25 @@
   
   mach_timebase_info_data_t timebaseInfo;
   mach_timebase_info(&timebaseInfo);
+  __block uint64_t machTimeAfter;
+  dispatch_semaphore_t synchronizationSemaphore = dispatch_semaphore_create(0);
   
   uint64_t machTimeBefore = mach_absolute_time();
-
-  __block uint64_t machTimeAfter;
   
-  dispatch_sync(dispatch_get_main_queue(), ^{
+  dispatch_async(dispatch_get_main_queue(), ^{
     machTimeAfter = mach_absolute_time();
+    dispatch_semaphore_signal(synchronizationSemaphore);
   });
   
+  BOOL success = (0 == dispatch_semaphore_wait(synchronizationSemaphore, dispatch_time(DISPATCH_TIME_NOW, 5000000000)));
+  dispatch_release(synchronizationSemaphore);
 
   // Convert the mach time to milliseconds
   uint64_t durationMachTime = machTimeAfter -  machTimeBefore;
-  uint64_t result = (durationMachTime/1000000 * timebaseInfo.numer) / timebaseInfo.denom;
+  uint64_t result = (durationMachTime/1000000 * timebaseInfo.numer)/timebaseInfo.denom;
   return [NSDictionary dictionaryWithObjectsAndKeys:
            [NSNumber numberWithUnsignedLongLong:result], @"result",
-           @"SUCCESS", @"outcome",
+            success ? @"SUCCESS" : @"FAILURE",           @"outcome",
         nil];
   
   

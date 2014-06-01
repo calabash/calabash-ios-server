@@ -11,4 +11,5 @@
 
 @interface LPUIPingRoute : NSObject <LPRoute>
 
+-(BOOL)inNetworkThread;
 @end

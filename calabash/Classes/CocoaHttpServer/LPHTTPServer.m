@@ -37,8 +37,7 @@
 		asyncSocket = [[LPGCDAsyncSocket alloc] initWithDelegate:self delegateQueue:serverQueue];
 		
 		// Use default connection class of LPHTTPConnection
-//		connectionQueue = dispatch_queue_create("LPHTTPConnection", NULL);
-        connectionQueue=dispatch_get_main_queue();
+		connectionQueue = dispatch_queue_create("LPHTTPConnection", NULL);
 		connectionClass = [LPHTTPConnection self];
 		
 		// By default bind on all available interfaces, en1, wifi etc
