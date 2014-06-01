@@ -25,6 +25,7 @@
 #import "LPKeyboardRoute.h"
 #import "LPLocationRoute.h"
 #import "LPDebugRoute.h"
+#import "LPUIPingRoute.h"
 #import <dlfcn.h>
 
 @interface CalabashServer ()
@@ -120,6 +121,10 @@
     LPDebugRoute *debugRoute = [LPDebugRoute new];
     [LPRouter addRoute:debugRoute forPath:@"debug"];
     [debugRoute release];
+
+    LPUIPingRoute *uiPingRoute = [LPUIPingRoute new];
+    [LPRouter addRoute:uiPingRoute forPath:@"uiping"];
+    [uiPingRoute release];
 
     //
     //        LPScreencastRoute *scr = [LPScreencastRoute new];
