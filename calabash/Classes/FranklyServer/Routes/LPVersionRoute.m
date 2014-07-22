@@ -8,6 +8,8 @@
 
 #import "LPVersionRoute.h"
 #import "LPTouchUtils.h"
+#import "LPHTTPDataResponse.h"
+#import "LPJSONUtils.h"
 #import <sys/utsname.h>
 
 @class UIDevice;
@@ -69,6 +71,22 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
   return [method isEqualToString:@"GET"];
 }
+
+- (BOOL)canHandlePostForPath:(NSArray *)path {
+  return [@"calabash_version" isEqualToString:[path lastObject]];
+}
+
+- (id)handleRequestForPath:(NSArray *)path withConnection:(id)connection {
+  if (![self canHandlePostForPath:path]) {
+    return nil;
+  }
+  NSDictionary *version = [self JSONResponseForMethod:@"GET" URI:@"calabash_version" data:nil];
+  NSData *jsonData = [[LPJSONUtils serializeDictionary:version] dataUsingEncoding:NSUTF8StringEncoding];
+  
+  return [[[LPHTTPDataResponse alloc] initWithData:jsonData] autorelease];
+  
+}
+
 
 - (NSDictionary *) JSONResponseForMethod:(NSString *) method URI:(NSString *) path data:(NSDictionary *) data {
   NSString *versionString = [[NSBundle mainBundle]

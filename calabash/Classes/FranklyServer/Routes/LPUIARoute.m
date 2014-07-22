@@ -8,6 +8,7 @@
 
 #import "LPUIARoute.h"
 #import "LPUIAChannel.h"
+#import "LPJSONUtils.h"
 
 @implementation LPUIARoute
 
@@ -15,6 +16,21 @@
   return [method isEqualToString:@"POST"];
 }
 
+- (id) handleRequestForPath: (NSArray *)path withConnection:(id)connection {
+  if (![self canHandlePostForPath:path]) {
+    return nil;
+  }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-method-access"
+  self.conn = connection;
+  self.data = [LPJSONUtils deserializeDictionary:[connection postDataAsString]];
+  return [self httpResponseForMethod:@"POST"
+        URI:  [path componentsJoinedByString:@"/"]];
+#pragma clang diagnostic push
+}
+- (BOOL) canHandlePostForPath: (NSArray *)path {
+ return [@"uia" isEqualToString:[path lastObject]];
+}
 
 - (void) beginOperation {
   self.done = NO;

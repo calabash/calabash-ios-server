@@ -20,6 +20,53 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		B1058DEF197F00C000B4A57B /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code"; }; };
+		B1058E08197F00C000B4A57B /* LPUIAChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F279AE183D5B3000A922BC /* LPUIAChannel.m */; };
+		B1058E1D197F00C000B4A57B /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; };
+		B1058E1E197F00C000B4A57B /* UIScriptAST.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFA14B6DB2B002A744C /* UIScriptAST.m */; };
+		B1058E20197F00C000B4A57B /* UIScriptASTALL.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFC14B6DB2B002A744C /* UIScriptASTALL.m */; };
+		B1058E21197F00C000B4A57B /* UIScriptASTClassName.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFE14B6DB2B002A744C /* UIScriptASTClassName.m */; };
+		B1058E22197F00C000B4A57B /* UIScriptASTDirection.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0014B6DB2B002A744C /* UIScriptASTDirection.m */; };
+		B1058E23197F00C000B4A57B /* UIScriptASTFirst.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0214B6DB2B002A744C /* UIScriptASTFirst.m */; };
+		B1058E24197F00C000B4A57B /* UIScriptASTIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0414B6DB2B002A744C /* UIScriptASTIndex.m */; };
+		B1058E25197F00C000B4A57B /* UIScriptASTLast.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0614B6DB2B002A744C /* UIScriptASTLast.m */; };
+		B1058E26197F00C000B4A57B /* LPEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DCD74189A82DF00F8DF87 /* LPEnv.m */; };
+		B1058E27197F00C000B4A57B /* UIScriptASTWith.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0814B6DB2B002A744C /* UIScriptASTWith.m */; };
+		B1058E29197F00C000B4A57B /* UIScriptParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0A14B6DB2B002A744C /* UIScriptParser.m */; };
+		B1058E2C197F00C000B4A57B /* LPTouchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */; };
+		B1058E2F197F00C000B4A57B /* LPReflectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B1296FC215DC1F5B005DDF5C /* LPReflectUtils.m */; };
+		B1058E33197F00C000B4A57B /* UIScriptASTVisibility.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B19DC716D162CF00D3D80B /* UIScriptASTVisibility.m */; };
+		B1058E35197F00C000B4A57B /* LPLog.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DCD78189A833000F8DF87 /* LPLog.m */; };
+		B1058E40197F00C000B4A57B /* CalabashServer.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8814B6DAE1002A744C /* CalabashServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B1058E4B197F00C000B4A57B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E757A15D434D00066550B /* CFNetwork.framework */; };
+		B1058E4C197F00C000B4A57B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
+		B1058E7A197F043100B4A57B /* LPCalabashFrankRegistrar.h in Headers */ = {isa = PBXBuildFile; fileRef = B1058E78197F043100B4A57B /* LPCalabashFrankRegistrar.h */; };
+		B1058E7B197F043100B4A57B /* LPCalabashFrankRegistrar.m in Sources */ = {isa = PBXBuildFile; fileRef = B1058E79197F043100B4A57B /* LPCalabashFrankRegistrar.m */; };
+		B113582C197F0C28004B16F4 /* LPTouchUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FE0E14B6DB2B002A744C /* LPTouchUtils.h */; };
+		B113582D197F0C41004B16F4 /* LPISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B29241627389500433F6C /* LPISO8601DateFormatter.m */; };
+		B113582E197F0C41004B16F4 /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDDF14B6DB2B002A744C /* CDataScanner_Extensions.m */; };
+		B113582F197F0C41004B16F4 /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; };
+		B1135830197F0C41004B16F4 /* LPCJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE314B6DB2B002A744C /* LPCJSONScanner.m */; };
+		B1135831197F0C41004B16F4 /* LPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE514B6DB2B002A744C /* LPCJSONSerializer.m */; };
+		B1135832197F0C73004B16F4 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8C14B6DAFB002A744C /* LPCDataScanner.m */; };
+		B1135833197F0C92004B16F4 /* LPJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */; };
+		B1135837197F10B7004B16F4 /* LPUIARoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CA15C06CB500BBE2BE /* LPUIARoute.m */; };
+		B1135839197F12CF004B16F4 /* LPGenericAsyncRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F315BC1ECD00408364 /* LPGenericAsyncRoute.m */; };
+		B113583A197F1311004B16F4 /* LPHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B514E6565500663205 /* LPHTTPConnection.m */; };
+		B113583B197F1351004B16F4 /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; };
+		B113583C197F1351004B16F4 /* LPHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B814E6565500663205 /* LPHTTPMessage.m */; };
+		B113583D197F1351004B16F4 /* LPHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9BB14E6565500663205 /* LPHTTPServer.m */; };
+		B113583E197F1351004B16F4 /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98414E5215800663205 /* DDData.m */; };
+		B113583F197F1351004B16F4 /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* DDNumber.m */; };
+		B1135840197F1351004B16F4 /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98814E5215800663205 /* DDRange.m */; };
+		B1135841197F1351004B16F4 /* LPHTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C99F14E6564200663205 /* LPHTTPAsyncFileResponse.m */; };
+		B1135842197F1351004B16F4 /* LPHTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A114E6564200663205 /* LPHTTPDataResponse.m */; };
+		B1135843197F1351004B16F4 /* LPHTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A314E6564200663205 /* LPHTTPDynamicFileResponse.m */; };
+		B1135844197F1351004B16F4 /* LPHTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A514E6564200663205 /* LPHTTPFileResponse.m */; };
+		B1135845197F1351004B16F4 /* LPHTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A714E6564200663205 /* LPHTTPRedirectResponse.m */; };
+		B1135846197F1351004B16F4 /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; };
+		B1135847197F1390004B16F4 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; };
+		B1135848197F1A38004B16F4 /* LPVersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B153F55B15949F3D00867E12 /* LPVersionRoute.m */; };
 		B164575718FDCE4900CAA25A /* LPUIATapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B164575518FDCE4900CAA25A /* LPUIATapRoute.m */; };
 		B164575818FDCE4900CAA25A /* LPUIATapRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B164575618FDCE4900CAA25A /* LPUIATapRoute.h */; };
 		B164575B18FDD60700CAA25A /* LPUIATapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B164575518FDCE4900CAA25A /* LPUIATapRoute.m */; };
@@ -207,6 +254,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		B1058E4D197F00C000B4A57B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/${PRODUCT_NAME}";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F5091C4118C4E1D700C85307 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -234,6 +290,9 @@
 		5BFF97A718B392370094E71E /* LPScrollToMarkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScrollToMarkOperation.m; sourceTree = "<group>"; };
 		692D779E1657010000DE3E53 /* LPExitRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPExitRoute.h; sourceTree = "<group>"; };
 		692D779F1657010000DE3E53 /* LPExitRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPExitRoute.m; sourceTree = "<group>"; };
+		B1058E51197F00C000B4A57B /* libFrankCalabash.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFrankCalabash.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1058E78197F043100B4A57B /* LPCalabashFrankRegistrar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPCalabashFrankRegistrar.h; path = Frank/LPCalabashFrankRegistrar.h; sourceTree = "<group>"; };
+		B1058E79197F043100B4A57B /* LPCalabashFrankRegistrar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPCalabashFrankRegistrar.m; path = Frank/LPCalabashFrankRegistrar.m; sourceTree = "<group>"; };
 		B1059F0418C546EB005A0262 /* LPCORSResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCORSResponse.m; sourceTree = "<group>"; };
 		B1059F0518C546EB005A0262 /* LPCORSResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCORSResponse.h; sourceTree = "<group>"; };
 		B111321514D5837900982BBC /* LPAsyncPlaybackRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPAsyncPlaybackRoute.h; sourceTree = "<group>"; };
@@ -420,6 +479,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B1058E4A197F00C000B4A57B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1058E4B197F00C000B4A57B /* CFNetwork.framework in Frameworks */,
+				B1058E4C197F00C000B4A57B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F5091C3E18C4E1D700C85307 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -449,6 +517,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B1058E77197F03F400B4A57B /* Frank */ = {
+			isa = PBXGroup;
+			children = (
+				B1058E78197F043100B4A57B /* LPCalabashFrankRegistrar.h */,
+				B1058E79197F043100B4A57B /* LPCalabashFrankRegistrar.m */,
+			);
+			name = Frank;
+			sourceTree = "<group>";
+		};
 		B116C98214E5214600663205 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -482,6 +559,7 @@
 				F5091C4618C4E1D700C85307 /* libcalabash-device.a */,
 				F5821A6418C4E27400293508 /* libcalabash-simulator.a */,
 				F537398C18E5253B004133FA /* version */,
+				B1058E51197F00C000B4A57B /* libFrankCalabash.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -560,6 +638,7 @@
 		B184FD8514B6DACA002A744C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				B1058E77197F03F400B4A57B /* Frank */,
 				F5E2D1D818C9120E00A0D9B6 /* SSKeychain */,
 				B1FF22B115CF002500F3A17B /* MapKit */,
 				B184FD8F14B6DB2B002A744C /* CocoaAsyncSocket */,
@@ -858,6 +937,16 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		B1058E3F197F00C000B4A57B /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1058E7A197F043100B4A57B /* LPCalabashFrankRegistrar.h in Headers */,
+				B113582C197F0C28004B16F4 /* LPTouchUtils.h in Headers */,
+				B1058E40197F00C000B4A57B /* CalabashServer.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F5091C2818C4E1D700C85307 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -895,6 +984,26 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		B1058DEC197F00C000B4A57B /* frank-calabash */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1058E4E197F00C000B4A57B /* Build configuration list for PBXNativeTarget "frank-calabash" */;
+			buildPhases = (
+				B1058DED197F00C000B4A57B /* Run Script - git versioning 1 of 2 */,
+				B1058DEE197F00C000B4A57B /* Sources */,
+				B1058E3E197F00C000B4A57B /* Run Script - git versioning 2 of 2 */,
+				B1058E3F197F00C000B4A57B /* Headers */,
+				B1058E4A197F00C000B4A57B /* Frameworks */,
+				B1058E4D197F00C000B4A57B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "frank-calabash";
+			productName = calabash;
+			productReference = B1058E51197F00C000B4A57B /* libFrankCalabash.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		F5091BD918C4E1D700C85307 /* calabash-device */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F5091C4318C4E1D700C85307 /* Build configuration list for PBXNativeTarget "calabash-device" */;
@@ -977,11 +1086,42 @@
 				F58219F718C4E27400293508 /* calabash-simulator */,
 				F5F53D6618C60FA900BD9731 /* use make to create the framework */,
 				F537398B18E5253B004133FA /* version */,
+				B1058DEC197F00C000B4A57B /* frank-calabash */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		B1058DED197F00C000B4A57B /* Run Script - git versioning 1 of 2 */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script - git versioning 1 of 2";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "sh calabash/gitversioning-before.sh \"calabash/LPGitVersionDefines.h\"";
+			showEnvVarsInLog = 0;
+		};
+		B1058E3E197F00C000B4A57B /* Run Script - git versioning 2 of 2 */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script - git versioning 2 of 2";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "sh calabash/gitversioning-after.sh \"calabash/LPGitVersionDefines.h\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F5091BDA18C4E1D700C85307 /* Run Script - git versioning 1 of 2 */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1045,6 +1185,55 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B1058DEE197F00C000B4A57B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1135842197F1351004B16F4 /* LPHTTPDataResponse.m in Sources */,
+				B1058DEF197F00C000B4A57B /* LPWebQuery.m in Sources */,
+				B1135839197F12CF004B16F4 /* LPGenericAsyncRoute.m in Sources */,
+				B1058E08197F00C000B4A57B /* LPUIAChannel.m in Sources */,
+				B1058E1D197F00C000B4A57B /* UIScriptASTPredicate.m in Sources */,
+				B1135847197F1390004B16F4 /* GCDAsyncSocket.m in Sources */,
+				B1058E1E197F00C000B4A57B /* UIScriptAST.m in Sources */,
+				B113583E197F1351004B16F4 /* DDData.m in Sources */,
+				B1135843197F1351004B16F4 /* LPHTTPDynamicFileResponse.m in Sources */,
+				B113583D197F1351004B16F4 /* LPHTTPServer.m in Sources */,
+				B113583A197F1311004B16F4 /* LPHTTPConnection.m in Sources */,
+				B1058E20197F00C000B4A57B /* UIScriptASTALL.m in Sources */,
+				B1058E21197F00C000B4A57B /* UIScriptASTClassName.m in Sources */,
+				B1058E7B197F043100B4A57B /* LPCalabashFrankRegistrar.m in Sources */,
+				B1135846197F1351004B16F4 /* LPCORSResponse.m in Sources */,
+				B1058E22197F00C000B4A57B /* UIScriptASTDirection.m in Sources */,
+				B1058E23197F00C000B4A57B /* UIScriptASTFirst.m in Sources */,
+				B1058E24197F00C000B4A57B /* UIScriptASTIndex.m in Sources */,
+				B1058E25197F00C000B4A57B /* UIScriptASTLast.m in Sources */,
+				B1058E26197F00C000B4A57B /* LPEnv.m in Sources */,
+				B1135831197F0C41004B16F4 /* LPCJSONSerializer.m in Sources */,
+				B1135833197F0C92004B16F4 /* LPJSONUtils.m in Sources */,
+				B1135848197F1A38004B16F4 /* LPVersionRoute.m in Sources */,
+				B1135830197F0C41004B16F4 /* LPCJSONScanner.m in Sources */,
+				B1135840197F1351004B16F4 /* DDRange.m in Sources */,
+				B1058E27197F00C000B4A57B /* UIScriptASTWith.m in Sources */,
+				B1058E29197F00C000B4A57B /* UIScriptParser.m in Sources */,
+				B1135841197F1351004B16F4 /* LPHTTPAsyncFileResponse.m in Sources */,
+				B113582F197F0C41004B16F4 /* LPCJSONDeserializer.m in Sources */,
+				B1135845197F1351004B16F4 /* LPHTTPRedirectResponse.m in Sources */,
+				B113582E197F0C41004B16F4 /* CDataScanner_Extensions.m in Sources */,
+				B113583B197F1351004B16F4 /* LPHTTPAuthenticationRequest.m in Sources */,
+				B1135837197F10B7004B16F4 /* LPUIARoute.m in Sources */,
+				B1058E2C197F00C000B4A57B /* LPTouchUtils.m in Sources */,
+				B1135844197F1351004B16F4 /* LPHTTPFileResponse.m in Sources */,
+				B1058E2F197F00C000B4A57B /* LPReflectUtils.m in Sources */,
+				B1058E33197F00C000B4A57B /* UIScriptASTVisibility.m in Sources */,
+				B1058E35197F00C000B4A57B /* LPLog.m in Sources */,
+				B1135832197F0C73004B16F4 /* LPCDataScanner.m in Sources */,
+				B113582D197F0C41004B16F4 /* LPISO8601DateFormatter.m in Sources */,
+				B113583C197F1351004B16F4 /* LPHTTPMessage.m in Sources */,
+				B113583F197F1351004B16F4 /* DDNumber.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F5091BDB18C4E1D700C85307 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1239,6 +1428,112 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		B1058E4F197F00C000B4A57B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = NO;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
+				DSTROOT = /tmp/calabash.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "calabash/calabash-Prefix.pch";
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				MACOSX_DEPLOYMENT_TARGET = "";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = FrankCalabash;
+				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
+				SDKROOT = iphonesimulator;
+				SEPARATE_STRIP = NO;
+				SKIP_INSTALL = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
+				VALID_ARCHS = "i386 x86_64";
+				WARNING_CFLAGS = (
+					"-Wunreachable-code",
+					"-fcolor-diagnostics",
+					"-Warc-retain-cycles",
+				);
+			};
+			name = Debug;
+		};
+		B1058E50197F00C000B4A57B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
+				CLANG_ANALYZER_SECURITY_INSECUREAPI_STRCPY = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_REPEATED_USE_OF_WEAK = YES;
+				CLANG_WARN_SUSPICIOUS_IMPLICIT_CONVERSION = NO;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CLANG_WARN__EXIT_TIME_DESTRUCTORS = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
+				DSTROOT = /tmp/calabash.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "calabash/calabash-Prefix.pch";
+				GCC_TREAT_IMPLICIT_FUNCTION_DECLARATIONS_AS_ERRORS = YES;
+				GCC_VERSION = "";
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
+				GCC_WARN_FOUR_CHARACTER_CONSTANTS = YES;
+				GCC_WARN_HIDDEN_VIRTUAL_FUNCTIONS = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
+				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
+				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
+				GCC_WARN_SHADOW = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
+				GCC_WARN_UNUSED_LABEL = YES;
+				GCC_WARN_UNUSED_PARAMETER = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				MACOSX_DEPLOYMENT_TARGET = "";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = FrankCalabash;
+				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
+				SDKROOT = iphonesimulator;
+				SEPARATE_STRIP = NO;
+				SKIP_INSTALL = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				STRIP_STYLE = "non-global";
+				VALID_ARCHS = "i386 x86_64";
+				WARNING_CFLAGS = (
+					"-Wunreachable-code",
+					"-fcolor-diagnostics",
+					"-Warc-retain-cycles",
+				);
+			};
+			name = Release;
+		};
 		B121E7A014B6D9FB0034C6A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1572,6 +1867,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B1058E4E197F00C000B4A57B /* Build configuration list for PBXNativeTarget "frank-calabash" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1058E4F197F00C000B4A57B /* Debug */,
+				B1058E50197F00C000B4A57B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B121E78B14B6D9FB0034C6A9 /* Build configuration list for PBXProject "calabash" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1597,6 +1901,7 @@
 				F537399618E5253B004133FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F5821A6118C4E27400293508 /* Build configuration list for PBXNativeTarget "calabash-simulator" */ = {
 			isa = XCConfigurationList;
