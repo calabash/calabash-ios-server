@@ -7,6 +7,7 @@
 #import "LPTouchUtils.h"
 #import "LPOperation.h"
 #import "LPHTTPConnection.h"
+#import "LPJSONUtils.h"
 
 #define kLPUIATapRouteModalWaitIterationCount 5
 
@@ -133,8 +134,7 @@
       [self failWithMessageFormat:@"Timed out running command %@"
                           message:command];
     } else {
-      [self succeedWithResult:[NSArray arrayWithObject:[[result copy]
-                                                        autorelease]]];
+      [self succeedWithResult: [NSArray arrayWithObject:[LPJSONUtils jsonifyObject:v]]];
     }
   }];
   
