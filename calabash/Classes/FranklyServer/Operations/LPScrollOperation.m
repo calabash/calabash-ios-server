@@ -14,30 +14,34 @@
 
 - (id) performWithTarget:(UIView *) _view error:(NSError **) error {
   NSString *dir = [_arguments objectAtIndex:0];
-
+  
   if ([_view isKindOfClass:[UIScrollView class]]) {
     UIScrollView *sv = (UIScrollView *) _view;
-    CGSize size = sv.frame.size;
+    CGSize size = UIEdgeInsetsInsetRect(sv.bounds, sv.contentInset).size;
     CGPoint offset = sv.contentOffset;
     CGFloat fraction = 2.0;
     if ([sv isPagingEnabled]) {
       fraction = 1.0;
     }
-
+    
     if ([@"up" isEqualToString:dir]) {
+      CGFloat scrollAmount = MIN((size.height)/fraction, offset.y);
       [sv                                setContentOffset:CGPointMake(offset.x,
-              offset.y - size.height / fraction) animated:YES];
+                                                                      offset.y - scrollAmount) animated:YES];
     } else if ([@"down" isEqualToString:dir]) {
+      CGFloat scrollAmount = MIN(size.height/fraction, sv.contentSize.height - offset.y - size.height);
       [sv                                setContentOffset:CGPointMake(offset.x,
-              offset.y + size.height / fraction) animated:YES];
+                                                                      offset.y + scrollAmount) animated:YES];
     } else if ([@"left" isEqualToString:dir]) {
-      [sv       setContentOffset:CGPointMake(offset.x - size.width / fraction,
-              offset.y) animated:YES];
+      CGFloat scrollAmount = MIN(size.width/fraction, offset.x);
+      [sv       setContentOffset:CGPointMake(offset.x - scrollAmount,
+                                             offset.y) animated:YES];
     } else if ([@"right" isEqualToString:dir]) {
-      [sv       setContentOffset:CGPointMake(offset.x + size.width / fraction,
-              offset.y) animated:YES];
+      CGFloat scrollAmount = MIN(size.width/fraction, sv.contentSize.width - offset.x - size.width);
+      [sv       setContentOffset:CGPointMake(offset.x + scrollAmount,
+                                             offset.y) animated:YES];
     }
-
+    
     return _view;
   } else if ([_view isKindOfClass:[UIWebView class]]) {
     UIWebView *wv = (UIWebView *) _view;
