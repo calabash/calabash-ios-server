@@ -67,6 +67,21 @@
 		B1135846197F1351004B16F4 /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; };
 		B1135847197F1390004B16F4 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; };
 		B1135848197F1A38004B16F4 /* LPVersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B153F55B15949F3D00867E12 /* LPVersionRoute.m */; };
+		B11358491981AE00004B16F4 /* LPMapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD214B6DB2B002A744C /* LPMapRoute.m */; };
+		B11358581981B053004B16F4 /* LPScrollToMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A718B392370094E71E /* LPScrollToMarkOperation.m */; };
+		B11358591981B053004B16F4 /* LPScrollToRowWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */; };
+		B113585A1981B053004B16F4 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A318B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m */; };
+		B113585B1981B053004B16F4 /* LPCollectionViewScrollToItemOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C3A62E18A2EA0800DB7E42 /* LPCollectionViewScrollToItemOperation.m */; };
+		B113585C1981B053004B16F4 /* LPSliderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5CAC06B180D499600E23F03 /* LPSliderOperation.m */; };
+		B113585D1981B053004B16F4 /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */; };
+		B113585E1981B053004B16F4 /* LPOrientationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F591380317C39128007B2BE4 /* LPOrientationOperation.m */; };
+		B113585F1981B053004B16F4 /* LPFlashOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B19440431725C70A00EE1B25 /* LPFlashOperation.m */; };
+		B11358601981B053004B16F4 /* LPQueryAllOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */; };
+		B11358611981B053004B16F4 /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; };
+		B11358621981B053004B16F4 /* LPQueryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC514B6DB2B002A744C /* LPQueryOperation.m */; };
+		B11358631981B053004B16F4 /* LPScrollOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC714B6DB2B002A744C /* LPScrollOperation.m */; };
+		B11358641981B053004B16F4 /* LPScrollToRowOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */; };
+		B11358651981B053004B16F4 /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; };
 		B164575718FDCE4900CAA25A /* LPUIATapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B164575518FDCE4900CAA25A /* LPUIATapRoute.m */; };
 		B164575818FDCE4900CAA25A /* LPUIATapRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B164575618FDCE4900CAA25A /* LPUIATapRoute.h */; };
 		B164575B18FDD60700CAA25A /* LPUIATapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B164575518FDCE4900CAA25A /* LPUIATapRoute.m */; };
@@ -1191,6 +1206,7 @@
 			files = (
 				B1135842197F1351004B16F4 /* LPHTTPDataResponse.m in Sources */,
 				B1058DEF197F00C000B4A57B /* LPWebQuery.m in Sources */,
+				B11358641981B053004B16F4 /* LPScrollToRowOperation.m in Sources */,
 				B1135839197F12CF004B16F4 /* LPGenericAsyncRoute.m in Sources */,
 				B1058E08197F00C000B4A57B /* LPUIAChannel.m in Sources */,
 				B1058E1D197F00C000B4A57B /* UIScriptASTPredicate.m in Sources */,
@@ -1199,13 +1215,17 @@
 				B113583E197F1351004B16F4 /* DDData.m in Sources */,
 				B1135843197F1351004B16F4 /* LPHTTPDynamicFileResponse.m in Sources */,
 				B113583D197F1351004B16F4 /* LPHTTPServer.m in Sources */,
+				B11358591981B053004B16F4 /* LPScrollToRowWithMarkOperation.m in Sources */,
 				B113583A197F1311004B16F4 /* LPHTTPConnection.m in Sources */,
 				B1058E20197F00C000B4A57B /* UIScriptASTALL.m in Sources */,
 				B1058E21197F00C000B4A57B /* UIScriptASTClassName.m in Sources */,
+				B113585E1981B053004B16F4 /* LPOrientationOperation.m in Sources */,
 				B1058E7B197F043100B4A57B /* LPCalabashFrankRegistrar.m in Sources */,
+				B11358621981B053004B16F4 /* LPQueryOperation.m in Sources */,
 				B1135846197F1351004B16F4 /* LPCORSResponse.m in Sources */,
 				B1058E22197F00C000B4A57B /* UIScriptASTDirection.m in Sources */,
 				B1058E23197F00C000B4A57B /* UIScriptASTFirst.m in Sources */,
+				B113585B1981B053004B16F4 /* LPCollectionViewScrollToItemOperation.m in Sources */,
 				B1058E24197F00C000B4A57B /* UIScriptASTIndex.m in Sources */,
 				B1058E25197F00C000B4A57B /* UIScriptASTLast.m in Sources */,
 				B1058E26197F00C000B4A57B /* LPEnv.m in Sources */,
@@ -1220,16 +1240,26 @@
 				B113582F197F0C41004B16F4 /* LPCJSONDeserializer.m in Sources */,
 				B1135845197F1351004B16F4 /* LPHTTPRedirectResponse.m in Sources */,
 				B113582E197F0C41004B16F4 /* CDataScanner_Extensions.m in Sources */,
+				B11358631981B053004B16F4 /* LPScrollOperation.m in Sources */,
 				B113583B197F1351004B16F4 /* LPHTTPAuthenticationRequest.m in Sources */,
 				B1135837197F10B7004B16F4 /* LPUIARoute.m in Sources */,
+				B11358601981B053004B16F4 /* LPQueryAllOperation.m in Sources */,
+				B11358651981B053004B16F4 /* LPSetTextOperation.m in Sources */,
+				B11358611981B053004B16F4 /* LPOperation.m in Sources */,
 				B1058E2C197F00C000B4A57B /* LPTouchUtils.m in Sources */,
 				B1135844197F1351004B16F4 /* LPHTTPFileResponse.m in Sources */,
 				B1058E2F197F00C000B4A57B /* LPReflectUtils.m in Sources */,
 				B1058E33197F00C000B4A57B /* UIScriptASTVisibility.m in Sources */,
 				B1058E35197F00C000B4A57B /* LPLog.m in Sources */,
+				B11358581981B053004B16F4 /* LPScrollToMarkOperation.m in Sources */,
+				B113585D1981B053004B16F4 /* LPDatePickerOperation.m in Sources */,
 				B1135832197F0C73004B16F4 /* LPCDataScanner.m in Sources */,
+				B11358491981AE00004B16F4 /* LPMapRoute.m in Sources */,
+				B113585A1981B053004B16F4 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
 				B113582D197F0C41004B16F4 /* LPISO8601DateFormatter.m in Sources */,
 				B113583C197F1351004B16F4 /* LPHTTPMessage.m in Sources */,
+				B113585C1981B053004B16F4 /* LPSliderOperation.m in Sources */,
+				B113585F1981B053004B16F4 /* LPFlashOperation.m in Sources */,
 				B113583F197F1351004B16F4 /* DDNumber.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
