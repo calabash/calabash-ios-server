@@ -11,6 +11,10 @@
 #import "LPTouchUtils.h"
 #import "LPUIARoute.h"
 #import "LPVersionRoute.h"
+#import "LPJSONUtils.h"
+#import "LPMapRoute.h"
+
+#define MAKE_CATEGORIES_LOADABLE(UNIQUE_NAME) @interface FORCELOAD_##UNIQUE_NAME : NSObject @end @implementation FORCELOAD_##UNIQUE_NAME @end
 
 static NSString *const selectorName = @"calabash_uispec";
 
@@ -37,6 +41,10 @@ static NSString *const selectorName = @"calabash_uispec";
   LPVersionRoute *versionRoute = [LPVersionRoute new];
   [frankRouter registerRoute:versionRoute];
   [versionRoute release];
+
+  LPMapRoute *mapRoute = [LPMapRoute new];
+  [frankRouter registerRoute:mapRoute];
+  [mapRoute release];
 #pragma clang diagnostic pop
 }
 
@@ -55,3 +63,14 @@ static NSString *const selectorName = @"calabash_uispec";
 }
 
 @end
+
+MAKE_CATEGORIES_LOADABLE(NSObject_CalabashExtensions)
+
+@implementation NSObject (CalabashExtensions)
+
+- (NSDictionary*) query {
+  return [LPJSONUtils jsonifyObject:self];
+}
+@end
+
+
