@@ -1,0 +1,19 @@
+language: objective-c
+
+before_script:
+  - gem install xcpretty
+
+script:
+  - make clean
+  - cd scripts && ruby make-framework.rb
+  - cd .. && make
+  - ./build-frank.sh
+  - scripts/ci/travis/run-chou-tests.rb
+
+rvm:
+  - 2.1.1
+
+notifications:
+  email:
+    on_success: change
+    on_failure: always
