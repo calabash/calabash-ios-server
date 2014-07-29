@@ -9,3 +9,7 @@ calabash.framework
 
 # AppCode
 .idea
+
+# CI pulls down these two repos from github
+animated-happiness
+calabash-ios
