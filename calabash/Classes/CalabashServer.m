@@ -20,7 +20,7 @@
 #import "LPExitRoute.h"
 #import "LPVersionRoute.h"
 #import "LPConditionRoute.h"
-#import "LPUIARoute.h"
+#import "LPUIARouteOverUserPrefs.h"
 #import "LPUIATapRoute.h"
 #import "LPKeyboardRoute.h"
 #import "LPLocationRoute.h"
@@ -105,9 +105,9 @@
     [LPRouter addRoute:keyboard forPath:@"keyboard"];
     [keyboard release];
 
-    LPUIARoute *uia = [LPUIARoute new];
-    [LPRouter addRoute:uia forPath:@"uia"];
-    [uia release];
+    LPUIARouteOverUserPrefs *uiaUsingUserPrefs = [LPUIARouteOverUserPrefs new];
+    [LPRouter addRoute:uiaUsingUserPrefs forPath:@"uia"];
+    [uiaUsingUserPrefs release];
 
     LPUIATapRoute *uiaTap = [LPUIATapRoute new];
     [LPRouter addRoute:uiaTap forPath:@"uia-tap"];
@@ -135,20 +135,20 @@
     // Advertise this device's capabilities to our listeners inside of the TXT record
     NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
     NSMutableDictionary *capabilities = [[NSMutableDictionary alloc]
-            initWithObjectsAndKeys:[[UIDevice currentDevice] name], @"name",
-                                   [[UIDevice currentDevice] model], @"model",
-                                   [[UIDevice currentDevice]
-                                           systemVersion], @"os_version",
-                                   [info objectForKey:@"CFBundleDisplayName"], @"app",
-                                   [info objectForKey:@"CFBundleIdentifier"], @"app_id",
-                                   [info objectForKey:@"CFBundleVersion"], @"app_version",
-                                   nil];
+                                         initWithObjectsAndKeys:[[UIDevice currentDevice] name], @"name",
+                                         [[UIDevice currentDevice] model], @"model",
+                                         [[UIDevice currentDevice]
+                                          systemVersion], @"os_version",
+                                         [info objectForKey:@"CFBundleDisplayName"], @"app",
+                                         [info objectForKey:@"CFBundleIdentifier"], @"app_id",
+                                         [info objectForKey:@"CFBundleVersion"], @"app_version",
+                                         nil];
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
     if ([[UIDevice currentDevice]
-            respondsToSelector:@selector(uniqueIdentifier)]) {
+         respondsToSelector:@selector(uniqueIdentifier)]) {
       id uuid = [[UIDevice currentDevice]
-              performSelector:@selector(uniqueIdentifier) withObject:nil];
+                 performSelector:@selector(uniqueIdentifier) withObject:nil];
       [capabilities setObject:uuid forKey:@"uuid"];
     }
 #pragma clang diagnostic pop
@@ -193,18 +193,18 @@
   }
 
   void *appSupport = dlopen(
-          [appSupportPath fileSystemRepresentation], RTLD_LAZY);
+                            [appSupportPath fileSystemRepresentation], RTLD_LAZY);
   if (!appSupport) {
     NSLog(@"ERROR: Unable to dlopen AppSupport. Cannot automatically enable accessibility.");
     return;
   }
 
   CFStringRef (*copySharedResourcesPreferencesDomainForDomain)(
-          CFStringRef domain) = dlsym(appSupport,
-          "CPCopySharedResourcesPreferencesDomainForDomain");
+                                                               CFStringRef domain) = dlsym(appSupport,
+                                                                                           "CPCopySharedResourcesPreferencesDomainForDomain");
   if (!copySharedResourcesPreferencesDomainForDomain) {
     NSLog(@"ERROR: Unable to dlsym CPCopySharedResourcesPreferencesDomainForDomain. "
-            "Cannot automatically enable accessibility.");
+          "Cannot automatically enable accessibility.");
     return;
   }
 
@@ -215,8 +215,8 @@
   }
 
   CFPreferencesSetValue(CFSTR("ApplicationAccessibilityEnabled"),
-          kCFBooleanTrue, accessibilityDomain, kCFPreferencesAnyUser,
-          kCFPreferencesAnyHost);
+                        kCFBooleanTrue, accessibilityDomain, kCFPreferencesAnyUser,
+                        kCFPreferencesAnyHost);
   CFRelease(accessibilityDomain);
 
   [autoreleasePool drain];

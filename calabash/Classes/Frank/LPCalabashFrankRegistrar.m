@@ -9,7 +9,7 @@
 #import "LPCalabashFrankRegistrar.h"
 #import "UIScriptParser.h"
 #import "LPTouchUtils.h"
-#import "LPUIARoute.h"
+#import "LPUIARouteOverUserPrefs.h"
 #import "LPVersionRoute.h"
 #import "LPJSONUtils.h"
 #import "LPMapRoute.h"
@@ -29,14 +29,14 @@ static NSString *const selectorName = @"calabash_uispec";
   NSLog(@"About to create route...");
   Class c = NSClassFromString(@"RequestRouter");
 #pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector" 
+#pragma clang diagnostic ignored "-Wundeclared-selector"
 #pragma clang diagnostic ignored "-Wobjc-method-access"
   id frankRouter = [c performSelector:@selector(singleton)];
   NSLog(@"Router: %@", frankRouter);
-  
-  LPUIARoute *uiaRoute = [LPUIARoute new];
-  [frankRouter registerRoute:uiaRoute];
-  [uiaRoute release];
+
+  LPUIARouteOverUserPrefs *uiaUsingUserPrefs = [LPUIARouteOverUserPrefs new];
+  [frankRouter registerRoute:uiaUsingUserPrefs];
+  [uiaUsingUserPrefs release];
 
   LPVersionRoute *versionRoute = [LPVersionRoute new];
   [frankRouter registerRoute:versionRoute];
@@ -49,7 +49,7 @@ static NSString *const selectorName = @"calabash_uispec";
 }
 
 - (NSArray *) selectViewsWithSelector:(NSString *)selector {
-  
+
   return [self selectViewsWithSelector:selector inWindows:[LPTouchUtils applicationWindows]];
 }
 

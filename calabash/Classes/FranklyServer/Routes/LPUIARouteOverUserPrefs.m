@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Xamarin. All rights reserved.
 //
 
-#import "LPUIARoute.h"
-#import "LPUIAChannel.h"
+#import "LPUIARouteOverUserPrefs.h"
+#import "LPUIAUserPrefsChannel.h"
 #import "LPJSONUtils.h"
 
-@implementation LPUIARoute
+@implementation LPUIARouteOverUserPrefs
 
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
   return [method isEqualToString:@"POST"];
@@ -25,24 +25,25 @@
   self.conn = connection;
   self.data = [LPJSONUtils deserializeDictionary:[connection postDataAsString]];
   return [self httpResponseForMethod:@"POST"
-        URI:  [path componentsJoinedByString:@"/"]];
+                                 URI:[path componentsJoinedByString:@"/"]];
 #pragma clang diagnostic push
 }
+
 - (BOOL) canHandlePostForPath: (NSArray *)path {
- return [@"uia" isEqualToString:[path lastObject]];
+  return [@"uia" isEqualToString:[path lastObject]];
 }
 
 - (void) beginOperation {
   self.done = NO;
 
   NSString *command = [self.data objectForKey:@"command"];
-  [LPUIAChannel runAutomationCommand:command then:^(NSDictionary *result) {
+  [LPUIAUserPrefsChannel runAutomationCommand:command then:^(NSDictionary *result) {
     if (!result) {
       [self failWithMessageFormat:@"Timed out running command %@"
                           message:command];
     } else {
       [self succeedWithResult:[NSArray arrayWithObject:[[result copy]
-              autorelease]]];
+                                                        autorelease]]];
     }
   }];
 }

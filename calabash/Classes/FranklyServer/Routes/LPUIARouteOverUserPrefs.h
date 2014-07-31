@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "LPGenericAsyncRoute.h"
 
-@interface LPUIARoute : LPGenericAsyncRoute
+@interface LPUIARouteOverUserPrefs : LPGenericAsyncRoute
 
 @end
