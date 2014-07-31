@@ -106,9 +106,22 @@ def lipo_verify(lib, arch, sdk)
   "xcrun -sdk #{sdk} lipo #{lib} -verify_arch '#{arch}'"
 end
 
+def xcode_version
+  xcode_build_output = `xcrun xcodebuild -version`.split("\n")
+  xcode_build_output.each do |line|
+    match=/^Xcode\s(.*)$/.match(line.strip)
+    return match[1] if match && match.length > 1
+  end
+end
+
 def lipo_verify_arches(lib, arches=['i386', 'x86_64', 'armv7', 'armv7s', 'arm64'])
+  major_xc_version = xcode_version.split('.').first.to_i
   arches.each do |arch|
     sdk = /i386|x86_64/.match(arch) ? 'iphonesimulator' : 'iphoneos'
+
+    if major_xc_version > 5 and arch == 'armv7s'
+      next
+    end
     cmd = lipo_verify(lib, arch, sdk)
     lipo_verify = `#{cmd}`
     result = $?
@@ -317,5 +330,9 @@ if __FILE__ == $0
       assert_equal(expected, cmd)
     end
 
+    def test_xcode_version
+      expected = '[5.1.1, 5.0, 6.0]'
+      assert(expected.include?(xcode_version))
+    end
   end
 end
