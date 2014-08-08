@@ -12,11 +12,11 @@ Dir.chdir working_dir do
 
   do_system('rm -rf calabash-ios')
 
-  do_system('git clone --recursive https://github.com/calabash/calabash-ios')
+  do_system('git clone --depth 1 --recursive https://github.com/calabash/calabash-ios')
 
   do_system('rm -rf animated-happiness')
 
-  do_system('git clone --recursive https://github.com/jmoody/animated-happiness.git')
+  do_system('git clone --depth 1 --recursive https://github.com/jmoody/animated-happiness.git')
 
   # if calabash.framework exists, it was built in another step
   unless File.exist?('calabash.framework')
