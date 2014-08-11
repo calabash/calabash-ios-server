@@ -2,8 +2,6 @@
 
 # todo add to the Makefile as 'make frank' or 'make' task
 
-rm -rf build
-
 # xcpretty will reduce spam and build times
 XCPRETTY=`gem list xcpretty -i | tr -d '\n'`
 if [ "${XCPRETTY}" = "false" ]; then gem install xcpretty; fi
