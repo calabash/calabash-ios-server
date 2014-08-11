@@ -47,6 +47,34 @@ def path_to_simulator_lib(opts = {})
   path_to_lib(merged[:directory], merged[:lib_name])
 end
 
+# @param [Hash] opts :device and :sim dylib paths
+# @return [Boolean] true if both device and sim dylibs are built
+def dylibs_built?(opts = {})
+  default_opts = {:device => './build/Debug-iphoneos/libCalabashDyn.dylib',
+                  :sim => './build/Debug-iphonesimulator/libCalabashDynSim.dylib'}
+  merged = default_opts.merge(opts)
+  File.exist?(merged[:device]) && File.exist?(merged[:sim])
+end
+
+# @return [String] the path to the device lib
+# @param [Hash] opts directory and lib name options
+def path_to_device_dylib(opts = {})
+  default_opts = {:directory => './build/Debug-iphoneos',
+                  :lib_name => 'libCalabashDyn.dylib'}
+  merged = default_opts.merge(opts)
+  path_to_lib(merged[:directory], merged[:lib_name])
+end
+
+# @return [String] the path to the simulator lib
+# @param [Hash] opts directory and lib name options
+def path_to_simulator_dylib(opts = {})
+  default_opts = {:directory => './build/Debug-iphonesimulator',
+                  :lib_name => 'libCalabashDynSim.dylib'}
+  merged = default_opts.merge(opts)
+
+  path_to_lib(merged[:directory], merged[:lib_name])
+end
+
 # creates a staging directory for the combined library.
 #
 # if a directory exists at the :directory option it is deleted.
@@ -252,6 +280,21 @@ def stage_framework(opts = {})
   `tar -xf #{tar_file}`
   puts 'INFO: cleaning up'
   FileUtils.rm(tar_file)
+
+  if File.directory?('./calabash.dylibs')
+    puts 'INFO: removing old calabash.dylibs'
+    FileUtils.rm_r('./calabash.dylibs')
+  end
+
+  if dylibs_built?
+    puts 'INFO: Dylibs detected - creating directory calabash.dylibs'
+    FileUtils.mkdir 'calabash.dylibs'
+    FileUtils.cp(path_to_simulator_dylib, './calabash.dylibs')
+    FileUtils.cp(path_to_device_dylib, './calabash.dylibs')
+    puts 'INFO: Copied dylibs to ./calabash.dylibs'
+  else
+    puts 'WARN: Dylibs not built... Might become an error in the future :)'
+  end
 
 end
 
