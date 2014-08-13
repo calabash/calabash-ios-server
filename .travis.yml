@@ -6,8 +6,9 @@ before_script:
 script:
   - make clean
   - cd scripts && ruby make-framework.rb
-  - cd .. && make
-  - ./build-frank.sh
+  - cd ..
+  - make
+  - make frank
   - scripts/ci/travis/run-chou-tests.rb
 
 rvm:
