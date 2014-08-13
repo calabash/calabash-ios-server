@@ -6,6 +6,10 @@ default:
 	scripts/make-calabash-lib-version.rb
 	scripts/make-framework.rb verify
 
+frank:
+	rm -rf build
+	scripts/make-frank-lib-iphonesimulator.rb
+
 clean:
 	rm -rf build
 	rm -rf calabash.framework
