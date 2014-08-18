@@ -9,9 +9,9 @@ clean:
 framework:
 	rm -rf build
 	rm -rf calabash.framework
-	scripts/make-calabash-lib-iphonesimulator.rb
-	scripts/make-calabash-lib-iphoneos.rb
-	scripts/make-calabash-lib-version.rb
+	scripts/make-calabash-lib.rb sim
+	scripts/make-calabash-lib.rb device
+	scripts/make-calabash-lib.rb version
 	scripts/make-libraries.rb verify-framework
 
 frank:
