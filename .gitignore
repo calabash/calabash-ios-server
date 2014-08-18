@@ -4,6 +4,7 @@ calabash.xcodeproj/xcuserdata/
 Markdown.pl
 build
 calabash.framework
+libFrankCalabash.a
 
 !scripts/test/build
 

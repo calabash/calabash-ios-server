@@ -298,7 +298,23 @@ def stage_framework(opts = {})
   `tar -xf #{tar_file}`
   puts 'INFO: cleaning up'
   FileUtils.rm(tar_file)
+end
 
+def stage_frank_lib
+  source = File.expand_path('build/Debug-combined/libFrankCalabash.a')
+  unless File.exists? source
+    puts 'FAIL: build/Debug-combined/libFrankCalabash.a does not exist.  Did you forget to run `make frank`?'
+    exit 1
+  end
+
+  target = File.expand_path('./libFrankCalabash.a')
+  if File.exists?(target)
+    puts 'INFO: removing old libFrankCalabash.a'
+    FileUtils.rm(target)
+  end
+
+  puts "INFO: staging '#{source}' to ./"
+  FileUtils.cp(source, target)
 end
 
 if ARGV[0] == 'verify-framework'
@@ -310,6 +326,7 @@ end
 
 if ARGV[0] == 'verify-frank'
   lipo_combine_frank_libs
+  stage_frank_lib
   exit 0
 end
 
