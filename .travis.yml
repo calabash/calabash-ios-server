@@ -5,9 +5,6 @@ before_script:
 
 script:
   - make clean
-  - cd scripts && ruby make-libraries.rb
-  - cd ..
-  - make
   - make frank
   - scripts/ci/travis/run-chou-tests.rb
   - scripts/ci/travis/test-make-without-xcpretty.rb
