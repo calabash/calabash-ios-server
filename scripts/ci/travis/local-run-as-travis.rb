@@ -9,7 +9,7 @@ Dir.chdir working_dir do
   do_system('make clean')
   scripts_dir = File.expand_path(File.join(working_dir, 'scripts'))
   Dir.chdir scripts_dir do
-    do_system 'ruby make-framework.rb'
+    do_system 'ruby make-libraries.rb'
   end
   do_system('make')
   do_system('make frank')

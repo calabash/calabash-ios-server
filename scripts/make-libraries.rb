@@ -301,7 +301,7 @@ def stage_framework(opts = {})
 
 end
 
-if ARGV[0] == 'verify'
+if ARGV[0] == 'verify-framework'
   lipo_combine_libs
   make_framework
   stage_framework
@@ -314,8 +314,8 @@ if ARGV[0] == 'verify-frank'
 end
 
 ## Test
-## $ ruby make-framework.rb
-## $ make-framework.rb
+## $ ruby make-libraries.rb
+## $ make-libraries.rb
 if __FILE__ == $0
   require 'test/unit'
   require 'fileutils'

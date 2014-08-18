@@ -5,7 +5,7 @@ before_script:
 
 script:
   - make clean
-  - cd scripts && ruby make-framework.rb
+  - cd scripts && ruby make-libraries.rb
   - cd ..
   - make
   - make frank
