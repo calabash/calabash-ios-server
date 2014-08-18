@@ -5,7 +5,10 @@ before_script:
 
 script:
   - make clean
+  - make framework
   - make frank
+  - make dylib
+  - make all
   - scripts/ci/travis/run-chou-tests.rb
   - scripts/ci/travis/test-make-without-xcpretty.rb
 
