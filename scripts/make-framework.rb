@@ -11,6 +11,11 @@ def combined_lib_name
   'calabash-combined.a'
 end
 
+# @return [String] the combined binary for Frank plugin name
+def combined_frank_lib_name
+  'libFrankCalabash.a'
+end
+
 # @return [String] constructs a path using +directory+ and +lib_name+
 # @param [String] directory the directory path
 # @param [String] lib_name name of the library
@@ -42,6 +47,25 @@ end
 def path_to_simulator_lib(opts = {})
   default_opts = {:directory => './build/Debug-iphonesimulator',
                   :lib_name => 'libcalabash-simulator.a'}
+  merged = default_opts.merge(opts)
+
+  path_to_lib(merged[:directory], merged[:lib_name])
+end
+
+# @return [String] the path to the device frank lib
+# @param [Hash] opts directory and lib name options
+def path_to_device_frank_lib(opts = {})
+  default_opts = {:directory => './build/Debug-iphoneos',
+                  :lib_name => 'libFrankCalabashDevice.a'}
+  merged = default_opts.merge(opts)
+  path_to_lib(merged[:directory], merged[:lib_name])
+end
+
+# @return [String] the path to the simulator frank lib
+# @param [Hash] opts directory and lib name options
+def path_to_simulator_frank_lib(opts = {})
+  default_opts = {:directory => './build/Debug-iphonesimulator',
+                  :lib_name => 'libFrankCalabash.a'}
   merged = default_opts.merge(opts)
 
   path_to_lib(merged[:directory], merged[:lib_name])
@@ -162,6 +186,28 @@ def lipo_combine_libs
   lipo_verify_arches(output)
 end
 
+## Assumes we have already build and setup stage for calabash combined libs
+def lipo_combine_frank_libs
+  staging = make_combined_lib_staging_dir
+  inputs = [path_to_device_frank_lib, path_to_simulator_frank_lib]
+  output = combined_lib_path(staging, combined_frank_lib_name)
+  cmd = lipo_cmd(inputs, output)
+
+  puts 'INFO: combining libs'
+  puts "INFO: #{cmd}"
+  lipo_create = `#{cmd}`
+  result = $?
+
+  unless result.success?
+    puts 'FAIL: could not create combined lib'
+    puts "FAIL: '#{lipo_create.strip}'"
+    exit result.to_i
+  end
+
+  lipo_put_info(output)
+  lipo_verify_arches(output)
+end
+
 
 def framework_product_name
   'calabash'
@@ -262,6 +308,10 @@ if ARGV[0] == 'verify'
   exit 0
 end
 
+if ARGV[0] == 'verify-frank'
+  lipo_combine_frank_libs
+  exit 0
+end
 
 ## Test
 ## $ ruby make-framework.rb

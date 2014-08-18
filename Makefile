@@ -9,6 +9,8 @@ default:
 frank:
 	rm -rf build
 	scripts/make-frank-lib-iphonesimulator.rb
+	scripts/make-frank-lib-iphoneos.rb
+	scripts/make-framework.rb verify-frank
 
 clean:
 	rm -rf build
