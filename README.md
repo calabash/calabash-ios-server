@@ -13,6 +13,12 @@ The companion of the calabash-ios gem:  https://github.com/calabash/calabash-ios
 $ make
 ```
 
+### Building the frank plugin
+
+```
+$ make frank
+```
+
 or from the calabash-ios/calabash-cucumber directory:
 
 ```
