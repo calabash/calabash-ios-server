@@ -16,6 +16,11 @@ def combined_frank_lib_name
   'libFrankCalabash.a'
 end
 
+# @return [String] the combined binary for dylib name
+def combined_dylib_name
+  'libCalabash.dylib'
+end
+
 # @return [String] constructs a path using +directory+ and +lib_name+
 # @param [String] directory the directory path
 # @param [String] lib_name name of the library
@@ -208,7 +213,6 @@ def lipo_combine_frank_libs
   lipo_verify_arches(output)
 end
 
-
 def framework_product_name
   'calabash'
 end
@@ -317,6 +321,72 @@ def stage_frank_lib
   FileUtils.cp(source, target)
 end
 
+# @param [Hash] opts :device and :sim dylib paths
+# @return [Boolean] true if both device and sim dylibs are built
+def dylibs_built?(opts = {})
+  default_opts = {:device => './build/Debug-iphoneos/libCalabashDyn.dylib',
+                  :sim => './build/Debug-iphonesimulator/libCalabashDynSim.dylib'}
+  merged = default_opts.merge(opts)
+  File.exist?(merged[:device]) && File.exist?(merged[:sim])
+end
+
+# @return [String] the path to the device lib
+# @param [Hash] opts directory and lib name options
+def path_to_device_dylib(opts = {})
+  default_opts = {:directory => './build/Debug-iphoneos',
+                  :lib_name => 'libCalabashDyn.dylib'}
+  merged = default_opts.merge(opts)
+  path_to_lib(merged[:directory], merged[:lib_name])
+end
+
+# @return [String] the path to the simulator lib
+# @param [Hash] opts directory and lib name options
+def path_to_simulator_dylib(opts = {})
+  default_opts = {:directory => './build/Debug-iphonesimulator',
+                  :lib_name => 'libCalabashDynSim.dylib'}
+  merged = default_opts.merge(opts)
+
+  path_to_lib(merged[:directory], merged[:lib_name])
+end
+
+def lipo_combine_dylibs
+  staging = make_combined_lib_staging_dir
+  inputs = [path_to_device_dylib, path_to_simulator_dylib]
+  output = combined_lib_path(staging, combined_dylib_name)
+  cmd = lipo_cmd(inputs, output)
+
+  puts 'INFO: combining libs'
+  puts "INFO: #{cmd}"
+  lipo_create = `#{cmd}`
+  result = $?
+
+  unless result.success?
+    puts 'FAIL: could not create combined lib'
+    puts "FAIL: '#{lipo_create.strip}'"
+    exit result.to_i
+  end
+
+  lipo_put_info(output)
+  lipo_verify_arches(output)
+end
+
+def stage_dylibs
+  source = File.expand_path("build/Debug-combined/#{combined_dylib_name}")
+  unless File.exists? source
+    puts "FAIL: build/Debug-combined/#{combined_dylib_name} does not exist.  Did you forget to run `make dylib`?"
+    exit 1
+  end
+
+  target = File.expand_path("./#{combined_dylib_name}")
+  if File.exists?(target)
+    puts "INFO: removing old #{combined_dylib_name}"
+    FileUtils.rm(target)
+  end
+
+  puts "INFO: staging '#{source}' to ./"
+  FileUtils.cp(source, target)
+end
+
 if ARGV[0] == 'verify-framework'
   lipo_combine_libs
   make_framework
@@ -327,6 +397,14 @@ end
 if ARGV[0] == 'verify-frank'
   lipo_combine_frank_libs
   stage_frank_lib
+  exit 0
+end
+
+if ARGV[0] == 'verify-dylib'
+  puts 'WARN: needs the dylib Xcode targets'
+  exit 0
+  lipo_combine_dylibs
+  stage_dylibs
   exit 0
 end
 
