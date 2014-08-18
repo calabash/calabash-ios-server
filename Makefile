@@ -17,6 +17,6 @@ framework:
 frank:
 	rm -rf build
 	rm -rf libFrankCalabash.a
-	scripts/make-frank-lib-iphonesimulator.rb
-	scripts/make-frank-lib-iphoneos.rb
+	scripts/make-frank-lib.rb sim
+	scripts/make-frank-lib.rb device
 	scripts/make-libraries.rb verify-frank
