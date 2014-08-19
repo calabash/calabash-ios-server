@@ -12,5 +12,6 @@ Dir.chdir working_dir do
   do_system('make dylib')
   do_system('make all')
   do_system('scripts/ci/travis/run-chou-tests.rb')
+  # Cannot run on Travis CI because the log output is too large
   do_system('test-make-without-xcpretty.rb')
 end
