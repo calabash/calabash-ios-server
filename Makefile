@@ -1,17 +1,31 @@
-default:
-	rm -rf build
-	rm -rf calabash.framework
-	scripts/make-calabash-lib-iphonesimulator.rb
-	scripts/make-calabash-lib-iphoneos.rb
-	scripts/make-calabash-lib-version.rb
-	scripts/make-framework.rb verify
-
-frank:
-	rm -rf build
-	scripts/make-frank-lib-iphonesimulator.rb
-	scripts/make-frank-lib-iphoneos.rb
-	scripts/make-framework.rb verify-frank
-
+all:
+	$(MAKE) framework
+	$(MAKE) frank
+	$(MAKE) dylibs
 clean:
 	rm -rf build
 	rm -rf calabash.framework
+	rm -rf libFrankCalabash.a
+	rm -rf calabash-dylibs
+
+framework:
+	rm -rf build
+	rm -rf calabash.framework
+	scripts/make-calabash-lib.rb sim
+	scripts/make-calabash-lib.rb device
+	scripts/make-calabash-lib.rb version
+	scripts/make-libraries.rb verify-framework
+
+frank:
+	rm -rf build
+	rm -rf libFrankCalabash.a
+	scripts/make-frank-lib.rb sim
+	scripts/make-frank-lib.rb device
+	scripts/make-libraries.rb verify-frank
+
+dylibs:
+	rm -rf build
+	rm -rf calabash-dylibs
+	scripts/make-calabash-dylib.rb sim
+	scripts/make-calabash-dylib.rb device
+	scripts/make-libraries.rb verify-dylibs
