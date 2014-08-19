@@ -1,7 +1,7 @@
 all:
 	$(MAKE) framework
 	$(MAKE) frank
-	$(MAKE) dylib
+	$(MAKE) dylibs
 clean:
 	rm -rf build
 	rm -rf calabash.framework
