@@ -348,6 +348,10 @@
 		F59C5D0718E0C1F30087B51D /* LPHTTPFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B116C9A414E6564200663205 /* LPHTTPFileResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5B27B9118C5884D0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		F5B27B9218C5884E0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
+		F5DD402619A40CB70083EFEF /* LPUIPingRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12FE3C4193BBE9B00CB5FFE /* LPUIPingRoute.m */; };
+		F5DD402719A40CB80083EFEF /* LPUIPingRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12FE3C4193BBE9B00CB5FFE /* LPUIPingRoute.m */; };
+		F5DD402819A40CB90083EFEF /* LPUIPingRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12FE3C4193BBE9B00CB5FFE /* LPUIPingRoute.m */; };
+		F5DD402919A40CBA0083EFEF /* LPUIPingRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12FE3C4193BBE9B00CB5FFE /* LPUIPingRoute.m */; };
 		F5E2D1E018C9120E00A0D9B6 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5E2D1E118C9120E00A0D9B6 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5E2D1E418C9120E00A0D9B6 /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -449,6 +453,8 @@
 		B12DCD78189A833000F8DF87 /* LPLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPLog.m; sourceTree = "<group>"; };
 		B12DCD84189A997B00F8DF87 /* LPDebugRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDebugRoute.m; sourceTree = "<group>"; };
 		B12DCD86189A998400F8DF87 /* LPDebugRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDebugRoute.h; sourceTree = "<group>"; };
+		B12FE3C3193BBE9B00CB5FFE /* LPUIPingRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUIPingRoute.h; sourceTree = "<group>"; };
+		B12FE3C4193BBE9B00CB5FFE /* LPUIPingRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUIPingRoute.m; sourceTree = "<group>"; };
 		B13B29231627389500433F6C /* LPISO8601DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPISO8601DateFormatter.h; sourceTree = "<group>"; };
 		B13B29241627389500433F6C /* LPISO8601DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPISO8601DateFormatter.m; sourceTree = "<group>"; };
 		B153F55A15949F3D00867E12 /* LPVersionRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPVersionRoute.h; sourceTree = "<group>"; };
@@ -914,6 +920,8 @@
 				692D779F1657010000DE3E53 /* LPExitRoute.m */,
 				B153F55A15949F3D00867E12 /* LPVersionRoute.h */,
 				B153F55B15949F3D00867E12 /* LPVersionRoute.m */,
+				B12FE3C3193BBE9B00CB5FFE /* LPUIPingRoute.h */,
+				B12FE3C4193BBE9B00CB5FFE /* LPUIPingRoute.m */,
 			);
 			path = Routes;
 			sourceTree = "<group>";
@@ -1420,6 +1428,7 @@
 				B11358651981B053004B16F4 /* LPSetTextOperation.m in Sources */,
 				B11358611981B053004B16F4 /* LPOperation.m in Sources */,
 				B1058E2C197F00C000B4A57B /* LPTouchUtils.m in Sources */,
+				F5DD402819A40CB90083EFEF /* LPUIPingRoute.m in Sources */,
 				B1135844197F1351004B16F4 /* LPHTTPFileResponse.m in Sources */,
 				B1058E2F197F00C000B4A57B /* LPReflectUtils.m in Sources */,
 				B1058E33197F00C000B4A57B /* UIScriptASTVisibility.m in Sources */,
@@ -1490,6 +1499,7 @@
 				B1D5BDA519A23BCE0070E8CE /* LPResources.m in Sources */,
 				B1D5BDA619A23BCE0070E8CE /* UIScriptASTPredicate.m in Sources */,
 				B1D5BDA719A23BCE0070E8CE /* UIScriptAST.m in Sources */,
+				F5DD402919A40CBA0083EFEF /* LPUIPingRoute.m in Sources */,
 				B1D5BDA819A23BCE0070E8CE /* LPDebugRoute.m in Sources */,
 				B1D5BDA919A23BCE0070E8CE /* UIScriptASTALL.m in Sources */,
 				B1D5BDAA19A23BCE0070E8CE /* UIScriptASTClassName.m in Sources */,
@@ -1576,6 +1586,7 @@
 				F5091C0718C4E1D700C85307 /* UIScriptASTPredicate.m in Sources */,
 				F5091C0818C4E1D700C85307 /* UIScriptAST.m in Sources */,
 				F5091C0918C4E1D700C85307 /* LPDebugRoute.m in Sources */,
+				F5DD402619A40CB70083EFEF /* LPUIPingRoute.m in Sources */,
 				F5091C0A18C4E1D700C85307 /* UIScriptASTALL.m in Sources */,
 				F5091C0B18C4E1D700C85307 /* UIScriptASTClassName.m in Sources */,
 				F5091C0C18C4E1D700C85307 /* UIScriptASTDirection.m in Sources */,
@@ -1670,6 +1681,7 @@
 				F5821A2518C4E27400293508 /* UIScriptASTPredicate.m in Sources */,
 				F5821A2618C4E27400293508 /* UIScriptAST.m in Sources */,
 				F5821A2718C4E27400293508 /* LPDebugRoute.m in Sources */,
+				F5DD402719A40CB80083EFEF /* LPUIPingRoute.m in Sources */,
 				F5821A2818C4E27400293508 /* UIScriptASTALL.m in Sources */,
 				F5821A2918C4E27400293508 /* UIScriptASTClassName.m in Sources */,
 				F5821A2A18C4E27400293508 /* UIScriptASTDirection.m in Sources */,
