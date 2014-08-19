@@ -6,7 +6,7 @@ clean:
 	rm -rf build
 	rm -rf calabash.framework
 	rm -rf libFrankCalabash.a
-	rm -rf libCalabash.dylib
+	rm -rf calabash-dylibs
 
 framework:
 	rm -rf build
@@ -23,9 +23,9 @@ frank:
 	scripts/make-frank-lib.rb device
 	scripts/make-libraries.rb verify-frank
 
-dylib:
+dylibs:
 	rm -rf build
-	rm -rf libCalabash.dylib
+	rm -rf calabash-dylibs
 	scripts/make-calabash-dylib.rb sim
 	scripts/make-calabash-dylib.rb device
-	scripts/make-libraries.rb verify-dylib
+	scripts/make-libraries.rb verify-dylibs

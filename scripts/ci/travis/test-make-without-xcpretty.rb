@@ -9,6 +9,6 @@ Dir.chdir working_dir do
   do_system('make clean')
   do_system('make framework')
   do_system('make frank')
-  do_system('make dylib')
+  do_system('make dylibs')
   do_system('make all')
 end

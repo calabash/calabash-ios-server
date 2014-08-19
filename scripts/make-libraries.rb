@@ -349,42 +349,37 @@ def path_to_simulator_dylib(opts = {})
   path_to_lib(merged[:directory], merged[:lib_name])
 end
 
-def lipo_combine_dylibs
-  staging = make_combined_lib_staging_dir
-  inputs = [path_to_device_dylib, path_to_simulator_dylib]
-  output = combined_lib_path(staging, combined_dylib_name)
-  cmd = lipo_cmd(inputs, output)
+def verify_dylibs
+  device_dylib = path_to_device_dylib
+  lipo_verify_arches(device_dylib, ['i386', 'x86_64'])
+  lipo_put_info(device_dylib)
 
-  puts 'INFO: combining libs'
-  puts "INFO: #{cmd}"
-  lipo_create = `#{cmd}`
-  result = $?
-
-  unless result.success?
-    puts 'FAIL: could not create combined lib'
-    puts "FAIL: '#{lipo_create.strip}'"
-    exit result.to_i
-  end
-
-  lipo_put_info(output)
-  lipo_verify_arches(output)
+  simulator_dylib = path_to_simulator_dylib
+  lipo_verify_arches(simulator_dylib, ['armv7', 'armv7s', 'arm64'])
+  lipo_put_info(simulator_dylib)
 end
 
 def stage_dylibs
-  source = File.expand_path("build/Debug-combined/#{combined_dylib_name}")
-  unless File.exists? source
-    puts "FAIL: build/Debug-combined/#{combined_dylib_name} does not exist.  Did you forget to run `make dylib`?"
+  device_dylib = path_to_device_dylib
+  simulator_dylib = path_to_simulator_dylib
+  unless dylibs_built?({:sim => simulator_dylib, :device => device_dylib})
+    puts 'FAIL:  the dylibs have not been built. Did you forget to run `make dylibs`?'
     exit 1
   end
 
-  target = File.expand_path("./#{combined_dylib_name}")
-  if File.exists?(target)
-    puts "INFO: removing old #{combined_dylib_name}"
-    FileUtils.rm(target)
+  target_dir = File.expand_path('./calabash.dylibs')
+  if target_dir.directory?(target_dir)
+    puts 'INFO:  removing old calabash.dylibs'
+    FileUtils.rm_rf target_dir
   end
 
-  puts "INFO: staging '#{source}' to ./"
-  FileUtils.cp(source, target)
+  FileUtils.mkdir target_dir
+
+  puts "INFO: staging '#{device_dylib}' to ./calabash.dylibs"
+  FileUtils.cp(device_dylib, target_dir)
+
+  puts "INFO: staging '#{simulator_dylib}' to ./calabash.dylibs"
+  FileUtils.cp(simulator_dylib, target_dir)
 end
 
 if ARGV[0] == 'verify-framework'
@@ -400,10 +395,10 @@ if ARGV[0] == 'verify-frank'
   exit 0
 end
 
-if ARGV[0] == 'verify-dylib'
+if ARGV[0] == 'verify-dylibs'
   puts 'WARN: needs the dylib Xcode targets'
   exit 0
-  lipo_combine_dylibs
+  verify_dylibs
   stage_dylibs
   exit 0
 end

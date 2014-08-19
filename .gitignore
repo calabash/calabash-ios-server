@@ -5,7 +5,7 @@ Markdown.pl
 build
 calabash.framework
 libFrankCalabash.a
-libCalabash.dylib
+calabash.dylibs
 
 !scripts/test/build
 
