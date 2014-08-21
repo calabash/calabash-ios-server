@@ -193,9 +193,25 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
 #pragma mark - Communication
 
 #if TARGET_IPHONE_SIMULATOR
-// in the simulator, UIAutomation uses a target-specific plist in ~/Library/Application Support/iPhone Simulator/[system version]/Library/Preferences/[bundle ID].plist
-// _not_ the NSUserDefaults plist, in the sandboxed Library
+// In the simulator, UIAutomation does _not_ use the NSUserDefaults plist in the
+// sandboxed Application Library.  Instead it uses a target-specific plist
+// located in one of the following locations:
+//
+// Xcode 5
+// ~/Library/Application Support/iPhone Simulator/[system version]/Library/Preferences/[bundle ID].plist
+//
+// Xcode 6
+// ~/Library/Developer/CoreSimulator/Devices/[UDID]/data/Library/Preferences/[bundle ID].plist
 // see http://stackoverflow.com/questions/4977673/reading-preferences-set-by-uiautomations-uiaapplication-setpreferencesvaluefork
+//
+// Also on Xcode 6 - When the app is first installed and launched, this plist
+// file _does not exist_.  However, if you ask the NSUserDefaults for its
+// contents you will get back a non-empty string.  It looks like NSUserDefaults
+// is a concatenation of system level preferences (language, locale, newstand,
+// etc.) and the application's own preferences.
+//
+// It is not clear whether or not the fact that file does not exist until
+// the app tries to store something will influence UIA interactions.
 - (NSString *)simulatorPreferencesPath {
   static NSString *path = nil;
   static dispatch_once_t onceToken;
@@ -206,11 +222,17 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
     // 1. get into the simulator's app support directory by fetching the sandboxed Library's path
 
     NSArray *userLibDirURLs = [[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask];
+
     NSURL *userDirURL = [userLibDirURLs lastObject];
     NSString *userDirectoryPath = [userDirURL path];
 
     // 2. get out of our application directory, back to the root support directory for this system version
-    plistRootPath = [userDirectoryPath substringToIndex:([userDirectoryPath rangeOfString:@"Applications"].location)];
+    if ([userDirectoryPath rangeOfString:@"CoreSimulator"].location == NSNotFound) {
+      plistRootPath = [userDirectoryPath substringToIndex:([userDirectoryPath rangeOfString:@"Applications"].location)];
+    } else {
+      NSRange range = [userDirectoryPath rangeOfString:@"data"];
+      plistRootPath = [userDirectoryPath substringToIndex:range.location + range.length];
+    }
 
     // 3. locate, relative to here, /Library/Preferences/[bundle ID].plist
     relativePlistPath = [NSString stringWithFormat:@"Library/Preferences/%@", plistName];
