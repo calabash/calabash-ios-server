@@ -210,7 +210,17 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
     NSString *userDirectoryPath = [userDirURL path];
 
     // 2. get out of our application directory, back to the root support directory for this system version
-    plistRootPath = [userDirectoryPath substringToIndex:([userDirectoryPath rangeOfString:@"Applications"].location)];
+    NSRange appsIndex = [userDirectoryPath rangeOfString:@"Applications"];
+    if (appsIndex.location == NSNotFound) {
+      appsIndex = [userDirectoryPath rangeOfString:@"Containers"];
+    }
+    if (appsIndex == NSNotFound) {
+      NSLog(@"Unable to find simulator app preferences path in: %@", userDirectoryPath);
+      path = nil;
+      return;
+    }
+
+    plistRootPath = [userDirectoryPath substringToIndex:appsIndex.location];
 
     // 3. locate, relative to here, /Library/Preferences/[bundle ID].plist
     relativePlistPath = [NSString stringWithFormat:@"Library/Preferences/%@", plistName];
