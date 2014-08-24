@@ -43,6 +43,16 @@ Dir.chdir calabash_gem_dir do
                :fail_msg => 'chou - could not install gem libraries'})
   end
 
+
+  uninstall_gem('run_loop')
+  do_system('rm -rf run_loop')
+  do_system('git clone --depth 1 --recursive https://github.com/calabash/run_loop')
+  run_loop_gem_dir = File.expand_path(File.join(calabash_gem_dir, 'run_loop'))
+  Dir.chdir run_loop_gem_dir do
+    do_system('bundle install')
+    do_system('rake install')
+  end
+
   do_system('script/ci/travis/bundle-install.rb',
             {:pass_msg => 'chou - bundle install worked',
              :fail_msg => 'chou - could not bundle install'})
