@@ -30,7 +30,18 @@ calabash_framework = File.expand_path(File.join(File.dirname(__FILE__), '..', '.
 
 Dir.chdir calabash_gem_dir do
 
-  do_system('script/ci/travis/install-static-libs.rb')
+  # The name of the CI script that builds the libraries that are included in
+  # the calabash-ios gem has changed in the master branch; install-static-libs
+  # is the old name.
+  if File.exist? 'script/ci/travis/install-static-libs.rb'
+    do_system('script/ci/travis/install-static-libs.rb',
+              {:pass_msg => 'chou - installed static libs',
+               :fail_msg => 'chou - could not install static libs'})
+  else
+    do_system('script/ci/travis/install-gem-libs.rb',
+              {:pass_msg => 'chou - installed gem libraries',
+               :fail_msg => 'chou - could not install gem libraries'})
+  end
 
   do_system('script/ci/travis/bundle-install.rb')
 
