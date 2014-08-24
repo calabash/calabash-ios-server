@@ -367,18 +367,18 @@ def stage_dylibs
     exit 1
   end
 
-  target_dir = File.expand_path('./calabash.dylibs')
+  target_dir = File.expand_path('./calabash-dylibs')
   if target_dir.directory?(target_dir)
-    puts 'INFO:  removing old calabash.dylibs'
+    puts 'INFO:  removing old calabash-dylibs'
     FileUtils.rm_rf target_dir
   end
 
   FileUtils.mkdir target_dir
 
-  puts "INFO: staging '#{device_dylib}' to ./calabash.dylibs"
+  puts "INFO: staging '#{device_dylib}' to ./calabash-dylibs"
   FileUtils.cp(device_dylib, target_dir)
 
-  puts "INFO: staging '#{simulator_dylib}' to ./calabash.dylibs"
+  puts "INFO: staging '#{simulator_dylib}' to ./calabash-dylibs"
   FileUtils.cp(simulator_dylib, target_dir)
 end
 
