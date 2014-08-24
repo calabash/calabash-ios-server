@@ -43,9 +43,13 @@ Dir.chdir calabash_gem_dir do
                :fail_msg => 'chou - could not install gem libraries'})
   end
 
-  do_system('script/ci/travis/bundle-install.rb')
+  do_system('script/ci/travis/bundle-install.rb',
+            {:pass_msg => 'chou - bundle install worked',
+             :fail_msg => 'chou - could not bundle install'})
 
-  do_system('script/ci/travis/install-gem-ci.rb')
+  do_system('script/ci/travis/install-gem-ci.rb',
+            {:pass_msg => 'chou - installing the gem',
+             :fail_msg => 'chou - could not install the gem'})
 
 end
 
