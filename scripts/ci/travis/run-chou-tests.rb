@@ -30,11 +30,36 @@ calabash_framework = File.expand_path(File.join(File.dirname(__FILE__), '..', '.
 
 Dir.chdir calabash_gem_dir do
 
-  do_system('script/ci/travis/install-static-libs.rb')
+  # The name of the CI script that builds the libraries that are included in
+  # the calabash-ios gem has changed in the master branch; install-static-libs
+  # is the old name.
+  if File.exist? 'script/ci/travis/install-static-libs.rb'
+    do_system('script/ci/travis/install-static-libs.rb',
+              {:pass_msg => 'chou - installed static libs',
+               :fail_msg => 'chou - could not install static libs'})
+  else
+    do_system('script/ci/travis/install-gem-libs.rb',
+              {:pass_msg => 'chou - installed gem libraries',
+               :fail_msg => 'chou - could not install gem libraries'})
+  end
 
-  do_system('script/ci/travis/bundle-install.rb')
 
-  do_system('script/ci/travis/install-gem-ci.rb')
+  uninstall_gem('run_loop')
+  do_system('rm -rf run_loop')
+  do_system('git clone --depth 1 --recursive https://github.com/calabash/run_loop')
+  run_loop_gem_dir = File.expand_path(File.join(calabash_gem_dir, 'run_loop'))
+  Dir.chdir run_loop_gem_dir do
+    do_system('bundle install')
+    do_system('rake install')
+  end
+
+  do_system('script/ci/travis/bundle-install.rb',
+            {:pass_msg => 'chou - bundle install worked',
+             :fail_msg => 'chou - could not bundle install'})
+
+  do_system('script/ci/travis/install-gem-ci.rb',
+            {:pass_msg => 'chou - installing the gem',
+             :fail_msg => 'chou - could not install the gem'})
 
 end
 
