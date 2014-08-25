@@ -1,9 +1,6 @@
 #!/usr/bin/env ruby
 require 'fileutils'
 
-puts 'WARN: needs the dylib Xcode targets'
-exit 0
-
 target = ARGV[0]
 valid_args = ['sim', 'device']
 
@@ -15,10 +12,10 @@ end
 xcpretty_available = `gem list xcpretty -i`.chomp == 'true'
 
 if target == 'sim'
-  target_arg = 'libCalabashDynSim'
+  target_arg = 'calabash-dylib-simulator'
   sdk = 'iphonesimulator'
 else
-  target_arg = 'libCalabashDyn'
+  target_arg = 'calabash-dylib-device'
   sdk = 'iphoneos'
 end
 

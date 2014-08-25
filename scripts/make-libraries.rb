@@ -351,11 +351,11 @@ end
 
 def verify_dylibs
   device_dylib = path_to_device_dylib
-  lipo_verify_arches(device_dylib, ['i386', 'x86_64'])
+  lipo_verify_arches(device_dylib, ['armv7', 'armv7s', 'arm64'])
   lipo_put_info(device_dylib)
 
   simulator_dylib = path_to_simulator_dylib
-  lipo_verify_arches(simulator_dylib, ['armv7', 'armv7s', 'arm64'])
+  lipo_verify_arches(simulator_dylib, ['i386', 'x86_64'])
   lipo_put_info(simulator_dylib)
 end
 
@@ -368,7 +368,7 @@ def stage_dylibs
   end
 
   target_dir = File.expand_path('./calabash-dylibs')
-  if target_dir.directory?(target_dir)
+  if File.directory?(target_dir)
     puts 'INFO:  removing old calabash-dylibs'
     FileUtils.rm_rf target_dir
   end
@@ -396,8 +396,6 @@ if ARGV[0] == 'verify-frank'
 end
 
 if ARGV[0] == 'verify-dylibs'
-  puts 'WARN: needs the dylib Xcode targets'
-  exit 0
   verify_dylibs
   stage_dylibs
   exit 0
