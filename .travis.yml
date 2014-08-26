@@ -9,7 +9,8 @@ script:
   - make clean
   - make framework
   - make frank
-  - make all
+  # See the note above
+  # - make all
   - scripts/ci/travis/run-chou-tests.rb
 
 rvm:

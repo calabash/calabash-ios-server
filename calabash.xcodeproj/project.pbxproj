@@ -82,6 +82,168 @@
 		B11358631981B053004B16F4 /* LPScrollOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC714B6DB2B002A744C /* LPScrollOperation.m */; };
 		B11358641981B053004B16F4 /* LPScrollToRowOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */; };
 		B11358651981B053004B16F4 /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; };
+		B15BF99719ABB17800B38577 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E757A15D434D00066550B /* CFNetwork.framework */; };
+		B15BF99819ABB18200B38577 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
+		B15BF99919ABB1DD00B38577 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-unreachable-code"; }; };
+		B15BF99A19ABB1DD00B38577 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		B15BF99B19ABB1DD00B38577 /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		B15BF99C19ABB1DD00B38577 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF99D19ABB1DD00B38577 /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF99E19ABB1DD00B38577 /* LPHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B514E6565500663205 /* LPHTTPConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF99F19ABB1DD00B38577 /* LPHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B814E6565500663205 /* LPHTTPMessage.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9A019ABB1DD00B38577 /* LPHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9BB14E6565500663205 /* LPHTTPServer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9A119ABB1DD00B38577 /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98414E5215800663205 /* DDData.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9A219ABB1DD00B38577 /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* DDNumber.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9A319ABB1DD00B38577 /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98814E5215800663205 /* DDRange.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9A419ABB1DD00B38577 /* LPHTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C99F14E6564200663205 /* LPHTTPAsyncFileResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9A519ABB1DD00B38577 /* LPHTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A114E6564200663205 /* LPHTTPDataResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9A619ABB1DD00B38577 /* LPHTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A314E6564200663205 /* LPHTTPDynamicFileResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9A719ABB1DD00B38577 /* LPHTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A514E6564200663205 /* LPHTTPFileResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9A819ABB1DD00B38577 /* LPHTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A714E6564200663205 /* LPHTTPRedirectResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9A919ABB1DD00B38577 /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9AA19ABB1DD00B38577 /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9AB19ABB1DD00B38577 /* LPScrollToMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A718B392370094E71E /* LPScrollToMarkOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9AC19ABB1DD00B38577 /* LPScrollToRowWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9AD19ABB1DD00B38577 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A318B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9AE19ABB1DD00B38577 /* LPCollectionViewScrollToItemOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C3A62E18A2EA0800DB7E42 /* LPCollectionViewScrollToItemOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9AF19ABB1DD00B38577 /* LPSliderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5CAC06B180D499600E23F03 /* LPSliderOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9B019ABB1DD00B38577 /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9B119ABB1DD00B38577 /* LPOrientationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F591380317C39128007B2BE4 /* LPOrientationOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9B219ABB1DD00B38577 /* LPFlashOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B19440431725C70A00EE1B25 /* LPFlashOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9B319ABB1DD00B38577 /* LPQueryAllOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9B419ABB1DD00B38577 /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9B519ABB1DD00B38577 /* LPQueryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC514B6DB2B002A744C /* LPQueryOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9B619ABB1DD00B38577 /* LPScrollOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC714B6DB2B002A744C /* LPScrollOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9B719ABB1DD00B38577 /* LPScrollToRowOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9B819ABB1DD00B38577 /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9B919ABB1DD00B38577 /* LPRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8714B6DBAC002A744C /* LPRecorder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9BA19ABB1DD00B38577 /* LPUIARouteOverUserPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CA15C06CB500BBE2BE /* LPUIARouteOverUserPrefs.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9BB19ABB1DD00B38577 /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9BC19ABB1DD00B38577 /* LPDebugRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DCD84189A997B00F8DF87 /* LPDebugRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9BD19ABB1DE00B38577 /* LPAppPropertyRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EBF08516EE63A000AE4D40 /* LPAppPropertyRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9BE19ABB1DE00B38577 /* LPQueryLogRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EBF08716EE63A000AE4D40 /* LPQueryLogRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9BF19ABB1DE00B38577 /* LPUIATapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B164575518FDCE4900CAA25A /* LPUIATapRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9C019ABB1DE00B38577 /* LPLocationRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1CED0FA183E9551004793B9 /* LPLocationRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9C119ABB1DE00B38577 /* LPUserPrefRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CC15C06CB500BBE2BE /* LPUserPrefRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9C219ABB1DE00B38577 /* LPKeyboardRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F715BC200300408364 /* LPKeyboardRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9C319ABB1DE00B38577 /* LPGenericAsyncRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F315BC1ECD00408364 /* LPGenericAsyncRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9C419ABB1DE00B38577 /* LPConditionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B163213415BBF13200408364 /* LPConditionRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9C519ABB1DE00B38577 /* LPInterpolateRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A04011511546F002FA032 /* LPInterpolateRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9C619ABB1DE00B38577 /* LPMapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD214B6DB2B002A744C /* LPMapRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9C719ABB1DE00B38577 /* LPRecordRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8B14B6DC7F002A744C /* LPRecordRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9C819ABB1DE00B38577 /* LPNoContentResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD414B6DB2B002A744C /* LPNoContentResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9C919ABB1DE00B38577 /* LPScreenshotRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9014B6DD33002A744C /* LPScreenshotRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9CA19ABB1DE00B38577 /* LPAsyncPlaybackRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B111321614D5837900982BBC /* LPAsyncPlaybackRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9CB19ABB1DE00B38577 /* LPBackdoorRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9CC19ABB1DE00B38577 /* LPExitRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 692D779F1657010000DE3E53 /* LPExitRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9CD19ABB1DE00B38577 /* LPVersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B153F55B15949F3D00867E12 /* LPVersionRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9CE19ABB1DE00B38577 /* LPISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B29241627389500433F6C /* LPISO8601DateFormatter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9CF19ABB1DE00B38577 /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDDF14B6DB2B002A744C /* CDataScanner_Extensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9D019ABB1DE00B38577 /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9D119ABB1DE00B38577 /* LPCJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE314B6DB2B002A744C /* LPCJSONScanner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9D219ABB1DE00B38577 /* LPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE514B6DB2B002A744C /* LPCJSONSerializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9D319ABB1DE00B38577 /* LPResources.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDF714B6DB2B002A744C /* LPResources.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9D419ABB1DE00B38577 /* UIScriptASTVisibility.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B19DC716D162CF00D3D80B /* UIScriptASTVisibility.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9D519ABB1DE00B38577 /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9D619ABB1DE00B38577 /* UIScriptAST.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFA14B6DB2B002A744C /* UIScriptAST.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9D719ABB1DE00B38577 /* UIScriptASTALL.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFC14B6DB2B002A744C /* UIScriptASTALL.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9D819ABB1DE00B38577 /* UIScriptASTClassName.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFE14B6DB2B002A744C /* UIScriptASTClassName.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9D919ABB1DE00B38577 /* UIScriptASTDirection.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0014B6DB2B002A744C /* UIScriptASTDirection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9DA19ABB1DE00B38577 /* UIScriptASTFirst.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0214B6DB2B002A744C /* UIScriptASTFirst.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9DB19ABB1DE00B38577 /* UIScriptASTIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0414B6DB2B002A744C /* UIScriptASTIndex.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9DC19ABB1DE00B38577 /* UIScriptASTLast.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0614B6DB2B002A744C /* UIScriptASTLast.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9DD19ABB1DE00B38577 /* UIScriptASTWith.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0814B6DB2B002A744C /* UIScriptASTWith.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9DE19ABB1DE00B38577 /* UIScriptParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0A14B6DB2B002A744C /* UIScriptParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9DF19ABB1DE00B38577 /* LPUIAUserPrefsChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F279AE183D5B3000A922BC /* LPUIAUserPrefsChannel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9E019ABB1DE00B38577 /* LPJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9E119ABB1DE00B38577 /* LPReflectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B1296FC215DC1F5B005DDF5C /* LPReflectUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9E219ABB1DE00B38577 /* LPTouchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9E319ABB1DE00B38577 /* LPEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DCD74189A82DF00F8DF87 /* LPEnv.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9E419ABB1DE00B38577 /* LPLog.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DCD78189A833000F8DF87 /* LPLog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9E519ABB1DE00B38577 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8C14B6DAFB002A744C /* LPCDataScanner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9E619ABB1DE00B38577 /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9E719ABB1EB00B38577 /* LPI.mm in Sources */ = {isa = PBXBuildFile; fileRef = B184FDBD14B6DB2B002A744C /* LPI.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9EA19ABB2B100B38577 /* LPI.mm in Sources */ = {isa = PBXBuildFile; fileRef = B184FDBD14B6DB2B002A744C /* LPI.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9EB19ABB2B100B38577 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-unreachable-code"; }; };
+		B15BF9EC19ABB2B100B38577 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		B15BF9ED19ABB2B100B38577 /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		B15BF9EE19ABB2B100B38577 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9EF19ABB2B100B38577 /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9F019ABB2B100B38577 /* LPHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B514E6565500663205 /* LPHTTPConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9F119ABB2B100B38577 /* LPHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B814E6565500663205 /* LPHTTPMessage.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9F219ABB2B100B38577 /* LPHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9BB14E6565500663205 /* LPHTTPServer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9F319ABB2B100B38577 /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98414E5215800663205 /* DDData.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9F419ABB2B100B38577 /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* DDNumber.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9F519ABB2B100B38577 /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98814E5215800663205 /* DDRange.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9F619ABB2B100B38577 /* LPHTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C99F14E6564200663205 /* LPHTTPAsyncFileResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9F719ABB2B100B38577 /* LPHTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A114E6564200663205 /* LPHTTPDataResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9F819ABB2B100B38577 /* LPHTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A314E6564200663205 /* LPHTTPDynamicFileResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9F919ABB2B100B38577 /* LPHTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A514E6564200663205 /* LPHTTPFileResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9FA19ABB2B100B38577 /* LPHTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A714E6564200663205 /* LPHTTPRedirectResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9FB19ABB2B100B38577 /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9FC19ABB2B100B38577 /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9FD19ABB2B100B38577 /* LPScrollToMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A718B392370094E71E /* LPScrollToMarkOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9FE19ABB2B100B38577 /* LPScrollToRowWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9FF19ABB2B100B38577 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A318B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA0019ABB2B100B38577 /* LPCollectionViewScrollToItemOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C3A62E18A2EA0800DB7E42 /* LPCollectionViewScrollToItemOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA0119ABB2B100B38577 /* LPSliderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5CAC06B180D499600E23F03 /* LPSliderOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA0219ABB2B100B38577 /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA0319ABB2B100B38577 /* LPOrientationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F591380317C39128007B2BE4 /* LPOrientationOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA0419ABB2B100B38577 /* LPFlashOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B19440431725C70A00EE1B25 /* LPFlashOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA0519ABB2B100B38577 /* LPQueryAllOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA0619ABB2B100B38577 /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA0719ABB2B100B38577 /* LPQueryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC514B6DB2B002A744C /* LPQueryOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA0819ABB2B100B38577 /* LPScrollOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC714B6DB2B002A744C /* LPScrollOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA0919ABB2B100B38577 /* LPScrollToRowOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA0A19ABB2B100B38577 /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA0B19ABB2B100B38577 /* LPRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8714B6DBAC002A744C /* LPRecorder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA0C19ABB2B100B38577 /* LPUIARouteOverUserPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CA15C06CB500BBE2BE /* LPUIARouteOverUserPrefs.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA0D19ABB2B100B38577 /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA0E19ABB2B100B38577 /* LPDebugRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DCD84189A997B00F8DF87 /* LPDebugRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA0F19ABB2B100B38577 /* LPAppPropertyRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EBF08516EE63A000AE4D40 /* LPAppPropertyRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA1019ABB2B100B38577 /* LPQueryLogRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EBF08716EE63A000AE4D40 /* LPQueryLogRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA1119ABB2B100B38577 /* LPUIATapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B164575518FDCE4900CAA25A /* LPUIATapRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA1219ABB2B100B38577 /* LPLocationRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1CED0FA183E9551004793B9 /* LPLocationRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA1319ABB2B100B38577 /* LPUserPrefRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CC15C06CB500BBE2BE /* LPUserPrefRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA1419ABB2B100B38577 /* LPKeyboardRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F715BC200300408364 /* LPKeyboardRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA1519ABB2B100B38577 /* LPGenericAsyncRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F315BC1ECD00408364 /* LPGenericAsyncRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA1619ABB2B100B38577 /* LPConditionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B163213415BBF13200408364 /* LPConditionRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA1719ABB2B100B38577 /* LPInterpolateRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A04011511546F002FA032 /* LPInterpolateRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA1819ABB2B100B38577 /* LPMapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD214B6DB2B002A744C /* LPMapRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA1919ABB2B100B38577 /* LPRecordRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8B14B6DC7F002A744C /* LPRecordRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA1A19ABB2B100B38577 /* LPNoContentResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD414B6DB2B002A744C /* LPNoContentResponse.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA1B19ABB2B100B38577 /* LPScreenshotRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9014B6DD33002A744C /* LPScreenshotRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA1C19ABB2B100B38577 /* LPAsyncPlaybackRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B111321614D5837900982BBC /* LPAsyncPlaybackRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA1D19ABB2B100B38577 /* LPBackdoorRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA1E19ABB2B100B38577 /* LPExitRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 692D779F1657010000DE3E53 /* LPExitRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA1F19ABB2B100B38577 /* LPVersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B153F55B15949F3D00867E12 /* LPVersionRoute.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA2019ABB2B100B38577 /* LPISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B29241627389500433F6C /* LPISO8601DateFormatter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA2119ABB2B100B38577 /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDDF14B6DB2B002A744C /* CDataScanner_Extensions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA2219ABB2B100B38577 /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA2319ABB2B100B38577 /* LPCJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE314B6DB2B002A744C /* LPCJSONScanner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA2419ABB2B100B38577 /* LPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE514B6DB2B002A744C /* LPCJSONSerializer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA2519ABB2B100B38577 /* LPResources.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDF714B6DB2B002A744C /* LPResources.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA2619ABB2B100B38577 /* UIScriptASTVisibility.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B19DC716D162CF00D3D80B /* UIScriptASTVisibility.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA2719ABB2B100B38577 /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA2819ABB2B100B38577 /* UIScriptAST.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFA14B6DB2B002A744C /* UIScriptAST.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA2919ABB2B100B38577 /* UIScriptASTALL.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFC14B6DB2B002A744C /* UIScriptASTALL.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA2A19ABB2B100B38577 /* UIScriptASTClassName.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFE14B6DB2B002A744C /* UIScriptASTClassName.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA2B19ABB2B100B38577 /* UIScriptASTDirection.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0014B6DB2B002A744C /* UIScriptASTDirection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA2C19ABB2B100B38577 /* UIScriptASTFirst.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0214B6DB2B002A744C /* UIScriptASTFirst.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA2D19ABB2B100B38577 /* UIScriptASTIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0414B6DB2B002A744C /* UIScriptASTIndex.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA2E19ABB2B100B38577 /* UIScriptASTLast.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0614B6DB2B002A744C /* UIScriptASTLast.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA2F19ABB2B100B38577 /* UIScriptASTWith.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0814B6DB2B002A744C /* UIScriptASTWith.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA3019ABB2B100B38577 /* UIScriptParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0A14B6DB2B002A744C /* UIScriptParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA3119ABB2B100B38577 /* LPUIAUserPrefsChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F279AE183D5B3000A922BC /* LPUIAUserPrefsChannel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA3219ABB2B100B38577 /* LPJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA3319ABB2B100B38577 /* LPReflectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B1296FC215DC1F5B005DDF5C /* LPReflectUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA3419ABB2B100B38577 /* LPTouchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA3519ABB2B100B38577 /* LPEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DCD74189A82DF00F8DF87 /* LPEnv.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA3619ABB2B100B38577 /* LPLog.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DCD78189A833000F8DF87 /* LPLog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA3719ABB2B100B38577 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8C14B6DAFB002A744C /* LPCDataScanner.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA3819ABB2B100B38577 /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA3A19ABB2B100B38577 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
+		B15BFA3B19ABB2B100B38577 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E757A15D434D00066550B /* CFNetwork.framework */; };
 		B164575718FDCE4900CAA25A /* LPUIATapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B164575518FDCE4900CAA25A /* LPUIATapRoute.m */; };
 		B164575B18FDD60700CAA25A /* LPUIATapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B164575518FDCE4900CAA25A /* LPUIATapRoute.m */; };
 		B1D5BD7819A23BCE0070E8CE /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code"; }; };
@@ -453,6 +615,13 @@
 		B13B29241627389500433F6C /* LPISO8601DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPISO8601DateFormatter.m; sourceTree = "<group>"; };
 		B153F55A15949F3D00867E12 /* LPVersionRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPVersionRoute.h; sourceTree = "<group>"; };
 		B153F55B15949F3D00867E12 /* LPVersionRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPVersionRoute.m; sourceTree = "<group>"; };
+		B15BF97119ABAFD200B38577 /* libCalabashDyn.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libCalabashDyn.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		B15BF97219ABAFD200B38577 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		B15BF97519ABAFD200B38577 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		B15BF97619ABAFD200B38577 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		B15BF97719ABAFD200B38577 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		B15BF98319ABAFD200B38577 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		B15BFA4019ABB2B100B38577 /* libCalabashDynSim.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libCalabashDynSim.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		B15DA5E315C5D80A009E6CFE /* LPQueryAllOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPQueryAllOperation.h; sourceTree = "<group>"; };
 		B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPQueryAllOperation.m; sourceTree = "<group>"; };
 		B160E8ED15321D8F00F69E7A /* LPBackdoorRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPBackdoorRoute.h; sourceTree = "<group>"; };
@@ -601,6 +770,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B15BF96E19ABAFD200B38577 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B15BF99819ABB18200B38577 /* Foundation.framework in Frameworks */,
+				B15BF99719ABB17800B38577 /* CFNetwork.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B15BFA3919ABB2B100B38577 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B15BFA3A19ABB2B100B38577 /* Foundation.framework in Frameworks */,
+				B15BFA3B19ABB2B100B38577 /* CFNetwork.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B1D5BDD219A23BCE0070E8CE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -683,6 +870,8 @@
 				F537398C18E5253B004133FA /* version */,
 				B1058E51197F00C000B4A57B /* libFrankCalabash.a */,
 				B1D5BDD919A23BCE0070E8CE /* libFrankCalabashDevice.a */,
+				B15BF97119ABAFD200B38577 /* libCalabashDyn.dylib */,
+				B15BFA4019ABB2B100B38577 /* libCalabashDynSim.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -692,6 +881,9 @@
 			children = (
 				B17E757A15D434D00066550B /* CFNetwork.framework */,
 				B121E79714B6D9FB0034C6A9 /* Foundation.framework */,
+				B15BF97219ABAFD200B38577 /* Cocoa.framework */,
+				B15BF98319ABAFD200B38577 /* XCTest.framework */,
+				B15BF97419ABAFD200B38577 /* Other Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -716,6 +908,16 @@
 				B121E79F14B6D9FB0034C6A9 /* calabash-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B15BF97419ABAFD200B38577 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B15BF97519ABAFD200B38577 /* Foundation.framework */,
+				B15BF97619ABAFD200B38577 /* CoreData.framework */,
+				B15BF97719ABAFD200B38577 /* AppKit.framework */,
+			);
+			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
 		B16C307C15191A8C00DAA3FA /* calabash-js */ = {
@@ -1070,6 +1272,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B15BF96F19ABAFD200B38577 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B15BFA3C19ABB2B100B38577 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B1D5BDC819A23BCE0070E8CE /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1140,6 +1356,40 @@
 			productName = calabash;
 			productReference = B1058E51197F00C000B4A57B /* libFrankCalabash.a */;
 			productType = "com.apple.product-type.library.static";
+		};
+		B15BF97019ABAFD200B38577 /* calabash-dylib-device */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B15BF99519ABAFD200B38577 /* Build configuration list for PBXNativeTarget "calabash-dylib-device" */;
+			buildPhases = (
+				B15BF96D19ABAFD200B38577 /* Sources */,
+				B15BF96E19ABAFD200B38577 /* Frameworks */,
+				B15BF96F19ABAFD200B38577 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "calabash-dylib-device";
+			productName = "calabash-dylib-device";
+			productReference = B15BF97119ABAFD200B38577 /* libCalabashDyn.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+		B15BF9E819ABB2B100B38577 /* calabash-dylib-simulator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B15BFA3D19ABB2B100B38577 /* Build configuration list for PBXNativeTarget "calabash-dylib-simulator" */;
+			buildPhases = (
+				B15BF9E919ABB2B100B38577 /* Sources */,
+				B15BFA3919ABB2B100B38577 /* Frameworks */,
+				B15BFA3C19ABB2B100B38577 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "calabash-dylib-simulator";
+			productName = "calabash-dylib-device";
+			productReference = B15BFA4019ABB2B100B38577 /* libCalabashDynSim.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
 		};
 		B1D5BD7519A23BCE0070E8CE /* frank-calabash-device */ = {
 			isa = PBXNativeTarget;
@@ -1245,6 +1495,8 @@
 				F537398B18E5253B004133FA /* version */,
 				B1058DEC197F00C000B4A57B /* frank-calabash */,
 				B1D5BD7519A23BCE0070E8CE /* frank-calabash-device */,
+				B15BF97019ABAFD200B38577 /* calabash-dylib-device */,
+				B15BF9E819ABB2B100B38577 /* calabash-dylib-simulator */,
 			);
 		};
 /* End PBXProject section */
@@ -1434,6 +1686,178 @@
 				B113585C1981B053004B16F4 /* LPSliderOperation.m in Sources */,
 				B113585F1981B053004B16F4 /* LPFlashOperation.m in Sources */,
 				B113583F197F1351004B16F4 /* DDNumber.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B15BF96D19ABAFD200B38577 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B15BF9E719ABB1EB00B38577 /* LPI.mm in Sources */,
+				B15BF99919ABB1DD00B38577 /* LPWebQuery.m in Sources */,
+				B15BF99A19ABB1DD00B38577 /* LPSSKeychain.m in Sources */,
+				B15BF99B19ABB1DD00B38577 /* LPSSKeychainQuery.m in Sources */,
+				B15BF99C19ABB1DD00B38577 /* GCDAsyncSocket.m in Sources */,
+				B15BF99D19ABB1DD00B38577 /* LPHTTPAuthenticationRequest.m in Sources */,
+				B15BF99E19ABB1DD00B38577 /* LPHTTPConnection.m in Sources */,
+				B15BF99F19ABB1DD00B38577 /* LPHTTPMessage.m in Sources */,
+				B15BF9A019ABB1DD00B38577 /* LPHTTPServer.m in Sources */,
+				B15BF9A119ABB1DD00B38577 /* DDData.m in Sources */,
+				B15BF9A219ABB1DD00B38577 /* DDNumber.m in Sources */,
+				B15BF9A319ABB1DD00B38577 /* DDRange.m in Sources */,
+				B15BF9A419ABB1DD00B38577 /* LPHTTPAsyncFileResponse.m in Sources */,
+				B15BF9A519ABB1DD00B38577 /* LPHTTPDataResponse.m in Sources */,
+				B15BF9A619ABB1DD00B38577 /* LPHTTPDynamicFileResponse.m in Sources */,
+				B15BF9A719ABB1DD00B38577 /* LPHTTPFileResponse.m in Sources */,
+				B15BF9A819ABB1DD00B38577 /* LPHTTPRedirectResponse.m in Sources */,
+				B15BF9A919ABB1DD00B38577 /* LPCORSResponse.m in Sources */,
+				B15BF9AA19ABB1DD00B38577 /* LPRouter.m in Sources */,
+				B15BF9AB19ABB1DD00B38577 /* LPScrollToMarkOperation.m in Sources */,
+				B15BF9AC19ABB1DD00B38577 /* LPScrollToRowWithMarkOperation.m in Sources */,
+				B15BF9AD19ABB1DD00B38577 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
+				B15BF9AE19ABB1DD00B38577 /* LPCollectionViewScrollToItemOperation.m in Sources */,
+				B15BF9AF19ABB1DD00B38577 /* LPSliderOperation.m in Sources */,
+				B15BF9B019ABB1DD00B38577 /* LPDatePickerOperation.m in Sources */,
+				B15BF9B119ABB1DD00B38577 /* LPOrientationOperation.m in Sources */,
+				B15BF9B219ABB1DD00B38577 /* LPFlashOperation.m in Sources */,
+				B15BF9B319ABB1DD00B38577 /* LPQueryAllOperation.m in Sources */,
+				B15BF9B419ABB1DD00B38577 /* LPOperation.m in Sources */,
+				B15BF9B519ABB1DD00B38577 /* LPQueryOperation.m in Sources */,
+				B15BF9B619ABB1DD00B38577 /* LPScrollOperation.m in Sources */,
+				B15BF9B719ABB1DD00B38577 /* LPScrollToRowOperation.m in Sources */,
+				B15BF9B819ABB1DD00B38577 /* LPSetTextOperation.m in Sources */,
+				B15BF9B919ABB1DD00B38577 /* LPRecorder.m in Sources */,
+				B15BF9BA19ABB1DD00B38577 /* LPUIARouteOverUserPrefs.m in Sources */,
+				B15BF9BB19ABB1DD00B38577 /* LPKeychainRoute.m in Sources */,
+				B15BF9BC19ABB1DD00B38577 /* LPDebugRoute.m in Sources */,
+				B15BF9BD19ABB1DE00B38577 /* LPAppPropertyRoute.m in Sources */,
+				B15BF9BE19ABB1DE00B38577 /* LPQueryLogRoute.m in Sources */,
+				B15BF9BF19ABB1DE00B38577 /* LPUIATapRoute.m in Sources */,
+				B15BF9C019ABB1DE00B38577 /* LPLocationRoute.m in Sources */,
+				B15BF9C119ABB1DE00B38577 /* LPUserPrefRoute.m in Sources */,
+				B15BF9C219ABB1DE00B38577 /* LPKeyboardRoute.m in Sources */,
+				B15BF9C319ABB1DE00B38577 /* LPGenericAsyncRoute.m in Sources */,
+				B15BF9C419ABB1DE00B38577 /* LPConditionRoute.m in Sources */,
+				B15BF9C519ABB1DE00B38577 /* LPInterpolateRoute.m in Sources */,
+				B15BF9C619ABB1DE00B38577 /* LPMapRoute.m in Sources */,
+				B15BF9C719ABB1DE00B38577 /* LPRecordRoute.m in Sources */,
+				B15BF9C819ABB1DE00B38577 /* LPNoContentResponse.m in Sources */,
+				B15BF9C919ABB1DE00B38577 /* LPScreenshotRoute.m in Sources */,
+				B15BF9CA19ABB1DE00B38577 /* LPAsyncPlaybackRoute.m in Sources */,
+				B15BF9CB19ABB1DE00B38577 /* LPBackdoorRoute.m in Sources */,
+				B15BF9CC19ABB1DE00B38577 /* LPExitRoute.m in Sources */,
+				B15BF9CD19ABB1DE00B38577 /* LPVersionRoute.m in Sources */,
+				B15BF9CE19ABB1DE00B38577 /* LPISO8601DateFormatter.m in Sources */,
+				B15BF9CF19ABB1DE00B38577 /* CDataScanner_Extensions.m in Sources */,
+				B15BF9D019ABB1DE00B38577 /* LPCJSONDeserializer.m in Sources */,
+				B15BF9D119ABB1DE00B38577 /* LPCJSONScanner.m in Sources */,
+				B15BF9D219ABB1DE00B38577 /* LPCJSONSerializer.m in Sources */,
+				B15BF9D319ABB1DE00B38577 /* LPResources.m in Sources */,
+				B15BF9D419ABB1DE00B38577 /* UIScriptASTVisibility.m in Sources */,
+				B15BF9D519ABB1DE00B38577 /* UIScriptASTPredicate.m in Sources */,
+				B15BF9D619ABB1DE00B38577 /* UIScriptAST.m in Sources */,
+				B15BF9D719ABB1DE00B38577 /* UIScriptASTALL.m in Sources */,
+				B15BF9D819ABB1DE00B38577 /* UIScriptASTClassName.m in Sources */,
+				B15BF9D919ABB1DE00B38577 /* UIScriptASTDirection.m in Sources */,
+				B15BF9DA19ABB1DE00B38577 /* UIScriptASTFirst.m in Sources */,
+				B15BF9DB19ABB1DE00B38577 /* UIScriptASTIndex.m in Sources */,
+				B15BF9DC19ABB1DE00B38577 /* UIScriptASTLast.m in Sources */,
+				B15BF9DD19ABB1DE00B38577 /* UIScriptASTWith.m in Sources */,
+				B15BF9DE19ABB1DE00B38577 /* UIScriptParser.m in Sources */,
+				B15BF9DF19ABB1DE00B38577 /* LPUIAUserPrefsChannel.m in Sources */,
+				B15BF9E019ABB1DE00B38577 /* LPJSONUtils.m in Sources */,
+				B15BF9E119ABB1DE00B38577 /* LPReflectUtils.m in Sources */,
+				B15BF9E219ABB1DE00B38577 /* LPTouchUtils.m in Sources */,
+				B15BF9E319ABB1DE00B38577 /* LPEnv.m in Sources */,
+				B15BF9E419ABB1DE00B38577 /* LPLog.m in Sources */,
+				B15BF9E519ABB1DE00B38577 /* LPCDataScanner.m in Sources */,
+				B15BF9E619ABB1DE00B38577 /* CalabashServer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B15BF9E919ABB2B100B38577 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B15BF9EA19ABB2B100B38577 /* LPI.mm in Sources */,
+				B15BF9EB19ABB2B100B38577 /* LPWebQuery.m in Sources */,
+				B15BF9EC19ABB2B100B38577 /* LPSSKeychain.m in Sources */,
+				B15BF9ED19ABB2B100B38577 /* LPSSKeychainQuery.m in Sources */,
+				B15BF9EE19ABB2B100B38577 /* GCDAsyncSocket.m in Sources */,
+				B15BF9EF19ABB2B100B38577 /* LPHTTPAuthenticationRequest.m in Sources */,
+				B15BF9F019ABB2B100B38577 /* LPHTTPConnection.m in Sources */,
+				B15BF9F119ABB2B100B38577 /* LPHTTPMessage.m in Sources */,
+				B15BF9F219ABB2B100B38577 /* LPHTTPServer.m in Sources */,
+				B15BF9F319ABB2B100B38577 /* DDData.m in Sources */,
+				B15BF9F419ABB2B100B38577 /* DDNumber.m in Sources */,
+				B15BF9F519ABB2B100B38577 /* DDRange.m in Sources */,
+				B15BF9F619ABB2B100B38577 /* LPHTTPAsyncFileResponse.m in Sources */,
+				B15BF9F719ABB2B100B38577 /* LPHTTPDataResponse.m in Sources */,
+				B15BF9F819ABB2B100B38577 /* LPHTTPDynamicFileResponse.m in Sources */,
+				B15BF9F919ABB2B100B38577 /* LPHTTPFileResponse.m in Sources */,
+				B15BF9FA19ABB2B100B38577 /* LPHTTPRedirectResponse.m in Sources */,
+				B15BF9FB19ABB2B100B38577 /* LPCORSResponse.m in Sources */,
+				B15BF9FC19ABB2B100B38577 /* LPRouter.m in Sources */,
+				B15BF9FD19ABB2B100B38577 /* LPScrollToMarkOperation.m in Sources */,
+				B15BF9FE19ABB2B100B38577 /* LPScrollToRowWithMarkOperation.m in Sources */,
+				B15BF9FF19ABB2B100B38577 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
+				B15BFA0019ABB2B100B38577 /* LPCollectionViewScrollToItemOperation.m in Sources */,
+				B15BFA0119ABB2B100B38577 /* LPSliderOperation.m in Sources */,
+				B15BFA0219ABB2B100B38577 /* LPDatePickerOperation.m in Sources */,
+				B15BFA0319ABB2B100B38577 /* LPOrientationOperation.m in Sources */,
+				B15BFA0419ABB2B100B38577 /* LPFlashOperation.m in Sources */,
+				B15BFA0519ABB2B100B38577 /* LPQueryAllOperation.m in Sources */,
+				B15BFA0619ABB2B100B38577 /* LPOperation.m in Sources */,
+				B15BFA0719ABB2B100B38577 /* LPQueryOperation.m in Sources */,
+				B15BFA0819ABB2B100B38577 /* LPScrollOperation.m in Sources */,
+				B15BFA0919ABB2B100B38577 /* LPScrollToRowOperation.m in Sources */,
+				B15BFA0A19ABB2B100B38577 /* LPSetTextOperation.m in Sources */,
+				B15BFA0B19ABB2B100B38577 /* LPRecorder.m in Sources */,
+				B15BFA0C19ABB2B100B38577 /* LPUIARouteOverUserPrefs.m in Sources */,
+				B15BFA0D19ABB2B100B38577 /* LPKeychainRoute.m in Sources */,
+				B15BFA0E19ABB2B100B38577 /* LPDebugRoute.m in Sources */,
+				B15BFA0F19ABB2B100B38577 /* LPAppPropertyRoute.m in Sources */,
+				B15BFA1019ABB2B100B38577 /* LPQueryLogRoute.m in Sources */,
+				B15BFA1119ABB2B100B38577 /* LPUIATapRoute.m in Sources */,
+				B15BFA1219ABB2B100B38577 /* LPLocationRoute.m in Sources */,
+				B15BFA1319ABB2B100B38577 /* LPUserPrefRoute.m in Sources */,
+				B15BFA1419ABB2B100B38577 /* LPKeyboardRoute.m in Sources */,
+				B15BFA1519ABB2B100B38577 /* LPGenericAsyncRoute.m in Sources */,
+				B15BFA1619ABB2B100B38577 /* LPConditionRoute.m in Sources */,
+				B15BFA1719ABB2B100B38577 /* LPInterpolateRoute.m in Sources */,
+				B15BFA1819ABB2B100B38577 /* LPMapRoute.m in Sources */,
+				B15BFA1919ABB2B100B38577 /* LPRecordRoute.m in Sources */,
+				B15BFA1A19ABB2B100B38577 /* LPNoContentResponse.m in Sources */,
+				B15BFA1B19ABB2B100B38577 /* LPScreenshotRoute.m in Sources */,
+				B15BFA1C19ABB2B100B38577 /* LPAsyncPlaybackRoute.m in Sources */,
+				B15BFA1D19ABB2B100B38577 /* LPBackdoorRoute.m in Sources */,
+				B15BFA1E19ABB2B100B38577 /* LPExitRoute.m in Sources */,
+				B15BFA1F19ABB2B100B38577 /* LPVersionRoute.m in Sources */,
+				B15BFA2019ABB2B100B38577 /* LPISO8601DateFormatter.m in Sources */,
+				B15BFA2119ABB2B100B38577 /* CDataScanner_Extensions.m in Sources */,
+				B15BFA2219ABB2B100B38577 /* LPCJSONDeserializer.m in Sources */,
+				B15BFA2319ABB2B100B38577 /* LPCJSONScanner.m in Sources */,
+				B15BFA2419ABB2B100B38577 /* LPCJSONSerializer.m in Sources */,
+				B15BFA2519ABB2B100B38577 /* LPResources.m in Sources */,
+				B15BFA2619ABB2B100B38577 /* UIScriptASTVisibility.m in Sources */,
+				B15BFA2719ABB2B100B38577 /* UIScriptASTPredicate.m in Sources */,
+				B15BFA2819ABB2B100B38577 /* UIScriptAST.m in Sources */,
+				B15BFA2919ABB2B100B38577 /* UIScriptASTALL.m in Sources */,
+				B15BFA2A19ABB2B100B38577 /* UIScriptASTClassName.m in Sources */,
+				B15BFA2B19ABB2B100B38577 /* UIScriptASTDirection.m in Sources */,
+				B15BFA2C19ABB2B100B38577 /* UIScriptASTFirst.m in Sources */,
+				B15BFA2D19ABB2B100B38577 /* UIScriptASTIndex.m in Sources */,
+				B15BFA2E19ABB2B100B38577 /* UIScriptASTLast.m in Sources */,
+				B15BFA2F19ABB2B100B38577 /* UIScriptASTWith.m in Sources */,
+				B15BFA3019ABB2B100B38577 /* UIScriptParser.m in Sources */,
+				B15BFA3119ABB2B100B38577 /* LPUIAUserPrefsChannel.m in Sources */,
+				B15BFA3219ABB2B100B38577 /* LPJSONUtils.m in Sources */,
+				B15BFA3319ABB2B100B38577 /* LPReflectUtils.m in Sources */,
+				B15BFA3419ABB2B100B38577 /* LPTouchUtils.m in Sources */,
+				B15BFA3519ABB2B100B38577 /* LPEnv.m in Sources */,
+				B15BFA3619ABB2B100B38577 /* LPLog.m in Sources */,
+				B15BFA3719ABB2B100B38577 /* LPCDataScanner.m in Sources */,
+				B15BFA3819ABB2B100B38577 /* CalabashServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1883,6 +2307,144 @@
 			};
 			name = Release;
 		};
+		B15BF99119ABAFD200B38577 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "calabash/calabash-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				MACOSX_DEPLOYMENT_TARGET = "";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = libCalabashDyn;
+				PROVISIONING_PROFILE = "EBE41819-36E2-494E-ACC8-757A1BB128F7";
+				SDKROOT = iphoneos;
+				VALID_ARCHS = "armv7 armv7s arm64";
+			};
+			name = Debug;
+		};
+		B15BF99219ABAFD200B38577 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "calabash/calabash-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				MACOSX_DEPLOYMENT_TARGET = "";
+				PRODUCT_NAME = libCalabashDyn;
+				PROVISIONING_PROFILE = "EBE41819-36E2-494E-ACC8-757A1BB128F7";
+				SDKROOT = iphoneos;
+				VALID_ARCHS = "armv7 armv7s arm64";
+			};
+			name = Release;
+		};
+		B15BFA3E19ABB2B100B38577 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "calabash/calabash-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				MACOSX_DEPLOYMENT_TARGET = "";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_NAME = libCalabashDynSim;
+				PROVISIONING_PROFILE = "EBE41819-36E2-494E-ACC8-757A1BB128F7";
+				SDKROOT = iphonesimulator;
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Debug;
+		};
+		B15BFA3F19ABB2B100B38577 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CODE_SIGN_IDENTITY = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "calabash/calabash-Prefix.pch";
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				MACOSX_DEPLOYMENT_TARGET = "";
+				PRODUCT_NAME = libCalabashDynSim;
+				PROVISIONING_PROFILE = "EBE41819-36E2-494E-ACC8-757A1BB128F7";
+				SDKROOT = iphonesimulator;
+				VALID_ARCHS = "i386 x86_64";
+			};
+			name = Release;
+		};
 		B1D5BDD719A23BCE0070E8CE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2274,6 +2836,23 @@
 			buildConfigurations = (
 				B121E7A014B6D9FB0034C6A9 /* Debug */,
 				B121E7A114B6D9FB0034C6A9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B15BF99519ABAFD200B38577 /* Build configuration list for PBXNativeTarget "calabash-dylib-device" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B15BF99119ABAFD200B38577 /* Debug */,
+				B15BF99219ABAFD200B38577 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		B15BFA3D19ABB2B100B38577 /* Build configuration list for PBXNativeTarget "calabash-dylib-simulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B15BFA3E19ABB2B100B38577 /* Debug */,
+				B15BFA3F19ABB2B100B38577 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -19,7 +19,19 @@ $ make
 $ make frank
 ```
 
-or from the calabash-ios/calabash-cucumber directory:
+### Building the dylibs
+
+```
+make dylibs
+```
+
+Dylibs support is based on this article:
+
+http://ddeville.me/2014/04/dynamic-linking/
+
+### Building to embed in Calabash gem
+
+From the calabash-ios/calabash-cucumber directory:
 
 ```
 # see the calabash-ios/calabash-cucumber/Rakefile for details
