@@ -47,8 +47,8 @@ $ CALABASH_NO_DYLIBS=1 rake build_server
 
 ### testing
 
+* https://travis-ci.org/calabash/calabash-ios-server
+
 ```
-# test building the framework
-$ cd scripts
-$ ./make-framework.rb
+$ scripts/ci/travis/local-run-as-travis.rb
 ```
