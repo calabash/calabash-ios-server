@@ -2317,7 +2317,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2337,7 +2337,7 @@
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = libCalabashDyn;
-				PROVISIONING_PROFILE = "EBE41819-36E2-494E-ACC8-757A1BB128F7";
+				PROVISIONING_PROFILE = "09e88607-43c6-4cdb-ac60-d198c99d4bae";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -2353,7 +2353,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -2370,7 +2370,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				PRODUCT_NAME = libCalabashDyn;
-				PROVISIONING_PROFILE = "EBE41819-36E2-494E-ACC8-757A1BB128F7";
+				PROVISIONING_PROFILE = "09e88607-43c6-4cdb-ac60-d198c99d4bae";
 				SDKROOT = iphoneos;
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
@@ -2829,7 +2829,7 @@
 				B1058E50197F00C000B4A57B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		B121E78B14B6D9FB0034C6A9 /* Build configuration list for PBXProject "calabash" */ = {
 			isa = XCConfigurationList;
@@ -2838,7 +2838,7 @@
 				B121E7A114B6D9FB0034C6A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		B15BF99519ABAFD200B38577 /* Build configuration list for PBXNativeTarget "calabash-dylib-device" */ = {
 			isa = XCConfigurationList;
@@ -2847,6 +2847,7 @@
 				B15BF99219ABAFD200B38577 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 		B15BFA3D19ABB2B100B38577 /* Build configuration list for PBXNativeTarget "calabash-dylib-simulator" */ = {
 			isa = XCConfigurationList;
@@ -2855,7 +2856,7 @@
 				B15BFA3F19ABB2B100B38577 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		B1D5BDD619A23BCE0070E8CE /* Build configuration list for PBXNativeTarget "frank-calabash-device" */ = {
 			isa = XCConfigurationList;
@@ -2864,7 +2865,7 @@
 				B1D5BDD819A23BCE0070E8CE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		F5091C4318C4E1D700C85307 /* Build configuration list for PBXNativeTarget "calabash-device" */ = {
 			isa = XCConfigurationList;
@@ -2873,7 +2874,7 @@
 				F5091C4518C4E1D700C85307 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		F537399718E5253B004133FA /* Build configuration list for PBXNativeTarget "version" */ = {
 			isa = XCConfigurationList;
@@ -2882,7 +2883,7 @@
 				F537399618E5253B004133FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		F5821A6118C4E27400293508 /* Build configuration list for PBXNativeTarget "calabash-simulator" */ = {
 			isa = XCConfigurationList;
@@ -2891,7 +2892,7 @@
 				F5821A6318C4E27400293508 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		F5F53D6718C60FA900BD9731 /* Build configuration list for PBXAggregateTarget "use make to create the framework" */ = {
 			isa = XCConfigurationList;
@@ -2900,7 +2901,7 @@
 				F5F53D6918C60FA900BD9731 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
