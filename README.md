@@ -10,7 +10,7 @@ The companion of the calabash-ios gem:  https://github.com/calabash/calabash-ios
 ### Building the Framework
 
 ```
-$ make
+$ make framework
 ```
 
 ### Building the frank plugin
