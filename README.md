@@ -35,11 +35,14 @@ http://ddeville.me/2014/04/dynamic-linking/
 
 ### Building to embed in Calabash gem
 
-From the calabash-ios/calabash-cucumber directory:
+See the calabash-ios/calabash-cucumber/Rakefile for more details.
 
 ```
-# see the calabash-ios/calabash-cucumber/Rakefile for details
+$ cd path/to/calabash-ios/calabash-cucumber
 $ rake build_server
+
+# If you need to build without the dylibs
+$ CALABASH_NO_DYLIBS=1 rake build_server
 ```
 
 ### testing
