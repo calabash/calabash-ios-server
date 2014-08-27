@@ -21,6 +21,10 @@ $ make frank
 
 ### Building the dylibs
 
+Building the dylibs requires that you inject xcspecs directly into your Xcode.app application bundle.  For instructions, refer to the link below.
+
+You will also need to update the code signing Build Settings of the `calabash-dylib-device` target with your credentials.
+
 ```
 make dylibs
 ```
