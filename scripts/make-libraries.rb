@@ -144,13 +144,9 @@ def xcode_version
 end
 
 def lipo_verify_arches(lib, arches=['i386', 'x86_64', 'armv7', 'armv7s', 'arm64'])
-  major_xc_version = xcode_version.split('.').first.to_i
   arches.each do |arch|
     sdk = /i386|x86_64/.match(arch) ? 'iphonesimulator' : 'iphoneos'
 
-    if major_xc_version > 5 and arch == 'armv7s'
-      next
-    end
     cmd = lipo_verify(lib, arch, sdk)
     lipo_verify = `#{cmd}`
     result = $?
