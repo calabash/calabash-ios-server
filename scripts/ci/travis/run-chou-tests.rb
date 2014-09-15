@@ -12,7 +12,7 @@ Dir.chdir working_dir do
 
   do_system('rm -rf calabash-ios')
 
-  do_system('git clone --depth 1 --recursive https://github.com/calabash/calabash-ios')
+  do_system('git clone --depth 1 --branch develop --recursive https://github.com/calabash/calabash-ios')
 
   do_system('rm -rf animated-happiness')
 
@@ -46,7 +46,7 @@ Dir.chdir calabash_gem_dir do
 
   uninstall_gem('run_loop')
   do_system('rm -rf run_loop')
-  do_system('git clone --depth 1 --recursive https://github.com/calabash/run_loop')
+  do_system('git clone --depth 1 --branch develop --recursive https://github.com/calabash/run_loop')
   run_loop_gem_dir = File.expand_path(File.join(calabash_gem_dir, 'run_loop'))
   Dir.chdir run_loop_gem_dir do
     do_system('bundle install')
@@ -75,7 +75,8 @@ Dir.chdir chou_working_dir do
 
   File.open('Gemfile', 'w') do |file|
     file.write("source 'https://rubygems.org'\n")
-    file.write("gem 'calabash-cucumber', :github => 'calabash/calabash-ios', :branch => 'master'\n")
+    file.write("gem 'run_loop', :github => 'calabash/run_loop', :branch => 'develop'\n")
+    file.write("gem 'calabash-cucumber', :github => 'calabash/calabash-ios', :branch => 'develop'\n")
     file.write("gem 'xcpretty', '~> 0.1'\n")
   end
 
