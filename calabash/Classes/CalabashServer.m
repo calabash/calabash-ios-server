@@ -143,15 +143,6 @@
                                          [info objectForKey:@"CFBundleIdentifier"], @"app_id",
                                          [info objectForKey:@"CFBundleVersion"], @"app_version",
                                          nil];
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wundeclared-selector"
-    if ([[UIDevice currentDevice]
-         respondsToSelector:@selector(uniqueIdentifier)]) {
-      id uuid = [[UIDevice currentDevice]
-                 performSelector:@selector(uniqueIdentifier) withObject:nil];
-      [capabilities setObject:uuid forKey:@"uuid"];
-    }
-#pragma clang diagnostic pop
     [_httpServer setTXTRecordDictionary:capabilities];
     [_httpServer setConnectionClass:[LPRouter class]];
     [_httpServer setPort:37265];
