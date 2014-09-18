@@ -57,11 +57,25 @@
 
   // See discussion above.
   int exitCode = 0;
+  NSNumber *payloadExitCode = [data objectForKey:@"exit_code"];
+  if (payloadExitCode) {
+    exitCode = [payloadExitCode intValue];
+  }
 
   NSTimeInterval defaultDelay = 0.4;
 
   NSTimeInterval postResignActiveDelay = defaultDelay;
   NSTimeInterval postWillTerminateDelay = defaultDelay;
+
+  NSNumber *payloadDelay = [data objectForKey:@"post_resign_active_delay"];
+  if (payloadDelay) {
+    postResignActiveDelay = [payloadDelay doubleValue];
+  }
+
+  payloadDelay = [data objectForKey:@"post_will_terminate_delay"];
+  if (payloadDelay) {
+    postWillTerminateDelay = [payloadDelay doubleValue];
+  }
 
   UIApplication *shared = [UIApplication sharedApplication];
 
