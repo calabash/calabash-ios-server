@@ -49,6 +49,9 @@
  report, use exit(3) instead.
 
  Is it me or do the docs contradict each other?
+
+ exit(3) => "exited abnormally with exit status 3"
+ exit(0) => < no output >
 */
 }
 
