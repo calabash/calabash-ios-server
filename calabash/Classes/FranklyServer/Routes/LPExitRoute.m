@@ -53,6 +53,55 @@
  exit(3) => "exited abnormally with exit status 3"
  exit(0) => < no output >
 */
+  NSLog(@"Received http exit.");
+
+  // See discussion above.
+  int exitCode = 0;
+
+  NSTimeInterval defaultDelay = 0.4;
+
+  NSTimeInterval postResignActiveDelay = defaultDelay;
+  NSTimeInterval postWillTerminateDelay = defaultDelay;
+
+  UIApplication *shared = [UIApplication sharedApplication];
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+  SEL willTerminate = @selector(applicationWillTerminate);
+  SEL terminateWithSuccess = @selector(terminateWithSuccess);
+#pragma clang diagnostic pop
+
+  SEL applicationWillResignActive = @selector(applicationWillResignActive:);
+
+  id<UIApplicationDelegate>appDelegate = [shared delegate];
+  if ([appDelegate respondsToSelector:applicationWillResignActive]) {
+    NSLog(@"Calling [[UIApplication delegate] applicationWillResignActive] after a delay of %@ s",
+    @(postWillTerminateDelay));
+    [appDelegate applicationWillResignActive:shared];
+  } else {
+    NSLog(@"Application delegate does not respond to selector '%@'; skipping.",
+          NSStringFromSelector(applicationWillResignActive));
+  }
+
+  if ([shared respondsToSelector:willTerminate]) {
+    NSLog(@"Calling [UIApplication willTerminate].");
+    [shared performSelector:willTerminate withObject:nil afterDelay:postResignActiveDelay];
+  } else {
+    NSLog(@"UIApplication does not respond to selector '%@'; skipping.",
+    NSStringFromSelector(willTerminate));
+  }
+
+  if ([shared respondsToSelector:terminateWithSuccess]) {
+    NSLog(@"Calling [UIApplication terminateWithSuccess] after a delay of %@ s", @(postWillTerminateDelay));
+    [shared performSelector:terminateWithSuccess withObject:nil afterDelay:defaultDelay];
+  } else {
+    NSLog(@"UIApplication does not respond to selector '%@'", NSStringFromSelector(terminateWithSuccess));
+    NSLog(@"Exiting with code %@", @(exitCode));
+    exit(exitCode);
+  }
+
+  // Unreachable, but compiler complains.
+  return @{};
 }
 
 @end
