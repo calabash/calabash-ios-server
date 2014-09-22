@@ -8,6 +8,7 @@
 #define LPiPHONE4INCHOFFSET 44
 
 #import "LPTouchUtils.h"
+#import "LPDevice.h"
 
 
 @implementation LPTouchUtils
@@ -43,6 +44,7 @@
   CGRect b = [s bounds];
   CGSize size = sm.size;
   UIDeviceOrientation o = [[UIDevice currentDevice] orientation];
+  CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
 
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
     if ([UIScreen mainScreen].scale == 2.0f) {
@@ -57,7 +59,7 @@
       if (result.height == 1136) {
         //NSLog(@"iPhone 5 Resolution");
         //iPhone 5 full
-        return point;
+        return CGPointMake(point.x*sampleFactor,point.y*sampleFactor);
       }
     }
   }
@@ -235,8 +237,10 @@
 
 + (CGPoint) centerOfFrame:(CGRect) frame shouldTranslate:(BOOL) shouldTranslate {
   CGPoint translated = shouldTranslate ? [self translateToScreenCoords:frame.origin] : frame.origin;
-  return CGPointMake(translated.x + 0.5 * frame.size.width,
-          translated.y + 0.5 * frame.size.height);
+  CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
+  
+  return CGPointMake(translated.x + 0.5 * frame.size.width * sampleFactor,
+          translated.y + 0.5 * frame.size.height * sampleFactor);
 }
 
 
