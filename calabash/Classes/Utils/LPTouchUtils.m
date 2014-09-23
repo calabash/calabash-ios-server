@@ -167,7 +167,9 @@
   return nil;
 }
 
-
++ (BOOL) isViewTransparent:(UIView*) view {
+  return !view.backgroundColor || view.backgroundColor == [UIColor clearColor];
+}
 + (BOOL) isView:(UIView *) viewToCheck zIndexAboveView:(UIView *) otherView {
   NSInteger firstIndex = -1;
   NSInteger secondIndex = -1;
@@ -213,8 +215,9 @@
                                          fromView:hitView];
       CGRect viewBounds = [viewWin convertRect:view.bounds fromView:view];
 
-      if (CGRectContainsRect(hitViewBounds, viewBounds) && [self isView:hitView
-                                                        zIndexAboveView:view]) {
+      if (CGRectContainsRect(hitViewBounds, viewBounds) &&
+          [self isView:hitView zIndexAboveView:view] &&
+          ![self isViewTransparent:hitView]) {
         //In this case the hitView (which we're not asking about)
         //is completely overlapping the view and "above" it in the container.
         return NO;

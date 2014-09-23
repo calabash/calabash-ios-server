@@ -1,0 +1,25 @@
+language: objective-c
+
+before_script:
+  - gem install xcpretty
+
+# NOTE! Do not try to 'make dylib' on Travis CI.  That rule requires .xcspec
+# files to be copied directly into the target Xcode.app.
+script:
+  - make clean
+  - make framework
+  - make frank
+  # See the note above
+  # - make all
+  - scripts/ci/travis/run-chou-tests.rb
+
+rvm:
+  - 2.1.1
+
+notifications:
+  email:
+    recipients:
+      - joshuajmoody@gmail.com
+      - karl.krukow@xamarin.com
+    on_success: change
+    on_failure: always

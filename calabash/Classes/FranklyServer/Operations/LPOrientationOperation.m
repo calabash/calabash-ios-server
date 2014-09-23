@@ -81,6 +81,8 @@ static NSString *const kFaceUp = @"face up";
     case UIInterfaceOrientationLandscapeLeft: return kLeft;
     case UIInterfaceOrientationLandscapeRight: return kRight;
       /******************/
+    default: return kDown;
+
   }
 }
 

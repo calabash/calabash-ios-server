@@ -4,8 +4,14 @@ calabash.xcodeproj/xcuserdata/
 Markdown.pl
 build
 calabash.framework
+libFrankCalabash.a
+calabash-dylibs
 
 !scripts/test/build
 
 # AppCode
 .idea
+
+# CI pulls down these two repos from github
+animated-happiness
+calabash-ios

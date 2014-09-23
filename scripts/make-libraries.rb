@@ -11,6 +11,16 @@ def combined_lib_name
   'calabash-combined.a'
 end
 
+# @return [String] the combined binary for Frank plugin name
+def combined_frank_lib_name
+  'libFrankCalabash.a'
+end
+
+# @return [String] the combined binary for dylib name
+def combined_dylib_name
+  'libCalabash.dylib'
+end
+
 # @return [String] constructs a path using +directory+ and +lib_name+
 # @param [String] directory the directory path
 # @param [String] lib_name name of the library
@@ -42,6 +52,25 @@ end
 def path_to_simulator_lib(opts = {})
   default_opts = {:directory => './build/Debug-iphonesimulator',
                   :lib_name => 'libcalabash-simulator.a'}
+  merged = default_opts.merge(opts)
+
+  path_to_lib(merged[:directory], merged[:lib_name])
+end
+
+# @return [String] the path to the device frank lib
+# @param [Hash] opts directory and lib name options
+def path_to_device_frank_lib(opts = {})
+  default_opts = {:directory => './build/Debug-iphoneos',
+                  :lib_name => 'libFrankCalabashDevice.a'}
+  merged = default_opts.merge(opts)
+  path_to_lib(merged[:directory], merged[:lib_name])
+end
+
+# @return [String] the path to the simulator frank lib
+# @param [Hash] opts directory and lib name options
+def path_to_simulator_frank_lib(opts = {})
+  default_opts = {:directory => './build/Debug-iphonesimulator',
+                  :lib_name => 'libFrankCalabash.a'}
   merged = default_opts.merge(opts)
 
   path_to_lib(merged[:directory], merged[:lib_name])
@@ -106,9 +135,18 @@ def lipo_verify(lib, arch, sdk)
   "xcrun -sdk #{sdk} lipo #{lib} -verify_arch '#{arch}'"
 end
 
+def xcode_version
+  xcode_build_output = `xcrun xcodebuild -version`.split("\n")
+  xcode_build_output.each do |line|
+    match=/^Xcode\s(.*)$/.match(line.strip)
+    return match[1] if match && match.length > 1
+  end
+end
+
 def lipo_verify_arches(lib, arches=['i386', 'x86_64', 'armv7', 'armv7s', 'arm64'])
   arches.each do |arch|
     sdk = /i386|x86_64/.match(arch) ? 'iphonesimulator' : 'iphoneos'
+
     cmd = lipo_verify(lib, arch, sdk)
     lipo_verify = `#{cmd}`
     result = $?
@@ -149,6 +187,27 @@ def lipo_combine_libs
   lipo_verify_arches(output)
 end
 
+## Assumes we have already build and setup stage for calabash combined libs
+def lipo_combine_frank_libs
+  staging = make_combined_lib_staging_dir
+  inputs = [path_to_device_frank_lib, path_to_simulator_frank_lib]
+  output = combined_lib_path(staging, combined_frank_lib_name)
+  cmd = lipo_cmd(inputs, output)
+
+  puts 'INFO: combining libs'
+  puts "INFO: #{cmd}"
+  lipo_create = `#{cmd}`
+  result = $?
+
+  unless result.success?
+    puts 'FAIL: could not create combined lib'
+    puts "FAIL: '#{lipo_create.strip}'"
+    exit result.to_i
+  end
+
+  lipo_put_info(output)
+  lipo_verify_arches(output)
+end
 
 def framework_product_name
   'calabash'
@@ -239,83 +298,101 @@ def stage_framework(opts = {})
   `tar -xf #{tar_file}`
   puts 'INFO: cleaning up'
   FileUtils.rm(tar_file)
-
 end
 
-if ARGV[0] == 'verify'
+def stage_frank_lib
+  source = File.expand_path('build/Debug-combined/libFrankCalabash.a')
+  unless File.exists? source
+    puts 'FAIL: build/Debug-combined/libFrankCalabash.a does not exist.  Did you forget to run `make frank`?'
+    exit 1
+  end
+
+  target = File.expand_path('./libFrankCalabash.a')
+  if File.exists?(target)
+    puts 'INFO: removing old libFrankCalabash.a'
+    FileUtils.rm(target)
+  end
+
+  puts "INFO: staging '#{source}' to ./"
+  FileUtils.cp(source, target)
+end
+
+# @param [Hash] opts :device and :sim dylib paths
+# @return [Boolean] true if both device and sim dylibs are built
+def dylibs_built?(opts = {})
+  default_opts = {:device => './build/Debug-iphoneos/libCalabashDyn.dylib',
+                  :sim => './build/Debug-iphonesimulator/libCalabashDynSim.dylib'}
+  merged = default_opts.merge(opts)
+  File.exist?(merged[:device]) && File.exist?(merged[:sim])
+end
+
+# @return [String] the path to the device lib
+# @param [Hash] opts directory and lib name options
+def path_to_device_dylib(opts = {})
+  default_opts = {:directory => './build/Debug-iphoneos',
+                  :lib_name => 'libCalabashDyn.dylib'}
+  merged = default_opts.merge(opts)
+  path_to_lib(merged[:directory], merged[:lib_name])
+end
+
+# @return [String] the path to the simulator lib
+# @param [Hash] opts directory and lib name options
+def path_to_simulator_dylib(opts = {})
+  default_opts = {:directory => './build/Debug-iphonesimulator',
+                  :lib_name => 'libCalabashDynSim.dylib'}
+  merged = default_opts.merge(opts)
+
+  path_to_lib(merged[:directory], merged[:lib_name])
+end
+
+def verify_dylibs
+  device_dylib = path_to_device_dylib
+  lipo_verify_arches(device_dylib, ['armv7', 'armv7s', 'arm64'])
+  lipo_put_info(device_dylib)
+
+  simulator_dylib = path_to_simulator_dylib
+  lipo_verify_arches(simulator_dylib, ['i386', 'x86_64'])
+  lipo_put_info(simulator_dylib)
+end
+
+def stage_dylibs
+  device_dylib = path_to_device_dylib
+  simulator_dylib = path_to_simulator_dylib
+  unless dylibs_built?({:sim => simulator_dylib, :device => device_dylib})
+    puts 'FAIL:  the dylibs have not been built. Did you forget to run `make dylibs`?'
+    exit 1
+  end
+
+  target_dir = File.expand_path('./calabash-dylibs')
+  if File.directory?(target_dir)
+    puts 'INFO:  removing old calabash-dylibs'
+    FileUtils.rm_rf target_dir
+  end
+
+  FileUtils.mkdir target_dir
+
+  puts "INFO: staging '#{device_dylib}' to ./calabash-dylibs"
+  FileUtils.cp(device_dylib, target_dir)
+
+  puts "INFO: staging '#{simulator_dylib}' to ./calabash-dylibs"
+  FileUtils.cp(simulator_dylib, target_dir)
+end
+
+if ARGV[0] == 'verify-framework'
   lipo_combine_libs
   make_framework
   stage_framework
   exit 0
 end
 
+if ARGV[0] == 'verify-frank'
+  lipo_combine_frank_libs
+  stage_frank_lib
+  exit 0
+end
 
-## Test
-## $ ruby make-framework.rb
-## $ make-framework.rb
-if __FILE__ == $0
-  require 'test/unit'
-  require 'fileutils'
-
-
-  class LocalTest < Test::Unit::TestCase
-
-    def test_product_name
-      assert_equal(combined_lib_name, 'calabash-combined.a')
-    end
-
-    def test_path_to_lib_dir_does_not_exist
-      assert_raise RuntimeError do
-        path_to_lib('tmp', nil)
-      end
-    end
-
-    def test_path_to_lib_file_does_not_exist
-      assert_raise RuntimeError do
-        path_to_lib('test/build/Debug-iphonesimulator', 'bananas')
-      end
-    end
-
-    def test_path_to_sim_returns_lib_path
-      path = path_to_simulator_lib({:directory => 'test/build/Debug-iphonesimulator'})
-      assert(File.exists?(path))
-    end
-
-    def test_path_to_device_returns_lib_path
-      path = path_to_device_lib({:directory => 'test/build/Debug-iphoneos'})
-      assert(File.exists?(path))
-    end
-
-    def test_create_staging_dir
-      path = make_combined_lib_staging_dir({:directory => 'test/build/Debug-combined'})
-      begin
-        assert(File.directory?(path))
-      rescue Exception => e
-        raise e
-      ensure
-        if File.exist?(path)
-          FileUtils.rm_r(path)
-        end
-      end
-    end
-
-    def test_product_path_no_dir
-      assert_raise RuntimeError do
-        combined_lib_path('tmp', nil)
-      end
-    end
-
-    def test_product_path
-      path = combined_lib_path('./test', 'foo.a')
-      assert_equal(File.join('./test', 'foo.a'), path)
-    end
-
-    def test_lipo_cmd
-      inputs = ['one-lib.a', 'two-lib.a']
-      cmd = lipo_cmd(inputs, 'combined.lib')
-      expected = 'xcrun lipo -create one-lib.a two-lib.a -output combined.lib'
-      assert_equal(expected, cmd)
-    end
-
-  end
+if ARGV[0] == 'verify-dylibs'
+  verify_dylibs
+  stage_dylibs
+  exit 0
 end

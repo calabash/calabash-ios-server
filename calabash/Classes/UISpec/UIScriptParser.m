@@ -306,7 +306,6 @@ static NSCharacterSet *curlyBrackets = nil;
         index = oldIndex; //rewind scan
       }
     } else if ([self tokenEndsWithColon:token]) {
-      NSUInteger oldIndex = index;
       NSString *lookAheadToken = [self findNextToken:&index];
       if (!lookAheadToken) {break;}
 

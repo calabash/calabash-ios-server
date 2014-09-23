@@ -9,6 +9,8 @@
 #import "LPTouchUtils.h"
 #import "LPOrientationOperation.h"
 #import "LPLog.h"
+#import "LPJSONUtils.h"
+#import "LPHTTPDataResponse.h"
 
 @implementation LPMapRoute
 @synthesize parser;
@@ -17,6 +19,26 @@
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
   return [method isEqualToString:@"POST"];
 }
+
+- (BOOL)canHandlePostForPath:(NSArray *)path {
+  return [@"cal_map" isEqualToString:[path lastObject]];
+}
+
+- (id) handleRequestForPath: (NSArray *)path withConnection:(id)connection {
+  if (![self canHandlePostForPath:path]) {
+    return nil;
+  }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wobjc-method-access"
+  NSDictionary *data = [LPJSONUtils deserializeDictionary:[connection postDataAsString]];
+
+  NSDictionary *response = [self JSONResponseForMethod:@"POST" URI:@"cal_map" data:data];
+  NSData *jsonData = [[LPJSONUtils serializeDictionary:response] dataUsingEncoding:NSUTF8StringEncoding];
+
+  return [[[LPHTTPDataResponse alloc] initWithData:jsonData] autorelease];
+#pragma clang diagnostic push
+}
+
 
 
 - (NSArray *) applyOperation:(NSDictionary *) operation toViews:(NSArray *) views error:(NSError **) error {

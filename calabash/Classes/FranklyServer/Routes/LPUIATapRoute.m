@@ -3,10 +3,11 @@
 
 
 #import "LPUIATapRoute.h"
-#import "LPUIAChannel.h"
+#import "LPUIAUserPrefsChannel.h"
 #import "LPTouchUtils.h"
 #import "LPOperation.h"
 #import "LPHTTPConnection.h"
+#import "LPJSONUtils.h"
 
 #define kLPUIATapRouteModalWaitIterationCount 5
 
@@ -128,13 +129,12 @@
   
   center = CGPointMake(center.x + offsetPoint.x, center.y + offsetPoint.y);
   NSString *command = [self tapCommandForPoint:center];
-  [LPUIAChannel runAutomationCommand:command then:^(NSDictionary *result) {
+  [LPUIAUserPrefsChannel runAutomationCommand:command then:^(NSDictionary *result) {
     if (!result) {
       [self failWithMessageFormat:@"Timed out running command %@"
                           message:command];
     } else {
-      [self succeedWithResult:[NSArray arrayWithObject:[[result copy]
-                                                        autorelease]]];
+      [self succeedWithResult: [NSArray arrayWithObject:[LPJSONUtils jsonifyObject:v]]];
     }
   }];
   
