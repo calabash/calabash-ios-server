@@ -73,8 +73,8 @@
     } else {
       if ([@"iPhone Simulator" isEqualToString:[device model]]) {
         
-        NSPredicate *iphone6plus = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone*6*Plus*'"];
-        NSPredicate *iphone6 = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone*6*'"];
+        NSPredicate *iphone6plus = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone 6*Plus*'"];
+        NSPredicate *iphone6 = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone 6*'"];
         
         if ([iphone6plus evaluateWithObject:env]) {
           if (CGSizeEqualToSize(size, IPHONE6PLUS_DISPLAY_ZOOM)) {
@@ -112,7 +112,7 @@
     _screenDimensions = nil;
   }
 
- return self;
+  return self;
 }
 
 -(CGFloat)sampleFactor {

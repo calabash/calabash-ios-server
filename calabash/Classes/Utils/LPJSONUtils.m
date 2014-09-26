@@ -8,6 +8,8 @@
 #import "LPCJSONSerializer.h"
 #import "LPCJSONDeserializer.h"
 #import "LPTouchUtils.h"
+#import "LPDevice.h"
+#import "LPOrientationOperation.h"
 
 @implementation LPJSONUtils
 
@@ -116,12 +118,22 @@
 
     CGRect frame = [object frame];
 
-    UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
     UIWindow *window = [LPTouchUtils windowForView:v];
     if (window) {
+      
+      CGPoint center = [LPTouchUtils centerOfView:v];
+
       CGRect rect = [window convertRect:v.bounds fromView:v];
-      rect = [frontWindow convertRect:rect fromWindow:window];
-      CGPoint center = [LPTouchUtils centerOfFrame:rect shouldTranslate:YES];
+      
+      UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
+      
+      if ([frontWindow respondsToSelector:@selector(convertRect:toCoordinateSpace:)]) {
+        rect = [frontWindow convertRect:rect toCoordinateSpace:frontWindow];
+      }
+      else {
+        rect = [frontWindow convertRect:rect fromWindow:window];
+      }
+
       NSDictionary *rectDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:center.x], @"center_x",
                                                                          [NSNumber numberWithFloat:center.y], @"center_y",
                                                                          [NSNumber numberWithFloat:rect.origin.x], @"x",
