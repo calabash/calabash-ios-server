@@ -11,5 +11,6 @@
 @interface LPDevice : NSObject
 + (LPDevice *) sharedDevice;
 
+- (NSDictionary*) screenDimensions;
 -(CGFloat)sampleFactor;
 @end

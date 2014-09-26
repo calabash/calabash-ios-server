@@ -12,6 +12,7 @@
 
 @implementation LPDevice {
   CGFloat _sample;
+  NSDictionary* _screenDimensions;
 
 }
 + (LPDevice *) sharedDevice {
@@ -51,7 +52,6 @@
     UIScreen *s = [UIScreen mainScreen];    
     UIScreenMode *sm = [s currentMode];
     CGSize size = sm.size;
-
     
     if ([@"iPhone7,1" isEqualToString:machine]) {
       //iPhone6+ http://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions
@@ -99,10 +99,19 @@
       }
       
     }
+    _screenDimensions = [[NSDictionary alloc] initWithObjectsAndKeys:
+                         [NSNumber numberWithFloat:size.height], @"height",
+                         [NSNumber numberWithFloat:size.width],  @"width",
+                         [NSNumber numberWithFloat:scale],       @"scale",
+                         [NSNumber numberWithFloat:_sample],      @"sample",
+                         nil];
+
   }
   else {
     _sample = 1.0f;
+    _screenDimensions = nil;
   }
+
  return self;
 }
 
@@ -111,7 +120,12 @@
 }
 
 
+- (NSDictionary*) screenDimensions {
+  return _screenDimensions;
+}
+
 - (void) dealloc {
+  [_screenDimensions release];
   [super dealloc];
 }
 
