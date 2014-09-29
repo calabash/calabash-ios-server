@@ -38,8 +38,9 @@
     CGSize IPHONE6PLUS_DISPLAY_ZOOM = CGSizeMake(375*scale, 667*scale);
     const CGFloat IPHONE6PLUS_DISPLAY_ZOOM_SAMPLE = 0.96f;
     
-    CGSize IPHONE6PLUS = CGSizeMake(414*scale, 736*scale);
-    const CGFloat IPHONE6PLUS_SAMPLE = 0.8695652173913f;
+    CGSize IPHONE6PLUSORIG = CGSizeMake(414, 736);
+    CGSize IPHONE6PLUS = CGSizeMake(IPHONE6PLUSORIG.width*scale, IPHONE6PLUSORIG.height*scale);
+    const CGFloat IPHONE6PLUS_SAMPLE = 1.0f;
 
     
     CGSize IPHONE6_DISPLAY_ZOOM = CGSizeMake(320*scale, 568*scale);
@@ -77,9 +78,9 @@
         NSPredicate *iphone6 = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone 6*'"];
         
         if ([iphone6plus evaluateWithObject:env]) {
-          if (CGSizeEqualToSize(size, IPHONE6PLUS_DISPLAY_ZOOM)) {
-            _sample = IPHONE6PLUS_DISPLAY_ZOOM_SAMPLE;
-            
+          if (size.width < IPHONE6PLUS.width && size.height < IPHONE6PLUS.height) {
+            _sample = (IPHONE6PLUS.width / size.width);
+            _sample = (IPHONE6PLUS.height / size.height);
           }
           else {
             _sample = IPHONE6PLUS_SAMPLE;
