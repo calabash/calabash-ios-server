@@ -3,14 +3,12 @@ language: objective-c
 before_script:
   - gem install xcpretty
 
-# NOTE! Do not try to 'make dylib' on Travis CI.  That rule requires .xcspec
-# files to be copied directly into the target Xcode.app.
 script:
   - make clean
   - make framework
   - make frank
-  # See the note above
-  # - make all
+  - make dylibs
+  - make all
   # The CoreSimulator environment on Travis CI is not ready
   # for calabash testing.  The 'chou' tests are cucumber
   # tests.
