@@ -7,8 +7,10 @@ script:
   - make clean
   - make framework
   - make frank
-  - make dylibs
-  - make all
+  # Dylib creation is allowed by Xcode 6, but it requires
+  # code-signing which is not easy to set up on Travis CI.
+  #- make dylibs
+  #- make all
   # The CoreSimulator environment on Travis CI is not ready
   # for calabash testing.  The 'chou' tests are cucumber
   # tests.
