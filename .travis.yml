@@ -1,8 +1,9 @@
 language: objective-c
 
-before_install:
-  - brew update
-  - if brew outdated | grep -qx openssl; then brew upgrade openssl; fi
+# Rolling back; did not help.
+#before_install:
+#  - brew update
+#  - if brew outdated | grep -qx openssl; then brew upgrade openssl; fi
 
 before_script:
   - gem install xcpretty
