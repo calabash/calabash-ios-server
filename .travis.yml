@@ -11,7 +11,10 @@ script:
   - make frank
   # See the note above
   # - make all
-  - scripts/ci/travis/run-chou-tests.rb
+  # The CoreSimulator environment on Travis CI is not ready
+  # for calabash testing.  The 'chou' tests are cucumber
+  # tests.
+  #- scripts/ci/travis/run-chou-tests.rb
 
 #rvm:
 #  - 2.0.0
