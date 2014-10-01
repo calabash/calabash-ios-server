@@ -19,7 +19,7 @@ script:
   - scripts/ci/travis/run-chou-tests.rb
 
 rvm:
-  - 2.1.1
+  - 2.0.0
 
 notifications:
   email:
