@@ -18,8 +18,8 @@ script:
   # - make all
   - scripts/ci/travis/run-chou-tests.rb
 
-rvm:
-  - 2.0.0
+#rvm:
+#  - 2.0.0
 
 notifications:
   email:
