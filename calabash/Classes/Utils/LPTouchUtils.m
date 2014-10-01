@@ -24,7 +24,7 @@
   BOOL iphone5Like = NO;
   if ([@"iPhone Simulator" isEqualToString:[device model]]) {
 
-    NSPredicate *inch5PhonePred = [NSPredicate predicateWithFormat:@"IPHONE_SIMULATOR_VERSIONS LIKE '*iPhone*Retina*4-inch*'"];
+    NSPredicate *inch5PhonePred = [NSPredicate predicateWithFormat:@"IPHONE_SIMULATOR_VERSIONS LIKE '*iPhone*Retina*4-inch*' OR SIMULATOR_VERSION_INFO LIKE '*iPhone 5*' OR SIMULATOR_VERSION_INFO LIKE '*iPhone 6*'"];
     iphone5Like = [inch5PhonePred evaluateWithObject:env];
   } else if ([[device model] hasPrefix:@"iPhone"]) {
     iphone5Like = [system hasPrefix:@"iPhone5"] || [system hasPrefix:@"iPhone6"];
