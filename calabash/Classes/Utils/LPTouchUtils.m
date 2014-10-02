@@ -29,13 +29,13 @@
     iphone5Like = [inch5PhonePred evaluateWithObject:env];
     
     if (!iphone5Like) {
-      inch5PhonePred = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone*5*'"];
+      inch5PhonePred = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone 5*'"];
       iphone5Like = [inch5PhonePred evaluateWithObject:env];
-      inch5PhonePred = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone*6*'"];
+      inch5PhonePred = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone 6*'"];
       iphone5Like =  iphone5Like || [inch5PhonePred evaluateWithObject:env];
     }
   } else if ([[device model] hasPrefix:@"iPhone"]) {
-    iphone5Like = [system hasPrefix:@"iPhone5"] || [system hasPrefix:@"iPhone6"] || [system hasPrefix:@"iPhone7,2"];
+    iphone5Like = [system hasPrefix:@"iPhone5"] || [system hasPrefix:@"iPhone6"] || [system hasPrefix:@"iPhone7,2"] || [system hasPrefix:@"iPhone7,1"];
   } else if ([[device model] hasPrefix:@"iPod"]) {
     iphone5Like = [system hasPrefix:@"iPod5"];
   }
@@ -44,7 +44,8 @@
 }
 
 + (BOOL) isLetterBox {
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+  
+  if ([self is4InchDevice] && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
     if ([UIScreen mainScreen].scale == 2.0f) {
       CGSize result = [[UIScreen mainScreen] bounds].size;
       CGFloat scale = [UIScreen mainScreen].scale;

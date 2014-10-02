@@ -137,7 +137,7 @@
       case '*':[invocation getReturnValue:(void **) &charPtrValue];
         return [NSString stringWithFormat:@"%s", charPtrValue];
       case 'c':[invocation getReturnValue:(void **) &charValue];
-        return [NSString stringWithFormat:@"%d", charValue];
+        return [NSNumber numberWithChar:charValue];
       case 'S':[invocation getReturnValue:(void **) &SValue];
         return [NSNumber numberWithUnsignedShort:SValue];
       case 'B':[invocation getReturnValue:(void **) &Bvalue];

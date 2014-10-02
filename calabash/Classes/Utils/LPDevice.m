@@ -53,7 +53,8 @@
     UIScreen *s = [UIScreen mainScreen];    
     UIScreenMode *sm = [s currentMode];
     CGSize size = sm.size;
-    
+
+    _sample = 1.0f;
     if ([@"iPhone7,1" isEqualToString:machine]) {
       //iPhone6+ http://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions
       if (CGSizeEqualToSize(size, IPHONE6PLUS_DISPLAY_ZOOM)) {
@@ -94,11 +95,8 @@
           else {
             _sample = IPHONE6_DISPLAY_ZOOM_SAMPLE;
           }
-
         }
-        
       }
-      
     }
     _screenDimensions = [[NSDictionary alloc] initWithObjectsAndKeys:
                          [NSNumber numberWithFloat:size.height], @"height",
