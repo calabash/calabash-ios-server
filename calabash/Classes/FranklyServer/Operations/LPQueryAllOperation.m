@@ -76,6 +76,11 @@
     short shortValue;
     float floatValue;
     double doubleValue;
+    unsigned short SValue;
+    _Bool Bvalue;
+    unsigned long long Qvalue;
+    long long qvalue;
+    unsigned long Lvalue;
     SEL sel = nil;
 
     NSMutableArray *args = [NSMutableArray array];
@@ -133,6 +138,16 @@
         return [NSString stringWithFormat:@"%s", charPtrValue];
       case 'c':[invocation getReturnValue:(void **) &charValue];
         return [NSString stringWithFormat:@"%d", charValue];
+      case 'S':[invocation getReturnValue:(void **) &SValue];
+        return [NSNumber numberWithUnsignedShort:SValue];
+      case 'B':[invocation getReturnValue:(void **) &Bvalue];
+        return [NSNumber numberWithBool:Bvalue];
+      case 'Q':[invocation getReturnValue:(void **) &Qvalue];
+        return [NSNumber numberWithUnsignedLongLong:Qvalue];
+      case 'q':[invocation getReturnValue:(void **) &qvalue];
+        return [NSNumber numberWithLongLong:qvalue];
+      case 'L':[invocation getReturnValue:(void **) &Lvalue];
+        return [NSNumber numberWithUnsignedLong:Lvalue];
       case '{': {
         NSUInteger length = [[invocation methodSignature] methodReturnLength];
         void *buffer = (void *) malloc(length);
@@ -223,6 +238,31 @@
       case 'c': {
         char chVal = [arg charValue];
         [invocation setArgument:&chVal atIndex:i + 2];
+        break;
+      }
+      case 'S': {
+        unsigned short SValue = [arg unsignedShortValue];
+        [invocation setArgument:&SValue atIndex:i + 2];
+        break;
+      }
+      case 'B': {
+        _Bool Bvalue = [arg boolValue];
+        [invocation setArgument:&Bvalue atIndex:i + 2];
+        break;
+      }
+      case 'Q': {
+        unsigned long long Qvalue = [arg unsignedLongLongValue];
+        [invocation setArgument:&Qvalue atIndex:i + 2];
+        break;
+      }
+      case 'q': {
+        long long qvalue = [arg longLongValue];
+        [invocation setArgument:&qvalue atIndex:i + 2];
+        break;
+      }
+      case 'L': {
+        unsigned long Lvalue = [arg unsignedLongValue];
+        [invocation setArgument:&Lvalue atIndex:i + 2];
         break;
       }
       case '{': {
