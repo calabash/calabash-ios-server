@@ -77,7 +77,7 @@
     float floatValue;
     double doubleValue;
     unsigned short SValue;
-    _Bool Bvalue;
+    BOOL Bvalue;
     unsigned long long Qvalue;
     long long qvalue;
     unsigned long Lvalue;
@@ -141,7 +141,7 @@
       case 'S':[invocation getReturnValue:(void **) &SValue];
         return [NSNumber numberWithUnsignedShort:SValue];
       case 'B':[invocation getReturnValue:(void **) &Bvalue];
-        return [NSNumber numberWithBool:Bvalue];
+        return @((short)Bvalue);
       case 'Q':[invocation getReturnValue:(void **) &Qvalue];
         return [NSNumber numberWithUnsignedLongLong:Qvalue];
       case 'q':[invocation getReturnValue:(void **) &qvalue];
