@@ -79,8 +79,10 @@
 + (id) jsonifyObject:(id) object {
   if (!object) {return nil;}
   if ([object isKindOfClass:[UIColor class]]) {
-    //todo special handling
-    return [object description];
+    UIColor *color = (UIColor*)object;
+    CGFloat red, green, blue, alpha;
+    [color getRed:&red green:&green blue:&blue alpha:&alpha];
+    return @{@"red": @(red), @"green": @(green), @"blue": @(blue), @"alpha": @(alpha)};
   }
   if ([object isKindOfClass:[UIView class]]) {
     UIView *v = (UIView *) object;
@@ -96,7 +98,6 @@
 
     // TODO LPJSONUtils.h has bug around accessibilityIdentifier
     if ([object respondsToSelector:@selector(accessibilityIdentifier)]) {
-
       NSString *aid = [object accessibilityIdentifier];
       if (aid) {
         [result setObject:aid forKey:@"id"];
@@ -105,7 +106,6 @@
       }
     }
     if ([object respondsToSelector:@selector(text)]) {
-
       NSString *text = [object text];
       if (text) {
         [result setObject:text forKey:@"text"];
@@ -113,7 +113,18 @@
         [result setObject:[NSNull null] forKey:@"text"];
       }
     }
-
+    if ([object respondsToSelector:@selector(isSelected)]) {
+      BOOL selected = [object isSelected];
+      [result setObject:@(selected) forKey:@"selected"];
+    }
+    if ([object respondsToSelector:@selector(isEnabled)]) {
+      BOOL enabled = [object isEnabled];
+      [result setObject:@(enabled) forKey:@"enabled"];
+    }
+    if ([object respondsToSelector:@selector(alpha)]) {
+      CGFloat alpha = [object alpha];
+      [result setObject:@(alpha) forKey:@"alpha"];
+    }
 
 
     CGRect frame = [object frame];
@@ -159,7 +170,7 @@
   }
   if ([object respondsToSelector:@selector(isAccessibilityElement)] && [object isAccessibilityElement]) {
     NSMutableDictionary *result = [NSMutableDictionary dictionaryWithObjectsAndKeys:NSStringFromClass([object class]), @"class", nil];
-    
+
     NSString *lbl = [object accessibilityLabel];
     if (lbl) {
       [result setObject:lbl forKey:@"label"];
@@ -204,6 +215,19 @@
         [result setObject:[NSNull null] forKey:@"text"];
       }
     }
+    if ([object respondsToSelector:@selector(isSelected)]) {
+      BOOL selected = [object isSelected];
+      [result setObject:@(selected) forKey:@"selected"];
+    }
+    if ([object respondsToSelector:@selector(isEnabled)]) {
+      BOOL enabled = [object isEnabled];
+      [result setObject:@(enabled) forKey:@"enabled"];
+    }
+    if ([object respondsToSelector:@selector(alpha)]) {
+      CGFloat alpha = [object alpha];
+      [result setObject:@(alpha) forKey:@"alpha"];
+    }
+
 
     CGRect frame = [object accessibilityFrame];
     CGPoint center = [LPTouchUtils centerOfFrame:frame shouldTranslate:YES];
