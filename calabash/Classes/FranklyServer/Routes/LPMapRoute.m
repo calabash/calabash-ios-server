@@ -11,6 +11,7 @@
 #import "LPLog.h"
 #import "LPJSONUtils.h"
 #import "LPHTTPDataResponse.h"
+#import "LPDevice.h"
 
 @implementation LPMapRoute
 @synthesize parser;
@@ -85,7 +86,6 @@
 
     //
     NSArray *allWindows = [LPTouchUtils applicationWindows];
-    NSMutableArray *views = [NSMutableArray arrayWithCapacity:32];
     result = [self.parser evalWith:allWindows];
   } else {
     result = nil;
@@ -97,10 +97,11 @@
 
   NSDictionary *resultDict = nil;
   if (resultArray) {
-    resultDict = [NSDictionary dictionaryWithObjectsAndKeys:[LPOrientationOperation statusBarOrientation], @"status_bar_orientation",
-                                                            resultArray, @"results",
-                                                            @"SUCCESS", @"outcome",
-                                                            nil];
+    resultDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                  [LPOrientationOperation statusBarOrientation], @"status_bar_orientation",
+                  resultArray, @"results",
+                  @"SUCCESS", @"outcome",
+                  nil];
   } else {
     resultDict = [NSDictionary dictionaryWithObjectsAndKeys:@"FAILURE", @"outcome",
                                                             @"", @"reason",
