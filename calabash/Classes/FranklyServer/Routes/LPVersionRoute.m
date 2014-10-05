@@ -10,6 +10,7 @@
 #import "LPTouchUtils.h"
 #import "LPHTTPDataResponse.h"
 #import "LPJSONUtils.h"
+#import "LPDevice.h"
 #import <sys/utsname.h>
 
 @class UIDevice;
@@ -130,6 +131,7 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
                         @"iOS_version": [[UIDevice currentDevice]
                                          systemVersion],
                         @"app_name": nameString,
+                        @"screen_dimensions": [[LPDevice sharedDevice] screenDimensions],
                         @"system": machine,
                         @"4inch": @(iphone5Like),
                         @"simulator_device": dev,

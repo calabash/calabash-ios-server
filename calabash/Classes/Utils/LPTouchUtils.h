@@ -6,11 +6,15 @@
 
 #import <Foundation/Foundation.h>
 
+#define LPiPHONE4INCHOFFSET 44
+
 @interface LPTouchUtils : NSObject
 
++ (CGPoint) translateToScreenCoords:(CGPoint) point sampleFactor:(CGFloat)sampleFactor;
 + (CGPoint) translateToScreenCoords:(CGPoint) point;
 
 + (CGPoint) centerOfView:(UIView *) view;
++ (CGPoint) centerOfView:(UIView *) view shouldTranslate:(BOOL) shouldTranslate;
 
 + (CGPoint) centerOfFrame:(CGRect) frame;
 
