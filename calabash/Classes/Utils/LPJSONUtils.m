@@ -8,6 +8,8 @@
 #import "LPCJSONSerializer.h"
 #import "LPCJSONDeserializer.h"
 #import "LPTouchUtils.h"
+#import "LPDevice.h"
+#import "LPOrientationOperation.h"
 
 @implementation LPJSONUtils
 
@@ -77,8 +79,10 @@
 + (id) jsonifyObject:(id) object {
   if (!object) {return nil;}
   if ([object isKindOfClass:[UIColor class]]) {
-    //todo special handling
-    return [object description];
+    UIColor *color = (UIColor*)object;
+    CGFloat red, green, blue, alpha;
+    [color getRed:&red green:&green blue:&blue alpha:&alpha];
+    return @{@"red": @(red), @"green": @(green), @"blue": @(blue), @"alpha": @(alpha)};
   }
   if ([object isKindOfClass:[UIView class]]) {
     UIView *v = (UIView *) object;
@@ -94,7 +98,6 @@
 
     // TODO LPJSONUtils.h has bug around accessibilityIdentifier
     if ([object respondsToSelector:@selector(accessibilityIdentifier)]) {
-
       NSString *aid = [object accessibilityIdentifier];
       if (aid) {
         [result setObject:aid forKey:@"id"];
@@ -103,7 +106,6 @@
       }
     }
     if ([object respondsToSelector:@selector(text)]) {
-
       NSString *text = [object text];
       if (text) {
         [result setObject:text forKey:@"text"];
@@ -111,17 +113,38 @@
         [result setObject:[NSNull null] forKey:@"text"];
       }
     }
-
+    if ([object respondsToSelector:@selector(isSelected)]) {
+      BOOL selected = [object isSelected];
+      [result setObject:@(selected) forKey:@"selected"];
+    }
+    if ([object respondsToSelector:@selector(isEnabled)]) {
+      BOOL enabled = [object isEnabled];
+      [result setObject:@(enabled) forKey:@"enabled"];
+    }
+    if ([object respondsToSelector:@selector(alpha)]) {
+      CGFloat alpha = [object alpha];
+      [result setObject:@(alpha) forKey:@"alpha"];
+    }
 
 
     CGRect frame = [object frame];
 
-    UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
     UIWindow *window = [LPTouchUtils windowForView:v];
     if (window) {
+      
+      CGPoint center = [LPTouchUtils centerOfView:v];
+
       CGRect rect = [window convertRect:v.bounds fromView:v];
-      rect = [frontWindow convertRect:rect fromWindow:window];
-      CGPoint center = [LPTouchUtils centerOfFrame:rect shouldTranslate:YES];
+      
+      UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
+      
+      if ([frontWindow respondsToSelector:@selector(convertRect:toCoordinateSpace:)]) {
+        rect = [frontWindow convertRect:rect toCoordinateSpace:frontWindow];
+      }
+      else {
+        rect = [frontWindow convertRect:rect fromWindow:window];
+      }
+
       NSDictionary *rectDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:center.x], @"center_x",
                                                                          [NSNumber numberWithFloat:center.y], @"center_y",
                                                                          [NSNumber numberWithFloat:rect.origin.x], @"x",
@@ -147,7 +170,7 @@
   }
   if ([object respondsToSelector:@selector(isAccessibilityElement)] && [object isAccessibilityElement]) {
     NSMutableDictionary *result = [NSMutableDictionary dictionaryWithObjectsAndKeys:NSStringFromClass([object class]), @"class", nil];
-    
+
     NSString *lbl = [object accessibilityLabel];
     if (lbl) {
       [result setObject:lbl forKey:@"label"];
@@ -192,6 +215,19 @@
         [result setObject:[NSNull null] forKey:@"text"];
       }
     }
+    if ([object respondsToSelector:@selector(isSelected)]) {
+      BOOL selected = [object isSelected];
+      [result setObject:@(selected) forKey:@"selected"];
+    }
+    if ([object respondsToSelector:@selector(isEnabled)]) {
+      BOOL enabled = [object isEnabled];
+      [result setObject:@(enabled) forKey:@"enabled"];
+    }
+    if ([object respondsToSelector:@selector(alpha)]) {
+      CGFloat alpha = [object alpha];
+      [result setObject:@(alpha) forKey:@"alpha"];
+    }
+
 
     CGRect frame = [object accessibilityFrame];
     CGPoint center = [LPTouchUtils centerOfFrame:frame shouldTranslate:YES];

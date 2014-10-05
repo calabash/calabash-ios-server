@@ -2347,17 +2347,21 @@ static NSMutableArray *recentNonces;
 	
 	if (tag == LPHTTP_PARTIAL_RESPONSE_BODY)
 	{
-		// Update the amount of data we have in asyncSocket's write queue
-		[responseDataSizes removeObjectAtIndex:0];
-		
+    // Update the amount of data we have in asyncSocket's write queue
+    if ([responseDataSizes count] > 0)
+    {
+      [responseDataSizes removeObjectAtIndex:0];
+    }
 		// We only wrote a part of the response - there may be more
 		[self continueSendingStandardResponseBody];
 	}
 	else if (tag == LPHTTP_CHUNKED_RESPONSE_BODY)
 	{
 		// Update the amount of data we have in asyncSocket's write queue.
-		// This will allow asynchronous responses to continue sending more data.
-		[responseDataSizes removeObjectAtIndex:0];
+    if ([responseDataSizes count] > 0)
+    {
+      [responseDataSizes removeObjectAtIndex:0];
+    }
 		
 		// Don't continue sending the response yet.
 		// The chunked footer that was sent after the body will tell us if we have more data to send.
@@ -2369,16 +2373,22 @@ static NSMutableArray *recentNonces;
 	}
 	else if (tag == LPHTTP_PARTIAL_RANGE_RESPONSE_BODY)
 	{
-		// Update the amount of data we have in asyncSocket's write queue
-		[responseDataSizes removeObjectAtIndex:0];
+    // Update the amount of data we have in asyncSocket's write queue.
+    if ([responseDataSizes count] > 0)
+    {
+      [responseDataSizes removeObjectAtIndex:0];
+    }
 		
 		// We only wrote a part of the range - there may be more
 		[self continueSendingSingleRangeResponseBody];
 	}
 	else if (tag == LPHTTP_PARTIAL_RANGES_RESPONSE_BODY)
 	{
-		// Update the amount of data we have in asyncSocket's write queue
-		[responseDataSizes removeObjectAtIndex:0];
+    // Update the amount of data we have in asyncSocket's write queue.
+    if ([responseDataSizes count] > 0)
+    {
+      [responseDataSizes removeObjectAtIndex:0];
+    }
 		
 		// We only wrote part of the range - there may be more, or there may be more ranges
 		[self continueSendingMultiRangeResponseBody];
