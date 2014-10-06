@@ -29,3 +29,13 @@ dylibs:
 	scripts/make-calabash-dylib.rb sim
 	scripts/make-calabash-dylib.rb device
 	scripts/make-libraries.rb verify-dylibs
+
+no-offending-symbols:
+	rm -rf build
+	rm -rf calabash.framework
+	scripts/make-calabash-lib.rb sim
+	scripts/make-calabash-lib.rb device
+	scripts/make-calabash-lib.rb version
+	scripts/make-libraries.rb verify-framework
+	./expect-no-offending-symbols.rb Metal
+	./expect-no-offending-symbols.rb kSecAttrSynchronizable
