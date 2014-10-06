@@ -85,8 +85,6 @@
 		B15BF99719ABB17800B38577 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E757A15D434D00066550B /* CFNetwork.framework */; };
 		B15BF99819ABB18200B38577 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		B15BF99919ABB1DD00B38577 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-unreachable-code"; }; };
-		B15BF99A19ABB1DD00B38577 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		B15BF99B19ABB1DD00B38577 /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF99C19ABB1DD00B38577 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B15BF99D19ABB1DD00B38577 /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B15BF99E19ABB1DD00B38577 /* LPHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B514E6565500663205 /* LPHTTPConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -165,8 +163,6 @@
 		B15BF9E719ABB1EB00B38577 /* LPI.mm in Sources */ = {isa = PBXBuildFile; fileRef = B184FDBD14B6DB2B002A744C /* LPI.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B15BF9EA19ABB2B100B38577 /* LPI.mm in Sources */ = {isa = PBXBuildFile; fileRef = B184FDBD14B6DB2B002A744C /* LPI.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B15BF9EB19ABB2B100B38577 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-unreachable-code"; }; };
-		B15BF9EC19ABB2B100B38577 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		B15BF9ED19ABB2B100B38577 /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9EE19ABB2B100B38577 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B15BF9EF19ABB2B100B38577 /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B15BF9F019ABB2B100B38577 /* LPHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B514E6565500663205 /* LPHTTPConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -258,7 +254,6 @@
 		B1D5BD8119A23BCE0070E8CE /* LPHTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C99F14E6564200663205 /* LPHTTPAsyncFileResponse.m */; };
 		B1D5BD8219A23BCE0070E8CE /* LPHTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A114E6564200663205 /* LPHTTPDataResponse.m */; };
 		B1D5BD8319A23BCE0070E8CE /* LPHTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A314E6564200663205 /* LPHTTPDynamicFileResponse.m */; };
-		B1D5BD8419A23BCE0070E8CE /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BD8519A23BCE0070E8CE /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A318B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m */; };
 		B1D5BD8619A23BCE0070E8CE /* LPHTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A514E6564200663205 /* LPHTTPFileResponse.m */; };
 		B1D5BD8719A23BCE0070E8CE /* LPHTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A714E6564200663205 /* LPHTTPRedirectResponse.m */; };
@@ -303,7 +298,6 @@
 		B1D5BDAE19A23BCE0070E8CE /* UIScriptASTLast.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0614B6DB2B002A744C /* UIScriptASTLast.m */; };
 		B1D5BDAF19A23BCE0070E8CE /* LPEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DCD74189A82DF00F8DF87 /* LPEnv.m */; };
 		B1D5BDB019A23BCE0070E8CE /* UIScriptASTWith.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0814B6DB2B002A744C /* UIScriptASTWith.m */; };
-		B1D5BDB119A23BCE0070E8CE /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BDB219A23BCE0070E8CE /* UIScriptParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0A14B6DB2B002A744C /* UIScriptParser.m */; };
 		B1D5BDB319A23BCE0070E8CE /* LPJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */; };
 		B1D5BDB419A23BCE0070E8CE /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; };
@@ -522,10 +516,6 @@
 		F59C5D0718E0C1F30087B51D /* LPHTTPFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B116C9A414E6564200663205 /* LPHTTPFileResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5B27B9118C5884D0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		F5B27B9218C5884E0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
-		F5E2D1E018C9120E00A0D9B6 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5E2D1E118C9120E00A0D9B6 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5E2D1E418C9120E00A0D9B6 /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5E2D1E518C9120E00A0D9B6 /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5F53D6A18C619CB00BD9731 /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; };
 		F5F53D6B18C619CB00BD9731 /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; };
 /* End PBXBuildFile section */
@@ -1700,8 +1690,6 @@
 			files = (
 				B15BF9E719ABB1EB00B38577 /* LPI.mm in Sources */,
 				B15BF99919ABB1DD00B38577 /* LPWebQuery.m in Sources */,
-				B15BF99A19ABB1DD00B38577 /* LPSSKeychain.m in Sources */,
-				B15BF99B19ABB1DD00B38577 /* LPSSKeychainQuery.m in Sources */,
 				B15BF99C19ABB1DD00B38577 /* GCDAsyncSocket.m in Sources */,
 				B15BF99D19ABB1DD00B38577 /* LPHTTPAuthenticationRequest.m in Sources */,
 				B15BF99E19ABB1DD00B38577 /* LPHTTPConnection.m in Sources */,
@@ -1787,8 +1775,6 @@
 			files = (
 				B15BF9EA19ABB2B100B38577 /* LPI.mm in Sources */,
 				B15BF9EB19ABB2B100B38577 /* LPWebQuery.m in Sources */,
-				B15BF9EC19ABB2B100B38577 /* LPSSKeychain.m in Sources */,
-				B15BF9ED19ABB2B100B38577 /* LPSSKeychainQuery.m in Sources */,
 				B15BF9EE19ABB2B100B38577 /* GCDAsyncSocket.m in Sources */,
 				B15BF9EF19ABB2B100B38577 /* LPHTTPAuthenticationRequest.m in Sources */,
 				B15BF9F019ABB2B100B38577 /* LPHTTPConnection.m in Sources */,
@@ -1884,7 +1870,6 @@
 				B1D5BD8119A23BCE0070E8CE /* LPHTTPAsyncFileResponse.m in Sources */,
 				B1D5BD8219A23BCE0070E8CE /* LPHTTPDataResponse.m in Sources */,
 				B1D5BD8319A23BCE0070E8CE /* LPHTTPDynamicFileResponse.m in Sources */,
-				B1D5BD8419A23BCE0070E8CE /* LPSSKeychainQuery.m in Sources */,
 				B1D5BD8519A23BCE0070E8CE /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
 				B1D5BD8619A23BCE0070E8CE /* LPHTTPFileResponse.m in Sources */,
 				B1D5BD8719A23BCE0070E8CE /* LPHTTPRedirectResponse.m in Sources */,
@@ -1930,7 +1915,6 @@
 				B1D5BDAE19A23BCE0070E8CE /* UIScriptASTLast.m in Sources */,
 				B1D5BDAF19A23BCE0070E8CE /* LPEnv.m in Sources */,
 				B1D5BDB019A23BCE0070E8CE /* UIScriptASTWith.m in Sources */,
-				B1D5BDB119A23BCE0070E8CE /* LPSSKeychain.m in Sources */,
 				B1D5BDB219A23BCE0070E8CE /* UIScriptParser.m in Sources */,
 				B1D5BDB319A23BCE0070E8CE /* LPJSONUtils.m in Sources */,
 				B1D5BDB419A23BCE0070E8CE /* LPKeychainRoute.m in Sources */,
@@ -1971,7 +1955,6 @@
 				F5091BE518C4E1D700C85307 /* LPHTTPAsyncFileResponse.m in Sources */,
 				F5091BE618C4E1D700C85307 /* LPHTTPDataResponse.m in Sources */,
 				F5091BE718C4E1D700C85307 /* LPHTTPDynamicFileResponse.m in Sources */,
-				F5E2D1E418C9120E00A0D9B6 /* LPSSKeychainQuery.m in Sources */,
 				F5091BE818C4E1D700C85307 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
 				F5091BE918C4E1D700C85307 /* LPHTTPFileResponse.m in Sources */,
 				F5091BEA18C4E1D700C85307 /* LPHTTPRedirectResponse.m in Sources */,
@@ -2016,7 +1999,6 @@
 				F5091C0F18C4E1D700C85307 /* UIScriptASTLast.m in Sources */,
 				F5091C1018C4E1D700C85307 /* LPEnv.m in Sources */,
 				F5091C1118C4E1D700C85307 /* UIScriptASTWith.m in Sources */,
-				F5E2D1E018C9120E00A0D9B6 /* LPSSKeychain.m in Sources */,
 				F5091C1218C4E1D700C85307 /* UIScriptParser.m in Sources */,
 				F5091C1318C4E1D700C85307 /* LPJSONUtils.m in Sources */,
 				F55D412418C9130100813F78 /* LPKeychainRoute.m in Sources */,
@@ -2066,7 +2048,6 @@
 				F5821A0318C4E27400293508 /* LPHTTPAsyncFileResponse.m in Sources */,
 				F5821A0418C4E27400293508 /* LPHTTPDataResponse.m in Sources */,
 				F5821A0518C4E27400293508 /* LPHTTPDynamicFileResponse.m in Sources */,
-				F5E2D1E518C9120E00A0D9B6 /* LPSSKeychainQuery.m in Sources */,
 				F5821A0618C4E27400293508 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
 				F5821A0718C4E27400293508 /* LPHTTPFileResponse.m in Sources */,
 				F5821A0818C4E27400293508 /* LPHTTPRedirectResponse.m in Sources */,
@@ -2111,7 +2092,6 @@
 				F5821A2D18C4E27400293508 /* UIScriptASTLast.m in Sources */,
 				F5821A2E18C4E27400293508 /* LPEnv.m in Sources */,
 				F5821A2F18C4E27400293508 /* UIScriptASTWith.m in Sources */,
-				F5E2D1E118C9120E00A0D9B6 /* LPSSKeychain.m in Sources */,
 				F5821A3018C4E27400293508 /* UIScriptParser.m in Sources */,
 				F5821A3118C4E27400293508 /* LPJSONUtils.m in Sources */,
 				F55D412518C9130100813F78 /* LPKeychainRoute.m in Sources */,
