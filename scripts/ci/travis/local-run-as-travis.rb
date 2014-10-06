@@ -18,6 +18,7 @@ Dir.chdir working_dir do
   # Cannot run on Travis CI because that rule requires .xcspec files to be
   # copied directly into the target Xcode.app.
   do_system('make dylibs', {:env_vars => env_vars})
+  do_system('make no-offending-symbols', {:env_vars => env_vars})
   do_system('make all', {:env_vars => env_vars})
   do_system('scripts/ci/travis/run-chou-tests.rb', {:env_vars => env_vars})
   # Cannot run on Travis CI because the log output is too large
