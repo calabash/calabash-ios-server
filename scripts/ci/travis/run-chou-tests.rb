@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'fileutils'
 
-require File.expand_path(File.join(File.dirname(__FILE__), 'test-helpers'))
+require File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'test-helpers'))
 
 working_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', '..'))
 
