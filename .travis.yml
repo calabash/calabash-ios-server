@@ -2,6 +2,7 @@ language: objective-c
 
 before_script:
   - gem install xcpretty
+  - gem install run_loop
 
 script:
   - make clean

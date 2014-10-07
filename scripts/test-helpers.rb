@@ -1,5 +1,11 @@
 #!/usr/bin/env ruby
 
+unless `gem list run_loop -i`.chomp == 'true'
+  install_gem('run_loop')
+end
+
+require 'run_loop'
+
 def log_cmd(msg)
   puts "\033[36mEXEC: #{msg}\033[0m" if msg
 end
