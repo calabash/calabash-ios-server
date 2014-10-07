@@ -20,6 +20,4 @@ Dir.chdir working_dir do
   do_system('make dylibs', {:env_vars => env_vars})
   do_system('make all', {:env_vars => env_vars})
   do_system('scripts/ci/travis/run-chou-tests.rb', {:env_vars => env_vars})
-  # Cannot run on Travis CI because the log output is too large
-  do_system('test-make-without-xcpretty.rb', {:env_vars => env_vars})
 end
