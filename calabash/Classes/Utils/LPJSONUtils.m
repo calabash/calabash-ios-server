@@ -137,13 +137,16 @@
       CGRect rect = [window convertRect:v.bounds fromView:v];
       
       UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
-      
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
       if ([frontWindow respondsToSelector:@selector(convertRect:toCoordinateSpace:)]) {
         rect = [frontWindow convertRect:rect toCoordinateSpace:frontWindow];
-      }
-      else {
+      } else {
         rect = [frontWindow convertRect:rect fromWindow:window];
       }
+#else
+      rect = [frontWindow convertRect:rect fromWindow:window];
+#endif
 
       NSDictionary *rectDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:center.x], @"center_x",
                                                                          [NSNumber numberWithFloat:center.y], @"center_y",
