@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 require 'fileutils'
 
-require File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'test-helpers'))
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'test-helpers'))
 
-working_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', '..'))
+working_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
 
 uninstall_gem('calabash-cucumber')
 
@@ -25,8 +25,8 @@ Dir.chdir working_dir do
 
 end
 
-calabash_gem_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', '..', 'calabash-ios'))
-calabash_framework = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', '..', 'calabash.framework'))
+calabash_gem_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'calabash-ios'))
+calabash_framework = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'calabash.framework'))
 
 Dir.chdir calabash_gem_dir do
 
@@ -63,7 +63,7 @@ Dir.chdir calabash_gem_dir do
 
 end
 
-chou_working_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', '..', 'animated-happiness/chou'))
+chou_working_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'animated-happiness/chou'))
 
 FileUtils.rm_rf("#{chou_working_dir}/calabash.framework")
 FileUtils.cp_r(calabash_framework, chou_working_dir)
@@ -88,7 +88,7 @@ Dir.chdir chou_working_dir do
   end
 end
 
-animated_happiness_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', '..', 'animated-happiness'))
+animated_happiness_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'animated-happiness'))
 
 Dir.chdir animated_happiness_dir do
 
