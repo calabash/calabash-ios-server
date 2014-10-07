@@ -18,6 +18,10 @@ def log_fail(msg)
   puts "\033[31mFAIL: #{msg}\033[0m" if msg
 end
 
+def log_info(msg)
+  puts "\033[35mINFO: #{msg}\033[0m" if msg
+end
+
 def do_system(cmd, opts={})
   default_opts = {:pass_msg => nil,
                   :fail_msg => nil,
