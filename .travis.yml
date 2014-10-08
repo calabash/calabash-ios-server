@@ -14,8 +14,8 @@ script:
   #- make all
   # The CoreSimulator environment on Travis CI is not ready
   # for calabash testing.  The 'chou' tests are cucumber
-  # tests.
-  #- scripts/ci/travis/run-chou-tests.rb
+  # tests. These tests will fail until travis stabilizes.
+  - scripts/ci/travis/run-chou-tests.rb
 
 # There are some problems with Xcode 6 + rvm on Travis CI.
 # In particular 2.1.1 does not work.
