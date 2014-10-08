@@ -81,7 +81,11 @@ static NSString *const kFaceUp = @"face up";
     case UIInterfaceOrientationLandscapeLeft: return kLeft;
     case UIInterfaceOrientationLandscapeRight: return kRight;
       /******************/
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wunreachable-code"
     default: return kDown;
+#pragma clang diagnostic pop
 
   }
 }

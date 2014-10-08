@@ -42,8 +42,10 @@
     CGSize IPHONE6PLUS = CGSizeMake(IPHONE6PLUSORIG.width*scale, IPHONE6PLUSORIG.height*scale);
     const CGFloat IPHONE6PLUS_SAMPLE = 1.0f;
 
-    
-    CGSize IPHONE6_DISPLAY_ZOOM = CGSizeMake(320*scale, 568*scale);
+    // Unused, but possibly useful.  The if condition (below) that assigns the
+    // _sample might use this some day, so I am keeping it around as a
+    // reference. -jjm
+    CGSize __unused IPHONE6_DISPLAY_ZOOM = CGSizeMake(320*scale, 568*scale);
     const CGFloat IPHONE6_DISPLAY_ZOOM_SAMPLE = 1.171875f;
     
     CGSize IPHONE6 = CGSizeMake(375*scale, 667*scale);

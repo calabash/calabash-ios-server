@@ -38,6 +38,13 @@ $ git co -b feature/my-new-feature
 $ git push -u origin feature/my-new-feature
 ```
 
+## Testing
+
+```
+$ scripts/test/run
+$ scripts/ci/travis/local-run-as-travis.rb
+```
+
 ## Releasing
 
 ### Create the release branch
