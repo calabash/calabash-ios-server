@@ -34,23 +34,34 @@
     
     NSDictionary *env = [[NSProcessInfo processInfo] environment];
     CGFloat scale = [UIScreen mainScreen].scale;
-    
-    CGSize IPHONE6PLUS_DISPLAY_ZOOM = CGSizeMake(375*scale, 667*scale);
-    const CGFloat IPHONE6PLUS_DISPLAY_ZOOM_SAMPLE = 0.96f;
-    
-    CGSize IPHONE6PLUSORIG = CGSizeMake(414, 736);
-    CGSize IPHONE6PLUS = CGSizeMake(IPHONE6PLUSORIG.width*scale, IPHONE6PLUSORIG.height*scale);
-    const CGFloat IPHONE6PLUS_SAMPLE = 1.0f;
 
+    const CGSize IPHONE6_TARGET_SPACE = CGSizeMake(375.0f, 667.0f);
+    const CGSize IPHONE6_DISPLAY_ZOOM_TARGET_SPACE = CGSizeMake(320.0f, 568.0f);
+
+    const CGSize IPHONE6PLUS_TARGET_SPACE = CGSizeMake(414.0f, 736.0f);
+    const CGSize IPHONE6PLUS_DISPLAY_ZOOM_TARGET_SPACE = IPHONE6_TARGET_SPACE;
+
+    const CGSize IPHONE6PLUS = CGSizeMake(IPHONE6PLUS_TARGET_SPACE.width*scale, IPHONE6PLUS_TARGET_SPACE.height*scale);
+    const CGSize IPHONE6PLUS_DISPLAY_ZOOM = CGSizeMake(IPHONE6PLUS_DISPLAY_ZOOM_TARGET_SPACE.width*scale,
+                                                       IPHONE6PLUS_DISPLAY_ZOOM_TARGET_SPACE.height*scale);
+
+
+    CGSize IPHONE6 = CGSizeMake(IPHONE6_TARGET_SPACE.width*scale,
+                                IPHONE6_TARGET_SPACE.height*scale);
+    CGSize __unused IPHONE6_DISPLAY_ZOOM = CGSizeMake(IPHONE6_DISPLAY_ZOOM_TARGET_SPACE.width*scale,
+                                                      IPHONE6_DISPLAY_ZOOM_TARGET_SPACE.height*scale);
+
+
+    const CGFloat IPHONE6_SAMPLE = 1.0f;
+    const CGFloat IPHONE6PLUS_DISPLAY_ZOOM_SAMPLE = 0.96f;
+    const CGFloat IPHONE6PLUS_SAMPLE = 1.0f;
     // Unused, but possibly useful.  The if condition (below) that assigns the
     // _sample might use this some day, so I am keeping it around as a
     // reference. -jjm
-    CGSize __unused IPHONE6_DISPLAY_ZOOM = CGSizeMake(320*scale, 568*scale);
     const CGFloat IPHONE6_DISPLAY_ZOOM_SAMPLE = 1.171875f;
+
     
-    CGSize IPHONE6 = CGSizeMake(375*scale, 667*scale);
-    const CGFloat IPHONE6_SAMPLE = 1.0f;
-    
+
     NSString *machine = @(systemInfo.machine);
     UIScreen *s = [UIScreen mainScreen];    
     UIScreenMode *sm = [s currentMode];
@@ -59,13 +70,14 @@
     _sample = 1.0f;
     if ([@"iPhone7,1" isEqualToString:machine]) {
       //iPhone6+ http://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions
-      if (CGSizeEqualToSize(size, IPHONE6PLUS_DISPLAY_ZOOM)) {
-        _sample = IPHONE6PLUS_DISPLAY_ZOOM_SAMPLE;
-        
+      if (size.width < IPHONE6PLUS.width && size.height < IPHONE6PLUS.height) {
+        _sample = (IPHONE6PLUS.width / size.width);
+        _sample = (IPHONE6PLUS.height / size.height);
       }
       else {
         _sample = IPHONE6PLUS_SAMPLE;
       }
+
     } else if ([@"iPhone7,2" isEqualToString:machine]) {
       //iPhone6
       if (CGSizeEqualToSize(size, IPHONE6)) {
