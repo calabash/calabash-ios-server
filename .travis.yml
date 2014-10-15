@@ -12,9 +12,6 @@ script:
   # code-signing which is not easy to set up on Travis CI.
   #- make dylibs
   #- make all
-  # The CoreSimulator environment on Travis CI is not ready
-  # for calabash testing.  The 'chou' tests are cucumber
-  # tests. These tests will fail until travis stabilizes.
   - scripts/ci/travis/run-chou-tests.rb
 
 # There are some problems with Xcode 6 + rvm on Travis CI.
