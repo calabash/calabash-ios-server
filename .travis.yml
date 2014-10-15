@@ -14,12 +14,6 @@ script:
   #- make all
   - scripts/ci/travis/run-chou-tests.rb
 
-# There are some problems with Xcode 6 + rvm on Travis CI.
-# In particular 2.1.1 does not work.
-# Use the default ruby (2.0.0) until the rvm env stabilizes.
-#rvm:
-#  - 2.0.0
-
 notifications:
   email:
     recipients:
