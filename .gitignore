@@ -15,3 +15,5 @@ calabash-dylibs
 # CI pulls down these two repos from github
 animated-happiness
 calabash-ios
+
+.ruby-version

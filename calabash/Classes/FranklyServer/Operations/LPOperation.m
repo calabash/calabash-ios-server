@@ -66,8 +66,6 @@
   }
   [parser parse];
 
-  NSMutableArray *views = [NSMutableArray arrayWithCapacity:32];
-
   NSArray *allWindows = [LPTouchUtils applicationWindows];
   
   NSArray *result = [parser evalWith:allWindows];

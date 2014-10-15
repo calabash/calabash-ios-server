@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
-require File.expand_path(File.join(File.dirname(__FILE__), 'ci-helpers'))
+require File.expand_path(File.join(File.dirname(__FILE__), '..', 'test-helpers'))
 
-working_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', '..'))
+working_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
 
 Dir.chdir working_dir do
   uninstall_gem('xcpretty')
