@@ -1,8 +1,8 @@
 language: objective-c
 
 before_script:
-  - gem install xcpretty
-  - gem install run_loop
+  - gem install xcpretty --no-document
+  - gem install run_loop --no-document
 
 script:
   - make clean
