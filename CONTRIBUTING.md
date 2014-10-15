@@ -52,22 +52,22 @@ $ scripts/ci/travis/local-run-as-travis.rb
 ```
 $ git co develop
 $ git pull
-$ git checkout -b release-<next number> develop
+$ git checkout -b release/< next version>
 ```
 
 No more features can be added.  All in-progress features and un-merged pull-requests must wait for the next release.
 
-You can, and should, make changes to the documentation.  You can bump the gem version.
+You can, and should, make changes to the documentation.  You can bump the server version.
 
 ### Create a pull request for the release branch
 
 Do this very soon after you make the release branch to notify the team that you are planning a release.
 
 ```
-$ git push -u origin release-<next number>
+$ git push -u origin release/< next version >
 ```
 
-Again, no more features can be added to this pull request.  Only changes to documentation are allowed.  You can bump the gem version.    
+Again, no more features can be added to this pull request.  Only changes to documentation are allowed.  You can bump the server version.
 
 ### Cut a new release
 
@@ -93,26 +93,25 @@ $ git pull origin master
 # Get the latest release.
 
 $ git fetch
-$ git co -t origin/release-<next number>
+$ git co -t origin/release/< next version >
 
 # Merge release into master, run the tests and push.
 $ git co master
-$ git merge release-<next number>
-$ be rake rspec
+$ git merge release/< next version >
+$ script/test/run
 $ git push
 
 # Merge release into develop, run the tests and push.
 $ git co develop
-$ git merge release-<next number>
-$ be rake rspec
+$ git merge release/< next version >
+$ script/text/run
 $ git push
 
 
 # Delete the release branch
-$ git push origin :release-<next number>
-$ git br -d release-<next number>
+$ git push origin :release/< next version >
+$ git br -d release/< next version >
 
 # All is well!
 You are done!
-
 ```
