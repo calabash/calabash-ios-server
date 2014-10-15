@@ -263,11 +263,12 @@
 + (CGPoint) centerOfView:(UIView *) view shouldTranslate:(BOOL) shouldTranslate {
   UIWindow *window = [self windowForView:view];
   CGRect rect = [window convertRect:view.bounds fromView:view];
-  CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
-  
+
   UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
-  
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
   if ([frontWindow respondsToSelector:@selector(convertPoint:toCoordinateSpace:)]) {
+    CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
     rect = [frontWindow convertRect:rect toCoordinateSpace:frontWindow];
     CGFloat x = (rect.origin.x + 0.5 * rect.size.width) * sampleFactor;
     CGFloat y = (rect.origin.y + 0.5 * rect.size.height) * sampleFactor;
@@ -282,13 +283,14 @@
       }
     }
     return CGPointMake(x,y);
-  }
-  else {
+  } else {
     rect = [frontWindow convertRect:rect fromWindow:window];
     return [self centerOfFrame:rect shouldTranslate:shouldTranslate];
   }
-  
-
+#else
+  rect = [frontWindow convertRect:rect fromWindow:window];
+  return [self centerOfFrame:rect shouldTranslate:shouldTranslate];
+#endif
 }
 
 

@@ -7,6 +7,10 @@ http://calaba.sh
 
 The companion of the calabash-ios gem:  https://github.com/calabash/calabash-ios
 
+### Failing Travis CI builds
+
+Travis updated to Xcode 6 and since then our CI has been failing because the instruments process is popping a Finder dialog requesting permission to 'analyze other processes'.  We are working with the Travis team to resolve this issue.
+
 ### Building the Framework
 
 ```
