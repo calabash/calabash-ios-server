@@ -12,7 +12,7 @@ script:
   # code-signing which is not easy to set up on Travis CI.
   #- make dylibs
   #- make all
-  - scripts/ci/travis/run-chou-tests.rb
+  - scripts/test/run-chou-tests.rb
 
 notifications:
   email:
