@@ -1,6 +1,7 @@
 language: objective-c
 
 before_script:
+  - scripts/ci/travis/instruments-auth.sh
   - gem install xcpretty --no-document
   - gem install run_loop --no-document
 
