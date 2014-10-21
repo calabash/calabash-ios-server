@@ -213,8 +213,8 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
 // It is not clear whether or not the fact that file does not exist until
 // the app tries to store something will influence UIA interactions.
 // // Xcode 6.1
-// ~/Library/Developer/CoreSimulator/Devices/[UDID]/data/Library/Preferences/[bundle ID].plist
-// see http://stackoverflow.com/questions/4977673/reading-preferences-set-by-uiautomations-uiaapplication-setpreferencesvaluefork
+// ~/Library/Developer/CoreSimulator/Devices/[Sim UDID]/data/Containers/Data/Application/[App UDID]/Library/Preferences/[bundle id].plist
+
 
 
 - (NSString *)simulatorPreferencesPath {
