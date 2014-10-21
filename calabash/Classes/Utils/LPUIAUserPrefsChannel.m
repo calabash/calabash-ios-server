@@ -214,51 +214,52 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
 // the app tries to store something will influence UIA interactions.
 // // Xcode 6.1
 // ~/Library/Developer/CoreSimulator/Devices/[Sim UDID]/data/Containers/Data/Application/[App UDID]/Library/Preferences/[bundle id].plist
-
-
-
 - (NSString *)simulatorPreferencesPath {
   static NSString *path = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-    NSString *plistRootPath = nil, *relativePlistPath = nil;
+
+    // 1. Add a token to NSUserDefaults
+    // Xcode 6.0 and Xcode 6.1 have different locations for the preferences
+    // plist.  It is impossible to know at runtime which to use a priori, so
+    // we set a token using NSUserDefaults and look for the plist that contains
+    // the token.
+    static NSString *const tokenKey = @"sh.calabash.preferences-token";
+    CFUUIDRef udid = CFUUIDCreate(NULL);
+    NSString *tokenValue = (NSString *) CFUUIDCreateString(NULL, udid);
+    [[NSUserDefaults standardUserDefaults] setObject:tokenValue forKey:tokenKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
     NSString *plistName = [NSString stringWithFormat:@"%@.plist", [[NSBundle mainBundle] bundleIdentifier]];
 
-    // 1. get into the simulator's app support directory by fetching the sandboxed Library's path
-
+    // 2. Find the app's Library directory so we can deduce the plist path.
     NSArray *userLibDirURLs = [[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask];
+    NSURL *userLibraryURL = [userLibDirURLs lastObject];
+    NSString *userLibraryPath = [userLibraryURL path];
 
-    NSURL *userDirURL = [userLibDirURLs lastObject];
-    NSString *userDirectoryPath = [userDirURL path];
-
-    // 2. get out of our application directory, back to the root support directory for this system version
-    if ([userDirectoryPath rangeOfString:@"CoreSimulator"].location == NSNotFound) {
-      plistRootPath = [userDirectoryPath substringToIndex:([userDirectoryPath rangeOfString:@"Applications"].location)];
+    // 3. Use the the library path to deduce the simulator environment.
+    if ([userLibraryPath rangeOfString:@"CoreSimulator"].location == NSNotFound) {
+      NSString *sandboxPath = [userLibraryPath substringToIndex:([userLibraryPath rangeOfString:@"Applications"].location)];
+      NSString *relativePlistPath = [NSString stringWithFormat:@"Library/Preferences/%@", plistName];
+      NSString *unsanitizedPlistPath = [sandboxPath stringByAppendingPathComponent:relativePlistPath];
+      path = [[unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] copy];
     } else {
-      if ([self isXcode60StylePreferences]) {
-        NSRange range = [userDirectoryPath rangeOfString:@"data"];
-        plistRootPath = [userDirectoryPath substringToIndex:range.location + range.length];
-      }
-      else {
-        plistRootPath = [userDirectoryPath stringByDeletingLastPathComponent];
+      // First candidate.  Xcode >= 6.1 CoreSimulator enviroments; preferences
+      // plist is in the application sandbox.
+      path = [self stringForXcode61PreferencesPlistWithUserLibraryPath:userLibraryPath
+                                                             plistName:plistName
+                                                              tokenKey:tokenKey
+                                                            tokenValue:tokenValue];
+
+      // Second candidate.  Xcode < 6.1 CoreSimulator environments; preferences
+      // plist is in the Simulator Library/Preferences.
+      if (!path) {
+        path = [self stringForXcode60PreferencesPlistWithUserLibraryPath:userLibraryPath
+                                                               plistName:plistName];
       }
     }
-
-    // 3. locate, relative to here, /Library/Preferences/[bundle ID].plist
-    relativePlistPath = [NSString stringWithFormat:@"Library/Preferences/%@", plistName];
-
-    // 4. and unescape spaces, if necessary (i.e. in the simulator)
-    NSString *unsanitizedPlistPath = [plistRootPath stringByAppendingPathComponent:relativePlistPath];
-    path = [[unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] copy];
   });
   return path;
-}
-
--(BOOL)isXcode60StylePreferences {
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_8_1
-     return NO;
-#endif
-  return YES;
 }
 
 #endif // TARGET_IPHONE_SIMULATOR
