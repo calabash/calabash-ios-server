@@ -228,6 +228,10 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
     CFUUIDRef udid = CFUUIDCreate(NULL);
     NSString *tokenValue = (NSString *) CFUUIDCreateString(NULL, udid);
     [[NSUserDefaults standardUserDefaults] setObject:tokenValue forKey:tokenKey];
+
+    if (udid != NULL) { CFRelease(udid);  }
+    if (tokenValue) { [tokenValue release]; }
+
     [[NSUserDefaults standardUserDefaults] synchronize];
 
     NSString *plistName = [NSString stringWithFormat:@"%@.plist", [[NSBundle mainBundle] bundleIdentifier]];
@@ -246,19 +250,20 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
     } else {
       // First candidate.  Xcode >= 6.1 CoreSimulator enviroments; preferences
       // plist is in the application sandbox.
-      path = [self stringForXcode61PreferencesPlistWithUserLibraryPath:userLibraryPath
-                                                             plistName:plistName
-                                                              tokenKey:tokenKey
-                                                            tokenValue:tokenValue];
+      path = [[self stringForXcode61PreferencesPlistWithUserLibraryPath:userLibraryPath
+                                                              plistName:plistName
+                                                               tokenKey:tokenKey
+                                                             tokenValue:tokenValue] copy];
 
       // Second candidate.  Xcode < 6.1 CoreSimulator environments; preferences
       // plist is in the Simulator Library/Preferences.
       if (!path) {
-        path = [self stringForXcode60PreferencesPlistWithUserLibraryPath:userLibraryPath
-                                                               plistName:plistName];
+        path = [[self stringForXcode60PreferencesPlistWithUserLibraryPath:userLibraryPath
+                                                                plistName:plistName] copy];
       }
     }
   });
+  NSLog(@"NSUserDefaults path = %@", path);
   return path;
 }
 
@@ -268,7 +273,7 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
                                                         tokenValue:(NSString *) aTokenValue {
   NSString *relativePlistPath = [NSString stringWithFormat:@"Preferences/%@", aPlistName];
   NSString *unsanitizedPlistPath = [aUserLibraryPath stringByAppendingPathComponent:relativePlistPath];
-  NSString *path = [[unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] copy];
+  NSString *path = [unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
   if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
     return nil;
@@ -291,7 +296,7 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
   NSString *simulatorDataPath = [aUserLibraryPath substringToIndex:range.location + range.length];
   NSString *relativePlistPath = [NSString stringWithFormat:@"Library/Preferences/%@", aPlistName];
   NSString *unsanitizedPlistPath = [simulatorDataPath stringByAppendingPathComponent:relativePlistPath];
-  return [[unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] copy];
+  return [unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 #endif // TARGET_IPHONE_SIMULATOR
