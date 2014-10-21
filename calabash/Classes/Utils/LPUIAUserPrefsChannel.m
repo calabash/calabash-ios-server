@@ -212,6 +212,11 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
 //
 // It is not clear whether or not the fact that file does not exist until
 // the app tries to store something will influence UIA interactions.
+// // Xcode 6.1
+// ~/Library/Developer/CoreSimulator/Devices/[Sim UDID]/data/Containers/Data/Application/[App UDID]/Library/Preferences/[bundle id].plist
+
+
+
 - (NSString *)simulatorPreferencesPath {
   static NSString *path = nil;
   static dispatch_once_t onceToken;
@@ -230,8 +235,13 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
     if ([userDirectoryPath rangeOfString:@"CoreSimulator"].location == NSNotFound) {
       plistRootPath = [userDirectoryPath substringToIndex:([userDirectoryPath rangeOfString:@"Applications"].location)];
     } else {
-      NSRange range = [userDirectoryPath rangeOfString:@"data"];
-      plistRootPath = [userDirectoryPath substringToIndex:range.location + range.length];
+      if ([self isXcode60StylePreferences]) {
+        NSRange range = [userDirectoryPath rangeOfString:@"data"];
+        plistRootPath = [userDirectoryPath substringToIndex:range.location + range.length];
+      }
+      else {
+        plistRootPath = [userDirectoryPath stringByDeletingLastPathComponent];
+      }
     }
 
     // 3. locate, relative to here, /Library/Preferences/[bundle ID].plist
@@ -243,6 +253,14 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
   });
   return path;
 }
+
+-(BOOL)isXcode60StylePreferences {
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_8_1
+     return NO;
+#endif
+  return YES;
+}
+
 #endif // TARGET_IPHONE_SIMULATOR
 
 
