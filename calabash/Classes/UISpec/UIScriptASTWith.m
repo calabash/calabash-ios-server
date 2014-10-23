@@ -163,21 +163,57 @@
 
       if (self.selectorName) {
         if ([v respondsToSelector:_selector]) {
-          void *val = [v performSelector:_selector];
-          switch (self.valueType) {
-            case UIScriptLiteralTypeInteger:
-              if ((NSInteger) val == self.integerValue) {
-                [res addObject:v];
-              }
+          BOOL Bvalue;
+          NSMethodSignature *sig = [v methodSignatureForSelector:_selector];
+          NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sig];
+          const char *type = [[invocation methodSignature] methodReturnType];
+          NSString *returnType = [NSString stringWithFormat:@"%s", type];
+          const char *trimmedType = [[returnType substringToIndex:1]
+                                     cStringUsingEncoding:NSASCIIStringEncoding];
+          BOOL boolReturnType = ('B' == *trimmedType);
+          BOOL objectReturnType = ('*' == *trimmedType);
+
+          void *val = nil;
+          if (boolReturnType) {
+            [invocation setSelector:_selector];
+            [invocation setTarget:v];
+            @try {
+              [invocation invoke];
+            }
+            @catch (NSException *exception) {
+              NSLog(@"Perform %@ with target %@ caught %@: %@", _selectorName,v, [exception name], [exception reason]);
               break;
-            case UIScriptLiteralTypeString: {
-              if (val != nil && ([(NSString *) val isEqualToString:(NSString *) self.objectValue])) {
+            }
+            [invocation getReturnValue:(void **) &Bvalue];
+          }
+          else {
+            val = [v performSelector:_selector];
+          }
+          switch (self.valueType) {
+            case UIScriptLiteralTypeInteger: {
+              if (boolReturnType) {
+                if ((self.integerValue == 1 && Bvalue) || (self.integerValue == 0 && !Bvalue)) {
+                  [res addObject:v];
+                }
+              }
+              else if ((NSInteger) val == self.integerValue) {
                 [res addObject:v];
               }
               break;
             }
+            case UIScriptLiteralTypeString: {
+              if (objectReturnType) {
+                id valObj = (id) val;
+                if (valObj != nil
+                    && [valObj respondsToSelector:@selector(isEqualToString:)]
+                    && ([valObj isEqualToString:(NSString *) self.objectValue])) {
+                  [res addObject:v];
+                }
+              }
+              break;
+            }
             case UIScriptLiteralTypeBool:
-              if (self.boolValue == (BOOL) val) {
+              if (boolReturnType && self.boolValue == Bvalue) {
                 [res addObject:v];
               }
               break;

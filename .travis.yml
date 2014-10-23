@@ -1,8 +1,9 @@
 language: objective-c
 
 before_script:
-  - gem install xcpretty
-  - gem install run_loop
+  - scripts/ci/travis/instruments-auth.sh
+  - gem install xcpretty --no-document
+  - gem install run_loop --no-document
 
 script:
   - make clean
@@ -12,16 +13,7 @@ script:
   # code-signing which is not easy to set up on Travis CI.
   #- make dylibs
   #- make all
-  # The CoreSimulator environment on Travis CI is not ready
-  # for calabash testing.  The 'chou' tests are cucumber
-  # tests. These tests will fail until travis stabilizes.
-  - scripts/ci/travis/run-chou-tests.rb
-
-# There are some problems with Xcode 6 + rvm on Travis CI.
-# In particular 2.1.1 does not work.
-# Use the default ruby (2.0.0) until the rvm env stabilizes.
-#rvm:
-#  - 2.0.0
+  - scripts/test/run-chou-tests.rb
 
 notifications:
   email:
