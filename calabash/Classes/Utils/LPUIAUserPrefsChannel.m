@@ -261,38 +261,6 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
   return path;
 }
 
-- (NSString *) stringForXcode61PreferencesPlistWithUserLibraryPath:(NSString *) aUserLibraryPath
-                                                         plistName:(NSString *) aPlistName
-                                                          tokenKey:(NSString *) aTokenKey
-                                                        tokenValue:(NSString *) aTokenValue {
-  NSString *relativePlistPath = [NSString stringWithFormat:@"Preferences/%@", aPlistName];
-  NSString *unsanitizedPlistPath = [aUserLibraryPath stringByAppendingPathComponent:relativePlistPath];
-  NSString *path = [unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-
-  if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
-    return nil;
-  }
-
-  NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfFile:path];
-  if ([[dictionary objectForKey:aTokenKey] isEqualToString:aTokenValue]) {
-    return path;
-  } else {
-    return nil;
-  }
-}
-
-- (NSString *) stringForXcode60PreferencesPlistWithUserLibraryPath:(NSString *) aUserLibraryPath
-                                                         plistName:(NSString *) aPlistName {
-  // Xcode 6.0 and 6.0.1 have a buggy NSUserDefaults implementation.  Values
-  // may or may not be written when [NSUserDefaults synchronize] is called, so
-  // it is not worth checking for the key/token pair.
-  NSRange range = [aUserLibraryPath rangeOfString:@"data"];
-  NSString *simulatorDataPath = [aUserLibraryPath substringToIndex:range.location + range.length];
-  NSString *relativePlistPath = [NSString stringWithFormat:@"Library/Preferences/%@", aPlistName];
-  NSString *unsanitizedPlistPath = [simulatorDataPath stringByAppendingPathComponent:relativePlistPath];
-  return [unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-}
-
 #endif // TARGET_IPHONE_SIMULATOR
 
 @end
