@@ -53,10 +53,14 @@ $ rake build_server
 $ CALABASH_NO_DYLIBS=1 rake build_server
 ```
 
-### testing
+### Testing
 
 * https://travis-ci.org/calabash/calabash-ios-server
 
 ```
-$ scripts/ci/travis/local-run-as-travis.rb
+# make rules
+$ scripts/test/test-make-rules.rb
+
+# cucumber tests + make rules
+$ scripts/test/run
 ```
