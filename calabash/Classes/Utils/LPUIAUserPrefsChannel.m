@@ -225,18 +225,17 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
       NSString *unsanitizedPlistPath = [sandboxPath stringByAppendingPathComponent:relativePlistPath];
       path = [[unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] copy];
     } else {
-      // First candidate.  Xcode >= 6.1 CoreSimulator enviroments; preferences
-      // plist is in the application sandbox.
-      path = [[self stringForXcode61PreferencesPlistWithUserLibraryPath:userLibraryPath
-                                                              plistName:plistName
-                                                               tokenKey:tokenKey
-                                                             tokenValue:tokenValue] copy];
-
-      // Second candidate.  Xcode < 6.1 CoreSimulator environments; preferences
-      // plist is in the Simulator Library/Preferences.
-      if (!path) {
-        path = [[self stringForXcode60PreferencesPlistWithUserLibraryPath:userLibraryPath
-                                                                plistName:plistName] copy];
+      NSString *systemVersion = [[UIDevice currentDevice] systemVersion];
+      if ([systemVersion compare:@"8.1" options:NSNumericSearch] != NSOrderedAscending) {
+        NSString *relativePlistPath = [NSString stringWithFormat:@"Preferences/%@", plistName];
+        NSString *unsanitizedPlistPath = [userLibraryPath stringByAppendingPathComponent:relativePlistPath];
+        path = [[unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] copy];
+      } else {
+        NSRange range = [userLibraryPath rangeOfString:@"data"];
+        NSString *simulatorDataPath = [userLibraryPath substringToIndex:range.location + range.length];
+        NSString *relativePlistPath = [NSString stringWithFormat:@"Library/Preferences/%@", plistName];
+        NSString *unsanitizedPlistPath = [simulatorDataPath stringByAppendingPathComponent:relativePlistPath];
+        path = [[unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] copy];
       }
     }
   });
