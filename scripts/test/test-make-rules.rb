@@ -24,7 +24,7 @@ Dir.chdir working_dir do
   env_vars = {}
   test_make_rules(env_vars, xcode_details[:version])
 
-  alt_xcodes_gte_xc511.each do |details|
+  alt_xcode_details_hash.each do |details|
     log_info "Regression: testing make rules #{details[:path]}"
     # noinspection RubyStringKeysInHashInspection
     env_vars =
