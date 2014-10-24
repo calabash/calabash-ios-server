@@ -230,7 +230,6 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
     [[NSUserDefaults standardUserDefaults] setObject:tokenValue forKey:tokenKey];
 
     if (udid != NULL) { CFRelease(udid);  }
-    if (tokenValue) { [tokenValue release]; }
 
     [[NSUserDefaults standardUserDefaults] synchronize];
 
@@ -262,6 +261,8 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
                                                                 plistName:plistName] copy];
       }
     }
+
+    if (tokenValue) { [tokenValue release]; }
   });
   NSLog(@"NSUserDefaults path = %@", path);
   return path;
