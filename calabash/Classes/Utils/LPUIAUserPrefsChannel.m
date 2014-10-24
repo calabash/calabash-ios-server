@@ -200,19 +200,11 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
 // Xcode 5
 // ~/Library/Application Support/iPhone Simulator/[system version]/Library/Preferences/[bundle ID].plist
 //
-// Xcode 6
+// Xcode 6.0*
 // ~/Library/Developer/CoreSimulator/Devices/[UDID]/data/Library/Preferences/[bundle ID].plist
 // see http://stackoverflow.com/questions/4977673/reading-preferences-set-by-uiautomations-uiaapplication-setpreferencesvaluefork
 //
-// Also on Xcode 6 - When the app is first installed and launched, this plist
-// file _does not exist_.  However, if you ask the NSUserDefaults for its
-// contents you will get back a non-empty string.  It looks like NSUserDefaults
-// is a concatenation of system level preferences (language, locale, newstand,
-// etc.) and the application's own preferences.
-//
-// It is not clear whether or not the fact that file does not exist until
-// the app tries to store something will influence UIA interactions.
-// // Xcode 6.1
+// Xcode 6.1 + iOS 8.1 - all other simulator SDKs use Xcode 6.0* rules.
 // ~/Library/Developer/CoreSimulator/Devices/[Sim UDID]/data/Containers/Data/Application/[App UDID]/Library/Preferences/[bundle id].plist
 - (NSString *)simulatorPreferencesPath {
   static NSString *path = nil;
