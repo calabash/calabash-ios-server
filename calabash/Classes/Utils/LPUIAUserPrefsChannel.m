@@ -211,21 +211,6 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
 
-    // 1. Add a token to NSUserDefaults
-    // Xcode 6.0 and Xcode 6.1 have different locations for the preferences
-    // plist.  It is impossible to know at runtime which to use a priori, so
-    // we set a token using NSUserDefaults and look for the plist that contains
-    // the token.
-    static NSString *const tokenKey = @"sh.calabash.preferences-token";
-    CFUUIDRef udid = CFUUIDCreate(NULL);
-    NSString *tokenValue = (NSString *) CFUUIDCreateString(NULL, udid);
-    [[NSUserDefaults standardUserDefaults] setObject:tokenValue forKey:tokenKey];
-
-    if (udid != NULL) { CFRelease(udid);  }
-    if (tokenValue) { [tokenValue release]; }
-
-    [[NSUserDefaults standardUserDefaults] synchronize];
-
     NSString *plistName = [NSString stringWithFormat:@"%@.plist", [[NSBundle mainBundle] bundleIdentifier]];
 
     // 2. Find the app's Library directory so we can deduce the plist path.
