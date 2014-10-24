@@ -171,7 +171,7 @@
           const char *trimmedType = [[returnType substringToIndex:1]
                                      cStringUsingEncoding:NSASCIIStringEncoding];
           BOOL boolReturnType = ('B' == *trimmedType);
-          BOOL objectReturnType = ('*' == *trimmedType);
+          BOOL objectReturnType = ('@' == *trimmedType);
 
           void *val = nil;
           if (boolReturnType) {

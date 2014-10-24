@@ -9,7 +9,11 @@ The companion of the calabash-ios gem:  https://github.com/calabash/calabash-ios
 
 ### Failing Travis CI builds
 
-Travis updated to Xcode 6 and since then our CI has been failing because the instruments process is popping a Finder dialog requesting permission to 'analyze other processes'.  We are working with the Travis team to resolve this issue.
+**RESOLVED** ~~Travis updated to Xcode 6 and since then our CI has been failing because the instruments process is popping a Finder dialog requesting permission to 'analyze other processes'.  We are working with the Travis team to resolve this issue.~~
+
+Jobs on Travis are flickering because the test apps are crashing on iOS 7.1 Simulators.  We have not been able to reproduce the behavior on Jenkins or locally.
+
+The build queues for Travis are incredibly long:  6 - 8 hours at times.  This is too long for us to wait for feedback on changes.
 
 ### Building the Framework
 
@@ -49,10 +53,14 @@ $ rake build_server
 $ CALABASH_NO_DYLIBS=1 rake build_server
 ```
 
-### testing
+### Testing
 
 * https://travis-ci.org/calabash/calabash-ios-server
 
 ```
-$ scripts/ci/travis/local-run-as-travis.rb
+# make rules
+$ scripts/test/test-make-rules.rb
+
+# cucumber tests + make rules
+$ scripts/test/run
 ```
