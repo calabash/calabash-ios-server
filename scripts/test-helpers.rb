@@ -155,7 +155,7 @@ def xcode_select_xcode_hash
   }.call
 end
 
-def alt_xcodes_gte_xc511
+def alt_xcode_details_hash(skip_versions = [RunLoop::Version.new('6.0')])
   @alt_xcodes_gte_xc511_hash ||= lambda {
     ENV.delete('DEVELOPER_DIR')
     xcode_select_path = RunLoop::XCTools.new.xcode_developer_dir
