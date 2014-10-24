@@ -213,18 +213,36 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
 
     NSString *plistName = [NSString stringWithFormat:@"%@.plist", [[NSBundle mainBundle] bundleIdentifier]];
 
-    // 2. Find the app's Library directory so we can deduce the plist path.
+    // 1. Find the app's Library directory so we can deduce the plist path.
     NSArray *userLibDirURLs = [[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask];
     NSURL *userLibraryURL = [userLibDirURLs lastObject];
     NSString *userLibraryPath = [userLibraryURL path];
 
-    // 3. Use the the library path to deduce the simulator environment.
+    // 2. Use the the library path to deduce the simulator environment.
+
     if ([userLibraryPath rangeOfString:@"CoreSimulator"].location == NSNotFound) {
+      // 3. Xcode < 6 environment.
       NSString *sandboxPath = [userLibraryPath substringToIndex:([userLibraryPath rangeOfString:@"Applications"].location)];
       NSString *relativePlistPath = [NSString stringWithFormat:@"Library/Preferences/%@", plistName];
       NSString *unsanitizedPlistPath = [sandboxPath stringByAppendingPathComponent:relativePlistPath];
       path = [[unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] copy];
     } else {
+
+      /*
+       3. CoreSimulator environments
+
+       * In Xcode 6.1 + iOS >= 8.1, UIAutomation and NSUserDefaults do IO on
+         the same plist in the app's sandbox.
+       * In Xcode 6.1 and iOS < 8.1, UIAutomation does IO on the a file in
+         < SIM DIRECTORY >/data/Library/Preferences/ and NSUserDefaults does
+         IO on a plist in the app's sandbox.
+       * In Xcode 6.0*, NSUserDefaults and UIAutomation do IO on the same plist
+         in < SIM DIRECTORY >/data/Library/Preferences.
+
+       Since iOS 8.1 only ships with Xcode 6.1, we can check the system version
+       at runtime and choose the correct plist.
+      */
+
       NSString *systemVersion = [[UIDevice currentDevice] systemVersion];
       if ([systemVersion compare:@"8.1" options:NSNumericSearch] != NSOrderedAscending) {
         NSString *relativePlistPath = [NSString stringWithFormat:@"Preferences/%@", plistName];
