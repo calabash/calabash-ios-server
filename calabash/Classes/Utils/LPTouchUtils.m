@@ -44,17 +44,19 @@
 }
 
 + (BOOL) isLetterBox {
-  
-  if ([self is4InchDevice] && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    if ([UIScreen mainScreen].scale == 2.0f) {
-      CGSize result = [[UIScreen mainScreen] bounds].size;
-      CGFloat scale = [UIScreen mainScreen].scale;
-      result = CGSizeMake(result.width * scale, result.height * scale);
-      
-      return (result.height == 960 && [LPTouchUtils is4InchDevice]);
-    }
+  if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPhone) {
+    return NO;
   }
-  return NO;
+
+  CGFloat scale = [UIScreen mainScreen].scale;
+  if (scale != 2.0f) {
+    return NO;
+  }
+
+  CGSize screenBounds = [[UIScreen mainScreen] bounds].size;
+  CGFloat height = screenBounds.height * scale;
+
+  return (height == 960 && [LPTouchUtils is4InchDevice]);
 }
 
 + (CGPoint) translateToScreenCoords:(CGPoint) point sampleFactor:(CGFloat)sampleFactor{
