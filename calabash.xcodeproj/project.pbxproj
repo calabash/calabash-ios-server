@@ -3011,7 +3011,7 @@
 					"$(PROJECT_DIR)/calabash-ios-server-tests/OCMock",
 				);
 				INFOPLIST_FILE = "calabash-ios-server-tests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3055,7 +3055,7 @@
 					"$(PROJECT_DIR)/calabash-ios-server-tests/OCMock",
 				);
 				INFOPLIST_FILE = "calabash-ios-server-tests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
