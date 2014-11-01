@@ -13,7 +13,7 @@
 
 @implementation LPTouchUtils
 
-+ (BOOL) is4InchDevice {
++ (BOOL) isThreeAndAHalfInchDevice {
   UIDevice *device = [UIDevice currentDevice];
   struct utsname systemInfo;
   uname(&systemInfo);
@@ -39,12 +39,15 @@
   } else if ([[device model] hasPrefix:@"iPod"]) {
     iphone5Like = [system hasPrefix:@"iPod5"];
   }
-
-  return iphone5Like;
+  return !iphone5Like;
 }
 
 + (BOOL) isLetterBox {
   if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPhone) {
+    return NO;
+  }
+
+  if ([LPTouchUtils isThreeAndAHalfInchDevice]) {
     return NO;
   }
 
@@ -54,9 +57,7 @@
   }
 
   CGSize screenBounds = [[UIScreen mainScreen] bounds].size;
-  CGFloat height = screenBounds.height * scale;
-
-  return (height == 960 && [LPTouchUtils is4InchDevice]);
+  return screenBounds.height * scale == 960;
 }
 
 + (CGPoint) translateToScreenCoords:(CGPoint) point sampleFactor:(CGFloat)sampleFactor{

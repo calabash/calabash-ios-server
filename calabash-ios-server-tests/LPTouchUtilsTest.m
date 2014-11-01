@@ -45,9 +45,9 @@
   return mainScreenMock;
 }
 
-- (id)mock4inDevice:(BOOL)aValue {
+- (id)mockThreeAndAHalfInchDevice:(BOOL)aValue {
   id touchUtilsMock = [OCMockObject mockForClass:[LPTouchUtils class]];
-  [[[touchUtilsMock stub] andReturnValue:@(aValue)] is4InchDevice];
+  [[[touchUtilsMock stub] andReturnValue:@(aValue)] isThreeAndAHalfInchDevice];
   return touchUtilsMock;
 }
 
@@ -57,7 +57,7 @@
 
   [self mockCurrentDeviceWithIdiom:UIUserInterfaceIdiomPhone];
   [self mockMainScreenWithScale:2.0 height:480];
-  [self mock4inDevice:YES];
+  [self mockThreeAndAHalfInchDevice:NO];
 
   XCTAssert([LPTouchUtils isLetterBox]);
 }
@@ -66,7 +66,7 @@
 
   [self mockCurrentDeviceWithIdiom:UIUserInterfaceIdiomPad];
   [self mockMainScreenWithScale:2.0 height:480];
-  [self mock4inDevice:YES];
+  [self mockThreeAndAHalfInchDevice:NO];
 
   XCTAssertFalse([LPTouchUtils isLetterBox]);
 }
@@ -74,7 +74,7 @@
 - (void) testIsLetterBoxWhenNotRetina {
   [self mockCurrentDeviceWithIdiom:UIUserInterfaceIdiomPhone];
   [self mockMainScreenWithScale:1.0 height:480];
-  [self mock4inDevice:YES];
+  [self mockThreeAndAHalfInchDevice:NO];
 
   XCTAssertFalse([LPTouchUtils isLetterBox]);
 }
@@ -82,7 +82,7 @@
 - (void) testIsLetterBoxWhenNotCropped {
   [self mockCurrentDeviceWithIdiom:UIUserInterfaceIdiomPhone];
   [self mockMainScreenWithScale:2.0 height:568];
-  [self mock4inDevice:YES];
+  [self mockThreeAndAHalfInchDevice:NO];
 
   XCTAssertFalse([LPTouchUtils isLetterBox]);
 }
@@ -90,7 +90,7 @@
 - (void) testIsLetterBoxWhenNot4inchDevice {
   [self mockCurrentDeviceWithIdiom:UIUserInterfaceIdiomPhone];
   [self mockMainScreenWithScale:2.0 height:480];
-  [self mock4inDevice:NO];
+  [self mockThreeAndAHalfInchDevice:YES];
 
   XCTAssertFalse([LPTouchUtils isLetterBox]);
 }
