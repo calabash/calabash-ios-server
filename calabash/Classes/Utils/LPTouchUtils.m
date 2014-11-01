@@ -13,13 +13,16 @@
 
 @implementation LPTouchUtils
 
-+ (BOOL) isThreeAndAHalfInchDevice {
-  UIDevice *device = [UIDevice currentDevice];
++ (NSString *) stringForSystemName {
   struct utsname systemInfo;
   uname(&systemInfo);
+  return [NSString stringWithCString:systemInfo.machine
+                            encoding:NSUTF8StringEncoding];
+}
 
-  NSString *system = [NSString stringWithCString:systemInfo.machine
-                                        encoding:NSUTF8StringEncoding];
++ (BOOL) isThreeAndAHalfInchDevice {
+  UIDevice *device = [UIDevice currentDevice];
+  NSString *system = [LPTouchUtils stringForSystemName];
   NSDictionary *env = [[NSProcessInfo processInfo] environment];
 
   BOOL iphone5Like = NO;
