@@ -103,7 +103,7 @@
 // iPhone 4*      | iPhone4*     | 3.5
 // iPhone 5       | iPhone5*     | 4
 // iPhone 5c      | iPhone5*     | 4
-// iPhone 5c      | iPhone6*     | 4
+// iPhone 5s      | iPhone6*     | 4
 // iPod   5       | iPod5*       | 4
 
 - (void) testIsThreeAndAHalfInchDeviceWhenIsThreeAndAHalfInchSimulator {
@@ -166,6 +166,80 @@
   [[[touchUtilsMock stub] andReturn:@"iPod5"] stringForSystemName];
 
   XCTAssertFalse([LPTouchUtils isThreeAndAHalfInchDevice]);
+}
+
+#pragma mark - is4inDevice
+
+- (void) testIs4InchDeviceWhenIsIphone5Simulator {
+  id currentDeviceMock = [OCMockObject partialMockForObject:[UIDevice currentDevice]];
+  [[[currentDeviceMock stub] andReturnValue:OCMOCK_VALUE(@"iPhone Simulator")] model];
+
+  NSDictionary *fakeEnvironment =
+  @{
+    @"SIMULATOR_VERSION_INFO":
+      @"CoreSimulator 110.4 - Device: iPhone 5 - Runtime: iOS 8.1 (12B411) - DeviceType: iPhone 5"
+    };
+
+  id processInfoStub = [OCMockObject partialMockForObject:[NSProcessInfo processInfo]];
+  [[[processInfoStub stub] andReturn:fakeEnvironment] environment];
+
+  XCTAssert([LPTouchUtils is4InchDevice]);
+}
+
+- (void) testIs4InchDeviceWhenIsIphone5sSimulator {
+  id currentDeviceMock = [OCMockObject partialMockForObject:[UIDevice currentDevice]];
+  [[[currentDeviceMock stub] andReturnValue:OCMOCK_VALUE(@"iPhone Simulator")] model];
+
+  NSDictionary *fakeEnvironment =
+  @{
+    @"SIMULATOR_VERSION_INFO":
+      @"CoreSimulator 110.4 - Device: iPhone 5s - Runtime: iOS 8.1 (12B411) - DeviceType: iPhone 5s"
+    };
+
+  id processInfoStub = [OCMockObject partialMockForObject:[NSProcessInfo processInfo]];
+  [[[processInfoStub stub] andReturn:fakeEnvironment] environment];
+
+  XCTAssert([LPTouchUtils is4InchDevice]);
+}
+
+- (void) testIs4InchDeviceWhenIphone5Device {
+  id currentDeviceMock = [OCMockObject partialMockForObject:[UIDevice currentDevice]];
+  [[[currentDeviceMock stub] andReturnValue:OCMOCK_VALUE(@"iPhone")] model];
+
+  id touchUtilsMock = [OCMockObject mockForClass:[LPTouchUtils class]];
+  [[[touchUtilsMock stub] andReturn:@"iPhone5,2"] stringForSystemName];
+
+  XCTAssert([LPTouchUtils is4InchDevice]);
+}
+
+- (void) testIs4InchDeviceWhenIphone5sDevice {
+  id currentDeviceMock = [OCMockObject partialMockForObject:[UIDevice currentDevice]];
+  [[[currentDeviceMock stub] andReturnValue:OCMOCK_VALUE(@"iPhone")] model];
+
+  id touchUtilsMock = [OCMockObject mockForClass:[LPTouchUtils class]];
+  [[[touchUtilsMock stub] andReturn:@"iPhone6,2"] stringForSystemName];
+
+  XCTAssert([LPTouchUtils is4InchDevice]);
+}
+
+- (void) testIs4InchDeviceWhenIpod5Device {
+  id currentDeviceMock = [OCMockObject partialMockForObject:[UIDevice currentDevice]];
+  [[[currentDeviceMock stub] andReturnValue:OCMOCK_VALUE(@"iPhone")] model];
+
+  id touchUtilsMock = [OCMockObject mockForClass:[LPTouchUtils class]];
+  [[[touchUtilsMock stub] andReturn:@"iPod5,2"] stringForSystemName];
+
+  XCTAssert([LPTouchUtils is4InchDevice]);
+}
+
+- (void) testIs4InchDeviceWhenIsThreeAndAHalfInchDevice {
+  id currentDeviceMock = [OCMockObject partialMockForObject:[UIDevice currentDevice]];
+  [[[currentDeviceMock stub] andReturnValue:OCMOCK_VALUE(@"iPhone")] model];
+
+  id touchUtilsMock = [OCMockObject mockForClass:[LPTouchUtils class]];
+  [[[touchUtilsMock stub] andReturn:@"iPhone4"] stringForSystemName];
+
+  XCTAssertFalse([LPTouchUtils is4InchDevice]);
 }
 
 @end

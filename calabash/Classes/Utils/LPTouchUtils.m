@@ -45,6 +45,28 @@
   return !iphone5Like;
 }
 
++ (BOOL) is4InchDevice {
+
+  if ([@"iPhone Simulator" isEqualToString:[[UIDevice currentDevice] model]]) {
+    NSDictionary *env = [[NSProcessInfo processInfo] environment];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone 5*'"];
+    return [predicate evaluateWithObject:env];
+  } else { // Device, not simulator
+    NSString *systemName = [LPTouchUtils stringForSystemName];
+    __block BOOL is4Inch = NO;
+
+    [@[@"iPhone5", @"iPhone6", @"iPod5"] enumerateObjectsUsingBlock:^(NSString *prefix,
+                                                                      NSUInteger idx,
+                                                                      BOOL *stop) {
+      if ([systemName hasPrefix:prefix]) {
+        is4Inch = YES;
+        *stop = YES;
+      }
+    }];
+    return is4Inch;
+  }
+}
+
 + (BOOL) isLetterBox {
   if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPhone) {
     return NO;
