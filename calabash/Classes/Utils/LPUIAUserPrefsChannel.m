@@ -59,11 +59,9 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
   return self;
 }
 
-
-// todo LPUIAChannel.m [super dealloc] should be called _last_
 - (void) dealloc {
-  [super dealloc];
   dispatch_release(_uiaQueue);
+  [super dealloc];
 }
 
 
@@ -78,15 +76,23 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
 
   dispatch_async(_uiaQueue, ^{
     [self requestExecutionOf:command];
+    NSLog(@"requested execution of command: %@", command);
 
     NSDictionary *result = nil;
     NSUInteger loopCount = 0;
     while (1) {//Loop waiting for response
+      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+      [defaults synchronize];
       NSDictionary *resultPrefs = [self userPreferences];
       NSDictionary *currentResponse = [resultPrefs objectForKey:LPUIAChannelUIAPrefsResponseKey];
 
+      NSLog(@"Current request: %@", [resultPrefs objectForKey:LPUIAChannelUIAPrefsRequestKey]);
+
       if (currentResponse) {
         NSUInteger responseIndex = [(NSNumber *) [currentResponse objectForKey:LPUIAChannelUIAPrefsIndexKey] unsignedIntegerValue];
+        NSLog(@"Current response: %@", currentResponse);
+        NSLog(@"Server current index: %lu",(unsigned long) _scriptIndex);
+        NSLog(@"response current index: %lu",(unsigned long) responseIndex);
         if (responseIndex == _scriptIndex) {
           result = currentResponse;
           break;
@@ -112,7 +118,6 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
   });
 }
 
-
 - (void) requestExecutionOf:(NSString *) command {
 #if TARGET_IPHONE_SIMULATOR
   [self simulatorRequestExecutionOf:command];
@@ -120,7 +125,6 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
   [self deviceRequestExecutionOf:command];
 #endif
 }
-
 
 - (NSDictionary *) userPreferences {
   NSDictionary *prefs = nil;
@@ -137,14 +141,35 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
 
 #if TARGET_IPHONE_SIMULATOR
 -(void)simulatorRequestExecutionOf:(NSString *)command {
-  NSMutableDictionary *prefs = [NSMutableDictionary dictionaryWithContentsOfFile:[self simulatorPreferencesPath]];
-  if (!prefs) {
-    prefs = [NSMutableDictionary dictionary];
-  }
-  NSDictionary *uiaRequest   = [self requestForCommand:command];
+  NSInteger i=0;
+  while (i<MAX_LOOP_COUNT) {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults synchronize];
 
-  [prefs setObject:uiaRequest forKey:LPUIAChannelUIAPrefsRequestKey];
-  [prefs writeToFile:[self simulatorPreferencesPath] atomically:YES];
+    NSMutableDictionary *prefs = [NSMutableDictionary dictionaryWithContentsOfFile:[self simulatorPreferencesPath]];
+    if (!prefs) {
+      prefs = [NSMutableDictionary dictionary];
+      NSLog(@"Empty preferences... resetting");
+    }
+    NSDictionary *uiaRequest   = [self requestForCommand:command];
+
+    [prefs setObject:uiaRequest forKey:LPUIAChannelUIAPrefsRequestKey];
+    BOOL writeSuccess = [prefs writeToFile:[self simulatorPreferencesPath] atomically:YES];
+
+    if (!writeSuccess) {
+      NSLog(@"Preparing for retry of simulatorRequestExecutionOf");
+    }
+
+    if ([self validateRequestWritten: uiaRequest]) {
+      return;
+    }
+    else {
+      NSLog(@"Validation of request failed... Retrying.");
+      [NSThread sleepForTimeInterval:LPUIAChannelUIADelay];
+      i++;
+    }
+    
+  }
 }
 #endif // TARGET_IPHONE_SIMULATOR
 
@@ -171,7 +196,8 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
 }
 
 -(BOOL)validateRequestWritten:(NSDictionary*)uiaRequest {
-  NSDictionary *defaults = [self userPreferences];
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  [defaults synchronize];
   NSDictionary *written = [defaults objectForKey:(NSString*)LPUIAChannelUIAPrefsRequestKey];
   if (!written) {
     return NO;
