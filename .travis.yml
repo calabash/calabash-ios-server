@@ -14,6 +14,7 @@ script:
   #- make dylibs
   #- make all
   - scripts/test/run-chou-tests.rb
+  - scripts/test/xctest.rb
 
 notifications:
   email:
