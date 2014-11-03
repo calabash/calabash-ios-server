@@ -13,6 +13,7 @@ script:
   # code-signing which is not easy to set up on Travis CI.
   #- make dylibs
   #- make all
+  - scripts/test/xctest.rb
   - scripts/test/run-chou-tests.rb
 
 notifications:
@@ -20,5 +21,6 @@ notifications:
     recipients:
       - joshuajmoody@gmail.com
       - karl.krukow@xamarin.com
+      - michael.john.kirk@gmail.com
     on_success: change
     on_failure: always
