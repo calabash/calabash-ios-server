@@ -202,6 +202,70 @@
   XCTAssert([LPTouchUtils is4InchDevice]);
 }
 
+- (void) testIs4InchDeviceWhenIsIphone4sSimulator {
+  id currentDeviceMock = [OCMockObject partialMockForObject:[UIDevice currentDevice]];
+  [[[currentDeviceMock stub] andReturnValue:OCMOCK_VALUE(@"iPhone Simulator")] model];
+
+  NSDictionary *fakeEnvironment =
+  @{
+    @"SIMULATOR_VERSION_INFO":
+      @"CoreSimulator 110.4 - Device: iPhone 4s - Runtime: iOS 8.1 (12B411) - DeviceType: iPhone 4s"
+    };
+
+  id processInfoStub = [OCMockObject partialMockForObject:[NSProcessInfo processInfo]];
+  [[[processInfoStub stub] andReturn:fakeEnvironment] environment];
+
+  XCTAssertFalse([LPTouchUtils is4InchDevice]);
+}
+
+- (void) testIs4InchDeviceWhenIsIphone6Simulator {
+  id currentDeviceMock = [OCMockObject partialMockForObject:[UIDevice currentDevice]];
+  [[[currentDeviceMock stub] andReturnValue:OCMOCK_VALUE(@"iPhone Simulator")] model];
+
+  NSDictionary *fakeEnvironment =
+  @{
+    @"SIMULATOR_VERSION_INFO":
+      @"CoreSimulator 110.4 - Device: iPhone 6 - Runtime: iOS 8.1 (12B411) - DeviceType: iPhone 6"
+    };
+
+  id processInfoStub = [OCMockObject partialMockForObject:[NSProcessInfo processInfo]];
+  [[[processInfoStub stub] andReturn:fakeEnvironment] environment];
+
+  XCTAssertFalse([LPTouchUtils is4InchDevice]);
+}
+
+- (void) testIs4InchDeviceWhenIsIphone5SimulatorXcode5 {
+  id currentDeviceMock = [OCMockObject partialMockForObject:[UIDevice currentDevice]];
+  [[[currentDeviceMock stub] andReturnValue:OCMOCK_VALUE(@"iPhone Simulator")] model];
+
+  NSDictionary *fakeEnvironment =
+  @{
+    @"IPHONE_SIMULATOR_VERSIONS":
+      @"iPhone Simulator 463.9.41, iPhone OS 7.1 (iPhone Retina (4-inch)/11D167)"
+    };
+
+  id processInfoStub = [OCMockObject partialMockForObject:[NSProcessInfo processInfo]];
+  [[[processInfoStub stub] andReturn:fakeEnvironment] environment];
+
+  XCTAssert([LPTouchUtils is4InchDevice]);
+}
+
+- (void) testIs4InchDeviceWhenIsIphone4SimulatorXcode5 {
+  id currentDeviceMock = [OCMockObject partialMockForObject:[UIDevice currentDevice]];
+  [[[currentDeviceMock stub] andReturnValue:OCMOCK_VALUE(@"iPhone Simulator")] model];
+
+  NSDictionary *fakeEnvironment =
+  @{
+    @"IPHONE_SIMULATOR_VERSIONS":
+      @"iPhone Simulator 463.9.41, iPhone OS 7.1 (iPhone Retina (3.5-inch)/11D167)"
+    };
+
+  id processInfoStub = [OCMockObject partialMockForObject:[NSProcessInfo processInfo]];
+  [[[processInfoStub stub] andReturn:fakeEnvironment] environment];
+
+  XCTAssertFalse([LPTouchUtils is4InchDevice]);
+}
+
 - (void) testIs4InchDeviceWhenIphone5Device {
   id currentDeviceMock = [OCMockObject partialMockForObject:[UIDevice currentDevice]];
   [[[currentDeviceMock stub] andReturnValue:OCMOCK_VALUE(@"iPhone")] model];

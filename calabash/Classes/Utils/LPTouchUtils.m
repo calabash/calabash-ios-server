@@ -49,7 +49,11 @@
 
   if ([@"iPhone Simulator" isEqualToString:[[UIDevice currentDevice] model]]) {
     NSDictionary *env = [[NSProcessInfo processInfo] environment];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone 5*'"];
+
+    NSPredicate *xCode6Predicate, *xCode5Predicate, *predicate;
+    xCode6Predicate = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone 5*'"];
+    xCode5Predicate = [NSPredicate predicateWithFormat:@"IPHONE_SIMULATOR_VERSIONS LIKE '*iPhone*Retina*4-inch*'"];
+    predicate = [NSCompoundPredicate orPredicateWithSubpredicates:@[xCode5Predicate, xCode6Predicate]];
     return [predicate evaluateWithObject:env];
   } else { // Device, not simulator
     NSString *systemName = [LPTouchUtils stringForSystemName];
