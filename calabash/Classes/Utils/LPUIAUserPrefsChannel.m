@@ -81,8 +81,7 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
     NSDictionary *result = nil;
     NSUInteger loopCount = 0;
     while (1) {//Loop waiting for response
-      NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-      [defaults synchronize];
+      [[NSUserDefaults standardUserDefaults] synchronize];
       NSDictionary *resultPrefs = [self userPreferences];
       NSDictionary *currentResponse = [resultPrefs objectForKey:LPUIAChannelUIAPrefsResponseKey];
 
