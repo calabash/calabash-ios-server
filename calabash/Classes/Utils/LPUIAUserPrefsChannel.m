@@ -141,34 +141,57 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
 
 #if TARGET_IPHONE_SIMULATOR
 -(void)simulatorRequestExecutionOf:(NSString *)command {
-  NSInteger i=0;
-  while (i<MAX_LOOP_COUNT) {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults synchronize];
+  // In Xcode 6.1 and iOS 8.1, there is synchronization problem between IO
+  // performed by NSUserDefaults and the UIAutomation preferences API.  The
+  // if condition detects iOS 8.1 which is a proxy for Xcode 6.1 detection.
+  // When Xcode 6.1 and iOS 8.1; compensate for the synchronization problem.
+  // Earlier iOS versions in Xcode 6.1 do not suffer from the sync problem
+  // because NSUserDefaults and UIAutomation preferences API do IO on different
+  // files. (>_>)
+  NSString *preferencesPlist = [self simulatorPreferencesPath];
+  NSMutableDictionary *preferences;
+  NSString *systemVersion = [[UIDevice currentDevice] systemVersion];
+  if ([systemVersion compare:@"8.1" options:NSNumericSearch] != NSOrderedAscending) {
+    NSLog(@"iOS >= 8.1 detected; assuming Xcode >= 6.1");
+    NSInteger i = 0;
+    while (i < MAX_LOOP_COUNT) {
+      [[NSUserDefaults standardUserDefaults] synchronize];
+      preferences  = [NSMutableDictionary dictionaryWithContentsOfFile:preferencesPlist];
+      if (!preferences) {
+        preferences = [NSMutableDictionary dictionary];
+        NSLog(@"Empty preferences... resetting");
+      }
 
-    NSMutableDictionary *prefs = [NSMutableDictionary dictionaryWithContentsOfFile:[self simulatorPreferencesPath]];
-    if (!prefs) {
-      prefs = [NSMutableDictionary dictionary];
+      NSDictionary *uiaRequest   = [self requestForCommand:command];
+      [preferences setObject:uiaRequest forKey:LPUIAChannelUIAPrefsRequestKey];
+      BOOL writeSuccess = [preferences writeToFile:preferencesPlist
+                                        atomically:YES];
+
+      if (!writeSuccess) {
+        NSLog(@"Preparing for retry of simulatorRequestExecutionOf:");
+      }
+
+      if ([self validateRequestWritten:uiaRequest]) {
+        return;
+      } else {
+        i++;
+        NSLog(@"Validation of request failed... Retrying - %@ of %@",
+              @(i), @(MAX_LOOP_COUNT));
+        [NSThread sleepForTimeInterval:LPUIAChannelUIADelay];
+      }
+    }
+  } else {
+    NSLog(@"iOS < 8.1 detected; assuming Xcode < 6.1");
+    preferences = [NSMutableDictionary dictionaryWithContentsOfFile:preferencesPlist];
+
+    if (!preferences) {
+      preferences = [NSMutableDictionary dictionary];
       NSLog(@"Empty preferences... resetting");
     }
     NSDictionary *uiaRequest   = [self requestForCommand:command];
 
-    [prefs setObject:uiaRequest forKey:LPUIAChannelUIAPrefsRequestKey];
-    BOOL writeSuccess = [prefs writeToFile:[self simulatorPreferencesPath] atomically:YES];
-
-    if (!writeSuccess) {
-      NSLog(@"Preparing for retry of simulatorRequestExecutionOf");
-    }
-
-    if ([self validateRequestWritten: uiaRequest]) {
-      return;
-    }
-    else {
-      NSLog(@"Validation of request failed... Retrying.");
-      [NSThread sleepForTimeInterval:LPUIAChannelUIADelay];
-      i++;
-    }
-    
+    [preferences setObject:uiaRequest forKey:LPUIAChannelUIAPrefsRequestKey];
+    [preferences writeToFile:preferencesPlist atomically:YES];
   }
 }
 #endif // TARGET_IPHONE_SIMULATOR
