@@ -137,7 +137,6 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
   return prefs;
 }
 
-
 #if TARGET_IPHONE_SIMULATOR
 -(void)simulatorRequestExecutionOf:(NSString *)command {
   // In Xcode 6.1 and iOS 8.1, there is synchronization problem between IO
@@ -194,7 +193,6 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
   }
 }
 #endif // TARGET_IPHONE_SIMULATOR
-
 
 - (void) deviceRequestExecutionOf:(NSString *) command {
   NSInteger i=0;
