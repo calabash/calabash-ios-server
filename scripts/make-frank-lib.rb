@@ -11,7 +11,7 @@ end
 xcpretty_available = `gem list xcpretty -i`.chomp == 'true'
 
 if target == 'sim'
-  target_arg = 'frank-calabash'
+  target_arg = 'frank-calabash-simulator'
   sdk = 'iphonesimulator'
 else
   target_arg = 'frank-calabash-device'
