@@ -27,13 +27,12 @@
 
 #import "LPUIAUserPrefsChannel.h"
 
-#define MAX_LOOP_COUNT 1200
-
 const static NSString *LPUIAChannelUIAPrefsRequestKey = @"__calabashRequest";
 const static NSString *LPUIAChannelUIAPrefsResponseKey = @"__calabashResponse";
 const static NSString *LPUIAChannelUIAPrefsIndexKey = @"index";
 const static NSString *LPUIAChannelUIAPrefsCommandKey = @"command";
 const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
+const static NSInteger LPUIAChannelMaximumLoopCount = 1200;
 
 @implementation LPUIAUserPrefsChannel {
   dispatch_queue_t _uiaQueue;
@@ -99,7 +98,7 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
       }
       [NSThread sleepForTimeInterval:LPUIAChannelUIADelay];
       loopCount++;
-      if (loopCount >= MAX_LOOP_COUNT) {
+      if (loopCount >= LPUIAChannelMaximumLoopCount) {
         NSLog(@"Timed out running command %@", command);
         NSLog(@"Server current index: %lu",(unsigned long) _scriptIndex);
         NSDictionary *prefs = [self userPreferences];
@@ -152,7 +151,7 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
   if ([systemVersion compare:@"8.1" options:NSNumericSearch] != NSOrderedAscending) {
     NSLog(@"iOS >= 8.1 detected; assuming Xcode >= 6.1");
     NSInteger i = 0;
-    while (i < MAX_LOOP_COUNT) {
+    while (i < LPUIAChannelMaximumLoopCount) {
       [[NSUserDefaults standardUserDefaults] synchronize];
       preferences  = [NSMutableDictionary dictionaryWithContentsOfFile:preferencesPlist];
       if (!preferences) {
@@ -174,7 +173,7 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
       } else {
         i++;
         NSLog(@"Validation of request failed... Retrying - %@ of %@",
-              @(i), @(MAX_LOOP_COUNT));
+              @(i), @(LPUIAChannelMaximumLoopCount));
         [NSThread sleepForTimeInterval:LPUIAChannelUIADelay];
       }
     }
@@ -196,7 +195,7 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
 
 - (void) deviceRequestExecutionOf:(NSString *) command {
   NSInteger i=0;
-  while (i<MAX_LOOP_COUNT) {
+  while (i<LPUIAChannelMaximumLoopCount) {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *uiaRequest = [self requestForCommand:command];
 
