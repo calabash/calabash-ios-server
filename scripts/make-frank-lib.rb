@@ -20,10 +20,12 @@ end
 
 args =
       [
-            "-target \"#{target_arg}\"",
+            '-project calabash.xcodeproj',
+            "-scheme \"#{target_arg}\"",
             '-configuration Debug',
             'SYMROOT=build',
-            "SDKROOT=#{sdk}",
+            '-derivedDataPath build',
+            "-sdk #{sdk}",
             'IPHONEOS_DEPLOYMENT_TARGET=5.1.1',
             xcpretty_available ? '| xcpretty -c' : ''
       ].join(' ')

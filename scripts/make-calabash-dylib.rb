@@ -24,10 +24,12 @@ FileUtils.mkdir_p "./build/Debug-#{sdk}"
 
 args =
       [
-            "-target \"#{target_arg}\"",
+            '-project calabash.xcodeproj',
+            "-scheme \"#{target_arg}\"",
             '-configuration Debug',
+            '-derivedDataPath build',
             'SYMROOT=build',
-            "SDKROOT=#{sdk}",
+            "-sdk #{sdk}",
             'IPHONEOS_DEPLOYMENT_TARGET=5.1.1',
             xcpretty_available ? '| xcpretty -c' : ''
       ].join(' ')
