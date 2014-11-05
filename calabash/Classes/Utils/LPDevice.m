@@ -36,24 +36,17 @@
     CGFloat scale = [UIScreen mainScreen].scale;
 
     const CGSize IPHONE6_TARGET_SPACE = CGSizeMake(375.0f, 667.0f);
-    const CGSize IPHONE6_DISPLAY_ZOOM_TARGET_SPACE = CGSizeMake(320.0f, 568.0f);
 
     const CGSize IPHONE6PLUS_TARGET_SPACE = CGSizeMake(414.0f, 736.0f);
-    const CGSize IPHONE6PLUS_DISPLAY_ZOOM_TARGET_SPACE = IPHONE6_TARGET_SPACE;
 
     const CGSize IPHONE6PLUS = CGSizeMake(IPHONE6PLUS_TARGET_SPACE.width*scale, IPHONE6PLUS_TARGET_SPACE.height*scale);
-    const CGSize IPHONE6PLUS_DISPLAY_ZOOM = CGSizeMake(IPHONE6PLUS_DISPLAY_ZOOM_TARGET_SPACE.width*scale,
-                                                       IPHONE6PLUS_DISPLAY_ZOOM_TARGET_SPACE.height*scale);
 
 
     CGSize IPHONE6 = CGSizeMake(IPHONE6_TARGET_SPACE.width*scale,
                                 IPHONE6_TARGET_SPACE.height*scale);
-    CGSize __unused IPHONE6_DISPLAY_ZOOM = CGSizeMake(IPHONE6_DISPLAY_ZOOM_TARGET_SPACE.width*scale,
-                                                      IPHONE6_DISPLAY_ZOOM_TARGET_SPACE.height*scale);
 
 
     const CGFloat IPHONE6_SAMPLE = 1.0f;
-    const CGFloat IPHONE6PLUS_DISPLAY_ZOOM_SAMPLE = 0.96f;
     const CGFloat IPHONE6PLUS_SAMPLE = 1.0f;
     // Unused, but possibly useful.  The if condition (below) that assigns the
     // _sample might use this some day, so I am keeping it around as a

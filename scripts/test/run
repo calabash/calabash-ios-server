@@ -10,5 +10,6 @@ Dir.chdir working_dir do
 
   install_gem('xcpretty')
   do_system('scripts/test/test-make-rules.rb', {:env_vars => env_vars})
+  do_system('scripts/test/xctest.rb', {:env_vars => env_vars})
   do_system('scripts/test/run-chou-tests.rb', {:env_vars => env_vars})
 end

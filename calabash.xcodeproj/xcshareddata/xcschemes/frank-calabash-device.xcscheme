@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F5F53D6618C60FA900BD9731"
-               BuildableName = "use make to create the framework"
-               BlueprintName = "use make to create the framework"
+               BlueprintIdentifier = "B1D5BD7519A23BCE0070E8CE"
+               BuildableName = "libFrankCalabashDevice.a"
+               BlueprintName = "frank-calabash-device"
                ReferencedContainer = "container:calabash.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -42,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F5F53D6618C60FA900BD9731"
-            BuildableName = "use make to create the framework"
-            BlueprintName = "use make to create the framework"
+            BlueprintIdentifier = "B1D5BD7519A23BCE0070E8CE"
+            BuildableName = "libFrankCalabashDevice.a"
+            BlueprintName = "frank-calabash-device"
             ReferencedContainer = "container:calabash.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

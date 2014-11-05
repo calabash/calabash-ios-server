@@ -19,5 +19,6 @@ Dir.chdir working_dir do
   # copied directly into the target Xcode.app.
   do_system('make dylibs', {:env_vars => env_vars})
   do_system('make all', {:env_vars => env_vars})
+  do_system('scripts/test/xctest.rb', {:env_vars => env_vars})
   do_system('scripts/test/run-chou-tests.rb', {:env_vars => env_vars})
 end

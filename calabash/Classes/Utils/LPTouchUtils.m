@@ -13,13 +13,16 @@
 
 @implementation LPTouchUtils
 
-+ (BOOL) is4InchDevice {
-  UIDevice *device = [UIDevice currentDevice];
++ (NSString *) stringForSystemName {
   struct utsname systemInfo;
   uname(&systemInfo);
+  return [NSString stringWithCString:systemInfo.machine
+                            encoding:NSUTF8StringEncoding];
+}
 
-  NSString *system = [NSString stringWithCString:systemInfo.machine
-                                        encoding:NSUTF8StringEncoding];
++ (BOOL) isThreeAndAHalfInchDevice {
+  UIDevice *device = [UIDevice currentDevice];
+  NSString *system = [LPTouchUtils stringForSystemName];
   NSDictionary *env = [[NSProcessInfo processInfo] environment];
 
   BOOL iphone5Like = NO;
@@ -39,22 +42,51 @@
   } else if ([[device model] hasPrefix:@"iPod"]) {
     iphone5Like = [system hasPrefix:@"iPod5"];
   }
+  return !iphone5Like;
+}
 
-  return iphone5Like;
++ (BOOL) is4InchDevice {
+
+  if ([@"iPhone Simulator" isEqualToString:[[UIDevice currentDevice] model]]) {
+    NSDictionary *env = [[NSProcessInfo processInfo] environment];
+
+    NSPredicate *xCode6Predicate, *xCode5Predicate, *predicate;
+    xCode6Predicate = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone 5*'"];
+    xCode5Predicate = [NSPredicate predicateWithFormat:@"IPHONE_SIMULATOR_VERSIONS LIKE '*iPhone*Retina*4-inch*'"];
+    predicate = [NSCompoundPredicate orPredicateWithSubpredicates:@[xCode5Predicate, xCode6Predicate]];
+    return [predicate evaluateWithObject:env];
+  } else { // Device, not simulator
+    NSString *systemName = [LPTouchUtils stringForSystemName];
+    __block BOOL is4Inch = NO;
+
+    [@[@"iPhone5", @"iPhone6", @"iPod5"] enumerateObjectsUsingBlock:^(NSString *prefix,
+                                                                      NSUInteger idx,
+                                                                      BOOL *stop) {
+      if ([systemName hasPrefix:prefix]) {
+        is4Inch = YES;
+        *stop = YES;
+      }
+    }];
+    return is4Inch;
+  }
 }
 
 + (BOOL) isLetterBox {
-  
-  if ([self is4InchDevice] && UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    if ([UIScreen mainScreen].scale == 2.0f) {
-      CGSize result = [[UIScreen mainScreen] bounds].size;
-      CGFloat scale = [UIScreen mainScreen].scale;
-      result = CGSizeMake(result.width * scale, result.height * scale);
-      
-      return (result.height == 960 && [LPTouchUtils is4InchDevice]);
-    }
+  if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPhone) {
+    return NO;
   }
-  return NO;
+
+  if ([LPTouchUtils isThreeAndAHalfInchDevice]) {
+    return NO;
+  }
+
+  CGFloat scale = [UIScreen mainScreen].scale;
+  if (scale != 2.0f) {
+    return NO;
+  }
+
+  CGSize screenBounds = [[UIScreen mainScreen] bounds].size;
+  return screenBounds.height * scale == 960;
 }
 
 + (CGPoint) translateToScreenCoords:(CGPoint) point sampleFactor:(CGFloat)sampleFactor{
