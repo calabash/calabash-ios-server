@@ -22,6 +22,7 @@
 
 + (CGPoint) centerOfView:(id) view withSuperView:(UIView *) superView inWindow:(id) window;
 
++ (BOOL) isThreeAndAHalfInchDevice;
 + (BOOL) is4InchDevice;
 
 + (NSArray *) applicationWindows;

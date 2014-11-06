@@ -9,14 +9,14 @@
          <BuildActionEntry
             buildForTesting = "YES"
             buildForRunning = "YES"
-            buildForProfiling = "YES"
-            buildForArchiving = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F5F53D6618C60FA900BD9731"
-               BuildableName = "use make to create the framework"
-               BlueprintName = "use make to create the framework"
+               BlueprintIdentifier = "F50CBF5D1A03F222004AC9DA"
+               BuildableName = "calabash-ios-server-tests.xctest"
+               BlueprintName = "calabash-ios-server-tests"
                ReferencedContainer = "container:calabash.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,7 +28,26 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "F50CBF5D1A03F222004AC9DA"
+               BuildableName = "calabash-ios-server-tests.xctest"
+               BlueprintName = "calabash-ios-server-tests"
+               ReferencedContainer = "container:calabash.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "F50CBF5D1A03F222004AC9DA"
+            BuildableName = "calabash-ios-server-tests.xctest"
+            BlueprintName = "calabash-ios-server-tests"
+            ReferencedContainer = "container:calabash.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </TestAction>
    <LaunchAction
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
@@ -42,9 +61,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F5F53D6618C60FA900BD9731"
-            BuildableName = "use make to create the framework"
-            BlueprintName = "use make to create the framework"
+            BlueprintIdentifier = "F50CBF5D1A03F222004AC9DA"
+            BuildableName = "calabash-ios-server-tests.xctest"
+            BlueprintName = "calabash-ios-server-tests"
             ReferencedContainer = "container:calabash.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -57,6 +76,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "F50CBF5D1A03F222004AC9DA"
+            BuildableName = "calabash-ios-server-tests.xctest"
+            BlueprintName = "calabash-ios-server-tests"
+            ReferencedContainer = "container:calabash.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

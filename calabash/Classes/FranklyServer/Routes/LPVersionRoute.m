@@ -112,7 +112,7 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
 
   NSDictionary *env = [[NSProcessInfo processInfo] environment];
 
-  BOOL iphone5Like = [LPTouchUtils is4InchDevice];
+  BOOL is4inDevice = [LPTouchUtils is4InchDevice];
 
   NSString *dev = env[@"IPHONE_SIMULATOR_DEVICE"];
   if (!dev) {  dev = @"";  }
@@ -133,7 +133,7 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
                         @"app_name": nameString,
                         @"screen_dimensions": [[LPDevice sharedDevice] screenDimensions],
                         @"system": machine,
-                        @"4inch": @(iphone5Like),
+                        @"4inch": @(is4inDevice),
                         @"simulator_device": dev,
                         @"simulator": sim,
                         @"app_version": versionString,
