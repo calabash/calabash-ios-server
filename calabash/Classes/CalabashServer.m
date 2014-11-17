@@ -161,9 +161,16 @@
                                          [info objectForKey:@"CFBundleIdentifier"], @"app_id",
                                          [info objectForKey:@"CFBundleVersion"], @"app_version",
                                          nil];
+    
+    int portNum = [[info objectForKey:@"CalabashPort"] intValue];
+    if(portNum){
+        [_httpServer setPort:portNum];
+    } else {
+        [_httpServer setPort:37265];
+    }
+    
     [_httpServer setTXTRecordDictionary:capabilities];
     [_httpServer setConnectionClass:[LPRouter class]];
-    [_httpServer setPort:37265];
     [capabilities release];
     // Serve files from our embedded Web folder
     //        NSString *webPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Web"];
