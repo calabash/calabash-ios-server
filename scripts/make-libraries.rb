@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'fileutils'
+require 'open3'
 
 # to be run after +make+
 # 1. combines the Debug-iphoneos and Debug-iphonesimulator libs into a FAT lib
@@ -149,22 +150,17 @@ def lipo_verify_arches(lib, arches=['i386', 'x86_64', 'armv7', 'armv7s', 'arm64'
     sdk = /i386|x86_64/.match(arch) ? 'iphonesimulator' : 'iphoneos'
 
     cmd = lipo_verify(lib, arch, sdk)
-    lipo_verify = `#{cmd}`
-    result = $?
-    if result.success?
-      puts "INFO: #{lib} contains arch '#{arch}'"
-    else
-      if lipo_verify != nil and lipo_verify != ''
-        puts "FAIL: could not verify lib contains arch '#{arch}'"
-        puts "FAIL: '#{lipo_verify}'"
-        exit result.to_i
+    Open3.popen3(cmd) do |_, _, _, wait_thr|
+      exit_status = wait_thr.value
+      if exit_status.success?
+        puts "INFO: #{lib} contains arch '#{arch}'"
       else
-        puts "FAIL: lib '#{lib}' does not contain arch '#{arch}'"
-        exit result.to_i
+        puts "FAIL: could not verify lib contains arch '#{arch}'"
+        puts "FAIL: '#{cmd}'"
+        exit 1
       end
     end
   end
-
 end
 
 def lipo_combine_libs
