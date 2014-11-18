@@ -1,4 +1,5 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
+
 require 'fileutils'
 
 # to be run after +make+
