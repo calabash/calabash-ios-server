@@ -21,7 +21,9 @@
 #import "LPVersionRoute.h"
 #import "LPConditionRoute.h"
 #import "LPUIARouteOverUserPrefs.h"
+#import "LPUIARouteOverSharedElement.h"
 #import "LPUIATapRoute.h"
+#import "LPUIATapRouteOverSharedElement.h"
 #import "LPKeyboardRoute.h"
 #import "LPLocationRoute.h"
 #import "LPDebugRoute.h"
@@ -109,9 +111,17 @@
     [LPRouter addRoute:uiaUsingUserPrefs forPath:@"uia"];
     [uiaUsingUserPrefs release];
 
+    LPUIARouteOverSharedElement *uiaUsingSharedEl = [LPUIARouteOverSharedElement new];
+    [LPRouter addRoute:uiaUsingSharedEl forPath:@"uia-shared"];
+    [uiaUsingSharedEl release];
+
     LPUIATapRoute *uiaTap = [LPUIATapRoute new];
     [LPRouter addRoute:uiaTap forPath:@"uia-tap"];
     [uiaTap release];
+
+    LPUIATapOverSharedElementRoute *uiaTapShared = [LPUIATapOverSharedElementRoute new];
+    [LPRouter addRoute:uiaTapShared forPath:@"uia-tap-shared"];
+    [uiaTapShared release];
 
     LPLocationRoute *location = [LPLocationRoute new];
     [LPRouter addRoute:location forPath:@"location"];

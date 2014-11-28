@@ -336,6 +336,54 @@
 		B1D5BDD319A23BCE0070E8CE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E757A15D434D00066550B /* CFNetwork.framework */; };
 		B1D5BDD419A23BCE0070E8CE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		B1D5BDDA19A23BE00070E8CE /* LPCalabashFrankRegistrar.m in Sources */ = {isa = PBXBuildFile; fileRef = B1058E79197F043100B4A57B /* LPCalabashFrankRegistrar.m */; };
+		B1F772001A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F771FC1A22A35A009A2336 /* LPUIARouteOverSharedElement.h */; };
+		B1F772011A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F771FC1A22A35A009A2336 /* LPUIARouteOverSharedElement.h */; };
+		B1F772021A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F771FC1A22A35A009A2336 /* LPUIARouteOverSharedElement.h */; };
+		B1F772031A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F771FC1A22A35A009A2336 /* LPUIARouteOverSharedElement.h */; };
+		B1F772041A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F771FC1A22A35A009A2336 /* LPUIARouteOverSharedElement.h */; };
+		B1F772051A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F771FC1A22A35A009A2336 /* LPUIARouteOverSharedElement.h */; };
+		B1F772061A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FD1A22A35A009A2336 /* LPUIARouteOverSharedElement.m */; };
+		B1F772071A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FD1A22A35A009A2336 /* LPUIARouteOverSharedElement.m */; };
+		B1F772081A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FD1A22A35A009A2336 /* LPUIARouteOverSharedElement.m */; };
+		B1F772091A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FD1A22A35A009A2336 /* LPUIARouteOverSharedElement.m */; };
+		B1F7720A1A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FD1A22A35A009A2336 /* LPUIARouteOverSharedElement.m */; };
+		B1F7720B1A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FD1A22A35A009A2336 /* LPUIARouteOverSharedElement.m */; };
+		B1F7720C1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F771FE1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h */; };
+		B1F7720D1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F771FE1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h */; };
+		B1F7720E1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F771FE1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h */; };
+		B1F7720F1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F771FE1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h */; };
+		B1F772101A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F771FE1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h */; };
+		B1F772111A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F771FE1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h */; };
+		B1F772121A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FF1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m */; };
+		B1F772131A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FF1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m */; };
+		B1F772141A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FF1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m */; };
+		B1F772151A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FF1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m */; };
+		B1F772161A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FF1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m */; };
+		B1F772171A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FF1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m */; };
+		B1F7721C1A22A398009A2336 /* LPSharedUIATextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F772181A22A398009A2336 /* LPSharedUIATextField.h */; };
+		B1F7721D1A22A398009A2336 /* LPSharedUIATextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F772181A22A398009A2336 /* LPSharedUIATextField.h */; };
+		B1F7721E1A22A398009A2336 /* LPSharedUIATextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F772181A22A398009A2336 /* LPSharedUIATextField.h */; };
+		B1F7721F1A22A398009A2336 /* LPSharedUIATextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F772181A22A398009A2336 /* LPSharedUIATextField.h */; };
+		B1F772201A22A398009A2336 /* LPSharedUIATextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F772181A22A398009A2336 /* LPSharedUIATextField.h */; };
+		B1F772211A22A398009A2336 /* LPSharedUIATextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F772181A22A398009A2336 /* LPSharedUIATextField.h */; };
+		B1F772221A22A398009A2336 /* LPSharedUIATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F772191A22A398009A2336 /* LPSharedUIATextField.m */; };
+		B1F772231A22A398009A2336 /* LPSharedUIATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F772191A22A398009A2336 /* LPSharedUIATextField.m */; };
+		B1F772241A22A398009A2336 /* LPSharedUIATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F772191A22A398009A2336 /* LPSharedUIATextField.m */; };
+		B1F772251A22A398009A2336 /* LPSharedUIATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F772191A22A398009A2336 /* LPSharedUIATextField.m */; };
+		B1F772261A22A398009A2336 /* LPSharedUIATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F772191A22A398009A2336 /* LPSharedUIATextField.m */; };
+		B1F772271A22A398009A2336 /* LPSharedUIATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F772191A22A398009A2336 /* LPSharedUIATextField.m */; };
+		B1F772281A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F7721A1A22A398009A2336 /* LPUIASharedElementChannel.h */; };
+		B1F772291A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F7721A1A22A398009A2336 /* LPUIASharedElementChannel.h */; };
+		B1F7722A1A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F7721A1A22A398009A2336 /* LPUIASharedElementChannel.h */; };
+		B1F7722B1A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F7721A1A22A398009A2336 /* LPUIASharedElementChannel.h */; };
+		B1F7722C1A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F7721A1A22A398009A2336 /* LPUIASharedElementChannel.h */; };
+		B1F7722D1A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F7721A1A22A398009A2336 /* LPUIASharedElementChannel.h */; };
+		B1F7722E1A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F7721B1A22A398009A2336 /* LPUIASharedElementChannel.m */; };
+		B1F7722F1A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F7721B1A22A398009A2336 /* LPUIASharedElementChannel.m */; };
+		B1F772301A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F7721B1A22A398009A2336 /* LPUIASharedElementChannel.m */; };
+		B1F772311A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F7721B1A22A398009A2336 /* LPUIASharedElementChannel.m */; };
+		B1F772321A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F7721B1A22A398009A2336 /* LPUIASharedElementChannel.m */; };
+		B1F772331A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F7721B1A22A398009A2336 /* LPUIASharedElementChannel.m */; };
 		B1FBBC5B19D0070000EE03CE /* LPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FBBC5919D0070000EE03CE /* LPDevice.m */; };
 		B1FBBC5C19D0070000EE03CE /* LPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FBBC5919D0070000EE03CE /* LPDevice.m */; };
 		B1FBBC5D19D0070000EE03CE /* LPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FBBC5919D0070000EE03CE /* LPDevice.m */; };
@@ -823,6 +871,14 @@
 		B1EBF08716EE63A000AE4D40 /* LPQueryLogRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPQueryLogRoute.m; sourceTree = "<group>"; };
 		B1F279AD183D5B3000A922BC /* LPUIAUserPrefsChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUIAUserPrefsChannel.h; sourceTree = "<group>"; };
 		B1F279AE183D5B3000A922BC /* LPUIAUserPrefsChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUIAUserPrefsChannel.m; sourceTree = "<group>"; };
+		B1F771FC1A22A35A009A2336 /* LPUIARouteOverSharedElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUIARouteOverSharedElement.h; sourceTree = "<group>"; };
+		B1F771FD1A22A35A009A2336 /* LPUIARouteOverSharedElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUIARouteOverSharedElement.m; sourceTree = "<group>"; };
+		B1F771FE1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUIATapRouteOverSharedElement.h; sourceTree = "<group>"; };
+		B1F771FF1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUIATapRouteOverSharedElement.m; sourceTree = "<group>"; };
+		B1F772181A22A398009A2336 /* LPSharedUIATextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPSharedUIATextField.h; sourceTree = "<group>"; };
+		B1F772191A22A398009A2336 /* LPSharedUIATextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSharedUIATextField.m; sourceTree = "<group>"; };
+		B1F7721A1A22A398009A2336 /* LPUIASharedElementChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUIASharedElementChannel.h; sourceTree = "<group>"; };
+		B1F7721B1A22A398009A2336 /* LPUIASharedElementChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUIASharedElementChannel.m; sourceTree = "<group>"; };
 		B1FBBC5919D0070000EE03CE /* LPDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDevice.m; sourceTree = "<group>"; };
 		B1FBBC5A19D0070000EE03CE /* LPDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDevice.h; sourceTree = "<group>"; };
 		B1FF22B215CF002500F3A17B /* MKMapView+Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+Test.h"; sourceTree = "<group>"; };
@@ -1197,6 +1253,10 @@
 		B184FDD014B6DB2B002A744C /* Routes */ = {
 			isa = PBXGroup;
 			children = (
+				B1F771FC1A22A35A009A2336 /* LPUIARouteOverSharedElement.h */,
+				B1F771FD1A22A35A009A2336 /* LPUIARouteOverSharedElement.m */,
+				B1F771FE1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h */,
+				B1F771FF1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m */,
 				B1DDE6C915C06CB500BBE2BE /* LPUIARouteOverUserPrefs.h */,
 				B1DDE6CA15C06CB500BBE2BE /* LPUIARouteOverUserPrefs.m */,
 				F55D412018C9130100813F78 /* LPKeychainRoute.h */,
@@ -1300,6 +1360,10 @@
 		B184FE0B14B6DB2B002A744C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B1F772181A22A398009A2336 /* LPSharedUIATextField.h */,
+				B1F772191A22A398009A2336 /* LPSharedUIATextField.m */,
+				B1F7721A1A22A398009A2336 /* LPUIASharedElementChannel.h */,
+				B1F7721B1A22A398009A2336 /* LPUIASharedElementChannel.m */,
 				B1FBBC5919D0070000EE03CE /* LPDevice.m */,
 				B1FBBC5A19D0070000EE03CE /* LPDevice.h */,
 				B1F279AD183D5B3000A922BC /* LPUIAUserPrefsChannel.h */,
@@ -1435,8 +1499,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1FBBC6319D0070000EE03CE /* LPDevice.h in Headers */,
+				B1F772021A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */,
+				B1F7721E1A22A398009A2336 /* LPSharedUIATextField.h in Headers */,
 				B1058E7A197F043100B4A57B /* LPCalabashFrankRegistrar.h in Headers */,
 				B113582C197F0C28004B16F4 /* LPTouchUtils.h in Headers */,
+				B1F7720E1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */,
+				B1F7722A1A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */,
 				B1058E40197F00C000B4A57B /* CalabashServer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1445,7 +1513,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1F772041A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */,
+				B1F772101A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */,
 				B1FBBC6519D0070000EE03CE /* LPDevice.h in Headers */,
+				B1F772201A22A398009A2336 /* LPSharedUIATextField.h in Headers */,
+				B1F7722C1A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1453,7 +1525,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1F772051A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */,
+				B1F772111A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */,
 				B1FBBC6619D0070000EE03CE /* LPDevice.h in Headers */,
+				B1F772211A22A398009A2336 /* LPSharedUIATextField.h in Headers */,
+				B1F7722D1A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1462,9 +1538,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1FBBC6419D0070000EE03CE /* LPDevice.h in Headers */,
+				B1F772031A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */,
 				B1D5BDC919A23BCE0070E8CE /* CalabashServer.h in Headers */,
 				B1D5BDCA19A23BCE0070E8CE /* LPRoute.h in Headers */,
+				B1F7722B1A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */,
+				B1F7720F1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */,
 				B1D5BDCB19A23BCE0070E8CE /* LPRouter.h in Headers */,
+				B1F7721F1A22A398009A2336 /* LPSharedUIATextField.h in Headers */,
 				B1D5BDCC19A23BCE0070E8CE /* LPHTTPResponse.h in Headers */,
 				B1D5BDCD19A23BCE0070E8CE /* LPHTTPAsyncFileResponse.h in Headers */,
 				B1D5BDCE19A23BCE0070E8CE /* LPHTTPDataResponse.h in Headers */,
@@ -1479,9 +1559,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1FBBC6119D0070000EE03CE /* LPDevice.h in Headers */,
+				B1F772001A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */,
 				F5091C2F18C4E1D700C85307 /* CalabashServer.h in Headers */,
 				F59C5CF818E0BB1A0087B51D /* LPRoute.h in Headers */,
+				B1F772281A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */,
+				B1F7720C1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */,
 				F59C5CF918E0BB290087B51D /* LPRouter.h in Headers */,
+				B1F7721C1A22A398009A2336 /* LPSharedUIATextField.h in Headers */,
 				F59C5CFA18E0BBAE0087B51D /* LPHTTPResponse.h in Headers */,
 				F59C5CFB18E0BBAE0087B51D /* LPHTTPAsyncFileResponse.h in Headers */,
 				F59C5CFC18E0BBAE0087B51D /* LPHTTPDataResponse.h in Headers */,
@@ -1496,9 +1580,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1FBBC6219D0070000EE03CE /* LPDevice.h in Headers */,
+				B1F772011A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */,
 				F5821A4D18C4E27400293508 /* CalabashServer.h in Headers */,
 				F59C5D0118E0C1D60087B51D /* LPRoute.h in Headers */,
+				B1F772291A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */,
+				B1F7720D1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */,
 				F59C5D0218E0C1D90087B51D /* LPRouter.h in Headers */,
+				B1F7721D1A22A398009A2336 /* LPSharedUIATextField.h in Headers */,
 				F59C5D0318E0C1DF0087B51D /* LPHTTPResponse.h in Headers */,
 				F59C5D0518E0C1EA0087B51D /* LPHTTPDataResponse.h in Headers */,
 				F59C5D0418E0C1E60087B51D /* LPHTTPAsyncFileResponse.h in Headers */,
@@ -1843,6 +1931,7 @@
 				B1058E08197F00C000B4A57B /* LPUIAUserPrefsChannel.m in Sources */,
 				B1058E1D197F00C000B4A57B /* UIScriptASTPredicate.m in Sources */,
 				B1135847197F1390004B16F4 /* GCDAsyncSocket.m in Sources */,
+				B1F772301A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */,
 				B1058E1E197F00C000B4A57B /* UIScriptAST.m in Sources */,
 				B113583E197F1351004B16F4 /* DDData.m in Sources */,
 				B1135843197F1351004B16F4 /* LPHTTPDynamicFileResponse.m in Sources */,
@@ -1852,6 +1941,7 @@
 				B1058E20197F00C000B4A57B /* UIScriptASTALL.m in Sources */,
 				B1058E21197F00C000B4A57B /* UIScriptASTClassName.m in Sources */,
 				B113585E1981B053004B16F4 /* LPOrientationOperation.m in Sources */,
+				B1F772241A22A398009A2336 /* LPSharedUIATextField.m in Sources */,
 				B1058E7B197F043100B4A57B /* LPCalabashFrankRegistrar.m in Sources */,
 				B11358621981B053004B16F4 /* LPQueryOperation.m in Sources */,
 				B1135846197F1351004B16F4 /* LPCORSResponse.m in Sources */,
@@ -1886,6 +1976,8 @@
 				B1058E35197F00C000B4A57B /* LPLog.m in Sources */,
 				B11358581981B053004B16F4 /* LPScrollToMarkOperation.m in Sources */,
 				B113585D1981B053004B16F4 /* LPDatePickerOperation.m in Sources */,
+				B1F772141A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */,
+				B1F772081A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */,
 				B1135832197F0C73004B16F4 /* LPCDataScanner.m in Sources */,
 				B11358491981AE00004B16F4 /* LPMapRoute.m in Sources */,
 				B113585A1981B053004B16F4 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
@@ -1908,6 +2000,7 @@
 				B15BF99C19ABB1DD00B38577 /* GCDAsyncSocket.m in Sources */,
 				B15BF99D19ABB1DD00B38577 /* LPHTTPAuthenticationRequest.m in Sources */,
 				B15BF99E19ABB1DD00B38577 /* LPHTTPConnection.m in Sources */,
+				B1F772321A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */,
 				B15BF99F19ABB1DD00B38577 /* LPHTTPMessage.m in Sources */,
 				B15BF9A019ABB1DD00B38577 /* LPHTTPServer.m in Sources */,
 				B15BF9A119ABB1DD00B38577 /* DDData.m in Sources */,
@@ -1933,7 +2026,9 @@
 				B15BF9B519ABB1DD00B38577 /* LPQueryOperation.m in Sources */,
 				B15BF9B619ABB1DD00B38577 /* LPScrollOperation.m in Sources */,
 				B15BF9B719ABB1DD00B38577 /* LPScrollToRowOperation.m in Sources */,
+				B1F772161A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */,
 				B15BF9B819ABB1DD00B38577 /* LPSetTextOperation.m in Sources */,
+				B1F7720A1A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */,
 				B15BF9B919ABB1DD00B38577 /* LPRecorder.m in Sources */,
 				B15BF9BA19ABB1DD00B38577 /* LPUIARouteOverUserPrefs.m in Sources */,
 				B15BF9BB19ABB1DD00B38577 /* LPKeychainRoute.m in Sources */,
@@ -1965,6 +2060,7 @@
 				B15BF9D519ABB1DE00B38577 /* UIScriptASTPredicate.m in Sources */,
 				B15BF9D619ABB1DE00B38577 /* UIScriptAST.m in Sources */,
 				B15BF9D719ABB1DE00B38577 /* UIScriptASTALL.m in Sources */,
+				B1F772261A22A398009A2336 /* LPSharedUIATextField.m in Sources */,
 				B15BF9D819ABB1DE00B38577 /* UIScriptASTClassName.m in Sources */,
 				B1FBBC5F19D0070000EE03CE /* LPDevice.m in Sources */,
 				B15BF9D919ABB1DE00B38577 /* UIScriptASTDirection.m in Sources */,
@@ -1995,6 +2091,7 @@
 				B15BF9EE19ABB2B100B38577 /* GCDAsyncSocket.m in Sources */,
 				B15BF9EF19ABB2B100B38577 /* LPHTTPAuthenticationRequest.m in Sources */,
 				B15BF9F019ABB2B100B38577 /* LPHTTPConnection.m in Sources */,
+				B1F772331A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */,
 				B15BF9F119ABB2B100B38577 /* LPHTTPMessage.m in Sources */,
 				B15BF9F219ABB2B100B38577 /* LPHTTPServer.m in Sources */,
 				B15BF9F319ABB2B100B38577 /* DDData.m in Sources */,
@@ -2020,7 +2117,9 @@
 				B15BFA0719ABB2B100B38577 /* LPQueryOperation.m in Sources */,
 				B15BFA0819ABB2B100B38577 /* LPScrollOperation.m in Sources */,
 				B15BFA0919ABB2B100B38577 /* LPScrollToRowOperation.m in Sources */,
+				B1F772171A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */,
 				B15BFA0A19ABB2B100B38577 /* LPSetTextOperation.m in Sources */,
+				B1F7720B1A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */,
 				B15BFA0B19ABB2B100B38577 /* LPRecorder.m in Sources */,
 				B15BFA0C19ABB2B100B38577 /* LPUIARouteOverUserPrefs.m in Sources */,
 				B15BFA0D19ABB2B100B38577 /* LPKeychainRoute.m in Sources */,
@@ -2052,6 +2151,7 @@
 				B15BFA2719ABB2B100B38577 /* UIScriptASTPredicate.m in Sources */,
 				B15BFA2819ABB2B100B38577 /* UIScriptAST.m in Sources */,
 				B15BFA2919ABB2B100B38577 /* UIScriptASTALL.m in Sources */,
+				B1F772271A22A398009A2336 /* LPSharedUIATextField.m in Sources */,
 				B15BFA2A19ABB2B100B38577 /* UIScriptASTClassName.m in Sources */,
 				B1FBBC6019D0070000EE03CE /* LPDevice.m in Sources */,
 				B15BFA2B19ABB2B100B38577 /* UIScriptASTDirection.m in Sources */,
@@ -2082,6 +2182,7 @@
 				B1D5BD7C19A23BCE0070E8CE /* LPHTTPMessage.m in Sources */,
 				B1D5BD7D19A23BCE0070E8CE /* LPHTTPServer.m in Sources */,
 				B1D5BD7E19A23BCE0070E8CE /* DDData.m in Sources */,
+				B1F772311A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */,
 				B1D5BD7F19A23BCE0070E8CE /* DDNumber.m in Sources */,
 				B1D5BD8019A23BCE0070E8CE /* DDRange.m in Sources */,
 				B1D5BD8119A23BCE0070E8CE /* LPHTTPAsyncFileResponse.m in Sources */,
@@ -2107,7 +2208,9 @@
 				B1D5BD9419A23BCE0070E8CE /* LPUIARouteOverUserPrefs.m in Sources */,
 				B1D5BD9519A23BCE0070E8CE /* LPUserPrefRoute.m in Sources */,
 				B1D5BD9619A23BCE0070E8CE /* LPKeyboardRoute.m in Sources */,
+				B1F772151A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */,
 				B1D5BD9719A23BCE0070E8CE /* LPGenericAsyncRoute.m in Sources */,
+				B1F772091A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */,
 				B1D5BD9819A23BCE0070E8CE /* LPConditionRoute.m in Sources */,
 				B1D5BD9919A23BCE0070E8CE /* LPInterpolateRoute.m in Sources */,
 				B1D5BD9A19A23BCE0070E8CE /* LPRecordRoute.m in Sources */,
@@ -2139,6 +2242,7 @@
 				B1D5BDB419A23BCE0070E8CE /* LPKeychainRoute.m in Sources */,
 				B1D5BDB519A23BCE0070E8CE /* LPTouchUtils.m in Sources */,
 				B1D5BDB619A23BCE0070E8CE /* LPCDataScanner.m in Sources */,
+				B1F772251A22A398009A2336 /* LPSharedUIATextField.m in Sources */,
 				B1D5BDB819A23BCE0070E8CE /* LPReflectUtils.m in Sources */,
 				B1FBBC5E19D0070000EE03CE /* LPDevice.m in Sources */,
 				B1D5BDB919A23BCE0070E8CE /* LPISO8601DateFormatter.m in Sources */,
@@ -2169,6 +2273,7 @@
 				F5091BE018C4E1D700C85307 /* LPHTTPMessage.m in Sources */,
 				F5091BE118C4E1D700C85307 /* LPHTTPServer.m in Sources */,
 				F5091BE218C4E1D700C85307 /* DDData.m in Sources */,
+				B1F7722E1A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */,
 				F5091BE318C4E1D700C85307 /* DDNumber.m in Sources */,
 				F5091BE418C4E1D700C85307 /* DDRange.m in Sources */,
 				F5091BE518C4E1D700C85307 /* LPHTTPAsyncFileResponse.m in Sources */,
@@ -2194,7 +2299,9 @@
 				F5091BF618C4E1D700C85307 /* LPUserPrefRoute.m in Sources */,
 				F5091BF718C4E1D700C85307 /* LPKeyboardRoute.m in Sources */,
 				F5091BF818C4E1D700C85307 /* LPGenericAsyncRoute.m in Sources */,
+				B1F772121A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */,
 				F5091BF918C4E1D700C85307 /* LPConditionRoute.m in Sources */,
+				B1F772061A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */,
 				F5091BFA18C4E1D700C85307 /* LPInterpolateRoute.m in Sources */,
 				F5091BFB18C4E1D700C85307 /* LPRecordRoute.m in Sources */,
 				F5091BFC18C4E1D700C85307 /* LPMapRoute.m in Sources */,
@@ -2226,6 +2333,7 @@
 				F5091C1418C4E1D700C85307 /* LPTouchUtils.m in Sources */,
 				F5091C1518C4E1D700C85307 /* LPCDataScanner.m in Sources */,
 				F5091C1718C4E1D700C85307 /* LPI.mm in Sources */,
+				B1F772221A22A398009A2336 /* LPSharedUIATextField.m in Sources */,
 				F5091C1818C4E1D700C85307 /* LPReflectUtils.m in Sources */,
 				B1FBBC5B19D0070000EE03CE /* LPDevice.m in Sources */,
 				F5091C1918C4E1D700C85307 /* LPISO8601DateFormatter.m in Sources */,
@@ -2356,6 +2464,7 @@
 				F58219FE18C4E27400293508 /* LPHTTPMessage.m in Sources */,
 				F58219FF18C4E27400293508 /* LPHTTPServer.m in Sources */,
 				F5821A0018C4E27400293508 /* DDData.m in Sources */,
+				B1F7722F1A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */,
 				F5821A0118C4E27400293508 /* DDNumber.m in Sources */,
 				F5821A0218C4E27400293508 /* DDRange.m in Sources */,
 				F5821A0318C4E27400293508 /* LPHTTPAsyncFileResponse.m in Sources */,
@@ -2381,7 +2490,9 @@
 				F5821A1418C4E27400293508 /* LPUserPrefRoute.m in Sources */,
 				F5821A1518C4E27400293508 /* LPKeyboardRoute.m in Sources */,
 				F5821A1618C4E27400293508 /* LPGenericAsyncRoute.m in Sources */,
+				B1F772131A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */,
 				F5821A1718C4E27400293508 /* LPConditionRoute.m in Sources */,
+				B1F772071A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */,
 				F5821A1818C4E27400293508 /* LPInterpolateRoute.m in Sources */,
 				F5821A1918C4E27400293508 /* LPRecordRoute.m in Sources */,
 				F5821A1A18C4E27400293508 /* LPMapRoute.m in Sources */,
@@ -2413,6 +2524,7 @@
 				F5821A3218C4E27400293508 /* LPTouchUtils.m in Sources */,
 				F5821A3318C4E27400293508 /* LPCDataScanner.m in Sources */,
 				F5821A3518C4E27400293508 /* LPI.mm in Sources */,
+				B1F772231A22A398009A2336 /* LPSharedUIATextField.m in Sources */,
 				F5821A3618C4E27400293508 /* LPReflectUtils.m in Sources */,
 				B1FBBC5C19D0070000EE03CE /* LPDevice.m in Sources */,
 				F5821A3718C4E27400293508 /* LPISO8601DateFormatter.m in Sources */,
