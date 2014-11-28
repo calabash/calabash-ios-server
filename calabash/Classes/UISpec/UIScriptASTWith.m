@@ -265,10 +265,10 @@
 -(BOOL)indexPath:(NSIndexPath*)indexPath addressesCell:(id) cell inIndexPathView:(id)indexPathView {
   id viewAtIndexPath = nil;
   if ([indexPathView respondsToSelector:@selector(cellForRowAtIndexPath:)]) {
-    viewAtIndexPath = [indexPathView cellForRowAtIndexPath:indexPathView];
+    viewAtIndexPath = [indexPathView cellForRowAtIndexPath:indexPath];
   }
   else if ([indexPathView respondsToSelector:@selector(cellForItemAtIndexPath:)]) {
-    viewAtIndexPath = [indexPathView cellForItemAtIndexPath:indexPathView];
+    viewAtIndexPath = [indexPathView cellForItemAtIndexPath:indexPath];
   }
   return [cell isEqual:viewAtIndexPath];
 }
