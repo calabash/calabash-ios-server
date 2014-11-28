@@ -145,8 +145,8 @@
         continue;
       }
 
-      if ([self isIndexPathAddressable:v] &&
-          [self.selectorName isEqualToString:@"indexPath"]) {
+      if ([self.selectorName isEqualToString:@"indexPath"] &&
+          [self isIndexPathAddressable:v]) {
         id cell = v;
         NSIndexPath *indexPath = (NSIndexPath *) self.objectValue;
         id indexPathView = [cell superview];
