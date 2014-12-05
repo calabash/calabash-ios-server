@@ -85,6 +85,7 @@
 		B13B7FBF1A31FE560054FFB1 /* LPDumpRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B13B7FBD1A31FE560054FFB1 /* LPDumpRoute.h */; };
 		B13B7FC01A31FE560054FFB1 /* LPDumpRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B7FBE1A31FE560054FFB1 /* LPDumpRoute.m */; };
 		B15369FB1A325E510093923F /* LPUIARouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FD1A22A35A009A2336 /* LPUIARouteOverSharedElement.m */; };
+		B15369FC1A32620A0093923F /* LPUIASharedElementChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F7721B1A22A398009A2336 /* LPUIASharedElementChannel.m */; };
 		B15BF99719ABB17800B38577 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E757A15D434D00066550B /* CFNetwork.framework */; };
 		B15BF99819ABB18200B38577 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		B15BF99919ABB1DD00B38577 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-unreachable-code"; }; };
@@ -2416,6 +2417,7 @@
 				F50CBF771A03F69A004AC9DA /* LPOCMockTest.m in Sources */,
 				F50CBF8E1A04058C004AC9DA /* LPCORSResponse.m in Sources */,
 				F50CBF9D1A040599004AC9DA /* LPScrollToMarkOperation.m in Sources */,
+				B15369FC1A32620A0093923F /* LPUIASharedElementChannel.m in Sources */,
 				F50CBFCA1A0405E9004AC9DA /* LPLog.m in Sources */,
 				F50CBF8B1A04056F004AC9DA /* LPHTTPDynamicFileResponse.m in Sources */,
 				B1670E2E1A32411100000A62 /* LPDumpRoute.m in Sources */,
