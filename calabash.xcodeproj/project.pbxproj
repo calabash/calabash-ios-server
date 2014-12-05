@@ -259,6 +259,7 @@
 		B1670E311A32411A00000A62 /* LPDumpRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B13B7FBD1A31FE560054FFB1 /* LPDumpRoute.h */; };
 		B1670E321A32411B00000A62 /* LPDumpRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B13B7FBD1A31FE560054FFB1 /* LPDumpRoute.h */; };
 		B1670E331A32411B00000A62 /* LPDumpRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B13B7FBD1A31FE560054FFB1 /* LPDumpRoute.h */; };
+		B1670E341A3248CC00000A62 /* LPSharedUIATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F772191A22A398009A2336 /* LPSharedUIATextField.m */; };
 		B1D5BD7819A23BCE0070E8CE /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code"; }; };
 		B1D5BD7919A23BCE0070E8CE /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; };
 		B1D5BD7A19A23BCE0070E8CE /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; };
@@ -2439,6 +2440,7 @@
 				F50CBFA31A0405B2004AC9DA /* LPAppPropertyRoute.m in Sources */,
 				F50CBFB41A0405CE004AC9DA /* LPISO8601DateFormatter.m in Sources */,
 				F50CBF871A040564004AC9DA /* DDNumber.m in Sources */,
+				B1670E341A3248CC00000A62 /* LPSharedUIATextField.m in Sources */,
 				F50CBF791A03F9FF004AC9DA /* LPTouchUtilsTest.m in Sources */,
 				F50CBF851A040564004AC9DA /* LPHTTPServer.m in Sources */,
 				F50CBFAE1A0405B2004AC9DA /* LPNoContentResponse.m in Sources */,

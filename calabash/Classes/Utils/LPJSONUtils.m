@@ -101,7 +101,10 @@
       [self dumpAccessibilityElement:object toDictionary:viewJson];
     }
     return viewJson;
-  } else if ([object respondsToSelector:@selector(accessibilityElementCount)] && [object accessibilityElementCount] > 0) {
+  } else if ([object respondsToSelector:@selector(accessibilityElementCount)] &&
+             [object respondsToSelector:@selector(accessibilityElementAtIndex:)] &&
+             [object accessibilityElementCount] != NSNotFound &&
+             [object accessibilityElementCount] > 0 ) {
     NSMutableDictionary *viewJson = [self jsonifyAccessibilityElement: object];
     if (dump) {
       [self dumpAccessibilityElement: object toDictionary:viewJson];
