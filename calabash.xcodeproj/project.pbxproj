@@ -86,6 +86,7 @@
 		B13B7FC01A31FE560054FFB1 /* LPDumpRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B7FBE1A31FE560054FFB1 /* LPDumpRoute.m */; };
 		B15369FB1A325E510093923F /* LPUIARouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FD1A22A35A009A2336 /* LPUIARouteOverSharedElement.m */; };
 		B15369FC1A32620A0093923F /* LPUIASharedElementChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F7721B1A22A398009A2336 /* LPUIASharedElementChannel.m */; };
+		B15369FD1A327A400093923F /* LPUIATapRouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FF1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m */; };
 		B15BF99719ABB17800B38577 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E757A15D434D00066550B /* CFNetwork.framework */; };
 		B15BF99819ABB18200B38577 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		B15BF99919ABB1DD00B38577 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-unreachable-code"; }; };
@@ -2468,6 +2469,7 @@
 				F50CBFBD1A0405CE004AC9DA /* UIScriptASTALL.m in Sources */,
 				F50CBF811A040564004AC9DA /* GCDAsyncSocket.m in Sources */,
 				F50CBF961A04058C004AC9DA /* LPQueryAllOperation.m in Sources */,
+				B15369FD1A327A400093923F /* LPUIATapRouteOverSharedElement.m in Sources */,
 				F50CBF7D1A040564004AC9DA /* LPSSKeychainQuery.m in Sources */,
 				F50CBF801A040564004AC9DA /* MKPolylineView+Test.m in Sources */,
 				F50CBF9C1A04058C004AC9DA /* LPRecorder.m in Sources */,
