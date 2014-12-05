@@ -248,6 +248,17 @@
 		B15BFA3B19ABB2B100B38577 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E757A15D434D00066550B /* CFNetwork.framework */; };
 		B164575718FDCE4900CAA25A /* LPUIATapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B164575518FDCE4900CAA25A /* LPUIATapRoute.m */; };
 		B164575B18FDD60700CAA25A /* LPUIATapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B164575518FDCE4900CAA25A /* LPUIATapRoute.m */; };
+		B1670E291A32410D00000A62 /* LPDumpRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B7FBE1A31FE560054FFB1 /* LPDumpRoute.m */; };
+		B1670E2A1A32410E00000A62 /* LPDumpRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B7FBE1A31FE560054FFB1 /* LPDumpRoute.m */; };
+		B1670E2B1A32410E00000A62 /* LPDumpRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B7FBE1A31FE560054FFB1 /* LPDumpRoute.m */; };
+		B1670E2C1A32410F00000A62 /* LPDumpRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B7FBE1A31FE560054FFB1 /* LPDumpRoute.m */; };
+		B1670E2D1A32410F00000A62 /* LPDumpRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B7FBE1A31FE560054FFB1 /* LPDumpRoute.m */; };
+		B1670E2E1A32411100000A62 /* LPDumpRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B7FBE1A31FE560054FFB1 /* LPDumpRoute.m */; };
+		B1670E2F1A32411800000A62 /* LPDumpRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B13B7FBD1A31FE560054FFB1 /* LPDumpRoute.h */; };
+		B1670E301A32411A00000A62 /* LPDumpRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B13B7FBD1A31FE560054FFB1 /* LPDumpRoute.h */; };
+		B1670E311A32411A00000A62 /* LPDumpRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B13B7FBD1A31FE560054FFB1 /* LPDumpRoute.h */; };
+		B1670E321A32411B00000A62 /* LPDumpRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B13B7FBD1A31FE560054FFB1 /* LPDumpRoute.h */; };
+		B1670E331A32411B00000A62 /* LPDumpRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B13B7FBD1A31FE560054FFB1 /* LPDumpRoute.h */; };
 		B1D5BD7819A23BCE0070E8CE /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code"; }; };
 		B1D5BD7919A23BCE0070E8CE /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; };
 		B1D5BD7A19A23BCE0070E8CE /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; };
@@ -1505,6 +1516,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1FBBC6319D0070000EE03CE /* LPDevice.h in Headers */,
+				B1670E301A32411A00000A62 /* LPDumpRoute.h in Headers */,
 				B1F772021A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */,
 				B1F7721E1A22A398009A2336 /* LPSharedUIATextField.h in Headers */,
 				B1058E7A197F043100B4A57B /* LPCalabashFrankRegistrar.h in Headers */,
@@ -1523,6 +1535,7 @@
 				B1F772101A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */,
 				B1FBBC6519D0070000EE03CE /* LPDevice.h in Headers */,
 				B1F772201A22A398009A2336 /* LPSharedUIATextField.h in Headers */,
+				B1670E321A32411B00000A62 /* LPDumpRoute.h in Headers */,
 				B1F7722C1A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1535,6 +1548,7 @@
 				B1F772111A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */,
 				B1FBBC6619D0070000EE03CE /* LPDevice.h in Headers */,
 				B1F772211A22A398009A2336 /* LPSharedUIATextField.h in Headers */,
+				B1670E331A32411B00000A62 /* LPDumpRoute.h in Headers */,
 				B1F7722D1A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1547,6 +1561,7 @@
 				B1F772031A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */,
 				B1D5BDC919A23BCE0070E8CE /* CalabashServer.h in Headers */,
 				B1D5BDCA19A23BCE0070E8CE /* LPRoute.h in Headers */,
+				B1670E311A32411A00000A62 /* LPDumpRoute.h in Headers */,
 				B1F7722B1A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */,
 				B1F7720F1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */,
 				B1D5BDCB19A23BCE0070E8CE /* LPRouter.h in Headers */,
@@ -1590,6 +1605,7 @@
 				B1F772011A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */,
 				F5821A4D18C4E27400293508 /* CalabashServer.h in Headers */,
 				F59C5D0118E0C1D60087B51D /* LPRoute.h in Headers */,
+				B1670E2F1A32411800000A62 /* LPDumpRoute.h in Headers */,
 				B1F772291A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */,
 				B1F7720D1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */,
 				F59C5D0218E0C1D90087B51D /* LPRouter.h in Headers */,
@@ -1938,6 +1954,7 @@
 				B1058E08197F00C000B4A57B /* LPUIAUserPrefsChannel.m in Sources */,
 				B1058E1D197F00C000B4A57B /* UIScriptASTPredicate.m in Sources */,
 				B1135847197F1390004B16F4 /* GCDAsyncSocket.m in Sources */,
+				B1670E2A1A32410E00000A62 /* LPDumpRoute.m in Sources */,
 				B1F772301A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */,
 				B1058E1E197F00C000B4A57B /* UIScriptAST.m in Sources */,
 				B113583E197F1351004B16F4 /* DDData.m in Sources */,
@@ -2059,6 +2076,7 @@
 				B15BF9CD19ABB1DE00B38577 /* LPVersionRoute.m in Sources */,
 				B15BF9CE19ABB1DE00B38577 /* LPISO8601DateFormatter.m in Sources */,
 				B15BF9CF19ABB1DE00B38577 /* CDataScanner_Extensions.m in Sources */,
+				B1670E2C1A32410F00000A62 /* LPDumpRoute.m in Sources */,
 				B15BF9D019ABB1DE00B38577 /* LPCJSONDeserializer.m in Sources */,
 				B15BF9D119ABB1DE00B38577 /* LPCJSONScanner.m in Sources */,
 				B15BF9D219ABB1DE00B38577 /* LPCJSONSerializer.m in Sources */,
@@ -2150,6 +2168,7 @@
 				B15BFA1F19ABB2B100B38577 /* LPVersionRoute.m in Sources */,
 				B15BFA2019ABB2B100B38577 /* LPISO8601DateFormatter.m in Sources */,
 				B15BFA2119ABB2B100B38577 /* CDataScanner_Extensions.m in Sources */,
+				B1670E2D1A32410F00000A62 /* LPDumpRoute.m in Sources */,
 				B15BFA2219ABB2B100B38577 /* LPCJSONDeserializer.m in Sources */,
 				B15BFA2319ABB2B100B38577 /* LPCJSONScanner.m in Sources */,
 				B15BFA2419ABB2B100B38577 /* LPCJSONSerializer.m in Sources */,
@@ -2241,6 +2260,7 @@
 				B1D5BDAC19A23BCE0070E8CE /* UIScriptASTFirst.m in Sources */,
 				B1D5BDAD19A23BCE0070E8CE /* UIScriptASTIndex.m in Sources */,
 				B1D5BDAE19A23BCE0070E8CE /* UIScriptASTLast.m in Sources */,
+				B1670E2B1A32410E00000A62 /* LPDumpRoute.m in Sources */,
 				B1D5BDAF19A23BCE0070E8CE /* LPEnv.m in Sources */,
 				B1D5BDB019A23BCE0070E8CE /* UIScriptASTWith.m in Sources */,
 				B1D5BDB119A23BCE0070E8CE /* LPSSKeychain.m in Sources */,
@@ -2396,6 +2416,7 @@
 				F50CBF9D1A040599004AC9DA /* LPScrollToMarkOperation.m in Sources */,
 				F50CBFCA1A0405E9004AC9DA /* LPLog.m in Sources */,
 				F50CBF8B1A04056F004AC9DA /* LPHTTPDynamicFileResponse.m in Sources */,
+				B1670E2E1A32411100000A62 /* LPDumpRoute.m in Sources */,
 				F50CBFA51A0405B2004AC9DA /* LPUIATapRoute.m in Sources */,
 				F50CBFA41A0405B2004AC9DA /* LPQueryLogRoute.m in Sources */,
 				F50CBFC11A0405CE004AC9DA /* UIScriptASTIndex.m in Sources */,
@@ -2524,6 +2545,7 @@
 				F5821A2C18C4E27400293508 /* UIScriptASTIndex.m in Sources */,
 				F5821A2D18C4E27400293508 /* UIScriptASTLast.m in Sources */,
 				F5821A2E18C4E27400293508 /* LPEnv.m in Sources */,
+				B1670E291A32410D00000A62 /* LPDumpRoute.m in Sources */,
 				F5821A2F18C4E27400293508 /* UIScriptASTWith.m in Sources */,
 				F5E2D1E118C9120E00A0D9B6 /* LPSSKeychain.m in Sources */,
 				F5821A3018C4E27400293508 /* UIScriptParser.m in Sources */,
