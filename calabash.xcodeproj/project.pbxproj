@@ -82,6 +82,8 @@
 		B11358631981B053004B16F4 /* LPScrollOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC714B6DB2B002A744C /* LPScrollOperation.m */; };
 		B11358641981B053004B16F4 /* LPScrollToRowOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */; };
 		B11358651981B053004B16F4 /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; };
+		B13B7FBF1A31FE560054FFB1 /* LPDumpRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B13B7FBD1A31FE560054FFB1 /* LPDumpRoute.h */; };
+		B13B7FC01A31FE560054FFB1 /* LPDumpRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B7FBE1A31FE560054FFB1 /* LPDumpRoute.m */; };
 		B15BF99719ABB17800B38577 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E757A15D434D00066550B /* CFNetwork.framework */; };
 		B15BF99819ABB18200B38577 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		B15BF99919ABB1DD00B38577 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-unreachable-code"; }; };
@@ -761,6 +763,8 @@
 		B12DCD86189A998400F8DF87 /* LPDebugRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDebugRoute.h; sourceTree = "<group>"; };
 		B13B29231627389500433F6C /* LPISO8601DateFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPISO8601DateFormatter.h; sourceTree = "<group>"; };
 		B13B29241627389500433F6C /* LPISO8601DateFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPISO8601DateFormatter.m; sourceTree = "<group>"; };
+		B13B7FBD1A31FE560054FFB1 /* LPDumpRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDumpRoute.h; sourceTree = "<group>"; };
+		B13B7FBE1A31FE560054FFB1 /* LPDumpRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDumpRoute.m; sourceTree = "<group>"; };
 		B153F55A15949F3D00867E12 /* LPVersionRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPVersionRoute.h; sourceTree = "<group>"; };
 		B153F55B15949F3D00867E12 /* LPVersionRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPVersionRoute.m; sourceTree = "<group>"; };
 		B15BF97119ABAFD200B38577 /* libCalabashDyn.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libCalabashDyn.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1253,6 +1257,8 @@
 		B184FDD014B6DB2B002A744C /* Routes */ = {
 			isa = PBXGroup;
 			children = (
+				B13B7FBD1A31FE560054FFB1 /* LPDumpRoute.h */,
+				B13B7FBE1A31FE560054FFB1 /* LPDumpRoute.m */,
 				B1F771FC1A22A35A009A2336 /* LPUIARouteOverSharedElement.h */,
 				B1F771FD1A22A35A009A2336 /* LPUIARouteOverSharedElement.m */,
 				B1F771FE1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h */,
@@ -1562,6 +1568,7 @@
 				B1F772001A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */,
 				F5091C2F18C4E1D700C85307 /* CalabashServer.h in Headers */,
 				F59C5CF818E0BB1A0087B51D /* LPRoute.h in Headers */,
+				B13B7FBF1A31FE560054FFB1 /* LPDumpRoute.h in Headers */,
 				B1F772281A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */,
 				B1F7720C1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */,
 				F59C5CF918E0BB290087B51D /* LPRouter.h in Headers */,
@@ -2325,6 +2332,7 @@
 				F5091C0E18C4E1D700C85307 /* UIScriptASTIndex.m in Sources */,
 				F5091C0F18C4E1D700C85307 /* UIScriptASTLast.m in Sources */,
 				F5091C1018C4E1D700C85307 /* LPEnv.m in Sources */,
+				B13B7FC01A31FE560054FFB1 /* LPDumpRoute.m in Sources */,
 				F5091C1118C4E1D700C85307 /* UIScriptASTWith.m in Sources */,
 				F5E2D1E018C9120E00A0D9B6 /* LPSSKeychain.m in Sources */,
 				F5091C1218C4E1D700C85307 /* UIScriptParser.m in Sources */,
