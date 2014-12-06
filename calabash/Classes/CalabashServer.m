@@ -27,6 +27,7 @@
 #import "LPKeyboardRoute.h"
 #import "LPLocationRoute.h"
 #import "LPDebugRoute.h"
+#import "LPDumpRoute.h"
 #import <dlfcn.h>
 
 @interface CalabashServer ()
@@ -130,6 +131,13 @@
     LPDebugRoute *debugRoute = [LPDebugRoute new];
     [LPRouter addRoute:debugRoute forPath:@"debug"];
     [debugRoute release];
+
+    LPDumpRoute *dumpRoute = [LPDumpRoute new];
+    [LPRouter addRoute:dumpRoute forPath:@"dump"];
+    [dumpRoute release];
+
+
+
 
     //
     //        LPScreencastRoute *scr = [LPScreencastRoute new];
