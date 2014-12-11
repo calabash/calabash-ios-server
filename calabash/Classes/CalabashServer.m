@@ -29,6 +29,7 @@
 #import "LPDebugRoute.h"
 #import "LPDumpRoute.h"
 #import <dlfcn.h>
+#import "LPInfoPlist.h"
 
 @interface CalabashServer ()
 - (void) start;
@@ -161,14 +162,11 @@
                                          [info objectForKey:@"CFBundleIdentifier"], @"app_id",
                                          [info objectForKey:@"CFBundleVersion"], @"app_version",
                                          nil];
-    
-    int portNum = [[info objectForKey:@"CalabashPort"] intValue];
-    if(portNum){
-        [_httpServer setPort:portNum];
-    } else {
-        [_httpServer setPort:37265];
-    }
-    
+
+    LPInfoPlist *infoPlist = [LPInfoPlist new];
+    [_httpServer setPort:[infoPlist serverPort]];
+    [infoPlist release];
+
     [_httpServer setTXTRecordDictionary:capabilities];
     [_httpServer setConnectionClass:[LPRouter class]];
     [capabilities release];
