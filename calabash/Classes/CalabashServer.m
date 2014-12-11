@@ -29,6 +29,7 @@
 #import "LPDebugRoute.h"
 #import "LPDumpRoute.h"
 #import <dlfcn.h>
+#import "LPInfoPlist.h"
 
 @interface CalabashServer ()
 - (void) start;
@@ -161,9 +162,13 @@
                                          [info objectForKey:@"CFBundleIdentifier"], @"app_id",
                                          [info objectForKey:@"CFBundleVersion"], @"app_version",
                                          nil];
+
+    LPInfoPlist *infoPlist = [LPInfoPlist new];
+    [_httpServer setPort:[infoPlist serverPort]];
+    [infoPlist release];
+
     [_httpServer setTXTRecordDictionary:capabilities];
     [_httpServer setConnectionClass:[LPRouter class]];
-    [_httpServer setPort:37265];
     [capabilities release];
     // Serve files from our embedded Web folder
     //        NSString *webPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Web"];
