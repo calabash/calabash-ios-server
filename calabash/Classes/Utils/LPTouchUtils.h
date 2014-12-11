@@ -33,6 +33,8 @@
 
 + (BOOL) isViewVisible:(UIView *) view;
 
++(NSArray*)accessibilityChildrenFor:(id)view;
+
 + (void) flashView:(id) viewOrDom forDuration:(NSUInteger) duration;
 
 @end

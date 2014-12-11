@@ -21,11 +21,15 @@
 #import "LPVersionRoute.h"
 #import "LPConditionRoute.h"
 #import "LPUIARouteOverUserPrefs.h"
+#import "LPUIARouteOverSharedElement.h"
 #import "LPUIATapRoute.h"
+#import "LPUIATapRouteOverSharedElement.h"
 #import "LPKeyboardRoute.h"
 #import "LPLocationRoute.h"
 #import "LPDebugRoute.h"
+#import "LPDumpRoute.h"
 #import <dlfcn.h>
+#import "LPInfoPlist.h"
 
 @interface CalabashServer ()
 - (void) start;
@@ -112,9 +116,17 @@
     [LPRouter addRoute:uiaUsingUserPrefs forPath:@"uia"];
     [uiaUsingUserPrefs release];
 
+    LPUIARouteOverSharedElement *uiaUsingSharedEl = [LPUIARouteOverSharedElement new];
+    [LPRouter addRoute:uiaUsingSharedEl forPath:@"uia-shared"];
+    [uiaUsingSharedEl release];
+
     LPUIATapRoute *uiaTap = [LPUIATapRoute new];
     [LPRouter addRoute:uiaTap forPath:@"uia-tap"];
     [uiaTap release];
+
+    LPUIATapOverSharedElementRoute *uiaTapShared = [LPUIATapOverSharedElementRoute new];
+    [LPRouter addRoute:uiaTapShared forPath:@"uia-tap-shared"];
+    [uiaTapShared release];
 
     LPLocationRoute *location = [LPLocationRoute new];
     [LPRouter addRoute:location forPath:@"location"];
@@ -123,6 +135,13 @@
     LPDebugRoute *debugRoute = [LPDebugRoute new];
     [LPRouter addRoute:debugRoute forPath:@"debug"];
     [debugRoute release];
+
+    LPDumpRoute *dumpRoute = [LPDumpRoute new];
+    [LPRouter addRoute:dumpRoute forPath:@"dump"];
+    [dumpRoute release];
+
+
+
 
     //
     //        LPScreencastRoute *scr = [LPScreencastRoute new];
@@ -146,9 +165,13 @@
                                          [info objectForKey:@"CFBundleIdentifier"], @"app_id",
                                          [info objectForKey:@"CFBundleVersion"], @"app_version",
                                          nil];
+
+    LPInfoPlist *infoPlist = [LPInfoPlist new];
+    [_httpServer setPort:[infoPlist serverPort]];
+    [infoPlist release];
+
     [_httpServer setTXTRecordDictionary:capabilities];
     [_httpServer setConnectionClass:[LPRouter class]];
-    [_httpServer setPort:37265];
     [capabilities release];
     // Serve files from our embedded Web folder
     //        NSString *webPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Web"];

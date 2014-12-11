@@ -354,6 +354,25 @@
   return delegateWindow;
 }
 
++(NSArray*)accessibilityChildrenFor:(id)view {
+  NSMutableArray *arr = [[NSMutableArray alloc] initWithCapacity:32];
+  if ([view respondsToSelector:@selector(subviews)]) {
+    [arr addObjectsFromArray:[view subviews]];
+  }
+  if ([view respondsToSelector:@selector(accessibilityElementCount)] &&
+      [view respondsToSelector:@selector(accessibilityElementAtIndex:)]) {
+    NSInteger count = [view accessibilityElementCount];
+    if (count == 0 || count == NSNotFound) {
+      return arr;
+    }
+    for (NSInteger i=0;i<count;i++) {
+      id accEl = [view accessibilityElementAtIndex:i];
+      [arr addObject:accEl];
+    }
+  }
+  return [arr autorelease];
+}
+
 
 + (CGPoint) centerOfView:(UIView *) view {
   return [self centerOfView:view shouldTranslate:YES];

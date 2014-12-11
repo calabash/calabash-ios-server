@@ -12,6 +12,7 @@
 #import "LPJSONUtils.h"
 #import "LPDevice.h"
 #import <sys/utsname.h>
+#import "LPInfoPlist.h"
 
 @class UIDevice;
 
@@ -126,6 +127,10 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
 
   NSString *calabashVersion = [kLPCALABASHVERSION componentsSeparatedByString:@" "].lastObject;
 
+  LPInfoPlist *infoPlist = [LPInfoPlist new];
+  NSNumber *serverPort = @([infoPlist serverPort]);
+
+
   NSDictionary *res = @{@"version": calabashVersion,
                         @"app_id": idString,
                         @"iOS_version": [[UIDevice currentDevice]
@@ -139,7 +144,8 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
                         @"app_version": versionString,
                         @"outcome": @"SUCCESS",
                         @"iphone_app_emulated_on_ipad": @(isIphoneAppEmulated),
-                        @"git": git};
+                        @"git": git,
+                        @"server_port" : serverPort};
   return res;
 }
 

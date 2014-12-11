@@ -13,9 +13,11 @@ xcpretty_available = `gem list xcpretty -i`.chomp == 'true'
 if target == 'sim'
   target_arg = 'frank-calabash-simulator'
   sdk = 'iphonesimulator'
+  arches = 'i386 x86_64'
 else
   target_arg = 'frank-calabash-device'
   sdk = 'iphoneos'
+  arches = 'armv7 armv7s arm64'
 end
 
 args =
@@ -25,6 +27,9 @@ args =
             '-configuration Debug',
             'SYMROOT=build',
             '-derivedDataPath build',
+            "ARCHS=\"#{arches}\"",
+            "VALID_ARCHS=\"#{arches}\"",
+            'ONLY_ACTIVE_ARCH=NO',
             "-sdk #{sdk}",
             'IPHONEOS_DEPLOYMENT_TARGET=5.1.1',
             xcpretty_available ? '| xcpretty -c' : ''
