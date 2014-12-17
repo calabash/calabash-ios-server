@@ -18,6 +18,7 @@ The build queues for Travis are incredibly long:  6 - 8 hours at times.  This is
 ### Building the Framework
 
 ```
+$ git submodule update --init --recursive
 $ make framework
 ```
 
