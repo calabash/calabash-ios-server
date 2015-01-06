@@ -301,7 +301,7 @@
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
   if ([frontWindow respondsToSelector:@selector(convertPoint:toCoordinateSpace:)]) {
     CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
-    rect = [frontWindow convertRect:rect toCoordinateSpace:frontWindow];
+    rect = [window convertRect:rect toCoordinateSpace:frontWindow];
     CGFloat x = (rect.origin.x + 0.5 * rect.size.width) * sampleFactor;
     CGFloat y = (rect.origin.y + 0.5 * rect.size.height) * sampleFactor;
     
@@ -329,6 +329,48 @@
 + (CGPoint) centerOfView:(UIView *) view inWindow:(UIWindow *) windowForView {
   CGRect bounds = [windowForView convertRect:view.bounds fromView:view];
   return [self centerOfFrame:bounds shouldTranslate:NO];
+}
+
++ (CGRect)translateRect:(CGRect)sourceRect inView:(UIView*) view {
+  UIWindow *window = [self windowForView:view];
+  CGRect bounds = [window convertRect:view.bounds fromView:view];
+  CGRect rect = CGRectMake(bounds.origin.x + sourceRect.origin.x,
+                          bounds.origin.y + sourceRect.origin.y,
+                          sourceRect.size.width,
+                          sourceRect.size.height);
+
+
+  UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+  if ([frontWindow respondsToSelector:@selector(convertPoint:toCoordinateSpace:)]) {
+    CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
+    rect = [window convertRect:rect toCoordinateSpace:frontWindow];
+    CGFloat x = rect.origin.x;
+    CGFloat y = rect.origin.y;
+    if ([LPTouchUtils isLetterBox]) {
+      UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+      if (UIInterfaceOrientationIsPortrait(orientation)) {
+        y += LPiPHONE4INCHOFFSET*sampleFactor;
+      }
+      else {
+        x += LPiPHONE4INCHOFFSET*sampleFactor;
+      }
+    }
+    return CGRectMake(x * sampleFactor, y * sampleFactor,
+                      rect.size.width * sampleFactor, rect.size.height * sampleFactor);
+  } else {
+    rect = [frontWindow convertRect:rect fromWindow:window];
+    CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
+    CGPoint translated = [self translateToScreenCoords:rect.origin sampleFactor:sampleFactor];
+    return CGRectMake(translated.x, translated.y, rect.size.width * sampleFactor, rect.size.height * sampleFactor);
+  }
+#else
+  rect = [frontWindow convertRect:rect fromWindow:window];
+  CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
+  CGPoint translated = [self translateToScreenCoords:rect.origin sampleFactor:sampleFactor];
+  return CGRectMake(translated.x, translated.y, rect.size.width * sampleFactor, rect.size.height * sampleFactor);
+#endif
 }
 
 

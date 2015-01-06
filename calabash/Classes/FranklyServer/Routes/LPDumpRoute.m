@@ -5,6 +5,7 @@
 #import "LPTouchUtils.h"
 #import "LPHTTPDataResponse.h"
 #import "LPJSONUtils.h"
+#import "LPWebQuery.h"
 
 @implementation LPDumpRoute
 
@@ -68,7 +69,14 @@
   for (id view in children) {
     NSDictionary *viewDic = [LPJSONUtils jsonifyObject:view fullDump:YES];
     if ([viewDic isKindOfClass:[NSDictionary class]]) {
-      [self recursiveDumpParent:viewDic children: [LPTouchUtils accessibilityChildrenFor: view]];
+      if ([view isKindOfClass:[UIWebView class]]) {
+        NSMutableDictionary *viewCopy = [NSMutableDictionary dictionaryWithDictionary:viewDic];
+        viewCopy[@"children"] = [NSArray arrayWithObject: [LPWebQuery dumpViewsInWebView:(UIWebView*)view]];
+        viewDic = viewCopy;
+      }
+      else {
+        [self recursiveDumpParent:viewDic children: [LPTouchUtils accessibilityChildrenFor: view]];
+      }
       [serializedChildren addObject:viewDic];
     }
   }
