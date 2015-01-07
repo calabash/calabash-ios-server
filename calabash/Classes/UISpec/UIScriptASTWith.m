@@ -145,16 +145,16 @@
         continue;
       }
 
-      if ([v isKindOfClass:[UITableViewCell class]] && [self.selectorName isEqualToString:@"indexPath"]) {
-        UITableViewCell *cell = (UITableViewCell *) v;
+      if ([self.selectorName isEqualToString:@"indexPath"] &&
+          [self isIndexPathAddressable:v]) {
+        id cell = v;
         NSIndexPath *indexPath = (NSIndexPath *) self.objectValue;
-        id tableView = [cell superview];
-        while (tableView && ![tableView isKindOfClass:[UITableView class]]) {
-          tableView = [tableView superview];
+        id indexPathView = [cell superview];
+        while (indexPathView && ![self supportsIndexPathAddressing:indexPathView]) {
+          indexPathView = [indexPathView superview];
         }
-        if (tableView) {
-          UITableView *tv = (UITableView *) tableView;
-          if ([indexPath isEqual:[tv indexPathForCell:cell]]) {
+        if (indexPathView) {
+          if ([self indexPath: indexPath addressesCell: cell inIndexPathView:indexPathView]) {
             [res addObject:cell];
           }
         }
@@ -255,6 +255,23 @@
   return res;
 }
 
+-(BOOL)isIndexPathAddressable:(id)v {
+  return [v isKindOfClass:[UITableViewCell class]] || [v isKindOfClass:[UICollectionViewCell class]];
+}
+-(BOOL)supportsIndexPathAddressing:(id)view {
+  return [view respondsToSelector:@selector(cellForRowAtIndexPath:)] ||
+         [view respondsToSelector:@selector(cellForItemAtIndexPath:)];
+}
+-(BOOL)indexPath:(NSIndexPath*)indexPath addressesCell:(id) cell inIndexPathView:(id)indexPathView {
+  id viewAtIndexPath = nil;
+  if ([indexPathView respondsToSelector:@selector(cellForRowAtIndexPath:)]) {
+    viewAtIndexPath = [indexPathView cellForRowAtIndexPath:indexPath];
+  }
+  else if ([indexPathView respondsToSelector:@selector(cellForItemAtIndexPath:)]) {
+    viewAtIndexPath = [indexPathView cellForItemAtIndexPath:indexPath];
+  }
+  return [cell isEqual:viewAtIndexPath];
+}
 
 - (void) dealloc {
   self.selector = nil;

@@ -18,5 +18,6 @@
 
 + (id) jsonifyObject:(id) obj;
 
++(id)jsonifyObject:(id)obj fullDump:(BOOL)dump;
 
 @end

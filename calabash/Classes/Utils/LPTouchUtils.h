@@ -15,11 +15,10 @@
 
 + (CGPoint) centerOfView:(UIView *) view;
 + (CGPoint) centerOfView:(UIView *) view shouldTranslate:(BOOL) shouldTranslate;
-
++ (CGRect)translateRect:(CGRect)rect inView:(UIView*) view;
++ (BOOL) canFindView:(UIView *) viewToFind asSubViewInView:(UIView *) viewToSearch;
 + (CGPoint) centerOfFrame:(CGRect) frame;
-
 + (CGPoint) centerOfFrame:(CGRect) frame shouldTranslate:(BOOL) shouldTranslate;
-
 + (CGPoint) centerOfView:(id) view withSuperView:(UIView *) superView inWindow:(id) window;
 
 + (BOOL) isThreeAndAHalfInchDevice;
@@ -32,6 +31,8 @@
 + (UIWindow *) appDelegateWindow;
 
 + (BOOL) isViewVisible:(UIView *) view;
+
++(NSArray*)accessibilityChildrenFor:(id)view;
 
 + (void) flashView:(id) viewOrDom forDuration:(NSUInteger) duration;
 
