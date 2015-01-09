@@ -29,3 +29,8 @@ dylibs:
 	scripts/make-calabash-dylib.rb sim
 	scripts/make-calabash-dylib.rb device
 	scripts/make-libraries.rb verify-dylibs
+
+install_test_binaries:
+	$(MAKE) dylibs
+	./scripts/install-test-binaries.rb
+
