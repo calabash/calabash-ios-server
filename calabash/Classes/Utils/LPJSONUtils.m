@@ -86,12 +86,16 @@
     UIColor *color = (UIColor*)object;
     CGFloat red, green, blue, alpha;
     [color getRed:&red green:&green blue:&blue alpha:&alpha];
-    return @{@"red": @(red), @"green": @(green), @"blue": @(blue), @"alpha": @(alpha)};
+    return @{@"red": @(red), @"green": @(green), @"blue": @(blue), @"alpha": @(alpha), @"type": NSStringFromClass([object class])};
   }
   else if ([object isKindOfClass:[UIView class]]) {
     NSMutableDictionary *viewJson = [self jsonifyView:(UIView*) object];
     if (dump) {
       [self dumpView: object toDictionary:viewJson];
+      if (viewJson[@"class"]) {
+        viewJson[@"type"] = viewJson[@"class"];
+        [viewJson removeObjectForKey:@"class"];
+      }
     }
     return viewJson;
   }
@@ -99,6 +103,11 @@
     NSMutableDictionary *viewJson = [self jsonifyAccessibilityElement:object];
     if (dump) {
       [self dumpAccessibilityElement:object toDictionary:viewJson];
+      if (viewJson[@"class"]) {
+        viewJson[@"type"] = viewJson[@"class"];
+        [viewJson removeObjectForKey:@"class"];
+      }
+
     }
     return viewJson;
   } else if ([object respondsToSelector:@selector(accessibilityElementCount)] &&
@@ -108,6 +117,11 @@
     NSMutableDictionary *viewJson = [self jsonifyAccessibilityElement: object];
     if (dump) {
       [self dumpAccessibilityElement: object toDictionary:viewJson];
+      if (viewJson[@"class"]) {
+        viewJson[@"type"] = viewJson[@"class"];
+        [viewJson removeObjectForKey:@"class"];
+      }
+
     }
     return viewJson;
   }
