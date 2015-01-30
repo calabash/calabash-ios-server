@@ -690,6 +690,7 @@
 		F5E2D1E518C9120E00A0D9B6 /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5F53D6A18C619CB00BD9731 /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; };
 		F5F53D6B18C619CB00BD9731 /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; };
+		F5F600401A7BE77E0020637D /* LPJSONUtilsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F6003F1A7BE77E0020637D /* LPJSONUtilsTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -959,6 +960,7 @@
 		F5E2D1DB18C9120E00A0D9B6 /* LPSSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPSSKeychainQuery.h; sourceTree = "<group>"; };
 		F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSSKeychainQuery.m; sourceTree = "<group>"; };
 		F5E2D1DD18C9120E00A0D9B6 /* SSKeychain.LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SSKeychain.LICENSE; sourceTree = "<group>"; };
+		F5F6003F1A7BE77E0020637D /* LPJSONUtilsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPJSONUtilsTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1452,6 +1454,7 @@
 		F50CBF5F1A03F222004AC9DA /* calabash-ios-server-tests */ = {
 			isa = PBXGroup;
 			children = (
+				F5F6003F1A7BE77E0020637D /* LPJSONUtilsTest.m */,
 				F50CBF781A03F9FF004AC9DA /* LPTouchUtilsTest.m */,
 				F50CBF601A03F222004AC9DA /* Supporting Files */,
 				F50CBFD01A040788004AC9DA /* tests.pch */,
@@ -2466,6 +2469,7 @@
 				F50CBFBA1A0405CE004AC9DA /* UIScriptASTVisibility.m in Sources */,
 				F50CBFBC1A0405CE004AC9DA /* UIScriptAST.m in Sources */,
 				F50CBFB21A0405B2004AC9DA /* LPExitRoute.m in Sources */,
+				F5F600401A7BE77E0020637D /* LPJSONUtilsTest.m in Sources */,
 				F50CBFA31A0405B2004AC9DA /* LPAppPropertyRoute.m in Sources */,
 				F50CBFB41A0405CE004AC9DA /* LPISO8601DateFormatter.m in Sources */,
 				F50CBF871A040564004AC9DA /* DDNumber.m in Sources */,
