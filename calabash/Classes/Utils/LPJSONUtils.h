@@ -16,6 +16,8 @@
 
 + (BOOL) selector:(SEL) selector returnValueIsVoidForReceiver:(id) object;
 
++ (BOOL) selector:(SEL) selector returnValueCanBeAutoboxedForReceiver:(id) object;
+
 + (NSString *) serializeDictionary:(NSDictionary *) dictionary;
 
 + (NSDictionary *) deserializeDictionary:(NSString *) string;

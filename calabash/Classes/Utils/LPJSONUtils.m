@@ -40,6 +40,18 @@
   return ([returnType isEqualToString:@"v"]);
 }
 
++ (BOOL) selector:(SEL) selector returnValueCanBeAutoboxedForReceiver:(id) object {
+  if ([LPJSONUtils selector:selector returnValueIsVoidForReceiver:object]) {
+    return NO;
+  }
+
+  if ([LPJSONUtils selector:selector returnsPointerForReceiver:object]) {
+    return NO;
+  }
+
+  return YES;
+}
+
 + (NSString *) serializeDictionary:(NSDictionary *) dictionary {
   LPCJSONSerializer *s = [LPCJSONSerializer serializer];
   NSError *error = nil;
