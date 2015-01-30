@@ -223,5 +223,68 @@
   XCTAssertTrue([LPJSONUtils selector:selector returnValueCanBeAutoboxedForReceiver:object]);
 }
 
+#pragma mark - dictionary:setObject:usingSelector:receiver
+
+- (void) testDictionarySetObjectUsingSelectorReceiverDoesNotRespondTo {
+  id object = [MyObject new];
+  SEL selector = NSSelectorFromString(@"receiverDoesNotRespondTo");
+  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+  NSString *key = @"key";
+  [LPJSONUtils dictionary:dict
+          setObjectForKey:key
+            usingSelector:selector
+               onReceiver:object];
+  XCTAssertEqualObjects([NSNull null], [dict objectForKey:key]);
+}
+
+- (void) testDictionarySetObjectUsingSelectorReceiverSelectorReturnsVoid {
+  id object = [MyObject new];
+  SEL selector = @selector(selectorThatReturnsVoid);
+  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+  NSString *key = @"key";
+  [LPJSONUtils dictionary:dict
+          setObjectForKey:key
+            usingSelector:selector
+               onReceiver:object];
+  XCTAssertEqualObjects([NSNull null], [dict objectForKey:key]);
+}
+
+- (void) testDictionarySetObjectUsingSelectorValueIsNil {
+  id object = [MyObject new];
+  SEL selector = @selector(idType);
+  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+  NSString *key = @"key";
+  [LPJSONUtils dictionary:dict
+          setObjectForKey:key
+            usingSelector:selector
+               onReceiver:object];
+  XCTAssertEqualObjects([NSNull null], [dict objectForKey:key]);
+}
+
+- (void) testDictionarySetObjectUsingSelectorValueIsNonNil {
+  MyObject *object = [MyObject new];
+  SEL selector = @selector(object);
+  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+  NSString *key = @"key";
+  [LPJSONUtils dictionary:dict
+          setObjectForKey:key
+            usingSelector:selector
+               onReceiver:object];
+  XCTAssertEqualObjects(object.object, [dict objectForKey:key]);
+}
+
+- (void) testDictionarySetObjectUsingSelectorValueCanBeAutoBoxed {
+  id object = [MyObject new];
+  SEL selector = @selector(selectorThatReturnsBOOL);
+  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+  NSString *key = @"key";
+  XCTAssertNoThrow(
+                   [LPJSONUtils dictionary:dict
+                           setObjectForKey:key
+                             usingSelector:selector
+                                onReceiver:object]
+                   );
+
+}
 
 @end

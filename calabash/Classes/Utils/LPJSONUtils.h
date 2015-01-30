@@ -18,6 +18,11 @@
 
 + (BOOL) selector:(SEL) selector returnValueCanBeAutoboxedForReceiver:(id) object;
 
++ (void) dictionary:(NSMutableDictionary *) dictionary
+    setObjectForKey:(NSString *) key
+      usingSelector:(SEL) selector
+         onReceiver:(id) receiver;
+
 + (NSString *) serializeDictionary:(NSDictionary *) dictionary;
 
 + (NSDictionary *) deserializeDictionary:(NSString *) string;

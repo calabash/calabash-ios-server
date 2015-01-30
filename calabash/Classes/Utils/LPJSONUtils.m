@@ -52,6 +52,31 @@
   return YES;
 }
 
++ (void) dictionary:(NSMutableDictionary *) dictionary
+    setObjectForKey:(NSString *) key
+      usingSelector:(SEL) selector
+         onReceiver:(id) receiver {
+
+
+  if (![receiver respondsToSelector:selector]) {
+    [dictionary setObject:[NSNull null] forKey:key];
+    return;
+  }
+
+  if ([LPJSONUtils selector:selector returnValueIsVoidForReceiver:receiver]) {
+    [dictionary setObject:[NSNull null] forKey:key];
+    return;
+  }
+
+  if ([LPJSONUtils selector:selector returnValueCanBeAutoboxedForReceiver:receiver]) {
+    @throw [NSException exceptionWithName:@"NotYetImplemented"
+                                   reason:@"it is difficult" userInfo:nil];
+  } else {
+    id result = [receiver performSelector:selector withObject:nil];
+    [LPJSONUtils dictionary:dictionary setObject:result forKey:key];
+  }
+}
+
 + (NSString *) serializeDictionary:(NSDictionary *) dictionary {
   LPCJSONSerializer *s = [LPCJSONSerializer serializer];
   NSError *error = nil;
