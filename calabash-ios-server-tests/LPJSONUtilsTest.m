@@ -188,4 +188,19 @@
   SEL selector = @selector(selectorThatReturnsCharArray);
   XCTAssertFalse([LPJSONUtils selector:selector returnsPointerForReceiver:object]);
 }
+
+#pragma mark - selector:returnValueIsVoidForReceiver:
+
+- (void) testSelectorReturnValueIsVoidForReceiverYES {
+  id object = [MyObject new];
+  SEL selector = @selector(selectorThatReturnsVoid);
+  XCTAssertTrue([LPJSONUtils selector:selector returnValueIsVoidForReceiver:object]);
+}
+
+- (void) testSelectorReturnValueIsVoidForReceiverNO {
+  id object = [MyObject new];
+  SEL selector = @selector(selectorThatReturnsBOOL);
+  XCTAssertFalse([LPJSONUtils selector:selector returnValueIsVoidForReceiver:object]);
+}
+
 @end

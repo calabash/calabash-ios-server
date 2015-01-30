@@ -35,6 +35,11 @@
   return ([returnType isEqualToString:@"@"]);
 }
 
++ (BOOL) selector:(SEL) selector returnValueIsVoidForReceiver:(id) object {
+  NSString *returnType = [LPJSONUtils stringForSelector:selector returnValueForReceiver:object];
+  return ([returnType isEqualToString:@"v"]);
+}
+
 + (NSString *) serializeDictionary:(NSDictionary *) dictionary {
   LPCJSONSerializer *s = [LPCJSONSerializer serializer];
   NSError *error = nil;

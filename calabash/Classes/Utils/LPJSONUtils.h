@@ -14,6 +14,8 @@
 
 + (BOOL) selector:(SEL) selector returnsPointerForReceiver:(id) object;
 
++ (BOOL) selector:(SEL) selector returnValueIsVoidForReceiver:(id) object;
+
 + (NSString *) serializeDictionary:(NSDictionary *) dictionary;
 
 + (NSDictionary *) deserializeDictionary:(NSString *) string;
