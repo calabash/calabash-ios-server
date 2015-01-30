@@ -10,6 +10,8 @@
           setObject:(id) object
              forKey:(NSString *) key;
 
++ (BOOL) selector:(SEL) selector returnsPointerForReceiver:(id) object;
+
 + (NSString *) serializeDictionary:(NSDictionary *) dictionary;
 
 + (NSDictionary *) deserializeDictionary:(NSString *) string;

@@ -24,6 +24,13 @@
   }
 }
 
++ (BOOL) selector:(SEL) selector returnsPointerForReceiver:(id) object {
+  NSMethodSignature *signature = [[object class] instanceMethodSignatureForSelector:selector];
+  NSString *returnType = [[NSString alloc] initWithCString:[signature methodReturnType]
+                                                  encoding:NSASCIIStringEncoding];
+  return ([returnType isEqualToString:@"@"]);
+}
+
 + (NSString *) serializeDictionary:(NSDictionary *) dictionary {
   LPCJSONSerializer *s = [LPCJSONSerializer serializer];
   NSError *error = nil;
