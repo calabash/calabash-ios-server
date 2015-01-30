@@ -24,10 +24,14 @@
   }
 }
 
-+ (BOOL) selector:(SEL) selector returnsPointerForReceiver:(id) object {
++ (NSString *) stringForSelector:(SEL) selector returnValueForReceiver:(id) object {
   NSMethodSignature *signature = [[object class] instanceMethodSignatureForSelector:selector];
-  NSString *returnType = [[NSString alloc] initWithCString:[signature methodReturnType]
-                                                  encoding:NSASCIIStringEncoding];
+  return [NSString stringWithCString:[signature methodReturnType]
+                            encoding:NSASCIIStringEncoding];
+}
+
++ (BOOL) selector:(SEL) selector returnsPointerForReceiver:(id) object {
+  NSString *returnType = [LPJSONUtils stringForSelector:selector returnValueForReceiver:object];
   return ([returnType isEqualToString:@"@"]);
 }
 
