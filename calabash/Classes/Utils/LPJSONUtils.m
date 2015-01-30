@@ -11,6 +11,12 @@
 #import "LPDevice.h"
 #import "LPOrientationOperation.h"
 
+@interface LPJSONUtils ()
+
++ (id) objectForSelector:(SEL) selector withAutoboxedReturnValueForReceiver:(id) receiver;
+
+@end
+
 @implementation LPJSONUtils
 
 + (void) dictionary:(NSMutableDictionary *) dictionary
@@ -76,6 +82,134 @@
     [LPJSONUtils dictionary:dictionary setObject:result forKey:key];
   }
 }
+
++ (id) objectForSelector:(SEL) selector withAutoboxableReturnValueForReceiver:(id) receiver {
+  NSString *returnType = [LPJSONUtils stringForSelector:selector
+                                 returnValueForReceiver:receiver];
+  if (![receiver respondsToSelector:selector]) {
+    NSLog(@"Receiver '%@' does not respond to selector '%@'. Returning NSNull.",
+          receiver, NSStringFromSelector(selector));
+  }
+
+  if (![LPJSONUtils selector:selector returnValueCanBeAutoboxedForReceiver:receiver]) {
+    NSLog(@"Calling selector '%@' on '%@' does not return a value that can be autoboxed: '%@'.  Returning NSNull.",
+          NSStringFromSelector(selector), receiver, returnType);
+    return [NSNull null];
+  }
+
+  NSMethodSignature *signature = [receiver methodSignatureForSelector:selector];
+  NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+  [invocation invokeWithTarget:receiver];
+
+  if ([returnType length] > 1) {
+    if ([returnType isEqualToString:@"r*"]) {
+      char *arr;
+      return @(arr);
+    } else {
+      NSLog(@"Expected a single character encodeing but found '%@' when invoking selector '%@' on receiver '%@'.  Returning NSNull.",
+            returnType, NSStringFromSelector(selector), receiver);
+      return [NSNull null];
+    }
+  }
+
+  char encoding = [returnType cStringUsingEncoding:NSASCIIStringEncoding][0];
+  switch (encoding) {
+
+    case '*' : {
+      char *ref; [invocation getReturnValue:(void **) &ref]; return @(ref);
+    }
+
+      // BOOL is explicitly signed so @encode(BOOL) == "c" rather than "C"
+      // even if -funsigned-char is used.
+    case 'c' : {
+      char ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((char)ref);
+    }
+
+    case 'C' : {
+      char ref;
+      [invocation getReturnValue:(void **) &ref];
+       return @((unsigned char)ref);
+    }
+
+      // See note above for 'c'.
+    case 'B': {
+      bool ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((bool)ref);
+    }
+
+    case 'i': {
+      int ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((int) ref);
+    }
+
+    case 'I': {
+      unsigned int ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((unsigned int) ref);
+    }
+
+    case 's': {
+      short ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((short) ref);
+    }
+
+    case 'S': {
+      unsigned short ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((unsigned short) ref);
+    }
+
+    case 'd' : {
+      double ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((double) ref);
+    }
+
+    case 'f' : {
+      float ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((float) ref);
+    }
+
+    case 'l' : {
+      long ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((long) ref);
+    }
+
+    case 'L' : {
+      unsigned long ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((unsigned long) ref);
+    }
+
+    case 'q' : {
+      long long ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((long long) ref);
+    }
+
+    case 'Q' : {
+      unsigned long long ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((unsigned long long) ref);
+    }
+
+    default: {
+      NSLog(@"Unexpected type encoding: '%@'.  Returning NSNull", @(encoding));
+    }
+  }
+
+  return [NSNull null];
+}
+
+
+
 
 + (NSString *) serializeDictionary:(NSDictionary *) dictionary {
   LPCJSONSerializer *s = [LPCJSONSerializer serializer];
