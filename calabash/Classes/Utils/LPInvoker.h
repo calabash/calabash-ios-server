@@ -1,5 +1,7 @@
 #import <Foundation/Foundation.h>
 
+extern NSString *const LPReceiverDoesNotRespondToSelectorEncoding;
+
 @interface LPInvoker : NSObject
 
 @property(assign, nonatomic, readonly) SEL selector;

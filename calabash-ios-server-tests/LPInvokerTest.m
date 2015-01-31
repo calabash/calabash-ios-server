@@ -67,4 +67,13 @@
   XCTAssertEqualObjects(actual, @"I");
 }
 
+- (void) testEncodingDoesNotRespondToSelector {
+  NSString *receiver = @"string";
+  SEL selector = NSSelectorFromString(@"obviouslyUnknownSelector");
+  LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
+                                                  receiver:receiver];
+  NSString *actual = [invoker encoding];
+  XCTAssertEqualObjects(actual, LPReceiverDoesNotRespondToSelectorEncoding);
+}
+
 @end

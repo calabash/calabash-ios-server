@@ -4,6 +4,8 @@
 
 #import "LPInvoker.h"
 
+NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
+
 @interface LPInvoker ()
 
 @property(strong, nonatomic, readonly) NSString *encoding;
@@ -37,10 +39,14 @@
 - (NSString *) encoding {
   if (_encoding) { return _encoding; }
 
-  NSMethodSignature *signature;
-  signature = [self.receiver methodSignatureForSelector:self.selector];
-  _encoding = [NSString stringWithCString:[signature methodReturnType]
-                                 encoding:NSASCIIStringEncoding];
+  if (![self receiverRespondsToSelector]) {
+    _encoding = LPReceiverDoesNotRespondToSelectorEncoding;
+  } else {
+    NSMethodSignature *signature;
+    signature = [self.receiver methodSignatureForSelector:self.selector];
+    _encoding = [NSString stringWithCString:[signature methodReturnType]
+                                   encoding:NSASCIIStringEncoding];
+  }
   return _encoding;
 }
 
