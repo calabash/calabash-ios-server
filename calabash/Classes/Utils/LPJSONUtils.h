@@ -12,7 +12,7 @@
 
 + (NSString *) stringForSelector:(SEL) selector returnValueForReceiver:(id) object;
 
-+ (BOOL) selector:(SEL) selector returnsPointerForReceiver:(id) object;
++ (BOOL) selector:(SEL) selector returnsNSObjectForReceiver:(id) object;
 
 + (BOOL) selector:(SEL) selector returnValueIsVoidForReceiver:(id) object;
 

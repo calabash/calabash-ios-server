@@ -116,77 +116,77 @@
 - (void) testSelectorReturnsPointerForObjectString {
   id object = @"object";
   SEL selector = @selector(substringToIndex:);
-  XCTAssertTrue([LPJSONUtils selector:selector returnsPointerForReceiver:object]);
+  XCTAssertTrue([LPJSONUtils selector:selector returnsNSObjectForReceiver:object]);
 }
 
 // '@'
 - (void) testSelectorReturnsPointerForObjectObject {
   id object = [MyObject new];
   SEL selector = @selector(number);
-  XCTAssertTrue([LPJSONUtils selector:selector returnsPointerForReceiver:object]);
+  XCTAssertTrue([LPJSONUtils selector:selector returnsNSObjectForReceiver:object]);
 }
 
 // '@'
 - (void) testSelectorReturnsPointerForObjectArray {
   id object = [MyObject new];
   SEL selector = @selector(array);
-  XCTAssertTrue([LPJSONUtils selector:selector returnsPointerForReceiver:object]);
+  XCTAssertTrue([LPJSONUtils selector:selector returnsNSObjectForReceiver:object]);
 }
 
 // '@'
 - (void) testSelectorReturnsPointerForObjectDictionary {
   id object = [MyObject new];
   SEL selector = @selector(dictionary);
-  XCTAssertTrue([LPJSONUtils selector:selector returnsPointerForReceiver:object]);
+  XCTAssertTrue([LPJSONUtils selector:selector returnsNSObjectForReceiver:object]);
 }
 
 // '@'
 - (void) testSelectorReturnsPointerForObjectIdType {
   id object = [MyObject new];
   SEL selector = @selector(idType);
-  XCTAssertTrue([LPJSONUtils selector:selector returnsPointerForReceiver:object]);
+  XCTAssertTrue([LPJSONUtils selector:selector returnsNSObjectForReceiver:object]);
 }
 
 // 'v' - cannot be autoboxed
 - (void) testSelectorReturnsPointerForObjectVoidReturn {
   id object = [MyObject new];
   SEL selector = @selector(selectorThatReturnsVoid);
-  XCTAssertFalse([LPJSONUtils selector:selector returnsPointerForReceiver:object]);
+  XCTAssertFalse([LPJSONUtils selector:selector returnsNSObjectForReceiver:object]);
 }
 
 // 'c'
 - (void) testSelectorReturnsPointerForObjectBOOLReturn {
   id object = [MyObject new];
   SEL selector = @selector(selectorThatReturnsBOOL);
-  XCTAssertFalse([LPJSONUtils selector:selector returnsPointerForReceiver:object]);
+  XCTAssertFalse([LPJSONUtils selector:selector returnsNSObjectForReceiver:object]);
 }
 
 // 'i'
 - (void) testSelectorReturnsPointerForObjectIntegerReturn {
   id object = [MyObject new];
   SEL selector = @selector(selectorThatReturnsNSInteger);
-  XCTAssertFalse([LPJSONUtils selector:selector returnsPointerForReceiver:object]);
+  XCTAssertFalse([LPJSONUtils selector:selector returnsNSObjectForReceiver:object]);
 }
 
 // 'f'
 - (void) testSelectorReturnsPointerForObjectCGFloatReturn {
   id object = [MyObject new];
   SEL selector = @selector(selectorThatReturnsCGFloat);
-  XCTAssertFalse([LPJSONUtils selector:selector returnsPointerForReceiver:object]);
+  XCTAssertFalse([LPJSONUtils selector:selector returnsNSObjectForReceiver:object]);
 }
 
 // 'c'
 - (void) testSelectorReturnsPointerForObjectCharReturn {
   id object = [MyObject new];
   SEL selector = @selector(selectorThatReturnsChar);
-  XCTAssertFalse([LPJSONUtils selector:selector returnsPointerForReceiver:object]);
+  XCTAssertFalse([LPJSONUtils selector:selector returnsNSObjectForReceiver:object]);
 }
 
 // 'r*' - can be autoboxed
 - (void) testSelectorReturnsPointerForObjectCharArrayReturn {
   id object = [MyObject new];
   SEL selector = @selector(selectorThatReturnsCharArray);
-  XCTAssertFalse([LPJSONUtils selector:selector returnsPointerForReceiver:object]);
+  XCTAssertFalse([LPJSONUtils selector:selector returnsNSObjectForReceiver:object]);
 }
 
 #pragma mark - selector:returnValueIsVoidForReceiver:

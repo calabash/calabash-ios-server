@@ -36,7 +36,7 @@
                             encoding:NSASCIIStringEncoding];
 }
 
-+ (BOOL) selector:(SEL) selector returnsPointerForReceiver:(id) object {
++ (BOOL) selector:(SEL) selector returnsNSObjectForReceiver:(id) object {
   NSString *returnType = [LPJSONUtils stringForSelector:selector returnValueForReceiver:object];
   return ([returnType isEqualToString:@"@"]);
 }
@@ -51,7 +51,7 @@
     return NO;
   }
 
-  if ([LPJSONUtils selector:selector returnsPointerForReceiver:object]) {
+  if ([LPJSONUtils selector:selector returnsNSObjectForReceiver:object]) {
     return NO;
   }
 
