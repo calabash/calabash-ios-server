@@ -76,7 +76,12 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
     id result;
     [invocation invoke];
     [invocation getReturnValue:&result];
-    return result;
+
+    if(!result) {
+      return [NSNull null];
+    } else {
+      return result;
+    }
   }
 
   if ([invoker selectorReturnValueCanBeCoerced]) { return [invoker objectByCoercingReturnValue]; }

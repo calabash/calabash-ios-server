@@ -9,7 +9,21 @@
 #import "InvokerFactory.h"
 #import <objc/runtime.h>
 
-@interface LPInvoker (XTCTEST)
+@interface NSString (XCTTEST)
+
+- (id) returnsNil;
+
+@end
+
+@implementation NSString (XCTTEST)
+
+- (id) returnsNil {
+  return nil;
+}
+
+@end
+
+@interface LPInvoker (XCTTEST)
 
 - (NSInvocation *) invocation;
 - (NSMethodSignature *) signature;
@@ -163,6 +177,13 @@
   SEL selector = @selector(description);
   id actual = [LPInvoker objectBySafelyInvokingSelector:selector receiver:receiver];
   XCTAssertEqualObjects(actual, receiver);
+}
+
+- (void) objectBySafelyInvokingSelectorNil {
+  NSString *receiver = @"string";
+  SEL selector = @selector(returnsNil);
+  id actual = [LPInvoker objectBySafelyInvokingSelector:selector receiver:receiver];
+  XCTAssertEqual(actual, [NSNull null]);
 }
 
 - (void) objectBySafelyInvokingSelectorCoerced {
