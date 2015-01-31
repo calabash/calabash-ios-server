@@ -124,9 +124,11 @@
     return [NSNull null];
   }
 
-  NSMethodSignature *signature = [receiver methodSignatureForSelector:selector];
+  NSMethodSignature *signature = [[receiver class] instanceMethodSignatureForSelector:selector];
   NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
-  [invocation invokeWithTarget:receiver];
+  [invocation setTarget:receiver];
+  [invocation setSelector:selector];
+  [invocation invoke];
 
   if ([returnType length] > 1) {
     if ([returnType isEqualToString:@"r*"]) {
