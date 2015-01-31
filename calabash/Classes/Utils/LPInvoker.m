@@ -50,4 +50,39 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
   return _encoding;
 }
 
+- (BOOL) encodingIsUnhandled {
+  NSString *encoding = [self encoding];
+
+  // @encode(void *) => ^v
+  // @encode(float *) => ^f
+  if ([encoding hasPrefix:@"^"]) { return YES; }
+
+  // @encode(typeof(NSError **))
+  if ([encoding isEqualToString:@"^@"]) { return YES; }
+
+  // @encode(NSObject)
+  if ([encoding isEqualToString:@"#"]) { return YES; }
+
+  // @encode(typeof([NSObject class])) => {NSObject=#}
+  // @encode(typeof(Struct)) => {name=type...}
+  if ([encoding hasPrefix:@"{"]) { return YES; }
+
+  // @encode(typeof(Union)) => (name=type...)
+  if ([encoding hasPrefix:@"("]) { return YES; }
+
+  // @encode(typeof(@selector(length))) => :
+  if ([encoding isEqualToString:@":"]) { return YES; }
+
+  // @encode(typeof(BitField) => bNUM
+  if ([encoding hasPrefix:@"b"]) { return YES; }
+
+  // int arr[5] = {1, 2, 3, 4, 5}; @encode(typeof(arr)) => [5i]
+  // float arr[3] = {0.1f, 0.2f, 0.3f}; @encode(typeof(arr)) => [3f]
+  if ([encoding hasPrefix:@"["]) { return YES; }
+
+  // unknown - function pointers?
+  if ([encoding isEqualToString:@"?"]) { return YES; }
+  return NO;
+}
+
 @end
