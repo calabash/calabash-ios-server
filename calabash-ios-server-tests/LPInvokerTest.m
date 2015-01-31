@@ -134,21 +134,21 @@
 
 #pragma mark - LPInvoker invokeSelector:withTarget:
 
-- (void) objectBySafelyInvokingSelectorSelectorHasArguments {
+- (void) invokeSelectorTargetSelectorHasArguments {
   NSString *target = @"string";
   SEL selector = @selector(substringToIndex:);
   id actual = [LPInvoker invokeSelector:selector withTarget:target];
   XCTAssertEqualObjects(actual, LPSelectorHasUnhandledArguments);
 }
 
-- (void) objectBySafelyInvokingSelectorDNRS {
+- (void) invokeSelectorTargetDoesNotRespondToSelector {
   NSString *target = @"string";
   SEL selector = NSSelectorFromString(@"obviouslyUnknownSelector");
   id actual = [LPInvoker invokeSelector:selector withTarget:target];
   XCTAssertEqualObjects(actual, LPTargetDoesNotRespondToSelector);
 }
 
-- (void) objectBySafelyInvokingSelectorVoid {
+- (void) invokeSelectorTargetVoid {
   NSString *target = @"string";
   SEL selector = @selector(length);
   @try {
@@ -160,7 +160,7 @@
   }
 }
 
-- (void) objectBySafelyInvokingSelectorUnknown {
+- (void) invokeSelectorTargetUnknown {
   NSString *target = @"string";
   SEL selector = @selector(length);
   @try {
@@ -172,21 +172,21 @@
   }
 }
 
-- (void) objectBySafelyInvokingSelectorObject {
+- (void) invokeSelectorTargetObject {
   NSString *target = @"target";
   SEL selector = @selector(description);
   id actual = [LPInvoker invokeSelector:selector withTarget:target];
   XCTAssertEqualObjects(actual, target);
 }
 
-- (void) objectBySafelyInvokingSelectorNil {
+- (void) invokeSelectorTargetNil {
   NSString *target = @"string";
   SEL selector = @selector(returnsNil);
   id actual = [LPInvoker invokeSelector:selector withTarget:target];
   XCTAssertEqual(actual, [NSNull null]);
 }
 
-- (void) objectBySafelyInvokingSelectorCoerced {
+- (void) invokeSelectorTargetCoerced {
   NSString *target = @"string";
   SEL selector = @selector(length);
   id actual = [LPInvoker invokeSelector:selector withTarget:target];
@@ -195,7 +195,7 @@
 
 #pragma mark - invocation
 
-- (void) testInvocationRS {
+- (void) testInvocationRespondsToSelector {
   NSString *target = @"string";
   SEL selector = @selector(length);
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
@@ -205,7 +205,7 @@
   XCTAssertEqualObjects(invocation.target, target);
 }
 
-- (void) testInvocationDNRS {
+- (void) testInvocationDoesNotRespondToSelector {
   NSString *target = @"string";
   SEL selector = NSSelectorFromString(@"obviouslyUnknownSelector");
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
@@ -216,7 +216,7 @@
 
 #pragma mark - signature
 
-- (void) testSignatureRS {
+- (void) testSignatureRespondsToSelector {
   NSString *target = @"string";
   SEL selector = @selector(length);
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
@@ -224,7 +224,7 @@
   XCTAssertNotNil([invoker signature]);
 }
 
-- (void) testSignatureDNRS {
+- (void) testSignatureDoesNotRespondToSelector {
   NSString *target = @"string";
   SEL selector = NSSelectorFromString(@"obviouslyUnknownSelector");
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
@@ -433,7 +433,7 @@
   [mock verify];
 }
 
-- (void) testSelectorReturnsObjectDNRS {
+- (void) testSelectorReturnsObjectDoesNotRespondToSelector {
   id mock = [self stubInvokerDoesNotRespondToSelector];
   XCTAssertFalse([mock selectorReturnsObject]);
   [mock verify];
@@ -455,58 +455,58 @@
   [mock verify];
 }
 
-- (void) testSelectorReturnsVoidDNRS {
+- (void) testSelectorReturnsVoidDoesNotRespondToSelector {
   id mock = [self stubInvokerDoesNotRespondToSelector];
   XCTAssertFalse([mock selectorReturnsVoid]);
   [mock verify];
 }
 
-#pragma mark - selectorReturnsAutoBoxable
+#pragma mark - selectorReturnValueCanBeCoerced
 
-- (void) testSelectorReturnsAutoBoxableVoid {
+- (void) testselectorReturnValueCanBeCoercedVoid {
   NSString *encoding = @(@encode(void));
   id mock = [self stubInvokerEncoding:encoding];
   XCTAssertFalse([mock selectorReturnValueCanBeCoerced]);
   [mock verify];
 }
 
-- (void) testSelectorReturnsAutoBoxableObject {
+- (void) testselectorReturnValueCanBeCoercedObject {
   NSString *encoding = @(@encode(NSObject *));
   id mock = [self stubInvokerEncoding:encoding];
   XCTAssertFalse([mock selectorReturnValueCanBeCoerced]);
   [mock verify];
 }
 
-- (void) testSelectorReturnsAutoBoxableUnknown {
+- (void) testselectorReturnValueCanBeCoercedUnknown {
   NSString *encoding = @"?";
   id mock = [self stubInvokerEncoding:encoding];
   XCTAssertFalse([mock selectorReturnValueCanBeCoerced]);
   [mock verify];
 }
 
-- (void) testSelectorReturnsAutoBoxableDNRS {
+- (void) testselectorReturnValueCanBeCoercedDoesNotRespondToSelector {
   id mock = [self stubInvokerDoesNotRespondToSelector];
   XCTAssertFalse([mock selectorReturnValueCanBeCoerced]);
   [mock verify];
 }
 
-- (void) testSelectorReturnsAutoBoxableCharStar {
+- (void) testselectorReturnValueCanBeCoercedCharStar {
   NSString *encoding = @(@encode(char *));
   id mock = [self stubInvokerEncoding:encoding];
   XCTAssertTrue([mock selectorReturnValueCanBeCoerced]);
   [mock verify];
 }
 
-#pragma mark - objectWithAutoboxedValue
+#pragma mark - objectByCoercingReturnValue
 
-- (void) testAutoboxedValueDNRS {
+- (void) testObjectByCoercingReturnValueDoesNotRespondToSelector {
   id mock = [self stubInvokerDoesNotRespondToSelector];
   XCTAssertEqualObjects([mock objectByCoercingReturnValue],
                         LPTargetDoesNotRespondToSelector);
   [mock verify];
 }
 
-- (void) testAutoboxedValueNotAutoboxable {
+- (void) testObjectByCoercingReturnValueNotAutoboxable {
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:@selector(length)
                                                     target:@"string"];
   id mock = [OCMockObject partialMockForObject:invoker];
@@ -518,7 +518,7 @@
   [mock verify];
 }
 
-- (void) testAutoboxedValueUnexpectedEncoding {
+- (void) testObjectByCoercingReturnValueUnexpectedEncoding {
   // space is intential; don't want first char to match
   NSString *encoding = @" unexpected encoding";
   id mock = [self expectInvokerEncoding:encoding];
@@ -527,7 +527,7 @@
   [mock verify];
 }
 
-- (void) testAutoboxedValueInvalidEncoding {
+- (void) testObjectByCoercingReturnValueInvalidEncoding {
   // space is intential; don't want first char to match
   NSString *encoding = @"";
   id mock = [self expectInvokerEncoding:encoding];
@@ -536,27 +536,27 @@
   [mock verify];
 }
 
-- (void) testAutoboxedValueConstCharStar {
+- (void) testObjectByCoercingReturnValueConstCharStar {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"const char *"];
   XCTAssertEqualObjects([invoker objectByCoercingReturnValue], @"const char *");
 }
 
-- (void) testAutoboxedValueCharStar {
+- (void) testObjectByCoercingReturnValueCharStar {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"char *"];
   XCTAssertEqualObjects([invoker objectByCoercingReturnValue], @"char *");
 }
 
-- (void) testAutoboxedValueChar {
+- (void) testObjectByCoercingReturnValueChar {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"char"];
   XCTAssertEqualObjects([invoker objectByCoercingReturnValue], @"c");
 }
 
-- (void) testAutoboxedValueUnsignedChar {
+- (void) testObjectByCoercingReturnValueUnsignedChar {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"unsigned char"];
   XCTAssertEqualObjects([invoker objectByCoercingReturnValue], @"C");
 }
 
-- (void) testAutoboxedValueBool {
+- (void) testObjectByCoercingReturnValueBool {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"bool true"];
   XCTAssertEqual([[invoker objectByCoercingReturnValue] boolValue], YES);
 
@@ -564,7 +564,7 @@
   XCTAssertEqual([[invoker objectByCoercingReturnValue] boolValue], NO);
 }
 
-- (void) testAutoboxedValueBOOL {
+- (void) testObjectByCoercingReturnValueBOOL {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"BOOL YES"];
   XCTAssertEqual([[invoker objectByCoercingReturnValue] boolValue], YES);
 
@@ -572,7 +572,7 @@
   XCTAssertEqual([[invoker objectByCoercingReturnValue] boolValue], NO);
 }
 
-- (void) testAutoboxedValueInteger {
+- (void) testObjectByCoercingReturnValueInteger {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"NSInteger"];
   XCTAssertEqual([[invoker objectByCoercingReturnValue] integerValue], NSIntegerMin);
 
@@ -580,7 +580,7 @@
   XCTAssertEqual([[invoker objectByCoercingReturnValue] unsignedIntegerValue], NSNotFound);
 }
 
-- (void) testAutoboxedValueShort {
+- (void) testObjectByCoercingReturnValueShort {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"short"];
   XCTAssertEqual([[invoker objectByCoercingReturnValue] integerValue], SHRT_MIN);
 
@@ -588,17 +588,17 @@
   XCTAssertEqual([[invoker objectByCoercingReturnValue] unsignedIntegerValue], SHRT_MAX);
 }
 
-- (void) testAutoboxedValueDouble {
+- (void) testObjectByCoercingReturnValueDouble {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"double"];
   XCTAssertEqual([[invoker objectByCoercingReturnValue] doubleValue], DBL_MAX);
 }
 
-- (void) testAutoboxedValueFloat {
+- (void) testObjectByCoercingReturnValueFloat {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"float"];
   XCTAssertEqual([[invoker objectByCoercingReturnValue] doubleValue], MAXFLOAT);
 }
 
-- (void) testAutoboxedValueLong {
+- (void) testObjectByCoercingReturnValueLong {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"long"];
   XCTAssertEqual([[invoker objectByCoercingReturnValue] longValue], LONG_MIN);
 
