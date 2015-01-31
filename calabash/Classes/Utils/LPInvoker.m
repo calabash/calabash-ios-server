@@ -64,9 +64,8 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
     return nil;
   }
 
-  NSMethodSignature *signature;
-  signature = [[self.receiver class] instanceMethodSignatureForSelector:self.selector];
-  NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+  NSInvocation *invocation;
+  invocation = [NSInvocation invocationWithMethodSignature:self.signature];
   [invocation setTarget:self.receiver];
   [invocation setSelector:self.selector];
   _invocation = invocation;
@@ -87,14 +86,22 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
   return [self.receiver respondsToSelector:self.selector];
 }
 
+
+- (NSUInteger) numberOfArguments {
+  return 0;
+}
+
+- (BOOL) selectorHasArguments {
+  return NO;
+}
+
 - (NSString *) encoding {
   if (_encoding) { return _encoding; }
 
   if (![self receiverRespondsToSelector]) {
     _encoding = LPReceiverDoesNotRespondToSelectorEncoding;
   } else {
-    NSMethodSignature *signature;
-    signature = [self.receiver methodSignatureForSelector:self.selector];
+    NSMethodSignature *signature = self.signature;
     _encoding = [NSString stringWithCString:[signature methodReturnType]
                                    encoding:NSASCIIStringEncoding];
   }
