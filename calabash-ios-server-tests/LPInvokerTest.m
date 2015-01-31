@@ -10,6 +10,7 @@
 @interface LPInvoker (XTCTEST)
 
 - (BOOL) selectorReturnsObject;
+- (BOOL) selectorReturnsVoid;
 
 @end
 
@@ -199,6 +200,22 @@
   NSString *encoding = @(@encode(char *));
   id mock = [self mockInvokerEncoding:encoding];
   XCTAssertFalse([mock selectorReturnsObject]);
+  [mock verify];
+}
+
+#pragma mark - selectorReturnsVoid
+
+- (void) testSelectorReturnsVoidYES {
+  NSString *encoding = @(@encode(void));
+  id mock = [self mockInvokerEncoding:encoding];
+  XCTAssertTrue([mock selectorReturnsVoid]);
+  [mock verify];
+}
+
+- (void) testSelectorReturnsVoidNO {
+  NSString *encoding = @(@encode(char *));
+  id mock = [self mockInvokerEncoding:encoding];
+  XCTAssertFalse([mock selectorReturnsVoid]);
   [mock verify];
 }
 
