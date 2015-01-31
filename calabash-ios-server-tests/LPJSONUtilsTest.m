@@ -5,6 +5,7 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "LPJSONUtils.h"
+#import <OCMock/OCMock.h>
 
 @interface MyObject : NSObject
 
@@ -96,8 +97,64 @@
   XCTAssertEqualObjects(actual, [NSNull null]);
 }
 
-#pragma mark - stringForSelector:returnValueForReceiver:
+#pragma mark - selector:returnsUnhandledEncodingForReceiver:
 
+- (id) mockReturnValueEncodingForReceiver:(NSString *) encoding {
+  id mock = [OCMockObject mockForClass:[LPJSONUtils class]];
+  [[[mock expect] andReturn:encoding] stringForSelector:[OCMArg anySelector]
+                         returnValueEncodingForReceiver:[OCMArg any]];
+  return mock;
+}
+
+- (void) testSelectorReturnsUnhandledEncodingForReceiverVoidStar {
+  NSString *encoding = @(@encode(void *));
+  id mock = [self mockReturnValueEncodingForReceiver:encoding];
+  XCTAssertTrue([LPJSONUtils selector:nil returnsUnhandledEncodingForReceiver:nil]);
+  [mock verify];
+}
+
+- (void) testSelectorReturnsUnhandledEncodingForReceiverNSErrorStarStar {
+  NSString *encoding = @(@encode(typeof(NSError **)));
+  id mock = [self mockReturnValueEncodingForReceiver:encoding];
+  XCTAssertTrue([LPJSONUtils selector:nil returnsUnhandledEncodingForReceiver:nil]);
+  [mock verify];
+}
+
+- (void) testSelectorReturnsUnhandledEncodingForReceiverNSObjectSymbol {
+  NSString *encoding = @(@encode(typeof(NSObject)));
+  id mock = [self mockReturnValueEncodingForReceiver:encoding];
+  XCTAssertTrue([LPJSONUtils selector:nil returnsUnhandledEncodingForReceiver:nil]);
+  [mock verify];
+}
+
+- (void) testSelectorReturnsUnhandledEncodingForReceiverClass {
+  NSString *encoding = @(@encode(typeof(NSObject)));
+  id mock = [self mockReturnValueEncodingForReceiver:encoding];
+  XCTAssertTrue([LPJSONUtils selector:nil returnsUnhandledEncodingForReceiver:nil]);
+  [mock verify];
+}
+
+- (void) testSelectorReturnsUnhandledEncodingForReceiverStruct {
+  typedef struct _struct {
+    short a;
+    long long b;
+    unsigned long long c;
+  } Struct;
+  NSString *encoding = @(@encode(typeof(Struct)));
+  id mock = [self mockReturnValueEncodingForReceiver:encoding];
+  XCTAssertTrue([LPJSONUtils selector:nil returnsUnhandledEncodingForReceiver:nil]);
+  [mock verify];
+}
+
+- (void) testSelectorReturnsUnhandledEncodingForReceiverCArray {
+  int arr[5] = {1, 2, 3, 4, 5};
+  NSString *encoding = @(@encode(typeof(arr)));
+  id mock = [self mockReturnValueEncodingForReceiver:encoding];
+  XCTAssertTrue([LPJSONUtils selector:nil returnsUnhandledEncodingForReceiver:nil]);
+  [mock verify];
+}
+
+#pragma mark - stringForSelector:returnValueForReceiver:
 
 - (void) testStringForSelectorReturnValueForRecieverPointer {
   id object = [MyObject new];

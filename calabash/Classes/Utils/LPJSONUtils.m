@@ -36,6 +36,30 @@
                             encoding:NSASCIIStringEncoding];
 }
 
++ (BOOL) selector:(SEL) selector returnsUnhandledEncodingForReceiver:(id) receiver {
+  NSString *encoding = [LPJSONUtils stringForSelector:selector returnValueEncodingForReceiver:receiver];
+
+  // @encode(void *)
+  if ([encoding isEqualToString:@"^v"]) { return YES; }
+
+  // @encode(typeof(NSError **))
+  if ([encoding isEqualToString:@"^@"]) { return YES; }
+
+  // @encode(NSObject)
+  if ([encoding isEqualToString:@"#"]) { return YES; }
+
+  // @encode(typeof([NSObject class])) => {NSObject=#}
+  // @encode(typeof(Struct)) => {_struct=sqQ}
+  if ([encoding hasPrefix:@"{"]) { return YES; }
+
+
+  // int arr[5] = {1, 2, 3, 4, 5}; @encode(typeof(arr)) => [5i]
+  // float arr[3] = {0.1f, 0.2f, 0.3f}; @encode(typeof(arr)) => [3f]
+  if ([encoding hasPrefix:@"["]) { return YES; }
+
+  return NO;
+}
+
 + (BOOL) selector:(SEL) selector returnsNSObjectForReceiver:(id) object {
   NSString *returnType = [LPJSONUtils stringForSelector:selector returnValueEncodingForReceiver:object];
   return ([returnType isEqualToString:@"@"]);
