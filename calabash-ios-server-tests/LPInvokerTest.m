@@ -56,4 +56,15 @@
   XCTAssertFalse([invoker receiverRespondsToSelector]);
 }
 
+#pragma mark - encoding
+
+- (void) testEncoding {
+  NSString *receiver = @"string";
+  SEL selector = @selector(length);
+  LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
+                                                  receiver:receiver];
+  NSString *actual = [invoker encoding];
+  XCTAssertEqualObjects(actual, @"I");
+}
+
 @end

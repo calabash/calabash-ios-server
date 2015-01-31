@@ -4,7 +4,15 @@
 
 #import "LPInvoker.h"
 
+@interface LPInvoker ()
+
+@property(strong, nonatomic, readonly) NSString *encoding;
+
+@end
+
 @implementation LPInvoker
+
+@synthesize encoding = _encoding;
 
 - (id) init {
   @throw [NSException exceptionWithName:@"LPDesignatedInitializerException"
@@ -24,6 +32,16 @@
 
 - (BOOL) receiverRespondsToSelector {
   return [self.receiver respondsToSelector:self.selector];
+}
+
+- (NSString *) encoding {
+  if (_encoding) { return _encoding; }
+
+  NSMethodSignature *signature;
+  signature = [self.receiver methodSignatureForSelector:self.selector];
+  _encoding = [NSString stringWithCString:[signature methodReturnType]
+                                 encoding:NSASCIIStringEncoding];
+  return _encoding;
 }
 
 @end
