@@ -9,13 +9,13 @@
 #import "InvokerFactory.h"
 #import <objc/runtime.h>
 
-@interface NSString (XCTTEST)
+@interface NSString (LPXCTTEST)
 
 - (id) returnsNil;
 
 @end
 
-@implementation NSString (XCTTEST)
+@implementation NSString (LPXCTTEST)
 
 - (id) returnsNil {
   return nil;
@@ -23,7 +23,7 @@
 
 @end
 
-@interface LPInvoker (XCTTEST)
+@interface LPInvoker (LPXCTTEST)
 
 - (NSInvocation *) invocation;
 - (NSMethodSignature *) signature;
