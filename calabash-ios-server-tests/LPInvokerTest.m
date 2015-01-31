@@ -85,7 +85,7 @@
 
 #pragma mark - encodingIsUnhandled
 
-- (id) mockInvokerEncoding:(NSString *) mockEncoding {
+- (id) expectInvokerEncoding:(NSString *) mockEncoding {
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:@selector(length)
                                                   receiver:@"string"];
   id mock = [OCMockObject partialMockForObject:invoker];
@@ -95,35 +95,35 @@
 
 - (void) testUnhandledEncodingVoidStar {
   NSString *encoding = @(@encode(void *));
-  id mock = [self mockInvokerEncoding:encoding];
+  id mock = [self expectInvokerEncoding:encoding];
   XCTAssertTrue([mock encodingIsUnhandled]);
   [mock verify];
 }
 
 - (void) testUnhandledEncodingTypeStar {
   NSString *encoding = @(@encode(float *));
-  id mock = [self mockInvokerEncoding:encoding];
+  id mock = [self expectInvokerEncoding:encoding];
   XCTAssertTrue([mock encodingIsUnhandled]);
   [mock verify];
 }
 
 - (void) testUnhandledEncodingNSObjectStarStar {
   NSString *encoding = @(@encode(typeof(NSObject **)));
-  id mock = [self mockInvokerEncoding:encoding];
+  id mock = [self expectInvokerEncoding:encoding];
   XCTAssertTrue([mock encodingIsUnhandled]);
   [mock verify];
 }
 
 - (void) testUnhandledEncodingClassObject {
   NSString *encoding = @(@encode(typeof(NSObject)));
-  id mock = [self mockInvokerEncoding:encoding];
+  id mock = [self expectInvokerEncoding:encoding];
   XCTAssertTrue([mock encodingIsUnhandled]);
   [mock verify];
 }
 
 - (void) testUnhandledEncodingClassInstance {
   NSString *encoding = @(@encode(typeof(NSObject)));
-  id mock = [self mockInvokerEncoding:encoding];
+  id mock = [self expectInvokerEncoding:encoding];
   XCTAssertTrue([mock encodingIsUnhandled]);
   [mock verify];
 }
@@ -135,7 +135,7 @@
     unsigned long long c;
   } Struct;
   NSString *encoding = @(@encode(typeof(Struct)));
-  id mock = [self mockInvokerEncoding:encoding];
+  id mock = [self expectInvokerEncoding:encoding];
   XCTAssertTrue([mock encodingIsUnhandled]);
   [mock verify];
 }
@@ -143,14 +143,14 @@
 - (void) testUnhandledEncodingCArray {
   int arr[5] = {1, 2, 3, 4, 5};
   NSString *encoding = @(@encode(typeof(arr)));
-  id mock = [self mockInvokerEncoding:encoding];
+  id mock = [self expectInvokerEncoding:encoding];
   XCTAssertTrue([mock encodingIsUnhandled]);
   [mock verify];
 }
 
 - (void) testUnhandledEncodingSelector {
   NSString *encoding = @(@encode(typeof(@selector(length))));
-  id mock = [self mockInvokerEncoding:encoding];
+  id mock = [self expectInvokerEncoding:encoding];
   XCTAssertTrue([mock encodingIsUnhandled]);
   [mock verify];
 }
@@ -163,7 +163,7 @@
   } MyUnion;
 
   NSString *encoding = @(@encode(typeof(MyUnion)));
-  id mock = [self mockInvokerEncoding:encoding];
+  id mock = [self expectInvokerEncoding:encoding];
   XCTAssertTrue([mock encodingIsUnhandled]);
   [mock verify];
 }
@@ -175,14 +175,14 @@
   } Age;
 
   NSString *encoding = @(@encode(typeof(Age)));
-  id mock = [self mockInvokerEncoding:encoding];
+  id mock = [self expectInvokerEncoding:encoding];
   XCTAssertTrue([mock encodingIsUnhandled]);
   [mock verify];
 }
 
 - (void) testUnhandledUnknown {
   NSString *encoding = @"?";
-  id mock = [self mockInvokerEncoding:encoding];
+  id mock = [self expectInvokerEncoding:encoding];
   XCTAssertTrue([mock encodingIsUnhandled]);
   [mock verify];
 }
@@ -191,14 +191,14 @@
 
 - (void) testSelectorReturnsObjectYES {
   NSString *encoding = @(@encode(NSObject *));
-  id mock = [self mockInvokerEncoding:encoding];
+  id mock = [self expectInvokerEncoding:encoding];
   XCTAssertTrue([mock selectorReturnsObject]);
   [mock verify];
 }
 
 - (void) testSelectorReturnsObjectNO {
   NSString *encoding = @(@encode(char *));
-  id mock = [self mockInvokerEncoding:encoding];
+  id mock = [self expectInvokerEncoding:encoding];
   XCTAssertFalse([mock selectorReturnsObject]);
   [mock verify];
 }
@@ -207,14 +207,14 @@
 
 - (void) testSelectorReturnsVoidYES {
   NSString *encoding = @(@encode(void));
-  id mock = [self mockInvokerEncoding:encoding];
+  id mock = [self expectInvokerEncoding:encoding];
   XCTAssertTrue([mock selectorReturnsVoid]);
   [mock verify];
 }
 
 - (void) testSelectorReturnsVoidNO {
   NSString *encoding = @(@encode(char *));
-  id mock = [self mockInvokerEncoding:encoding];
+  id mock = [self expectInvokerEncoding:encoding];
   XCTAssertFalse([mock selectorReturnsVoid]);
   [mock verify];
 }
