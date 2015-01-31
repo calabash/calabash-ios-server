@@ -2,7 +2,7 @@
 
 extern NSString *const LPReceiverDoesNotRespondToSelector;
 extern NSString *const LPVoidSelectorReturnValue;
-extern NSString *const LPUnhandledSelectorEncoding;
+extern NSString *const LPSelectorHasUnhandledEncoding;
 extern NSString *const LPSelectorHasUnhandledArguments;
 extern NSString *const LPCannotCoerceSelectorReturnValueToObject;
 extern NSString *const LPSelectorHasUnknownEncoding;

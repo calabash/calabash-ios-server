@@ -6,7 +6,7 @@
 
 NSString *const LPReceiverDoesNotRespondToSelector = @"*****";
 NSString *const LPVoidSelectorReturnValue = @"*selector returns void*";
-NSString *const LPUnhandledSelectorEncoding = @"*unhandled encoding*";
+NSString *const LPSelectorHasUnhandledEncoding = @"*selector returns unhandled encoding*";
 NSString *const LPSelectorHasUnhandledArguments = @"*unhandled selector arguments*";
 NSString *const LPCannotCoerceSelectorReturnValueToObject = @"*cannot coerce to object*";
 NSString *const LPSelectorHasUnknownEncoding = @"*unknown encoding*";
