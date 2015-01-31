@@ -7,6 +7,7 @@
 #import "LPInvoker.h"
 #import <OCMock/OCMock.h>
 #import "InvokerFactory.h"
+#import <objc/runtime.h>
 
 @interface LPInvoker (XTCTEST)
 
@@ -23,12 +24,22 @@
 
 @interface LPInvokerTest : XCTestCase
 
+@property (assign) Method originalEncodingMethod;
+@property (assign) Method swizzledEncodingMethod;
+
+- (void) swizzleEncodingWithNewSelector:(SEL) newSelector;
+- (void) unswizzleEncoding;
+- (NSString *) encodingSwizzledToVoid;
+- (NSString *) encodingSwizzledToUnknown;
+
 @end
 
 @implementation LPInvokerTest
 
 - (void)setUp {
   [super setUp];
+  self.originalEncodingMethod = class_getInstanceMethod([LPInvoker class],
+                                                        @selector(encoding));
 }
 
 - (void)tearDown {
@@ -39,6 +50,28 @@
 
 - (void) testCannotInitInvokerFactory {
   XCTAssertThrows([InvokerFactory new]);
+}
+
+#pragma mark - Swizzling
+
+- (NSString *) encodingSwizzledToVoid {
+  return @(@encode(void));
+}
+
+- (NSString *) encodingSwizzledToUnknown {
+  return @"?";
+}
+
+- (void) swizzleEncodingWithNewSelector:(SEL) newSelector {
+  self.swizzledEncodingMethod  = class_getInstanceMethod([self class],
+                                                         newSelector);
+  method_exchangeImplementations(self.originalEncodingMethod,
+                                 self.swizzledEncodingMethod);
+}
+
+- (void) unswizzleEncoding {
+  method_exchangeImplementations(self.swizzledEncodingMethod,
+                                 self.originalEncodingMethod);
 }
 
 #pragma mark - Mocking
