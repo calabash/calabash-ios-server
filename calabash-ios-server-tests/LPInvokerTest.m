@@ -7,6 +7,12 @@
 #import "LPInvoker.h"
 #import <OCMock/OCMock.h>
 
+@interface LPInvoker (XTCTEST)
+
+- (BOOL) selectorReturnsObject;
+
+@end
+
 @interface LPInvokerTest : XCTestCase
 
 @end
@@ -179,5 +185,22 @@
   XCTAssertTrue([mock encodingIsUnhandled]);
   [mock verify];
 }
+
+#pragma mark - selectorReturnsObject
+
+- (void) testSelectorReturnsObjectYES {
+  NSString *encoding = @(@encode(NSObject *));
+  id mock = [self mockInvokerEncoding:encoding];
+  XCTAssertTrue([mock selectorReturnsObject]);
+  [mock verify];
+}
+
+- (void) testSelectorReturnsObjectNO {
+  NSString *encoding = @(@encode(char *));
+  id mock = [self mockInvokerEncoding:encoding];
+  XCTAssertFalse([mock selectorReturnsObject]);
+  [mock verify];
+}
+
 
 @end

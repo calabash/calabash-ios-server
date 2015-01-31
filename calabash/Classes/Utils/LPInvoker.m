@@ -10,6 +10,8 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
 
 @property(strong, nonatomic, readonly) NSString *encoding;
 
+- (BOOL) selectorReturnsObject;
+
 @end
 
 @implementation LPInvoker
@@ -83,6 +85,10 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
   // unknown - function pointers?
   if ([encoding isEqualToString:@"?"]) { return YES; }
   return NO;
+}
+
+- (BOOL) selectorReturnsObject {
+  return [self.encoding isEqualToString:@"@"];
 }
 
 @end
