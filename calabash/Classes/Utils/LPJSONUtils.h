@@ -10,21 +10,6 @@
           setObject:(id) object
              forKey:(NSString *) key;
 
-+ (NSString *) stringForSelector:(SEL) selector returnValueEncodingForReceiver:(id) receiver;
-
-+ (BOOL) selector:(SEL) selector returnsUnhandledEncodingForReceiver:(id) receiver;
-
-+ (BOOL) selector:(SEL) selector returnsNSObjectForReceiver:(id) receiver;
-
-+ (BOOL) selector:(SEL) selector returnsVoidForReceiver:(id) receiver;
-
-+ (BOOL) selector:(SEL) selector returnsAutoBoxableValueForReceiver:(id) receiver;
-
-+ (void) dictionary:(NSMutableDictionary *) dictionary
-    setObjectForKey:(NSString *) key
-      usingSelector:(SEL) selector
-         onReceiver:(id) receiver;
-
 + (NSString *) serializeDictionary:(NSDictionary *) dictionary;
 
 + (NSDictionary *) deserializeDictionary:(NSString *) string;
