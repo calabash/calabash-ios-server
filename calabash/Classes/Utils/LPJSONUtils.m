@@ -102,8 +102,8 @@
   }
 
   if ([LPJSONUtils selector:selector returnsAutoBoxableValueForReceiver:receiver]) {
-    @throw [NSException exceptionWithName:@"NotYetImplemented"
-                                   reason:@"it is difficult" userInfo:nil];
+    id result = [LPJSONUtils objectForSelector:selector withAutoBoxableValueForReceiver:receiver];
+    [LPJSONUtils dictionary:dictionary setObject:result forKey:key];
   } else {
     id result = [receiver performSelector:selector withObject:nil];
     [LPJSONUtils dictionary:dictionary setObject:result forKey:key];
