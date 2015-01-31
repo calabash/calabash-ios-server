@@ -361,7 +361,10 @@
                              usingSelector:selector
                                 onReceiver:object]
                    );
-
 }
 
 @end
+
+//  NSMethodSignature *signature = [object methodSignatureForSelector:selector];
+//  NSLog(@"return value = %@", [NSString stringWithCString:[signature methodReturnType]
+//                                                 encoding:NSASCIIStringEncoding]);

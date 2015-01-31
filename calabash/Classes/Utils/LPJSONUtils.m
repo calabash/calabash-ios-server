@@ -264,7 +264,6 @@
   return res;
 }
 
-
 + (NSString *) serializeArray:(NSArray *) array {
   LPCJSONSerializer *s = [LPCJSONSerializer serializer];
   NSError *error = nil;
