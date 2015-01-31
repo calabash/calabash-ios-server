@@ -89,11 +89,13 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
 }
 
 - (BOOL) selectorReturnsObject {
-  return [self.encoding isEqualToString:@"@"];
+  return [[self encoding] isEqualToString:@"@"];
 }
 
 - (BOOL) selectorReturnsVoid {
-  return [self.encoding isEqualToString:@"v"];
+  return [[self encoding] isEqualToString:@"v"];
+}
+
 }
 
 @end
