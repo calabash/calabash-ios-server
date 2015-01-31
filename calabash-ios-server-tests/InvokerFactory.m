@@ -10,8 +10,8 @@
 @property(strong, nonatomic, readonly) NSDictionary *selectorMap;
 
 - (id) init_private;
-- (Receiver *) _receiverWithSelectorReturnValue:(NSString *) key;
-- (LPInvoker *) _invokerWithSelectorReturnValue:(NSString *) key;
+- (Target *) instance_targetWithSelectorReturnValue:(NSString *) key;
+- (LPInvoker *) instance_invokerWithSelectorReturnValue:(NSString *) key;
 
 @end
 
@@ -81,17 +81,17 @@
   return _selectorMap;
 }
 
-+ (Receiver *) receiverWithSelectorReturnValue:(NSString *) key {
++ (Target *) targetWithSelectorReturnValue:(NSString *) key {
   InvokerFactory *factory = [InvokerFactory shared];
-  return [factory _receiverWithSelectorReturnValue:key];
+  return [factory instance_targetWithSelectorReturnValue:key];
 }
 
 + (LPInvoker *) invokerWithSelectorReturnValue:(NSString *) key {
   InvokerFactory *factory = [InvokerFactory shared];
-  return [factory _invokerWithSelectorReturnValue:key];
+  return [factory instance_invokerWithSelectorReturnValue:key];
 }
 
-- (Receiver *) _receiverWithSelectorReturnValue:(NSString *) key {
+- (Target *) instance_targetWithSelectorReturnValue:(NSString *) key {
   NSDictionary *map = self.selectorMap;
   NSString *selector = [map objectForKey:key];
   if (!selector) {
@@ -102,20 +102,20 @@
                                  userInfo:nil];
   }
 
-  Receiver *receiver = [Receiver new];
-  receiver.selector = NSSelectorFromString(selector);
-  return receiver;
+  Target *target = [Target new];
+  target.selector = NSSelectorFromString(selector);
+  return target;
 }
 
-- (LPInvoker *) _invokerWithSelectorReturnValue:(NSString *) key {
-  Receiver *receiver = [self _receiverWithSelectorReturnValue:key];
-  return [[LPInvoker alloc] initWithSelector:receiver.selector
-                                    receiver:receiver];
+- (LPInvoker *) instance_invokerWithSelectorReturnValue:(NSString *) key {
+  Target *target = [self instance_targetWithSelectorReturnValue:key];
+  return [[LPInvoker alloc] initWithSelector:target.selector
+                                      target:target];
 }
 
 @end
 
-@implementation Receiver
+@implementation Target
 
 - (id) init {
   self = [super init];
@@ -150,6 +150,5 @@
 - (unsigned long) selectorThatReturnsUnsignedLong { return (unsigned long)ULONG_MAX; }
 - (long long) selectorThatReturnsLongLong { return (long long)LONG_LONG_MIN; }
 - (unsigned long long) selectorThatReturnsUnsignedLongLong { return (unsigned long long)ULONG_LONG_MAX; }
-
 
 @end

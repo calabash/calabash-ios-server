@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-extern NSString *const LPReceiverDoesNotRespondToSelector;
+extern NSString *const LPTargetDoesNotRespondToSelector;
 extern NSString *const LPVoidSelectorReturnValue;
 extern NSString *const LPSelectorHasUnhandledEncoding;
 extern NSString *const LPSelectorHasUnhandledArguments;
@@ -11,16 +11,16 @@ extern NSString *const LPUnspecifiedInvocationError;
 @interface LPInvoker : NSObject
 
 @property(assign, nonatomic, readonly) SEL selector;
-@property(strong, nonatomic, readonly) id receiver;
+@property(strong, nonatomic, readonly) id target;
 
 // Designated initializer.
 - (id) initWithSelector:(SEL) selector
-               receiver:(id) receiver;
+                 target:(id) target;
 
 // Always returns an object.
 + (id) invokeSelector:(SEL) selector withTarget:(id) receiver;
 
-- (BOOL) receiverRespondsToSelector;
+- (BOOL) targetRespondsToSelector;
 - (NSString *) encoding;
 - (BOOL) encodingIsUnhandled;
 

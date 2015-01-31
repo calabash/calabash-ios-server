@@ -4,7 +4,7 @@
 
 #import "LPInvoker.h"
 
-NSString *const LPReceiverDoesNotRespondToSelector = @"*****";
+NSString *const LPTargetDoesNotRespondToSelector = @"*****";
 NSString *const LPVoidSelectorReturnValue = @"*selector returns void*";
 NSString *const LPSelectorHasUnhandledEncoding = @"*selector returns unhandled encoding*";
 NSString *const LPSelectorHasUnhandledArguments = @"*unhandled selector arguments*";
@@ -40,11 +40,11 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
 }
 
 // Designated initializer.
-- (id) initWithSelector:(SEL) selector receiver:(id) receiver {
+- (id) initWithSelector:(SEL) selector target:(id) target {
   self = [super init];
   if (self) {
     _selector = selector;
-    _receiver = receiver;
+    _target = target;
     _invocation = nil;
     _signature = nil;
   }
@@ -53,17 +53,17 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
 
 - (NSString *) description {
   return [NSString stringWithFormat:@"#<LPInvoker '%@' '%@' => '%@'>]",
-          NSStringFromSelector(self.selector), [self.receiver class], self.encoding];
+          NSStringFromSelector(self.selector), [self.target class], self.encoding];
 }
 
 - (NSString *) debugDescription {
   return [self description];
 }
 
-+ (id) invokeSelector:(SEL) selector withTarget:(id) receiver {
++ (id) invokeSelector:(SEL) selector withTarget:(id) target {
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
-                                                  receiver:receiver];
-  if (![invoker receiverRespondsToSelector]) { return LPReceiverDoesNotRespondToSelector; }
+                                                    target:target];
+  if (![invoker targetRespondsToSelector]) { return LPTargetDoesNotRespondToSelector; }
 
   if ([invoker selectorHasArguments]) { return LPSelectorHasUnhandledArguments; }
 
@@ -91,15 +91,15 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
 
 - (NSInvocation *) invocation {
   if (_invocation) { return _invocation; }
-  if (![self receiverRespondsToSelector]) {
-    NSLog(@"Receiver '%@' does not respond to selector '%@'; cannot create invocation.",
-          self.receiver, NSStringFromSelector(self.selector));
+  if (![self targetRespondsToSelector]) {
+    NSLog(@"Target '%@' does not respond to selector '%@'; cannot create invocation.",
+          self.target, NSStringFromSelector(self.selector));
     return nil;
   }
 
   NSInvocation *invocation;
   invocation = [NSInvocation invocationWithMethodSignature:self.signature];
-  [invocation setTarget:self.receiver];
+  [invocation setTarget:self.target];
   [invocation setSelector:self.selector];
   _invocation = invocation;
   return _invocation;
@@ -107,23 +107,23 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
 
 - (NSMethodSignature *) signature {
   if (_signature) { return _signature; }
-  _signature = [[self.receiver class] instanceMethodSignatureForSelector:self.selector];
+  _signature = [[self.target class] instanceMethodSignatureForSelector:self.selector];
   if (!_signature) {
-    NSLog(@"Cannot create signature; receiver '%@' does not respond to selector '%@'",
-          self.receiver, NSStringFromSelector(self.selector));
+    NSLog(@"Cannot create signature; target '%@' does not respond to selector '%@'",
+          self.target, NSStringFromSelector(self.selector));
   }
   return _signature;
 }
 
-- (BOOL) receiverRespondsToSelector {
-  return [self.receiver respondsToSelector:self.selector];
+- (BOOL) targetRespondsToSelector {
+  return [self.target respondsToSelector:self.selector];
 }
 
 /*
  There are always at least two arguments, because an NSMethodSignature object
  includes the hidden arguments self and _cmd, which are the first two arguments
  passed to every method implementation.
-*/
+ */
 - (NSUInteger) numberOfArguments {
   return [self.signature numberOfArguments] - 2;
 }
@@ -135,8 +135,8 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
 - (NSString *) encoding {
   if (_encoding) { return _encoding; }
 
-  if (![self receiverRespondsToSelector]) {
-    _encoding = LPReceiverDoesNotRespondToSelector;
+  if (![self targetRespondsToSelector]) {
+    _encoding = LPTargetDoesNotRespondToSelector;
   } else {
     NSMethodSignature *signature = self.signature;
     _encoding = [NSString stringWithCString:[signature methodReturnType]
@@ -181,17 +181,17 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
 }
 
 - (BOOL) selectorReturnsObject {
-  if (![self receiverRespondsToSelector]) { return NO; }
+  if (![self targetRespondsToSelector]) { return NO; }
   return [self.encoding isEqualToString:@"@"];
 }
 
 - (BOOL) selectorReturnsVoid {
-  if (![self receiverRespondsToSelector]) { return NO; }
+  if (![self targetRespondsToSelector]) { return NO; }
   return [self.encoding isEqualToString:@"v"];
 }
 
 - (BOOL) selectorReturnValueCanBeCoerced {
-  if (![self receiverRespondsToSelector]) { return NO; }
+  if (![self targetRespondsToSelector]) { return NO; }
   if ([self selectorReturnsVoid]) { return NO; }
   if ([self selectorReturnsObject]) { return NO; }
   if ([self encodingIsUnhandled]) { return NO; }
@@ -201,10 +201,10 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
 - (id) objectByCoercingReturnValue {
   NSString *encoding = self.encoding;
   SEL selector = self.selector;
-  id receiver = self.receiver;
+  id target = self.target;
 
-  if (![self receiverRespondsToSelector]) {
-    return LPReceiverDoesNotRespondToSelector;
+  if (![self targetRespondsToSelector]) {
+    return LPTargetDoesNotRespondToSelector;
   }
 
   if (![self selectorReturnValueCanBeCoerced]) {
@@ -214,7 +214,7 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
   // Guard against invalid access when asking for encoding[0]
   if (!encoding.length >= 1) {
     NSLog(@"Selector '%@' on '%@' has an invalid encoding; '%@' must have at least once character.",
-          NSStringFromSelector(selector), receiver, encoding);
+          NSStringFromSelector(selector), target, encoding);
     return LPSelectorHasUnknownEncoding;
   }
 

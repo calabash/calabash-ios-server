@@ -92,7 +92,7 @@
 
 - (id) expectInvokerEncoding:(NSString *) mockEncoding {
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:@selector(length)
-                                                  receiver:@"string"];
+                                                    target:@"string"];
   id mock = [OCMockObject partialMockForObject:invoker];
   [[[mock expect] andReturn:mockEncoding] encoding];
   return mock;
@@ -100,7 +100,7 @@
 
 - (id) stubInvokerEncoding:(NSString *) mockEncoding {
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:@selector(length)
-                                                  receiver:@"string"];
+                                                    target:@"string"];
   id mock = [OCMockObject partialMockForObject:invoker];
   [[[mock stub] andReturn:mockEncoding] encoding];
   return mock;
@@ -108,10 +108,10 @@
 
 - (id) stubInvokerDoesNotRespondToSelector {
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:@selector(length)
-                                                  receiver:@"string"];
+                                                    target:@"string"];
   id mock = [OCMockObject partialMockForObject:invoker];
   BOOL falsey = NO;
-  [[[mock stub] andReturnValue:OCMOCK_VALUE(falsey)] receiverRespondsToSelector];
+  [[[mock stub] andReturnValue:OCMOCK_VALUE(falsey)] targetRespondsToSelector];
   return mock;
 }
 
@@ -121,39 +121,39 @@
   XCTAssertThrows([LPInvoker new]);
 }
 
-#pragma mark - initWithSelector:receiver
+#pragma mark - initWithSelector:target
 
 - (void) testDesignatedInitializer {
-  NSString *receiver = @"string";
+  NSString *target = @"string";
   SEL selector = @selector(length);
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
-                                                  receiver:receiver];
+                                                    target:target];
   XCTAssertEqual(invoker.selector, selector);
-  XCTAssertEqualObjects(invoker.receiver, receiver);
+  XCTAssertEqualObjects(invoker.target, target);
 }
 
-#pragma mark - LPInvoker objectBySafelyInvokingSelector:receiver
+#pragma mark - LPInvoker invokeSelector:withTarget:
 
 - (void) objectBySafelyInvokingSelectorSelectorHasArguments {
-  NSString *receiver = @"string";
+  NSString *target = @"string";
   SEL selector = @selector(substringToIndex:);
-  id actual = [LPInvoker invokeSelector:selector withTarget:receiver];
+  id actual = [LPInvoker invokeSelector:selector withTarget:target];
   XCTAssertEqualObjects(actual, LPSelectorHasUnhandledArguments);
 }
 
 - (void) objectBySafelyInvokingSelectorDNRS {
-  NSString *receiver = @"string";
+  NSString *target = @"string";
   SEL selector = NSSelectorFromString(@"obviouslyUnknownSelector");
-  id actual = [LPInvoker invokeSelector:selector withTarget:receiver];
-  XCTAssertEqualObjects(actual, LPReceiverDoesNotRespondToSelector);
+  id actual = [LPInvoker invokeSelector:selector withTarget:target];
+  XCTAssertEqualObjects(actual, LPTargetDoesNotRespondToSelector);
 }
 
 - (void) objectBySafelyInvokingSelectorVoid {
-  NSString *receiver = @"string";
+  NSString *target = @"string";
   SEL selector = @selector(length);
   @try {
     [self swizzleEncodingWithNewSelector:@selector(encodingSwizzledToVoid)];
-    id actual = [LPInvoker invokeSelector:selector withTarget:receiver];
+    id actual = [LPInvoker invokeSelector:selector withTarget:target];
     XCTAssertEqualObjects(actual, LPVoidSelectorReturnValue);
   } @finally {
     [self unswizzleEncoding];
@@ -161,11 +161,11 @@
 }
 
 - (void) objectBySafelyInvokingSelectorUnknown {
-  NSString *receiver = @"string";
+  NSString *target = @"string";
   SEL selector = @selector(length);
   @try {
     [self swizzleEncodingWithNewSelector:@selector(encodingSwizzledToUnknown)];
-    id actual = [LPInvoker invokeSelector:selector withTarget:receiver];
+    id actual = [LPInvoker invokeSelector:selector withTarget:target];
     XCTAssertEqualObjects(actual, LPSelectorHasUnhandledEncoding);
   } @finally {
     [self unswizzleEncoding];
@@ -173,43 +173,43 @@
 }
 
 - (void) objectBySafelyInvokingSelectorObject {
-  NSString *receiver = @"receiver";
+  NSString *target = @"target";
   SEL selector = @selector(description);
-  id actual = [LPInvoker invokeSelector:selector withTarget:receiver];
-  XCTAssertEqualObjects(actual, receiver);
+  id actual = [LPInvoker invokeSelector:selector withTarget:target];
+  XCTAssertEqualObjects(actual, target);
 }
 
 - (void) objectBySafelyInvokingSelectorNil {
-  NSString *receiver = @"string";
+  NSString *target = @"string";
   SEL selector = @selector(returnsNil);
-  id actual = [LPInvoker invokeSelector:selector withTarget:receiver];
+  id actual = [LPInvoker invokeSelector:selector withTarget:target];
   XCTAssertEqual(actual, [NSNull null]);
 }
 
 - (void) objectBySafelyInvokingSelectorCoerced {
-  NSString *receiver = @"string";
+  NSString *target = @"string";
   SEL selector = @selector(length);
-  id actual = [LPInvoker invokeSelector:selector withTarget:receiver];
-  XCTAssertEqual([actual unsignedIntegerValue], receiver.length);
+  id actual = [LPInvoker invokeSelector:selector withTarget:target];
+  XCTAssertEqual([actual unsignedIntegerValue], target.length);
 }
 
 #pragma mark - invocation
 
 - (void) testInvocationRS {
-  NSString *receiver = @"string";
+  NSString *target = @"string";
   SEL selector = @selector(length);
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
-                                                  receiver:receiver];
+                                                    target:target];
   NSInvocation *invocation = [invoker invocation];
   XCTAssertEqual(invocation.selector, selector);
-  XCTAssertEqualObjects(invocation.target, receiver);
+  XCTAssertEqualObjects(invocation.target, target);
 }
 
 - (void) testInvocationDNRS {
-  NSString *receiver = @"string";
+  NSString *target = @"string";
   SEL selector = NSSelectorFromString(@"obviouslyUnknownSelector");
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
-                                                  receiver:receiver];
+                                                    target:target];
   NSInvocation *invocation = [invoker invocation];
   XCTAssertNil(invocation);
 }
@@ -217,68 +217,68 @@
 #pragma mark - signature
 
 - (void) testSignatureRS {
-  NSString *receiver = @"string";
+  NSString *target = @"string";
   SEL selector = @selector(length);
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
-                                                  receiver:receiver];
+                                                    target:target];
   XCTAssertNotNil([invoker signature]);
 }
 
 - (void) testSignatureDNRS {
-  NSString *receiver = @"string";
+  NSString *target = @"string";
   SEL selector = NSSelectorFromString(@"obviouslyUnknownSelector");
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
-                                                  receiver:receiver];
+                                                    target:target];
   XCTAssertNil([invoker signature]);
 }
 
 #pragma mark - description
 
 - (void) testDescription {
-  NSString *receiver = @"string";
+  NSString *target = @"string";
   SEL selector = @selector(length);
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
-                                                  receiver:receiver];
+                                                    target:target];
   XCTAssertNoThrow([invoker description]);
   XCTAssertNoThrow([invoker debugDescription]);
 }
 
-#pragma mark - receiverRespondsToSelector
+#pragma mark - targetRespondsToSelector
 
-- (void) testReceiverRespondsToSelectorYES {
-  NSString *receiver = @"string";
+- (void) testtargetRespondsToSelectorYES {
+  NSString *target = @"string";
   SEL selector = @selector(length);
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
-                                                  receiver:receiver];
-  XCTAssertTrue([invoker receiverRespondsToSelector]);
+                                                    target:target];
+  XCTAssertTrue([invoker targetRespondsToSelector]);
 }
 
-- (void) testReceiverRespondsToSelectorNO {
-  NSString *receiver = @"string";
+- (void) testtargetRespondsToSelectorNO {
+  NSString *target = @"string";
   SEL selector = NSSelectorFromString(@"obviouslyUnknownSelector");
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
-                                                  receiver:receiver];
-  XCTAssertFalse([invoker receiverRespondsToSelector]);
+                                                    target:target];
+  XCTAssertFalse([invoker targetRespondsToSelector]);
 }
 
 #pragma mark - encoding
 
 - (void) testEncoding {
-  NSString *receiver = @"string";
+  NSString *target = @"string";
   SEL selector = @selector(length);
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
-                                                  receiver:receiver];
+                                                    target:target];
   NSString *actual = [invoker encoding];
   XCTAssertEqualObjects(actual, @"I");
 }
 
 - (void) testEncodingDoesNotRespondToSelector {
-  NSString *receiver = @"string";
+  NSString *target = @"string";
   SEL selector = NSSelectorFromString(@"obviouslyUnknownSelector");
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
-                                                  receiver:receiver];
+                                                    target:target];
   NSString *actual = [invoker encoding];
-  XCTAssertEqualObjects(actual, LPReceiverDoesNotRespondToSelector);
+  XCTAssertEqualObjects(actual, LPTargetDoesNotRespondToSelector);
 }
 
 #pragma mark - numberOfArguments
@@ -288,36 +288,36 @@
  */
 
 - (void) testNumberOfArguments0 {
-  NSString *receiver = @"string";
+  NSString *target = @"string";
   SEL selector = @selector(length);
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
-                                                  receiver:receiver];
+                                                    target:target];
   XCTAssertEqual([invoker numberOfArguments], 0);
 }
 
 - (void) testNumberOfArguments1 {
-  NSString *receiver = @"string";
+  NSString *target = @"string";
   SEL selector = @selector(substringToIndex:);
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
-                                                  receiver:receiver];
+                                                    target:target];
   XCTAssertEqual([invoker numberOfArguments], 1);
 }
 
 #pragma mark - selectorHasArguments
 
 - (void) testSelectorHasArgumentsNO {
-  NSString *receiver = @"string";
+  NSString *target = @"string";
   SEL selector = @selector(length);
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
-                                                  receiver:receiver];
+                                                    target:target];
   XCTAssertEqual([invoker selectorHasArguments], NO);
 }
 
 - (void) testSelectorHasArgumentsYES {
-  NSString *receiver = @"string";
+  NSString *target = @"string";
   SEL selector = @selector(substringToIndex:);
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
-                                                  receiver:receiver];
+                                                    target:target];
   XCTAssertEqual([invoker selectorHasArguments], YES);
 }
 
@@ -502,13 +502,13 @@
 - (void) testAutoboxedValueDNRS {
   id mock = [self stubInvokerDoesNotRespondToSelector];
   XCTAssertEqualObjects([mock objectByCoercingReturnValue],
-                        LPReceiverDoesNotRespondToSelector);
+                        LPTargetDoesNotRespondToSelector);
   [mock verify];
 }
 
 - (void) testAutoboxedValueNotAutoboxable {
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:@selector(length)
-                                                  receiver:@"string"];
+                                                    target:@"string"];
   id mock = [OCMockObject partialMockForObject:invoker];
   BOOL falsey = NO;
   [[[mock expect] andReturnValue:OCMOCK_VALUE(falsey)] selectorReturnValueCanBeCoerced];

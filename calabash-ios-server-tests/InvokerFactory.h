@@ -1,17 +1,17 @@
 #import <Foundation/Foundation.h>
 
-@class Receiver;
+@class Target;
 @class LPInvoker;
 
 @interface InvokerFactory : NSObject
 
 + (InvokerFactory *) shared;
-+ (Receiver *) receiverWithSelectorReturnValue:(NSString *) key;
++ (Target *) targetWithSelectorReturnValue:(NSString *) key;
 + (LPInvoker *) invokerWithSelectorReturnValue:(NSString *) key;
 
 @end
 
-@interface Receiver : NSObject
+@interface Target : NSObject
 
 @property(assign, nonatomic) SEL selector;
 @property(strong, nonatomic, readonly) NSObject *object;
