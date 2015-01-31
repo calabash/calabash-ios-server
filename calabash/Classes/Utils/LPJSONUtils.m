@@ -46,7 +46,7 @@
   return ([returnType isEqualToString:@"v"]);
 }
 
-+ (BOOL) selector:(SEL) selector returnValueCanBeAutoboxedForReceiver:(id) object {
++ (BOOL) selector:(SEL) selector returnsAutoBoxableValueForReceiver:(id) object {
   if ([LPJSONUtils selector:selector returnsVoidForReceiver:object]) {
     return NO;
   }
@@ -73,7 +73,7 @@
     return;
   }
 
-  if ([LPJSONUtils selector:selector returnValueCanBeAutoboxedForReceiver:receiver]) {
+  if ([LPJSONUtils selector:selector returnsAutoBoxableValueForReceiver:receiver]) {
     @throw [NSException exceptionWithName:@"NotYetImplemented"
                                    reason:@"it is difficult" userInfo:nil];
   } else {
@@ -90,7 +90,7 @@
           receiver, NSStringFromSelector(selector));
   }
 
-  if (![LPJSONUtils selector:selector returnValueCanBeAutoboxedForReceiver:receiver]) {
+  if (![LPJSONUtils selector:selector returnsAutoBoxableValueForReceiver:receiver]) {
     NSLog(@"Calling selector '%@' on '%@' does not return a value that can be autoboxed: '%@'.  Returning NSNull.",
           NSStringFromSelector(selector), receiver, returnType);
     return [NSNull null];

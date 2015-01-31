@@ -16,7 +16,7 @@
 
 + (BOOL) selector:(SEL) selector returnsVoidForReceiver:(id) object;
 
-+ (BOOL) selector:(SEL) selector returnValueCanBeAutoboxedForReceiver:(id) object;
++ (BOOL) selector:(SEL) selector returnsAutoBoxableValueForReceiver:(id) object;
 
 + (void) dictionary:(NSMutableDictionary *) dictionary
     setObjectForKey:(NSString *) key

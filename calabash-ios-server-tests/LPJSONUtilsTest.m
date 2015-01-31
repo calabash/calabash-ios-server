@@ -228,19 +228,19 @@
 - (void) testSelectorReturnValueCanBeAutoboxedWithVoid {
   id object = [MyObject new];
   SEL selector = @selector(selectorThatReturnsVoid);
-  XCTAssertFalse([LPJSONUtils selector:selector returnValueCanBeAutoboxedForReceiver:object]);
+  XCTAssertFalse([LPJSONUtils selector:selector returnsAutoBoxableValueForReceiver:object]);
 }
 
 - (void) testSelectorReturnValueCanBeAutoboxedWithPointer {
   id object = [MyObject new];
   SEL selector = @selector(number);
-  XCTAssertFalse([LPJSONUtils selector:selector returnValueCanBeAutoboxedForReceiver:object]);
+  XCTAssertFalse([LPJSONUtils selector:selector returnsAutoBoxableValueForReceiver:object]);
 }
 
 - (void) testSelectorReturnValueCanBeAutoboxedYES {
   id object = [MyObject new];
   SEL selector = @selector(selectorThatReturnsBOOL);
-  XCTAssertTrue([LPJSONUtils selector:selector returnValueCanBeAutoboxedForReceiver:object]);
+  XCTAssertTrue([LPJSONUtils selector:selector returnsAutoBoxableValueForReceiver:object]);
 }
 
 #pragma mark - dictionary:setObject:usingSelector:receiver
