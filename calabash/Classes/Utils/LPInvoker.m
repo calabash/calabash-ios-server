@@ -12,6 +12,7 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
 
 - (BOOL) selectorReturnsObject;
 - (BOOL) selectorReturnsVoid;
+- (BOOL) selectorReturnsAutoBoxable;
 
 @end
 
@@ -94,6 +95,13 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
 
 - (BOOL) selectorReturnsVoid {
   return [[self encoding] isEqualToString:@"v"];
+}
+
+- (BOOL) selectorReturnsAutoBoxable {
+  if ([self selectorReturnsVoid]) { return NO; }
+  if ([self selectorReturnsObject]) { return NO; }
+  if ([self encodingIsUnhandled]) { return NO; }
+  return YES;
 }
 
 }
