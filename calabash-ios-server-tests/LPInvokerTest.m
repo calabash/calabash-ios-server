@@ -137,14 +137,14 @@
 - (void) objectBySafelyInvokingSelectorSelectorHasArguments {
   NSString *receiver = @"string";
   SEL selector = @selector(substringToIndex:);
-  id actual = [LPInvoker objectBySafelyInvokingSelector:selector receiver:receiver];
+  id actual = [LPInvoker objectForSelector:selector sentToReceiver:receiver];
   XCTAssertEqualObjects(actual, LPSelectorHasUnhandledArguments);
 }
 
 - (void) objectBySafelyInvokingSelectorDNRS {
   NSString *receiver = @"string";
   SEL selector = NSSelectorFromString(@"obviouslyUnknownSelector");
-  id actual = [LPInvoker objectBySafelyInvokingSelector:selector receiver:receiver];
+  id actual = [LPInvoker objectForSelector:selector sentToReceiver:receiver];
   XCTAssertEqualObjects(actual, LPReceiverDoesNotRespondToSelector);
 }
 
@@ -153,7 +153,7 @@
   SEL selector = @selector(length);
   @try {
     [self swizzleEncodingWithNewSelector:@selector(encodingSwizzledToVoid)];
-    id actual = [LPInvoker objectBySafelyInvokingSelector:selector receiver:receiver];
+    id actual = [LPInvoker objectForSelector:selector sentToReceiver:receiver];
     XCTAssertEqualObjects(actual, LPVoidSelectorReturnValue);
   } @finally {
     [self unswizzleEncoding];
@@ -165,7 +165,7 @@
   SEL selector = @selector(length);
   @try {
     [self swizzleEncodingWithNewSelector:@selector(encodingSwizzledToUnknown)];
-    id actual = [LPInvoker objectBySafelyInvokingSelector:selector receiver:receiver];
+    id actual = [LPInvoker objectForSelector:selector sentToReceiver:receiver];
     XCTAssertEqualObjects(actual, LPSelectorHasUnhandledEncoding);
   } @finally {
     [self unswizzleEncoding];
@@ -175,21 +175,21 @@
 - (void) objectBySafelyInvokingSelectorObject {
   NSString *receiver = @"receiver";
   SEL selector = @selector(description);
-  id actual = [LPInvoker objectBySafelyInvokingSelector:selector receiver:receiver];
+  id actual = [LPInvoker objectForSelector:selector sentToReceiver:receiver];
   XCTAssertEqualObjects(actual, receiver);
 }
 
 - (void) objectBySafelyInvokingSelectorNil {
   NSString *receiver = @"string";
   SEL selector = @selector(returnsNil);
-  id actual = [LPInvoker objectBySafelyInvokingSelector:selector receiver:receiver];
+  id actual = [LPInvoker objectForSelector:selector sentToReceiver:receiver];
   XCTAssertEqual(actual, [NSNull null]);
 }
 
 - (void) objectBySafelyInvokingSelectorCoerced {
   NSString *receiver = @"string";
   SEL selector = @selector(length);
-  id actual = [LPInvoker objectBySafelyInvokingSelector:selector receiver:receiver];
+  id actual = [LPInvoker objectForSelector:selector sentToReceiver:receiver];
   XCTAssertEqual([actual unsignedIntegerValue], receiver.length);
 }
 

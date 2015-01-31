@@ -60,7 +60,7 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
   return [self description];
 }
 
-+ (id) objectBySafelyInvokingSelector:(SEL)selector receiver:(id)receiver {
++ (id) objectForSelector:(SEL) selector sentToReceiver:(id) receiver {
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
                                                   receiver:receiver];
   if (![invoker receiverRespondsToSelector]) { return LPReceiverDoesNotRespondToSelector; }

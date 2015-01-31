@@ -18,7 +18,7 @@ extern NSString *const LPUnspecifiedInvocationError;
                receiver:(id) receiver;
 
 // Always returns an object.
-+ (id) objectBySafelyInvokingSelector:(SEL) selector receiver:(id) receiver;
++ (id) objectForSelector:(SEL) selector sentToReceiver:(id) receiver;
 
 - (BOOL) receiverRespondsToSelector;
 - (NSString *) encoding;
