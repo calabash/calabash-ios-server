@@ -49,6 +49,10 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
   return [self description];
 }
 
++ (id) invokeSelector:(SEL)selector receiver:(id)receiver {
+  return nil;
+}
+
 - (NSInvocation *) invocation {
   if (_invocation) { return _invocation; }
   if (![self receiverRespondsToSelector]) {

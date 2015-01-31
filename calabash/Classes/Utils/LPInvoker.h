@@ -10,9 +10,10 @@ extern NSString *const LPReceiverDoesNotRespondToSelectorEncoding;
 - (id) initWithSelector:(SEL) selector
                receiver:(id) receiver;
 
++ (id) invokeSelector:(SEL) selector receiver:(id) receiver;
+
 - (BOOL) receiverRespondsToSelector;
 - (NSString *) encoding;
-- (id) invoke;
 - (BOOL) encodingIsUnhandled;
 
 @end
