@@ -41,13 +41,13 @@
   return ([returnType isEqualToString:@"@"]);
 }
 
-+ (BOOL) selector:(SEL) selector returnValueIsVoidForReceiver:(id) object {
++ (BOOL) selector:(SEL) selector returnsVoidForReceiver:(id) object {
   NSString *returnType = [LPJSONUtils stringForSelector:selector returnValueEncodingForReceiver:object];
   return ([returnType isEqualToString:@"v"]);
 }
 
 + (BOOL) selector:(SEL) selector returnValueCanBeAutoboxedForReceiver:(id) object {
-  if ([LPJSONUtils selector:selector returnValueIsVoidForReceiver:object]) {
+  if ([LPJSONUtils selector:selector returnsVoidForReceiver:object]) {
     return NO;
   }
 
@@ -63,13 +63,12 @@
       usingSelector:(SEL) selector
          onReceiver:(id) receiver {
 
-
   if (![receiver respondsToSelector:selector]) {
     [dictionary setObject:[NSNull null] forKey:key];
     return;
   }
 
-  if ([LPJSONUtils selector:selector returnValueIsVoidForReceiver:receiver]) {
+  if ([LPJSONUtils selector:selector returnsVoidForReceiver:receiver]) {
     [dictionary setObject:[NSNull null] forKey:key];
     return;
   }

@@ -14,7 +14,7 @@
 
 + (BOOL) selector:(SEL) selector returnsNSObjectForReceiver:(id) object;
 
-+ (BOOL) selector:(SEL) selector returnValueIsVoidForReceiver:(id) object;
++ (BOOL) selector:(SEL) selector returnsVoidForReceiver:(id) object;
 
 + (BOOL) selector:(SEL) selector returnValueCanBeAutoboxedForReceiver:(id) object;
 
@@ -38,3 +38,5 @@
 +(id)jsonifyObject:(id)obj fullDump:(BOOL)dump;
 
 @end
+
+// ^v # ^@ {_struct=sqQ} {NSObject=#} [Ki] [Kf]

@@ -214,13 +214,13 @@
 - (void) testSelectorReturnValueIsVoidForReceiverYES {
   id object = [MyObject new];
   SEL selector = @selector(selectorThatReturnsVoid);
-  XCTAssertTrue([LPJSONUtils selector:selector returnValueIsVoidForReceiver:object]);
+  XCTAssertTrue([LPJSONUtils selector:selector returnsVoidForReceiver:object]);
 }
 
 - (void) testSelectorReturnValueIsVoidForReceiverNO {
   id object = [MyObject new];
   SEL selector = @selector(selectorThatReturnsBOOL);
-  XCTAssertFalse([LPJSONUtils selector:selector returnValueIsVoidForReceiver:object]);
+  XCTAssertFalse([LPJSONUtils selector:selector returnsVoidForReceiver:object]);
 }
 
 #pragma mark - selector:returnValueCanBeAutoboxedForReceiver:
