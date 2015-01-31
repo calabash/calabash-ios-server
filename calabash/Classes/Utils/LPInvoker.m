@@ -60,8 +60,28 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
   return [self description];
 }
 
-+ (id) invokeSelector:(SEL)selector receiver:(id)receiver {
-  return nil;
++ (id) objectBySafelyInvokingSelector:(SEL)selector receiver:(id)receiver {
+  LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
+                                                  receiver:receiver];
+  if (![invoker receiverRespondsToSelector]) { return LPReceiverDoesNotRespondToSelector; }
+
+  if ([invoker selectorHasArguments]) { return LPSelectorHasUnhandledArguments; }
+
+  if ([invoker selectorReturnsVoid]) { return LPVoidSelectorReturnValue; }
+
+  if ([invoker encodingIsUnhandled]) { return LPSelectorHasUnhandledEncoding; }
+
+  if ([invoker selectorReturnsObject]) {
+    NSInvocation *invocation = invoker.invocation;
+    id result;
+    [invocation invoke];
+    [invocation getReturnValue:&result];
+    return result;
+  }
+
+  if ([invoker selectorReturnValueCanBeCoerced]) { return [invoker objectByCoercingReturnValue]; }
+
+  return LPUnspecifiedInvocationError;
 }
 
 - (NSInvocation *) invocation {

@@ -118,6 +118,60 @@
   XCTAssertEqualObjects(invoker.receiver, receiver);
 }
 
+#pragma mark - LPInvoker objectBySafelyInvokingSelector:receiver
+
+- (void) objectBySafelyInvokingSelectorSelectorHasArguments {
+  NSString *receiver = @"string";
+  SEL selector = @selector(substringToIndex:);
+  id actual = [LPInvoker objectBySafelyInvokingSelector:selector receiver:receiver];
+  XCTAssertEqualObjects(actual, LPSelectorHasUnhandledArguments);
+}
+
+- (void) objectBySafelyInvokingSelectorDNRS {
+  NSString *receiver = @"string";
+  SEL selector = NSSelectorFromString(@"obviouslyUnknownSelector");
+  id actual = [LPInvoker objectBySafelyInvokingSelector:selector receiver:receiver];
+  XCTAssertEqualObjects(actual, LPReceiverDoesNotRespondToSelector);
+}
+
+- (void) objectBySafelyInvokingSelectorVoid {
+  NSString *receiver = @"string";
+  SEL selector = @selector(length);
+  @try {
+    [self swizzleEncodingWithNewSelector:@selector(encodingSwizzledToVoid)];
+    id actual = [LPInvoker objectBySafelyInvokingSelector:selector receiver:receiver];
+    XCTAssertEqualObjects(actual, LPVoidSelectorReturnValue);
+  } @finally {
+    [self unswizzleEncoding];
+  }
+}
+
+- (void) objectBySafelyInvokingSelectorUnknown {
+  NSString *receiver = @"string";
+  SEL selector = @selector(length);
+  @try {
+    [self swizzleEncodingWithNewSelector:@selector(encodingSwizzledToUnknown)];
+    id actual = [LPInvoker objectBySafelyInvokingSelector:selector receiver:receiver];
+    XCTAssertEqualObjects(actual, LPSelectorHasUnhandledEncoding);
+  } @finally {
+    [self unswizzleEncoding];
+  }
+}
+
+- (void) objectBySafelyInvokingSelectorObject {
+  NSString *receiver = @"receiver";
+  SEL selector = @selector(description);
+  id actual = [LPInvoker objectBySafelyInvokingSelector:selector receiver:receiver];
+  XCTAssertEqualObjects(actual, receiver);
+}
+
+- (void) objectBySafelyInvokingSelectorCoerced {
+  NSString *receiver = @"string";
+  SEL selector = @selector(length);
+  id actual = [LPInvoker objectBySafelyInvokingSelector:selector receiver:receiver];
+  XCTAssertEqual([actual unsignedIntegerValue], receiver.length);
+}
+
 #pragma mark - invocation
 
 - (void) testInvocationRS {
