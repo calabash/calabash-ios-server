@@ -13,17 +13,6 @@
 
 @implementation LPJSONUtils
 
-+ (void) dictionary:(NSMutableDictionary *) dictionary
-          setObject:(id) object
-             forKey:(NSString *) key {
-
-  if (object) {
-    [dictionary setObject:object forKey:key];
-  } else {
-    [dictionary setObject:[NSNull null] forKey:key];
-  }
-}
-
 + (NSString *) serializeDictionary:(NSDictionary *) dictionary {
   LPCJSONSerializer *s = [LPCJSONSerializer serializer];
   NSError *error = nil;

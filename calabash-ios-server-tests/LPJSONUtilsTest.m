@@ -21,24 +21,4 @@
   [super tearDown];
 }
 
-#pragma mark - dictionary:setObject:forKey
-
-- (void) testDictionarySetObjectCanSetAnNonNilObject {
-  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-  NSString *key = @"key";
-  NSString *object = @"object";
-  [LPJSONUtils dictionary:dict setObject:object forKey:key];
-  id actual = [dict objectForKey:key];
-  XCTAssertEqualObjects(actual, object);
-}
-
-- (void) testDictionarySetObjectCanSetAndNilObject {
-  NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-  NSString *key = @"key";
-  NSString *object = nil;
-  [LPJSONUtils dictionary:dict setObject:object forKey:key];
-  id actual = [dict objectForKey:key];
-  XCTAssertEqualObjects(actual, [NSNull null]);
-}
-
 @end

@@ -6,10 +6,6 @@
 
 @interface LPJSONUtils : NSObject
 
-+ (void) dictionary:(NSMutableDictionary *) dictionary
-          setObject:(id) object
-             forKey:(NSString *) key;
-
 + (NSString *) serializeDictionary:(NSDictionary *) dictionary;
 
 + (NSDictionary *) deserializeDictionary:(NSString *) string;
