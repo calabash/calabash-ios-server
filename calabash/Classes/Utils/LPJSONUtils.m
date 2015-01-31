@@ -79,6 +79,10 @@
     return NO;
   }
 
+  if ([LPJSONUtils selector:selector returnsUnhandledEncodingForReceiver:receiver]) {
+    return NO;
+  }
+
   return YES;
 }
 
