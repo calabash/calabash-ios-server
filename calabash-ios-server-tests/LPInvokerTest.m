@@ -11,6 +11,7 @@
 @interface LPInvoker (XTCTEST)
 
 - (NSInvocation *) invocation;
+- (NSMethodSignature *) signature;
 - (BOOL) selectorReturnsObject;
 - (BOOL) selectorReturnsVoid;
 - (BOOL) selectorReturnValueCanBeCoerced;
@@ -101,6 +102,24 @@
                                                   receiver:receiver];
   NSInvocation *invocation = [invoker invocation];
   XCTAssertNil(invocation);
+}
+
+#pragma mark - signature
+
+- (void) testSignatureRS {
+  NSString *receiver = @"string";
+  SEL selector = @selector(length);
+  LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
+                                                  receiver:receiver];
+  XCTAssertNotNil([invoker signature]);
+}
+
+- (void) testSignatureDNRS {
+  NSString *receiver = @"string";
+  SEL selector = NSSelectorFromString(@"obviouslyUnknownSelector");
+  LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
+                                                  receiver:receiver];
+  XCTAssertNil([invoker signature]);
 }
 
 #pragma mark - description

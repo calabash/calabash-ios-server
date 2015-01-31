@@ -10,6 +10,7 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
 
 @property(strong, nonatomic, readonly) NSString *encoding;
 @property(strong, nonatomic, readonly) NSInvocation *invocation;
+@property(strong, nonatomic, readonly) NSMethodSignature *signature;
 
 - (BOOL) selectorReturnsObject;
 - (BOOL) selectorReturnsVoid;
@@ -22,6 +23,7 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
 
 @synthesize encoding = _encoding;
 @synthesize invocation = _invocation;
+@synthesize signature = _signature;
 
 - (id) init {
   @throw [NSException exceptionWithName:@"LPDesignatedInitializerException"
@@ -36,6 +38,7 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
     _selector = selector;
     _receiver = receiver;
     _invocation = nil;
+    _signature = nil;
   }
   return self;
 }
@@ -68,6 +71,16 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
   [invocation setSelector:self.selector];
   _invocation = invocation;
   return _invocation;
+}
+
+- (NSMethodSignature *) signature {
+  if (_signature) { return _signature; }
+  _signature = [[self.receiver class] instanceMethodSignatureForSelector:self.selector];
+  if (!_signature) {
+    NSLog(@"Cannot create signature; receiver '%@' does not respond to selector '%@'",
+          self.receiver, NSStringFromSelector(self.selector));
+  }
+  return _signature;
 }
 
 - (BOOL) receiverRespondsToSelector {
