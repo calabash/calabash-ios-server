@@ -28,6 +28,16 @@
   [super tearDown];
 }
 
+#pragma mark - Mocking
+
+- (id) expectInvokerEncoding:(NSString *) mockEncoding {
+  LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:@selector(length)
+                                                  receiver:@"string"];
+  id mock = [OCMockObject partialMockForObject:invoker];
+  [[[mock expect] andReturn:mockEncoding] encoding];
+  return mock;
+}
+
 #pragma mark - init
 
 - (void) testInitThrowsException {
@@ -84,14 +94,6 @@
 }
 
 #pragma mark - encodingIsUnhandled
-
-- (id) expectInvokerEncoding:(NSString *) mockEncoding {
-  LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:@selector(length)
-                                                  receiver:@"string"];
-  id mock = [OCMockObject partialMockForObject:invoker];
-  [[[mock expect] andReturn:mockEncoding] encoding];
-  return mock;
-}
 
 - (void) testUnhandledEncodingVoidStar {
   NSString *encoding = @(@encode(void *));
