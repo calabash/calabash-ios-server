@@ -13,7 +13,7 @@
 
 @interface LPJSONUtils ()
 
-+ (id) objectForSelector:(SEL) selector withAutoboxedReturnValueForReceiver:(id) receiver;
++ (id) objectForSelector:(SEL) selector withAutoboxableReturnValueForReceiver:(id) receiver;
 
 @end
 
