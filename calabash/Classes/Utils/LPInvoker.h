@@ -1,6 +1,12 @@
 #import <Foundation/Foundation.h>
 
-extern NSString *const LPReceiverDoesNotRespondToSelectorEncoding;
+extern NSString *const LPReceiverDoesNotRespondToSelector;
+extern NSString *const LPVoidSelectorReturnValue;
+extern NSString *const LPUnhandledSelectorEncoding;
+extern NSString *const LPSelectorHasUnhandledArguments;
+extern NSString *const LPCannotCoerceSelectorReturnValueToObject;
+extern NSString *const LPSelectorHasUnknownEncoding;
+extern NSString *const LPUnspecifiedInvocationError;
 
 @interface LPInvoker : NSObject
 

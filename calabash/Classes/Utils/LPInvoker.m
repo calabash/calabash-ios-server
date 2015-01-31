@@ -4,7 +4,13 @@
 
 #import "LPInvoker.h"
 
-NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
+NSString *const LPReceiverDoesNotRespondToSelector = @"*****";
+NSString *const LPVoidSelectorReturnValue = @"*selector returns void*";
+NSString *const LPUnhandledSelectorEncoding = @"*unhandled encoding*";
+NSString *const LPSelectorHasUnhandledArguments = @"*unhandled selector arguments*";
+NSString *const LPCannotCoerceSelectorReturnValueToObject = @"*cannot coerce to object*";
+NSString *const LPSelectorHasUnknownEncoding = @"*unknown encoding*";
+NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
 
 @interface LPInvoker ()
 
@@ -105,7 +111,7 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
   if (_encoding) { return _encoding; }
 
   if (![self receiverRespondsToSelector]) {
-    _encoding = LPReceiverDoesNotRespondToSelectorEncoding;
+    _encoding = LPReceiverDoesNotRespondToSelector;
   } else {
     NSMethodSignature *signature = self.signature;
     _encoding = [NSString stringWithCString:[signature methodReturnType]
@@ -173,22 +179,18 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
   id receiver = self.receiver;
 
   if (![self receiverRespondsToSelector]) {
-    NSLog(@"Receiver '%@' does not respond to selector '%@'. Returning NSNull.",
-          receiver, NSStringFromSelector(selector));
-    return [NSNull null];
+    return LPReceiverDoesNotRespondToSelector;
   }
 
   if (![self selectorReturnValueCanBeCoerced]) {
-    NSLog(@"Calling selector '%@' on '%@' does not return a value that can be autoboxed: '%@'.  Returning NSNull.",
-          NSStringFromSelector(selector), receiver, encoding);
-    return [NSNull null];
+    return LPCannotCoerceSelectorReturnValueToObject;
   }
 
   // Guard against invalid access when asking for encoding[0]
   if (!encoding.length >= 1) {
-    NSLog(@"Selector '%@' on '%@' has an invallid encoding; '%@' must have at least once character.  Returning NSNull",
+    NSLog(@"Selector '%@' on '%@' has an invalid encoding; '%@' must have at least once character.",
           NSStringFromSelector(selector), receiver, encoding);
-    return [NSNull null];
+    return LPSelectorHasUnknownEncoding;
   }
 
   NSInvocation *invocation = self.invocation;
@@ -301,11 +303,11 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
     }
 
     default: {
-      NSLog(@"Unexpected type encoding: '%@'.  Returning NSNull", encoding);
+      NSLog(@"Unexpected type encoding: '%@'.", encoding);
     }
   }
 
-  return [NSNull null];
+  return LPSelectorHasUnknownEncoding;
 }
 
 @end

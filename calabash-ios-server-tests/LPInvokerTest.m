@@ -170,7 +170,7 @@
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
                                                   receiver:receiver];
   NSString *actual = [invoker encoding];
-  XCTAssertEqualObjects(actual, LPReceiverDoesNotRespondToSelectorEncoding);
+  XCTAssertEqualObjects(actual, LPReceiverDoesNotRespondToSelector);
 }
 
 #pragma mark - numberOfArguments
@@ -393,7 +393,8 @@
 
 - (void) testAutoboxedValueDNRS {
   id mock = [self stubInvokerDoesNotRespondToSelector];
-  XCTAssertEqualObjects([mock objectByCoercingReturnValue], [NSNull null]);
+  XCTAssertEqualObjects([mock objectByCoercingReturnValue],
+                        LPReceiverDoesNotRespondToSelector);
   [mock verify];
 }
 
@@ -404,7 +405,8 @@
   BOOL falsey = NO;
   [[[mock expect] andReturnValue:OCMOCK_VALUE(falsey)] selectorReturnValueCanBeCoerced];
 
-  XCTAssertEqualObjects([mock objectByCoercingReturnValue], [NSNull null]);
+  XCTAssertEqualObjects([mock objectByCoercingReturnValue],
+                        LPCannotCoerceSelectorReturnValueToObject);
   [mock verify];
 }
 
@@ -412,7 +414,8 @@
   // space is intential; don't want first char to match
   NSString *encoding = @" unexpected encoding";
   id mock = [self expectInvokerEncoding:encoding];
-  XCTAssertEqualObjects([mock objectByCoercingReturnValue], [NSNull null]);
+  XCTAssertEqualObjects([mock objectByCoercingReturnValue],
+                        LPSelectorHasUnknownEncoding);
   [mock verify];
 }
 
@@ -420,7 +423,8 @@
   // space is intential; don't want first char to match
   NSString *encoding = @"";
   id mock = [self expectInvokerEncoding:encoding];
-  XCTAssertEqualObjects([mock objectByCoercingReturnValue], [NSNull null]);
+  XCTAssertEqualObjects([mock objectByCoercingReturnValue],
+                        LPSelectorHasUnknownEncoding);
   [mock verify];
 }
 
