@@ -6,4 +6,10 @@
 
 @implementation LPInvoker
 
+- (id) init {
+  @throw [NSException exceptionWithName:@"LPDesignatedInitializerException"
+                                 reason:@"init is not the designated initializer for LPInvoker"
+                                 userInfo:nil];
+}
+
 @end

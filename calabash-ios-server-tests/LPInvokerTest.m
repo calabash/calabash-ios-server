@@ -21,4 +21,10 @@
   [super tearDown];
 }
 
+#pragma mark - init
+
+- (void) testInitThrowsException {
+  XCTAssertThrows([LPInvoker new]);
+}
+
 @end
