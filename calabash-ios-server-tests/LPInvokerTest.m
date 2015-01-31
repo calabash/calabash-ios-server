@@ -16,6 +16,8 @@
 - (BOOL) selectorReturnsVoid;
 - (BOOL) selectorReturnValueCanBeCoerced;
 - (id) objectByCoercingReturnValue;
+- (NSUInteger) numberOfArguments;
+- (BOOL) selectorHasArguments;
 
 @end
 
@@ -169,6 +171,46 @@
                                                   receiver:receiver];
   NSString *actual = [invoker encoding];
   XCTAssertEqualObjects(actual, LPReceiverDoesNotRespondToSelectorEncoding);
+}
+
+#pragma mark - numberOfArguments
+
+/*
+ Mocking does work; infinite loop on forwardSelector
+ */
+
+- (void) testNumberOfArguments0 {
+  NSString *receiver = @"string";
+  SEL selector = @selector(length);
+  LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
+                                                  receiver:receiver];
+  XCTAssertEqual([invoker numberOfArguments], 0);
+}
+
+- (void) testNumberOfArguments1 {
+  NSString *receiver = @"string";
+  SEL selector = @selector(substringToIndex:);
+  LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
+                                                  receiver:receiver];
+  XCTAssertEqual([invoker numberOfArguments], 1);
+}
+
+#pragma mark - selectorHasArguments
+
+- (void) testSelectorHasArgumentsNO {
+  NSString *receiver = @"string";
+  SEL selector = @selector(length);
+  LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
+                                                  receiver:receiver];
+  XCTAssertEqual([invoker selectorHasArguments], NO);
+}
+
+- (void) testSelectorHasArgumentsYES {
+  NSString *receiver = @"string";
+  SEL selector = @selector(substringToIndex:);
+  LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
+                                                  receiver:receiver];
+  XCTAssertEqual([invoker selectorHasArguments], YES);
 }
 
 #pragma mark - encodingIsUnhandled

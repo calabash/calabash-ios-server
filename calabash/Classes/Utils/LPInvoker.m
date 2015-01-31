@@ -15,6 +15,8 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
 - (BOOL) selectorReturnsObject;
 - (BOOL) selectorReturnsVoid;
 - (BOOL) selectorReturnValueCanBeCoerced;
+- (NSUInteger) numberOfArguments;
+- (BOOL) selectorHasArguments;
 - (id) objectByCoercingReturnValue;
 
 @end
@@ -86,13 +88,17 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
   return [self.receiver respondsToSelector:self.selector];
 }
 
-
+/*
+ There are always at least two arguments, because an NSMethodSignature object
+ includes the hidden arguments self and _cmd, which are the first two arguments
+ passed to every method implementation.
+*/
 - (NSUInteger) numberOfArguments {
-  return 0;
+  return [self.signature numberOfArguments] - 2;
 }
 
 - (BOOL) selectorHasArguments {
-  return NO;
+  return [self numberOfArguments] != 0;
 }
 
 - (NSString *) encoding {
