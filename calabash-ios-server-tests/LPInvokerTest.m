@@ -47,6 +47,15 @@
   return mock;
 }
 
+- (id) stubInvokerDoesNotRespondToSelector {
+  LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:@selector(length)
+                                                  receiver:@"string"];
+  id mock = [OCMockObject partialMockForObject:invoker];
+  BOOL falsey = NO;
+  [[[mock stub] andReturnValue:OCMOCK_VALUE(falsey)] receiverRespondsToSelector];
+  return mock;
+}
+
 #pragma mark - init
 
 - (void) testInitThrowsException {
@@ -225,6 +234,12 @@
   [mock verify];
 }
 
+- (void) testSelectorReturnsObjectDNRS {
+  id mock = [self stubInvokerDoesNotRespondToSelector];
+  XCTAssertFalse([mock selectorReturnsObject]);
+  [mock verify];
+}
+
 #pragma mark - selectorReturnsVoid
 
 - (void) testSelectorReturnsVoidYES {
@@ -237,6 +252,12 @@
 - (void) testSelectorReturnsVoidNO {
   NSString *encoding = @(@encode(char *));
   id mock = [self expectInvokerEncoding:encoding];
+  XCTAssertFalse([mock selectorReturnsVoid]);
+  [mock verify];
+}
+
+- (void) testSelectorReturnsVoidDNRS {
+  id mock = [self stubInvokerDoesNotRespondToSelector];
   XCTAssertFalse([mock selectorReturnsVoid]);
   [mock verify];
 }
@@ -264,12 +285,17 @@
   [mock verify];
 }
 
+- (void) testSelectorReturnsAutoBoxableDNRS {
+  id mock = [self stubInvokerDoesNotRespondToSelector];
+  XCTAssertFalse([mock selectorReturnsAutoBoxable]);
+  [mock verify];
+}
+
 - (void) testSelectorReturnsAutoBoxableCharStar {
   NSString *encoding = @(@encode(char *));
   id mock = [self stubInvokerEncoding:encoding];
   XCTAssertTrue([mock selectorReturnsAutoBoxable]);
   [mock verify];
 }
-
 
 @end
