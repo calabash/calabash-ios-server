@@ -284,7 +284,7 @@
 #pragma mark - numberOfArguments
 
 /*
- Mocking does work; infinite loop on forwardSelector
+ Mocking does not work; infinite loop on forwardSelector
  */
 
 - (void) testNumberOfArguments0 {
