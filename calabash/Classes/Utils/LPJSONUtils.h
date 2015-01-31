@@ -10,7 +10,7 @@
           setObject:(id) object
              forKey:(NSString *) key;
 
-+ (NSString *) stringForSelector:(SEL) selector returnValueForReceiver:(id) object;
++ (NSString *) stringForSelector:(SEL) selector returnValueEncodingForReceiver:(id) object;
 
 + (BOOL) selector:(SEL) selector returnsNSObjectForReceiver:(id) object;
 

@@ -30,19 +30,19 @@
   }
 }
 
-+ (NSString *) stringForSelector:(SEL) selector returnValueForReceiver:(id) object {
-  NSMethodSignature *signature = [[object class] instanceMethodSignatureForSelector:selector];
++ (NSString *) stringForSelector:(SEL) selector returnValueEncodingForReceiver:(id) receiver {
+  NSMethodSignature *signature = [receiver methodSignatureForSelector:selector];
   return [NSString stringWithCString:[signature methodReturnType]
                             encoding:NSASCIIStringEncoding];
 }
 
 + (BOOL) selector:(SEL) selector returnsNSObjectForReceiver:(id) object {
-  NSString *returnType = [LPJSONUtils stringForSelector:selector returnValueForReceiver:object];
+  NSString *returnType = [LPJSONUtils stringForSelector:selector returnValueEncodingForReceiver:object];
   return ([returnType isEqualToString:@"@"]);
 }
 
 + (BOOL) selector:(SEL) selector returnValueIsVoidForReceiver:(id) object {
-  NSString *returnType = [LPJSONUtils stringForSelector:selector returnValueForReceiver:object];
+  NSString *returnType = [LPJSONUtils stringForSelector:selector returnValueEncodingForReceiver:object];
   return ([returnType isEqualToString:@"v"]);
 }
 
@@ -85,7 +85,7 @@
 
 + (id) objectForSelector:(SEL) selector withAutoboxableReturnValueForReceiver:(id) receiver {
   NSString *returnType = [LPJSONUtils stringForSelector:selector
-                                 returnValueForReceiver:receiver];
+                                 returnValueEncodingForReceiver:receiver];
   if (![receiver respondsToSelector:selector]) {
     NSLog(@"Receiver '%@' does not respond to selector '%@'. Returning NSNull.",
           receiver, NSStringFromSelector(selector));

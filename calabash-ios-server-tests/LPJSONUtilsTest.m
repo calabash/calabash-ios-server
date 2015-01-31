@@ -85,20 +85,20 @@
 
 #pragma mark - stringForSelector:returnValueForReceiver:
 
+
 - (void) testStringForSelectorReturnValueForRecieverPointer {
   id object = [MyObject new];
   SEL selector = @selector(number);
   XCTAssertEqualObjects([LPJSONUtils stringForSelector:selector
-                                returnValueForReceiver:object],
+                                returnValueEncodingForReceiver:object],
                         @"@");
 }
-
 
 - (void) testStringForSelectorReturnValueForRecieverVoid {
   id object = [MyObject new];
   SEL selector = @selector(selectorThatReturnsVoid);
   XCTAssertEqualObjects([LPJSONUtils stringForSelector:selector
-                                returnValueForReceiver:object],
+                                returnValueEncodingForReceiver:object],
                         @"v");
 }
 
@@ -106,7 +106,7 @@
   id object = [MyObject new];
   SEL selector = @selector(selectorThatReturnsCharArray);
   XCTAssertEqualObjects([LPJSONUtils stringForSelector:selector
-                                returnValueForReceiver:object],
+                                returnValueEncodingForReceiver:object],
                         @"r*");
 }
 
