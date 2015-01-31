@@ -7,6 +7,7 @@ extern NSString *const LPReceiverDoesNotRespondToSelectorEncoding;
 @property(assign, nonatomic, readonly) SEL selector;
 @property(strong, nonatomic, readonly) id receiver;
 
+// Designated initializer.
 - (id) initWithSelector:(SEL) selector
                receiver:(id) receiver;
 
