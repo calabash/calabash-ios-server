@@ -14,11 +14,13 @@
 @property(copy, nonatomic, readonly) NSDictionary *dictionary;
 @property(strong, nonatomic, readonly) id idType;
 
+
 - (void) selectorThatReturnsVoid;
 - (BOOL) selectorThatReturnsBOOL;
 - (NSInteger) selectorThatReturnsNSInteger;
 - (CGFloat) selectorThatReturnsCGFloat;
 - (char) selectorThatReturnsChar;
+- (char *) selectorThatReturnsCharStar;
 
 @end
 
@@ -45,8 +47,12 @@
   return [@"abc" cStringUsingEncoding:NSASCIIStringEncoding];
 }
 
-@end
+- (char *) selectorThatReturnsCharStar {
+  char *cString = "A c-string";
+  return cString;
+}
 
+@end
 
 
 @interface LPJSONUtilsTest : XCTestCase
@@ -61,6 +67,13 @@
 
 - (void)tearDown {
   [super tearDown];
+}
+
+#pragma mark - Autoboxing
+
+- (void) testCanAutoboxCharStar {
+  char *cString = "A c-string";
+  XCTAssertEqualObjects(@"A c-string", @(cString));
 }
 
 #pragma mark - dictionary:setObject:forKey
@@ -186,6 +199,13 @@
 - (void) testSelectorReturnsPointerForObjectCharArrayReturn {
   id object = [MyObject new];
   SEL selector = @selector(selectorThatReturnsCharArray);
+  XCTAssertFalse([LPJSONUtils selector:selector returnsNSObjectForReceiver:object]);
+}
+
+// '*' - can be autoboxed
+- (void) testSelectorReturnsPointerForObjectCharStarReturn {
+  MyObject *object = [MyObject new];
+  SEL selector = @selector(selectorThatReturnsCharStar);
   XCTAssertFalse([LPJSONUtils selector:selector returnsNSObjectForReceiver:object]);
 }
 
