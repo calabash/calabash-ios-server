@@ -38,4 +38,22 @@
   XCTAssertEqualObjects(invoker.receiver, receiver);
 }
 
+#pragma mark - receiverRespondsToSelector
+
+- (void) testReceiverRespondsToSelectorYES {
+  NSString *receiver = @"string";
+  SEL selector = @selector(length);
+  LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
+                                                  receiver:receiver];
+  XCTAssertTrue([invoker receiverRespondsToSelector]);
+}
+
+- (void) testReceiverRespondsToSelectorNO {
+  NSString *receiver = @"string";
+  SEL selector = NSSelectorFromString(@"obviouslyUnknownSelector");
+  LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
+                                                  receiver:receiver];
+  XCTAssertFalse([invoker receiverRespondsToSelector]);
+}
+
 @end

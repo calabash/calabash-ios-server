@@ -22,4 +22,8 @@
   return self;
 }
 
+- (BOOL) receiverRespondsToSelector {
+  return [self.receiver respondsToSelector:self.selector];
+}
+
 @end
