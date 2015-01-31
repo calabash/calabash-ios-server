@@ -36,6 +36,15 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
   return self;
 }
 
+- (NSString *) description {
+  return [NSString stringWithFormat:@"#<LPInvoker '%@' '%@' => '%@'>]",
+          NSStringFromSelector(self.selector), [self.receiver class], [self encoding]];
+}
+
+- (NSString *) debugDescription {
+  return [self description];
+}
+
 - (BOOL) receiverRespondsToSelector {
   return [self.receiver respondsToSelector:self.selector];
 }
