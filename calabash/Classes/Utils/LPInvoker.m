@@ -12,4 +12,14 @@
                                  userInfo:nil];
 }
 
+// Designated initializer.
+- (id) initWithSelector:(SEL) selector receiver:(id) receiver {
+  self = [super init];
+  if (self) {
+    _selector = selector;
+    _receiver = receiver;
+  }
+  return self;
+}
+
 @end

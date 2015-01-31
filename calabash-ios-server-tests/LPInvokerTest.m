@@ -27,4 +27,15 @@
   XCTAssertThrows([LPInvoker new]);
 }
 
+#pragma mark - initWithSelector:receiver
+
+- (void) testDesignatedInitializer {
+  NSString *receiver = @"string";
+  SEL selector = @selector(length);
+  LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
+                                                  receiver:receiver];
+  XCTAssertEqual(invoker.selector, selector);
+  XCTAssertEqualObjects(invoker.receiver, receiver);
+}
+
 @end
