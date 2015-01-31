@@ -9,6 +9,7 @@
 
 @interface LPInvoker (XTCTEST)
 
+- (NSInvocation *) invocation;
 - (BOOL) selectorReturnsObject;
 - (BOOL) selectorReturnsVoid;
 - (BOOL) selectorReturnsAutoBoxable;
@@ -71,6 +72,27 @@
                                                   receiver:receiver];
   XCTAssertEqual(invoker.selector, selector);
   XCTAssertEqualObjects(invoker.receiver, receiver);
+}
+
+#pragma mark - invocation
+
+- (void) testInvocationRS {
+  NSString *receiver = @"string";
+  SEL selector = @selector(length);
+  LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
+                                                  receiver:receiver];
+  NSInvocation *invocation = [invoker invocation];
+  XCTAssertEqual(invocation.selector, selector);
+  XCTAssertEqualObjects(invocation.target, receiver);
+}
+
+- (void) testInvocationDNRS {
+  NSString *receiver = @"string";
+  SEL selector = NSSelectorFromString(@"obviouslyUnknownSelector");
+  LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
+                                                  receiver:receiver];
+  NSInvocation *invocation = [invoker invocation];
+  XCTAssertNil(invocation);
 }
 
 #pragma mark - description
