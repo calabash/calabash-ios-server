@@ -13,8 +13,8 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
 
 - (BOOL) selectorReturnsObject;
 - (BOOL) selectorReturnsVoid;
-- (id) objectWithAutoboxedValue;
 - (BOOL) selectorReturnValueCanBeCoerced;
+- (id) objectByCoercingReturnValue;
 
 @end
 
@@ -137,6 +137,145 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
   return YES;
 }
 
+- (id) objectByCoercingReturnValue {
+  NSString *encoding = self.encoding;
+  SEL selector = self.selector;
+  id receiver = self.receiver;
+
+  if (![self receiverRespondsToSelector]) {
+    NSLog(@"Receiver '%@' does not respond to selector '%@'. Returning NSNull.",
+          receiver, NSStringFromSelector(selector));
+    return [NSNull null];
+  }
+
+  if (![self selectorReturnValueCanBeCoerced]) {
+    NSLog(@"Calling selector '%@' on '%@' does not return a value that can be autoboxed: '%@'.  Returning NSNull.",
+          NSStringFromSelector(selector), receiver, encoding);
+    return [NSNull null];
+  }
+
+  // Guard against invalid access when asking for encoding[0]
+  if (!encoding.length >= 1) {
+    NSLog(@"Selector '%@' on '%@' has an invallid encoding; '%@' must have at least once character.  Returning NSNull",
+          NSStringFromSelector(selector), receiver, encoding);
+    return [NSNull null];
+  }
+
+  NSInvocation *invocation = self.invocation;
+  [invocation invoke];
+
+  if ([encoding isEqualToString:@"r*"]) {
+    const char *ref;
+    [invocation getReturnValue:(void **) &ref];
+    return @(ref);
+  }
+
+  char char_encoding = [encoding cStringUsingEncoding:NSASCIIStringEncoding][0];
+  switch (char_encoding) {
+
+    case '*' : {
+      char *ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @(ref);
+    }
+
+      // BOOL is explicitly signed so @encode(BOOL) == "c" rather than "C"
+      // even if -funsigned-char is used.
+    case 'c' : {
+      char ref;
+      [invocation getReturnValue:(void **) &ref];
+      if (ref == (BOOL)1) {
+        return [NSNumber numberWithBool:YES];
+      } else if (ref == (BOOL)0) {
+        return [NSNumber numberWithBool:NO];
+      } else {
+        return [NSString stringWithFormat:@"%c", (char) ref];
+      }
+    }
+
+    case 'C' : {
+      unsigned char ref;
+      [invocation getReturnValue:(void **) &ref];
+      return [NSString stringWithFormat:@"%c", (char) ref];
+    }
+
+      // See note above for 'c'.
+    case 'B': {
+      bool ref;
+      [invocation getReturnValue:(void **) &ref];
+      if (ref == true) {
+        return [NSNumber numberWithBool:YES];
+      } else {
+        return [NSNumber numberWithBool:NO];
+      }
+    }
+
+    case 'i': {
+      int ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((int) ref);
+    }
+
+    case 'I': {
+      unsigned int ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((unsigned int) ref);
+    }
+
+    case 's': {
+      short ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((short) ref);
+    }
+
+    case 'S': {
+      unsigned short ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((unsigned short) ref);
+    }
+
+    case 'd' : {
+      double ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((double) ref);
+    }
+
+    case 'f' : {
+      float ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((float) ref);
+    }
+
+    case 'l' : {
+      long ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((long) ref);
+    }
+
+    case 'L' : {
+      unsigned long ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((unsigned long) ref);
+    }
+
+    case 'q' : {
+      long long ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((long long) ref);
+    }
+
+    case 'Q' : {
+      unsigned long long ref;
+      [invocation getReturnValue:(void **) &ref];
+      return @((unsigned long long) ref);
+    }
+
+    default: {
+      NSLog(@"Unexpected type encoding: '%@'.  Returning NSNull", encoding);
+    }
+  }
+
+  return [NSNull null];
 }
 
 @end

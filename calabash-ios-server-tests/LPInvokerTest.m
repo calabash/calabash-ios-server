@@ -6,6 +6,7 @@
 #import <XCTest/XCTest.h>
 #import "LPInvoker.h"
 #import <OCMock/OCMock.h>
+#import "InvokerFactory.h"
 
 @interface LPInvoker (XTCTEST)
 
@@ -13,6 +14,7 @@
 - (BOOL) selectorReturnsObject;
 - (BOOL) selectorReturnsVoid;
 - (BOOL) selectorReturnValueCanBeCoerced;
+- (id) objectByCoercingReturnValue;
 
 @end
 
@@ -28,6 +30,12 @@
 
 - (void)tearDown {
   [super tearDown];
+}
+
+#pragma mark - Playground
+
+- (void) testCannotInitInvokerFactory {
+  XCTAssertThrows([InvokerFactory new]);
 }
 
 #pragma mark - Mocking
@@ -320,7 +328,115 @@
   [mock verify];
 }
 
+#pragma mark - objectWithAutoboxedValue
+
+- (void) testAutoboxedValueDNRS {
+  id mock = [self stubInvokerDoesNotRespondToSelector];
+  XCTAssertEqualObjects([mock objectByCoercingReturnValue], [NSNull null]);
   [mock verify];
+}
+
+- (void) testAutoboxedValueNotAutoboxable {
+  LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:@selector(length)
+                                                  receiver:@"string"];
+  id mock = [OCMockObject partialMockForObject:invoker];
+  BOOL falsey = NO;
+  [[[mock expect] andReturnValue:OCMOCK_VALUE(falsey)] selectorReturnValueCanBeCoerced];
+
+  XCTAssertEqualObjects([mock objectByCoercingReturnValue], [NSNull null]);
+  [mock verify];
+}
+
+- (void) testAutoboxedValueUnexpectedEncoding {
+  // space is intential; don't want first char to match
+  NSString *encoding = @" unexpected encoding";
+  id mock = [self expectInvokerEncoding:encoding];
+  XCTAssertEqualObjects([mock objectByCoercingReturnValue], [NSNull null]);
+  [mock verify];
+}
+
+- (void) testAutoboxedValueInvalidEncoding {
+  // space is intential; don't want first char to match
+  NSString *encoding = @"";
+  id mock = [self expectInvokerEncoding:encoding];
+  XCTAssertEqualObjects([mock objectByCoercingReturnValue], [NSNull null]);
+  [mock verify];
+}
+
+- (void) testAutoboxedValueConstCharStar {
+  LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"const char *"];
+  XCTAssertEqualObjects([invoker objectByCoercingReturnValue], @"const char *");
+}
+
+- (void) testAutoboxedValueCharStar {
+  LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"char *"];
+  XCTAssertEqualObjects([invoker objectByCoercingReturnValue], @"char *");
+}
+
+- (void) testAutoboxedValueChar {
+  LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"char"];
+  XCTAssertEqualObjects([invoker objectByCoercingReturnValue], @"c");
+}
+
+- (void) testAutoboxedValueUnsignedChar {
+  LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"unsigned char"];
+  XCTAssertEqualObjects([invoker objectByCoercingReturnValue], @"C");
+}
+
+- (void) testAutoboxedValueBool {
+  LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"bool true"];
+  XCTAssertEqual([[invoker objectByCoercingReturnValue] boolValue], YES);
+
+  invoker = [InvokerFactory invokerWithSelectorReturnValue:@"bool false"];
+  XCTAssertEqual([[invoker objectByCoercingReturnValue] boolValue], NO);
+}
+
+- (void) testAutoboxedValueBOOL {
+  LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"BOOL YES"];
+  XCTAssertEqual([[invoker objectByCoercingReturnValue] boolValue], YES);
+
+  invoker = [InvokerFactory invokerWithSelectorReturnValue:@"BOOL NO"];
+  XCTAssertEqual([[invoker objectByCoercingReturnValue] boolValue], NO);
+}
+
+- (void) testAutoboxedValueInteger {
+  LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"NSInteger"];
+  XCTAssertEqual([[invoker objectByCoercingReturnValue] integerValue], NSIntegerMin);
+
+  invoker = [InvokerFactory invokerWithSelectorReturnValue:@"NSUInteger"];
+  XCTAssertEqual([[invoker objectByCoercingReturnValue] unsignedIntegerValue], NSNotFound);
+}
+
+- (void) testAutoboxedValueShort {
+  LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"short"];
+  XCTAssertEqual([[invoker objectByCoercingReturnValue] integerValue], SHRT_MIN);
+
+  invoker = [InvokerFactory invokerWithSelectorReturnValue:@"unsigned short"];
+  XCTAssertEqual([[invoker objectByCoercingReturnValue] unsignedIntegerValue], SHRT_MAX);
+}
+
+- (void) testAutoboxedValueDouble {
+  LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"double"];
+  XCTAssertEqual([[invoker objectByCoercingReturnValue] doubleValue], DBL_MAX);
+}
+
+- (void) testAutoboxedValueFloat {
+  LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"float"];
+  XCTAssertEqual([[invoker objectByCoercingReturnValue] doubleValue], MAXFLOAT);
+}
+
+- (void) testAutoboxedValueLong {
+  LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"long"];
+  XCTAssertEqual([[invoker objectByCoercingReturnValue] longValue], LONG_MIN);
+
+  invoker = [InvokerFactory invokerWithSelectorReturnValue:@"unsigned long"];
+  XCTAssertEqual([[invoker objectByCoercingReturnValue] unsignedLongValue], ULONG_MAX);
+
+  invoker = [InvokerFactory invokerWithSelectorReturnValue:@"long long"];
+  XCTAssertEqual([[invoker objectByCoercingReturnValue] longLongValue], LONG_LONG_MIN);
+
+  invoker = [InvokerFactory invokerWithSelectorReturnValue:@"unsigned long long"];
+  XCTAssertEqual([[invoker objectByCoercingReturnValue] unsignedLongLongValue], ULONG_LONG_MAX);
 }
 
 @end
