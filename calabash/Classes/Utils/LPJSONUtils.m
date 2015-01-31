@@ -60,22 +60,22 @@
   return NO;
 }
 
-+ (BOOL) selector:(SEL) selector returnsNSObjectForReceiver:(id) object {
-  NSString *returnType = [LPJSONUtils stringForSelector:selector returnValueEncodingForReceiver:object];
++ (BOOL) selector:(SEL) selector returnsNSObjectForReceiver:(id) receiver {
+  NSString *returnType = [LPJSONUtils stringForSelector:selector returnValueEncodingForReceiver:receiver];
   return ([returnType isEqualToString:@"@"]);
 }
 
-+ (BOOL) selector:(SEL) selector returnsVoidForReceiver:(id) object {
-  NSString *returnType = [LPJSONUtils stringForSelector:selector returnValueEncodingForReceiver:object];
++ (BOOL) selector:(SEL) selector returnsVoidForReceiver:(id) receiver {
+  NSString *returnType = [LPJSONUtils stringForSelector:selector returnValueEncodingForReceiver:receiver];
   return ([returnType isEqualToString:@"v"]);
 }
 
-+ (BOOL) selector:(SEL) selector returnsAutoBoxableValueForReceiver:(id) object {
-  if ([LPJSONUtils selector:selector returnsVoidForReceiver:object]) {
++ (BOOL) selector:(SEL) selector returnsAutoBoxableValueForReceiver:(id) receiver {
+  if ([LPJSONUtils selector:selector returnsVoidForReceiver:receiver]) {
     return NO;
   }
 
-  if ([LPJSONUtils selector:selector returnsNSObjectForReceiver:object]) {
+  if ([LPJSONUtils selector:selector returnsNSObjectForReceiver:receiver]) {
     return NO;
   }
 

@@ -10,15 +10,15 @@
           setObject:(id) object
              forKey:(NSString *) key;
 
-+ (NSString *) stringForSelector:(SEL) selector returnValueEncodingForReceiver:(id) object;
++ (NSString *) stringForSelector:(SEL) selector returnValueEncodingForReceiver:(id) receiver;
 
-+ (BOOL) selector:(SEL) selector returnsUnhandledEncodingForReceiver:(id) object;
++ (BOOL) selector:(SEL) selector returnsUnhandledEncodingForReceiver:(id) receiver;
 
-+ (BOOL) selector:(SEL) selector returnsNSObjectForReceiver:(id) object;
++ (BOOL) selector:(SEL) selector returnsNSObjectForReceiver:(id) receiver;
 
-+ (BOOL) selector:(SEL) selector returnsVoidForReceiver:(id) object;
++ (BOOL) selector:(SEL) selector returnsVoidForReceiver:(id) receiver;
 
-+ (BOOL) selector:(SEL) selector returnsAutoBoxableValueForReceiver:(id) object;
++ (BOOL) selector:(SEL) selector returnsAutoBoxableValueForReceiver:(id) receiver;
 
 + (void) dictionary:(NSMutableDictionary *) dictionary
     setObjectForKey:(NSString *) key
