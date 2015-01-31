@@ -13,7 +13,7 @@
 
 @interface LPJSONUtils ()
 
-+ (id) objectForSelector:(SEL) selector withAutoboxableReturnValueForReceiver:(id) receiver;
++ (id) objectForSelector:(SEL) selector withAutoBoxableValueForReceiver:(id) receiver;
 
 @end
 
@@ -82,7 +82,7 @@
   }
 }
 
-+ (id) objectForSelector:(SEL) selector withAutoboxableReturnValueForReceiver:(id) receiver {
++ (id) objectForSelector:(SEL) selector withAutoBoxableValueForReceiver:(id) receiver {
   NSString *returnType = [LPJSONUtils stringForSelector:selector
                                  returnValueEncodingForReceiver:receiver];
   if (![receiver respondsToSelector:selector]) {
