@@ -12,7 +12,7 @@
 - (NSInvocation *) invocation;
 - (BOOL) selectorReturnsObject;
 - (BOOL) selectorReturnsVoid;
-- (BOOL) selectorReturnsAutoBoxable;
+- (BOOL) selectorReturnValueCanBeCoerced;
 
 @end
 
@@ -289,34 +289,37 @@
 - (void) testSelectorReturnsAutoBoxableVoid {
   NSString *encoding = @(@encode(void));
   id mock = [self stubInvokerEncoding:encoding];
-  XCTAssertFalse([mock selectorReturnsAutoBoxable]);
+  XCTAssertFalse([mock selectorReturnValueCanBeCoerced]);
   [mock verify];
 }
 
 - (void) testSelectorReturnsAutoBoxableObject {
   NSString *encoding = @(@encode(NSObject *));
   id mock = [self stubInvokerEncoding:encoding];
-  XCTAssertFalse([mock selectorReturnsAutoBoxable]);
+  XCTAssertFalse([mock selectorReturnValueCanBeCoerced]);
   [mock verify];
 }
 
 - (void) testSelectorReturnsAutoBoxableUnknown {
   NSString *encoding = @"?";
   id mock = [self stubInvokerEncoding:encoding];
-  XCTAssertFalse([mock selectorReturnsAutoBoxable]);
+  XCTAssertFalse([mock selectorReturnValueCanBeCoerced]);
   [mock verify];
 }
 
 - (void) testSelectorReturnsAutoBoxableDNRS {
   id mock = [self stubInvokerDoesNotRespondToSelector];
-  XCTAssertFalse([mock selectorReturnsAutoBoxable]);
+  XCTAssertFalse([mock selectorReturnValueCanBeCoerced]);
   [mock verify];
 }
 
 - (void) testSelectorReturnsAutoBoxableCharStar {
   NSString *encoding = @(@encode(char *));
   id mock = [self stubInvokerEncoding:encoding];
-  XCTAssertTrue([mock selectorReturnsAutoBoxable]);
+  XCTAssertTrue([mock selectorReturnValueCanBeCoerced]);
+  [mock verify];
+}
+
   [mock verify];
 }
 
