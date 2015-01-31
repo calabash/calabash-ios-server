@@ -13,6 +13,7 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
 - (BOOL) selectorReturnsObject;
 - (BOOL) selectorReturnsVoid;
 - (BOOL) selectorReturnsAutoBoxable;
+- (id) objectWithAutoboxedValue;
 
 @end
 
@@ -38,7 +39,7 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
 
 - (NSString *) description {
   return [NSString stringWithFormat:@"#<LPInvoker '%@' '%@' => '%@'>]",
-          NSStringFromSelector(self.selector), [self.receiver class], [self encoding]];
+          NSStringFromSelector(self.selector), [self.receiver class], self.encoding];
 }
 
 - (NSString *) debugDescription {
@@ -64,7 +65,7 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
 }
 
 - (BOOL) encodingIsUnhandled {
-  NSString *encoding = [self encoding];
+  NSString *encoding = self.encoding;
 
   // @encode(void *) => ^v
   // @encode(float *) => ^f
@@ -100,12 +101,12 @@ NSString *const LPReceiverDoesNotRespondToSelectorEncoding = @"*****";
 
 - (BOOL) selectorReturnsObject {
   if (![self receiverRespondsToSelector]) { return NO; }
-  return [[self encoding] isEqualToString:@"@"];
+  return [self.encoding isEqualToString:@"@"];
 }
 
 - (BOOL) selectorReturnsVoid {
   if (![self receiverRespondsToSelector]) { return NO; }
-  return [[self encoding] isEqualToString:@"v"];
+  return [self.encoding isEqualToString:@"v"];
 }
 
 - (BOOL) selectorReturnsAutoBoxable {
