@@ -164,4 +164,28 @@
   XCTAssertEqual([dict count], 11);
 }
 
+- (void) testJsonifyViewUISlider {
+  CGRect frame = {20, 64, 88, 44};
+  UISlider *view = [[UISlider alloc] initWithFrame:frame];
+  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+
+  NSLog(@"%@", dict);
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"alpha"], @(1));
+  XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
+  XCTAssertEqualObjects(dict[@"description"], [view description]);
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(20));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(64));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(88));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(44));
+  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"value"], @(0));
+  XCTAssertEqualObjects(dict[@"visible"], @(1));
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqual([dict count], 11);
+}
+
+
 @end
