@@ -151,7 +151,7 @@
   return object;
 }
 
-+(NSMutableDictionary*)jsonifyView:(id)v {
++ (NSMutableDictionary*) jsonifyView:(id) v {
   NSMutableDictionary *result = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                  NSStringFromClass([v class]), @"class", nil];
 
@@ -193,22 +193,21 @@
     CGFloat alpha = [v alpha];
     [result setObject:@(alpha) forKey:@"alpha"];
   }
+
+  // setting value
   if ([v respondsToSelector:@selector(value)]) {
     id value = [v performSelector:@selector(value) withObject:nil];
     if (!value) {
       value = [NSNull null];
     }
     result[@"value"] = value;
-  }
-  else if ([v respondsToSelector:@selector(text)]) {
+  } else if ([v respondsToSelector:@selector(text)]) {
     id value = [v performSelector:@selector(text) withObject:nil];
     if (!value) {
       value = [NSNull null];
     }
     result[@"value"] = value;
-
-  }
-  else if ([v respondsToSelector:@selector(accessibilityValue)]) {
+  } else if ([v respondsToSelector:@selector(accessibilityValue)]) {
     id value = [v performSelector:@selector(accessibilityValue) withObject:nil];
     if (!value) {
       value = [NSNull null];
