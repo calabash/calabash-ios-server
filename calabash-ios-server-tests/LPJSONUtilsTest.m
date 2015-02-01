@@ -7,6 +7,9 @@
 #import "LPJSONUtils.h"
 #import <OCMock/OCMock.h>
 
+// TODO:  UIBarButton
+// TODO:  UINavigationBarButton
+// TODO:  UITabBarButton
 @interface LPJSONUtils (LPXCTTEST)
 
 + (void) dictionary:(NSMutableDictionary *) dictionary
@@ -81,10 +84,10 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
-  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(20));
-  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(64));
-  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(88));
-  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(44));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
   XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
@@ -103,15 +106,15 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
-  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(20));
-  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(64));
-  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(88));
-  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(44));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
   XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"selected"], @(0));
   XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"visible"], @(1));
-  XCTAssertEqualObjects(dict[@"selected"], @(0));
   XCTAssertEqual([dict count], 11);
 }
 
@@ -126,15 +129,14 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
-  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(20));
-  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(64));
-  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(88));
-  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(44));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
   XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"value"], @"");
   XCTAssertEqualObjects(dict[@"visible"], @(1));
-  XCTAssertEqualObjects(dict[@"enabled"], @(1));
   XCTAssertEqualObjects(dict[@"selected"], @(0));
   XCTAssertEqualObjects(dict[@"text"], @"");
   XCTAssertEqual([dict count], 12);
@@ -151,15 +153,14 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
-  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(20));
-  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(64));
-  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(88));
-  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(44));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
   XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"value"], @"");
   XCTAssertEqualObjects(dict[@"visible"], @(1));
-  XCTAssertEqualObjects(dict[@"enabled"], @(1));
   XCTAssertEqualObjects(dict[@"text"], @"");
   XCTAssertEqual([dict count], 11);
 }
@@ -175,17 +176,311 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
-  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(20));
-  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(64));
-  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(88));
-  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(44));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
   XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"selected"], @(0));
   XCTAssertEqualObjects(dict[@"value"], @(0));
   XCTAssertEqualObjects(dict[@"visible"], @(1));
-  XCTAssertEqualObjects(dict[@"enabled"], @(1));
   XCTAssertEqual([dict count], 11);
 }
 
+- (void) testJsonifyViewUISwitch {
+  CGRect frame = {20, 64, 88, 44};
+  UISwitch *view = [[UISwitch alloc] initWithFrame:frame];
+  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+
+  NSLog(@"%@", dict);
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"alpha"], @(1));
+  XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
+  XCTAssertEqualObjects(dict[@"description"], [view description]);
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
+  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"selected"], @(0));
+  XCTAssertEqualObjects(dict[@"visible"], @(1));
+  XCTAssertEqual([dict count], 11);
+}
+
+- (void) testJsonifyViewUIButton {
+  CGRect frame = {20, 64, 88, 44};
+  UIButton *view = [[UIButton alloc] initWithFrame:frame];
+  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+
+  NSLog(@"%@", dict);
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"alpha"], @(1));
+  XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
+  XCTAssertEqualObjects(dict[@"description"], [view description]);
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
+  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"visible"], @(1));
+  XCTAssertEqual([dict count], 11);
+}
+
+- (void) testJsonifyViewUIScrollView {
+  CGRect frame = {20, 64, 88, 44};
+  UIScrollView *view = [[UIScrollView alloc] initWithFrame:frame];
+  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+
+  NSLog(@"%@", dict);
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"alpha"], @(1));
+  XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
+  XCTAssertEqualObjects(dict[@"description"], [view description]);
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
+  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"visible"], @(1));
+  XCTAssertEqual([dict count], 10);
+}
+
+- (void) testJsonifyViewUITableView {
+  CGRect frame = {20, 64, 88, 44};
+  UITableView *view = [[UITableView alloc] initWithFrame:frame];
+  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+
+  NSLog(@"%@", dict);
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"alpha"], @(1));
+  XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
+  XCTAssertEqualObjects(dict[@"description"], [view description]);
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
+  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"visible"], @(1));
+  XCTAssertEqual([dict count], 10);
+}
+
+- (void) testJsonifyViewUITableViewCell {
+  UITableViewCell *view = [[UITableViewCell alloc]
+                       initWithStyle:UITableViewCellStyleDefault
+                       reuseIdentifier:@"identifier"];
+
+  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+
+  NSLog(@"%@", dict);
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"alpha"], @(1));
+  XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
+  XCTAssertEqualObjects(dict[@"description"], [view description]);
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
+  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"text"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"visible"], @(1));
+  XCTAssertEqual([dict count], 12);
+}
+
+- (void) testJsonifyViewUICollectionView {
+  CGRect frame = {20, 64, 88, 44};
+  UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
+  UICollectionView *view = [[UICollectionView alloc] initWithFrame:frame
+                                              collectionViewLayout:layout];
+  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+
+  NSLog(@"%@", dict);
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"alpha"], @(1));
+  XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
+  XCTAssertEqualObjects(dict[@"description"], [view description]);
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
+  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"visible"], @(1));
+  XCTAssertEqual([dict count], 10);
+}
+
+- (void) testJsonifyViewUICollectionViewCell {
+  CGRect frame = {20, 64, 88, 44};
+  UICollectionViewCell *view = [[UICollectionViewCell alloc] initWithFrame:frame];
+
+  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+
+  NSLog(@"%@", dict);
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"alpha"], @(1));
+  XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
+  XCTAssertEqualObjects(dict[@"description"], [view description]);
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
+  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"visible"], @(1));
+  XCTAssertEqual([dict count], 11);
+}
+
+- (void) testJsonifyViewUISegmentedControl {
+  CGRect frame = {20, 64, 88, 44};
+  UISegmentedControl *view = [[UISegmentedControl alloc] initWithFrame:frame];
+
+  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+
+  NSLog(@"%@", dict);
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"alpha"], @(1));
+  XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
+  XCTAssertEqualObjects(dict[@"description"], [view description]);
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
+  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"visible"], @(1));
+  XCTAssertEqual([dict count], 11);
+}
+
+- (void) testJsonifyViewUIPickerView {
+  CGRect frame = {20, 64, 88, 44};
+  UIPickerView *view = [[UIPickerView alloc] initWithFrame:frame];
+
+  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+
+  NSLog(@"%@", dict);
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"alpha"], @(1));
+  XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
+  XCTAssertEqualObjects(dict[@"description"], [view description]);
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
+  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"visible"], @(1));
+  XCTAssertEqual([dict count], 10);
+}
+
+- (void) testJsonifyViewUIDatePicker {
+  CGRect frame = {20, 64, 88, 44};
+  UIDatePicker *view = [[UIDatePicker alloc] initWithFrame:frame];
+
+  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+
+  NSLog(@"%@", dict);
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"alpha"], @(1));
+  XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
+  XCTAssertEqualObjects(dict[@"description"], [view description]);
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
+  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"visible"], @(1));
+  XCTAssertEqual([dict count], 11);
+}
+
+
+- (void) testJsonifyViewUITabBar {
+  CGRect frame = {20, 64, 88, 44};
+  UITabBar *view = [[UITabBar alloc] initWithFrame:frame];
+
+  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+
+  NSLog(@"%@", dict);
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"alpha"], @(1));
+  XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
+  XCTAssertEqualObjects(dict[@"description"], [view description]);
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
+  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"visible"], @(1));
+  XCTAssertEqual([dict count], 10);
+}
+
+- (void) testJsonifyViewUINavigationBar {
+  CGRect frame = {20, 64, 88, 44};
+  UINavigationBar *view = [[UINavigationBar alloc] initWithFrame:frame];
+
+  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+
+  NSLog(@"%@", dict);
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"alpha"], @(1));
+  XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
+  XCTAssertEqualObjects(dict[@"description"], [view description]);
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
+  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"visible"], @(1));
+  XCTAssertEqual([dict count], 10);
+}
+
+- (void) testJsonifyViewUIToolbar {
+  CGRect frame = {20, 64, 88, 44};
+  UIToolbar *view = [[UIToolbar alloc] initWithFrame:frame];
+
+  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+
+  NSLog(@"%@", dict);
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"alpha"], @(1));
+  XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
+  XCTAssertEqualObjects(dict[@"description"], [view description]);
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
+  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"visible"], @(1));
+  XCTAssertEqual([dict count], 10);
+}
 
 @end
