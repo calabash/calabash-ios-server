@@ -501,8 +501,8 @@
 
 - (void) testObjectByCoercingReturnValueDoesNotRespondToSelector {
   id mock = [self stubInvokerDoesNotRespondToSelector];
-  XCTAssertEqualObjects([mock objectByCoercingReturnValue],
-                        LPTargetDoesNotRespondToSelector);
+  LPCoercion *coercion = [mock objectByCoercingReturnValue];
+  XCTAssertEqualObjects(coercion.failureMessage, LPTargetDoesNotRespondToSelector);
   [mock verify];
 }
 
@@ -512,9 +512,8 @@
   id mock = [OCMockObject partialMockForObject:invoker];
   BOOL falsey = NO;
   [[[mock expect] andReturnValue:OCMOCK_VALUE(falsey)] selectorReturnValueCanBeCoerced];
-
-  XCTAssertEqualObjects([mock objectByCoercingReturnValue],
-                        LPCannotCoerceSelectorReturnValueToObject);
+  LPCoercion *coercion = [mock objectByCoercingReturnValue];
+  XCTAssertEqualObjects(coercion.failureMessage, LPCannotCoerceSelectorReturnValueToObject);
   [mock verify];
 }
 
@@ -522,8 +521,8 @@
   // space is intential; don't want first char to match
   NSString *encoding = @" unexpected encoding";
   id mock = [self expectInvokerEncoding:encoding];
-  XCTAssertEqualObjects([mock objectByCoercingReturnValue],
-                        LPSelectorHasUnknownEncoding);
+  LPCoercion *coercion = [mock objectByCoercingReturnValue];
+  XCTAssertEqualObjects(coercion.failureMessage, LPSelectorHasUnknownEncoding);
   [mock verify];
 }
 
@@ -531,85 +530,121 @@
   // space is intential; don't want first char to match
   NSString *encoding = @"";
   id mock = [self expectInvokerEncoding:encoding];
-  XCTAssertEqualObjects([mock objectByCoercingReturnValue],
-                        LPSelectorHasUnknownEncoding);
+  LPCoercion *coercion = [mock objectByCoercingReturnValue];
+  XCTAssertEqualObjects(coercion.failureMessage, LPSelectorHasUnknownEncoding);
   [mock verify];
 }
 
 - (void) testObjectByCoercingReturnValueConstCharStar {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"const char *"];
-  XCTAssertEqualObjects([invoker objectByCoercingReturnValue], @"const char *");
+  LPCoercion *coercion = [invoker objectByCoercingReturnValue];
+  id value = coercion.value;
+  XCTAssertEqualObjects(value, @"const char *");
 }
 
 - (void) testObjectByCoercingReturnValueCharStar {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"char *"];
-  XCTAssertEqualObjects([invoker objectByCoercingReturnValue], @"char *");
+  LPCoercion *coercion = [invoker objectByCoercingReturnValue];
+  id value = coercion.value;
+  XCTAssertEqualObjects(value, @"char *");
 }
 
 - (void) testObjectByCoercingReturnValueChar {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"char"];
-  XCTAssertEqualObjects([invoker objectByCoercingReturnValue], @"c");
+  LPCoercion *coercion = [invoker objectByCoercingReturnValue];
+  id value = coercion.value;
+  XCTAssertEqualObjects(value, @"c");
 }
 
 - (void) testObjectByCoercingReturnValueUnsignedChar {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"unsigned char"];
-  XCTAssertEqualObjects([invoker objectByCoercingReturnValue], @"C");
+  LPCoercion *coercion = [invoker objectByCoercingReturnValue];
+  id value = coercion.value;
+  XCTAssertEqualObjects(value, @"C");
 }
 
 - (void) testObjectByCoercingReturnValueBool {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"bool true"];
-  XCTAssertEqual([[invoker objectByCoercingReturnValue] boolValue], YES);
+  LPCoercion *coercion = [invoker objectByCoercingReturnValue];
+  id value = coercion.value;
+  XCTAssertEqual([value boolValue], YES);
 
   invoker = [InvokerFactory invokerWithSelectorReturnValue:@"bool false"];
-  XCTAssertEqual([[invoker objectByCoercingReturnValue] boolValue], NO);
+  coercion = [invoker objectByCoercingReturnValue];
+  value = coercion.value;
+  XCTAssertEqual([value boolValue], NO);
 }
 
 - (void) testObjectByCoercingReturnValueBOOL {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"BOOL YES"];
-  XCTAssertEqual([[invoker objectByCoercingReturnValue] boolValue], YES);
+  LPCoercion *coercion = [invoker objectByCoercingReturnValue];
+  id value = coercion.value;
+  XCTAssertEqual([value boolValue], YES);
 
   invoker = [InvokerFactory invokerWithSelectorReturnValue:@"BOOL NO"];
-  XCTAssertEqual([[invoker objectByCoercingReturnValue] boolValue], NO);
+  coercion = [invoker objectByCoercingReturnValue];
+  value = coercion.value;
+  XCTAssertEqual([value boolValue], NO);
 }
 
 - (void) testObjectByCoercingReturnValueInteger {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"NSInteger"];
-  XCTAssertEqual([[invoker objectByCoercingReturnValue] integerValue], NSIntegerMin);
+  LPCoercion *coercion = [invoker objectByCoercingReturnValue];
+  id value = coercion.value;
+  XCTAssertEqual([value integerValue], NSIntegerMin);
 
   invoker = [InvokerFactory invokerWithSelectorReturnValue:@"NSUInteger"];
-  XCTAssertEqual([[invoker objectByCoercingReturnValue] unsignedIntegerValue], NSNotFound);
+  coercion = [invoker objectByCoercingReturnValue];
+  value = coercion.value;
+  XCTAssertEqual([value unsignedIntegerValue], NSNotFound);
 }
 
 - (void) testObjectByCoercingReturnValueShort {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"short"];
-  XCTAssertEqual([[invoker objectByCoercingReturnValue] integerValue], SHRT_MIN);
+  LPCoercion *coercion = [invoker objectByCoercingReturnValue];
+  id value = coercion.value;
+  XCTAssertEqual([value shortValue], SHRT_MIN);
 
   invoker = [InvokerFactory invokerWithSelectorReturnValue:@"unsigned short"];
-  XCTAssertEqual([[invoker objectByCoercingReturnValue] unsignedIntegerValue], SHRT_MAX);
+  coercion = [invoker objectByCoercingReturnValue];
+  value = coercion.value;
+  XCTAssertEqual([value unsignedShortValue], SHRT_MAX);
 }
 
 - (void) testObjectByCoercingReturnValueDouble {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"double"];
-  XCTAssertEqual([[invoker objectByCoercingReturnValue] doubleValue], DBL_MAX);
+  LPCoercion *coercion = [invoker objectByCoercingReturnValue];
+  id value = coercion.value;
+  XCTAssertEqual([value doubleValue], DBL_MAX);
 }
 
 - (void) testObjectByCoercingReturnValueFloat {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"float"];
-  XCTAssertEqual([[invoker objectByCoercingReturnValue] doubleValue], MAXFLOAT);
+  LPCoercion *coercion = [invoker objectByCoercingReturnValue];
+  id value = coercion.value;
+  XCTAssertEqual([value floatValue], MAXFLOAT);
 }
 
 - (void) testObjectByCoercingReturnValueLong {
   LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"long"];
-  XCTAssertEqual([[invoker objectByCoercingReturnValue] longValue], LONG_MIN);
+  LPCoercion *coercion = [invoker objectByCoercingReturnValue];
+  id value = coercion.value;
+  XCTAssertEqual([value longValue], LONG_MIN);
 
   invoker = [InvokerFactory invokerWithSelectorReturnValue:@"unsigned long"];
-  XCTAssertEqual([[invoker objectByCoercingReturnValue] unsignedLongValue], ULONG_MAX);
+  coercion = [invoker objectByCoercingReturnValue];
+  value = coercion.value;
+  XCTAssertEqual([value unsignedLongValue], ULONG_MAX);
 
   invoker = [InvokerFactory invokerWithSelectorReturnValue:@"long long"];
-  XCTAssertEqual([[invoker objectByCoercingReturnValue] longLongValue], LONG_LONG_MIN);
+  coercion = [invoker objectByCoercingReturnValue];
+  value = coercion.value;
+  XCTAssertEqual([value longLongValue], LONG_LONG_MIN);
 
   invoker = [InvokerFactory invokerWithSelectorReturnValue:@"unsigned long long"];
-  XCTAssertEqual([[invoker objectByCoercingReturnValue] unsignedLongLongValue], ULONG_LONG_MAX);
+  coercion = [invoker objectByCoercingReturnValue];
+  value = coercion.value;
+  XCTAssertEqual([value unsignedLongLongValue], ULONG_LONG_MAX);
 }
 
 @end

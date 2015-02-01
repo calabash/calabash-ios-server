@@ -12,6 +12,43 @@ NSString *const LPCannotCoerceSelectorReturnValueToObject = @"*cannot coerce to 
 NSString *const LPSelectorHasUnknownEncoding = @"*unknown encoding*";
 NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
 
+@interface LPCoercion ()
+
+- (id) initWithValue:(id) value
+      failureMessage:(NSString *) failureMessage;
+
+@end
+
+@implementation LPCoercion
+
+- (id) initWithValue:(id) value
+      failureMessage:(NSString *) failureMessage {
+  self = [super init];
+  if (self) {
+    _value = value;
+    _failureMessage = failureMessage;
+  };
+  return self;
+}
+
++ (id) coercionWithValue:(id) value {
+  return [[LPCoercion alloc] initWithValue:value failureMessage:nil];
+}
+
++ (id) coercionWithFailureMessage:(NSString *) failureMessage {
+  return [[LPCoercion alloc] initWithValue:nil failureMessage:failureMessage];
+}
+
+- (BOOL) wasSuccessful {
+  if (self) {
+    return YES;
+  } else {
+    return NO;
+  }
+}
+
+@end
+
 @interface LPInvoker ()
 
 @property(strong, nonatomic, readonly) NSString *encoding;
@@ -23,7 +60,7 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
 - (BOOL) selectorReturnValueCanBeCoerced;
 - (NSUInteger) numberOfArguments;
 - (BOOL) selectorHasArguments;
-- (id) objectByCoercingReturnValue;
+- (LPCoercion *) objectByCoercingReturnValue;
 
 @end
 
@@ -198,24 +235,24 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
   return YES;
 }
 
-- (id) objectByCoercingReturnValue {
+- (LPCoercion *) objectByCoercingReturnValue {
   NSString *encoding = self.encoding;
   SEL selector = self.selector;
   id target = self.target;
 
   if (![self targetRespondsToSelector]) {
-    return LPTargetDoesNotRespondToSelector;
+    return [LPCoercion coercionWithFailureMessage:LPTargetDoesNotRespondToSelector];
   }
 
   if (![self selectorReturnValueCanBeCoerced]) {
-    return LPCannotCoerceSelectorReturnValueToObject;
+    return [LPCoercion coercionWithFailureMessage:LPCannotCoerceSelectorReturnValueToObject];
   }
 
   // Guard against invalid access when asking for encoding[0]
   if (!encoding.length >= 1) {
     NSLog(@"Selector '%@' on '%@' has an invalid encoding; '%@' must have at least once character.",
           NSStringFromSelector(selector), target, encoding);
-    return LPSelectorHasUnknownEncoding;
+    return [LPCoercion coercionWithFailureMessage:LPSelectorHasUnknownEncoding];
   }
 
   NSInvocation *invocation = self.invocation;
@@ -224,7 +261,7 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
   if ([encoding isEqualToString:@"r*"]) {
     const char *ref;
     [invocation getReturnValue:(void **) &ref];
-    return @(ref);
+    return [LPCoercion coercionWithValue:@(ref)];
   }
 
   char char_encoding = [encoding cStringUsingEncoding:NSASCIIStringEncoding][0];
@@ -233,7 +270,7 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
     case '*' : {
       char *ref;
       [invocation getReturnValue:(void **) &ref];
-      return @(ref);
+      return [LPCoercion coercionWithValue:@(ref)];
     }
 
       // BOOL is explicitly signed so @encode(BOOL) == "c" rather than "C"
@@ -242,18 +279,20 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
       char ref;
       [invocation getReturnValue:(void **) &ref];
       if (ref == (BOOL)1) {
-        return [NSNumber numberWithBool:YES];
+        return [LPCoercion coercionWithValue:@(YES)];
       } else if (ref == (BOOL)0) {
-        return [NSNumber numberWithBool:NO];
+        return [LPCoercion coercionWithValue:@(NO)];
       } else {
-        return [NSString stringWithFormat:@"%c", (char) ref];
+        NSString *value = [NSString stringWithFormat:@"%c", (char) ref];
+        return [LPCoercion coercionWithValue:value];
       }
     }
 
     case 'C' : {
       unsigned char ref;
       [invocation getReturnValue:(void **) &ref];
-      return [NSString stringWithFormat:@"%c", (char) ref];
+      NSString *value = [NSString stringWithFormat:@"%c", (char) ref];
+      return [LPCoercion coercionWithValue:value];
     }
 
       // See note above for 'c'.
@@ -261,70 +300,70 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
       bool ref;
       [invocation getReturnValue:(void **) &ref];
       if (ref == true) {
-        return [NSNumber numberWithBool:YES];
+        return [LPCoercion coercionWithValue:@(YES)];
       } else {
-        return [NSNumber numberWithBool:NO];
+        return [LPCoercion coercionWithValue:@(NO)];
       }
     }
 
     case 'i': {
       int ref;
       [invocation getReturnValue:(void **) &ref];
-      return @((int) ref);
+      return [LPCoercion coercionWithValue:@((int) ref)];
     }
 
     case 'I': {
       unsigned int ref;
       [invocation getReturnValue:(void **) &ref];
-      return @((unsigned int) ref);
+      return [LPCoercion coercionWithValue:@((unsigned int) ref)];
     }
 
     case 's': {
       short ref;
       [invocation getReturnValue:(void **) &ref];
-      return @((short) ref);
+      return [LPCoercion coercionWithValue:@((short) ref)];
     }
 
     case 'S': {
       unsigned short ref;
       [invocation getReturnValue:(void **) &ref];
-      return @((unsigned short) ref);
+      return [LPCoercion coercionWithValue:@((unsigned short) ref)];
     }
 
     case 'd' : {
       double ref;
       [invocation getReturnValue:(void **) &ref];
-      return @((double) ref);
+      return [LPCoercion coercionWithValue:@((double) ref)];
     }
 
     case 'f' : {
       float ref;
       [invocation getReturnValue:(void **) &ref];
-      return @((float) ref);
+      return [LPCoercion coercionWithValue:@((float) ref)];
     }
 
     case 'l' : {
       long ref;
       [invocation getReturnValue:(void **) &ref];
-      return @((long) ref);
+      return [LPCoercion coercionWithValue:@((long) ref)];
     }
 
     case 'L' : {
       unsigned long ref;
       [invocation getReturnValue:(void **) &ref];
-      return @((unsigned long) ref);
+      return [LPCoercion coercionWithValue:@((unsigned long) ref)];
     }
 
     case 'q' : {
       long long ref;
       [invocation getReturnValue:(void **) &ref];
-      return @((long long) ref);
+      return [LPCoercion coercionWithValue:@((long long) ref)];
     }
 
     case 'Q' : {
       unsigned long long ref;
       [invocation getReturnValue:(void **) &ref];
-      return @((unsigned long long) ref);
+      return [LPCoercion coercionWithValue:@((unsigned long long) ref)];
     }
 
     default: {
@@ -332,7 +371,7 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
     }
   }
 
-  return LPSelectorHasUnknownEncoding;
+  return [LPCoercion coercionWithFailureMessage:LPSelectorHasUnknownEncoding];
 }
 
 @end
