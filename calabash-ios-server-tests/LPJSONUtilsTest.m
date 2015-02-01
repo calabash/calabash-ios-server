@@ -123,7 +123,6 @@
   UITextField *view = [[UITextField alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
-  NSLog(@"%@", dict);
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
@@ -147,7 +146,6 @@
   UITextView *view = [[UITextView alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
-  NSLog(@"%@", dict);
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
@@ -170,7 +168,6 @@
   UISlider *view = [[UISlider alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
-  NSLog(@"%@", dict);
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
@@ -193,7 +190,6 @@
   UISwitch *view = [[UISwitch alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
-  NSLog(@"%@", dict);
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
@@ -215,7 +211,6 @@
   UIButton *view = [[UIButton alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
-  NSLog(@"%@", dict);
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
@@ -236,7 +231,6 @@
   UIScrollView *view = [[UIScrollView alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
-  NSLog(@"%@", dict);
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
@@ -257,7 +251,6 @@
   UITableView *view = [[UITableView alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
-  NSLog(@"%@", dict);
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
@@ -280,7 +273,6 @@
 
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
-  NSLog(@"%@", dict);
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
@@ -305,7 +297,6 @@
                                               collectionViewLayout:layout];
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
-  NSLog(@"%@", dict);
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
@@ -327,7 +318,6 @@
 
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
-  NSLog(@"%@", dict);
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
@@ -350,7 +340,6 @@
 
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
-  NSLog(@"%@", dict);
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
@@ -373,7 +362,6 @@
 
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
-  NSLog(@"%@", dict);
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
@@ -396,7 +384,6 @@
 
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
-  NSLog(@"%@", dict);
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
@@ -420,7 +407,6 @@
 
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
-  NSLog(@"%@", dict);
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
@@ -443,7 +429,6 @@
 
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
-  NSLog(@"%@", dict);
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
@@ -466,7 +451,6 @@
 
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
-  NSLog(@"%@", dict);
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
