@@ -196,11 +196,10 @@
 
   // setting value
   if ([v respondsToSelector:@selector(value)]) {
-    id value = [v performSelector:@selector(value) withObject:nil];
-    if (!value) {
-      value = [NSNull null];
-    }
-    result[@"value"] = value;
+    [LPJSONUtils dictionary:result
+            setObjectforKey:@"value"
+                 whenTarget:v
+                 respondsTo:@selector(value)];
   } else if ([v respondsToSelector:@selector(text)]) {
     id value = [v performSelector:@selector(text) withObject:nil];
     if (!value) {
