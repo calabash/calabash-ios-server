@@ -9,6 +9,11 @@
 
 @interface LPJSONUtils (LPXCTTEST)
 
++ (void) dictionary:(NSMutableDictionary *) dictionary
+    setObjectforKey:(NSString *) key
+         whenTarget:(id) target
+         respondsTo:(SEL) selector;
+
 + (NSMutableDictionary *) jsonifyView:(UIView *) view;
 
 @end
@@ -25,6 +30,43 @@
 
 - (void)tearDown {
   [super tearDown];
+}
+
+#pragma mark - dictionary:setObject:forKey:whenTarget:respondsTo:
+
+- (void) testDictionarySetObjectForKeyWhenTargetRespondsToYesAndNil {
+  NSMutableDictionary *dict = [@{} mutableCopy];
+  UIView *view = [[UIView alloc] init];
+  SEL selector = @selector(accessibilityLabel);
+  [LPJSONUtils dictionary:dict
+          setObjectforKey:@"key"
+               whenTarget:view
+               respondsTo:selector];
+  XCTAssertEqualObjects(dict[@"key"], [NSNull null]);
+}
+
+- (void) testDictionarySetObjectForKeyWhenTargetRespondsToYesAndNonNil {
+  NSMutableDictionary *dict = [@{} mutableCopy];
+  UIView *view = [[UIView alloc] init];
+  SEL selector = @selector(accessibilityLabel);
+  NSString *expected = @"Touch me";
+  view.accessibilityLabel = expected;
+  [LPJSONUtils dictionary:dict
+          setObjectforKey:@"key"
+               whenTarget:view
+               respondsTo:selector];
+  XCTAssertEqualObjects(dict[@"key"], expected);
+}
+
+- (void) testDictionarySetObjectForKeyWhenTargetRespondsToNo {
+  NSMutableDictionary *dict = [@{} mutableCopy];
+  UIView *view = [[UIView alloc] init];
+  SEL selector = NSSelectorFromString(@"obviouslyUnknownSelector");
+  [LPJSONUtils dictionary:dict
+          setObjectforKey:@"key"
+               whenTarget:view
+               respondsTo:selector];
+  XCTAssertEqualObjects(dict[@"key"], nil);
 }
 
 #pragma mark - jsonifyView

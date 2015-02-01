@@ -10,8 +10,27 @@
 #import "LPTouchUtils.h"
 #import "LPDevice.h"
 #import "LPOrientationOperation.h"
+#import "LPInvoker.h"
+
+@interface LPJSONUtils ()
+
++ (void) dictionary:(NSMutableDictionary *) dictionary
+    setObjectforKey:(NSString *) key
+         whenTarget:(id) target
+         respondsTo:(SEL) selector;
+@end
 
 @implementation LPJSONUtils
+
++ (void) dictionary:(NSMutableDictionary *) dictionary
+    setObjectforKey:(NSString *) key
+         whenTarget:(id) target
+         respondsTo:(SEL) selector {
+  if ([target respondsToSelector:selector]) {
+    id value = [LPInvoker invokeSelector:selector withTarget:target];
+    [dictionary setObject:value forKey:key];
+  }
+}
 
 + (NSString *) serializeDictionary:(NSDictionary *) dictionary {
   LPCJSONSerializer *s = [LPCJSONSerializer serializer];
