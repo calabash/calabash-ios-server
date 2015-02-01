@@ -158,6 +158,12 @@
   NSNumber *viewVisible = [LPTouchUtils isViewVisible:(UIView*)v] ? @(1) : @(0);
   [result setObject:viewVisible forKey:@"visible"];
 
+  // Be defensive: user *might* have a view with a 'nil' description.
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"description"
+               whenTarget:v
+               respondsTo:@selector(description)];
+
   // Selector is defined for NSObject(UIKit), but better to be safe than sorry.
   [LPJSONUtils dictionary:result
           setObjectforKey:@"accessibilityElement"
@@ -253,7 +259,7 @@
 
   [result setObject:frameDic forKey:@"frame"];
 
-  [result setObject:[v description] forKey:@"description"];
+
 
   return result;
 }
