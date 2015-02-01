@@ -220,6 +220,10 @@
   }
 
   CGRect frame = [v frame];
+  result[@"frame"] = @{@"x" : @(frame.origin.x),
+                       @"y" : @(frame.origin.y),
+                       @"width" : @(frame.size.width),
+                       @"height" : @(frame.size.height)};
 
   UIWindow *window = [LPTouchUtils windowForView:v];
   if (window) {
@@ -250,16 +254,6 @@
 
     [result setObject:rectDic forKey:@"rect"];
   }
-
-  NSDictionary *frameDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:frame.origin.x], @"x",
-                            [NSNumber numberWithFloat:frame.origin.y], @"y",
-                            [NSNumber numberWithFloat:frame.size.width], @"width",
-                            [NSNumber numberWithFloat:frame.size.height], @"height",
-                            nil];
-
-  [result setObject:frameDic forKey:@"frame"];
-
-
 
   return result;
 }
