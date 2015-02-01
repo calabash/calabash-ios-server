@@ -158,7 +158,11 @@
   NSNumber *viewVisible = [LPTouchUtils isViewVisible:(UIView*)v] ? @(1) : @(0);
   [result setObject:viewVisible forKey:@"visible"];
 
-  result[@"accessibilityElement"] = [v isAccessibilityElement] ? @(1) : @(0);
+  // Selector is defined for NSObject(UIKit), but better to be safe than sorry.
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"accessibilityElement"
+          whenTarget:v
+          respondsTo:@selector(isAccessibilityElement)];
 
   [LPJSONUtils dictionary:result
           setObjectforKey:@"label"
