@@ -71,15 +71,14 @@
 
 #pragma mark - jsonifyView
 
-- (void) testJsonifyView {
+- (void) testJsonifyViewUIView {
   CGRect frame = {20, 64, 88, 44};
   UIView *view = [[UIView alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
-  NSLog(@"%@", dict);
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
-  XCTAssertEqualObjects(dict[@"class"], @"UIView");
+  XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
   XCTAssertEqualObjects(dict[@"frame"][@"x"], @(20));
@@ -90,6 +89,79 @@
   XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"visible"], @(1));
+  XCTAssertEqual([dict count], 10);
+}
+
+
+- (void) testJsonifyViewUIControl {
+  CGRect frame = {20, 64, 88, 44};
+  UIControl *view = [[UIControl alloc] initWithFrame:frame];
+  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"alpha"], @(1));
+  XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
+  XCTAssertEqualObjects(dict[@"description"], [view description]);
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(20));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(64));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(88));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(44));
+  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"visible"], @(1));
+  XCTAssertEqualObjects(dict[@"selected"], @(0));
+  XCTAssertEqual([dict count], 11);
+}
+
+- (void) testJsonifyViewUITextField {
+  CGRect frame = {20, 64, 88, 44};
+  UITextField *view = [[UITextField alloc] initWithFrame:frame];
+  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+
+  NSLog(@"%@", dict);
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"alpha"], @(1));
+  XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
+  XCTAssertEqualObjects(dict[@"description"], [view description]);
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(20));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(64));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(88));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(44));
+  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"value"], @"");
+  XCTAssertEqualObjects(dict[@"visible"], @(1));
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqualObjects(dict[@"selected"], @(0));
+  XCTAssertEqualObjects(dict[@"text"], @"");
+  XCTAssertEqual([dict count], 12);
+}
+
+- (void) testJsonifyViewUITextView {
+  CGRect frame = {20, 64, 88, 44};
+  UITextView *view = [[UITextView alloc] initWithFrame:frame];
+  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+
+  NSLog(@"%@", dict);
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"alpha"], @(1));
+  XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
+  XCTAssertEqualObjects(dict[@"description"], [view description]);
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(20));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(64));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(88));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(44));
+  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"value"], @"");
+  XCTAssertEqualObjects(dict[@"visible"], @(1));
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqualObjects(dict[@"text"], @"");
+  XCTAssertEqual([dict count], 11);
 }
 
 @end
