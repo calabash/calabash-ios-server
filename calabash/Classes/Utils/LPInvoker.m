@@ -100,13 +100,13 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
 + (id) invokeSelector:(SEL) selector withTarget:(id) target {
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
                                                     target:target];
-  if (![invoker targetRespondsToSelector]) { return LPTargetDoesNotRespondToSelector; }
+  if (![invoker targetRespondsToSelector]) { return [NSNull null]; }
 
-  if ([invoker selectorHasArguments]) { return LPSelectorHasUnhandledArguments; }
+  if ([invoker selectorHasArguments]) { return [NSNull null]; }
 
-  if ([invoker selectorReturnsVoid]) { return LPVoidSelectorReturnValue; }
+  if ([invoker selectorReturnsVoid]) { return [NSNull null]; }
 
-  if ([invoker encodingIsUnhandled]) { return LPSelectorHasUnhandledEncoding; }
+  if ([invoker encodingIsUnhandled]) { return [NSNull null]; }
 
   if ([invoker selectorReturnsObject]) {
     NSInvocation *invocation = invoker.invocation;
@@ -121,9 +121,16 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
     }
   }
 
-  if ([invoker selectorReturnValueCanBeCoerced]) { return [invoker objectByCoercingReturnValue]; }
+  if ([invoker selectorReturnValueCanBeCoerced]) {
+    LPCoercion *coercion = [invoker objectByCoercingReturnValue];
+    if ([coercion wasSuccessful]) {
+      return coercion.value;
+    } else {
+      return [NSNull null];
+    }
+  }
 
-  return LPUnspecifiedInvocationError;
+  return [NSNull null];
 }
 
 - (NSInvocation *) invocation {
