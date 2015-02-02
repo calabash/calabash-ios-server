@@ -135,6 +135,7 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
   XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
@@ -156,6 +157,7 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
   XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
@@ -178,6 +180,7 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
   XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
@@ -201,6 +204,7 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
   XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
@@ -223,6 +227,7 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
   XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
@@ -245,6 +250,7 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
   XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
@@ -266,6 +272,7 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
   XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
@@ -286,6 +293,7 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
   XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
@@ -306,6 +314,7 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
   XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
@@ -328,6 +337,7 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
   XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
@@ -352,6 +362,7 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
   XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
@@ -373,6 +384,7 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
   XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
@@ -395,6 +407,7 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
   XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
@@ -417,6 +430,7 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
   XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
@@ -439,6 +453,7 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
   XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
@@ -462,6 +477,7 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
   XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
@@ -484,6 +500,7 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
   XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
@@ -506,6 +523,7 @@
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
   XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
   XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
