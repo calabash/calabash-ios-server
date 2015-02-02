@@ -88,7 +88,7 @@
 #pragma mark - jsonifyView
 
 - (void) testJsonifyViewUIViewWithWindow {
-  CGRect frame = {20, 64, 88, 44};
+  CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UIView *view = [[UIView alloc] initWithFrame:frame];
   id mock = [self mockForLPTouchUtilsWindowForView:view];
 
@@ -126,7 +126,7 @@
 }
 
 - (void) testJsonifyViewUIView {
-  CGRect frame = {20, 64, 88, 44};
+  CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UIView *view = [[UIView alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
@@ -147,7 +147,7 @@
 }
 
 - (void) testJsonifyViewUIControl {
-  CGRect frame = {20, 64, 88, 44};
+  CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UIControl *view = [[UIControl alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
@@ -169,7 +169,7 @@
 }
 
 - (void) testJsonifyViewUITextField {
-  CGRect frame = {20, 64, 88, 44};
+  CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UITextField *view = [[UITextField alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
@@ -192,7 +192,7 @@
 }
 
 - (void) testJsonifyViewUITextView {
-  CGRect frame = {20, 64, 88, 44};
+  CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UITextView *view = [[UITextView alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
@@ -214,7 +214,7 @@
 }
 
 - (void) testJsonifyViewUISlider {
-  CGRect frame = {20, 64, 88, 44};
+  CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UISlider *view = [[UISlider alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
@@ -236,7 +236,7 @@
 }
 
 - (void) testJsonifyViewUISwitch {
-  CGRect frame = {20, 64, 88, 44};
+  CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UISwitch *view = [[UISwitch alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
@@ -257,7 +257,7 @@
 }
 
 - (void) testJsonifyViewUIButton {
-  CGRect frame = {20, 64, 88, 44};
+  CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UIButton *view = [[UIButton alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
@@ -277,7 +277,7 @@
 }
 
 - (void) testJsonifyViewUIScrollView {
-  CGRect frame = {20, 64, 88, 44};
+  CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UIScrollView *view = [[UIScrollView alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
@@ -297,7 +297,7 @@
 }
 
 - (void) testJsonifyViewUITableView {
-  CGRect frame = {20, 64, 88, 44};
+  CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UITableView *view = [[UITableView alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
@@ -341,7 +341,7 @@
 }
 
 - (void) testJsonifyViewUICollectionView {
-  CGRect frame = {20, 64, 88, 44};
+  CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
   UICollectionView *view = [[UICollectionView alloc] initWithFrame:frame
                                               collectionViewLayout:layout];
@@ -363,7 +363,7 @@
 }
 
 - (void) testJsonifyViewUICollectionViewCell {
-  CGRect frame = {20, 64, 88, 44};
+  CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UICollectionViewCell *view = [[UICollectionViewCell alloc] initWithFrame:frame];
 
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
@@ -385,7 +385,7 @@
 }
 
 - (void) testJsonifyViewUISegmentedControl {
-  CGRect frame = {20, 64, 88, 44};
+  CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UISegmentedControl *view = [[UISegmentedControl alloc] initWithFrame:frame];
 
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
@@ -407,7 +407,7 @@
 }
 
 - (void) testJsonifyViewUIPickerView {
-  CGRect frame = {20, 64, 88, 44};
+  CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UIPickerView *view = [[UIPickerView alloc] initWithFrame:frame];
 
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
@@ -429,7 +429,7 @@
 }
 
 - (void) testJsonifyViewUIDatePicker {
-  CGRect frame = {20, 64, 88, 44};
+  CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UIDatePicker *view = [[UIDatePicker alloc] initWithFrame:frame];
 
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
@@ -452,7 +452,7 @@
 
 
 - (void) testJsonifyViewUITabBar {
-  CGRect frame = {20, 64, 88, 44};
+  CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UITabBar *view = [[UITabBar alloc] initWithFrame:frame];
 
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
@@ -474,7 +474,7 @@
 }
 
 - (void) testJsonifyViewUINavigationBar {
-  CGRect frame = {20, 64, 88, 44};
+  CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UINavigationBar *view = [[UINavigationBar alloc] initWithFrame:frame];
 
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
@@ -496,7 +496,7 @@
 }
 
 - (void) testJsonifyViewUIToolbar {
-  CGRect frame = {20, 64, 88, 44};
+  CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UIToolbar *view = [[UIToolbar alloc] initWithFrame:frame];
 
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
