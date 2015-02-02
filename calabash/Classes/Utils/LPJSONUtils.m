@@ -244,17 +244,13 @@
     rect = [frontWindow convertRect:rect fromWindow:window];
 #endif
 
-    NSDictionary *rectDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:center.x], @"center_x",
-                             [NSNumber numberWithFloat:center.y], @"center_y",
-                             [NSNumber numberWithFloat:rect.origin.x], @"x",
-                             [NSNumber numberWithFloat:rect.origin.y], @"y",
-                             [NSNumber numberWithFloat:rect.size.width], @"width",
-                             [NSNumber numberWithFloat:rect.size.height], @"height",
-                             nil];
-
-    [result setObject:rectDic forKey:@"rect"];
+    result[@"rect"] = @{@"center_x" : @(center.x),
+                        @"center_y" : @(center.y),
+                        @"x" : @(rect.origin.x),
+                        @"y" : @(rect.origin.y),
+                        @"width" : @(rect.size.width),
+                        @"height" : @(rect.size.height)};
   }
-
   return result;
 }
 

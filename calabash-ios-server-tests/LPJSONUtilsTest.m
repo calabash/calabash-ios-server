@@ -6,10 +6,12 @@
 #import <XCTest/XCTest.h>
 #import "LPJSONUtils.h"
 #import <OCMock/OCMock.h>
+#import "LPTouchUtils.h"
 
 // TODO:  UIBarButton
 // TODO:  UINavigationBarButton
 // TODO:  UITabBarButton
+// TODO:  Test with an Application Target so we can verify view frame transforms.
 @interface LPJSONUtils (LPXCTTEST)
 
 + (void) dictionary:(NSMutableDictionary *) dictionary
@@ -33,6 +35,17 @@
 
 - (void)tearDown {
   [super tearDown];
+}
+
+#pragma mark - Mocking
+
+- (id) mockForLPTouchUtilsWindowForView:(id) view {
+  CGRect frame = [[UIScreen mainScreen] applicationFrame];
+  UIWindow *window = [[UIWindow alloc] initWithFrame:frame];
+  [window addSubview:view];
+  id mock = [OCMockObject mockForClass:[LPTouchUtils class]];
+  [[[mock stub] andReturn:window] windowForView:view];
+  return mock;
 }
 
 #pragma mark - dictionary:setObject:forKey:whenTarget:respondsTo:
@@ -74,6 +87,44 @@
 
 #pragma mark - jsonifyView
 
+- (void) testJsonifyViewUIViewWithWindow {
+  CGRect frame = {20, 64, 88, 44};
+  UIView *view = [[UIView alloc] initWithFrame:frame];
+  id mock = [self mockForLPTouchUtilsWindowForView:view];
+
+  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSLog(@"%@", dict);
+
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"alpha"], @(1));
+  XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
+  XCTAssertEqualObjects(dict[@"description"], [view description]);
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
+  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"rect"]).count, 6);
+  XCTAssertEqualObjects(dict[@"rect"][@"x"], @(0));
+  XCTAssertEqualObjects(dict[@"rect"][@"y"], @(0));
+  XCTAssertEqualObjects(dict[@"rect"][@"width"],@(0));
+  XCTAssertEqualObjects(dict[@"rect"][@"height"], @(0));
+  XCTAssertEqualObjects(dict[@"rect"][@"center_x"], @(0));
+  XCTAssertEqualObjects(dict[@"rect"][@"center_y"], @(0));
+  XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"visible"], @(0));
+  XCTAssertEqual([dict count], 11);
+
+  [mock verify];
+}
+
 - (void) testJsonifyViewUIView {
   CGRect frame = {20, 64, 88, 44};
   UIView *view = [[UIView alloc] initWithFrame:frame];
@@ -94,7 +145,6 @@
   XCTAssertEqualObjects(dict[@"visible"], @(1));
   XCTAssertEqual([dict count], 10);
 }
-
 
 - (void) testJsonifyViewUIControl {
   CGRect frame = {20, 64, 88, 44};
