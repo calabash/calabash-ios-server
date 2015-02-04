@@ -21,6 +21,6 @@
  4. gitversioning-after.sh
 
 ****************************************************************/
-#define LP_GIT_SHORT_REVISION @"6cc289a"
-#define LP_GIT_BRANCH @"0.9.x-include-git-remote-origin"
-#define LP_GIT_REMOTE_ORIGIN @"git@github.com:jmoody/calabash-ios-server.git"
+#define LP_GIT_SHORT_REVISION @"fc4b35e"
+#define LP_GIT_BRANCH @"develop"
+#define LP_GIT_REMOTE_ORIGIN @"git@github.com:calabash/calabash-ios-server.git"

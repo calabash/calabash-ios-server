@@ -2,6 +2,7 @@ all:
 	$(MAKE) framework
 	$(MAKE) frank
 	$(MAKE) dylibs
+
 clean:
 	rm -rf build
 	rm -rf calabash.framework
@@ -39,3 +40,8 @@ no-offending-symbols:
 	scripts/make-libraries.rb verify-framework
 	./expect-no-offending-symbols.rb Metal
 	./expect-no-offending-symbols.rb kSecAttrSynchronizable
+
+install_test_binaries:
+	$(MAKE) dylibs
+	./scripts/install-test-binaries.rb
+
