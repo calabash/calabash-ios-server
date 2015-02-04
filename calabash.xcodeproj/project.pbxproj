@@ -460,7 +460,6 @@
 		F5091C1118C4E1D700C85307 /* UIScriptASTWith.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0814B6DB2B002A744C /* UIScriptASTWith.m */; };
 		F5091C1218C4E1D700C85307 /* UIScriptParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0A14B6DB2B002A744C /* UIScriptParser.m */; };
 		F5091C1318C4E1D700C85307 /* LPJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */; };
-		F5091C1418C4E1D700C85307 /* LPTouchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */; };
 		F5091C1518C4E1D700C85307 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8C14B6DAFB002A744C /* LPCDataScanner.m */; };
 		F5091C1718C4E1D700C85307 /* LPI.mm in Sources */ = {isa = PBXBuildFile; fileRef = B184FDBD14B6DB2B002A744C /* LPI.mm */; };
 		F5091C1818C4E1D700C85307 /* LPReflectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B1296FC215DC1F5B005DDF5C /* LPReflectUtils.m */; };
@@ -634,7 +633,6 @@
 		F5821A2F18C4E27400293508 /* UIScriptASTWith.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0814B6DB2B002A744C /* UIScriptASTWith.m */; };
 		F5821A3018C4E27400293508 /* UIScriptParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0A14B6DB2B002A744C /* UIScriptParser.m */; };
 		F5821A3118C4E27400293508 /* LPJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */; };
-		F5821A3218C4E27400293508 /* LPTouchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */; };
 		F5821A3318C4E27400293508 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8C14B6DAFB002A744C /* LPCDataScanner.m */; };
 		F5821A3518C4E27400293508 /* LPI.mm in Sources */ = {isa = PBXBuildFile; fileRef = B184FDBD14B6DB2B002A744C /* LPI.mm */; };
 		F5821A3618C4E27400293508 /* LPReflectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B1296FC215DC1F5B005DDF5C /* LPReflectUtils.m */; };
@@ -668,6 +666,8 @@
 		F59C5D0518E0C1EA0087B51D /* LPHTTPDataResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B116C9A014E6564200663205 /* LPHTTPDataResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F59C5D0618E0C1EF0087B51D /* LPHTTPDynamicFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B116C9A214E6564200663205 /* LPHTTPDynamicFileResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F59C5D0718E0C1F30087B51D /* LPHTTPFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B116C9A414E6564200663205 /* LPHTTPFileResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F59CA4091A824FBB007A2F38 /* LPTouchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */; };
+		F59CA40A1A824FBB007A2F38 /* LPTouchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */; };
 		F5B27B9118C5884D0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		F5B27B9218C5884E0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		F5CB7D581A7CF45B00DACC8B /* InvokerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = F5CB7D571A7CF45B00DACC8B /* InvokerFactory.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -2380,10 +2380,9 @@
 				F5091C1118C4E1D700C85307 /* UIScriptASTWith.m in Sources */,
 				F5091C1218C4E1D700C85307 /* UIScriptParser.m in Sources */,
 				F5091C1318C4E1D700C85307 /* LPJSONUtils.m in Sources */,
-				F5091C1418C4E1D700C85307 /* LPTouchUtils.m in Sources */,
-				F5091C1418C4E1D700C85307 /* LPTouchUtils.m in Sources */,
 				F5F600491A7C69760020637D /* LPInvoker.m in Sources */,
 				F5091C1518C4E1D700C85307 /* LPCDataScanner.m in Sources */,
+				F59CA4091A824FBB007A2F38 /* LPTouchUtils.m in Sources */,
 				F5091C1718C4E1D700C85307 /* LPI.mm in Sources */,
 				B1F772221A22A398009A2336 /* LPSharedUIATextField.m in Sources */,
 				F5091C1818C4E1D700C85307 /* LPReflectUtils.m in Sources */,
@@ -2581,10 +2580,9 @@
 				F5821A2F18C4E27400293508 /* UIScriptASTWith.m in Sources */,
 				F5821A3018C4E27400293508 /* UIScriptParser.m in Sources */,
 				F5821A3118C4E27400293508 /* LPJSONUtils.m in Sources */,
-				F5821A3218C4E27400293508 /* LPTouchUtils.m in Sources */,
-				F5821A3218C4E27400293508 /* LPTouchUtils.m in Sources */,
 				F5F6004A1A7C69760020637D /* LPInvoker.m in Sources */,
 				F5821A3318C4E27400293508 /* LPCDataScanner.m in Sources */,
+				F59CA40A1A824FBB007A2F38 /* LPTouchUtils.m in Sources */,
 				F5821A3518C4E27400293508 /* LPI.mm in Sources */,
 				B1F772231A22A398009A2336 /* LPSharedUIATextField.m in Sources */,
 				F5821A3618C4E27400293508 /* LPReflectUtils.m in Sources */,
