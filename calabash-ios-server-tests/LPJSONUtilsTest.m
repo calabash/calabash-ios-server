@@ -221,6 +221,46 @@
   [mock verify];
 }
 
+- (void) testJsonifyViewUIViewWithApplicationWindow {
+  CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
+  UIView *view = [[UIView alloc] initWithFrame:frame];
+
+  UIApplication *app = [UIApplication sharedApplication];
+  UIWindow *window = [[app delegate] window];
+  XCTAssertNotNil(window);
+  [window addSubview:view];
+
+  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSLog(@"%@", dict);
+
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"alpha"], @(1));
+  XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
+  XCTAssertEqualObjects(dict[@"description"], [view description]);
+  XCTAssertEqualObjects(dict[@"enabled"], @(1));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
+  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"rect"]).count, 6);
+  XCTAssertEqualObjects(dict[@"rect"][@"x"], @(CGRectGetMinX([view frame])));
+  XCTAssertEqualObjects(dict[@"rect"][@"y"], @(CGRectGetMinY([view frame])));
+  XCTAssertEqualObjects(dict[@"rect"][@"width"], @(CGRectGetWidth([view frame])));
+  XCTAssertEqualObjects(dict[@"rect"][@"height"], @(CGRectGetHeight([view frame])));
+  XCTAssertEqualObjects(dict[@"rect"][@"center_x"], @(CGRectGetMidX([view frame])));
+  XCTAssertEqualObjects(dict[@"rect"][@"center_y"], @(CGRectGetMidY([view frame])));
+  XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"visible"], @(1));
+  XCTAssertEqual([dict count], 11);
+}
+
 #pragma mark - jsonifyView:
 
 - (void) testJsonifyViewUIView {
