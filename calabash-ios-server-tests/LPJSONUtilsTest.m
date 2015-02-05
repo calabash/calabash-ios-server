@@ -19,6 +19,16 @@
 
 @end
 
+@interface LPObjectRetunsFrame : NSObject
+
+@property(copy, nonatomic) NSString *frame;
+
+@end
+
+@implementation LPObjectRetunsFrame
+
+@end
+
 // TODO:  UIBarButton
 // TODO:  UINavigationBarButton
 // TODO:  UITabBarButton
@@ -29,7 +39,7 @@
          whenTarget:(id) target
          respondsTo:(SEL) selector;
 
-+ (NSMutableDictionary *) jsonifyView:(UIView *) view;
++ (NSMutableDictionary *) jsonifyView:(id) view;
 
 @end
 
@@ -84,7 +94,38 @@
   XCTAssertEqualObjects(dict[@"key"], nil);
 }
 
-#pragma mark - jsonifyView: setting value
+#pragma mark - jsonifyView:  called on an object that is not a UIView
+
+- (void) testJsonifyViewPassedAString {
+  NSString *string = @"string";
+
+  NSDictionary *dict = [LPJSONUtils jsonifyView:string];
+  NSLog(@"%@", dict);
+
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([string class]));
+  XCTAssertEqualObjects(dict[@"description"], string);
+  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
+  XCTAssertEqual([dict count], 6);
+}
+
+- (void) testJsonifyViewPassedAnNonViewObjectThatRespondsToFrame {
+  LPObjectRetunsFrame *framer = [LPObjectRetunsFrame new];
+  framer.frame = @"a frame";
+
+  NSDictionary *dict = [LPJSONUtils jsonifyView:framer];
+
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"class"],
+                        NSStringFromClass([LPObjectRetunsFrame class]));
+  XCTAssertEqualObjects(dict[@"description"], [framer description]);
+  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
+  XCTAssertEqual([dict count], 6);
+}
 
 // Is UISlider the only UIView with value selector?
 - (void) testJsonfiyViewValueSettingHasValueTextAccessibilityValue {
