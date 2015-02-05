@@ -17,8 +17,6 @@
 
 @implementation LPXCTestSliderWithText
 
-@synthesize text;
-
 @end
 
 // TODO:  UIBarButton
