@@ -194,11 +194,16 @@
     [result setObject:@(alpha) forKey:@"alpha"];
   }
   if ([v respondsToSelector:@selector(value)]) {
-    id value = [v performSelector:@selector(value) withObject:nil];
-    if (!value) {
-      value = [NSNull null];
+    if ([[v class] isSubclassOfClass:[UISlider class]]) {
+      UISlider *slider = (UISlider *)v;
+      result[@"value"] = @([slider value]);
+    } else {
+      id value = [v performSelector:@selector(value) withObject:nil];
+      if (!value) {
+        value = [NSNull null];
+      }
+      result[@"value"] = value;
     }
-    result[@"value"] = value;
   }
   else if ([v respondsToSelector:@selector(text)]) {
     id value = [v performSelector:@selector(text) withObject:nil];
