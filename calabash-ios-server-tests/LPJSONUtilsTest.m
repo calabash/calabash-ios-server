@@ -22,7 +22,6 @@
 // TODO:  UIBarButton
 // TODO:  UINavigationBarButton
 // TODO:  UITabBarButton
-// TODO:  Test with an Application Target so we can verify view frame transforms.
 @interface LPJSONUtils (LPXCTTEST)
 
 + (void) dictionary:(NSMutableDictionary *) dictionary
