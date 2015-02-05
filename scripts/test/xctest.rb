@@ -10,7 +10,7 @@ XCODE_MAJOR_VERSION=`xcrun -k xcodebuild -version | tr -d "\n" | cut -c 7`.chomp
 if XCODE_MAJOR_VERSION == '5'
   target_simulator_name = 'iPhone Retina (4-inch)'
 else
-  target_simulator_name = 'iPhone 5'
+  target_simulator_name = 'iPhone 5s'
 end
 
 args =

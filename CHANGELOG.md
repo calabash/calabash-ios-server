@@ -1,4 +1,6 @@
 ### 0.12.3
 
-* Fix jsonify view crash on uislider #109
+* Add app target to xctest bundle #111
+* Fix memory leak in LPVersionRoute a0d565b
+* Replace jsonifyView: with dictionaryByEncodingView: #113 - fixes UISlider crash
 

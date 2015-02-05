@@ -106,7 +106,7 @@
     return @{@"red": @(red), @"green": @(green), @"blue": @(blue), @"alpha": @(alpha), @"type": NSStringFromClass([object class])};
   }
   else if ([object isKindOfClass:[UIView class]]) {
-    NSMutableDictionary *viewJson = [self jsonifyView:(UIView*) object];
+    NSMutableDictionary *viewJson = [self dictionaryByEncodingView:(UIView*) object];
     if (dump) {
       [self dumpView: object toDictionary:viewJson];
       if (viewJson[@"class"]) {
@@ -151,106 +151,129 @@
   return object;
 }
 
-+ (NSMutableDictionary*) jsonifyView:(id) v {
-  NSMutableDictionary *result = [@{} mutableCopy];
-  result[@"class"] = NSStringFromClass([v class]);
++ (NSMutableDictionary *) dictionaryByEncodingView:(id) object {
+  NSMutableDictionary *result = [NSMutableDictionary dictionary];
+  result[@"class"] = NSStringFromClass([object class]);
 
-  NSNumber *viewVisible = [LPTouchUtils isViewVisible:(UIView*)v] ? @(1) : @(0);
-  [result setObject:viewVisible forKey:@"visible"];
+  // v might not be a UIView.
+  if ([object isKindOfClass:[UIView class]]) {
+    if ([LPTouchUtils isViewVisible:(UIView*)object]) {
+      result[@"visible"] = @(1);
+    } else {
+      result[@"visible"] = @(0);
+    }
+  }
 
   // Be defensive: user *might* have a view with a 'nil' description.
   [LPJSONUtils dictionary:result
           setObjectforKey:@"description"
-               whenTarget:v
+               whenTarget:object
                respondsTo:@selector(description)];
 
   // Selector is defined for NSObject(UIKit), but better to be safe than sorry.
   [LPJSONUtils dictionary:result
           setObjectforKey:@"accessibilityElement"
-          whenTarget:v
-          respondsTo:@selector(isAccessibilityElement)];
+               whenTarget:object
+               respondsTo:@selector(isAccessibilityElement)];
 
   [LPJSONUtils dictionary:result
           setObjectforKey:@"label"
-               whenTarget:v
+               whenTarget:object
                respondsTo:@selector(accessibilityLabel)];
 
   [LPJSONUtils dictionary:result
           setObjectforKey:@"id"
-               whenTarget:v
+               whenTarget:object
                respondsTo:@selector(accessibilityIdentifier)];
 
   [LPJSONUtils dictionary:result
           setObjectforKey:@"text"
-               whenTarget:v
+               whenTarget:object
                respondsTo:@selector(text)];
 
   [LPJSONUtils dictionary:result
           setObjectforKey:@"selected"
-               whenTarget:v
+               whenTarget:object
                respondsTo:@selector(isSelected)];
 
   [LPJSONUtils dictionary:result
           setObjectforKey:@"enabled"
-               whenTarget:v
+               whenTarget:object
                respondsTo:@selector(isEnabled)];
 
   [LPJSONUtils dictionary:result
           setObjectforKey:@"alpha"
-               whenTarget:v
+               whenTarget:object
                respondsTo:@selector(alpha)];
 
   // Setting value.
   NSString *valueKey = @"value";
-  if ([v respondsToSelector:@selector(value)]) { // value
+  if ([object respondsToSelector:@selector(value)]) { // value
     [LPJSONUtils dictionary:result
             setObjectforKey:valueKey
-                 whenTarget:v
+                 whenTarget:object
                  respondsTo:@selector(value)];
-  } else if ([v respondsToSelector:@selector(text)]) { // text
+  } else if ([object respondsToSelector:@selector(text)]) { // text
     [LPJSONUtils dictionary:result
             setObjectforKey:valueKey
-                 whenTarget:v
+                 whenTarget:object
                  respondsTo:@selector(text)];
-  } else if ([v respondsToSelector:@selector(accessibilityValue)]) { // accessibilityValue
+  } else if ([object respondsToSelector:@selector(accessibilityValue)]) { // accessibilityValue
     [LPJSONUtils dictionary:result
             setObjectforKey:@"value"
-                 whenTarget:v
+                 whenTarget:object
                  respondsTo:@selector(accessibilityValue)];
   }
 
-  CGRect frame = [v frame];
-  result[@"frame"] = @{@"x" : @(frame.origin.x),
-                       @"y" : @(frame.origin.y),
-                       @"width" : @(frame.size.width),
-                       @"height" : @(frame.size.height)};
+  if ([object respondsToSelector:@selector(frame)]) {
+    // TODO:  The type on `v` is id which means it can be any object.  Should
+    // be able to use the LPInvoker, but it is not (yet) able to handle
+    // selectors that return structs.
+    NSMethodSignature *signature;
+    signature = [[object class] instanceMethodSignatureForSelector:@selector(frame)];
+    const char *cEncoding = [signature methodReturnType];
+    NSString *encoding = [NSString stringWithCString:cEncoding
+                                            encoding:NSASCIIStringEncoding];
+    if ([encoding rangeOfString:@"{CGRect"].location == 0) {
+      CGRect frame = [object frame];
+      result[@"frame"] = @{@"x" : @(frame.origin.x),
+                           @"y" : @(frame.origin.y),
+                           @"width" : @(frame.size.width),
+                           @"height" : @(frame.size.height)};
+    }
+  }
 
-  UIWindow *window = [LPTouchUtils windowForView:v];
-  if (window) {
+  if ([object isKindOfClass:[UIView class]]) {
+    UIView *view = (UIView *)object;
+    UIWindow *window = [LPTouchUtils windowForView:view];
 
-    CGPoint center = [LPTouchUtils centerOfView:v];
+    if (window) {
 
-    CGRect rect = [window convertRect:((UIView*)v).bounds fromView:v];
+      CGPoint center = [LPTouchUtils centerOfView:view];
 
-    UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
+      CGRect rect = [window convertRect:view.bounds fromView:view];
+
+      UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
 
 #if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-    if ([frontWindow respondsToSelector:@selector(convertRect:toCoordinateSpace:)]) {
-      rect = [frontWindow convertRect:rect toCoordinateSpace:frontWindow];
-    } else {
-      rect = [frontWindow convertRect:rect fromWindow:window];
-    }
+      if ([frontWindow respondsToSelector:@selector(convertRect:toCoordinateSpace:)]) {
+        rect = [frontWindow convertRect:rect toCoordinateSpace:frontWindow];
+      } else {
+        rect = [frontWindow convertRect:rect fromWindow:window];
+      }
 #else
-    rect = [frontWindow convertRect:rect fromWindow:window];
+      rect = [frontWindow convertRect:rect fromWindow:window];
 #endif
 
-    result[@"rect"] = @{@"center_x" : @(center.x),
-                        @"center_y" : @(center.y),
-                        @"x" : @(rect.origin.x),
-                        @"y" : @(rect.origin.y),
-                        @"width" : @(rect.size.width),
-                        @"height" : @(rect.size.height)};
+      result[@"rect"] = @{@"center_x" : @(center.x),
+                          @"center_y" : @(center.y),
+                          @"x" : @(rect.origin.x),
+                          @"y" : @(rect.origin.y),
+                          @"width" : @(rect.size.width),
+                          @"height" : @(rect.size.height)};
+    }
   }
+
   return result;
 }
 

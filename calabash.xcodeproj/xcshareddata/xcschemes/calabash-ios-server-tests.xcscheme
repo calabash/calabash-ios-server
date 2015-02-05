@@ -76,15 +76,6 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F50CBF5D1A03F222004AC9DA"
-            BuildableName = "calabash-ios-server-tests.xctest"
-            BlueprintName = "calabash-ios-server-tests"
-            ReferencedContainer = "container:calabash.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
