@@ -111,7 +111,8 @@
   float expected = 0.5f;
   view.value = expected;
 
-  view.text = @"TEXT!";
+  NSString *text = @"TEXT!";
+  view.text = text;
 
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
@@ -126,9 +127,9 @@
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
   XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
-  XCTAssertEqualObjects(dict[@"label"], @"TEXT!");
+  XCTAssertEqualObjects(dict[@"label"], text);
   XCTAssertEqualObjects(dict[@"selected"], @(0));
-  XCTAssertEqualObjects(dict[@"text"], @"TEXT!");
+  XCTAssertEqualObjects(dict[@"text"], text);
   XCTAssertEqualObjects(dict[@"value"], @(expected));
   XCTAssertEqualObjects(dict[@"visible"], @(1));
   XCTAssertEqual([dict count], 12);
@@ -139,7 +140,8 @@
 
   UITextField *view = [[UITextField alloc] initWithFrame:frame];
   view.accessibilityValue = @"ACCESSIBILITY VALUE!";
-  view.text = @"TEXT!";
+  NSString *text = @"TEXT!";
+  view.text = text;
 
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
@@ -156,8 +158,8 @@
   XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"selected"], @(0));
-  XCTAssertEqualObjects(dict[@"text"], @"TEXT!");
-  XCTAssertEqualObjects(dict[@"value"], @"TEXT!");
+  XCTAssertEqualObjects(dict[@"text"], text);
+  XCTAssertEqualObjects(dict[@"value"], text);
   XCTAssertEqualObjects(dict[@"visible"], @(1));
   XCTAssertEqual([dict count], 12);
 }
@@ -166,7 +168,8 @@
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
 
   UIView *view = [[UIView alloc] initWithFrame:frame];
-  view.accessibilityValue = @"ACCESSIBILITY VALUE!";
+  NSString *value = @"ACCESSIBILITY VALUE!";
+  view.accessibilityValue = value;
 
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
 
@@ -182,7 +185,7 @@
   XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
   XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
-  XCTAssertEqualObjects(dict[@"value"], @"ACCESSIBILITY VALUE!");
+  XCTAssertEqualObjects(dict[@"value"], value);
   XCTAssertEqualObjects(dict[@"visible"], @(1));
   XCTAssertEqual([dict count], 10);
 }
