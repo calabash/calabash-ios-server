@@ -73,7 +73,7 @@
 		B113585A1981B053004B16F4 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A318B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m */; };
 		B113585B1981B053004B16F4 /* LPCollectionViewScrollToItemOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C3A62E18A2EA0800DB7E42 /* LPCollectionViewScrollToItemOperation.m */; };
 		B113585C1981B053004B16F4 /* LPSliderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5CAC06B180D499600E23F03 /* LPSliderOperation.m */; };
-		B113585D1981B053004B16F4 /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */; };
+		B113585D1981B053004B16F4 /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B113585E1981B053004B16F4 /* LPOrientationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F591380317C39128007B2BE4 /* LPOrientationOperation.m */; };
 		B113585F1981B053004B16F4 /* LPFlashOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B19440431725C70A00EE1B25 /* LPFlashOperation.m */; };
 		B11358601981B053004B16F4 /* LPQueryAllOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */; };
@@ -112,7 +112,7 @@
 		B15BF9AD19ABB1DD00B38577 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A318B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B15BF9AE19ABB1DD00B38577 /* LPCollectionViewScrollToItemOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C3A62E18A2EA0800DB7E42 /* LPCollectionViewScrollToItemOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B15BF9AF19ABB1DD00B38577 /* LPSliderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5CAC06B180D499600E23F03 /* LPSliderOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		B15BF9B019ABB1DD00B38577 /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BF9B019ABB1DD00B38577 /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9B119ABB1DD00B38577 /* LPOrientationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F591380317C39128007B2BE4 /* LPOrientationOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B15BF9B219ABB1DD00B38577 /* LPFlashOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B19440431725C70A00EE1B25 /* LPFlashOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B15BF9B319ABB1DD00B38577 /* LPQueryAllOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -192,7 +192,7 @@
 		B15BF9FF19ABB2B100B38577 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A318B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B15BFA0019ABB2B100B38577 /* LPCollectionViewScrollToItemOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C3A62E18A2EA0800DB7E42 /* LPCollectionViewScrollToItemOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B15BFA0119ABB2B100B38577 /* LPSliderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5CAC06B180D499600E23F03 /* LPSliderOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		B15BFA0219ABB2B100B38577 /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B15BFA0219ABB2B100B38577 /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BFA0319ABB2B100B38577 /* LPOrientationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F591380317C39128007B2BE4 /* LPOrientationOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B15BFA0419ABB2B100B38577 /* LPFlashOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B19440431725C70A00EE1B25 /* LPFlashOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B15BFA0519ABB2B100B38577 /* LPQueryAllOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -340,7 +340,7 @@
 		B1D5BDC319A23BCE0070E8CE /* LPScrollToRowWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */; };
 		B1D5BDC419A23BCE0070E8CE /* LPOrientationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F591380317C39128007B2BE4 /* LPOrientationOperation.m */; };
 		B1D5BDC519A23BCE0070E8CE /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; };
-		B1D5BDC619A23BCE0070E8CE /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */; };
+		B1D5BDC619A23BCE0070E8CE /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BDC919A23BCE0070E8CE /* CalabashServer.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8814B6DAE1002A744C /* CalabashServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B1D5BDCA19A23BCE0070E8CE /* LPRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDBE14B6DB2B002A744C /* LPRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B1D5BDCB19A23BCE0070E8CE /* LPRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDBF14B6DB2B002A744C /* LPRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -485,7 +485,7 @@
 		F5091C2318C4E1D700C85307 /* LPFlashOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B19440431725C70A00EE1B25 /* LPFlashOperation.m */; };
 		F5091C2418C4E1D700C85307 /* LPScrollToRowWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */; };
 		F5091C2518C4E1D700C85307 /* LPOrientationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F591380317C39128007B2BE4 /* LPOrientationOperation.m */; };
-		F5091C2618C4E1D700C85307 /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */; };
+		F5091C2618C4E1D700C85307 /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091C2F18C4E1D700C85307 /* CalabashServer.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8814B6DAE1002A744C /* CalabashServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5091C3F18C4E1D700C85307 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E757A15D434D00066550B /* CFNetwork.framework */; };
 		F5091C4018C4E1D700C85307 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
@@ -515,7 +515,7 @@
 		F50CBF901A04058C004AC9DA /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; };
 		F50CBF911A04058C004AC9DA /* LPCollectionViewScrollToItemOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C3A62E18A2EA0800DB7E42 /* LPCollectionViewScrollToItemOperation.m */; };
 		F50CBF921A04058C004AC9DA /* LPSliderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5CAC06B180D499600E23F03 /* LPSliderOperation.m */; };
-		F50CBF931A04058C004AC9DA /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */; };
+		F50CBF931A04058C004AC9DA /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBF941A04058C004AC9DA /* LPOrientationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F591380317C39128007B2BE4 /* LPOrientationOperation.m */; };
 		F50CBF951A04058C004AC9DA /* LPFlashOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B19440431725C70A00EE1B25 /* LPFlashOperation.m */; };
 		F50CBF961A04058C004AC9DA /* LPQueryAllOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */; };
@@ -664,7 +664,7 @@
 		F5821A4118C4E27400293508 /* LPFlashOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B19440431725C70A00EE1B25 /* LPFlashOperation.m */; };
 		F5821A4218C4E27400293508 /* LPScrollToRowWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */; };
 		F5821A4318C4E27400293508 /* LPOrientationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F591380317C39128007B2BE4 /* LPOrientationOperation.m */; };
-		F5821A4418C4E27400293508 /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */; };
+		F5821A4418C4E27400293508 /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5821A4D18C4E27400293508 /* CalabashServer.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8814B6DAE1002A744C /* CalabashServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5821A5D18C4E27400293508 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E757A15D434D00066550B /* CFNetwork.framework */; };
 		F5821A5E18C4E27400293508 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
