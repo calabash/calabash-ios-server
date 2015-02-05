@@ -48,17 +48,6 @@
   [super tearDown];
 }
 
-#pragma mark - Mocking
-
-- (id) mockForLPTouchUtilsWindowForView:(id) view {
-  CGRect frame = [[UIScreen mainScreen] applicationFrame];
-  UIWindow *window = [[UIWindow alloc] initWithFrame:frame];
-  [window addSubview:view];
-  id mock = [OCMockObject mockForClass:[LPTouchUtils class]];
-  [[[mock stub] andReturn:window] windowForView:view];
-  return mock;
-}
-
 #pragma mark - dictionary:setObject:forKey:whenTarget:respondsTo:
 
 - (void) testDictionarySetObjectForKeyWhenTargetRespondsToYesAndNil {
@@ -190,13 +179,17 @@
 
 #pragma mark - jsonifyView: when view is subview of a window
 
-- (void) testJsonifyViewUIViewWithWindow {
+- (void) testJsonifyViewUIViewWithMockedWindow {
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UIView *view = [[UIView alloc] initWithFrame:frame];
-  id mock = [self mockForLPTouchUtilsWindowForView:view];
+
+  CGRect applicationFrame = [[UIScreen mainScreen] applicationFrame];
+  UIWindow *window = [[UIWindow alloc] initWithFrame:applicationFrame];
+  [window addSubview:view];
+  id mock = [OCMockObject mockForClass:[LPTouchUtils class]];
+  [[[mock stub] andReturn:window] windowForView:view];
 
   NSDictionary *dict = [LPJSONUtils jsonifyView:view];
-  NSLog(@"%@", dict);
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
