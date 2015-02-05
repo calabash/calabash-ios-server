@@ -152,78 +152,77 @@
 }
 
 + (NSMutableDictionary*) jsonifyView:(id) v {
-  NSMutableDictionary *result = [@{} mutableCopy];
-  result[@"class"] = NSStringFromClass([v class]);
+  NSMutableDictionary *result = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                 NSStringFromClass([v class]), @"class", nil];
 
   NSNumber *viewVisible = [LPTouchUtils isViewVisible:(UIView*)v] ? @(1) : @(0);
   [result setObject:viewVisible forKey:@"visible"];
-
-  // Be defensive: user *might* have a view with a 'nil' description.
-  [LPJSONUtils dictionary:result
-          setObjectforKey:@"description"
-               whenTarget:v
-               respondsTo:@selector(description)];
-
-  // Selector is defined for NSObject(UIKit), but better to be safe than sorry.
-  [LPJSONUtils dictionary:result
-          setObjectforKey:@"accessibilityElement"
-          whenTarget:v
-          respondsTo:@selector(isAccessibilityElement)];
-
-  [LPJSONUtils dictionary:result
-          setObjectforKey:@"label"
-               whenTarget:v
-               respondsTo:@selector(accessibilityLabel)];
-
-  [LPJSONUtils dictionary:result
-          setObjectforKey:@"id"
-               whenTarget:v
-               respondsTo:@selector(accessibilityIdentifier)];
-
-  [LPJSONUtils dictionary:result
-          setObjectforKey:@"text"
-               whenTarget:v
-               respondsTo:@selector(text)];
-
-  [LPJSONUtils dictionary:result
-          setObjectforKey:@"selected"
-               whenTarget:v
-               respondsTo:@selector(isSelected)];
-
-  [LPJSONUtils dictionary:result
-          setObjectforKey:@"enabled"
-               whenTarget:v
-               respondsTo:@selector(isEnabled)];
-
-  [LPJSONUtils dictionary:result
-          setObjectforKey:@"alpha"
-               whenTarget:v
-               respondsTo:@selector(alpha)];
-
-  // Setting value.
-  NSString *valueKey = @"value";
-  if ([v respondsToSelector:@selector(value)]) { // value
-    [LPJSONUtils dictionary:result
-            setObjectforKey:valueKey
-                 whenTarget:v
-                 respondsTo:@selector(value)];
-  } else if ([v respondsToSelector:@selector(text)]) { // text
-    [LPJSONUtils dictionary:result
-            setObjectforKey:valueKey
-                 whenTarget:v
-                 respondsTo:@selector(text)];
-  } else if ([v respondsToSelector:@selector(accessibilityValue)]) { // accessibilityValue
-    [LPJSONUtils dictionary:result
-            setObjectforKey:@"value"
-                 whenTarget:v
-                 respondsTo:@selector(accessibilityValue)];
+  result[@"accessibilityElement"] = [v isAccessibilityElement] ? @(1) : @(0);
+  NSString *lbl = [v accessibilityLabel];
+  if (lbl) {
+    [result setObject:lbl forKey:@"label"];
+  } else {
+    [result setObject:[NSNull null] forKey:@"label"];
   }
 
+  if ([v respondsToSelector:@selector(accessibilityIdentifier)]) {
+    NSString *aid = [v accessibilityIdentifier];
+    if (aid) {
+      [result setObject:aid forKey:@"id"];
+    } else {
+      [result setObject:[NSNull null] forKey:@"id"];
+    }
+  }
+  if ([v respondsToSelector:@selector(text)]) {
+    NSString *text = [v text];
+    if (text) {
+      [result setObject:text forKey:@"text"];
+    } else {
+      [result setObject:[NSNull null] forKey:@"text"];
+    }
+  }
+  if ([v respondsToSelector:@selector(isSelected)]) {
+    BOOL selected = [v isSelected];
+    [result setObject:@(selected) forKey:@"selected"];
+  }
+  if ([v respondsToSelector:@selector(isEnabled)]) {
+    BOOL enabled = [v isEnabled];
+    [result setObject:@(enabled) forKey:@"enabled"];
+  }
+  if ([v respondsToSelector:@selector(alpha)]) {
+    CGFloat alpha = [v alpha];
+    [result setObject:@(alpha) forKey:@"alpha"];
+  }
+  if ([v respondsToSelector:@selector(value)]) {
+    if ([[v class] isSubclassOfClass:[UISlider class]]) {
+      UISlider *slider = (UISlider *)v;
+      result[@"value"] = @([slider value]);
+    } else {
+      id value = [v performSelector:@selector(value) withObject:nil];
+      if (!value) {
+        value = [NSNull null];
+      }
+      result[@"value"] = value;
+    }
+  }
+  else if ([v respondsToSelector:@selector(text)]) {
+    id value = [v performSelector:@selector(text) withObject:nil];
+    if (!value) {
+      value = [NSNull null];
+    }
+    result[@"value"] = value;
+  }
+  else if ([v respondsToSelector:@selector(accessibilityValue)]) {
+    id value = [v performSelector:@selector(accessibilityValue) withObject:nil];
+    if (!value) {
+      value = [NSNull null];
+    }
+    result[@"value"] = value;
+  }
+
+
+
   CGRect frame = [v frame];
-  result[@"frame"] = @{@"x" : @(frame.origin.x),
-                       @"y" : @(frame.origin.y),
-                       @"width" : @(frame.size.width),
-                       @"height" : @(frame.size.height)};
 
   UIWindow *window = [LPTouchUtils windowForView:v];
   if (window) {
@@ -244,13 +243,27 @@
     rect = [frontWindow convertRect:rect fromWindow:window];
 #endif
 
-    result[@"rect"] = @{@"center_x" : @(center.x),
-                        @"center_y" : @(center.y),
-                        @"x" : @(rect.origin.x),
-                        @"y" : @(rect.origin.y),
-                        @"width" : @(rect.size.width),
-                        @"height" : @(rect.size.height)};
+    NSDictionary *rectDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:center.x], @"center_x",
+                             [NSNumber numberWithFloat:center.y], @"center_y",
+                             [NSNumber numberWithFloat:rect.origin.x], @"x",
+                             [NSNumber numberWithFloat:rect.origin.y], @"y",
+                             [NSNumber numberWithFloat:rect.size.width], @"width",
+                             [NSNumber numberWithFloat:rect.size.height], @"height",
+                             nil];
+
+    [result setObject:rectDic forKey:@"rect"];
   }
+
+  NSDictionary *frameDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:frame.origin.x], @"x",
+                            [NSNumber numberWithFloat:frame.origin.y], @"y",
+                            [NSNumber numberWithFloat:frame.size.width], @"width",
+                            [NSNumber numberWithFloat:frame.size.height], @"height",
+                            nil];
+
+  [result setObject:frameDic forKey:@"frame"];
+
+  [result setObject:[v description] forKey:@"description"];
+
   return result;
 }
 
