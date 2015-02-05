@@ -39,7 +39,7 @@
          whenTarget:(id) target
          respondsTo:(SEL) selector;
 
-+ (NSMutableDictionary *) jsonifyView:(id) view;
++ (NSMutableDictionary *) dictionaryByEncodingView:(id) view;
 
 @end
 
@@ -94,12 +94,12 @@
   XCTAssertEqualObjects(dict[@"key"], nil);
 }
 
-#pragma mark - jsonifyView:  called on an object that is not a UIView
+#pragma mark - dictionaryByEncodingView:  called on an object that is not a UIView
 
 - (void) testJsonifyViewPassedAString {
   NSString *string = @"string";
 
-  NSDictionary *dict = [LPJSONUtils jsonifyView:string];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:string];
   NSLog(@"%@", dict);
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
@@ -115,7 +115,7 @@
   LPObjectRetunsFrame *framer = [LPObjectRetunsFrame new];
   framer.frame = @"a frame";
 
-  NSDictionary *dict = [LPJSONUtils jsonifyView:framer];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:framer];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"class"],
@@ -127,7 +127,7 @@
   XCTAssertEqual([dict count], 6);
 }
 
-#pragma mark - jsonifyView: setting 'value' key
+#pragma mark - dictionaryByEncodingView: setting 'value' key
 
 // Is UISlider the only UIView with value selector?
 - (void) testJsonfiyViewValueSettingHasValueTextAccessibilityValue {
@@ -143,7 +143,7 @@
   NSString *text = @"TEXT!";
   view.text = text;
 
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
@@ -172,7 +172,7 @@
   NSString *text = @"TEXT!";
   view.text = text;
 
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
@@ -200,7 +200,7 @@
   NSString *value = @"ACCESSIBILITY VALUE!";
   view.accessibilityValue = value;
 
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
@@ -219,7 +219,7 @@
   XCTAssertEqual([dict count], 10);
 }
 
-#pragma mark - jsonifyView: when view is subview of a window
+#pragma mark - dictionaryByEncodingView: when view is subview of a window
 
 - (void) testJsonifyViewUIViewWithMockedWindow {
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
@@ -231,7 +231,7 @@
   id mock = [OCMockObject mockForClass:[LPTouchUtils class]];
   [[[mock stub] andReturn:window] windowForView:view];
 
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
@@ -272,7 +272,7 @@
   XCTAssertNotNil(window);
   [window addSubview:view];
 
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
   NSLog(@"%@", dict);
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
@@ -303,12 +303,12 @@
   XCTAssertEqual([dict count], 11);
 }
 
-#pragma mark - jsonifyView:
+#pragma mark - dictionaryByEncodingView:
 
 - (void) testJsonifyViewUIView {
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UIView *view = [[UIView alloc] initWithFrame:frame];
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
@@ -330,7 +330,7 @@
 - (void) testJsonifyViewUIControl {
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UIControl *view = [[UIControl alloc] initWithFrame:frame];
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
@@ -353,7 +353,7 @@
 - (void) testJsonifyViewUITextField {
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UITextField *view = [[UITextField alloc] initWithFrame:frame];
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
@@ -377,7 +377,7 @@
 - (void) testJsonifyViewUITextView {
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UITextView *view = [[UITextView alloc] initWithFrame:frame];
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
@@ -400,7 +400,7 @@
 - (void) testJsonifyViewUISlider {
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UISlider *view = [[UISlider alloc] initWithFrame:frame];
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
@@ -423,7 +423,7 @@
 - (void) testJsonifyViewUISwitch {
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UISwitch *view = [[UISwitch alloc] initWithFrame:frame];
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
@@ -445,7 +445,7 @@
 - (void) testJsonifyViewUIButton {
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UIButton *view = [[UIButton alloc] initWithFrame:frame];
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
@@ -466,7 +466,7 @@
 - (void) testJsonifyViewUIScrollView {
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UIScrollView *view = [[UIScrollView alloc] initWithFrame:frame];
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
@@ -487,7 +487,7 @@
 - (void) testJsonifyViewUITableView {
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UITableView *view = [[UITableView alloc] initWithFrame:frame];
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
@@ -510,7 +510,7 @@
                        initWithStyle:UITableViewCellStyleDefault
                        reuseIdentifier:@"identifier"];
 
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
@@ -535,7 +535,7 @@
   UICollectionViewFlowLayout *layout = [UICollectionViewFlowLayout new];
   UICollectionView *view = [[UICollectionView alloc] initWithFrame:frame
                                               collectionViewLayout:layout];
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
@@ -557,7 +557,7 @@
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UICollectionViewCell *view = [[UICollectionViewCell alloc] initWithFrame:frame];
 
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
@@ -580,7 +580,7 @@
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UISegmentedControl *view = [[UISegmentedControl alloc] initWithFrame:frame];
 
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
@@ -603,7 +603,7 @@
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UIPickerView *view = [[UIPickerView alloc] initWithFrame:frame];
 
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
@@ -626,7 +626,7 @@
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UIDatePicker *view = [[UIDatePicker alloc] initWithFrame:frame];
 
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
@@ -650,7 +650,7 @@
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UITabBar *view = [[UITabBar alloc] initWithFrame:frame];
 
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
@@ -673,7 +673,7 @@
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UINavigationBar *view = [[UINavigationBar alloc] initWithFrame:frame];
 
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
@@ -696,7 +696,7 @@
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UIToolbar *view = [[UIToolbar alloc] initWithFrame:frame];
 
-  NSDictionary *dict = [LPJSONUtils jsonifyView:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));

@@ -106,7 +106,7 @@
     return @{@"red": @(red), @"green": @(green), @"blue": @(blue), @"alpha": @(alpha), @"type": NSStringFromClass([object class])};
   }
   else if ([object isKindOfClass:[UIView class]]) {
-    NSMutableDictionary *viewJson = [self jsonifyView:(UIView*) object];
+    NSMutableDictionary *viewJson = [self dictionaryByEncodingView:(UIView*) object];
     if (dump) {
       [self dumpView: object toDictionary:viewJson];
       if (viewJson[@"class"]) {
