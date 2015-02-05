@@ -127,6 +127,8 @@
   XCTAssertEqual([dict count], 6);
 }
 
+#pragma mark - jsonifyView: setting 'value' key
+
 // Is UISlider the only UIView with value selector?
 - (void) testJsonfiyViewValueSettingHasValueTextAccessibilityValue {
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
