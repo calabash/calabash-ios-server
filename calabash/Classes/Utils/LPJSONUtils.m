@@ -151,6 +151,132 @@
   return object;
 }
 
++ (NSMutableDictionary *) dictionaryByEncodingView:(id) object {
+  NSMutableDictionary *result = [NSMutableDictionary dictionary];
+  result[@"class"] = NSStringFromClass([object class]);
+
+  // v might not be a UIView.
+  if ([object isKindOfClass:[UIView class]]) {
+    if ([LPTouchUtils isViewVisible:(UIView*)object]) {
+      result[@"visible"] = @(1);
+    } else {
+      result[@"visible"] = @(0);
+    }
+  }
+
+  // Be defensive: user *might* have a view with a 'nil' description.
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"description"
+               whenTarget:object
+               respondsTo:@selector(description)];
+
+  // Selector is defined for NSObject(UIKit), but better to be safe than sorry.
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"accessibilityElement"
+               whenTarget:object
+               respondsTo:@selector(isAccessibilityElement)];
+
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"label"
+               whenTarget:object
+               respondsTo:@selector(accessibilityLabel)];
+
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"id"
+               whenTarget:object
+               respondsTo:@selector(accessibilityIdentifier)];
+
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"text"
+               whenTarget:object
+               respondsTo:@selector(text)];
+
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"selected"
+               whenTarget:object
+               respondsTo:@selector(isSelected)];
+
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"enabled"
+               whenTarget:object
+               respondsTo:@selector(isEnabled)];
+
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"alpha"
+               whenTarget:object
+               respondsTo:@selector(alpha)];
+
+  // Setting value.
+  NSString *valueKey = @"value";
+  if ([object respondsToSelector:@selector(value)]) { // value
+    [LPJSONUtils dictionary:result
+            setObjectforKey:valueKey
+                 whenTarget:object
+                 respondsTo:@selector(value)];
+  } else if ([object respondsToSelector:@selector(text)]) { // text
+    [LPJSONUtils dictionary:result
+            setObjectforKey:valueKey
+                 whenTarget:object
+                 respondsTo:@selector(text)];
+  } else if ([object respondsToSelector:@selector(accessibilityValue)]) { // accessibilityValue
+    [LPJSONUtils dictionary:result
+            setObjectforKey:@"value"
+                 whenTarget:object
+                 respondsTo:@selector(accessibilityValue)];
+  }
+
+  if ([object respondsToSelector:@selector(frame)]) {
+    // TODO:  The type on `v` is id which means it can be any object.  Should
+    // be able to use the LPInvoker, but it is not (yet) able to handle
+    // selectors that return structs.
+    NSMethodSignature *signature;
+    signature = [[object class] instanceMethodSignatureForSelector:@selector(frame)];
+    const char *cEncoding = [signature methodReturnType];
+    NSString *encoding = [NSString stringWithCString:cEncoding
+                                            encoding:NSASCIIStringEncoding];
+    if ([encoding rangeOfString:@"{CGRect"].location == 0) {
+      CGRect frame = [object frame];
+      result[@"frame"] = @{@"x" : @(frame.origin.x),
+                           @"y" : @(frame.origin.y),
+                           @"width" : @(frame.size.width),
+                           @"height" : @(frame.size.height)};
+    }
+  }
+
+  if ([object isKindOfClass:[UIView class]]) {
+    UIView *view = (UIView *)object;
+    UIWindow *window = [LPTouchUtils windowForView:view];
+
+    if (window) {
+
+      CGPoint center = [LPTouchUtils centerOfView:view];
+
+      CGRect rect = [window convertRect:view.bounds fromView:view];
+
+      UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+      if ([frontWindow respondsToSelector:@selector(convertRect:toCoordinateSpace:)]) {
+        rect = [frontWindow convertRect:rect toCoordinateSpace:frontWindow];
+      } else {
+        rect = [frontWindow convertRect:rect fromWindow:window];
+      }
+#else
+      rect = [frontWindow convertRect:rect fromWindow:window];
+#endif
+
+      result[@"rect"] = @{@"center_x" : @(center.x),
+                          @"center_y" : @(center.y),
+                          @"x" : @(rect.origin.x),
+                          @"y" : @(rect.origin.y),
+                          @"width" : @(rect.size.width),
+                          @"height" : @(rect.size.height)};
+    }
+  }
+
+  return result;
+}
+
 + (NSMutableDictionary*) jsonifyView:(id) v {
   NSMutableDictionary *result = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                  NSStringFromClass([v class]), @"class", nil];
