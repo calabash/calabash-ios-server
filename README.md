@@ -65,3 +65,21 @@ $ scripts/test/test-make-rules.rb
 # cucumber tests + make rules
 $ scripts/test/run
 ```
+
+### Building a Xamarin Binding
+
+```
+$ git clone --recursive git@github.com:calabash/calabash-ios-server.git no-symbols
+$ cd no-symbols
+$ git fetch
+$ git checkout maintenance/no-ios7-or-ios8-symbols
+$ make no-offending-symbols
+$ git clone https://github.com/xamarin/CalabashBinding.git
+$ mv no-symbols/calabash.framework/calabash CalabashBinding/CalabashBinding/calabash
+$ xbuild CalabashBinding/CalabashBinding.sln
+```
+
+Distribute the resulting:
+
+* `classic/Debug/Calabash.dll`
+* `classic/Debug/Calabash.dll.mdb`
