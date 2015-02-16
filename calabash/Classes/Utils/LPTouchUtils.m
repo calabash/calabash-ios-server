@@ -5,20 +5,24 @@
 //
 #import <sys/utsname.h>
 
-#define LPiPHONE4INCHOFFSET 44
+
 
 #import "LPTouchUtils.h"
+#import "LPDevice.h"
 
 
 @implementation LPTouchUtils
 
-+ (BOOL) is4InchDevice {
-  UIDevice *device = [UIDevice currentDevice];
++ (NSString *) stringForSystemName {
   struct utsname systemInfo;
   uname(&systemInfo);
+  return [NSString stringWithCString:systemInfo.machine
+                            encoding:NSUTF8StringEncoding];
+}
 
-  NSString *system = [NSString stringWithCString:systemInfo.machine
-                                        encoding:NSUTF8StringEncoding];
++ (BOOL) isThreeAndAHalfInchDevice {
+  UIDevice *device = [UIDevice currentDevice];
+  NSString *system = [LPTouchUtils stringForSystemName];
   NSDictionary *env = [[NSProcessInfo processInfo] environment];
 
   BOOL iphone5Like = NO;
@@ -26,17 +30,66 @@
 
     NSPredicate *inch5PhonePred = [NSPredicate predicateWithFormat:@"IPHONE_SIMULATOR_VERSIONS LIKE '*iPhone*Retina*4-inch*'"];
     iphone5Like = [inch5PhonePred evaluateWithObject:env];
+    
+    if (!iphone5Like) {
+      inch5PhonePred = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone 5*'"];
+      iphone5Like = [inch5PhonePred evaluateWithObject:env];
+      inch5PhonePred = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone 6*'"];
+      iphone5Like =  iphone5Like || [inch5PhonePred evaluateWithObject:env];
+    }
   } else if ([[device model] hasPrefix:@"iPhone"]) {
-    iphone5Like = [system hasPrefix:@"iPhone5"] || [system hasPrefix:@"iPhone6"];
+    iphone5Like = [system hasPrefix:@"iPhone5"] || [system hasPrefix:@"iPhone6"] || [system hasPrefix:@"iPhone7,2"] || [system hasPrefix:@"iPhone7,1"];
   } else if ([[device model] hasPrefix:@"iPod"]) {
     iphone5Like = [system hasPrefix:@"iPod5"];
   }
-
-  return iphone5Like;
+  return !iphone5Like;
 }
 
++ (BOOL) is4InchDevice {
 
-+ (CGPoint) translateToScreenCoords:(CGPoint) point {
+  if ([@"iPhone Simulator" isEqualToString:[[UIDevice currentDevice] model]]) {
+    NSDictionary *env = [[NSProcessInfo processInfo] environment];
+
+    NSPredicate *xCode6Predicate, *xCode5Predicate, *predicate;
+    xCode6Predicate = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone 5*'"];
+    xCode5Predicate = [NSPredicate predicateWithFormat:@"IPHONE_SIMULATOR_VERSIONS LIKE '*iPhone*Retina*4-inch*'"];
+    predicate = [NSCompoundPredicate orPredicateWithSubpredicates:@[xCode5Predicate, xCode6Predicate]];
+    return [predicate evaluateWithObject:env];
+  } else { // Device, not simulator
+    NSString *systemName = [LPTouchUtils stringForSystemName];
+    __block BOOL is4Inch = NO;
+
+    [@[@"iPhone5", @"iPhone6", @"iPod5"] enumerateObjectsUsingBlock:^(NSString *prefix,
+                                                                      NSUInteger idx,
+                                                                      BOOL *stop) {
+      if ([systemName hasPrefix:prefix]) {
+        is4Inch = YES;
+        *stop = YES;
+      }
+    }];
+    return is4Inch;
+  }
+}
+
++ (BOOL) isLetterBox {
+  if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPhone) {
+    return NO;
+  }
+
+  if ([LPTouchUtils isThreeAndAHalfInchDevice]) {
+    return NO;
+  }
+
+  CGFloat scale = [UIScreen mainScreen].scale;
+  if (scale != 2.0f) {
+    return NO;
+  }
+
+  CGSize screenBounds = [[UIScreen mainScreen] bounds].size;
+  return screenBounds.height * scale == 960;
+}
+
++ (CGPoint) translateToScreenCoords:(CGPoint) point sampleFactor:(CGFloat)sampleFactor{
   UIScreen *s = [UIScreen mainScreen];
 
   UIScreenMode *sm = [s currentMode];
@@ -45,21 +98,10 @@
   UIDeviceOrientation o = [[UIDevice currentDevice] orientation];
 
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    if ([UIScreen mainScreen].scale == 2.0f) {
-      CGSize result = [[UIScreen mainScreen] bounds].size;
-      CGFloat scale = [UIScreen mainScreen].scale;
-      result = CGSizeMake(result.width * scale, result.height * scale);
-
-      if (result.height == 960 && [LPTouchUtils is4InchDevice]) {//detect Letterbox
-        return CGPointMake(point.x, point.y + LPiPHONE4INCHOFFSET);
-      }
-
-      if (result.height == 1136) {
-        //NSLog(@"iPhone 5 Resolution");
-        //iPhone 5 full
-        return point;
-      }
+    if ([self isLetterBox]) {
+      return CGPointMake(point.x * sampleFactor, (point.y + LPiPHONE4INCHOFFSET)*sampleFactor);
     }
+    return CGPointMake(point.x*sampleFactor,point.y*sampleFactor);
   }
 
 
@@ -71,10 +113,8 @@
   CGSize retina_ipad_hori = CGSizeMake(2048, 1536);
 
 
-  if ((CGRectEqualToRect(small_vert, b) || CGRectEqualToRect(small_hori,
-          b)) && (CGSizeEqualToSize(large_size_hori, size) || CGSizeEqualToSize(
-          large_size_vert, size) || CGSizeEqualToSize(retina_ipad_hori,
-          size) || CGSizeEqualToSize(retina_ipad_vert, size))) {
+  if ((CGRectEqualToRect(small_vert, b) || CGRectEqualToRect(small_hori,b)) && (CGSizeEqualToSize(large_size_hori, size) || CGSizeEqualToSize(large_size_vert, size) || CGSizeEqualToSize(retina_ipad_hori,size) ||
+      CGSizeEqualToSize(retina_ipad_vert, size))) {
 
     CGSize orientation_size = UIDeviceOrientationIsPortrait(o) || UIDeviceOrientationFaceUp == o || UIDeviceOrientationUnknown == o ? large_size_vert : large_size_hori;
     float x_offset = orientation_size.width / 2.0f - b.size.width / 2.0f;
@@ -85,6 +125,10 @@
   }
 }
 
++ (CGPoint) translateToScreenCoords:(CGPoint) point{
+  CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
+  return [self translateToScreenCoords:point sampleFactor:sampleFactor];
+}
 
 + (NSArray *) applicationWindows {
   // iOS flatdacted apparently doesn't list the "real" window containing alerts in the windows list, but stores it
@@ -233,10 +277,13 @@
 }
 
 
-+ (CGPoint) centerOfFrame:(CGRect) frame shouldTranslate:(BOOL) shouldTranslate {
-  CGPoint translated = shouldTranslate ? [self translateToScreenCoords:frame.origin] : frame.origin;
-  return CGPointMake(translated.x + 0.5 * frame.size.width,
-          translated.y + 0.5 * frame.size.height);
++ (CGPoint) centerOfFrame:(CGRect) rect shouldTranslate:(BOOL) shouldTranslate {
+  CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
+  CGPoint translated = shouldTranslate ? [self translateToScreenCoords:rect.origin sampleFactor:sampleFactor] : rect.origin;
+  
+  return CGPointMake(translated.x + 0.5 * rect.size.width * sampleFactor,
+                     translated.y + 0.5 * rect.size.height * sampleFactor);
+  
 }
 
 
@@ -246,18 +293,84 @@
 
 
 + (CGPoint) centerOfView:(UIView *) view shouldTranslate:(BOOL) shouldTranslate {
+  UIWindow *window = [self windowForView:view];
+  CGRect rect = [window convertRect:view.bounds fromView:view];
 
-  UIWindow *delegateWindow = [LPTouchUtils appDelegateWindow];
-  UIWindow *viewWindow = [self windowForView:view];
-  CGRect bounds = [viewWindow convertRect:view.bounds fromView:view];
-  bounds = [delegateWindow convertRect:bounds fromWindow:viewWindow];
-  return [self centerOfFrame:bounds shouldTranslate:shouldTranslate];
+  UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+  if ([frontWindow respondsToSelector:@selector(convertPoint:toCoordinateSpace:)]) {
+    CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
+    rect = [window convertRect:rect toCoordinateSpace:frontWindow];
+    CGFloat x = (rect.origin.x + 0.5 * rect.size.width) * sampleFactor;
+    CGFloat y = (rect.origin.y + 0.5 * rect.size.height) * sampleFactor;
+    
+    if ([LPTouchUtils isLetterBox]) {
+      UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+      if (UIInterfaceOrientationIsPortrait(orientation)) {
+        y += LPiPHONE4INCHOFFSET*sampleFactor;
+      }
+      else {
+        x += LPiPHONE4INCHOFFSET*sampleFactor;
+      }
+    }
+    return CGPointMake(x,y);
+  } else {
+    rect = [frontWindow convertRect:rect fromWindow:window];
+    return [self centerOfFrame:rect shouldTranslate:shouldTranslate];
+  }
+#else
+  rect = [frontWindow convertRect:rect fromWindow:window];
+  return [self centerOfFrame:rect shouldTranslate:shouldTranslate];
+#endif
 }
 
 
 + (CGPoint) centerOfView:(UIView *) view inWindow:(UIWindow *) windowForView {
   CGRect bounds = [windowForView convertRect:view.bounds fromView:view];
   return [self centerOfFrame:bounds shouldTranslate:NO];
+}
+
++ (CGRect)translateRect:(CGRect)sourceRect inView:(UIView*) view {
+  UIWindow *window = [self windowForView:view];
+  CGRect bounds = [window convertRect:view.bounds fromView:view];
+  CGRect rect = CGRectMake(bounds.origin.x + sourceRect.origin.x,
+                          bounds.origin.y + sourceRect.origin.y,
+                          sourceRect.size.width,
+                          sourceRect.size.height);
+
+
+  UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+  if ([frontWindow respondsToSelector:@selector(convertPoint:toCoordinateSpace:)]) {
+    CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
+    rect = [window convertRect:rect toCoordinateSpace:frontWindow];
+    CGFloat x = rect.origin.x;
+    CGFloat y = rect.origin.y;
+    if ([LPTouchUtils isLetterBox]) {
+      UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+      if (UIInterfaceOrientationIsPortrait(orientation)) {
+        y += LPiPHONE4INCHOFFSET*sampleFactor;
+      }
+      else {
+        x += LPiPHONE4INCHOFFSET*sampleFactor;
+      }
+    }
+    return CGRectMake(x * sampleFactor, y * sampleFactor,
+                      rect.size.width * sampleFactor, rect.size.height * sampleFactor);
+  } else {
+    rect = [frontWindow convertRect:rect fromWindow:window];
+    CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
+    CGPoint translated = [self translateToScreenCoords:rect.origin sampleFactor:sampleFactor];
+    return CGRectMake(translated.x, translated.y, rect.size.width * sampleFactor, rect.size.height * sampleFactor);
+  }
+#else
+  rect = [frontWindow convertRect:rect fromWindow:window];
+  CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
+  CGPoint translated = [self translateToScreenCoords:rect.origin sampleFactor:sampleFactor];
+  return CGRectMake(translated.x, translated.y, rect.size.width * sampleFactor, rect.size.height * sampleFactor);
+#endif
 }
 
 
@@ -281,6 +394,25 @@
     delegateWindow = appDelegate.window;
   }
   return delegateWindow;
+}
+
++(NSArray*)accessibilityChildrenFor:(id)view {
+  NSMutableArray *arr = [[NSMutableArray alloc] initWithCapacity:32];
+  if ([view respondsToSelector:@selector(subviews)]) {
+    [arr addObjectsFromArray:[view subviews]];
+  }
+  if ([view respondsToSelector:@selector(accessibilityElementCount)] &&
+      [view respondsToSelector:@selector(accessibilityElementAtIndex:)]) {
+    NSInteger count = [view accessibilityElementCount];
+    if (count == 0 || count == NSNotFound) {
+      return arr;
+    }
+    for (NSInteger i=0;i<count;i++) {
+      id accEl = [view accessibilityElementAtIndex:i];
+      [arr addObject:accEl];
+    }
+  }
+  return [arr autorelease];
 }
 
 

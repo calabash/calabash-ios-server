@@ -145,16 +145,16 @@
         continue;
       }
 
-      if ([v isKindOfClass:[UITableViewCell class]] && [self.selectorName isEqualToString:@"indexPath"]) {
-        UITableViewCell *cell = (UITableViewCell *) v;
+      if ([self.selectorName isEqualToString:@"indexPath"] &&
+          [self isIndexPathAddressable:v]) {
+        id cell = v;
         NSIndexPath *indexPath = (NSIndexPath *) self.objectValue;
-        id tableView = [cell superview];
-        while (tableView && ![tableView isKindOfClass:[UITableView class]]) {
-          tableView = [tableView superview];
+        id indexPathView = [cell superview];
+        while (indexPathView && ![self supportsIndexPathAddressing:indexPathView]) {
+          indexPathView = [indexPathView superview];
         }
-        if (tableView) {
-          UITableView *tv = (UITableView *) tableView;
-          if ([indexPath isEqual:[tv indexPathForCell:cell]]) {
+        if (indexPathView) {
+          if ([self indexPath: indexPath addressesCell: cell inIndexPathView:indexPathView]) {
             [res addObject:cell];
           }
         }
@@ -163,21 +163,57 @@
 
       if (self.selectorName) {
         if ([v respondsToSelector:_selector]) {
-          void *val = [v performSelector:_selector];
-          switch (self.valueType) {
-            case UIScriptLiteralTypeInteger:
-              if ((NSInteger) val == self.integerValue) {
-                [res addObject:v];
-              }
+          BOOL Bvalue;
+          NSMethodSignature *sig = [v methodSignatureForSelector:_selector];
+          NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sig];
+          const char *type = [[invocation methodSignature] methodReturnType];
+          NSString *returnType = [NSString stringWithFormat:@"%s", type];
+          const char *trimmedType = [[returnType substringToIndex:1]
+                                     cStringUsingEncoding:NSASCIIStringEncoding];
+          BOOL boolReturnType = ('B' == *trimmedType);
+          BOOL objectReturnType = ('@' == *trimmedType);
+
+          void *val = nil;
+          if (boolReturnType) {
+            [invocation setSelector:_selector];
+            [invocation setTarget:v];
+            @try {
+              [invocation invoke];
+            }
+            @catch (NSException *exception) {
+              NSLog(@"Perform %@ with target %@ caught %@: %@", _selectorName,v, [exception name], [exception reason]);
               break;
-            case UIScriptLiteralTypeString: {
-              if (val != nil && ([(NSString *) val isEqualToString:(NSString *) self.objectValue])) {
+            }
+            [invocation getReturnValue:(void **) &Bvalue];
+          }
+          else {
+            val = [v performSelector:_selector];
+          }
+          switch (self.valueType) {
+            case UIScriptLiteralTypeInteger: {
+              if (boolReturnType) {
+                if ((self.integerValue == 1 && Bvalue) || (self.integerValue == 0 && !Bvalue)) {
+                  [res addObject:v];
+                }
+              }
+              else if ((NSInteger) val == self.integerValue) {
                 [res addObject:v];
               }
               break;
             }
+            case UIScriptLiteralTypeString: {
+              if (objectReturnType) {
+                id valObj = (id) val;
+                if (valObj != nil
+                    && [valObj respondsToSelector:@selector(isEqualToString:)]
+                    && ([valObj isEqualToString:(NSString *) self.objectValue])) {
+                  [res addObject:v];
+                }
+              }
+              break;
+            }
             case UIScriptLiteralTypeBool:
-              if (self.boolValue == (BOOL) val) {
+              if (boolReturnType && self.boolValue == Bvalue) {
                 [res addObject:v];
               }
               break;
@@ -219,6 +255,23 @@
   return res;
 }
 
+-(BOOL)isIndexPathAddressable:(id)v {
+  return [v isKindOfClass:[UITableViewCell class]] || [v isKindOfClass:[UICollectionViewCell class]];
+}
+-(BOOL)supportsIndexPathAddressing:(id)view {
+  return [view respondsToSelector:@selector(cellForRowAtIndexPath:)] ||
+         [view respondsToSelector:@selector(cellForItemAtIndexPath:)];
+}
+-(BOOL)indexPath:(NSIndexPath*)indexPath addressesCell:(id) cell inIndexPathView:(id)indexPathView {
+  id viewAtIndexPath = nil;
+  if ([indexPathView respondsToSelector:@selector(cellForRowAtIndexPath:)]) {
+    viewAtIndexPath = [indexPathView cellForRowAtIndexPath:indexPath];
+  }
+  else if ([indexPathView respondsToSelector:@selector(cellForItemAtIndexPath:)]) {
+    viewAtIndexPath = [indexPathView cellForItemAtIndexPath:indexPath];
+  }
+  return [cell isEqual:viewAtIndexPath];
+}
 
 - (void) dealloc {
   self.selector = nil;

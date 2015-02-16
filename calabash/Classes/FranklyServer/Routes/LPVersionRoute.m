@@ -10,7 +10,9 @@
 #import "LPTouchUtils.h"
 #import "LPHTTPDataResponse.h"
 #import "LPJSONUtils.h"
+#import "LPDevice.h"
 #import <sys/utsname.h>
+#import "LPInfoPlist.h"
 
 @class UIDevice;
 
@@ -111,7 +113,7 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
 
   NSDictionary *env = [[NSProcessInfo processInfo] environment];
 
-  BOOL iphone5Like = [LPTouchUtils is4InchDevice];
+  BOOL is4inDevice = [LPTouchUtils is4InchDevice];
 
   NSString *dev = env[@"IPHONE_SIMULATOR_DEVICE"];
   if (!dev) {  dev = @"";  }
@@ -125,19 +127,26 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
 
   NSString *calabashVersion = [kLPCALABASHVERSION componentsSeparatedByString:@" "].lastObject;
 
+  LPInfoPlist *infoPlist = [LPInfoPlist new];
+  NSNumber *serverPort = @([infoPlist serverPort]);
+  [infoPlist release];
+
+
   NSDictionary *res = @{@"version": calabashVersion,
                         @"app_id": idString,
                         @"iOS_version": [[UIDevice currentDevice]
                                          systemVersion],
                         @"app_name": nameString,
+                        @"screen_dimensions": [[LPDevice sharedDevice] screenDimensions],
                         @"system": machine,
-                        @"4inch": @(iphone5Like),
+                        @"4inch": @(is4inDevice),
                         @"simulator_device": dev,
                         @"simulator": sim,
                         @"app_version": versionString,
                         @"outcome": @"SUCCESS",
                         @"iphone_app_emulated_on_ipad": @(isIphoneAppEmulated),
-                        @"git": git};
+                        @"git": git,
+                        @"server_port" : serverPort};
   return res;
 }
 

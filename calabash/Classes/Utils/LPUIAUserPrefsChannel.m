@@ -27,13 +27,12 @@
 
 #import "LPUIAUserPrefsChannel.h"
 
-#define MAX_LOOP_COUNT 1200
-
 const static NSString *LPUIAChannelUIAPrefsRequestKey = @"__calabashRequest";
 const static NSString *LPUIAChannelUIAPrefsResponseKey = @"__calabashResponse";
 const static NSString *LPUIAChannelUIAPrefsIndexKey = @"index";
 const static NSString *LPUIAChannelUIAPrefsCommandKey = @"command";
 const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
+const static NSInteger LPUIAChannelMaximumLoopCount = 1200;
 
 @implementation LPUIAUserPrefsChannel {
   dispatch_queue_t _uiaQueue;
@@ -59,11 +58,9 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
   return self;
 }
 
-
-// todo LPUIAChannel.m [super dealloc] should be called _last_
 - (void) dealloc {
-  [super dealloc];
   dispatch_release(_uiaQueue);
+  [super dealloc];
 }
 
 
@@ -78,15 +75,22 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
 
   dispatch_async(_uiaQueue, ^{
     [self requestExecutionOf:command];
+    NSLog(@"requested execution of command: %@", command);
 
     NSDictionary *result = nil;
     NSUInteger loopCount = 0;
     while (1) {//Loop waiting for response
+      [[NSUserDefaults standardUserDefaults] synchronize];
       NSDictionary *resultPrefs = [self userPreferences];
       NSDictionary *currentResponse = [resultPrefs objectForKey:LPUIAChannelUIAPrefsResponseKey];
 
+      NSLog(@"Current request: %@", [resultPrefs objectForKey:LPUIAChannelUIAPrefsRequestKey]);
+
       if (currentResponse) {
         NSUInteger responseIndex = [(NSNumber *) [currentResponse objectForKey:LPUIAChannelUIAPrefsIndexKey] unsignedIntegerValue];
+        NSLog(@"Current response: %@", currentResponse);
+        NSLog(@"Server current index: %lu",(unsigned long) _scriptIndex);
+        NSLog(@"response current index: %lu",(unsigned long) responseIndex);
         if (responseIndex == _scriptIndex) {
           result = currentResponse;
           break;
@@ -94,7 +98,7 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
       }
       [NSThread sleepForTimeInterval:LPUIAChannelUIADelay];
       loopCount++;
-      if (loopCount >= MAX_LOOP_COUNT) {
+      if (loopCount >= LPUIAChannelMaximumLoopCount) {
         NSLog(@"Timed out running command %@", command);
         NSLog(@"Server current index: %lu",(unsigned long) _scriptIndex);
         NSDictionary *prefs = [self userPreferences];
@@ -112,7 +116,6 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
   });
 }
 
-
 - (void) requestExecutionOf:(NSString *) command {
 #if TARGET_IPHONE_SIMULATOR
   [self simulatorRequestExecutionOf:command];
@@ -120,7 +123,6 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
   [self deviceRequestExecutionOf:command];
 #endif
 }
-
 
 - (NSDictionary *) userPreferences {
   NSDictionary *prefs = nil;
@@ -134,24 +136,66 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
   return prefs;
 }
 
-
 #if TARGET_IPHONE_SIMULATOR
 -(void)simulatorRequestExecutionOf:(NSString *)command {
-  NSMutableDictionary *prefs = [NSMutableDictionary dictionaryWithContentsOfFile:[self simulatorPreferencesPath]];
-  if (!prefs) {
-    prefs = [NSMutableDictionary dictionary];
-  }
-  NSDictionary *uiaRequest   = [self requestForCommand:command];
+  // In Xcode 6.1 and iOS 8.1, there is synchronization problem between IO
+  // performed by NSUserDefaults and the UIAutomation preferences API.  The
+  // if condition detects iOS 8.1 which is a proxy for Xcode 6.1 detection.
+  // When Xcode 6.1 and iOS 8.1; compensate for the synchronization problem.
+  // Earlier iOS versions in Xcode 6.1 do not suffer from the sync problem
+  // because NSUserDefaults and UIAutomation preferences API do IO on different
+  // files. (>_>)
+  NSString *preferencesPlist = [self simulatorPreferencesPath];
+  NSMutableDictionary *preferences;
+  NSString *systemVersion = [[UIDevice currentDevice] systemVersion];
+  if ([systemVersion compare:@"8.1" options:NSNumericSearch] != NSOrderedAscending) {
+    NSLog(@"iOS >= 8.1 detected; assuming Xcode >= 6.1");
+    NSInteger i = 0;
+    while (i < LPUIAChannelMaximumLoopCount) {
+      [[NSUserDefaults standardUserDefaults] synchronize];
+      preferences  = [NSMutableDictionary dictionaryWithContentsOfFile:preferencesPlist];
+      if (!preferences) {
+        preferences = [NSMutableDictionary dictionary];
+        NSLog(@"Empty preferences... resetting");
+      }
 
-  [prefs setObject:uiaRequest forKey:LPUIAChannelUIAPrefsRequestKey];
-  [prefs writeToFile:[self simulatorPreferencesPath] atomically:YES];
+      NSDictionary *uiaRequest   = [self requestForCommand:command];
+      [preferences setObject:uiaRequest forKey:LPUIAChannelUIAPrefsRequestKey];
+      BOOL writeSuccess = [preferences writeToFile:preferencesPlist
+                                        atomically:YES];
+
+      if (!writeSuccess) {
+        NSLog(@"Preparing for retry of simulatorRequestExecutionOf:");
+      }
+
+      if ([self validateRequestWritten:uiaRequest]) {
+        return;
+      } else {
+        i++;
+        NSLog(@"Validation of request failed... Retrying - %@ of %@",
+              @(i), @(LPUIAChannelMaximumLoopCount));
+        [NSThread sleepForTimeInterval:LPUIAChannelUIADelay];
+      }
+    }
+  } else {
+    NSLog(@"iOS < 8.1 detected; assuming Xcode < 6.1");
+    preferences = [NSMutableDictionary dictionaryWithContentsOfFile:preferencesPlist];
+
+    if (!preferences) {
+      preferences = [NSMutableDictionary dictionary];
+      NSLog(@"Empty preferences... resetting");
+    }
+    NSDictionary *uiaRequest   = [self requestForCommand:command];
+
+    [preferences setObject:uiaRequest forKey:LPUIAChannelUIAPrefsRequestKey];
+    [preferences writeToFile:preferencesPlist atomically:YES];
+  }
 }
 #endif // TARGET_IPHONE_SIMULATOR
 
-
 - (void) deviceRequestExecutionOf:(NSString *) command {
   NSInteger i=0;
-  while (i<MAX_LOOP_COUNT) {
+  while (i<LPUIAChannelMaximumLoopCount) {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *uiaRequest = [self requestForCommand:command];
 
@@ -171,7 +215,8 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
 }
 
 -(BOOL)validateRequestWritten:(NSDictionary*)uiaRequest {
-  NSDictionary *defaults = [self userPreferences];
+  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+  [defaults synchronize];
   NSDictionary *written = [defaults objectForKey:(NSString*)LPUIAChannelUIAPrefsRequestKey];
   if (!written) {
     return NO;
@@ -200,50 +245,67 @@ const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
 // Xcode 5
 // ~/Library/Application Support/iPhone Simulator/[system version]/Library/Preferences/[bundle ID].plist
 //
-// Xcode 6
+// Xcode 6.0*
 // ~/Library/Developer/CoreSimulator/Devices/[UDID]/data/Library/Preferences/[bundle ID].plist
 // see http://stackoverflow.com/questions/4977673/reading-preferences-set-by-uiautomations-uiaapplication-setpreferencesvaluefork
 //
-// Also on Xcode 6 - When the app is first installed and launched, this plist
-// file _does not exist_.  However, if you ask the NSUserDefaults for its
-// contents you will get back a non-empty string.  It looks like NSUserDefaults
-// is a concatenation of system level preferences (language, locale, newstand,
-// etc.) and the application's own preferences.
-//
-// It is not clear whether or not the fact that file does not exist until
-// the app tries to store something will influence UIA interactions.
+// Xcode 6.1 + iOS 8.1 - all other simulator SDKs use Xcode 6.0* rules.
+// ~/Library/Developer/CoreSimulator/Devices/[Sim UDID]/data/Containers/Data/Application/[App UDID]/Library/Preferences/[bundle id].plist
 - (NSString *)simulatorPreferencesPath {
   static NSString *path = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-    NSString *plistRootPath = nil, *relativePlistPath = nil;
+
     NSString *plistName = [NSString stringWithFormat:@"%@.plist", [[NSBundle mainBundle] bundleIdentifier]];
 
-    // 1. get into the simulator's app support directory by fetching the sandboxed Library's path
-
+    // 1. Find the app's Library directory so we can deduce the plist path.
     NSArray *userLibDirURLs = [[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask];
+    NSURL *userLibraryURL = [userLibDirURLs lastObject];
+    NSString *userLibraryPath = [userLibraryURL path];
 
-    NSURL *userDirURL = [userLibDirURLs lastObject];
-    NSString *userDirectoryPath = [userDirURL path];
+    // 2. Use the the library path to deduce the simulator environment.
 
-    // 2. get out of our application directory, back to the root support directory for this system version
-    if ([userDirectoryPath rangeOfString:@"CoreSimulator"].location == NSNotFound) {
-      plistRootPath = [userDirectoryPath substringToIndex:([userDirectoryPath rangeOfString:@"Applications"].location)];
+    if ([userLibraryPath rangeOfString:@"CoreSimulator"].location == NSNotFound) {
+      // 3. Xcode < 6 environment.
+      NSString *sandboxPath = [userLibraryPath substringToIndex:([userLibraryPath rangeOfString:@"Applications"].location)];
+      NSString *relativePlistPath = [NSString stringWithFormat:@"Library/Preferences/%@", plistName];
+      NSString *unsanitizedPlistPath = [sandboxPath stringByAppendingPathComponent:relativePlistPath];
+      path = [[unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] copy];
     } else {
-      NSRange range = [userDirectoryPath rangeOfString:@"data"];
-      plistRootPath = [userDirectoryPath substringToIndex:range.location + range.length];
+
+      /*
+       3. CoreSimulator environments
+
+       * In Xcode 6.1 + iOS >= 8.1, UIAutomation and NSUserDefaults do IO on
+         the same plist in the app's sandbox.
+       * In Xcode 6.1 and iOS < 8.1, UIAutomation does IO on the a file in
+         < SIM DIRECTORY >/data/Library/Preferences/ and NSUserDefaults does
+         IO on a plist in the app's sandbox.
+       * In Xcode 6.0*, NSUserDefaults and UIAutomation do IO on the same plist
+         in < SIM DIRECTORY >/data/Library/Preferences.
+
+       Since iOS 8.1 only ships with Xcode 6.1, we can check the system version
+       at runtime and choose the correct plist.
+      */
+
+      NSString *systemVersion = [[UIDevice currentDevice] systemVersion];
+      if ([systemVersion compare:@"8.1" options:NSNumericSearch] != NSOrderedAscending) {
+        NSString *relativePlistPath = [NSString stringWithFormat:@"Preferences/%@", plistName];
+        NSString *unsanitizedPlistPath = [userLibraryPath stringByAppendingPathComponent:relativePlistPath];
+        path = [[unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] copy];
+      } else {
+        NSRange range = [userLibraryPath rangeOfString:@"data"];
+        NSString *simulatorDataPath = [userLibraryPath substringToIndex:range.location + range.length];
+        NSString *relativePlistPath = [NSString stringWithFormat:@"Library/Preferences/%@", plistName];
+        NSString *unsanitizedPlistPath = [simulatorDataPath stringByAppendingPathComponent:relativePlistPath];
+        path = [[unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] copy];
+      }
     }
-
-    // 3. locate, relative to here, /Library/Preferences/[bundle ID].plist
-    relativePlistPath = [NSString stringWithFormat:@"Library/Preferences/%@", plistName];
-
-    // 4. and unescape spaces, if necessary (i.e. in the simulator)
-    NSString *unsanitizedPlistPath = [plistRootPath stringByAppendingPathComponent:relativePlistPath];
-    path = [[unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] copy];
   });
+  NSLog(@"NSUserDefaults path = %@", path);
   return path;
 }
-#endif // TARGET_IPHONE_SIMULATOR
 
+#endif // TARGET_IPHONE_SIMULATOR
 
 @end
