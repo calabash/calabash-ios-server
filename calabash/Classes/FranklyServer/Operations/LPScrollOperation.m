@@ -17,7 +17,7 @@
   
   if ([_view isKindOfClass:[UIScrollView class]]) {
     UIScrollView *sv = (UIScrollView *) _view;
-    CGSize size = UIEdgeInsetsInsetRect(sv.bounds, sv.contentInset).size;
+    CGSize size = sv.bounds.size;
     CGPoint offset = sv.contentOffset;
     CGFloat fraction = 2.0;
     if ([sv isPagingEnabled]) {
@@ -25,21 +25,17 @@
     }
     
     if ([@"up" isEqualToString:dir]) {
-      CGFloat scrollAmount = MIN((size.height)/fraction, offset.y);
-      [sv                                setContentOffset:CGPointMake(offset.x,
-                                                                      offset.y - scrollAmount) animated:YES];
+      CGFloat scrollAmount = MIN((size.height)/fraction, offset.y + sv.contentInset.top);
+      [sv setContentOffset:CGPointMake(offset.x, offset.y - scrollAmount) animated:YES];
     } else if ([@"down" isEqualToString:dir]) {
-      CGFloat scrollAmount = MIN(size.height/fraction, sv.contentSize.height - offset.y - size.height);
-      [sv                                setContentOffset:CGPointMake(offset.x,
-                                                                      offset.y + scrollAmount) animated:YES];
+      CGFloat scrollAmount = MIN(size.height/fraction, sv.contentSize.height + sv.contentInset.bottom - offset.y - size.height);
+      [sv setContentOffset:CGPointMake(offset.x, offset.y + scrollAmount) animated:YES];
     } else if ([@"left" isEqualToString:dir]) {
-      CGFloat scrollAmount = MIN(size.width/fraction, offset.x);
-      [sv       setContentOffset:CGPointMake(offset.x - scrollAmount,
-                                             offset.y) animated:YES];
+      CGFloat scrollAmount = MIN(size.width/fraction, offset.x + sv.contentInset.left);
+      [sv setContentOffset:CGPointMake(offset.x - scrollAmount, offset.y) animated:YES];
     } else if ([@"right" isEqualToString:dir]) {
-      CGFloat scrollAmount = MIN(size.width/fraction, sv.contentSize.width - offset.x - size.width);
-      [sv       setContentOffset:CGPointMake(offset.x + scrollAmount,
-                                             offset.y) animated:YES];
+      CGFloat scrollAmount = MIN(size.width/fraction, sv.contentSize.width + sv.contentInset.right - offset.x - size.width);
+      [sv setContentOffset:CGPointMake(offset.x + scrollAmount, offset.y) animated:YES];
     }
     
     return _view;
