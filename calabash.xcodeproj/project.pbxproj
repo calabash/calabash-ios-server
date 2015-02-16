@@ -20,6 +20,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		66DCD4371A91EC77000246D8 /* LPScrollOperationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 66DCD4361A91EC77000246D8 /* LPScrollOperationTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1058DEF197F00C000B4A57B /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code"; }; };
 		B1058E08197F00C000B4A57B /* LPUIAUserPrefsChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F279AE183D5B3000A922BC /* LPUIAUserPrefsChannel.m */; };
 		B1058E1D197F00C000B4A57B /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; };
@@ -763,6 +764,7 @@
 		5BFF97A318B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCollectionViewScrollToItemWithMarkOperation.m; sourceTree = "<group>"; };
 		5BFF97A618B392370094E71E /* LPScrollToMarkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPScrollToMarkOperation.h; sourceTree = "<group>"; };
 		5BFF97A718B392370094E71E /* LPScrollToMarkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScrollToMarkOperation.m; sourceTree = "<group>"; };
+		66DCD4361A91EC77000246D8 /* LPScrollOperationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScrollOperationTest.m; sourceTree = "<group>"; };
 		692D779E1657010000DE3E53 /* LPExitRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPExitRoute.h; sourceTree = "<group>"; };
 		692D779F1657010000DE3E53 /* LPExitRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPExitRoute.m; sourceTree = "<group>"; };
 		B1058E51197F00C000B4A57B /* libFrankCalabash.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFrankCalabash.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1508,6 +1510,7 @@
 		F50CBF5F1A03F222004AC9DA /* calabash-ios-server-tests */ = {
 			isa = PBXGroup;
 			children = (
+				66DCD4361A91EC77000246D8 /* LPScrollOperationTest.m */,
 				F5F6003F1A7BE77E0020637D /* LPJSONUtilsTest.m */,
 				F50CBF781A03F9FF004AC9DA /* LPTouchUtilsTest.m */,
 				F50CBF601A03F222004AC9DA /* Supporting Files */,
@@ -2604,6 +2607,7 @@
 				F50CBF8C1A04056F004AC9DA /* LPHTTPFileResponse.m in Sources */,
 				F50CBFB91A0405CE004AC9DA /* LPResources.m in Sources */,
 				F50CBF831A040564004AC9DA /* LPHTTPConnection.m in Sources */,
+				66DCD4371A91EC77000246D8 /* LPScrollOperationTest.m in Sources */,
 				F50CBFB11A0405B2004AC9DA /* LPBackdoorRoute.m in Sources */,
 				F50CBFB01A0405B2004AC9DA /* LPAsyncPlaybackRoute.m in Sources */,
 				F50CBFC41A0405CE004AC9DA /* UIScriptParser.m in Sources */,
