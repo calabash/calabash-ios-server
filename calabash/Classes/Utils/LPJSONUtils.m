@@ -365,12 +365,17 @@
   SEL selector = @selector(setObject:forKey:);
   if (![dictionary respondsToSelector:selector]) { return ; }
 
-  NSDictionary *rect = dictionary[@"rect"];
-  if (!rect) { return; }
+  id centerX = [NSNull null];
+  id centerY = [NSNull null];
 
-  id centerX = rect[@"center_x"];
-  id centerY = rect[@"center_y"];
-  if (!centerX || !centerY) { return; }
+  NSDictionary *rect = dictionary[@"rect"];
+  if (rect) {
+    id tmpX = rect[@"center_x"];
+    if (tmpX) { centerX = tmpX; }
+
+    id tmpY = rect[@"center_y"];
+    if (tmpY) { centerY = tmpY; }
+  }
 
   dictionary[@"hit-point"] = @{@"x" : centerX, @"y" : centerY};
 }

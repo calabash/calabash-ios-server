@@ -726,19 +726,31 @@
 - (void) testInsertHitPointIntoMutableDictionaryNoRectInDictionary {
   NSMutableDictionary *dict = [@{} mutableCopy];
   [LPJSONUtils insertHitPointIntoMutableDictionary:dict];
-  XCTAssertTrue([dict count] == 0);
+  XCTAssertTrue([dict count] == 1);
+  NSDictionary *hitPoint = dict[@"hit-point"];
+  XCTAssertNotNil(hitPoint);
+  XCTAssertEqualObjects(hitPoint[@"x"], [NSNull null]);
+  XCTAssertEqualObjects(hitPoint[@"y"], [NSNull null]);
 }
 
 - (void) testInsertHitPointIntoMutableDictionaryRectHasNoCenterX {
   NSMutableDictionary *dict = [@{@"rect" : @{@"center_y" : @(55)}} mutableCopy];
   [LPJSONUtils insertHitPointIntoMutableDictionary:dict];
-  XCTAssertTrue([dict count] == 1);
+  XCTAssertTrue([dict count] == 2);
+  NSDictionary *hitPoint = dict[@"hit-point"];
+  XCTAssertNotNil(hitPoint);
+  XCTAssertEqualObjects(hitPoint[@"x"], [NSNull null]);
+  XCTAssertEqualObjects(hitPoint[@"y"], @(55));
 }
 
 - (void) testInsertHitPointIntoMutableDictionaryRectHasNoCenterY {
   NSMutableDictionary *dict = [@{@"rect" : @{@"center_x" : @(55)}} mutableCopy];
   [LPJSONUtils insertHitPointIntoMutableDictionary:dict];
-  XCTAssertTrue([dict count] == 1);
+  XCTAssertTrue([dict count] == 2);
+  NSDictionary *hitPoint = dict[@"hit-point"];
+  XCTAssertNotNil(hitPoint);
+  XCTAssertEqualObjects(hitPoint[@"x"], @(55));
+  XCTAssertEqualObjects(hitPoint[@"y"], [NSNull null]);
 }
 
 - (void) testInsertHitPointIntoMutableDictionary {
