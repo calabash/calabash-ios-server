@@ -27,7 +27,7 @@
 
 //                        required =========> |     optional
 // _arguments ==> [target date str, format str, notify targets, animated]
-- (id) performWithTarget:(UIView *) _view error:(NSError **) error {
+- (id) performWithTarget:(UIView *) _view error:(NSError *__autoreleasing*) error {
   if ([_view isKindOfClass:[UIDatePicker class]] == NO) {
     NSLog(@"Warning view: %@ should be a date picker", _view);
     return nil;
