@@ -100,7 +100,6 @@
   NSString *string = @"string";
 
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:string];
-  NSLog(@"%@", dict);
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([string class]));
