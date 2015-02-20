@@ -17,27 +17,27 @@
 
   if ([_view isKindOfClass:[UIScrollView class]]) {
     UIScrollView *sv = (UIScrollView *) _view;
-    CGSize size = sv.frame.size;
+    CGSize size = sv.bounds.size;
     CGPoint offset = sv.contentOffset;
     CGFloat fraction = 2.0;
     if ([sv isPagingEnabled]) {
       fraction = 1.0;
     }
-
+    
     if ([@"up" isEqualToString:dir]) {
-      [sv                                setContentOffset:CGPointMake(offset.x,
-              offset.y - size.height / fraction) animated:YES];
+      CGFloat scrollAmount = MIN((size.height)/fraction, offset.y + sv.contentInset.top);
+      [sv setContentOffset:CGPointMake(offset.x, offset.y - scrollAmount) animated:YES];
     } else if ([@"down" isEqualToString:dir]) {
-      [sv                                setContentOffset:CGPointMake(offset.x,
-              offset.y + size.height / fraction) animated:YES];
+      CGFloat scrollAmount = MIN(size.height/fraction, sv.contentSize.height + sv.contentInset.bottom - offset.y - size.height);
+      [sv setContentOffset:CGPointMake(offset.x, offset.y + scrollAmount) animated:YES];
     } else if ([@"left" isEqualToString:dir]) {
-      [sv       setContentOffset:CGPointMake(offset.x - size.width / fraction,
-              offset.y) animated:YES];
+      CGFloat scrollAmount = MIN(size.width/fraction, offset.x + sv.contentInset.left);
+      [sv setContentOffset:CGPointMake(offset.x - scrollAmount, offset.y) animated:YES];
     } else if ([@"right" isEqualToString:dir]) {
-      [sv       setContentOffset:CGPointMake(offset.x + size.width / fraction,
-              offset.y) animated:YES];
+      CGFloat scrollAmount = MIN(size.width/fraction, sv.contentSize.width + sv.contentInset.right - offset.x - size.width);
+      [sv setContentOffset:CGPointMake(offset.x + scrollAmount, offset.y) animated:YES];
     }
-
+    
     return _view;
   } else if ([_view isKindOfClass:[UIWebView class]]) {
     UIWebView *wv = (UIWebView *) _view;
