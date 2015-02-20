@@ -692,6 +692,19 @@
 		F59CA4831A82EF40007A2F38 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F59CA4811A82EF40007A2F38 /* LaunchScreen.xib */; };
 		F5B27B9118C5884D0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		F5B27B9218C5884E0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
+		F5C0944D1A979CC200AE5991 /* LPWebQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = F5C0944B1A979CC200AE5991 /* LPWebQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F5C0944E1A979CC200AE5991 /* LPWebQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = F5C0944B1A979CC200AE5991 /* LPWebQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F5C0944F1A979CC200AE5991 /* LPWebQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = F5C0944B1A979CC200AE5991 /* LPWebQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F5C094501A979CC200AE5991 /* LPWebQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = F5C0944B1A979CC200AE5991 /* LPWebQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F5C094511A979CC200AE5991 /* LPWebQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = F5C0944B1A979CC200AE5991 /* LPWebQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F5C094521A979CC200AE5991 /* LPWebQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = F5C0944B1A979CC200AE5991 /* LPWebQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F5C094531A979CC200AE5991 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C0944C1A979CC200AE5991 /* LPWebQuery.m */; };
+		F5C094541A979CC200AE5991 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C0944C1A979CC200AE5991 /* LPWebQuery.m */; };
+		F5C094551A979CC200AE5991 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C0944C1A979CC200AE5991 /* LPWebQuery.m */; };
+		F5C094561A979CC200AE5991 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C0944C1A979CC200AE5991 /* LPWebQuery.m */; };
+		F5C094571A979CC200AE5991 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C0944C1A979CC200AE5991 /* LPWebQuery.m */; };
+		F5C094581A979CC200AE5991 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C0944C1A979CC200AE5991 /* LPWebQuery.m */; };
+		F5C094591A979CC200AE5991 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C0944C1A979CC200AE5991 /* LPWebQuery.m */; };
 		F5CB7D581A7CF45B00DACC8B /* InvokerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = F5CB7D571A7CF45B00DACC8B /* InvokerFactory.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5E2D1E018C9120E00A0D9B6 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5E2D1E118C9120E00A0D9B6 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -993,6 +1006,8 @@
 		F59CA4821A82EF40007A2F38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		F5AE0BC4174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPScrollToRowWithMarkOperation.h; sourceTree = "<group>"; };
 		F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScrollToRowWithMarkOperation.m; sourceTree = "<group>"; };
+		F5C0944B1A979CC200AE5991 /* LPWebQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPWebQuery.h; sourceTree = "<group>"; };
+		F5C0944C1A979CC200AE5991 /* LPWebQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPWebQuery.m; sourceTree = "<group>"; };
 		F5C3A62D18A2EA0800DB7E42 /* LPCollectionViewScrollToItemOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCollectionViewScrollToItemOperation.h; sourceTree = "<group>"; tabWidth = 4; };
 		F5C3A62E18A2EA0800DB7E42 /* LPCollectionViewScrollToItemOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCollectionViewScrollToItemOperation.m; sourceTree = "<group>"; tabWidth = 4; };
 		F5CAC06A180D499600E23F03 /* LPSliderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPSliderOperation.h; sourceTree = "<group>"; };
@@ -1238,6 +1253,7 @@
 				B184FDBC14B6DB2B002A744C /* FranklyServer */,
 				B184FDDD14B6DB2B002A744C /* JSON */,
 				B184FDF514B6DB2B002A744C /* Resources */,
+				F5C0944A1A979CC200AE5991 /* WebViewQuery */,
 				B184FDF814B6DB2B002A744C /* UISpec */,
 				B184FE0B14B6DB2B002A744C /* Utils */,
 				B184FD8B14B6DAFB002A744C /* LPCDataScanner.h */,
@@ -1608,6 +1624,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F5C0944A1A979CC200AE5991 /* WebViewQuery */ = {
+			isa = PBXGroup;
+			children = (
+				F5C0944B1A979CC200AE5991 /* LPWebQuery.h */,
+				F5C0944C1A979CC200AE5991 /* LPWebQuery.m */,
+			);
+			path = WebViewQuery;
+			sourceTree = "<group>";
+		};
 		F5E2D1D818C9120E00A0D9B6 /* SSKeychain */ = {
 			isa = PBXGroup;
 			children = (
@@ -1628,6 +1653,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1FBBC6319D0070000EE03CE /* LPDevice.h in Headers */,
+				F5C0944F1A979CC200AE5991 /* LPWebQuery.h in Headers */,
 				B1670E301A32411A00000A62 /* LPDumpRoute.h in Headers */,
 				B1F772021A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */,
 				B1F7721E1A22A398009A2336 /* LPSharedUIATextField.h in Headers */,
@@ -1643,6 +1669,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5C094511A979CC200AE5991 /* LPWebQuery.h in Headers */,
 				B1F772041A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */,
 				B1F772101A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */,
 				B1FBBC6519D0070000EE03CE /* LPDevice.h in Headers */,
@@ -1656,6 +1683,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5C094521A979CC200AE5991 /* LPWebQuery.h in Headers */,
 				B1F772051A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */,
 				B1F772111A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */,
 				B1FBBC6619D0070000EE03CE /* LPDevice.h in Headers */,
@@ -1677,6 +1705,7 @@
 				B1F7722B1A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */,
 				B1F7720F1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */,
 				B1D5BDCB19A23BCE0070E8CE /* LPRouter.h in Headers */,
+				F5C094501A979CC200AE5991 /* LPWebQuery.h in Headers */,
 				B1F7721F1A22A398009A2336 /* LPSharedUIATextField.h in Headers */,
 				B1D5BDCC19A23BCE0070E8CE /* LPHTTPResponse.h in Headers */,
 				B1D5BDCD19A23BCE0070E8CE /* LPHTTPAsyncFileResponse.h in Headers */,
@@ -1699,6 +1728,7 @@
 				B1F772281A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */,
 				B1F7720C1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */,
 				F59C5CF918E0BB290087B51D /* LPRouter.h in Headers */,
+				F5C0944D1A979CC200AE5991 /* LPWebQuery.h in Headers */,
 				B1F7721C1A22A398009A2336 /* LPSharedUIATextField.h in Headers */,
 				F59C5CFA18E0BBAE0087B51D /* LPHTTPResponse.h in Headers */,
 				F59C5CFB18E0BBAE0087B51D /* LPHTTPAsyncFileResponse.h in Headers */,
@@ -1721,6 +1751,7 @@
 				B1F772291A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */,
 				B1F7720D1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */,
 				F59C5D0218E0C1D90087B51D /* LPRouter.h in Headers */,
+				F5C0944E1A979CC200AE5991 /* LPWebQuery.h in Headers */,
 				B1F7721D1A22A398009A2336 /* LPSharedUIATextField.h in Headers */,
 				F59C5D0318E0C1DF0087B51D /* LPHTTPResponse.h in Headers */,
 				F59C5D0518E0C1EA0087B51D /* LPHTTPDataResponse.h in Headers */,
@@ -2110,6 +2141,7 @@
 				B113583A197F1311004B16F4 /* LPHTTPConnection.m in Sources */,
 				B1058E20197F00C000B4A57B /* UIScriptASTALL.m in Sources */,
 				B1058E21197F00C000B4A57B /* UIScriptASTClassName.m in Sources */,
+				F5C094551A979CC200AE5991 /* LPWebQuery.m in Sources */,
 				B113585E1981B053004B16F4 /* LPOrientationOperation.m in Sources */,
 				B1F772241A22A398009A2336 /* LPSharedUIATextField.m in Sources */,
 				B1058E7B197F043100B4A57B /* LPCalabashFrankRegistrar.m in Sources */,
@@ -2204,6 +2236,7 @@
 				B1F7720A1A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */,
 				B15BF9B919ABB1DD00B38577 /* LPRecorder.m in Sources */,
 				B15BF9BA19ABB1DD00B38577 /* LPUIARouteOverUserPrefs.m in Sources */,
+				F5C094571A979CC200AE5991 /* LPWebQuery.m in Sources */,
 				B15BF9BB19ABB1DD00B38577 /* LPKeychainRoute.m in Sources */,
 				B15BF9BC19ABB1DD00B38577 /* LPDebugRoute.m in Sources */,
 				B15BF9BD19ABB1DE00B38577 /* LPAppPropertyRoute.m in Sources */,
@@ -2298,6 +2331,7 @@
 				B1F7720B1A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */,
 				B15BFA0B19ABB2B100B38577 /* LPRecorder.m in Sources */,
 				B15BFA0C19ABB2B100B38577 /* LPUIARouteOverUserPrefs.m in Sources */,
+				F5C094581A979CC200AE5991 /* LPWebQuery.m in Sources */,
 				B15BFA0D19ABB2B100B38577 /* LPKeychainRoute.m in Sources */,
 				B15BFA0E19ABB2B100B38577 /* LPDebugRoute.m in Sources */,
 				B15BFA0F19ABB2B100B38577 /* LPAppPropertyRoute.m in Sources */,
@@ -2392,6 +2426,7 @@
 				B1F772091A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */,
 				B1D5BD9819A23BCE0070E8CE /* LPConditionRoute.m in Sources */,
 				B1D5BD9919A23BCE0070E8CE /* LPInterpolateRoute.m in Sources */,
+				F5C094561A979CC200AE5991 /* LPWebQuery.m in Sources */,
 				B1D5BD9A19A23BCE0070E8CE /* LPRecordRoute.m in Sources */,
 				B1D5BD9B19A23BCE0070E8CE /* LPMapRoute.m in Sources */,
 				B1D5BD9C19A23BCE0070E8CE /* LPNoContentResponse.m in Sources */,
@@ -2486,6 +2521,7 @@
 				B1F772061A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */,
 				F5091BFA18C4E1D700C85307 /* LPInterpolateRoute.m in Sources */,
 				F5091BFB18C4E1D700C85307 /* LPRecordRoute.m in Sources */,
+				F5C094531A979CC200AE5991 /* LPWebQuery.m in Sources */,
 				F5091BFC18C4E1D700C85307 /* LPMapRoute.m in Sources */,
 				F5091BFD18C4E1D700C85307 /* LPNoContentResponse.m in Sources */,
 				F5091BFE18C4E1D700C85307 /* LPScreenshotRoute.m in Sources */,
@@ -2556,6 +2592,7 @@
 				F50CBFAB1A0405B2004AC9DA /* LPInterpolateRoute.m in Sources */,
 				F50CBFA01A0405B2004AC9DA /* LPUIARouteOverUserPrefs.m in Sources */,
 				F50CBFBB1A0405CE004AC9DA /* UIScriptASTPredicate.m in Sources */,
+				F5C0945A1A97B7CB00AE5991 /* LPWebQuery.m in Sources */,
 				F56630891A39B00700DEA0C0 /* LPInfoPlistTest.m in Sources */,
 				F50CBFBE1A0405CE004AC9DA /* UIScriptASTClassName.m in Sources */,
 				F50CBF981A04058C004AC9DA /* LPQueryOperation.m in Sources */,
@@ -2693,6 +2730,7 @@
 				B1F772071A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */,
 				F5821A1818C4E27400293508 /* LPInterpolateRoute.m in Sources */,
 				F5821A1918C4E27400293508 /* LPRecordRoute.m in Sources */,
+				F5C094541A979CC200AE5991 /* LPWebQuery.m in Sources */,
 				F5821A1A18C4E27400293508 /* LPMapRoute.m in Sources */,
 				F5821A1B18C4E27400293508 /* LPNoContentResponse.m in Sources */,
 				F5821A1C18C4E27400293508 /* LPScreenshotRoute.m in Sources */,
@@ -2750,6 +2788,7 @@
 			files = (
 				F59CA47B1A82EF40007A2F38 /* SecondViewController.m in Sources */,
 				F59CA4751A82EF40007A2F38 /* AppDelegate.m in Sources */,
+				F5C094591A979CC200AE5991 /* LPWebQuery.m in Sources */,
 				F59CA4781A82EF40007A2F38 /* FirstViewController.m in Sources */,
 				F59CA4721A82EF40007A2F38 /* main.m in Sources */,
 			);
