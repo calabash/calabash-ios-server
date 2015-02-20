@@ -32,63 +32,60 @@
                              webView:(UIWebView *)webView
                     includeInvisible:(BOOL)includeInvisible
 {
-    NSString *jsString = nil;
-    switch (type) 
-    {
-        case LPWebQueryTypeCSS:
-            jsString = [NSString stringWithFormat:LP_QUERY_JS,query,@"css", @""];
-            break;
-            
-        case LPWebQueryTypeXPATH:
-            jsString = [NSString stringWithFormat:LP_QUERY_JS,query,@"xpath",@""];
-            break;
-        case LPWebQueryTypeFreeText:
-            jsString = [NSString stringWithFormat:LP_QUERY_JS, 
-                        [NSString stringWithFormat:@"//node()[contains(text(),\\\"%@\\\")]", query], 
-                        @"xpath",@""];
-            break;
-        default:
-            return nil;
+  NSString *jsString = nil;
+  switch (type)
+  {
+    case LPWebQueryTypeCSS:
+      jsString = [NSString stringWithFormat:LP_QUERY_JS,query,@"css", @""];
+      break;
+
+    case LPWebQueryTypeXPATH:
+      jsString = [NSString stringWithFormat:LP_QUERY_JS,query,@"xpath",@""];
+      break;
+    case LPWebQueryTypeFreeText:
+      jsString = [NSString stringWithFormat:LP_QUERY_JS,
+                  [NSString stringWithFormat:@"//node()[contains(text(),\\\"%@\\\")]", query],
+                  @"xpath",@""];
+      break;
+    default:
+      return nil;
+  }
+
+  NSMutableArray *result = [NSMutableArray array];
+
+  NSString *output = [webView stringByEvaluatingJavaScriptFromString:jsString];
+
+
+  NSArray *queryResult = [LPJSONUtils deserializeArray:output];
+
+  UIWindow *window = [LPTouchUtils windowForView:webView];
+  UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
+  CGPoint webViewPageOffset = [self pointByAdjustingOffsetForScrollPostionOfWebView: webView];
+
+  for (NSDictionary *d in queryResult) {
+    NSMutableDictionary *dres = [NSMutableDictionary dictionaryWithDictionary:d];
+    CGFloat center_x = [[dres valueForKeyPath:@"rect.x"] floatValue];
+    CGFloat center_y = [[dres valueForKeyPath:@"rect.y"] floatValue];
+
+    CGPoint center = CGPointMake(webViewPageOffset.x + center_x, webViewPageOffset.y + center_y);
+    CGPoint windowCenter = [window convertPoint:center fromView:webView];
+    CGPoint keyCenter = [frontWindow convertPoint:windowCenter fromWindow:window];
+    CGPoint finalCenter = [LPTouchUtils translateToScreenCoords:keyCenter];
+
+    if (includeInvisible || (!CGPointEqualToPoint(CGPointZero, center) && [webView pointInside:center withEvent:nil])) {
+      NSDictionary *centerDict = (__bridge_transfer NSDictionary *)CGPointCreateDictionaryRepresentation(finalCenter);
+      [dres setValue:centerDict forKey:@"center"];
+      [dres setValue:webView forKey:@"webView"];
+
+      [dres setValue:[NSNumber numberWithFloat:finalCenter.x] forKeyPath:@"rect.center_x"];
+      [dres setValue:[NSNumber numberWithFloat:finalCenter.y] forKeyPath:@"rect.center_y"];
+      [dres setValue:[NSNumber numberWithFloat:finalCenter.x] forKeyPath:@"rect.x"];
+      [dres setValue:[NSNumber numberWithFloat:finalCenter.y] forKeyPath:@"rect.y"];
+
+      [result addObject:dres];
     }
-
-    NSMutableArray *result = [NSMutableArray array];
-
-    NSString *output = [webView stringByEvaluatingJavaScriptFromString:jsString];
-
-
-    NSArray *queryResult = [LPJSONUtils deserializeArray:output];
-
-    UIWindow *window = [LPTouchUtils windowForView:webView];
-    UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
-    CGPoint webViewPageOffset = [self pointByAdjustingOffsetForScrollPostionOfWebView: webView];
-
-
-    for (NSDictionary *d in queryResult)
-    {
-        NSMutableDictionary *dres = [NSMutableDictionary dictionaryWithDictionary:d];
-        CGFloat center_x = [[dres valueForKeyPath:@"rect.x"] floatValue];
-        CGFloat center_y = [[dres valueForKeyPath:@"rect.y"] floatValue];
-      
-        CGPoint center = CGPointMake(webViewPageOffset.x + center_x, webViewPageOffset.y + center_y);
-        CGPoint windowCenter = [window convertPoint:center fromView:webView];
-        CGPoint keyCenter = [frontWindow convertPoint:windowCenter fromWindow:window];
-        CGPoint finalCenter = [LPTouchUtils translateToScreenCoords:keyCenter];
-
-        if (includeInvisible || (!CGPointEqualToPoint(CGPointZero, center) && [webView pointInside:center withEvent:nil]))
-        {
-            NSDictionary *centerDict = (__bridge_transfer NSDictionary *)CGPointCreateDictionaryRepresentation(finalCenter);
-            [dres setValue:centerDict forKey:@"center"];
-            [dres setValue:webView forKey:@"webView"];
-            
-            [dres setValue:[NSNumber numberWithFloat:finalCenter.x] forKeyPath:@"rect.center_x"];
-            [dres setValue:[NSNumber numberWithFloat:finalCenter.y] forKeyPath:@"rect.center_y"];
-            [dres setValue:[NSNumber numberWithFloat:finalCenter.x] forKeyPath:@"rect.x"];
-            [dres setValue:[NSNumber numberWithFloat:finalCenter.y] forKeyPath:@"rect.y"];
-
-            [result addObject:dres];
-        }
-    }
-    return result;
+  }
+  return result;
 }
 
 + (NSDictionary *) dictionaryOfViewsInWebView:(UIWebView *)webView {
@@ -112,13 +109,12 @@
 
   NSMutableArray *children = [NSMutableArray arrayWithCapacity:8];
 
-  for (NSDictionary *domChild in domElement[@"children"])
-  {
+  for (NSDictionary *domChild in domElement[@"children"]) {
     NSDictionary *rectAsDict = domChild[@"rect"];
     CGRect domChildRect = CGRectMake([rectAsDict[@"left"] floatValue],
-                                       [rectAsDict[@"top"] floatValue],
-                                       [rectAsDict[@"width"] floatValue],
-                                       [rectAsDict[@"height"] floatValue]);
+                                     [rectAsDict[@"top"] floatValue],
+                                     [rectAsDict[@"width"] floatValue],
+                                     [rectAsDict[@"height"] floatValue]);
 
     CGRect domChildBounds = CGRectMake(domChildRect.origin.x + webViewPageOffset.x,
                                        domChildRect.origin.y + webViewPageOffset.y,
@@ -167,8 +163,7 @@
           [augmentedChild setValue:@(0) forKeyPath:@"visible"];
         }
       }
-    }
-    else {
+    } else {
       [augmentedChild setValue:@(0) forKeyPath:@"visible"];
     }
 
