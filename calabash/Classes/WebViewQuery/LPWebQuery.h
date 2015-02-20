@@ -21,11 +21,11 @@ typedef enum LPWebQueryType
 
 @interface LPWebQuery : NSObject
 
-+(NSArray*)evaluateQuery:(NSString *)query 
-                  ofType:(LPWebQueryType)type 
-               inWebView:(UIWebView *)webView
-        includeInvisible:(BOOL)includeInvisible;
++ (NSArray *) arrayByEvaluatingQuery:(NSString *)query
+                               type:(LPWebQueryType)type
+                            webView:(UIWebView *)webView
+                   includeInvisible:(BOOL)includeInvisible;
 
-+(NSDictionary*)dumpViewsInWebView:(UIWebView *)webView;
++ (NSDictionary *) dictionaryOfViewsInWebView:(UIWebView *)webView;
 
 @end
