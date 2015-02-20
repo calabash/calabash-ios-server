@@ -17,9 +17,9 @@
 @interface LPWebQuery ()
 
 
-+ (NSDictionary *) dictionaryByAugmentingDOMElement:(NSDictionary *)domElement
-                                            webView:(UIWebView *)webView
-                              accumlateInDictionary:(NSMutableDictionary *)accumulator;
++ (NSDictionary *) dictionaryByAugmentingDOMElement:(NSDictionary *) domElement
+                                            webView:(UIWebView *) webView
+                              accumlateInDictionary:(NSMutableDictionary *) accumulator;
 
 + (CGPoint) pointByAdjustingOffsetForScrollPostionOfWebView:(UIWebView *) webView;
 
@@ -27,14 +27,12 @@
 
 @implementation LPWebQuery
 
-+ (NSArray *) arrayByEvaluatingQuery:(NSString *)query
-                                type:(LPWebQueryType)type
-                             webView:(UIWebView *)webView
-                    includeInvisible:(BOOL)includeInvisible
-{
++ (NSArray *) arrayByEvaluatingQuery:(NSString *) query
+                                type:(LPWebQueryType) type
+                             webView:(UIWebView *) webView
+                    includeInvisible:(BOOL) includeInvisible {
   NSString *jsString = nil;
-  switch (type)
-  {
+  switch (type) {
     case LPWebQueryTypeCSS:
       jsString = [NSString stringWithFormat:LP_QUERY_JS,query,@"css", @""];
       break;
@@ -55,12 +53,11 @@
 
   NSString *output = [webView stringByEvaluatingJavaScriptFromString:jsString];
 
-
   NSArray *queryResult = [LPJSONUtils deserializeArray:output];
 
   UIWindow *window = [LPTouchUtils windowForView:webView];
   UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
-  CGPoint webViewPageOffset = [self pointByAdjustingOffsetForScrollPostionOfWebView: webView];
+  CGPoint webViewPageOffset = [self pointByAdjustingOffsetForScrollPostionOfWebView:webView];
 
   for (NSDictionary *d in queryResult) {
     NSMutableDictionary *dres = [NSMutableDictionary dictionaryWithDictionary:d];
@@ -88,7 +85,7 @@
   return result;
 }
 
-+ (NSDictionary *) dictionaryOfViewsInWebView:(UIWebView *)webView {
++ (NSDictionary *) dictionaryOfViewsInWebView:(UIWebView *) webView {
   NSString *jsString = [NSString stringWithFormat:LP_QUERY_JS,@"",@"dump", @""];
 
   NSString *output = [webView stringByEvaluatingJavaScriptFromString:jsString];
@@ -97,13 +94,15 @@
   if (!(finalResult[@"type"])) {
     finalResult[@"type"] = @"dom";
   }
-  return [self dictionaryByAugmentingDOMElement: dumpResult webView: webView accumlateInDictionary: finalResult];
+  return [self dictionaryByAugmentingDOMElement:dumpResult
+                                        webView:webView
+                          accumlateInDictionary:finalResult];
 }
 
 
-+ (NSDictionary *) dictionaryByAugmentingDOMElement:(NSDictionary *)domElement
-                                            webView:(UIWebView *)webView
-                              accumlateInDictionary:(NSMutableDictionary *)accumulator {
++ (NSDictionary *) dictionaryByAugmentingDOMElement:(NSDictionary *) domElement
+                                            webView:(UIWebView *) webView
+                              accumlateInDictionary:(NSMutableDictionary *) accumulator {
 
   CGPoint webViewPageOffset = [self pointByAdjustingOffsetForScrollPostionOfWebView:webView];
 
@@ -167,14 +166,16 @@
       [augmentedChild setValue:@(0) forKeyPath:@"visible"];
     }
 
-    [self dictionaryByAugmentingDOMElement:domChild webView:webView accumlateInDictionary:augmentedChild];
+    [self dictionaryByAugmentingDOMElement:domChild
+                                   webView:webView
+                     accumlateInDictionary:augmentedChild];
     [children addObject:augmentedChild];
   }
   accumulator[@"children"] = children;
   return accumulator;
 }
 
-+ (CGPoint) pointByAdjustingOffsetForScrollPostionOfWebView:(UIWebView*) webView {
++ (CGPoint) pointByAdjustingOffsetForScrollPostionOfWebView:(UIWebView *) webView {
   CGPoint webViewPageOffset = CGPointMake(0, 0);
   if ([webView respondsToSelector:@selector(scrollView)]) {
     id scrollView = [webView performSelector:@selector(scrollView) withObject:nil];
