@@ -66,7 +66,7 @@
 
         if (includeInvisible || (!CGPointEqualToPoint(CGPointZero, center) && [webView pointInside:center withEvent:nil]))
         {
-            NSDictionary *centerDict = (NSDictionary*)CGPointCreateDictionaryRepresentation(finalCenter);
+            NSDictionary *centerDict = (__bridge_transfer NSDictionary *)CGPointCreateDictionaryRepresentation(finalCenter);
             [dres setValue:centerDict forKey:@"center"];
             [dres setValue:webView forKey:@"webView"];
             
@@ -76,7 +76,6 @@
             [dres setValue:[NSNumber numberWithFloat:finalCenter.y] forKeyPath:@"rect.y"];
 
             [result addObject:dres];
-            [centerDict release];
         }
     }
     return result;
@@ -141,8 +140,6 @@
     if (!(augmentedChild[@"type"])) {
       augmentedChild[@"type"] = @"dom";
     }
-
-    [rectDict release];
 
     if (!CGPointEqualToPoint(CGPointZero, boundsCenterInScrollView) && [webView.scrollView pointInside:boundsCenterInScrollView withEvent:nil]) {
       [augmentedChild setValue:@(1) forKeyPath:@"visible"];
