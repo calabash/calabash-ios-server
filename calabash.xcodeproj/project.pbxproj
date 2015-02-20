@@ -21,7 +21,6 @@
 
 /* Begin PBXBuildFile section */
 		66D6976D1A93C5910035A763 /* LPScrollOperationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 66D6976C1A93C5910035A763 /* LPScrollOperationTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		B1058DEF197F00C000B4A57B /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code"; }; };
 		B1058E08197F00C000B4A57B /* LPUIAUserPrefsChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F279AE183D5B3000A922BC /* LPUIAUserPrefsChannel.m */; };
 		B1058E1D197F00C000B4A57B /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; };
 		B1058E1E197F00C000B4A57B /* UIScriptAST.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFA14B6DB2B002A744C /* UIScriptAST.m */; };
@@ -90,7 +89,6 @@
 		B15369FD1A327A400093923F /* LPUIATapRouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FF1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m */; };
 		B15BF99719ABB17800B38577 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E757A15D434D00066550B /* CFNetwork.framework */; };
 		B15BF99819ABB18200B38577 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
-		B15BF99919ABB1DD00B38577 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-unreachable-code"; }; };
 		B15BF99A19ABB1DD00B38577 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF99B19ABB1DD00B38577 /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF99C19ABB1DD00B38577 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -170,7 +168,6 @@
 		B15BF9E619ABB1DE00B38577 /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B15BF9E719ABB1EB00B38577 /* LPI.mm in Sources */ = {isa = PBXBuildFile; fileRef = B184FDBD14B6DB2B002A744C /* LPI.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B15BF9EA19ABB2B100B38577 /* LPI.mm in Sources */ = {isa = PBXBuildFile; fileRef = B184FDBD14B6DB2B002A744C /* LPI.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		B15BF9EB19ABB2B100B38577 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc -Wno-unreachable-code"; }; };
 		B15BF9EC19ABB2B100B38577 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9ED19ABB2B100B38577 /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9EE19ABB2B100B38577 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -264,7 +261,6 @@
 		B1670E321A32411B00000A62 /* LPDumpRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B13B7FBD1A31FE560054FFB1 /* LPDumpRoute.h */; };
 		B1670E331A32411B00000A62 /* LPDumpRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B13B7FBD1A31FE560054FFB1 /* LPDumpRoute.h */; };
 		B1670E341A3248CC00000A62 /* LPSharedUIATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F772191A22A398009A2336 /* LPSharedUIATextField.m */; };
-		B1D5BD7819A23BCE0070E8CE /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code"; }; };
 		B1D5BD7919A23BCE0070E8CE /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; };
 		B1D5BD7A19A23BCE0070E8CE /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; };
 		B1D5BD7B19A23BCE0070E8CE /* LPHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B514E6565500663205 /* LPHTTPConnection.m */; };
@@ -414,7 +410,6 @@
 		B1FBBC6419D0070000EE03CE /* LPDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = B1FBBC5A19D0070000EE03CE /* LPDevice.h */; };
 		B1FBBC6519D0070000EE03CE /* LPDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = B1FBBC5A19D0070000EE03CE /* LPDevice.h */; };
 		B1FBBC6619D0070000EE03CE /* LPDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = B1FBBC5A19D0070000EE03CE /* LPDevice.h */; };
-		F5091BDC18C4E1D700C85307 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code"; }; };
 		F5091BDD18C4E1D700C85307 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; };
 		F5091BDE18C4E1D700C85307 /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; };
 		F5091BDF18C4E1D700C85307 /* LPHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B514E6565500663205 /* LPHTTPConnection.m */; };
@@ -576,7 +571,6 @@
 		F50CBFCC1A0405E9004AC9DA /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		F50CBFCE1A040669004AC9DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F50CBFCD1A040669004AC9DA /* UIKit.framework */; };
 		F50CBFCF1A040707004AC9DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
-		F50CBFD11A040849004AC9DA /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; };
 		F52BF6321A3A0BC700E173AF /* LPTouchUtilsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F50CBF781A03F9FF004AC9DA /* LPTouchUtilsTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F537397318E5200C004133FA /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F537397418E52014004133FA /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -593,7 +587,6 @@
 		F56630971A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F56630981A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F566309A1A39F13000DEA0C0 /* LPVersionRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F56630991A39F13000DEA0C0 /* LPVersionRouteTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F58219FA18C4E27400293508 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = B1914DB8159C228500CB928D /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code"; }; };
 		F58219FB18C4E27400293508 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; };
 		F58219FC18C4E27400293508 /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; };
 		F58219FD18C4E27400293508 /* LPHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B514E6565500663205 /* LPHTTPConnection.m */; };
@@ -2125,7 +2118,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1135842197F1351004B16F4 /* LPHTTPDataResponse.m in Sources */,
-				B1058DEF197F00C000B4A57B /* LPWebQuery.m in Sources */,
 				B11358641981B053004B16F4 /* LPScrollToRowOperation.m in Sources */,
 				B1135839197F12CF004B16F4 /* LPGenericAsyncRoute.m in Sources */,
 				B1058E08197F00C000B4A57B /* LPUIAUserPrefsChannel.m in Sources */,
@@ -2198,7 +2190,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B15BF9E719ABB1EB00B38577 /* LPI.mm in Sources */,
-				B15BF99919ABB1DD00B38577 /* LPWebQuery.m in Sources */,
 				B15BF99A19ABB1DD00B38577 /* LPSSKeychain.m in Sources */,
 				B15BF99B19ABB1DD00B38577 /* LPSSKeychainQuery.m in Sources */,
 				B15BF99C19ABB1DD00B38577 /* GCDAsyncSocket.m in Sources */,
@@ -2293,7 +2284,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B15BF9EA19ABB2B100B38577 /* LPI.mm in Sources */,
-				B15BF9EB19ABB2B100B38577 /* LPWebQuery.m in Sources */,
 				B15BF9EC19ABB2B100B38577 /* LPSSKeychain.m in Sources */,
 				B15BF9ED19ABB2B100B38577 /* LPSSKeychainQuery.m in Sources */,
 				B15BF9EE19ABB2B100B38577 /* GCDAsyncSocket.m in Sources */,
@@ -2387,7 +2377,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1D5BD7819A23BCE0070E8CE /* LPWebQuery.m in Sources */,
 				B1D5BD7919A23BCE0070E8CE /* GCDAsyncSocket.m in Sources */,
 				B1D5BD7A19A23BCE0070E8CE /* LPHTTPAuthenticationRequest.m in Sources */,
 				B1D5BD7B19A23BCE0070E8CE /* LPHTTPConnection.m in Sources */,
@@ -2482,7 +2471,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5091BDC18C4E1D700C85307 /* LPWebQuery.m in Sources */,
 				F5091BDD18C4E1D700C85307 /* GCDAsyncSocket.m in Sources */,
 				F5091BDE18C4E1D700C85307 /* LPHTTPAuthenticationRequest.m in Sources */,
 				F5091BDF18C4E1D700C85307 /* LPHTTPConnection.m in Sources */,
@@ -2624,7 +2612,6 @@
 				F50CBF951A04058C004AC9DA /* LPFlashOperation.m in Sources */,
 				F50CBF921A04058C004AC9DA /* LPSliderOperation.m in Sources */,
 				F50CBF9E1A040599004AC9DA /* LPScrollToRowWithMarkOperation.m in Sources */,
-				F50CBFD11A040849004AC9DA /* LPWebQuery.m in Sources */,
 				F50CBF861A040564004AC9DA /* DDData.m in Sources */,
 				F50CBF841A040564004AC9DA /* LPHTTPMessage.m in Sources */,
 				F50CBF9A1A04058C004AC9DA /* LPScrollToRowOperation.m in Sources */,
@@ -2691,7 +2678,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F58219FA18C4E27400293508 /* LPWebQuery.m in Sources */,
 				F58219FB18C4E27400293508 /* GCDAsyncSocket.m in Sources */,
 				F58219FC18C4E27400293508 /* LPHTTPAuthenticationRequest.m in Sources */,
 				F58219FD18C4E27400293508 /* LPHTTPConnection.m in Sources */,
