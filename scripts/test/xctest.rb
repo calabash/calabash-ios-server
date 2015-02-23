@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'test-helpers'))
+require 'run_loop'
 
 working_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
 
@@ -27,9 +28,35 @@ args =
       ]
 
 Dir.chdir(working_dir) do
-  terminate_all_sims
+
+  # It is possible that this is causing problems on Travis CI on the first run.
+  # (>_>) Get up get down Apple XCTest is a joke in my town.
+  unless travis_ci?
+    RunLoop::SimControl.terminate_all_sims
+  end
+
   cmd = "xcrun xcodebuild #{args.join(' ')}"
-  do_system(cmd,
-            {:pass_msg => 'XCTests passed',
-             :fail_msg => 'XCTests failed'})
+
+  on_retry = Proc.new do |_, try, elapsed_time, next_interval|
+    log_fail "XCTest: attempt #{try} failed in '#{elapsed_time}'; will retry in '#{next_interval}'"
+    RunLoop::SimControl.terminate_all_sims
+  end
+
+  options =
+        {
+              :tries => travis_ci? ? 3 : 1,
+              :base_interval => 5,
+              :on_retry => on_retry
+        }
+
+  Retriable.retriable(options) do
+    exit_code = do_system(cmd,
+                          {:pass_msg => 'XCTests passed',
+                           :fail_msg => 'XCTests failed'})
+    unless exit_code == 0
+      # Hunting for the exit code that indicates the simulator failed to launch.
+      log_fail "XCTest exited '#{exit_code}'"
+      raise RuntimeError, 'XCTest failed.'
+    end
+  end
 end
