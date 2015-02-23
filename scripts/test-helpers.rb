@@ -6,6 +6,12 @@ end
 
 require 'run_loop'
 
+unless `gem list retriable -i`.chomp == 'true'
+  install_gem('retriable')
+end
+
+require 'retriable'
+
 def log_cmd(msg)
   puts "\033[36mEXEC: #{msg}\033[0m" if msg
 end
