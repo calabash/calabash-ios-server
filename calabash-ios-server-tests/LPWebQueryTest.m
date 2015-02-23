@@ -22,5 +22,8 @@
   [super tearDown];
 }
 
+- (void) testWebQueryEmptyTest {
+  // For TDD - can be removed.
+}
 
 @end
