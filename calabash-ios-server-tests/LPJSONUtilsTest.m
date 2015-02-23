@@ -273,7 +273,6 @@
   [window addSubview:view];
 
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
-  NSLog(@"%@", dict);
 
   XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
