@@ -4,7 +4,6 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'test-helpers')
 
 working_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
 
-
 def test_make_rules(env_vars, xcode_version)
   install_gem('xcpretty')
   do_system('make clean', {:env_vars => env_vars})
@@ -16,6 +15,8 @@ def test_make_rules(env_vars, xcode_version)
     do_system('make dylibs', {:env_vars => env_vars})
     do_system('make all', {:env_vars => env_vars})
   end
+
+  do_system('make webquery_headers')
 end
 
 Dir.chdir working_dir do
