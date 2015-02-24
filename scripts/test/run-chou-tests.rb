@@ -94,5 +94,5 @@ Dir.chdir animated_happiness_dir do
 
   do_system('script/ci/travis/build-and-stage-app.sh')
 
-  do_system('script/ci/travis/cucumber-ci.rb --tags ~@no_ci')
+  do_system('script/ci/travis/cucumber-ci.rb --tags ~@no_ci --tags ~@scroll')
 end
