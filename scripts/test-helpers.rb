@@ -6,6 +6,12 @@ end
 
 require 'run_loop'
 
+unless `gem list retriable -i`.chomp == 'true'
+  install_gem('retriable')
+end
+
+require 'retriable'
+
 def log_cmd(msg)
   puts "\033[36mEXEC: #{msg}\033[0m" if msg
 end
@@ -181,54 +187,4 @@ def alt_xcode_details_hash(skip_versions = [RunLoop::Version.new('6.0'), RunLoop
       end
     end
   }.call.compact
-end
-
-# Terminates all simulators.
-#
-# @note Sends `kill -9` to all Simulator processes.  Use sparingly or not
-#  at all.
-#
-# SimulatorBridge
-# launchd_sim
-# ScriptAgent
-#
-# There can be only one simulator running at a time.  However, during
-# gem testing, situations can arise where multiple simulators are active.
-def terminate_all_sims
-
-  # @todo Throwing SpringBoard crashed UI dialog.
-  # Tried the gentle approach first; it did not work.
-  # SimControl.new.quit_sim({:post_quit_wait => 0.5})
-
-  processes =
-        ['iPhone Simulator.app', 'iOS Simulator.app',
-
-         # Multiple launchd_sim processes have been causing problems.  This
-         # is a first pass at investigating what it would mean to kill the
-         # launchd_sim process.
-         'launchd_sim'
-
-        # RE: Throwing SpringBoard crashed UI dialog
-        # These are children of launchd_sim.  I tried quiting them
-        # to suppress related UI dialogs about crashing processes.  Killing
-        # them can throw 'launchd_sim' UI Dialogs
-        #'SimulatorBridge', 'SpringBoard', 'ScriptAgent', 'configd_sim', 'xpcproxy_sim'
-        ]
-
-  # @todo Maybe should try to send -TERM first and -KILL if TERM fails.
-  # @todo Needs benchmarking.
-  processes.each do |process_name|
-    descripts = `xcrun ps x -o pid,command | grep "#{process_name}" | grep -v grep`.strip.split("\n")
-    descripts.each do |process_desc|
-      pid = process_desc.split(' ').first
-      Open3.popen3("xcrun kill -9 #{pid} && xcrun wait #{pid}") do  |_, stdout,  stderr, _|
-        if ENV['DEBUG_UNIX_CALLS'] == '1'
-          out = stdout.read.strip
-          err = stderr.read.strip
-          next if out.to_s.empty? and err.to_s.empty?
-          puts "kill process '#{pid}' => stdout: '#{out}' | stderr: '#{err}'"
-        end
-      end
-    end
-  end
 end
