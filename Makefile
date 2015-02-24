@@ -35,3 +35,6 @@ install_test_binaries:
 	$(MAKE) dylibs
 	./scripts/install-test-binaries.rb
 
+webquery_headers:
+	scripts/insert-js-into-webquery-headers.rb
+
