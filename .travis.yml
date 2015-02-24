@@ -4,6 +4,7 @@ before_script:
   - scripts/ci/travis/instruments-auth.sh
   - gem install xcpretty --no-document
   - gem install run_loop --no-document
+  - gem install retriable --no-document
 
 script:
   - make clean
