@@ -18,6 +18,9 @@
     setObjectforKey:(NSString *) key
          whenTarget:(id) target
          respondsTo:(SEL) selector;
+
++ (void) insertHitPointIntoMutableDictionary:(NSMutableDictionary *) dictionary;
+
 @end
 
 @implementation LPJSONUtils
@@ -108,7 +111,7 @@
   else if ([object isKindOfClass:[UIView class]]) {
     NSMutableDictionary *viewJson = [self dictionaryByEncodingView:(UIView*) object];
     if (dump) {
-      [self dumpView: object toDictionary:viewJson];
+      [LPJSONUtils insertHitPointIntoMutableDictionary:viewJson];
       if (viewJson[@"class"]) {
         viewJson[@"type"] = viewJson[@"class"];
         [viewJson removeObjectForKey:@"class"];
@@ -357,10 +360,24 @@
   return result;
 }
 
-+(void)dumpView:(UIView*) view toDictionary:(NSMutableDictionary*)viewJson {
-  NSDictionary *rect = viewJson[@"rect"];
 
-  viewJson[@"hit-point"] = @{@"x": rect[@"center_x"], @"y": rect[@"center_y"]};
++ (void) insertHitPointIntoMutableDictionary:(NSMutableDictionary *) dictionary {
+  SEL selector = @selector(setObject:forKey:);
+  if (![dictionary respondsToSelector:selector]) { return ; }
+
+  id centerX = [NSNull null];
+  id centerY = [NSNull null];
+
+  NSDictionary *rect = dictionary[@"rect"];
+  if (rect) {
+    id tmpX = rect[@"center_x"];
+    if (tmpX) { centerX = tmpX; }
+
+    id tmpY = rect[@"center_y"];
+    if (tmpY) { centerY = tmpY; }
+  }
+
+  dictionary[@"hit-point"] = @{@"x" : centerX, @"y" : centerY};
 }
 
 +(void)dumpAccessibilityElement:(id)object toDictionary:(NSMutableDictionary*)viewJson {

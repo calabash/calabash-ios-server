@@ -6,8 +6,11 @@
 //  Copyright (c) 2011 LessPainful. All rights reserved.
 //
 
-#import "LPDatePickerOperation.h"
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
 
+#import "LPDatePickerOperation.h"
 
 @implementation LPDatePickerOperation
 
@@ -24,7 +27,7 @@
 
 //                        required =========> |     optional
 // _arguments ==> [target date str, format str, notify targets, animated]
-- (id) performWithTarget:(UIView *) _view error:(NSError **) error {
+- (id) performWithTarget:(UIView *) _view error:(NSError *__autoreleasing*) error {
   if ([_view isKindOfClass:[UIDatePicker class]] == NO) {
     NSLog(@"Warning view: %@ should be a date picker", _view);
     return nil;

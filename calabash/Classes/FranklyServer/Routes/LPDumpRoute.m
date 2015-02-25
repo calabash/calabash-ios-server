@@ -71,7 +71,7 @@
     if ([viewDic isKindOfClass:[NSDictionary class]]) {
       if ([view isKindOfClass:[UIWebView class]]) {
         NSMutableDictionary *viewCopy = [NSMutableDictionary dictionaryWithDictionary:viewDic];
-        viewCopy[@"children"] = [NSArray arrayWithObject: [LPWebQuery dumpViewsInWebView:(UIWebView*)view]];
+        viewCopy[@"children"] = [NSArray arrayWithObject: [LPWebQuery dictionaryOfViewsInWebView:(UIWebView*)view]];
         viewDic = viewCopy;
       }
       else {
