@@ -96,6 +96,38 @@
 
 #pragma mark - arrayByEvaluatingQuery:Type:webView:includeInvisible:
 
+- (id) mockForEvaluatingJavaScriptInWebView:(UIWebView *) webView
+                                    evalsTo:(NSString *) result {
+  id mock = [OCMockObject partialMockForObject:webView];
+  [[[mock expect]
+    andReturn:result]
+   stringByEvaluatingJavaScriptFromString:OCMOCK_ANY];
+  return mock;
+}
+
+- (id) mockTouchUtilsMockingTranslateToScreenCoords:(CGPoint) point
+                                         mainWindow:(UIWindow *) mainWindow
+                                         forWebView:(UIWebView *) webView {
+  id mock = [OCMockObject mockForClass:[LPTouchUtils class]];
+  OCMStub([mock windowForView:webView]).andReturn(mainWindow);
+
+  NSValue *finalCenter = OCMOCK_VALUE(point);
+  [[[[mock stub]
+     ignoringNonObjectArgs]
+    andReturnValue:finalCenter]
+   translateToScreenCoords:CGPointZero];
+  return mock;
+}
+
+- (id) mockPointByAdjustingForPageOffsetWithPoint:(CGPoint) point
+                                       forWebView:(UIWebView *) webView {
+  id mock = [OCMockObject mockForClass:[LPWebQuery class]];
+  [[[mock stub]
+    andReturnValue:OCMOCK_VALUE(point)]
+   pointByAdjustingOffsetForScrollPostionOfWebView:webView];
+  return mock;
+}
+
 - (void) testArrayByEvaluatingQueryUnknownType {
   NSArray *actual = [LPWebQuery arrayByEvaluatingQuery:nil
                                                   type:NSNotFound
