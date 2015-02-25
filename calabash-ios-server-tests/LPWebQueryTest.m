@@ -136,27 +136,77 @@
   XCTAssertNil(actual);
 }
 
-- (void) testArrayByEvaluatingQueryCss {
+- (void) testArrayByEvaluatingNoVisibleCenterNotZeroZeroButPointInsideNO {
   NSString *query = @"a";
   LPWebQueryType type = LPWebQueryTypeCSS;
   UIWebView *webView = [self webviewWithFrame:[self iphone4sFrame]];
 
   NSString *jsEvaled = @"[{\"rect\":{\"left\":100,\"top\":363.4375,\"width\":24.890625,\"height\":20,\"x\":112,\"y\":373.4375},\"nodeType\":\"ELEMENT_NODE\",\"nodeName\":\"A\",\"id\":\"\",\"class\":\"\",\"href\":\"http://www.googl.com/\",\"textContent\":\"link\"}]";
 
-  id mockWebView = [OCMockObject partialMockForObject:webView];
-  [[[mockWebView expect]
-    andReturn:jsEvaled]
-   stringByEvaluatingJavaScriptFromString:OCMOCK_ANY];
-
-  id touchUtilMock = [OCMockObject mockForClass:[LPTouchUtils class]];
   UIWindow *mainWindow = [self appWindow];
-  OCMStub([touchUtilMock windowForView:mockWebView]).andReturn(mainWindow);
+  CGPoint finalCenter = CGPointMake(112, 393.4375);
 
-  NSValue *finalCenter = OCMOCK_VALUE(CGPointMake(112, 393.4375));
-  [[[[touchUtilMock stub]
-     ignoringNonObjectArgs]
-    andReturnValue:finalCenter]
-   translateToScreenCoords:CGPointZero];
+  id mockWebView = [self mockForEvaluatingJavaScriptInWebView:webView
+                                                      evalsTo:jsEvaled];
+
+  id touchUtilMock = [self mockTouchUtilsMockingTranslateToScreenCoords:finalCenter
+                                                             mainWindow:mainWindow
+                                                             forWebView:mockWebView];
+  CGPoint pageOffset = CGPointMake(0, 120);
+  id webQueryMock = [self mockPointByAdjustingForPageOffsetWithPoint:pageOffset
+                                                          forWebView:mockWebView];
+  BOOL notInside = NO;
+  [[[mockWebView expect]
+    andReturnValue:OCMOCK_VALUE(notInside)]
+   // Point must match _exactly_ or the mock will not be called.
+    pointInside:CGPointMake(112, 373.4375 + 120) withEvent:nil];
+
+  NSArray *results = [LPWebQuery arrayByEvaluatingQuery:query
+                                                   type:type
+                                                webView:mockWebView
+                                       includeInvisible:NO];
+  XCTAssertEqual(results.count, 0);
+
+  [mockWebView verify];
+  [webQueryMock verify];
+  [touchUtilMock verify];
+}
+
+- (void) testArrayByEvaluatingNoVisibleCenterIsZeroZeroButInsideYES {
+  NSString *query = @"a";
+  LPWebQueryType type = LPWebQueryTypeCSS;
+  UIWebView *webView = [self webviewWithFrame:[self iphone4sFrame]];
+
+  NSString *jsEvaled = @"[{\"rect\":{\"left\":100,\"top\":363.4375,\"width\":24.890625,\"height\":20,\"x\":112,\"y\":373.4375},\"nodeType\":\"ELEMENT_NODE\",\"nodeName\":\"A\",\"id\":\"\",\"class\":\"\",\"href\":\"http://www.googl.com/\",\"textContent\":\"link\"}]";
+
+  UIWindow *mainWindow = [self appWindow];
+  CGPoint finalCenter = CGPointMake(112, 393.4375);
+
+  id mockWebView = [self mockForEvaluatingJavaScriptInWebView:webView
+                                                      evalsTo:jsEvaled];
+
+  id touchUtilMock = [self mockTouchUtilsMockingTranslateToScreenCoords:finalCenter
+                                                             mainWindow:mainWindow
+                                                             forWebView:mockWebView];
+  CGPoint pageOffset = CGPointMake(-112, -373.4375);
+  id webQueryMock = [self mockPointByAdjustingForPageOffsetWithPoint:pageOffset
+                                                          forWebView:mockWebView];
+  BOOL notInside = YES;
+  [[[mockWebView expect]
+    andReturnValue:OCMOCK_VALUE(notInside)]
+   // Point must match _exactly_ or the mock will not be called.
+   pointInside:CGPointZero withEvent:nil];
+
+  NSArray *results = [LPWebQuery arrayByEvaluatingQuery:query
+                                                   type:type
+                                                webView:mockWebView
+                                       includeInvisible:NO];
+  XCTAssertEqual(results.count, 0);
+
+  [mockWebView verify];
+  [webQueryMock verify];
+  [touchUtilMock verify];
+}
 
   id webQueryMock = [OCMockObject mockForClass:[LPWebQuery class]];
   CGPoint pageOffset = CGPointZero;
