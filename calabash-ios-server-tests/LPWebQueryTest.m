@@ -87,4 +87,15 @@
   [webView verify];
 }
 
+
+#pragma mark - arrayByEvaluatingQuery:Type:webView:includeInvisible:
+
+- (void) testArrayByEvaluatingQueryUnknownType {
+  NSArray *actual = [LPWebQuery arrayByEvaluatingQuery:nil
+                                                  type:NSNotFound
+                                               webView:nil
+                                      includeInvisible:NO];
+  XCTAssertNil(actual);
+}
+
 @end
