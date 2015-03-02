@@ -23,9 +23,17 @@
 
 + (CGPoint) pointByAdjustingOffsetForScrollPostionOfWebView:(UIWebView *) webView;
 
++ (BOOL) point:(CGPoint) center isVisibleInWebview:(UIWebView *) webView;
+
 @end
 
 @implementation LPWebQuery
+
++ (BOOL) point:(CGPoint) center isVisibleInWebview:(UIWebView *) webView {
+  BOOL pointInsideCenter = [webView pointInside:center withEvent:nil];
+  BOOL centerNotZeroPoint = !CGPointEqualToPoint(CGPointZero, center);
+  return centerNotZeroPoint && pointInsideCenter;
+}
 
 + (NSArray *) arrayByEvaluatingQuery:(NSString *) query
                                 type:(LPWebQueryType) type
@@ -69,7 +77,7 @@
     CGPoint keyCenter = [frontWindow convertPoint:windowCenter fromWindow:window];
     CGPoint finalCenter = [LPTouchUtils translateToScreenCoords:keyCenter];
 
-    if (includeInvisible || (!CGPointEqualToPoint(CGPointZero, center) && [webView pointInside:center withEvent:nil])) {
+    if (includeInvisible || [self point:center isVisibleInWebview:webView]) {
       NSDictionary *centerDict = (__bridge_transfer NSDictionary *)CGPointCreateDictionaryRepresentation(finalCenter);
       [dres setValue:centerDict forKey:@"center"];
       [dres setValue:webView forKey:@"webView"];

@@ -10,6 +10,8 @@
 
 + (CGPoint) pointByAdjustingOffsetForScrollPostionOfWebView:(UIWebView *) webView;
 
++ (BOOL) point:(CGPoint) center isVisibleInWebview:(UIWebView *) webView;
+
 @end
 
 @interface LPWebQueryTest : XCTestCase
@@ -56,6 +58,41 @@
   [[[mockedWebView expect] andReturn:pageViewOffset] stringByEvaluatingJavaScriptFromString:@"window.pageYOffset"];
 
   return mockedWebView;
+}
+
+#pragma mark - point:isVisibleInWebView:
+
+- (void) testPointIsVisibleInWebViewYES {
+  UIWebView *webView = [self webviewWithFrame:[self iphone4sFrame]];
+  id mock = [OCMockObject partialMockForObject:webView];
+  CGPoint center = CGPointMake(20, 40);
+  BOOL isInside = YES;
+  [[[mock expect] andReturnValue:OCMOCK_VALUE(isInside)] pointInside:center withEvent:nil];
+
+  XCTAssertTrue([LPWebQuery point:center isVisibleInWebview:webView]);
+  [mock verify];
+}
+
+- (void) testPointIsVisibleInWebViewNotInCenterNO {
+  UIWebView *webView = [self webviewWithFrame:[self iphone4sFrame]];
+  id mock = [OCMockObject partialMockForObject:webView];
+  CGPoint center = CGPointMake(20, 40);
+  BOOL isInside = NO;
+  [[[mock expect] andReturnValue:OCMOCK_VALUE(isInside)] pointInside:center withEvent:nil];
+
+  XCTAssertFalse([LPWebQuery point:center isVisibleInWebview:webView]);
+  [mock verify];
+}
+
+- (void) testPointIsVisibleInWebViewIsCGPointZero {
+  UIWebView *webView = [self webviewWithFrame:[self iphone4sFrame]];
+  id mock = [OCMockObject partialMockForObject:webView];
+  CGPoint center = CGPointMake(0, 0);
+  BOOL isInside = YES;
+  [[[mock expect] andReturnValue:OCMOCK_VALUE(isInside)] pointInside:center withEvent:nil];
+
+  XCTAssertFalse([LPWebQuery point:center isVisibleInWebview:webView]);
+  [mock verify];
 }
 
 #pragma mark - pointByAdjustingOffsetForScrollPostionOfWebView:
