@@ -576,6 +576,9 @@
 		F537397418E52014004133FA /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F537398D18E5253B004133FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		F537399B18E6E0BE004133FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F537399918E6E0BE004133FA /* main.m */; };
+		F5396A711AA6056D00D75E78 /* cucumber-report.html in Resources */ = {isa = PBXBuildFile; fileRef = F5396A6E1AA6056D00D75E78 /* cucumber-report.html */; };
+		F5396A721AA6056D00D75E78 /* lp-simple-example.html in Resources */ = {isa = PBXBuildFile; fileRef = F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */; };
+		F5396A731AA6056D00D75E78 /* xam-docs.html in Resources */ = {isa = PBXBuildFile; fileRef = F5396A701AA6056D00D75E78 /* xam-docs.html */; };
 		F55D412418C9130100813F78 /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; };
 		F55D412518C9130100813F78 /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; };
 		F56630891A39B00700DEA0C0 /* LPInfoPlistTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F56630881A39B00700DEA0C0 /* LPInfoPlistTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -963,6 +966,9 @@
 		F5329C931A9D6F2900FE3800 /* LPWebQueryResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPWebQueryResult.m; sourceTree = "<group>"; };
 		F537398C18E5253B004133FA /* version */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = version; sourceTree = BUILT_PRODUCTS_DIR; };
 		F537399918E6E0BE004133FA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F5396A6E1AA6056D00D75E78 /* cucumber-report.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "cucumber-report.html"; sourceTree = "<group>"; };
+		F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "lp-simple-example.html"; sourceTree = "<group>"; };
+		F5396A701AA6056D00D75E78 /* xam-docs.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "xam-docs.html"; sourceTree = "<group>"; };
 		F55A350F17CF8F8F0001E8B4 /* LPDatePickerOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDatePickerOperation.h; sourceTree = "<group>"; };
 		F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDatePickerOperation.m; sourceTree = "<group>"; };
 		F55D412018C9130100813F78 /* LPKeychainRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPKeychainRoute.h; sourceTree = "<group>"; };
@@ -1600,10 +1606,14 @@
 			sourceTree = "<group>";
 		};
 		F59741D21AA56FAC0089DC88 /* Specta */ = {
+		F5396A6D1AA6056D00D75E78 /* TestResources */ = {
 			isa = PBXGroup;
 			children = (
 				F59741DB1AA570750089DC88 /* Specta */,
 				F59741D31AA56FAC0089DC88 /* libSpecta.a */,
+				F5396A6E1AA6056D00D75E78 /* cucumber-report.html */,
+				F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */,
+				F5396A701AA6056D00D75E78 /* xam-docs.html */,
 			);
 			path = Specta;
 			sourceTree = "<group>";
@@ -1698,11 +1708,13 @@
 				F59742161AA571A90089DC88 /* NSValue+Expecta.h */,
 			);
 			path = Expecta;
+			path = TestResources;
 			sourceTree = "<group>";
 		};
 		F59CA46E1A82EF40007A2F38 /* LPTestTarget */ = {
 			isa = PBXGroup;
 			children = (
+				F5396A6D1AA6056D00D75E78 /* TestResources */,
 				F59CA4731A82EF40007A2F38 /* AppDelegate.h */,
 				F59CA4741A82EF40007A2F38 /* AppDelegate.m */,
 				F59CA4761A82EF40007A2F38 /* FirstViewController.h */,
@@ -2090,7 +2102,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F59CA47E1A82EF40007A2F38 /* Main.storyboard in Resources */,
+				F5396A721AA6056D00D75E78 /* lp-simple-example.html in Resources */,
 				F59CA4801A82EF40007A2F38 /* Images.xcassets in Resources */,
+				F5396A711AA6056D00D75E78 /* cucumber-report.html in Resources */,
+				F5396A731AA6056D00D75E78 /* xam-docs.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
