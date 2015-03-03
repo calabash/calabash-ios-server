@@ -265,7 +265,11 @@
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
                                                     target:target];
   NSString *actual = [invoker encoding];
+#if __LP64__
+  XCTAssertEqualObjects(actual, @"Q");
+#else
   XCTAssertEqualObjects(actual, @"I");
+#endif
 }
 
 - (void) testEncodingDoesNotRespondToSelector {
