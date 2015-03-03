@@ -1605,22 +1605,21 @@
 			path = "calabash-version";
 			sourceTree = "<group>";
 		};
-		F59741D21AA56FAC0089DC88 /* Specta */ = {
 		F5396A6D1AA6056D00D75E78 /* TestResources */ = {
 			isa = PBXGroup;
 			children = (
-				F59741DB1AA570750089DC88 /* Specta */,
-				F59741D31AA56FAC0089DC88 /* libSpecta.a */,
 				F5396A6E1AA6056D00D75E78 /* cucumber-report.html */,
 				F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */,
 				F5396A701AA6056D00D75E78 /* xam-docs.html */,
 			);
-			path = Specta;
+			path = TestResources;
 			sourceTree = "<group>";
 		};
 		F59741DB1AA570750089DC88 /* Specta */ = {
 			isa = PBXGroup;
 			children = (
+				F59741DB1AA570750089DC88 /* Specta */,
+				F59741D31AA56FAC0089DC88 /* libSpecta.a */,
 				F59741DC1AA570750089DC88 /* Specta.h */,
 				F59741DD1AA570750089DC88 /* SpectaDSL.h */,
 				F59741DE1AA570750089DC88 /* SpectaTypes.h */,
@@ -1708,7 +1707,6 @@
 				F59742161AA571A90089DC88 /* NSValue+Expecta.h */,
 			);
 			path = Expecta;
-			path = TestResources;
 			sourceTree = "<group>";
 		};
 		F59CA46E1A82EF40007A2F38 /* LPTestTarget */ = {
