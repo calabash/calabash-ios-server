@@ -129,6 +129,7 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
 
   LPInfoPlist *infoPlist = [LPInfoPlist new];
   NSNumber *serverPort = @([infoPlist serverPort]);
+  [infoPlist release];
 
 
   NSDictionary *res = @{@"version": calabashVersion,

@@ -110,9 +110,14 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
 
   if ([invoker selectorReturnsObject]) {
     NSInvocation *invocation = invoker.invocation;
-    id result;
+
+    NSUInteger length = [invoker.signature methodReturnLength];
+    void *buffer = (void *) malloc(length);
+
     [invocation invoke];
-    [invocation getReturnValue:&result];
+    [invocation getReturnValue:&buffer];
+
+    id result = (__bridge id)buffer;
 
     if(!result) {
       return [NSNull null];

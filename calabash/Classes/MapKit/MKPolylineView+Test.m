@@ -12,7 +12,7 @@
  * @return {"width: 1, "color":[r,g,b], "points":[[lat,lon], ...]}
  */
 - (NSString *) calDebugDescription {
-  int count = self.polyline.pointCount;
+  NSUInteger count = self.polyline.pointCount;
   CLLocationCoordinate2D *coords = malloc(sizeof(CLLocationCoordinate2D) * count);
   NSRange range = NSMakeRange(0, count);
   [[self polyline] getCoordinates:coords range:range];

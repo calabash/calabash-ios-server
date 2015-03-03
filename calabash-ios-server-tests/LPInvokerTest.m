@@ -2,12 +2,8 @@
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
 
-#import <UIKit/UIKit.h>
-#import <XCTest/XCTest.h>
 #import "LPInvoker.h"
-#import <OCMock/OCMock.h>
 #import "InvokerFactory.h"
-#import <objc/runtime.h>
 
 @interface NSString (LPXCTTEST)
 
@@ -269,7 +265,11 @@
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
                                                     target:target];
   NSString *actual = [invoker encoding];
+#if __LP64__
+  XCTAssertEqualObjects(actual, @"Q");
+#else
   XCTAssertEqualObjects(actual, @"I");
+#endif
 }
 
 - (void) testEncodingDoesNotRespondToSelector {

@@ -99,7 +99,7 @@
 }
 
 
-- (NSNumber *) calSetZoomLevel:(int) zoomLevel {
+- (NSNumber *) calSetZoomLevel:(NSUInteger) zoomLevel {
   CLLocationCoordinate2D center = self.centerCoordinate;
   [self calSetCenterCoordinate:center zoomLevel:zoomLevel animated:NO];
 

@@ -1,4 +1,20 @@
 #ifdef __OBJC__
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+
+#import <XCTest/XCTest.h>
+
+#import <OCMock/OCMock.h>
+
+#define HC_SHORTHAND
+#import <OCHamcrestIOS/OCHamcrestIOS.h>
+
+#define MOCKITO_SHORTHAND
+#import <OCMockitoIOS/OCMockitoIOS.h>
+
+#import <Specta/Specta.h>
+#import <Expecta/Expecta.h>
+
+#import <objc/runtime.h>
+
 #endif
