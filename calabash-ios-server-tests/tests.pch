@@ -15,4 +15,6 @@
 #import <Specta/Specta.h>
 #import <Expecta/Expecta.h>
 
+#import <objc/runtime.h>
+
 #endif
