@@ -6,6 +6,8 @@ build
 calabash.framework
 libFrankCalabash.a
 calabash-dylibs
+*.app
+*.ipa
 
 !scripts/test/build
 
@@ -17,3 +19,8 @@ animated-happiness
 calabash-ios
 
 .ruby-version
+
+.env
+.irb-history
+.irbrc
+

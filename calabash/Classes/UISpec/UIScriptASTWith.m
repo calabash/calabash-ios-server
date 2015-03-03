@@ -91,9 +91,10 @@
       type = LPWebQueryTypeCSS;
     }
 
-    return [LPWebQuery arrayByEvaluatingQuery:(NSString *) self.objectValue type:type
-                           webView:webView
-                    includeInvisible:visibility == UIScriptASTVisibilityTypeAll];
+    return [LPWebQuery arrayByEvaluatingQuery:(NSString *) self.objectValue
+                                         type:type
+                                      webView:webView
+                             includeInvisible:visibility == UIScriptASTVisibilityTypeAll];
   } else {
     NSLog(@"Attempting to look for non string in web view");
     return [NSMutableArray array];

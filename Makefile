@@ -38,3 +38,9 @@ install_test_binaries:
 webquery_headers:
 	scripts/insert-js-into-webquery-headers.rb
 
+test_app:
+	scripts/make-lp-test-app.rb
+
+xctest:
+	scripts/test/xctest.rb
+

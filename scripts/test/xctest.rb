@@ -42,21 +42,27 @@ Dir.chdir(working_dir) do
     RunLoop::SimControl.terminate_all_sims
   end
 
+  class XCTestFailedError < StandardError
+
+  end
+
   options =
         {
               :tries => travis_ci? ? 3 : 1,
               :base_interval => 5,
+              #:interval => 5,
               :on_retry => on_retry
         }
 
   Retriable.retriable(options) do
     exit_code = do_system(cmd,
                           {:pass_msg => 'XCTests passed',
-                           :fail_msg => 'XCTests failed'})
+                           :fail_msg => 'XCTests failed',
+                           :exit_on_nonzero_status => false})
     unless exit_code == 0
       # Hunting for the exit code that indicates the simulator failed to launch.
       log_fail "XCTest exited '#{exit_code}'"
-      raise RuntimeError, 'XCTest failed.'
+      raise XCTestFailedError, 'XCTest failed.'
     end
   end
 end
