@@ -6,6 +6,8 @@ build
 calabash.framework
 libFrankCalabash.a
 calabash-dylibs
+*.app
+*.ipa
 
 !scripts/test/build
 
