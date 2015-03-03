@@ -41,3 +41,6 @@ webquery_headers:
 test_app:
 	scripts/make-lp-test-app.rb
 
+xctest:
+	scripts/test/xctest.rb
+
