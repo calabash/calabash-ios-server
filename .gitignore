@@ -19,3 +19,8 @@ animated-happiness
 calabash-ios
 
 .ruby-version
+
+.env
+.irb-history
+.irbrc
+
