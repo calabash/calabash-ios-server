@@ -159,9 +159,6 @@
     [_httpServer setTXTRecordDictionary:capabilities];
     [_httpServer setConnectionClass:[LPRouter class]];
 
-    // Serve files from our embedded Web folder
-    //        NSString *webPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Web"];
-    //        [_httpServer setDocumentRoot:webPath];
     NSLog(@"Creating the server: %@", _httpServer);
     NSLog(@"Calabash iOS server version: %@", kLPCALABASHVERSION);
 
