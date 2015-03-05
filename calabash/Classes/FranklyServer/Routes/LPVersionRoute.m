@@ -1,3 +1,7 @@
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
 //
 //  LPVersionRoute.m
 //  calabash
@@ -85,7 +89,7 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
   NSDictionary *version = [self JSONResponseForMethod:@"GET" URI:@"calabash_version" data:nil];
   NSData *jsonData = [[LPJSONUtils serializeDictionary:version] dataUsingEncoding:NSUTF8StringEncoding];
   
-  return [[[LPHTTPDataResponse alloc] initWithData:jsonData] autorelease];
+  return [[LPHTTPDataResponse alloc] initWithData:jsonData];
   
 }
 
@@ -130,8 +134,6 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
   LPInfoPlist *infoPlist = [LPInfoPlist new];
   NSNumber *serverPort = @([infoPlist serverPort]);
   NSString *appBaseSdkName = [infoPlist stringForDTSDKName];
-  [infoPlist release];
-
 
   NSDictionary *res = @{@"version": calabashVersion,
                         @"app_id": idString,
