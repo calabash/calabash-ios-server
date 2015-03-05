@@ -41,7 +41,6 @@ SpecBegin(LPInfoPlist)
 describe(@"LPInfoPlist", ^{
   __block LPInfoPlist *infoPlist;
   __block id mainBundleMock;
-  __block NSDictionary *plistDictionary;
 
   beforeEach(^{
     infoPlist = [LPInfoPlist new];
@@ -49,27 +48,14 @@ describe(@"LPInfoPlist", ^{
   });
 
   afterEach(^{
+    [mainBundleMock verify];
     [mainBundleMock stopMocking];
   });
 
-  describe(@"stringForDTSDKName", ^{
-
-    it(@"returns the DTSDKName if avaliable", ^{
-      NSString *expected = @"foo";
-      plistDictionary = @{@"DTSDKName" : expected};
-      [[[mainBundleMock expect] andReturn:plistDictionary] infoDictionary];
-      NSString *actual = [infoPlist stringForDTSDKName];
-      expect(actual).to.equal(expected);
-      [mainBundleMock verify];
-    });
-
-    it(@"returns nil if the DTSDName is not available", ^{
-      plistDictionary = @{};
-      [[[mainBundleMock expect] andReturn:plistDictionary] infoDictionary];
-      NSString *actual = [infoPlist stringForDTSDKName];
-      expect(actual).to.equal(nil);
-      [mainBundleMock verify];
-    });
+  it(@"DTSDKName", ^{
+    [[[mainBundleMock expect]
+      andReturn:@{@"DTSDKName" : @"foo"}] infoDictionary];
+    expect([infoPlist stringForDTSDKName]).to.equal(@"foo");
   });
 
 });
