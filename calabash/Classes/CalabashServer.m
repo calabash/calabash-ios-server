@@ -142,20 +142,19 @@
     [_httpServer setName:@"Calabash Server"];
     [_httpServer setType:@"_http._tcp."];
 
-    // Advertise this device's capabilities to our listeners inside of the TXT record
-    NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
+    LPInfoPlist *infoPlist = [LPInfoPlist new];
 
+    // Advertise this device's capabilities to our listeners inside of the TXT record
     UIDevice *device = [UIDevice currentDevice];
     NSDictionary *capabilities =
     @{
       @"name" : [device name],
       @"os_version" : [device systemVersion],
-      @"app" : [info objectForKey:@"CFBundleDisplayName"],
-      @"app_id" : [info objectForKey:@"CFBundleIdentifier"],
-      @"app_version" : [info objectForKey:@"CFBundleVersion"]
+      @"app" : [infoPlist stringForDisplayName],
+      @"app_id" : [infoPlist stringForIdentifier],
+      @"app_version" : [infoPlist stringForVersion],
       };
 
-    LPInfoPlist *infoPlist = [LPInfoPlist new];
     [_httpServer setPort:[infoPlist serverPort]];
     NSString *dtSdkName = [infoPlist stringForDTSDKName];
     [infoPlist release];
