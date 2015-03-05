@@ -46,14 +46,6 @@ describe(@"LPScreenshotRoute", ^{
       OCMVerify([mock takeScreenshot]);
     });
   });
-
-  describe(@"#takeScreenshot", ^{
-    it(@"returns data", ^{
-      NSData *result = [route takeScreenshot];
-      XCTAssertNotNil(result);
-      expect(result).to.beKindOf([NSData class]);
-    });
-  });
 });
 
 SpecEnd
