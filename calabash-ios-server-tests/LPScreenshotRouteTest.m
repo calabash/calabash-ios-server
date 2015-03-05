@@ -9,6 +9,7 @@
 
 - (NSObject <LPHTTPResponse> *) httpResponseForMethod:(NSString *) method
                                                   URI:(NSString *) path;
+- (NSData *) takeScreenshot;
 
 @end
 

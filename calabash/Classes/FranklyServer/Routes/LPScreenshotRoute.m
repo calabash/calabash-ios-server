@@ -8,6 +8,11 @@
 #import "LPHTTPDataResponse.h"
 #import "LPTouchUtils.h"
 
+@interface LPScreenshotRoute ()
+
+- (NSData *) takeScreenshot;
+
+@end
 
 // UIGetScreenImage violates t
 @implementation LPScreenshotRoute
