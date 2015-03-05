@@ -38,6 +38,8 @@
   NSDictionary *plistDictionary = @{@"CalabashServerPort" : @(expectedPort)};
   [[[mainBundleMock stub] andReturn:plistDictionary] infoDictionary];
   XCTAssertEqual([self.infoPlist serverPort], expectedPort);
+  [mainBundleMock verify];
+  [mainBundleMock stopMocking];
 }
 
 @end
