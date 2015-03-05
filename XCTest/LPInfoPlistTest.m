@@ -4,6 +4,12 @@
 
 #import "LPInfoPlist.h"
 
+@interface LPInfoPlist (LPTesting)
+
+- (NSDictionary *) infoDictionary;
+
+@end
+
 @interface LPInfoPlistTest : XCTestCase
 
 @property (strong, nonatomic) LPInfoPlist *infoPlist;
@@ -40,28 +46,43 @@ SpecBegin(LPInfoPlist)
 
 describe(@"LPInfoPlist", ^{
   __block LPInfoPlist *infoPlist;
-  __block id mainBundleMock;
 
   beforeEach(^{
     infoPlist = [LPInfoPlist new];
-    mainBundleMock = [OCMockObject partialMockForObject:[NSBundle mainBundle]];
   });
 
-  afterEach(^{
+  it(@"#infoDictionary", ^{
+    id mainBundleMock = [OCMockObject partialMockForObject:[NSBundle mainBundle]];
+    [[[mainBundleMock expect] andReturn:@{@"key" : @"value"}] infoDictionary];
+    NSDictionary *actual = [infoPlist infoDictionary];
+    expect(actual[@"key"]).to.equal(@"value");
     [mainBundleMock verify];
     [mainBundleMock stopMocking];
   });
 
-  it(@"DTSDKName", ^{
-    [[[mainBundleMock expect]
-      andReturn:@{@"DTSDKName" : @"foo"}] infoDictionary];
-    expect([infoPlist stringForDTSDKName]).to.equal(@"foo");
-  });
+  describe(@"Accessing Info.plist Keys", ^{
+    __block id infoMock;
+    __block NSDictionary *mockedPlist;
 
-  it(@"CFBundleDisplayName", ^{
-    [[[mainBundleMock expect]
-      andReturn:@{@"CFBundleDisplayName" : @"foo"}] infoDictionary];
-    expect([infoPlist stringForDisplayName]).to.equal(@"foo");
+    beforeEach(^{
+      infoMock = [OCMockObject partialMockForObject:infoPlist];
+    });
+
+    afterEach(^{
+      [infoMock verify];
+      [infoMock stopMocking];
+    });
+
+    it(@"DTSDKName", ^{
+      [[[infoMock expect] andReturn:@{@"DTSDKName" : @"foo"}] infoDictionary];
+      expect([infoMock stringForDTSDKName]).to.equal(@"foo");
+    });
+
+    it(@"CFBundleDisplayName", ^{
+      mockedPlist = @{@"CFBundleDisplayName" : @"foo"};
+      [[[infoMock expect] andReturn:mockedPlist] infoDictionary];
+      expect([infoMock stringForDisplayName]).to.equal(@"foo");
+    });
   });
 });
 

@@ -7,10 +7,24 @@
 static unsigned short const LPCalabashServerDefaultPort = 37265;
 static NSString *const LPCalabashServerPortInfoPlistKey = @"CalabashServerPort";
 
+@interface LPInfoPlist ()
+
+@property(strong, nonatomic, readonly) NSDictionary *infoDictionary;
+
+@end
+
 @implementation LPInfoPlist
 
+@synthesize infoDictionary = _infoDictionary;
+
+- (NSDictionary *) infoDictionary {
+  if (_infoDictionary) { return _infoDictionary; }
+  _infoDictionary = [[NSBundle mainBundle] infoDictionary];
+  return _infoDictionary;
+}
+
 - (unsigned short) serverPort {
-  NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
+  NSDictionary *info = self.infoDictionary;
   NSNumber *infoPlistValue = info[LPCalabashServerPortInfoPlistKey];
   if (!infoPlistValue) {
     return LPCalabashServerDefaultPort;
@@ -20,12 +34,11 @@ static NSString *const LPCalabashServerPortInfoPlistKey = @"CalabashServerPort";
 }
 
 - (NSString *) stringForDTSDKName {
-  NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
-  return info[@"DTSDKName"];
+  return self.infoDictionary[@"DTSDKName"];
 }
 
 - (NSString *) stringForDisplayName {
-  return [[NSBundle mainBundle] infoDictionary][@"CFBundleDisplayName"];
+  return self.infoDictionary[@"CFBundleDisplayName"];
 }
 
 @end
