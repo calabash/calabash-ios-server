@@ -165,6 +165,7 @@
 
     LPInfoPlist *infoPlist = [LPInfoPlist new];
     [_httpServer setPort:[infoPlist serverPort]];
+    NSString *dtSdkName = [infoPlist stringForDTSDKName];
     [infoPlist release];
 
     [_httpServer setTXTRecordDictionary:capabilities];
@@ -175,6 +176,7 @@
     //        [_httpServer setDocumentRoot:webPath];
     NSLog(@"Creating the server: %@", _httpServer);
     NSLog(@"Calabash iOS server version: %@", kLPCALABASHVERSION);
+    NSLog(@"App Base SDK: %@", dtSdkName);
   }
   return self;
 }
