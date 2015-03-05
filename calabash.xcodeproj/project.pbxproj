@@ -1980,9 +1980,9 @@
 			productReference = F5091C4618C4E1D700C85307 /* libcalabash-device.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		F50CBF5D1A03F222004AC9DA /* calabash-ios-server-tests */ = {
+		F50CBF5D1A03F222004AC9DA /* XCTest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F50CBF661A03F222004AC9DA /* Build configuration list for PBXNativeTarget "calabash-ios-server-tests" */;
+			buildConfigurationList = F50CBF661A03F222004AC9DA /* Build configuration list for PBXNativeTarget "XCTest" */;
 			buildPhases = (
 				F50CBF5A1A03F222004AC9DA /* Sources */,
 				F50CBF5B1A03F222004AC9DA /* Frameworks */,
@@ -1993,7 +1993,7 @@
 			dependencies = (
 				F59CA4971A82F2BF007A2F38 /* PBXTargetDependency */,
 			);
-			name = "calabash-ios-server-tests";
+			name = XCTest;
 			productName = "calabash-ios-server-tests";
 			productReference = F50CBF5E1A03F222004AC9DA /* calabash-ios-server-tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -2091,7 +2091,7 @@
 				B1D5BD7519A23BCE0070E8CE /* frank-calabash-device */,
 				B15BF97019ABAFD200B38577 /* calabash-dylib-device */,
 				B15BF9E819ABB2B100B38577 /* calabash-dylib-simulator */,
-				F50CBF5D1A03F222004AC9DA /* calabash-ios-server-tests */,
+				F50CBF5D1A03F222004AC9DA /* XCTest */,
 				F59CA46C1A82EF40007A2F38 /* LPTestTarget */,
 			);
 		};
@@ -3893,7 +3893,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		F50CBF661A03F222004AC9DA /* Build configuration list for PBXNativeTarget "calabash-ios-server-tests" */ = {
+		F50CBF661A03F222004AC9DA /* Build configuration list for PBXNativeTarget "XCTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F50CBF641A03F222004AC9DA /* Debug */,
