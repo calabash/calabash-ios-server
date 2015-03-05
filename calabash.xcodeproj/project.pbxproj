@@ -957,7 +957,7 @@
 		B1FF22B715CF002500F3A17B /* MKPolylineView+Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKPolylineView+Test.m"; sourceTree = "<group>"; };
 		F500459D17D249D000B72386 /* LPGitVersionDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPGitVersionDefines.h; sourceTree = "<group>"; };
 		F5091C4618C4E1D700C85307 /* libcalabash-device.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcalabash-device.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F50CBF5E1A03F222004AC9DA /* calabash-ios-server-tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "calabash-ios-server-tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F50CBF5E1A03F222004AC9DA /* XCTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F50CBF611A03F222004AC9DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F50CBF761A03F69A004AC9DA /* LPTestToolsStandup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPTestToolsStandup.m; sourceTree = "<group>"; };
 		F50CBF781A03F9FF004AC9DA /* LPTouchUtilsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPTouchUtilsTest.m; sourceTree = "<group>"; };
@@ -1192,7 +1192,7 @@
 				F537399818E6E0BE004133FA /* calabash-version */,
 				B16C307C15191A8C00DAA3FA /* calabash-js */,
 				B121E79914B6D9FB0034C6A9 /* calabash */,
-				F50CBF5F1A03F222004AC9DA /* calabash-ios-server-tests */,
+				F50CBF5F1A03F222004AC9DA /* XCTest */,
 				F59CA46E1A82EF40007A2F38 /* LPTestTarget */,
 				B121E79614B6D9FB0034C6A9 /* Frameworks */,
 				B121E79514B6D9FB0034C6A9 /* Products */,
@@ -1211,7 +1211,7 @@
 				B1D5BDD919A23BCE0070E8CE /* libFrankCalabashDevice.a */,
 				B15BF97119ABAFD200B38577 /* libCalabashDyn.dylib */,
 				B15BFA4019ABB2B100B38577 /* libCalabashDynSim.dylib */,
-				F50CBF5E1A03F222004AC9DA /* calabash-ios-server-tests.xctest */,
+				F50CBF5E1A03F222004AC9DA /* XCTest.xctest */,
 				F59CA46D1A82EF40007A2F38 /* LPTestTarget.app */,
 			);
 			name = Products;
@@ -1552,7 +1552,7 @@
 			path = MapKit;
 			sourceTree = "<group>";
 		};
-		F50CBF5F1A03F222004AC9DA /* calabash-ios-server-tests */ = {
+		F50CBF5F1A03F222004AC9DA /* XCTest */ = {
 			isa = PBXGroup;
 			children = (
 				F58937E21A9BD749007B9A5B /* LPWebQueryTest.m */,
@@ -1570,8 +1570,8 @@
 				F5329C931A9D6F2900FE3800 /* LPWebQueryResult.m */,
 				F50E427A1AA86FA3003DB030 /* LPScreenshotRouteTest.m */,
 			);
-			path = "calabash-ios-server-tests";
-			sourceTree = "<group>";
+			path = XCTest;
+			sourceTree = SOURCE_ROOT;
 		};
 		F50CBF601A03F222004AC9DA /* Supporting Files */ = {
 			isa = PBXGroup;
@@ -1995,7 +1995,7 @@
 			);
 			name = XCTest;
 			productName = "calabash-ios-server-tests";
-			productReference = F50CBF5E1A03F222004AC9DA /* calabash-ios-server-tests.xctest */;
+			productReference = F50CBF5E1A03F222004AC9DA /* XCTest.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		F537398B18E5253B004133FA /* version */ = {
@@ -3513,9 +3513,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
-					"$(PROJECT_DIR)/calabash-ios-server-tests",
+					"$(PROJECT_DIR)/XCTest",
 				);
-				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/calabash-ios-server-tests/tests.pch";
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/XCTest/tests.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
@@ -3524,18 +3524,18 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Xcode/6.1/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(PROJECT_DIR)/calabash-ios-server-tests/OCMock",
-					"$(PROJECT_DIR)/calabash-ios-server-tests/Specta",
-					"$(PROJECT_DIR)/calabash-ios-server-tests/Expecta",
+					"$(PROJECT_DIR)/XCTest/OCMock",
+					"$(PROJECT_DIR)/XCTest/Specta",
+					"$(PROJECT_DIR)/XCTest/Expecta",
 				);
-				INFOPLIST_FILE = "calabash-ios-server-tests/Info.plist";
+				INFOPLIST_FILE = XCTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/calabash-ios-server-tests/OCMock",
-					"$(PROJECT_DIR)/calabash-ios-server-tests/Specta",
-					"$(PROJECT_DIR)/calabash-ios-server-tests/Expecta",
+					"$(PROJECT_DIR)/XCTest/OCMock",
+					"$(PROJECT_DIR)/XCTest/Specta",
+					"$(PROJECT_DIR)/XCTest/Expecta",
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
@@ -3572,9 +3572,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
-					"$(PROJECT_DIR)/calabash-ios-server-tests",
+					"$(PROJECT_DIR)/XCTest",
 				);
-				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/calabash-ios-server-tests/tests.pch";
+				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/XCTest/tests.pch";
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -3582,18 +3582,18 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Xcode/6.1/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(PROJECT_DIR)/calabash-ios-server-tests/OCMock",
-					"$(PROJECT_DIR)/calabash-ios-server-tests/Specta",
-					"$(PROJECT_DIR)/calabash-ios-server-tests/Expecta",
+					"$(PROJECT_DIR)/XCTest/OCMock",
+					"$(PROJECT_DIR)/XCTest/Specta",
+					"$(PROJECT_DIR)/XCTest/Expecta",
 				);
-				INFOPLIST_FILE = "calabash-ios-server-tests/Info.plist";
+				INFOPLIST_FILE = XCTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/calabash-ios-server-tests/OCMock",
-					"$(PROJECT_DIR)/calabash-ios-server-tests/Specta",
-					"$(PROJECT_DIR)/calabash-ios-server-tests/Expecta",
+					"$(PROJECT_DIR)/XCTest/OCMock",
+					"$(PROJECT_DIR)/XCTest/Specta",
+					"$(PROJECT_DIR)/XCTest/Expecta",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = (
