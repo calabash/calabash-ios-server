@@ -83,18 +83,20 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
 }
 
 - (id)handleRequestForPath:(NSArray *)path withConnection:(id)connection {
-  if (![self canHandlePostForPath:path]) {
-    return nil;
-  }
-  NSDictionary *version = [self JSONResponseForMethod:@"GET" URI:@"calabash_version" data:nil];
-  NSData *jsonData = [[LPJSONUtils serializeDictionary:version] dataUsingEncoding:NSUTF8StringEncoding];
+  if (![self canHandlePostForPath:path]) {  return nil;  }
+
+  NSDictionary *version = [self JSONResponseForMethod:@"GET"
+                                                  URI:@"calabash_version"
+                                                 data:nil];
+  NSData *jsonData = [[LPJSONUtils serializeDictionary:version]
+                      dataUsingEncoding:NSUTF8StringEncoding];
   
   return [[LPHTTPDataResponse alloc] initWithData:jsonData];
-  
 }
 
-
-- (NSDictionary *) JSONResponseForMethod:(NSString *) method URI:(NSString *) path data:(NSDictionary *) data {
+- (NSDictionary *) JSONResponseForMethod:(NSString *) method
+                                     URI:(NSString *) path
+                                    data:(NSDictionary *) data {
   NSString *versionString = [[NSBundle mainBundle]
                              objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
   if (!versionString) {
@@ -126,7 +128,13 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
   if (!sim) {  sim = @"";  }
 
   BOOL isIphoneAppEmulated = [self isIPhoneAppEmulatedOnIPad];
-  NSDictionary *git = @{@"revision" : kLPGitShortRevision, @"branch" : kLPGitBranch, @"remote_origin" : kLPGitRemoteOrigin};
+
+  NSDictionary *git =
+  @{
+    @"revision" : kLPGitShortRevision,
+    @"branch" : kLPGitBranch,
+    @"remote_origin" : kLPGitRemoteOrigin
+    };
 
 
   NSString *calabashVersion = [kLPCALABASHVERSION componentsSeparatedByString:@" "].lastObject;
@@ -135,22 +143,26 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
   NSNumber *serverPort = @([infoPlist serverPort]);
   NSString *appBaseSdkName = [infoPlist stringForDTSDKName];
 
-  NSDictionary *res = @{@"version": calabashVersion,
-                        @"app_id": idString,
-                        @"iOS_version": [[UIDevice currentDevice]
-                                         systemVersion],
-                        @"app_name": nameString,
-                        @"screen_dimensions": [[LPDevice sharedDevice] screenDimensions],
-                        @"system": machine,
-                        @"4inch": @(is4inDevice),
-                        @"simulator_device": dev,
-                        @"simulator": sim,
-                        @"app_version": versionString,
-                        @"outcome": @"SUCCESS",
-                        @"iphone_app_emulated_on_ipad": @(isIphoneAppEmulated),
-                        @"git": git,
-                        @"server_port" : serverPort,
-                        @"app_base_sdk" : appBaseSdkName};
+  NSDictionary *res =
+  @{
+
+    @"version": calabashVersion,
+    @"app_id": idString,
+    @"iOS_version": [[UIDevice currentDevice]
+                     systemVersion],
+    @"app_name": nameString,
+    @"screen_dimensions": [[LPDevice sharedDevice] screenDimensions],
+    @"system": machine,
+    @"4inch": @(is4inDevice),
+    @"simulator_device": dev,
+    @"simulator": sim,
+    @"app_version": versionString,
+    @"outcome": @"SUCCESS",
+    @"iphone_app_emulated_on_ipad": @(isIphoneAppEmulated),
+    @"git": git,
+    @"server_port" : serverPort,
+    @"app_base_sdk" : appBaseSdkName
+    };
   return res;
 }
 
