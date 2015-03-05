@@ -26,19 +26,9 @@
 
 - (NSData *) takeScreenshot {
   // Create a graphics context with the target size
-  // On iOS 4 and later, use UIGraphicsBeginImageContextWithOptions to take the scale into consideration
-  // On iOS prior to 4, fall back to use UIGraphicsBeginImageContext
 
-  // todo - this can be refactored becase we no longer support iOS 4
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunreachable-code"
   CGSize imageSize = [[UIScreen mainScreen] bounds].size;
-  if (NULL != UIGraphicsBeginImageContextWithOptions) {
-    UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
-  } else {
-    UIGraphicsBeginImageContext(imageSize);
-  }
-#pragma clang diagnostic pop
+  UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
 
   CGContextRef context = UIGraphicsGetCurrentContext();
 
