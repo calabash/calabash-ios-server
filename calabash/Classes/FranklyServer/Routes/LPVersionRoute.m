@@ -129,6 +129,7 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
 
   LPInfoPlist *infoPlist = [LPInfoPlist new];
   NSNumber *serverPort = @([infoPlist serverPort]);
+  NSString *appBaseSdkName = [infoPlist stringForDTSDKName];
   [infoPlist release];
 
 
@@ -146,7 +147,8 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
                         @"outcome": @"SUCCESS",
                         @"iphone_app_emulated_on_ipad": @(isIphoneAppEmulated),
                         @"git": git,
-                        @"server_port" : serverPort};
+                        @"server_port" : serverPort,
+                        @"app_base_sdk" : appBaseSdkName};
   return res;
 }
 
