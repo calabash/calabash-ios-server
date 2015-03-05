@@ -28,7 +28,7 @@ Dir.chdir working_dir do
   do_system('rm -rf .bundle')
   do_system('mkdir .bundle')
   do_system('touch .bundle/config')
-  do_system('rm Gemfile.lock')
+  do_system('rm -f Gemfile.lock')
 
   do_system('mv Gemfile Gemfile.backup')
   do_system('cp Gemfile.develop Gemfile', opts)
