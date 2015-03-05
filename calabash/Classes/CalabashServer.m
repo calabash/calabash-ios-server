@@ -143,6 +143,7 @@
     [_httpServer setType:@"_http._tcp."];
 
     LPInfoPlist *infoPlist = [LPInfoPlist new];
+    [_httpServer setPort:[infoPlist serverPort]];
 
     // Advertise this device's capabilities to our listeners inside of the TXT record
     UIDevice *device = [UIDevice currentDevice];
@@ -155,10 +156,6 @@
       @"app_version" : [infoPlist stringForVersion],
       };
 
-    [_httpServer setPort:[infoPlist serverPort]];
-    NSString *dtSdkName = [infoPlist stringForDTSDKName];
-    [infoPlist release];
-
     [_httpServer setTXTRecordDictionary:capabilities];
     [_httpServer setConnectionClass:[LPRouter class]];
 
@@ -167,7 +164,11 @@
     //        [_httpServer setDocumentRoot:webPath];
     NSLog(@"Creating the server: %@", _httpServer);
     NSLog(@"Calabash iOS server version: %@", kLPCALABASHVERSION);
+
+    NSString *dtSdkName = [infoPlist stringForDTSDKName];
     NSLog(@"App Base SDK: %@", dtSdkName);
+
+    [infoPlist release];
   }
   return self;
 }
