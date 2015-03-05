@@ -153,15 +153,16 @@
 
     // Advertise this device's capabilities to our listeners inside of the TXT record
     NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
-    NSMutableDictionary *capabilities = [[NSMutableDictionary alloc]
-                                         initWithObjectsAndKeys:[[UIDevice currentDevice] name], @"name",
-                                         [[UIDevice currentDevice] model], @"model",
-                                         [[UIDevice currentDevice]
-                                          systemVersion], @"os_version",
-                                         [info objectForKey:@"CFBundleDisplayName"], @"app",
-                                         [info objectForKey:@"CFBundleIdentifier"], @"app_id",
-                                         [info objectForKey:@"CFBundleVersion"], @"app_version",
-                                         nil];
+
+    UIDevice *device = [UIDevice currentDevice];
+    NSDictionary *capabilities =
+    @{
+      @"name" : [device name],
+      @"os_version" : [device systemVersion],
+      @"app" : [info objectForKey:@"CFBundleDisplayName"],
+      @"app_id" : [info objectForKey:@"CFBundleIdentifier"],
+      @"app_version" : [info objectForKey:@"CFBundleVersion"]
+      };
 
     LPInfoPlist *infoPlist = [LPInfoPlist new];
     [_httpServer setPort:[infoPlist serverPort]];
@@ -170,7 +171,7 @@
 
     [_httpServer setTXTRecordDictionary:capabilities];
     [_httpServer setConnectionClass:[LPRouter class]];
-    [capabilities release];
+
     // Serve files from our embedded Web folder
     //        NSString *webPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Web"];
     //        [_httpServer setDocumentRoot:webPath];
