@@ -58,6 +58,11 @@ describe(@"LPInfoPlist", ^{
     expect([infoPlist stringForDTSDKName]).to.equal(@"foo");
   });
 
+  it(@"CFBundleDisplayName", ^{
+    [[[mainBundleMock expect]
+      andReturn:@{@"CFBundleDisplayName" : @"foo"}] infoDictionary];
+    expect([infoPlist stringForDisplayName]).to.equal(@"foo");
+  });
 });
 
 SpecEnd
