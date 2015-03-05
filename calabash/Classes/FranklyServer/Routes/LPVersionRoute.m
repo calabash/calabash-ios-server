@@ -121,7 +121,9 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
     @"remote_origin" : kLPGitRemoteOrigin
     };
 
-  NSString *calabashVersion = [kLPCALABASHVERSION componentsSeparatedByString:@" "].lastObject;
+  NSArray *versionTokens = [kLPCALABASHVERSION componentsSeparatedByString:@" "];
+  NSString *calabashVersion = [versionTokens lastObject];
+  if (!calabashVersion) { calabashVersion = @""; }
 
   LPInfoPlist *infoPlist = [LPInfoPlist new];
 
