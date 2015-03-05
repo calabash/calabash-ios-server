@@ -137,15 +137,6 @@
     [LPRouter addRoute:dumpRoute forPath:@"dump"];
     [dumpRoute release];
 
-
-
-
-    //
-    //        LPScreencastRoute *scr = [LPScreencastRoute new];
-    //        [LPRouter addRoute:scr forPath:@"/screencast"];
-    //        [scr release];
-    //
-
     _httpServer = [[[LPHTTPServer alloc] init] retain];
 
     [_httpServer setName:@"Calabash Server"];
