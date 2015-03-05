@@ -5,5 +5,8 @@
 - (unsigned short) serverPort;
 - (NSString *) stringForDTSDKName;
 - (NSString *) stringForDisplayName;
+- (NSString *) stringForIdentifier;
+- (NSString *) stringForVersion;
+- (NSString *) stringForShortVersion;
 
 @end

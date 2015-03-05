@@ -73,15 +73,68 @@ describe(@"LPInfoPlist", ^{
       [infoMock stopMocking];
     });
 
-    it(@"DTSDKName", ^{
-      [[[infoMock expect] andReturn:@{@"DTSDKName" : @"foo"}] infoDictionary];
-      expect([infoMock stringForDTSDKName]).to.equal(@"foo");
+    describe(@"DTSDKName", ^{
+      it(@"value exists", ^{
+        [[[infoMock expect] andReturn:@{@"DTSDKName" : @"foo"}] infoDictionary];
+        expect([infoMock stringForDTSDKName]).to.equal(@"foo");
+      });
+
+      it(@"value does not exist", ^{
+        [[[infoMock expect] andReturn:@{}] infoDictionary];
+        expect([infoMock stringForDTSDKName]).to.beEmpty();
+      });
     });
 
-    it(@"CFBundleDisplayName", ^{
-      mockedPlist = @{@"CFBundleDisplayName" : @"foo"};
-      [[[infoMock expect] andReturn:mockedPlist] infoDictionary];
-      expect([infoMock stringForDisplayName]).to.equal(@"foo");
+    describe(@"CFBundleDisplayName", ^{
+      it(@"value exists", ^{
+        mockedPlist = @{@"CFBundleDisplayName" : @"foo"};
+        [[[infoMock expect] andReturn:mockedPlist] infoDictionary];
+        expect([infoMock stringForDisplayName]).to.equal(@"foo");
+      });
+
+      it(@"value does not exist", ^{
+        [[[infoMock expect] andReturn:@{}] infoDictionary];
+        expect([infoMock stringForDisplayName]).to.beEmpty();
+      });
+    });
+
+    describe(@"CFBundleIdentifier", ^{
+      it(@"value exists", ^{
+        mockedPlist = @{@"CFBundleIdentifier" : @"foo"};
+        [[[infoMock expect] andReturn:mockedPlist] infoDictionary];
+        expect([infoMock stringForIdentifier]).to.equal(@"foo");
+      });
+
+      it(@"value does not exist", ^{
+        [[[infoMock expect] andReturn:@{}] infoDictionary];
+        expect([infoMock stringForIdentifier]).to.beEmpty();
+      });
+    });
+
+    describe(@"CFBundleVersion", ^{
+      it(@"value exists", ^{
+        mockedPlist = @{@"CFBundleVersion" : @"foo"};
+        [[[infoMock expect] andReturn:mockedPlist] infoDictionary];
+        expect([infoMock stringForVersion]).to.equal(@"foo");
+      });
+
+      it(@"value does not exist", ^{
+        [[[infoMock expect] andReturn:@{}] infoDictionary];
+        expect([infoMock stringForVersion]).to.beEmpty();
+      });
+    });
+
+    describe(@"CFBundleShortVersionString", ^{
+      it(@"value exists", ^{
+        mockedPlist = @{@"CFBundleShortVersionString" : @"foo"};
+        [[[infoMock expect] andReturn:mockedPlist] infoDictionary];
+        expect([infoMock stringForShortVersion]).to.equal(@"foo");
+      });
+
+      it(@"value does not exist", ^{
+        [[[infoMock expect] andReturn:@{}] infoDictionary];
+        expect([infoMock stringForShortVersion]).to.beEmpty();
+      });
     });
   });
 });

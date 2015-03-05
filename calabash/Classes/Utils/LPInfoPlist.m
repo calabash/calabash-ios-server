@@ -10,6 +10,7 @@ static NSString *const LPCalabashServerPortInfoPlistKey = @"CalabashServerPort";
 @interface LPInfoPlist ()
 
 @property(strong, nonatomic, readonly) NSDictionary *infoDictionary;
+- (NSString *) stringForKey:(NSString *) key;
 
 @end
 
@@ -23,6 +24,12 @@ static NSString *const LPCalabashServerPortInfoPlistKey = @"CalabashServerPort";
   return _infoDictionary;
 }
 
+- (NSString *) stringForKey:(NSString *) key {
+  NSString *value = self.infoDictionary[key];
+  if (!value) { value = @""; }
+  return value;
+}
+
 - (unsigned short) serverPort {
   NSDictionary *info = self.infoDictionary;
   NSNumber *infoPlistValue = info[LPCalabashServerPortInfoPlistKey];
@@ -34,11 +41,23 @@ static NSString *const LPCalabashServerPortInfoPlistKey = @"CalabashServerPort";
 }
 
 - (NSString *) stringForDTSDKName {
-  return self.infoDictionary[@"DTSDKName"];
+  return [self stringForKey:@"DTSDKName"];
 }
 
 - (NSString *) stringForDisplayName {
-  return self.infoDictionary[@"CFBundleDisplayName"];
+  return [self stringForKey:@"CFBundleDisplayName"];
+}
+
+- (NSString *) stringForIdentifier {
+  return [self stringForKey:@"CFBundleIdentifier"];
+}
+
+- (NSString *) stringForVersion {
+  return [self stringForKey:@"CFBundleVersion"];
+}
+
+- (NSString *) stringForShortVersion {
+  return [self stringForKey:@"CFBundleShortVersionString"];
 }
 
 @end
