@@ -143,13 +143,13 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
   NSNumber *serverPort = @([infoPlist serverPort]);
   NSString *appBaseSdkName = [infoPlist stringForDTSDKName];
 
-  NSDictionary *res =
+  return
+
   @{
 
     @"version": calabashVersion,
     @"app_id": idString,
-    @"iOS_version": [[UIDevice currentDevice]
-                     systemVersion],
+    @"iOS_version": [[UIDevice currentDevice] systemVersion],
     @"app_name": nameString,
     @"screen_dimensions": [[LPDevice sharedDevice] screenDimensions],
     @"system": machine,
@@ -162,8 +162,8 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
     @"git": git,
     @"server_port" : serverPort,
     @"app_base_sdk" : appBaseSdkName
+
     };
-  return res;
 }
 
 
