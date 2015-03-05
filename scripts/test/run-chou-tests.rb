@@ -20,7 +20,7 @@ Dir.chdir working_dir do
 
   # if calabash.framework exists, it was built in another step
   unless File.exist?('calabash.framework')
-    do_system('make')
+    do_system('make framework')
   end
 
 end

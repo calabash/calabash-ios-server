@@ -1,0 +1,7 @@
+source 'https://rubygems.org'
+
+gem 'calabash-cucumber', '~> 0.13'
+gem 'run_loop', '~> 1.2'
+gem 'multi_test'
+gem 'pry'
+gem 'pry-nav'
