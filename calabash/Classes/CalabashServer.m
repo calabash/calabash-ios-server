@@ -141,6 +141,7 @@
 
     [_httpServer setName:@"Calabash Server"];
     [_httpServer setType:@"_http._tcp."];
+    [_httpServer setConnectionClass:[LPRouter class]];
 
     LPInfoPlist *infoPlist = [LPInfoPlist new];
     [_httpServer setPort:[infoPlist serverPort]];
@@ -157,7 +158,6 @@
       };
 
     [_httpServer setTXTRecordDictionary:capabilities];
-    [_httpServer setConnectionClass:[LPRouter class]];
 
     NSLog(@"Creating the server: %@", _httpServer);
     NSLog(@"Calabash iOS server version: %@", kLPCALABASHVERSION);
