@@ -571,6 +571,7 @@
 		F50CBFCE1A040669004AC9DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F50CBFCD1A040669004AC9DA /* UIKit.framework */; };
 		F50CBFCF1A040707004AC9DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		F50E42791AA86D36003DB030 /* libSpecta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F50E42711AA86D36003DB030 /* libSpecta.a */; };
+		F50E427B1AA86FA3003DB030 /* LPScreenshotRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F50E427A1AA86FA3003DB030 /* LPScreenshotRouteTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F52BF6321A3A0BC700E173AF /* LPTouchUtilsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F50CBF781A03F9FF004AC9DA /* LPTouchUtilsTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5329C941A9D6F2900FE3800 /* LPWebQueryResult.m in Sources */ = {isa = PBXBuildFile; fileRef = F5329C931A9D6F2900FE3800 /* LPWebQueryResult.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F537397318E5200C004133FA /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -969,6 +970,7 @@
 		F50E42761AA86D36003DB030 /* SPTSharedExampleGroups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTSharedExampleGroups.h; sourceTree = "<group>"; };
 		F50E42771AA86D36003DB030 /* SPTSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTSpec.h; sourceTree = "<group>"; };
 		F50E42781AA86D36003DB030 /* XCTestCase+Specta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTestCase+Specta.h"; sourceTree = "<group>"; };
+		F50E427A1AA86FA3003DB030 /* LPScreenshotRouteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScreenshotRouteTest.m; sourceTree = "<group>"; };
 		F5329C921A9D6F2900FE3800 /* LPWebQueryResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPWebQueryResult.h; sourceTree = "<group>"; };
 		F5329C931A9D6F2900FE3800 /* LPWebQueryResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPWebQueryResult.m; sourceTree = "<group>"; };
 		F537398C18E5253B004133FA /* version */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = version; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1566,6 +1568,7 @@
 				F5CB7D571A7CF45B00DACC8B /* InvokerFactory.m */,
 				F5329C921A9D6F2900FE3800 /* LPWebQueryResult.h */,
 				F5329C931A9D6F2900FE3800 /* LPWebQueryResult.m */,
+				F50E427A1AA86FA3003DB030 /* LPScreenshotRouteTest.m */,
 			);
 			path = "calabash-ios-server-tests";
 			sourceTree = "<group>";
@@ -2707,6 +2710,7 @@
 				F50CBF891A04056F004AC9DA /* LPHTTPAsyncFileResponse.m in Sources */,
 				F50CBFAB1A0405B2004AC9DA /* LPInterpolateRoute.m in Sources */,
 				F50CBFA01A0405B2004AC9DA /* LPUIARouteOverUserPrefs.m in Sources */,
+				F50E427B1AA86FA3003DB030 /* LPScreenshotRouteTest.m in Sources */,
 				F50CBFBB1A0405CE004AC9DA /* UIScriptASTPredicate.m in Sources */,
 				F5C0945A1A97B7CB00AE5991 /* LPWebQuery.m in Sources */,
 				F56630891A39B00700DEA0C0 /* LPInfoPlistTest.m in Sources */,
