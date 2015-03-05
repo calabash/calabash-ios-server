@@ -1189,12 +1189,12 @@
 		B121E78614B6D9FB0034C6A9 = {
 			isa = PBXGroup;
 			children = (
-				F537399818E6E0BE004133FA /* calabash-version */,
 				B16C307C15191A8C00DAA3FA /* calabash-js */,
 				B121E79914B6D9FB0034C6A9 /* calabash */,
 				F50CBF5F1A03F222004AC9DA /* XCTest */,
 				F59CA46E1A82EF40007A2F38 /* LPTestTarget */,
 				B121E79614B6D9FB0034C6A9 /* Frameworks */,
+				F537399818E6E0BE004133FA /* VersionTool */,
 				B121E79514B6D9FB0034C6A9 /* Products */,
 			);
 			indentWidth = 2;
@@ -1622,13 +1622,13 @@
 			name = ScrollToMark;
 			sourceTree = "<group>";
 		};
-		F537399818E6E0BE004133FA /* calabash-version */ = {
+		F537399818E6E0BE004133FA /* VersionTool */ = {
 			isa = PBXGroup;
 			children = (
 				F537399918E6E0BE004133FA /* main.m */,
 			);
-			path = "calabash-version";
-			sourceTree = "<group>";
+			path = VersionTool;
+			sourceTree = SOURCE_ROOT;
 		};
 		F5396A6D1AA6056D00D75E78 /* TestResources */ = {
 			isa = PBXGroup;
