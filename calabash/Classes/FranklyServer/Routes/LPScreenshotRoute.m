@@ -1,3 +1,7 @@
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
 //
 //  ScreenshotRoute.m
 //  Created by Karl Krukow on 13/08/11.
@@ -25,7 +29,7 @@
 - (NSObject <LPHTTPResponse> *) httpResponseForMethod:(NSString *) method URI:(NSString *) path {
   LPHTTPDataResponse *drsp = [[LPHTTPDataResponse alloc]
           initWithData:[self takeScreenshot]];
-  return [drsp autorelease];
+  return drsp;
 }
 
 
