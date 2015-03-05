@@ -19,4 +19,9 @@ static NSString *const LPCalabashServerPortInfoPlistKey = @"CalabashServerPort";
   }
 }
 
+- (NSString *) stringForDTSDKName {
+  NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
+  return info[@"DTSDKName"];
+}
+
 @end

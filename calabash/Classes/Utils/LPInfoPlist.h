@@ -3,5 +3,6 @@
 @interface LPInfoPlist : NSObject
 
 - (unsigned short) serverPort;
+- (NSString *) stringForDTSDKName;
 
 @end
