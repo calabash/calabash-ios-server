@@ -9,6 +9,4 @@
 
 @interface LPScreenshotRoute : NSObject <LPRoute>
 
-- (NSData *) takeScreenshot;
-
 @end
