@@ -34,7 +34,8 @@ def do_system(cmd, opts={})
                   :exit_on_nonzero_status => true,
                   :env_vars => {},
                   :log_cmd => true,
-                  :obscure_fields => []}
+                  :obscure_fields => [],
+                  :on_failure_proc => nil}
   merged_opts = default_opts.merge(opts)
 
   obscure_fields = merged_opts[:obscure_fields]
@@ -65,6 +66,8 @@ def do_system(cmd, opts={})
     log_pass merged_opts[:pass_msg]
   else
     log_fail merged_opts[:fail_msg]
+    on_failure_proc = merged_opts[:on_failure_proc]
+    on_failure_proc.call if on_failure_proc
     exit exit_code if exit_on_err
   end
   system 'set -e'
