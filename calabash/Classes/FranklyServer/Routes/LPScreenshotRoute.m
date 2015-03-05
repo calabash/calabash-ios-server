@@ -65,15 +65,6 @@
 
   UIGraphicsEndImageContext();
 
-  //    NSString* appID = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
-  //    static NSDateFormatter *fm = nil;
-  //    if (!fm) {
-  //        fm=[[NSDateFormatter alloc] init];
-  //        [fm setDateFormat:@"ddMM'-'HH':'mm':'SSSS"];
-  //    }
-  //    NSString* timestamp = [fm stringFromDate:[NSDate date]];
-  //    NSString* tempFile = [NSString stringWithFormat:@"%@screenshot_%@_%@.png",tempDir,appID,timestamp,nil];
-
   return UIImagePNGRepresentation(image);
 }
 
