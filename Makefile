@@ -31,6 +31,12 @@ dylibs:
 	scripts/make-calabash-dylib.rb device
 	scripts/make-libraries.rb verify-dylibs
 
+dylib_sim:
+	rm -rf build
+	rm -rf calabash-dylibs
+	scripts/make-calabash-dylib.rb sim
+	scripts/make-libraries.rb verify-sim-dylib
+
 install_test_binaries:
 	$(MAKE) dylibs
 	./scripts/install-test-binaries.rb

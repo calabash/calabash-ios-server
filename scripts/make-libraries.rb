@@ -342,14 +342,22 @@ def path_to_simulator_dylib(opts = {})
   path_to_lib(merged[:directory], merged[:lib_name])
 end
 
-def verify_dylibs
-  device_dylib = path_to_device_dylib
-  lipo_verify_arches(device_dylib, ['armv7', 'armv7s', 'arm64'])
-  lipo_put_info(device_dylib)
-
-  simulator_dylib = path_to_simulator_dylib
-  lipo_verify_arches(simulator_dylib, ['i386', 'x86_64'])
-  lipo_put_info(simulator_dylib)
+def verify_dylibs(which=:both)
+  case which
+    when :both
+      verify_dylibs :device
+      verify_dylibs :sim
+    when :sim
+      simulator_dylib = path_to_simulator_dylib
+      lipo_verify_arches(simulator_dylib, ['i386', 'x86_64'])
+      lipo_put_info(simulator_dylib)
+    when :device
+      device_dylib = path_to_device_dylib
+      lipo_verify_arches(device_dylib, ['armv7', 'armv7s', 'arm64'])
+      lipo_put_info(device_dylib)
+    else
+      raise "Expected `which` arg '#{which}' to be one of [:sim, :device, :both]"
+  end
 end
 
 def stage_dylibs
@@ -391,5 +399,24 @@ end
 if ARGV[0] == 'verify-dylibs'
   verify_dylibs
   stage_dylibs
+  exit 0
+end
+
+if ARGV[0] == 'verify-sim-dylib'
+  verify_dylibs :sim
+
+  simulator_dylib = path_to_simulator_dylib
+
+  target_dir = File.expand_path('./calabash-dylibs')
+  if File.directory?(target_dir)
+    puts 'INFO:  removing old calabash-dylibs'
+    FileUtils.rm_rf target_dir
+  end
+
+  FileUtils.mkdir target_dir
+
+  puts "INFO: staging '#{simulator_dylib}' to ./calabash-dylibs"
+  FileUtils.cp(simulator_dylib, target_dir)
+
   exit 0
 end

@@ -13,6 +13,7 @@ def test_make_rules(env_vars, xcode_version)
   # Requires injecting xcspec files into Xcode.app bundle for Xcode < 6.0
   if xcode_version >= RunLoop::Version.new('6.0')
     do_system('make dylibs', {:env_vars => env_vars})
+    do_system('make dylib_sim', {:env_vars => env_vars})
     do_system('make all', {:env_vars => env_vars})
   end
 
