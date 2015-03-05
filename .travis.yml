@@ -17,6 +17,7 @@ script:
   #- make all
   - make dylib_sim
   - scripts/test/xctest.rb
+  - scripts/test/cucumber.rb
   - scripts/test/run-chou-tests.rb
 
 notifications:
