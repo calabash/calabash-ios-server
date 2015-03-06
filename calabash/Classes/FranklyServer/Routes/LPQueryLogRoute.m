@@ -85,6 +85,8 @@
   NSMutableArray *messages = [[NSMutableArray alloc] init];
   aslmsg msg;
 
+  // todo aslresponse_next is deprecated iOS 7
+  // https://github.com/calabash/calabash-ios/issues/719
   while ((msg = aslresponse_next(response)) && count-- > 0) {
     //Load all the key/value pairs from the message into a dictionary.
     const char *k;
@@ -97,6 +99,8 @@
     [messages addObject:msgDict];
   }
 
+  // todo alsresponse_free is deprecated iOS 7
+  // https://github.com/calabash/calabash-ios/issues/719
   aslresponse_free(response);  //Also frees the messages used in the above loop.
 
   NSArray *results = [NSArray arrayWithArray:messages];
