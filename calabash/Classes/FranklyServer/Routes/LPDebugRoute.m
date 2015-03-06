@@ -22,9 +22,19 @@
     [LPLog setLevelFromString:requiredLogLevel];
   }
 
-  return [NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithObject:[LPLog currentLevelString]], @"results",
-                                                    @"SUCCESS", @"outcome",
-                                                    nil];
+  NSString *currentLogLevel = [LPLog currentLevelString];
+  NSArray *resultsArray;
+  if (!currentLogLevel) {
+    resultsArray = @[];
+  } else {
+    resultsArray = @[currentLogLevel];
+  }
+
+  return
+  @{
+    @"results" : resultsArray,
+    @"outcome" : @"SUCCESS"
+    };
 }
 
 @end
