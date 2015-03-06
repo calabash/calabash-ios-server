@@ -9,12 +9,18 @@
 #import "LPDevice.h"
 #import <sys/utsname.h>
 
+@interface LPDevice ()
 
-@implementation LPDevice {
-  CGFloat _sample;
-  NSDictionary* _screenDimensions;
+@property(assign, nonatomic) CGFloat sample;
+@property(strong, nonatomic) NSDictionary *screenDimensions;
 
-}
+@end
+
+@implementation LPDevice
+
+@synthesize sample = _sample;
+@synthesize screenDimensions = _screenDimensions;
+
 + (LPDevice *) sharedDevice {
   static LPDevice *shared = nil;
   static dispatch_once_t onceToken;
@@ -61,6 +67,8 @@
     CGSize size = sm.size;
 
     _sample = 1.0f;
+    _screenDimensions = nil;
+
     if ([@"iPhone7,1" isEqualToString:machine]) {
       //iPhone6+ http://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions
       if (size.width < IPHONE6PLUS.width && size.height < IPHONE6PLUS.height) {
@@ -111,13 +119,7 @@
                          [NSNumber numberWithFloat:scale],       @"scale",
                          [NSNumber numberWithFloat:_sample],      @"sample",
                          nil];
-
   }
-  else {
-    _sample = 1.0f;
-    _screenDimensions = nil;
-  }
-
   return self;
 }
 
