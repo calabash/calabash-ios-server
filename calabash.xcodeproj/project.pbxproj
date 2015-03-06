@@ -3550,7 +3550,7 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LPTestTarget.app/LPTestTarget";
-				WARNING_CFLAGS = "-Wno-unused-getter-return-value";
+				WARNING_CFLAGS = "";
 			};
 			name = Debug;
 		};
@@ -3606,7 +3606,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LPTestTarget.app/LPTestTarget";
-				WARNING_CFLAGS = "-Wno-unused-getter-return-value";
+				WARNING_CFLAGS = "";
 			};
 			name = Release;
 		};
