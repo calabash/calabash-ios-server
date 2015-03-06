@@ -33,7 +33,6 @@
   return shared;
 }
 
-
 - (id) init {
   self = [super init];
   if (self) {
@@ -48,7 +47,8 @@
 
     const CGSize IPHONE6PLUS_TARGET_SPACE = CGSizeMake(414.0f, 736.0f);
 
-    const CGSize IPHONE6PLUS = CGSizeMake(IPHONE6PLUS_TARGET_SPACE.width*scale, IPHONE6PLUS_TARGET_SPACE.height*scale);
+    const CGSize IPHONE6PLUS = CGSizeMake(IPHONE6PLUS_TARGET_SPACE.width*scale,
+                                          IPHONE6PLUS_TARGET_SPACE.height*scale);
 
 
     CGSize IPHONE6 = CGSizeMake(IPHONE6_TARGET_SPACE.width*scale,
@@ -57,9 +57,6 @@
 
     const CGFloat IPHONE6_SAMPLE = 1.0f;
     const CGFloat IPHONE6PLUS_SAMPLE = 1.0f;
-    // Unused, but possibly useful.  The if condition (below) that assigns the
-    // _sample might use this some day, so I am keeping it around as a
-    // reference. -jjm
     const CGFloat IPHONE6_DISPLAY_ZOOM_SAMPLE = 1.171875f;
 
     
@@ -126,14 +123,12 @@
   return self;
 }
 
--(CGFloat)sampleFactor {
+- (CGFloat) sampleFactor {
   return _sample;
 }
 
-
-- (NSDictionary*) screenDimensions {
+- (NSDictionary *) screenDimensions {
   return _screenDimensions;
 }
-
 
 @end

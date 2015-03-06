@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface LPDevice : NSObject
+
 + (LPDevice *) sharedDevice;
 
-- (NSDictionary*) screenDimensions;
--(CGFloat)sampleFactor;
+- (NSDictionary *) screenDimensions;
+- (CGFloat) sampleFactor;
+
 @end
