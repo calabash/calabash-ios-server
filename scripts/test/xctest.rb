@@ -20,7 +20,7 @@ args =
             '-SYMROOT=build',
             '-derivedDataPath build',
             '-project calabash.xcodeproj',
-            '-scheme calabash-ios-server-tests',
+            '-scheme XCTest',
             "-destination 'platform=iOS Simulator,name=#{target_simulator_name},OS=latest'",
             '-sdk iphonesimulator',
             '-configuration Debug',

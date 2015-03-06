@@ -31,15 +31,11 @@ dylibs:
 	scripts/make-calabash-dylib.rb device
 	scripts/make-libraries.rb verify-dylibs
 
-no-offending-symbols:
+dylib_sim:
 	rm -rf build
-	rm -rf calabash.framework
-	scripts/make-calabash-lib.rb sim
-	scripts/make-calabash-lib.rb device
-	scripts/make-calabash-lib.rb version
-	scripts/make-libraries.rb verify-framework
-	./expect-no-offending-symbols.rb Metal
-	./expect-no-offending-symbols.rb kSecAttrSynchronizable
+	rm -rf calabash-dylibs
+	scripts/make-calabash-dylib.rb sim
+	scripts/make-libraries.rb verify-sim-dylib
 
 install_test_binaries:
 	$(MAKE) dylibs
@@ -51,6 +47,16 @@ webquery_headers:
 test_app:
 	scripts/make-lp-test-app.rb
 
-xctest:
+xct:
 	scripts/test/xctest.rb
+
+no-offending-symbols:
+	rm -rf build
+	rm -rf calabash.framework
+	scripts/make-calabash-lib.rb sim
+	scripts/make-calabash-lib.rb device
+	scripts/make-calabash-lib.rb version
+	scripts/make-libraries.rb verify-framework
+	./expect-no-offending-symbols.rb Metal
+	./expect-no-offending-symbols.rb kSecAttrSynchronizable
 

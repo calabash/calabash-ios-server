@@ -23,4 +23,5 @@ calabash-ios
 .env
 .irb-history
 .irbrc
+Gemfile.lock
 
