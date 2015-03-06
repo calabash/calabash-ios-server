@@ -1,3 +1,6 @@
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
 //
 //  LPQueryLogRoute.m
 //  calabash
@@ -22,7 +25,7 @@
   //Build a query message containing all our criteria.
   aslmsg query = asl_new(ASL_TYPE_QUERY);
 
-  for (NSString *key in [data keyEnumerator]) {
+  for (__strong NSString *key in [data keyEnumerator]) {
     int op = ASL_QUERY_OP_EQUAL;
     NSString *kData = [data valueForKey:key];
 
@@ -79,9 +82,9 @@
 
   asl_free(query);
 
-  // todo possible memory leak in LPQueryLogRoute
   NSMutableArray *messages = [[NSMutableArray alloc] init];
   aslmsg msg;
+
   while ((msg = aslresponse_next(response)) && count-- > 0) {
     //Load all the key/value pairs from the message into a dictionary.
     const char *k;
@@ -93,7 +96,7 @@
     }
     [messages addObject:msgDict];
   }
-  // todo possible memory leak in LPQueryLogRoute
+
   aslresponse_free(response);  //Also frees the messages used in the above loop.
 
   NSArray *results = [NSArray arrayWithArray:messages];
