@@ -3153,6 +3153,11 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
 				VALID_ARCHS = "armv7 armv7s arm64";
+				WARNING_CFLAGS = (
+					"-Wunreachable-code",
+					"-fcolor-diagnostics",
+					"-Warc-retain-cycles",
+				);
 			};
 			name = Debug;
 		};
@@ -3194,6 +3199,11 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
 				VALID_ARCHS = "armv7 armv7s arm64";
+				WARNING_CFLAGS = (
+					"-Wunreachable-code",
+					"-fcolor-diagnostics",
+					"-Warc-retain-cycles",
+				);
 			};
 			name = Release;
 		};
@@ -3232,6 +3242,11 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
 				VALID_ARCHS = "i386 x86_64";
+				WARNING_CFLAGS = (
+					"-Wunreachable-code",
+					"-fcolor-diagnostics",
+					"-Warc-retain-cycles",
+				);
 			};
 			name = Debug;
 		};
@@ -3268,6 +3283,11 @@
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
 				VALID_ARCHS = "i386 x86_64";
+				WARNING_CFLAGS = (
+					"-Wunreachable-code",
+					"-fcolor-diagnostics",
+					"-Warc-retain-cycles",
+				);
 			};
 			name = Release;
 		};
@@ -3550,7 +3570,11 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LPTestTarget.app/LPTestTarget";
-				WARNING_CFLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wunreachable-code",
+					"-fcolor-diagnostics",
+					"-Warc-retain-cycles",
+				);
 			};
 			name = Debug;
 		};
@@ -3606,7 +3630,11 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LPTestTarget.app/LPTestTarget";
-				WARNING_CFLAGS = "";
+				WARNING_CFLAGS = (
+					"-Wunreachable-code",
+					"-fcolor-diagnostics",
+					"-Warc-retain-cycles",
+				);
 			};
 			name = Release;
 		};
@@ -3792,6 +3820,11 @@
 				PROVISIONING_PROFILE = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wunreachable-code",
+					"-fcolor-diagnostics",
+					"-Warc-retain-cycles",
+				);
 			};
 			name = Debug;
 		};
@@ -3819,6 +3852,11 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WARNING_CFLAGS = (
+					"-Wunreachable-code",
+					"-fcolor-diagnostics",
+					"-Warc-retain-cycles",
+				);
 			};
 			name = Release;
 		};
