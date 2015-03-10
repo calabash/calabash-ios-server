@@ -405,7 +405,7 @@
       [view respondsToSelector:@selector(accessibilityElementAtIndex:)]) {
     NSInteger count = [view accessibilityElementCount];
     if (count == 0 || count == NSNotFound) {
-      return arr;
+      return [arr autorelease];
     }
     for (NSInteger i=0;i<count;i++) {
       id accEl = [view accessibilityElementAtIndex:i];

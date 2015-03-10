@@ -28,3 +28,22 @@
 }
 
 @end
+
+SpecBegin(LPVersionRoute)
+
+describe(@"LPVersionRoute", ^{
+  describe(@"#JSONResponsForMethod:URI:data:", ^{
+    __block NSDictionary *response;
+
+    before(^{
+      LPVersionRoute *route = [LPVersionRoute new];
+      response = [route JSONResponseForMethod:nil URI:nil data:nil];
+    });
+
+    it(@"contains app_base_sdk key", ^{
+      XCTAssertNotNil(response[@"app_base_sdk"]);
+    });
+  });
+});
+
+SpecEnd
