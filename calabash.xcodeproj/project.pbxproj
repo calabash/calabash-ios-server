@@ -559,6 +559,14 @@
 		F50CBFCF1A040707004AC9DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		F50E42791AA86D36003DB030 /* libSpecta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F50E42711AA86D36003DB030 /* libSpecta.a */; };
 		F50E427B1AA86FA3003DB030 /* LPScreenshotRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F50E427A1AA86FA3003DB030 /* LPScreenshotRouteTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5252A201AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m in Sources */ = {isa = PBXBuildFile; fileRef = F5252A191AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5252A211AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m in Sources */ = {isa = PBXBuildFile; fileRef = F5252A191AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5252A221AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m in Sources */ = {isa = PBXBuildFile; fileRef = F5252A191AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5252A231AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m in Sources */ = {isa = PBXBuildFile; fileRef = F5252A191AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5252A241AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m in Sources */ = {isa = PBXBuildFile; fileRef = F5252A191AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5252A251AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m in Sources */ = {isa = PBXBuildFile; fileRef = F5252A191AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5252A261AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m in Sources */ = {isa = PBXBuildFile; fileRef = F5252A191AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5252A281AAF7EA5005A4FA4 /* LPLegacyAppRectTranslatorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5252A271AAF7EA5005A4FA4 /* LPLegacyAppRectTranslatorTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F52BF6321A3A0BC700E173AF /* LPTouchUtilsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F50CBF781A03F9FF004AC9DA /* LPTouchUtilsTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5329C941A9D6F2900FE3800 /* LPWebQueryResult.m in Sources */ = {isa = PBXBuildFile; fileRef = F5329C931A9D6F2900FE3800 /* LPWebQueryResult.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F537397318E5200C004133FA /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -954,6 +962,9 @@
 		F50E42771AA86D36003DB030 /* SPTSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTSpec.h; sourceTree = "<group>"; };
 		F50E42781AA86D36003DB030 /* XCTestCase+Specta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTestCase+Specta.h"; sourceTree = "<group>"; };
 		F50E427A1AA86FA3003DB030 /* LPScreenshotRouteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScreenshotRouteTest.m; sourceTree = "<group>"; };
+		F5252A181AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPLegacyAppRectTranslator.h; sourceTree = "<group>"; };
+		F5252A191AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPLegacyAppRectTranslator.m; sourceTree = "<group>"; };
+		F5252A271AAF7EA5005A4FA4 /* LPLegacyAppRectTranslatorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPLegacyAppRectTranslatorTest.m; sourceTree = "<group>"; };
 		F5329C921A9D6F2900FE3800 /* LPWebQueryResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPWebQueryResult.h; sourceTree = "<group>"; };
 		F5329C931A9D6F2900FE3800 /* LPWebQueryResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPWebQueryResult.m; sourceTree = "<group>"; };
 		F537398C18E5253B004133FA /* version */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = version; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1518,6 +1529,8 @@
 				F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */,
 				F5F600411A7C69760020637D /* LPInvoker.h */,
 				F5F600421A7C69760020637D /* LPInvoker.m */,
+				F5252A181AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.h */,
+				F5252A191AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1552,6 +1565,7 @@
 				F5329C921A9D6F2900FE3800 /* LPWebQueryResult.h */,
 				F5329C931A9D6F2900FE3800 /* LPWebQueryResult.m */,
 				F50E427A1AA86FA3003DB030 /* LPScreenshotRouteTest.m */,
+				F5252A271AAF7EA5005A4FA4 /* LPLegacyAppRectTranslatorTest.m */,
 			);
 			path = XCTest;
 			sourceTree = SOURCE_ROOT;
@@ -2250,6 +2264,7 @@
 				F5C094551A979CC200AE5991 /* LPWebQuery.m in Sources */,
 				B113585E1981B053004B16F4 /* LPOrientationOperation.m in Sources */,
 				B1F772241A22A398009A2336 /* LPSharedUIATextField.m in Sources */,
+				F5252A221AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m in Sources */,
 				B1058E7B197F043100B4A57B /* LPCalabashFrankRegistrar.m in Sources */,
 				B11358621981B053004B16F4 /* LPQueryOperation.m in Sources */,
 				B1135846197F1351004B16F4 /* LPCORSResponse.m in Sources */,
@@ -2360,6 +2375,7 @@
 				B15BF9CD19ABB1DE00B38577 /* LPVersionRoute.m in Sources */,
 				B15BF9CE19ABB1DE00B38577 /* LPISO8601DateFormatter.m in Sources */,
 				B15BF9CF19ABB1DE00B38577 /* CDataScanner_Extensions.m in Sources */,
+				F5252A241AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m in Sources */,
 				B1670E2C1A32410F00000A62 /* LPDumpRoute.m in Sources */,
 				B15BF9D019ABB1DE00B38577 /* LPCJSONDeserializer.m in Sources */,
 				B15BF9D119ABB1DE00B38577 /* LPCJSONScanner.m in Sources */,
@@ -2451,6 +2467,7 @@
 				B15BFA1F19ABB2B100B38577 /* LPVersionRoute.m in Sources */,
 				B15BFA2019ABB2B100B38577 /* LPISO8601DateFormatter.m in Sources */,
 				B15BFA2119ABB2B100B38577 /* CDataScanner_Extensions.m in Sources */,
+				F5252A251AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m in Sources */,
 				B1670E2D1A32410F00000A62 /* LPDumpRoute.m in Sources */,
 				B15BFA2219ABB2B100B38577 /* LPCJSONDeserializer.m in Sources */,
 				B15BFA2319ABB2B100B38577 /* LPCJSONScanner.m in Sources */,
@@ -2568,6 +2585,7 @@
 				B1D5BDC319A23BCE0070E8CE /* LPScrollToRowWithMarkOperation.m in Sources */,
 				B1D5BDC419A23BCE0070E8CE /* LPOrientationOperation.m in Sources */,
 				B1D5BDC519A23BCE0070E8CE /* LPCORSResponse.m in Sources */,
+				F5252A231AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m in Sources */,
 				B1D5BDC619A23BCE0070E8CE /* LPDatePickerOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2659,6 +2677,7 @@
 				F5091C2418C4E1D700C85307 /* LPScrollToRowWithMarkOperation.m in Sources */,
 				F5091C2518C4E1D700C85307 /* LPOrientationOperation.m in Sources */,
 				F5F53D6B18C619CB00BD9731 /* LPCORSResponse.m in Sources */,
+				F5252A201AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m in Sources */,
 				F5091C2618C4E1D700C85307 /* LPDatePickerOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2703,6 +2722,7 @@
 				F5F600501A7C69BA0020637D /* LPInvokerTest.m in Sources */,
 				F50CBF9D1A040599004AC9DA /* LPScrollToMarkOperation.m in Sources */,
 				B15369FC1A32620A0093923F /* LPUIASharedElementChannel.m in Sources */,
+				F5252A281AAF7EA5005A4FA4 /* LPLegacyAppRectTranslatorTest.m in Sources */,
 				F50CBFCA1A0405E9004AC9DA /* LPLog.m in Sources */,
 				F50CBF8B1A04056F004AC9DA /* LPHTTPDynamicFileResponse.m in Sources */,
 				B1670E2E1A32411100000A62 /* LPDumpRoute.m in Sources */,
@@ -2716,6 +2736,7 @@
 				F50CBF951A04058C004AC9DA /* LPFlashOperation.m in Sources */,
 				F58937E31A9BD749007B9A5B /* LPWebQueryTest.m in Sources */,
 				F50CBF921A04058C004AC9DA /* LPSliderOperation.m in Sources */,
+				F5252A261AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m in Sources */,
 				F50CBF9E1A040599004AC9DA /* LPScrollToRowWithMarkOperation.m in Sources */,
 				F50CBF861A040564004AC9DA /* DDData.m in Sources */,
 				F50CBF841A040564004AC9DA /* LPHTTPMessage.m in Sources */,
@@ -2863,6 +2884,7 @@
 				F5821A4218C4E27400293508 /* LPScrollToRowWithMarkOperation.m in Sources */,
 				F5821A4318C4E27400293508 /* LPOrientationOperation.m in Sources */,
 				F5F53D6A18C619CB00BD9731 /* LPCORSResponse.m in Sources */,
+				F5252A211AAF7DF1005A4FA4 /* LPLegacyAppRectTranslator.m in Sources */,
 				F5821A4418C4E27400293508 /* LPDatePickerOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
