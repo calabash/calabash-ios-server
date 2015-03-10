@@ -120,7 +120,6 @@
 		B15BF9B819ABB1DD00B38577 /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; };
 		B15BF9B919ABB1DD00B38577 /* LPRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8714B6DBAC002A744C /* LPRecorder.m */; };
 		B15BF9BA19ABB1DD00B38577 /* LPUIARouteOverUserPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CA15C06CB500BBE2BE /* LPUIARouteOverUserPrefs.m */; };
-		B15BF9BB19ABB1DD00B38577 /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; };
 		B15BF9BC19ABB1DD00B38577 /* LPDebugRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DCD84189A997B00F8DF87 /* LPDebugRoute.m */; };
 		B15BF9BD19ABB1DE00B38577 /* LPAppPropertyRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EBF08516EE63A000AE4D40 /* LPAppPropertyRoute.m */; };
 		B15BF9BE19ABB1DE00B38577 /* LPQueryLogRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EBF08716EE63A000AE4D40 /* LPQueryLogRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -197,7 +196,6 @@
 		B15BFA0A19ABB2B100B38577 /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; };
 		B15BFA0B19ABB2B100B38577 /* LPRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8714B6DBAC002A744C /* LPRecorder.m */; };
 		B15BFA0C19ABB2B100B38577 /* LPUIARouteOverUserPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CA15C06CB500BBE2BE /* LPUIARouteOverUserPrefs.m */; };
-		B15BFA0D19ABB2B100B38577 /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; };
 		B15BFA0E19ABB2B100B38577 /* LPDebugRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DCD84189A997B00F8DF87 /* LPDebugRoute.m */; };
 		B15BFA0F19ABB2B100B38577 /* LPAppPropertyRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EBF08516EE63A000AE4D40 /* LPAppPropertyRoute.m */; };
 		B15BFA1019ABB2B100B38577 /* LPQueryLogRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EBF08716EE63A000AE4D40 /* LPQueryLogRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -2342,7 +2340,6 @@
 				B15BF9B919ABB1DD00B38577 /* LPRecorder.m in Sources */,
 				B15BF9BA19ABB1DD00B38577 /* LPUIARouteOverUserPrefs.m in Sources */,
 				F5C094571A979CC200AE5991 /* LPWebQuery.m in Sources */,
-				B15BF9BB19ABB1DD00B38577 /* LPKeychainRoute.m in Sources */,
 				B15BF9BC19ABB1DD00B38577 /* LPDebugRoute.m in Sources */,
 				B15BF9BD19ABB1DE00B38577 /* LPAppPropertyRoute.m in Sources */,
 				B15BF9BE19ABB1DE00B38577 /* LPQueryLogRoute.m in Sources */,
@@ -2434,7 +2431,6 @@
 				B15BFA0B19ABB2B100B38577 /* LPRecorder.m in Sources */,
 				B15BFA0C19ABB2B100B38577 /* LPUIARouteOverUserPrefs.m in Sources */,
 				F5C094581A979CC200AE5991 /* LPWebQuery.m in Sources */,
-				B15BFA0D19ABB2B100B38577 /* LPKeychainRoute.m in Sources */,
 				B15BFA0E19ABB2B100B38577 /* LPDebugRoute.m in Sources */,
 				B15BFA0F19ABB2B100B38577 /* LPAppPropertyRoute.m in Sources */,
 				B15BFA1019ABB2B100B38577 /* LPQueryLogRoute.m in Sources */,
