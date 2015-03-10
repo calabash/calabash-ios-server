@@ -14,6 +14,8 @@
 #import "LPDevice.h"
 #import "LPOrientationOperation.h"
 #import "LPInvoker.h"
+#import "LPInfoPlist.h"
+#import "LPLegacyAppRectTranslator.h"
 
 @interface LPJSONUtils ()
 
@@ -277,6 +279,14 @@
                           @"y" : @(rect.origin.y),
                           @"width" : @(rect.size.width),
                           @"height" : @(rect.size.height)};
+
+      LPLegacyAppRectTranslator *translator = [LPLegacyAppRectTranslator new];
+      if ([translator appUnderTestRequiresLegacyRectTranslation]) {
+        NSDictionary *translatedRect;
+        NSDictionary *originalRect = result[@"rect"];
+        translatedRect = [translator dictionaryAfterLegacyRectTranslation:originalRect];
+        result[@"rect"] = translatedRect;
+      }
     }
   }
 
