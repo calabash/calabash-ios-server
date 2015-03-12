@@ -43,6 +43,7 @@
   [server start];
 
   dlopen([@"/Developer/Library/PrivateFrameworks/UIAutomation.framework/UIAutomation" fileSystemRepresentation], RTLD_LOCAL);
+  [server loadPlugins];
 }
 
 
@@ -225,6 +226,53 @@
   CFRelease(accessibilityDomain);
 
   [autoreleasePool drain];
+}
+
+-(void)loadPlugins {
+  NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
+  NSFileManager *localFileManager=[NSFileManager defaultManager];
+
+  NSDirectoryEnumerator *bundleEnumerator = [localFileManager
+                                          enumeratorAtURL:[NSURL URLWithString:bundlePath]
+                                          includingPropertiesForKeys:
+                                          [NSArray arrayWithObjects:NSURLNameKey,
+                                           NSURLIsRegularFileKey,NSURLIsDirectoryKey,nil]
+                                          options:NSDirectoryEnumerationSkipsHiddenFiles|
+                                          NSDirectoryEnumerationSkipsSubdirectoryDescendants
+                                          errorHandler:nil];
+
+
+  NSMutableArray *calabashDylibs = [NSMutableArray array];
+  for (NSURL *fileUrl in bundleEnumerator) {
+
+    NSString *fileName;
+    [fileUrl getResourceValue:&fileName forKey:NSURLNameKey error:NULL];
+
+    NSNumber *isRegularFile;
+    [fileUrl getResourceValue:&isRegularFile forKey:NSURLIsRegularFileKey error:NULL];
+
+    // dylibs must have form XXXCalabash.dylib, e.g. xamCastCalabash.dylib
+    NSString *dylibPattern = @"Calabash.dylib";
+
+    if ([isRegularFile boolValue] && [fileName length]>[dylibPattern length]) {
+      NSRange searchRange = NSMakeRange([fileName length] -[dylibPattern length], [dylibPattern length]);
+      NSRange range = [fileName rangeOfString:dylibPattern options:NSCaseInsensitiveSearch range:searchRange];
+      if (range.location != NSNotFound) {
+        [calabashDylibs addObject:[NSString stringWithFormat:@"%@/%@", bundlePath, fileName]];
+      }
+    }
+  }
+
+  char *error;
+  for (NSURL *filename in calabashDylibs) {
+    const char *fileSys = [filename fileSystemRepresentation];
+    NSLog(@"Loading Calabash plugin - %@",[NSString stringWithUTF8String:fileSys]);
+    dlopen(fileSys, RTLD_LOCAL);
+    error = dlerror();
+    if (error) {
+      NSLog(@"Warning: error while loading Calabash plugin %@. Error: %@", [filename lastPathComponent], [NSString stringWithUTF8String:error]);
+    }
+  }
 }
 
 
