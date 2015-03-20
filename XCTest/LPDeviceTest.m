@@ -14,10 +14,56 @@ SpecBegin(LPDevice)
 
 describe(@"LPDevice", ^{
 
+  __block LPDevice *device = [[LPDevice alloc] init_private];
+
   describe(@"init", ^{
     expect(^{
       LPDevice __unused *tmp = [[LPDevice alloc] init];
     }).to.raiseAny();
+  });
+
+  describe(@"#iPhone6", ^{
+    describe(@"simulator", ^{
+      it(@"returns NO", ^{
+        XCTAssertTrue(NO);
+      });
+
+      it(@"returns YES", ^{
+        XCTAssertTrue(NO);
+      });
+    });
+
+    describe(@"device", ^{
+      it(@"returns NO", ^{
+        XCTAssertTrue(NO);
+      });
+
+      it(@"returns YES", ^{
+        XCTAssertTrue(NO);
+      });
+    });
+  });
+
+  describe(@"#iPhone6Plus", ^{
+    describe(@"simulator", ^{
+      it(@"returns NO", ^{
+        XCTAssertTrue(NO);
+      });
+
+      it(@"returns YES", ^{
+        XCTAssertTrue(NO);
+      });
+    });
+
+    describe(@"device", ^{
+      it(@"returns NO", ^{
+        XCTAssertTrue(NO);
+      });
+
+      it(@"returns YES", ^{
+        XCTAssertTrue(NO);
+      });
+    });
   });
 });
 

@@ -139,4 +139,12 @@
   return _screenDimensions;
 }
 
+- (BOOL) iPhone6 {
+  return NO;
+}
+
+- (BOOL) iPhone6Plus {
+  return NO;
+}
+
 @end
