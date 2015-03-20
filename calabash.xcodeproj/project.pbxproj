@@ -694,6 +694,7 @@
 		F59CA4801A82EF40007A2F38 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F59CA47F1A82EF40007A2F38 /* Images.xcassets */; };
 		F5B27B9118C5884D0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		F5B27B9218C5884E0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
+		F5BD0BF31ABCE19B009E3D77 /* LPDeviceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BD0BF21ABCE19B009E3D77 /* LPDeviceTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5C0944D1A979CC200AE5991 /* LPWebQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = F5C0944B1A979CC200AE5991 /* LPWebQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5C0944E1A979CC200AE5991 /* LPWebQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = F5C0944B1A979CC200AE5991 /* LPWebQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5C0944F1A979CC200AE5991 /* LPWebQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = F5C0944B1A979CC200AE5991 /* LPWebQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1058,6 +1059,7 @@
 		F59CA47F1A82EF40007A2F38 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F5AE0BC4174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPScrollToRowWithMarkOperation.h; sourceTree = "<group>"; };
 		F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScrollToRowWithMarkOperation.m; sourceTree = "<group>"; };
+		F5BD0BF21ABCE19B009E3D77 /* LPDeviceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDeviceTest.m; sourceTree = "<group>"; };
 		F5C0944B1A979CC200AE5991 /* LPWebQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPWebQuery.h; sourceTree = "<group>"; };
 		F5C0944C1A979CC200AE5991 /* LPWebQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPWebQuery.m; sourceTree = "<group>"; };
 		F5C3A62D18A2EA0800DB7E42 /* LPCollectionViewScrollToItemOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCollectionViewScrollToItemOperation.h; sourceTree = "<group>"; tabWidth = 4; };
@@ -1556,6 +1558,7 @@
 		F50CBF5F1A03F222004AC9DA /* XCTest */ = {
 			isa = PBXGroup;
 			children = (
+				F5BD0BF21ABCE19B009E3D77 /* LPDeviceTest.m */,
 				F58937E21A9BD749007B9A5B /* LPWebQueryTest.m */,
 				66D6976C1A93C5910035A763 /* LPScrollOperationTest.m */,
 				F5F6003F1A7BE77E0020637D /* LPJSONUtilsTest.m */,
@@ -2768,6 +2771,7 @@
 				F50CBF8C1A04056F004AC9DA /* LPHTTPFileResponse.m in Sources */,
 				F50CBFB91A0405CE004AC9DA /* LPResources.m in Sources */,
 				F50CBF831A040564004AC9DA /* LPHTTPConnection.m in Sources */,
+				F5BD0BF31ABCE19B009E3D77 /* LPDeviceTest.m in Sources */,
 				66D6976D1A93C5910035A763 /* LPScrollOperationTest.m in Sources */,
 				F50CBFB11A0405B2004AC9DA /* LPBackdoorRoute.m in Sources */,
 				F50CBFB01A0405B2004AC9DA /* LPAsyncPlaybackRoute.m in Sources */,
