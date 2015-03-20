@@ -17,6 +17,8 @@
 @property(assign, nonatomic) CGFloat sample;
 @property(strong, nonatomic) NSDictionary *screenDimensions;
 
+- (id) init_private;
+
 @end
 
 @implementation LPDevice
@@ -24,16 +26,22 @@
 @synthesize sample = _sample;
 @synthesize screenDimensions = _screenDimensions;
 
+- (id) init {
+  @throw [NSException exceptionWithName:@"Cannot call init"
+                                 reason:@"This is a singleton class"
+                                 userInfo:nil];
+}
+
 + (LPDevice *) sharedDevice {
   static LPDevice *shared = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-    shared = [[LPDevice alloc] init];
+    shared = [[LPDevice alloc] init_private];
   });
   return shared;
 }
 
-- (id) init {
+- (id) init_private {
   self = [super init];
   if (self) {
     UIDevice *device = [UIDevice currentDevice];
