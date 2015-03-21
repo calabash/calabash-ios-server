@@ -115,12 +115,25 @@ describe(@"LPDevice", ^{
     });
 
     describe(@"device", ^{
+      __block LPDevice *device;
+      __block id mockDevice;
+
+      beforeEach(^{
+        device = [[LPDevice alloc] init_private];
+        mockDevice = OCMPartialMock(device);
+        [[[mockDevice expect] andReturnValue:OCMOCK_VALUE(no)] simulator];
+      });
+
       it(@"returns NO", ^{
-        XCTAssertTrue(NO);
+        [[[mockDevice expect] andReturn:@"Some Machine"] system];
+        expect(device.iPhone6).to.equal(NO);
+        [mockDevice verify];
       });
 
       it(@"returns YES", ^{
-        XCTAssertTrue(NO);
+        [[[mockDevice expect] andReturn:@"iPhone7,2"] system];
+        expect(device.iPhone6).to.equal(YES);
+        [mockDevice verify];
       });
     });
   });
@@ -174,12 +187,25 @@ describe(@"LPDevice", ^{
     });
 
     describe(@"device", ^{
+      __block LPDevice *device;
+      __block id mockDevice;
+
+      beforeEach(^{
+        device = [[LPDevice alloc] init_private];
+        mockDevice = OCMPartialMock(device);
+        [[[mockDevice expect] andReturnValue:OCMOCK_VALUE(no)] simulator];
+      });
+
       it(@"returns NO", ^{
-        XCTAssertTrue(NO);
+        [[[mockDevice expect] andReturn:@"Some Machine"] system];
+        expect(device.iPhone6Plus).to.equal(NO);
+        [mockDevice verify];
       });
 
       it(@"returns YES", ^{
-        XCTAssertTrue(NO);
+        [[[mockDevice expect] andReturn:@"iPhone7,1"] system];
+        expect(device.iPhone6Plus).to.equal(YES);
+        [mockDevice verify];
       });
     });
   });

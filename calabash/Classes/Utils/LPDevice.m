@@ -173,7 +173,7 @@
     NSDictionary *env = [[NSProcessInfo processInfo] environment];
     return [self.iPhone6SimPredicate evaluateWithObject:env];
   } else {
-    return NO;
+    return [[self system] isEqualToString:@"iPhone7,2"];
   }
 }
 
@@ -182,7 +182,7 @@
     NSDictionary *env = [[NSProcessInfo processInfo] environment];
     return [self.iPhone6PlusSimPredicate evaluateWithObject:env];
   } else {
-    return NO;
+    return [[self system] isEqualToString:@"iPhone7,1"];
   }
 }
 
