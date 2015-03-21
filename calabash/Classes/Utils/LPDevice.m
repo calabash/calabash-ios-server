@@ -169,7 +169,12 @@
 }
 
 - (BOOL) iPhone6 {
-  return NO;
+  if ([self simulator]) {
+    NSDictionary *env = [[NSProcessInfo processInfo] environment];
+    return [self.iPhone6SimPredicate evaluateWithObject:env];
+  } else {
+    return NO;
+  }
 }
 
 - (BOOL) iPhone6Plus {

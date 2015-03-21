@@ -4,6 +4,12 @@
 
 #import "LPDevice.h"
 
+static NSString *const LPiPhone6SimVersionInfo = @"Device: iPhone 6 - Runtime: iOS 8.1 (12B411) - DeviceType: iPhone 6";
+
+static NSString *const LPiPhone6PlusSimVersionInfo = @"CoreSimulator 110.4 - Device: iPhone 6 Plus - Runtime: iOS 8.1 (12B411) - DeviceType: iPhone 6 Plus";
+
+static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device: iPhone 5s - Runtime: iOS 8.1 (12B411) - DeviceType: iPhone 5s";
+
 @interface LPDevice (LPXCTEST)
 
 - (id) init_private;
@@ -15,6 +21,9 @@
 SpecBegin(LPDevice)
 
 describe(@"LPDevice", ^{
+
+  __block BOOL yes = YES;
+  __block BOOL no = NO;
 
   describe(@"init", ^{
     expect(^{
@@ -54,12 +63,49 @@ describe(@"LPDevice", ^{
 
   describe(@"#iPhone6", ^{
     describe(@"simulator", ^{
-      it(@"returns NO", ^{
-        XCTAssertTrue(NO);
+      __block LPDevice *device;
+      __block id mockDevice;
+      __block id processInfo;
+
+      beforeEach(^{
+        device = [[LPDevice alloc] init_private];
+        mockDevice = OCMPartialMock(device);
+        [[[mockDevice expect] andReturnValue:OCMOCK_VALUE(yes)] simulator];
+
+        processInfo = OCMPartialMock([NSProcessInfo processInfo]);
+      });
+
+      afterEach(^{
+        [processInfo stopMocking];
+      });
+
+      describe(@"returns NO", ^{
+        it(@"when iPhone 6 Plus", ^{
+          NSDictionary *env = @{@"SIMULATOR_VERSION_INFO" : LPiPhone6PlusSimVersionInfo};
+          [[[processInfo stub] andReturn:env] environment];
+
+          expect(device.iPhone6).to.equal(NO);
+          [mockDevice verify];
+          [processInfo verify];
+        });
+
+        it(@"when not iPhone 6 form factor", ^{
+          NSDictionary *env = @{@"SIMULATOR_VERSION_INFO" : LPiPhone5sSimVersionInfo};
+          [[[processInfo stub] andReturn:env] environment];
+
+          expect(device.iPhone6).to.equal(NO);
+          [mockDevice verify];
+          [processInfo verify];
+        });
       });
 
       it(@"returns YES", ^{
-        XCTAssertTrue(NO);
+        NSDictionary *env = @{@"SIMULATOR_VERSION_INFO" : LPiPhone6SimVersionInfo};
+        [[[processInfo stub] andReturn:env] environment];
+
+        expect(device.iPhone6).to.equal(YES);
+        [mockDevice verify];
+        [processInfo verify];
       });
     });
 
