@@ -48,8 +48,7 @@
   if (self) {
     struct utsname systemInfo;
     uname(&systemInfo);
-    
-    NSDictionary *env = [[NSProcessInfo processInfo] environment];
+
     CGFloat scale = [UIScreen mainScreen].scale;
 
     const CGSize IPHONE6_TARGET_SPACE = CGSizeMake(375.0f, 667.0f);
@@ -98,11 +97,8 @@
       }
     } else {
       if ([self simulator]) {
-        
-        NSPredicate *iphone6plus = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone 6*Plus*'"];
-        NSPredicate *iphone6 = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone 6*'"];
-        
-        if ([iphone6plus evaluateWithObject:env]) {
+
+        if ([self iPhone6Plus]) {
           if (size.width < IPHONE6PLUS.width && size.height < IPHONE6PLUS.height) {
             _sample = (IPHONE6PLUS.width / size.width);
             _sample = (IPHONE6PLUS.height / size.height);
@@ -112,7 +108,7 @@
           }
           
         }
-        else if ([iphone6 evaluateWithObject:env]) {
+        else if ([self iPhone6]) {
           if (CGSizeEqualToSize(size, IPHONE6)) {
             _sample = IPHONE6_SAMPLE;
           }
