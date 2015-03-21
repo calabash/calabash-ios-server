@@ -121,13 +121,50 @@ describe(@"LPDevice", ^{
   });
 
   describe(@"#iPhone6Plus", ^{
-    describe(@"simulator", ^{
-      it(@"returns NO", ^{
-        XCTAssertTrue(NO);
+    fdescribe(@"simulator", ^{
+      __block LPDevice *device;
+      __block id mockDevice;
+      __block id processInfo;
+
+      beforeEach(^{
+        device = [[LPDevice alloc] init_private];
+        mockDevice = OCMPartialMock(device);
+        [[[mockDevice expect] andReturnValue:OCMOCK_VALUE(yes)] simulator];
+
+        processInfo = OCMPartialMock([NSProcessInfo processInfo]);
+      });
+
+      afterEach(^{
+        [processInfo stopMocking];
+      });
+
+      describe(@"returns NO", ^{
+        it(@"when iPhone 6", ^{
+          NSDictionary *env = @{@"SIMULATOR_VERSION_INFO" : LPiPhone6SimVersionInfo};
+          [[[processInfo stub] andReturn:env] environment];
+
+          expect(device.iPhone6Plus).to.equal(NO);
+          [mockDevice verify];
+          [processInfo verify];
+        });
+
+        it(@"when not iPhone 6 form factor", ^{
+          NSDictionary *env = @{@"SIMULATOR_VERSION_INFO" : LPiPhone5sSimVersionInfo};
+          [[[processInfo stub] andReturn:env] environment];
+
+          expect(device.iPhone6).to.equal(NO);
+          [mockDevice verify];
+          [processInfo verify];
+        });
       });
 
       it(@"returns YES", ^{
-        XCTAssertTrue(NO);
+        NSDictionary *env = @{@"SIMULATOR_VERSION_INFO" : LPiPhone6PlusSimVersionInfo};
+        [[[processInfo stub] andReturn:env] environment];
+
+        expect(device.iPhone6Plus).to.equal(YES);
+        [mockDevice verify];
+        [processInfo verify];
       });
     });
 
