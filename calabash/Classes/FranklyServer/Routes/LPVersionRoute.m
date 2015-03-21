@@ -97,10 +97,13 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
 - (NSDictionary *) JSONResponseForMethod:(NSString *) method
                                      URI:(NSString *) path
                                     data:(NSDictionary *) data {
-  struct utsname systemInfo;
-  uname(&systemInfo);
 
-  NSString *machine = @(systemInfo.machine);
+  LPDevice *device = [LPDevice sharedDevice];
+  NSString *system = [device system];
+  if (!system) { system = @""; }
+
+  NSString *formFactor = [device formFactor];
+  if (!formFactor) { formFactor = @""; }
 
   NSDictionary *env = [[NSProcessInfo processInfo] environment];
 
@@ -136,7 +139,7 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
     @"iOS_version": [[UIDevice currentDevice] systemVersion],
     @"app_name": [infoPlist stringForDisplayName],
     @"screen_dimensions": [[LPDevice sharedDevice] screenDimensions],
-    @"system": machine,
+    @"system": system,
     @"4inch": @(is4inDevice),
     @"simulator_device": dev,
     @"simulator": sim,
@@ -145,8 +148,8 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
     @"iphone_app_emulated_on_ipad": @(isIphoneAppEmulated),
     @"git": git,
     @"server_port" : @([infoPlist serverPort]),
-    @"app_base_sdk" : [infoPlist stringForDTSDKName]
-
+    @"app_base_sdk" : [infoPlist stringForDTSDKName],
+    @"form_factor" : formFactor
     };
 }
 
