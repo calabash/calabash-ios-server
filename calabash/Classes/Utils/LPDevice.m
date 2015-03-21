@@ -46,8 +46,6 @@
 - (id) init_private {
   self = [super init];
   if (self) {
-    struct utsname systemInfo;
-    uname(&systemInfo);
 
     CGFloat scale = [UIScreen mainScreen].scale;
 
@@ -69,7 +67,7 @@
 
     
 
-    NSString *machine = @(systemInfo.machine);
+    NSString *machine = [self system];
     UIScreen *s = [UIScreen mainScreen];    
     UIScreenMode *sm = [s currentMode];
     CGSize size = sm.size;
