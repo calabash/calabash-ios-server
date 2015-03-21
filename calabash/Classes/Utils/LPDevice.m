@@ -139,6 +139,10 @@
   return _screenDimensions;
 }
 
+- (BOOL) simulator {
+  return NO;
+}
+
 - (BOOL) iPhone6 {
   return NO;
 }

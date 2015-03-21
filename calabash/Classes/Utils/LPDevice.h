@@ -15,6 +15,8 @@
 - (NSDictionary *) screenDimensions;
 - (CGFloat) sampleFactor;
 
+- (BOOL) simulator;
+
 - (BOOL) iPhone6;
 - (BOOL) iPhone6Plus;
 

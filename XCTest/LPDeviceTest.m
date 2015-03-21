@@ -22,6 +22,16 @@ describe(@"LPDevice", ^{
     }).to.raiseAny();
   });
 
+  describe(@"#simulator", ^{
+    it(@"returns NO", ^{
+      XCTAssertTrue(NO);
+    });
+
+    it(@"returns YES", ^{
+      XCTAssertTrue(NO);
+    });
+  });
+
   describe(@"#iPhone6", ^{
     describe(@"simulator", ^{
       it(@"returns NO", ^{
