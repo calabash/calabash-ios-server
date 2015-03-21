@@ -10,14 +10,13 @@
 
 @interface LPDevice : NSObject
 
+@property(strong, nonatomic, readonly) NSDictionary *screenDimensions;
+@property(assign, nonatomic, readonly) CGFloat sampleFactor;
+@property(copy, nonatomic, readonly) NSString *system;
+
 + (LPDevice *) sharedDevice;
 
-- (NSDictionary *) screenDimensions;
-- (CGFloat) sampleFactor;
-
 - (BOOL) simulator;
-- (NSString *) system;
-
 - (BOOL) iPhone6;
 - (BOOL) iPhone6Plus;
 
