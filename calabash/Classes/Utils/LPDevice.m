@@ -48,6 +48,9 @@
   self = [super init];
   if (self) {
 
+    // http://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions
+    // Thanks for the inspiration for iPhone 6 form factor sample.
+
     CGFloat scale = [UIScreen mainScreen].scale;
 
     const CGSize IPHONE6_TARGET_SPACE = CGSizeMake(375.0f, 667.0f);
@@ -74,41 +77,31 @@
     _screenDimensions = nil;
 
     if ([self iPhone6Plus]) {
-      //iPhone6+ http://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions
       if (size.width < IPHONE6PLUS.width && size.height < IPHONE6PLUS.height) {
         _sample = (IPHONE6PLUS.width / size.width);
         _sample = (IPHONE6PLUS.height / size.height);
-      }
-      else {
+      } else {
         _sample = IPHONE6PLUS_SAMPLE;
       }
-
     } else if ([self iPhone6]) {
-      //iPhone6
       if (CGSizeEqualToSize(size, IPHONE6)) {
         _sample = IPHONE6_SAMPLE;
-      }
-      else {
+      } else {
         _sample = IPHONE6_DISPLAY_ZOOM_SAMPLE;
       }
     } else {
       if ([self simulator]) {
-
         if ([self iPhone6Plus]) {
           if (size.width < IPHONE6PLUS.width && size.height < IPHONE6PLUS.height) {
             _sample = (IPHONE6PLUS.width / size.width);
             _sample = (IPHONE6PLUS.height / size.height);
-          }
-          else {
+          } else {
             _sample = IPHONE6PLUS_SAMPLE;
           }
-          
-        }
-        else if ([self iPhone6]) {
+        } else if ([self iPhone6]) {
           if (CGSizeEqualToSize(size, IPHONE6)) {
             _sample = IPHONE6_SAMPLE;
-          }
-          else {
+          } else {
             _sample = IPHONE6_DISPLAY_ZOOM_SAMPLE;
           }
         }
