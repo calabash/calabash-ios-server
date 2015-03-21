@@ -140,7 +140,8 @@
 }
 
 - (BOOL) simulator {
-  return NO;
+  UIDevice *device = [UIDevice currentDevice];
+  return [[device model] isEqualToString:@"iPhone Simulator"];
 }
 
 - (BOOL) iPhone6 {

@@ -24,11 +24,15 @@ describe(@"LPDevice", ^{
 
   describe(@"#simulator", ^{
     it(@"returns NO", ^{
-      XCTAssertTrue(NO);
+      id currentDevice = OCMPartialMock([UIDevice currentDevice]);
+      [[[currentDevice stub] andReturn:@"Anything but: iPhone Simulator"] model];
+      expect(device.simulator).to.equal(NO);
     });
 
     it(@"returns YES", ^{
-      XCTAssertTrue(NO);
+      id currentDevice = OCMPartialMock([UIDevice currentDevice]);
+      [[[currentDevice stub] andReturn:@"iPhone Simulator"] model];
+      expect(device.simulator).to.equal(YES);
     });
   });
 
