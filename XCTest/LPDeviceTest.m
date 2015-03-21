@@ -7,6 +7,8 @@
 @interface LPDevice (LPXCTEST)
 
 - (id) init_private;
+- (NSPredicate *) iPhone6SimPredicate;
+- (NSPredicate *) iPhone6PlusSimPredicate;
 
 @end
 
@@ -34,6 +36,20 @@ describe(@"LPDevice", ^{
       [[[currentDevice stub] andReturn:@"iPhone Simulator"] model];
       expect(device.simulator).to.equal(YES);
     });
+  });
+
+  it(@"#iPhone6SimPredicate", ^{
+    LPDevice *device = [[LPDevice alloc] init_private];
+    NSPredicate *pred = [device iPhone6SimPredicate];
+    NSString *expected = @"SIMULATOR_VERSION_INFO LIKE \"*iPhone 6*\" AND (NOT SIMULATOR_VERSION_INFO LIKE \"*iPhone 6*Plus*\")";
+    expect([pred description]).to.equal(expected);
+  });
+
+  it(@"#iPhone6PlusSimPredicate", ^{
+    LPDevice *device = [[LPDevice alloc] init_private];
+    NSPredicate *pred = [device iPhone6PlusSimPredicate];
+    NSString *expected = @"SIMULATOR_VERSION_INFO LIKE \"*iPhone 6*Plus*\"";
+    expect([pred description]).to.equal(expected);
   });
 
   describe(@"#iPhone6", ^{

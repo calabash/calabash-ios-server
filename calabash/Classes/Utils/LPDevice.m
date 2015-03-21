@@ -16,6 +16,8 @@
 
 @property(assign, nonatomic) CGFloat sample;
 @property(strong, nonatomic) NSDictionary *screenDimensions;
+@property(strong, nonatomic) NSPredicate *iPhone6SimPredicate;
+@property(strong, nonatomic) NSPredicate *iPhone6PlusSimPredicate;
 
 - (id) init_private;
 
@@ -141,6 +143,29 @@
 - (BOOL) simulator {
   UIDevice *device = [UIDevice currentDevice];
   return [[device model] isEqualToString:@"iPhone Simulator"];
+}
+
+- (NSPredicate *) iPhone6SimPredicate {
+  if (_iPhone6SimPredicate) { return _iPhone6SimPredicate; }
+  NSString *key = @"SIMULATOR_VERSION_INFO";
+  NSString *value = @"*iPhone 6*";
+  NSPredicate *likePredicate = [NSPredicate predicateWithFormat:@"%K LIKE %@",
+                                key, value];
+  NSPredicate *iPhone6PlusPred = self.iPhone6PlusSimPredicate;
+  NSPredicate *notLikePredicate;
+  notLikePredicate = [NSCompoundPredicate notPredicateWithSubpredicate:iPhone6PlusPred];
+  NSArray *array = @[likePredicate, notLikePredicate];
+  _iPhone6SimPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:array];
+  return _iPhone6SimPredicate;
+}
+
+- (NSPredicate *) iPhone6PlusSimPredicate {
+  if (_iPhone6PlusSimPredicate) { return _iPhone6PlusSimPredicate; }
+  NSString *key = @"SIMULATOR_VERSION_INFO";
+  NSString *value = @"*iPhone 6*Plus*";
+  _iPhone6PlusSimPredicate = [NSPredicate predicateWithFormat:@"%K LIKE %@",
+                           key, value];
+  return _iPhone6PlusSimPredicate;
 }
 
 - (BOOL) iPhone6 {
