@@ -10,6 +10,7 @@
 //
 
 #import "LPDevice.h"
+#import "LPTouchUtils.h"
 #import <sys/utsname.h>
 
 @interface LPDevice ()
@@ -27,6 +28,7 @@
 @synthesize sampleFactor = _sampleFactor;
 @synthesize system = _system;
 @synthesize model = _model;
+@synthesize formFactor = _formFactor;
 
 - (id) init {
   @throw [NSException exceptionWithName:@"Cannot call init"
@@ -128,6 +130,25 @@
   UIDevice *device = [UIDevice currentDevice];
   _model = [device model];
   return _model;
+}
+
+- (NSString *) formFactor {
+  if (_formFactor) { return _formFactor; }
+
+  NSString *factor = @"";
+  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
+    factor = @"ipad";
+  } else if ([LPTouchUtils is4InchDevice]) {
+    factor = @"iphone 4in";
+  } else if ([LPTouchUtils isThreeAndAHalfInchDevice]) {
+    factor = @"iphone 3.5in";
+  } else if ([self iPhone6]) {
+    return @"iphone 6";
+  } else if ([self iPhone6Plus]) {
+    return @"iphone 6+";
+  }
+  _formFactor = factor;
+  return _formFactor;
 }
 
 - (BOOL) simulator {

@@ -14,6 +14,7 @@
 @property(assign, nonatomic, readonly) CGFloat sampleFactor;
 @property(copy, nonatomic, readonly) NSString *system;
 @property(copy, nonatomic, readonly) NSString *model;
+@property(copy, nonatomic, readonly) NSString *formFactor;
 
 + (LPDevice *) sharedDevice;
 
