@@ -14,8 +14,6 @@ SpecBegin(LPDevice)
 
 describe(@"LPDevice", ^{
 
-  __block LPDevice *device = [[LPDevice alloc] init_private];
-
   describe(@"init", ^{
     expect(^{
       LPDevice __unused *tmp = [[LPDevice alloc] init];
@@ -24,12 +22,14 @@ describe(@"LPDevice", ^{
 
   describe(@"#simulator", ^{
     it(@"returns NO", ^{
+      LPDevice *device = [[LPDevice alloc] init_private];
       id currentDevice = OCMPartialMock([UIDevice currentDevice]);
       [[[currentDevice stub] andReturn:@"Anything but: iPhone Simulator"] model];
       expect(device.simulator).to.equal(NO);
     });
 
     it(@"returns YES", ^{
+      LPDevice *device = [[LPDevice alloc] init_private];
       id currentDevice = OCMPartialMock([UIDevice currentDevice]);
       [[[currentDevice stub] andReturn:@"iPhone Simulator"] model];
       expect(device.simulator).to.equal(YES);
