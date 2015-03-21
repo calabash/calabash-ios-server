@@ -26,6 +26,7 @@
 @synthesize screenDimensions = _screenDimensions;
 @synthesize sampleFactor = _sampleFactor;
 @synthesize system = _system;
+@synthesize model = _model;
 
 - (id) init {
   @throw [NSException exceptionWithName:@"Cannot call init"
@@ -120,6 +121,13 @@
   uname(&systemInfo);
   _system = @(systemInfo.machine);
   return _system;
+}
+
+- (NSString *) model {
+  if (_model) { return _model; }
+  UIDevice *device = [UIDevice currentDevice];
+  _model = [device model];
+  return _model;
 }
 
 - (BOOL) simulator {

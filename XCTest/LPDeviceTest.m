@@ -52,6 +52,11 @@ describe(@"LPDevice", ^{
     expect([device system]).notTo.beNil();
   });
 
+  it(@"#model", ^{
+    LPDevice *device = [[LPDevice alloc] init_private];
+    expect([device model]).notTo.beNil();
+  });
+
   it(@"#iPhone6SimPredicate", ^{
     LPDevice *device = [[LPDevice alloc] init_private];
     NSPredicate *pred = [device iPhone6SimPredicate];

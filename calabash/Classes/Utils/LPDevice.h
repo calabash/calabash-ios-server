@@ -13,6 +13,7 @@
 @property(strong, nonatomic, readonly) NSDictionary *screenDimensions;
 @property(assign, nonatomic, readonly) CGFloat sampleFactor;
 @property(copy, nonatomic, readonly) NSString *system;
+@property(copy, nonatomic, readonly) NSString *model;
 
 + (LPDevice *) sharedDevice;
 
