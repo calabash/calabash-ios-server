@@ -18,6 +18,7 @@
 @property(strong, nonatomic) NSDictionary *screenDimensions;
 @property(strong, nonatomic) NSPredicate *iPhone6SimPredicate;
 @property(strong, nonatomic) NSPredicate *iPhone6PlusSimPredicate;
+@property(copy, nonatomic) NSString *system;
 
 - (id) init_private;
 
@@ -135,9 +136,11 @@
 }
 
 - (NSString *) system {
+  if (_system) { return _system; }
   struct utsname systemInfo;
   uname(&systemInfo);
-  return @(systemInfo.machine);
+  _system = @(systemInfo.machine);
+  return _system;
 }
 
 - (BOOL) simulator {
