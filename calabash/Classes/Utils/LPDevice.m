@@ -107,12 +107,11 @@
         }
       }
     }
-    _screenDimensions = [[NSDictionary alloc] initWithObjectsAndKeys:
-                         [NSNumber numberWithFloat:size.height], @"height",
-                         [NSNumber numberWithFloat:size.width],  @"width",
-                         [NSNumber numberWithFloat:scale],       @"scale",
-                         [NSNumber numberWithFloat:_sample],      @"sample",
-                         nil];
+
+    _screenDimensions = @{@"height" : [NSNumber numberWithFloat:size.height],
+                          @"width" : [NSNumber numberWithFloat:size.width],
+                          @"scale" : [NSNumber numberWithFloat:scale],
+                          @"sample" : [NSNumber numberWithFloat:_sample]};
   }
   return self;
 }
