@@ -16,6 +16,7 @@
 - (CGFloat) sampleFactor;
 
 - (BOOL) simulator;
+- (NSString *) system;
 
 - (BOOL) iPhone6;
 - (BOOL) iPhone6Plus;

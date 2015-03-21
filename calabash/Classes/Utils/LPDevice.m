@@ -136,6 +136,12 @@
   return _screenDimensions;
 }
 
+- (NSString *) system {
+  struct utsname systemInfo;
+  uname(&systemInfo);
+  return @(systemInfo.machine);
+}
+
 - (BOOL) simulator {
   UIDevice *device = [UIDevice currentDevice];
   return [[device model] isEqualToString:@"iPhone Simulator"];

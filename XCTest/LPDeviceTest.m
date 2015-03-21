@@ -47,6 +47,11 @@ describe(@"LPDevice", ^{
     });
   });
 
+  it(@"#system", ^{
+    LPDevice *device = [[LPDevice alloc] init_private];
+    expect([device system]).notTo.beNil();
+  });
+
   it(@"#iPhone6SimPredicate", ^{
     LPDevice *device = [[LPDevice alloc] init_private];
     NSPredicate *pred = [device iPhone6SimPredicate];
@@ -121,7 +126,7 @@ describe(@"LPDevice", ^{
   });
 
   describe(@"#iPhone6Plus", ^{
-    fdescribe(@"simulator", ^{
+    describe(@"simulator", ^{
       __block LPDevice *device;
       __block id mockDevice;
       __block id processInfo;
