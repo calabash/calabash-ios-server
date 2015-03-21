@@ -32,18 +32,24 @@ describe(@"LPDevice", ^{
   });
 
   describe(@"#simulator", ^{
+    __block LPDevice *device;
+    __block id mockDevice;
+
+    beforeEach(^{
+      device = [[LPDevice alloc] init_private];
+      mockDevice = OCMPartialMock(device);
+    });
+
     it(@"returns NO", ^{
-      LPDevice *device = [[LPDevice alloc] init_private];
-      id currentDevice = OCMPartialMock([UIDevice currentDevice]);
-      [[[currentDevice stub] andReturn:@"Anything but: iPhone Simulator"] model];
+      [[[mockDevice expect] andReturn:@"Anything but: iPhone Simulator"] model];
       expect(device.simulator).to.equal(NO);
+      [mockDevice verify];
     });
 
     it(@"returns YES", ^{
-      LPDevice *device = [[LPDevice alloc] init_private];
-      id currentDevice = OCMPartialMock([UIDevice currentDevice]);
-      [[[currentDevice stub] andReturn:@"iPhone Simulator"] model];
+      [[[mockDevice expect] andReturn:@"iPhone Simulator"] model];
       expect(device.simulator).to.equal(YES);
+      [mockDevice verify];
     });
   });
 

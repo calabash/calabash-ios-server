@@ -131,8 +131,7 @@
 }
 
 - (BOOL) simulator {
-  UIDevice *device = [UIDevice currentDevice];
-  return [[device model] isEqualToString:@"iPhone Simulator"];
+  return [self.model isEqualToString:@"iPhone Simulator"];
 }
 
 - (NSPredicate *) iPhone6SimPredicate {
