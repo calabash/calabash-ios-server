@@ -43,6 +43,10 @@ describe(@"LPVersionRoute", ^{
     it(@"contains app_base_sdk key", ^{
       XCTAssertNotNil(response[@"app_base_sdk"]);
     });
+
+    it(@"contains form_factor key", ^{
+      expect(response[@"form_factor"]).notTo.beNil();
+    });
   });
 });
 
