@@ -44,7 +44,6 @@
 - (id) init_private {
   self = [super init];
   if (self) {
-    UIDevice *device = [UIDevice currentDevice];
     struct utsname systemInfo;
     uname(&systemInfo);
     
@@ -96,7 +95,7 @@
         _sample = IPHONE6_DISPLAY_ZOOM_SAMPLE;
       }
     } else {
-      if ([@"iPhone Simulator" isEqualToString:[device model]]) {
+      if ([self simulator]) {
         
         NSPredicate *iphone6plus = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone 6*Plus*'"];
         NSPredicate *iphone6 = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone 6*'"];
