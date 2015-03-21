@@ -66,9 +66,6 @@
     const CGFloat IPHONE6PLUS_SAMPLE = 1.0f;
     const CGFloat IPHONE6_DISPLAY_ZOOM_SAMPLE = 1.171875f;
 
-    
-
-    NSString *machine = [self system];
     UIScreen *s = [UIScreen mainScreen];    
     UIScreenMode *sm = [s currentMode];
     CGSize size = sm.size;
@@ -76,7 +73,7 @@
     _sample = 1.0f;
     _screenDimensions = nil;
 
-    if ([@"iPhone7,1" isEqualToString:machine]) {
+    if ([self iPhone6Plus]) {
       //iPhone6+ http://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions
       if (size.width < IPHONE6PLUS.width && size.height < IPHONE6PLUS.height) {
         _sample = (IPHONE6PLUS.width / size.width);
@@ -86,7 +83,7 @@
         _sample = IPHONE6PLUS_SAMPLE;
       }
 
-    } else if ([@"iPhone7,2" isEqualToString:machine]) {
+    } else if ([self iPhone6]) {
       //iPhone6
       if (CGSizeEqualToSize(size, IPHONE6)) {
         _sample = IPHONE6_SAMPLE;
