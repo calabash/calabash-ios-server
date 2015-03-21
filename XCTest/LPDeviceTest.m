@@ -77,7 +77,7 @@ describe(@"LPDevice", ^{
     expect([device model]).notTo.beNil();
   });
 
-  fdescribe(@"#formFactor", ^{
+  describe(@"#formFactor", ^{
     __block id currentDevice;
 
     UIUserInterfaceIdiom iphoneIdiom = UIUserInterfaceIdiomPhone;
