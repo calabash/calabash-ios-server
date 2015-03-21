@@ -31,6 +31,19 @@ describe(@"LPDevice", ^{
     }).to.raiseAny();
   });
 
+  it(@"sharedDevice", ^{
+    LPDevice *shared = [LPDevice sharedDevice];
+    NSDictionary *dims = shared.screenDimensions;
+    expect(dims).notTo.beNil();
+    expect(dims.count).to.equal(4);
+    expect(dims[@"height"]).to.beAKindOf([NSNumber class]);
+    expect(dims[@"width"]).to.beAKindOf([NSNumber class]);
+    expect(dims[@"scale"]).to.beAKindOf([NSNumber class]);
+    expect(dims[@"sample"]).to.beAKindOf([NSNumber class]);
+
+    expect(shared).to.beIdenticalTo([LPDevice sharedDevice]);
+  });
+
   describe(@"#simulator", ^{
     __block LPDevice *device;
     __block id mockDevice;
