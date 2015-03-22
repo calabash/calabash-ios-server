@@ -581,6 +581,7 @@
 		F5396A711AA6056D00D75E78 /* cucumber-report.html in Resources */ = {isa = PBXBuildFile; fileRef = F5396A6E1AA6056D00D75E78 /* cucumber-report.html */; };
 		F5396A721AA6056D00D75E78 /* lp-simple-example.html in Resources */ = {isa = PBXBuildFile; fileRef = F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */; };
 		F5396A731AA6056D00D75E78 /* xam-docs.html in Resources */ = {isa = PBXBuildFile; fileRef = F5396A701AA6056D00D75E78 /* xam-docs.html */; };
+		F5543F221ABF7D7000E1A0BF /* LPPluginLoaderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5543F211ABF7D7000E1A0BF /* LPPluginLoaderTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F55D412418C9130100813F78 /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; };
 		F55D412518C9130100813F78 /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; };
 		F56630891A39B00700DEA0C0 /* LPInfoPlistTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F56630881A39B00700DEA0C0 /* LPInfoPlistTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -980,6 +981,7 @@
 		F5396A6E1AA6056D00D75E78 /* cucumber-report.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "cucumber-report.html"; sourceTree = "<group>"; };
 		F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "lp-simple-example.html"; sourceTree = "<group>"; };
 		F5396A701AA6056D00D75E78 /* xam-docs.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "xam-docs.html"; sourceTree = "<group>"; };
+		F5543F211ABF7D7000E1A0BF /* LPPluginLoaderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPluginLoaderTest.m; sourceTree = "<group>"; };
 		F55A350F17CF8F8F0001E8B4 /* LPDatePickerOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDatePickerOperation.h; sourceTree = "<group>"; };
 		F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDatePickerOperation.m; sourceTree = "<group>"; };
 		F55D412018C9130100813F78 /* LPKeychainRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPKeychainRoute.h; sourceTree = "<group>"; };
@@ -1558,6 +1560,7 @@
 		F50CBF5F1A03F222004AC9DA /* XCTest */ = {
 			isa = PBXGroup;
 			children = (
+				F5543F1F1ABF7D7000E1A0BF /* Tests */,
 				F5BD0BF21ABCE19B009E3D77 /* LPDeviceTest.m */,
 				F58937E21A9BD749007B9A5B /* LPWebQueryTest.m */,
 				66D6976C1A93C5910035A763 /* LPScrollOperationTest.m */,
@@ -1642,6 +1645,22 @@
 				F5396A701AA6056D00D75E78 /* xam-docs.html */,
 			);
 			path = TestResources;
+			sourceTree = "<group>";
+		};
+		F5543F1F1ABF7D7000E1A0BF /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				F5543F201ABF7D7000E1A0BF /* Utils */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		F5543F201ABF7D7000E1A0BF /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F5543F211ABF7D7000E1A0BF /* LPPluginLoaderTest.m */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		F59741E21AA5712F0089DC88 /* OCMock */ = {
@@ -2714,6 +2733,7 @@
 				F50CBFC21A0405CE004AC9DA /* UIScriptASTLast.m in Sources */,
 				F50CBF891A04056F004AC9DA /* LPHTTPAsyncFileResponse.m in Sources */,
 				F50CBFAB1A0405B2004AC9DA /* LPInterpolateRoute.m in Sources */,
+				F5543F221ABF7D7000E1A0BF /* LPPluginLoaderTest.m in Sources */,
 				F50CBFA01A0405B2004AC9DA /* LPUIARouteOverUserPrefs.m in Sources */,
 				F50E427B1AA86FA3003DB030 /* LPScreenshotRouteTest.m in Sources */,
 				F50CBFBB1A0405CE004AC9DA /* UIScriptASTPredicate.m in Sources */,
