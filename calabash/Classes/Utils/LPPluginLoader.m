@@ -9,6 +9,8 @@
 
 @property(strong, nonatomic, readonly) NSPredicate *filterPredicate;
 
+- (NSArray *) arrayOfCabalshDylibPaths;
+
 @end
 
 @implementation LPPluginLoader
@@ -20,6 +22,13 @@
   _filterPredicate = [NSPredicate predicateWithFormat:@"SELF ENDSWITH %@",
                       @"Calabash.dylib"];
   return _filterPredicate;
+}
+
+- (NSArray *) arrayOfCabalshDylibPaths {
+  NSBundle *main = [NSBundle mainBundle];
+  NSArray *dylibs = [main pathsForResourcesOfType:@"dylib"
+                                      inDirectory:nil];
+  return [dylibs filteredArrayUsingPredicate:self.filterPredicate];
 }
 
 @end

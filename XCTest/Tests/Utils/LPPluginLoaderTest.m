@@ -7,6 +7,7 @@
 @interface LPPluginLoader (LPXCTEST)
 
 - (NSPredicate *) filterPredicate;
+- (NSArray *) arrayOfCabalshDylibPaths;
 
 @end
 
@@ -22,6 +23,19 @@ SpecBegin(LPPluginLoader)
 
 describe(@"LPPluginLoader", ^{
 
+  __block NSArray *examples;
+  __block NSArray *calabshDylibs;
+
+  before(^{
+    examples = @[
+                 @"/some/path/to/file",
+                 @"/some/path/to/file.dylib",
+                 @"/some/path/to/fileCalabash.dylib",
+                 @"/some/path/to/otherCalabash.dylib"
+                 ];
+    calabshDylibs = [examples subarrayWithRange:NSMakeRange(2, 2)];
+  });
+
   describe(@"#filterPredicate", ^{
     __block NSPredicate *predicate;
 
@@ -34,17 +48,21 @@ describe(@"LPPluginLoader", ^{
     });
 
     it(@"predicate can filter an array", ^{
-      NSArray *examples = @[
-                            @"/some/path/to/file",
-                            @"/some/path/to/file.dylib",
-                            @"/some/path/to/fileCalabash.dylib",
-                            @"/some/path/to/otherCalabash.dylib"
-                            ];
-      NSArray *expected = [examples subarrayWithRange:NSMakeRange(2, 2)];
       NSArray *actual = [examples filteredArrayUsingPredicate:predicate];
-      expect(actual).to.haveACountOf(2);
-      expect(actual).to.beSupersetOf(expected);
+      expect(actual).to.haveACountOf([calabshDylibs count]);
+      expect(actual).to.beSupersetOf(calabshDylibs);
     });
+  });
+
+  it(@"#arrayOfCalabashDylibPaths", ^{
+    id bundleMock = OCMPartialMock([NSBundle mainBundle]);
+    [[[bundleMock stub] andReturn:examples] pathsForResourcesOfType:@"dylib"
+                                                        inDirectory:nil];
+    LPPluginLoader *loader = [LPPluginLoader new];
+    NSArray *dylibs = [loader arrayOfCabalshDylibPaths];
+    expect(dylibs).to.haveACountOf([calabshDylibs count]);
+    expect(dylibs).to.beSupersetOf(calabshDylibs);
+    [bundleMock stopMocking];
   });
 
 });
