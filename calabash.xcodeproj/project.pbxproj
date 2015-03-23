@@ -581,6 +581,14 @@
 		F5396A711AA6056D00D75E78 /* cucumber-report.html in Resources */ = {isa = PBXBuildFile; fileRef = F5396A6E1AA6056D00D75E78 /* cucumber-report.html */; };
 		F5396A721AA6056D00D75E78 /* lp-simple-example.html in Resources */ = {isa = PBXBuildFile; fileRef = F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */; };
 		F5396A731AA6056D00D75E78 /* xam-docs.html in Resources */ = {isa = PBXBuildFile; fileRef = F5396A701AA6056D00D75E78 /* xam-docs.html */; };
+		F5543F221ABF7D7000E1A0BF /* LPPluginLoaderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5543F211ABF7D7000E1A0BF /* LPPluginLoaderTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5543F2B1ABF7DE900E1A0BF /* LPPluginLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5543F241ABF7DE900E1A0BF /* LPPluginLoader.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5543F2C1ABF7DE900E1A0BF /* LPPluginLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5543F241ABF7DE900E1A0BF /* LPPluginLoader.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5543F2D1ABF7DE900E1A0BF /* LPPluginLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5543F241ABF7DE900E1A0BF /* LPPluginLoader.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5543F2E1ABF7DE900E1A0BF /* LPPluginLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5543F241ABF7DE900E1A0BF /* LPPluginLoader.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5543F2F1ABF7DE900E1A0BF /* LPPluginLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5543F241ABF7DE900E1A0BF /* LPPluginLoader.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5543F301ABF7DE900E1A0BF /* LPPluginLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5543F241ABF7DE900E1A0BF /* LPPluginLoader.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5543F311ABF7DF500E1A0BF /* LPPluginLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5543F241ABF7DE900E1A0BF /* LPPluginLoader.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F55D412418C9130100813F78 /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; };
 		F55D412518C9130100813F78 /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; };
 		F56630891A39B00700DEA0C0 /* LPInfoPlistTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F56630881A39B00700DEA0C0 /* LPInfoPlistTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -692,6 +700,11 @@
 		F59CA47B1A82EF40007A2F38 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F59CA47A1A82EF40007A2F38 /* SecondViewController.m */; };
 		F59CA47E1A82EF40007A2F38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F59CA47C1A82EF40007A2F38 /* Main.storyboard */; };
 		F59CA4801A82EF40007A2F38 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F59CA47F1A82EF40007A2F38 /* Images.xcassets */; };
+		F5A33A411ABFAD8D00224639 /* examplePlugin.dylib in Resources */ = {isa = PBXBuildFile; fileRef = F5A33A391ABFAD7600224639 /* examplePlugin.dylib */; };
+		F5A33A421ABFAD9100224639 /* examplePluginCalabash.dylib in Resources */ = {isa = PBXBuildFile; fileRef = F5A33A3A1ABFAD7600224639 /* examplePluginCalabash.dylib */; };
+		F5A33A431ABFAD9400224639 /* memoryPlugin.dylib in Resources */ = {isa = PBXBuildFile; fileRef = F5A33A3B1ABFAD7600224639 /* memoryPlugin.dylib */; };
+		F5A33A441ABFAD9700224639 /* memoryPluginCalabash.dylib in Resources */ = {isa = PBXBuildFile; fileRef = F5A33A3C1ABFAD7600224639 /* memoryPluginCalabash.dylib */; };
+		F5A33A471ABFB0BD00224639 /* badPlugin.dylib in Resources */ = {isa = PBXBuildFile; fileRef = F5A33A451ABFB09500224639 /* badPlugin.dylib */; };
 		F5B27B9118C5884D0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		F5B27B9218C5884E0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		F5BD0BF31ABCE19B009E3D77 /* LPDeviceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BD0BF21ABCE19B009E3D77 /* LPDeviceTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -980,6 +993,9 @@
 		F5396A6E1AA6056D00D75E78 /* cucumber-report.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "cucumber-report.html"; sourceTree = "<group>"; };
 		F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "lp-simple-example.html"; sourceTree = "<group>"; };
 		F5396A701AA6056D00D75E78 /* xam-docs.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "xam-docs.html"; sourceTree = "<group>"; };
+		F5543F211ABF7D7000E1A0BF /* LPPluginLoaderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPluginLoaderTest.m; sourceTree = "<group>"; };
+		F5543F231ABF7DE900E1A0BF /* LPPluginLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPPluginLoader.h; sourceTree = "<group>"; };
+		F5543F241ABF7DE900E1A0BF /* LPPluginLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPluginLoader.m; sourceTree = "<group>"; };
 		F55A350F17CF8F8F0001E8B4 /* LPDatePickerOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDatePickerOperation.h; sourceTree = "<group>"; };
 		F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDatePickerOperation.m; sourceTree = "<group>"; };
 		F55D412018C9130100813F78 /* LPKeychainRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPKeychainRoute.h; sourceTree = "<group>"; };
@@ -1057,6 +1073,11 @@
 		F59CA47A1A82EF40007A2F38 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		F59CA47D1A82EF40007A2F38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F59CA47F1A82EF40007A2F38 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F5A33A391ABFAD7600224639 /* examplePlugin.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = examplePlugin.dylib; sourceTree = "<group>"; };
+		F5A33A3A1ABFAD7600224639 /* examplePluginCalabash.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = examplePluginCalabash.dylib; sourceTree = "<group>"; };
+		F5A33A3B1ABFAD7600224639 /* memoryPlugin.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = memoryPlugin.dylib; sourceTree = "<group>"; };
+		F5A33A3C1ABFAD7600224639 /* memoryPluginCalabash.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = memoryPluginCalabash.dylib; sourceTree = "<group>"; };
+		F5A33A451ABFB09500224639 /* badPlugin.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = badPlugin.dylib; sourceTree = "<group>"; };
 		F5AE0BC4174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPScrollToRowWithMarkOperation.h; sourceTree = "<group>"; };
 		F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScrollToRowWithMarkOperation.m; sourceTree = "<group>"; };
 		F5BD0BF21ABCE19B009E3D77 /* LPDeviceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDeviceTest.m; sourceTree = "<group>"; };
@@ -1538,6 +1559,8 @@
 				F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */,
 				F5F600411A7C69760020637D /* LPInvoker.h */,
 				F5F600421A7C69760020637D /* LPInvoker.m */,
+				F5543F231ABF7DE900E1A0BF /* LPPluginLoader.h */,
+				F5543F241ABF7DE900E1A0BF /* LPPluginLoader.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1558,6 +1581,7 @@
 		F50CBF5F1A03F222004AC9DA /* XCTest */ = {
 			isa = PBXGroup;
 			children = (
+				F5543F1F1ABF7D7000E1A0BF /* Tests */,
 				F5BD0BF21ABCE19B009E3D77 /* LPDeviceTest.m */,
 				F58937E21A9BD749007B9A5B /* LPWebQueryTest.m */,
 				66D6976C1A93C5910035A763 /* LPScrollOperationTest.m */,
@@ -1637,11 +1661,32 @@
 		F5396A6D1AA6056D00D75E78 /* TestResources */ = {
 			isa = PBXGroup;
 			children = (
+				F5A33A451ABFB09500224639 /* badPlugin.dylib */,
+				F5A33A391ABFAD7600224639 /* examplePlugin.dylib */,
+				F5A33A3A1ABFAD7600224639 /* examplePluginCalabash.dylib */,
+				F5A33A3B1ABFAD7600224639 /* memoryPlugin.dylib */,
+				F5A33A3C1ABFAD7600224639 /* memoryPluginCalabash.dylib */,
 				F5396A6E1AA6056D00D75E78 /* cucumber-report.html */,
 				F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */,
 				F5396A701AA6056D00D75E78 /* xam-docs.html */,
 			);
 			path = TestResources;
+			sourceTree = "<group>";
+		};
+		F5543F1F1ABF7D7000E1A0BF /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				F5543F201ABF7D7000E1A0BF /* Utils */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		F5543F201ABF7D7000E1A0BF /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F5543F211ABF7D7000E1A0BF /* LPPluginLoaderTest.m */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		F59741E21AA5712F0089DC88 /* OCMock */ = {
@@ -2118,6 +2163,11 @@
 				F59CA4801A82EF40007A2F38 /* Images.xcassets in Resources */,
 				F5396A711AA6056D00D75E78 /* cucumber-report.html in Resources */,
 				F5396A731AA6056D00D75E78 /* xam-docs.html in Resources */,
+				F5A33A411ABFAD8D00224639 /* examplePlugin.dylib in Resources */,
+				F5A33A421ABFAD9100224639 /* examplePluginCalabash.dylib in Resources */,
+				F5A33A431ABFAD9400224639 /* memoryPlugin.dylib in Resources */,
+				F5A33A441ABFAD9700224639 /* memoryPluginCalabash.dylib in Resources */,
+				F5A33A471ABFB0BD00224639 /* badPlugin.dylib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2265,6 +2315,7 @@
 				B1135843197F1351004B16F4 /* LPHTTPDynamicFileResponse.m in Sources */,
 				B113583D197F1351004B16F4 /* LPHTTPServer.m in Sources */,
 				B11358591981B053004B16F4 /* LPScrollToRowWithMarkOperation.m in Sources */,
+				F5543F2D1ABF7DE900E1A0BF /* LPPluginLoader.m in Sources */,
 				B113583A197F1311004B16F4 /* LPHTTPConnection.m in Sources */,
 				B1058E20197F00C000B4A57B /* UIScriptASTALL.m in Sources */,
 				B1058E21197F00C000B4A57B /* UIScriptASTClassName.m in Sources */,
@@ -2393,6 +2444,7 @@
 				B15BF9D519ABB1DE00B38577 /* UIScriptASTPredicate.m in Sources */,
 				F5F6004D1A7C69760020637D /* LPInvoker.m in Sources */,
 				B15BF9D619ABB1DE00B38577 /* UIScriptAST.m in Sources */,
+				F5543F2F1ABF7DE900E1A0BF /* LPPluginLoader.m in Sources */,
 				B15BF9D719ABB1DE00B38577 /* UIScriptASTALL.m in Sources */,
 				B1F772261A22A398009A2336 /* LPSharedUIATextField.m in Sources */,
 				B15BF9D819ABB1DE00B38577 /* UIScriptASTClassName.m in Sources */,
@@ -2487,6 +2539,7 @@
 				B15BFA2719ABB2B100B38577 /* UIScriptASTPredicate.m in Sources */,
 				F5F6004E1A7C69760020637D /* LPInvoker.m in Sources */,
 				B15BFA2819ABB2B100B38577 /* UIScriptAST.m in Sources */,
+				F5543F301ABF7DE900E1A0BF /* LPPluginLoader.m in Sources */,
 				B15BFA2919ABB2B100B38577 /* UIScriptASTALL.m in Sources */,
 				B1F772271A22A398009A2336 /* LPSharedUIATextField.m in Sources */,
 				B15BFA2A19ABB2B100B38577 /* UIScriptASTClassName.m in Sources */,
@@ -2581,6 +2634,7 @@
 				B1D5BDB419A23BCE0070E8CE /* LPKeychainRoute.m in Sources */,
 				F5F6004C1A7C69760020637D /* LPInvoker.m in Sources */,
 				B1D5BDB519A23BCE0070E8CE /* LPTouchUtils.m in Sources */,
+				F5543F2E1ABF7DE900E1A0BF /* LPPluginLoader.m in Sources */,
 				B1D5BDB619A23BCE0070E8CE /* LPCDataScanner.m in Sources */,
 				B1F772251A22A398009A2336 /* LPSharedUIATextField.m in Sources */,
 				B1D5BDB819A23BCE0070E8CE /* LPReflectUtils.m in Sources */,
@@ -2675,6 +2729,7 @@
 				F5091C1418C4E1D700C85307 /* LPTouchUtils.m in Sources */,
 				F5F600491A7C69760020637D /* LPInvoker.m in Sources */,
 				F5091C1518C4E1D700C85307 /* LPCDataScanner.m in Sources */,
+				F5543F2B1ABF7DE900E1A0BF /* LPPluginLoader.m in Sources */,
 				F5091C1718C4E1D700C85307 /* LPI.mm in Sources */,
 				B1F772221A22A398009A2336 /* LPSharedUIATextField.m in Sources */,
 				F5091C1818C4E1D700C85307 /* LPReflectUtils.m in Sources */,
@@ -2705,6 +2760,7 @@
 				F50CBFA91A0405B2004AC9DA /* LPGenericAsyncRoute.m in Sources */,
 				F50CBF8D1A04056F004AC9DA /* LPHTTPRedirectResponse.m in Sources */,
 				F50CBFB31A0405B2004AC9DA /* LPVersionRoute.m in Sources */,
+				F5543F311ABF7DF500E1A0BF /* LPPluginLoader.m in Sources */,
 				F50CBFA71A0405B2004AC9DA /* LPUserPrefRoute.m in Sources */,
 				F50CBFAA1A0405B2004AC9DA /* LPConditionRoute.m in Sources */,
 				F50CBF8A1A04056F004AC9DA /* LPHTTPDataResponse.m in Sources */,
@@ -2714,6 +2770,7 @@
 				F50CBFC21A0405CE004AC9DA /* UIScriptASTLast.m in Sources */,
 				F50CBF891A04056F004AC9DA /* LPHTTPAsyncFileResponse.m in Sources */,
 				F50CBFAB1A0405B2004AC9DA /* LPInterpolateRoute.m in Sources */,
+				F5543F221ABF7D7000E1A0BF /* LPPluginLoaderTest.m in Sources */,
 				F50CBFA01A0405B2004AC9DA /* LPUIARouteOverUserPrefs.m in Sources */,
 				F50E427B1AA86FA3003DB030 /* LPScreenshotRouteTest.m in Sources */,
 				F50CBFBB1A0405CE004AC9DA /* UIScriptASTPredicate.m in Sources */,
@@ -2886,6 +2943,7 @@
 				F5821A3218C4E27400293508 /* LPTouchUtils.m in Sources */,
 				F5F6004A1A7C69760020637D /* LPInvoker.m in Sources */,
 				F5821A3318C4E27400293508 /* LPCDataScanner.m in Sources */,
+				F5543F2C1ABF7DE900E1A0BF /* LPPluginLoader.m in Sources */,
 				F5821A3518C4E27400293508 /* LPI.mm in Sources */,
 				B1F772231A22A398009A2336 /* LPSharedUIATextField.m in Sources */,
 				F5821A3618C4E27400293508 /* LPReflectUtils.m in Sources */,
@@ -3820,6 +3878,7 @@
 				INFOPLIST_FILE = LPTestTarget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3854,6 +3913,7 @@
 				INFOPLIST_FILE = LPTestTarget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

@@ -30,6 +30,7 @@
 #import "LPDumpRoute.h"
 #import <dlfcn.h>
 #import "LPInfoPlist.h"
+#import "LPPluginLoader.h"
 
 @interface CalabashServer ()
 - (void) start;
@@ -43,6 +44,10 @@
   [server start];
 
   dlopen([@"/Developer/Library/PrivateFrameworks/UIAutomation.framework/UIAutomation" fileSystemRepresentation], RTLD_LOCAL);
+
+  LPPluginLoader *loader = [LPPluginLoader new];
+  [loader loadCalabashPlugins];
+  [loader release];
 }
 
 
@@ -226,7 +231,6 @@
 
   [autoreleasePool drain];
 }
-
 
 - (void) dealloc {
   [_httpServer release];
