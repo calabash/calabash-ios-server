@@ -11,6 +11,4 @@
 
 + (void) start;
 
--(void)loadPlugins;
-
 @end
