@@ -8,6 +8,7 @@
 
 - (NSPredicate *) filterPredicate;
 - (NSArray *) arrayOfCabalshDylibPaths;
+- (BOOL) loadDylibAtPath:(NSString *) path;
 
 @end
 
@@ -63,6 +64,28 @@ describe(@"LPPluginLoader", ^{
     expect(dylibs).to.haveACountOf([calabshDylibs count]);
     expect(dylibs).to.beSupersetOf(calabshDylibs);
     [bundleMock stopMocking];
+  });
+
+  describe(@"#loadDylibAtPath:", ^{
+    __block LPPluginLoader *loader;
+
+    before(^{
+      loader = [LPPluginLoader new];
+    });
+
+    it(@"returns false when dylib cannot be loaded", ^{
+      NSBundle *main = [NSBundle mainBundle];
+      NSString *path = [main pathForResource:@"badPlugin" ofType:@"dylib"];
+      expect(path).notTo.equal(nil);
+      expect([loader loadDylibAtPath:path]).to.equal(NO);
+    });
+
+    it(@"returns true when dylib is loaded", ^{
+      NSBundle *main = [NSBundle mainBundle];
+      NSString *path = [main pathForResource:@"examplePlugin" ofType:@"dylib"];
+      expect(path).notTo.equal(nil);
+      expect([loader loadDylibAtPath:path]).to.equal(YES);
+    });
   });
 
 });
