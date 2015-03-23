@@ -88,6 +88,21 @@ describe(@"LPPluginLoader", ^{
     });
   });
 
+  describe(@"#loadCalabashPlugins", ^{
+    it(@"returns true if all plug-ins were loaded", ^{
+      LPPluginLoader *loader = [LPPluginLoader new];
+      expect([loader loadCalabashPlugins]).to.equal(YES);
+    });
+
+    it(@"returns false if a plug fails to load", ^{
+      LPPluginLoader *loader = [LPPluginLoader new];
+      id mock = OCMPartialMock(loader);
+      BOOL no = NO;
+      [[[mock stub] andReturnValue:OCMOCK_VALUE(no)] loadDylibAtPath:OCMOCK_ANY];
+      expect([loader loadCalabashPlugins]).to.equal(NO);
+    });
+  });
+
 });
 
 SpecEnd

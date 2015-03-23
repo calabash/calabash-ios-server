@@ -2,4 +2,6 @@
 
 @interface LPPluginLoader : NSObject
 
+- (BOOL) loadCalabashPlugins;
+
 @end

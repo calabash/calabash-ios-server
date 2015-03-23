@@ -37,19 +37,31 @@
 
   char *error;
   const char *cFileSystemRep = [url fileSystemRepresentation];
-  NSLog(@"Loading Calabash plugin - %@",
-        [NSString stringWithUTF8String:cFileSystemRep]);
+
+  NSString *pluginName = [path lastPathComponent];
+  NSLog(@"Loading Calabash plugin: %@", pluginName);
 
   dlopen(cFileSystemRep, RTLD_LOCAL);
   error = dlerror();
   if (error) {
-    NSLog(@"Warning: Could not load Calabash plugin %@.",
-          [path lastPathComponent]);
+    NSLog(@"Warning: Could not load Calabash plugin %@.", pluginName);
     NSLog(@"Warning: %@", [NSString stringWithUTF8String:error]);
     return NO;
   } else {
+    NSLog(@"Loaded Calabash plugin: %@", pluginName);
     return YES;
   }
+}
+
+- (BOOL) loadCalabashPlugins {
+  NSArray *dylibs = [self arrayOfCabalshDylibPaths];
+  BOOL success = YES;
+  for (NSString *path in dylibs) {
+    if (![self loadDylibAtPath:path]) {
+      success = NO;
+    }
+  }
+  return success;
 }
 
 @end
