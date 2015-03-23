@@ -700,6 +700,11 @@
 		F59CA47B1A82EF40007A2F38 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F59CA47A1A82EF40007A2F38 /* SecondViewController.m */; };
 		F59CA47E1A82EF40007A2F38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F59CA47C1A82EF40007A2F38 /* Main.storyboard */; };
 		F59CA4801A82EF40007A2F38 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F59CA47F1A82EF40007A2F38 /* Images.xcassets */; };
+		F5A33A411ABFAD8D00224639 /* examplePlugin.dylib in Resources */ = {isa = PBXBuildFile; fileRef = F5A33A391ABFAD7600224639 /* examplePlugin.dylib */; };
+		F5A33A421ABFAD9100224639 /* examplePluginCalabash.dylib in Resources */ = {isa = PBXBuildFile; fileRef = F5A33A3A1ABFAD7600224639 /* examplePluginCalabash.dylib */; };
+		F5A33A431ABFAD9400224639 /* memoryPlugin.dylib in Resources */ = {isa = PBXBuildFile; fileRef = F5A33A3B1ABFAD7600224639 /* memoryPlugin.dylib */; };
+		F5A33A441ABFAD9700224639 /* memoryPluginCalabash.dylib in Resources */ = {isa = PBXBuildFile; fileRef = F5A33A3C1ABFAD7600224639 /* memoryPluginCalabash.dylib */; };
+		F5A33A471ABFB0BD00224639 /* badPlugin.dylib in Resources */ = {isa = PBXBuildFile; fileRef = F5A33A451ABFB09500224639 /* badPlugin.dylib */; };
 		F5B27B9118C5884D0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		F5B27B9218C5884E0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		F5BD0BF31ABCE19B009E3D77 /* LPDeviceTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BD0BF21ABCE19B009E3D77 /* LPDeviceTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -1068,6 +1073,11 @@
 		F59CA47A1A82EF40007A2F38 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
 		F59CA47D1A82EF40007A2F38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F59CA47F1A82EF40007A2F38 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F5A33A391ABFAD7600224639 /* examplePlugin.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = examplePlugin.dylib; sourceTree = "<group>"; };
+		F5A33A3A1ABFAD7600224639 /* examplePluginCalabash.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = examplePluginCalabash.dylib; sourceTree = "<group>"; };
+		F5A33A3B1ABFAD7600224639 /* memoryPlugin.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = memoryPlugin.dylib; sourceTree = "<group>"; };
+		F5A33A3C1ABFAD7600224639 /* memoryPluginCalabash.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = memoryPluginCalabash.dylib; sourceTree = "<group>"; };
+		F5A33A451ABFB09500224639 /* badPlugin.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = badPlugin.dylib; sourceTree = "<group>"; };
 		F5AE0BC4174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPScrollToRowWithMarkOperation.h; sourceTree = "<group>"; };
 		F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScrollToRowWithMarkOperation.m; sourceTree = "<group>"; };
 		F5BD0BF21ABCE19B009E3D77 /* LPDeviceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDeviceTest.m; sourceTree = "<group>"; };
@@ -1651,6 +1661,11 @@
 		F5396A6D1AA6056D00D75E78 /* TestResources */ = {
 			isa = PBXGroup;
 			children = (
+				F5A33A451ABFB09500224639 /* badPlugin.dylib */,
+				F5A33A391ABFAD7600224639 /* examplePlugin.dylib */,
+				F5A33A3A1ABFAD7600224639 /* examplePluginCalabash.dylib */,
+				F5A33A3B1ABFAD7600224639 /* memoryPlugin.dylib */,
+				F5A33A3C1ABFAD7600224639 /* memoryPluginCalabash.dylib */,
 				F5396A6E1AA6056D00D75E78 /* cucumber-report.html */,
 				F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */,
 				F5396A701AA6056D00D75E78 /* xam-docs.html */,
@@ -2148,6 +2163,11 @@
 				F59CA4801A82EF40007A2F38 /* Images.xcassets in Resources */,
 				F5396A711AA6056D00D75E78 /* cucumber-report.html in Resources */,
 				F5396A731AA6056D00D75E78 /* xam-docs.html in Resources */,
+				F5A33A411ABFAD8D00224639 /* examplePlugin.dylib in Resources */,
+				F5A33A421ABFAD9100224639 /* examplePluginCalabash.dylib in Resources */,
+				F5A33A431ABFAD9400224639 /* memoryPlugin.dylib in Resources */,
+				F5A33A441ABFAD9700224639 /* memoryPluginCalabash.dylib in Resources */,
+				F5A33A471ABFB0BD00224639 /* badPlugin.dylib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3858,6 +3878,7 @@
 				INFOPLIST_FILE = LPTestTarget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -3892,6 +3913,7 @@
 				INFOPLIST_FILE = LPTestTarget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
