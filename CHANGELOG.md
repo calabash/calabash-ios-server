@@ -1,3 +1,8 @@
+### 0.13.1
+
+* can report iphone6 form factors #141
+* can load dylib plug-ins #140
+
 ### 0.13.0
 
 * Migrate objc code from calabash-js submodule #123
