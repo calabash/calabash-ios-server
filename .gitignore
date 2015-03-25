@@ -15,7 +15,7 @@ calabash-dylibs
 .idea
 
 # CI pulls down these two repos from github
-animated-happiness
+ios-smoke-test-app
 calabash-ios
 
 .ruby-version
