@@ -14,9 +14,9 @@ Dir.chdir working_dir do
 
   do_system('git clone --depth 1 --branch develop --recursive https://github.com/calabash/calabash-ios')
 
-  do_system('rm -rf animated-happiness')
+  do_system('rm -rf ios-smoke-test-app')
 
-  do_system('git clone --depth 1 --recursive https://github.com/jmoody/animated-happiness.git')
+  do_system('git clone --depth 1 --recursive https://github.com/calabash/ios-smoke-test-app.git')
 
   # if calabash.framework exists, it was built in another step
   unless File.exist?('calabash.framework')
@@ -63,7 +63,7 @@ Dir.chdir calabash_gem_dir do
 
 end
 
-chou_working_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'animated-happiness/chou'))
+chou_working_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'ios-smoke-test-app/CalSmokeApp'))
 
 FileUtils.rm_rf("#{chou_working_dir}/calabash.framework")
 FileUtils.cp_r(calabash_framework, chou_working_dir)
@@ -88,7 +88,7 @@ Dir.chdir chou_working_dir do
   end
 end
 
-animated_happiness_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'animated-happiness'))
+animated_happiness_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'ios-smoke-test-app'))
 
 Dir.chdir animated_happiness_dir do
 
