@@ -18,18 +18,18 @@
 
 
 + (NSDictionary *) dictionaryByAugmentingDOMElement:(NSDictionary *) domElement
-                                            webView:(UIWebView *) webView
+                                            webView:(id<LPWebViewProtocol>) webView
                               accumlateInDictionary:(NSMutableDictionary *) accumulator;
 
-+ (CGPoint) pointByAdjustingOffsetForScrollPostionOfWebView:(UIWebView *) webView;
++ (CGPoint) pointByAdjustingOffsetForScrollPostionOfWebView:(id<LPWebViewProtocol>) webView;
 
-+ (BOOL) point:(CGPoint) center isVisibleInWebview:(UIWebView *) webView;
++ (BOOL) point:(CGPoint) center isVisibleInWebview:(id<LPWebViewProtocol>) webView;
 
 @end
 
 @implementation LPWebQuery
 
-+ (BOOL) point:(CGPoint) center isVisibleInWebview:(UIWebView *) webView {
++ (BOOL) point:(CGPoint) center isVisibleInWebview:(id<LPWebViewProtocol>) webView {
   BOOL pointInsideCenter = [webView pointInside:center withEvent:nil];
   BOOL centerNotZeroPoint = !CGPointEqualToPoint(CGPointZero, center);
   return centerNotZeroPoint && pointInsideCenter;
@@ -37,7 +37,7 @@
 
 + (NSArray *) arrayByEvaluatingQuery:(NSString *) query
                                 type:(LPWebQueryType) type
-                             webView:(UIWebView *) webView
+                             webView:(id<LPWebViewProtocol>) webView
                     includeInvisible:(BOOL) includeInvisible {
   NSString *jsString = nil;
   switch (type) {
@@ -59,11 +59,11 @@
 
   NSMutableArray *result = [NSMutableArray array];
 
-  NSString *output = [webView stringByEvaluatingJavaScriptFromString:jsString];
+  NSString *output = [webView lpStringByEvaulatingJavaScript:jsString];
 
   NSArray *queryResult = [LPJSONUtils deserializeArray:output];
 
-  UIWindow *window = [LPTouchUtils windowForView:webView];
+  UIWindow *window = [LPTouchUtils windowForView:(UIView *)webView];
   UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
   CGPoint webViewPageOffset = [self pointByAdjustingOffsetForScrollPostionOfWebView:webView];
 
@@ -73,7 +73,7 @@
     CGFloat center_y = [[dres valueForKeyPath:@"rect.y"] floatValue];
 
     CGPoint center = CGPointMake(webViewPageOffset.x + center_x, webViewPageOffset.y + center_y);
-    CGPoint windowCenter = [window convertPoint:center fromView:webView];
+    CGPoint windowCenter = [window convertPoint:center fromView:(UIView *)webView];
     CGPoint keyCenter = [frontWindow convertPoint:windowCenter fromWindow:window];
     CGPoint finalCenter = [LPTouchUtils translateToScreenCoords:keyCenter];
 
@@ -93,10 +93,10 @@
   return result;
 }
 
-+ (NSDictionary *) dictionaryOfViewsInWebView:(UIWebView *) webView {
++ (NSDictionary *) dictionaryOfViewsInWebView:(id<LPWebViewProtocol>) webView {
   NSString *jsString = [NSString stringWithFormat:LP_QUERY_JS,@"",@"dump", @""];
 
-  NSString *output = [webView stringByEvaluatingJavaScriptFromString:jsString];
+  NSString *output = [webView lpStringByEvaulatingJavaScript:jsString];
   NSDictionary *dumpResult = [LPJSONUtils deserializeDictionary:output];
   NSMutableDictionary *finalResult = [NSMutableDictionary dictionaryWithDictionary:dumpResult];
   if (!(finalResult[@"type"])) {
@@ -109,7 +109,7 @@
 
 
 + (NSDictionary *) dictionaryByAugmentingDOMElement:(NSDictionary *) domElement
-                                            webView:(UIWebView *) webView
+                                            webView:(id<LPWebViewProtocol>) webView
                               accumlateInDictionary:(NSMutableDictionary *) accumulator {
 
   CGPoint webViewPageOffset = [self pointByAdjustingOffsetForScrollPostionOfWebView:webView];
@@ -157,16 +157,16 @@
     if (!CGPointEqualToPoint(CGPointZero, boundsCenterInScrollView) && [webView.scrollView pointInside:boundsCenterInScrollView withEvent:nil]) {
       [augmentedChild setValue:@(1) forKeyPath:@"visible"];
 
-      UIWindow *windowForView = [LPTouchUtils windowForView:webView];
+      UIWindow *windowForView = [LPTouchUtils windowForView:(UIView *)webView];
       CGPoint windowBounds = [windowForView convertPoint:boundsCenterInScrollView fromView:webView.scrollView];
       UIView *hitView = [windowForView hitTest:windowBounds withEvent:nil];
-      if (![LPTouchUtils canFindView:webView asSubViewInView:hitView]) {
+      if (![LPTouchUtils canFindView:(UIView *)webView asSubViewInView:hitView]) {
         UIView *hitSuperView = hitView;
 
-        while (hitSuperView && hitSuperView != webView) {
+        while (hitSuperView && hitSuperView != (UIView *)webView) {
           hitSuperView = [hitSuperView superview];
         }
-        if (hitSuperView != webView) {
+        if (hitSuperView != (UIView *)webView) {
           [augmentedChild setValue:@(0) forKeyPath:@"visible"];
         }
       }
@@ -183,13 +183,13 @@
   return accumulator;
 }
 
-+ (CGPoint) pointByAdjustingOffsetForScrollPostionOfWebView:(UIWebView *) webView {
++ (CGPoint) pointByAdjustingOffsetForScrollPostionOfWebView:(id<LPWebViewProtocol>) webView {
   CGPoint webViewPageOffset = CGPointMake(0, 0);
   if ([webView respondsToSelector:@selector(scrollView)]) {
     id scrollView = [webView performSelector:@selector(scrollView) withObject:nil];
     if ([scrollView respondsToSelector:@selector(contentOffset)]) {
       CGPoint scrollViewOffset = [scrollView contentOffset];
-      NSString *pageOffsetStr = [webView stringByEvaluatingJavaScriptFromString:@"window.pageYOffset"];
+      NSString *pageOffsetStr = [webView lpStringByEvaulatingJavaScript:@"window.pageYOffset"];
       webViewPageOffset = CGPointMake(0, [pageOffsetStr floatValue] - scrollViewOffset.y);
     }
   }
