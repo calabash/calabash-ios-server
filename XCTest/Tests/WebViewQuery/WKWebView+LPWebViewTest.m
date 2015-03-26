@@ -1,0 +1,280 @@
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
+#import "WKWebView+LPWebView.h"
+#import "LPJSONUtils.h"
+
+@interface WKWebView (LPXCTEST)
+
+- (NSString *) lpStringWithDate:(NSDate *) date;
+- (NSString *) lpStringWithDictionary:(NSDictionary *) dictionary;
+- (NSString *) lpStringWithArray:(NSArray *) array;
+
+@end
+
+@interface LPMockEvaluator : NSObject
+
+@property(strong, nonatomic, readonly) id result;
+@property(assign, nonatomic, readonly) BOOL raiseError;
+
+- (void) mockEvaluateJavascript:(NSString *) javascript
+              completionHandler:(void (^)(id, NSError *))completionHandler;
+
+- (id) initWithResult:(id) result;
+- (id) initWithResult:(id) result
+                raise:(BOOL) raiseError;
+
+@end
+
+@implementation LPMockEvaluator
+
+- (id) initWithResult:(id) result {
+  return [self initWithResult:result raise:NO];
+}
+
+- (id) initWithResult:(id)result raise:(BOOL)raiseError {
+  self = [super init];
+  if (self) {
+    _result = result;
+    _raiseError = raiseError;
+  }
+  return self;
+}
+
+- (void) mockEvaluateJavascript:(NSString *)javascript
+              completionHandler:(void (^)(id, NSError *))completionHandler {
+  if (self.raiseError) {
+    NSError *error = [NSError errorWithDomain:@"MY DOMAIN!"
+                                         code:11
+                                     userInfo:@{NSLocalizedDescriptionKey :
+                                                  @"Another day, another JavaScript failure"}];
+    completionHandler(nil, error);
+  } else {
+    completionHandler(self.result, nil);
+  }
+}
+
+@end
+
+@interface WKWebView_LPWebViewTest : XCTestCase
+
+@end
+
+@implementation WKWebView_LPWebViewTest
+
+@end
+
+SpecBegin(WKWebView_LPWebViewTest)
+
+describe(@"WKWebView+LPWebView", ^{
+
+  describe(@"helper methods", ^{
+    __block WKWebView *webView;
+    before(^{ webView = [[WKWebView alloc] initWithFrame:CGRectZero]; });
+
+    it(@"#lpStringFromDate:", ^{
+      NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+      [formatter setDateFormat:LPWKWebViewISO8601DateFormat];
+      NSString *expected = @"2015-03-26 16:39:06 +0100";
+      NSDate *date = [formatter dateFromString:expected];
+      NSString *actual = [webView lpStringWithDate:date];
+      expect(actual).to.equal(expected);
+    });
+
+    it(@"lpStringFromDictionary:", ^{
+      NSDictionary *dict = @{@"one" : @(1),
+                             @"two" : @(2),
+                             @"three" : @(3)};
+      NSString *expected = [LPJSONUtils serializeDictionary:dict];
+      NSString *actual = [webView lpStringWithDictionary:dict];
+      expect(actual).to.equal(expected);
+    });
+
+    it(@"lpStringFromArray:", ^{
+      NSArray *arr = @[@(1), @(2), @(3)];
+      NSString *expected = [LPJSONUtils serializeArray:arr];
+      NSString *actual = [webView lpStringWithArray:arr];
+      expect(actual).to.equal(expected);
+    });
+  });
+
+  describe(@"#lpStringByEvaulatingJavaScript:", ^{
+
+    __block WKWebView *webView;
+    __block SEL mockSel;
+    __block LPMockEvaluator *evaluator;
+    __block NSString *expected;
+    __block NSString *actual;
+    before(^{
+      webView = [[WKWebView alloc] initWithFrame:CGRectZero];
+      mockSel = @selector(mockEvaluateJavascript:completionHandler:);
+    });
+
+    it(@"can report errors", ^{
+      evaluator = [[LPMockEvaluator alloc] initWithResult:nil raise:YES];
+      id viewMock = [OCMockObject partialMockForObject:webView];
+      [[[viewMock stub] andCall:mockSel onObject:evaluator]
+       evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
+      actual = [viewMock lpStringByEvaulatingJavaScript:@"invalid javascript"];
+      expect(actual).to.equal(@"");
+    });
+
+    describe(@"can handle various return types", ^{
+
+      it(@"returns empty string for 'nil'", ^{
+        evaluator = [[LPMockEvaluator alloc] initWithResult:nil];
+        id viewMock = [OCMockObject partialMockForObject:webView];
+        [[[viewMock stub] andCall:mockSel onObject:evaluator]
+         evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
+        actual = [viewMock lpStringByEvaulatingJavaScript:@""];
+        expect(actual).to.equal(@"");
+      });
+
+      it(@"returns empty string for NSNull", ^{
+        evaluator = [[LPMockEvaluator alloc] initWithResult:[NSNull null]];
+        id viewMock = [OCMockObject partialMockForObject:webView];
+        [[[viewMock stub] andCall:mockSel onObject:evaluator]
+         evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
+        actual = [viewMock lpStringByEvaulatingJavaScript:@""];
+        expect(actual).to.equal(@"");
+      });
+
+      it(@"returns a string for NSString", ^{
+        evaluator = [[LPMockEvaluator alloc] initWithResult:@"a string"];
+        id viewMock = [OCMockObject partialMockForObject:webView];
+        [[[viewMock stub] andCall:mockSel onObject:evaluator]
+         evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
+        NSString *actual = [viewMock lpStringByEvaulatingJavaScript:@""];
+        expect(actual).to.equal(@"a string");
+      });
+
+      it(@"returns an iso 8601 string for NSDate", ^{
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:LPWKWebViewISO8601DateFormat];
+        expected = @"2015-03-26 16:39:06 +0100";
+        NSDate *date = [formatter dateFromString:expected];
+
+        evaluator = [[LPMockEvaluator alloc] initWithResult:date];
+        id viewMock = [OCMockObject partialMockForObject:webView];
+        [[[viewMock stub] andCall:mockSel onObject:evaluator]
+         evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
+        actual = [viewMock lpStringByEvaulatingJavaScript:@""];
+        expect(actual).to.equal(expected);
+      });
+
+      it(@"returns JSON representation of NSDictionary", ^{
+        NSDictionary *dict = @{@"one" : @(1),
+                               @"two" : @(2),
+                               @"three" : @(3)};
+       expected = [LPJSONUtils serializeDictionary:dict];
+
+        evaluator = [[LPMockEvaluator alloc] initWithResult:dict];
+        id viewMock = [OCMockObject partialMockForObject:webView];
+        [[[viewMock stub] andCall:mockSel onObject:evaluator]
+         evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
+        actual = [viewMock lpStringByEvaulatingJavaScript:@""];
+        expect(actual).to.equal(expected);
+      });
+
+      it(@"returns JSON representation of NSArray", ^{
+        NSArray *arr = @[@(1), @(2), @(3)];
+        expected = [LPJSONUtils serializeArray:arr];
+
+        evaluator = [[LPMockEvaluator alloc] initWithResult:arr];
+        id viewMock = [OCMockObject partialMockForObject:webView];
+        [[[viewMock stub] andCall:mockSel onObject:evaluator]
+         evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
+        actual = [viewMock lpStringByEvaulatingJavaScript:@""];
+        expect(actual).to.equal(expected);
+      });
+
+      describe(@"returns string for NSNumber", ^{
+        it(@"CGFloat", ^{
+          CGFloat val = 44.5;
+          NSNumber *number = @(val);
+          evaluator = [[LPMockEvaluator alloc] initWithResult:number];
+          id viewMock = [OCMockObject partialMockForObject:webView];
+          [[[viewMock stub] andCall:mockSel onObject:evaluator]
+           evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
+
+          actual = [viewMock lpStringByEvaulatingJavaScript:@""];
+          expect(actual).to.equal(@"44.5");
+        });
+
+        it(@"NSUInteger", ^{
+          NSUInteger val = 44;
+          NSNumber *number = @(val);
+          evaluator = [[LPMockEvaluator alloc] initWithResult:number];
+          id viewMock = [OCMockObject partialMockForObject:webView];
+          [[[viewMock stub] andCall:mockSel onObject:evaluator]
+           evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
+          actual = [viewMock lpStringByEvaulatingJavaScript:@""];
+          expect(actual).to.equal(@"44");
+        });
+
+        it(@"NSInteger", ^{
+          NSInteger val = -44;
+          NSNumber *number = @(val);
+          evaluator = [[LPMockEvaluator alloc] initWithResult:number];
+          id viewMock = [OCMockObject partialMockForObject:webView];
+          [[[viewMock stub] andCall:mockSel onObject:evaluator]
+           evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
+          NSString *actual = [viewMock lpStringByEvaulatingJavaScript:@""];
+          expect(actual).to.equal(@"-44");
+        });
+      });
+
+      it(@"returns description if all else fails", ^{
+        UIColor *color = [UIColor whiteColor];
+        evaluator = [[LPMockEvaluator alloc] initWithResult:color];
+        id viewMock = [OCMockObject partialMockForObject:webView];
+        [[[viewMock stub] andCall:mockSel onObject:evaluator]
+         evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
+        NSString *actual = [viewMock lpStringByEvaulatingJavaScript:@""];
+        NSLog(@"actual = %@", actual);
+        NSUInteger idx = [actual rangeOfString:@"UIDeviceWhiteColorSpace"].location;
+        expect(idx).notTo.equal(NSNotFound);
+      });
+    });
+
+
+    describe(@"can eval actual JavaScript", ^{
+      it(@"returns string for numbers", ^{
+        NSString *actual;
+        actual = [webView lpStringByEvaulatingJavaScript:@"1 + 2"];
+        expect(actual).to.equal(@"3");
+        actual = [webView lpStringByEvaulatingJavaScript:@"new Number(4)"];
+        expect(actual).to.equal(@"{}");
+      });
+
+
+      it(@"returns string for string concat", ^{
+        NSString *javascript = @"eval(\"'a' + 'b'\")";
+        actual = [webView lpStringByEvaulatingJavaScript:javascript];
+        expect(actual).to.equal(@"ab");
+      });
+
+      it(@"returns JSON representation of arrays", ^{
+        expected = @"[\"a\",\"b\",1]";
+        NSString *javascript = @"['a', 'b', 1]";
+
+        actual = [webView lpStringByEvaulatingJavaScript:javascript];
+        expect(actual).to.equal(expected);
+        javascript = @"new Array('a', 'b', 1)";
+
+        actual = [webView lpStringByEvaulatingJavaScript:javascript];
+        javascript = @"new Array('a', 'b', 1)";
+      });
+
+      it(@"returns JSON representation of associate arrys", ^{
+        expected =  @"{\"trout\":\"yummy\"}";
+        NSString *javascript = @"var a = {}; var fish = 'trout'; a[fish] = 'yummy'; a;";
+        actual = [webView lpStringByEvaulatingJavaScript:javascript];
+        expect(actual).to.equal(expected);
+      });
+    });
+  });
+});
+
+SpecEnd
