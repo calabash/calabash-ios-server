@@ -267,7 +267,7 @@ describe(@"WKWebView+LPWebView", ^{
         javascript = @"new Array('a', 'b', 1)";
       });
 
-      it(@"returns JSON representation of associate arrys", ^{
+      it(@"returns JSON representation of associate arrays", ^{
         expected =  @"{\"trout\":\"yummy\"}";
         NSString *javascript = @"var a = {}; var fish = 'trout'; a[fish] = 'yummy'; a;";
         actual = [webView calabashStringByEvaluatingJavaScript:javascript];
