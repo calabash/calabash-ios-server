@@ -5,6 +5,8 @@
 #import "WKWebView+LPWebView.h"
 #import "LPJSONUtils.h"
 
+// Inspiration from http://atmarkplant.com/ios-wkwebview-tips/ Daiji Ito @DJ110
+
 NSString *const LPWKWebViewISO8601DateFormat = @"yyyy-MM-dd HH:mm:ss Z";
 
 @interface WKWebView (WKWebView_LPWebView_Private)
