@@ -48,7 +48,7 @@
     NSError *error = [NSError errorWithDomain:@"MY DOMAIN!"
                                          code:11
                                      userInfo:@{NSLocalizedDescriptionKey :
-                                                  @"Another day, another JavaScript failure"}];
+                                                  @"Another day, another misunderstood JavaScript programmer."}];
     completionHandler(nil, error);
   } else {
     completionHandler(self.result, nil);
@@ -111,13 +111,27 @@ describe(@"WKWebView+LPWebView", ^{
       mockSel = @selector(mockEvaluateJavascript:completionHandler:);
     });
 
-    it(@"can report errors", ^{
-      evaluator = [[LPMockEvaluator alloc] initWithResult:nil raise:YES];
-      id viewMock = [OCMockObject partialMockForObject:webView];
-      [[[viewMock stub] andCall:mockSel onObject:evaluator]
-       evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
-      actual = [viewMock calabashStringByEvaluatingJavaScript:@"invalid javascript"];
-      expect(actual).to.equal(@"");
+    describe(@"can report errors", ^{
+      it(@"when javascript is not nil", ^{
+        evaluator = [[LPMockEvaluator alloc] initWithResult:nil raise:YES];
+        id viewMock = [OCMockObject partialMockForObject:webView];
+        [[[viewMock stub] andCall:mockSel onObject:evaluator]
+         evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
+        actual = [viewMock calabashStringByEvaluatingJavaScript:@"invalid javascript"];
+        expected = @"{\"error\":\"Another day, another misunderstood JavaScript programmer.\",\"javascript\":\"invalid javascript\"}";
+        expect(actual).to.equal(expected);
+      });
+
+      it(@"when javascript is nil", ^{
+        evaluator = [[LPMockEvaluator alloc] initWithResult:nil raise:YES];
+        id viewMock = [OCMockObject partialMockForObject:webView];
+        [[[viewMock stub] andCall:mockSel onObject:evaluator]
+         evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
+        actual = [viewMock calabashStringByEvaluatingJavaScript:nil];
+        expected = @"{\"error\":\"Another day, another misunderstood JavaScript programmer.\",\"javascript\":null}";
+        expect(actual).to.equal(expected);
+      });
+
     });
 
     describe(@"can handle various return types", ^{

@@ -24,10 +24,18 @@ NSString *const LPWKWebViewISO8601DateFormat = @"yyyy-MM-dd HH:mm:ss Z";
   __block BOOL finish = NO;
   [self evaluateJavaScript:javascript completionHandler:^(id result, NSError *error){
     if (error) {
+      NSString *localizedDescription = [error localizedDescription];
       NSLog(@"Error evaluating JavaScript: '%@'", javascript);
-      NSLog(@"Error was: '%@'", [error localizedDescription]);
+      NSLog(@"Error was: '%@'", localizedDescription);
+      NSDictionary *errorDict =
+      @{
+        @"error" : localizedDescription ? localizedDescription : [NSNull null],
+        @"javascript" : javascript ? javascript : [NSNull null]
+      };
+      res = [LPJSONUtils serializeDictionary:errorDict];
+    } else {
+      res = result;
     }
-    res = result;
     finish = YES;
   }];
 
