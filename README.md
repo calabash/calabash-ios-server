@@ -9,8 +9,10 @@ The companion of the calabash-ios gem:  https://github.com/calabash/calabash-ios
 
 ### Building the Framework
 
+
 ```
-$ git submodule update --init --recursive
+$ git clone --recursive git@github.com:calabash/calabash-ios-server.git
+$ cd calabash-ios-server
 $ make framework
 ```
 
