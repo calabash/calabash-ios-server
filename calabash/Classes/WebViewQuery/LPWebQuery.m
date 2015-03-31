@@ -59,7 +59,7 @@
 
   NSMutableArray *result = [NSMutableArray array];
 
-  NSString *output = [webView lpStringByEvaulatingJavaScript:jsString];
+  NSString *output = [webView calabashStringByEvaluatingJavaScript:jsString];
 
   NSArray *queryResult = [LPJSONUtils deserializeArray:output];
 
@@ -96,7 +96,7 @@
 + (NSDictionary *) dictionaryOfViewsInWebView:(UIView<LPWebViewProtocol> *) webView {
   NSString *jsString = [NSString stringWithFormat:LP_QUERY_JS,@"",@"dump", @""];
 
-  NSString *output = [webView lpStringByEvaulatingJavaScript:jsString];
+  NSString *output = [webView calabashStringByEvaluatingJavaScript:jsString];
   NSDictionary *dumpResult = [LPJSONUtils deserializeDictionary:output];
   NSMutableDictionary *finalResult = [NSMutableDictionary dictionaryWithDictionary:dumpResult];
   if (!(finalResult[@"type"])) {
@@ -189,7 +189,7 @@
     id scrollView = [webView performSelector:@selector(scrollView) withObject:nil];
     if ([scrollView respondsToSelector:@selector(contentOffset)]) {
       CGPoint scrollViewOffset = [scrollView contentOffset];
-      NSString *pageOffsetStr = [webView lpStringByEvaulatingJavaScript:@"window.pageYOffset"];
+      NSString *pageOffsetStr = [webView calabashStringByEvaluatingJavaScript:@"window.pageYOffset"];
       webViewPageOffset = CGPointMake(0, [pageOffsetStr floatValue] - scrollViewOffset.y);
     }
   }

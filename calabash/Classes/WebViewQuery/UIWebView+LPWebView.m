@@ -6,7 +6,7 @@
 
 @implementation UIWebView (UIWebView_LPWebView)
 
-- (NSString *) lpStringByEvaulatingJavaScript:(NSString *) javascript {
+- (NSString *) calabashStringByEvaluatingJavaScript:(NSString *) javascript {
   return [self stringByEvaluatingJavaScriptFromString:javascript];
 }
 

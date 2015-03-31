@@ -17,7 +17,7 @@ NSString *const LPWKWebViewISO8601DateFormat = @"yyyy-MM-dd HH:mm:ss Z";
 
 @implementation WKWebView (WKWebView_LPWebView)
 
-- (NSString *) lpStringByEvaulatingJavaScript:(NSString *) javascript {
+- (NSString *) calabashStringByEvaluatingJavaScript:(NSString *) javascript {
   __block id res = nil;
   __block BOOL finish = NO;
   [self evaluateJavaScript:javascript completionHandler:^(id result, NSError *error){

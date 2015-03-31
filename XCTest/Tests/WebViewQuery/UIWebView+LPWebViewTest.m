@@ -16,9 +16,9 @@ SpecBegin(UIWebView_LPWebViewTest)
 
 describe(@"UIWebView+LPWebView", ^{
 
-  it(@"#lpStringByEvaulatingJavaScript:", ^{
+  it(@"#calabashStringByEvaluatingJavaScript:", ^{
     UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectZero];
-    NSString *actual = [webView lpStringByEvaulatingJavaScript:@"1 + 2"];
+    NSString *actual = [webView calabashStringByEvaluatingJavaScript:@"1 + 2"];
     expect(actual).to.equal(@"3");
   });
 });

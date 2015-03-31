@@ -99,7 +99,7 @@ describe(@"WKWebView+LPWebView", ^{
     });
   });
 
-  describe(@"#lpStringByEvaulatingJavaScript:", ^{
+  describe(@"#calabashStringByEvaulatingJavaScript:", ^{
 
     __block WKWebView *webView;
     __block SEL mockSel;
@@ -116,7 +116,7 @@ describe(@"WKWebView+LPWebView", ^{
       id viewMock = [OCMockObject partialMockForObject:webView];
       [[[viewMock stub] andCall:mockSel onObject:evaluator]
        evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
-      actual = [viewMock lpStringByEvaulatingJavaScript:@"invalid javascript"];
+      actual = [viewMock calabashStringByEvaluatingJavaScript:@"invalid javascript"];
       expect(actual).to.equal(@"");
     });
 
@@ -127,7 +127,7 @@ describe(@"WKWebView+LPWebView", ^{
         id viewMock = [OCMockObject partialMockForObject:webView];
         [[[viewMock stub] andCall:mockSel onObject:evaluator]
          evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
-        actual = [viewMock lpStringByEvaulatingJavaScript:@""];
+        actual = [viewMock calabashStringByEvaluatingJavaScript:@""];
         expect(actual).to.equal(@"");
       });
 
@@ -136,7 +136,7 @@ describe(@"WKWebView+LPWebView", ^{
         id viewMock = [OCMockObject partialMockForObject:webView];
         [[[viewMock stub] andCall:mockSel onObject:evaluator]
          evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
-        actual = [viewMock lpStringByEvaulatingJavaScript:@""];
+        actual = [viewMock calabashStringByEvaluatingJavaScript:@""];
         expect(actual).to.equal(@"");
       });
 
@@ -145,7 +145,7 @@ describe(@"WKWebView+LPWebView", ^{
         id viewMock = [OCMockObject partialMockForObject:webView];
         [[[viewMock stub] andCall:mockSel onObject:evaluator]
          evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
-        NSString *actual = [viewMock lpStringByEvaulatingJavaScript:@""];
+        NSString *actual = [viewMock calabashStringByEvaluatingJavaScript:@""];
         expect(actual).to.equal(@"a string");
       });
 
@@ -159,7 +159,7 @@ describe(@"WKWebView+LPWebView", ^{
         id viewMock = [OCMockObject partialMockForObject:webView];
         [[[viewMock stub] andCall:mockSel onObject:evaluator]
          evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
-        actual = [viewMock lpStringByEvaulatingJavaScript:@""];
+        actual = [viewMock calabashStringByEvaluatingJavaScript:@""];
         expect(actual).to.equal(expected);
       });
 
@@ -173,7 +173,7 @@ describe(@"WKWebView+LPWebView", ^{
         id viewMock = [OCMockObject partialMockForObject:webView];
         [[[viewMock stub] andCall:mockSel onObject:evaluator]
          evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
-        actual = [viewMock lpStringByEvaulatingJavaScript:@""];
+        actual = [viewMock calabashStringByEvaluatingJavaScript:@""];
         expect(actual).to.equal(expected);
       });
 
@@ -185,7 +185,7 @@ describe(@"WKWebView+LPWebView", ^{
         id viewMock = [OCMockObject partialMockForObject:webView];
         [[[viewMock stub] andCall:mockSel onObject:evaluator]
          evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
-        actual = [viewMock lpStringByEvaulatingJavaScript:@""];
+        actual = [viewMock calabashStringByEvaluatingJavaScript:@""];
         expect(actual).to.equal(expected);
       });
 
@@ -198,7 +198,7 @@ describe(@"WKWebView+LPWebView", ^{
           [[[viewMock stub] andCall:mockSel onObject:evaluator]
            evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
 
-          actual = [viewMock lpStringByEvaulatingJavaScript:@""];
+          actual = [viewMock calabashStringByEvaluatingJavaScript:@""];
           expect(actual).to.equal(@"44.5");
         });
 
@@ -209,7 +209,7 @@ describe(@"WKWebView+LPWebView", ^{
           id viewMock = [OCMockObject partialMockForObject:webView];
           [[[viewMock stub] andCall:mockSel onObject:evaluator]
            evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
-          actual = [viewMock lpStringByEvaulatingJavaScript:@""];
+          actual = [viewMock calabashStringByEvaluatingJavaScript:@""];
           expect(actual).to.equal(@"44");
         });
 
@@ -220,7 +220,7 @@ describe(@"WKWebView+LPWebView", ^{
           id viewMock = [OCMockObject partialMockForObject:webView];
           [[[viewMock stub] andCall:mockSel onObject:evaluator]
            evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
-          NSString *actual = [viewMock lpStringByEvaulatingJavaScript:@""];
+          NSString *actual = [viewMock calabashStringByEvaluatingJavaScript:@""];
           expect(actual).to.equal(@"-44");
         });
       });
@@ -231,7 +231,7 @@ describe(@"WKWebView+LPWebView", ^{
         id viewMock = [OCMockObject partialMockForObject:webView];
         [[[viewMock stub] andCall:mockSel onObject:evaluator]
          evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
-        NSString *actual = [viewMock lpStringByEvaulatingJavaScript:@""];
+        NSString *actual = [viewMock calabashStringByEvaluatingJavaScript:@""];
         NSLog(@"actual = %@", actual);
         NSUInteger idx = [actual rangeOfString:@"UIDeviceWhiteColorSpace"].location;
         expect(idx).notTo.equal(NSNotFound);
@@ -242,16 +242,16 @@ describe(@"WKWebView+LPWebView", ^{
     describe(@"can eval actual JavaScript", ^{
       it(@"returns string for numbers", ^{
         NSString *actual;
-        actual = [webView lpStringByEvaulatingJavaScript:@"1 + 2"];
+        actual = [webView calabashStringByEvaluatingJavaScript:@"1 + 2"];
         expect(actual).to.equal(@"3");
-        actual = [webView lpStringByEvaulatingJavaScript:@"new Number(4)"];
+        actual = [webView calabashStringByEvaluatingJavaScript:@"new Number(4)"];
         expect(actual).to.equal(@"{}");
       });
 
 
       it(@"returns string for string concat", ^{
         NSString *javascript = @"eval(\"'a' + 'b'\")";
-        actual = [webView lpStringByEvaulatingJavaScript:javascript];
+        actual = [webView calabashStringByEvaluatingJavaScript:javascript];
         expect(actual).to.equal(@"ab");
       });
 
@@ -259,18 +259,18 @@ describe(@"WKWebView+LPWebView", ^{
         expected = @"[\"a\",\"b\",1]";
         NSString *javascript = @"['a', 'b', 1]";
 
-        actual = [webView lpStringByEvaulatingJavaScript:javascript];
+        actual = [webView calabashStringByEvaluatingJavaScript:javascript];
         expect(actual).to.equal(expected);
         javascript = @"new Array('a', 'b', 1)";
 
-        actual = [webView lpStringByEvaulatingJavaScript:javascript];
+        actual = [webView calabashStringByEvaluatingJavaScript:javascript];
         javascript = @"new Array('a', 'b', 1)";
       });
 
       it(@"returns JSON representation of associate arrys", ^{
         expected =  @"{\"trout\":\"yummy\"}";
         NSString *javascript = @"var a = {}; var fish = 'trout'; a[fish] = 'yummy'; a;";
-        actual = [webView lpStringByEvaulatingJavaScript:javascript];
+        actual = [webView calabashStringByEvaluatingJavaScript:javascript];
         expect(actual).to.equal(expected);
       });
     });

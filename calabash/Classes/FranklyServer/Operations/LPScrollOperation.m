@@ -55,7 +55,7 @@
     } else if ([@"right" isEqualToString:dir]) {
       scrollJS = [NSString stringWithFormat:scrollJS, @"100", @"0"];
     }
-    NSString *res = [webView lpStringByEvaulatingJavaScript:scrollJS];
+    NSString *res = [webView calabashStringByEvaluatingJavaScript:scrollJS];
     NSLog(@"RES:%@", res);
     return _view;
   }
