@@ -38,6 +38,7 @@ dylib_sim:
 	scripts/make-libraries.rb verify-sim-dylib
 
 install_test_binaries:
+	$(MAKE) framework
 	$(MAKE) dylibs
 	./scripts/install-test-binaries.rb
 
