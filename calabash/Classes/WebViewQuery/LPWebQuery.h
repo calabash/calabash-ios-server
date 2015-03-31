@@ -25,9 +25,9 @@ typedef enum : NSUInteger {
 
 + (NSArray *) arrayByEvaluatingQuery:(NSString *) query
                                 type:(LPWebQueryType) type
-                             webView:(id<LPWebViewProtocol>) webView
+                             webView:(UIView<LPWebViewProtocol> *) webView
                     includeInvisible:(BOOL) includeInvisible;
 
-+ (NSDictionary *) dictionaryOfViewsInWebView:(id<LPWebViewProtocol>) webView;
++ (NSDictionary *) dictionaryOfViewsInWebView:(UIView<LPWebViewProtocol> *) webView;
 
 @end
