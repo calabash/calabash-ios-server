@@ -49,8 +49,6 @@ Dir.chdir(working_dir) do
   options =
         {
               :tries => travis_ci? ? 3 : 1,
-              :base_interval => 5,
-              #:interval => 5,
               :on_retry => on_retry
         }
 
