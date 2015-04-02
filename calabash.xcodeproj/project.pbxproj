@@ -558,9 +558,7 @@
 		F537397418E52014004133FA /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F537398D18E5253B004133FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		F537399B18E6E0BE004133FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F537399918E6E0BE004133FA /* main.m */; };
-		F5396A711AA6056D00D75E78 /* cucumber-report.html in Resources */ = {isa = PBXBuildFile; fileRef = F5396A6E1AA6056D00D75E78 /* cucumber-report.html */; };
 		F5396A721AA6056D00D75E78 /* lp-simple-example.html in Resources */ = {isa = PBXBuildFile; fileRef = F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */; };
-		F5396A731AA6056D00D75E78 /* xam-docs.html in Resources */ = {isa = PBXBuildFile; fileRef = F5396A701AA6056D00D75E78 /* xam-docs.html */; };
 		F55185571AC3866300CE06DC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A33A721AC01E8E00224639 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F55185581AC3875200CE06DC /* LPWebViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A601AC01A9F00224639 /* LPWebViewProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F55185591AC3875900CE06DC /* UIWebView+LPWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A4F1AC00D1300224639 /* UIWebView+LPWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
