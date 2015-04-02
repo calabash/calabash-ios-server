@@ -38,11 +38,9 @@ describe(@"LPRuntimeWKWebView", ^{
     expect(conforms).to.equal(YES);
   });
 
-  it(@"#lpParser", ^{
-    SEL sel = NSSelectorFromString(@"lpParser");
+  it(@"#lpStringWithDate:", ^{
+    SEL sel = NSSelectorFromString(@"lpStringWithDate:");
     expect([webView respondsToSelector:sel]).to.equal(YES);
-    id parser = [LPInvoker invokeSelector:sel withTarget:webView];
-    expect([parser isKindOfClass:[LPJSReturnedObjectParser class]]).to.equal(YES);
   });
 
 });

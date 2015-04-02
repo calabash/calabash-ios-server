@@ -37,8 +37,10 @@ NSString *const LPRuntimeWKWebViewISO8601DateFormat = @"yyyy-MM-dd HH:mm:ss Z";
 
 @end
 
-static LPJSReturnedObjectParser *lpParserIMP(id self, SEL _cmd) {
-  return [[LPJSReturnedObjectParser alloc] init];
+static NSString *LPStringWithDateIMP(id self, SEL _cmd, NSDate *date) {
+  NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+  [formatter setDateFormat:LPRuntimeWKWebViewISO8601DateFormat];
+  return [formatter stringFromDate:date];
 }
 
 @implementation LPRuntimeWKWebView
@@ -46,19 +48,21 @@ static LPJSReturnedObjectParser *lpParserIMP(id self, SEL _cmd) {
 + (BOOL) create {
 
   Class LPWKWebViewClass = objc_getClass("WKWebView");
-  if (LPWKWebViewClass) {
+  if (!LPWKWebViewClass) { return NO; }
 
-    Protocol *lpWebViewProtocol = NSProtocolFromString(@"LPWebViewProtocol");
-    class_addProtocol(LPWKWebViewClass, lpWebViewProtocol);
+  Protocol *lpWebViewProtocol = NSProtocolFromString(@"LPWebViewProtocol");
+  class_addProtocol(LPWKWebViewClass, lpWebViewProtocol);
 
-    Method parserMethod = class_getInstanceMethod([LPJSReturnedObjectParser class],
-                                                  @selector(returnsSelfForEncoding));
-    const char *parserMethodEncoding = method_getTypeEncoding(parserMethod);
+  Method descript = class_getInstanceMethod([NSObject class],
+                                            @selector(description));
 
-    SEL lpParserSel = NSSelectorFromString(@"lpParser");
-    class_addMethod(LPWKWebViewClass, lpParserSel, (IMP)lpParserIMP, parserMethodEncoding);
-  }
-  return NO;
+  const char *stringEncoding = method_getTypeEncoding(descript);
+
+  SEL withDateSel = NSSelectorFromString(@"lpStringWithDate:");
+  class_addMethod(LPWKWebViewClass, withDateSel,
+                  (IMP)LPStringWithDateIMP, stringEncoding);
+
+  return YES;
 }
 
 @end
