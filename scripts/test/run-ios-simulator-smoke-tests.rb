@@ -93,6 +93,6 @@ animated_happiness_dir = File.expand_path(File.join(File.dirname(__FILE__), '..'
 Dir.chdir animated_happiness_dir do
 
   do_system('script/ci/travis/build-and-stage-app.sh')
-
+  install_gem('luffa')
   do_system('script/ci/travis/cucumber-ci.rb --tags ~@no_ci --tags ~@scroll')
 end
