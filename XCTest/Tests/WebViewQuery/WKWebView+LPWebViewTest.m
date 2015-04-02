@@ -76,10 +76,11 @@ describe(@"WKWebView+LPWebView", ^{
     it(@"#lpStringFromDate:", ^{
       NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
       [formatter setDateFormat:LPWKWebViewISO8601DateFormat];
-      NSString *expected = @"2015-03-26 16:39:06 +0100";
-      NSDate *date = [formatter dateFromString:expected];
-      NSString *actual = [webView lpStringWithDate:date];
-      expect(actual).to.equal(expected);
+      NSString *expectedDateString = @"2015-03-26 16:39:06 +0100";
+      NSDate *expected = [formatter dateFromString:expectedDateString];
+      NSString *actualDateString = [webView lpStringWithDate:expected];
+      NSDate *actual = [formatter dateFromString:actualDateString];
+      expect([actual compare:expected]).to.equal(NSOrderedSame);
     });
 
     it(@"lpStringFromDictionary:", ^{
@@ -166,15 +167,18 @@ describe(@"WKWebView+LPWebView", ^{
       it(@"returns an iso 8601 string for NSDate", ^{
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:LPWKWebViewISO8601DateFormat];
-        expected = @"2015-03-26 16:39:06 +0100";
-        NSDate *date = [formatter dateFromString:expected];
+        NSString *expectedDateString = @"2015-03-26 16:39:06 +0100";
+        NSDate *expectedDate = [formatter dateFromString:expectedDateString];
 
-        evaluator = [[LPMockEvaluator alloc] initWithResult:date];
+        NSDate *dateToReturn = [formatter dateFromString:expected];
+        evaluator = [[LPMockEvaluator alloc] initWithResult:dateToReturn];
         id viewMock = [OCMockObject partialMockForObject:webView];
         [[[viewMock stub] andCall:mockSel onObject:evaluator]
          evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
-        actual = [viewMock calabashStringByEvaluatingJavaScript:@""];
-        expect(actual).to.equal(expected);
+        NSString *actualDateString = [viewMock calabashStringByEvaluatingJavaScript:@""];
+
+        NSDate *actualDate = [formatter dateFromString:actualDateString];
+        expect([actualDate compare:expectedDate]).to.equal(NSOrderedSame);
       });
 
       it(@"returns JSON representation of NSDictionary", ^{
