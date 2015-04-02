@@ -2270,16 +2270,16 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				F50CBF5D1A03F222004AC9DA /* XCTest */,
 				F5091BD918C4E1D700C85307 /* calabash-device */,
 				F58219F718C4E27400293508 /* calabash-simulator */,
-				F5F53D6618C60FA900BD9731 /* use make to create the framework */,
-				F537398B18E5253B004133FA /* version */,
 				B1058DEC197F00C000B4A57B /* frank-calabash */,
 				B1D5BD7519A23BCE0070E8CE /* frank-calabash-device */,
 				B15BF97019ABAFD200B38577 /* calabash-dylib-device */,
 				B15BF9E819ABB2B100B38577 /* calabash-dylib-simulator */,
-				F50CBF5D1A03F222004AC9DA /* XCTest */,
 				F59CA46C1A82EF40007A2F38 /* LPTestTarget */,
+				F5F53D6618C60FA900BD9731 /* use make to create the framework */,
+				F537398B18E5253B004133FA /* version */,
 			);
 		};
 /* End PBXProject section */
