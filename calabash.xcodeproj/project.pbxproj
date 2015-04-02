@@ -774,6 +774,14 @@
 		F5C094571A979CC200AE5991 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C0944C1A979CC200AE5991 /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5C094581A979CC200AE5991 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C0944C1A979CC200AE5991 /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5C0945A1A97B7CB00AE5991 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C0944C1A979CC200AE5991 /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5C224C71ACDF299001DB4FA /* LPRuntimeWKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C224C01ACDF298001DB4FA /* LPRuntimeWKWebView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5C224C81ACDF299001DB4FA /* LPRuntimeWKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C224C01ACDF298001DB4FA /* LPRuntimeWKWebView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5C224C91ACDF299001DB4FA /* LPRuntimeWKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C224C01ACDF298001DB4FA /* LPRuntimeWKWebView.m */; };
+		F5C224CA1ACDF299001DB4FA /* LPRuntimeWKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C224C01ACDF298001DB4FA /* LPRuntimeWKWebView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5C224CB1ACDF299001DB4FA /* LPRuntimeWKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C224C01ACDF298001DB4FA /* LPRuntimeWKWebView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5C224CC1ACDF299001DB4FA /* LPRuntimeWKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C224C01ACDF298001DB4FA /* LPRuntimeWKWebView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5C224CD1ACDF299001DB4FA /* LPRuntimeWKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C224C01ACDF298001DB4FA /* LPRuntimeWKWebView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5C224CF1ACDFF38001DB4FA /* LPRuntimeWKWebViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C224CE1ACDFF38001DB4FA /* LPRuntimeWKWebViewTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5CB7D581A7CF45B00DACC8B /* InvokerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = F5CB7D571A7CF45B00DACC8B /* InvokerFactory.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5DA9C951AA95020002E6AAE /* LPQueryLogRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EBF08716EE63A000AE4D40 /* LPQueryLogRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5E2D1E018C9120E00A0D9B6 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -1155,6 +1163,9 @@
 		F5BD0BF21ABCE19B009E3D77 /* LPDeviceTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDeviceTest.m; sourceTree = "<group>"; };
 		F5C0944B1A979CC200AE5991 /* LPWebQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPWebQuery.h; sourceTree = "<group>"; };
 		F5C0944C1A979CC200AE5991 /* LPWebQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPWebQuery.m; sourceTree = "<group>"; };
+		F5C224BF1ACDF298001DB4FA /* LPRuntimeWKWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPRuntimeWKWebView.h; sourceTree = "<group>"; };
+		F5C224C01ACDF298001DB4FA /* LPRuntimeWKWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPRuntimeWKWebView.m; sourceTree = "<group>"; };
+		F5C224CE1ACDFF38001DB4FA /* LPRuntimeWKWebViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPRuntimeWKWebViewTest.m; sourceTree = "<group>"; };
 		F5C3A62D18A2EA0800DB7E42 /* LPCollectionViewScrollToItemOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCollectionViewScrollToItemOperation.h; sourceTree = "<group>"; tabWidth = 4; };
 		F5C3A62E18A2EA0800DB7E42 /* LPCollectionViewScrollToItemOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCollectionViewScrollToItemOperation.m; sourceTree = "<group>"; tabWidth = 4; };
 		F5CAC06A180D499600E23F03 /* LPSliderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPSliderOperation.h; sourceTree = "<group>"; };
@@ -1883,6 +1894,7 @@
 				F5A33A5E1AC0172A00224639 /* UIWebView+LPWebViewTest.m */,
 				F5A33A701AC01BC400224639 /* WKWebView+LPWebViewTest.m */,
 				F5F2D5DF1ACAC3B60027937B /* UIView+LPIsWebViewTest.m */,
+				F5C224CE1ACDFF38001DB4FA /* LPRuntimeWKWebViewTest.m */,
 			);
 			path = WebViewQuery;
 			sourceTree = "<group>";
@@ -1899,6 +1911,8 @@
 				F5A33A501AC00D1300224639 /* UIWebView+LPWebView.m */,
 				F5A33A611AC01BA900224639 /* WKWebView+LPWebView.h */,
 				F5A33A621AC01BA900224639 /* WKWebView+LPWebView.m */,
+				F5C224BF1ACDF298001DB4FA /* LPRuntimeWKWebView.h */,
+				F5C224C01ACDF298001DB4FA /* LPRuntimeWKWebView.m */,
 			);
 			path = WebViewQuery;
 			sourceTree = "<group>";
@@ -2439,6 +2453,7 @@
 				B1135842197F1351004B16F4 /* LPHTTPDataResponse.m in Sources */,
 				B11358641981B053004B16F4 /* LPScrollToRowOperation.m in Sources */,
 				B1135839197F12CF004B16F4 /* LPGenericAsyncRoute.m in Sources */,
+				F5C224CA1ACDF299001DB4FA /* LPRuntimeWKWebView.m in Sources */,
 				B1058E08197F00C000B4A57B /* LPUIAUserPrefsChannel.m in Sources */,
 				B1058E1D197F00C000B4A57B /* UIScriptASTPredicate.m in Sources */,
 				B1135847197F1390004B16F4 /* GCDAsyncSocket.m in Sources */,
@@ -2590,6 +2605,7 @@
 				B15BF9D819ABB1DE00B38577 /* UIScriptASTClassName.m in Sources */,
 				B1FBBC5F19D0070000EE03CE /* LPDevice.m in Sources */,
 				B15BF9D919ABB1DE00B38577 /* UIScriptASTDirection.m in Sources */,
+				F5C224CC1ACDF299001DB4FA /* LPRuntimeWKWebView.m in Sources */,
 				B15BF9DA19ABB1DE00B38577 /* UIScriptASTFirst.m in Sources */,
 				B15BF9DB19ABB1DE00B38577 /* UIScriptASTIndex.m in Sources */,
 				B15BF9DC19ABB1DE00B38577 /* UIScriptASTLast.m in Sources */,
@@ -2688,6 +2704,7 @@
 				B15BFA2A19ABB2B100B38577 /* UIScriptASTClassName.m in Sources */,
 				B1FBBC6019D0070000EE03CE /* LPDevice.m in Sources */,
 				B15BFA2B19ABB2B100B38577 /* UIScriptASTDirection.m in Sources */,
+				F5C224CD1ACDF299001DB4FA /* LPRuntimeWKWebView.m in Sources */,
 				B15BFA2C19ABB2B100B38577 /* UIScriptASTFirst.m in Sources */,
 				B15BFA2D19ABB2B100B38577 /* UIScriptASTIndex.m in Sources */,
 				B15BFA2E19ABB2B100B38577 /* UIScriptASTLast.m in Sources */,
@@ -2786,6 +2803,7 @@
 				B1D5BDB819A23BCE0070E8CE /* LPReflectUtils.m in Sources */,
 				B1FBBC5E19D0070000EE03CE /* LPDevice.m in Sources */,
 				B1D5BDB919A23BCE0070E8CE /* LPISO8601DateFormatter.m in Sources */,
+				F5C224CB1ACDF299001DB4FA /* LPRuntimeWKWebView.m in Sources */,
 				B1D5BDBA19A23BCE0070E8CE /* LPExitRoute.m in Sources */,
 				B1D5BDBB19A23BCE0070E8CE /* LPSliderOperation.m in Sources */,
 				B1D5BDBC19A23BCE0070E8CE /* UIScriptASTVisibility.m in Sources */,
@@ -2884,6 +2902,7 @@
 				F5091C1818C4E1D700C85307 /* LPReflectUtils.m in Sources */,
 				B1FBBC5B19D0070000EE03CE /* LPDevice.m in Sources */,
 				F5091C1918C4E1D700C85307 /* LPISO8601DateFormatter.m in Sources */,
+				F5C224C81ACDF299001DB4FA /* LPRuntimeWKWebView.m in Sources */,
 				F5091C1A18C4E1D700C85307 /* LPExitRoute.m in Sources */,
 				F5091C1B18C4E1D700C85307 /* LPSliderOperation.m in Sources */,
 				F5091C1D18C4E1D700C85307 /* UIScriptASTVisibility.m in Sources */,
@@ -2966,6 +2985,7 @@
 				F50CBF9A1A04058C004AC9DA /* LPScrollToRowOperation.m in Sources */,
 				F50CBF8F1A04058C004AC9DA /* LPI.mm in Sources */,
 				B15369FB1A325E510093923F /* LPUIARouteOverSharedElement.m in Sources */,
+				F5C224CF1ACDFF38001DB4FA /* LPRuntimeWKWebViewTest.m in Sources */,
 				F50CBFAF1A0405B2004AC9DA /* LPScreenshotRoute.m in Sources */,
 				F50CBFBA1A0405CE004AC9DA /* UIScriptASTVisibility.m in Sources */,
 				F50CBFBC1A0405CE004AC9DA /* UIScriptAST.m in Sources */,
@@ -2989,6 +3009,7 @@
 				F50CBFC41A0405CE004AC9DA /* UIScriptParser.m in Sources */,
 				F50CBFAD1A0405B2004AC9DA /* LPRecordRoute.m in Sources */,
 				F50CBF971A04058C004AC9DA /* LPOperation.m in Sources */,
+				F5C224C71ACDF299001DB4FA /* LPRuntimeWKWebView.m in Sources */,
 				F50CBFA11A0405B2004AC9DA /* LPKeychainRoute.m in Sources */,
 				F50CBF941A04058C004AC9DA /* LPOrientationOperation.m in Sources */,
 				F50CBFC71A0405E9004AC9DA /* LPJSONUtils.m in Sources */,
@@ -3107,6 +3128,7 @@
 				F5821A3618C4E27400293508 /* LPReflectUtils.m in Sources */,
 				B1FBBC5C19D0070000EE03CE /* LPDevice.m in Sources */,
 				F5821A3718C4E27400293508 /* LPISO8601DateFormatter.m in Sources */,
+				F5C224C91ACDF299001DB4FA /* LPRuntimeWKWebView.m in Sources */,
 				F5821A3818C4E27400293508 /* LPExitRoute.m in Sources */,
 				F5821A3918C4E27400293508 /* LPSliderOperation.m in Sources */,
 				F5821A3B18C4E27400293508 /* UIScriptASTVisibility.m in Sources */,
