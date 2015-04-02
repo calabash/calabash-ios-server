@@ -7,6 +7,7 @@
 #import "LPRuntimeWKWebView.h"
 #import <WebKit/WebKit.h>
 #import "LPInvoker.h"
+#import "lPWebViewProtocol.h"
 
 @interface LPRuntimeWKWebViewTest : XCTestCase
 
@@ -30,6 +31,11 @@ describe(@"LPRuntimeWKWebView", ^{
 
   before(^{
     webView = [[WKWebView alloc] initWithFrame:CGRectZero];
+  });
+
+  it(@"implements LPWebViewProtocol", ^{
+    BOOL conforms = [webView conformsToProtocol:@protocol(LPWebViewProtocol)];
+    expect(conforms).to.equal(YES);
   });
 
   it(@"#lpParser", ^{

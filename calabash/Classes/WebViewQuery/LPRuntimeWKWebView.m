@@ -48,6 +48,9 @@ static LPJSReturnedObjectParser *lpParserIMP(id self, SEL _cmd) {
   Class LPWKWebViewClass = objc_getClass("WKWebView");
   if (LPWKWebViewClass) {
 
+    Protocol *lpWebViewProtocol = NSProtocolFromString(@"LPWebViewProtocol");
+    class_addProtocol(LPWKWebViewClass, lpWebViewProtocol);
+
     Method parserMethod = class_getInstanceMethod([LPJSReturnedObjectParser class],
                                                   @selector(returnsSelfForEncoding));
     const char *parserMethodEncoding = method_getTypeEncoding(parserMethod);
