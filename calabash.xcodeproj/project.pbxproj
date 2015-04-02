@@ -578,9 +578,7 @@
 		F537397418E52014004133FA /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F537398D18E5253B004133FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		F537399B18E6E0BE004133FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F537399918E6E0BE004133FA /* main.m */; };
-		F5396A711AA6056D00D75E78 /* cucumber-report.html in Resources */ = {isa = PBXBuildFile; fileRef = F5396A6E1AA6056D00D75E78 /* cucumber-report.html */; };
 		F5396A721AA6056D00D75E78 /* lp-simple-example.html in Resources */ = {isa = PBXBuildFile; fileRef = F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */; };
-		F5396A731AA6056D00D75E78 /* xam-docs.html in Resources */ = {isa = PBXBuildFile; fileRef = F5396A701AA6056D00D75E78 /* xam-docs.html */; };
 		F5543F221ABF7D7000E1A0BF /* LPPluginLoaderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5543F211ABF7D7000E1A0BF /* LPPluginLoaderTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5543F2B1ABF7DE900E1A0BF /* LPPluginLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5543F241ABF7DE900E1A0BF /* LPPluginLoader.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5543F2C1ABF7DE900E1A0BF /* LPPluginLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5543F241ABF7DE900E1A0BF /* LPPluginLoader.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -990,9 +988,7 @@
 		F5329C931A9D6F2900FE3800 /* LPWebQueryResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPWebQueryResult.m; sourceTree = "<group>"; };
 		F537398C18E5253B004133FA /* version */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = version; sourceTree = BUILT_PRODUCTS_DIR; };
 		F537399918E6E0BE004133FA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F5396A6E1AA6056D00D75E78 /* cucumber-report.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "cucumber-report.html"; sourceTree = "<group>"; };
 		F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "lp-simple-example.html"; sourceTree = "<group>"; };
-		F5396A701AA6056D00D75E78 /* xam-docs.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "xam-docs.html"; sourceTree = "<group>"; };
 		F5543F211ABF7D7000E1A0BF /* LPPluginLoaderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPluginLoaderTest.m; sourceTree = "<group>"; };
 		F5543F231ABF7DE900E1A0BF /* LPPluginLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPPluginLoader.h; sourceTree = "<group>"; };
 		F5543F241ABF7DE900E1A0BF /* LPPluginLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPluginLoader.m; sourceTree = "<group>"; };
@@ -1666,9 +1662,7 @@
 				F5A33A3A1ABFAD7600224639 /* examplePluginCalabash.dylib */,
 				F5A33A3B1ABFAD7600224639 /* memoryPlugin.dylib */,
 				F5A33A3C1ABFAD7600224639 /* memoryPluginCalabash.dylib */,
-				F5396A6E1AA6056D00D75E78 /* cucumber-report.html */,
 				F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */,
-				F5396A701AA6056D00D75E78 /* xam-docs.html */,
 			);
 			path = TestResources;
 			sourceTree = "<group>";
@@ -2161,8 +2155,6 @@
 				F59CA47E1A82EF40007A2F38 /* Main.storyboard in Resources */,
 				F5396A721AA6056D00D75E78 /* lp-simple-example.html in Resources */,
 				F59CA4801A82EF40007A2F38 /* Images.xcassets in Resources */,
-				F5396A711AA6056D00D75E78 /* cucumber-report.html in Resources */,
-				F5396A731AA6056D00D75E78 /* xam-docs.html in Resources */,
 				F5A33A411ABFAD8D00224639 /* examplePlugin.dylib in Resources */,
 				F5A33A421ABFAD9100224639 /* examplePluginCalabash.dylib in Resources */,
 				F5A33A431ABFAD9400224639 /* memoryPlugin.dylib in Resources */,
