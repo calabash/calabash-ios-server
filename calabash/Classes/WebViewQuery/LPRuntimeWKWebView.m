@@ -7,7 +7,7 @@
 #import "LPWebViewProtocol.h"
 #import <objc/runtime.h>
 
-NSString *const LPRuntimeWKWebViewISO8601DateFormat = @"yyyy-MM-dd HH:mm:ss Z";
+NSString *const LPWKWebViewISO8601DateFormat = @"yyyy-MM-dd HH:mm:ss Z";
 
 @interface LPRuntimeWKWebView ()
 
@@ -31,7 +31,7 @@ NSString *const LPRuntimeWKWebViewISO8601DateFormat = @"yyyy-MM-dd HH:mm:ss Z";
 
 static NSString *LPWKWebViewStringWithDateIMP(id self, SEL _cmd, NSDate *date) {
   NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-  [formatter setDateFormat:LPRuntimeWKWebViewISO8601DateFormat];
+  [formatter setDateFormat:LPWKWebViewISO8601DateFormat];
   return [formatter stringFromDate:date];
 }
 

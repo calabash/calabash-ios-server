@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-extern NSString *const LPRuntimeWKWebViewISO8601DateFormat;
+extern NSString *const LPWKWebViewISO8601DateFormat;
 
 typedef enum : NSUInteger {
   LPWKWebViewNotAvailable = 0,

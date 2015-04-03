@@ -48,7 +48,7 @@
   NSError *error = nil;
   if ([javaScriptString isEqualToString:@"date"]) {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:LPRuntimeWKWebViewISO8601DateFormat];
+    [formatter setDateFormat:LPWKWebViewISO8601DateFormat];
     NSString *expectedDateString = @"2015-03-26 16:39:06 +0100";
     result = [formatter dateFromString:expectedDateString];
   } else if ([javaScriptString isEqualToString:@"dictionary"]) {
@@ -116,7 +116,7 @@ describe(@"LPRuntimeWKWebView", ^{
       expect([obj respondsToSelector:sel]).to.equal(YES);
 
       NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-      [formatter setDateFormat:LPRuntimeWKWebViewISO8601DateFormat];
+      [formatter setDateFormat:LPWKWebViewISO8601DateFormat];
       NSString *expectedDateString = @"2015-03-26 16:39:06 +0100";
       NSDate *expected = [formatter dateFromString:expectedDateString];
       NSString *actualDateString;
