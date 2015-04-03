@@ -10,22 +10,18 @@
 #import "LPWebViewProtocol.h"
 #import "LPJSONUtils.h"
 
+
 @interface LPRuntimeWKWebView (LPXCTest)
 
 + (Class) lpClassForWKWebView;
 
 + (BOOL) addLPWebViewProtocol:(Class) klass;
-
 + (BOOL) addWithDateMethod:(Class) klass;
-
 + (BOOL) addWithDictionaryMethod:(Class) klass;
-
 + (BOOL) addWithArrayMethod:(Class) klass;
-
 + (BOOL) addEvaluateJavaScriptMethod:(Class) klass;
 
 @end
-
 
 @interface LPTestProtocol : NSObject @end
 @implementation LPTestProtocol @end
@@ -39,8 +35,52 @@
 @interface LPTestWithArray : NSObject @end
 @implementation LPTestWithArray @end
 
-@interface LPTestEvalJS : NSObject @end
-@implementation LPTestEvalJS @end
+@interface LPTestEvalJS : NSObject
+
+- (void) evaluateJavaScript:(NSString *)javaScriptString completionHandler:(void (^)(id, NSError *))completionHandler;
+
+@end
+
+@implementation LPTestEvalJS
+
+- (void)evaluateJavaScript:(NSString *)javaScriptString completionHandler:(void (^)(id, NSError *))completionHandler {
+  id result = nil;
+  NSError *error = nil;
+  if ([javaScriptString isEqualToString:@"date"]) {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:LPRuntimeWKWebViewISO8601DateFormat];
+    NSString *expectedDateString = @"2015-03-26 16:39:06 +0100";
+    result = [formatter dateFromString:expectedDateString];
+  } else if ([javaScriptString isEqualToString:@"dictionary"]) {
+    result = @{@"one" : @(1), @"two" : @(2), @"three" : @(3)};
+  } else if ([javaScriptString isEqualToString:@"array"]) {
+    result = @[@(1), @(2), @(3)];
+  } else if ([javaScriptString isEqualToString:@"string"]) {
+    result = [NSString stringWithFormat:@"Received javascript: %@!", javaScriptString];
+  } else if ([javaScriptString isEqualToString:@"nil"]) {
+    result = @"Recieved nil";
+  } else if ([javaScriptString isEqualToString:@"error"]) {
+    error = [NSError errorWithDomain:@"MY DOMAIN!"
+                                code:11
+                            userInfo:@{NSLocalizedDescriptionKey :
+                                         @"Another day, another misunderstood JavaScript programmer."}];
+  }
+  completionHandler(result, error);
+}
+
+- (NSString *) lpStringWithDate:(NSDate *) date {
+  return @"Received a date!";
+}
+
+- (NSString *) lpStringWithDictionary:(NSDictionary *) dictionary {
+  return @"Received a dictionary!";
+}
+
+- (NSString *) lpStringWithArray:(NSArray *) array {
+  return @"Received an array!";
+}
+
+@end
 
 @interface LPTestImplemented : NSObject @end
 @implementation LPTestImplemented @end
@@ -126,6 +166,44 @@ describe(@"LPRuntimeWKWebView", ^{
       id obj = [LPTestEvalJS new];
       SEL sel = NSSelectorFromString(@"calabashStringByEvaluatingJavaScript:");
       expect([obj respondsToSelector:sel]).to.equal(YES);
+
+      NSString *actual;
+      // nil
+      actual = [LPWKWebViewMethodInvoker stringByInvokingSelector:sel
+                                                           target:obj
+                                                         argument:@"nil"];
+      expect(actual).to.equal(@"Recieved nil");
+
+      // date
+      actual = [LPWKWebViewMethodInvoker stringByInvokingSelector:sel
+                                                           target:obj
+                                                         argument:@"date"];
+      expect(actual).to.equal(@"Received a date!");
+
+      // dictionary
+      actual = [LPWKWebViewMethodInvoker stringByInvokingSelector:sel
+                                                           target:obj
+                                                         argument:@"dictionary"];
+      expect(actual).to.equal(@"Received a dictionary!");
+
+      // array
+      actual = [LPWKWebViewMethodInvoker stringByInvokingSelector:sel
+                                                           target:obj
+                                                         argument:@"array"];
+      expect(actual).to.equal(@"Received an array!");
+
+      // string
+      actual = [LPWKWebViewMethodInvoker stringByInvokingSelector:sel
+                                                           target:obj
+                                                         argument:@"string"];
+      expect(actual).to.equal(@"Received javascript: string!");
+
+      // error
+      actual = [LPWKWebViewMethodInvoker stringByInvokingSelector:sel
+                                                           target:obj
+                                                         argument:@"error"];
+      NSString *expected = @"{\"error\":\"Another day, another misunderstood JavaScript programmer.\",\"javascript\":\"error\"}";
+      expect(actual).to.equal(expected);
     });
   });
 

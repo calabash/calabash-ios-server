@@ -24,8 +24,7 @@ NSString *const LPRuntimeWKWebViewISO8601DateFormat = @"yyyy-MM-dd HH:mm:ss Z";
 - (NSString *) withArrayPrototype:(NSDictionary *) array;
 + (BOOL) addWithArrayMethod:(Class) klass;
 
-- (void) prototypeForEvalJS:(NSString *)javaScriptString
-                    handler:(void (^)(id, NSError *))completionHandler;
+- (NSString *) prototypeForEvalJS:(NSString *)js;
 + (BOOL) addEvaluateJavaScriptMethod:(Class) klass;
 
 @end
@@ -44,6 +43,74 @@ static NSString *LPWKWebViewStringWithDictionaryIMP(id self, SEL _cmd,
 static NSString *LPWKWebViewStringWithArrayIMP(id self, SEL _cmd,
                                                NSArray *array) {
   return [LPJSONUtils serializeArray:array];
+}
+
+static NSString *LPWKWebViewCalabashStringByEvaluatingJavaScriptIMP(id self,
+                                                                    SEL _cmd,
+                                                                    NSString
+                                                                    *javascript) {
+  __block id res = nil;
+  __block BOOL finish = NO;
+
+  void (^completionHandler)(id result, NSError *error) = ^void(id result, NSError *error) {
+    if (error) {
+      NSString *localizedDescription = [error localizedDescription];
+      NSLog(@"Error evaluating JavaScript: '%@'", javascript);
+      NSLog(@"Error was: '%@'", localizedDescription);
+      NSDictionary *errorDict =
+      @{
+        @"error" : localizedDescription ? localizedDescription : [NSNull null],
+        @"javascript" : javascript ? javascript : [NSNull null]
+        };
+      res = [LPJSONUtils serializeDictionary:errorDict];
+    } else {
+      res = result;
+    }
+    finish = YES;
+  };
+
+  SEL evalSelector = NSSelectorFromString(@"evaluateJavaScript:completionHandler:");
+  NSMethodSignature *signature;
+  signature = [[self class] instanceMethodSignatureForSelector:evalSelector];
+
+  NSInvocation *invocation;
+  invocation = [NSInvocation invocationWithMethodSignature:signature];
+  invocation.target = self;
+  invocation.selector = evalSelector;
+
+  [invocation setArgument:&javascript atIndex:2];
+  [invocation setArgument:&completionHandler atIndex:3];
+  [invocation retainArguments];
+  [invocation invoke];
+
+  while(!finish) {
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+  }
+
+  if (!res) { return @""; }
+  if (res == [NSNull null]) { return @""; }
+  if ([res isKindOfClass:[NSString class]]) { return res; }
+
+  if ([res isKindOfClass:[NSDate class]]) {
+    SEL selector = NSSelectorFromString(@"lpStringWithDate:");
+    return [LPWKWebViewMethodInvoker stringByInvokingSelector:selector
+                                                       target:self
+                                                     argument:res];
+  } else if ([res isKindOfClass:[NSDictionary class]]) {
+    SEL selector = NSSelectorFromString(@"lpStringWithDictionary:");
+    return [LPWKWebViewMethodInvoker stringByInvokingSelector:selector
+                                                       target:self
+                                                     argument:res];
+  } else if ([res isKindOfClass:[NSArray class]]) {
+    SEL selector = NSSelectorFromString(@"lpStringWithArray:");
+    return [LPWKWebViewMethodInvoker stringByInvokingSelector:selector
+                                                       target:self
+                                                     argument:res];
+  } else {
+    SEL stringValueSel = @selector(stringValue);
+    if ([res respondsToSelector:stringValueSel]) {  return [res stringValue]; }
+  }
+  return [res description];
 }
 
 @implementation LPRuntimeWKWebView
@@ -146,11 +213,18 @@ static NSString *LPWKWebViewStringWithArrayIMP(id self, SEL _cmd,
 
 #pragma mark - calabashStringByEvaluatingJavaScript:
 
-- (void) prototypeForEvalJS:(NSString *)javaScriptString
-                    handler:(void (^)(id, NSError *))completionHandler { return; }
+- (NSString *) prototypeForEvalJS:(NSString *)js { return @""; }
 
 + (BOOL) addEvaluateJavaScriptMethod:(Class) klass {
-  return NO;
+  Method method = class_getInstanceMethod([self class],
+                                          @selector(prototypeForEvalJS:));
+  const char *types = method_getTypeEncoding(method);
+
+  SEL selector = NSSelectorFromString(@"calabashStringByEvaluatingJavaScript:");
+  return class_addMethod(klass,
+                         selector,
+                         (IMP)LPWKWebViewCalabashStringByEvaluatingJavaScriptIMP,
+                         types);
 }
 
 @end
