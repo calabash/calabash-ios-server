@@ -21,6 +21,8 @@
 + (BOOL) addWithArrayMethod:(Class) klass;
 + (BOOL) addEvaluateJavaScriptMethod:(Class) klass;
 
+- (void) setState:(LPWKWebViewWebViewProtocolImplementation) newState;
+
 @end
 
 @interface LPTestProtocol : NSObject @end
@@ -97,7 +99,7 @@ SpecBegin(LPWKWebViewRuntimeLoader)
 
 describe(@"LPWKWebViewRuntimeLoaderTest", ^{
 
-  describe(@"Implements Singleton Patter", ^{
+  describe(@"Implements Singleton Pattern", ^{
     it(@"#init", ^{
       expect(^{
         id __unused obj = [[LPWKWebViewRuntimeLoader alloc] init];
@@ -109,6 +111,45 @@ describe(@"LPWKWebViewRuntimeLoaderTest", ^{
       id b = [LPWKWebViewRuntimeLoader shared];
       expect(a).to.equal(b);
       expect([a isKindOfClass:[LPWKWebViewRuntimeLoader class]]).to.equal(YES);
+    });
+  });
+
+  describe(@"#loadImplementation", ^{
+    it(@"Skips loading if implementation is already loaded", ^{
+      LPWKWebViewRuntimeLoader *loader = [LPWKWebViewRuntimeLoader shared];
+      id mock = OCMPartialMock(loader);
+      LPWKWebViewWebViewProtocolImplementation mockState = LPWKWebViewNotAvailable;
+      [[[mock stub] andReturnValue:OCMOCK_VALUE(mockState)] state];
+
+      @try {
+        expect([mock loadImplementation]).to.equal(LPWKWebViewNotAvailable);
+        [mock verify];
+      }
+
+      @finally {
+        [mock stopMocking];
+        [loader setState:LPWKWebViewHaveNotTriedToImplementProtocol];
+      }
+    });
+
+    it(@"Loads the implementation if it hasn't already tried", ^{
+      LPWKWebViewRuntimeLoader *loader = [LPWKWebViewRuntimeLoader shared];
+      expect(loader.state).to.equal(LPWKWebViewHaveNotTriedToImplementProtocol);
+
+      id mock = [OCMockObject mockForClass:[LPWKWebViewRuntimeLoader class]];
+
+      LPWKWebViewWebViewProtocolImplementation mockState = LPWKWebViewDidImplementProtocol;
+      [[[mock expect] andReturnValue:OCMOCK_VALUE(mockState)] implementLPWebViewProtocolOnWKWebView];
+
+      @try {
+        expect([loader loadImplementation]).to.equal(LPWKWebViewDidImplementProtocol);
+        [mock verify];
+      }
+
+      @finally {
+        [mock stopMocking];
+        [loader setState:LPWKWebViewHaveNotTriedToImplementProtocol];
+      }
     });
   });
 

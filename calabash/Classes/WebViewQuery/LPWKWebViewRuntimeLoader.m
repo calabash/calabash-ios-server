@@ -29,6 +29,8 @@ NSString *const LPWKWebViewISO8601DateFormat = @"yyyy-MM-dd HH:mm:ss Z";
 
 - (id) init_private;
 
+- (void) setState:(LPWKWebViewWebViewProtocolImplementation) newState;
+
 @end
 
 static NSString *LPWKWebViewStringWithDateIMP(id self, SEL _cmd, NSDate *date) {
@@ -117,6 +119,12 @@ static NSString *LPWKWebViewCalabashStringByEvaluatingJavaScriptIMP(id self,
 
 @implementation LPWKWebViewRuntimeLoader
 
+#pragma mark - Testing Only
+
+- (void) setState:(LPWKWebViewWebViewProtocolImplementation) newState {
+  _state = newState;
+}
+
 #pragma mark - Singleton Pattern
 
 - (id) init {
@@ -129,7 +137,7 @@ static NSString *LPWKWebViewCalabashStringByEvaluatingJavaScriptIMP(id self,
 - (id) init_private {
   self = [super init];
   if (self) {
-
+    _state = LPWKWebViewHaveNotTriedToImplementProtocol;
   }
   return self;
 }
@@ -141,6 +149,15 @@ static NSString *LPWKWebViewCalabashStringByEvaluatingJavaScriptIMP(id self,
     sharedLoader = [[LPWKWebViewRuntimeLoader alloc] init_private];
   });
   return sharedLoader;
+}
+
+- (LPWKWebViewWebViewProtocolImplementation) loadImplementation {
+  if (self.state == LPWKWebViewHaveNotTriedToImplementProtocol) {
+    [self setState:[[self class] implementLPWebViewProtocolOnWKWebView]];
+  } else {
+    NSLog(@"Tried to load WKWebView LPWebViewProtocl implemention again; not allowed");
+  }
+  return self.state;
 }
 
 + (Class) lpClassForWKWebView {
