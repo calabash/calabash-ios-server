@@ -4,14 +4,14 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-#import "LPRuntimeWKWebView.h"
+#import "LPWKWebViewRuntimeLoader.h"
 #import <WebKit/WebKit.h>
 #import "LPInvoker.h"
 #import "LPWebViewProtocol.h"
 #import "LPJSONUtils.h"
 
 
-@interface LPRuntimeWKWebView (LPXCTest)
+@interface LPWKWebViewRuntimeLoader (LPXCTest)
 
 + (Class) lpClassForWKWebView;
 
@@ -85,22 +85,22 @@
 @interface LPTestImplemented : NSObject @end
 @implementation LPTestImplemented @end
 
-@interface LPRuntimeWKWebViewTest : XCTestCase
+@interface LPWKWebViewRuntimeLoaderTest : XCTestCase
 
 @end
 
-@implementation LPRuntimeWKWebViewTest
+@implementation LPWKWebViewRuntimeLoaderTest
 
 @end
 
-SpecBegin(LPRuntimeWKWebViewTest)
+SpecBegin(LPWKWebViewRuntimeLoaderTest)
 
 describe(@"LPRuntimeWKWebView", ^{
 
   describe(@"Construct Class at Runtime", ^{
 
     it(@"addLPWebViewProtocol", ^{
-      BOOL success = [LPRuntimeWKWebView addLPWebViewProtocol:[LPTestProtocol class]];
+      BOOL success = [LPWKWebViewRuntimeLoader addLPWebViewProtocol:[LPTestProtocol class]];
       expect(success).to.equal(YES);
       id obj = [LPTestProtocol new];
       BOOL conforms = [obj conformsToProtocol:@protocol(LPWebViewProtocol)];
@@ -108,7 +108,7 @@ describe(@"LPRuntimeWKWebView", ^{
     });
 
     it(@"addWithDateMethod:", ^{
-      BOOL success = [LPRuntimeWKWebView addWithDateMethod:[LPTestWithDate class]];
+      BOOL success = [LPWKWebViewRuntimeLoader addWithDateMethod:[LPTestWithDate class]];
 
       expect(success).to.equal(YES);
       id obj = [LPTestWithDate new];
@@ -129,7 +129,7 @@ describe(@"LPRuntimeWKWebView", ^{
     });
 
     it(@"addWithDictionaryMethod:", ^{
-      BOOL success = [LPRuntimeWKWebView addWithDictionaryMethod:[LPTestWithDictionary class]];
+      BOOL success = [LPWKWebViewRuntimeLoader addWithDictionaryMethod:[LPTestWithDictionary class]];
       expect(success).to.equal(YES);
       id obj = [LPTestWithDictionary new];
       SEL sel = NSSelectorFromString(@"lpStringWithDictionary:");
@@ -146,7 +146,7 @@ describe(@"LPRuntimeWKWebView", ^{
     });
 
     it(@"addWithArrayMethod:", ^{
-      BOOL success = [LPRuntimeWKWebView addWithArrayMethod:[LPTestWithArray class]];
+      BOOL success = [LPWKWebViewRuntimeLoader addWithArrayMethod:[LPTestWithArray class]];
       expect(success).to.equal(YES);
       id obj = [LPTestWithArray new];
       SEL sel = NSSelectorFromString(@"lpStringWithArray:");
@@ -161,7 +161,7 @@ describe(@"LPRuntimeWKWebView", ^{
     });
 
     it(@"addEvaluateJavaScriptMethod:", ^{
-      BOOL success = [LPRuntimeWKWebView addEvaluateJavaScriptMethod:[LPTestEvalJS class]];
+      BOOL success = [LPWKWebViewRuntimeLoader addEvaluateJavaScriptMethod:[LPTestEvalJS class]];
       expect(success).to.equal(YES);
       id obj = [LPTestEvalJS new];
       SEL sel = NSSelectorFromString(@"calabashStringByEvaluatingJavaScript:");
@@ -209,7 +209,7 @@ describe(@"LPRuntimeWKWebView", ^{
 
   describe(@"implementLPWebViewProtocolOnWKWebView", ^{
     it(@"returns not available when WKWebView is not defined", ^{
-      id mock = [OCMockObject niceMockForClass:[LPRuntimeWKWebView class]];
+      id mock = [OCMockObject niceMockForClass:[LPWKWebViewRuntimeLoader class]];
       [[[mock stub] andReturn:nil] lpClassForWKWebView];
       LPWKWebViewWebViewProtocolImplementation state;
       state = [[mock class] implementLPWebViewProtocolOnWKWebView];
@@ -217,7 +217,7 @@ describe(@"LPRuntimeWKWebView", ^{
     });
 
     it(@"returns implemented if runtime implementation was successful", ^{
-      id mock = [OCMockObject niceMockForClass:[LPRuntimeWKWebView class]];
+      id mock = [OCMockObject niceMockForClass:[LPWKWebViewRuntimeLoader class]];
       Class klass = [LPTestImplemented class];
       [[[mock stub] andReturn:klass] lpClassForWKWebView];
       [[[mock stub] andReturnValue:@YES] addLPWebViewProtocol:klass];

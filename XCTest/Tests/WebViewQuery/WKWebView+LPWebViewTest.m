@@ -2,14 +2,17 @@
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
 
-#import "WKWebView+LPWebView.h"
+#import "LPWKWebViewRuntimeLoader.h"
 #import "LPJSONUtils.h"
+#import <WebKit/WebKit.h>
+#import "LPWebViewProtocol.h"
 
 @interface WKWebView (LPXCTEST)
 
 - (NSString *) lpStringWithDate:(NSDate *) date;
 - (NSString *) lpStringWithDictionary:(NSDictionary *) dictionary;
 - (NSString *) lpStringWithArray:(NSArray *) array;
+- (NSString *) calabashStringByEvaluatingJavaScript:(NSString *) javascript;
 
 @end
 

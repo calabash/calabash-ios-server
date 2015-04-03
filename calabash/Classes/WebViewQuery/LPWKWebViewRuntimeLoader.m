@@ -2,14 +2,14 @@
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
 
-#import "LPRuntimeWKWebView.h"
+#import "LPWKWebViewRuntimeLoader.h"
 #import "LPJSONUtils.h"
 #import "LPWebViewProtocol.h"
 #import <objc/runtime.h>
 
 NSString *const LPWKWebViewISO8601DateFormat = @"yyyy-MM-dd HH:mm:ss Z";
 
-@interface LPRuntimeWKWebView ()
+@interface LPWKWebViewRuntimeLoader ()
 
 + (Class) lpClassForWKWebView;
 
@@ -113,7 +113,7 @@ static NSString *LPWKWebViewCalabashStringByEvaluatingJavaScriptIMP(id self,
   return [res description];
 }
 
-@implementation LPRuntimeWKWebView
+@implementation LPWKWebViewRuntimeLoader
 
 + (Class) lpClassForWKWebView {
   return objc_getClass("WKWebView");

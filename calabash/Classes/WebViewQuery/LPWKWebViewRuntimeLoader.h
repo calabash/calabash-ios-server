@@ -8,7 +8,7 @@ typedef enum : NSUInteger {
   LPWKWebViewFailedToImplementProtocol
 } LPWKWebViewWebViewProtocolImplementation;
 
-@interface LPRuntimeWKWebView : NSObject
+@interface LPWKWebViewRuntimeLoader : NSObject
 
 + (LPWKWebViewWebViewProtocolImplementation) implementLPWebViewProtocolOnWKWebView;
 
