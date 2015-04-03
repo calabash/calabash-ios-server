@@ -15,17 +15,18 @@ NSString *const LPRuntimeWKWebViewISO8601DateFormat = @"yyyy-MM-dd HH:mm:ss Z";
 
 + (BOOL) addLPWebViewProtocol:(Class) klass;
 
-+ (BOOL) addWithDateMethod:(Class) klass
-                  encoding:(const char *) encoding;
+- (NSString *) withDatePrototype:(NSDate *) date;
++ (BOOL) addWithDateMethod:(Class) klass;
 
-+ (BOOL) addWithDictionaryMethod:(Class) klass
-                        encoding:(const char *) encoding;
+- (NSString *) withDictionaryPrototype:(NSDictionary *) dictionary;
++ (BOOL) addWithDictionaryMethod:(Class) klass;
 
-+ (BOOL) addWithArrayMethod:(Class) klass
-                  encoding:(const char *) encoding;
+- (NSString *) withArrayPrototype:(NSDictionary *) array;
++ (BOOL) addWithArrayMethod:(Class) klass;
 
-+ (BOOL) addEvaluateJavaScriptMethod:(Class) klass
-                            encoding:(const char *) encoding;
+- (void) prototypeForEvalJS:(NSString *)javaScriptString
+                    handler:(void (^)(id, NSError *))completionHandler;
++ (BOOL) addEvaluateJavaScriptMethod:(Class) klass;
 
 @end
 
@@ -47,6 +48,10 @@ static NSString *LPWKWebViewStringWithArrayIMP(id self, SEL _cmd,
 
 @implementation LPRuntimeWKWebView
 
++ (Class) lpClassForWKWebView {
+  return objc_getClass("WKWebView");
+}
+
 + (LPWKWebViewWebViewProtocolImplementation) implementLPWebViewProtocolOnWKWebView {
 
   Class LPWKWebViewClass = [[self class] lpClassForWKWebView];
@@ -55,33 +60,27 @@ static NSString *LPWKWebViewStringWithArrayIMP(id self, SEL _cmd,
     return LPWKWebViewNotAvailable;
   }
 
-  Method descript = class_getInstanceMethod([NSObject class],
-                                            @selector(description));
-
-  const char *encoding = method_getTypeEncoding(descript);
-
   if (![[self class] addLPWebViewProtocol:LPWKWebViewClass]) {
     NSLog(@"Failed to add LPWebViewProtocol to WKWebView");
     return LPWKWebViewFailedToImplementProtocol;
   }
 
-  if (![[self class] addWithDateMethod:LPWKWebViewClass encoding:encoding]) {
+  if (![[self class] addWithDateMethod:LPWKWebViewClass]) {
     NSLog(@"Failed to add lpStringWithDate: to WKWebView");
     return LPWKWebViewFailedToImplementProtocol;
   }
 
-  if (![[self class] addWithDictionaryMethod:LPWKWebViewClass encoding:encoding]) {
+  if (![[self class] addWithDictionaryMethod:LPWKWebViewClass]) {
     NSLog(@"Failed to add lpStringWithDictionary: to WKWebView");
     return LPWKWebViewFailedToImplementProtocol;
   }
 
-  if (![[self class] addWithArrayMethod:LPWKWebViewClass encoding:encoding]) {
+  if (![[self class] addWithArrayMethod:LPWKWebViewClass]) {
     NSLog(@"Failed to add lpStringWithArray: to WKWebView");
     return LPWKWebViewFailedToImplementProtocol;
   }
 
-  if (![[self class] addEvaluateJavaScriptMethod:LPWKWebViewClass
-                                        encoding:encoding]) {
+  if (![[self class] addEvaluateJavaScriptMethod:LPWKWebViewClass]) {
     NSLog(@"Failed to add calabashStringByEvaluatingJavaScript: to WKWebView");
     return LPWKWebViewFailedToImplementProtocol;
   }
@@ -90,45 +89,92 @@ static NSString *LPWKWebViewStringWithArrayIMP(id self, SEL _cmd,
   return LPWKWebViewDidImplementProtocol;
 }
 
-+ (Class) lpClassForWKWebView {
-  return objc_getClass("WKWebView");
-}
+#pragma mark - Protocol
 
 + (BOOL) addLPWebViewProtocol:(Class) klass {
   Protocol *lpWebViewProtocol = NSProtocolFromString(@"LPWebViewProtocol");
   return class_addProtocol(klass, lpWebViewProtocol);
 }
 
-+ (BOOL) addWithDateMethod:(Class) klass
-                  encoding:(const char *) encoding {
+#pragma mark - lpStringWithDate:
+
+- (NSString *) withDatePrototype:(NSDate *) date {  return @""; }
+
++ (BOOL) addWithDateMethod:(Class) klass {
+  Method method = class_getInstanceMethod([self class],
+                                          @selector(withDatePrototype:));
+  const char *types = method_getTypeEncoding(method);
+
   SEL selector = NSSelectorFromString(@"lpStringWithDate:");
   return class_addMethod(klass,
                          selector,
                          (IMP)LPWKWebViewStringWithDateIMP,
-                         encoding);
+                         types);
 }
 
-+ (BOOL) addWithDictionaryMethod:(Class) klass
-                        encoding:(const char *) encoding {
+#pragma mark - lpStringWithDictionary:
+
+- (NSString *) withDictionaryPrototype:(NSDictionary *) dictionary {  return @""; }
+
++ (BOOL) addWithDictionaryMethod:(Class) klass {
+  Method method = class_getInstanceMethod([self class],
+                                          @selector(withDictionaryPrototype:));
+  const char *types = method_getTypeEncoding(method);
+
   SEL selector = NSSelectorFromString(@"lpStringWithDictionary:");
   return class_addMethod(klass,
                          selector,
                          (IMP)LPWKWebViewStringWithDictionaryIMP,
-                         encoding);
+                         types);
 }
 
-+ (BOOL) addWithArrayMethod:(Class) klass
-                   encoding:(const char *) encoding {
+#pragma mark - lpStringWithArray:
+
+- (NSString *) withArrayPrototype:(NSDictionary *) dictionary {  return @""; }
+
++ (BOOL) addWithArrayMethod:(Class) klass {
+  Method method = class_getInstanceMethod([self class],
+                                          @selector(withArrayPrototype:));
+  const char *types = method_getTypeEncoding(method);
+
   SEL selector = NSSelectorFromString(@"lpStringWithArray:");
   return class_addMethod(klass,
                          selector,
                          (IMP)LPWKWebViewStringWithArrayIMP,
-                         encoding);
+                         types);
 }
 
-+ (BOOL) addEvaluateJavaScriptMethod:(Class) klass
-                            encoding:(const char *) encoding {
+#pragma mark - calabashStringByEvaluatingJavaScript:
+
+- (void) prototypeForEvalJS:(NSString *)javaScriptString
+                    handler:(void (^)(id, NSError *))completionHandler { return; }
+
++ (BOOL) addEvaluateJavaScriptMethod:(Class) klass {
   return NO;
+}
+
+@end
+
+@implementation LPWKWebViewMethodInvoker
+
++ (NSString *) stringByInvokingSelector:(SEL) selector
+                                 target:(id) target
+                               argument:(id) argument {
+  NSMethodSignature *signature;
+  signature = [[target class] instanceMethodSignatureForSelector:selector];
+
+  NSInvocation *invocation;
+  invocation = [NSInvocation invocationWithMethodSignature:signature];
+  invocation.target = target;
+  invocation.selector = selector;
+
+  [invocation setArgument:&argument atIndex:2];
+  [invocation retainArguments];
+
+  NSString *result = nil;
+  [invocation invoke];
+  [invocation getReturnValue:&result];
+  return result;
 }
 
 @end

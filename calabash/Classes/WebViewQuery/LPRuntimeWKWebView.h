@@ -13,3 +13,10 @@ typedef enum : NSUInteger {
 + (LPWKWebViewWebViewProtocolImplementation) implementLPWebViewProtocolOnWKWebView;
 
 @end
+
+@interface LPWKWebViewMethodInvoker : NSObject
+
++ (NSString *) stringByInvokingSelector:(SEL) selector
+                                 target:(id) target
+                               argument:(id) argument;
+@end

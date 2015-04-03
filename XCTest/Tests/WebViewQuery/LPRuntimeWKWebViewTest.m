@@ -8,6 +8,7 @@
 #import <WebKit/WebKit.h>
 #import "LPInvoker.h"
 #import "LPWebViewProtocol.h"
+#import "LPJSONUtils.h"
 
 @interface LPRuntimeWKWebView (LPXCTest)
 
@@ -15,17 +16,13 @@
 
 + (BOOL) addLPWebViewProtocol:(Class) klass;
 
-+ (BOOL) addWithDateMethod:(Class) klass
-                  encoding:(const char *) encoding;
++ (BOOL) addWithDateMethod:(Class) klass;
 
-+ (BOOL) addWithDictionaryMethod:(Class) klass
-                        encoding:(const char *) encoding;
++ (BOOL) addWithDictionaryMethod:(Class) klass;
 
-+ (BOOL) addWithArrayMethod:(Class) klass
-                   encoding:(const char *) encoding;
++ (BOOL) addWithArrayMethod:(Class) klass;
 
-+ (BOOL) addEvaluateJavaScriptMethod:(Class) klass
-                            encoding:(const char *) encoding;
++ (BOOL) addEvaluateJavaScriptMethod:(Class) klass;
 
 @end
 
@@ -60,14 +57,6 @@ SpecBegin(LPRuntimeWKWebViewTest)
 
 describe(@"LPRuntimeWKWebView", ^{
 
-  __block const char *encoding;
-
-  before(^{
-    Method descript = class_getInstanceMethod([NSObject class],
-                                              @selector(description));
-    encoding = method_getTypeEncoding(descript);
-  });
-
   describe(@"Construct Class at Runtime", ^{
 
     it(@"addLPWebViewProtocol", ^{
@@ -79,35 +68,60 @@ describe(@"LPRuntimeWKWebView", ^{
     });
 
     it(@"addWithDateMethod:", ^{
-      BOOL success = [LPRuntimeWKWebView addWithDateMethod:[LPTestWithDate class]
-                                                  encoding:encoding];
+      BOOL success = [LPRuntimeWKWebView addWithDateMethod:[LPTestWithDate class]];
+
       expect(success).to.equal(YES);
       id obj = [LPTestWithDate new];
       SEL sel = NSSelectorFromString(@"lpStringWithDate:");
       expect([obj respondsToSelector:sel]).to.equal(YES);
+
+      NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+      [formatter setDateFormat:LPRuntimeWKWebViewISO8601DateFormat];
+      NSString *expectedDateString = @"2015-03-26 16:39:06 +0100";
+      NSDate *expected = [formatter dateFromString:expectedDateString];
+      NSString *actualDateString;
+      actualDateString = [LPWKWebViewMethodInvoker stringByInvokingSelector:sel
+                                                                     target:obj
+                                                                   argument:expected];
+
+      NSDate *actual = [formatter dateFromString:actualDateString];
+      expect([actual compare:expected]).to.equal(NSOrderedSame);
     });
 
     it(@"addWithDictionaryMethod:", ^{
-      BOOL success = [LPRuntimeWKWebView addWithDictionaryMethod:[LPTestWithDictionary class]
-                                                        encoding:encoding];
+      BOOL success = [LPRuntimeWKWebView addWithDictionaryMethod:[LPTestWithDictionary class]];
       expect(success).to.equal(YES);
       id obj = [LPTestWithDictionary new];
       SEL sel = NSSelectorFromString(@"lpStringWithDictionary:");
       expect([obj respondsToSelector:sel]).to.equal(YES);
+
+      NSDictionary *dict = @{@"one" : @(1),
+                             @"two" : @(2),
+                             @"three" : @(3)};
+      NSString *expected = [LPJSONUtils serializeDictionary:dict];
+      NSString *actual = [LPWKWebViewMethodInvoker stringByInvokingSelector:sel
+                                                                     target:obj
+                                                                   argument:dict];
+      expect(actual).to.equal(expected);
     });
 
     it(@"addWithArrayMethod:", ^{
-      BOOL success = [LPRuntimeWKWebView addWithArrayMethod:[LPTestWithArray class]
-                                                   encoding:encoding];
+      BOOL success = [LPRuntimeWKWebView addWithArrayMethod:[LPTestWithArray class]];
       expect(success).to.equal(YES);
       id obj = [LPTestWithArray new];
       SEL sel = NSSelectorFromString(@"lpStringWithArray:");
       expect([obj respondsToSelector:sel]).to.equal(YES);
+
+      NSArray *arr = @[@(1), @(2), @(3)];
+      NSString *expected = [LPJSONUtils serializeArray:arr];
+      NSString *actual = [LPWKWebViewMethodInvoker stringByInvokingSelector:sel
+                                                                     target:obj
+                                                                   argument:arr];
+      expect(actual).to.equal(expected);
     });
 
     it(@"addEvaluateJavaScriptMethod:", ^{
-      BOOL success = [LPRuntimeWKWebView addEvaluateJavaScriptMethod:[LPTestEvalJS class]
-                                                            encoding:encoding];
+      BOOL success = [LPRuntimeWKWebView addEvaluateJavaScriptMethod:[LPTestEvalJS class]];
       expect(success).to.equal(YES);
       id obj = [LPTestEvalJS new];
       SEL sel = NSSelectorFromString(@"calabashStringByEvaluatingJavaScript:");
@@ -115,7 +129,7 @@ describe(@"LPRuntimeWKWebView", ^{
     });
   });
 
-  fdescribe(@"implementLPWebViewProtocolOnWKWebView", ^{
+  describe(@"implementLPWebViewProtocolOnWKWebView", ^{
     it(@"returns not available when WKWebView is not defined", ^{
       id mock = [OCMockObject niceMockForClass:[LPRuntimeWKWebView class]];
       [[[mock stub] andReturn:nil] lpClassForWKWebView];
@@ -129,14 +143,10 @@ describe(@"LPRuntimeWKWebView", ^{
       Class klass = [LPTestImplemented class];
       [[[mock stub] andReturn:klass] lpClassForWKWebView];
       [[[mock stub] andReturnValue:@YES] addLPWebViewProtocol:klass];
-      [[[mock stub] andReturnValue:@YES] addWithDateMethod:klass
-                                                  encoding:encoding];
-      [[[mock stub] andReturnValue:@YES] addWithDictionaryMethod:klass
-                                                        encoding:encoding];
-      [[[mock stub] andReturnValue:@YES] addWithArrayMethod:klass
-                                                   encoding:encoding];
-      [[[mock stub] andReturnValue:@YES] addEvaluateJavaScriptMethod:klass
-                                                            encoding:encoding];
+      [[[mock stub] andReturnValue:@YES] addWithDateMethod:klass];
+      [[[mock stub] andReturnValue:@YES] addWithDictionaryMethod:klass];
+      [[[mock stub] andReturnValue:@YES] addWithArrayMethod:klass];
+      [[[mock stub] andReturnValue:@YES] addEvaluateJavaScriptMethod:klass];
 
       LPWKWebViewWebViewProtocolImplementation state;
       state = [[mock class] implementLPWebViewProtocolOnWKWebView];
