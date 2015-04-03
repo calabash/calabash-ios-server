@@ -292,9 +292,11 @@ static NSString *LPWKWebViewCalabashStringByEvaluatingJavaScriptIMP(id self,
   [invocation setArgument:&argument atIndex:2];
   [invocation retainArguments];
 
-  NSString *result = nil;
+  void *buffer;
   [invocation invoke];
-  [invocation getReturnValue:&result];
+  [invocation getReturnValue:&buffer];
+
+  NSString *result = (__bridge NSString *)buffer;
   return result;
 }
 
