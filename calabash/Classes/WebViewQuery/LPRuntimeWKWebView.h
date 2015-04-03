@@ -2,16 +2,14 @@
 
 extern NSString *const LPRuntimeWKWebViewISO8601DateFormat;
 
+typedef enum : NSUInteger {
+  LPWKWebViewNotAvailable = 0,
+  LPWKWebViewDidImplementProtocol,
+  LPWKWebViewFailedToImplementProtocol
+} LPWKWebViewWebViewProtocolImplementation;
+
 @interface LPRuntimeWKWebView : NSObject
 
-+ (BOOL) create;
-
-@end
-
-@interface LPJSReturnedObjectParser : NSObject
-
-- (NSString *) lpStringWithDate:(NSDate *) date;
-- (NSString *) lpStringWithDictionary:(NSDictionary *) dictionary;
-- (NSString *) lpStringWithArray:(NSArray *) array;
++ (LPWKWebViewWebViewProtocolImplementation) implementLPWebViewProtocolOnWKWebView;
 
 @end
