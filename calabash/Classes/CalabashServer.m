@@ -31,6 +31,7 @@
 #import <dlfcn.h>
 #import "LPInfoPlist.h"
 #import "LPPluginLoader.h"
+#import "LPWKWebViewRuntimeLoader.h"
 
 @interface CalabashServer ()
 - (void) start;
@@ -48,6 +49,8 @@
   LPPluginLoader *loader = [LPPluginLoader new];
   [loader loadCalabashPlugins];
   [loader release];
+
+  [[LPWKWebViewRuntimeLoader shared] loadImplementation];
 }
 
 

@@ -13,14 +13,13 @@
 
 @interface LPWKWebViewRuntimeLoader (LPXCTest)
 
++ (LPWKWebViewWebViewProtocolImplementation) implementLPWebViewProtocolOnWKWebView;
 + (Class) lpClassForWKWebView;
-
 + (BOOL) addLPWebViewProtocol:(Class) klass;
 + (BOOL) addWithDateMethod:(Class) klass;
 + (BOOL) addWithDictionaryMethod:(Class) klass;
 + (BOOL) addWithArrayMethod:(Class) klass;
 + (BOOL) addEvaluateJavaScriptMethod:(Class) klass;
-
 - (void) setState:(LPWKWebViewWebViewProtocolImplementation) newState;
 
 @end
@@ -117,6 +116,8 @@ describe(@"LPWKWebViewRuntimeLoaderTest", ^{
   describe(@"#loadImplementation", ^{
     it(@"Skips loading if implementation is already loaded", ^{
       LPWKWebViewRuntimeLoader *loader = [LPWKWebViewRuntimeLoader shared];
+      LPWKWebViewWebViewProtocolImplementation originalState = loader.state;
+
       id mock = OCMPartialMock(loader);
       LPWKWebViewWebViewProtocolImplementation mockState = LPWKWebViewNotAvailable;
       [[[mock stub] andReturnValue:OCMOCK_VALUE(mockState)] state];
@@ -128,28 +129,13 @@ describe(@"LPWKWebViewRuntimeLoaderTest", ^{
 
       @finally {
         [mock stopMocking];
-        [loader setState:LPWKWebViewHaveNotTriedToImplementProtocol];
+        [loader setState:originalState];
       }
     });
 
-    it(@"Loads the implementation if it hasn't already tried", ^{
+    it(@"Implementation has been loaded by CalabashServer.start", ^{
       LPWKWebViewRuntimeLoader *loader = [LPWKWebViewRuntimeLoader shared];
-      expect(loader.state).to.equal(LPWKWebViewHaveNotTriedToImplementProtocol);
-
-      id mock = [OCMockObject mockForClass:[LPWKWebViewRuntimeLoader class]];
-
-      LPWKWebViewWebViewProtocolImplementation mockState = LPWKWebViewDidImplementProtocol;
-      [[[mock expect] andReturnValue:OCMOCK_VALUE(mockState)] implementLPWebViewProtocolOnWKWebView];
-
-      @try {
-        expect([loader loadImplementation]).to.equal(LPWKWebViewDidImplementProtocol);
-        [mock verify];
-      }
-
-      @finally {
-        [mock stopMocking];
-        [loader setState:LPWKWebViewHaveNotTriedToImplementProtocol];
-      }
+      expect(loader.state).to.equal(LPWKWebViewDidImplementProtocol);
     });
   });
 

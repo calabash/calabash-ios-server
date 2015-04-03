@@ -11,6 +11,8 @@ NSString *const LPWKWebViewISO8601DateFormat = @"yyyy-MM-dd HH:mm:ss Z";
 
 @interface LPWKWebViewRuntimeLoader ()
 
++ (LPWKWebViewWebViewProtocolImplementation) implementLPWebViewProtocolOnWKWebView;
+
 + (Class) lpClassForWKWebView;
 
 + (BOOL) addLPWebViewProtocol:(Class) klass;
