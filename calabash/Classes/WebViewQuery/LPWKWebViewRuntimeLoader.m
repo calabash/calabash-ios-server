@@ -27,6 +27,8 @@ NSString *const LPWKWebViewISO8601DateFormat = @"yyyy-MM-dd HH:mm:ss Z";
 - (NSString *) prototypeForEvalJS:(NSString *)js;
 + (BOOL) addEvaluateJavaScriptMethod:(Class) klass;
 
+- (id) init_private;
+
 @end
 
 static NSString *LPWKWebViewStringWithDateIMP(id self, SEL _cmd, NSDate *date) {
@@ -114,6 +116,32 @@ static NSString *LPWKWebViewCalabashStringByEvaluatingJavaScriptIMP(id self,
 }
 
 @implementation LPWKWebViewRuntimeLoader
+
+#pragma mark - Singleton Pattern
+
+- (id) init {
+  @throw [NSException exceptionWithName:@"Singleton Pattern"
+                                 reason:[NSString stringWithFormat:@"%@ does not respond to 'init' selector",
+                                         [self class]]
+                               userInfo:nil];
+}
+
+- (id) init_private {
+  self = [super init];
+  if (self) {
+
+  }
+  return self;
+}
+
++ (LPWKWebViewRuntimeLoader *) shared {
+  static LPWKWebViewRuntimeLoader *sharedLoader = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    sharedLoader = [[LPWKWebViewRuntimeLoader alloc] init_private];
+  });
+  return sharedLoader;
+}
 
 + (Class) lpClassForWKWebView {
   return objc_getClass("WKWebView");

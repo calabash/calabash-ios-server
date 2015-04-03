@@ -10,6 +10,7 @@ typedef enum : NSUInteger {
 
 @interface LPWKWebViewRuntimeLoader : NSObject
 
++ (LPWKWebViewRuntimeLoader *) shared;
 + (LPWKWebViewWebViewProtocolImplementation) implementLPWebViewProtocolOnWKWebView;
 
 @end

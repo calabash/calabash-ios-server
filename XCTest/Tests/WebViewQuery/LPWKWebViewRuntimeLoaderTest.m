@@ -93,9 +93,24 @@
 
 @end
 
-SpecBegin(LPWKWebViewRuntimeLoaderTest)
+SpecBegin(LPWKWebViewRuntimeLoader)
 
-describe(@"LPRuntimeWKWebView", ^{
+describe(@"LPWKWebViewRuntimeLoaderTest", ^{
+
+  describe(@"Implements Singleton Patter", ^{
+    it(@"#init", ^{
+      expect(^{
+        id __unused obj = [[LPWKWebViewRuntimeLoader alloc] init];
+      }).to.raiseAny();
+    });
+
+    it(@"shared", ^{
+      id a = [LPWKWebViewRuntimeLoader shared];
+      id b = [LPWKWebViewRuntimeLoader shared];
+      expect(a).to.equal(b);
+      expect([a isKindOfClass:[LPWKWebViewRuntimeLoader class]]).to.equal(YES);
+    });
+  });
 
   describe(@"Construct Class at Runtime", ^{
 
