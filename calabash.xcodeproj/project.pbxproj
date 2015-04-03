@@ -562,19 +562,14 @@
 		F55185571AC3866300CE06DC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A33A721AC01E8E00224639 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F55185581AC3875200CE06DC /* LPWebViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A601AC01A9F00224639 /* LPWebViewProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F55185591AC3875900CE06DC /* UIWebView+LPWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A4F1AC00D1300224639 /* UIWebView+LPWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F551855A1AC3875D00CE06DC /* WKWebView+LPWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A611AC01BA900224639 /* WKWebView+LPWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F551855B1AC3876F00CE06DC /* LPWebViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A601AC01A9F00224639 /* LPWebViewProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F551855C1AC3876F00CE06DC /* UIWebView+LPWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A4F1AC00D1300224639 /* UIWebView+LPWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F551855D1AC3876F00CE06DC /* WKWebView+LPWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A611AC01BA900224639 /* WKWebView+LPWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F551855E1AC3878200CE06DC /* LPWebViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A601AC01A9F00224639 /* LPWebViewProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F551855F1AC3878200CE06DC /* UIWebView+LPWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A4F1AC00D1300224639 /* UIWebView+LPWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F55185601AC3878200CE06DC /* WKWebView+LPWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A611AC01BA900224639 /* WKWebView+LPWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F55185611AC3878D00CE06DC /* LPWebViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A601AC01A9F00224639 /* LPWebViewProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F55185621AC3878D00CE06DC /* UIWebView+LPWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A4F1AC00D1300224639 /* UIWebView+LPWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F55185631AC3878D00CE06DC /* WKWebView+LPWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A611AC01BA900224639 /* WKWebView+LPWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F55185641AC3879D00CE06DC /* LPWebViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A601AC01A9F00224639 /* LPWebViewProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F55185651AC3879D00CE06DC /* UIWebView+LPWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A4F1AC00D1300224639 /* UIWebView+LPWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F55185661AC3879D00CE06DC /* WKWebView+LPWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A611AC01BA900224639 /* WKWebView+LPWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F55185671AC387A200CE06DC /* LPWebViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A601AC01A9F00224639 /* LPWebViewProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F55185681AC3891900CE06DC /* LPRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDBE14B6DB2B002A744C /* LPRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F55185691AC3891E00CE06DC /* LPRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDBF14B6DB2B002A744C /* LPRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -742,21 +737,7 @@
 		F5A33A5C1AC00D1300224639 /* UIWebView+LPWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A33A501AC00D1300224639 /* UIWebView+LPWebView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5A33A5D1AC00D1300224639 /* UIWebView+LPWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A33A501AC00D1300224639 /* UIWebView+LPWebView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5A33A5F1AC0172A00224639 /* UIWebView+LPWebViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A33A5E1AC0172A00224639 /* UIWebView+LPWebViewTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5A33A681AC01BA900224639 /* WKWebView+LPWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A611AC01BA900224639 /* WKWebView+LPWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F5A33A691AC01BA900224639 /* WKWebView+LPWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A33A621AC01BA900224639 /* WKWebView+LPWebView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5A33A6A1AC01BA900224639 /* WKWebView+LPWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A33A621AC01BA900224639 /* WKWebView+LPWebView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5A33A6B1AC01BA900224639 /* WKWebView+LPWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A33A621AC01BA900224639 /* WKWebView+LPWebView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5A33A6C1AC01BA900224639 /* WKWebView+LPWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A33A621AC01BA900224639 /* WKWebView+LPWebView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5A33A6D1AC01BA900224639 /* WKWebView+LPWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A33A621AC01BA900224639 /* WKWebView+LPWebView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5A33A6E1AC01BA900224639 /* WKWebView+LPWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A33A621AC01BA900224639 /* WKWebView+LPWebView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5A33A6F1AC01BA900224639 /* WKWebView+LPWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A33A621AC01BA900224639 /* WKWebView+LPWebView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5A33A711AC01BC400224639 /* WKWebView+LPWebViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A33A701AC01BC400224639 /* WKWebView+LPWebViewTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5A33A731AC01E8E00224639 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A33A721AC01E8E00224639 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		F5A33A741AC01E9A00224639 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A33A721AC01E8E00224639 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		F5A33A751AC01EA000224639 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A33A721AC01E8E00224639 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		F5A33A761AC01EA600224639 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A33A721AC01E8E00224639 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		F5A33A771AC01EB300224639 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A33A721AC01E8E00224639 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		F5A33A781AC01EBC00224639 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A33A721AC01E8E00224639 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F5A33A791AC01EC400224639 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A33A721AC01E8E00224639 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F5B27B9118C5884D0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		F5B27B9218C5884E0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
@@ -1154,8 +1135,6 @@
 		F5A33A501AC00D1300224639 /* UIWebView+LPWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+LPWebView.m"; sourceTree = "<group>"; };
 		F5A33A5E1AC0172A00224639 /* UIWebView+LPWebViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+LPWebViewTest.m"; sourceTree = "<group>"; };
 		F5A33A601AC01A9F00224639 /* LPWebViewProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LPWebViewProtocol.h; sourceTree = "<group>"; };
-		F5A33A611AC01BA900224639 /* WKWebView+LPWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKWebView+LPWebView.h"; sourceTree = "<group>"; };
-		F5A33A621AC01BA900224639 /* WKWebView+LPWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+LPWebView.m"; sourceTree = "<group>"; };
 		F5A33A701AC01BC400224639 /* WKWebView+LPWebViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+LPWebViewTest.m"; sourceTree = "<group>"; };
 		F5A33A721AC01E8E00224639 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		F5AE0BC4174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPScrollToRowWithMarkOperation.h; sourceTree = "<group>"; };
@@ -1193,7 +1172,6 @@
 			files = (
 				B1058E4B197F00C000B4A57B /* CFNetwork.framework in Frameworks */,
 				B1058E4C197F00C000B4A57B /* Foundation.framework in Frameworks */,
-				F5A33A751AC01EA000224639 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1203,7 +1181,6 @@
 			files = (
 				B15BF99819ABB18200B38577 /* Foundation.framework in Frameworks */,
 				B15BF99719ABB17800B38577 /* CFNetwork.framework in Frameworks */,
-				F5A33A771AC01EB300224639 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1213,7 +1190,6 @@
 			files = (
 				B15BFA3A19ABB2B100B38577 /* Foundation.framework in Frameworks */,
 				B15BFA3B19ABB2B100B38577 /* CFNetwork.framework in Frameworks */,
-				F5A33A781AC01EBC00224639 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1223,7 +1199,6 @@
 			files = (
 				B1D5BDD319A23BCE0070E8CE /* CFNetwork.framework in Frameworks */,
 				B1D5BDD419A23BCE0070E8CE /* Foundation.framework in Frameworks */,
-				F5A33A761AC01EA600224639 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1231,7 +1206,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5A33A731AC01E8E00224639 /* WebKit.framework in Frameworks */,
 				F5091C3F18C4E1D700C85307 /* CFNetwork.framework in Frameworks */,
 				F5091C4018C4E1D700C85307 /* Foundation.framework in Frameworks */,
 			);
@@ -1266,7 +1240,6 @@
 			files = (
 				F5821A5D18C4E27400293508 /* CFNetwork.framework in Frameworks */,
 				F5821A5E18C4E27400293508 /* Foundation.framework in Frameworks */,
-				F5A33A741AC01E9A00224639 /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1909,8 +1882,6 @@
 				F5F2D5E21ACACF2F0027937B /* UIView+LPIsWebView.m */,
 				F5A33A4F1AC00D1300224639 /* UIWebView+LPWebView.h */,
 				F5A33A501AC00D1300224639 /* UIWebView+LPWebView.m */,
-				F5A33A611AC01BA900224639 /* WKWebView+LPWebView.h */,
-				F5A33A621AC01BA900224639 /* WKWebView+LPWebView.m */,
 				F5C224BF1ACDF298001DB4FA /* LPWKWebViewRuntimeLoader.h */,
 				F5C224C01ACDF298001DB4FA /* LPWKWebViewRuntimeLoader.m */,
 			);
@@ -1950,7 +1921,6 @@
 				F551855E1AC3878200CE06DC /* LPWebViewProtocol.h in Headers */,
 				F5F2D5E51ACACF2F0027937B /* UIView+LPIsWebView.h in Headers */,
 				F551855F1AC3878200CE06DC /* UIWebView+LPWebView.h in Headers */,
-				F55185601AC3878200CE06DC /* WKWebView+LPWebView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1970,7 +1940,6 @@
 				F55185641AC3879D00CE06DC /* LPWebViewProtocol.h in Headers */,
 				F5C094511A979CC200AE5991 /* LPWebQuery.h in Headers */,
 				F55185651AC3879D00CE06DC /* UIWebView+LPWebView.h in Headers */,
-				F55185661AC3879D00CE06DC /* WKWebView+LPWebView.h in Headers */,
 				F551857D1AC38A5200CE06DC /* CalabashServer.h in Headers */,
 				F50292971ACAD4FE00D07D31 /* UIView+LPIsWebView.h in Headers */,
 			);
@@ -1993,7 +1962,6 @@
 				F55185671AC387A200CE06DC /* LPWebViewProtocol.h in Headers */,
 				F5A33A561AC00D1300224639 /* UIWebView+LPWebView.h in Headers */,
 				F5F2D5E81ACACF2F0027937B /* UIView+LPIsWebView.h in Headers */,
-				F5A33A681AC01BA900224639 /* WKWebView+LPWebView.h in Headers */,
 				F55185871AC38A5700CE06DC /* CalabashServer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2016,7 +1984,6 @@
 				F55185621AC3878D00CE06DC /* UIWebView+LPWebView.h in Headers */,
 				F55185741AC389E800CE06DC /* LPCORSResponse.h in Headers */,
 				F5F2D5E61ACACF2F0027937B /* UIView+LPIsWebView.h in Headers */,
-				F55185631AC3878D00CE06DC /* WKWebView+LPWebView.h in Headers */,
 				B1D5BDCC19A23BCE0070E8CE /* LPHTTPResponse.h in Headers */,
 				B1D5BDCD19A23BCE0070E8CE /* LPHTTPAsyncFileResponse.h in Headers */,
 				B1D5BDCE19A23BCE0070E8CE /* LPHTTPDataResponse.h in Headers */,
@@ -2044,7 +2011,6 @@
 				F55185591AC3875900CE06DC /* UIWebView+LPWebView.h in Headers */,
 				F5F2D5E31ACACF2F0027937B /* UIView+LPIsWebView.h in Headers */,
 				F55185711AC389CD00CE06DC /* LPCORSResponse.h in Headers */,
-				F551855A1AC3875D00CE06DC /* WKWebView+LPWebView.h in Headers */,
 				F59C5CFA18E0BBAE0087B51D /* LPHTTPResponse.h in Headers */,
 				F59C5CFB18E0BBAE0087B51D /* LPHTTPAsyncFileResponse.h in Headers */,
 				F59C5CFC18E0BBAE0087B51D /* LPHTTPDataResponse.h in Headers */,
@@ -2072,7 +2038,6 @@
 				F551855C1AC3876F00CE06DC /* UIWebView+LPWebView.h in Headers */,
 				F55185721AC389D300CE06DC /* LPCORSResponse.h in Headers */,
 				F5F2D5E41ACACF2F0027937B /* UIView+LPIsWebView.h in Headers */,
-				F551855D1AC3876F00CE06DC /* WKWebView+LPWebView.h in Headers */,
 				F59C5D0318E0C1DF0087B51D /* LPHTTPResponse.h in Headers */,
 				F59C5D0518E0C1EA0087B51D /* LPHTTPDataResponse.h in Headers */,
 				F59C5D0418E0C1E60087B51D /* LPHTTPAsyncFileResponse.h in Headers */,
@@ -2510,7 +2475,6 @@
 				B113585D1981B053004B16F4 /* LPDatePickerOperation.m in Sources */,
 				B1F772141A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */,
 				B1F772081A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */,
-				F5A33A6B1AC01BA900224639 /* WKWebView+LPWebView.m in Sources */,
 				B1135832197F0C73004B16F4 /* LPCDataScanner.m in Sources */,
 				B11358491981AE00004B16F4 /* LPMapRoute.m in Sources */,
 				B113585A1981B053004B16F4 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
@@ -2556,7 +2520,6 @@
 				B15BF9B219ABB1DD00B38577 /* LPFlashOperation.m in Sources */,
 				B15BF9B319ABB1DD00B38577 /* LPQueryAllOperation.m in Sources */,
 				B15BF9B419ABB1DD00B38577 /* LPOperation.m in Sources */,
-				F5A33A6D1AC01BA900224639 /* WKWebView+LPWebView.m in Sources */,
 				B15BF9B519ABB1DD00B38577 /* LPQueryOperation.m in Sources */,
 				B15BF9B619ABB1DD00B38577 /* LPScrollOperation.m in Sources */,
 				F56630961A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */,
@@ -2655,7 +2618,6 @@
 				B15BFA0419ABB2B100B38577 /* LPFlashOperation.m in Sources */,
 				B15BFA0519ABB2B100B38577 /* LPQueryAllOperation.m in Sources */,
 				B15BFA0619ABB2B100B38577 /* LPOperation.m in Sources */,
-				F5A33A6E1AC01BA900224639 /* WKWebView+LPWebView.m in Sources */,
 				B15BFA0719ABB2B100B38577 /* LPQueryOperation.m in Sources */,
 				B15BFA0819ABB2B100B38577 /* LPScrollOperation.m in Sources */,
 				F56630971A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */,
@@ -2754,7 +2716,6 @@
 				B1D5BD9119A23BCE0070E8CE /* LPUIAUserPrefsChannel.m in Sources */,
 				B1D5BD9219A23BCE0070E8CE /* LPRecorder.m in Sources */,
 				B1D5BD9319A23BCE0070E8CE /* CalabashServer.m in Sources */,
-				F5A33A6C1AC01BA900224639 /* WKWebView+LPWebView.m in Sources */,
 				B1D5BD9419A23BCE0070E8CE /* LPUIARouteOverUserPrefs.m in Sources */,
 				B1D5BD9519A23BCE0070E8CE /* LPUserPrefRoute.m in Sources */,
 				F56630951A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */,
@@ -2853,7 +2814,6 @@
 				F5091BF418C4E1D700C85307 /* LPRecorder.m in Sources */,
 				F5B27B9118C5884D0049B5FF /* CalabashServer.m in Sources */,
 				F5091BF518C4E1D700C85307 /* LPUIARouteOverUserPrefs.m in Sources */,
-				F5A33A691AC01BA900224639 /* WKWebView+LPWebView.m in Sources */,
 				F5091BF618C4E1D700C85307 /* LPUserPrefRoute.m in Sources */,
 				F5091BF718C4E1D700C85307 /* LPKeyboardRoute.m in Sources */,
 				F56630921A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */,
@@ -2977,7 +2937,6 @@
 				F50CBFBF1A0405CE004AC9DA /* UIScriptASTDirection.m in Sources */,
 				F50CBFA21A0405B2004AC9DA /* LPDebugRoute.m in Sources */,
 				F50CBF951A04058C004AC9DA /* LPFlashOperation.m in Sources */,
-				F5A33A6F1AC01BA900224639 /* WKWebView+LPWebView.m in Sources */,
 				F50CBF921A04058C004AC9DA /* LPSliderOperation.m in Sources */,
 				F50CBF9E1A040599004AC9DA /* LPScrollToRowWithMarkOperation.m in Sources */,
 				F50CBF861A040564004AC9DA /* DDData.m in Sources */,
@@ -3079,7 +3038,6 @@
 				F5821A1218C4E27400293508 /* LPRecorder.m in Sources */,
 				F5B27B9218C5884E0049B5FF /* CalabashServer.m in Sources */,
 				F5821A1318C4E27400293508 /* LPUIARouteOverUserPrefs.m in Sources */,
-				F5A33A6A1AC01BA900224639 /* WKWebView+LPWebView.m in Sources */,
 				F5821A1418C4E27400293508 /* LPUserPrefRoute.m in Sources */,
 				F5821A1518C4E27400293508 /* LPKeyboardRoute.m in Sources */,
 				F56630931A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */,

@@ -3,6 +3,7 @@
 #endif
 
 #import "UIView+LPIsWebView.h"
+#import <objc/runtime.h>
 
 @interface UIView (UIView_LPIsWebView_Private)
 
