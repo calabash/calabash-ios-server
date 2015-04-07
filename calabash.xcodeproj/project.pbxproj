@@ -1030,7 +1030,7 @@
 		F50CBF611A03F222004AC9DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F50CBF761A03F69A004AC9DA /* LPTestToolsStandup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPTestToolsStandup.m; path = ../LPTestToolsStandup.m; sourceTree = "<group>"; };
 		F50CBFCD1A040669004AC9DA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		F50CBFD01A040788004AC9DA /* tests.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tests.pch; sourceTree = "<group>"; };
+		F50CBFD01A040788004AC9DA /* tests.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = tests.pch; path = ../tests.pch; sourceTree = "<group>"; };
 		F50E42711AA86D36003DB030 /* libSpecta.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSpecta.a; sourceTree = "<group>"; };
 		F50E42731AA86D36003DB030 /* Specta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Specta.h; sourceTree = "<group>"; };
 		F50E42741AA86D36003DB030 /* SpectaDSL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpectaDSL.h; sourceTree = "<group>"; };
@@ -1651,7 +1651,6 @@
 			children = (
 				F5543F1F1ABF7D7000E1A0BF /* Tests */,
 				F50CBF601A03F222004AC9DA /* Supporting Files */,
-				F50CBFD01A040788004AC9DA /* tests.pch */,
 			);
 			path = XCTest;
 			sourceTree = SOURCE_ROOT;
@@ -1728,6 +1727,7 @@
 		F5543F1F1ABF7D7000E1A0BF /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				F50CBFD01A040788004AC9DA /* tests.pch */,
 				F50CBF761A03F69A004AC9DA /* LPTestToolsStandup.m */,
 				F5C224E41AD47403001DB4FA /* Operations */,
 				F5C224E61AD47403001DB4FA /* Routes */,
