@@ -10,9 +10,9 @@
 }
 
 
-- (id) performWithTarget:(id) _view error:(NSError **) error {
-  if ([_view isKindOfClass:[NSDictionary class]]) {
-    NSMutableDictionary *mdict = [NSMutableDictionary dictionaryWithDictionary:_view];
+- (id) performWithTarget:(id) target error:(NSError **) error {
+  if ([target isKindOfClass:[NSDictionary class]]) {
+    NSMutableDictionary *mdict = [NSMutableDictionary dictionaryWithDictionary:target];
     [mdict removeObjectForKey:@"html"];
 
     UIWebView *webView = [mdict valueForKey:@"webView"];
@@ -22,7 +22,7 @@
     NSString *res = [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:LP_SET_TEXT_JS,
                                                                                                json]];
     NSLog(@"RESULT: %@", res);
-  } else if ([_view respondsToSelector:@selector(setText:)]) {
+  } else if ([target respondsToSelector:@selector(setText:)]) {
     NSString *txt = nil;
     id argument = [_arguments objectAtIndex:0];
     if ([argument isKindOfClass:[NSString class]]) {
@@ -30,8 +30,8 @@
     } else {
       txt = [argument description];
     }
-    [_view performSelector:@selector(setText:) withObject:txt];
-    return _view;
+    [target performSelector:@selector(setText:) withObject:txt];
+    return target;
   }
   return nil;
 }
