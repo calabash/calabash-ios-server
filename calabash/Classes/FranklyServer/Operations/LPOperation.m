@@ -18,7 +18,17 @@
 #import "LPSliderOperation.h"
 #import "LPCollectionViewScrollToItemOperation.h"
 
+@interface LPOperation ()
+
+- (NSArray *) arguments;
+
+@end
+
 @implementation LPOperation
+
+- (NSArray *) arguments {
+  return _arguments;
+}
 
 + (id) operationFromDictionary:(NSDictionary *) dictionary {
   NSString *opName = [dictionary valueForKey:@"method_name"];

@@ -27,15 +27,20 @@
                                                                                                json]];
     NSLog(@"RESULT: %@", res);
   } else if ([target respondsToSelector:@selector(setText:)]) {
-    NSString *txt = nil;
-    id argument = [_arguments objectAtIndex:0];
-    if ([argument isKindOfClass:[NSString class]]) {
-      txt = argument;
+    if (!_arguments || [_arguments count] == 0) {
+      NSLog(@"Missing the 'text' argument; nothing to do - returning nil");
+      return nil;
     } else {
-      txt = [argument description];
+      NSString *txt = nil;
+      id argument = [_arguments objectAtIndex:0];
+      if ([argument isKindOfClass:[NSString class]]) {
+        txt = argument;
+      } else {
+        txt = [argument description];
+      }
+      [target performSelector:@selector(setText:) withObject:txt];
+      return target;
     }
-    [target performSelector:@selector(setText:) withObject:txt];
-    return target;
   }
   return nil;
 }

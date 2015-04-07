@@ -4,6 +4,12 @@
 
 #import "LPSetTextOperation.h"
 
+@interface LPSetTextOperation (LPXCTEST)
+
+- (NSArray *) arguments;
+
+@end
+
 SpecBegin(LPSetTextOperation)
 
 describe(@"LPSetTextOperation", ^{
@@ -24,13 +30,17 @@ describe(@"LPSetTextOperation", ^{
 
       __block LPSetTextOperation *operation;
       __block NSDictionary *dictionary;
+      __block UITextField *textField;
+
+      before(^{
+        textField = [[UITextField alloc] initWithFrame:CGRectZero];
+      });
 
       describe(@"has correct arguments", ^{
         it(@"argument is an NSString", ^{
           dictionary = @{@"method_name" : @"setText",
                          @"arguments": @[@"new text"]};
           operation = [[LPSetTextOperation alloc] initWithOperation:dictionary];
-          UITextField *textField = [[UITextField alloc] initWithFrame:CGRectZero];
           id result = [operation performWithTarget:textField error:nil];
           expect(result).to.equal(textField);
           expect(textField.text).to.equal(@"new text");
@@ -40,15 +50,27 @@ describe(@"LPSetTextOperation", ^{
           dictionary = @{@"method_name" : @"setText",
                          @"arguments": @[@(5)]};
           operation = [[LPSetTextOperation alloc] initWithOperation:dictionary];
-          UITextField *textField = [[UITextField alloc] initWithFrame:CGRectZero];
           id result = [operation performWithTarget:textField error:nil];
           expect(result).to.equal(textField);
           expect(textField.text).to.equal(@"5");
         });
       });
 
-      it(@"does not have correct arguments", ^{
+      describe(@"does not have correct arguments", ^{
+        it(@"missing argument key", ^{
+          dictionary = @{@"method_name" : @"setText"};
+          operation = [[LPSetTextOperation alloc] initWithOperation:dictionary];
+          id result = [operation performWithTarget:textField error:nil];
+          expect(result).to.equal(nil);
+        });
 
+        it(@"argument does not have at least 1 value", ^{
+          dictionary = @{@"method_name" : @"setText",
+                         @"arguments": @[]};
+          operation = [[LPSetTextOperation alloc] initWithOperation:dictionary];
+          id result = [operation performWithTarget:textField error:nil];
+          expect(result).to.equal(nil);
+        });
       });
     });
 
