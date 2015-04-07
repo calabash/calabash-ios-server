@@ -6,19 +6,6 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		F5F53D6618C60FA900BD9731 /* use make to create the framework */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = F5F53D6718C60FA900BD9731 /* Build configuration list for PBXAggregateTarget "use make to create the framework" */;
-			buildPhases = (
-			);
-			dependencies = (
-			);
-			name = "use make to create the framework";
-			productName = "use make to create the framework";
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
 		B1058E08197F00C000B4A57B /* LPUIAUserPrefsChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F279AE183D5B3000A922BC /* LPUIAUserPrefsChannel.m */; };
 		B1058E1D197F00C000B4A57B /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; };
@@ -2279,7 +2266,6 @@
 				B15BF97019ABAFD200B38577 /* calabash-dylib-device */,
 				B15BF9E819ABB2B100B38577 /* calabash-dylib-simulator */,
 				F59CA46C1A82EF40007A2F38 /* LPTestTarget */,
-				F5F53D6618C60FA900BD9731 /* use make to create the framework */,
 				F537398B18E5253B004133FA /* version */,
 			);
 		};
@@ -4084,20 +4070,6 @@
 			};
 			name = Release;
 		};
-		F5F53D6818C60FA900BD9731 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		F5F53D6918C60FA900BD9731 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -4187,15 +4159,6 @@
 			buildConfigurations = (
 				F59CA4901A82EF40007A2F38 /* Debug */,
 				F59CA4911A82EF40007A2F38 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		F5F53D6718C60FA900BD9731 /* Build configuration list for PBXAggregateTarget "use make to create the framework" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F5F53D6818C60FA900BD9731 /* Debug */,
-				F5F53D6918C60FA900BD9731 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
