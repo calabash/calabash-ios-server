@@ -9,11 +9,26 @@
 #import "LPJSONUtils.h"
 #import "LPWebViewProtocol.h"
 
+@interface LPSetTextOperation ()
+
+- (NSString *) stringValueForArgument:(id) argument;
+
+@end
+
 @implementation LPSetTextOperation
 - (NSString *) description {
   return [NSString stringWithFormat:@"Text: %@", _arguments];
 }
 
+- (NSString *) stringValueForArgument:(id) argument {
+  if ([argument isKindOfClass:[NSString class]]) {
+    return [argument copy];
+  } else if ([argument respondsToSelector:@selector(stringValue)]) {
+    return [argument stringValue];
+  } else {
+    return [argument description];
+  }
+}
 
 - (id) performWithTarget:(id) target error:(NSError **) error {
   if (!_arguments || [_arguments count] == 0) {
@@ -44,27 +59,15 @@
     }
 
     UIView<LPWebViewProtocol> *webView = (UIView<LPWebViewProtocol> *)webViewValue;
-    NSString *txt = nil;
-    id argument = [_arguments objectAtIndex:0];
-    if ([argument isKindOfClass:[NSString class]]) {
-      txt = argument;
-    } else {
-      txt = [argument description];
-    }
+    NSString *text = [self stringValueForArgument:[_arguments objectAtIndex:0]];
     NSString *javascript = [NSString stringWithFormat:LP_SET_TEXT_JS,
-                            json, txt];
+                            json, text];
     return [webView calabashStringByEvaluatingJavaScript:javascript];
   }
 
   if ([target respondsToSelector:@selector(setText:)]) {
-    NSString *txt = nil;
-    id argument = [_arguments objectAtIndex:0];
-    if ([argument isKindOfClass:[NSString class]]) {
-      txt = argument;
-    } else {
-      txt = [argument description];
-    }
-    [target performSelector:@selector(setText:) withObject:txt];
+    NSString *text = [self stringValueForArgument:[_arguments objectAtIndex:0]];
+    [target performSelector:@selector(setText:) withObject:text];
     return target;
   }
 

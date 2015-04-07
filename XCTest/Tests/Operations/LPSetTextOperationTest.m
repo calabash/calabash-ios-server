@@ -8,6 +8,9 @@
 @interface LPSetTextOperation (LPXCTEST)
 
 - (NSArray *) arguments;
+- (NSString *) stringValueForArgument:(id) argument;
+
+// Corrects type error warnings:  target is supposed to be a UIView
 - (id) performWithTarget:(id) target error:(NSError *__autoreleasing *)error;
 
 @end
@@ -16,10 +19,36 @@ SpecBegin(LPSetTextOperation)
 
 describe(@"LPSetTextOperation", ^{
 
-  __block LPSetTextOperation *operation;
-  __block NSDictionary *dictionary;
+  describe(@"#stringValueForArgument:", ^{
+    __block id argument;
+    __block LPSetTextOperation *operation;
 
-  describe(@"performWithTarget:error:", ^{
+    before(^{
+      operation = [[LPSetTextOperation alloc] init];
+    });
+
+    it(@"argument is string", ^{
+      argument = @"argument";
+      expect([operation stringValueForArgument:argument]).to.equal(argument);
+    });
+
+    it(@"argument responds to stringValue", ^{
+      argument = @(5);
+      expect([argument respondsToSelector:@selector(stringValue)]).to.equal(YES);
+      expect([operation stringValueForArgument:argument]).to.equal(@"5");
+    });
+
+    it(@"argument does not respond to stringValue", ^{
+      argument = [UIColor whiteColor];
+      expect([argument respondsToSelector:@selector(stringValue)]).to.equal(NO);
+      expect([operation stringValueForArgument:argument]).to.equal(@"UIDeviceWhiteColorSpace 1 1");
+    });
+  });
+
+  describe(@"#performWithTarget:error:", ^{
+
+    __block LPSetTextOperation *operation;
+    __block NSDictionary *dictionary;
 
     describe(@"returns nil when invalid arguments", ^{
       __block id target;
