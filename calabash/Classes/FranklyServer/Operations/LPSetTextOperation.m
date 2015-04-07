@@ -35,8 +35,22 @@
         result = nil;
       } else {
         NSString *json = [LPJSONUtils serializeDictionary:mdict];
-        NSString *res = [webViewValue stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:LP_SET_TEXT_JS,
-                                                                              json]];
+        if (!json) {
+          NSLog(@"Could serialize %@ to JSON; nothing to do - returning nil", mdict);
+          result = nil;
+        } else {
+          UIView<LPWebViewProtocol> *webView = (UIView<LPWebViewProtocol> *)webViewValue;
+          NSString *txt = nil;
+          id argument = [_arguments objectAtIndex:0];
+          if ([argument isKindOfClass:[NSString class]]) {
+            txt = argument;
+          } else {
+            txt = [argument description];
+          }
+          NSString *javascript = [NSString stringWithFormat:LP_SET_TEXT_JS,
+                                  json, txt];
+          result = [webView calabashStringByEvaluatingJavaScript:javascript];
+        }
       }
     }
   } else if ([target respondsToSelector:@selector(setText:)]) {

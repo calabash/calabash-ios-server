@@ -3,6 +3,7 @@
 #endif
 
 #import "LPSetTextOperation.h"
+#import "LPJSONUtils.h"
 
 @interface LPSetTextOperation (LPXCTEST)
 
@@ -44,15 +45,15 @@ describe(@"LPSetTextOperation", ^{
     });
 
     describe(@"target represents a WebView; it is a dictionary", ^{
+      __block NSDictionary *target;
+
+      before(^{
+        dictionary = @{@"method_name" : @"setText",
+                       @"arguments": @[@"new text"]};
+        operation = [[LPSetTextOperation alloc] initWithOperation:dictionary];
+      });
+
       describe(@"representation has invalid keys", ^{
-
-        __block NSDictionary *target;
-
-        before(^{
-          dictionary = @{@"method_name" : @"setText",
-                         @"arguments": @[@"new text"]};
-          operation = [[LPSetTextOperation alloc] initWithOperation:dictionary];
-        });
 
         it(@"is missing webView key", ^{
           target = @{};
@@ -69,6 +70,25 @@ describe(@"LPSetTextOperation", ^{
 
       describe(@"representation has valid keys", ^{
 
+        __block UIWebView *webView;
+
+        before(^{
+          webView = [[UIWebView alloc] initWithFrame:CGRectZero];
+          target = @{@"webView" : webView};
+        });
+
+        it(@"returns nil if the WebView cannot be serialized", ^{
+          id mock = [OCMockObject niceMockForClass:[LPJSONUtils class]];
+          [[[mock stub] andReturn:nil] serializeDictionary:OCMOCK_ANY];
+          id result = [operation performWithTarget:target error:nil];
+          expect(result).to.equal(nil);
+          [mock verify];
+        });
+
+        it(@"returns the result of evaluating javascript", ^{
+          id result = [operation performWithTarget:target error:nil];
+          expect(result).notTo.equal(nil);
+        });
       });
     });
 
