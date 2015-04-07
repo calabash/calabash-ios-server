@@ -25,7 +25,9 @@ describe(@"LPSetTextOperation", ^{
     });
 
     it(@"target does not respond to setText", ^{
-
+      UISlider *slider = [[UISlider alloc] initWithFrame:CGRectZero];
+      LPSetTextOperation *op = [[LPSetTextOperation alloc] init];
+      expect([op performWithTarget:slider error:nil]).to.equal(nil);
     });
   });
 });
