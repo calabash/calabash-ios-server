@@ -96,30 +96,37 @@ static NSString *LPWKWebViewCalabashStringByEvaluatingJavaScriptIMP(id self,
 
   NSLog(@"JavaScript result = %@", javascriptResult);
 
-  if (!javascriptResult) { return @""; }
-  if (javascriptResult == [NSNull null]) { return @""; }
-  if ([javascriptResult isKindOfClass:[NSString class]]) { return javascriptResult; }
+  NSString *returnValue = nil;
+  javascriptResult = [javascriptResult copy];
 
-  if ([javascriptResult isKindOfClass:[NSDate class]]) {
+  if (!javascriptResult || javascriptResult == [NSNull null]) {
+    returnValue = @"";
+  } else if ([javascriptResult isKindOfClass:[NSString class]]) {
+    returnValue = javascriptResult;
+  } else if ([javascriptResult isKindOfClass:[NSDate class]]) {
     SEL selector = NSSelectorFromString(@"lpStringWithDate:");
-    return [LPWKWebViewMethodInvoker stringByInvokingSelector:selector
-                                                       target:self
-                                                     argument:javascriptResult];
+    returnValue = [LPWKWebViewMethodInvoker stringByInvokingSelector:selector
+                                                              target:self
+                                                            argument:javascriptResult];
   } else if ([javascriptResult isKindOfClass:[NSDictionary class]]) {
     SEL selector = NSSelectorFromString(@"lpStringWithDictionary:");
-    return [LPWKWebViewMethodInvoker stringByInvokingSelector:selector
-                                                       target:self
-                                                     argument:javascriptResult];
+    returnValue = [LPWKWebViewMethodInvoker stringByInvokingSelector:selector
+                                                              target:self
+                                                            argument:javascriptResult];
   } else if ([javascriptResult isKindOfClass:[NSArray class]]) {
     SEL selector = NSSelectorFromString(@"lpStringWithArray:");
-    return [LPWKWebViewMethodInvoker stringByInvokingSelector:selector
-                                                       target:self
-                                                     argument:javascriptResult];
+    returnValue = [LPWKWebViewMethodInvoker stringByInvokingSelector:selector
+                                                              target:self
+                                                            argument:javascriptResult];
   } else {
     SEL stringValueSel = @selector(stringValue);
-    if ([javascriptResult respondsToSelector:stringValueSel]) {  return [javascriptResult stringValue]; }
+    if ([javascriptResult respondsToSelector:stringValueSel]) {
+      returnValue = [javascriptResult stringValue];
+    } else {
+      returnValue = [javascriptResult description];
+    }
   }
-  return [javascriptResult description];
+  return returnValue;
 }
 
 @implementation LPWKWebViewRuntimeLoader
