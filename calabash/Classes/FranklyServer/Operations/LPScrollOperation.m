@@ -6,7 +6,6 @@
 
 #import "LPScrollOperation.h"
 #import "UIWebView+LPWebView.h"
-#import "WKWebView+LPWebView.h"
 #import "UIView+LPIsWebView.h"
 #import "LPWebViewProtocol.h"
 

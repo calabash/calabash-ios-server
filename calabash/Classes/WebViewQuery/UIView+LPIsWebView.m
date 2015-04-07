@@ -3,15 +3,29 @@
 #endif
 
 #import "UIView+LPIsWebView.h"
+#import <objc/runtime.h>
 
+@interface UIView (UIView_LPIsWebView_Private)
+
+- (Class) lpClassForWKWebView;
+
+@end
 
 @implementation UIView (UIView_LPIsWebView)
 
-- (BOOL) lpIsWebView {
-  return
+- (Class) lpClassForWKWebView {
+  return objc_getClass("WKWebView");
+}
 
-  [self isKindOfClass:[UIWebView class]] ||
-  [self isKindOfClass:[WKWebView class]];
+- (BOOL) lpIsWebView {
+  Class klass = [self lpClassForWKWebView];
+  if (klass) {
+    return
+    [self isKindOfClass:[UIWebView class]] ||
+    [self isKindOfClass:klass];
+  } else {
+    return [self isKindOfClass:[UIWebView class]];
+  }
 }
 
 @end

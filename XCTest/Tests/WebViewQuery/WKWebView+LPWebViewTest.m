@@ -2,14 +2,17 @@
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
 
-#import "WKWebView+LPWebView.h"
+#import "LPWKWebViewRuntimeLoader.h"
 #import "LPJSONUtils.h"
+#import <WebKit/WebKit.h>
+#import "LPWebViewProtocol.h"
 
 @interface WKWebView (LPXCTEST)
 
 - (NSString *) lpStringWithDate:(NSDate *) date;
 - (NSString *) lpStringWithDictionary:(NSDictionary *) dictionary;
 - (NSString *) lpStringWithArray:(NSArray *) array;
+- (NSString *) calabashStringByEvaluatingJavaScript:(NSString *) javascript;
 
 @end
 
@@ -44,14 +47,15 @@
 
 - (void) mockEvaluateJavascript:(NSString *)javascript
               completionHandler:(void (^)(id, NSError *))completionHandler {
-  if (self.raiseError) {
+  __weak __typeof__(self) weakSelf = self;
+  if (weakSelf.raiseError) {
     NSError *error = [NSError errorWithDomain:@"MY DOMAIN!"
                                          code:11
                                      userInfo:@{NSLocalizedDescriptionKey :
                                                   @"Another day, another misunderstood JavaScript programmer."}];
     completionHandler(nil, error);
   } else {
-    completionHandler(self.result, nil);
+    completionHandler(weakSelf.result, nil);
   }
 }
 
@@ -107,15 +111,18 @@ describe(@"WKWebView+LPWebView", ^{
     __block LPMockEvaluator *evaluator;
     __block NSString *expected;
     __block NSString *actual;
+    __block id viewMock;
+
     before(^{
       webView = [[WKWebView alloc] initWithFrame:CGRectZero];
       mockSel = @selector(mockEvaluateJavascript:completionHandler:);
     });
 
+
     describe(@"can report errors", ^{
       it(@"when javascript is not nil", ^{
         evaluator = [[LPMockEvaluator alloc] initWithResult:nil raise:YES];
-        id viewMock = [OCMockObject partialMockForObject:webView];
+        viewMock = [OCMockObject partialMockForObject:webView];
         [[[viewMock stub] andCall:mockSel onObject:evaluator]
          evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
         actual = [viewMock calabashStringByEvaluatingJavaScript:@"invalid javascript"];
@@ -125,21 +132,20 @@ describe(@"WKWebView+LPWebView", ^{
 
       it(@"when javascript is nil", ^{
         evaluator = [[LPMockEvaluator alloc] initWithResult:nil raise:YES];
-        id viewMock = [OCMockObject partialMockForObject:webView];
+        viewMock = [OCMockObject partialMockForObject:webView];
         [[[viewMock stub] andCall:mockSel onObject:evaluator]
          evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
         actual = [viewMock calabashStringByEvaluatingJavaScript:nil];
         expected = @"{\"error\":\"Another day, another misunderstood JavaScript programmer.\",\"javascript\":null}";
         expect(actual).to.equal(expected);
       });
-
     });
 
     describe(@"can handle various return types", ^{
 
       it(@"returns empty string for 'nil'", ^{
         evaluator = [[LPMockEvaluator alloc] initWithResult:nil];
-        id viewMock = [OCMockObject partialMockForObject:webView];
+        viewMock = [OCMockObject partialMockForObject:webView];
         [[[viewMock stub] andCall:mockSel onObject:evaluator]
          evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
         actual = [viewMock calabashStringByEvaluatingJavaScript:@""];
@@ -148,7 +154,7 @@ describe(@"WKWebView+LPWebView", ^{
 
       it(@"returns empty string for NSNull", ^{
         evaluator = [[LPMockEvaluator alloc] initWithResult:[NSNull null]];
-        id viewMock = [OCMockObject partialMockForObject:webView];
+        viewMock = [OCMockObject partialMockForObject:webView];
         [[[viewMock stub] andCall:mockSel onObject:evaluator]
          evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
         actual = [viewMock calabashStringByEvaluatingJavaScript:@""];
@@ -157,7 +163,7 @@ describe(@"WKWebView+LPWebView", ^{
 
       it(@"returns a string for NSString", ^{
         evaluator = [[LPMockEvaluator alloc] initWithResult:@"a string"];
-        id viewMock = [OCMockObject partialMockForObject:webView];
+        viewMock = [OCMockObject partialMockForObject:webView];
         [[[viewMock stub] andCall:mockSel onObject:evaluator]
          evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
         NSString *actual = [viewMock calabashStringByEvaluatingJavaScript:@""];
@@ -172,7 +178,7 @@ describe(@"WKWebView+LPWebView", ^{
 
         NSDate *dateToReturn = [formatter dateFromString:expected];
         evaluator = [[LPMockEvaluator alloc] initWithResult:dateToReturn];
-        id viewMock = [OCMockObject partialMockForObject:webView];
+        viewMock = [OCMockObject partialMockForObject:webView];
         [[[viewMock stub] andCall:mockSel onObject:evaluator]
          evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
         NSString *actualDateString = [viewMock calabashStringByEvaluatingJavaScript:@""];
@@ -188,7 +194,7 @@ describe(@"WKWebView+LPWebView", ^{
        expected = [LPJSONUtils serializeDictionary:dict];
 
         evaluator = [[LPMockEvaluator alloc] initWithResult:dict];
-        id viewMock = [OCMockObject partialMockForObject:webView];
+        viewMock = [OCMockObject partialMockForObject:webView];
         [[[viewMock stub] andCall:mockSel onObject:evaluator]
          evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
         actual = [viewMock calabashStringByEvaluatingJavaScript:@""];
@@ -198,9 +204,8 @@ describe(@"WKWebView+LPWebView", ^{
       it(@"returns JSON representation of NSArray", ^{
         NSArray *arr = @[@(1), @(2), @(3)];
         expected = [LPJSONUtils serializeArray:arr];
-
         evaluator = [[LPMockEvaluator alloc] initWithResult:arr];
-        id viewMock = [OCMockObject partialMockForObject:webView];
+        viewMock = [OCMockObject partialMockForObject:webView];
         [[[viewMock stub] andCall:mockSel onObject:evaluator]
          evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
         actual = [viewMock calabashStringByEvaluatingJavaScript:@""];
@@ -212,7 +217,7 @@ describe(@"WKWebView+LPWebView", ^{
           CGFloat val = 44.5;
           NSNumber *number = @(val);
           evaluator = [[LPMockEvaluator alloc] initWithResult:number];
-          id viewMock = [OCMockObject partialMockForObject:webView];
+          viewMock = [OCMockObject partialMockForObject:webView];
           [[[viewMock stub] andCall:mockSel onObject:evaluator]
            evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
 
@@ -224,7 +229,7 @@ describe(@"WKWebView+LPWebView", ^{
           NSUInteger val = 44;
           NSNumber *number = @(val);
           evaluator = [[LPMockEvaluator alloc] initWithResult:number];
-          id viewMock = [OCMockObject partialMockForObject:webView];
+          viewMock = [OCMockObject partialMockForObject:webView];
           [[[viewMock stub] andCall:mockSel onObject:evaluator]
            evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
           actual = [viewMock calabashStringByEvaluatingJavaScript:@""];
@@ -235,7 +240,7 @@ describe(@"WKWebView+LPWebView", ^{
           NSInteger val = -44;
           NSNumber *number = @(val);
           evaluator = [[LPMockEvaluator alloc] initWithResult:number];
-          id viewMock = [OCMockObject partialMockForObject:webView];
+          viewMock = [OCMockObject partialMockForObject:webView];
           [[[viewMock stub] andCall:mockSel onObject:evaluator]
            evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
           NSString *actual = [viewMock calabashStringByEvaluatingJavaScript:@""];
@@ -246,16 +251,14 @@ describe(@"WKWebView+LPWebView", ^{
       it(@"returns description if all else fails", ^{
         UIColor *color = [UIColor whiteColor];
         evaluator = [[LPMockEvaluator alloc] initWithResult:color];
-        id viewMock = [OCMockObject partialMockForObject:webView];
+        viewMock = [OCMockObject partialMockForObject:webView];
         [[[viewMock stub] andCall:mockSel onObject:evaluator]
          evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
         NSString *actual = [viewMock calabashStringByEvaluatingJavaScript:@""];
-        NSLog(@"actual = %@", actual);
         NSUInteger idx = [actual rangeOfString:@"UIDeviceWhiteColorSpace"].location;
         expect(idx).notTo.equal(NSNotFound);
       });
     });
-
 
     describe(@"can eval actual JavaScript", ^{
       it(@"returns string for numbers", ^{
@@ -265,7 +268,6 @@ describe(@"WKWebView+LPWebView", ^{
         actual = [webView calabashStringByEvaluatingJavaScript:@"new Number(4)"];
         expect(actual).to.equal(@"{}");
       });
-
 
       it(@"returns string for string concat", ^{
         NSString *javascript = @"eval(\"'a' + 'b'\")";
@@ -279,10 +281,6 @@ describe(@"WKWebView+LPWebView", ^{
 
         actual = [webView calabashStringByEvaluatingJavaScript:javascript];
         expect(actual).to.equal(expected);
-        javascript = @"new Array('a', 'b', 1)";
-
-        actual = [webView calabashStringByEvaluatingJavaScript:javascript];
-        javascript = @"new Array('a', 'b', 1)";
       });
 
       it(@"returns JSON representation of associate arrays", ^{
