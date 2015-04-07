@@ -14,9 +14,35 @@ SpecBegin(LPSetTextOperation)
 
 describe(@"LPSetTextOperation", ^{
 
-  describe(@"performWithTarget:error:", ^{
-    describe(@"target represents a WebView; it is a dictionary", ^{
+  __block LPSetTextOperation *operation;
+  __block NSDictionary *dictionary;
 
+  describe(@"performWithTarget:error:", ^{
+
+    describe(@"returns nil when invalid arguments", ^{
+      __block id target;
+
+      before(^{
+        target = [NSObject new];
+      });
+
+      it(@"arguments are nil", ^{
+        dictionary = @{@"method_name" : @"setText"};
+        operation = [[LPSetTextOperation alloc] initWithOperation:dictionary];
+        id result = [operation performWithTarget:target error:nil];
+        expect(result).to.equal(nil);
+      });
+
+      it(@"arguments does not have at least 1 value", ^{
+        dictionary = @{@"method_name" : @"setText",
+                       @"arguments": @[]};
+        operation = [[LPSetTextOperation alloc] initWithOperation:dictionary];
+        id result = [operation performWithTarget:target error:nil];
+        expect(result).to.equal(nil);
+      });
+    });
+
+    describe(@"target represents a WebView; it is a dictionary", ^{
       describe(@"dict has invalid keys", ^{
 
       });
@@ -28,8 +54,6 @@ describe(@"LPSetTextOperation", ^{
 
     describe(@"target responds to setText", ^{
 
-      __block LPSetTextOperation *operation;
-      __block NSDictionary *dictionary;
       __block UITextField *textField;
 
       before(^{
@@ -55,30 +79,16 @@ describe(@"LPSetTextOperation", ^{
           expect(textField.text).to.equal(@"5");
         });
       });
-
-      describe(@"does not have correct arguments", ^{
-        it(@"missing argument key", ^{
-          dictionary = @{@"method_name" : @"setText"};
-          operation = [[LPSetTextOperation alloc] initWithOperation:dictionary];
-          id result = [operation performWithTarget:textField error:nil];
-          expect(result).to.equal(nil);
-        });
-
-        it(@"argument does not have at least 1 value", ^{
-          dictionary = @{@"method_name" : @"setText",
-                         @"arguments": @[]};
-          operation = [[LPSetTextOperation alloc] initWithOperation:dictionary];
-          id result = [operation performWithTarget:textField error:nil];
-          expect(result).to.equal(nil);
-        });
-      });
     });
 
     it(@"target does not respond to setText", ^{
+      dictionary = @{@"method_name" : @"setText",
+                     @"arguments": @[@"new text"]};
+      operation = [[LPSetTextOperation alloc] init];
       UISlider *slider = [[UISlider alloc] initWithFrame:CGRectZero];
-      LPSetTextOperation *op = [[LPSetTextOperation alloc] init];
-      expect([op performWithTarget:slider error:nil]).to.equal(nil);
+      expect([operation performWithTarget:slider error:nil]).to.equal(nil);
     });
   });
 });
+
 SpecEnd

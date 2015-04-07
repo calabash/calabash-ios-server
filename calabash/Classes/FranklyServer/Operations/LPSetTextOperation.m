@@ -16,32 +16,30 @@
 
 - (id) performWithTarget:(id) target error:(NSError **) error {
   id result = nil;
-  if ([target isKindOfClass:[NSDictionary class]]) {
+  if (!_arguments || [_arguments count] == 0) {
+    NSLog(@"Missing the 'text' argument @ index 0 of arguments; nothing to do - returning nil");
+    result = nil;
+  } else if ([target isKindOfClass:[NSDictionary class]]) {
     NSMutableDictionary *mdict = [NSMutableDictionary dictionaryWithDictionary:target];
     [mdict removeObjectForKey:@"html"];
 
     UIWebView *webView = [mdict valueForKey:@"webView"];
     NSString *json = [LPJSONUtils serializeDictionary:mdict];
     NSLog(@"script: %@", [NSString stringWithFormat:LP_SET_TEXT_JS, json,
-                                                    [_arguments objectAtIndex:0]]);
+                          [_arguments objectAtIndex:0]]);
     NSString *res = [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:LP_SET_TEXT_JS,
-                                                                                               json]];
+                                                                     json]];
     NSLog(@"RESULT: %@", res);
   } else if ([target respondsToSelector:@selector(setText:)]) {
-    if (!_arguments || [_arguments count] == 0) {
-      NSLog(@"Missing the 'text' argument; nothing to do - returning nil");
-      result = nil;
+    NSString *txt = nil;
+    id argument = [_arguments objectAtIndex:0];
+    if ([argument isKindOfClass:[NSString class]]) {
+      txt = argument;
     } else {
-      NSString *txt = nil;
-      id argument = [_arguments objectAtIndex:0];
-      if ([argument isKindOfClass:[NSString class]]) {
-        txt = argument;
-      } else {
-        txt = [argument description];
-      }
-      [target performSelector:@selector(setText:) withObject:txt];
-      result = target;
+      txt = [argument description];
     }
+    [target performSelector:@selector(setText:) withObject:txt];
+    result = target;
   }
   return result;
 }
