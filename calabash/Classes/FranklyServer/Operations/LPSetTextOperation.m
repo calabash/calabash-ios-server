@@ -35,11 +35,8 @@
         result = nil;
       } else {
         NSString *json = [LPJSONUtils serializeDictionary:mdict];
-        NSLog(@"script: %@", [NSString stringWithFormat:LP_SET_TEXT_JS, json,
-                              [_arguments objectAtIndex:0]]);
         NSString *res = [webViewValue stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:LP_SET_TEXT_JS,
                                                                               json]];
-        NSLog(@"RESULT: %@", res);
       }
     }
   } else if ([target respondsToSelector:@selector(setText:)]) {
