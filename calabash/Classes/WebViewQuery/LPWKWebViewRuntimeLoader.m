@@ -53,9 +53,8 @@ static NSString *LPWKWebViewStringWithArrayIMP(id self, SEL _cmd,
 
 static NSString *LPWKWebViewCalabashStringByEvaluatingJavaScriptIMP(id self,
                                                                     SEL _cmd,
-                                                                    NSString
-                                                                    *javascript) {
-  __block id javascriptResult = nil;
+                                                                    NSString *javascript) {
+  __block id objectFromBlock = nil;
   __block BOOL finish = NO;
 
   void (^completionHandler)(id result, NSError *error) = ^void(id result, NSError *error) {
@@ -68,9 +67,9 @@ static NSString *LPWKWebViewCalabashStringByEvaluatingJavaScriptIMP(id self,
         @"error" : localizedDescription ? localizedDescription : [NSNull null],
         @"javascript" : javascript ? javascript : [NSNull null]
         };
-      javascriptResult = [[LPJSONUtils serializeDictionary:errorDict] copy];
+      objectFromBlock = [[LPJSONUtils serializeDictionary:errorDict] copy];
     } else {
-      javascriptResult = [result copy];
+      objectFromBlock = [result copy];
     }
     finish = YES;
   };
@@ -94,36 +93,36 @@ static NSString *LPWKWebViewCalabashStringByEvaluatingJavaScriptIMP(id self,
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
   }
 
-  NSLog(@"JavaScript result = %@", javascriptResult);
+  NSLog(@"JavaScript result = %@", objectFromBlock);
 
   NSString *returnValue = nil;
-  javascriptResult = [javascriptResult copy];
+  objectFromBlock = [objectFromBlock copy];
 
-  if (!javascriptResult || javascriptResult == [NSNull null]) {
+  if (!objectFromBlock || objectFromBlock == [NSNull null]) {
     returnValue = @"";
-  } else if ([javascriptResult isKindOfClass:[NSString class]]) {
-    returnValue = javascriptResult;
-  } else if ([javascriptResult isKindOfClass:[NSDate class]]) {
+  } else if ([objectFromBlock isKindOfClass:[NSString class]]) {
+    returnValue = objectFromBlock;
+  } else if ([objectFromBlock isKindOfClass:[NSDate class]]) {
     SEL selector = NSSelectorFromString(@"lpStringWithDate:");
     returnValue = [LPWKWebViewMethodInvoker stringByInvokingSelector:selector
                                                               target:self
-                                                            argument:javascriptResult];
-  } else if ([javascriptResult isKindOfClass:[NSDictionary class]]) {
+                                                            argument:objectFromBlock];
+  } else if ([objectFromBlock isKindOfClass:[NSDictionary class]]) {
     SEL selector = NSSelectorFromString(@"lpStringWithDictionary:");
     returnValue = [LPWKWebViewMethodInvoker stringByInvokingSelector:selector
                                                               target:self
-                                                            argument:javascriptResult];
-  } else if ([javascriptResult isKindOfClass:[NSArray class]]) {
+                                                            argument:objectFromBlock];
+  } else if ([objectFromBlock isKindOfClass:[NSArray class]]) {
     SEL selector = NSSelectorFromString(@"lpStringWithArray:");
     returnValue = [LPWKWebViewMethodInvoker stringByInvokingSelector:selector
                                                               target:self
-                                                            argument:javascriptResult];
+                                                            argument:objectFromBlock];
   } else {
     SEL stringValueSel = @selector(stringValue);
-    if ([javascriptResult respondsToSelector:stringValueSel]) {
-      returnValue = [javascriptResult stringValue];
+    if ([objectFromBlock respondsToSelector:stringValueSel]) {
+      returnValue = [objectFromBlock stringValue];
     } else {
-      returnValue = [javascriptResult description];
+      returnValue = [objectFromBlock description];
     }
   }
   return returnValue;
@@ -291,6 +290,7 @@ static NSString *LPWKWebViewCalabashStringByEvaluatingJavaScriptIMP(id self,
 + (NSString *) stringByInvokingSelector:(SEL) selector
                                  target:(id) target
                                argument:(id) argument {
+
   NSMethodSignature *signature;
   signature = [[target class] instanceMethodSignatureForSelector:selector];
 
