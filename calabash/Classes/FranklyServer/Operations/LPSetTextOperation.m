@@ -7,6 +7,7 @@
 
 #import "LPSetTextOperation.h"
 #import "LPJSONUtils.h"
+#import "LPWebViewProtocol.h"
 
 @implementation LPSetTextOperation
 - (NSString *) description {
@@ -23,13 +24,24 @@
     NSMutableDictionary *mdict = [NSMutableDictionary dictionaryWithDictionary:target];
     [mdict removeObjectForKey:@"html"];
 
-    UIWebView *webView = [mdict valueForKey:@"webView"];
-    NSString *json = [LPJSONUtils serializeDictionary:mdict];
-    NSLog(@"script: %@", [NSString stringWithFormat:LP_SET_TEXT_JS, json,
-                          [_arguments objectAtIndex:0]]);
-    NSString *res = [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:LP_SET_TEXT_JS,
-                                                                     json]];
-    NSLog(@"RESULT: %@", res);
+    id webViewValue = [mdict valueForKey:@"webView"];
+    if (!webViewValue) {
+      NSLog(@"Missing value for 'webView' key in target; nothing to do - returning nil");
+      result = nil;
+    } else {
+      if (![webViewValue conformsToProtocol:@protocol(LPWebViewProtocol)]) {
+        NSLog(@"Expected 'webView' => UIView<LPWebViewProtocol>, found %@; nothing to do - returning nil",
+              webViewValue);
+        result = nil;
+      } else {
+        NSString *json = [LPJSONUtils serializeDictionary:mdict];
+        NSLog(@"script: %@", [NSString stringWithFormat:LP_SET_TEXT_JS, json,
+                              [_arguments objectAtIndex:0]]);
+        NSString *res = [webViewValue stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:LP_SET_TEXT_JS,
+                                                                              json]];
+        NSLog(@"RESULT: %@", res);
+      }
+    }
   } else if ([target respondsToSelector:@selector(setText:)]) {
     NSString *txt = nil;
     id argument = [_arguments objectAtIndex:0];

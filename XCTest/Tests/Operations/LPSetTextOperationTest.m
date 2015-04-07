@@ -7,6 +7,7 @@
 @interface LPSetTextOperation (LPXCTEST)
 
 - (NSArray *) arguments;
+- (id) performWithTarget:(id) target error:(NSError *__autoreleasing *)error;
 
 @end
 
@@ -43,11 +44,30 @@ describe(@"LPSetTextOperation", ^{
     });
 
     describe(@"target represents a WebView; it is a dictionary", ^{
-      describe(@"dict has invalid keys", ^{
+      describe(@"representation has invalid keys", ^{
 
+        __block NSDictionary *target;
+
+        before(^{
+          dictionary = @{@"method_name" : @"setText",
+                         @"arguments": @[@"new text"]};
+          operation = [[LPSetTextOperation alloc] initWithOperation:dictionary];
+        });
+
+        it(@"is missing webView key", ^{
+          target = @{};
+          id result = [operation performWithTarget:target error:nil];
+          expect(result).to.equal(nil);
+        });
+
+        it(@"webView value is not a WebView", ^{
+          target = @{@"webView" : [NSObject new]};
+          id result = [operation performWithTarget:target error:nil];
+          expect(result).to.equal(nil);
+        });
       });
 
-      describe(@"dict has valid keys", ^{
+      describe(@"representation has valid keys", ^{
 
       });
     });
