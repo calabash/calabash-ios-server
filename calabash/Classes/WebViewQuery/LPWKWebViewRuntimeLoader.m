@@ -68,9 +68,9 @@ static NSString *LPWKWebViewCalabashStringByEvaluatingJavaScriptIMP(id self,
         @"error" : localizedDescription ? localizedDescription : [NSNull null],
         @"javascript" : javascript ? javascript : [NSNull null]
         };
-      res = [LPJSONUtils serializeDictionary:errorDict];
+      res = [[LPJSONUtils serializeDictionary:errorDict] copy];
     } else {
-      res = result;
+      res = [result copy];
     }
     finish = YES;
   };
