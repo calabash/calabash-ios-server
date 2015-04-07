@@ -65,7 +65,7 @@
 		B11358621981B053004B16F4 /* LPQueryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC514B6DB2B002A744C /* LPQueryOperation.m */; };
 		B11358631981B053004B16F4 /* LPScrollOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC714B6DB2B002A744C /* LPScrollOperation.m */; };
 		B11358641981B053004B16F4 /* LPScrollToRowOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */; };
-		B11358651981B053004B16F4 /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; };
+		B11358651981B053004B16F4 /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B13B7FBF1A31FE560054FFB1 /* LPDumpRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B13B7FBD1A31FE560054FFB1 /* LPDumpRoute.h */; };
 		B13B7FC01A31FE560054FFB1 /* LPDumpRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B7FBE1A31FE560054FFB1 /* LPDumpRoute.m */; };
 		B15369FB1A325E510093923F /* LPUIARouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FD1A22A35A009A2336 /* LPUIARouteOverSharedElement.m */; };
@@ -103,7 +103,7 @@
 		B15BF9B519ABB1DD00B38577 /* LPQueryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC514B6DB2B002A744C /* LPQueryOperation.m */; };
 		B15BF9B619ABB1DD00B38577 /* LPScrollOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC714B6DB2B002A744C /* LPScrollOperation.m */; };
 		B15BF9B719ABB1DD00B38577 /* LPScrollToRowOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */; };
-		B15BF9B819ABB1DD00B38577 /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; };
+		B15BF9B819ABB1DD00B38577 /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9B919ABB1DD00B38577 /* LPRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8714B6DBAC002A744C /* LPRecorder.m */; };
 		B15BF9BA19ABB1DD00B38577 /* LPUIARouteOverUserPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CA15C06CB500BBE2BE /* LPUIARouteOverUserPrefs.m */; };
 		B15BF9BB19ABB1DD00B38577 /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; };
@@ -182,7 +182,7 @@
 		B15BFA0719ABB2B100B38577 /* LPQueryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC514B6DB2B002A744C /* LPQueryOperation.m */; };
 		B15BFA0819ABB2B100B38577 /* LPScrollOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC714B6DB2B002A744C /* LPScrollOperation.m */; };
 		B15BFA0919ABB2B100B38577 /* LPScrollToRowOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */; };
-		B15BFA0A19ABB2B100B38577 /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; };
+		B15BFA0A19ABB2B100B38577 /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BFA0B19ABB2B100B38577 /* LPRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8714B6DBAC002A744C /* LPRecorder.m */; };
 		B15BFA0C19ABB2B100B38577 /* LPUIARouteOverUserPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CA15C06CB500BBE2BE /* LPUIARouteOverUserPrefs.m */; };
 		B15BFA0D19ABB2B100B38577 /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; };
@@ -265,7 +265,7 @@
 		B1D5BD8D19A23BCE0070E8CE /* LPScrollOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC714B6DB2B002A744C /* LPScrollOperation.m */; };
 		B1D5BD8E19A23BCE0070E8CE /* LPUIATapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B164575518FDCE4900CAA25A /* LPUIATapRoute.m */; };
 		B1D5BD8F19A23BCE0070E8CE /* LPScrollToRowOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */; };
-		B1D5BD9019A23BCE0070E8CE /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; };
+		B1D5BD9019A23BCE0070E8CE /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BD9119A23BCE0070E8CE /* LPUIAUserPrefsChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F279AE183D5B3000A922BC /* LPUIAUserPrefsChannel.m */; };
 		B1D5BD9219A23BCE0070E8CE /* LPRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8714B6DBAC002A744C /* LPRecorder.m */; };
 		B1D5BD9319A23BCE0070E8CE /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
@@ -398,7 +398,7 @@
 		F5091BEF18C4E1D700C85307 /* LPQueryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC514B6DB2B002A744C /* LPQueryOperation.m */; };
 		F5091BF018C4E1D700C85307 /* LPScrollOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC714B6DB2B002A744C /* LPScrollOperation.m */; };
 		F5091BF118C4E1D700C85307 /* LPScrollToRowOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */; };
-		F5091BF218C4E1D700C85307 /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; };
+		F5091BF218C4E1D700C85307 /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091BF318C4E1D700C85307 /* LPUIAUserPrefsChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F279AE183D5B3000A922BC /* LPUIAUserPrefsChannel.m */; };
 		F5091BF418C4E1D700C85307 /* LPRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8714B6DBAC002A744C /* LPRecorder.m */; };
 		F5091BF518C4E1D700C85307 /* LPUIARouteOverUserPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CA15C06CB500BBE2BE /* LPUIARouteOverUserPrefs.m */; };
@@ -485,7 +485,7 @@
 		F50CBF981A04058C004AC9DA /* LPQueryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC514B6DB2B002A744C /* LPQueryOperation.m */; };
 		F50CBF991A04058C004AC9DA /* LPScrollOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC714B6DB2B002A744C /* LPScrollOperation.m */; };
 		F50CBF9A1A04058C004AC9DA /* LPScrollToRowOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */; };
-		F50CBF9B1A04058C004AC9DA /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; };
+		F50CBF9B1A04058C004AC9DA /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBF9C1A04058C004AC9DA /* LPRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8714B6DBAC002A744C /* LPRecorder.m */; };
 		F50CBF9D1A040599004AC9DA /* LPScrollToMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A718B392370094E71E /* LPScrollToMarkOperation.m */; };
 		F50CBF9E1A040599004AC9DA /* LPScrollToRowWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */; };
@@ -625,7 +625,7 @@
 		F5821A0D18C4E27400293508 /* LPQueryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC514B6DB2B002A744C /* LPQueryOperation.m */; };
 		F5821A0E18C4E27400293508 /* LPScrollOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC714B6DB2B002A744C /* LPScrollOperation.m */; };
 		F5821A0F18C4E27400293508 /* LPScrollToRowOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */; };
-		F5821A1018C4E27400293508 /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; };
+		F5821A1018C4E27400293508 /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5821A1118C4E27400293508 /* LPUIAUserPrefsChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F279AE183D5B3000A922BC /* LPUIAUserPrefsChannel.m */; };
 		F5821A1218C4E27400293508 /* LPRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8714B6DBAC002A744C /* LPRecorder.m */; };
 		F5821A1318C4E27400293508 /* LPUIARouteOverUserPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CA15C06CB500BBE2BE /* LPUIARouteOverUserPrefs.m */; };
