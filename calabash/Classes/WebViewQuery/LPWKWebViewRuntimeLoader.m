@@ -93,8 +93,6 @@ static NSString *LPWKWebViewCalabashStringByEvaluatingJavaScriptIMP(id self,
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
   }
 
-  NSLog(@"JavaScript result = %@", objectFromBlock);
-
   NSString *returnValue = nil;
   objectFromBlock = [objectFromBlock copy];
 
