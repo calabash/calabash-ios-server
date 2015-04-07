@@ -22,6 +22,34 @@ describe(@"LPSetTextOperation", ^{
 
     describe(@"target responds to setText", ^{
 
+      __block LPSetTextOperation *operation;
+      __block NSDictionary *dictionary;
+
+      describe(@"has correct arguments", ^{
+        it(@"argument is an NSString", ^{
+          dictionary = @{@"method_name" : @"setText",
+                         @"arguments": @[@"new text"]};
+          operation = [[LPSetTextOperation alloc] initWithOperation:dictionary];
+          UITextField *textField = [[UITextField alloc] initWithFrame:CGRectZero];
+          id result = [operation performWithTarget:textField error:nil];
+          expect(result).to.equal(textField);
+          expect(textField.text).to.equal(@"new text");
+        });
+
+        it(@"argument is not an NSString", ^{
+          dictionary = @{@"method_name" : @"setText",
+                         @"arguments": @[@(5)]};
+          operation = [[LPSetTextOperation alloc] initWithOperation:dictionary];
+          UITextField *textField = [[UITextField alloc] initWithFrame:CGRectZero];
+          id result = [operation performWithTarget:textField error:nil];
+          expect(result).to.equal(textField);
+          expect(textField.text).to.equal(@"5");
+        });
+      });
+
+      it(@"does not have correct arguments", ^{
+
+      });
     });
 
     it(@"target does not respond to setText", ^{
