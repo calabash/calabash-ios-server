@@ -281,7 +281,6 @@ describe(@"WKWebView+LPWebView", ^{
 
         actual = [webView calabashStringByEvaluatingJavaScript:javascript];
         expect(actual).to.equal(expected);
-        javascript = @"new Array('a', 'b', 1)";
       });
 
       it(@"returns JSON representation of associate arrays", ^{
