@@ -15,6 +15,7 @@
 
 
 - (id) performWithTarget:(id) target error:(NSError **) error {
+  id result = nil;
   if ([target isKindOfClass:[NSDictionary class]]) {
     NSMutableDictionary *mdict = [NSMutableDictionary dictionaryWithDictionary:target];
     [mdict removeObjectForKey:@"html"];
@@ -29,7 +30,7 @@
   } else if ([target respondsToSelector:@selector(setText:)]) {
     if (!_arguments || [_arguments count] == 0) {
       NSLog(@"Missing the 'text' argument; nothing to do - returning nil");
-      return nil;
+      result = nil;
     } else {
       NSString *txt = nil;
       id argument = [_arguments objectAtIndex:0];
@@ -39,10 +40,10 @@
         txt = [argument description];
       }
       [target performSelector:@selector(setText:) withObject:txt];
-      return target;
+      result = target;
     }
   }
-  return nil;
+  return result;
 }
 
 @end
