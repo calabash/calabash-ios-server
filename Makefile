@@ -31,10 +31,23 @@ dylibs:
 	scripts/make-calabash-dylib.rb device
 	scripts/make-libraries.rb verify-dylibs
 
+dylib_sim:
+	rm -rf build
+	rm -rf calabash-dylibs
+	scripts/make-calabash-dylib.rb sim
+	scripts/make-libraries.rb verify-sim-dylib
+
 install_test_binaries:
+	$(MAKE) framework
 	$(MAKE) dylibs
 	./scripts/install-test-binaries.rb
 
 webquery_headers:
 	scripts/insert-js-into-webquery-headers.rb
+
+test_app:
+	scripts/make-lp-test-app.rb
+
+xct:
+	scripts/test/xctest.rb
 

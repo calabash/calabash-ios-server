@@ -1957,17 +1957,18 @@ enum LPGCDAsyncSocketConfig
 		[pool drain];
 	};
 	
-	if (dispatch_get_current_queue() == socketQueue)
+  if (dispatch_get_current_queue() == socketQueue) {
 		block();
-	else
+  } else {
 		dispatch_sync(socketQueue, block);
+  }
 	
-	if (result == NO)
-	{
-		if (errPtr)
+	if (result == NO) {
+    if (errPtr) {
 			*errPtr = [err autorelease];
-		else
+    } else {
 			[err release];
+    }
 	}
 	
 	return result;
@@ -3104,10 +3105,11 @@ enum LPGCDAsyncSocketConfig
 		}
 	};
 	
-	if (dispatch_get_current_queue() == socketQueue)
+  if (dispatch_get_current_queue() == socketQueue) {
 		block();
-	else
+  } else {
 		dispatch_sync(socketQueue, block);
+  }
 	
 	return [result autorelease];
 }
@@ -3140,10 +3142,11 @@ enum LPGCDAsyncSocketConfig
 		}
 	};
 	
-	if (dispatch_get_current_queue() == socketQueue)
+  if (dispatch_get_current_queue() == socketQueue) {
 		block();
-	else
+  } else {
 		dispatch_sync(socketQueue, block);
+  }
 	
 	return [result autorelease];
 }

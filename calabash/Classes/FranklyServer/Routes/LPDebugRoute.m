@@ -17,19 +17,24 @@
 
 
 - (NSDictionary *) JSONResponseForMethod:(NSString *) method URI:(NSString *) path data:(NSDictionary *) data {
-  NSDictionary *resultDict = nil;
   if ([method isEqualToString:@"POST"]) {
     NSString *requiredLogLevel = [data valueForKey:@"level"];
     [LPLog setLevelFromString:requiredLogLevel];
-    resultDict = [NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithObject:[LPLog currentLevelString]], @"results",
-                                                            @"SUCCESS", @"outcome",
-                                                            nil];
-    // todo result dictionary is never used in LPDebugRoute
   }
 
-  return [NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithObject:[LPLog currentLevelString]], @"results",
-                                                    @"SUCCESS", @"outcome",
-                                                    nil];
+  NSString *currentLogLevel = [LPLog currentLevelString];
+  NSArray *resultsArray;
+  if (!currentLogLevel) {
+    resultsArray = @[];
+  } else {
+    resultsArray = @[currentLogLevel];
+  }
+
+  return
+  @{
+    @"results" : resultsArray,
+    @"outcome" : @"SUCCESS"
+    };
 }
 
 @end

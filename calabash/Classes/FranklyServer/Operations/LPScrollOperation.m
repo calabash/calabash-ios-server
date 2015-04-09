@@ -5,6 +5,9 @@
 //
 
 #import "LPScrollOperation.h"
+#import "UIWebView+LPWebView.h"
+#import "UIView+LPIsWebView.h"
+#import "LPWebViewProtocol.h"
 
 @implementation LPScrollOperation
 - (NSString *) description {
@@ -39,8 +42,8 @@
     }
     
     return _view;
-  } else if ([_view isKindOfClass:[UIWebView class]]) {
-    UIWebView *wv = (UIWebView *) _view;
+  } else if ([_view lpIsWebView]) {
+    UIView<LPWebViewProtocol> *webView = (UIView<LPWebViewProtocol> *)_view;
     NSString *scrollJS = @"window.scrollBy(%@,%@);";
     if ([@"up" isEqualToString:dir]) {
       scrollJS = [NSString stringWithFormat:scrollJS, @"0", @"-100"];
@@ -51,7 +54,7 @@
     } else if ([@"right" isEqualToString:dir]) {
       scrollJS = [NSString stringWithFormat:scrollJS, @"100", @"0"];
     }
-    NSString *res = [wv stringByEvaluatingJavaScriptFromString:scrollJS];
+    NSString *res = [webView calabashStringByEvaluatingJavaScript:scrollJS];
     NSLog(@"RES:%@", res);
     return _view;
   }

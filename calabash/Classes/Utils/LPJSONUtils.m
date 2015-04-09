@@ -1,3 +1,6 @@
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
 //
 //  LPJSONUtils.m
 //  Created by Karl Krukow on 11/08/11.
@@ -44,7 +47,7 @@
   }
   NSString *res = [[NSString alloc] initWithBytes:[d bytes] length:[d length]
                                          encoding:NSUTF8StringEncoding];
-  return [res autorelease];
+  return res;
 }
 
 + (NSDictionary *) deserializeDictionary:(NSString *) string {
@@ -67,7 +70,7 @@
   }
   NSString *res = [[NSString alloc] initWithBytes:[d bytes] length:[d length]
                                          encoding:NSUTF8StringEncoding];
-  return [res autorelease];
+  return res;
 }
 
 
@@ -92,7 +95,7 @@
   }
   NSString *res = [[NSString alloc] initWithBytes:[d bytes] length:[d length]
                                          encoding:NSUTF8StringEncoding];
-  return [res autorelease];
+  return res;
 }
 
 
@@ -442,7 +445,7 @@
   if ((traits & UIAccessibilityTraitHeader)) {
     [traitStrings addObject:@"header"];
   }
-  return [traitStrings autorelease];
+  return traitStrings;
 }
 
 @end

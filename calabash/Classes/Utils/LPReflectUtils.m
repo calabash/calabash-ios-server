@@ -22,8 +22,14 @@
       key = (NSString *) [specArr objectAtIndex:0];
       val = [specArr objectAtIndex:1];
     }
-    [selStr appendFormat:@"%@:", key];
-    [args addObject:val];
+
+    if (!val) {
+      NSLog(@"Expected spec '%@' to an array or dictionary",
+            NSStringFromClass([spec class]));
+      NSLog(@"Appending selStr with '%@' key, but adding NSNull to args", key);
+      [selStr appendFormat:@"%@:", key];
+      [args addObject:[NSNull null]];
+    }
   }
   return NSSelectorFromString(selStr);
 }

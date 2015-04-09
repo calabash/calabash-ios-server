@@ -111,8 +111,7 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
   if ([invoker selectorReturnsObject]) {
     NSInvocation *invocation = invoker.invocation;
 
-    NSUInteger length = [invoker.signature methodReturnLength];
-    void *buffer = (void *) malloc(length);
+    void *buffer;
 
     [invocation invoke];
     [invocation getReturnValue:&buffer];

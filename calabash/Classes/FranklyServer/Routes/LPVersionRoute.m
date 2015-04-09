@@ -1,3 +1,7 @@
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
 //
 //  LPVersionRoute.m
 //  calabash
@@ -79,37 +83,27 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
 }
 
 - (id)handleRequestForPath:(NSArray *)path withConnection:(id)connection {
-  if (![self canHandlePostForPath:path]) {
-    return nil;
-  }
-  NSDictionary *version = [self JSONResponseForMethod:@"GET" URI:@"calabash_version" data:nil];
-  NSData *jsonData = [[LPJSONUtils serializeDictionary:version] dataUsingEncoding:NSUTF8StringEncoding];
+  if (![self canHandlePostForPath:path]) {  return nil;  }
+
+  NSDictionary *version = [self JSONResponseForMethod:@"GET"
+                                                  URI:@"calabash_version"
+                                                 data:nil];
+  NSData *jsonData = [[LPJSONUtils serializeDictionary:version]
+                      dataUsingEncoding:NSUTF8StringEncoding];
   
-  return [[[LPHTTPDataResponse alloc] initWithData:jsonData] autorelease];
-  
+  return [[LPHTTPDataResponse alloc] initWithData:jsonData];
 }
 
+- (NSDictionary *) JSONResponseForMethod:(NSString *) method
+                                     URI:(NSString *) path
+                                    data:(NSDictionary *) data {
 
-- (NSDictionary *) JSONResponseForMethod:(NSString *) method URI:(NSString *) path data:(NSDictionary *) data {
-  NSString *versionString = [[NSBundle mainBundle]
-                             objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
-  if (!versionString) {
-    versionString = @"Unknown";
-  }
-  NSString *idString = [[NSBundle mainBundle]
-                        objectForInfoDictionaryKey:@"CFBundleIdentifier"];
+  LPDevice *device = [LPDevice sharedDevice];
+  NSString *system = [device system];
+  if (!system) { system = @""; }
 
-  if (!idString) { idString = @"Unknown";  }
-
-  NSString *nameString = [[NSBundle mainBundle]
-                          objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-
-  if (!nameString) { nameString = @"Unknown";  }
-
-  struct utsname systemInfo;
-  uname(&systemInfo);
-
-  NSString *machine = @(systemInfo.machine);
+  NSString *formFactor = [device formFactor];
+  if (!formFactor) { formFactor = @""; }
 
   NSDictionary *env = [[NSProcessInfo processInfo] environment];
 
@@ -122,32 +116,41 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
   if (!sim) {  sim = @"";  }
 
   BOOL isIphoneAppEmulated = [self isIPhoneAppEmulatedOnIPad];
-  NSDictionary *git = @{@"revision" : kLPGitShortRevision, @"branch" : kLPGitBranch, @"remote_origin" : kLPGitRemoteOrigin};
 
+  NSDictionary *git =
+  @{
+    @"revision" : kLPGitShortRevision,
+    @"branch" : kLPGitBranch,
+    @"remote_origin" : kLPGitRemoteOrigin
+    };
 
-  NSString *calabashVersion = [kLPCALABASHVERSION componentsSeparatedByString:@" "].lastObject;
+  NSArray *versionTokens = [kLPCALABASHVERSION componentsSeparatedByString:@" "];
+  NSString *calabashVersion = [versionTokens lastObject];
+  if (!calabashVersion) { calabashVersion = @""; }
 
   LPInfoPlist *infoPlist = [LPInfoPlist new];
-  NSNumber *serverPort = @([infoPlist serverPort]);
-  [infoPlist release];
 
+  return
 
-  NSDictionary *res = @{@"version": calabashVersion,
-                        @"app_id": idString,
-                        @"iOS_version": [[UIDevice currentDevice]
-                                         systemVersion],
-                        @"app_name": nameString,
-                        @"screen_dimensions": [[LPDevice sharedDevice] screenDimensions],
-                        @"system": machine,
-                        @"4inch": @(is4inDevice),
-                        @"simulator_device": dev,
-                        @"simulator": sim,
-                        @"app_version": versionString,
-                        @"outcome": @"SUCCESS",
-                        @"iphone_app_emulated_on_ipad": @(isIphoneAppEmulated),
-                        @"git": git,
-                        @"server_port" : serverPort};
-  return res;
+  @{
+
+    @"version": calabashVersion,
+    @"app_id": [infoPlist stringForIdentifier],
+    @"iOS_version": [[UIDevice currentDevice] systemVersion],
+    @"app_name": [infoPlist stringForDisplayName],
+    @"screen_dimensions": [[LPDevice sharedDevice] screenDimensions],
+    @"system": system,
+    @"4inch": @(is4inDevice),
+    @"simulator_device": dev,
+    @"simulator": sim,
+    @"app_version": [infoPlist stringForVersion],
+    @"outcome": @"SUCCESS",
+    @"iphone_app_emulated_on_ipad": @(isIphoneAppEmulated),
+    @"git": git,
+    @"server_port" : @([infoPlist serverPort]),
+    @"app_base_sdk" : [infoPlist stringForDTSDKName],
+    @"form_factor" : formFactor
+    };
 }
 
 

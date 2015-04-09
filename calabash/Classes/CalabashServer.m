@@ -30,6 +30,8 @@
 #import "LPDumpRoute.h"
 #import <dlfcn.h>
 #import "LPInfoPlist.h"
+#import "LPPluginLoader.h"
+#import "LPWKWebViewRuntimeLoader.h"
 
 @interface CalabashServer ()
 - (void) start;
@@ -43,6 +45,12 @@
   [server start];
 
   dlopen([@"/Developer/Library/PrivateFrameworks/UIAutomation.framework/UIAutomation" fileSystemRepresentation], RTLD_LOCAL);
+
+  LPPluginLoader *loader = [LPPluginLoader new];
+  [loader loadCalabashPlugins];
+  [loader release];
+
+  [[LPWKWebViewRuntimeLoader shared] loadImplementation];
 }
 
 
@@ -137,44 +145,35 @@
     [LPRouter addRoute:dumpRoute forPath:@"dump"];
     [dumpRoute release];
 
-
-
-
-    //
-    //        LPScreencastRoute *scr = [LPScreencastRoute new];
-    //        [LPRouter addRoute:scr forPath:@"/screencast"];
-    //        [scr release];
-    //
-
     _httpServer = [[[LPHTTPServer alloc] init] retain];
 
     [_httpServer setName:@"Calabash Server"];
     [_httpServer setType:@"_http._tcp."];
-
-    // Advertise this device's capabilities to our listeners inside of the TXT record
-    NSDictionary *info = [[NSBundle mainBundle] infoDictionary];
-    NSMutableDictionary *capabilities = [[NSMutableDictionary alloc]
-                                         initWithObjectsAndKeys:[[UIDevice currentDevice] name], @"name",
-                                         [[UIDevice currentDevice] model], @"model",
-                                         [[UIDevice currentDevice]
-                                          systemVersion], @"os_version",
-                                         [info objectForKey:@"CFBundleDisplayName"], @"app",
-                                         [info objectForKey:@"CFBundleIdentifier"], @"app_id",
-                                         [info objectForKey:@"CFBundleVersion"], @"app_version",
-                                         nil];
+    [_httpServer setConnectionClass:[LPRouter class]];
 
     LPInfoPlist *infoPlist = [LPInfoPlist new];
     [_httpServer setPort:[infoPlist serverPort]];
-    [infoPlist release];
+
+    // Advertise this device's capabilities to our listeners inside of the TXT record
+    UIDevice *device = [UIDevice currentDevice];
+    NSDictionary *capabilities =
+    @{
+      @"name" : [device name],
+      @"os_version" : [device systemVersion],
+      @"app" : [infoPlist stringForDisplayName],
+      @"app_id" : [infoPlist stringForIdentifier],
+      @"app_version" : [infoPlist stringForVersion],
+      };
 
     [_httpServer setTXTRecordDictionary:capabilities];
-    [_httpServer setConnectionClass:[LPRouter class]];
-    [capabilities release];
-    // Serve files from our embedded Web folder
-    //        NSString *webPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Web"];
-    //        [_httpServer setDocumentRoot:webPath];
+
     NSLog(@"Creating the server: %@", _httpServer);
     NSLog(@"Calabash iOS server version: %@", kLPCALABASHVERSION);
+
+    NSString *dtSdkName = [infoPlist stringForDTSDKName];
+    NSLog(@"App Base SDK: %@", dtSdkName);
+
+    [infoPlist release];
   }
   return self;
 }
@@ -235,7 +234,6 @@
 
   [autoreleasePool drain];
 }
-
 
 - (void) dealloc {
   [_httpServer release];

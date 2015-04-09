@@ -7,6 +7,7 @@
 #import "UIScriptASTWith.h"
 #import "LPWebQuery.h"
 #import "LPReflectUtils.h"
+#import "LPWebQuery.h"
 
 @implementation UIScriptASTWith
 @synthesize selectorName = _selectorName;
@@ -75,7 +76,7 @@
 }
 
 
-- (NSArray *) handleWebView:(UIWebView *) webView visibility:(UIScriptASTVisibilityType) visibility {
+- (NSArray *) handleWebView:(UIView<LPWebViewProtocol> *) webView visibility:(UIScriptASTVisibilityType) visibility {
   if (!self.selectorName) {
     NSLog(@"WebView only supports css/xpath selectors");
     return [NSMutableArray array];
@@ -91,9 +92,10 @@
       type = LPWebQueryTypeCSS;
     }
 
-    return [LPWebQuery arrayByEvaluatingQuery:(NSString *) self.objectValue type:type
-                           webView:webView
-                    includeInvisible:visibility == UIScriptASTVisibilityTypeAll];
+    return [LPWebQuery arrayByEvaluatingQuery:(NSString *) self.objectValue
+                                         type:type
+                                      webView:webView
+                             includeInvisible:visibility == UIScriptASTVisibilityTypeAll];
   } else {
     NSLog(@"Attempting to look for non string in web view");
     return [NSMutableArray array];
@@ -113,8 +115,8 @@
         [res addObject:dict];
       }
     } else {
-      if ([v isKindOfClass:[UIWebView class]]) {
-        [res addObjectsFromArray:[self handleWebView:(UIWebView *) v
+      if ([v lpIsWebView]) {
+        [res addObjectsFromArray:[self handleWebView:(UIView<LPWebViewProtocol> *) v
                                           visibility:visibility]];
         continue;
       }

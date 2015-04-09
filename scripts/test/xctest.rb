@@ -20,7 +20,7 @@ args =
             '-SYMROOT=build',
             '-derivedDataPath build',
             '-project calabash.xcodeproj',
-            '-scheme calabash-ios-server-tests',
+            '-scheme XCTest',
             "-destination 'platform=iOS Simulator,name=#{target_simulator_name},OS=latest'",
             '-sdk iphonesimulator',
             '-configuration Debug',
@@ -42,21 +42,30 @@ Dir.chdir(working_dir) do
     RunLoop::SimControl.terminate_all_sims
   end
 
+  class XCTestFailedError < StandardError
+
+  end
+
   options =
         {
               :tries => travis_ci? ? 3 : 1,
-              :base_interval => 5,
               :on_retry => on_retry
         }
 
   Retriable.retriable(options) do
     exit_code = do_system(cmd,
                           {:pass_msg => 'XCTests passed',
-                           :fail_msg => 'XCTests failed'})
-    unless exit_code == 0
-      # Hunting for the exit code that indicates the simulator failed to launch.
-      log_fail "XCTest exited '#{exit_code}'"
-      raise RuntimeError, 'XCTest failed.'
+                           :fail_msg => 'XCTests failed',
+                           :exit_on_nonzero_status => false})
+    # Not sure if '65' is a magic number that will _always_ indicate that tests
+    # have failed.  If we exited non-zero and the exit code does not indicate
+    # tests have failed, we assume XCTest failed to launch the simulator. What
+    # are you going to do?
+    if exit_code != 0 && exit_code != 65
+      log_fail "XCTest exited '#{exit_code}' because it could not launch the simulator; will retry."
+      raise XCTestFailedError, 'XCTest failed.'
+    else
+      exit(exit_code)
     end
   end
 end

@@ -6,6 +6,8 @@ build
 calabash.framework
 libFrankCalabash.a
 calabash-dylibs
+*.app
+*.ipa
 
 !scripts/test/build
 
@@ -13,7 +15,13 @@ calabash-dylibs
 .idea
 
 # CI pulls down these two repos from github
-animated-happiness
+ios-smoke-test-app
 calabash-ios
 
 .ruby-version
+
+.env
+.irb-history
+.irbrc
+Gemfile.lock
+

@@ -9,8 +9,17 @@
 #import <Foundation/Foundation.h>
 
 @interface LPDevice : NSObject
+
+@property(strong, nonatomic, readonly) NSDictionary *screenDimensions;
+@property(assign, nonatomic, readonly) CGFloat sampleFactor;
+@property(copy, nonatomic, readonly) NSString *system;
+@property(copy, nonatomic, readonly) NSString *model;
+@property(copy, nonatomic, readonly) NSString *formFactor;
+
 + (LPDevice *) sharedDevice;
 
-- (NSDictionary*) screenDimensions;
--(CGFloat)sampleFactor;
+- (BOOL) simulator;
+- (BOOL) iPhone6;
+- (BOOL) iPhone6Plus;
+
 @end

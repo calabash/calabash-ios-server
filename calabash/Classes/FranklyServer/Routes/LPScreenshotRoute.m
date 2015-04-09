@@ -1,3 +1,7 @@
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
 //
 //  ScreenshotRoute.m
 //  Created by Karl Krukow on 13/08/11.
@@ -8,37 +12,28 @@
 #import "LPHTTPDataResponse.h"
 #import "LPTouchUtils.h"
 
+@interface LPScreenshotRoute ()
 
-// UIGetScreenImage violates t
+- (NSData *) takeScreenshot;
+
+@end
+
 @implementation LPScreenshotRoute
 
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
   return [method isEqualToString:@"GET"];
 }
 
-
 - (NSObject <LPHTTPResponse> *) httpResponseForMethod:(NSString *) method URI:(NSString *) path {
   LPHTTPDataResponse *drsp = [[LPHTTPDataResponse alloc]
-          initWithData:[self takeScreenshot]];
-  return [drsp autorelease];
+                              initWithData:[self takeScreenshot]];
+  return drsp;
 }
 
-
 - (NSData *) takeScreenshot {
-  // Create a graphics context with the target size
-  // On iOS 4 and later, use UIGraphicsBeginImageContextWithOptions to take the scale into consideration
-  // On iOS prior to 4, fall back to use UIGraphicsBeginImageContext
 
-  // todo - this can be refactored becase we no longer support iOS 4
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wunreachable-code"
   CGSize imageSize = [[UIScreen mainScreen] bounds].size;
-  if (NULL != UIGraphicsBeginImageContextWithOptions) {
-    UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
-  } else {
-    UIGraphicsBeginImageContext(imageSize);
-  }
-#pragma clang diagnostic pop
+  UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
 
   CGContextRef context = UIGraphicsGetCurrentContext();
 
@@ -54,8 +49,8 @@
       CGContextConcatCTM(context, [window transform]);
       // Offset by the portion of the bounds left of and above the anchor point
       CGContextTranslateCTM(context,
-              -[window bounds].size.width * [[window layer] anchorPoint].x,
-              -[window bounds].size.height * [[window layer] anchorPoint].y);
+                            -[window bounds].size.width * [[window layer] anchorPoint].x,
+                            -[window bounds].size.height * [[window layer] anchorPoint].y);
 
       // Render the layer hierarchy to the current context
       [[window layer] renderInContext:context];
@@ -70,18 +65,7 @@
 
   UIGraphicsEndImageContext();
 
-
-//    NSString* appID = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
-//    static NSDateFormatter *fm = nil;
-//    if (!fm) {
-//        fm=[[NSDateFormatter alloc] init];
-//        [fm setDateFormat:@"ddMM'-'HH':'mm':'SSSS"];
-//    }
-//    NSString* timestamp = [fm stringFromDate:[NSDate date]];
-//    NSString* tempFile = [NSString stringWithFormat:@"%@screenshot_%@_%@.png",tempDir,appID,timestamp,nil];
-
   return UIImagePNGRepresentation(image);
 }
-
 
 @end
