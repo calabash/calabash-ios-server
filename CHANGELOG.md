@@ -1,5 +1,6 @@
 ### 0.14.0
 
+* Handle case where DOCUMENT\_NODE has empty rect #148
 * add setText: support for WKWebView #146
 * fix setText: support for UIWebView #146
 * Create WKWebView ObjC category at runtime #145
