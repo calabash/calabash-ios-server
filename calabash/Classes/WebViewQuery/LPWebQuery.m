@@ -118,6 +118,10 @@
 
   for (NSDictionary *domChild in domElement[@"children"]) {
     NSDictionary *rectAsDict = domChild[@"rect"];
+    if ([rectAsDict isKindOfClass:[NSNull class]]) {
+      continue;
+    }
+
     CGRect domChildRect = CGRectMake([rectAsDict[@"left"] floatValue],
                                      [rectAsDict[@"top"] floatValue],
                                      [rectAsDict[@"width"] floatValue],
@@ -127,7 +131,6 @@
                                        domChildRect.origin.y + webViewPageOffset.y,
                                        domChildRect.size.width,
                                        domChildRect.size.height);
-
 
     CGRect translatedRect = [LPTouchUtils translateRect:domChildBounds inView:webView.scrollView];
 
