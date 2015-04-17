@@ -11,6 +11,7 @@
 
 #define kLPConditionRouteNoNetworkIndicator @"NO_NETWORK_INDICATOR"
 #define kLPConditionRouteNoneAnimating @"NONE_ANIMATING"
+#define kLPConditionRouteAnimationDurationLimit 0.01
 
 
 @implementation LPConditionRoute
@@ -90,9 +91,15 @@
       for (id v in result) {
         if ([v isKindOfClass:[UIView class]]) {
           UIView *view = (UIView *) v;
-          if ([[view.layer animationKeys] count] > 0) {
-            self.stablePeriodCount = 0;
-            return;
+          NSArray *animationKeys = [[view.layer animationKeys] copy];
+          for (NSString *key in animationKeys) {
+            CAAnimation *animation = [view.layer animationForKey:key];
+            // Only consider animations with a duration greater than the defined limit. This is intended to work
+            // around the parallax animation attached to all UIAlertViewControllers
+            if (animation.duration > kLPConditionRouteAnimationDurationLimit) {
+              self.stablePeriodCount = 0;
+              return;
+            }
           }
         }
       }
