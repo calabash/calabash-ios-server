@@ -710,6 +710,25 @@
   XCTAssertEqual([dict count], 10);
 }
 
+- (void) testJsonifyViewWithInfCoords {
+  CGRect frame = CGRectMake(-INFINITY, INFINITY, CGFLOAT_MAX, CGFLOAT_MIN);
+  UIWindow *fakewindow = [UIWindow new];
+  UIView *view = [[UIView alloc] initWithFrame:frame];
+  [fakewindow addSubview:view];
+  NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
+
+  XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGFLOAT_MIN));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGFLOAT_MAX));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGFLOAT_MAX));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGFLOAT_MIN));
+
+
+  XCTAssertEqualObjects(dict[@"visible"], @(0));
+
+}
+
+
 #pragma mark - insertHitPointIntoMutableDictionary:
 
 - (void) testInsertHitPointIntoMutableDictionaryArgNotMutable {
