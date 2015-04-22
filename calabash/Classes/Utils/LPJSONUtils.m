@@ -14,6 +14,7 @@
 #import "LPDevice.h"
 #import "LPOrientationOperation.h"
 #import "LPInvoker.h"
+#import <math.h>
 
 @interface LPJSONUtils ()
 
@@ -242,10 +243,7 @@
                                             encoding:NSASCIIStringEncoding];
     if ([encoding rangeOfString:@"{CGRect"].location == 0) {
       CGRect frame = [object frame];
-      result[@"frame"] = @{@"x" : @(frame.origin.x),
-                           @"y" : @(frame.origin.y),
-                           @"width" : @(frame.size.width),
-                           @"height" : @(frame.size.height)};
+      result[@"frame"] = [self serializeRect: frame];
     }
   }
 
@@ -270,17 +268,41 @@
 #else
       rect = [frontWindow convertRect:rect fromWindow:window];
 #endif
+      NSMutableDictionary *rectDict = [self serializeRect:rect];
+      rectDict[@"center_x"] = [self normalizeFloat:center.x];
+      rectDict[@"center_y"] = [self normalizeFloat:center.y];
 
-      result[@"rect"] = @{@"center_x" : @(center.x),
-                          @"center_y" : @(center.y),
-                          @"x" : @(rect.origin.x),
-                          @"y" : @(rect.origin.y),
-                          @"width" : @(rect.size.width),
-                          @"height" : @(rect.size.height)};
+      result[@"rect"] = rectDict;
     }
   }
 
   return result;
+}
+
++(NSMutableDictionary*)serializeRect:(CGRect)rect {
+  CGFloat x = rect.origin.x;
+  CGFloat y = rect.origin.y;
+  CGFloat width = rect.size.width;
+  CGFloat height = rect.size.height;
+
+
+  return [NSMutableDictionary dictionaryWithObjectsAndKeys:
+            [self normalizeFloat:x],      @"x",
+            [self normalizeFloat:y],      @"y",
+            [self normalizeFloat:width],  @"width",
+            [self normalizeFloat:height], @"height",
+          nil];
+
+}
+
++(NSNumber*)normalizeFloat:(CGFloat) x {
+  if (isfinite(x)) {
+    return @(x);
+  }
+  if (isinf(x)) {
+    return (x == INFINITY ? @(CGFLOAT_MAX) : @(CGFLOAT_MIN));
+  }
+  return @(CGFLOAT_MAX);
 }
 
 +(NSMutableDictionary*)jsonifyAccessibilityElement:(id)object {
