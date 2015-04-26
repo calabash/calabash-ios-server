@@ -79,6 +79,7 @@
 
   if (self.curCount == self.maxCount) {
     [self failWithMessageFormat:@"Timed out waiting for condition %@" message:condition];
+    return;
   }
 
   self.curCount += 1;
@@ -123,6 +124,9 @@
 
 
 - (void) failWithMessageFormat:(NSString *) messageFmt message:(NSString *) message {
+  if (!self.timer) { //to prevent accidental double writing of http chunks
+    return;
+  }
   [self.timer invalidate];
   self.timer = nil;
   [super failWithMessageFormat:messageFmt message:message];
@@ -130,6 +134,9 @@
 
 
 - (void) succeedWithResult:(NSArray *) result {
+  if (!self.timer) { //to prevent accidental double writing of http chunks
+    return;
+  }
   [self.timer invalidate];
   self.timer = nil;
   [super succeedWithResult:result];
