@@ -115,7 +115,7 @@
         [res addObject:dict];
       }
     } else {
-      if ([v lpIsWebView]) {
+      if ([v respondsToSelector:@selector(lpIsWebView)] && [v lpIsWebView]) {
         [res addObjectsFromArray:[self handleWebView:(UIView<LPWebViewProtocol> *) v
                                           visibility:visibility]];
         continue;
