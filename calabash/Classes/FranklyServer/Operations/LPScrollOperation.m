@@ -42,7 +42,7 @@
     }
     
     return _view;
-  } else if ([_view lpIsWebView]) {
+  } else if ([_view respondsToSelector:@selector(lpIsWebView)] && [_view lpIsWebView]) {
     UIView<LPWebViewProtocol> *webView = (UIView<LPWebViewProtocol> *)_view;
     NSString *scrollJS = @"window.scrollBy(%@,%@);";
     if ([@"up" isEqualToString:dir]) {
