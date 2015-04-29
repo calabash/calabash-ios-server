@@ -1,3 +1,9 @@
+### 0.14.1
+
+* Guard calls to lpIsWebView since we also query non-UIView objects #152
+* Fix fall-through causing double write of http chunk #151
+* Fix case where a coordinate is inf or nan #150
+
 ### 0.14.0
 
 * Handle case where DOCUMENT\_NODE has empty rect #148
