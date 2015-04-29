@@ -69,7 +69,7 @@
   for (id view in children) {
     NSDictionary *viewDic = [LPJSONUtils jsonifyObject:view fullDump:YES];
     if ([viewDic isKindOfClass:[NSDictionary class]]) {
-      if ([view lpIsWebView]) {
+      if ([view respondsToSelector:@selector(lpIsWebView)] && [view lpIsWebView]) {
         NSMutableDictionary *viewCopy = [NSMutableDictionary dictionaryWithDictionary:viewDic];
         viewCopy[@"children"] =
         @[[LPWebQuery dictionaryOfViewsInWebView:(UIView<LPWebViewProtocol> *)view]];

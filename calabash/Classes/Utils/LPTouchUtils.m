@@ -4,6 +4,7 @@
 //  Copyright 2011 LessPainful. All rights reserved.
 //
 #import <sys/utsname.h>
+#import <math.h>
 
 
 
@@ -231,6 +232,12 @@
   if (![view isKindOfClass:[UIView class]] || [self isViewOrParentsHidden:view]) {return NO;}
   UIWindow *windowForView = [self windowForView:view];
   if (!windowForView) {return YES;/* what can I do?*/}
+
+  CGRect viewRect = [view frame];
+  if (!(isfinite(viewRect.origin.x) && isfinite(viewRect.origin.y))) {
+    //we don't consider this visible although there is a theorectical infinite view which would be
+    return NO;
+  }
 
   CGPoint center = [self centerOfView:view inWindow:windowForView];
 
