@@ -61,7 +61,8 @@
   [slider setValue:targetValue animated:animate];
 
   if (notifyTargets) {
-    [slider sendActionsForControlEvents:UIControlEventValueChanged];
+    UIControlEvents events = [slider allControlEvents];
+    [slider sendActionsForControlEvents:UIControlEventAllEvents];
   }
 
   return [LPJSONUtils jsonifyObject:_view];
