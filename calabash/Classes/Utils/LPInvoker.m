@@ -111,12 +111,22 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
   if ([invoker selectorReturnsObject]) {
     NSInvocation *invocation = invoker.invocation;
 
-    void *buffer;
+    id result = nil;
 
-    [invocation invoke];
-    [invocation getReturnValue:&buffer];
-
-    id result = (__bridge id)buffer;
+    @try {
+      void *buffer;
+      [invocation invoke];
+      [invocation getReturnValue:&buffer];
+      result = (__bridge id)buffer;
+    } @catch (NSException *exception) {
+      NSLog(@"LPInvoker caught an exception: %@", exception);
+      NSLog(@"=== INVOCATION DETAILS ===");
+      NSLog(@"target = %@", target);
+      NSLog(@"target class = %@", [target class]);
+      NSLog(@"selector = %@", NSStringFromSelector(selector));
+      NSLog(@"target responds to selector: %@", [target respondsToSelector:selector] ? @"YES" : @"NO");
+      result = nil;
+    }
 
     if(!result) {
       return [NSNull null];
