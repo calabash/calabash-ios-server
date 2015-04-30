@@ -66,6 +66,6 @@
   }
 
   return [LPJSONUtils jsonifyObject:_view];
-}
 
+}
 @end
