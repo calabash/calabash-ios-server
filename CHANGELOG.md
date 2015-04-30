@@ -1,3 +1,7 @@
+### 0.14.2.pre1
+
+* Try/Catch around LPInvoker invokeSelector:withTarget: #157
+
 ### 0.14.1
 
 * Guard calls to lpIsWebView since we also query non-UIView objects #152
