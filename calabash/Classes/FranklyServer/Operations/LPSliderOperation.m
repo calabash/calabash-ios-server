@@ -3,6 +3,7 @@
 #endif
 
 #import "LPSliderOperation.h"
+#import "LPJSONUtils.h"
 
 @implementation LPSliderOperation
 
@@ -74,6 +75,6 @@
     }
   }
 
-  return _view;
+  return [LPJSONUtils jsonifyObject:_view];
 }
 @end
