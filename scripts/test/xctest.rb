@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'test-helpers'))
 require 'run_loop'
+require 'retriable'
+require 'retriable/version'
 
 working_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
 
@@ -37,8 +39,16 @@ Dir.chdir(working_dir) do
 
   cmd = "xcrun xcodebuild #{args.join(' ')}"
 
+  tries = travis_ci? ? 3 : 1
+  interval = 5
+
   on_retry = Proc.new do |_, try, elapsed_time, next_interval|
-    log_fail "XCTest: attempt #{try} failed in '#{elapsed_time}'; will retry in '#{next_interval}'"
+    if elapsed_time && next_interval
+      log_fail "XCTest: attempt #{try} failed in '#{elapsed_time}'; will retry in '#{next_interval}'"
+      RunLoop::SimControl.terminate_all_sims
+    else
+      log_fail "XCTest: attempt #{try} failed; will retry in '#{interval}'"
+    end
     RunLoop::SimControl.terminate_all_sims
   end
 
@@ -46,11 +56,22 @@ Dir.chdir(working_dir) do
 
   end
 
-  options =
-        {
-              :tries => travis_ci? ? 3 : 1,
-              :on_retry => on_retry
-        }
+  retriable_version = RunLoop::Version.new(Retriable::VERSION)
+
+  if retriable_version >= RunLoop::Version.new('2.0.0')
+    options =
+          {
+                :intervals => Array.new(tries, interval),
+                :on_retry => on_retry
+          }
+  else
+    options =
+          {
+                :tries => tries,
+                :interval => interval,
+                :on_retry => on_retry
+          }
+  end
 
   Retriable.retriable(options) do
     exit_code = do_system(cmd,
