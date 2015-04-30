@@ -61,20 +61,10 @@
   [slider setValue:targetValue animated:animate];
 
   if (notifyTargets) {
-    NSSet *targets = [slider allTargets];
-    for (id target in targets) {
-      NSArray *actions = [slider actionsForTarget:target
-                                  forControlEvent:UIControlEventValueChanged];
-      for (NSString *action in actions) {
-        SEL sel = NSSelectorFromString(action);
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [target performSelector:sel withObject:slider];
-#pragma clang diagnostic pop
-      }
-    }
+    [slider sendActionsForControlEvents:UIControlEventValueChanged];
   }
 
   return [LPJSONUtils jsonifyObject:_view];
 }
+
 @end
