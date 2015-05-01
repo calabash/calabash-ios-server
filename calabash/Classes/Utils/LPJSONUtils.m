@@ -312,61 +312,51 @@
   result[@"visible"] = @(1);
   result[@"accessibilityElement"] = @(1);
 
-  NSString *lbl = [object accessibilityLabel];
-  if (lbl) {
-    [result setObject:lbl forKey:@"label"];
-  } else {
-    [result setObject:[NSNull null] forKey:@"label"];
-  }
+  // Be defensive: user *might* have a view with a 'nil' description.
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"description"
+               whenTarget:object
+               respondsTo:@selector(description)];
 
-  if ([object respondsToSelector:@selector(accessibilityIdentifier)]) {
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"label"
+               whenTarget:object
+               respondsTo:@selector(accessibilityLabel)];
 
-    NSString *aid = [object accessibilityIdentifier];
-    if (aid) {
-      [result setObject:aid forKey:@"id"];
-    } else {
-      [result setObject:[NSNull null] forKey:@"id"];
-    }
-  }
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"id"
+               whenTarget:object
+               respondsTo:@selector(accessibilityIdentifier)];
 
-  if ([object respondsToSelector:@selector(accessibilityHint)]) {
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"hint"
+               whenTarget:object
+               respondsTo:@selector(accessibilityHint)];
 
-    NSString *accHint = [object accessibilityHint];
-    if (accHint) {
-      [result setObject:accHint forKey:@"hint"];
-    } else {
-      [result setObject:[NSNull null] forKey:@"hint"];
-    }
-  }
-  if ([object respondsToSelector:@selector(accessibilityValue)]) {
-    NSString *accVal = [object accessibilityValue];
-    if (accVal) {
-      [result setObject:accVal forKey:@"value"];
-    } else {
-      [result setObject:[NSNull null] forKey:@"value"];
-    }
-  }
-  if ([object respondsToSelector:@selector(text)]) {
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"value"
+               whenTarget:object
+               respondsTo:@selector(accessibilityValue)];
 
-    NSString *text = [object text];
-    if (text) {
-      [result setObject:text forKey:@"text"];
-    } else {
-      [result setObject:[NSNull null] forKey:@"text"];
-    }
-  }
-  if ([object respondsToSelector:@selector(isSelected)]) {
-    BOOL selected = [object isSelected];
-    [result setObject:@(selected) forKey:@"selected"];
-  }
-  if ([object respondsToSelector:@selector(isEnabled)]) {
-    BOOL enabled = [object isEnabled];
-    [result setObject:@(enabled) forKey:@"enabled"];
-  }
-  if ([object respondsToSelector:@selector(alpha)]) {
-    CGFloat alpha = [object alpha];
-    [result setObject:@(alpha) forKey:@"alpha"];
-  }
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"text"
+               whenTarget:object
+               respondsTo:@selector(text)];
+
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"selected"
+               whenTarget:object
+               respondsTo:@selector(isSelected)];
+
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"enabled"
+               whenTarget:object
+               respondsTo:@selector(isEnabled)];
+
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"alpha"
+               whenTarget:object
+               respondsTo:@selector(alpha)];
 
   CGRect frame = [object accessibilityFrame];
   CGPoint center = [LPTouchUtils centerOfFrame:frame shouldTranslate:YES];
