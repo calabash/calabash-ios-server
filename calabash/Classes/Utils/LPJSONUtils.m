@@ -309,9 +309,9 @@
   NSMutableDictionary *result = [NSMutableDictionary dictionary];
 
   result[@"class"] = NSStringFromClass([object class]);
-
-  [result setObject:@(1) forKey:@"visible"];
+  result[@"visible"] = @(1);
   result[@"accessibilityElement"] = @(1);
+
   NSString *lbl = [object accessibilityLabel];
   if (lbl) {
     [result setObject:lbl forKey:@"label"];
@@ -368,7 +368,6 @@
     [result setObject:@(alpha) forKey:@"alpha"];
   }
 
-
   CGRect frame = [object accessibilityFrame];
   CGPoint center = [LPTouchUtils centerOfFrame:frame shouldTranslate:YES];
   NSDictionary *frameDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:frame.origin.x], @"x",
@@ -379,9 +378,8 @@
                             [NSNumber numberWithFloat:center.y], @"center_y",
                             nil];
 
-  [result setObject:frameDic forKey:@"rect"];
-
-  [result setObject:[object description] forKey:@"description"];
+  result[@"rect"] = frameDic;
+  result[@"description"] = [object description];
 
   return result;
 }
