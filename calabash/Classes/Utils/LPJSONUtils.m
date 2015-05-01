@@ -358,18 +358,30 @@
                whenTarget:object
                respondsTo:@selector(alpha)];
 
-  CGRect frame = [object accessibilityFrame];
-  CGPoint center = [LPTouchUtils centerOfFrame:frame shouldTranslate:YES];
-  NSDictionary *frameDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:frame.origin.x], @"x",
-                            [NSNumber numberWithFloat:frame.origin.y], @"y",
-                            [NSNumber numberWithFloat:frame.size.width], @"width",
-                            [NSNumber numberWithFloat:frame.size.height], @"height",
-                            [NSNumber numberWithFloat:center.x], @"center_x",
-                            [NSNumber numberWithFloat:center.y], @"center_y",
-                            nil];
+  NSDictionary *frameDictionary = nil;
 
-  result[@"rect"] = frameDic;
-  result[@"description"] = [object description];
+  SEL frameSelector = @selector(accessibilityFrame);
+  if ([object respondsToSelector:frameSelector]) {
+    @try {
+      CGRect frame = [object accessibilityFrame];
+      CGPoint center = [LPTouchUtils centerOfFrame:frame shouldTranslate:YES];
+      NSMutableDictionary *tmp = [self serializeRect:frame];
+      tmp[@"center_x"] = [self normalizeFloat:center.x];
+      tmp[@"center_y"] = [self normalizeFloat:center.y];
+      frameDictionary = [NSDictionary dictionaryWithDictionary:tmp];
+    } @catch (NSException *exception) {
+      NSLog(@"LPJSONUtils caught an exception in jsonifyAccessibilityElement:");
+      NSLog(@"%@", exception);
+      NSLog(@"while trying to find the accessibilityFrame of this object:");
+      NSLog(@"%@", object);
+    }
+  }
+
+  if (frameDictionary) {
+    result[@"rect"] = frameDictionary;
+  } else {
+    result[@"rect"] = [NSNull null];
+  }
 
   return result;
 }

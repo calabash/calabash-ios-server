@@ -44,6 +44,51 @@
 
 @end
 
+@interface LPDoesNotRespondTo : NSObject
+
+@property (assign, nonatomic) SEL selector;
+@property (copy, nonatomic) NSString *selectorString;
+
+- (id) initWithSelector:(SEL) selector;
+
+@end
+
+@implementation LPDoesNotRespondTo
+
+
+- (id) initWithSelector:(SEL)selector {
+  self = [super init];
+  if (self) {
+    self.selector = selector;
+    self.selectorString = NSStringFromSelector(_selector);
+  }
+  return self;
+}
+
+- (BOOL) respondsToSelector:(SEL)aSelector {
+  NSString *other = NSStringFromSelector(aSelector);
+  if ([self.selectorString isEqualToString:other]) {
+    return NO;
+  } else {
+    return [super respondsToSelector:aSelector];
+  }
+}
+
+@end
+
+@interface LPRaisesOnAccessibilityFrame : NSObject
+
+@end
+
+@implementation LPRaisesOnAccessibilityFrame
+
+- (CGRect) accessibilityFrame {
+  @throw [NSException exceptionWithName:NSInvalidArgumentException
+                                 reason:@"Something in the call chain raises an exception" userInfo:nil];
+}
+
+@end
+
 SpecBegin(LPJSONUtils)
 
 describe(@".jsonifyAccessibilityElement:", ^{
@@ -72,8 +117,24 @@ describe(@".jsonifyAccessibilityElement:", ^{
         expect(value).to.equal(key);
       }
     }
+  });
 
-    NSLog(@"dict = %@", dict);
+  describe(@"finding the frame rect", ^{
+    it(@"can handle DNRTS accessibilityFrame", ^{
+      LPDoesNotRespondTo *obj = [[LPDoesNotRespondTo alloc]
+                                 initWithSelector:@selector(accessibilityFrame)];
+
+      NSDictionary *dict = [LPJSONUtils jsonifyAccessibilityElement:obj];
+      expect(dict.count).to.equal(9);
+      expect(dict[@"value"]).to.equal([NSNull null]);
+    });
+
+    it(@"can handle accessibilityFrame raising an exception", ^{
+      LPRaisesOnAccessibilityFrame *obj = [LPRaisesOnAccessibilityFrame new];
+      NSDictionary *dict = [LPJSONUtils jsonifyAccessibilityElement:obj];
+      expect(dict.count).to.equal(9);
+      expect(dict[@"value"]).to.equal([NSNull null]);
+    });
   });
 });
 
