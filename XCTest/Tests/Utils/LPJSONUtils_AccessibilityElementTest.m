@@ -92,31 +92,34 @@
 SpecBegin(LPJSONUtilsAccessibilityElement)
 
 describe(@".jsonifyAccessibilityElement:", ^{
-  it(@"returns dictionary with correct key/value pairs", ^{
-    LPTestAccessibilityElement *obj = [LPTestAccessibilityElement new];
-    NSDictionary *dict = [LPJSONUtils jsonifyAccessibilityElement:obj];
 
-    expect(dict.count).to.equal(13);
-    for (NSString *key in [dict allKeys]) {
-      id value = dict[key];
-      if ([key isEqualToString:@"class"]) {
-        expect(value).to.equal(NSStringFromClass([obj class]));
-      } else if ([key isEqualToString:@"rect"]) {
-        expect(value).to.beAKindOf([NSDictionary class]);
-        for (NSString *frameKey in [value allKeys]) {
-          expect(value[frameKey]).to.equal(@(0));
+  describe(@"LPTestAccessibilityElement instance", ^{
+    it(@"returns dictionary with correct key/value pairs", ^{
+      LPTestAccessibilityElement *obj = [LPTestAccessibilityElement new];
+      NSDictionary *dict = [LPJSONUtils jsonifyAccessibilityElement:obj];
+
+      expect(dict.count).to.equal(13);
+      for (NSString *key in [dict allKeys]) {
+        id value = dict[key];
+        if ([key isEqualToString:@"class"]) {
+          expect(value).to.equal(NSStringFromClass([obj class]));
+        } else if ([key isEqualToString:@"rect"]) {
+          expect(value).to.beAKindOf([NSDictionary class]);
+          for (NSString *frameKey in [value allKeys]) {
+            expect(value[frameKey]).to.equal(@(0));
+          }
+        } else if ([key isEqualToString:@"selected"] ||
+                   [key isEqualToString:@"enabled"]  ||
+                   [key isEqualToString:@"accessibilityElement"]  ||
+                   [key isEqualToString:@"visible"]) {
+          expect(value).to.equal(@(1));
+        } else if ([key isEqualToString:@"alpha"]) {
+          expect(value).to.equal(@(1.0));
+        } else {
+          expect(value).to.equal(key);
         }
-      } else if ([key isEqualToString:@"selected"] ||
-                 [key isEqualToString:@"enabled"]  ||
-                 [key isEqualToString:@"accessibilityElement"]  ||
-                 [key isEqualToString:@"visible"]) {
-        expect(value).to.equal(@(1));
-      } else if ([key isEqualToString:@"alpha"]) {
-        expect(value).to.equal(@(1.0));
-      } else {
-        expect(value).to.equal(key);
       }
-    }
+    });
   });
 
   describe(@"finding the frame rect", ^{
@@ -135,6 +138,24 @@ describe(@".jsonifyAccessibilityElement:", ^{
       expect(dict.count).to.equal(10);
       expect(dict[@"rect"]).to.equal([NSNull null]);
     });
+  });
+
+  it(@"NSOject instance", ^{
+    id obj = [NSObject new];
+    NSDictionary *dict = [LPJSONUtils jsonifyAccessibilityElement:obj];
+    expect(dict.count).to.equal(10);
+  });
+
+  it(@"UIView instance", ^{
+    id obj = [[UIView alloc] initWithFrame:CGRectZero];
+    NSDictionary *dict = [LPJSONUtils jsonifyAccessibilityElement:obj];
+    expect(dict.count).to.equal(12);
+  });
+
+  fit(@"UIControl instance", ^{
+    id obj = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    NSDictionary *dict = [LPJSONUtils jsonifyAccessibilityElement:obj];
+    expect(dict.count).to.equal(13);
   });
 });
 
