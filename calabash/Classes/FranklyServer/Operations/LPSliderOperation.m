@@ -19,7 +19,7 @@
 
 //    required =========> |     optional
 // _arguments ==> [value_st,  notify targets, animate]
-- (id) performWithTarget:(UIView *) _view error:(NSError **) error {
+- (id) performWithTarget:(UIView *) _view error:(NSError * __autoreleasing *) error {
   if ([_view isKindOfClass:[UISlider class]] == NO) {
     NSLog(@"Warning view: %@ should be a UISlier", _view);
     return nil;
