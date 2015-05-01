@@ -543,6 +543,7 @@
 		F537398D18E5253B004133FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		F537399B18E6E0BE004133FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F537399918E6E0BE004133FA /* main.m */; };
 		F5396A721AA6056D00D75E78 /* lp-simple-example.html in Resources */ = {isa = PBXBuildFile; fileRef = F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */; };
+		F5419F0D1AF3D37000EAAA66 /* LPJSONUtils_AccessibilityElementTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5419F0C1AF3D37000EAAA66 /* LPJSONUtils_AccessibilityElementTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F55185571AC3866300CE06DC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A33A721AC01E8E00224639 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F55185581AC3875200CE06DC /* LPWebViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A601AC01A9F00224639 /* LPWebViewProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F55185591AC3875900CE06DC /* UIWebView+LPWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A4F1AC00D1300224639 /* UIWebView+LPWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1029,6 +1030,7 @@
 		F537398C18E5253B004133FA /* version */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = version; sourceTree = BUILT_PRODUCTS_DIR; };
 		F537399918E6E0BE004133FA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "lp-simple-example.html"; sourceTree = "<group>"; };
+		F5419F0C1AF3D37000EAAA66 /* LPJSONUtils_AccessibilityElementTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPJSONUtils_AccessibilityElementTest.m; sourceTree = "<group>"; };
 		F5543F211ABF7D7000E1A0BF /* LPPluginLoaderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPluginLoaderTest.m; sourceTree = "<group>"; };
 		F5543F231ABF7DE900E1A0BF /* LPPluginLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPPluginLoader.h; sourceTree = "<group>"; };
 		F5543F241ABF7DE900E1A0BF /* LPPluginLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPluginLoader.m; sourceTree = "<group>"; };
@@ -1735,6 +1737,7 @@
 				F5C224DF1AD473F0001DB4FA /* LPTouchUtilsTest.m */,
 				F5C224D61AD472B1001DB4FA /* LPInvoker */,
 				F5543F211ABF7D7000E1A0BF /* LPPluginLoaderTest.m */,
+				F5419F0C1AF3D37000EAAA66 /* LPJSONUtils_AccessibilityElementTest.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2989,6 +2992,7 @@
 				F50CBF911A04058C004AC9DA /* LPCollectionViewScrollToItemOperation.m in Sources */,
 				F50CBF9F1A040599004AC9DA /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
 				F50CBFB81A0405CE004AC9DA /* LPCJSONSerializer.m in Sources */,
+				F5419F0D1AF3D37000EAAA66 /* LPJSONUtils_AccessibilityElementTest.m in Sources */,
 				F50CBF7A1A040511004AC9DA /* LPTouchUtils.m in Sources */,
 				F50CBFAC1A0405B2004AC9DA /* LPMapRoute.m in Sources */,
 				F50CBFC01A0405CE004AC9DA /* UIScriptASTFirst.m in Sources */,
