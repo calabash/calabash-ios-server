@@ -35,6 +35,11 @@
          whenTarget:(id) target
          respondsTo:(SEL) selector;
 
++ (void) dictionary:(NSMutableDictionary *) dictionary
+ ensureObjectForKey:(NSString *) key
+         withTarget:(id) target
+           selector:(SEL) selector;
+
 + (NSMutableDictionary *) dictionaryByEncodingView:(id) view;
 + (void) insertHitPointIntoMutableDictionary:(NSMutableDictionary *) dictionary;
 
@@ -778,3 +783,34 @@
 }
 
 @end
+
+SpecBegin(LPJSONUtils)
+
+describe(@"dictionary:ensureObjectForKey:withTarget:selector:", ^{
+
+  it(@"inserts nil when target does not respond to selector", ^{
+    NSMutableDictionary *dict = [@{} mutableCopy];
+    SEL sel = NSSelectorFromString(@"doesNotExistSelector");
+    NSObject *target = [NSObject new];
+    [LPJSONUtils dictionary:dict
+         ensureObjectForKey:@"key"
+                 withTarget:target
+                   selector:sel];
+    expect(dict.count).to.equal(1);
+    expect(dict[@"key"]).to.equal([NSNull null]);
+  });
+
+  it(@"inserts a value when target does respond", ^{
+    NSMutableDictionary *dict = [@{} mutableCopy];
+    NSObject *target = [NSObject new];
+    SEL sel = NSSelectorFromString(@"description");
+    [LPJSONUtils dictionary:dict
+         ensureObjectForKey:@"key"
+                 withTarget:target
+                   selector:sel];
+    expect(dict.count).to.equal(1);
+    expect(dict[@"key"]).to.beAKindOf([NSString class]);
+  });
+});
+
+SpecEnd

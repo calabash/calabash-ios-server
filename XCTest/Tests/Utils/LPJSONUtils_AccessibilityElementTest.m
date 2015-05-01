@@ -89,7 +89,7 @@
 
 @end
 
-SpecBegin(LPJSONUtils)
+SpecBegin(LPJSONUtilsAccessibilityElement)
 
 describe(@".jsonifyAccessibilityElement:", ^{
   it(@"returns dictionary with correct key/value pairs", ^{

@@ -18,10 +18,21 @@
 
 @interface LPJSONUtils ()
 
+// If the target responds to the selector, invoke the selector on the target and
+// insert the value into the dictionary.  LPInvoker is responsible for ensuring
+// the value is not nil and is an object (not a primative).
+// @todo Add check for nil key
 + (void) dictionary:(NSMutableDictionary *) dictionary
     setObjectforKey:(NSString *) key
          whenTarget:(id) target
          respondsTo:(SEL) selector;
+
+// If the target does not respond to the selector, insert NSNull for key.
+// @todo Add check for nil key
++ (void) dictionary:(NSMutableDictionary *) dictionary
+ ensureObjectForKey:(NSString *) key
+         withTarget:(id) target
+           selector:(SEL) selector;
 
 + (void) insertHitPointIntoMutableDictionary:(NSMutableDictionary *) dictionary;
 
@@ -36,6 +47,18 @@
   if ([target respondsToSelector:selector]) {
     id value = [LPInvoker invokeSelector:selector withTarget:target];
     [dictionary setObject:value forKey:key];
+  }
+}
+
++ (void) dictionary:(NSMutableDictionary *) dictionary
+ ensureObjectForKey:(NSString *) key
+         withTarget:(id) target
+           selector:(SEL) selector {
+  if ([target respondsToSelector:selector]) {
+    id value = [LPInvoker invokeSelector:selector withTarget:target];
+    [dictionary setObject:value forKey:key];
+  } else {
+    [dictionary setObject:[NSNull null] forKey:key];
   }
 }
 
