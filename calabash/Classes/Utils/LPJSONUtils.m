@@ -306,8 +306,9 @@
 }
 
 +(NSMutableDictionary*)jsonifyAccessibilityElement:(id)object {
-  NSMutableDictionary *result = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    NSStringFromClass([object class]), @"class", nil];
+  NSMutableDictionary *result = [NSMutableDictionary dictionary];
+
+  result[@"class"] = NSStringFromClass([object class]);
 
   [result setObject:@(1) forKey:@"visible"];
   result[@"accessibilityElement"] = @(1);
