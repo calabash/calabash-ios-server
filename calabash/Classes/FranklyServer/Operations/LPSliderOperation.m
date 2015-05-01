@@ -62,7 +62,7 @@
 
   if (notifyTargets) {
     UIControlEvents events = [slider allControlEvents];
-    [slider sendActionsForControlEvents:UIControlEventAllEvents];
+    [slider sendActionsForControlEvents:events];
   }
 
   return [LPJSONUtils jsonifyObject:_view];
