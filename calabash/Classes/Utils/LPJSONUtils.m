@@ -337,34 +337,34 @@
 
   // Be defensive: user *might* have a view with a 'nil' description.
   [LPJSONUtils dictionary:result
-          setObjectforKey:@"description"
-               whenTarget:object
-               respondsTo:@selector(description)];
+       ensureObjectForKey:@"description"
+               withTarget:object
+                 selector:@selector(description)];
 
   [LPJSONUtils dictionary:result
-          setObjectforKey:@"label"
-               whenTarget:object
-               respondsTo:@selector(accessibilityLabel)];
+       ensureObjectForKey:@"label"
+               withTarget:object
+                 selector:@selector(accessibilityLabel)];
 
   [LPJSONUtils dictionary:result
-          setObjectforKey:@"id"
-               whenTarget:object
-               respondsTo:@selector(accessibilityIdentifier)];
+       ensureObjectForKey:@"id"
+               withTarget:object
+                 selector:@selector(accessibilityIdentifier)];
 
   [LPJSONUtils dictionary:result
-          setObjectforKey:@"hint"
-               whenTarget:object
-               respondsTo:@selector(accessibilityHint)];
+       ensureObjectForKey:@"hint"
+               withTarget:object
+               selector:@selector(accessibilityHint)];
 
   [LPJSONUtils dictionary:result
-          setObjectforKey:@"value"
-               whenTarget:object
-               respondsTo:@selector(accessibilityValue)];
+       ensureObjectForKey:@"value"
+               withTarget:object
+                 selector:@selector(accessibilityValue)];
 
   [LPJSONUtils dictionary:result
-          setObjectforKey:@"text"
-               whenTarget:object
-               respondsTo:@selector(text)];
+       ensureObjectForKey:@"text"
+               withTarget:object
+                 selector:@selector(text)];
 
   [LPJSONUtils dictionary:result
           setObjectforKey:@"selected"
