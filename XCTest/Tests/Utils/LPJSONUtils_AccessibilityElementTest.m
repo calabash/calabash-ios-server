@@ -126,14 +126,14 @@ describe(@".jsonifyAccessibilityElement:", ^{
 
       NSDictionary *dict = [LPJSONUtils jsonifyAccessibilityElement:obj];
       expect(dict.count).to.equal(10);
-      expect(dict[@"value"]).to.equal([NSNull null]);
+      expect(dict[@"rect"]).to.equal([NSNull null]);
     });
 
     it(@"can handle accessibilityFrame raising an exception", ^{
       LPRaisesOnAccessibilityFrame *obj = [LPRaisesOnAccessibilityFrame new];
       NSDictionary *dict = [LPJSONUtils jsonifyAccessibilityElement:obj];
       expect(dict.count).to.equal(10);
-      expect(dict[@"value"]).to.equal([NSNull null]);
+      expect(dict[@"rect"]).to.equal([NSNull null]);
     });
   });
 });
