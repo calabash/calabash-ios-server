@@ -738,7 +738,7 @@
 		F5C0945A1A97B7CB00AE5991 /* LPWebQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C0944C1A979CC200AE5991 /* LPWebQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5C224C71ACDF299001DB4FA /* LPWKWebViewRuntimeLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C224C01ACDF298001DB4FA /* LPWKWebViewRuntimeLoader.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5C224C81ACDF299001DB4FA /* LPWKWebViewRuntimeLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C224C01ACDF298001DB4FA /* LPWKWebViewRuntimeLoader.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5C224C91ACDF299001DB4FA /* LPWKWebViewRuntimeLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C224C01ACDF298001DB4FA /* LPWKWebViewRuntimeLoader.m */; };
+		F5C224C91ACDF299001DB4FA /* LPWKWebViewRuntimeLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C224C01ACDF298001DB4FA /* LPWKWebViewRuntimeLoader.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5C224CA1ACDF299001DB4FA /* LPWKWebViewRuntimeLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C224C01ACDF298001DB4FA /* LPWKWebViewRuntimeLoader.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5C224CB1ACDF299001DB4FA /* LPWKWebViewRuntimeLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C224C01ACDF298001DB4FA /* LPWKWebViewRuntimeLoader.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5C224CC1ACDF299001DB4FA /* LPWKWebViewRuntimeLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C224C01ACDF298001DB4FA /* LPWKWebViewRuntimeLoader.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
