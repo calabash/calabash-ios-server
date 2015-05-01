@@ -302,7 +302,6 @@ const static NSInteger LPUIAChannelMaximumLoopCount = 1200;
       }
     }
   });
-  NSLog(@"NSUserDefaults path = %@", path);
   return path;
 }
 
