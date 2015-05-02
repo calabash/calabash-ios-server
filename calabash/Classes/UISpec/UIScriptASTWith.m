@@ -8,6 +8,14 @@
 #import "LPWebQuery.h"
 #import "LPReflectUtils.h"
 #import "LPWebQuery.h"
+#import "LPInvoker.h"
+
+@interface UIScriptASTWith ()
+
+- (NSString *) stringByCoercingAccessibilityAttribute:(SEL) aSelector
+                                             ofObject:(id) object;
+
+@end
 
 @implementation UIScriptASTWith
 @synthesize selectorName = _selectorName;
@@ -120,29 +128,30 @@
                                           visibility:visibility]];
         continue;
       }
+
       if ([self.selectorName isEqualToString:@"marked"]) {
         NSString *val = nil;
-        if ([v respondsToSelector:@selector(accessibilityIdentifier)]) {
-          val = [v accessibilityIdentifier];
-          if ([val isEqualToString:(NSString *) self.objectValue]) {
-            [res addObject:v];
-            continue;
-          }
+        val = [self stringByCoercingAccessibilityAttribute:@selector(accessibilityIdentifier)
+                                                  ofObject:v];
+        if ([val isEqualToString:(NSString *) self.objectValue]) {
+          [res addObject:v];
+          continue;
         }
-        val = [v accessibilityLabel];
+
+        val = [self stringByCoercingAccessibilityAttribute:@selector(accessibilityLabel)
+                                                  ofObject:v];
         if ([val isEqualToString:(NSString *) self.objectValue]) {
           [res addObject:v];
         }
         continue;
       }
+
       if ([self.selectorName isEqualToString:@"id"]) {
-        NSString *val = nil;
-        if ([v respondsToSelector:@selector(accessibilityIdentifier)]) {
-          val = [v accessibilityIdentifier];
-          if ([val isEqualToString:(NSString *) self.objectValue]) {
-            [res addObject:v];
-            continue;
-          }
+        NSString *val = [self stringByCoercingAccessibilityAttribute:@selector(accessibilityIdentifier)
+                                                            ofObject:v];
+        if ([val isEqualToString:(NSString *) self.objectValue]) {
+          [res addObject:v];
+          continue;
         }
         continue;
       }
@@ -284,5 +293,25 @@
   [super dealloc];
 }
 
+- (NSString *) stringByCoercingAccessibilityAttribute:(SEL) aSelector
+                                             ofObject:(id) object {
+  if (![object respondsToSelector:aSelector]) {
+    NSLog(@"%@ does not respond to %@; returning nil",
+          [object class], NSStringFromSelector(aSelector));
+    return nil;
+  }
+
+  id attributeValue = [LPInvoker invokeSelector:aSelector withTarget:object];
+
+  if ([attributeValue isKindOfClass:[NSString class]]) {
+    return (NSString *) attributeValue;
+  }
+
+  if ([attributeValue respondsToSelector:@selector(stringValue)]) {
+    return [attributeValue stringValue];
+  } else {
+    return nil;
+  }
+}
 
 @end
