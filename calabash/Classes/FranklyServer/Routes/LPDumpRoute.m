@@ -6,6 +6,7 @@
 #import "LPHTTPDataResponse.h"
 #import "LPJSONUtils.h"
 #import "LPWebQuery.h"
+#import "LPIsWebView.h"
 
 @implementation LPDumpRoute
 
@@ -69,7 +70,7 @@
   for (id view in children) {
     NSDictionary *viewDic = [LPJSONUtils jsonifyObject:view fullDump:YES];
     if ([viewDic isKindOfClass:[NSDictionary class]]) {
-      if ([view respondsToSelector:@selector(lpIsWebView)] && [view lpIsWebView]) {
+      if ([LPIsWebView isWebView:view]) {
         NSMutableDictionary *viewCopy = [NSMutableDictionary dictionaryWithDictionary:viewDic];
         viewCopy[@"children"] =
         @[[LPWebQuery dictionaryOfViewsInWebView:(UIView<LPWebViewProtocol> *)view]];
