@@ -66,7 +66,7 @@
   LPCJSONSerializer *s = [LPCJSONSerializer serializer];
   NSError *error = nil;
   NSData *d = [s serializeDictionary:dictionary error:&error];
-  if (error) {
+  if (!d) {
     NSLog(@"Unable to serialize dictionary (%@), %@", error, dictionary);
   }
   NSString *res = [[NSString alloc] initWithBytes:[d bytes] length:[d length]
@@ -79,7 +79,7 @@
   NSError *error = nil;
   NSDictionary *res = [ds deserializeAsDictionary:[string dataUsingEncoding:NSUTF8StringEncoding]
                                             error:&error];
-  if (error) {
+  if (!res) {
     NSLog(@"Unable to deserialize  %@", string);
   }
   return res;
@@ -89,8 +89,8 @@
   LPCJSONSerializer *s = [LPCJSONSerializer serializer];
   NSError *error = nil;
   NSData *d = [s serializeArray:array error:&error];
-  if (error) {
-    NSLog(@"Unable to serialize arrayy (%@), %@", error, array);
+  if (!d) {
+    NSLog(@"Unable to serialize array (%@), %@", error, array);
   }
   NSString *res = [[NSString alloc] initWithBytes:[d bytes] length:[d length]
                                          encoding:NSUTF8StringEncoding];
@@ -103,7 +103,7 @@
   NSError *error = nil;
   NSArray *res = [ds deserializeAsArray:[string dataUsingEncoding:NSUTF8StringEncoding]
                                   error:&error];
-  if (error) {
+  if (!res) {
     NSLog(@"Unable to deserialize  %@", string);
   }
   return res;
@@ -114,7 +114,7 @@
   LPCJSONSerializer *s = [LPCJSONSerializer serializer];
   NSError *error = nil;
   NSData *d = [s serializeObject:obj error:&error];
-  if (error) {
+  if (!d) {
     NSLog(@"Unable to serialize object (%@), %@", error, [obj description]);
   }
   NSString *res = [[NSString alloc] initWithBytes:[d bytes] length:[d length]
