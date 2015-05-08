@@ -538,6 +538,7 @@
 		F50CBFCE1A040669004AC9DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F50CBFCD1A040669004AC9DA /* UIKit.framework */; };
 		F50CBFCF1A040707004AC9DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		F50E42791AA86D36003DB030 /* libSpecta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F50E42711AA86D36003DB030 /* libSpecta.a */; };
+		F532C19B1AFD28970024DA55 /* LPCJSONSerializerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F532C19A1AFD28970024DA55 /* LPCJSONSerializerTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F537397318E5200C004133FA /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F537397418E52014004133FA /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F537398D18E5253B004133FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
@@ -1027,6 +1028,7 @@
 		F50E42761AA86D36003DB030 /* SPTSharedExampleGroups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTSharedExampleGroups.h; sourceTree = "<group>"; };
 		F50E42771AA86D36003DB030 /* SPTSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTSpec.h; sourceTree = "<group>"; };
 		F50E42781AA86D36003DB030 /* XCTestCase+Specta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTestCase+Specta.h"; sourceTree = "<group>"; };
+		F532C19A1AFD28970024DA55 /* LPCJSONSerializerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCJSONSerializerTest.m; sourceTree = "<group>"; };
 		F537398C18E5253B004133FA /* version */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = version; sourceTree = BUILT_PRODUCTS_DIR; };
 		F537399918E6E0BE004133FA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "lp-simple-example.html"; sourceTree = "<group>"; };
@@ -1694,6 +1696,14 @@
 			name = ScrollToMark;
 			sourceTree = "<group>";
 		};
+		F532C1991AFD28970024DA55 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				F532C19A1AFD28970024DA55 /* LPCJSONSerializerTest.m */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
 		F537399818E6E0BE004133FA /* VersionTool */ = {
 			isa = PBXGroup;
 			children = (
@@ -1722,6 +1732,7 @@
 				F50CBF761A03F69A004AC9DA /* LPTestToolsStandup.m */,
 				F5C224E41AD47403001DB4FA /* Operations */,
 				F5C224E61AD47403001DB4FA /* Routes */,
+				F532C1991AFD28970024DA55 /* JSON */,
 				F5A33A481AC009B600224639 /* WebViewQuery */,
 				F5543F201ABF7D7000E1A0BF /* Utils */,
 			);
@@ -2984,6 +2995,7 @@
 				F50CBFB01A0405B2004AC9DA /* LPAsyncPlaybackRoute.m in Sources */,
 				F50CBFC41A0405CE004AC9DA /* UIScriptParser.m in Sources */,
 				F50CBFAD1A0405B2004AC9DA /* LPRecordRoute.m in Sources */,
+				F532C19B1AFD28970024DA55 /* LPCJSONSerializerTest.m in Sources */,
 				F50CBF971A04058C004AC9DA /* LPOperation.m in Sources */,
 				F5C224C71ACDF299001DB4FA /* LPWKWebViewRuntimeLoader.m in Sources */,
 				F50CBFA11A0405B2004AC9DA /* LPKeychainRoute.m in Sources */,
