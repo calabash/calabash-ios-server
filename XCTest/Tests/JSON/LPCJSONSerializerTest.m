@@ -85,6 +85,15 @@ describe(@"LPCJSONSerializer", ^{
         expect(error).to.equal(nil);
       });
 
+      it(@"NSData", ^{
+        [[[mock expect] andReturn:mockData] serializeString:OCMOCK_ANY
+                                                      error:[OCMArg setTo:nil]];
+        data = [mock serializeObject:[[NSData alloc] init] error:&error];
+        [mock verify];
+        expect(data).to.beIdenticalTo(mockData);
+        expect(error).to.equal(nil);
+      });
+
       it(@"NSDate", ^{
         [[[mock expect] andReturn:mockData] serializeDate:OCMOCK_ANY
                                                     error:[OCMArg setTo:nil]];
