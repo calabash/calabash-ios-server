@@ -116,11 +116,21 @@ describe(@"LPCJSONSerializer", ^{
 
     describe(@"nil and NULL", ^{
       it(@"nil", ^{
-
+        [[[mock expect] andReturn:mockData] serializeNull:OCMOCK_ANY
+                                                    error:[OCMArg setTo:nil]];
+        data = [mock serializeObject:nil error:&error];
+        [mock verify];
+        expect(data).to.beIdenticalTo(mockData);
+        expect(error).to.equal(nil);
       });
 
       it(@"NULL", ^{
-
+        [[[mock expect] andReturn:mockData] serializeNull:OCMOCK_ANY
+                                                    error:[OCMArg setTo:nil]];
+        data = [mock serializeObject:NULL error:&error];
+        [mock verify];
+        expect(data).to.beIdenticalTo(mockData);
+        expect(error).to.equal(nil);
       });
     });
 

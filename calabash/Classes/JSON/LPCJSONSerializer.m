@@ -100,7 +100,7 @@ static NSData *kTrue = NULL;
     {
     NSData *theResult = NULL;
 
-    if ([inObject isKindOfClass:[NSNull class]])
+    if ([inObject isKindOfClass:[NSNull class]] || inObject == NULL || inObject == nil)
         {
         theResult = [self serializeNull:inObject error:outError];
         }
