@@ -127,26 +127,7 @@ static NSData *kTrue = NULL;
         }
     else if ([inObject isKindOfClass:[NSDate class]])
     {
-        
-        static LPISO8601DateFormatter *dateFormat = nil;
-        if (dateFormat == nil)
-        {
-            dateFormat = [[LPISO8601DateFormatter alloc] init];
-            [dateFormat setIncludeTime:YES];
-        }
-
-        
-        
-       
-        NSString *str = [dateFormat stringFromDate:(NSDate*)inObject];
-        NSRange rangeButLastTwo = NSMakeRange(0, [str length]-2);
-        NSRange rangeLastTwo = NSMakeRange([str length]-2, 2);
-        
-        NSString *firstPart = [str substringWithRange:rangeButLastTwo];
-        NSString *lastPart = [str substringWithRange:rangeLastTwo];
-        
-        str = [NSString stringWithFormat:@"%@:%@",firstPart,lastPart];
-        theResult = [self serializeString:str error:outError];
+        theResult = [self serializeDate:(NSDate *)inObject error:outError];
     }
     else if ([inObject respondsToSelector:@selector(JSONDataRepresentation)])
         {
@@ -366,5 +347,23 @@ static NSData *kTrue = NULL;
 
     return(theData);
     }
+
+- (NSData *)serializeDate:(NSDate *)date error:(NSError **)outError{
+  static LPISO8601DateFormatter *dateFormat = nil;
+  if (dateFormat == nil) {
+    dateFormat = [[LPISO8601DateFormatter alloc] init];
+    [dateFormat setIncludeTime:YES];
+  }
+
+  NSString *str = [dateFormat stringFromDate:date];
+  NSRange rangeButLastTwo = NSMakeRange(0, [str length]-2);
+  NSRange rangeLastTwo = NSMakeRange([str length]-2, 2);
+
+  NSString *firstPart = [str substringWithRange:rangeButLastTwo];
+  NSString *lastPart = [str substringWithRange:rangeLastTwo];
+
+  str = [NSString stringWithFormat:@"%@:%@",firstPart,lastPart];
+  return [self serializeString:str error:outError];
+}
 
 @end

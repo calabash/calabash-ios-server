@@ -44,6 +44,7 @@
 - (NSData *)serializeString:(NSString *)inString error:(NSError **)outError;
 - (NSData *)serializeArray:(NSArray *)inArray error:(NSError **)outError;
 - (NSData *)serializeDictionary:(NSDictionary *)inDictionary error:(NSError **)outError;
+- (NSData *)serializeDate:(NSDate *) date error:(NSError **) outError;
 
 @end
 

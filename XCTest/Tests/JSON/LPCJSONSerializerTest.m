@@ -22,20 +22,20 @@ SpecBegin(LPCJSONSerializer)
 
 describe(@"LPCJSONSerializer", ^{
 
-  describe(@"#serializeObject:error:", ^{
+  __block LPCJSONSerializer *serializer;
+  __block NSError *error;
+  __block NSData *data;
+  __block NSData *mockData;
+  __block id mock;
+  before(^{
+    serializer = [LPCJSONSerializer serializer];
+    error = nil;
+    mockData = [[NSString stringWithFormat:@"data"]
+                dataUsingEncoding:NSUTF8StringEncoding];
+    mock = OCMPartialMock(serializer);
+  });
 
-    __block LPCJSONSerializer *serializer;
-    __block NSError *error;
-    __block NSData *data;
-    __block NSData *mockData;
-    __block id mock;
-    before(^{
-      serializer = [LPCJSONSerializer serializer];
-      error = nil;
-      mockData = [[NSString stringWithFormat:@"data"]
-                  dataUsingEncoding:NSUTF8StringEncoding];
-      mock = OCMPartialMock(serializer);
-    });
+  describe(@"#serializeObject:error:", ^{
 
     describe(@"valid JSON objects", ^{
       it(@"NSNull", ^{
@@ -86,8 +86,8 @@ describe(@"LPCJSONSerializer", ^{
       });
 
       it(@"NSDate", ^{
-        [[[mock expect] andReturn:mockData] serializeString:OCMOCK_ANY
-                                                      error:[OCMArg setTo:nil]];
+        [[[mock expect] andReturn:mockData] serializeDate:OCMOCK_ANY
+                                                    error:[OCMArg setTo:nil]];
         data = [mock serializeObject:[NSDate date] error:&error];
         [mock verify];
         expect(data).to.beIdenticalTo(mockData);
@@ -128,6 +128,15 @@ describe(@"LPCJSONSerializer", ^{
 
       });
     });
+  });
+
+  it(@"#serializeDate:error:", ^{
+    [[[mock expect] andReturn:mockData] serializeString:OCMOCK_ANY
+                                                  error:[OCMArg setTo:nil]];
+    data = [mock serializeDate:[NSDate date] error:&error];
+    [mock verify];
+    expect(data).to.beIdenticalTo(mockData);
+    expect(error).to.equal(nil);
   });
 });
 
