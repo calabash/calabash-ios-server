@@ -66,20 +66,20 @@ describe(@"LPCJSONSerializer", ^{
 
       });
 
-      it(@"NSDictionary", ^{
-        [[[mock expect] andReturn:mockData] serializeDictionary:OCMOCK_ANY
-                                                          error:[OCMArg setTo:nil]];
-
-        data = [mock serializeObject:@{} error:&error];
+      it(@"NSArray", ^{
+        [[[mock expect] andReturn:mockData] serializeArray:OCMOCK_ANY
+                                                     error:[OCMArg setTo:nil]];
+        data = [mock serializeObject:@[] error:&error];
         [mock verify];
         expect(data).to.beIdenticalTo(mockData);
         expect(error).to.equal(nil);
       });
 
-      it(@"NSArray", ^{
-        [[[mock expect] andReturn:mockData] serializeArray:OCMOCK_ANY
-                                                     error:[OCMArg setTo:nil]];
-        data = [mock serializeObject:@[] error:&error];
+      it(@"NSDictionary", ^{
+        [[[mock expect] andReturn:mockData] serializeDictionary:OCMOCK_ANY
+                                                          error:[OCMArg setTo:nil]];
+
+        data = [mock serializeObject:@{} error:&error];
         [mock verify];
         expect(data).to.beIdenticalTo(mockData);
         expect(error).to.equal(nil);
