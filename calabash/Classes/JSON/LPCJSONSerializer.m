@@ -144,10 +144,6 @@ static NSData *kTrue = NULL;
         {
         theResult = [inObject JSONDataRepresentation];
         }
-    else if ([inObject isKindOfClass:[UIView class]]) 
-       {
-           theResult = [self serializeString:[inObject description] error:outError];
-       }
     else
         {
         if (outError)
