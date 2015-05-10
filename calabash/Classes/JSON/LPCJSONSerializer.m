@@ -36,6 +36,13 @@ static NSData *kNULL = NULL;
 static NSData *kFalse = NULL;
 static NSData *kTrue = NULL;
 
+@interface LPCJSONSerializer ()
+
+- (Class) classForNSManagedObject;
+- (BOOL) isCoreDataStackAvailable;
+
+@end
+
 @implementation LPCJSONSerializer
 
 + (void)initialize
@@ -368,6 +375,18 @@ static NSData *kTrue = NULL;
 
   str = [NSString stringWithFormat:@"%@:%@",firstPart,lastPart];
   return [self serializeString:str error:outError];
+}
+
+- (Class) classForNSManagedObject {
+  return objc_getClass("NSManagedObject");
+}
+
+- (BOOL) isCoreDataStackAvailable {
+  if ([self classForNSManagedObject]) {
+    return YES;
+  } else {
+    return NO;
+  }
 }
 
 @end

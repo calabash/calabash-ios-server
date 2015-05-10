@@ -5,6 +5,13 @@
 #import "LPCJSONSerializer.h"
 #import "LPJSONRepresentation.h"
 
+@interface LPCJSONSerializer (LPXCTEST)
+
+- (Class) classForNSManagedObject;
+- (BOOL) isCoreDataStackAvailable;
+
+@end
+
 @interface LPJsonifiable : NSObject <LPJSONRepresentation>
 
 @end
@@ -219,6 +226,20 @@ describe(@"LPCJSONSerializer", ^{
     [mock verify];
     expect(data).to.beIdenticalTo(mockData);
     expect(error).to.equal(nil);
+  });
+
+  describe(@"#isCoreDataStackAvailable", ^{
+    it(@"returns YES when stack is available", ^{
+      [[[mock expect] andReturn:[self class] ] classForNSManagedObject];
+      expect([mock isCoreDataStackAvailable]).to.equal(YES);
+      [mock verify];
+    });
+
+    it(@"returns NO when stack is not available", ^{
+      [[[mock expect] andReturn:nil] classForNSManagedObject];
+      expect([mock isCoreDataStackAvailable]).to.equal(NO);
+      [mock verify];
+    });
   });
 });
 
