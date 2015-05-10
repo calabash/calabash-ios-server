@@ -32,6 +32,7 @@
 #import "LPJSONRepresentation.h"
 
 NSString *const LPJSONSerializerNSManageObjectFormatString = @"'%@' is an NSManagedObject - description withheld for safety";
+NSString *const LPJSONSerializerDoesNotRespondToDescriptionFormatString = @"'%@': does not respond to selector 'description'";
 
 static NSData *kNULL = NULL;
 static NSData *kFalse = NULL;
@@ -405,7 +406,7 @@ static NSData *kTrue = NULL;
   }
 
   if (![object respondsToSelector:[self descriptionSelector]]) {
-    NSString *str = [NSString stringWithFormat:@"'%@': does not respond to selector 'description'",
+    NSString *str = [NSString stringWithFormat:LPJSONSerializerDoesNotRespondToDescriptionFormatString,
                      NSStringFromClass([object class])];
     return [self serializeString:str error:outError];
   }

@@ -281,12 +281,18 @@ describe(@"LPCJSONSerializer", ^{
     it(@"does not respond to description selector", ^{
       SEL mockSelector = NSSelectorFromString(@"noSuchSelector");
       [[[mock expect] andReturnValue:OCMOCK_VALUE(mockSelector)] descriptionSelector];
-      [[[mock expect] andReturn:mockData] serializeString:OCMOCK_ANY
-                                                    error:[OCMArg setTo:nil]];
-
       NSObject *object = [NSObject new];
+
+      NSString *expected = [NSString stringWithFormat:@"\"%@\"",
+                            [NSString stringWithFormat:LPJSONSerializerDoesNotRespondToDescriptionFormatString,
+                             NSStringFromClass([object class])]];
       data = [mock serializeInvalidJSONObject:object error:&error];
-      expect(data).to.beIdenticalTo(mockData);
+
+      NSString *actual = [[NSString alloc] initWithBytes:[data bytes]
+                                                  length:[data length]
+                                                encoding:NSUTF8StringEncoding];
+
+      expect(actual).to.equal(expected);
       expect(error).to.equal(nil);
       [mock verify];
     });
