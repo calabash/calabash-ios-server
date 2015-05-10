@@ -62,7 +62,7 @@ static NSData *kTrue = NULL;
     
 - (BOOL)isValidJSONObject:(id)inObject
     {
-    if ([inObject isKindOfClass:[NSNull class]])
+    if ([inObject isKindOfClass:[NSNull class]] || inObject == NULL || inObject == nil)
         {
         return(YES);
         }
@@ -83,6 +83,10 @@ static NSData *kTrue = NULL;
         return(YES);
         }
     else if ([inObject isKindOfClass:[NSData class]])
+        {
+        return(YES);
+        }
+    else if ([inObject isKindOfClass:[NSDate class]])
         {
         return(YES);
         }

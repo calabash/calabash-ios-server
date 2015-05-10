@@ -35,6 +35,69 @@ describe(@"LPCJSONSerializer", ^{
     mock = OCMPartialMock(serializer);
   });
 
+  describe(@"#isValidJSONObject:", ^{
+    describe(@"returns true for", ^{
+      describe(@"NSNull, nil, and NULL", ^{
+        it(@"NSNull", ^{
+          expect([serializer isValidJSONObject:[NSNull null]]).to.equal(YES);
+        });
+
+        it(@"nil", ^{
+          expect([serializer isValidJSONObject:nil]).to.equal(YES);
+        });
+
+        it(@"NULL", ^{
+          expect([serializer isValidJSONObject:NULL]).to.equal(YES);
+        });
+      });
+
+      it(@"NSNumber", ^{
+        expect([serializer isValidJSONObject:@(1)]).to.equal(YES);
+      });
+
+      it(@"NSString", ^{
+        expect([serializer isValidJSONObject:@"Hey!"]).to.equal(YES);
+      });
+
+      it(@"NSArray", ^{
+        expect([serializer isValidJSONObject:@[]]).to.equal(YES);
+      });
+
+      it(@"NSDictionary", ^{
+        expect([serializer isValidJSONObject:@{}]).to.equal(YES);
+      });
+
+      it(@"NSData", ^{
+        expect([serializer isValidJSONObject:[[NSData alloc] init]]).to.equal(YES);
+      });
+
+      it(@"NSDate", ^{
+        expect([serializer isValidJSONObject:[NSDate date]]).to.equal(YES);
+      });
+
+      it(@"responds to JSONDataRepresentation", ^{
+        LPJsonifiable *json = [LPJsonifiable new];
+        expect([serializer isValidJSONObject:json]).to.equal(YES);
+      });
+    });
+
+    describe(@"returns false for", ^{
+      it(@"NSObject", ^{
+        expect([serializer isValidJSONObject:[NSObject new]]).to.equal(NO);
+      });
+
+      it(@"UIView", ^{
+        UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
+        expect([serializer isValidJSONObject:view]).to.equal(NO);
+      });
+
+      it(@"NSManagedObject", ^{
+
+      });
+    });
+
+  });
+
   describe(@"#serializeObject:error:", ^{
 
     describe(@"valid JSON objects", ^{
