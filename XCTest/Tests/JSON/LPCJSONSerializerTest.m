@@ -44,6 +44,19 @@
 
 @end
 
+@interface LPDescriptionRaisesException : NSObject
+
+@end
+
+@implementation LPDescriptionRaisesException
+
+- (NSString *) description {
+  @throw [NSException exceptionWithName:@"An exception"
+                                 reason:@"just because" userInfo:@{}];
+}
+
+@end
+
 SpecBegin(LPCJSONSerializer)
 
 describe(@"LPCJSONSerializer", ^{
@@ -342,12 +355,12 @@ describe(@"LPCJSONSerializer", ^{
     });
 
     it(@"NSManagedObject", ^{
-      NSObject *object = [NSObject new];
+      LPDescriptionRaisesException *object = [LPDescriptionRaisesException new];
       BOOL yes = YES;
       [[[mock expect] andReturnValue:OCMOCK_VALUE(yes)] isCoreDataStackAvailable];
       [[[mock expect] andReturnValue:OCMOCK_VALUE(yes)] isNSManagedObject:object];
       NSString *expected = [NSString stringWithFormat:@"\"%@\"",
-                            [NSString stringWithFormat:LPJSONSerializerNSManageObjectFormatString,
+                            [NSString stringWithFormat:LPJSONSerializerNSManageObjectDescriptionFaultFormatString,
                              NSStringFromClass([object class])]];
 
       data = [mock serializeInvalidJSONObject:object error:&error];

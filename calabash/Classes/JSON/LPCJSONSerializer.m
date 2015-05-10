@@ -31,7 +31,7 @@
 #import "LPISO8601DateFormatter.h"
 #import "LPJSONRepresentation.h"
 
-NSString *const LPJSONSerializerNSManageObjectFormatString = @"'%@' is an NSManagedObject - description withheld for safety";
+NSString *const LPJSONSerializerNSManageObjectDescriptionFaultFormatString = @"Calling 'description' on '%@' (an instance of NSManagedObject) caused a fault - this is probably a bug.";
 NSString *const LPJSONSerializerDoesNotRespondToDescriptionFormatString = @"'%@': does not respond to selector 'description'";
 
 static NSData *kNULL = NULL;
@@ -399,15 +399,26 @@ static NSData *kTrue = NULL;
 }
 
 - (NSData *) serializeInvalidJSONObject:(id) object error:(NSError **) outError {
-  if ([self isCoreDataStackAvailable] && [self isNSManagedObject:object]) {
-    NSString *str = [NSString stringWithFormat:LPJSONSerializerNSManageObjectFormatString,
+  if (![object respondsToSelector:[self descriptionSelector]]) {
+    NSString *str = [NSString stringWithFormat:LPJSONSerializerDoesNotRespondToDescriptionFormatString,
                      NSStringFromClass([object class])];
     return [self serializeString:str error:outError];
   }
 
-  if (![object respondsToSelector:[self descriptionSelector]]) {
-    NSString *str = [NSString stringWithFormat:LPJSONSerializerDoesNotRespondToDescriptionFormatString,
-                     NSStringFromClass([object class])];
+  if ([self isCoreDataStackAvailable] && [self isNSManagedObject:object]) {
+    NSString *str = nil;
+    @try {
+      str = [object description];
+    }
+    @catch (NSException *exception) {
+      NSString *className = NSStringFromClass([object class]);
+      NSLog(@"Calling 'description' on an NSManagedObject instance of '%@' raised an exception:",
+            className);
+      NSLog(@"%@", exception);
+      str = [NSString stringWithFormat:LPJSONSerializerNSManageObjectDescriptionFaultFormatString,
+             className];
+
+    }
     return [self serializeString:str error:outError];
   }
 

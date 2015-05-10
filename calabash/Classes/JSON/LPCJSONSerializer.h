@@ -29,7 +29,7 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString *const LPJSONSerializerNSManageObjectFormatString;
+extern NSString *const LPJSONSerializerNSManageObjectDescriptionFaultFormatString;
 extern NSString *const LPJSONSerializerDoesNotRespondToDescriptionFormatString;
 
 @interface LPCJSONSerializer : NSObject {
