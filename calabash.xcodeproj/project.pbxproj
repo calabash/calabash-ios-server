@@ -539,6 +539,9 @@
 		F50CBFCF1A040707004AC9DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		F50E42791AA86D36003DB030 /* libSpecta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F50E42711AA86D36003DB030 /* libSpecta.a */; };
 		F532C19B1AFD28970024DA55 /* LPCJSONSerializerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F532C19A1AFD28970024DA55 /* LPCJSONSerializerTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F532C1DE1AFF4F080024DA55 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F532C1DD1AFF4F080024DA55 /* CoreData.framework */; };
+		F532C1E31AFF4F250024DA55 /* LPCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = F532C1E01AFF4F240024DA55 /* LPCoreDataStack.m */; };
+		F532C1E41AFF4F250024DA55 /* LPTestTarget.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F532C1E11AFF4F240024DA55 /* LPTestTarget.xcdatamodeld */; };
 		F537397318E5200C004133FA /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F537397418E52014004133FA /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F537398D18E5253B004133FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
@@ -1029,6 +1032,10 @@
 		F50E42771AA86D36003DB030 /* SPTSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTSpec.h; sourceTree = "<group>"; };
 		F50E42781AA86D36003DB030 /* XCTestCase+Specta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTestCase+Specta.h"; sourceTree = "<group>"; };
 		F532C19A1AFD28970024DA55 /* LPCJSONSerializerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCJSONSerializerTest.m; sourceTree = "<group>"; };
+		F532C1DD1AFF4F080024DA55 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		F532C1DF1AFF4F240024DA55 /* LPCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCoreDataStack.h; sourceTree = "<group>"; };
+		F532C1E01AFF4F240024DA55 /* LPCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCoreDataStack.m; sourceTree = "<group>"; };
+		F532C1E21AFF4F250024DA55 /* XCTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = XCTest.xcdatamodel; sourceTree = "<group>"; };
 		F537398C18E5253B004133FA /* version */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = version; sourceTree = BUILT_PRODUCTS_DIR; };
 		F537399918E6E0BE004133FA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "lp-simple-example.html"; sourceTree = "<group>"; };
@@ -1240,6 +1247,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F532C1DE1AFF4F080024DA55 /* CoreData.framework in Frameworks */,
 				F55185571AC3866300CE06DC /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1304,6 +1312,7 @@
 		B121E79614B6D9FB0034C6A9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F532C1DD1AFF4F080024DA55 /* CoreData.framework */,
 				F5A33A721AC01E8E00224639 /* WebKit.framework */,
 				F50CBFCD1A040669004AC9DA /* UIKit.framework */,
 				B17E757A15D434D00066550B /* CFNetwork.framework */,
@@ -1835,6 +1844,9 @@
 		F59CA46E1A82EF40007A2F38 /* LPTestTarget */ = {
 			isa = PBXGroup;
 			children = (
+				F532C1DF1AFF4F240024DA55 /* LPCoreDataStack.h */,
+				F532C1E01AFF4F240024DA55 /* LPCoreDataStack.m */,
+				F532C1E11AFF4F240024DA55 /* LPTestTarget.xcdatamodeld */,
 				F5396A6D1AA6056D00D75E78 /* TestResources */,
 				F59CA4731A82EF40007A2F38 /* AppDelegate.h */,
 				F59CA4741A82EF40007A2F38 /* AppDelegate.m */,
@@ -3138,8 +3150,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F59CA47B1A82EF40007A2F38 /* SecondViewController.m in Sources */,
+				F532C1E31AFF4F250024DA55 /* LPCoreDataStack.m in Sources */,
 				F59CA4751A82EF40007A2F38 /* AppDelegate.m in Sources */,
 				F59CA4781A82EF40007A2F38 /* FirstViewController.m in Sources */,
+				F532C1E41AFF4F250024DA55 /* LPTestTarget.xcdatamodeld in Sources */,
 				F59CA4721A82EF40007A2F38 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4186,6 +4200,19 @@
 			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F532C1E11AFF4F240024DA55 /* LPTestTarget.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F532C1E21AFF4F250024DA55 /* XCTest.xcdatamodel */,
+			);
+			currentVersion = F532C1E21AFF4F250024DA55 /* XCTest.xcdatamodel */;
+			path = LPTestTarget.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B121E78814B6D9FB0034C6A9 /* Project object */;
 }
