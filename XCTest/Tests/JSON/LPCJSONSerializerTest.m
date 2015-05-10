@@ -14,6 +14,7 @@
 - (BOOL) isNSManagedObject:(id) object;
 - (SEL) descriptionSelector;
 - (NSData *) serializeInvalidJSONObject:(id) object error:(NSError **) outError;
+- (BOOL)isValidJSONObject:(id)inObject;
 
 @end
 

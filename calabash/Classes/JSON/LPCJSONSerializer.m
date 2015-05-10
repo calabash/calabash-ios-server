@@ -40,6 +40,7 @@ static NSData *kTrue = NULL;
 
 @interface LPCJSONSerializer ()
 
+- (BOOL)isValidJSONObject:(id)inObject;
 - (Class) classForNSManagedObject;
 - (BOOL) isCoreDataStackAvailable;
 - (BOOL) isNSManagedObject:(id) object;
