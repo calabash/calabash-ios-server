@@ -9,6 +9,7 @@
 
 - (Class) classForNSManagedObject;
 - (BOOL) isCoreDataStackAvailable;
+- (SEL) descriptionSelector;
 
 @end
 
@@ -240,6 +241,10 @@ describe(@"LPCJSONSerializer", ^{
       expect([mock isCoreDataStackAvailable]).to.equal(NO);
       [mock verify];
     });
+  });
+
+  it(@"descriptionSelector", ^{
+    expect([serializer descriptionSelector]).to.equal(@selector(description));
   });
 });
 

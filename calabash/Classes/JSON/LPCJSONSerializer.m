@@ -40,6 +40,7 @@ static NSData *kTrue = NULL;
 
 - (Class) classForNSManagedObject;
 - (BOOL) isCoreDataStackAvailable;
+- (SEL) descriptionSelector;
 
 @end
 
@@ -385,4 +386,7 @@ static NSData *kTrue = NULL;
   }
 }
 
+- (SEL) descriptionSelector {
+  return @selector(description);
+}
 @end
