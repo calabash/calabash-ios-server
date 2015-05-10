@@ -29,6 +29,9 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString *const LPJSONSerializerNSManageObjectFormatString;
+
+
 @interface LPCJSONSerializer : NSObject {
 }
 

@@ -336,7 +336,21 @@ describe(@"LPCJSONSerializer", ^{
     });
 
     it(@"NSManagedObject", ^{
+      NSObject *object = [NSObject new];
+      BOOL yes = YES;
+      [[[mock expect] andReturnValue:OCMOCK_VALUE(yes)] isCoreDataStackAvailable];
+      [[[mock expect] andReturnValue:OCMOCK_VALUE(yes)] isNSManagedObject:object];
+      NSString *expected = [NSString stringWithFormat:@"\"%@\"",
+                            [NSString stringWithFormat:LPJSONSerializerNSManageObjectFormatString,
+                             NSStringFromClass([object class])]];
 
+      data = [mock serializeInvalidJSONObject:object error:&error];
+      NSString *actual = [[NSString alloc] initWithBytes:[data bytes]
+                                                  length:[data length]
+                                                encoding:NSUTF8StringEncoding];
+      expect(actual).to.equal(expected);
+      expect(error).to.equal(nil);
+      [mock verify];
     });
   });
 });
