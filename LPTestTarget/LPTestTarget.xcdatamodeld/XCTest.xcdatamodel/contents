@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Server" syncable="YES">
+    <entity name="Server" representedClassName="LPServerEntity" syncable="YES">
         <attribute name="address" attributeType="String" defaultValueString="localhost" indexed="YES" syncable="YES"/>
         <attribute name="lastPing" attributeType="Integer 64" defaultValueString="-1" indexed="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Server" positionX="-63" positionY="-18" width="128" height="30"/>
+        <element name="Server" positionX="-63" positionY="-18" width="128" height="90"/>
     </elements>
 </model>

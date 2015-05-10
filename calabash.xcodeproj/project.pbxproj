@@ -542,6 +542,7 @@
 		F532C1DE1AFF4F080024DA55 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F532C1DD1AFF4F080024DA55 /* CoreData.framework */; };
 		F532C1E31AFF4F250024DA55 /* LPCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = F532C1E01AFF4F240024DA55 /* LPCoreDataStack.m */; };
 		F532C1E41AFF4F250024DA55 /* LPTestTarget.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F532C1E11AFF4F240024DA55 /* LPTestTarget.xcdatamodeld */; };
+		F532C1E71AFF6A2D0024DA55 /* LPServerEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = F532C1E61AFF6A2D0024DA55 /* LPServerEntity.m */; };
 		F537397318E5200C004133FA /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F537397418E52014004133FA /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F537398D18E5253B004133FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
@@ -1036,6 +1037,8 @@
 		F532C1DF1AFF4F240024DA55 /* LPCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCoreDataStack.h; sourceTree = "<group>"; };
 		F532C1E01AFF4F240024DA55 /* LPCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCoreDataStack.m; sourceTree = "<group>"; };
 		F532C1E21AFF4F250024DA55 /* XCTest.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = XCTest.xcdatamodel; sourceTree = "<group>"; };
+		F532C1E51AFF6A2D0024DA55 /* LPServerEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPServerEntity.h; sourceTree = "<group>"; };
+		F532C1E61AFF6A2D0024DA55 /* LPServerEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPServerEntity.m; sourceTree = "<group>"; };
 		F537398C18E5253B004133FA /* version */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = version; sourceTree = BUILT_PRODUCTS_DIR; };
 		F537399918E6E0BE004133FA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "lp-simple-example.html"; sourceTree = "<group>"; };
@@ -1844,6 +1847,8 @@
 		F59CA46E1A82EF40007A2F38 /* LPTestTarget */ = {
 			isa = PBXGroup;
 			children = (
+				F532C1E51AFF6A2D0024DA55 /* LPServerEntity.h */,
+				F532C1E61AFF6A2D0024DA55 /* LPServerEntity.m */,
 				F532C1DF1AFF4F240024DA55 /* LPCoreDataStack.h */,
 				F532C1E01AFF4F240024DA55 /* LPCoreDataStack.m */,
 				F532C1E11AFF4F240024DA55 /* LPTestTarget.xcdatamodeld */,
@@ -3152,6 +3157,7 @@
 				F59CA47B1A82EF40007A2F38 /* SecondViewController.m in Sources */,
 				F532C1E31AFF4F250024DA55 /* LPCoreDataStack.m in Sources */,
 				F59CA4751A82EF40007A2F38 /* AppDelegate.m in Sources */,
+				F532C1E71AFF6A2D0024DA55 /* LPServerEntity.m in Sources */,
 				F59CA4781A82EF40007A2F38 /* FirstViewController.m in Sources */,
 				F532C1E41AFF4F250024DA55 /* LPTestTarget.xcdatamodeld in Sources */,
 				F59CA4721A82EF40007A2F38 /* main.m in Sources */,

@@ -397,6 +397,41 @@ describe(@"LPCJSONSerializer", ^{
                                     inManagedObjectContext:context];
       expect([serializer isNSManagedObject:server]).to.equal(YES);
     });
+
+    describe(@"#serializeInvalidJSONObject:error", ^{
+      it(@"calling description raises no exception", ^{
+        NSManagedObject *server =
+        [NSEntityDescription insertNewObjectForEntityForName:@"Server"
+                                      inManagedObjectContext:context];
+        data = [serializer serializeInvalidJSONObject:server error:&error];
+        NSString *actual = [[NSString alloc] initWithBytes:[data bytes]
+                                                    length:[data length]
+                                                  encoding:NSUTF8StringEncoding];
+
+        expect([actual hasPrefix:@"\"<LPServerEntity"]).to.equal(YES);
+      });
+
+      it(@"calling description raises an exception", ^{
+        NSManagedObject *server =
+        [NSEntityDescription insertNewObjectForEntityForName:@"Server"
+                                      inManagedObjectContext:context];
+
+        // Turn the server into a fault.
+        [context deleteObject:server];
+        expect([context save:&error]).to.equal(YES);
+        expect(error).to.equal(nil);
+
+        NSString *expected = [NSString stringWithFormat:@"\"%@\"",
+                              [NSString stringWithFormat:LPJSONSerializerNSManageObjectDescriptionFaultFormatString,
+                               NSStringFromClass([server class])]];
+
+        data = [serializer serializeInvalidJSONObject:server error:&error];
+        NSString *actual = [[NSString alloc] initWithBytes:[data bytes]
+                                                    length:[data length]
+                                                  encoding:NSUTF8StringEncoding];
+        expect(actual).to.equal(expected);
+      });
+    });
   });
 });
 
