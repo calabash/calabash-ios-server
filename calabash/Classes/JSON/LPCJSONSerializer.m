@@ -31,8 +31,8 @@
 #import "LPISO8601DateFormatter.h"
 #import "LPJSONRepresentation.h"
 
-NSString *const LPJSONSerializerNSManageObjectDescriptionFaultFormatString = @"Calling 'description' on '%@' (an instance of NSManagedObject) caused a fault - this is probably a bug.";
-NSString *const LPJSONSerializerDoesNotRespondToDescriptionFormatString = @"'%@': does not respond to selector 'description'";
+NSString *const LPJSONSerializerNSManageObjectDescriptionFaultFormatString = @"Calling 'description' on '%@' (an instance of NSManagedObject) caused a fault - this is probably a bug in your application.";
+NSString *const LPJSONSerializerDoesNotRespondToDescriptionFormatString = @"'%@': does not respond to selector 'description' - this is probably a bug in your application.";
 
 static NSData *kNULL = NULL;
 static NSData *kFalse = NULL;
