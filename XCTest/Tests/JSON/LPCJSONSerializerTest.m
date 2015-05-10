@@ -4,6 +4,8 @@
 
 #import "LPCJSONSerializer.h"
 #import "LPJSONRepresentation.h"
+#import "AppDelegate.h"
+#import <CoreData/CoreData.h>
 
 @interface LPCJSONSerializer (LPXCTEST)
 
@@ -66,6 +68,7 @@ describe(@"LPCJSONSerializer", ^{
   __block NSData *data;
   __block NSData *mockData;
   __block id mock;
+
   before(^{
     serializer = [LPCJSONSerializer serializer];
     error = nil;
@@ -370,6 +373,29 @@ describe(@"LPCJSONSerializer", ^{
       expect(actual).to.equal(expected);
       expect(error).to.equal(nil);
       [mock verify];
+    });
+  });
+
+  describe(@"Handling NSManagedObjects", ^{
+     __block NSManagedObjectContext *context;
+    before(^{
+      AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication]
+                                              delegate];
+      context = delegate.managedObjectContext;
+      [context reset];
+      NSError *coreDataSaveError = nil;
+      BOOL success = [context save:&coreDataSaveError];
+      if (!success) {
+        NSLog(@"%@", coreDataSaveError);
+        abort();
+      }
+    });
+
+    it(@"#isNSManagedObject:", ^{
+      NSManagedObject *server =
+      [NSEntityDescription insertNewObjectForEntityForName:@"Server"
+                                    inManagedObjectContext:context];
+      expect([serializer isNSManagedObject:server]).to.equal(YES);
     });
   });
 });
