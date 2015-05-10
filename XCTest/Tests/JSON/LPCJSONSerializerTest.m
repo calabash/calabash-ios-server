@@ -9,7 +9,9 @@
 
 - (Class) classForNSManagedObject;
 - (BOOL) isCoreDataStackAvailable;
+- (BOOL) isNSManagedObject:(id) object;
 - (SEL) descriptionSelector;
+- (NSData *) serializeInvalidJSONObject:(id) object error:(NSError **) outError;
 
 @end
 
@@ -22,6 +24,22 @@
 - (NSData *) JSONDataRepresentation {
   return [[NSString stringWithFormat:@"data"]
           dataUsingEncoding:NSUTF8StringEncoding];
+}
+
+- (NSString *) description {
+  return @"json";
+}
+
+@end
+
+@interface LPHasNilDescription : NSObject
+
+@end
+
+@implementation LPHasNilDescription
+
+- (NSString *) description {
+  return nil;
 }
 
 @end
@@ -243,8 +261,83 @@ describe(@"LPCJSONSerializer", ^{
     });
   });
 
+  describe(@"#isNSManagedObject:", ^{
+    it(@"returns YES when object is an NSManagedObject", ^{
+      [[[mock expect] andReturn:[self class] ] classForNSManagedObject];
+      expect([mock isNSManagedObject:self]).to.equal(YES);
+      [mock verify];
+    });
+
+    it(@"returns NO when object is not an NSManagedObject", ^{
+      expect([mock isNSManagedObject:self]).to.equal(NO);
+    });
+  });
+
   it(@"descriptionSelector", ^{
     expect([serializer descriptionSelector]).to.equal(@selector(description));
+  });
+
+  describe(@"#serializeInvalidJSONObject:error:", ^{
+    it(@"does not respond to description selector", ^{
+      SEL mockSelector = NSSelectorFromString(@"noSuchSelector");
+      [[[mock expect] andReturnValue:OCMOCK_VALUE(mockSelector)] descriptionSelector];
+      [[[mock expect] andReturn:mockData] serializeString:OCMOCK_ANY
+                                                    error:[OCMArg setTo:nil]];
+
+      NSObject *object = [NSObject new];
+      data = [mock serializeInvalidJSONObject:object error:&error];
+      expect(data).to.beIdenticalTo(mockData);
+      expect(error).to.equal(nil);
+      [mock verify];
+    });
+
+    it(@"description selector returns nil", ^{
+      LPHasNilDescription *hasNil = [LPHasNilDescription new];
+      [[[mock expect] andReturn:mockData] serializeNull:OCMOCK_ANY
+                                                  error:[OCMArg setTo:nil]];
+      data = [mock serializeInvalidJSONObject:hasNil error:&error];
+      expect(data).to.beIdenticalTo(mockData);
+      expect(error).to.equal(nil);
+      [mock verify];
+    });
+
+    it(@"description is non-nil", ^{
+      [[[mock expect] andReturn:mockData] serializeString:OCMOCK_ANY
+                                                    error:[OCMArg setTo:nil]];
+
+      NSObject *object = [NSObject new];
+      data = [mock serializeInvalidJSONObject:object error:&error];
+      expect(data).to.beIdenticalTo(mockData);
+      expect(error).to.equal(nil);
+      [mock verify];
+    });
+
+    it(@"NSObject", ^{
+      LPJsonifiable *json = [LPJsonifiable new];
+      data = [serializer serializeInvalidJSONObject:json error:&error];
+      NSString *string = [[NSString alloc] initWithBytes:[data bytes]
+                                                  length:[data length]
+                                                  encoding:NSUTF8StringEncoding];
+      expect(string).to.equal([NSString stringWithFormat:@"\"%@\"",
+                               [json description]]);
+      expect(error).to.equal(nil);
+    });
+
+    it(@"UIView", ^{
+      UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
+      data = [serializer serializeInvalidJSONObject:view error:&error];
+      NSString *string = [[NSString alloc] initWithBytes:[data bytes]
+                                                  length:[data length]
+                                                encoding:NSUTF8StringEncoding];
+      expect(string).to.equal([NSString stringWithFormat:@"\"%@\"",
+                               [view description]]);
+      expect(error).to.equal(nil);
+
+    });
+
+    it(@"NSManagedObject", ^{
+
+    });
   });
 });
 

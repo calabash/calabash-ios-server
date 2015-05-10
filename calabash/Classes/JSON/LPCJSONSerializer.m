@@ -40,7 +40,9 @@ static NSData *kTrue = NULL;
 
 - (Class) classForNSManagedObject;
 - (BOOL) isCoreDataStackAvailable;
+- (BOOL) isNSManagedObject:(id) object;
 - (SEL) descriptionSelector;
+- (NSData *) serializeInvalidJSONObject:(id) object error:(NSError **) outError;
 
 @end
 
@@ -386,7 +388,26 @@ static NSData *kTrue = NULL;
   }
 }
 
+- (BOOL) isNSManagedObject:(id) object {
+  return [object isKindOfClass:[self classForNSManagedObject]];
+}
+
 - (SEL) descriptionSelector {
   return @selector(description);
 }
+
+- (NSData *) serializeInvalidJSONObject:(id) object error:(NSError **) outError {
+  if (![object respondsToSelector:[self descriptionSelector]]) {
+    NSString *str = [NSString stringWithFormat:@"'%@': does not respond to selector 'description'",
+                     NSStringFromClass([object class])];
+    return [self serializeString:str error:outError];
+  }
+
+  NSString *description = [object description];
+  if (!description) {
+    return [self serializeNull:[NSNull null] error:outError];
+  }
+  return [self serializeString:description error:outError];
+}
+
 @end
