@@ -9,12 +9,17 @@
 
 @interface LPCJSONSerializer (LPXCTEST)
 
+- (BOOL)isValidJSONObject:(id)inObject;
 - (Class) classForNSManagedObject;
 - (BOOL) isCoreDataStackAvailable;
 - (BOOL) isNSManagedObject:(id) object;
 - (SEL) descriptionSelector;
+
+- (NSData *) serializeNull:(NSNull *) inNull error:(NSError **) outError;
+- (NSData *) serializeNumber:(NSNumber *) inNumber error:(NSError **) outError;
+- (NSData *) serializeString:(NSString *) inString error:(NSError **) outError;
+- (NSData *) serializeDate:(NSDate *) date error:(NSError **) outError;
 - (NSData *) serializeInvalidJSONObject:(id) object error:(NSError **) outError;
-- (BOOL)isValidJSONObject:(id)inObject;
 
 @end
 
