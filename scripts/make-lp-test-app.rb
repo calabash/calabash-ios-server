@@ -29,6 +29,7 @@ args =
             '-scheme LPTestTarget',
             '-sdk iphonesimulator',
             '-configuration Debug',
+            'GCC_TREAT_WARNINGS_AS_ERRORS=YES',
             '| xcpretty -c && exit ${PIPESTATUS[0]}'
       ]
 
