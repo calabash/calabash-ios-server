@@ -1,7 +1,7 @@
 //  Created by Karl Krukow on 11/08/11.
 //  Copyright 2011 LessPainful. All rights reserved.
 
-#import "LPHTTPServer.h"
+#import <Foundation/Foundation.h>
 
 @class LPHTTPServer;
 
