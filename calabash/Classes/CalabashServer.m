@@ -6,6 +6,7 @@
 //
 
 #import "CalabashServer.h"
+#import "LPHTTPServer.h"
 #import "LPRouter.h"
 #import "LPScreenshotRoute.h"
 #import "LPMapRoute.h"
