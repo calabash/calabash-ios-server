@@ -566,6 +566,24 @@ describe(@"LPCJSONSerializer", ^{
       expect(actual).to.equal(@"mock data");
     });
   });
+
+  describe(@"#stringByEnsuringSerializationOfArray:", ^{
+    it(@"can handling being passed a non-array instance", ^{
+      id dictionary = @{@"array" : @[@(1), @(2), @(3)]};
+      NSString *actual = [serializer stringByEnsuringSerializationOfArray:dictionary];
+      expect(actual).notTo.equal(nil);
+      expect(actual.length).notTo.equal(0);
+    });
+
+    it(@"serializes the array", ^{
+      [[[mock expect] andReturn:mockData] serializeArray:OCMOCK_ANY
+                                                   error:[OCMArg setTo:nil]];
+
+      NSString *actual = [mock stringByEnsuringSerializationOfArray:@[]];
+      [mock verify];
+      expect(actual).to.equal(@"mock data");
+    });
+  });
 });
 
 SpecEnd

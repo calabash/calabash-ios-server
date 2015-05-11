@@ -486,4 +486,31 @@ static NSData *kTrue = NULL;
   return [self stringByDecodingNSData:data];
 }
 
+- (NSString *) stringByEnsuringSerializationOfArray:(NSArray *) array {
+  if (![array isKindOfClass:[NSArray class]]) {
+    NSString *className = NSStringFromClass([array class]);
+    NSLog(@"Expected NSArray but found instance of '%@'.\nCannot serialize object.",
+          className);
+    NSString *json = [NSString stringWithFormat:@"Cannot serialize instance of '%@' as an array.",
+                      className];
+    NSData *data = [self serializeString:json error:nil];
+    return [self stringByDecodingNSData:data];
+  }
+
+  NSError *error = nil;
+  NSData *data = [self serializeArray:array error:&error];
+  if (!data) {
+    NSString *className = NSStringFromClass([array class]);
+    if (error) {
+      NSLog(@"Unable to serialize array '%@'.\n%@", className, error);
+    } else {
+      NSLog(@"Unable to serialize array '%@'", className);
+    }
+    data = [[NSString stringWithFormat:@"Invalid JSON for '%@' instance.", className]
+            dataUsingEncoding:NSUTF8StringEncoding];
+  }
+
+  return [self stringByDecodingNSData:data];
+}
+
 @end

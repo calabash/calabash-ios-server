@@ -40,6 +40,7 @@ extern NSString *const LPJSONSerializerDoesNotRespondToDescriptionFormatString;
 - (NSData *)serializeObject:(id)inObject error:(NSError **)outError;
 
 - (NSData *)serializeArray:(NSArray *)inArray error:(NSError **)outError;
+- (NSString *) stringByEnsuringSerializationOfArray:(NSArray *) array;
 - (NSString *) stringByEnsuringSerializationOfDictionary:(NSDictionary *) dictionary;
 
 @end
