@@ -153,7 +153,7 @@ describe(@"LPCJSONSerializer", ^{
     describe(@"valid JSON objects", ^{
       it(@"NSNull", ^{
         [[[mock expect] andReturn:mockData] serializeNull:OCMOCK_ANY
-                                                    error:[OCMArg setTo:nil]];
+                                                    error:[OCMArg setTo:error]];
         data = [mock serializeObject:[NSNull null] error:&error];
         [mock verify];
         expect(data).to.beIdenticalTo(mockData);
@@ -162,7 +162,7 @@ describe(@"LPCJSONSerializer", ^{
 
       it(@"NSNumber", ^{
         [[[mock expect] andReturn:mockData] serializeNumber:OCMOCK_ANY
-                                                      error:[OCMArg setTo:nil]];
+                                                      error:[OCMArg setTo:error]];
         data = [mock serializeObject:@(1) error:&error];
         [mock verify];
         expect(data).to.beIdenticalTo(mockData);
@@ -171,7 +171,7 @@ describe(@"LPCJSONSerializer", ^{
 
       it(@"NSString", ^{
         [[[mock stub] andReturn:mockData] serializeString:OCMOCK_ANY
-                                                    error:[OCMArg setTo:nil]];
+                                                    error:[OCMArg setTo:error]];
         data = [mock serializeObject:@"Right on!" error:&error];
         [mock verify];
         expect(data).to.beIdenticalTo(mockData);
@@ -181,7 +181,7 @@ describe(@"LPCJSONSerializer", ^{
 
       it(@"NSArray", ^{
         [[[mock expect] andReturn:mockData] serializeArray:OCMOCK_ANY
-                                                     error:[OCMArg setTo:nil]];
+                                                     error:[OCMArg setTo:error]];
         data = [mock serializeObject:@[] error:&error];
         [mock verify];
         expect(data).to.beIdenticalTo(mockData);
@@ -190,7 +190,7 @@ describe(@"LPCJSONSerializer", ^{
 
       it(@"NSDictionary", ^{
         [[[mock expect] andReturn:mockData] serializeDictionary:OCMOCK_ANY
-                                                          error:[OCMArg setTo:nil]];
+                                                          error:[OCMArg setTo:error]];
 
         data = [mock serializeObject:@{} error:&error];
         [mock verify];
@@ -200,7 +200,7 @@ describe(@"LPCJSONSerializer", ^{
 
       it(@"NSData", ^{
         [[[mock expect] andReturn:mockData] serializeString:OCMOCK_ANY
-                                                      error:[OCMArg setTo:nil]];
+                                                      error:[OCMArg setTo:error]];
         data = [mock serializeObject:[[NSData alloc] init] error:&error];
         [mock verify];
         expect(data).to.beIdenticalTo(mockData);
@@ -209,7 +209,7 @@ describe(@"LPCJSONSerializer", ^{
 
       it(@"NSDate", ^{
         [[[mock expect] andReturn:mockData] serializeDate:OCMOCK_ANY
-                                                    error:[OCMArg setTo:nil]];
+                                                    error:[OCMArg setTo:error]];
         data = [mock serializeObject:[NSDate date] error:&error];
         [mock verify];
         expect(data).to.beIdenticalTo(mockData);
@@ -230,7 +230,7 @@ describe(@"LPCJSONSerializer", ^{
     describe(@"nil and NULL", ^{
       it(@"nil", ^{
         [[[mock expect] andReturn:mockData] serializeNull:OCMOCK_ANY
-                                                    error:[OCMArg setTo:nil]];
+                                                    error:[OCMArg setTo:error]];
         data = [mock serializeObject:nil error:&error];
         [mock verify];
         expect(data).to.beIdenticalTo(mockData);
@@ -239,7 +239,7 @@ describe(@"LPCJSONSerializer", ^{
 
       it(@"NULL", ^{
         [[[mock expect] andReturn:mockData] serializeNull:OCMOCK_ANY
-                                                    error:[OCMArg setTo:nil]];
+                                                    error:[OCMArg setTo:error]];
         data = [mock serializeObject:NULL error:&error];
         [mock verify];
         expect(data).to.beIdenticalTo(mockData);
@@ -265,7 +265,7 @@ describe(@"LPCJSONSerializer", ^{
 
   it(@"#serializeDate:error:", ^{
     [[[mock expect] andReturn:mockData] serializeString:OCMOCK_ANY
-                                                  error:[OCMArg setTo:nil]];
+                                                  error:[OCMArg setTo:error]];
     data = [mock serializeDate:[NSDate date] error:&error];
     [mock verify];
     expect(data).to.beIdenticalTo(mockData);
@@ -325,7 +325,7 @@ describe(@"LPCJSONSerializer", ^{
     it(@"description selector returns nil", ^{
       LPHasNilDescription *hasNil = [LPHasNilDescription new];
       [[[mock expect] andReturn:mockData] serializeNull:OCMOCK_ANY
-                                                  error:[OCMArg setTo:nil]];
+                                                  error:[OCMArg setTo:error]];
       data = [mock serializeInvalidJSONObject:hasNil error:&error];
       expect(data).to.beIdenticalTo(mockData);
       expect(error).to.equal(nil);
@@ -334,7 +334,7 @@ describe(@"LPCJSONSerializer", ^{
 
     it(@"description is non-nil", ^{
       [[[mock expect] andReturn:mockData] serializeString:OCMOCK_ANY
-                                                    error:[OCMArg setTo:nil]];
+                                                    error:[OCMArg setTo:error]];
 
       NSObject *object = [NSObject new];
       data = [mock serializeInvalidJSONObject:object error:&error];
@@ -572,7 +572,7 @@ describe(@"LPCJSONSerializer", ^{
 
     it(@"serializes the dictionary", ^{
       [[[mock expect] andReturn:mockData] serializeDictionary:OCMOCK_ANY
-                                                        error:[OCMArg setTo:nil]];
+                                                        error:[OCMArg setTo:error]];
 
       NSString *actual = [mock stringByEnsuringSerializationOfDictionary:@{}];
       [mock verify];
@@ -602,7 +602,7 @@ describe(@"LPCJSONSerializer", ^{
 
     it(@"serializes the array", ^{
       [[[mock expect] andReturn:mockData] serializeArray:OCMOCK_ANY
-                                                   error:[OCMArg setTo:nil]];
+                                                   error:[OCMArg setTo:error]];
 
       NSString *actual = [mock stringByEnsuringSerializationOfArray:@[]];
       [mock verify];
@@ -628,7 +628,7 @@ describe(@"LPCJSONSerializer", ^{
       BOOL yes = YES;
       [[[mock expect] andReturnValue:OCMOCK_VALUE(yes)] isValidJSONObject:object];
       [[[mock expect] andReturn:mockData] serializeObject:OCMOCK_ANY
-                                                    error:[OCMArg setTo:nil]];
+                                                    error:[OCMArg setTo:error]];
 
       NSString *actual = [mock stringByEnsuringSerializationOfObject:object];
       [mock verify];
@@ -640,7 +640,7 @@ describe(@"LPCJSONSerializer", ^{
       BOOL no = NO;
       [[[mock expect] andReturnValue:OCMOCK_VALUE(no)] isValidJSONObject:object];
       [[[mock expect] andReturn:mockData] serializeInvalidJSONObject:OCMOCK_ANY
-                                                               error:[OCMArg setTo:nil]];
+                                                               error:[OCMArg setTo:error]];
 
       NSString *actual = [mock stringByEnsuringSerializationOfObject:object];
       [mock verify];
