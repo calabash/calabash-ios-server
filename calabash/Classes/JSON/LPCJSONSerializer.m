@@ -458,4 +458,31 @@ static NSData *kTrue = NULL;
                                  encoding:NSUTF8StringEncoding] autorelease];
 }
 
+- (NSString *) stringByEnsuringSerializationOfDictionary:(NSDictionary *) dictionary {
+  if (![dictionary isKindOfClass:[NSDictionary class]]) {
+    NSString *className = NSStringFromClass([dictionary class]);
+    NSLog(@"Expected NSDictionary but found instance of '%@'.\nCannot serialize object.",
+          className);
+    NSString *json = [NSString stringWithFormat:@"Cannot serialize instance of '%@' as a dictionary.",
+                      className];
+    NSData *data = [self serializeString:json error:nil];
+    return [self stringByDecodingNSData:data];
+  }
+
+  NSError *error = nil;
+  NSData *data = [self serializeDictionary:dictionary error:&error];
+  if (!data) {
+    NSString *className = NSStringFromClass([dictionary class]);
+    if (error) {
+      NSLog(@"Unable to serialize dictionary '%@'.\n%@", className, error);
+    } else {
+      NSLog(@"Unable to serialize dictionary '%@'", className);
+    }
+    data = [[NSString stringWithFormat:@"Invalid JSON for '%@' instance.", className]
+            dataUsingEncoding:NSUTF8StringEncoding];
+  }
+
+  return [self stringByDecodingNSData:data];
+}
+
 @end
