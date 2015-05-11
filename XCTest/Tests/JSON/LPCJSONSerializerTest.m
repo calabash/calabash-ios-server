@@ -578,6 +578,29 @@ describe(@"LPCJSONSerializer", ^{
       [mock verify];
       expect(actual).to.equal(@"mock data");
     });
+
+    describe(@"unable to serialze", ^{
+      it(@"there was no error", ^{
+        id object = @{};
+        [[[mock expect] andReturn:nil] serializeDictionary:OCMOCK_ANY
+                                                     error:[OCMArg setTo:nil]];
+
+        NSString *actual = [mock stringByEnsuringSerializationOfDictionary:object];
+        [mock verify];
+        expect([actual rangeOfString:@"Invalid JSON for "].location).notTo.equal(NSNotFound);
+      });
+
+      it (@"there was an error", ^{
+        id object = @{};
+        error = [NSError errorWithDomain:@"Domain" code:1 userInfo:@{}];
+        [[[mock expect] andReturn:nil] serializeDictionary:OCMOCK_ANY
+                                                error:[OCMArg setTo:error]];
+
+        NSString *actual = [mock stringByEnsuringSerializationOfDictionary:object];
+        [mock verify];
+        expect([actual rangeOfString:@"Invalid JSON for "].location).notTo.equal(NSNotFound);
+      });
+    });
   });
 
   describe(@"#stringByEnsuringSerializationOfArray:", ^{
@@ -607,6 +630,29 @@ describe(@"LPCJSONSerializer", ^{
       NSString *actual = [mock stringByEnsuringSerializationOfArray:@[]];
       [mock verify];
       expect(actual).to.equal(@"mock data");
+    });
+
+    describe(@"unable to serialze", ^{
+      it(@"there was no error", ^{
+        id object = @[];
+        [[[mock expect] andReturn:nil] serializeArray:OCMOCK_ANY
+                                                error:[OCMArg setTo:nil]];
+
+        NSString *actual = [mock stringByEnsuringSerializationOfArray:object];
+        [mock verify];
+        expect([actual rangeOfString:@"Invalid JSON for "].location).notTo.equal(NSNotFound);
+      });
+
+      it (@"there was an error", ^{
+        id object = @[];
+        error = [NSError errorWithDomain:@"Domain" code:1 userInfo:@{}];
+        [[[mock expect] andReturn:nil] serializeArray:OCMOCK_ANY
+                                                error:[OCMArg setTo:error]];
+
+        NSString *actual = [mock stringByEnsuringSerializationOfArray:object];
+        [mock verify];
+        expect([actual rangeOfString:@"Invalid JSON for "].location).notTo.equal(NSNotFound);
+      });
     });
   });
 
