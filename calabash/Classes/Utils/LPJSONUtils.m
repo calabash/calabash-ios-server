@@ -63,15 +63,8 @@
 }
 
 + (NSString *) serializeDictionary:(NSDictionary *) dictionary {
-  LPCJSONSerializer *s = [LPCJSONSerializer serializer];
-  NSError *error = nil;
-  NSData *d = [s serializeDictionary:dictionary error:&error];
-  if (error) {
-    NSLog(@"Unable to serialize dictionary (%@), %@", error, dictionary);
-  }
-  NSString *res = [[NSString alloc] initWithBytes:[d bytes] length:[d length]
-                                         encoding:NSUTF8StringEncoding];
-  return res;
+  LPCJSONSerializer *serializer = [LPCJSONSerializer serializer];
+  return [serializer stringByEnsuringSerializationOfDictionary:dictionary];
 }
 
 + (NSDictionary *) deserializeDictionary:(NSString *) string {
