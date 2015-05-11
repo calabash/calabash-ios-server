@@ -79,17 +79,9 @@
 }
 
 + (NSString *) serializeArray:(NSArray *) array {
-  LPCJSONSerializer *s = [LPCJSONSerializer serializer];
-  NSError *error = nil;
-  NSData *d = [s serializeArray:array error:&error];
-  if (error) {
-    NSLog(@"Unable to serialize arrayy (%@), %@", error, array);
-  }
-  NSString *res = [[NSString alloc] initWithBytes:[d bytes] length:[d length]
-                                         encoding:NSUTF8StringEncoding];
-  return res;
+  LPCJSONSerializer *serializer = [LPCJSONSerializer serializer];
+  return [serializer stringByEnsuringSerializationOfArray:array];
 }
-
 
 + (NSArray *) deserializeArray:(NSString *) string {
   LPCJSONDeserializer *ds = [LPCJSONDeserializer deserializer];

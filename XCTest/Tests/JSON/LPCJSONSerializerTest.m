@@ -19,8 +19,8 @@
 - (NSData *) serializeNumber:(NSNumber *) inNumber error:(NSError **) outError;
 - (NSData *) serializeString:(NSString *) inString error:(NSError **) outError;
 - (NSData *) serializeDate:(NSDate *) date error:(NSError **) outError;
-- (NSData *)serializeDictionary:(NSDictionary *)inDictionary error:(NSError **)outError;
-
+- (NSData *) serializeDictionary:(NSDictionary *) inDictionary error:(NSError **) outError;
+- (NSData *) serializeArray:(NSArray *) inArray error:(NSError **) outError;
 - (NSData *) serializeInvalidJSONObject:(id) object error:(NSError **) outError;
 
 - (NSString *) stringByDecodingNSData:(NSData *) data;
@@ -557,6 +557,18 @@ describe(@"LPCJSONSerializer", ^{
       expect(actual.length).notTo.equal(0);
     });
 
+    it(@"can handle nil argument", ^{
+      NSString *actual = [serializer stringByEnsuringSerializationOfDictionary:nil];
+      expect(actual).notTo.equal(nil);
+      expect(actual.length).notTo.equal(0);
+    });
+
+    it(@"can handle NULL argument", ^{
+      NSString *actual = [serializer stringByEnsuringSerializationOfDictionary:NULL];
+      expect(actual).notTo.equal(nil);
+      expect(actual.length).notTo.equal(0);
+    });
+
     it(@"serializes the dictionary", ^{
       [[[mock expect] andReturn:mockData] serializeDictionary:OCMOCK_ANY
                                                         error:[OCMArg setTo:nil]];
@@ -571,6 +583,18 @@ describe(@"LPCJSONSerializer", ^{
     it(@"can handling being passed a non-array instance", ^{
       id dictionary = @{@"array" : @[@(1), @(2), @(3)]};
       NSString *actual = [serializer stringByEnsuringSerializationOfArray:dictionary];
+      expect(actual).notTo.equal(nil);
+      expect(actual.length).notTo.equal(0);
+    });
+
+    it(@"can handle nil argument", ^{
+      NSString *actual = [serializer stringByEnsuringSerializationOfArray:nil];
+      expect(actual).notTo.equal(nil);
+      expect(actual.length).notTo.equal(0);
+    });
+
+    it(@"can handle NULL argument", ^{
+      NSString *actual = [serializer stringByEnsuringSerializationOfArray:NULL];
       expect(actual).notTo.equal(nil);
       expect(actual.length).notTo.equal(0);
     });
