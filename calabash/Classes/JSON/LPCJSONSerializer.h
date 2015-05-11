@@ -47,7 +47,7 @@
 
 @end
 
-typedef enum {
-    CJSONSerializerErrorCouldNotSerializeDataType = -1,
-    CJSONSerializerErrorCouldNotSerializeObject = -1
-} CJSONSerializerError;
+typedef enum : NSInteger {
+  LPLPCJSONSerializerErrorCouldNotSerializeDataType = -1,
+  LPLPCJSONSerializerErrorCouldNotSerializeObject = -1
+} LPCJSONSerializerError;
