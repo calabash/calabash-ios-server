@@ -25,7 +25,7 @@
 @implementation LPJsonifiable
 
 - (NSData *) JSONDataRepresentation {
-  return [[NSString stringWithFormat:@"data"]
+  return [[NSString stringWithFormat:@"LPJsonifiable: JSONRepresentation"]
           dataUsingEncoding:NSUTF8StringEncoding];
 }
 
@@ -54,8 +54,10 @@
 @implementation LPDescriptionRaisesException
 
 - (NSString *) description {
-  @throw [NSException exceptionWithName:@"An exception"
-                                 reason:@"just because" userInfo:@{}];
+  NSString *reason = @"Simulating case where calling `description` raises an error";
+  @throw [NSException exceptionWithName:@"Testing Exception"
+                                 reason:reason
+                               userInfo:@{}];
 }
 
 @end
@@ -73,7 +75,7 @@ describe(@"LPCJSONSerializer", ^{
   before(^{
     serializer = [LPCJSONSerializer serializer];
     error = nil;
-    mockData = [[NSString stringWithFormat:@"data"]
+    mockData = [[NSString stringWithFormat:@"mock data"]
                 dataUsingEncoding:NSUTF8StringEncoding];
     mock = OCMPartialMock(serializer);
   });
@@ -340,7 +342,7 @@ describe(@"LPCJSONSerializer", ^{
       data = [serializer serializeInvalidJSONObject:json error:&error];
       NSString *string = [[NSString alloc] initWithBytes:[data bytes]
                                                   length:[data length]
-                                                  encoding:NSUTF8StringEncoding];
+                                                encoding:NSUTF8StringEncoding];
       expect(string).to.equal([NSString stringWithFormat:@"\"%@\"",
                                [json description]]);
       expect(error).to.equal(nil);
@@ -378,7 +380,7 @@ describe(@"LPCJSONSerializer", ^{
   });
 
   describe(@"Handling NSManagedObjects", ^{
-     __block NSManagedObjectContext *context;
+    __block NSManagedObjectContext *context;
     before(^{
       AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication]
                                               delegate];
@@ -432,6 +434,96 @@ describe(@"LPCJSONSerializer", ^{
                                                   encoding:NSUTF8StringEncoding];
         expect(actual).to.equal(expected);
       });
+    });
+  });
+
+  describe(@"#serilizeArray:error", ^{
+    it(@"can serialize an array of valid JSON objects", ^{
+      NSArray *array = @[@(9999),
+                         @"string",
+                         [NSDate date],
+                         mockData,
+                         @{@"key" : @"value"},
+                         @[@(1), @(2), @(3)],
+                         [LPJsonifiable new],
+                         [NSNull null]];
+      data = [serializer serializeArray:array error:&error];
+
+      NSString *actual = [[NSString alloc] initWithBytes:[data bytes]
+                                                  length:[data length]
+                                                encoding:NSUTF8StringEncoding];
+
+      // Skip the date checking; too difficult.
+      expect([actual rangeOfString:@"9999"].location).notTo.equal(NSNotFound);
+      expect([actual rangeOfString:@"\"string\""].location).notTo.equal(NSNotFound);
+      expect([actual rangeOfString:@"\"mock data\""].location).notTo.equal(NSNotFound);
+      expect([actual rangeOfString:@"{\"key\":\"value\"}"].location).notTo.equal(NSNotFound);
+      expect([actual rangeOfString:@"LPJsonifiable: JSONRepresentation"].location).notTo.equal(NSNotFound);
+      expect([actual rangeOfString:@"[1,2,3]"].location).notTo.equal(NSNotFound);
+      expect([actual rangeOfString:@"null"].location).notTo.equal(NSNotFound);
+
+      expect(error).to.equal(nil);
+    });
+
+    it(@"can serialize an array of invalid JSON objects", ^{
+      // Skipping NSManagedObject.
+      NSArray *array = @[[NSObject new],
+                         [[UIView alloc] initWithFrame:CGRectZero],
+                         [LPHasNilDescription new]];
+      data = [serializer serializeArray:array error:&error];
+      NSString *actual = [[NSString alloc] initWithBytes:[data bytes]
+                                                  length:[data length]
+                                                encoding:NSUTF8StringEncoding];
+
+      expect([actual rangeOfString:@"\"<NSObject"].location).notTo.equal(NSNotFound);
+      expect([actual rangeOfString:@"\"<UIView"].location).notTo.equal(NSNotFound);
+      expect([actual rangeOfString:@"null"].location).notTo.equal(NSNotFound);
+      expect(error).to.equal(nil);
+    });
+  });
+
+  describe(@"#serializeDictionary:error:", ^{
+    it(@"can serialize a dictionary of valid JSON objects", ^{
+      NSDictionary *dictionary =  @{@"number" : @(9999),
+                                    @"string" : @"string",
+                                    @"date" : [NSDate date],
+                                    @"data" : mockData,
+                                    @"dictionary" : @{@"key" : @"value"},
+                                    @"LPJSONRepresentation protocol" : [LPJsonifiable new],
+                                    @"array" : @[@(1), @(2), @(3)],
+                                    @"NSNull" : [NSNull null]
+                                    };
+      data = [serializer serializeDictionary:dictionary error:&error];
+      NSString *actual = [[NSString alloc] initWithBytes:[data bytes]
+                                                  length:[data length]
+                                                encoding:NSUTF8StringEncoding];
+
+      // Skip the date checking; too difficult.
+      expect([actual rangeOfString:@"\"number\":9999"].location).notTo.equal(NSNotFound);
+      expect([actual rangeOfString:@"\"string\":\"string\""].location).notTo.equal(NSNotFound);
+      expect([actual rangeOfString:@"\"mock data\""].location).notTo.equal(NSNotFound);
+      expect([actual rangeOfString:@"\"NSNull\":null"].location).notTo.equal(NSNotFound);
+      expect([actual rangeOfString:@"\"LPJSONRepresentation protocol\":LPJsonifiable"].location).notTo.equal(NSNotFound);
+      expect([actual rangeOfString:@"\"array\":[1,2,3]"].location).notTo.equal(NSNotFound);
+
+      expect(error).to.equal(nil);
+    });
+
+    it(@"can serialize a dictionary of invalid JSON objects", ^{
+      // Skipping NSManagedObject.
+      NSDictionary *dictionary = @{@"object" : [NSObject new],
+                                   @"view" : [[UIView alloc] initWithFrame:CGRectZero],
+                                   @"has nil description" : [LPHasNilDescription new]
+                                   };
+      data = [serializer serializeDictionary:dictionary error:&error];
+      NSString *actual = [[NSString alloc] initWithBytes:[data bytes]
+                                                  length:[data length]
+                                                encoding:NSUTF8StringEncoding];
+
+      expect([actual rangeOfString:@"\"has nil description\":null"].location).notTo.equal(NSNotFound);
+      expect([actual rangeOfString:@"\"object\":\"<NSObject"].location).notTo.equal(NSNotFound);
+      expect([actual rangeOfString:@"\"view\":\"<UIView"].location).notTo.equal(NSNotFound);
+      expect(error).to.equal(nil);
     });
   });
 });

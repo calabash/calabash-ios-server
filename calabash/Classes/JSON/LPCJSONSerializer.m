@@ -308,7 +308,12 @@ static NSData *kTrue = NULL;
     NSUInteger i = 0;
     while ((theValue = [theEnumerator nextObject]) != NULL)
         {
-        NSData *theValueData = [self serializeObject:theValue error:outError];
+        NSData *theValueData = nil;
+        if ([self isValidJSONObject:theValue]) {
+          theValueData = [self serializeObject:theValue error:outError];
+        } else {
+          theValueData = [self serializeInvalidJSONObject:theValue error:outError];
+        }
         if (theValueData == NULL)
             {
             return(NULL);
@@ -341,7 +346,12 @@ static NSData *kTrue = NULL;
             {
             return(NULL);
             }
-        NSData *theValueData = [self serializeObject:theValue error:outError];
+        NSData *theValueData = nil;
+          if ([self isValidJSONObject:theValue]) {
+            theValueData = [self serializeObject:theValue error:outError];
+          } else {
+            theValueData = [self serializeInvalidJSONObject:theValue error:outError];
+          }
         if (theValueData == NULL)
             {
             return(NULL);
