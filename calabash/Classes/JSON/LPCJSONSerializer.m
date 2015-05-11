@@ -513,4 +513,27 @@ static NSData *kTrue = NULL;
   return [self stringByDecodingNSData:data];
 }
 
+- (NSString *) stringByEnsuringSerializationOfObject:(id) object {
+  NSData *data = nil;
+  NSError *error = nil;
+  if ([self isValidJSONObject:object]) {
+    data = [self serializeObject:object error:&error];
+  } else {
+    data = [self serializeInvalidJSONObject:object error:&error];
+  }
+
+  if (!data) {
+    NSString *className = NSStringFromClass([object class]);
+    if (error) {
+      NSLog(@"Unable to serialize object '%@'.\n%@", className, error);
+    } else {
+      NSLog(@"Unable to serialize object '%@'", className);
+    }
+    data = [[NSString stringWithFormat:@"Invalid JSON for '%@' instance.", className]
+            dataUsingEncoding:NSUTF8StringEncoding];
+  }
+
+  return [self stringByDecodingNSData:data];
+}
+
 @end

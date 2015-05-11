@@ -38,7 +38,7 @@ extern NSString *const LPJSONSerializerDoesNotRespondToDescriptionFormatString;
 
 /// Take any JSON compatible object (generally NSNull, NSNumber, NSString, NSArray and NSDictionary) and produce an NSData containing the serialized JSON.
 - (NSData *)serializeObject:(id)inObject error:(NSError **)outError;
-- (NSString *) stringByEnsuringSerilizationOfObject:(id) object;
+- (NSString *) stringByEnsuringSerializationOfObject:(id) object;
 - (NSString *) stringByEnsuringSerializationOfArray:(NSArray *) array;
 - (NSString *) stringByEnsuringSerializationOfDictionary:(NSDictionary *) dictionary;
 

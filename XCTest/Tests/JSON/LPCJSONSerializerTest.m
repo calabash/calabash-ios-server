@@ -608,6 +608,69 @@ describe(@"LPCJSONSerializer", ^{
       expect(actual).to.equal(@"mock data");
     });
   });
+
+  describe(@"#stringByEnsuringSerializationOfObject:", ^{
+    it(@"can handle nil argument", ^{
+      NSString *actual = [serializer stringByEnsuringSerializationOfObject:nil];
+      expect(actual).notTo.equal(nil);
+      expect(actual.length).notTo.equal(0);
+    });
+
+    it(@"can handle NULL argument", ^{
+      NSString *actual = [serializer stringByEnsuringSerializationOfObject:NULL];
+      expect(actual).notTo.equal(nil);
+      expect(actual.length).notTo.equal(0);
+    });
+
+    it(@"valid JSON object", ^{
+      id object = [NSObject new];
+      BOOL yes = YES;
+      [[[mock expect] andReturnValue:OCMOCK_VALUE(yes)] isValidJSONObject:object];
+      [[[mock expect] andReturn:mockData] serializeObject:OCMOCK_ANY
+                                                    error:[OCMArg setTo:nil]];
+
+      NSString *actual = [mock stringByEnsuringSerializationOfObject:object];
+      [mock verify];
+      expect(actual).to.equal(@"mock data");
+    });
+
+    it(@"invalid JSON object", ^{
+      id object = [NSObject new];
+      BOOL no = NO;
+      [[[mock expect] andReturnValue:OCMOCK_VALUE(no)] isValidJSONObject:object];
+      [[[mock expect] andReturn:mockData] serializeInvalidJSONObject:OCMOCK_ANY
+                                                               error:[OCMArg setTo:nil]];
+
+      NSString *actual = [mock stringByEnsuringSerializationOfObject:object];
+      [mock verify];
+      expect(actual).to.equal(@"mock data");
+    });
+
+    describe(@"unable to serialze", ^{
+      it(@"there was no error", ^{
+        id object = [NSObject new];
+        [[[mock expect] andReturn:nil] serializeInvalidJSONObject:OCMOCK_ANY
+                                                            error:[OCMArg setTo:nil]];
+
+        NSString *actual = [mock stringByEnsuringSerializationOfObject:object];
+        [mock verify];
+        expect([actual rangeOfString:@"Invalid JSON for 'NSObject' instance."].location).notTo.equal(NSNotFound);
+      });
+
+      it (@"there was an error", ^{
+        id object = [NSObject new];
+
+        error = [NSError errorWithDomain:@"Domain" code:1 userInfo:@{}];
+
+        [[[mock expect] andReturn:nil] serializeInvalidJSONObject:OCMOCK_ANY
+                                                            error:[OCMArg setTo:error]];
+
+        NSString *actual = [mock stringByEnsuringSerializationOfObject:object];
+        [mock verify];
+        expect([actual rangeOfString:@"Invalid JSON for 'NSObject' instance."].location).notTo.equal(NSNotFound);
+      });
+    });
+  });
 });
 
 SpecEnd
