@@ -52,6 +52,8 @@ static NSData *kTrue = NULL;
 - (NSData *) serializeDate:(NSDate *) date error:(NSError **) outError;
 - (NSData *) serializeInvalidJSONObject:(id) object error:(NSError **) outError;
 
+- (NSString *) stringByDecodingNSData:(NSData *) data;
+
 @end
 
 @implementation LPCJSONSerializer
@@ -443,6 +445,17 @@ static NSData *kTrue = NULL;
     return [self serializeNull:[NSNull null] error:outError];
   }
   return [self serializeString:description error:outError];
+}
+
+- (NSString *) stringByDecodingNSData:(NSData *) data {
+  NSData *dataGuard = data;
+  if (!data) {
+    dataGuard = [self serializeNull:[NSNull null] error:nil];
+  }
+
+  return [[[NSString alloc] initWithBytes:[dataGuard bytes]
+                                   length:[dataGuard length]
+                                 encoding:NSUTF8StringEncoding] autorelease];
 }
 
 @end

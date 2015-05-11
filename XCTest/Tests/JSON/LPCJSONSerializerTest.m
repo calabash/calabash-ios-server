@@ -21,6 +21,8 @@
 - (NSData *) serializeDate:(NSDate *) date error:(NSError **) outError;
 - (NSData *) serializeInvalidJSONObject:(id) object error:(NSError **) outError;
 
+- (NSString *) stringByDecodingNSData:(NSData *) data;
+
 @end
 
 @interface LPJsonifiable : NSObject <LPJSONRepresentation>
@@ -525,6 +527,23 @@ describe(@"LPCJSONSerializer", ^{
       expect([actual rangeOfString:@"\"object\":\"<NSObject"].location).notTo.equal(NSNotFound);
       expect([actual rangeOfString:@"\"view\":\"<UIView"].location).notTo.equal(NSNotFound);
       expect(error).to.equal(nil);
+    });
+  });
+
+  describe(@"#stringByDecodingNSData:", ^{
+    it(@"can handle nil data argument", ^{
+      NSString *actual = [serializer stringByDecodingNSData:nil];
+      expect(actual).to.equal(@"null");
+    });
+
+    it(@"can handle NULL data argument", ^{
+      NSString *actual = [serializer stringByDecodingNSData:NULL];
+      expect(actual).to.equal(@"null");
+    });
+
+    it(@"can handle arbitrary data", ^{
+      NSString *actual = [serializer stringByDecodingNSData:mockData];
+      expect(actual).to.equal(@"mock data");
     });
   });
 });
