@@ -135,12 +135,7 @@ describe(@"LPCJSONSerializer", ^{
         UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
         expect([serializer isValidJSONObject:view]).to.equal(NO);
       });
-
-      it(@"NSManagedObject", ^{
-
-      });
     });
-
   });
 
   describe(@"#serializeObject:error:", ^{
@@ -242,17 +237,18 @@ describe(@"LPCJSONSerializer", ^{
       });
     });
 
-    describe(@"arbitrary NSObjects", ^{
+    describe(@"Returns NULL when object is invalid JSON object", ^{
       it(@"NSObject", ^{
-
+        data = [serializer serializeObject:[NSObject new] error:&error];
+        expect(data).to.equal(NULL);
+        expect(error).notTo.equal(nil);
       });
 
       it(@"UIView", ^{
-
-      });
-
-      it(@"NSManagedObject", ^{
-
+        data = [serializer serializeObject:[[UIView alloc] initWithFrame:CGRectZero]
+                                     error:&error];
+        expect(data).to.equal(NULL);
+        expect(error).notTo.equal(nil);
       });
     });
   });
