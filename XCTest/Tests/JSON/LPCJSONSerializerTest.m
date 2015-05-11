@@ -22,6 +22,7 @@
 - (NSData *) serializeDictionary:(NSDictionary *) inDictionary error:(NSError **) outError;
 - (NSData *) serializeArray:(NSArray *) inArray error:(NSError **) outError;
 - (NSData *) serializeInvalidJSONObject:(id) object error:(NSError **) outError;
+- (NSData *) serializeObject:(id)inObject error:(NSError **) outError;
 
 - (NSString *) stringByDecodingNSData:(NSData *) data;
 

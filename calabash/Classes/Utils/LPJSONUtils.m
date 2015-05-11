@@ -94,19 +94,10 @@
   return res;
 }
 
-
 + (NSString *) serializeObject:(id) obj {
-  LPCJSONSerializer *s = [LPCJSONSerializer serializer];
-  NSError *error = nil;
-  NSData *d = [s serializeObject:obj error:&error];
-  if (error) {
-    NSLog(@"Unable to serialize object (%@), %@", error, [obj description]);
-  }
-  NSString *res = [[NSString alloc] initWithBytes:[d bytes] length:[d length]
-                                         encoding:NSUTF8StringEncoding];
-  return res;
+  LPCJSONSerializer *serializer = [LPCJSONSerializer serializer];
+  return [serializer stringByEnsuringSerializationOfObject:obj];
 }
-
 
 + (id) jsonifyObject:(id) object {
   return [self jsonifyObject:object fullDump:NO];
@@ -158,12 +149,7 @@
     return viewJson;
   }
 
-  LPCJSONSerializer *s = [LPCJSONSerializer serializer];
-  NSError *error = nil;
-  if (![s serializeObject:object error:&error] || error) {
-    return [object description];
-  }
-  return object;
+  return [LPJSONUtils serializeObject:object];
 }
 
 + (NSMutableDictionary *) dictionaryByEncodingView:(id) object {
