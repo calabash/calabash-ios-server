@@ -51,8 +51,10 @@ static NSData *kTrue = NULL;
 - (NSData *) serializeNumber:(NSNumber *) inNumber error:(NSError **) outError;
 - (NSData *) serializeString:(NSString *) inString error:(NSError **) outError;
 - (NSData *) serializeDate:(NSDate *) date error:(NSError **) outError;
-- (NSData *)serializeObject:(id)inObject error:(NSError **)outError;
+- (NSData *) serializeDictionary:(NSDictionary *) inDictionary error:(NSError **) outError;
+- (NSData *) serializeArray:(NSArray *) inArray error:(NSError **) outError;
 - (NSData *) serializeInvalidJSONObject:(id) object error:(NSError **) outError;
+- (NSData *) serializeObject:(id)inObject error:(NSError **) outError;
 
 - (NSString *) stringByDecodingNSData:(NSData *) data;
 
