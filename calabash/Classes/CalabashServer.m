@@ -45,7 +45,21 @@
   CalabashServer *server = [[CalabashServer alloc] init];
   [server start];
 
-  dlopen([@"/Developer/Library/PrivateFrameworks/UIAutomation.framework/UIAutomation" fileSystemRepresentation], RTLD_LOCAL);
+
+  NSString *automationLibPath =
+  @"/Developer/Library/PrivateFrameworks/UIAutomation.framework/UIAutomation";
+
+  NSURL *url = [NSURL fileURLWithPath:automationLibPath];
+  const char *cFileSystemRep = [url fileSystemRepresentation];
+
+  char *error;
+  dlopen(cFileSystemRep, RTLD_LOCAL);
+  error = dlerror();
+
+  if (error) {
+    NSLog(@"Warning: Could not load private UIAutomation.framework.");
+    NSLog(@"Warning: %@", [NSString stringWithUTF8String:error]);
+  }
 
   LPPluginLoader *loader = [LPPluginLoader new];
   [loader loadCalabashPlugins];
