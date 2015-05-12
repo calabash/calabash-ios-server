@@ -8,6 +8,7 @@
 #import "LPWebQuery.h"
 #import "LPReflectUtils.h"
 #import "LPWebQuery.h"
+#import "LPIsWebView.h"
 
 @implementation UIScriptASTWith
 @synthesize selectorName = _selectorName;
@@ -115,7 +116,7 @@
         [res addObject:dict];
       }
     } else {
-      if ([v respondsToSelector:@selector(lpIsWebView)] && [v lpIsWebView]) {
+      if ([LPIsWebView isWebView:v]) {
         [res addObjectsFromArray:[self handleWebView:(UIView<LPWebViewProtocol> *) v
                                           visibility:visibility]];
         continue;

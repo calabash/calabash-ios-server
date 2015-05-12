@@ -17,6 +17,7 @@ if target == 'version'
               "-target \"version\"",
               '-configuration Debug',
               'SYMROOT=build',
+              'GCC_TREAT_WARNINGS_AS_ERRORS=YES',
               xcpretty_available ? '| xcpretty -c' : ''
         ].join(' ')
 
@@ -44,6 +45,7 @@ else
               '-derivedDataPath build',
               "-sdk #{sdk}",
               'IPHONEOS_DEPLOYMENT_TARGET=5.1.1',
+              'GCC_TREAT_WARNINGS_AS_ERRORS=YES',
               xcpretty_available ? '| xcpretty -c' : ''
         ].join(' ')
 

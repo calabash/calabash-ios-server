@@ -3,6 +3,7 @@
 #endif
 
 #import "LPSliderOperation.h"
+#import "LPJSONUtils.h"
 
 @implementation LPSliderOperation
 
@@ -18,7 +19,7 @@
 
 //    required =========> |     optional
 // _arguments ==> [value_st,  notify targets, animate]
-- (id) performWithTarget:(UIView *) _view error:(NSError **) error {
+- (id) performWithTarget:(UIView *) _view error:(NSError * __autoreleasing *) error {
   if ([_view isKindOfClass:[UISlider class]] == NO) {
     NSLog(@"Warning view: %@ should be a UISlier", _view);
     return nil;
@@ -60,20 +61,11 @@
   [slider setValue:targetValue animated:animate];
 
   if (notifyTargets) {
-    NSSet *targets = [slider allTargets];
-    for (id target in targets) {
-      NSArray *actions = [slider actionsForTarget:target
-                                  forControlEvent:UIControlEventValueChanged];
-      for (NSString *action in actions) {
-        SEL sel = NSSelectorFromString(action);
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [target performSelector:sel withObject:slider];
-#pragma clang diagnostic pop
-      }
-    }
+    UIControlEvents events = [slider allControlEvents];
+    [slider sendActionsForControlEvents:events];
   }
 
-  return _view;
+  return [LPJSONUtils jsonifyObject:_view];
+
 }
 @end

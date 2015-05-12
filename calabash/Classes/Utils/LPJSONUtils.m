@@ -18,10 +18,21 @@
 
 @interface LPJSONUtils ()
 
+// If the target responds to the selector, invoke the selector on the target and
+// insert the value into the dictionary.  LPInvoker is responsible for ensuring
+// the value is not nil and is an object (not a primative).
+// @todo Add check for nil key
 + (void) dictionary:(NSMutableDictionary *) dictionary
     setObjectforKey:(NSString *) key
          whenTarget:(id) target
          respondsTo:(SEL) selector;
+
+// If the target does not respond to the selector, insert NSNull for key.
+// @todo Add check for nil key
++ (void) dictionary:(NSMutableDictionary *) dictionary
+ ensureObjectForKey:(NSString *) key
+         withTarget:(id) target
+           selector:(SEL) selector;
 
 + (void) insertHitPointIntoMutableDictionary:(NSMutableDictionary *) dictionary;
 
@@ -39,16 +50,21 @@
   }
 }
 
-+ (NSString *) serializeDictionary:(NSDictionary *) dictionary {
-  LPCJSONSerializer *s = [LPCJSONSerializer serializer];
-  NSError *error = nil;
-  NSData *d = [s serializeDictionary:dictionary error:&error];
-  if (error) {
-    NSLog(@"Unable to serialize dictionary (%@), %@", error, dictionary);
++ (void) dictionary:(NSMutableDictionary *) dictionary
+ ensureObjectForKey:(NSString *) key
+         withTarget:(id) target
+           selector:(SEL) selector {
+  if ([target respondsToSelector:selector]) {
+    id value = [LPInvoker invokeSelector:selector withTarget:target];
+    [dictionary setObject:value forKey:key];
+  } else {
+    [dictionary setObject:[NSNull null] forKey:key];
   }
-  NSString *res = [[NSString alloc] initWithBytes:[d bytes] length:[d length]
-                                         encoding:NSUTF8StringEncoding];
-  return res;
+}
+
++ (NSString *) serializeDictionary:(NSDictionary *) dictionary {
+  LPCJSONSerializer *serializer = [LPCJSONSerializer serializer];
+  return [serializer stringByEnsuringSerializationOfDictionary:dictionary];
 }
 
 + (NSDictionary *) deserializeDictionary:(NSString *) string {
@@ -63,17 +79,9 @@
 }
 
 + (NSString *) serializeArray:(NSArray *) array {
-  LPCJSONSerializer *s = [LPCJSONSerializer serializer];
-  NSError *error = nil;
-  NSData *d = [s serializeArray:array error:&error];
-  if (error) {
-    NSLog(@"Unable to serialize arrayy (%@), %@", error, array);
-  }
-  NSString *res = [[NSString alloc] initWithBytes:[d bytes] length:[d length]
-                                         encoding:NSUTF8StringEncoding];
-  return res;
+  LPCJSONSerializer *serializer = [LPCJSONSerializer serializer];
+  return [serializer stringByEnsuringSerializationOfArray:array];
 }
-
 
 + (NSArray *) deserializeArray:(NSString *) string {
   LPCJSONDeserializer *ds = [LPCJSONDeserializer deserializer];
@@ -86,19 +94,10 @@
   return res;
 }
 
-
 + (NSString *) serializeObject:(id) obj {
-  LPCJSONSerializer *s = [LPCJSONSerializer serializer];
-  NSError *error = nil;
-  NSData *d = [s serializeObject:obj error:&error];
-  if (error) {
-    NSLog(@"Unable to serialize object (%@), %@", error, [obj description]);
-  }
-  NSString *res = [[NSString alloc] initWithBytes:[d bytes] length:[d length]
-                                         encoding:NSUTF8StringEncoding];
-  return res;
+  LPCJSONSerializer *serializer = [LPCJSONSerializer serializer];
+  return [serializer stringByEnsuringSerializationOfObject:obj];
 }
-
 
 + (id) jsonifyObject:(id) object {
   return [self jsonifyObject:object fullDump:NO];
@@ -150,12 +149,7 @@
     return viewJson;
   }
 
-  LPCJSONSerializer *s = [LPCJSONSerializer serializer];
-  NSError *error = nil;
-  if (![s serializeObject:object error:&error] || error) {
-    return [object description];
-  }
-  return object;
+  return [LPJSONUtils serializeObject:object];
 }
 
 + (NSMutableDictionary *) dictionaryByEncodingView:(id) object {
@@ -306,81 +300,82 @@
 }
 
 +(NSMutableDictionary*)jsonifyAccessibilityElement:(id)object {
-  NSMutableDictionary *result = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                    NSStringFromClass([object class]), @"class", nil];
+  NSMutableDictionary *result = [NSMutableDictionary dictionary];
 
-  [result setObject:@(1) forKey:@"visible"];
+  result[@"class"] = NSStringFromClass([object class]);
+  result[@"visible"] = @(1);
   result[@"accessibilityElement"] = @(1);
-  NSString *lbl = [object accessibilityLabel];
-  if (lbl) {
-    [result setObject:lbl forKey:@"label"];
+
+  // Be defensive: user *might* have a view with a 'nil' description.
+  [LPJSONUtils dictionary:result
+       ensureObjectForKey:@"description"
+               withTarget:object
+                 selector:@selector(description)];
+
+  [LPJSONUtils dictionary:result
+       ensureObjectForKey:@"label"
+               withTarget:object
+                 selector:@selector(accessibilityLabel)];
+
+  [LPJSONUtils dictionary:result
+       ensureObjectForKey:@"id"
+               withTarget:object
+                 selector:@selector(accessibilityIdentifier)];
+
+  [LPJSONUtils dictionary:result
+       ensureObjectForKey:@"hint"
+               withTarget:object
+               selector:@selector(accessibilityHint)];
+
+  [LPJSONUtils dictionary:result
+       ensureObjectForKey:@"value"
+               withTarget:object
+                 selector:@selector(accessibilityValue)];
+
+  [LPJSONUtils dictionary:result
+       ensureObjectForKey:@"text"
+               withTarget:object
+                 selector:@selector(text)];
+
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"selected"
+               whenTarget:object
+               respondsTo:@selector(isSelected)];
+
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"enabled"
+               whenTarget:object
+               respondsTo:@selector(isEnabled)];
+
+  [LPJSONUtils dictionary:result
+          setObjectforKey:@"alpha"
+               whenTarget:object
+               respondsTo:@selector(alpha)];
+
+  NSDictionary *frameDictionary = nil;
+
+  SEL frameSelector = @selector(accessibilityFrame);
+  if ([object respondsToSelector:frameSelector]) {
+    @try {
+      CGRect frame = [object accessibilityFrame];
+      CGPoint center = [LPTouchUtils centerOfFrame:frame shouldTranslate:YES];
+      NSMutableDictionary *tmp = [self serializeRect:frame];
+      tmp[@"center_x"] = [self normalizeFloat:center.x];
+      tmp[@"center_y"] = [self normalizeFloat:center.y];
+      frameDictionary = [NSDictionary dictionaryWithDictionary:tmp];
+    } @catch (NSException *exception) {
+      NSLog(@"LPJSONUtils caught an exception in jsonifyAccessibilityElement:");
+      NSLog(@"%@", exception);
+      NSLog(@"while trying to find the accessibilityFrame of this object:");
+      NSLog(@"%@", object);
+    }
+  }
+
+  if (frameDictionary) {
+    result[@"rect"] = frameDictionary;
   } else {
-    [result setObject:[NSNull null] forKey:@"label"];
+    result[@"rect"] = [NSNull null];
   }
-
-  if ([object respondsToSelector:@selector(accessibilityIdentifier)]) {
-
-    NSString *aid = [object accessibilityIdentifier];
-    if (aid) {
-      [result setObject:aid forKey:@"id"];
-    } else {
-      [result setObject:[NSNull null] forKey:@"id"];
-    }
-  }
-
-  if ([object respondsToSelector:@selector(accessibilityHint)]) {
-
-    NSString *accHint = [object accessibilityHint];
-    if (accHint) {
-      [result setObject:accHint forKey:@"hint"];
-    } else {
-      [result setObject:[NSNull null] forKey:@"hint"];
-    }
-  }
-  if ([object respondsToSelector:@selector(accessibilityValue)]) {
-    NSString *accVal = [object accessibilityValue];
-    if (accVal) {
-      [result setObject:accVal forKey:@"value"];
-    } else {
-      [result setObject:[NSNull null] forKey:@"value"];
-    }
-  }
-  if ([object respondsToSelector:@selector(text)]) {
-
-    NSString *text = [object text];
-    if (text) {
-      [result setObject:text forKey:@"text"];
-    } else {
-      [result setObject:[NSNull null] forKey:@"text"];
-    }
-  }
-  if ([object respondsToSelector:@selector(isSelected)]) {
-    BOOL selected = [object isSelected];
-    [result setObject:@(selected) forKey:@"selected"];
-  }
-  if ([object respondsToSelector:@selector(isEnabled)]) {
-    BOOL enabled = [object isEnabled];
-    [result setObject:@(enabled) forKey:@"enabled"];
-  }
-  if ([object respondsToSelector:@selector(alpha)]) {
-    CGFloat alpha = [object alpha];
-    [result setObject:@(alpha) forKey:@"alpha"];
-  }
-
-
-  CGRect frame = [object accessibilityFrame];
-  CGPoint center = [LPTouchUtils centerOfFrame:frame shouldTranslate:YES];
-  NSDictionary *frameDic = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithFloat:frame.origin.x], @"x",
-                            [NSNumber numberWithFloat:frame.origin.y], @"y",
-                            [NSNumber numberWithFloat:frame.size.width], @"width",
-                            [NSNumber numberWithFloat:frame.size.height], @"height",
-                            [NSNumber numberWithFloat:center.x], @"center_x",
-                            [NSNumber numberWithFloat:center.y], @"center_y",
-                            nil];
-
-  [result setObject:frameDic forKey:@"rect"];
-
-  [result setObject:[object description] forKey:@"description"];
 
   return result;
 }

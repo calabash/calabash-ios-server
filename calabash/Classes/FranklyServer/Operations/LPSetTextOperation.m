@@ -30,7 +30,7 @@
   }
 }
 
-- (id) performWithTarget:(id) target error:(NSError **) error {
+- (id) performWithTarget:(id) target error:(NSError * __autoreleasing *) error {
   if (!_arguments || [_arguments count] == 0) {
     NSLog(@"Missing the 'text' argument @ index 0 of arguments; nothing to do - returning nil");
     return nil;

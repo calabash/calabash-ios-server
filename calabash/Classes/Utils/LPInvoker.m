@@ -121,7 +121,6 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
     } @catch (NSException *exception) {
       NSLog(@"LPInvoker caught an exception: %@", exception);
       NSLog(@"=== INVOCATION DETAILS ===");
-      NSLog(@"target = %@", target);
       NSLog(@"target class = %@", [target class]);
       NSLog(@"selector = %@", NSStringFromSelector(selector));
       NSLog(@"target responds to selector: %@", [target respondsToSelector:selector] ? @"YES" : @"NO");

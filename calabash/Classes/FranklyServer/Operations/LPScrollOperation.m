@@ -6,7 +6,7 @@
 
 #import "LPScrollOperation.h"
 #import "UIWebView+LPWebView.h"
-#import "UIView+LPIsWebView.h"
+#import "LPIsWebView.h"
 #import "LPWebViewProtocol.h"
 
 @implementation LPScrollOperation
@@ -42,7 +42,7 @@
     }
     
     return _view;
-  } else if ([_view respondsToSelector:@selector(lpIsWebView)] && [_view lpIsWebView]) {
+  } else if ([LPIsWebView isWebView:_view]) {
     UIView<LPWebViewProtocol> *webView = (UIView<LPWebViewProtocol> *)_view;
     NSString *scrollJS = @"window.scrollBy(%@,%@);";
     if ([@"up" isEqualToString:dir]) {
