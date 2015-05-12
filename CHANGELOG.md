@@ -1,6 +1,13 @@
-### 0.14.2.pre1
+### 0.14.2
 
-* Try/Catch around LPInvoker invokeSelector:withTarget: #157
+* Don't include non-public LPHTTPServer.h in CalabashServer.h #166 @ldiqual
+* LPJSONSerializer can encode arbitrary objects #165
+* Set GCC\_TREAT\_WARNINGS\_AS\_ERRORS=YES for command-line builds #164
+* Replace UIView+LPIsWebView category with LPIsWebView static class #163
+* More guards in [LPJSONUtils jsonifyAccessibilityElement:] against unrecognized selectors # 16
+* LPSliderOperation should support any UIControlEvent the target slider is registered to receive #157
+* Try/Catch around LPInvoker invokeSelector:withTarget: #156
+* Put UISliderOperation under ARC
 
 ### 0.14.1
 
