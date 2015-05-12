@@ -149,7 +149,7 @@
     return viewJson;
   }
 
-  return [LPJSONUtils serializeObject:object];
+  return object;
 }
 
 + (NSMutableDictionary *) dictionaryByEncodingView:(id) object {
