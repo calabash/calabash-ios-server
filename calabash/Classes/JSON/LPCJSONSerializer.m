@@ -29,12 +29,34 @@
 
 #import "LPCJSONSerializer.h"
 #import "LPISO8601DateFormatter.h"
-
 #import "LPJSONRepresentation.h"
+#import <objc/runtime.h>
+
+NSString *const LPJSONSerializerNSManageObjectDescriptionFaultFormatString = @"Calling 'description' on '%@' (an instance of NSManagedObject) caused a fault - this is probably a bug in your application.";
+NSString *const LPJSONSerializerDoesNotRespondToDescriptionFormatString = @"'%@': does not respond to selector 'description' - this is probably a bug in your application.";
 
 static NSData *kNULL = NULL;
 static NSData *kFalse = NULL;
 static NSData *kTrue = NULL;
+
+@interface LPCJSONSerializer ()
+
+- (BOOL)isValidJSONObject:(id)inObject;
+- (Class) classForNSManagedObject;
+- (BOOL) isCoreDataStackAvailable;
+- (BOOL) isNSManagedObject:(id) object;
+- (SEL) descriptionSelector;
+
+- (NSData *) serializeNull:(NSNull *) inNull error:(NSError **) outError;
+- (NSData *) serializeNumber:(NSNumber *) inNumber error:(NSError **) outError;
+- (NSData *) serializeString:(NSString *) inString error:(NSError **) outError;
+- (NSData *) serializeDate:(NSDate *) date error:(NSError **) outError;
+- (NSData *)serializeObject:(id)inObject error:(NSError **)outError;
+- (NSData *) serializeInvalidJSONObject:(id) object error:(NSError **) outError;
+
+- (NSString *) stringByDecodingNSData:(NSData *) data;
+
+@end
 
 @implementation LPCJSONSerializer
 
@@ -62,7 +84,7 @@ static NSData *kTrue = NULL;
     
 - (BOOL)isValidJSONObject:(id)inObject
     {
-    if ([inObject isKindOfClass:[NSNull class]])
+    if ([inObject isKindOfClass:[NSNull class]] || inObject == NULL || inObject == nil)
         {
         return(YES);
         }
@@ -86,6 +108,10 @@ static NSData *kTrue = NULL;
         {
         return(YES);
         }
+    else if ([inObject isKindOfClass:[NSDate class]])
+        {
+        return(YES);
+        }
     else if ([inObject respondsToSelector:@selector(JSONDataRepresentation)])
         {
         return(YES);
@@ -100,7 +126,7 @@ static NSData *kTrue = NULL;
     {
     NSData *theResult = NULL;
 
-    if ([inObject isKindOfClass:[NSNull class]])
+    if ([inObject isKindOfClass:[NSNull class]] || inObject == NULL || inObject == nil)
         {
         theResult = [self serializeNull:inObject error:outError];
         }
@@ -127,35 +153,12 @@ static NSData *kTrue = NULL;
         }
     else if ([inObject isKindOfClass:[NSDate class]])
     {
-        
-        static LPISO8601DateFormatter *dateFormat = nil;
-        if (dateFormat == nil)
-        {
-            dateFormat = [[LPISO8601DateFormatter alloc] init];
-            [dateFormat setIncludeTime:YES];
-        }
-
-        
-        
-       
-        NSString *str = [dateFormat stringFromDate:(NSDate*)inObject];
-        NSRange rangeButLastTwo = NSMakeRange(0, [str length]-2);
-        NSRange rangeLastTwo = NSMakeRange([str length]-2, 2);
-        
-        NSString *firstPart = [str substringWithRange:rangeButLastTwo];
-        NSString *lastPart = [str substringWithRange:rangeLastTwo];
-        
-        str = [NSString stringWithFormat:@"%@:%@",firstPart,lastPart];
-        theResult = [self serializeString:str error:outError];
+        theResult = [self serializeDate:(NSDate *)inObject error:outError];
     }
     else if ([inObject respondsToSelector:@selector(JSONDataRepresentation)])
         {
         theResult = [inObject JSONDataRepresentation];
         }
-    else if ([inObject isKindOfClass:[UIView class]]) 
-       {
-           theResult = [self serializeString:[inObject description] error:outError];
-       }
     else
         {
         if (outError)
@@ -314,7 +317,12 @@ static NSData *kTrue = NULL;
     NSUInteger i = 0;
     while ((theValue = [theEnumerator nextObject]) != NULL)
         {
-        NSData *theValueData = [self serializeObject:theValue error:outError];
+        NSData *theValueData = nil;
+        if ([self isValidJSONObject:theValue]) {
+          theValueData = [self serializeObject:theValue error:outError];
+        } else {
+          theValueData = [self serializeInvalidJSONObject:theValue error:outError];
+        }
         if (theValueData == NULL)
             {
             return(NULL);
@@ -347,7 +355,12 @@ static NSData *kTrue = NULL;
             {
             return(NULL);
             }
-        NSData *theValueData = [self serializeObject:theValue error:outError];
+        NSData *theValueData = nil;
+          if ([self isValidJSONObject:theValue]) {
+            theValueData = [self serializeObject:theValue error:outError];
+          } else {
+            theValueData = [self serializeInvalidJSONObject:theValue error:outError];
+          }
         if (theValueData == NULL)
             {
             return(NULL);
@@ -366,5 +379,162 @@ static NSData *kTrue = NULL;
 
     return(theData);
     }
+
+- (NSData *)serializeDate:(NSDate *)date error:(NSError **)outError{
+  static LPISO8601DateFormatter *dateFormat = nil;
+  if (dateFormat == nil) {
+    dateFormat = [[LPISO8601DateFormatter alloc] init];
+    [dateFormat setIncludeTime:YES];
+  }
+
+  NSString *str = [dateFormat stringFromDate:date];
+  NSRange rangeButLastTwo = NSMakeRange(0, [str length]-2);
+  NSRange rangeLastTwo = NSMakeRange([str length]-2, 2);
+
+  NSString *firstPart = [str substringWithRange:rangeButLastTwo];
+  NSString *lastPart = [str substringWithRange:rangeLastTwo];
+
+  str = [NSString stringWithFormat:@"%@:%@",firstPart,lastPart];
+  return [self serializeString:str error:outError];
+}
+
+- (Class) classForNSManagedObject {
+  return objc_getClass("NSManagedObject");
+}
+
+- (BOOL) isCoreDataStackAvailable {
+  if ([self classForNSManagedObject]) {
+    return YES;
+  } else {
+    return NO;
+  }
+}
+
+- (BOOL) isNSManagedObject:(id) object {
+  return [object isKindOfClass:[self classForNSManagedObject]];
+}
+
+- (SEL) descriptionSelector {
+  return @selector(description);
+}
+
+- (NSData *) serializeInvalidJSONObject:(id) object error:(NSError **) outError {
+  if (![object respondsToSelector:[self descriptionSelector]]) {
+    NSString *str = [NSString stringWithFormat:LPJSONSerializerDoesNotRespondToDescriptionFormatString,
+                     NSStringFromClass([object class])];
+    return [self serializeString:str error:outError];
+  }
+
+  if ([self isCoreDataStackAvailable] && [self isNSManagedObject:object]) {
+    NSString *str = nil;
+    @try {
+      str = [object description];
+    }
+    @catch (NSException *exception) {
+      NSString *className = NSStringFromClass([object class]);
+      NSLog(@"Calling 'description' on an NSManagedObject instance of '%@' raised an exception:",
+            className);
+      NSLog(@"%@", exception);
+      str = [NSString stringWithFormat:LPJSONSerializerNSManageObjectDescriptionFaultFormatString,
+             className];
+
+    }
+    return [self serializeString:str error:outError];
+  }
+
+  NSString *description = [object description];
+  if (!description) {
+    return [self serializeNull:[NSNull null] error:outError];
+  }
+  return [self serializeString:description error:outError];
+}
+
+- (NSString *) stringByDecodingNSData:(NSData *) data {
+  NSData *dataGuard = data;
+  if (!data) {
+    dataGuard = [self serializeNull:[NSNull null] error:nil];
+  }
+
+  return [[[NSString alloc] initWithBytes:[dataGuard bytes]
+                                   length:[dataGuard length]
+                                 encoding:NSUTF8StringEncoding] autorelease];
+}
+
+- (NSString *) stringByEnsuringSerializationOfDictionary:(NSDictionary *) dictionary {
+  if (![dictionary isKindOfClass:[NSDictionary class]]) {
+    NSString *className = NSStringFromClass([dictionary class]);
+    NSLog(@"Expected NSDictionary but found instance of '%@'.\nCannot serialize object.",
+          className);
+    NSString *json = [NSString stringWithFormat:@"Cannot serialize instance of '%@' as a dictionary.",
+                      className];
+    NSData *data = [self serializeString:json error:nil];
+    return [self stringByDecodingNSData:data];
+  }
+
+  NSError *error = nil;
+  NSData *data = [self serializeDictionary:dictionary error:&error];
+  if (!data) {
+    NSString *className = NSStringFromClass([dictionary class]);
+    if (error) {
+      NSLog(@"Unable to serialize dictionary '%@'.\n%@", className, error);
+    } else {
+      NSLog(@"Unable to serialize dictionary '%@'", className);
+    }
+    data = [[NSString stringWithFormat:@"Invalid JSON for '%@' instance.", className]
+            dataUsingEncoding:NSUTF8StringEncoding];
+  }
+
+  return [self stringByDecodingNSData:data];
+}
+
+- (NSString *) stringByEnsuringSerializationOfArray:(NSArray *) array {
+  if (![array isKindOfClass:[NSArray class]]) {
+    NSString *className = NSStringFromClass([array class]);
+    NSLog(@"Expected NSArray but found instance of '%@'.\nCannot serialize object.",
+          className);
+    NSString *json = [NSString stringWithFormat:@"Cannot serialize instance of '%@' as an array.",
+                      className];
+    NSData *data = [self serializeString:json error:nil];
+    return [self stringByDecodingNSData:data];
+  }
+
+  NSError *error = nil;
+  NSData *data = [self serializeArray:array error:&error];
+  if (!data) {
+    NSString *className = NSStringFromClass([array class]);
+    if (error) {
+      NSLog(@"Unable to serialize array '%@'.\n%@", className, error);
+    } else {
+      NSLog(@"Unable to serialize array '%@'", className);
+    }
+    data = [[NSString stringWithFormat:@"Invalid JSON for '%@' instance.", className]
+            dataUsingEncoding:NSUTF8StringEncoding];
+  }
+
+  return [self stringByDecodingNSData:data];
+}
+
+- (NSString *) stringByEnsuringSerializationOfObject:(id) object {
+  NSData *data = nil;
+  NSError *error = nil;
+  if ([self isValidJSONObject:object]) {
+    data = [self serializeObject:object error:&error];
+  } else {
+    data = [self serializeInvalidJSONObject:object error:&error];
+  }
+
+  if (!data) {
+    NSString *className = NSStringFromClass([object class]);
+    if (error) {
+      NSLog(@"Unable to serialize object '%@'.\n%@", className, error);
+    } else {
+      NSLog(@"Unable to serialize object '%@'", className);
+    }
+    data = [[NSString stringWithFormat:@"Invalid JSON for '%@' instance.", className]
+            dataUsingEncoding:NSUTF8StringEncoding];
+  }
+
+  return [self stringByDecodingNSData:data];
+}
 
 @end

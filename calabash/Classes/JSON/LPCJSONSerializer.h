@@ -29,21 +29,37 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LPCJSONSerializer : NSObject {
-}
+extern NSString *const LPJSONSerializerNSManageObjectDescriptionFaultFormatString;
+extern NSString *const LPJSONSerializerDoesNotRespondToDescriptionFormatString;
+
+@interface LPCJSONSerializer : NSObject
 
 + (LPCJSONSerializer *)serializer;
 
-- (BOOL)isValidJSONObject:(id)inObject;
-
-/// Take any JSON compatible object (generally NSNull, NSNumber, NSString, NSArray and NSDictionary) and produce an NSData containing the serialized JSON.
-- (NSData *)serializeObject:(id)inObject error:(NSError **)outError;
-
-- (NSData *)serializeNull:(NSNull *)inNull error:(NSError **)outError;
-- (NSData *)serializeNumber:(NSNumber *)inNumber error:(NSError **)outError;
-- (NSData *)serializeString:(NSString *)inString error:(NSError **)outError;
-- (NSData *)serializeArray:(NSArray *)inArray error:(NSError **)outError;
-- (NSData *)serializeDictionary:(NSDictionary *)inDictionary error:(NSError **)outError;
+// Natively encodes JSON compatible objects:
+// * NSNull, nil, NULL
+// * NSNumber
+// * NSString
+// * NSArray
+// * NSDictionary
+// * NSData
+// * NSDate - part of Apple's JavaScript JSON API.
+//
+// For invalid JSON object, it calls `description` on the object and encodes
+// the result as a string.
+//
+// When `object` is an NSManagedObject, special care is taken when calling
+// `description` because developers will often override (against Apple's advice)
+// `description` which can result in faults.  If the object is an instance of
+// NSManagedObject, catch the exception and report the problem as part of the
+// JSON object.
+//
+// @todo We should be bubbling exceptional cases up to the response and marking
+// it as producing invalid JSON.  Otherwise the user may never see that there
+// is a potential problem in their app.
+- (NSString *) stringByEnsuringSerializationOfObject:(id) object;
+- (NSString *) stringByEnsuringSerializationOfArray:(NSArray *) array;
+- (NSString *) stringByEnsuringSerializationOfDictionary:(NSDictionary *) dictionary;
 
 @end
 

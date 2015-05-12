@@ -1,10 +1,20 @@
 #import "AppDelegate.h"
+#import <CoreData/CoreData.h>
+#import "LPCoreDataStack.h"
 
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
+
+@synthesize managedObjectContext = _managedObjectContext;
+
+- (NSManagedObjectContext *) managedObjectContext {
+  if (_managedObjectContext) { return _managedObjectContext; }
+  _managedObjectContext = [[LPCoreDataStack new] managedObjectContext];
+  return _managedObjectContext;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   return YES;
