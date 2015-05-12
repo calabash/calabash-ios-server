@@ -90,18 +90,12 @@
   [picker setDate:date animated:animate];
 
   if (notifyTargets) {
-    NSSet *targets = [picker allTargets];
-    for (id target in targets) {
-      NSArray *actions = [picker actionsForTarget:target
-                                  forControlEvent:UIControlEventValueChanged];
-      for (NSString *action in actions) {
-        SEL sel = NSSelectorFromString(action);
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-        [target performSelector:sel withObject:picker];
-#pragma clang diagnostic pop
-      }
-    }
+    UIControlEvents events = [picker allControlEvents];
+    [picker sendActionsForControlEvents:events];
+  }
+
+  if (notifyTargets) {
+    [picker sendActionsForControlEvents:UIControlEventAllEvents];
   }
 
   return _view;
