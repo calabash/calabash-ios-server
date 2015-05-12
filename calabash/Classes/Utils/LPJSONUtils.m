@@ -149,7 +149,29 @@
     return viewJson;
   }
 
-  return object;
+  // Sometimes we don't actually want to return an JSON encoded string because
+  // the object will be passed throught the serializer again and we'd end up
+  // with results like this:
+  //
+  // > query('tabBarButton', :accessibilityLabel)
+  // [
+  // [0] "\"Buttons\"",
+  // [1] "\"Text\"",
+  // [2] "\"Date\"",
+  // [3] "\"Scrolling Views\"",
+  // [4] "\"Sliders\""
+  // ]
+  //
+  // To my eye this is clearly a bug in this method; we should never exit
+  // this method with invalid JSON. Fixing this is beyond the scope of this
+  // pull-request. -jjm
+  LPCJSONSerializer *serializer = [LPCJSONSerializer serializer];
+  NSData *data = [serializer serializeObject:object error:nil];
+  if (!data) {
+    return [object description];
+  } else {
+    return object;
+  }
 }
 
 + (NSMutableDictionary *) dictionaryByEncodingView:(id) object {
