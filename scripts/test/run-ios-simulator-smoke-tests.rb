@@ -35,12 +35,12 @@ Dir.chdir calabash_gem_dir do
   # is the old name.
   if File.exist? 'script/ci/travis/install-static-libs.rb'
     do_system('script/ci/travis/install-static-libs.rb',
-              {:pass_msg => 'chou - installed static libs',
-               :fail_msg => 'chou - could not install static libs'})
+              {:pass_msg => 'CalSmokeTest - installed static libs',
+               :fail_msg => 'CalSmokeTest - could not install static libs'})
   else
     do_system('script/ci/travis/install-gem-libs.rb',
-              {:pass_msg => 'chou - installed gem libraries',
-               :fail_msg => 'chou - could not install gem libraries'})
+              {:pass_msg => 'CalSmokeTest - installed gem libraries',
+               :fail_msg => 'CalSmokeTest - could not install gem libraries'})
   end
 
 
@@ -54,21 +54,21 @@ Dir.chdir calabash_gem_dir do
   end
 
   do_system('script/ci/travis/bundle-install.rb',
-            {:pass_msg => 'chou - bundle install worked',
-             :fail_msg => 'chou - could not bundle install'})
+            {:pass_msg => 'CalSmokeTest - bundle install worked',
+             :fail_msg => 'CalSmokeTest - could not bundle install'})
 
   do_system('script/ci/travis/install-gem-ci.rb',
-            {:pass_msg => 'chou - installing the gem',
-             :fail_msg => 'chou - could not install the gem'})
+            {:pass_msg => 'CalSmokeTest - installing the gem',
+             :fail_msg => 'CalSmokeTest - could not install the gem'})
 
 end
 
-chou_working_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'ios-smoke-test-app/CalSmokeApp'))
+smoke_test_working_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'ios-smoke-test-app/CalSmokeApp'))
 
-FileUtils.rm_rf("#{chou_working_dir}/calabash.framework")
-FileUtils.cp_r(calabash_framework, chou_working_dir)
+FileUtils.rm_rf("#{smoke_test_working_dir}/calabash.framework")
+FileUtils.cp_r(calabash_framework, smoke_test_working_dir)
 
-Dir.chdir chou_working_dir do
+Dir.chdir smoke_test_working_dir do
 
   do_system('rm -rf Gemfile*')
   do_system('rm -rf .bundle')
@@ -92,7 +92,7 @@ animated_happiness_dir = File.expand_path(File.join(File.dirname(__FILE__), '..'
 
 Dir.chdir animated_happiness_dir do
 
-  do_system('script/ci/travis/build-and-stage-app.sh')
   install_gem('luffa')
+  do_system('script/ci/travis/build-and-stage-app.sh')
   do_system('script/ci/travis/cucumber-ci.rb --tags ~@no_ci --tags ~@scroll')
 end
