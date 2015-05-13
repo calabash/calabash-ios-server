@@ -1,5 +1,9 @@
 ### 0.14.2
 
+* LPJSONUtils fix double quoting of strings in jsonifyObject: #171
+* CalabashServer: log dlopen UIAutomation errors #170
+* Use 'CalSmoke' text in test scripts #169
+* Date picker: send actions for all UIControlEvents #168
 * Don't include non-public LPHTTPServer.h in CalabashServer.h #166 @ldiqual
 * LPJSONSerializer can encode arbitrary objects #165
 * Set GCC\_TREAT\_WARNINGS\_AS\_ERRORS=YES for command-line builds #164
