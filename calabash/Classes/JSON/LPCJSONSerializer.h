@@ -57,6 +57,11 @@ extern NSString *const LPJSONSerializerDoesNotRespondToDescriptionFormatString;
 // @todo We should be bubbling exceptional cases up to the response and marking
 // it as producing invalid JSON.  Otherwise the user may never see that there
 // is a potential problem in their app.
+
+// @todo Remove this from the public API.  The stringByEnsuring* methods should
+//       be the only public interface.
+- (NSData *) serializeObject:(id)inObject error:(NSError **) outError;
+
 - (NSString *) stringByEnsuringSerializationOfObject:(id) object;
 - (NSString *) stringByEnsuringSerializationOfArray:(NSArray *) array;
 - (NSString *) stringByEnsuringSerializationOfDictionary:(NSDictionary *) dictionary;

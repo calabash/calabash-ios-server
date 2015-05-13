@@ -51,7 +51,8 @@ static NSData *kTrue = NULL;
 - (NSData *) serializeNumber:(NSNumber *) inNumber error:(NSError **) outError;
 - (NSData *) serializeString:(NSString *) inString error:(NSError **) outError;
 - (NSData *) serializeDate:(NSDate *) date error:(NSError **) outError;
-- (NSData *)serializeObject:(id)inObject error:(NSError **)outError;
+- (NSData *) serializeDictionary:(NSDictionary *) inDictionary error:(NSError **) outError;
+- (NSData *) serializeArray:(NSArray *) inArray error:(NSError **) outError;
 - (NSData *) serializeInvalidJSONObject:(id) object error:(NSError **) outError;
 
 - (NSString *) stringByDecodingNSData:(NSData *) data;
@@ -473,16 +474,17 @@ static NSData *kTrue = NULL;
 
   NSError *error = nil;
   NSData *data = [self serializeDictionary:dictionary error:&error];
-  if (!data) {
-    NSString *className = NSStringFromClass([dictionary class]);
-    if (error) {
-      NSLog(@"Unable to serialize dictionary '%@'.\n%@", className, error);
-    } else {
-      NSLog(@"Unable to serialize dictionary '%@'", className);
-    }
-    data = [[NSString stringWithFormat:@"Invalid JSON for '%@' instance.", className]
-            dataUsingEncoding:NSUTF8StringEncoding];
+
+  if (data) { return [self stringByDecodingNSData:data]; }
+
+  NSString *className = NSStringFromClass([dictionary class]);
+  if (error) {
+    NSLog(@"Unable to serialize dictionary '%@'.\n%@", className, error);
+  } else {
+    NSLog(@"Unable to serialize dictionary '%@'", className);
   }
+  data = [[NSString stringWithFormat:@"Invalid JSON for '%@' instance.", className]
+          dataUsingEncoding:NSUTF8StringEncoding];
 
   return [self stringByDecodingNSData:data];
 }
@@ -500,16 +502,17 @@ static NSData *kTrue = NULL;
 
   NSError *error = nil;
   NSData *data = [self serializeArray:array error:&error];
-  if (!data) {
-    NSString *className = NSStringFromClass([array class]);
-    if (error) {
-      NSLog(@"Unable to serialize array '%@'.\n%@", className, error);
-    } else {
-      NSLog(@"Unable to serialize array '%@'", className);
-    }
-    data = [[NSString stringWithFormat:@"Invalid JSON for '%@' instance.", className]
-            dataUsingEncoding:NSUTF8StringEncoding];
+
+  if (data) { return [self stringByDecodingNSData:data]; }
+
+  NSString *className = NSStringFromClass([array class]);
+  if (error) {
+    NSLog(@"Unable to serialize array '%@'.\n%@", className, error);
+  } else {
+    NSLog(@"Unable to serialize array '%@'", className);
   }
+  data = [[NSString stringWithFormat:@"Invalid JSON for '%@' instance.", className]
+          dataUsingEncoding:NSUTF8StringEncoding];
 
   return [self stringByDecodingNSData:data];
 }
@@ -523,16 +526,16 @@ static NSData *kTrue = NULL;
     data = [self serializeInvalidJSONObject:object error:&error];
   }
 
-  if (!data) {
-    NSString *className = NSStringFromClass([object class]);
-    if (error) {
-      NSLog(@"Unable to serialize object '%@'.\n%@", className, error);
-    } else {
-      NSLog(@"Unable to serialize object '%@'", className);
-    }
-    data = [[NSString stringWithFormat:@"Invalid JSON for '%@' instance.", className]
-            dataUsingEncoding:NSUTF8StringEncoding];
+  if (data) { return [self stringByDecodingNSData:data]; }
+
+  NSString *className = NSStringFromClass([object class]);
+  if (error) {
+    NSLog(@"Unable to serialize object '%@'.\n%@", className, error);
+  } else {
+    NSLog(@"Unable to serialize object '%@'", className);
   }
+  data = [[NSString stringWithFormat:@"Invalid JSON for '%@' instance.", className]
+          dataUsingEncoding:NSUTF8StringEncoding];
 
   return [self stringByDecodingNSData:data];
 }
