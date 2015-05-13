@@ -62,14 +62,16 @@ Dir.chdir(working_dir) do
     options =
           {
                 :intervals => Array.new(tries, interval),
-                :on_retry => on_retry
+                :on_retry => on_retry,
+                :on => [XCTestFailedError]
           }
   else
     options =
           {
                 :tries => tries,
                 :interval => interval,
-                :on_retry => on_retry
+                :on_retry => on_retry,
+                :on => [XCTestFailedError]
           }
   end
 
@@ -78,12 +80,10 @@ Dir.chdir(working_dir) do
                           {:pass_msg => 'XCTests passed',
                            :fail_msg => 'XCTests failed',
                            :exit_on_nonzero_status => false})
-    # Not sure if '65' is a magic number that will _always_ indicate that tests
-    # have failed.  If we exited non-zero and the exit code does not indicate
-    # tests have failed, we assume XCTest failed to launch the simulator. What
-    # are you going to do?
-    if exit_code != 0 && exit_code != 65
-      log_fail "XCTest exited '#{exit_code}' because it could not launch the simulator; will retry."
+    # At some point I will figure out what the correct exit code for "could not
+    # launch the simulator.
+    if exit_code != 0
+      log_fail "XCTest exited '#{exit_code}' - did we fail because the Simulator did not launch?"
       raise XCTestFailedError, 'XCTest failed.'
     else
       exit(exit_code)
