@@ -144,6 +144,7 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
     @"simulator_device": dev,
     @"simulator": sim,
     @"app_version": [infoPlist stringForVersion],
+    @"short_version_string": [infoPlist stringForShortVersion],
     @"outcome": @"SUCCESS",
     @"iphone_app_emulated_on_ipad": @(isIphoneAppEmulated),
     @"git": git,
