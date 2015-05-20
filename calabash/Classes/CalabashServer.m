@@ -50,7 +50,15 @@
   @"/Developer/Library/PrivateFrameworks/UIAutomation.framework/UIAutomation";
 
   NSURL *url = [NSURL fileURLWithPath:automationLibPath];
-  const char *cFileSystemRep = [url fileSystemRepresentation];
+
+  const char *cFileSystemRep;
+  if ([url respondsToSelector:@selector(fileSystemRepresentation)]) {
+    // iOS > 6
+    cFileSystemRep = [url fileSystemRepresentation];
+  } else {
+    NSString *absolutePath = [url path];
+    cFileSystemRep = [absolutePath cStringUsingEncoding:NSUTF8StringEncoding];
+  }
 
   char *error;
   dlopen(cFileSystemRep, RTLD_LOCAL);
