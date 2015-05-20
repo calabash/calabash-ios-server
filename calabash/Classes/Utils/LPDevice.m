@@ -135,7 +135,7 @@
 - (NSString *) formFactor {
   if (_formFactor) { return _formFactor; }
 
-  NSString *factor = @"";
+  NSString *factor = @"unknown";
   if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
     factor = @"ipad";
   } else if ([LPTouchUtils is4InchDevice]) {
