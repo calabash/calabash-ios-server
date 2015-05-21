@@ -47,6 +47,10 @@ describe(@"LPVersionRoute", ^{
     it(@"contains form_factor key", ^{
       expect(response[@"form_factor"]).notTo.beNil();
     });
+
+    it(@"contains short_version_string key", ^{
+      expect(response[@"short_version_string"]).notTo.beNil();
+    });
   });
 });
 

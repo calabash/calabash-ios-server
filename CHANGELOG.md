@@ -1,3 +1,9 @@
+### 0.14.3
+
+* Avoid [NSURL fileSystemRepresentation] on iOS 6 #175
+* LPDevice: use 'unknown' for unknown form-factors #174
+* Version route: add key for CFBundleShortVersionString #173
+
 ### 0.14.2
 
 * LPJSONUtils fix double quoting of strings in jsonifyObject: #171

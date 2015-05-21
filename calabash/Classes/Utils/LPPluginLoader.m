@@ -36,7 +36,15 @@
   NSURL *url = [NSURL fileURLWithPath:path];
 
   char *error;
-  const char *cFileSystemRep = [url fileSystemRepresentation];
+
+  const char *cFileSystemRep;
+  if ([url respondsToSelector:@selector(fileSystemRepresentation)]) {
+    // iOS > 6
+    cFileSystemRep = [url fileSystemRepresentation];
+  } else {
+    NSString *absolutePath = [url path];
+    cFileSystemRep = [absolutePath cStringUsingEncoding:NSUTF8StringEncoding];
+  }
 
   NSString *pluginName = [path lastPathComponent];
   NSLog(@"Loading Calabash plugin: %@", pluginName);
