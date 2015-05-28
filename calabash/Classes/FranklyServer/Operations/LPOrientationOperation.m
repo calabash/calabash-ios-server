@@ -92,7 +92,7 @@ static NSString *const kFaceUp = @"face up";
 
 
 // _arguments ==> {'device' | 'status_bar'}
-- (id) performWithTarget:(UIView *) _view error:(NSError **) error {
+- (id) performWithTarget:(UIView *) view error:(NSError **) error {
 
   NSUInteger argCount = [_arguments count];
   if (argCount == 0) {
@@ -118,7 +118,7 @@ static NSString *const kFaceUp = @"face up";
   } else if ([kStatusBar isEqualToString:firstArg]) {
     return [LPOrientationOperation statusBarOrientation];
   } else {
-    NSLog(@"Warning: feel through conditional for arguments: '[%@]'",
+    NSLog(@"Warning: fell through conditions for arguments: '[%@]'",
             [_arguments componentsJoinedByString:@", "]);
     return nil;
   }
