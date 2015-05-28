@@ -14,6 +14,7 @@
 #import "LPJSONUtils.h"
 #import "LPHTTPDataResponse.h"
 #import "LPDevice.h"
+#import "LPInvoker.h"
 
 @implementation LPMapRoute
 
@@ -23,21 +24,47 @@
   return [method isEqualToString:@"POST"];
 }
 
+// Calabash as Frank Plug-In support.
 - (BOOL) canHandlePostForPath:(NSArray *) path {
   return [@"cal_map" isEqualToString:[path lastObject]];
 }
 
+// Calabash as Frank Plug-In support.
+// The connection argument will be: RoutingHTTPConnection which has the
+// 'postDataAsString' selector defined.
 - (id) handleRequestForPath:(NSArray *) path withConnection:(id) connection {
+
   if (![self canHandlePostForPath:path]) {
     return nil;
   }
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wobjc-method-access"
-  NSDictionary *data = [LPJSONUtils deserializeDictionary:[connection postDataAsString]];
 
-  NSDictionary *response = [self JSONResponseForMethod:@"POST"
-                                                   URI:@"cal_map"
-                                                  data:data];
+  NSDictionary *response = nil;
+  SEL selector = NSSelectorFromString(@"postDataAsString");
+
+  if ([connection respondsToSelector:selector]) {
+    id connectionData = [LPInvoker invokeSelector:selector
+                                       withTarget:connection];
+    NSDictionary *data = [LPJSONUtils deserializeDictionary:connectionData];
+
+    response = [self JSONResponseForMethod:@"POST"
+                                       URI:@"cal_map"
+                                      data:data];
+
+  } else {
+
+    NSString *reason = [NSString stringWithFormat:@"%@ does not respond to selector %@",
+                        [connection class], NSStringFromSelector(selector)];
+    NSString *details = [NSString stringWithFormat:@"The %@ method should only be on called on the %@ class instances when Calabash is being used as a plug-in for Frank.",
+                         NSStringFromSelector(@selector(handleRequestForPath:withConnection:)),
+                         [LPMapRoute class]];
+    response =
+    @{
+      @"outcome" : @"FAILURE",
+      @"reason" : reason,
+      @"details" : details
+      };
+  }
+
   NSData *jsonData = [[LPJSONUtils serializeDictionary:response]
                       dataUsingEncoding:NSUTF8StringEncoding];
 
