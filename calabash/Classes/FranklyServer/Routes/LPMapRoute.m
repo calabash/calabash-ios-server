@@ -1,3 +1,6 @@
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
 //
 //  MapRoute.m
 //  Created by Karl Krukow on 13/08/11.
@@ -38,15 +41,14 @@
   NSData *jsonData = [[LPJSONUtils serializeDictionary:response]
                       dataUsingEncoding:NSUTF8StringEncoding];
 
-  return [[[LPHTTPDataResponse alloc] initWithData:jsonData] autorelease];
-#pragma clang diagnostic push
+  return [[LPHTTPDataResponse alloc] initWithData:jsonData];
 }
 
 - (NSArray *) applyOperation:(NSDictionary *) operation
                      toViews:(NSArray *) views
-                     error:(NSError **) error {
+                     error:(NSError *__autoreleasing*) error {
   if ([operation valueForKey:@"method_name"] == nil) {
-    return [[views copy] autorelease];
+    return [views copy];
   }
   LPOperation *op = [LPOperation operationFromDictionary:operation];
   NSMutableArray *finalRes = [NSMutableArray arrayWithCapacity:[views count]];
@@ -113,11 +115,6 @@
   [LPLog debug:@"Map results %@", resultDict];
 
   return resultDict;
-}
-
-- (void) dealloc {
-  _parser = nil;
-  [super dealloc];
 }
 
 @end
