@@ -3,7 +3,6 @@
 //  Created by Karl Krukow on 13/08/11.
 //  Copyright 2011 LessPainful. All rights reserved.
 //
-
 #import "LPMapRoute.h"
 #import "LPOperation.h"
 #import "LPTouchUtils.h"
@@ -14,18 +13,18 @@
 #import "LPDevice.h"
 
 @implementation LPMapRoute
-@synthesize parser = _parser;
 
+@synthesize parser = _parser;
 
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
   return [method isEqualToString:@"POST"];
 }
 
-- (BOOL)canHandlePostForPath:(NSArray *)path {
+- (BOOL) canHandlePostForPath:(NSArray *) path {
   return [@"cal_map" isEqualToString:[path lastObject]];
 }
 
-- (id) handleRequestForPath: (NSArray *)path withConnection:(id)connection {
+- (id) handleRequestForPath:(NSArray *) path withConnection:(id) connection {
   if (![self canHandlePostForPath:path]) {
     return nil;
   }
@@ -33,16 +32,19 @@
 #pragma clang diagnostic ignored "-Wobjc-method-access"
   NSDictionary *data = [LPJSONUtils deserializeDictionary:[connection postDataAsString]];
 
-  NSDictionary *response = [self JSONResponseForMethod:@"POST" URI:@"cal_map" data:data];
-  NSData *jsonData = [[LPJSONUtils serializeDictionary:response] dataUsingEncoding:NSUTF8StringEncoding];
+  NSDictionary *response = [self JSONResponseForMethod:@"POST"
+                                                   URI:@"cal_map"
+                                                  data:data];
+  NSData *jsonData = [[LPJSONUtils serializeDictionary:response]
+                      dataUsingEncoding:NSUTF8StringEncoding];
 
   return [[[LPHTTPDataResponse alloc] initWithData:jsonData] autorelease];
 #pragma clang diagnostic push
 }
 
-
-
-- (NSArray *) applyOperation:(NSDictionary *) operation toViews:(NSArray *) views error:(NSError **) error {
+- (NSArray *) applyOperation:(NSDictionary *) operation
+                     toViews:(NSArray *) views
+                     error:(NSError **) error {
   if ([operation valueForKey:@"method_name"] == nil) {
     return [[views copy] autorelease];
   }
@@ -68,9 +70,9 @@
   return finalRes;
 }
 
-
-- (NSDictionary *) JSONResponseForMethod:(NSString *) method URI:(NSString *) path data:(NSDictionary *) data {
-
+- (NSDictionary *) JSONResponseForMethod:(NSString *) method
+                                     URI:(NSString *) path
+                                    data:(NSDictionary *) data {
   id scriptObj = [data objectForKey:@"query"];
   NSDictionary *operation = [data objectForKey:@"operation"];
   NSArray *result = nil;
@@ -88,7 +90,8 @@
   }
   self.parser = nil;
   NSError *error = nil;
-  NSArray *resultArray = [self applyOperation:operation toViews:result
+  NSArray *resultArray = [self applyOperation:operation
+                                      toViews:result
                                         error:&error];
 
   NSDictionary *resultDict = nil;
@@ -108,7 +111,6 @@
 
   return resultDict;
 }
-
 
 - (void) dealloc {
   _parser = nil;
