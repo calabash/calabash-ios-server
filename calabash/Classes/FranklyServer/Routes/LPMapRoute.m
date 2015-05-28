@@ -48,7 +48,7 @@
   }
   LPOperation *op = [LPOperation operationFromDictionary:operation];
   NSMutableArray *finalRes = [NSMutableArray arrayWithCapacity:[views count]];
-  if (views == nil) {
+  if (views == nil || views.count == 0) {
     id res = [op performWithTarget:nil error:error];
     if (res != nil) {
       [finalRes addObject:res];
