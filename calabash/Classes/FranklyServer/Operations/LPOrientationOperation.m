@@ -92,7 +92,7 @@ static NSString *const kFaceUp = @"face up";
 
 
 // _arguments ==> {'device' | 'status_bar'}
-- (id) performWithTarget:(UIView *) _view error:(NSError **) error {
+- (id) performWithTarget:(UIView *) view error:(NSError **) error {
 
   NSUInteger argCount = [_arguments count];
   if (argCount == 0) {
