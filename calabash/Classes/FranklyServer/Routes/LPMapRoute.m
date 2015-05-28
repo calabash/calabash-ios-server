@@ -74,7 +74,7 @@
 - (NSArray *) applyOperation:(NSDictionary *) operation
                      toViews:(NSArray *) views
                      error:(NSError *__autoreleasing*) error {
-  if ([operation valueForKey:@"method_name"] == nil) {
+  if ([operation objectForKey:@"method_name"] == nil) {
     return [views copy];
   }
   LPOperation *op = [LPOperation operationFromDictionary:operation];
