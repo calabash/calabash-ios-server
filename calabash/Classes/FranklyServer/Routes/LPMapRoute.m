@@ -47,7 +47,6 @@
     return [[views copy] autorelease];
   }
   LPOperation *op = [LPOperation operationFromDictionary:operation];
-  //LPHTTPLogDDLogVerbose(@"Applying operation %@ to views...",op);
   NSMutableArray *finalRes = [NSMutableArray arrayWithCapacity:[views count]];
   if (views == nil) {
     id res = [op performWithTarget:nil error:error];
@@ -56,7 +55,6 @@
     }
   } else {
     for (id view in views) {
-      // if ([view isKindOfClass:[UIView class]] && ![LPTouchUtils isViewVisible:view]) {continue;}
       NSError *err = nil;
       id val = [op performWithTarget:view error:&err];
       if (err) {continue;}
@@ -75,7 +73,6 @@
 
   id scriptObj = [data objectForKey:@"query"];
   NSDictionary *operation = [data objectForKey:@"operation"];
-  //DDLogVerbose(@"MapRoute received command\n%@", data);
   NSArray *result = nil;
   if ([NSNull null] != scriptObj) {
 
@@ -84,7 +81,6 @@
     NSArray *tokens = [self.parser parsedTokens];
     NSLog(@"Map %@, %@ Parsed UIScript as\n%@", method, path, tokens);
 
-    //
     NSArray *allWindows = [LPTouchUtils applicationWindows];
     result = [self.parser evalWith:allWindows];
   } else {
