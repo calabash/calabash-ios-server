@@ -74,11 +74,13 @@
 - (NSArray *) applyOperation:(NSDictionary *) operation
                      toViews:(NSArray *) views
                      error:(NSError *__autoreleasing*) error {
-  if ([operation objectForKey:@"method_name"] == nil) {
-    return [views copy];
-  }
+  NSString *operationName = [operation objectForKey:@"method_name"];
+
+  if (!operationName) {  return [views copy];  }
+
   LPOperation *op = [LPOperation operationFromDictionary:operation];
   NSMutableArray *finalRes = [NSMutableArray arrayWithCapacity:[views count]];
+
   if (views == nil || views.count == 0) {
     id res = [op performWithTarget:nil error:error];
     if (res != nil) {
