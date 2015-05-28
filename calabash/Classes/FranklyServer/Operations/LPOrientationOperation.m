@@ -118,7 +118,7 @@ static NSString *const kFaceUp = @"face up";
   } else if ([kStatusBar isEqualToString:firstArg]) {
     return [LPOrientationOperation statusBarOrientation];
   } else {
-    NSLog(@"Warning: feel through conditional for arguments: '[%@]'",
+    NSLog(@"Warning: fell through conditions for arguments: '[%@]'",
             [_arguments componentsJoinedByString:@", "]);
     return nil;
   }
