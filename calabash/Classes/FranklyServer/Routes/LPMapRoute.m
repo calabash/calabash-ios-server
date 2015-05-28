@@ -96,16 +96,19 @@
 
   NSDictionary *resultDict = nil;
   if (resultArray) {
-    resultDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                  [LPOrientationOperation statusBarOrientation], @"status_bar_orientation",
-                  resultArray, @"results",
-                  @"SUCCESS", @"outcome",
-                  nil];
+    resultDict =
+    @{
+      @"status_bar_orientation" : [LPOrientationOperation statusBarOrientation],
+      @"results" : resultArray,
+      @"outcome" : @"SUCCESS"
+      };
   } else {
-    resultDict = [NSDictionary dictionaryWithObjectsAndKeys:@"FAILURE", @"outcome",
-                                                            @"", @"reason",
-                                                            @"", @"details",
-                                                            nil];
+    resultDict =
+    @{
+      @"outcome" : @"FAILURE",
+      @"reason" : @"",
+      @"details" : @""
+      };
   }
   [LPLog debug:@"Map results %@", resultDict];
 
