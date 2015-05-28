@@ -14,7 +14,7 @@
 #import "LPDevice.h"
 
 @implementation LPMapRoute
-@synthesize parser;
+@synthesize parser = _parser;
 
 
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
@@ -111,7 +111,7 @@
 
 
 - (void) dealloc {
-  self.parser = nil;
+  _parser = nil;
   [super dealloc];
 }
 
