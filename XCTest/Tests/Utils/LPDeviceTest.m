@@ -151,7 +151,7 @@ describe(@"LPDevice", ^{
         [[[touchMock stub] andReturnValue:OCMOCK_VALUE(no)] isThreeAndAHalfInchDevice];
         [[[mockDevice stub] andReturnValue:OCMOCK_VALUE(no)] iPhone6];
         [[[mockDevice stub] andReturnValue:OCMOCK_VALUE(no)] iPhone6Plus];
-        expect([mockDevice formFactor]).to.equal(@"");
+        expect([mockDevice formFactor]).to.equal(@"unknown");
       });
     });
   });
