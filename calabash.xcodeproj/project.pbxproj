@@ -7,29 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		89F2EFDC1B2243D500958052 /* LPAccessorRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFDA1B2243D500958052 /* LPAccessorRoute.h */; };
-		89F2EFDD1B2243D500958052 /* LPAccessorRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFDA1B2243D500958052 /* LPAccessorRoute.h */; };
-		89F2EFDE1B2243D500958052 /* LPAccessorRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFDA1B2243D500958052 /* LPAccessorRoute.h */; };
-		89F2EFDF1B2243D500958052 /* LPAccessorRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFDA1B2243D500958052 /* LPAccessorRoute.h */; };
-		89F2EFE01B2243D500958052 /* LPAccessorRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFDA1B2243D500958052 /* LPAccessorRoute.h */; };
-		89F2EFE11B2243D500958052 /* LPAccessorRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPAccessorRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		89F2EFE21B2243D500958052 /* LPAccessorRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPAccessorRoute.m */; };
-		89F2EFE31B2243D500958052 /* LPAccessorRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPAccessorRoute.m */; };
-		89F2EFE41B2243D500958052 /* LPAccessorRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPAccessorRoute.m */; };
-		89F2EFE51B2243D500958052 /* LPAccessorRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPAccessorRoute.m */; };
-		89F2EFE61B2243D500958052 /* LPAccessorRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPAccessorRoute.m */; };
-		89F2EFE81B22462700958052 /* LPAccessorRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFE71B22462700958052 /* LPAccessorRouteTest.m */; };
-		89F2EFEB1B224F6D00958052 /* LPJSONUtils+Accessors.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFE91B224F6D00958052 /* LPJSONUtils+Accessors.h */; };
-		89F2EFEC1B224F6D00958052 /* LPJSONUtils+Accessors.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFE91B224F6D00958052 /* LPJSONUtils+Accessors.h */; };
-		89F2EFED1B224F6D00958052 /* LPJSONUtils+Accessors.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFE91B224F6D00958052 /* LPJSONUtils+Accessors.h */; };
-		89F2EFEE1B224F6D00958052 /* LPJSONUtils+Accessors.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFE91B224F6D00958052 /* LPJSONUtils+Accessors.h */; };
-		89F2EFEF1B224F6D00958052 /* LPJSONUtils+Accessors.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFE91B224F6D00958052 /* LPJSONUtils+Accessors.h */; };
-		89F2EFF01B224F6D00958052 /* LPJSONUtils+Accessors.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFEA1B224F6D00958052 /* LPJSONUtils+Accessors.m */; };
-		89F2EFF11B224F6D00958052 /* LPJSONUtils+Accessors.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFEA1B224F6D00958052 /* LPJSONUtils+Accessors.m */; };
-		89F2EFF21B224F6D00958052 /* LPJSONUtils+Accessors.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFEA1B224F6D00958052 /* LPJSONUtils+Accessors.m */; };
-		89F2EFF31B224F6D00958052 /* LPJSONUtils+Accessors.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFEA1B224F6D00958052 /* LPJSONUtils+Accessors.m */; };
-		89F2EFF41B224F6D00958052 /* LPJSONUtils+Accessors.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFEA1B224F6D00958052 /* LPJSONUtils+Accessors.m */; };
-		89F2EFF51B224F6D00958052 /* LPJSONUtils+Accessors.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFEA1B224F6D00958052 /* LPJSONUtils+Accessors.m */; };
+		89128F951B25DD92008874B0 /* LPIntrospectionTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89128F941B25DD92008874B0 /* LPIntrospectionTestView.m */; };
+		89F2EFE11B2243D500958052 /* LPIntrospectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		89F2EFE21B2243D500958052 /* LPIntrospectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		89F2EFE31B2243D500958052 /* LPIntrospectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		89F2EFE41B2243D500958052 /* LPIntrospectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		89F2EFE51B2243D500958052 /* LPIntrospectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		89F2EFE61B2243D500958052 /* LPIntrospectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		89F2EFE81B22462700958052 /* LPIntrospectionRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFE71B22462700958052 /* LPIntrospectionRouteTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		89F2EFEB1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFE91B224F6D00958052 /* LPJSONUtils+Introspection.h */; };
+		89F2EFEC1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFE91B224F6D00958052 /* LPJSONUtils+Introspection.h */; };
+		89F2EFED1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFE91B224F6D00958052 /* LPJSONUtils+Introspection.h */; };
+		89F2EFEE1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFE91B224F6D00958052 /* LPJSONUtils+Introspection.h */; };
+		89F2EFEF1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFE91B224F6D00958052 /* LPJSONUtils+Introspection.h */; };
+		89F2EFF01B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFEA1B224F6D00958052 /* LPJSONUtils+Introspection.m */; };
+		89F2EFF11B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFEA1B224F6D00958052 /* LPJSONUtils+Introspection.m */; };
+		89F2EFF21B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFEA1B224F6D00958052 /* LPJSONUtils+Introspection.m */; };
+		89F2EFF31B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFEA1B224F6D00958052 /* LPJSONUtils+Introspection.m */; };
+		89F2EFF41B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFEA1B224F6D00958052 /* LPJSONUtils+Introspection.m */; };
+		89F2EFF51B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFEA1B224F6D00958052 /* LPJSONUtils+Introspection.m */; };
 		B1058E08197F00C000B4A57B /* LPUIAUserPrefsChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F279AE183D5B3000A922BC /* LPUIAUserPrefsChannel.m */; };
 		B1058E1D197F00C000B4A57B /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; };
 		B1058E1E197F00C000B4A57B /* UIScriptAST.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFA14B6DB2B002A744C /* UIScriptAST.m */; };
@@ -868,11 +864,13 @@
 		5BFF97A718B392370094E71E /* LPScrollToMarkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScrollToMarkOperation.m; sourceTree = "<group>"; };
 		692D779E1657010000DE3E53 /* LPExitRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPExitRoute.h; sourceTree = "<group>"; };
 		692D779F1657010000DE3E53 /* LPExitRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPExitRoute.m; sourceTree = "<group>"; };
-		89F2EFDA1B2243D500958052 /* LPAccessorRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPAccessorRoute.h; sourceTree = "<group>"; };
-		89F2EFDB1B2243D500958052 /* LPAccessorRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPAccessorRoute.m; sourceTree = "<group>"; };
-		89F2EFE71B22462700958052 /* LPAccessorRouteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPAccessorRouteTest.m; sourceTree = "<group>"; };
-		89F2EFE91B224F6D00958052 /* LPJSONUtils+Accessors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LPJSONUtils+Accessors.h"; sourceTree = "<group>"; };
-		89F2EFEA1B224F6D00958052 /* LPJSONUtils+Accessors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LPJSONUtils+Accessors.m"; sourceTree = "<group>"; };
+		89128F931B25DD92008874B0 /* LPIntrospectionTestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPIntrospectionTestView.h; sourceTree = "<group>"; };
+		89128F941B25DD92008874B0 /* LPIntrospectionTestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPIntrospectionTestView.m; sourceTree = "<group>"; };
+		89F2EFDA1B2243D500958052 /* LPIntrospectionRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPIntrospectionRoute.h; sourceTree = "<group>"; };
+		89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPIntrospectionRoute.m; sourceTree = "<group>"; };
+		89F2EFE71B22462700958052 /* LPIntrospectionRouteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPIntrospectionRouteTest.m; sourceTree = "<group>"; };
+		89F2EFE91B224F6D00958052 /* LPJSONUtils+Introspection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LPJSONUtils+Introspection.h"; sourceTree = "<group>"; };
+		89F2EFEA1B224F6D00958052 /* LPJSONUtils+Introspection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "LPJSONUtils+Introspection.m"; sourceTree = "<group>"; };
 		B1058E51197F00C000B4A57B /* libFrankCalabash.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFrankCalabash.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1058E78197F043100B4A57B /* LPCalabashFrankRegistrar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LPCalabashFrankRegistrar.h; path = Frank/LPCalabashFrankRegistrar.h; sourceTree = "<group>"; };
 		B1058E79197F043100B4A57B /* LPCalabashFrankRegistrar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPCalabashFrankRegistrar.m; path = Frank/LPCalabashFrankRegistrar.m; sourceTree = "<group>"; };
@@ -1574,8 +1572,8 @@
 				692D779F1657010000DE3E53 /* LPExitRoute.m */,
 				B153F55A15949F3D00867E12 /* LPVersionRoute.h */,
 				B153F55B15949F3D00867E12 /* LPVersionRoute.m */,
-				89F2EFDA1B2243D500958052 /* LPAccessorRoute.h */,
-				89F2EFDB1B2243D500958052 /* LPAccessorRoute.m */,
+				89F2EFDA1B2243D500958052 /* LPIntrospectionRoute.h */,
+				89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */,
 			);
 			path = Routes;
 			sourceTree = "<group>";
@@ -1648,8 +1646,8 @@
 				B1F279AD183D5B3000A922BC /* LPUIAUserPrefsChannel.h */,
 				B1F279AE183D5B3000A922BC /* LPUIAUserPrefsChannel.m */,
 				B1DDE6D115C0701D00BBE2BE /* UIAutomation.h */,
-				89F2EFE91B224F6D00958052 /* LPJSONUtils+Accessors.h */,
-				89F2EFEA1B224F6D00958052 /* LPJSONUtils+Accessors.m */,
+				89F2EFE91B224F6D00958052 /* LPJSONUtils+Introspection.h */,
+				89F2EFEA1B224F6D00958052 /* LPJSONUtils+Introspection.m */,
 				B184FE0C14B6DB2B002A744C /* LPJSONUtils.h */,
 				B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */,
 				B1296FBF15DC1F4B005DDF5C /* LPReflectUtils.h */,
@@ -1961,7 +1959,9 @@
 			children = (
 				F5C224E71AD47403001DB4FA /* LPScreenshotRouteTest.m */,
 				F5C224E81AD47403001DB4FA /* LPVersionRouteTest.m */,
-				89F2EFE71B22462700958052 /* LPAccessorRouteTest.m */,
+				89F2EFE71B22462700958052 /* LPIntrospectionRouteTest.m */,
+				89128F931B25DD92008874B0 /* LPIntrospectionTestView.h */,
+				89128F941B25DD92008874B0 /* LPIntrospectionTestView.m */,
 			);
 			path = Routes;
 			sourceTree = "<group>";
@@ -2011,12 +2011,11 @@
 				F55185761AC389F600CE06DC /* LPHTTPDataResponse.h in Headers */,
 				F55185771AC389F600CE06DC /* LPHTTPDynamicFileResponse.h in Headers */,
 				F55185781AC389F600CE06DC /* LPHTTPFileResponse.h in Headers */,
-				89F2EFEE1B224F6D00958052 /* LPJSONUtils+Accessors.h in Headers */,
+				89F2EFEE1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */,
 				F55185701AC389C700CE06DC /* LPCORSResponse.h in Headers */,
 				F551857A1AC38A5200CE06DC /* LPRoute.h in Headers */,
 				F551857B1AC38A5200CE06DC /* LPRouter.h in Headers */,
 				F551857C1AC38A5200CE06DC /* LPVersionRoute.h in Headers */,
-				89F2EFDF1B2243D500958052 /* LPAccessorRoute.h in Headers */,
 				F55185641AC3879D00CE06DC /* LPWebViewProtocol.h in Headers */,
 				F5C094511A979CC200AE5991 /* LPWebQuery.h in Headers */,
 				F55185651AC3879D00CE06DC /* UIWebView+LPWebView.h in Headers */,
@@ -2034,12 +2033,11 @@
 				F55185801AC38A5700CE06DC /* LPHTTPDataResponse.h in Headers */,
 				F55185811AC38A5700CE06DC /* LPHTTPDynamicFileResponse.h in Headers */,
 				F55185821AC38A5700CE06DC /* LPHTTPFileResponse.h in Headers */,
-				89F2EFEF1B224F6D00958052 /* LPJSONUtils+Accessors.h in Headers */,
+				89F2EFEF1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */,
 				F55185831AC38A5700CE06DC /* LPCORSResponse.h in Headers */,
 				F55185841AC38A5700CE06DC /* LPRoute.h in Headers */,
 				F55185851AC38A5700CE06DC /* LPRouter.h in Headers */,
 				F55185861AC38A5700CE06DC /* LPVersionRoute.h in Headers */,
-				89F2EFE01B2243D500958052 /* LPAccessorRoute.h in Headers */,
 				F5C094521A979CC200AE5991 /* LPWebQuery.h in Headers */,
 				F55185671AC387A200CE06DC /* LPWebViewProtocol.h in Headers */,
 				F5A33A561AC00D1300224639 /* UIWebView+LPWebView.h in Headers */,
@@ -2061,11 +2059,10 @@
 				B1F7720F1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */,
 				B1D5BDCB19A23BCE0070E8CE /* LPRouter.h in Headers */,
 				F5C094501A979CC200AE5991 /* LPWebQuery.h in Headers */,
-				89F2EFED1B224F6D00958052 /* LPJSONUtils+Accessors.h in Headers */,
+				89F2EFED1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */,
 				B1F7721F1A22A398009A2336 /* LPSharedUIATextField.h in Headers */,
 				F55185611AC3878D00CE06DC /* LPWebViewProtocol.h in Headers */,
 				F55185621AC3878D00CE06DC /* UIWebView+LPWebView.h in Headers */,
-				89F2EFDE1B2243D500958052 /* LPAccessorRoute.h in Headers */,
 				F55185741AC389E800CE06DC /* LPCORSResponse.h in Headers */,
 				F5F2D5E61ACACF2F0027937B /* LPIsWebView.h in Headers */,
 				B1D5BDCC19A23BCE0070E8CE /* LPHTTPResponse.h in Headers */,
@@ -2090,11 +2087,10 @@
 				F5091C2F18C4E1D700C85307 /* CalabashServer.h in Headers */,
 				F59C5CF818E0BB1A0087B51D /* LPRoute.h in Headers */,
 				F59C5CF918E0BB290087B51D /* LPRouter.h in Headers */,
-				89F2EFEB1B224F6D00958052 /* LPJSONUtils+Accessors.h in Headers */,
+				89F2EFEB1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */,
 				F5C0944D1A979CC200AE5991 /* LPWebQuery.h in Headers */,
 				F55185581AC3875200CE06DC /* LPWebViewProtocol.h in Headers */,
 				F55185591AC3875900CE06DC /* UIWebView+LPWebView.h in Headers */,
-				89F2EFDC1B2243D500958052 /* LPAccessorRoute.h in Headers */,
 				F5F2D5E31ACACF2F0027937B /* LPIsWebView.h in Headers */,
 				F55185711AC389CD00CE06DC /* LPCORSResponse.h in Headers */,
 				F59C5CFA18E0BBAE0087B51D /* LPHTTPResponse.h in Headers */,
@@ -2119,11 +2115,10 @@
 				B1F7720D1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */,
 				F59C5D0218E0C1D90087B51D /* LPRouter.h in Headers */,
 				F5C0944E1A979CC200AE5991 /* LPWebQuery.h in Headers */,
-				89F2EFEC1B224F6D00958052 /* LPJSONUtils+Accessors.h in Headers */,
+				89F2EFEC1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */,
 				B1F7721D1A22A398009A2336 /* LPSharedUIATextField.h in Headers */,
 				F551855B1AC3876F00CE06DC /* LPWebViewProtocol.h in Headers */,
 				F551855C1AC3876F00CE06DC /* UIWebView+LPWebView.h in Headers */,
-				89F2EFDD1B2243D500958052 /* LPAccessorRoute.h in Headers */,
 				F55185721AC389D300CE06DC /* LPCORSResponse.h in Headers */,
 				F5F2D5E41ACACF2F0027937B /* LPIsWebView.h in Headers */,
 				F59C5D0318E0C1DF0087B51D /* LPHTTPResponse.h in Headers */,
@@ -2645,7 +2640,7 @@
 				B15BF9D119ABB1DE00B38577 /* LPCJSONScanner.m in Sources */,
 				B15BF9D219ABB1DE00B38577 /* LPCJSONSerializer.m in Sources */,
 				B15BF9D319ABB1DE00B38577 /* LPResources.m in Sources */,
-				89F2EFF41B224F6D00958052 /* LPJSONUtils+Accessors.m in Sources */,
+				89F2EFF41B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */,
 				B15BF9D419ABB1DE00B38577 /* UIScriptASTVisibility.m in Sources */,
 				B15BF9D519ABB1DE00B38577 /* UIScriptASTPredicate.m in Sources */,
 				F5F6004D1A7C69760020637D /* LPInvoker.m in Sources */,
@@ -2669,7 +2664,7 @@
 				B15BF9E319ABB1DE00B38577 /* LPEnv.m in Sources */,
 				B15BF9E419ABB1DE00B38577 /* LPLog.m in Sources */,
 				B15BF9E519ABB1DE00B38577 /* LPCDataScanner.m in Sources */,
-				89F2EFE51B2243D500958052 /* LPAccessorRoute.m in Sources */,
+				89F2EFE51B2243D500958052 /* LPIntrospectionRoute.m in Sources */,
 				B15BF9E619ABB1DE00B38577 /* CalabashServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2745,7 +2740,7 @@
 				B15BFA2319ABB2B100B38577 /* LPCJSONScanner.m in Sources */,
 				B15BFA2419ABB2B100B38577 /* LPCJSONSerializer.m in Sources */,
 				B15BFA2519ABB2B100B38577 /* LPResources.m in Sources */,
-				89F2EFF51B224F6D00958052 /* LPJSONUtils+Accessors.m in Sources */,
+				89F2EFF51B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */,
 				B15BFA2619ABB2B100B38577 /* UIScriptASTVisibility.m in Sources */,
 				B15BFA2719ABB2B100B38577 /* UIScriptASTPredicate.m in Sources */,
 				F5F6004E1A7C69760020637D /* LPInvoker.m in Sources */,
@@ -2769,7 +2764,7 @@
 				B15BFA3519ABB2B100B38577 /* LPEnv.m in Sources */,
 				B15BFA3619ABB2B100B38577 /* LPLog.m in Sources */,
 				B15BFA3719ABB2B100B38577 /* LPCDataScanner.m in Sources */,
-				89F2EFE61B2243D500958052 /* LPAccessorRoute.m in Sources */,
+				89F2EFE61B2243D500958052 /* LPIntrospectionRoute.m in Sources */,
 				B15BFA3819ABB2B100B38577 /* CalabashServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2845,7 +2840,7 @@
 				B1D5BDB019A23BCE0070E8CE /* UIScriptASTWith.m in Sources */,
 				B1D5BDB119A23BCE0070E8CE /* LPSSKeychain.m in Sources */,
 				B1D5BDB219A23BCE0070E8CE /* UIScriptParser.m in Sources */,
-				89F2EFF31B224F6D00958052 /* LPJSONUtils+Accessors.m in Sources */,
+				89F2EFF31B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */,
 				B1D5BDB319A23BCE0070E8CE /* LPJSONUtils.m in Sources */,
 				B1D5BDB419A23BCE0070E8CE /* LPKeychainRoute.m in Sources */,
 				F5F6004C1A7C69760020637D /* LPInvoker.m in Sources */,
@@ -2869,7 +2864,7 @@
 				B1D5BDC319A23BCE0070E8CE /* LPScrollToRowWithMarkOperation.m in Sources */,
 				B1D5BDC419A23BCE0070E8CE /* LPOrientationOperation.m in Sources */,
 				B1D5BDC519A23BCE0070E8CE /* LPCORSResponse.m in Sources */,
-				89F2EFE41B2243D500958052 /* LPAccessorRoute.m in Sources */,
+				89F2EFE41B2243D500958052 /* LPIntrospectionRoute.m in Sources */,
 				B1D5BDC619A23BCE0070E8CE /* LPDatePickerOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2945,7 +2940,7 @@
 				F5E2D1E018C9120E00A0D9B6 /* LPSSKeychain.m in Sources */,
 				F5091C1218C4E1D700C85307 /* UIScriptParser.m in Sources */,
 				F5091C1318C4E1D700C85307 /* LPJSONUtils.m in Sources */,
-				89F2EFF11B224F6D00958052 /* LPJSONUtils+Accessors.m in Sources */,
+				89F2EFF11B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */,
 				F55D412418C9130100813F78 /* LPKeychainRoute.m in Sources */,
 				F5091C1418C4E1D700C85307 /* LPTouchUtils.m in Sources */,
 				F5F600491A7C69760020637D /* LPInvoker.m in Sources */,
@@ -2969,7 +2964,7 @@
 				F5091C2418C4E1D700C85307 /* LPScrollToRowWithMarkOperation.m in Sources */,
 				F5091C2518C4E1D700C85307 /* LPOrientationOperation.m in Sources */,
 				F5F53D6B18C619CB00BD9731 /* LPCORSResponse.m in Sources */,
-				89F2EFE21B2243D500958052 /* LPAccessorRoute.m in Sources */,
+				89F2EFE21B2243D500958052 /* LPIntrospectionRoute.m in Sources */,
 				F5091C2618C4E1D700C85307 /* LPDatePickerOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2992,6 +2987,7 @@
 				F50CBFC21A0405CE004AC9DA /* UIScriptASTLast.m in Sources */,
 				F50CBF891A04056F004AC9DA /* LPHTTPAsyncFileResponse.m in Sources */,
 				F50CBFAB1A0405B2004AC9DA /* LPInterpolateRoute.m in Sources */,
+				89128F951B25DD92008874B0 /* LPIntrospectionTestView.m in Sources */,
 				F5543F221ABF7D7000E1A0BF /* LPPluginLoaderTest.m in Sources */,
 				F50CBFA01A0405B2004AC9DA /* LPUIARouteOverUserPrefs.m in Sources */,
 				F5A33A5F1AC0172A00224639 /* UIWebView+LPWebViewTest.m in Sources */,
@@ -3004,7 +3000,7 @@
 				F50CBFB71A0405CE004AC9DA /* LPCJSONScanner.m in Sources */,
 				F50CBFB61A0405CE004AC9DA /* LPCJSONDeserializer.m in Sources */,
 				F50CBFC31A0405CE004AC9DA /* UIScriptASTWith.m in Sources */,
-				89F2EFE81B22462700958052 /* LPAccessorRouteTest.m in Sources */,
+				89F2EFE81B22462700958052 /* LPIntrospectionRouteTest.m in Sources */,
 				F50CBF7F1A040564004AC9DA /* MKMapView+ZoomLevel.m in Sources */,
 				F50CBF901A04058C004AC9DA /* LPRouter.m in Sources */,
 				F50CBFC61A0405E9004AC9DA /* LPUIAUserPrefsChannel.m in Sources */,
@@ -3023,7 +3019,7 @@
 				F5C224E31AD473F0001DB4FA /* LPTouchUtilsTest.m in Sources */,
 				F5C224DB1AD472B1001DB4FA /* LPInvokerTest.m in Sources */,
 				B1670E2E1A32411100000A62 /* LPDumpRoute.m in Sources */,
-				89F2EFE11B2243D500958052 /* LPAccessorRoute.m in Sources */,
+				89F2EFE11B2243D500958052 /* LPIntrospectionRoute.m in Sources */,
 				F50CBFA51A0405B2004AC9DA /* LPUIATapRoute.m in Sources */,
 				F50CBFA41A0405B2004AC9DA /* LPQueryLogRoute.m in Sources */,
 				F50CBFC11A0405CE004AC9DA /* UIScriptASTIndex.m in Sources */,
@@ -3060,7 +3056,7 @@
 				F50CBFB91A0405CE004AC9DA /* LPResources.m in Sources */,
 				F50CBF831A040564004AC9DA /* LPHTTPConnection.m in Sources */,
 				F5C224E21AD473F0001DB4FA /* LPJSONUtilsTest.m in Sources */,
-				89F2EFF01B224F6D00958052 /* LPJSONUtils+Accessors.m in Sources */,
+				89F2EFF01B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */,
 				F50CBFB11A0405B2004AC9DA /* LPBackdoorRoute.m in Sources */,
 				F5C224ED1AD4766E001DB4FA /* LPSetTextOperationTest.m in Sources */,
 				F50CBFB01A0405B2004AC9DA /* LPAsyncPlaybackRoute.m in Sources */,
@@ -3177,7 +3173,7 @@
 				F5E2D1E118C9120E00A0D9B6 /* LPSSKeychain.m in Sources */,
 				F5821A3018C4E27400293508 /* UIScriptParser.m in Sources */,
 				F5821A3118C4E27400293508 /* LPJSONUtils.m in Sources */,
-				89F2EFF21B224F6D00958052 /* LPJSONUtils+Accessors.m in Sources */,
+				89F2EFF21B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */,
 				F55D412518C9130100813F78 /* LPKeychainRoute.m in Sources */,
 				F5821A3218C4E27400293508 /* LPTouchUtils.m in Sources */,
 				F5F6004A1A7C69760020637D /* LPInvoker.m in Sources */,
@@ -3201,7 +3197,7 @@
 				F5821A4218C4E27400293508 /* LPScrollToRowWithMarkOperation.m in Sources */,
 				F5821A4318C4E27400293508 /* LPOrientationOperation.m in Sources */,
 				F5F53D6A18C619CB00BD9731 /* LPCORSResponse.m in Sources */,
-				89F2EFE31B2243D500958052 /* LPAccessorRoute.m in Sources */,
+				89F2EFE31B2243D500958052 /* LPIntrospectionRoute.m in Sources */,
 				F5821A4418C4E27400293508 /* LPDatePickerOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,6 +8,6 @@
 
 #import "LPRoute.h"
 
-@interface LPAccessorRoute : NSObject<LPRoute>
+@interface LPIntrospectionRoute : NSObject<LPRoute>
 
 @end

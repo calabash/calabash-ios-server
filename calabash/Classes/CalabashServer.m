@@ -20,7 +20,7 @@
 #import "LPBackdoorRoute.h"
 #import "LPExitRoute.h"
 #import "LPVersionRoute.h"
-#import "LPAccessorRoute.h"
+#import "LPIntrospectionRoute.h"
 #import "LPConditionRoute.h"
 #import "LPUIARouteOverUserPrefs.h"
 #import "LPUIARouteOverSharedElement.h"
@@ -169,9 +169,9 @@
     [LPRouter addRoute:dumpRoute forPath:@"dump"];
     [dumpRoute release];
     
-    LPAccessorRoute *accessorRoute = [LPAccessorRoute new];
-    [LPRouter addRoute:accessorRoute forPath:@"accessors"];
-    [accessorRoute release];
+    LPIntrospectionRoute *introspectionRoute = [LPIntrospectionRoute new];
+    [LPRouter addRoute:introspectionRoute forPath:@"introspection"];
+    [introspectionRoute release];
 
     _httpServer = [[[LPHTTPServer alloc] init] retain];
 
