@@ -152,7 +152,7 @@ describe(@".jsonifyAccessibilityElement:", ^{
     expect(dict.count).to.equal(12);
   });
 
-  fit(@"UIControl instance", ^{
+  it(@"UIControl instance", ^{
     id obj = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
     NSDictionary *dict = [LPJSONUtils jsonifyAccessibilityElement:obj];
     expect(dict.count).to.equal(13);
