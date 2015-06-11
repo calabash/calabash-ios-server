@@ -610,6 +610,7 @@
 		F56630961A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F56630971A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F56630981A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F57C17EE1B29D5CF00B5572F /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		F58219FB18C4E27400293508 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; };
 		F58219FC18C4E27400293508 /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; };
 		F58219FD18C4E27400293508 /* LPHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B514E6565500663205 /* LPHTTPConnection.m */; };
@@ -2472,6 +2473,7 @@
 				B113583E197F1351004B16F4 /* DDData.m in Sources */,
 				B1135843197F1351004B16F4 /* LPHTTPDynamicFileResponse.m in Sources */,
 				B113583D197F1351004B16F4 /* LPHTTPServer.m in Sources */,
+				F57C17EE1B29D5CF00B5572F /* CalabashServer.m in Sources */,
 				B11358591981B053004B16F4 /* LPScrollToRowWithMarkOperation.m in Sources */,
 				F5543F2D1ABF7DE900E1A0BF /* LPPluginLoader.m in Sources */,
 				B113583A197F1311004B16F4 /* LPHTTPConnection.m in Sources */,
