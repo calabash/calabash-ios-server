@@ -611,6 +611,24 @@
 		F56630971A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F56630981A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F57C17EE1B29D5CF00B5572F /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
+		F57C17FE1B29E56000B5572F /* LPLocationRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1CED0FA183E9551004793B9 /* LPLocationRoute.m */; };
+		F57C17FF1B29E57000B5572F /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; };
+		F57C18001B29E57600B5572F /* LPDebugRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DCD84189A997B00F8DF87 /* LPDebugRoute.m */; };
+		F57C18011B29E57C00B5572F /* LPAppPropertyRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1EBF08516EE63A000AE4D40 /* LPAppPropertyRoute.m */; };
+		F57C18021B29E58300B5572F /* LPUIATapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B164575518FDCE4900CAA25A /* LPUIATapRoute.m */; };
+		F57C18031B29E58B00B5572F /* LPUserPrefRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CC15C06CB500BBE2BE /* LPUserPrefRoute.m */; };
+		F57C18041B29E59300B5572F /* LPKeyboardRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F715BC200300408364 /* LPKeyboardRoute.m */; };
+		F57C18051B29E59900B5572F /* LPConditionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B163213415BBF13200408364 /* LPConditionRoute.m */; };
+		F57C18061B29E59C00B5572F /* LPInterpolateRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A04011511546F002FA032 /* LPInterpolateRoute.m */; };
+		F57C18071B29E5A900B5572F /* LPRecordRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8B14B6DC7F002A744C /* LPRecordRoute.m */; };
+		F57C18081B29E5AE00B5572F /* LPNoContentResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD414B6DB2B002A744C /* LPNoContentResponse.m */; };
+		F57C18091B29E5B200B5572F /* LPScreenshotRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9014B6DD33002A744C /* LPScreenshotRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F57C180A1B29E5B600B5572F /* LPAsyncPlaybackRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B111321614D5837900982BBC /* LPAsyncPlaybackRoute.m */; };
+		F57C180B1B29E5BB00B5572F /* LPBackdoorRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */; };
+		F57C180C1B29E5BE00B5572F /* LPExitRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 692D779F1657010000DE3E53 /* LPExitRoute.m */; };
+		F57C180D1B29E5C900B5572F /* LPRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8714B6DBAC002A744C /* LPRecorder.m */; };
+		F57C180E1B29E5CE00B5572F /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; };
+		F57C180F1B29E62900B5572F /* LPResources.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDF714B6DB2B002A744C /* LPResources.m */; };
 		F58219FB18C4E27400293508 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; };
 		F58219FC18C4E27400293508 /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; };
 		F58219FD18C4E27400293508 /* LPHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B514E6565500663205 /* LPHTTPConnection.m */; };
@@ -2460,16 +2478,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5DA9C951AA95020002E6AAE /* LPQueryLogRoute.m in Sources */,
+				F57C18061B29E59C00B5572F /* LPInterpolateRoute.m in Sources */,
+				F57C180E1B29E5CE00B5572F /* LPRouter.m in Sources */,
 				B1135842197F1351004B16F4 /* LPHTTPDataResponse.m in Sources */,
 				B11358641981B053004B16F4 /* LPScrollToRowOperation.m in Sources */,
 				B1135839197F12CF004B16F4 /* LPGenericAsyncRoute.m in Sources */,
 				F5C224CA1ACDF299001DB4FA /* LPWKWebViewRuntimeLoader.m in Sources */,
 				B1058E08197F00C000B4A57B /* LPUIAUserPrefsChannel.m in Sources */,
+				F57C17FF1B29E57000B5572F /* LPKeychainRoute.m in Sources */,
 				B1058E1D197F00C000B4A57B /* UIScriptASTPredicate.m in Sources */,
 				B1135847197F1390004B16F4 /* GCDAsyncSocket.m in Sources */,
 				B1670E2A1A32410E00000A62 /* LPDumpRoute.m in Sources */,
 				B1F772301A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */,
 				B1058E1E197F00C000B4A57B /* UIScriptAST.m in Sources */,
+				F57C180A1B29E5B600B5572F /* LPAsyncPlaybackRoute.m in Sources */,
 				B113583E197F1351004B16F4 /* DDData.m in Sources */,
 				B1135843197F1351004B16F4 /* LPHTTPDynamicFileResponse.m in Sources */,
 				B113583D197F1351004B16F4 /* LPHTTPServer.m in Sources */,
@@ -2488,6 +2510,7 @@
 				B1058E22197F00C000B4A57B /* UIScriptASTDirection.m in Sources */,
 				B1058E23197F00C000B4A57B /* UIScriptASTFirst.m in Sources */,
 				B113585B1981B053004B16F4 /* LPCollectionViewScrollToItemOperation.m in Sources */,
+				F57C180B1B29E5BB00B5572F /* LPBackdoorRoute.m in Sources */,
 				B1058E24197F00C000B4A57B /* UIScriptASTIndex.m in Sources */,
 				B1058E25197F00C000B4A57B /* UIScriptASTLast.m in Sources */,
 				B1058E26197F00C000B4A57B /* LPEnv.m in Sources */,
@@ -2499,10 +2522,16 @@
 				B1135830197F0C41004B16F4 /* LPCJSONScanner.m in Sources */,
 				B1135840197F1351004B16F4 /* DDRange.m in Sources */,
 				B1058E27197F00C000B4A57B /* UIScriptASTWith.m in Sources */,
+				F57C18021B29E58300B5572F /* LPUIATapRoute.m in Sources */,
+				F57C17FE1B29E56000B5572F /* LPLocationRoute.m in Sources */,
 				B1058E29197F00C000B4A57B /* UIScriptParser.m in Sources */,
 				B1135841197F1351004B16F4 /* LPHTTPAsyncFileResponse.m in Sources */,
+				F57C180D1B29E5C900B5572F /* LPRecorder.m in Sources */,
+				F57C180F1B29E62900B5572F /* LPResources.m in Sources */,
 				B113582F197F0C41004B16F4 /* LPCJSONDeserializer.m in Sources */,
 				B1135845197F1351004B16F4 /* LPHTTPRedirectResponse.m in Sources */,
+				F57C18031B29E58B00B5572F /* LPUserPrefRoute.m in Sources */,
+				F57C18051B29E59900B5572F /* LPConditionRoute.m in Sources */,
 				B113582E197F0C41004B16F4 /* CDataScanner_Extensions.m in Sources */,
 				B11358631981B053004B16F4 /* LPScrollOperation.m in Sources */,
 				B113583B197F1351004B16F4 /* LPHTTPAuthenticationRequest.m in Sources */,
@@ -2512,20 +2541,27 @@
 				B11358651981B053004B16F4 /* LPSetTextOperation.m in Sources */,
 				B11358611981B053004B16F4 /* LPOperation.m in Sources */,
 				B1058E2C197F00C000B4A57B /* LPTouchUtils.m in Sources */,
+				F57C18001B29E57600B5572F /* LPDebugRoute.m in Sources */,
 				B1135844197F1351004B16F4 /* LPHTTPFileResponse.m in Sources */,
 				B1058E2F197F00C000B4A57B /* LPReflectUtils.m in Sources */,
 				B1058E33197F00C000B4A57B /* UIScriptASTVisibility.m in Sources */,
 				F5A33A591AC00D1300224639 /* UIWebView+LPWebView.m in Sources */,
 				B1058E35197F00C000B4A57B /* LPLog.m in Sources */,
+				F57C18071B29E5A900B5572F /* LPRecordRoute.m in Sources */,
 				B11358581981B053004B16F4 /* LPScrollToMarkOperation.m in Sources */,
 				B113585D1981B053004B16F4 /* LPDatePickerOperation.m in Sources */,
 				B1F772141A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */,
+				F57C18091B29E5B200B5572F /* LPScreenshotRoute.m in Sources */,
+				F57C18041B29E59300B5572F /* LPKeyboardRoute.m in Sources */,
 				B1F772081A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */,
 				B1135832197F0C73004B16F4 /* LPCDataScanner.m in Sources */,
 				B11358491981AE00004B16F4 /* LPMapRoute.m in Sources */,
+				F57C18011B29E57C00B5572F /* LPAppPropertyRoute.m in Sources */,
+				F57C180C1B29E5BE00B5572F /* LPExitRoute.m in Sources */,
 				B113585A1981B053004B16F4 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
 				F5F6004B1A7C69760020637D /* LPInvoker.m in Sources */,
 				B113582D197F0C41004B16F4 /* LPISO8601DateFormatter.m in Sources */,
+				F57C18081B29E5AE00B5572F /* LPNoContentResponse.m in Sources */,
 				B113583C197F1351004B16F4 /* LPHTTPMessage.m in Sources */,
 				B113585C1981B053004B16F4 /* LPSliderOperation.m in Sources */,
 				B113585F1981B053004B16F4 /* LPFlashOperation.m in Sources */,
