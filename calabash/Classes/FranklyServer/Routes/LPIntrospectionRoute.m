@@ -19,8 +19,11 @@
 
 @implementation LPIntrospectionRoute
 
-- (NSDictionary *)JSONResponseForMethod:(NSString *) method URI:(NSString *) path data:(NSDictionary *) data {
+- (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
+  return [method isEqualToString:@"POST"];
+}
 
+- (NSDictionary *)JSONResponseForMethod:(NSString *) method URI:(NSString *) path data:(NSDictionary *) data {
   NSMutableArray *ret;
   id scriptObj              = data[@"query"];
   NSArray *results          = nil;

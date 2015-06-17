@@ -1,10 +1,3 @@
-//
-//  LPAccessorRouteTest.m
-//  calabash
-//
-//  Created by Chris Fuentes on 6/5/15.
-//  Copyright (c) 2015 Xamarin. All rights reserved.
-//
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
@@ -13,30 +6,9 @@
 #import "LPJSONUtils+Introspection.h"
 
 @interface LPIntrospectionRouteTest : XCTestCase
-
 @end
 
 @implementation LPIntrospectionRouteTest
-
-- (void)setUp {
-  [super setUp];
-}
-
-- (void)tearDown {
-  [super tearDown];
-}
-
-- (void)testExample {
-  
-}
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
-}
-
 @end
 
 SpecBegin(LPIntrospectionRoute)
@@ -53,7 +25,7 @@ describe(@"LPAccessorRoute", ^{
       results = [LPJSONUtils objectIntrospection:view];
     });
     
-    it(@"returnsAllSelectorsFromNewClass", ^{
+    it(@"returns all selectors from a new class", ^{
       NSArray *methods = results[@"methods"];
       expect(methods).to.contain(@"privateMethod");
       expect(methods).to.contain(@"privateMethodWithArg:");
@@ -66,7 +38,7 @@ describe(@"LPAccessorRoute", ^{
       expect(methods).to.contain(@"idMethodWithArg:andAnother:");
     });
     
-    it(@"returnsAllPropertiesFromNewClass", ^{
+    it(@"returns all properties from a new class", ^{
       NSDictionary *properties = results[@"properties"];
       for (NSString *propName in @[@"string",
                                    @"readonlyString",
@@ -83,7 +55,7 @@ describe(@"LPAccessorRoute", ^{
       expect(properties[@"customGetterCustomGetterString"]).to.equal(@{@"getter" : @"customStringGetter", @"setter" : @"customStringSetter:"});
     });
     
-    it(@"alwaysReturnsAValidSetterAndGetterOrREADONLY", ^{
+    it(@"always returns a valid setter and getter or READONLY", ^{
       NSDictionary *properties = results[@"properties"];
       for (NSString *propName in properties) {
         NSString *setter = results[propName][@"setter"];

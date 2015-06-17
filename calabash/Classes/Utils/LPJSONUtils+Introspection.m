@@ -1,10 +1,6 @@
-//
-//  LPJSONUtils+Accessors.m
-//  calabash
-//
-//  Created by Chris Fuentes on 6/5/15.
-//  Copyright (c) 2015 Xamarin. All rights reserved.
-//
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
 
 #import "LPJSONUtils+Introspection.h"
 #import <objc/runtime.h>
@@ -18,7 +14,7 @@ static inline NSString *objCStr(const char *cString) {
 };
 
 @implementation LPJSONUtils (Introspection)
-
+static NSUInteger const LPJSONUtilsIntrospectionMethodDescriptionBufferLength = 256;
 
 #pragma mark - Public API
 /*
@@ -33,7 +29,6 @@ static inline NSString *objCStr(const char *cString) {
  @return NSDictionary - a dictionary of strings describing the custom accessors, or nil
  if none exist.
  */
-
 + (NSDictionary *)objectIntrospection:(id)object {
   NSDictionary *customAccessors = @{
                                     @"properties" : [NSMutableDictionary new],
@@ -130,14 +125,13 @@ static inline NSString *objCStr(const char *cString) {
   return accessors;
 }
 
-#define BUF_LEN 256
 + (NSString *)methodDescription:(Method)m {
-  char buff[BUF_LEN];
+  char buff[LPJSONUtilsIntrospectionMethodDescriptionBufferLength];
   NSMutableString *description = [NSMutableString string];
   
   int numArgs = method_getNumberOfArguments(m);
   for (int i = 0; i < numArgs; i++) {
-    method_getArgumentType(m, i, buff, BUF_LEN);
+    method_getArgumentType(m, i, buff, LPJSONUtilsIntrospectionMethodDescriptionBufferLength);
     [description appendFormat:@"Arg: %s\t", buff];
   }
   return description;
