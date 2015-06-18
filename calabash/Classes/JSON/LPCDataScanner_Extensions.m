@@ -27,7 +27,7 @@
 //  OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "CDataScanner_Extensions.h"
+#import "LPCDataScanner_Extensions.h"
 
 #define LF 0x000a // Line Feed
 #define FF 0x000c // Form Feed

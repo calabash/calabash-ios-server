@@ -69,6 +69,6 @@ extern NSString *const LPJSONSerializerDoesNotRespondToDescriptionFormatString;
 @end
 
 typedef enum : NSInteger {
-  LPLPCJSONSerializerErrorCouldNotSerializeDataType = -1,
-  LPLPCJSONSerializerErrorCouldNotSerializeObject = -1
+  LPCJSONSerializerErrorCouldNotSerializeDataType = -1,
+  LPCJSONSerializerErrorCouldNotSerializeObject = -1
 } LPCJSONSerializerError;

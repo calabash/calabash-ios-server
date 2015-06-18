@@ -42,7 +42,7 @@
 		B1058E4C197F00C000B4A57B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		B1058E7B197F043100B4A57B /* LPCalabashFrankRegistrar.m in Sources */ = {isa = PBXBuildFile; fileRef = B1058E79197F043100B4A57B /* LPCalabashFrankRegistrar.m */; };
 		B113582D197F0C41004B16F4 /* LPISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B29241627389500433F6C /* LPISO8601DateFormatter.m */; };
-		B113582E197F0C41004B16F4 /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDDF14B6DB2B002A744C /* CDataScanner_Extensions.m */; };
+		B113582E197F0C41004B16F4 /* LPCDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDDF14B6DB2B002A744C /* LPCDataScanner_Extensions.m */; };
 		B113582F197F0C41004B16F4 /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; };
 		B1135830197F0C41004B16F4 /* LPCJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE314B6DB2B002A744C /* LPCJSONScanner.m */; };
 		B1135831197F0C41004B16F4 /* LPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE514B6DB2B002A744C /* LPCJSONSerializer.m */; };
@@ -139,7 +139,7 @@
 		B15BF9CC19ABB1DE00B38577 /* LPExitRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 692D779F1657010000DE3E53 /* LPExitRoute.m */; };
 		B15BF9CD19ABB1DE00B38577 /* LPVersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B153F55B15949F3D00867E12 /* LPVersionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9CE19ABB1DE00B38577 /* LPISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B29241627389500433F6C /* LPISO8601DateFormatter.m */; };
-		B15BF9CF19ABB1DE00B38577 /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDDF14B6DB2B002A744C /* CDataScanner_Extensions.m */; };
+		B15BF9CF19ABB1DE00B38577 /* LPCDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDDF14B6DB2B002A744C /* LPCDataScanner_Extensions.m */; };
 		B15BF9D019ABB1DE00B38577 /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; };
 		B15BF9D119ABB1DE00B38577 /* LPCJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE314B6DB2B002A744C /* LPCJSONScanner.m */; };
 		B15BF9D219ABB1DE00B38577 /* LPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE514B6DB2B002A744C /* LPCJSONSerializer.m */; };
@@ -218,7 +218,7 @@
 		B15BFA1E19ABB2B100B38577 /* LPExitRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 692D779F1657010000DE3E53 /* LPExitRoute.m */; };
 		B15BFA1F19ABB2B100B38577 /* LPVersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B153F55B15949F3D00867E12 /* LPVersionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BFA2019ABB2B100B38577 /* LPISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B29241627389500433F6C /* LPISO8601DateFormatter.m */; };
-		B15BFA2119ABB2B100B38577 /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDDF14B6DB2B002A744C /* CDataScanner_Extensions.m */; };
+		B15BFA2119ABB2B100B38577 /* LPCDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDDF14B6DB2B002A744C /* LPCDataScanner_Extensions.m */; };
 		B15BFA2219ABB2B100B38577 /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; };
 		B15BFA2319ABB2B100B38577 /* LPCJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE314B6DB2B002A744C /* LPCJSONScanner.m */; };
 		B15BFA2419ABB2B100B38577 /* LPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE514B6DB2B002A744C /* LPCJSONSerializer.m */; };
@@ -293,7 +293,7 @@
 		B1D5BD9E19A23BCE0070E8CE /* LPAsyncPlaybackRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B111321614D5837900982BBC /* LPAsyncPlaybackRoute.m */; };
 		B1D5BD9F19A23BCE0070E8CE /* LPBackdoorRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */; };
 		B1D5BDA019A23BCE0070E8CE /* LPVersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B153F55B15949F3D00867E12 /* LPVersionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		B1D5BDA119A23BCE0070E8CE /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDDF14B6DB2B002A744C /* CDataScanner_Extensions.m */; };
+		B1D5BDA119A23BCE0070E8CE /* LPCDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDDF14B6DB2B002A744C /* LPCDataScanner_Extensions.m */; };
 		B1D5BDA219A23BCE0070E8CE /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; };
 		B1D5BDA319A23BCE0070E8CE /* LPCJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE314B6DB2B002A744C /* LPCJSONScanner.m */; };
 		B1D5BDA419A23BCE0070E8CE /* LPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE514B6DB2B002A744C /* LPCJSONSerializer.m */; };
@@ -410,7 +410,7 @@
 		F5091BFF18C4E1D700C85307 /* LPAsyncPlaybackRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B111321614D5837900982BBC /* LPAsyncPlaybackRoute.m */; };
 		F5091C0018C4E1D700C85307 /* LPBackdoorRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */; };
 		F5091C0118C4E1D700C85307 /* LPVersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B153F55B15949F3D00867E12 /* LPVersionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5091C0218C4E1D700C85307 /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDDF14B6DB2B002A744C /* CDataScanner_Extensions.m */; };
+		F5091C0218C4E1D700C85307 /* LPCDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDDF14B6DB2B002A744C /* LPCDataScanner_Extensions.m */; };
 		F5091C0318C4E1D700C85307 /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; };
 		F5091C0418C4E1D700C85307 /* LPCJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE314B6DB2B002A744C /* LPCJSONScanner.m */; };
 		F5091C0518C4E1D700C85307 /* LPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE514B6DB2B002A744C /* LPCJSONSerializer.m */; };
@@ -504,7 +504,7 @@
 		F50CBFB21A0405B2004AC9DA /* LPExitRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 692D779F1657010000DE3E53 /* LPExitRoute.m */; };
 		F50CBFB31A0405B2004AC9DA /* LPVersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B153F55B15949F3D00867E12 /* LPVersionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBFB41A0405CE004AC9DA /* LPISO8601DateFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B29241627389500433F6C /* LPISO8601DateFormatter.m */; };
-		F50CBFB51A0405CE004AC9DA /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDDF14B6DB2B002A744C /* CDataScanner_Extensions.m */; };
+		F50CBFB51A0405CE004AC9DA /* LPCDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDDF14B6DB2B002A744C /* LPCDataScanner_Extensions.m */; };
 		F50CBFB61A0405CE004AC9DA /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; };
 		F50CBFB71A0405CE004AC9DA /* LPCJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE314B6DB2B002A744C /* LPCJSONScanner.m */; };
 		F50CBFB81A0405CE004AC9DA /* LPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE514B6DB2B002A744C /* LPCJSONSerializer.m */; };
@@ -659,7 +659,7 @@
 		F5821A1D18C4E27400293508 /* LPAsyncPlaybackRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B111321614D5837900982BBC /* LPAsyncPlaybackRoute.m */; };
 		F5821A1E18C4E27400293508 /* LPBackdoorRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B160E8EE15321D8F00F69E7A /* LPBackdoorRoute.m */; };
 		F5821A1F18C4E27400293508 /* LPVersionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B153F55B15949F3D00867E12 /* LPVersionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5821A2018C4E27400293508 /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDDF14B6DB2B002A744C /* CDataScanner_Extensions.m */; };
+		F5821A2018C4E27400293508 /* LPCDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDDF14B6DB2B002A744C /* LPCDataScanner_Extensions.m */; };
 		F5821A2118C4E27400293508 /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; };
 		F5821A2218C4E27400293508 /* LPCJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE314B6DB2B002A744C /* LPCJSONScanner.m */; };
 		F5821A2318C4E27400293508 /* LPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE514B6DB2B002A744C /* LPCJSONSerializer.m */; };
@@ -967,8 +967,8 @@
 		B184FDD414B6DB2B002A744C /* LPNoContentResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPNoContentResponse.m; sourceTree = "<group>"; };
 		B184FDD714B6DB2B002A744C /* LPRecordRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LPRecordRoute.h; sourceTree = "<group>"; };
 		B184FDDB14B6DB2B002A744C /* LPScreenshotRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPScreenshotRoute.h; sourceTree = "<group>"; };
-		B184FDDE14B6DB2B002A744C /* CDataScanner_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner_Extensions.h; sourceTree = "<group>"; };
-		B184FDDF14B6DB2B002A744C /* CDataScanner_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner_Extensions.m; sourceTree = "<group>"; };
+		B184FDDE14B6DB2B002A744C /* LPCDataScanner_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCDataScanner_Extensions.h; sourceTree = "<group>"; };
+		B184FDDF14B6DB2B002A744C /* LPCDataScanner_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCDataScanner_Extensions.m; sourceTree = "<group>"; };
 		B184FDE014B6DB2B002A744C /* LPCJSONDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCJSONDeserializer.h; sourceTree = "<group>"; };
 		B184FDE214B6DB2B002A744C /* LPCJSONScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCJSONScanner.h; sourceTree = "<group>"; };
 		B184FDE314B6DB2B002A744C /* LPCJSONScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCJSONScanner.m; sourceTree = "<group>"; };
@@ -1573,8 +1573,8 @@
 			children = (
 				B13B29231627389500433F6C /* LPISO8601DateFormatter.h */,
 				B13B29241627389500433F6C /* LPISO8601DateFormatter.m */,
-				B184FDDE14B6DB2B002A744C /* CDataScanner_Extensions.h */,
-				B184FDDF14B6DB2B002A744C /* CDataScanner_Extensions.m */,
+				B184FDDE14B6DB2B002A744C /* LPCDataScanner_Extensions.h */,
+				B184FDDF14B6DB2B002A744C /* LPCDataScanner_Extensions.m */,
 				B184FDE014B6DB2B002A744C /* LPCJSONDeserializer.h */,
 				B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */,
 				B184FDE214B6DB2B002A744C /* LPCJSONScanner.h */,
@@ -2508,7 +2508,7 @@
 				B1135845197F1351004B16F4 /* LPHTTPRedirectResponse.m in Sources */,
 				F57C18031B29E58B00B5572F /* LPUserPrefRoute.m in Sources */,
 				F57C18051B29E59900B5572F /* LPConditionRoute.m in Sources */,
-				B113582E197F0C41004B16F4 /* CDataScanner_Extensions.m in Sources */,
+				B113582E197F0C41004B16F4 /* LPCDataScanner_Extensions.m in Sources */,
 				B11358631981B053004B16F4 /* LPScrollOperation.m in Sources */,
 				B113583B197F1351004B16F4 /* LPHTTPAuthenticationRequest.m in Sources */,
 				B1135837197F10B7004B16F4 /* LPUIARouteOverUserPrefs.m in Sources */,
@@ -2611,7 +2611,7 @@
 				F5A33A5B1AC00D1300224639 /* UIWebView+LPWebView.m in Sources */,
 				B15BF9CD19ABB1DE00B38577 /* LPVersionRoute.m in Sources */,
 				B15BF9CE19ABB1DE00B38577 /* LPISO8601DateFormatter.m in Sources */,
-				B15BF9CF19ABB1DE00B38577 /* CDataScanner_Extensions.m in Sources */,
+				B15BF9CF19ABB1DE00B38577 /* LPCDataScanner_Extensions.m in Sources */,
 				B1670E2C1A32410F00000A62 /* LPDumpRoute.m in Sources */,
 				B15BF9D019ABB1DE00B38577 /* LPCJSONDeserializer.m in Sources */,
 				B15BF9D119ABB1DE00B38577 /* LPCJSONScanner.m in Sources */,
@@ -2711,7 +2711,7 @@
 				F5A33A5C1AC00D1300224639 /* UIWebView+LPWebView.m in Sources */,
 				B15BFA1F19ABB2B100B38577 /* LPVersionRoute.m in Sources */,
 				B15BFA2019ABB2B100B38577 /* LPISO8601DateFormatter.m in Sources */,
-				B15BFA2119ABB2B100B38577 /* CDataScanner_Extensions.m in Sources */,
+				B15BFA2119ABB2B100B38577 /* LPCDataScanner_Extensions.m in Sources */,
 				B1670E2D1A32410F00000A62 /* LPDumpRoute.m in Sources */,
 				B15BFA2219ABB2B100B38577 /* LPCJSONDeserializer.m in Sources */,
 				B15BFA2319ABB2B100B38577 /* LPCJSONScanner.m in Sources */,
@@ -2797,7 +2797,7 @@
 				B1D5BD9E19A23BCE0070E8CE /* LPAsyncPlaybackRoute.m in Sources */,
 				B1D5BD9F19A23BCE0070E8CE /* LPBackdoorRoute.m in Sources */,
 				B1D5BDA019A23BCE0070E8CE /* LPVersionRoute.m in Sources */,
-				B1D5BDA119A23BCE0070E8CE /* CDataScanner_Extensions.m in Sources */,
+				B1D5BDA119A23BCE0070E8CE /* LPCDataScanner_Extensions.m in Sources */,
 				B1D5BDA219A23BCE0070E8CE /* LPCJSONDeserializer.m in Sources */,
 				B1D5BDA319A23BCE0070E8CE /* LPCJSONScanner.m in Sources */,
 				B1D5BDA419A23BCE0070E8CE /* LPCJSONSerializer.m in Sources */,
@@ -2896,7 +2896,7 @@
 				F5F2D5E91ACACF2F0027937B /* LPIsWebView.m in Sources */,
 				F5091C0018C4E1D700C85307 /* LPBackdoorRoute.m in Sources */,
 				F5091C0118C4E1D700C85307 /* LPVersionRoute.m in Sources */,
-				F5091C0218C4E1D700C85307 /* CDataScanner_Extensions.m in Sources */,
+				F5091C0218C4E1D700C85307 /* LPCDataScanner_Extensions.m in Sources */,
 				F5091C0318C4E1D700C85307 /* LPCJSONDeserializer.m in Sources */,
 				F5091C0418C4E1D700C85307 /* LPCJSONScanner.m in Sources */,
 				F5091C0518C4E1D700C85307 /* LPCJSONSerializer.m in Sources */,
@@ -2959,7 +2959,7 @@
 				F50CBFA71A0405B2004AC9DA /* LPUserPrefRoute.m in Sources */,
 				F50CBFAA1A0405B2004AC9DA /* LPConditionRoute.m in Sources */,
 				F50CBF8A1A04056F004AC9DA /* LPHTTPDataResponse.m in Sources */,
-				F50CBFB51A0405CE004AC9DA /* CDataScanner_Extensions.m in Sources */,
+				F50CBFB51A0405CE004AC9DA /* LPCDataScanner_Extensions.m in Sources */,
 				F50CBFC21A0405CE004AC9DA /* UIScriptASTLast.m in Sources */,
 				F50CBF891A04056F004AC9DA /* LPHTTPAsyncFileResponse.m in Sources */,
 				F50CBFAB1A0405B2004AC9DA /* LPInterpolateRoute.m in Sources */,
@@ -3126,7 +3126,7 @@
 				F5F2D5EA1ACACF2F0027937B /* LPIsWebView.m in Sources */,
 				F5821A1E18C4E27400293508 /* LPBackdoorRoute.m in Sources */,
 				F5821A1F18C4E27400293508 /* LPVersionRoute.m in Sources */,
-				F5821A2018C4E27400293508 /* CDataScanner_Extensions.m in Sources */,
+				F5821A2018C4E27400293508 /* LPCDataScanner_Extensions.m in Sources */,
 				F5821A2118C4E27400293508 /* LPCJSONDeserializer.m in Sources */,
 				F5821A2218C4E27400293508 /* LPCJSONScanner.m in Sources */,
 				F5821A2318C4E27400293508 /* LPCJSONSerializer.m in Sources */,

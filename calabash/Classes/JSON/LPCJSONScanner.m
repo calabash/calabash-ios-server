@@ -30,7 +30,7 @@
 #import "LPCJSONScanner.h"
 #import "LPISO8601DateFormatter.h"
 
-#import "CDataScanner_Extensions.h"
+#import "LPCDataScanner_Extensions.h"
 
 #if !defined(TREAT_COMMENTS_AS_WHITESPACE)
 #define TREAT_COMMENTS_AS_WHITESPACE 0
