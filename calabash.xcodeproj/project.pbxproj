@@ -3833,6 +3833,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/XCTest",
 				);
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/XCTest/tests.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_VERSION = "";
@@ -3894,6 +3896,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/XCTest",
 				);
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/XCTest/tests.pch";
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
