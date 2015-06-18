@@ -15,11 +15,6 @@
 		89F2EFE51B2243D500958052 /* LPIntrospectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89F2EFE61B2243D500958052 /* LPIntrospectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89F2EFE81B22462700958052 /* LPIntrospectionRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFE71B22462700958052 /* LPIntrospectionRouteTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		89F2EFEB1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFE91B224F6D00958052 /* LPJSONUtils+Introspection.h */; };
-		89F2EFEC1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFE91B224F6D00958052 /* LPJSONUtils+Introspection.h */; };
-		89F2EFED1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFE91B224F6D00958052 /* LPJSONUtils+Introspection.h */; };
-		89F2EFEE1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFE91B224F6D00958052 /* LPJSONUtils+Introspection.h */; };
-		89F2EFEF1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFE91B224F6D00958052 /* LPJSONUtils+Introspection.h */; };
 		89F2EFF01B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFEA1B224F6D00958052 /* LPJSONUtils+Introspection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89F2EFF11B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFEA1B224F6D00958052 /* LPJSONUtils+Introspection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89F2EFF21B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFEA1B224F6D00958052 /* LPJSONUtils+Introspection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -85,7 +80,6 @@
 		B11358631981B053004B16F4 /* LPScrollOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC714B6DB2B002A744C /* LPScrollOperation.m */; };
 		B11358641981B053004B16F4 /* LPScrollToRowOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */; };
 		B11358651981B053004B16F4 /* LPSetTextOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		B13B7FBF1A31FE560054FFB1 /* LPDumpRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B13B7FBD1A31FE560054FFB1 /* LPDumpRoute.h */; };
 		B13B7FC01A31FE560054FFB1 /* LPDumpRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B7FBE1A31FE560054FFB1 /* LPDumpRoute.m */; };
 		B15369FB1A325E510093923F /* LPUIARouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FD1A22A35A009A2336 /* LPUIARouteOverSharedElement.m */; };
 		B15369FC1A32620A0093923F /* LPUIASharedElementChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F7721B1A22A398009A2336 /* LPUIASharedElementChannel.m */; };
@@ -258,8 +252,6 @@
 		B1670E2C1A32410F00000A62 /* LPDumpRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B7FBE1A31FE560054FFB1 /* LPDumpRoute.m */; };
 		B1670E2D1A32410F00000A62 /* LPDumpRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B7FBE1A31FE560054FFB1 /* LPDumpRoute.m */; };
 		B1670E2E1A32411100000A62 /* LPDumpRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B13B7FBE1A31FE560054FFB1 /* LPDumpRoute.m */; };
-		B1670E2F1A32411800000A62 /* LPDumpRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B13B7FBD1A31FE560054FFB1 /* LPDumpRoute.h */; };
-		B1670E311A32411A00000A62 /* LPDumpRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B13B7FBD1A31FE560054FFB1 /* LPDumpRoute.h */; };
 		B1670E341A3248CC00000A62 /* LPSharedUIATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F772191A22A398009A2336 /* LPSharedUIATextField.m */; };
 		B1D5BD7919A23BCE0070E8CE /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; };
 		B1D5BD7A19A23BCE0070E8CE /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; };
@@ -350,36 +342,24 @@
 		B1D5BDD319A23BCE0070E8CE /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E757A15D434D00066550B /* CFNetwork.framework */; };
 		B1D5BDD419A23BCE0070E8CE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		B1D5BDDA19A23BE00070E8CE /* LPCalabashFrankRegistrar.m in Sources */ = {isa = PBXBuildFile; fileRef = B1058E79197F043100B4A57B /* LPCalabashFrankRegistrar.m */; };
-		B1F772001A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F771FC1A22A35A009A2336 /* LPUIARouteOverSharedElement.h */; };
-		B1F772011A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F771FC1A22A35A009A2336 /* LPUIARouteOverSharedElement.h */; };
-		B1F772031A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F771FC1A22A35A009A2336 /* LPUIARouteOverSharedElement.h */; };
 		B1F772061A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FD1A22A35A009A2336 /* LPUIARouteOverSharedElement.m */; };
 		B1F772071A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FD1A22A35A009A2336 /* LPUIARouteOverSharedElement.m */; };
 		B1F772081A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FD1A22A35A009A2336 /* LPUIARouteOverSharedElement.m */; };
 		B1F772091A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FD1A22A35A009A2336 /* LPUIARouteOverSharedElement.m */; };
 		B1F7720A1A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FD1A22A35A009A2336 /* LPUIARouteOverSharedElement.m */; };
 		B1F7720B1A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FD1A22A35A009A2336 /* LPUIARouteOverSharedElement.m */; };
-		B1F7720C1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F771FE1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h */; };
-		B1F7720D1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F771FE1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h */; };
-		B1F7720F1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F771FE1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h */; };
 		B1F772121A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FF1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m */; };
 		B1F772131A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FF1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m */; };
 		B1F772141A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FF1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m */; };
 		B1F772151A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FF1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m */; };
 		B1F772161A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FF1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m */; };
 		B1F772171A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F771FF1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m */; };
-		B1F7721C1A22A398009A2336 /* LPSharedUIATextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F772181A22A398009A2336 /* LPSharedUIATextField.h */; };
-		B1F7721D1A22A398009A2336 /* LPSharedUIATextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F772181A22A398009A2336 /* LPSharedUIATextField.h */; };
-		B1F7721F1A22A398009A2336 /* LPSharedUIATextField.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F772181A22A398009A2336 /* LPSharedUIATextField.h */; };
 		B1F772221A22A398009A2336 /* LPSharedUIATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F772191A22A398009A2336 /* LPSharedUIATextField.m */; };
 		B1F772231A22A398009A2336 /* LPSharedUIATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F772191A22A398009A2336 /* LPSharedUIATextField.m */; };
 		B1F772241A22A398009A2336 /* LPSharedUIATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F772191A22A398009A2336 /* LPSharedUIATextField.m */; };
 		B1F772251A22A398009A2336 /* LPSharedUIATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F772191A22A398009A2336 /* LPSharedUIATextField.m */; };
 		B1F772261A22A398009A2336 /* LPSharedUIATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F772191A22A398009A2336 /* LPSharedUIATextField.m */; };
 		B1F772271A22A398009A2336 /* LPSharedUIATextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F772191A22A398009A2336 /* LPSharedUIATextField.m */; };
-		B1F772281A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F7721A1A22A398009A2336 /* LPUIASharedElementChannel.h */; };
-		B1F772291A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F7721A1A22A398009A2336 /* LPUIASharedElementChannel.h */; };
-		B1F7722B1A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */ = {isa = PBXBuildFile; fileRef = B1F7721A1A22A398009A2336 /* LPUIASharedElementChannel.h */; };
 		B1F7722E1A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F7721B1A22A398009A2336 /* LPUIASharedElementChannel.m */; };
 		B1F7722F1A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F7721B1A22A398009A2336 /* LPUIASharedElementChannel.m */; };
 		B1F772301A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F7721B1A22A398009A2336 /* LPUIASharedElementChannel.m */; };
@@ -392,9 +372,6 @@
 		B1FBBC5E19D0070000EE03CE /* LPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FBBC5919D0070000EE03CE /* LPDevice.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1FBBC5F19D0070000EE03CE /* LPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FBBC5919D0070000EE03CE /* LPDevice.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1FBBC6019D0070000EE03CE /* LPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FBBC5919D0070000EE03CE /* LPDevice.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		B1FBBC6119D0070000EE03CE /* LPDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = B1FBBC5A19D0070000EE03CE /* LPDevice.h */; };
-		B1FBBC6219D0070000EE03CE /* LPDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = B1FBBC5A19D0070000EE03CE /* LPDevice.h */; };
-		B1FBBC6419D0070000EE03CE /* LPDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = B1FBBC5A19D0070000EE03CE /* LPDevice.h */; };
 		F50292971ACAD4FE00D07D31 /* LPIsWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = F5F2D5E11ACACF2F0027937B /* LPIsWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5091BDD18C4E1D700C85307 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; };
 		F5091BDE18C4E1D700C85307 /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; };
@@ -720,10 +697,10 @@
 		F5821A4D18C4E27400293508 /* CalabashServer.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8814B6DAE1002A744C /* CalabashServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5821A5D18C4E27400293508 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E757A15D434D00066550B /* CFNetwork.framework */; };
 		F5821A5E18C4E27400293508 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
-		F58F2C781B32CF3800C02A77 /* LPJSONUtils+Introspection.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFEA1B224F6D00958052 /* LPJSONUtils+Introspection.m */; };
-		F58F2C791B32CF7F00C02A77 /* LPIntrospectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */; };
-		F58F2C7A1B32CFC600C02A77 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; };
-		F58F2C7B1B32CFC900C02A77 /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; };
+		F58F2C781B32CF3800C02A77 /* LPJSONUtils+Introspection.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFEA1B224F6D00958052 /* LPJSONUtils+Introspection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F58F2C791B32CF7F00C02A77 /* LPIntrospectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F58F2C7A1B32CFC600C02A77 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F58F2C7B1B32CFC900C02A77 /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F59741C11AA565190089DC88 /* OCMockitoIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59741BD1AA565190089DC88 /* OCMockitoIOS.framework */; };
 		F59741C21AA565190089DC88 /* OCHamcrestIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59741BE1AA565190089DC88 /* OCHamcrestIOS.framework */; };
 		F59741EE1AA5712F0089DC88 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F59741E31AA5712F0089DC88 /* libOCMock.a */; };
@@ -2011,7 +1988,6 @@
 				F55185761AC389F600CE06DC /* LPHTTPDataResponse.h in Headers */,
 				F55185771AC389F600CE06DC /* LPHTTPDynamicFileResponse.h in Headers */,
 				F55185781AC389F600CE06DC /* LPHTTPFileResponse.h in Headers */,
-				89F2EFEE1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */,
 				F55185701AC389C700CE06DC /* LPCORSResponse.h in Headers */,
 				F551857A1AC38A5200CE06DC /* LPRoute.h in Headers */,
 				F551857B1AC38A5200CE06DC /* LPRouter.h in Headers */,
@@ -2033,7 +2009,6 @@
 				F55185801AC38A5700CE06DC /* LPHTTPDataResponse.h in Headers */,
 				F55185811AC38A5700CE06DC /* LPHTTPDynamicFileResponse.h in Headers */,
 				F55185821AC38A5700CE06DC /* LPHTTPFileResponse.h in Headers */,
-				89F2EFEF1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */,
 				F55185831AC38A5700CE06DC /* LPCORSResponse.h in Headers */,
 				F55185841AC38A5700CE06DC /* LPRoute.h in Headers */,
 				F55185851AC38A5700CE06DC /* LPRouter.h in Headers */,
@@ -2050,17 +2025,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1FBBC6419D0070000EE03CE /* LPDevice.h in Headers */,
-				B1F772031A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */,
 				B1D5BDC919A23BCE0070E8CE /* CalabashServer.h in Headers */,
 				B1D5BDCA19A23BCE0070E8CE /* LPRoute.h in Headers */,
-				B1670E311A32411A00000A62 /* LPDumpRoute.h in Headers */,
-				B1F7722B1A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */,
-				B1F7720F1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */,
 				B1D5BDCB19A23BCE0070E8CE /* LPRouter.h in Headers */,
 				F5C094501A979CC200AE5991 /* LPWebQuery.h in Headers */,
-				89F2EFED1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */,
-				B1F7721F1A22A398009A2336 /* LPSharedUIATextField.h in Headers */,
 				F55185611AC3878D00CE06DC /* LPWebViewProtocol.h in Headers */,
 				F55185621AC3878D00CE06DC /* UIWebView+LPWebView.h in Headers */,
 				F55185741AC389E800CE06DC /* LPCORSResponse.h in Headers */,
@@ -2078,16 +2046,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1FBBC6119D0070000EE03CE /* LPDevice.h in Headers */,
-				B1F772001A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */,
-				B13B7FBF1A31FE560054FFB1 /* LPDumpRoute.h in Headers */,
-				B1F772281A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */,
-				B1F7720C1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */,
-				B1F7721C1A22A398009A2336 /* LPSharedUIATextField.h in Headers */,
 				F5091C2F18C4E1D700C85307 /* CalabashServer.h in Headers */,
 				F59C5CF818E0BB1A0087B51D /* LPRoute.h in Headers */,
 				F59C5CF918E0BB290087B51D /* LPRouter.h in Headers */,
-				89F2EFEB1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */,
 				F5C0944D1A979CC200AE5991 /* LPWebQuery.h in Headers */,
 				F55185581AC3875200CE06DC /* LPWebViewProtocol.h in Headers */,
 				F55185591AC3875900CE06DC /* UIWebView+LPWebView.h in Headers */,
@@ -2106,17 +2067,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B1FBBC6219D0070000EE03CE /* LPDevice.h in Headers */,
-				B1F772011A22A35A009A2336 /* LPUIARouteOverSharedElement.h in Headers */,
 				F5821A4D18C4E27400293508 /* CalabashServer.h in Headers */,
 				F59C5D0118E0C1D60087B51D /* LPRoute.h in Headers */,
-				B1670E2F1A32411800000A62 /* LPDumpRoute.h in Headers */,
-				B1F772291A22A398009A2336 /* LPUIASharedElementChannel.h in Headers */,
-				B1F7720D1A22A35A009A2336 /* LPUIATapRouteOverSharedElement.h in Headers */,
 				F59C5D0218E0C1D90087B51D /* LPRouter.h in Headers */,
 				F5C0944E1A979CC200AE5991 /* LPWebQuery.h in Headers */,
-				89F2EFEC1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */,
-				B1F7721D1A22A398009A2336 /* LPSharedUIATextField.h in Headers */,
 				F551855B1AC3876F00CE06DC /* LPWebViewProtocol.h in Headers */,
 				F551855C1AC3876F00CE06DC /* UIWebView+LPWebView.h in Headers */,
 				F55185721AC389D300CE06DC /* LPCORSResponse.h in Headers */,
