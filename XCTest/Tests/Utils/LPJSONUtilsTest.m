@@ -42,6 +42,8 @@
 
 + (NSMutableDictionary *) dictionaryByEncodingView:(id) view;
 + (void) insertHitPointIntoMutableDictionary:(NSMutableDictionary *) dictionary;
++ (NSMutableDictionary*)serializeRect:(CGRect)rect;
++ (NSNumber*)normalizeFloat:(CGFloat) x;
 
 @end
 
@@ -786,30 +788,78 @@
 
 SpecBegin(LPJSONUtils)
 
-describe(@"dictionary:ensureObjectForKey:withTarget:selector:", ^{
+describe(@"LPJSONUtils", ^{
 
-  it(@"inserts nil when target does not respond to selector", ^{
-    NSMutableDictionary *dict = [@{} mutableCopy];
-    SEL sel = NSSelectorFromString(@"doesNotExistSelector");
-    NSObject *target = [NSObject new];
-    [LPJSONUtils dictionary:dict
-         ensureObjectForKey:@"key"
-                 withTarget:target
-                   selector:sel];
-    expect(dict.count).to.equal(1);
-    expect(dict[@"key"]).to.equal([NSNull null]);
+  describe(@"dictionary:ensureObjectForKey:withTarget:selector:", ^{
+
+    it(@"inserts nil when target does not respond to selector", ^{
+      NSMutableDictionary *dict = [@{} mutableCopy];
+      SEL sel = NSSelectorFromString(@"doesNotExistSelector");
+      NSObject *target = [NSObject new];
+      [LPJSONUtils dictionary:dict
+           ensureObjectForKey:@"key"
+                   withTarget:target
+                     selector:sel];
+      expect(dict.count).to.equal(1);
+      expect(dict[@"key"]).to.equal([NSNull null]);
+    });
+
+    it(@"inserts a value when target does respond", ^{
+      NSMutableDictionary *dict = [@{} mutableCopy];
+      NSObject *target = [NSObject new];
+      SEL sel = NSSelectorFromString(@"description");
+      [LPJSONUtils dictionary:dict
+           ensureObjectForKey:@"key"
+                   withTarget:target
+                     selector:sel];
+      expect(dict.count).to.equal(1);
+      expect(dict[@"key"]).to.beAKindOf([NSString class]);
+    });
   });
 
-  it(@"inserts a value when target does respond", ^{
-    NSMutableDictionary *dict = [@{} mutableCopy];
-    NSObject *target = [NSObject new];
-    SEL sel = NSSelectorFromString(@"description");
-    [LPJSONUtils dictionary:dict
-         ensureObjectForKey:@"key"
-                 withTarget:target
-                   selector:sel];
-    expect(dict.count).to.equal(1);
-    expect(dict[@"key"]).to.beAKindOf([NSString class]);
+  it(@"serializeRect:", ^{
+    CGRect rect = CGRectMake(72.44512424, 144.44413423, 44.1235663, 88.12567543);
+    NSDictionary *serialized = [LPJSONUtils serializeRect:rect];
+    expect(serialized[@"x"]).to.beCloseToWithin(72.45, 0.001);
+    expect(serialized[@"y"]).to.beCloseToWithin(144.44, 0.001);
+    expect(serialized[@"width"]).to.beCloseToWithin(44.12, 0.001);
+    expect(serialized[@"height"]).to.beCloseToWithin(88.13, 0.001);
+  });
+
+  describe(@"normalizeFloat:", ^{
+    it(@"returns a rounded CGFloat if finite", ^{
+      CGFloat value = 44.445888;
+      NSNumber *number = [LPJSONUtils normalizeFloat:value];
+#if CGFLOAT_IS_DOUBLE
+      expect([number doubleValue]).to.beCloseToWithin(44.45, 0.001);
+#else
+      expect([number floatValue]).to.beCloseToWithin(44.45, 0.001);
+#endif
+    });
+
+    it(@"returns CGFLOAT_MAX if infinite and INFINITY", ^{
+      CGFloat value = INFINITY;
+      NSNumber *number = [LPJSONUtils normalizeFloat:value];
+      expect(number).to.equal(@(CGFLOAT_MAX));
+    });
+
+    it(@"returns CGFLOAT_MIN if infinite and -INFINITY", ^{
+      CGFloat value = -INFINITY;
+      NSNumber *number = [LPJSONUtils normalizeFloat:value];
+      expect(number).to.equal(@(CGFLOAT_MIN));
+    });
+
+    it(@"returns CGFLOAT_MAX if it is float max", ^{
+      CGFloat value = CGFLOAT_MAX;
+      NSNumber *number = [LPJSONUtils normalizeFloat:value];
+      expect(number).to.equal(@(CGFLOAT_MAX));
+    });
+
+    it(@"returns CGFLOAT_MIN if it is float min", ^{
+      CGFloat value = CGFLOAT_MIN;
+      NSNumber *number = [LPJSONUtils normalizeFloat:value];
+      expect(number).to.equal(@(CGFLOAT_MIN));
+    });
   });
 });
 
