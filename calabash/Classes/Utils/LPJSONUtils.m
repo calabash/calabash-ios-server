@@ -15,6 +15,7 @@
 #import "LPOrientationOperation.h"
 #import "LPInvoker.h"
 #import <math.h>
+#import "LPDecimalRounder.h"
 
 @interface LPJSONUtils ()
 
@@ -37,6 +38,7 @@
 + (void) insertHitPointIntoMutableDictionary:(NSMutableDictionary *) dictionary;
 
 + (NSMutableDictionary*)serializeRect:(CGRect)rect;
++ (NSNumber*)normalizeFloat:(CGFloat) x;
 
 @end
 
@@ -313,13 +315,17 @@
 }
 
 +(NSNumber*)normalizeFloat:(CGFloat) x {
-  if (isfinite(x)) {
-    return @(x);
-  }
   if (isinf(x)) {
     return (x == INFINITY ? @(CGFLOAT_MAX) : @(CGFLOAT_MIN));
+  } else if (x == CGFLOAT_MIN) {
+    return @(CGFLOAT_MIN);
+  } else if (x == CGFLOAT_MAX) {
+    return @(CGFLOAT_MAX);
+  } else {
+    LPDecimalRounder *rounder = [LPDecimalRounder new];
+    CGFloat rounded = [rounder round:x];
+    return @(rounded);
   }
-  return @(CGFLOAT_MAX);
 }
 
 +(NSMutableDictionary*)jsonifyAccessibilityElement:(id)object {
