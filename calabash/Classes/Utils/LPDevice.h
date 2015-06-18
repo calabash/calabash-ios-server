@@ -15,11 +15,13 @@
 @property(copy, nonatomic, readonly) NSString *system;
 @property(copy, nonatomic, readonly) NSString *model;
 @property(copy, nonatomic, readonly) NSString *formFactor;
+@property(copy, nonatomic, readonly) NSString *iOSVersion;
 
 + (LPDevice *) sharedDevice;
 
 - (BOOL) simulator;
 - (BOOL) iPhone6;
 - (BOOL) iPhone6Plus;
+- (BOOL) isLessThaniOS8;
 
 @end

@@ -72,6 +72,43 @@ describe(@"LPDevice", ^{
     expect([device system]).notTo.beNil();
   });
 
+  it(@"#systemVersion", ^{
+    LPDevice *device = [[LPDevice alloc] init_private];
+    expect([device iOSVersion]).notTo.beNil();
+  });
+
+  describe(@"#isLessThanIOS8", ^{
+
+    __block LPDevice *device;
+    __block id mockDevice;
+
+    before(^{
+      device = [[LPDevice alloc] init_private];
+      mockDevice = OCMPartialMock(device);
+    });
+
+    it(@"true for iOS < 8.0", ^{
+      [[[mockDevice expect] andReturn:@"7.1"] iOSVersion];
+
+      expect([mockDevice isLessThaniOS8]).to.equal(YES);
+      [mockDevice verify];
+    });
+
+    it(@"false for iOS = 8.0", ^{
+      [[[mockDevice expect] andReturn:@"8.0"] iOSVersion];
+
+      expect([mockDevice isLessThaniOS8]).to.equal(NO);
+      [mockDevice verify];
+    });
+
+    it(@"false for iOS > 8.0", ^{
+      [[[mockDevice expect] andReturn:@"9.0"] iOSVersion];
+
+      expect([mockDevice isLessThaniOS8]).to.equal(NO);
+      [mockDevice verify];
+    });
+  });
+
   it(@"#model", ^{
     LPDevice *device = [[LPDevice alloc] init_private];
     expect([device model]).notTo.beNil();
