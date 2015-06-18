@@ -9,6 +9,8 @@
 #import "LPInvoker.h"
 #import "LPWebViewProtocol.h"
 #import "LPJSONUtils.h"
+#import "LPCJSONDeserializer.h"
+#import "LPDevice.h"
 
 
 @interface LPWKWebViewRuntimeLoader (LPXCTest)
@@ -134,8 +136,12 @@ describe(@"LPWKWebViewRuntimeLoaderTest", ^{
     });
 
     it(@"Implementation has been loaded by CalabashServer.start", ^{
-      LPWKWebViewRuntimeLoader *loader = [LPWKWebViewRuntimeLoader shared];
-      expect(loader.state).to.equal(LPWKWebViewDidImplementProtocol);
+      if([[LPDevice sharedDevice] isLessThaniOS8]) {
+        // nop for iOS < 8
+      } else {
+        LPWKWebViewRuntimeLoader *loader = [LPWKWebViewRuntimeLoader shared];
+        expect(loader.state).to.equal(LPWKWebViewDidImplementProtocol);
+      }
     });
   });
 
