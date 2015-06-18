@@ -167,7 +167,7 @@ static NSData *kTrue = NULL;
             NSDictionary *theUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:
                 [NSString stringWithFormat:@"Cannot serialize data of type '%@'", NSStringFromClass([inObject class])], NSLocalizedDescriptionKey,
                 NULL];
-            *outError = [NSError errorWithDomain:@"TODO_DOMAIN" code:LPLPCJSONSerializerErrorCouldNotSerializeDataType userInfo:theUserInfo];
+            *outError = [NSError errorWithDomain:@"TODO_DOMAIN" code:LPCJSONSerializerErrorCouldNotSerializeDataType userInfo:theUserInfo];
             }
         return(NULL);
         }
@@ -178,7 +178,7 @@ static NSData *kTrue = NULL;
             NSDictionary *theUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:
                 [NSString stringWithFormat:@"Could not serialize object '%@'", inObject], NSLocalizedDescriptionKey,
                 NULL];
-            *outError = [NSError errorWithDomain:@"TODO_DOMAIN" code:LPLPCJSONSerializerErrorCouldNotSerializeObject userInfo:theUserInfo];
+            *outError = [NSError errorWithDomain:@"TODO_DOMAIN" code:LPCJSONSerializerErrorCouldNotSerializeObject userInfo:theUserInfo];
             }
         return(NULL);
         }
