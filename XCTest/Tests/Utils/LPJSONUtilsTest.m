@@ -4,6 +4,7 @@
 
 #import "LPJSONUtils.h"
 #import "LPTouchUtils.h"
+#import "LPDevice.h"
 
 @interface LPXCTestSliderWithText : UISlider
 
@@ -49,6 +50,12 @@
 
 @interface LPJSONUtilsTest : XCTestCase
 
+- (BOOL) isIphone6;
+- (BOOL) isIphone6Plus;
+- (BOOL) isIphone4in;
+- (BOOL) isIphone35in;
+- (BOOL) isIpad;
+
 @end
 
 @implementation LPJSONUtilsTest
@@ -59,6 +66,26 @@
 
 - (void)tearDown {
   [super tearDown];
+}
+
+- (BOOL) isIphone6 {
+  return [[LPDevice sharedDevice] iPhone6];
+}
+
+- (BOOL) isIphone6Plus {
+  return [[LPDevice sharedDevice] iPhone6Plus];
+}
+
+- (BOOL) isIphone4in {
+  return [LPTouchUtils is4InchDevice];
+}
+
+- (BOOL) isIphone35in {
+  return [LPTouchUtils isThreeAndAHalfInchDevice];
+}
+
+- (BOOL) isIpad {
+  return [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
 }
 
 #pragma mark - dictionary:setObject:forKey:whenTarget:respondsTo:
