@@ -15,11 +15,6 @@
 		89F2EFE51B2243D500958052 /* LPIntrospectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89F2EFE61B2243D500958052 /* LPIntrospectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89F2EFE81B22462700958052 /* LPIntrospectionRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFE71B22462700958052 /* LPIntrospectionRouteTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		89F2EFEB1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFE91B224F6D00958052 /* LPJSONUtils+Introspection.h */; };
-		89F2EFEC1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFE91B224F6D00958052 /* LPJSONUtils+Introspection.h */; };
-		89F2EFED1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFE91B224F6D00958052 /* LPJSONUtils+Introspection.h */; };
-		89F2EFEE1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFE91B224F6D00958052 /* LPJSONUtils+Introspection.h */; };
-		89F2EFEF1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */ = {isa = PBXBuildFile; fileRef = 89F2EFE91B224F6D00958052 /* LPJSONUtils+Introspection.h */; };
 		89F2EFF01B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFEA1B224F6D00958052 /* LPJSONUtils+Introspection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89F2EFF11B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFEA1B224F6D00958052 /* LPJSONUtils+Introspection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89F2EFF21B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFEA1B224F6D00958052 /* LPJSONUtils+Introspection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -1993,7 +1988,6 @@
 				F55185761AC389F600CE06DC /* LPHTTPDataResponse.h in Headers */,
 				F55185771AC389F600CE06DC /* LPHTTPDynamicFileResponse.h in Headers */,
 				F55185781AC389F600CE06DC /* LPHTTPFileResponse.h in Headers */,
-				89F2EFEE1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */,
 				F55185701AC389C700CE06DC /* LPCORSResponse.h in Headers */,
 				F551857A1AC38A5200CE06DC /* LPRoute.h in Headers */,
 				F551857B1AC38A5200CE06DC /* LPRouter.h in Headers */,
@@ -2015,7 +2009,6 @@
 				F55185801AC38A5700CE06DC /* LPHTTPDataResponse.h in Headers */,
 				F55185811AC38A5700CE06DC /* LPHTTPDynamicFileResponse.h in Headers */,
 				F55185821AC38A5700CE06DC /* LPHTTPFileResponse.h in Headers */,
-				89F2EFEF1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */,
 				F55185831AC38A5700CE06DC /* LPCORSResponse.h in Headers */,
 				F55185841AC38A5700CE06DC /* LPRoute.h in Headers */,
 				F55185851AC38A5700CE06DC /* LPRouter.h in Headers */,
@@ -2056,7 +2049,6 @@
 				F5091C2F18C4E1D700C85307 /* CalabashServer.h in Headers */,
 				F59C5CF818E0BB1A0087B51D /* LPRoute.h in Headers */,
 				F59C5CF918E0BB290087B51D /* LPRouter.h in Headers */,
-				89F2EFEB1B224F6D00958052 /* LPJSONUtils+Introspection.h in Headers */,
 				F5C0944D1A979CC200AE5991 /* LPWebQuery.h in Headers */,
 				F55185581AC3875200CE06DC /* LPWebViewProtocol.h in Headers */,
 				F55185591AC3875900CE06DC /* UIWebView+LPWebView.h in Headers */,
