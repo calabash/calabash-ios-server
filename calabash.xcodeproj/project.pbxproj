@@ -475,9 +475,6 @@
 		F50CBF7A1A040511004AC9DA /* LPTouchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */; };
 		F50CBF7C1A040564004AC9DA /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBF7D1A040564004AC9DA /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F50CBF7E1A040564004AC9DA /* MKMapView+Test.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FF22B315CF002500F3A17B /* MKMapView+Test.m */; };
-		F50CBF7F1A040564004AC9DA /* MKMapView+ZoomLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FF22B515CF002500F3A17B /* MKMapView+ZoomLevel.m */; };
-		F50CBF801A040564004AC9DA /* MKPolylineView+Test.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FF22B715CF002500F3A17B /* MKPolylineView+Test.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBF811A040564004AC9DA /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* GCDAsyncSocket.m */; };
 		F50CBF821A040564004AC9DA /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; };
 		F50CBF831A040564004AC9DA /* LPHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B514E6565500663205 /* LPHTTPConnection.m */; };
@@ -723,6 +720,10 @@
 		F5821A4D18C4E27400293508 /* CalabashServer.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8814B6DAE1002A744C /* CalabashServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5821A5D18C4E27400293508 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E757A15D434D00066550B /* CFNetwork.framework */; };
 		F5821A5E18C4E27400293508 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
+		F58F2C781B32CF3800C02A77 /* LPJSONUtils+Introspection.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFEA1B224F6D00958052 /* LPJSONUtils+Introspection.m */; };
+		F58F2C791B32CF7F00C02A77 /* LPIntrospectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */; };
+		F58F2C7A1B32CFC600C02A77 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; };
+		F58F2C7B1B32CFC900C02A77 /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; };
 		F59741C11AA565190089DC88 /* OCMockitoIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59741BD1AA565190089DC88 /* OCMockitoIOS.framework */; };
 		F59741C21AA565190089DC88 /* OCHamcrestIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59741BE1AA565190089DC88 /* OCHamcrestIOS.framework */; };
 		F59741EE1AA5712F0089DC88 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F59741E31AA5712F0089DC88 /* libOCMock.a */; };
@@ -1057,12 +1058,6 @@
 		B1F7721B1A22A398009A2336 /* LPUIASharedElementChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUIASharedElementChannel.m; sourceTree = "<group>"; };
 		B1FBBC5919D0070000EE03CE /* LPDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDevice.m; sourceTree = "<group>"; };
 		B1FBBC5A19D0070000EE03CE /* LPDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDevice.h; sourceTree = "<group>"; };
-		B1FF22B215CF002500F3A17B /* MKMapView+Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+Test.h"; sourceTree = "<group>"; };
-		B1FF22B315CF002500F3A17B /* MKMapView+Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+Test.m"; sourceTree = "<group>"; };
-		B1FF22B415CF002500F3A17B /* MKMapView+ZoomLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKMapView+ZoomLevel.h"; sourceTree = "<group>"; };
-		B1FF22B515CF002500F3A17B /* MKMapView+ZoomLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKMapView+ZoomLevel.m"; sourceTree = "<group>"; };
-		B1FF22B615CF002500F3A17B /* MKPolylineView+Test.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKPolylineView+Test.h"; sourceTree = "<group>"; };
-		B1FF22B715CF002500F3A17B /* MKPolylineView+Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKPolylineView+Test.m"; sourceTree = "<group>"; };
 		F500459D17D249D000B72386 /* LPGitVersionDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPGitVersionDefines.h; sourceTree = "<group>"; };
 		F5091C4618C4E1D700C85307 /* libcalabash-device.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcalabash-device.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F50CBF5E1A03F222004AC9DA /* XCTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1433,7 +1428,6 @@
 			children = (
 				B1058E77197F03F400B4A57B /* Frank */,
 				F5E2D1D818C9120E00A0D9B6 /* SSKeychain */,
-				B1FF22B115CF002500F3A17B /* MapKit */,
 				B184FD8F14B6DB2B002A744C /* CocoaAsyncSocket */,
 				B184FD9214B6DB2B002A744C /* CocoaHttpServer */,
 				B184FDBC14B6DB2B002A744C /* FranklyServer */,
@@ -1685,19 +1679,6 @@
 				F5543F241ABF7DE900E1A0BF /* LPPluginLoader.m */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		B1FF22B115CF002500F3A17B /* MapKit */ = {
-			isa = PBXGroup;
-			children = (
-				B1FF22B215CF002500F3A17B /* MKMapView+Test.h */,
-				B1FF22B315CF002500F3A17B /* MKMapView+Test.m */,
-				B1FF22B415CF002500F3A17B /* MKMapView+ZoomLevel.h */,
-				B1FF22B515CF002500F3A17B /* MKMapView+ZoomLevel.m */,
-				B1FF22B615CF002500F3A17B /* MKPolylineView+Test.h */,
-				B1FF22B715CF002500F3A17B /* MKPolylineView+Test.m */,
-			);
-			path = MapKit;
 			sourceTree = "<group>";
 		};
 		F50CBF5F1A03F222004AC9DA /* XCTest */ = {
@@ -2525,6 +2506,7 @@
 				B1058E08197F00C000B4A57B /* LPUIAUserPrefsChannel.m in Sources */,
 				F57C17FF1B29E57000B5572F /* LPKeychainRoute.m in Sources */,
 				B1058E1D197F00C000B4A57B /* UIScriptASTPredicate.m in Sources */,
+				F58F2C7B1B32CFC900C02A77 /* LPSSKeychainQuery.m in Sources */,
 				B1135847197F1390004B16F4 /* GCDAsyncSocket.m in Sources */,
 				B1670E2A1A32410E00000A62 /* LPDumpRoute.m in Sources */,
 				B1F772301A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */,
@@ -2536,6 +2518,7 @@
 				F57C17EE1B29D5CF00B5572F /* CalabashServer.m in Sources */,
 				B11358591981B053004B16F4 /* LPScrollToRowWithMarkOperation.m in Sources */,
 				F5543F2D1ABF7DE900E1A0BF /* LPPluginLoader.m in Sources */,
+				F58F2C781B32CF3800C02A77 /* LPJSONUtils+Introspection.m in Sources */,
 				B113583A197F1311004B16F4 /* LPHTTPConnection.m in Sources */,
 				B1058E20197F00C000B4A57B /* UIScriptASTALL.m in Sources */,
 				B1058E21197F00C000B4A57B /* UIScriptASTClassName.m in Sources */,
@@ -2549,6 +2532,7 @@
 				B1058E23197F00C000B4A57B /* UIScriptASTFirst.m in Sources */,
 				B113585B1981B053004B16F4 /* LPCollectionViewScrollToItemOperation.m in Sources */,
 				F57C180B1B29E5BB00B5572F /* LPBackdoorRoute.m in Sources */,
+				F58F2C7A1B32CFC600C02A77 /* LPSSKeychain.m in Sources */,
 				B1058E24197F00C000B4A57B /* UIScriptASTIndex.m in Sources */,
 				B1058E25197F00C000B4A57B /* UIScriptASTLast.m in Sources */,
 				B1058E26197F00C000B4A57B /* LPEnv.m in Sources */,
@@ -2597,6 +2581,7 @@
 				F57C18011B29E57C00B5572F /* LPAppPropertyRoute.m in Sources */,
 				F57C180C1B29E5BE00B5572F /* LPExitRoute.m in Sources */,
 				B113585A1981B053004B16F4 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
+				F58F2C791B32CF7F00C02A77 /* LPIntrospectionRoute.m in Sources */,
 				F5F6004B1A7C69760020637D /* LPInvoker.m in Sources */,
 				B113582D197F0C41004B16F4 /* LPISO8601DateFormatter.m in Sources */,
 				F57C18081B29E5AE00B5572F /* LPNoContentResponse.m in Sources */,
@@ -3021,7 +3006,6 @@
 				F50CBFAA1A0405B2004AC9DA /* LPConditionRoute.m in Sources */,
 				F50CBF8A1A04056F004AC9DA /* LPHTTPDataResponse.m in Sources */,
 				F50CBFB51A0405CE004AC9DA /* CDataScanner_Extensions.m in Sources */,
-				F50CBF7E1A040564004AC9DA /* MKMapView+Test.m in Sources */,
 				F50CBFC21A0405CE004AC9DA /* UIScriptASTLast.m in Sources */,
 				F50CBF891A04056F004AC9DA /* LPHTTPAsyncFileResponse.m in Sources */,
 				F50CBFAB1A0405B2004AC9DA /* LPInterpolateRoute.m in Sources */,
@@ -3039,7 +3023,6 @@
 				F50CBFB61A0405CE004AC9DA /* LPCJSONDeserializer.m in Sources */,
 				F50CBFC31A0405CE004AC9DA /* UIScriptASTWith.m in Sources */,
 				89F2EFE81B22462700958052 /* LPIntrospectionRouteTest.m in Sources */,
-				F50CBF7F1A040564004AC9DA /* MKMapView+ZoomLevel.m in Sources */,
 				F50CBF901A04058C004AC9DA /* LPRouter.m in Sources */,
 				F50CBFC61A0405E9004AC9DA /* LPUIAUserPrefsChannel.m in Sources */,
 				F50CBFC91A0405E9004AC9DA /* LPEnv.m in Sources */,
@@ -3120,7 +3103,6 @@
 				B15369FD1A327A400093923F /* LPUIATapRouteOverSharedElement.m in Sources */,
 				F5C224E01AD473F0001DB4FA /* LPDeviceTest.m in Sources */,
 				F50CBF7D1A040564004AC9DA /* LPSSKeychainQuery.m in Sources */,
-				F50CBF801A040564004AC9DA /* MKPolylineView+Test.m in Sources */,
 				F50CBF9C1A04058C004AC9DA /* LPRecorder.m in Sources */,
 				F50CBF7C1A040564004AC9DA /* LPSSKeychain.m in Sources */,
 				F50CBFCC1A0405E9004AC9DA /* CalabashServer.m in Sources */,
