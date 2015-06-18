@@ -299,7 +299,7 @@
   return result;
 }
 
-+(NSMutableDictionary*)serializeRect:(CGRect)rect {
++ (NSMutableDictionary*)serializeRect:(CGRect)rect {
   CGFloat x = rect.origin.x;
   CGFloat y = rect.origin.y;
   CGFloat width = rect.size.width;
@@ -314,7 +314,7 @@
      } mutableCopy];
 }
 
-+(NSNumber*)normalizeFloat:(CGFloat) x {
++ (NSNumber*)normalizeFloat:(CGFloat) x {
   if (isinf(x)) {
     return (x == INFINITY ? @(CGFLOAT_MAX) : @(CGFLOAT_MIN));
   } else if (x == CGFLOAT_MIN) {

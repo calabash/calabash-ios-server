@@ -509,8 +509,8 @@
 
 - (void) testJsonifyViewUITableViewCell {
   UITableViewCell *view = [[UITableViewCell alloc]
-                       initWithStyle:UITableViewCellStyleDefault
-                       reuseIdentifier:@"identifier"];
+                           initWithStyle:UITableViewCellStyleDefault
+                           reuseIdentifier:@"identifier"];
 
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
