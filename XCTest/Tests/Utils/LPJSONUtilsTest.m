@@ -88,6 +88,10 @@
   return [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
 }
 
+- (BOOL) isLessThanIOS8 {
+  return [[LPDevice sharedDevice] isLessThaniOS8];
+}
+
 #pragma mark - dictionary:setObject:forKey:whenTarget:respondsTo:
 
 - (void) testDictionarySetObjectForKeyWhenTargetRespondsToYesAndNil {
@@ -175,7 +179,11 @@
 
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
-  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  if([self isLessThanIOS8]) {
+    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
+  } else {
+    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  }
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
@@ -281,7 +289,11 @@
   XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
   XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"rect"]).count, 6);
   XCTAssertEqualObjects(dict[@"rect"][@"x"], @(CGRectGetMinX([view frame])));
-  XCTAssertEqualObjects(dict[@"rect"][@"y"], @(CGRectGetMinY([view frame])));
+  if ([self isLessThanIOS8]) {
+    expect(dict[@"rect"][@"y"]).to.beCloseToWithin(84.5, 0.001);// @(CGRectGetMinY([view frame])));
+  } else {
+    XCTAssertEqualObjects(dict[@"rect"][@"y"], @(CGRectGetMinY([view frame])));
+  }
   XCTAssertEqualObjects(dict[@"rect"][@"width"], @(CGRectGetWidth([view frame])));
   XCTAssertEqualObjects(dict[@"rect"][@"height"], @(CGRectGetHeight([view frame])));
   XCTAssertEqualObjects(dict[@"rect"][@"center_x"], @(CGRectGetMidX([view frame])));
@@ -431,7 +443,11 @@
   UISlider *view = [[UISlider alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
-  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  if ([self isLessThanIOS8]) {
+    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
+  } else {
+    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  }
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
