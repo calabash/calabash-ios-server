@@ -247,11 +247,24 @@ describe(@"LPWKWebViewRuntimeLoaderTest", ^{
       expect(actual).to.equal(@"Received javascript: string!");
 
       // error
+
+      // The error string can come back with its keys in an order, so it makes
+      // checking for equality impossible.
       actual = [LPWKWebViewMethodInvoker stringByInvokingSelector:sel
                                                            target:obj
                                                          argument:@"error"];
+      NSData *actualData = [actual dataUsingEncoding:NSUTF8StringEncoding];
+
       NSString *expected = @"{\"error\":\"Another day, another misunderstood JavaScript programmer.\",\"javascript\":\"error\"}";
-      expect(actual).to.equal(expected);
+      NSData *expectedData = [expected dataUsingEncoding:NSUTF8StringEncoding];
+
+      LPCJSONDeserializer *parser = [LPCJSONDeserializer new];
+
+      NSDictionary *actualDict = [parser deserializeAsDictionary:actualData error:nil];
+      NSDictionary *expectedDict = [parser deserializeAsDictionary:expectedData error:nil];
+
+      expect(actualDict[@"error"]).to.equal(expectedDict[@"error"]);
+      expect(actualDict[@"javascript"]).to.equal(expectedDict[@"javascript"]);
     });
   });
 
