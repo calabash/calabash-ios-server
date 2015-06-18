@@ -8,6 +8,6 @@
 @property (nonatomic, assign) float *values;
 @property (nonatomic, assign) size_t size;
 
-- (instancetype)initWithFloatValues:(float *)values size:(size_t)size NS_DESIGNATED_INITIALIZER;
+- (id)initWithFloatValues:(float *)values size:(size_t)size;
 
 @end

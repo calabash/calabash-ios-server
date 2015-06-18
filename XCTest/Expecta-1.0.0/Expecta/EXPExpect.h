@@ -9,7 +9,6 @@
   char *_fileName;
   BOOL _negative;
   BOOL _asynchronous;
-  NSTimeInterval _timeout;
 }
 
 @property(nonatomic, copy) EXPIdBlock actualBlock;
@@ -19,16 +18,14 @@
 @property(nonatomic) const char *fileName;
 @property(nonatomic) BOOL negative;
 @property(nonatomic) BOOL asynchronous;
-@property(nonatomic) NSTimeInterval timeout;
 
 @property(nonatomic, readonly) EXPExpect *to;
 @property(nonatomic, readonly) EXPExpect *toNot;
 @property(nonatomic, readonly) EXPExpect *notTo;
 @property(nonatomic, readonly) EXPExpect *will;
 @property(nonatomic, readonly) EXPExpect *willNot;
-@property(nonatomic, readonly) EXPExpect *(^after)(NSTimeInterval timeInterval);
 
-- (instancetype)initWithActualBlock:(id)actualBlock testCase:(id)testCase lineNumber:(int)lineNumber fileName:(const char *)fileName NS_DESIGNATED_INITIALIZER;
+- (id)initWithActualBlock:(id)actualBlock testCase:(id)testCase lineNumber:(int)lineNumber fileName:(const char *)fileName;
 + (EXPExpect *)expectWithActualBlock:(id)actualBlock testCase:(id)testCase lineNumber:(int)lineNumber fileName:(const char *)fileName;
 
 - (void)applyMatcher:(id<EXPMatcher>)matcher;
@@ -40,6 +37,6 @@
   EXPExpect *_expectation;
   SEL _selector;
 }
-- (instancetype)initWithExpectation:(EXPExpect *)expectation selector:(SEL)selector NS_DESIGNATED_INITIALIZER;
-@property (nonatomic, readonly, copy) void (^dispatch)(void);
+- (id)initWithExpectation:(EXPExpect *)expectation selector:(SEL)selector;
+- (void (^)(void))dispatch;
 @end

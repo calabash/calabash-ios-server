@@ -6,6 +6,6 @@
 
 @property (nonatomic, retain) NSString *type;
 
-- (instancetype)initWithType:(NSString *)type NS_DESIGNATED_INITIALIZER;
+- (id)initWithType:(NSString *)type;
 
 @end
