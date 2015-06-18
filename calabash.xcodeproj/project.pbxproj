@@ -745,6 +745,14 @@
 		F5A33A791AC01EC400224639 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A33A721AC01E8E00224639 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F5B27B9118C5884D0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		F5B27B9218C5884E0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
+		F5C04E251B330F8B00F23526 /* LPDecimalRounderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C04E241B330F8B00F23526 /* LPDecimalRounderTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5C04E2E1B33110B00F23526 /* LPDecimalRounder.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C04E271B33110B00F23526 /* LPDecimalRounder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5C04E2F1B33110B00F23526 /* LPDecimalRounder.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C04E271B33110B00F23526 /* LPDecimalRounder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5C04E301B33110B00F23526 /* LPDecimalRounder.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C04E271B33110B00F23526 /* LPDecimalRounder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5C04E311B33110B00F23526 /* LPDecimalRounder.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C04E271B33110B00F23526 /* LPDecimalRounder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5C04E321B33110B00F23526 /* LPDecimalRounder.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C04E271B33110B00F23526 /* LPDecimalRounder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5C04E331B33110B00F23526 /* LPDecimalRounder.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C04E271B33110B00F23526 /* LPDecimalRounder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5C04E341B33110B00F23526 /* LPDecimalRounder.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C04E271B33110B00F23526 /* LPDecimalRounder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5C0944D1A979CC200AE5991 /* LPWebQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = F5C0944B1A979CC200AE5991 /* LPWebQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5C0944E1A979CC200AE5991 /* LPWebQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = F5C0944B1A979CC200AE5991 /* LPWebQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5C0944F1A979CC200AE5991 /* LPWebQuery.h in Headers */ = {isa = PBXBuildFile; fileRef = F5C0944B1A979CC200AE5991 /* LPWebQuery.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1153,6 +1161,9 @@
 		F5A33A721AC01E8E00224639 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		F5AE0BC4174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPScrollToRowWithMarkOperation.h; sourceTree = "<group>"; };
 		F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScrollToRowWithMarkOperation.m; sourceTree = "<group>"; };
+		F5C04E241B330F8B00F23526 /* LPDecimalRounderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDecimalRounderTest.m; sourceTree = "<group>"; };
+		F5C04E261B33110B00F23526 /* LPDecimalRounder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDecimalRounder.h; sourceTree = "<group>"; };
+		F5C04E271B33110B00F23526 /* LPDecimalRounder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDecimalRounder.m; sourceTree = "<group>"; };
 		F5C0944B1A979CC200AE5991 /* LPWebQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPWebQuery.h; sourceTree = "<group>"; };
 		F5C0944C1A979CC200AE5991 /* LPWebQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPWebQuery.m; sourceTree = "<group>"; };
 		F5C224BF1ACDF298001DB4FA /* LPWKWebViewRuntimeLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPWKWebViewRuntimeLoader.h; sourceTree = "<group>"; };
@@ -1654,6 +1665,8 @@
 				F5F600421A7C69760020637D /* LPInvoker.m */,
 				F5543F231ABF7DE900E1A0BF /* LPPluginLoader.h */,
 				F5543F241ABF7DE900E1A0BF /* LPPluginLoader.m */,
+				F5C04E261B33110B00F23526 /* LPDecimalRounder.h */,
+				F5C04E271B33110B00F23526 /* LPDecimalRounder.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1768,6 +1781,7 @@
 				F5C224D61AD472B1001DB4FA /* LPInvoker */,
 				F5543F211ABF7D7000E1A0BF /* LPPluginLoaderTest.m */,
 				F5419F0C1AF3D37000EAAA66 /* LPJSONUtils_AccessibilityElementTest.m */,
+				F5C04E241B330F8B00F23526 /* LPDecimalRounderTest.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2493,6 +2507,7 @@
 				F5F2D5EB1ACACF2F0027937B /* LPIsWebView.m in Sources */,
 				B1135831197F0C41004B16F4 /* LPCJSONSerializer.m in Sources */,
 				B1135833197F0C92004B16F4 /* LPJSONUtils.m in Sources */,
+				F5C04E311B33110B00F23526 /* LPDecimalRounder.m in Sources */,
 				B1135848197F1A38004B16F4 /* LPVersionRoute.m in Sources */,
 				F56630941A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */,
 				B1135830197F0C41004B16F4 /* LPCJSONScanner.m in Sources */,
@@ -2593,6 +2608,7 @@
 				B15BF9BC19ABB1DD00B38577 /* LPDebugRoute.m in Sources */,
 				B15BF9BD19ABB1DE00B38577 /* LPAppPropertyRoute.m in Sources */,
 				B15BF9BE19ABB1DE00B38577 /* LPQueryLogRoute.m in Sources */,
+				F5C04E331B33110B00F23526 /* LPDecimalRounder.m in Sources */,
 				F5F2D5ED1ACACF2F0027937B /* LPIsWebView.m in Sources */,
 				B15BF9BF19ABB1DE00B38577 /* LPUIATapRoute.m in Sources */,
 				B15BF9C019ABB1DE00B38577 /* LPLocationRoute.m in Sources */,
@@ -2693,6 +2709,7 @@
 				B15BFA0E19ABB2B100B38577 /* LPDebugRoute.m in Sources */,
 				B15BFA0F19ABB2B100B38577 /* LPAppPropertyRoute.m in Sources */,
 				B15BFA1019ABB2B100B38577 /* LPQueryLogRoute.m in Sources */,
+				F5C04E341B33110B00F23526 /* LPDecimalRounder.m in Sources */,
 				F5F2D5EE1ACACF2F0027937B /* LPIsWebView.m in Sources */,
 				B15BFA1119ABB2B100B38577 /* LPUIATapRoute.m in Sources */,
 				B15BFA1219ABB2B100B38577 /* LPLocationRoute.m in Sources */,
@@ -2793,6 +2810,7 @@
 				B1D5BD9B19A23BCE0070E8CE /* LPMapRoute.m in Sources */,
 				B1D5BD9C19A23BCE0070E8CE /* LPNoContentResponse.m in Sources */,
 				B1D5BD9D19A23BCE0070E8CE /* LPScreenshotRoute.m in Sources */,
+				F5C04E321B33110B00F23526 /* LPDecimalRounder.m in Sources */,
 				F5F2D5EC1ACACF2F0027937B /* LPIsWebView.m in Sources */,
 				B1D5BD9E19A23BCE0070E8CE /* LPAsyncPlaybackRoute.m in Sources */,
 				B1D5BD9F19A23BCE0070E8CE /* LPBackdoorRoute.m in Sources */,
@@ -2893,6 +2911,7 @@
 				F5091BFD18C4E1D700C85307 /* LPNoContentResponse.m in Sources */,
 				F5091BFE18C4E1D700C85307 /* LPScreenshotRoute.m in Sources */,
 				F5091BFF18C4E1D700C85307 /* LPAsyncPlaybackRoute.m in Sources */,
+				F5C04E2F1B33110B00F23526 /* LPDecimalRounder.m in Sources */,
 				F5F2D5E91ACACF2F0027937B /* LPIsWebView.m in Sources */,
 				F5091C0018C4E1D700C85307 /* LPBackdoorRoute.m in Sources */,
 				F5091C0118C4E1D700C85307 /* LPVersionRoute.m in Sources */,
@@ -2957,6 +2976,7 @@
 				F50CBFB31A0405B2004AC9DA /* LPVersionRoute.m in Sources */,
 				F5543F311ABF7DF500E1A0BF /* LPPluginLoader.m in Sources */,
 				F50CBFA71A0405B2004AC9DA /* LPUserPrefRoute.m in Sources */,
+				F5C04E2E1B33110B00F23526 /* LPDecimalRounder.m in Sources */,
 				F50CBFAA1A0405B2004AC9DA /* LPConditionRoute.m in Sources */,
 				F50CBF8A1A04056F004AC9DA /* LPHTTPDataResponse.m in Sources */,
 				F50CBFB51A0405CE004AC9DA /* LPCDataScanner_Extensions.m in Sources */,
@@ -3013,6 +3033,7 @@
 				F50CBF841A040564004AC9DA /* LPHTTPMessage.m in Sources */,
 				F5C224E91AD47403001DB4FA /* LPScrollOperationTest.m in Sources */,
 				F50CBF9A1A04058C004AC9DA /* LPScrollToRowOperation.m in Sources */,
+				F5C04E251B330F8B00F23526 /* LPDecimalRounderTest.m in Sources */,
 				F50CBF8F1A04058C004AC9DA /* LPI.mm in Sources */,
 				B15369FB1A325E510093923F /* LPUIARouteOverSharedElement.m in Sources */,
 				F5C224CF1ACDFF38001DB4FA /* LPWKWebViewRuntimeLoaderTest.m in Sources */,
@@ -3123,6 +3144,7 @@
 				F5821A1B18C4E27400293508 /* LPNoContentResponse.m in Sources */,
 				F5821A1C18C4E27400293508 /* LPScreenshotRoute.m in Sources */,
 				F5821A1D18C4E27400293508 /* LPAsyncPlaybackRoute.m in Sources */,
+				F5C04E301B33110B00F23526 /* LPDecimalRounder.m in Sources */,
 				F5F2D5EA1ACACF2F0027937B /* LPIsWebView.m in Sources */,
 				F5821A1E18C4E27400293508 /* LPBackdoorRoute.m in Sources */,
 				F5821A1F18C4E27400293508 /* LPVersionRoute.m in Sources */,
