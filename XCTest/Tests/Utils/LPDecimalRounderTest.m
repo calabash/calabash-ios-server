@@ -27,23 +27,23 @@ describe(@"LPDecimalRounder", ^{
   it(@"#round", ^{
     toRound = 44.445888;
     rounded = [rounder round:toRound];
-    expect(rounded).to.beCloseToWithin(44.45, 0.01);
+    expect(rounded).to.beCloseToWithin(44.45, 0.001);
 
     toRound = 44.444888;
     rounded = [rounder round:toRound];
-    expect(rounded).to.beCloseToWithin(44.44, 0.01);
+    expect(rounded).to.beCloseToWithin(44.44, 0.001);
   });
 
   it(@"#round:withScale:", ^{
     toRound = 44.445888;
     rounded = [rounder round:toRound withScale:1];
-    expect(rounded).to.beCloseToWithin(44.4, 0.1);
+    expect(rounded).to.beCloseToWithin(44.4, 0.01);
 
     rounded = [rounder round:toRound withScale:3];
-    expect(rounded).to.beCloseToWithin(44.446, 0.001);
+    expect(rounded).to.beCloseToWithin(44.446, 0.0001);
 
     rounded = [rounder round:toRound withScale:4];
-    expect(rounded).to.beCloseToWithin(44.4459, 0.0001);
+    expect(rounded).to.beCloseToWithin(44.4459, 0.00001);
   });
 
 });
