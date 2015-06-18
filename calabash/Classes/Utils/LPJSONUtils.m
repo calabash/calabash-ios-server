@@ -36,6 +36,8 @@
 
 + (void) insertHitPointIntoMutableDictionary:(NSMutableDictionary *) dictionary;
 
++ (NSMutableDictionary*)serializeRect:(CGRect)rect;
+
 @end
 
 @implementation LPJSONUtils
@@ -301,14 +303,13 @@
   CGFloat width = rect.size.width;
   CGFloat height = rect.size.height;
 
-
-  return [NSMutableDictionary dictionaryWithObjectsAndKeys:
-            [self normalizeFloat:x],      @"x",
-            [self normalizeFloat:y],      @"y",
-            [self normalizeFloat:width],  @"width",
-            [self normalizeFloat:height], @"height",
-          nil];
-
+  return
+  [@{
+     @"x" : [self normalizeFloat:x],
+     @"y" : [self normalizeFloat:y],
+     @"width" : [self normalizeFloat:width],
+     @"height" : [self normalizeFloat:height]
+     } mutableCopy];
 }
 
 +(NSNumber*)normalizeFloat:(CGFloat) x {
