@@ -15,14 +15,36 @@
 SpecBegin(LPDecimalRounder)
 
 describe(@"LPDecimalRounder", ^{
-  describe(@"rounding CGFloat", ^{
-    it(@"rounds to 2 decimal places by default", ^{
 
-    });
+  __block LPDecimalRounder *rounder;
+  __block CGFloat toRound;
+  __block CGFloat rounded;
 
-    it(@"can round to an scale", ^{
-
-    });
+  before(^{
+    rounder = [LPDecimalRounder new];
   });
+
+  it(@"#round", ^{
+    toRound = 44.445888;
+    rounded = [rounder round:toRound];
+    expect(rounded).to.beCloseToWithin(44.45, 0.01);
+
+    toRound = 44.444888;
+    rounded = [rounder round:toRound];
+    expect(rounded).to.beCloseToWithin(44.44, 0.01);
+  });
+
+  it(@"#round:withScale:", ^{
+    toRound = 44.445888;
+    rounded = [rounder round:toRound withScale:1];
+    expect(rounded).to.beCloseToWithin(44.4, 0.1);
+
+    rounded = [rounder round:toRound withScale:3];
+    expect(rounded).to.beCloseToWithin(44.446, 0.001);
+
+    rounded = [rounder round:toRound withScale:4];
+    expect(rounded).to.beCloseToWithin(44.4459, 0.0001);
+  });
+
 });
 SpecEnd
