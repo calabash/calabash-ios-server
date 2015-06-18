@@ -15,6 +15,7 @@
 #import "LPOrientationOperation.h"
 #import "LPInvoker.h"
 #import <math.h>
+#import "LPDecimalRounder.h"
 
 @interface LPJSONUtils ()
 
@@ -35,6 +36,9 @@
            selector:(SEL) selector;
 
 + (void) insertHitPointIntoMutableDictionary:(NSMutableDictionary *) dictionary;
+
++ (NSMutableDictionary*)serializeRect:(CGRect)rect;
++ (NSNumber*)normalizeFloat:(CGFloat) x;
 
 @end
 
@@ -295,30 +299,33 @@
   return result;
 }
 
-+(NSMutableDictionary*)serializeRect:(CGRect)rect {
++ (NSMutableDictionary*)serializeRect:(CGRect)rect {
   CGFloat x = rect.origin.x;
   CGFloat y = rect.origin.y;
   CGFloat width = rect.size.width;
   CGFloat height = rect.size.height;
 
-
-  return [NSMutableDictionary dictionaryWithObjectsAndKeys:
-            [self normalizeFloat:x],      @"x",
-            [self normalizeFloat:y],      @"y",
-            [self normalizeFloat:width],  @"width",
-            [self normalizeFloat:height], @"height",
-          nil];
-
+  return
+  [@{
+     @"x" : [self normalizeFloat:x],
+     @"y" : [self normalizeFloat:y],
+     @"width" : [self normalizeFloat:width],
+     @"height" : [self normalizeFloat:height]
+     } mutableCopy];
 }
 
-+(NSNumber*)normalizeFloat:(CGFloat) x {
-  if (isfinite(x)) {
-    return @(x);
-  }
++ (NSNumber*)normalizeFloat:(CGFloat) x {
   if (isinf(x)) {
     return (x == INFINITY ? @(CGFLOAT_MAX) : @(CGFLOAT_MIN));
+  } else if (x == CGFLOAT_MIN) {
+    return @(CGFLOAT_MIN);
+  } else if (x == CGFLOAT_MAX) {
+    return @(CGFLOAT_MAX);
+  } else {
+    LPDecimalRounder *rounder = [LPDecimalRounder new];
+    CGFloat rounded = [rounder round:x];
+    return @(rounded);
   }
-  return @(CGFLOAT_MAX);
 }
 
 +(NSMutableDictionary*)jsonifyAccessibilityElement:(id)object {
