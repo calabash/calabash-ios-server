@@ -31,7 +31,7 @@ describe(@".isWebView", ^{
       });
 
       it(@"is a WKWebView", ^{
-        if ([[LPDevice sharedDevice] isLessThaniOS8]) {
+        if (lp_ios_version_lt(@"8.0")) {
           // nop for iOS < 8.0
         } else {
           Class klass = objc_getClass("WKWebView");
@@ -41,7 +41,7 @@ describe(@".isWebView", ^{
       });
 
       it(@"is a subclass of WKWebView", ^{
-        if ([[LPDevice sharedDevice] isLessThaniOS8]) {
+        if (lp_ios_version_lt(@"8.0")) {
           // nop for iOS < 8.0
         } else {
           Class klass = objc_getClass("WKWebView");
