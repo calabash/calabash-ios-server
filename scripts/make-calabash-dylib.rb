@@ -32,6 +32,8 @@ args =
             "-sdk #{sdk}",
             'IPHONEOS_DEPLOYMENT_TARGET=5.1.1',
             'GCC_TREAT_WARNINGS_AS_ERRORS=YES',
+            'GCC_GENERATE_TEST_COVERAGE_FILES=NO',
+            'GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=NO',
             xcpretty_available ? '| xcpretty -c' : ''
       ].join(' ')
 
