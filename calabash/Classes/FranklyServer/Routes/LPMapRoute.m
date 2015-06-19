@@ -10,7 +10,7 @@
 #import "LPOperation.h"
 #import "LPTouchUtils.h"
 #import "LPOrientationOperation.h"
-#import "LPLog.h"
+#import "LPLogger.h"
 #import "LPJSONUtils.h"
 #import "LPHTTPDataResponse.h"
 #import "LPDevice.h"
@@ -141,7 +141,7 @@
       @"details" : @""
       };
   }
-  [LPLog debug:@"Map results %@", resultDict];
+  [LPLogger debug:@"Map results %@", resultDict];
 
   return resultDict;
 }

@@ -10,7 +10,7 @@
 
 typedef enum {LPLogLevelDebug = 1, LPLogLevelInfo = 5, LPLogLevelError = 10} LPLogLevel;
 
-@interface LPLog : NSObject
+@interface LPLogger : NSObject
 
 + (LPLogLevel) currentLevel;
 

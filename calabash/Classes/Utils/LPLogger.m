@@ -6,31 +6,31 @@
 //  Copyright (c) 2014 Xamarin. All rights reserved.
 //
 
-#import "LPLog.h"
+#import "LPLogger.h"
 #import "LPEnv.h"
 
 
-@implementation LPLog {
+@implementation LPLogger {
   LPLogLevel _logLevel;
 }
 
-+ (LPLog *) sharedLog {
-  static LPLog *sharedLog = nil;
++ (LPLogger *) sharedLog {
+  static LPLogger *sharedLog = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-    sharedLog = [[LPLog alloc] init];
+    sharedLog = [[LPLogger alloc] init];
   });
   return sharedLog;
 }
 
 
 + (LPLogLevel) currentLevel {
-  return [[LPLog sharedLog] currentLevel];
+  return [[LPLogger sharedLog] currentLevel];
 }
 
 
 + (void) setLevelFromString:(NSString *) logLevel {
-  [[LPLog sharedLog] setLevelFromString:logLevel];
+  [[LPLogger sharedLog] setLevelFromString:logLevel];
 }
 
 
@@ -51,7 +51,7 @@
 
 
 + (NSString *) currentLevelString {
-  switch ([LPLog currentLevel]) {
+  switch ([LPLogger currentLevel]) {
     case LPLogLevelDebug:return @"debug";
     case LPLogLevelInfo:return @"info";
     case LPLogLevelError:return @"error";
@@ -76,7 +76,7 @@
 
 //Not 100% sure if this va_* is necessary
 + (void) debug:(NSString *) formatString, ...; {
-  if (![[LPLog sharedLog] shouldLogAtLevel:LPLogLevelDebug]) {return;}
+  if (![[LPLogger sharedLog] shouldLogAtLevel:LPLogLevelDebug]) {return;}
   va_list args;
   va_start(args, formatString);
   NSLogv(formatString, args);
@@ -85,7 +85,7 @@
 
 
 + (void) info:(NSString *) formatString, ... {
-  if (![[LPLog sharedLog] shouldLogAtLevel:LPLogLevelInfo]) {return;}
+  if (![[LPLogger sharedLog] shouldLogAtLevel:LPLogLevelInfo]) {return;}
   va_list args;
   va_start(args, formatString);
   NSLogv(formatString, args);
@@ -94,7 +94,7 @@
 
 
 + (void) error:(NSString *) formatString, ... {
-  if (![[LPLog sharedLog] shouldLogAtLevel:LPLogLevelError]) {return;}
+  if (![[LPLogger sharedLog] shouldLogAtLevel:LPLogLevelError]) {return;}
   va_list args;
   va_start(args, formatString);
   NSLogv(formatString, args);
