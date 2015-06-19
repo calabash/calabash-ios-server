@@ -63,7 +63,7 @@ end
 # @param [Hash] opts directory and lib name options
 def path_to_device_frank_lib(opts = {})
   default_opts = {:directory => './build/Debug-iphoneos',
-                  :lib_name => 'libFrankCalabashDevice.a'}
+                  :lib_name => 'libcalabash-plugin-for-frank.a'}
   merged = default_opts.merge(opts)
   path_to_lib(merged[:directory], merged[:lib_name])
 end
@@ -72,7 +72,7 @@ end
 # @param [Hash] opts directory and lib name options
 def path_to_simulator_frank_lib(opts = {})
   default_opts = {:directory => './build/Debug-iphonesimulator',
-                  :lib_name => 'libFrankCalabash.a'}
+                  :lib_name => 'libcalabash-plugin-for-frank.a'}
   merged = default_opts.merge(opts)
 
   path_to_lib(merged[:directory], merged[:lib_name])
