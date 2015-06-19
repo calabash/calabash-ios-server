@@ -13,6 +13,8 @@
 #import <OCMockitoIOS/OCMockitoIOS.h>
 
 #import <Specta/Specta.h>
+
+#define EXP_SHORTHAND
 #import <Expecta/Expecta.h>
 
 #import <objc/runtime.h>

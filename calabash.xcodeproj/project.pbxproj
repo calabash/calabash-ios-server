@@ -1099,7 +1099,6 @@
 		F59741F21AA571A80089DC88 /* EXPDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXPDefines.h; sourceTree = "<group>"; };
 		F59741F31AA571A80089DC88 /* EXPDoubleTuple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXPDoubleTuple.h; sourceTree = "<group>"; };
 		F59741F41AA571A80089DC88 /* Expecta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Expecta.h; sourceTree = "<group>"; };
-		F59741F51AA571A80089DC88 /* ExpectaObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpectaObject.h; sourceTree = "<group>"; };
 		F59741F61AA571A80089DC88 /* ExpectaSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpectaSupport.h; sourceTree = "<group>"; };
 		F59741F71AA571A80089DC88 /* EXPExpect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXPExpect.h; sourceTree = "<group>"; };
 		F59741F81AA571A80089DC88 /* EXPFloatTuple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EXPFloatTuple.h; sourceTree = "<group>"; };
@@ -1125,7 +1124,6 @@
 		F597420C1AA571A90089DC88 /* EXPMatchers+endWith.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EXPMatchers+endWith.h"; sourceTree = "<group>"; };
 		F597420D1AA571A90089DC88 /* EXPMatchers+equal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EXPMatchers+equal.h"; sourceTree = "<group>"; };
 		F597420E1AA571A90089DC88 /* EXPMatchers+haveCountOf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EXPMatchers+haveCountOf.h"; sourceTree = "<group>"; };
-		F597420F1AA571A90089DC88 /* EXPMatchers+postNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EXPMatchers+postNotification.h"; sourceTree = "<group>"; };
 		F59742101AA571A90089DC88 /* EXPMatchers+raise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EXPMatchers+raise.h"; sourceTree = "<group>"; };
 		F59742111AA571A90089DC88 /* EXPMatchers+raiseWithReason.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EXPMatchers+raiseWithReason.h"; sourceTree = "<group>"; };
 		F59742121AA571A90089DC88 /* EXPMatchers+respondTo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EXPMatchers+respondTo.h"; sourceTree = "<group>"; };
@@ -1827,7 +1825,6 @@
 				F59741F21AA571A80089DC88 /* EXPDefines.h */,
 				F59741F31AA571A80089DC88 /* EXPDoubleTuple.h */,
 				F59741F41AA571A80089DC88 /* Expecta.h */,
-				F59741F51AA571A80089DC88 /* ExpectaObject.h */,
 				F59741F61AA571A80089DC88 /* ExpectaSupport.h */,
 				F59741F71AA571A80089DC88 /* EXPExpect.h */,
 				F59741F81AA571A80089DC88 /* EXPFloatTuple.h */,
@@ -1853,7 +1850,6 @@
 				F597420C1AA571A90089DC88 /* EXPMatchers+endWith.h */,
 				F597420D1AA571A90089DC88 /* EXPMatchers+equal.h */,
 				F597420E1AA571A90089DC88 /* EXPMatchers+haveCountOf.h */,
-				F597420F1AA571A90089DC88 /* EXPMatchers+postNotification.h */,
 				F59742101AA571A90089DC88 /* EXPMatchers+raise.h */,
 				F59742111AA571A90089DC88 /* EXPMatchers+raiseWithReason.h */,
 				F59742121AA571A90089DC88 /* EXPMatchers+respondTo.h */,
@@ -3837,6 +3833,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/XCTest",
 				);
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/XCTest/tests.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_VERSION = "";
@@ -3898,6 +3896,8 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/XCTest",
 				);
+				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/XCTest/tests.pch";
 				GCC_VERSION = "";
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
