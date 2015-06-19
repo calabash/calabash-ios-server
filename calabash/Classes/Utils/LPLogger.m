@@ -9,10 +9,15 @@
 #import "LPLogger.h"
 #import "LPEnv.h"
 
+@interface LPLogger ()
 
-@implementation LPLogger {
-  LPLoggerLevel _logLevel;
-}
+@property(assign, atomic, readonly) LPLoggerLevel logLevel;
+
+@end
+
+@implementation LPLogger
+
+@synthesize logLevel = _logLevel;
 
 + (LPLogger *) sharedLog {
   static LPLogger *sharedLog = nil;
