@@ -1045,7 +1045,7 @@
 		B1FBBC5919D0070000EE03CE /* LPDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDevice.m; sourceTree = "<group>"; };
 		B1FBBC5A19D0070000EE03CE /* LPDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDevice.h; sourceTree = "<group>"; };
 		F500459D17D249D000B72386 /* LPGitVersionDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPGitVersionDefines.h; sourceTree = "<group>"; };
-		F5091C4618C4E1D700C85307 /* libcalabash-device.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcalabash-device.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5091C4618C4E1D700C85307 /* libcalabash.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcalabash.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F50CBF5E1A03F222004AC9DA /* XCTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F50CBF611A03F222004AC9DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F50CBF761A03F69A004AC9DA /* LPTestToolsStandup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPTestToolsStandup.m; path = ../LPTestToolsStandup.m; sourceTree = "<group>"; };
@@ -1328,7 +1328,7 @@
 		B121E79514B6D9FB0034C6A9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F5091C4618C4E1D700C85307 /* libcalabash-device.a */,
+				F5091C4618C4E1D700C85307 /* libcalabash.a */,
 				F5821A6418C4E27400293508 /* libcalabash-simulator.a */,
 				F537398C18E5253B004133FA /* version */,
 				B1058E51197F00C000B4A57B /* libFrankCalabash.a */,
@@ -2176,9 +2176,9 @@
 			productReference = B1D5BDD919A23BCE0070E8CE /* libFrankCalabashDevice.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		F5091BD918C4E1D700C85307 /* calabash-device */ = {
+		F5091BD918C4E1D700C85307 /* calabash */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F5091C4318C4E1D700C85307 /* Build configuration list for PBXNativeTarget "calabash-device" */;
+			buildConfigurationList = F5091C4318C4E1D700C85307 /* Build configuration list for PBXNativeTarget "calabash" */;
 			buildPhases = (
 				F5091BDA18C4E1D700C85307 /* Run Script - git versioning 1 of 2 */,
 				F5091BDB18C4E1D700C85307 /* Sources */,
@@ -2191,9 +2191,9 @@
 			);
 			dependencies = (
 			);
-			name = "calabash-device";
+			name = calabash;
 			productName = calabash;
-			productReference = F5091C4618C4E1D700C85307 /* libcalabash-device.a */;
+			productReference = F5091C4618C4E1D700C85307 /* libcalabash.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		F50CBF5D1A03F222004AC9DA /* XCTest */ = {
@@ -2300,7 +2300,7 @@
 			projectRoot = "";
 			targets = (
 				F50CBF5D1A03F222004AC9DA /* XCTest */,
-				F5091BD918C4E1D700C85307 /* calabash-device */,
+				F5091BD918C4E1D700C85307 /* calabash */,
 				F58219F718C4E27400293508 /* calabash-simulator */,
 				B1058DEC197F00C000B4A57B /* frank-calabash */,
 				B1D5BD7519A23BCE0070E8CE /* frank-calabash-device */,
@@ -3761,7 +3761,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "calabash-device";
+				PRODUCT_NAME = calabash;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
 				SEPARATE_STRIP = NO;
 				SKIP_INSTALL = YES;
@@ -3819,7 +3819,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "calabash-device";
+				PRODUCT_NAME = calabash;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
 				SEPARATE_STRIP = NO;
 				SKIP_INSTALL = YES;
@@ -4241,7 +4241,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		F5091C4318C4E1D700C85307 /* Build configuration list for PBXNativeTarget "calabash-device" */ = {
+		F5091C4318C4E1D700C85307 /* Build configuration list for PBXNativeTarget "calabash" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F5091C4418C4E1D700C85307 /* Debug */,

@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F5091BD918C4E1D700C85307"
-               BuildableName = "libcalabash-device.a"
-               BlueprintName = "calabash-device"
+               BuildableName = "libcalabash.a"
+               BlueprintName = "calabash"
                ReferencedContainer = "container:calabash.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,8 +46,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F5091BD918C4E1D700C85307"
-            BuildableName = "libcalabash-device.a"
-            BlueprintName = "calabash-device"
+            BuildableName = "libcalabash.a"
+            BlueprintName = "calabash"
             ReferencedContainer = "container:calabash.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
