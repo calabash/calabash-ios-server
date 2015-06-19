@@ -3310,6 +3310,8 @@
 					armv7,
 					armv7s,
 					arm64,
+					i386,
+					x86_64,
 				);
 				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
@@ -3350,7 +3352,7 @@
 				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
 				WARNING_CFLAGS = (
 					"-Wunreachable-code",
 					"-fcolor-diagnostics",
@@ -3366,6 +3368,8 @@
 					armv7,
 					armv7s,
 					arm64,
+					i386,
+					x86_64,
 				);
 				CLANG_ANALYZER_SECURITY_FLOATLOOPCOUNTER = YES;
 				CLANG_ANALYZER_SECURITY_INSECUREAPI_RAND = YES;
@@ -3406,7 +3410,7 @@
 				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
-				VALID_ARCHS = "armv7 armv7s arm64";
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64 i386";
 				WARNING_CFLAGS = (
 					"-Wunreachable-code",
 					"-fcolor-diagnostics",
