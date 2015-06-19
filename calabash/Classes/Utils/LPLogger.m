@@ -11,7 +11,7 @@
 
 
 @implementation LPLogger {
-  LPLogLevel _logLevel;
+  LPLoggerLevel _logLevel;
 }
 
 + (LPLogger *) sharedLog {
@@ -24,7 +24,7 @@
 }
 
 
-+ (LPLogLevel) currentLevel {
++ (LPLoggerLevel) currentLevel {
   return [[LPLogger sharedLog] currentLevel];
 }
 
@@ -36,25 +36,25 @@
 
 - (void) setLevelFromString:(NSString *) logLevel {
   if ([@"debug" isEqualToString:[logLevel lowercaseString]]) {
-    _logLevel = LPLogLevelDebug;
+    _logLevel = LPLoggerLevelDebug;
   } else if ([@"info" isEqualToString:[logLevel lowercaseString]]) {
-    _logLevel = LPLogLevelInfo;
+    _logLevel = LPLoggerLevelInfo;
   } else if ([@"error" isEqualToString:[logLevel lowercaseString]]) {
-    _logLevel = LPLogLevelError;
+    _logLevel = LPLoggerLevelError;
   }
 }
 
 
-- (LPLogLevel) currentLevel {
+- (LPLoggerLevel) currentLevel {
   return _logLevel;
 }
 
 
 + (NSString *) currentLevelString {
   switch ([LPLogger currentLevel]) {
-    case LPLogLevelDebug:return @"debug";
-    case LPLogLevelInfo:return @"info";
-    case LPLogLevelError:return @"error";
+    case LPLoggerLevelDebug:return @"debug";
+    case LPLoggerLevelInfo:return @"info";
+    case LPLoggerLevelError:return @"error";
     default:return nil;
   }
 }
@@ -63,20 +63,20 @@
 - (id) init {
   self = [super init];
   if (self) {
-    _logLevel = [LPEnv calabashDebugEnabled] ? LPLogLevelDebug : LPLogLevelInfo;
+    _logLevel = [LPEnv calabashDebugEnabled] ? LPLoggerLevelDebug : LPLoggerLevelInfo;
   }
   return self;
 }
 
 
-- (BOOL) shouldLogAtLevel:(LPLogLevel) level {
+- (BOOL) shouldLogAtLevel:(LPLoggerLevel) level {
   return (level >= _logLevel);
 }
 
 
 //Not 100% sure if this va_* is necessary
 + (void) debug:(NSString *) formatString, ...; {
-  if (![[LPLogger sharedLog] shouldLogAtLevel:LPLogLevelDebug]) {return;}
+  if (![[LPLogger sharedLog] shouldLogAtLevel:LPLoggerLevelDebug]) {return;}
   va_list args;
   va_start(args, formatString);
   NSLogv(formatString, args);
@@ -85,7 +85,7 @@
 
 
 + (void) info:(NSString *) formatString, ... {
-  if (![[LPLogger sharedLog] shouldLogAtLevel:LPLogLevelInfo]) {return;}
+  if (![[LPLogger sharedLog] shouldLogAtLevel:LPLoggerLevelInfo]) {return;}
   va_list args;
   va_start(args, formatString);
   NSLogv(formatString, args);
@@ -94,7 +94,7 @@
 
 
 + (void) error:(NSString *) formatString, ... {
-  if (![[LPLogger sharedLog] shouldLogAtLevel:LPLogLevelError]) {return;}
+  if (![[LPLogger sharedLog] shouldLogAtLevel:LPLoggerLevelError]) {return;}
   va_list args;
   va_start(args, formatString);
   NSLogv(formatString, args);
