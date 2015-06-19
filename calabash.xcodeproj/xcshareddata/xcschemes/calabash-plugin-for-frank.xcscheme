@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B1D5BD7519A23BCE0070E8CE"
-               BuildableName = "libFrankCalabashDevice.a"
-               BlueprintName = "frank-calabash-device"
+               BuildableName = "libcalabash-plugin-for-frank.a"
+               BlueprintName = "calabash-plugin-for-frank"
                ReferencedContainer = "container:calabash.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,8 +46,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B1D5BD7519A23BCE0070E8CE"
-            BuildableName = "libFrankCalabashDevice.a"
-            BlueprintName = "frank-calabash-device"
+            BuildableName = "libcalabash-plugin-for-frank.a"
+            BlueprintName = "calabash-plugin-for-frank"
             ReferencedContainer = "container:calabash.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

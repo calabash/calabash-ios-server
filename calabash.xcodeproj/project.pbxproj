@@ -781,7 +781,7 @@
 		B1B19DC716D162CF00D3D80B /* UIScriptASTVisibility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScriptASTVisibility.m; sourceTree = "<group>"; };
 		B1CED0FA183E9551004793B9 /* LPLocationRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPLocationRoute.m; sourceTree = "<group>"; };
 		B1CED0FC183E9562004793B9 /* LPLocationRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPLocationRoute.h; sourceTree = "<group>"; };
-		B1D5BDD919A23BCE0070E8CE /* libFrankCalabashDevice.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFrankCalabashDevice.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1D5BDD919A23BCE0070E8CE /* libcalabash-plugin-for-frank.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libcalabash-plugin-for-frank.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1DDE6C915C06CB500BBE2BE /* LPUIARouteOverUserPrefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUIARouteOverUserPrefs.h; sourceTree = "<group>"; };
 		B1DDE6CA15C06CB500BBE2BE /* LPUIARouteOverUserPrefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUIARouteOverUserPrefs.m; sourceTree = "<group>"; };
 		B1DDE6CB15C06CB500BBE2BE /* LPUserPrefRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUserPrefRoute.h; sourceTree = "<group>"; };
@@ -1072,7 +1072,7 @@
 			children = (
 				F5091C4618C4E1D700C85307 /* libcalabash.a */,
 				F537398C18E5253B004133FA /* version */,
-				B1D5BDD919A23BCE0070E8CE /* libFrankCalabashDevice.a */,
+				B1D5BDD919A23BCE0070E8CE /* libcalabash-plugin-for-frank.a */,
 				B15BF97119ABAFD200B38577 /* libCalabashDyn.dylib */,
 				B15BFA4019ABB2B100B38577 /* libCalabashDynSim.dylib */,
 				F50CBF5E1A03F222004AC9DA /* XCTest.xctest */,
@@ -1834,9 +1834,9 @@
 			productReference = B15BFA4019ABB2B100B38577 /* libCalabashDynSim.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
-		B1D5BD7519A23BCE0070E8CE /* frank-calabash-device */ = {
+		B1D5BD7519A23BCE0070E8CE /* calabash-plugin-for-frank */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B1D5BDD619A23BCE0070E8CE /* Build configuration list for PBXNativeTarget "frank-calabash-device" */;
+			buildConfigurationList = B1D5BDD619A23BCE0070E8CE /* Build configuration list for PBXNativeTarget "calabash-plugin-for-frank" */;
 			buildPhases = (
 				B1D5BD7619A23BCE0070E8CE /* Run Script - git versioning 1 of 2 */,
 				B1D5BD7719A23BCE0070E8CE /* Sources */,
@@ -1849,9 +1849,9 @@
 			);
 			dependencies = (
 			);
-			name = "frank-calabash-device";
+			name = "calabash-plugin-for-frank";
 			productName = calabash;
-			productReference = B1D5BDD919A23BCE0070E8CE /* libFrankCalabashDevice.a */;
+			productReference = B1D5BDD919A23BCE0070E8CE /* libcalabash-plugin-for-frank.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		F5091BD918C4E1D700C85307 /* calabash */ = {
@@ -1959,7 +1959,7 @@
 			targets = (
 				F50CBF5D1A03F222004AC9DA /* XCTest */,
 				F5091BD918C4E1D700C85307 /* calabash */,
-				B1D5BD7519A23BCE0070E8CE /* frank-calabash-device */,
+				B1D5BD7519A23BCE0070E8CE /* calabash-plugin-for-frank */,
 				B15BF97019ABAFD200B38577 /* calabash-dylib-device */,
 				B15BF9E819ABB2B100B38577 /* calabash-dylib-simulator */,
 				F59CA46C1A82EF40007A2F38 /* LPTestTarget */,
@@ -2935,7 +2935,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = FrankCalabashDevice;
+				PRODUCT_NAME = "calabash-plugin-for-frank";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
 				SEPARATE_STRIP = NO;
 				SKIP_INSTALL = YES;
@@ -2993,7 +2993,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = FrankCalabashDevice;
+				PRODUCT_NAME = "calabash-plugin-for-frank";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
 				SEPARATE_STRIP = NO;
 				SKIP_INSTALL = YES;
@@ -3405,7 +3405,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		B1D5BDD619A23BCE0070E8CE /* Build configuration list for PBXNativeTarget "frank-calabash-device" */ = {
+		B1D5BDD619A23BCE0070E8CE /* Build configuration list for PBXNativeTarget "calabash-plugin-for-frank" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B1D5BDD719A23BCE0070E8CE /* Debug */,
