@@ -317,8 +317,8 @@ end
 # @param [Hash] opts :device and :sim dylib paths
 # @return [Boolean] true if both device and sim dylibs are built
 def dylibs_built?(opts = {})
-  default_opts = {:device => './build/Debug-iphoneos/libCalabashDyn.dylib',
-                  :sim => './build/Debug-iphonesimulator/libCalabashDynSim.dylib'}
+  default_opts = {:device => './build/Debug-iphoneos/calabash-dylib.dylib',
+                  :sim => './build/Debug-iphonesimulator/calabash-dylib.dylib'}
   merged = default_opts.merge(opts)
   File.exist?(merged[:device]) && File.exist?(merged[:sim])
 end
@@ -327,7 +327,7 @@ end
 # @param [Hash] opts directory and lib name options
 def path_to_device_dylib(opts = {})
   default_opts = {:directory => './build/Debug-iphoneos',
-                  :lib_name => 'libCalabashDyn.dylib'}
+                  :lib_name => 'calabash-dylib.dylib'}
   merged = default_opts.merge(opts)
   path_to_lib(merged[:directory], merged[:lib_name])
 end
@@ -336,7 +336,7 @@ end
 # @param [Hash] opts directory and lib name options
 def path_to_simulator_dylib(opts = {})
   default_opts = {:directory => './build/Debug-iphonesimulator',
-                  :lib_name => 'libCalabashDynSim.dylib'}
+                  :lib_name => 'calabash-dylib.dylib'}
   merged = default_opts.merge(opts)
 
   path_to_lib(merged[:directory], merged[:lib_name])
@@ -376,11 +376,11 @@ def stage_dylibs
 
   FileUtils.mkdir target_dir
 
-  puts "INFO: staging '#{device_dylib}' to ./calabash-dylibs"
-  FileUtils.cp(device_dylib, target_dir)
+  puts "INFO: staging '#{device_dylib}' to ./calabash-dylibs/libCalabashDyn.dylib"
+  FileUtils.cp(device_dylib, File.join(target_dir, 'libCalabashDyn.dylib'))
 
-  puts "INFO: staging '#{simulator_dylib}' to ./calabash-dylibs"
-  FileUtils.cp(simulator_dylib, target_dir)
+  puts "INFO: staging '#{simulator_dylib}' to ./calabash-dylibs/libCalabashDynSim.dylib"
+  FileUtils.cp(simulator_dylib, File.join(target_dir, 'libCalabashDynSim.dylib'))
 end
 
 if ARGV[0] == 'verify-framework'
