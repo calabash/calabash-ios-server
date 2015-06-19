@@ -44,7 +44,7 @@ end
 # @param [Hash] opts directory and lib name options
 def path_to_device_lib(opts = {})
   default_opts = {:directory => './build/Debug-iphoneos',
-                  :lib_name => 'libcalabash-device.a'}
+                  :lib_name => 'libcalabash.a'}
   merged = default_opts.merge(opts)
   path_to_lib(merged[:directory], merged[:lib_name])
 end
@@ -53,7 +53,7 @@ end
 # @param [Hash] opts directory and lib name options
 def path_to_simulator_lib(opts = {})
   default_opts = {:directory => './build/Debug-iphonesimulator',
-                  :lib_name => 'libcalabash-simulator.a'}
+                  :lib_name => 'libcalabash.a'}
   merged = default_opts.merge(opts)
 
   path_to_lib(merged[:directory], merged[:lib_name])
