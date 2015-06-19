@@ -29,6 +29,7 @@
 @synthesize system = _system;
 @synthesize model = _model;
 @synthesize formFactor = _formFactor;
+@synthesize iOSVersion = _iOSVersion;
 
 - (id) init {
   @throw [NSException exceptionWithName:@"Cannot call init"
@@ -123,6 +124,17 @@
   uname(&systemInfo);
   _system = @(systemInfo.machine);
   return _system;
+}
+
+- (NSString *) iOSVersion {
+  if (_iOSVersion) { return _iOSVersion; }
+  _iOSVersion = [[UIDevice currentDevice] systemVersion];
+  return _iOSVersion;
+}
+
+- (BOOL) isLessThaniOS8 {
+  NSString *version = self.iOSVersion;
+  return [version compare:@"8.0" options:NSNumericSearch] == NSOrderedAscending;
 }
 
 - (NSString *) model {

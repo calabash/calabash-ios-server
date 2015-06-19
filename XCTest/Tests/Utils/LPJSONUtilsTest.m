@@ -4,6 +4,7 @@
 
 #import "LPJSONUtils.h"
 #import "LPTouchUtils.h"
+#import "LPDevice.h"
 
 @interface LPXCTestSliderWithText : UISlider
 
@@ -49,6 +50,12 @@
 
 @interface LPJSONUtilsTest : XCTestCase
 
+- (BOOL) isIphone6;
+- (BOOL) isIphone6Plus;
+- (BOOL) isIphone4in;
+- (BOOL) isIphone35in;
+- (BOOL) isIpad;
+
 @end
 
 @implementation LPJSONUtilsTest
@@ -59,6 +66,30 @@
 
 - (void)tearDown {
   [super tearDown];
+}
+
+- (BOOL) isIphone6 {
+  return [[LPDevice sharedDevice] iPhone6];
+}
+
+- (BOOL) isIphone6Plus {
+  return [[LPDevice sharedDevice] iPhone6Plus];
+}
+
+- (BOOL) isIphone4in {
+  return [LPTouchUtils is4InchDevice];
+}
+
+- (BOOL) isIphone35in {
+  return [LPTouchUtils isThreeAndAHalfInchDevice];
+}
+
+- (BOOL) isIpad {
+  return [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
+}
+
+- (BOOL) isLessThanIOS8 {
+  return [[LPDevice sharedDevice] isLessThaniOS8];
 }
 
 #pragma mark - dictionary:setObject:forKey:whenTarget:respondsTo:
@@ -148,7 +179,11 @@
 
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
-  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  if([self isLessThanIOS8]) {
+    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
+  } else {
+    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  }
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
@@ -254,11 +289,26 @@
   XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
   XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"rect"]).count, 6);
   XCTAssertEqualObjects(dict[@"rect"][@"x"], @(CGRectGetMinX([view frame])));
-  XCTAssertEqualObjects(dict[@"rect"][@"y"], @(CGRectGetMinY([view frame])));
+  if ([self isLessThanIOS8]) {
+    expect(dict[@"rect"][@"y"]).to.beCloseToWithin(84.5, 0.001);// @(CGRectGetMinY([view frame])));
+  } else {
+    XCTAssertEqualObjects(dict[@"rect"][@"y"], @(CGRectGetMinY([view frame])));
+  }
   XCTAssertEqualObjects(dict[@"rect"][@"width"], @(CGRectGetWidth([view frame])));
   XCTAssertEqualObjects(dict[@"rect"][@"height"], @(CGRectGetHeight([view frame])));
-  XCTAssertEqualObjects(dict[@"rect"][@"center_x"], @(CGRectGetMidX([view frame])));
-  XCTAssertEqualObjects(dict[@"rect"][@"center_y"], @(106.75));
+
+  if ([self isIphone6Plus]) {
+    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(82.93, 0.001);
+    XCTAssertEqualObjects(dict[@"rect"][@"center_y"], @(138.32));
+  } else if ([self isIphone6]) {
+    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(75.0, 0.001);
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(125.1, 0.001);
+  } else if ([self isIphone4in] || [self isIphone35in] || [self isIpad]) {
+    XCTAssertEqualObjects(dict[@"rect"][@"center_x"], @(CGRectGetMidX([view frame])));
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(106.75, 0.001);
+  } else {
+    XCTFail(@"Expected device to be an iPhone 6, 6+, 4in, or 3.5in or an iPad");
+  }
   XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"visible"], @(0));
   XCTAssertEqual([dict count], 11);
@@ -298,8 +348,20 @@
   XCTAssertEqualObjects(dict[@"rect"][@"y"], @(CGRectGetMinY([view frame])));
   XCTAssertEqualObjects(dict[@"rect"][@"width"], @(CGRectGetWidth([view frame])));
   XCTAssertEqualObjects(dict[@"rect"][@"height"], @(CGRectGetHeight([view frame])));
-  XCTAssertEqualObjects(dict[@"rect"][@"center_x"], @(CGRectGetMidX([view frame])));
-  XCTAssertEqualObjects(dict[@"rect"][@"center_y"], @(CGRectGetMidY([view frame])));
+
+  if ([self isIphone6Plus]) {
+    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(82.93, 0.001);
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(112.41, 0.001);
+  } else if ([self isIphone6]) {
+    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(75.0, 0.001);
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(101.66, 0.001);
+  } else if ([self isIphone4in] || [self isIphone35in] || [self isIpad]) {
+    XCTAssertEqualObjects(dict[@"rect"][@"center_x"], @(CGRectGetMidX([view frame])));
+    XCTAssertEqualObjects(dict[@"rect"][@"center_y"], @(CGRectGetMidY([view frame])));
+  } else {
+    XCTFail(@"Expected device to be an iPhone 6, 6+, 4in, or 3.5in or an iPad");
+  }
+
   XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"visible"], @(1));
   XCTAssertEqual([dict count], 11);
@@ -404,7 +466,11 @@
   UISlider *view = [[UISlider alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
-  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  if ([self isLessThanIOS8]) {
+    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
+  } else {
+    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  }
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
