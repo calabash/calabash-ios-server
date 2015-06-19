@@ -19,4 +19,5 @@
 
 #import <objc/runtime.h>
 
+#import "LPiOSVersionInlines.h"
 #endif

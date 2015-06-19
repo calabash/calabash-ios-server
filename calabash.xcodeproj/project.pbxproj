@@ -531,6 +531,7 @@
 		F50CBFCE1A040669004AC9DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F50CBFCD1A040669004AC9DA /* UIKit.framework */; };
 		F50CBFCF1A040707004AC9DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		F50E42791AA86D36003DB030 /* libSpecta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F50E42711AA86D36003DB030 /* libSpecta.a */; };
+		F514ACCC1B341557004ACFEE /* LPiOSVersionInlinesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F514ACCB1B341557004ACFEE /* LPiOSVersionInlinesTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F532C19B1AFD28970024DA55 /* LPCJSONSerializerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F532C19A1AFD28970024DA55 /* LPCJSONSerializerTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F532C1DE1AFF4F080024DA55 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F532C1DD1AFF4F080024DA55 /* CoreData.framework */; };
 		F532C1E31AFF4F250024DA55 /* LPCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = F532C1E01AFF4F240024DA55 /* LPCoreDataStack.m */; };
@@ -1057,6 +1058,8 @@
 		F50E42761AA86D36003DB030 /* SPTSharedExampleGroups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTSharedExampleGroups.h; sourceTree = "<group>"; };
 		F50E42771AA86D36003DB030 /* SPTSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTSpec.h; sourceTree = "<group>"; };
 		F50E42781AA86D36003DB030 /* XCTestCase+Specta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTestCase+Specta.h"; sourceTree = "<group>"; };
+		F514ACCA1B3413D8004ACFEE /* LPiOSVersionInlines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPiOSVersionInlines.h; sourceTree = "<group>"; };
+		F514ACCB1B341557004ACFEE /* LPiOSVersionInlinesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPiOSVersionInlinesTest.m; sourceTree = "<group>"; };
 		F532C19A1AFD28970024DA55 /* LPCJSONSerializerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCJSONSerializerTest.m; sourceTree = "<group>"; };
 		F532C1DD1AFF4F080024DA55 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F532C1DF1AFF4F240024DA55 /* LPCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCoreDataStack.h; sourceTree = "<group>"; };
@@ -1759,6 +1762,8 @@
 			isa = PBXGroup;
 			children = (
 				F50CBFD01A040788004AC9DA /* tests.pch */,
+				F514ACCA1B3413D8004ACFEE /* LPiOSVersionInlines.h */,
+				F514ACCB1B341557004ACFEE /* LPiOSVersionInlinesTest.m */,
 				F50CBF761A03F69A004AC9DA /* LPTestToolsStandup.m */,
 				F5C224E41AD47403001DB4FA /* Operations */,
 				F5C224E61AD47403001DB4FA /* Routes */,
@@ -2968,6 +2973,7 @@
 				F50CBF991A04058C004AC9DA /* LPScrollOperation.m in Sources */,
 				F50CBF9B1A04058C004AC9DA /* LPSetTextOperation.m in Sources */,
 				F50CBFA91A0405B2004AC9DA /* LPGenericAsyncRoute.m in Sources */,
+				F514ACCC1B341557004ACFEE /* LPiOSVersionInlinesTest.m in Sources */,
 				F50CBF8D1A04056F004AC9DA /* LPHTTPRedirectResponse.m in Sources */,
 				F50CBFB31A0405B2004AC9DA /* LPVersionRoute.m in Sources */,
 				F5543F311ABF7DF500E1A0BF /* LPPluginLoader.m in Sources */,
