@@ -88,10 +88,6 @@
   return [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
 }
 
-- (BOOL) isLessThanIOS8 {
-  return [[LPDevice sharedDevice] isLessThaniOS8];
-}
-
 #pragma mark - dictionary:setObject:forKey:whenTarget:respondsTo:
 
 - (void) testDictionarySetObjectForKeyWhenTargetRespondsToYesAndNil {
@@ -179,7 +175,7 @@
 
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
-  if([self isLessThanIOS8]) {
+  if (lp_ios_version_lte(@"8.0")) {
     XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
   } else {
     XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
@@ -289,11 +285,13 @@
   XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
   XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"rect"]).count, 6);
   XCTAssertEqualObjects(dict[@"rect"][@"x"], @(CGRectGetMinX([view frame])));
-  if ([self isLessThanIOS8]) {
+
+  if (lp_ios_version_lte(@"8.0")) {
     expect(dict[@"rect"][@"y"]).to.beCloseToWithin(84.5, 0.001);// @(CGRectGetMinY([view frame])));
   } else {
     XCTAssertEqualObjects(dict[@"rect"][@"y"], @(CGRectGetMinY([view frame])));
   }
+
   XCTAssertEqualObjects(dict[@"rect"][@"width"], @(CGRectGetWidth([view frame])));
   XCTAssertEqualObjects(dict[@"rect"][@"height"], @(CGRectGetHeight([view frame])));
 
@@ -309,6 +307,7 @@
   } else {
     XCTFail(@"Expected device to be an iPhone 6, 6+, 4in, or 3.5in or an iPad");
   }
+
   XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"visible"], @(0));
   XCTAssertEqual([dict count], 11);
@@ -466,11 +465,12 @@
   UISlider *view = [[UISlider alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
-  if ([self isLessThanIOS8]) {
+  if (lp_ios_version_lte(@"8.0")) {
     XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
   } else {
     XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
   }
+
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);

@@ -75,7 +75,7 @@ SpecBegin(WKWebView_LPWebViewTest)
 
 describe(@"WKWebView+LPWebView", ^{
 
-  if([[LPDevice sharedDevice] isLessThaniOS8]) {
+  if (lp_ios_version_lt(@"8.0")) {
     // nop for iOS < 8
   } else {
 
