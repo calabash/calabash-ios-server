@@ -691,7 +691,7 @@
 		B13B7FBE1A31FE560054FFB1 /* LPDumpRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDumpRoute.m; sourceTree = "<group>"; };
 		B153F55A15949F3D00867E12 /* LPVersionRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPVersionRoute.h; sourceTree = "<group>"; };
 		B153F55B15949F3D00867E12 /* LPVersionRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPVersionRoute.m; sourceTree = "<group>"; };
-		B15BF97119ABAFD200B38577 /* libCalabashDyn.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libCalabashDyn.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		B15BF97119ABAFD200B38577 /* calabash-dylib.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "calabash-dylib.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B15BFA4019ABB2B100B38577 /* libCalabashDynSim.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libCalabashDynSim.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		B15DA5E315C5D80A009E6CFE /* LPQueryAllOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPQueryAllOperation.h; sourceTree = "<group>"; };
 		B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPQueryAllOperation.m; sourceTree = "<group>"; };
@@ -1073,7 +1073,7 @@
 				F5091C4618C4E1D700C85307 /* libcalabash.a */,
 				F537398C18E5253B004133FA /* version */,
 				B1D5BDD919A23BCE0070E8CE /* libcalabash-plugin-for-frank.a */,
-				B15BF97119ABAFD200B38577 /* libCalabashDyn.dylib */,
+				B15BF97119ABAFD200B38577 /* calabash-dylib.dylib */,
 				B15BFA4019ABB2B100B38577 /* libCalabashDynSim.dylib */,
 				F50CBF5E1A03F222004AC9DA /* XCTest.xctest */,
 				F59CA46D1A82EF40007A2F38 /* LPTestTarget.app */,
@@ -1800,9 +1800,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		B15BF97019ABAFD200B38577 /* calabash-dylib-device */ = {
+		B15BF97019ABAFD200B38577 /* calabash-dylib */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B15BF99519ABAFD200B38577 /* Build configuration list for PBXNativeTarget "calabash-dylib-device" */;
+			buildConfigurationList = B15BF99519ABAFD200B38577 /* Build configuration list for PBXNativeTarget "calabash-dylib" */;
 			buildPhases = (
 				B15BF96D19ABAFD200B38577 /* Sources */,
 				B15BF96E19ABAFD200B38577 /* Frameworks */,
@@ -1812,9 +1812,9 @@
 			);
 			dependencies = (
 			);
-			name = "calabash-dylib-device";
+			name = "calabash-dylib";
 			productName = "calabash-dylib-device";
-			productReference = B15BF97119ABAFD200B38577 /* libCalabashDyn.dylib */;
+			productReference = B15BF97119ABAFD200B38577 /* calabash-dylib.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 		B15BF9E819ABB2B100B38577 /* calabash-dylib-simulator */ = {
@@ -1960,7 +1960,7 @@
 				F50CBF5D1A03F222004AC9DA /* XCTest */,
 				F5091BD918C4E1D700C85307 /* calabash */,
 				B1D5BD7519A23BCE0070E8CE /* calabash-plugin-for-frank */,
-				B15BF97019ABAFD200B38577 /* calabash-dylib-device */,
+				B15BF97019ABAFD200B38577 /* calabash-dylib */,
 				B15BF9E819ABB2B100B38577 /* calabash-dylib-simulator */,
 				F59CA46C1A82EF40007A2F38 /* LPTestTarget */,
 				F537398B18E5253B004133FA /* version */,
@@ -2748,7 +2748,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_NAME = libCalabashDyn;
+				PRODUCT_NAME = "calabash-dylib";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -2796,7 +2796,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MACOSX_DEPLOYMENT_TARGET = "";
-				PRODUCT_NAME = libCalabashDyn;
+				PRODUCT_NAME = "calabash-dylib";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
@@ -3391,7 +3391,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		B15BF99519ABAFD200B38577 /* Build configuration list for PBXNativeTarget "calabash-dylib-device" */ = {
+		B15BF99519ABAFD200B38577 /* Build configuration list for PBXNativeTarget "calabash-dylib" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B15BF99119ABAFD200B38577 /* Debug */,
