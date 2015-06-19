@@ -8,7 +8,7 @@
 
 #import "LPSharedUIATextField.h"
 #import "LPJSONUtils.h"
-#import "LPLog.h"
+#import "LPLogger.h"
 
 const NSString *LPSharedUIATextFieldId = @"__calabash_uia_channel";
 const NSString *LPSharedUIATextFieldSyncRequest =  @"{\"type\":\"syncRequest\"}";
@@ -65,7 +65,7 @@ const NSString *LPSharedUIATextFieldSyncRequest =  @"{\"type\":\"syncRequest\"}"
 }
 
 -(void)setText:(NSString *)newText {
-  [LPLog debug:@"LPSharedUIATextField set value called: %@",newText];
+  [LPLogger debug:@"LPSharedUIATextField set value called: %@",newText];
   NSString *oldText = self.text;
   if (oldText == newText || [newText isEqualToString:self.text]) {
     return;
@@ -76,7 +76,7 @@ const NSString *LPSharedUIATextFieldSyncRequest =  @"{\"type\":\"syncRequest\"}"
     [super setText:newText];
   }
   if (self.currentMessage) {
-    [LPLog debug:@"LPSharedUIATextField handle event %@", self.currentMessage];
+    [LPLogger debug:@"LPSharedUIATextField handle event %@", self.currentMessage];
     [self handleUIACommandEvent];
   }
 
@@ -88,7 +88,7 @@ const NSString *LPSharedUIATextFieldSyncRequest =  @"{\"type\":\"syncRequest\"}"
     if ([self currentMessageIsSynchronizationDone]) {
       [LPSharedUIATextField cancelPreviousPerformRequestsWithTarget:self];
       [self detachFromKeyWindow];
-      [LPLog debug:@"LPSharedUIATextField Synchronization with UIAutomation done"];
+      [LPLogger debug:@"LPSharedUIATextField Synchronization with UIAutomation done"];
       self.currentMessage = nil;
       [self setText:nil];
       self.isSynchronizing = NO;
@@ -99,7 +99,7 @@ const NSString *LPSharedUIATextFieldSyncRequest =  @"{\"type\":\"syncRequest\"}"
   else if ([self currentMessageIsResponse]) {
     NSDictionary *message = [self.currentMessage retain];
     [self setText:nil];
-    [LPLog debug:@"LPSharedUIATextField sending response to delegate %@", message];
+    [LPLogger debug:@"LPSharedUIATextField sending response to delegate %@", message];
     [self.uiaDelegate sharedUIATextField:self didReceiveUIAResponse:message];
     [message release];
   }
@@ -118,14 +118,14 @@ const NSString *LPSharedUIATextFieldSyncRequest =  @"{\"type\":\"syncRequest\"}"
 }
 
 -(void)synchronizeWithUIAutomation {
-  [LPLog debug:@"LPSharedUIATextField synchronizing with UIAutomation..."];
+  [LPLogger debug:@"LPSharedUIATextField synchronizing with UIAutomation..."];
   self.isSynchronizing = YES;
   [self setText:(NSString*)LPSharedUIATextFieldSyncRequest];
   [self attachToKeyWindow];
   [self performSelector:@selector(synchronizeWithUIAutomationTimedOut) withObject:nil afterDelay:20];
 }
 -(void)synchronizeWithUIAutomationTimedOut {
-  [LPLog debug:@"LPSharedUIATextField synchronizing with UIAutomation timed out... Aborting..."];
+  [LPLogger debug:@"LPSharedUIATextField synchronizing with UIAutomation timed out... Aborting..."];
   self.isSynchronized = NO;
   self.isSynchronizing = NO;
   [self detachFromKeyWindow];

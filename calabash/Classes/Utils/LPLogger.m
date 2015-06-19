@@ -1,3 +1,7 @@
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
 //
 //  LPLog.m
 //  calabash
@@ -6,55 +10,60 @@
 //  Copyright (c) 2014 Xamarin. All rights reserved.
 //
 
-#import "LPLog.h"
+#import "LPLogger.h"
 #import "LPEnv.h"
 
+@interface LPLogger ()
 
-@implementation LPLog {
-  LPLogLevel _logLevel;
-}
+@property(assign, atomic, readonly) LPLoggerLevel logLevel;
 
-+ (LPLog *) sharedLog {
-  static LPLog *sharedLog = nil;
+@end
+
+@implementation LPLogger
+
+@synthesize logLevel = _logLevel;
+
++ (LPLogger *) sharedLog {
+  static LPLogger *sharedLog = nil;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-    sharedLog = [[LPLog alloc] init];
+    sharedLog = [[LPLogger alloc] init];
   });
   return sharedLog;
 }
 
 
-+ (LPLogLevel) currentLevel {
-  return [[LPLog sharedLog] currentLevel];
++ (LPLoggerLevel) currentLevel {
+  return [[LPLogger sharedLog] currentLevel];
 }
 
 
 + (void) setLevelFromString:(NSString *) logLevel {
-  [[LPLog sharedLog] setLevelFromString:logLevel];
+  [[LPLogger sharedLog] setLevelFromString:logLevel];
 }
 
 
 - (void) setLevelFromString:(NSString *) logLevel {
   if ([@"debug" isEqualToString:[logLevel lowercaseString]]) {
-    _logLevel = LPLogLevelDebug;
+    _logLevel = LPLoggerLevelDebug;
   } else if ([@"info" isEqualToString:[logLevel lowercaseString]]) {
-    _logLevel = LPLogLevelInfo;
+    _logLevel = LPLoggerLevelInfo;
   } else if ([@"error" isEqualToString:[logLevel lowercaseString]]) {
-    _logLevel = LPLogLevelError;
+    _logLevel = LPLoggerLevelError;
   }
 }
 
 
-- (LPLogLevel) currentLevel {
+- (LPLoggerLevel) currentLevel {
   return _logLevel;
 }
 
 
 + (NSString *) currentLevelString {
-  switch ([LPLog currentLevel]) {
-    case LPLogLevelDebug:return @"debug";
-    case LPLogLevelInfo:return @"info";
-    case LPLogLevelError:return @"error";
+  switch ([LPLogger currentLevel]) {
+    case LPLoggerLevelDebug:return @"debug";
+    case LPLoggerLevelInfo:return @"info";
+    case LPLoggerLevelError:return @"error";
     default:return nil;
   }
 }
@@ -63,20 +72,20 @@
 - (id) init {
   self = [super init];
   if (self) {
-    _logLevel = [LPEnv calabashDebugEnabled] ? LPLogLevelDebug : LPLogLevelInfo;
+    _logLevel = [LPEnv calabashDebugEnabled] ? LPLoggerLevelDebug : LPLoggerLevelInfo;
   }
   return self;
 }
 
 
-- (BOOL) shouldLogAtLevel:(LPLogLevel) level {
+- (BOOL) shouldLogAtLevel:(LPLoggerLevel) level {
   return (level >= _logLevel);
 }
 
 
 //Not 100% sure if this va_* is necessary
 + (void) debug:(NSString *) formatString, ...; {
-  if (![[LPLog sharedLog] shouldLogAtLevel:LPLogLevelDebug]) {return;}
+  if (![[LPLogger sharedLog] shouldLogAtLevel:LPLoggerLevelDebug]) {return;}
   va_list args;
   va_start(args, formatString);
   NSLogv(formatString, args);
@@ -85,7 +94,7 @@
 
 
 + (void) info:(NSString *) formatString, ... {
-  if (![[LPLog sharedLog] shouldLogAtLevel:LPLogLevelInfo]) {return;}
+  if (![[LPLogger sharedLog] shouldLogAtLevel:LPLoggerLevelInfo]) {return;}
   va_list args;
   va_start(args, formatString);
   NSLogv(formatString, args);
@@ -94,7 +103,7 @@
 
 
 + (void) error:(NSString *) formatString, ... {
-  if (![[LPLog sharedLog] shouldLogAtLevel:LPLogLevelError]) {return;}
+  if (![[LPLogger sharedLog] shouldLogAtLevel:LPLoggerLevelError]) {return;}
   va_list args;
   va_start(args, formatString);
   NSLogv(formatString, args);

@@ -7,7 +7,7 @@
 //
 
 #import "LPDebugRoute.h"
-#import "LPLog.h"
+#import "LPLogger.h"
 
 @implementation LPDebugRoute
 
@@ -19,10 +19,10 @@
 - (NSDictionary *) JSONResponseForMethod:(NSString *) method URI:(NSString *) path data:(NSDictionary *) data {
   if ([method isEqualToString:@"POST"]) {
     NSString *requiredLogLevel = [data valueForKey:@"level"];
-    [LPLog setLevelFromString:requiredLogLevel];
+    [LPLogger setLevelFromString:requiredLogLevel];
   }
 
-  NSString *currentLogLevel = [LPLog currentLevelString];
+  NSString *currentLogLevel = [LPLogger currentLevelString];
   NSArray *resultsArray;
   if (!currentLogLevel) {
     resultsArray = @[];
