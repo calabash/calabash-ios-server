@@ -8,7 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum {LPLoggerLevelDebug = 1, LPLoggerLevelInfo = 5, LPLoggerLevelError = 10} LPLoggerLevel;
+typedef enum : NSUInteger {
+  LPLoggerLevelDebug = 1,
+  LPLoggerLevelInfo = 5,
+  LPLoggerLevelError = 10
+} LPLoggerLevel;
 
 @interface LPLogger : NSObject
 
