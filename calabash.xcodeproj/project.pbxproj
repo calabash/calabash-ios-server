@@ -440,6 +440,46 @@
 		F5A33A5F1AC0172A00224639 /* UIWebView+LPWebViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A33A5E1AC0172A00224639 /* UIWebView+LPWebViewTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5A33A711AC01BC400224639 /* WKWebView+LPWebViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A33A701AC01BC400224639 /* WKWebView+LPWebViewTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5A33A791AC01EC400224639 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A33A721AC01E8E00224639 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F5A8B4581B39BFEB00F390CA /* LPCLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B43E1B39BFEB00F390CA /* LPCLIColor.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4591B39BFEB00F390CA /* LPCLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B43E1B39BFEB00F390CA /* LPCLIColor.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B45A1B39BFEB00F390CA /* LPCLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B43E1B39BFEB00F390CA /* LPCLIColor.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B45B1B39BFEB00F390CA /* LPCLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B43E1B39BFEB00F390CA /* LPCLIColor.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4621B39BFEB00F390CA /* LPContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4421B39BFEB00F390CA /* LPContextFilterLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4631B39BFEB00F390CA /* LPContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4421B39BFEB00F390CA /* LPContextFilterLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4641B39BFEB00F390CA /* LPContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4421B39BFEB00F390CA /* LPContextFilterLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4651B39BFEB00F390CA /* LPContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4421B39BFEB00F390CA /* LPContextFilterLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4691B39BFEB00F390CA /* LPDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4441B39BFEB00F390CA /* LPDispatchQueueLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B46A1B39BFEB00F390CA /* LPDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4441B39BFEB00F390CA /* LPDispatchQueueLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B46B1B39BFEB00F390CA /* LPDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4441B39BFEB00F390CA /* LPDispatchQueueLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B46C1B39BFEB00F390CA /* LPDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4441B39BFEB00F390CA /* LPDispatchQueueLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4701B39BFEB00F390CA /* LPMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4461B39BFEB00F390CA /* LPMultiFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4711B39BFEB00F390CA /* LPMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4461B39BFEB00F390CA /* LPMultiFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4721B39BFEB00F390CA /* LPMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4461B39BFEB00F390CA /* LPMultiFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4731B39BFEB00F390CA /* LPMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4461B39BFEB00F390CA /* LPMultiFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4771B39BFEB00F390CA /* LPAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4481B39BFEB00F390CA /* LPAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4781B39BFEB00F390CA /* LPAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4481B39BFEB00F390CA /* LPAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4791B39BFEB00F390CA /* LPAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4481B39BFEB00F390CA /* LPAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B47A1B39BFEB00F390CA /* LPAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4481B39BFEB00F390CA /* LPAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B47E1B39BFEB00F390CA /* LPASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B44A1B39BFEB00F390CA /* LPASLLogCapture.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B47F1B39BFEB00F390CA /* LPASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B44A1B39BFEB00F390CA /* LPASLLogCapture.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4801B39BFEB00F390CA /* LPASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B44A1B39BFEB00F390CA /* LPASLLogCapture.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4811B39BFEB00F390CA /* LPASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B44A1B39BFEB00F390CA /* LPASLLogCapture.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4851B39BFEB00F390CA /* LPASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B44C1B39BFEB00F390CA /* LPASLLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4861B39BFEB00F390CA /* LPASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B44C1B39BFEB00F390CA /* LPASLLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4871B39BFEB00F390CA /* LPASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B44C1B39BFEB00F390CA /* LPASLLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4881B39BFEB00F390CA /* LPASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B44C1B39BFEB00F390CA /* LPASLLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4921B39BFEB00F390CA /* LPFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4501B39BFEB00F390CA /* LPFileLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4931B39BFEB00F390CA /* LPFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4501B39BFEB00F390CA /* LPFileLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4941B39BFEB00F390CA /* LPFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4501B39BFEB00F390CA /* LPFileLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4951B39BFEB00F390CA /* LPFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4501B39BFEB00F390CA /* LPFileLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B49F1B39BFEB00F390CA /* LPLog.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4541B39BFEB00F390CA /* LPLog.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4A01B39BFEB00F390CA /* LPLog.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4541B39BFEB00F390CA /* LPLog.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4A11B39BFEB00F390CA /* LPLog.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4541B39BFEB00F390CA /* LPLog.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4A21B39BFEB00F390CA /* LPLog.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4541B39BFEB00F390CA /* LPLog.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4A91B39BFEB00F390CA /* LPTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4571B39BFEB00F390CA /* LPTTYLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4AA1B39BFEB00F390CA /* LPTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4571B39BFEB00F390CA /* LPTTYLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4AB1B39BFEB00F390CA /* LPTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4571B39BFEB00F390CA /* LPTTYLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A8B4AC1B39BFEB00F390CA /* LPTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B4571B39BFEB00F390CA /* LPTTYLogger.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5B27B9118C5884D0049B5FF /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		F5C04E251B330F8B00F23526 /* LPDecimalRounderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C04E241B330F8B00F23526 /* LPDecimalRounderTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5C04E2E1B33110B00F23526 /* LPDecimalRounder.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C04E271B33110B00F23526 /* LPDecimalRounder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -468,6 +508,10 @@
 		F5C224EA1AD47403001DB4FA /* LPScreenshotRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C224E71AD47403001DB4FA /* LPScreenshotRouteTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5C224EB1AD47403001DB4FA /* LPVersionRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C224E81AD47403001DB4FA /* LPVersionRouteTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5C224ED1AD4766E001DB4FA /* LPSetTextOperationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C224EC1AD4766E001DB4FA /* LPSetTextOperationTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5C276251B39C27800DF63FA /* LPLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C276211B39C27800DF63FA /* LPLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5C276261B39C27800DF63FA /* LPLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C276211B39C27800DF63FA /* LPLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5C276271B39C27800DF63FA /* LPLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C276211B39C27800DF63FA /* LPLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5C276281B39C27800DF63FA /* LPLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C276211B39C27800DF63FA /* LPLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5E2D1E018C9120E00A0D9B6 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5E2D1E418C9120E00A0D9B6 /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5F2D5E01ACAC3B60027937B /* LPIsWebViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F2D5DF1ACAC3B60027937B /* LPIsWebViewTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -809,6 +853,31 @@
 		F5A33A601AC01A9F00224639 /* LPWebViewProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LPWebViewProtocol.h; sourceTree = "<group>"; };
 		F5A33A701AC01BC400224639 /* WKWebView+LPWebViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+LPWebViewTest.m"; sourceTree = "<group>"; };
 		F5A33A721AC01E8E00224639 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		F5A8B43E1B39BFEB00F390CA /* LPCLIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCLIColor.m; sourceTree = "<group>"; };
+		F5A8B43F1B39BFEB00F390CA /* LPCLIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCLIColor.h; sourceTree = "<group>"; };
+		F5A8B4411B39BFEB00F390CA /* LPContextFilterLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPContextFilterLogFormatter.h; sourceTree = "<group>"; };
+		F5A8B4421B39BFEB00F390CA /* LPContextFilterLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPContextFilterLogFormatter.m; sourceTree = "<group>"; };
+		F5A8B4431B39BFEB00F390CA /* LPDispatchQueueLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDispatchQueueLogFormatter.h; sourceTree = "<group>"; };
+		F5A8B4441B39BFEB00F390CA /* LPDispatchQueueLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDispatchQueueLogFormatter.m; sourceTree = "<group>"; };
+		F5A8B4451B39BFEB00F390CA /* LPMultiFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPMultiFormatter.h; sourceTree = "<group>"; };
+		F5A8B4461B39BFEB00F390CA /* LPMultiFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPMultiFormatter.m; sourceTree = "<group>"; };
+		F5A8B4471B39BFEB00F390CA /* LPAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		F5A8B4481B39BFEB00F390CA /* LPAbstractDatabaseLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPAbstractDatabaseLogger.m; sourceTree = "<group>"; };
+		F5A8B4491B39BFEB00F390CA /* LPASLLogCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPASLLogCapture.h; sourceTree = "<group>"; };
+		F5A8B44A1B39BFEB00F390CA /* LPASLLogCapture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPASLLogCapture.m; sourceTree = "<group>"; };
+		F5A8B44B1B39BFEB00F390CA /* LPASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPASLLogger.h; sourceTree = "<group>"; };
+		F5A8B44C1B39BFEB00F390CA /* LPASLLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPASLLogger.m; sourceTree = "<group>"; };
+		F5A8B44D1B39BFEB00F390CA /* LPAssertMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPAssertMacros.h; sourceTree = "<group>"; };
+		F5A8B44E1B39BFEB00F390CA /* LPCocoaLumberjack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCocoaLumberjack.h; sourceTree = "<group>"; };
+		F5A8B44F1B39BFEB00F390CA /* LPFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPFileLogger.h; sourceTree = "<group>"; };
+		F5A8B4501B39BFEB00F390CA /* LPFileLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPFileLogger.m; sourceTree = "<group>"; };
+		F5A8B4511B39BFEB00F390CA /* LPLegacyMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPLegacyMacros.h; sourceTree = "<group>"; };
+		F5A8B4521B39BFEB00F390CA /* LPLog+LOGV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LPLog+LOGV.h"; sourceTree = "<group>"; };
+		F5A8B4531B39BFEB00F390CA /* LPLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPLog.h; sourceTree = "<group>"; };
+		F5A8B4541B39BFEB00F390CA /* LPLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPLog.m; sourceTree = "<group>"; };
+		F5A8B4551B39BFEB00F390CA /* LPLogMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPLogMacros.h; sourceTree = "<group>"; };
+		F5A8B4561B39BFEB00F390CA /* LPTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPTTYLogger.h; sourceTree = "<group>"; };
+		F5A8B4571B39BFEB00F390CA /* LPTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPTTYLogger.m; sourceTree = "<group>"; };
 		F5AE0BC4174F58A5006E4050 /* LPScrollToRowWithMarkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPScrollToRowWithMarkOperation.h; sourceTree = "<group>"; };
 		F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScrollToRowWithMarkOperation.m; sourceTree = "<group>"; };
 		F5C04E241B330F8B00F23526 /* LPDecimalRounderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDecimalRounderTest.m; sourceTree = "<group>"; };
@@ -830,6 +899,8 @@
 		F5C224E71AD47403001DB4FA /* LPScreenshotRouteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScreenshotRouteTest.m; sourceTree = "<group>"; };
 		F5C224E81AD47403001DB4FA /* LPVersionRouteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPVersionRouteTest.m; sourceTree = "<group>"; };
 		F5C224EC1AD4766E001DB4FA /* LPSetTextOperationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSetTextOperationTest.m; sourceTree = "<group>"; };
+		F5C276201B39C27800DF63FA /* LPLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPLogFormatter.h; sourceTree = "<group>"; };
+		F5C276211B39C27800DF63FA /* LPLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPLogFormatter.m; sourceTree = "<group>"; };
 		F5C3A62D18A2EA0800DB7E42 /* LPCollectionViewScrollToItemOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCollectionViewScrollToItemOperation.h; sourceTree = "<group>"; tabWidth = 4; };
 		F5C3A62E18A2EA0800DB7E42 /* LPCollectionViewScrollToItemOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCollectionViewScrollToItemOperation.m; sourceTree = "<group>"; tabWidth = 4; };
 		F5CAC06A180D499600E23F03 /* LPSliderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPSliderOperation.h; sourceTree = "<group>"; };
@@ -1034,6 +1105,7 @@
 		B184FD8514B6DACA002A744C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				F5A8B43C1B39BFEB00F390CA /* CocoaLumberjack */,
 				B184FD9214B6DB2B002A744C /* CocoaHttpServer */,
 				B184FD8F14B6DB2B002A744C /* CocoaAsyncSocket */,
 				B1058E77197F03F400B4A57B /* Frank */,
@@ -1530,6 +1602,56 @@
 			path = WebViewQuery;
 			sourceTree = "<group>";
 		};
+		F5A8B43C1B39BFEB00F390CA /* CocoaLumberjack */ = {
+			isa = PBXGroup;
+			children = (
+				F5C276201B39C27800DF63FA /* LPLogFormatter.h */,
+				F5C276211B39C27800DF63FA /* LPLogFormatter.m */,
+				F5A8B43D1B39BFEB00F390CA /* CLI */,
+				F5A8B4401B39BFEB00F390CA /* Extensions */,
+				F5A8B4471B39BFEB00F390CA /* LPAbstractDatabaseLogger.h */,
+				F5A8B4481B39BFEB00F390CA /* LPAbstractDatabaseLogger.m */,
+				F5A8B4491B39BFEB00F390CA /* LPASLLogCapture.h */,
+				F5A8B44A1B39BFEB00F390CA /* LPASLLogCapture.m */,
+				F5A8B44B1B39BFEB00F390CA /* LPASLLogger.h */,
+				F5A8B44C1B39BFEB00F390CA /* LPASLLogger.m */,
+				F5A8B44D1B39BFEB00F390CA /* LPAssertMacros.h */,
+				F5A8B44E1B39BFEB00F390CA /* LPCocoaLumberjack.h */,
+				F5A8B44F1B39BFEB00F390CA /* LPFileLogger.h */,
+				F5A8B4501B39BFEB00F390CA /* LPFileLogger.m */,
+				F5A8B4511B39BFEB00F390CA /* LPLegacyMacros.h */,
+				F5A8B4521B39BFEB00F390CA /* LPLog+LOGV.h */,
+				F5A8B4531B39BFEB00F390CA /* LPLog.h */,
+				F5A8B4541B39BFEB00F390CA /* LPLog.m */,
+				F5A8B4551B39BFEB00F390CA /* LPLogMacros.h */,
+				F5A8B4561B39BFEB00F390CA /* LPTTYLogger.h */,
+				F5A8B4571B39BFEB00F390CA /* LPTTYLogger.m */,
+			);
+			path = CocoaLumberjack;
+			sourceTree = "<group>";
+		};
+		F5A8B43D1B39BFEB00F390CA /* CLI */ = {
+			isa = PBXGroup;
+			children = (
+				F5A8B43F1B39BFEB00F390CA /* LPCLIColor.h */,
+				F5A8B43E1B39BFEB00F390CA /* LPCLIColor.m */,
+			);
+			path = CLI;
+			sourceTree = "<group>";
+		};
+		F5A8B4401B39BFEB00F390CA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F5A8B4411B39BFEB00F390CA /* LPContextFilterLogFormatter.h */,
+				F5A8B4421B39BFEB00F390CA /* LPContextFilterLogFormatter.m */,
+				F5A8B4431B39BFEB00F390CA /* LPDispatchQueueLogFormatter.h */,
+				F5A8B4441B39BFEB00F390CA /* LPDispatchQueueLogFormatter.m */,
+				F5A8B4451B39BFEB00F390CA /* LPMultiFormatter.h */,
+				F5A8B4461B39BFEB00F390CA /* LPMultiFormatter.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		F5C0944A1A979CC200AE5991 /* WebViewQuery */ = {
 			isa = PBXGroup;
 			children = (
@@ -1904,6 +2026,7 @@
 				B15BF9E719ABB1EB00B38577 /* LPI.mm in Sources */,
 				B15BF99A19ABB1DD00B38577 /* LPSSKeychain.m in Sources */,
 				B15BF99B19ABB1DD00B38577 /* LPSSKeychainQuery.m in Sources */,
+				F5A8B45B1B39BFEB00F390CA /* LPCLIColor.m in Sources */,
 				B15BF99C19ABB1DD00B38577 /* GCDAsyncSocket.m in Sources */,
 				B15BF99D19ABB1DD00B38577 /* LPHTTPAuthenticationRequest.m in Sources */,
 				B15BF99E19ABB1DD00B38577 /* LPHTTPConnection.m in Sources */,
@@ -1913,6 +2036,7 @@
 				B15BF9A119ABB1DD00B38577 /* DDData.m in Sources */,
 				B15BF9A219ABB1DD00B38577 /* DDNumber.m in Sources */,
 				B15BF9A319ABB1DD00B38577 /* DDRange.m in Sources */,
+				F5A8B4AC1B39BFEB00F390CA /* LPTTYLogger.m in Sources */,
 				B15BF9A419ABB1DD00B38577 /* LPHTTPAsyncFileResponse.m in Sources */,
 				B15BF9A519ABB1DD00B38577 /* LPHTTPDataResponse.m in Sources */,
 				B15BF9A619ABB1DD00B38577 /* LPHTTPDynamicFileResponse.m in Sources */,
@@ -1921,10 +2045,12 @@
 				B15BF9A919ABB1DD00B38577 /* LPCORSResponse.m in Sources */,
 				B15BF9AA19ABB1DD00B38577 /* LPRouter.m in Sources */,
 				B15BF9AB19ABB1DD00B38577 /* LPScrollToMarkOperation.m in Sources */,
+				F5A8B4651B39BFEB00F390CA /* LPContextFilterLogFormatter.m in Sources */,
 				B15BF9AC19ABB1DD00B38577 /* LPScrollToRowWithMarkOperation.m in Sources */,
 				B15BF9AD19ABB1DD00B38577 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
 				B15BF9AE19ABB1DD00B38577 /* LPCollectionViewScrollToItemOperation.m in Sources */,
 				B15BF9AF19ABB1DD00B38577 /* LPSliderOperation.m in Sources */,
+				F5C276281B39C27800DF63FA /* LPLogFormatter.m in Sources */,
 				B15BF9B019ABB1DD00B38577 /* LPDatePickerOperation.m in Sources */,
 				B15BF9B119ABB1DD00B38577 /* LPOrientationOperation.m in Sources */,
 				B15BF9B219ABB1DD00B38577 /* LPFlashOperation.m in Sources */,
@@ -1937,6 +2063,7 @@
 				B1F772161A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */,
 				B15BF9B819ABB1DD00B38577 /* LPSetTextOperation.m in Sources */,
 				B1F7720A1A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */,
+				F5A8B4811B39BFEB00F390CA /* LPASLLogCapture.m in Sources */,
 				B15BF9B919ABB1DD00B38577 /* LPRecorder.m in Sources */,
 				B15BF9BA19ABB1DD00B38577 /* LPUIARouteOverUserPrefs.m in Sources */,
 				F5C094571A979CC200AE5991 /* LPWebQuery.m in Sources */,
@@ -1955,12 +2082,14 @@
 				B15BF9C519ABB1DE00B38577 /* LPInterpolateRoute.m in Sources */,
 				B15BF9C619ABB1DE00B38577 /* LPMapRoute.m in Sources */,
 				B15BF9C719ABB1DE00B38577 /* LPRecordRoute.m in Sources */,
+				F5A8B4A21B39BFEB00F390CA /* LPLog.m in Sources */,
 				B15BF9C819ABB1DE00B38577 /* LPNoContentResponse.m in Sources */,
 				B15BF9C919ABB1DE00B38577 /* LPScreenshotRoute.m in Sources */,
 				B15BF9CA19ABB1DE00B38577 /* LPAsyncPlaybackRoute.m in Sources */,
 				B15BF9CB19ABB1DE00B38577 /* LPBackdoorRoute.m in Sources */,
 				B15BF9CC19ABB1DE00B38577 /* LPExitRoute.m in Sources */,
 				F5A33A5B1AC00D1300224639 /* UIWebView+LPWebView.m in Sources */,
+				F5A8B4881B39BFEB00F390CA /* LPASLLogger.m in Sources */,
 				B15BF9CD19ABB1DE00B38577 /* LPVersionRoute.m in Sources */,
 				B15BF9CE19ABB1DE00B38577 /* LPISO8601DateFormatter.m in Sources */,
 				B15BF9CF19ABB1DE00B38577 /* LPCDataScanner_Extensions.m in Sources */,
@@ -1972,6 +2101,7 @@
 				89F2EFF41B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */,
 				B15BF9D419ABB1DE00B38577 /* UIScriptASTVisibility.m in Sources */,
 				B15BF9D519ABB1DE00B38577 /* UIScriptASTPredicate.m in Sources */,
+				F5A8B4951B39BFEB00F390CA /* LPFileLogger.m in Sources */,
 				F5F6004D1A7C69760020637D /* LPInvoker.m in Sources */,
 				B15BF9D619ABB1DE00B38577 /* UIScriptAST.m in Sources */,
 				F5543F2F1ABF7DE900E1A0BF /* LPPluginLoader.m in Sources */,
@@ -1980,11 +2110,14 @@
 				B15BF9D819ABB1DE00B38577 /* UIScriptASTClassName.m in Sources */,
 				B1FBBC5F19D0070000EE03CE /* LPDevice.m in Sources */,
 				B15BF9D919ABB1DE00B38577 /* UIScriptASTDirection.m in Sources */,
+				F5A8B46C1B39BFEB00F390CA /* LPDispatchQueueLogFormatter.m in Sources */,
+				F5A8B4731B39BFEB00F390CA /* LPMultiFormatter.m in Sources */,
 				F5C224CC1ACDF299001DB4FA /* LPWKWebViewRuntimeLoader.m in Sources */,
 				B15BF9DA19ABB1DE00B38577 /* UIScriptASTFirst.m in Sources */,
 				B15BF9DB19ABB1DE00B38577 /* UIScriptASTIndex.m in Sources */,
 				B15BF9DC19ABB1DE00B38577 /* UIScriptASTLast.m in Sources */,
 				B15BF9DD19ABB1DE00B38577 /* UIScriptASTWith.m in Sources */,
+				F5A8B47A1B39BFEB00F390CA /* LPAbstractDatabaseLogger.m in Sources */,
 				B15BF9DE19ABB1DE00B38577 /* UIScriptParser.m in Sources */,
 				B15BF9DF19ABB1DE00B38577 /* LPUIAUserPrefsChannel.m in Sources */,
 				B15BF9E019ABB1DE00B38577 /* LPJSONUtils.m in Sources */,
@@ -2005,6 +2138,7 @@
 				B1D5BD7919A23BCE0070E8CE /* GCDAsyncSocket.m in Sources */,
 				B1D5BD7A19A23BCE0070E8CE /* LPHTTPAuthenticationRequest.m in Sources */,
 				B1D5BD7B19A23BCE0070E8CE /* LPHTTPConnection.m in Sources */,
+				F5A8B45A1B39BFEB00F390CA /* LPCLIColor.m in Sources */,
 				B1D5BD7C19A23BCE0070E8CE /* LPHTTPMessage.m in Sources */,
 				B1D5BD7D19A23BCE0070E8CE /* LPHTTPServer.m in Sources */,
 				B1D5BD7E19A23BCE0070E8CE /* DDData.m in Sources */,
@@ -2014,6 +2148,7 @@
 				B1D5BD8119A23BCE0070E8CE /* LPHTTPAsyncFileResponse.m in Sources */,
 				B1D5BD8219A23BCE0070E8CE /* LPHTTPDataResponse.m in Sources */,
 				B1D5BD8319A23BCE0070E8CE /* LPHTTPDynamicFileResponse.m in Sources */,
+				F5A8B4AB1B39BFEB00F390CA /* LPTTYLogger.m in Sources */,
 				B1D5BD8419A23BCE0070E8CE /* LPSSKeychainQuery.m in Sources */,
 				B1D5BD8519A23BCE0070E8CE /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
 				B1D5BD8619A23BCE0070E8CE /* LPHTTPFileResponse.m in Sources */,
@@ -2022,10 +2157,12 @@
 				B1D5BD8919A23BCE0070E8CE /* LPRouter.m in Sources */,
 				B1D5BD8A19A23BCE0070E8CE /* LPQueryAllOperation.m in Sources */,
 				B1D5BD8B19A23BCE0070E8CE /* LPOperation.m in Sources */,
+				F5A8B4641B39BFEB00F390CA /* LPContextFilterLogFormatter.m in Sources */,
 				B1D5BD8C19A23BCE0070E8CE /* LPQueryOperation.m in Sources */,
 				B1D5BDDA19A23BE00070E8CE /* LPCalabashFrankRegistrar.m in Sources */,
 				B1D5BD8D19A23BCE0070E8CE /* LPScrollOperation.m in Sources */,
 				B1D5BD8E19A23BCE0070E8CE /* LPUIATapRoute.m in Sources */,
+				F5C276271B39C27800DF63FA /* LPLogFormatter.m in Sources */,
 				B1D5BD8F19A23BCE0070E8CE /* LPScrollToRowOperation.m in Sources */,
 				B1D5BD9019A23BCE0070E8CE /* LPSetTextOperation.m in Sources */,
 				B1D5BD9119A23BCE0070E8CE /* LPUIAUserPrefsChannel.m in Sources */,
@@ -2038,6 +2175,7 @@
 				B1F772151A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */,
 				B1D5BD9719A23BCE0070E8CE /* LPGenericAsyncRoute.m in Sources */,
 				B1F772091A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */,
+				F5A8B4801B39BFEB00F390CA /* LPASLLogCapture.m in Sources */,
 				B1D5BD9819A23BCE0070E8CE /* LPConditionRoute.m in Sources */,
 				B1D5BD9919A23BCE0070E8CE /* LPInterpolateRoute.m in Sources */,
 				F5C094561A979CC200AE5991 /* LPWebQuery.m in Sources */,
@@ -2056,12 +2194,14 @@
 				B1D5BDA419A23BCE0070E8CE /* LPCJSONSerializer.m in Sources */,
 				B1D5BDA519A23BCE0070E8CE /* LPResources.m in Sources */,
 				B1D5BDA619A23BCE0070E8CE /* UIScriptASTPredicate.m in Sources */,
+				F5A8B4A11B39BFEB00F390CA /* LPLog.m in Sources */,
 				B1D5BDA719A23BCE0070E8CE /* UIScriptAST.m in Sources */,
 				B1D5BDA819A23BCE0070E8CE /* LPDebugRoute.m in Sources */,
 				B1D5BDA919A23BCE0070E8CE /* UIScriptASTALL.m in Sources */,
 				B1D5BDAA19A23BCE0070E8CE /* UIScriptASTClassName.m in Sources */,
 				B1D5BDAB19A23BCE0070E8CE /* UIScriptASTDirection.m in Sources */,
 				F5A33A5A1AC00D1300224639 /* UIWebView+LPWebView.m in Sources */,
+				F5A8B4871B39BFEB00F390CA /* LPASLLogger.m in Sources */,
 				B1D5BDAC19A23BCE0070E8CE /* UIScriptASTFirst.m in Sources */,
 				B1D5BDAD19A23BCE0070E8CE /* UIScriptASTIndex.m in Sources */,
 				B1D5BDAE19A23BCE0070E8CE /* UIScriptASTLast.m in Sources */,
@@ -2073,6 +2213,7 @@
 				89F2EFF31B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */,
 				B1D5BDB319A23BCE0070E8CE /* LPJSONUtils.m in Sources */,
 				B1D5BDB419A23BCE0070E8CE /* LPKeychainRoute.m in Sources */,
+				F5A8B4941B39BFEB00F390CA /* LPFileLogger.m in Sources */,
 				F5F6004C1A7C69760020637D /* LPInvoker.m in Sources */,
 				B1D5BDB519A23BCE0070E8CE /* LPTouchUtils.m in Sources */,
 				F5543F2E1ABF7DE900E1A0BF /* LPPluginLoader.m in Sources */,
@@ -2081,11 +2222,14 @@
 				B1D5BDB819A23BCE0070E8CE /* LPReflectUtils.m in Sources */,
 				B1FBBC5E19D0070000EE03CE /* LPDevice.m in Sources */,
 				B1D5BDB919A23BCE0070E8CE /* LPISO8601DateFormatter.m in Sources */,
+				F5A8B46B1B39BFEB00F390CA /* LPDispatchQueueLogFormatter.m in Sources */,
+				F5A8B4721B39BFEB00F390CA /* LPMultiFormatter.m in Sources */,
 				F5C224CB1ACDF299001DB4FA /* LPWKWebViewRuntimeLoader.m in Sources */,
 				B1D5BDBA19A23BCE0070E8CE /* LPExitRoute.m in Sources */,
 				B1D5BDBB19A23BCE0070E8CE /* LPSliderOperation.m in Sources */,
 				B1D5BDBC19A23BCE0070E8CE /* UIScriptASTVisibility.m in Sources */,
 				B1D5BDBD19A23BCE0070E8CE /* LPCollectionViewScrollToItemOperation.m in Sources */,
+				F5A8B4791B39BFEB00F390CA /* LPAbstractDatabaseLogger.m in Sources */,
 				B1D5BDBE19A23BCE0070E8CE /* LPLogger.m in Sources */,
 				B1D5BDBF19A23BCE0070E8CE /* LPAppPropertyRoute.m in Sources */,
 				B1D5BDC019A23BCE0070E8CE /* LPQueryLogRoute.m in Sources */,
@@ -2106,6 +2250,7 @@
 				F5091BDD18C4E1D700C85307 /* GCDAsyncSocket.m in Sources */,
 				F5091BDE18C4E1D700C85307 /* LPHTTPAuthenticationRequest.m in Sources */,
 				F5091BDF18C4E1D700C85307 /* LPHTTPConnection.m in Sources */,
+				F5A8B4591B39BFEB00F390CA /* LPCLIColor.m in Sources */,
 				F5091BE018C4E1D700C85307 /* LPHTTPMessage.m in Sources */,
 				F5091BE118C4E1D700C85307 /* LPHTTPServer.m in Sources */,
 				F5091BE218C4E1D700C85307 /* DDData.m in Sources */,
@@ -2115,6 +2260,7 @@
 				F5091BE518C4E1D700C85307 /* LPHTTPAsyncFileResponse.m in Sources */,
 				F5091BE618C4E1D700C85307 /* LPHTTPDataResponse.m in Sources */,
 				F5091BE718C4E1D700C85307 /* LPHTTPDynamicFileResponse.m in Sources */,
+				F5A8B4AA1B39BFEB00F390CA /* LPTTYLogger.m in Sources */,
 				F5E2D1E418C9120E00A0D9B6 /* LPSSKeychainQuery.m in Sources */,
 				F5091BE818C4E1D700C85307 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
 				F5091BE918C4E1D700C85307 /* LPHTTPFileResponse.m in Sources */,
@@ -2123,10 +2269,12 @@
 				F5091BEC18C4E1D700C85307 /* LPRouter.m in Sources */,
 				F5091BED18C4E1D700C85307 /* LPQueryAllOperation.m in Sources */,
 				F5091BEE18C4E1D700C85307 /* LPOperation.m in Sources */,
+				F5A8B4631B39BFEB00F390CA /* LPContextFilterLogFormatter.m in Sources */,
 				F5091BEF18C4E1D700C85307 /* LPQueryOperation.m in Sources */,
 				F5091BF018C4E1D700C85307 /* LPScrollOperation.m in Sources */,
 				B164575718FDCE4900CAA25A /* LPUIATapRoute.m in Sources */,
 				F5091BF118C4E1D700C85307 /* LPScrollToRowOperation.m in Sources */,
+				F5C276261B39C27800DF63FA /* LPLogFormatter.m in Sources */,
 				F5091BF218C4E1D700C85307 /* LPSetTextOperation.m in Sources */,
 				F5091BF318C4E1D700C85307 /* LPUIAUserPrefsChannel.m in Sources */,
 				F5091BF418C4E1D700C85307 /* LPRecorder.m in Sources */,
@@ -2139,6 +2287,7 @@
 				B1F772121A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */,
 				F5091BF918C4E1D700C85307 /* LPConditionRoute.m in Sources */,
 				B1F772061A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */,
+				F5A8B47F1B39BFEB00F390CA /* LPASLLogCapture.m in Sources */,
 				F5091BFA18C4E1D700C85307 /* LPInterpolateRoute.m in Sources */,
 				F5091BFB18C4E1D700C85307 /* LPRecordRoute.m in Sources */,
 				F5C094531A979CC200AE5991 /* LPWebQuery.m in Sources */,
@@ -2157,12 +2306,14 @@
 				F5091C0618C4E1D700C85307 /* LPResources.m in Sources */,
 				F5091C0718C4E1D700C85307 /* UIScriptASTPredicate.m in Sources */,
 				F5091C0818C4E1D700C85307 /* UIScriptAST.m in Sources */,
+				F5A8B4A01B39BFEB00F390CA /* LPLog.m in Sources */,
 				F5091C0918C4E1D700C85307 /* LPDebugRoute.m in Sources */,
 				F5091C0A18C4E1D700C85307 /* UIScriptASTALL.m in Sources */,
 				F5091C0B18C4E1D700C85307 /* UIScriptASTClassName.m in Sources */,
 				F5091C0C18C4E1D700C85307 /* UIScriptASTDirection.m in Sources */,
 				F5091C0D18C4E1D700C85307 /* UIScriptASTFirst.m in Sources */,
 				F5A33A571AC00D1300224639 /* UIWebView+LPWebView.m in Sources */,
+				F5A8B4861B39BFEB00F390CA /* LPASLLogger.m in Sources */,
 				F5091C0E18C4E1D700C85307 /* UIScriptASTIndex.m in Sources */,
 				F5091C0F18C4E1D700C85307 /* UIScriptASTLast.m in Sources */,
 				F5091C1018C4E1D700C85307 /* LPEnv.m in Sources */,
@@ -2174,6 +2325,7 @@
 				89F2EFF11B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */,
 				F55D412418C9130100813F78 /* LPKeychainRoute.m in Sources */,
 				F5091C1418C4E1D700C85307 /* LPTouchUtils.m in Sources */,
+				F5A8B4931B39BFEB00F390CA /* LPFileLogger.m in Sources */,
 				F5F600491A7C69760020637D /* LPInvoker.m in Sources */,
 				F5091C1518C4E1D700C85307 /* LPCDataScanner.m in Sources */,
 				F5543F2B1ABF7DE900E1A0BF /* LPPluginLoader.m in Sources */,
@@ -2182,11 +2334,14 @@
 				F5091C1818C4E1D700C85307 /* LPReflectUtils.m in Sources */,
 				B1FBBC5B19D0070000EE03CE /* LPDevice.m in Sources */,
 				F5091C1918C4E1D700C85307 /* LPISO8601DateFormatter.m in Sources */,
+				F5A8B46A1B39BFEB00F390CA /* LPDispatchQueueLogFormatter.m in Sources */,
+				F5A8B4711B39BFEB00F390CA /* LPMultiFormatter.m in Sources */,
 				F5C224C81ACDF299001DB4FA /* LPWKWebViewRuntimeLoader.m in Sources */,
 				F5091C1A18C4E1D700C85307 /* LPExitRoute.m in Sources */,
 				F5091C1B18C4E1D700C85307 /* LPSliderOperation.m in Sources */,
 				F5091C1D18C4E1D700C85307 /* UIScriptASTVisibility.m in Sources */,
 				F5091C1E18C4E1D700C85307 /* LPCollectionViewScrollToItemOperation.m in Sources */,
+				F5A8B4781B39BFEB00F390CA /* LPAbstractDatabaseLogger.m in Sources */,
 				F5091C1F18C4E1D700C85307 /* LPLogger.m in Sources */,
 				F5091C2018C4E1D700C85307 /* LPAppPropertyRoute.m in Sources */,
 				F5091C2118C4E1D700C85307 /* LPQueryLogRoute.m in Sources */,
@@ -2241,6 +2396,7 @@
 				F50CBFA81A0405B2004AC9DA /* LPKeyboardRoute.m in Sources */,
 				F50CBF881A040564004AC9DA /* DDRange.m in Sources */,
 				F50CBF771A03F69A004AC9DA /* LPTestToolsStandup.m in Sources */,
+				F5A8B4A91B39BFEB00F390CA /* LPTTYLogger.m in Sources */,
 				F50CBF8E1A04058C004AC9DA /* LPCORSResponse.m in Sources */,
 				F5C224E11AD473F0001DB4FA /* LPInfoPlistTest.m in Sources */,
 				F50CBF9D1A040599004AC9DA /* LPScrollToMarkOperation.m in Sources */,
@@ -2249,7 +2405,9 @@
 				F50CBF8B1A04056F004AC9DA /* LPHTTPDynamicFileResponse.m in Sources */,
 				F5C224E31AD473F0001DB4FA /* LPTouchUtilsTest.m in Sources */,
 				F5C224DB1AD472B1001DB4FA /* LPInvokerTest.m in Sources */,
+				F5A8B4621B39BFEB00F390CA /* LPContextFilterLogFormatter.m in Sources */,
 				B1670E2E1A32411100000A62 /* LPDumpRoute.m in Sources */,
+				F5C276251B39C27800DF63FA /* LPLogFormatter.m in Sources */,
 				89F2EFE11B2243D500958052 /* LPIntrospectionRoute.m in Sources */,
 				F50CBFA51A0405B2004AC9DA /* LPUIATapRoute.m in Sources */,
 				F50CBFA41A0405B2004AC9DA /* LPQueryLogRoute.m in Sources */,
@@ -2264,6 +2422,7 @@
 				F50CBFA21A0405B2004AC9DA /* LPDebugRoute.m in Sources */,
 				F50CBF951A04058C004AC9DA /* LPFlashOperation.m in Sources */,
 				F50CBF921A04058C004AC9DA /* LPSliderOperation.m in Sources */,
+				F5A8B4581B39BFEB00F390CA /* LPCLIColor.m in Sources */,
 				F50CBF9E1A040599004AC9DA /* LPScrollToRowWithMarkOperation.m in Sources */,
 				F50CBF861A040564004AC9DA /* DDData.m in Sources */,
 				F50CBF841A040564004AC9DA /* LPHTTPMessage.m in Sources */,
@@ -2275,8 +2434,10 @@
 				F5C224CF1ACDFF38001DB4FA /* LPWKWebViewRuntimeLoaderTest.m in Sources */,
 				F50CBFAF1A0405B2004AC9DA /* LPScreenshotRoute.m in Sources */,
 				F50CBFBA1A0405CE004AC9DA /* UIScriptASTVisibility.m in Sources */,
+				F5A8B4691B39BFEB00F390CA /* LPDispatchQueueLogFormatter.m in Sources */,
 				F50CBFBC1A0405CE004AC9DA /* UIScriptAST.m in Sources */,
 				F50CBFB21A0405B2004AC9DA /* LPExitRoute.m in Sources */,
+				F5A8B4701B39BFEB00F390CA /* LPMultiFormatter.m in Sources */,
 				F50CBFA31A0405B2004AC9DA /* LPAppPropertyRoute.m in Sources */,
 				F50CBFB41A0405CE004AC9DA /* LPISO8601DateFormatter.m in Sources */,
 				F50CBF871A040564004AC9DA /* DDNumber.m in Sources */,
@@ -2291,8 +2452,10 @@
 				89F2EFF01B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */,
 				F50CBFB11A0405B2004AC9DA /* LPBackdoorRoute.m in Sources */,
 				F5C224ED1AD4766E001DB4FA /* LPSetTextOperationTest.m in Sources */,
+				F5A8B4771B39BFEB00F390CA /* LPAbstractDatabaseLogger.m in Sources */,
 				F50CBFB01A0405B2004AC9DA /* LPAsyncPlaybackRoute.m in Sources */,
 				F50CBFC41A0405CE004AC9DA /* UIScriptParser.m in Sources */,
+				F5A8B49F1B39BFEB00F390CA /* LPLog.m in Sources */,
 				F50CBFAD1A0405B2004AC9DA /* LPRecordRoute.m in Sources */,
 				F532C19B1AFD28970024DA55 /* LPCJSONSerializerTest.m in Sources */,
 				F50CBF971A04058C004AC9DA /* LPOperation.m in Sources */,
@@ -2301,6 +2464,7 @@
 				F50CBF941A04058C004AC9DA /* LPOrientationOperation.m in Sources */,
 				F50CBFC71A0405E9004AC9DA /* LPJSONUtils.m in Sources */,
 				F50CBF911A04058C004AC9DA /* LPCollectionViewScrollToItemOperation.m in Sources */,
+				F5A8B47E1B39BFEB00F390CA /* LPASLLogCapture.m in Sources */,
 				F50CBF9F1A040599004AC9DA /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
 				F50CBFB81A0405CE004AC9DA /* LPCJSONSerializer.m in Sources */,
 				F5419F0D1AF3D37000EAAA66 /* LPJSONUtils_AccessibilityElementTest.m in Sources */,
@@ -2309,6 +2473,7 @@
 				F50CBFC01A0405CE004AC9DA /* UIScriptASTFirst.m in Sources */,
 				F50CBFBD1A0405CE004AC9DA /* UIScriptASTALL.m in Sources */,
 				F50CBF811A040564004AC9DA /* GCDAsyncSocket.m in Sources */,
+				F5A8B4921B39BFEB00F390CA /* LPFileLogger.m in Sources */,
 				F5A33A4D1AC009B600224639 /* LPWebQueryTest.m in Sources */,
 				F50CBF961A04058C004AC9DA /* LPQueryAllOperation.m in Sources */,
 				B15369FD1A327A400093923F /* LPUIATapRouteOverSharedElement.m in Sources */,
@@ -2322,6 +2487,7 @@
 				F5C224EB1AD47403001DB4FA /* LPVersionRouteTest.m in Sources */,
 				F50CBF931A04058C004AC9DA /* LPDatePickerOperation.m in Sources */,
 				F50CBFC51A0405E9004AC9DA /* LPDevice.m in Sources */,
+				F5A8B4851B39BFEB00F390CA /* LPASLLogger.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
