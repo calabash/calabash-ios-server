@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F5091BD918C4E1D700C85307"
-               BuildableName = "libcalabash-device.a"
-               BlueprintName = "calabash-device"
+               BlueprintIdentifier = "B15BF97019ABAFD200B38577"
+               BuildableName = "calabash-dylib.dylib"
+               BlueprintName = "calabash-dylib"
                ReferencedContainer = "container:calabash.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F5091BD918C4E1D700C85307"
-            BuildableName = "libcalabash-device.a"
-            BlueprintName = "calabash-device"
+            BlueprintIdentifier = "B15BF97019ABAFD200B38577"
+            BuildableName = "calabash-dylib.dylib"
+            BlueprintName = "calabash-dylib"
             ReferencedContainer = "container:calabash.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

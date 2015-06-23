@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B15BF97019ABAFD200B38577"
-               BuildableName = "libCalabashDyn.dylib"
-               BlueprintName = "calabash-dylib-device"
+               BlueprintIdentifier = "B1D5BD7519A23BCE0070E8CE"
+               BuildableName = "libcalabash-plugin-for-frank.a"
+               BlueprintName = "calabash-plugin-for-frank"
                ReferencedContainer = "container:calabash.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B15BF97019ABAFD200B38577"
-            BuildableName = "libCalabashDyn.dylib"
-            BlueprintName = "calabash-dylib-device"
+            BlueprintIdentifier = "B1D5BD7519A23BCE0070E8CE"
+            BuildableName = "libcalabash-plugin-for-frank.a"
+            BlueprintName = "calabash-plugin-for-frank"
             ReferencedContainer = "container:calabash.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

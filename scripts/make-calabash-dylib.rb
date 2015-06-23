@@ -11,12 +11,14 @@ end
 
 xcpretty_available = `gem list xcpretty -i`.chomp == 'true'
 
+target_arg = 'calabash-dylib'
+
 if target == 'sim'
-  target_arg = 'calabash-dylib-simulator'
   sdk = 'iphonesimulator'
+  arches = 'i386 x86_64'
 else
-  target_arg = 'calabash-dylib-device'
   sdk = 'iphoneos'
+  arches = 'armv7 armv7s arm64'
 end
 
 # dylib target does _not_ create necessary directories
@@ -27,6 +29,9 @@ args =
             '-project calabash.xcodeproj',
             "-scheme \"#{target_arg}\"",
             '-configuration Debug',
+            "ARCHS=\"#{arches}\"",
+            "VALID_ARCHS=\"#{arches}\"",
+            'ONLY_ACTIVE_ARCH=NO',
             '-derivedDataPath build',
             'SYMROOT=build',
             "-sdk #{sdk}",
