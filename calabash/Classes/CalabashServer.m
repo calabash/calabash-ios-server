@@ -34,6 +34,8 @@
 #import "LPInfoPlist.h"
 #import "LPPluginLoader.h"
 #import "LPWKWebViewRuntimeLoader.h"
+#import "LPCocoaLumberjack.h"
+#import "LPLogFormatter.h"
 
 @interface CalabashServer ()
 - (void) start;
@@ -66,8 +68,8 @@
   error = dlerror();
 
   if (error) {
-    NSLog(@"Warning: Could not load private UIAutomation.framework.");
-    NSLog(@"Warning: %@", [NSString stringWithUTF8String:error]);
+    LPLogWarn(@"Could not load private UIAutomation.framework.");
+    LPLogWarn(@"%@", [NSString stringWithUTF8String:error]);
   }
 
   LPPluginLoader *loader = [LPPluginLoader new];
@@ -168,7 +170,7 @@
     LPDumpRoute *dumpRoute = [LPDumpRoute new];
     [LPRouter addRoute:dumpRoute forPath:@"dump"];
     [dumpRoute release];
-    
+
     LPIntrospectionRoute *introspectionRoute = [LPIntrospectionRoute new];
     [LPRouter addRoute:introspectionRoute forPath:@"introspection"];
     [introspectionRoute release];
@@ -195,11 +197,18 @@
 
     [_httpServer setTXTRecordDictionary:capabilities];
 
-    NSLog(@"Creating the server: %@", _httpServer);
-    NSLog(@"Calabash iOS server version: %@", kLPCALABASHVERSION);
+    LPLogFormatter *logFormatter = [LPLogFormatter new];
+    [[LPASLLogger sharedInstance] setLogFormatter:logFormatter];
+    [[LPTTYLogger sharedInstance] setLogFormatter:logFormatter];
+    [LPLog addLogger:[LPASLLogger sharedInstance]];
+    [LPLog addLogger:[LPTTYLogger sharedInstance]];
+    [logFormatter release];
+
+    LPLogDebug(@"Creating the server: %@", _httpServer);
+    LPLogDebug(@"Calabash iOS server version: %@", kLPCALABASHVERSION);
 
     NSString *dtSdkName = [infoPlist stringForDTSDKName];
-    NSLog(@"App Base SDK: %@", dtSdkName);
+    LPLogDebug(@"App Base SDK: %@", dtSdkName);
 
     [infoPlist release];
   }
@@ -213,10 +222,9 @@
 
   NSError *error = nil;
   if (![_httpServer start:&error]) {
-    NSLog(@"Error starting Calabash LPHTTP Server: %@", error);// %@", error);
+    LPLogError(@"Error starting Calabash HTTP Server: %@", error);
   }
 }
-
 
 - (void) enableAccessibility {
   // Approach described at:
@@ -228,15 +236,14 @@
   // If we're on the simulator, make sure we're using the sim's copy of AppSupport
   NSDictionary *environment = [[NSProcessInfo processInfo] environment];
   NSString *simulatorRoot = [environment objectForKey:@"IPHONE_SIMULATOR_ROOT"];
-  NSLog(@"simroot: %@", simulatorRoot);
+  LPLogDebug(@"IPHONE_SIMULATOR_ROOT: %@", simulatorRoot);
   if (simulatorRoot) {
     appSupportPath = [simulatorRoot stringByAppendingString:appSupportPath];
   }
 
-  void *appSupport = dlopen(
-                            [appSupportPath fileSystemRepresentation], RTLD_LAZY);
+  void *appSupport = dlopen([appSupportPath fileSystemRepresentation], RTLD_LAZY);
   if (!appSupport) {
-    NSLog(@"ERROR: Unable to dlopen AppSupport. Cannot automatically enable accessibility.");
+    LPLogError(@"Unable to dlopen AppSupport. Cannot automatically enable accessibility.");
     return;
   }
 
@@ -244,19 +251,20 @@
                                                                CFStringRef domain) = dlsym(appSupport,
                                                                                            "CPCopySharedResourcesPreferencesDomainForDomain");
   if (!copySharedResourcesPreferencesDomainForDomain) {
-    NSLog(@"ERROR: Unable to dlsym CPCopySharedResourcesPreferencesDomainForDomain. "
-          "Cannot automatically enable accessibility.");
+    LPLogError(@"Unable to dlsym CPCopySharedResourcesPreferencesDomainForDomain. Cannot automatically enable accessibility.");
     return;
   }
 
   CFStringRef accessibilityDomain = copySharedResourcesPreferencesDomainForDomain(CFSTR("com.apple.Accessibility"));
   if (!accessibilityDomain) {
-    NSLog(@"ERROR: Unable to cop accessibility preferences. Cannot automatically enable accessibility.");
+    LPLogError(@"Unable to cop accessibility preferences. Cannot automatically enable accessibility.");
     return;
   }
 
   CFPreferencesSetValue(CFSTR("ApplicationAccessibilityEnabled"),
-                        kCFBooleanTrue, accessibilityDomain, kCFPreferencesAnyUser,
+                        kCFBooleanTrue,
+                        accessibilityDomain,
+                        kCFPreferencesAnyUser,
                         kCFPreferencesAnyHost);
   CFRelease(accessibilityDomain);
 
@@ -268,5 +276,5 @@
   [super dealloc];
 }
 
-
 @end
+
