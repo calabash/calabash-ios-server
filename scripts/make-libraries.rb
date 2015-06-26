@@ -2,6 +2,7 @@
 
 require 'fileutils'
 require 'open3'
+require 'openssl'
 
 # to be run after +make+
 # 1. combines the Debug-iphoneos and Debug-iphonesimulator libs into a FAT lib
@@ -386,6 +387,7 @@ end
 def sign_dylibs
   keychain_tool = File.expand_path("~/.calabash/calabash-codesign/ios/create-keychain.rb")
   resign_tool = File.expand_path("~/.calabash/calabash-codesign/ios/resign-dylib.rb")
+  cert = File.expand_path("~/.calabash/calabash-codesign/ios/certs/developer.p12")
 
   if !File.exists?(keychain_tool) && !File.exists?(resign_tool)
     puts "WARN: Skipping dylib codesigning"
@@ -393,6 +395,25 @@ def sign_dylibs
     puts "WARN: If you are not a maintainer, you can ignore this message."
     puts "WARN: See: https://github.com/calabash/calabash-codesign"
     return
+  end
+
+  expected_sum = ENV['CERT_CHECKSUM']
+
+  sha = OpenSSL::Digest::SHA256.new
+  sha << File.read(cert)
+  actual_sum = sha.hexdigest
+
+  if expected_sum == actual_sum
+    puts "INFO: Expected cert checksum:  #{expected_sum}"
+    puts "INFO:   Actual cert checksum:  #{actual_sum}"
+  else
+    puts "FAIL: Expected cert checksum:  #{expected_sum}"
+    puts "FAIL:   Actual cert checksum:  #{actual_sum}"
+    puts "FAIL: You must update your local code signing tool"
+    puts "FAIL: $ cd ~/.calabash/calabash-codesign/"
+    puts "FAIL: $ git checkout master"
+    puts "FAIL: $ git pull"
+    exit 1
   end
 
   device_dylib = path_to_device_dylib
