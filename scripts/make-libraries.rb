@@ -383,6 +383,35 @@ def stage_dylibs
   FileUtils.cp(simulator_dylib, File.join(target_dir, 'libCalabashDynSim.dylib'))
 end
 
+def sign_dylibs
+  keychain_tool = File.expand_path("~/.calabash/calabash-codesign/ios/create-keychain.rb")
+  resign_tool = File.expand_path("~/.calabash/calabash-codesign/ios/resign-dylib.rb")
+
+  if !File.exists?(keychain_tool) && !File.exists?(resign_tool)
+    puts "WARN: Skipping dylib codesigning"
+    puts "WARN: If you are a maintainer, this you should be resigning!"
+    puts "WARN: If you are not a maintainer, you can ignore this message."
+    puts "WARN: See: https://github.com/calabash/calabash-codesign"
+    return
+  end
+
+  device_dylib = path_to_device_dylib
+  simulator_dylib = path_to_simulator_dylib
+  unless dylibs_built?({:sim => simulator_dylib, :device => device_dylib})
+    puts 'FAIL:  the dylibs have not been built. Did you forget to run `make dylibs`?'
+    exit 1
+  end
+
+  puts "INFO: Creating the Calabash.keychain for signing."
+  system(keychain_tool)
+
+  puts "INFO: signing the simulator dylib"
+  system(resign_tool, simulator_dylib)
+
+  puts "INFO: signing the device dylib"
+  system(resign_tool, device_dylib)
+end
+
 if ARGV[0] == 'verify-framework'
   lipo_combine_libs
   make_framework
@@ -399,6 +428,9 @@ end
 if ARGV[0] == 'verify-dylibs'
   verify_dylibs
   stage_dylibs
+  sign_dylibs
+
+  puts "INFO: Done."
   exit 0
 end
 
