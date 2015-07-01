@@ -2662,6 +2662,7 @@
 					"-Wunreachable-code",
 					"-fcolor-diagnostics",
 					"-Warc-retain-cycles",
+					"-Wno-objc-designated-initializers",
 				);
 			};
 			name = Debug;
@@ -2710,6 +2711,7 @@
 					"-Wunreachable-code",
 					"-fcolor-diagnostics",
 					"-Warc-retain-cycles",
+					"-Wno-objc-designated-initializers",
 				);
 			};
 			name = Release;
