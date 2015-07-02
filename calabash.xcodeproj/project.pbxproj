@@ -774,6 +774,7 @@
 		F55D412118C9130100813F78 /* LPKeychainRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPKeychainRoute.m; sourceTree = "<group>"; };
 		F566308A1A39B09C00DEA0C0 /* LPInfoPlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPInfoPlist.h; sourceTree = "<group>"; };
 		F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInfoPlist.m; sourceTree = "<group>"; };
+		F56CBBB01B451B74002D1DC1 /* VERSION.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = VERSION.md; sourceTree = "<group>"; };
 		F58937E91A9BE0E6007B9A5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		F58B6DE8186847F70042191C /* gitversioning-after.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "gitversioning-after.sh"; sourceTree = "<group>"; };
 		F58B6DE9186847F70042191C /* gitversioning-before.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "gitversioning-before.sh"; sourceTree = "<group>"; };
@@ -1127,6 +1128,7 @@
 		B184FD8F14B6DB2B002A744C /* CocoaAsyncSocket */ = {
 			isa = PBXGroup;
 			children = (
+				F56CBBB01B451B74002D1DC1 /* VERSION.md */,
 				B184FD9014B6DB2B002A744C /* LPGCDAsyncSocket.h */,
 				B184FD9114B6DB2B002A744C /* LPGCDAsyncSocket.m */,
 			);
