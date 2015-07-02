@@ -8,7 +8,7 @@
 //  http://code.google.com/p/cocoaasyncsocket/
 //
 
-#import "GCDAsyncSocket.h"
+#import "LPGCDAsyncSocket.h"
 
 #if TARGET_OS_IPHONE
   #import <CFNetwork/CFNetwork.h>
