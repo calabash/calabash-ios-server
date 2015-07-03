@@ -96,5 +96,5 @@ Dir.chdir animated_happiness_dir do
 
   install_gem('luffa')
   do_system('script/ci/travis/build-and-stage-app.sh')
-  do_system('script/ci/travis/cucumber-ci.rb --tags ~@no_ci --tags ~@scroll')
+  do_system('script/ci/travis/cucumber-ci.rb --tags @travis')
 end
