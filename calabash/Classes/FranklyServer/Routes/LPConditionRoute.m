@@ -30,10 +30,6 @@
 @implementation LPConditionRoute
 
 @synthesize timer = _timer;
-@synthesize maxCount;
-@synthesize curCount;
-@synthesize stablePeriod;
-@synthesize stablePeriodCount;
 
 
 // Should only return YES after the LPHTTPConnection has read all available data.
