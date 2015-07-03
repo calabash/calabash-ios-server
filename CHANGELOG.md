@@ -1,3 +1,9 @@
+### 0.15.0 WIP
+
+* When checking for no animation, ignore animations with trivially short
+  durations #142 @JoeSzymanski
+* LPIntrospectionRoute: a server route for object introspection #178
+
 ### 0.14.3
 
 * Avoid [NSURL fileSystemRepresentation] on iOS 6 #175
