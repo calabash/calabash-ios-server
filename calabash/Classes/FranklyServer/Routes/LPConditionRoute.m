@@ -17,8 +17,18 @@
 #define kLPConditionRouteNoneAnimating @"NONE_ANIMATING"
 #define kLPConditionRouteAnimationDurationLimit 0.01
 
+@interface LPConditionRoute ()
+
+@property(nonatomic, strong) NSTimer *timer;
+@property(nonatomic, assign) NSUInteger maxCount;
+@property(nonatomic, assign) NSUInteger curCount;
+@property(nonatomic, assign) NSUInteger stablePeriod;
+@property(nonatomic, assign) NSUInteger stablePeriodCount;
+
+@end
 
 @implementation LPConditionRoute
+
 @synthesize timer = _timer;
 @synthesize maxCount;
 @synthesize curCount;
