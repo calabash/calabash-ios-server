@@ -12,12 +12,13 @@
 
 #import "LPConditionRoute.h"
 #import "LPOperation.h"
+#import "LPRepeatingTimerProtocol.h"
 
 #define kLPConditionRouteNoNetworkIndicator @"NO_NETWORK_INDICATOR"
 #define kLPConditionRouteNoneAnimating @"NONE_ANIMATING"
 #define kLPConditionRouteAnimationDurationLimit 0.01
 
-@interface LPConditionRoute ()
+@interface LPConditionRoute () <LPRepeatingTimerProtocol>
 
 @property(nonatomic, strong) NSTimer *timer;
 @property(nonatomic, assign) NSUInteger maxCount;
@@ -32,6 +33,27 @@
 
 @synthesize timer = _timer;
 
+#pragma mark - Memory Management
+
+- (void) dealloc {
+  [self stopAndReleaseRepeatingTimers];
+}
+
+- (void) startAndRetainRepeatingTimers {
+  [self stopAndReleaseRepeatingTimers];
+  _timer = [NSTimer scheduledTimerWithTimeInterval:self.timerRepeatInterval
+                                            target:self
+                                          selector:@selector(checkConditionWithTimer:)
+                                          userInfo:nil
+                                           repeats:YES];
+}
+
+- (void) stopAndReleaseRepeatingTimers {
+  if (_timer != nil) {
+    [_timer invalidate];
+    _timer = nil;
+  }
+}
 
 // Should only return YES after the LPHTTPConnection has read all available data.
 - (BOOL) isDone {
@@ -147,8 +169,7 @@
   if (!self.timer) { //to prevent accidental double writing of http chunks
     return;
   }
-  [self.timer invalidate];
-  self.timer = nil;
+  [self stopAndReleaseRepeatingTimers];
   [super failWithMessageFormat:messageFmt message:message];
 }
 
@@ -157,8 +178,7 @@
   if (!self.timer) { //to prevent accidental double writing of http chunks
     return;
   }
-  [self.timer invalidate];
-  self.timer = nil;
+  [self stopAndReleaseRepeatingTimers];
   [super succeedWithResult:result];
 }
 
@@ -172,11 +192,4 @@
   return [NSNumber numberWithUnsignedInteger:30];
 }
 
-
-- (void) dealloc {
-  [self.timer invalidate];  
-  self.timer = nil;
-}
-
 @end
-
