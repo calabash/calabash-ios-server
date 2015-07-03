@@ -99,12 +99,9 @@
   self.stablePeriod = ceil(stablePeriod_d / freq_d);
   self.stablePeriodCount = 0;
 
-  self.timer = [NSTimer scheduledTimerWithTimeInterval:freq_d
-                                                target:self
-                                              selector:@selector(checkConditionWithTimer:)
-                                              userInfo:nil repeats:YES];
-  [self checkConditionWithTimer:self.timer];
   self.timerRepeatInterval = (NSTimeInterval)freq_d;
+
+  [self startAndRetainRepeatingTimers];
 }
 
 
