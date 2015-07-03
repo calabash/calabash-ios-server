@@ -65,7 +65,7 @@
 		B15BF9C119ABB1DE00B38577 /* LPUserPrefRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CC15C06CB500BBE2BE /* LPUserPrefRoute.m */; };
 		B15BF9C219ABB1DE00B38577 /* LPKeyboardRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F715BC200300408364 /* LPKeyboardRoute.m */; };
 		B15BF9C319ABB1DE00B38577 /* LPGenericAsyncRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F315BC1ECD00408364 /* LPGenericAsyncRoute.m */; };
-		B15BF9C419ABB1DE00B38577 /* LPConditionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B163213415BBF13200408364 /* LPConditionRoute.m */; };
+		B15BF9C419ABB1DE00B38577 /* LPConditionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B163213415BBF13200408364 /* LPConditionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9C519ABB1DE00B38577 /* LPInterpolateRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A04011511546F002FA032 /* LPInterpolateRoute.m */; };
 		B15BF9C619ABB1DE00B38577 /* LPMapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD214B6DB2B002A744C /* LPMapRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9C719ABB1DE00B38577 /* LPRecordRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8B14B6DC7F002A744C /* LPRecordRoute.m */; };
@@ -137,7 +137,7 @@
 		B1D5BD9519A23BCE0070E8CE /* LPUserPrefRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CC15C06CB500BBE2BE /* LPUserPrefRoute.m */; };
 		B1D5BD9619A23BCE0070E8CE /* LPKeyboardRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F715BC200300408364 /* LPKeyboardRoute.m */; };
 		B1D5BD9719A23BCE0070E8CE /* LPGenericAsyncRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F315BC1ECD00408364 /* LPGenericAsyncRoute.m */; };
-		B1D5BD9819A23BCE0070E8CE /* LPConditionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B163213415BBF13200408364 /* LPConditionRoute.m */; };
+		B1D5BD9819A23BCE0070E8CE /* LPConditionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B163213415BBF13200408364 /* LPConditionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BD9919A23BCE0070E8CE /* LPInterpolateRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A04011511546F002FA032 /* LPInterpolateRoute.m */; };
 		B1D5BD9A19A23BCE0070E8CE /* LPRecordRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8B14B6DC7F002A744C /* LPRecordRoute.m */; };
 		B1D5BD9B19A23BCE0070E8CE /* LPMapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD214B6DB2B002A744C /* LPMapRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -239,7 +239,7 @@
 		F5091BF618C4E1D700C85307 /* LPUserPrefRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CC15C06CB500BBE2BE /* LPUserPrefRoute.m */; };
 		F5091BF718C4E1D700C85307 /* LPKeyboardRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F715BC200300408364 /* LPKeyboardRoute.m */; };
 		F5091BF818C4E1D700C85307 /* LPGenericAsyncRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F315BC1ECD00408364 /* LPGenericAsyncRoute.m */; };
-		F5091BF918C4E1D700C85307 /* LPConditionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B163213415BBF13200408364 /* LPConditionRoute.m */; };
+		F5091BF918C4E1D700C85307 /* LPConditionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B163213415BBF13200408364 /* LPConditionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091BFA18C4E1D700C85307 /* LPInterpolateRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A04011511546F002FA032 /* LPInterpolateRoute.m */; };
 		F5091BFB18C4E1D700C85307 /* LPRecordRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8B14B6DC7F002A744C /* LPRecordRoute.m */; };
 		F5091BFC18C4E1D700C85307 /* LPMapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD214B6DB2B002A744C /* LPMapRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -331,7 +331,7 @@
 		F50CBFA71A0405B2004AC9DA /* LPUserPrefRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CC15C06CB500BBE2BE /* LPUserPrefRoute.m */; };
 		F50CBFA81A0405B2004AC9DA /* LPKeyboardRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F715BC200300408364 /* LPKeyboardRoute.m */; };
 		F50CBFA91A0405B2004AC9DA /* LPGenericAsyncRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F315BC1ECD00408364 /* LPGenericAsyncRoute.m */; };
-		F50CBFAA1A0405B2004AC9DA /* LPConditionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B163213415BBF13200408364 /* LPConditionRoute.m */; };
+		F50CBFAA1A0405B2004AC9DA /* LPConditionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B163213415BBF13200408364 /* LPConditionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBFAB1A0405B2004AC9DA /* LPInterpolateRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A04011511546F002FA032 /* LPInterpolateRoute.m */; };
 		F50CBFAC1A0405B2004AC9DA /* LPMapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDD214B6DB2B002A744C /* LPMapRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBFAD1A0405B2004AC9DA /* LPRecordRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8B14B6DC7F002A744C /* LPRecordRoute.m */; };
