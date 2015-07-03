@@ -24,6 +24,7 @@
 @property(nonatomic, assign) NSUInteger curCount;
 @property(nonatomic, assign) NSUInteger stablePeriod;
 @property(nonatomic, assign) NSUInteger stablePeriodCount;
+@property(nonatomic, assign) NSTimeInterval timerRepeatInterval;
 
 @end
 
@@ -81,6 +82,7 @@
                                               selector:@selector(checkConditionWithTimer:)
                                               userInfo:nil repeats:YES];
   [self checkConditionWithTimer:self.timer];
+  self.timerRepeatInterval = (NSTimeInterval)freq_d;
 }
 
 
