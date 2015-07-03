@@ -60,7 +60,6 @@
   return !self.timer && [super isDone];
 }
 
-
 - (void) beginOperation {
   self.done = NO;
   NSString *condition = [self.data objectForKey:@"condition"];
@@ -103,7 +102,6 @@
 
   [self startAndRetainRepeatingTimers];
 }
-
 
 - (void) checkConditionWithTimer:(NSTimer *) aTimer {
 
@@ -166,27 +164,26 @@
 
 
 - (void) failWithMessageFormat:(NSString *) messageFmt message:(NSString *) message {
-  if (!self.timer) { //to prevent accidental double writing of http chunks
-    return;
-  }
+  // Prevent accidental double writing of http chunks
+  if (!self.timer) { return; }
+
   [self stopAndReleaseRepeatingTimers];
   [super failWithMessageFormat:messageFmt message:message];
 }
 
 
 - (void) succeedWithResult:(NSArray *) result {
-  if (!self.timer) { //to prevent accidental double writing of http chunks
-    return;
-  }
+  // Prevent accidental double writing of http chunks
+  if (!self.timer) { return; }
+
   [self stopAndReleaseRepeatingTimers];
   [super succeedWithResult:result];
 }
 
--(NSNumber*)defaultTimeoutForCondition:(NSString*)condition {
+- (NSNumber *) defaultTimeoutForCondition:(NSString *)condition {
   if ([kLPConditionRouteNoneAnimating isEqualToString:condition]) {
     return [NSNumber numberWithUnsignedInteger:6];
-  }
-  else if ([kLPConditionRouteNoNetworkIndicator isEqualToString:condition]) {
+  } else if ([kLPConditionRouteNoNetworkIndicator isEqualToString:condition]) {
     return [NSNumber numberWithUnsignedInteger:30];
   }
   return [NSNumber numberWithUnsignedInteger:30];
