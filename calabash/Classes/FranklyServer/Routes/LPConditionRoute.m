@@ -99,8 +99,9 @@
           NSArray *animationKeys = [[view.layer animationKeys] copy];
           for (NSString *key in animationKeys) {
             CAAnimation *animation = [view.layer animationForKey:key];
-            // Only consider animations with a duration greater than the defined limit. This is intended to work
-            // around the parallax animation attached to all UIAlertViewControllers
+            // Only consider animations with a duration greater than the defined
+            // limit. This is intended to work around the parallax animation
+            // attached to iOS 8 UIAlertViews and UIActionSheets
             if (animation.duration > kLPConditionRouteAnimationDurationLimit) {
               self.stablePeriodCount = 0;
               return;
