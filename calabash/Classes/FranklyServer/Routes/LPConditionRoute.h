@@ -10,9 +10,6 @@
 #import "LPHTTPResponse.h"
 #import "LPGenericAsyncRoute.h"
 
-@interface LPConditionRoute : LPGenericAsyncRoute {
-  NSTimer *_timer;
-}
 
 @property(nonatomic, retain) NSTimer *timer;
 @property(nonatomic, assign) NSUInteger maxCount;
@@ -20,5 +17,6 @@
 @property(nonatomic, assign) NSUInteger stablePeriod;
 @property(nonatomic, assign) NSUInteger stablePeriodCount;
 
+@interface LPConditionRoute : LPGenericAsyncRoute
 
 @end
