@@ -5326,7 +5326,10 @@ static dispatch_queue_t cfstreamThreadSetupQueue; // setup & teardown
 #if TARGET_OS_IPHONE
     {
       LPGCDAsyncSpecialPacket *tlsPacket = (LPGCDAsyncSpecialPacket *) currentRead;
-      NSDictionary *tlsSettings = tlsPacket->tlsSettings;
+      NSDictionary *tlsSettings = nil;
+      if (tlsPacket) {
+        tlsSettings = tlsPacket->tlsSettings;
+      }
 
       NSNumber *value = [tlsSettings objectForKey:LPGCDAsyncSocketUseCFStreamForTLS];
       if (value && [value boolValue] == YES)
