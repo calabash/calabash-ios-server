@@ -4,9 +4,9 @@
 #import "LPHTTPMessage.h"
 #import "LPHTTPResponse.h"
 #import "LPHTTPAuthenticationRequest.h"
-#import "DDNumber.h"
-#import "DDRange.h"
-#import "DDData.h"
+#import "NSNumber+LPCHSExtensions.h"
+#import "LPDDRange.h"
+#import "NSData+LPCHSExtensions.h"
 #import "LPHTTPFileResponse.h"
 #import "LPHTTPAsyncFileResponse.h"
 
@@ -800,7 +800,7 @@ static NSMutableArray *recentNonces;
 			
 			if(byteIndex >= contentLength) return NO;
 			
-			[ranges addObject:[NSValue valueWithDDRange:LPDDMakeRange(byteIndex, 1)]];
+			[ranges addObject:[NSValue valueWithLPDDRange:LPDDMakeRange(byteIndex, 1)]];
 		}
 		else
 		{
@@ -828,7 +828,7 @@ static NSMutableArray *recentNonces;
 				
 				UInt64 startIndex = contentLength - r2;
 				
-				[ranges addObject:[NSValue valueWithDDRange:LPDDMakeRange(startIndex, r2)]];
+				[ranges addObject:[NSValue valueWithLPDDRange:LPDDMakeRange(startIndex, r2)]];
 			}
 			else if (!hasR2)
 			{
@@ -838,7 +838,7 @@ static NSMutableArray *recentNonces;
 				
 				if(r1 >= contentLength) return NO;
 				
-				[ranges addObject:[NSValue valueWithDDRange:LPDDMakeRange(r1, contentLength - r1)]];
+				[ranges addObject:[NSValue valueWithLPDDRange:LPDDMakeRange(r1, contentLength - r1)]];
 			}
 			else
 			{
@@ -849,7 +849,7 @@ static NSMutableArray *recentNonces;
 				if(r1 > r2) return NO;
 				if(r2 >= contentLength) return NO;
 				
-				[ranges addObject:[NSValue valueWithDDRange:LPDDMakeRange(r1, r2 - r1 + 1)]];
+				[ranges addObject:[NSValue valueWithLPDDRange:LPDDMakeRange(r1, r2 - r1 + 1)]];
 			}
 		}
 	}
@@ -860,12 +860,12 @@ static NSMutableArray *recentNonces;
 	
 	for (i = 0; i < [ranges count] - 1; i++)
 	{
-		LPDDRange range1 = [[ranges objectAtIndex:i] ddrangeValue];
+		LPDDRange range1 = [[ranges objectAtIndex:i] lpDDRangeValue];
 		
 		NSUInteger j;
 		for (j = i+1; j < [ranges count]; j++)
 		{
-			LPDDRange range2 = [[ranges objectAtIndex:j] ddrangeValue];
+			LPDDRange range2 = [[ranges objectAtIndex:j] lpDDRangeValue];
 			
 			LPDDRange iRange = LPDDIntersectionRange(range1, range2);
 			
@@ -878,7 +878,7 @@ static NSMutableArray *recentNonces;
 	
 	// Sort the ranges
 	
-	[ranges sortUsingSelector:@selector(ddrangeCompare:)];
+	[ranges sortUsingSelector:@selector(lpDDRangeCompare:)];
 	
 	return YES;
 }
@@ -1011,7 +1011,7 @@ static NSMutableArray *recentNonces;
 	// Status Code 206 - Partial Content
 	LPHTTPMessage *response = [[LPHTTPMessage alloc] initResponseWithStatusCode:206 description:nil version:LPHTTPVersion1_1];
 	
-	LPDDRange range = [[ranges objectAtIndex:0] ddrangeValue];
+	LPDDRange range = [[ranges objectAtIndex:0] lpDDRangeValue];
 	
 	NSString *contentLengthStr = [NSString stringWithFormat:@"%qu", range.length];
 	[response setHeaderField:@"Content-Length" value:contentLengthStr];
@@ -1068,7 +1068,7 @@ static NSMutableArray *recentNonces;
 	NSUInteger i;
 	for (i = 0; i < [ranges count]; i++)
 	{
-		LPDDRange range = [[ranges objectAtIndex:i] ddrangeValue];
+		LPDDRange range = [[ranges objectAtIndex:i] lpDDRangeValue];
 		
 		NSString *rangeStr = [NSString stringWithFormat:@"%qu-%qu", range.location, LPDDMaxRange(range) - 1];
 		NSString *contentRangeVal = [NSString stringWithFormat:@"bytes %@/%qu", rangeStr, contentLength];
@@ -1261,7 +1261,7 @@ static NSMutableArray *recentNonces;
 			if ([ranges count] == 1)
 			{
 				// Client is requesting a single range
-				LPDDRange range = [[ranges objectAtIndex:0] ddrangeValue];
+				LPDDRange range = [[ranges objectAtIndex:0] lpDDRangeValue];
 				
 				[httpResponse setOffset:range.location];
 				
@@ -1287,7 +1287,7 @@ static NSMutableArray *recentNonces;
 				[asyncSocket writeData:rangeHeaderData withTimeout:TIMEOUT_WRITE_HEAD tag:LPHTTP_PARTIAL_RESPONSE_HEADER];
 				
 				// Start writing range body
-				LPDDRange range = [[ranges objectAtIndex:0] ddrangeValue];
+				LPDDRange range = [[ranges objectAtIndex:0] lpDDRangeValue];
 				
 				[httpResponse setOffset:range.location];
 				
@@ -1423,7 +1423,7 @@ static NSMutableArray *recentNonces;
 	
 	if(writeQueueSize >= READ_CHUNKSIZE) return;
 	
-	LPDDRange range = [[ranges objectAtIndex:0] ddrangeValue];
+	LPDDRange range = [[ranges objectAtIndex:0] lpDDRangeValue];
 	
 	UInt64 offset = [httpResponse offset];
 	UInt64 bytesRead = offset - range.location;
@@ -1474,7 +1474,7 @@ static NSMutableArray *recentNonces;
 	
 	if(writeQueueSize >= READ_CHUNKSIZE) return;
 	
-	LPDDRange range = [[ranges objectAtIndex:rangeIndex] ddrangeValue];
+	LPDDRange range = [[ranges objectAtIndex:rangeIndex] lpDDRangeValue];
 	
 	UInt64 offset = [httpResponse offset];
 	UInt64 bytesRead = offset - range.location;
@@ -1503,7 +1503,7 @@ static NSMutableArray *recentNonces;
 			[asyncSocket writeData:rangeHeader withTimeout:TIMEOUT_WRITE_HEAD tag:LPHTTP_PARTIAL_RESPONSE_HEADER];
 			
 			// Start writing range body
-			range = [[ranges objectAtIndex:rangeIndex] ddrangeValue];
+			range = [[ranges objectAtIndex:rangeIndex] lpDDRangeValue];
 			
 			[httpResponse setOffset:range.location];
 			
