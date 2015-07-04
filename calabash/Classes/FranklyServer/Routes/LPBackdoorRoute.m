@@ -50,9 +50,7 @@
     result = (__bridge id)buffer;
 
     if (!result) {result = [NSNull null];}
-    return [NSDictionary dictionaryWithObjectsAndKeys:result, @"result",
-                                                      @"SUCCESS", @"outcome",
-                                                      nil];
+    return  @{ @"result" : result, @"outcome" : @"SUCCESS" };
   } else {
 
     NSString *details = [NSString stringWithFormat:@"you must define the selector '%@' in your UIApplicationDelegate.",
