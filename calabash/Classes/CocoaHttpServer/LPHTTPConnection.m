@@ -6,7 +6,7 @@
 #import "LPHTTPAuthenticationRequest.h"
 #import "DDNumber.h"
 #import "DDRange.h"
-#import "DDData.h"
+#import "NSData+LPCHSExtensions.h"
 #import "LPHTTPFileResponse.h"
 #import "LPHTTPAsyncFileResponse.h"
 

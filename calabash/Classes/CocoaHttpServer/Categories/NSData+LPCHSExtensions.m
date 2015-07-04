@@ -1,8 +1,8 @@
- #import "DDData.h"
+#import "NSData+LPCHSExtensions.h"
 #import <CommonCrypto/CommonDigest.h>
 
 
-@implementation NSData (LPDDData)
+@implementation NSData (LPCHSExtensions)
 
 static char encodingTable[64] = {
 'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P',

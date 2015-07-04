@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 
-@interface NSData (LPDDData)
+@interface NSData (LPCHSExtensions)
 
 - (NSData *)md5Digest;
 
