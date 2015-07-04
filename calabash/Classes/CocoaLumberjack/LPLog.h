@@ -116,26 +116,26 @@ typedef NS_ENUM(NSUInteger, LPLogLevel) {
 };
 
 /**
- * The THIS_FILE macro gives you an NSString of the file name.
+ * The LP_THIS_FILE macro gives you an NSString of the file name.
  * For simplicity and clarity, the file name does not include the full path or file extension.
  *
- * For example: LPLogWarn(@"%@: Unable to find thingy", THIS_FILE) -> @"MyViewController: Unable to find thingy"
+ * For example: LPLogWarn(@"%@: Unable to find thingy", LP_THIS_FILE) -> @"MyViewController: Unable to find thingy"
  **/
 
 NSString * LPExtractFileNameWithoutExtension(const char *filePath, BOOL copy);
 
-#define THIS_FILE         (LPExtractFileNameWithoutExtension(__FILE__, NO))
+#define LP_THIS_FILE         (LPExtractFileNameWithoutExtension(__FILE__, NO))
 
 /**
- * The THIS_METHOD macro gives you the name of the current objective-c method.
+ * The LP_THIS_METHOD macro gives you the name of the current objective-c method.
  *
- * For example: LPLogWarn(@"%@ - Requires non-nil strings", THIS_METHOD) -> @"setMake:model: requires non-nil strings"
+ * For example: LPLogWarn(@"%@ - Requires non-nil strings", LP_THIS_METHOD) -> @"setMake:model: requires non-nil strings"
  *
  * Note: This does NOT work in straight C functions (non objective-c).
  * Instead you should use the predefined __FUNCTION__ macro.
  **/
 
-#define THIS_METHOD       NSStringFromSelector(_cmd)
+#define LP_THIS_METHOD       NSStringFromSelector(_cmd)
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

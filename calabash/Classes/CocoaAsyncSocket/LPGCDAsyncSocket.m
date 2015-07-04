@@ -7,6 +7,9 @@
 //
 //  https://github.com/robbiehanson/CocoaAsyncSocket
 //
+#if !__has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
 
 #import "LPGCDAsyncSocket.h"
 
@@ -29,73 +32,24 @@
 #import <sys/poll.h>
 #import <sys/uio.h>
 #import <unistd.h>
+#import "LPCocoaLumberjack.h"
 
-#if !__has_feature(objc_arc)
-#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
-// For more information see: https://github.com/robbiehanson/CocoaAsyncSocket/wiki/ARC
+static LPLogLevel __unused lpGCDLogLevel = LPLogLevelError;
+
+#ifndef LP_GCD_LOG_LEVEL_DEF
+  #ifdef lpGCDLogLevel
+    #define LP_GCD_LOG_LEVEL_DEF lpGCDLogLevel
+  #else
+    #define LP_GCD_LOG_LEVEL_DEF LPLogLevelOff
+  #endif
 #endif
 
-
-#ifndef LPGCDAsyncSocketLoggingEnabled
-#define LPGCDAsyncSocketLoggingEnabled 0
-#endif
-
-#if LPGCDAsyncSocketLoggingEnabled
-
-// Logging Enabled - See log level below
-
-// Logging uses the CocoaLumberjack framework (which is also GCD based).
-// https://github.com/robbiehanson/CocoaLumberjack
-//
-// It allows us to do a lot of logging without significantly slowing down the code.
-#import "LPLog.h"
-
-#define LP_LEGACY_MACROS 1
-
-#define LPGCDLogAsync   YES
-#define LPGCDContext LPGCDAsyncSocketLoggingContext
-
-#define LPGCDLogObjc(flg, frmt, ...) LPLOG_OBJC_MAYBE(LPGCDLogAsync, logLevel, flg, LPGCDContext, frmt, ##__VA_ARGS__)
-#define LPGCDLogC(flg, frmt, ...)    LPLOG_C_MAYBE(LPGCDLogAsync, logLevel, flg, LPGCDContext, frmt, ##__VA_ARGS__)
-
-#define LPGCDLogError(frmt, ...)     LPGCDLogObjc(LOG_FLAG_ERROR,   (@"%@: " frmt), THIS_FILE, ##__VA_ARGS__)
-#define LPGCDLogWarn(frmt, ...)      LPGCDLogObjc(LOG_FLAG_WARN,    (@"%@: " frmt), THIS_FILE, ##__VA_ARGS__)
-#define LPGCDLogInfo(frmt, ...)      LPGCDLogObjc(LOG_FLAG_INFO,    (@"%@: " frmt), THIS_FILE, ##__VA_ARGS__)
-#define LPGCDLogVerbose(frmt, ...)   LPGCDLogObjc(LOG_FLAG_VERBOSE, (@"%@: " frmt), THIS_FILE, ##__VA_ARGS__)
-
-#define LPGCDLogCError(frmt, ...)    LPGCDLogC(LOG_FLAG_ERROR,   (@"%@: " frmt), THIS_FILE, ##__VA_ARGS__)
-#define LPGCDLogCWarn(frmt, ...)     LPGCDLogC(LOG_FLAG_WARN,    (@"%@: " frmt), THIS_FILE, ##__VA_ARGS__)
-#define LPGCDLogCInfo(frmt, ...)     LPGCDLogC(LOG_FLAG_INFO,    (@"%@: " frmt), THIS_FILE, ##__VA_ARGS__)
-#define LPGCDLogCVerbose(frmt, ...)  LPGCDLogC(LOG_FLAG_VERBOSE, (@"%@: " frmt), THIS_FILE, ##__VA_ARGS__)
-
-#define LPGCDLogTrace()              LPGCDLogObjc(LOG_FLAG_VERBOSE, @"%@: %@", THIS_FILE, THIS_METHOD)
-#define LPGCDLogCTrace()             LPGCDLogC(LOG_FLAG_VERBOSE, @"%@: %s", THIS_FILE, __FUNCTION__)
-
-#ifndef LPGCDAsyncSocketLogLevel
-#define LPGCDAsyncSocketLogLevel LOG_LEVEL_VERBOSE
-#endif
-
-// Log levels : off, error, warn, info, verbose
-static const int logLevel = LPGCDAsyncSocketLogLevel;
-
-#else
-
-// Logging Disabled
-
-#define LPGCDLogError(frmt, ...)     {}
-#define LPGCDLogWarn(frmt, ...)      {}
-#define LPGCDLogInfo(frmt, ...)      {}
-#define LPGCDLogVerbose(frmt, ...)   {}
-
-#define LPGCDLogCError(frmt, ...)    {}
-#define LPGCDLogCWarn(frmt, ...)     {}
-#define LPGCDLogCInfo(frmt, ...)     {}
-#define LPGCDLogCVerbose(frmt, ...)  {}
-
-#define LPGCDLogTrace()              {}
-#define LPGCDLogCTrace(frmt, ...)    {}
-
-#endif
+#define LPGCDLogError(frmt, ...)   LP_LOG_MAYBE(NO,  LP_GCD_LOG_LEVEL_DEF, LPLogFlagError,   LPGCDAsyncSocketLoggingContext, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
+#define LPGCDLogWarn(frmt, ...)    LP_LOG_MAYBE(YES, LP_GCD_LOG_LEVEL_DEF, LPLogFlagWarning, LPGCDAsyncSocketLoggingContext, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
+#define LPGCDLogInfo(frmt, ...)    LP_LOG_MAYBE(YES, LP_GCD_LOG_LEVEL_DEF, LPLogFlagInfo,    LPGCDAsyncSocketLoggingContext, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
+#define LPGCDLogDebug(frmt, ...)   LP_LOG_MAYBE(YES, LP_GCD_LOG_LEVEL_DEF, LPLogFlagDebug,   LPGCDAsyncSocketLoggingContext, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
+#define LPGCDLogVerbose(frmt, ...) LP_LOG_MAYBE(YES, LP_GCD_LOG_LEVEL_DEF, LPLogFlagVerbose, LPGCDAsyncSocketLoggingContext, nil, __PRETTY_FUNCTION__, frmt, ##__VA_ARGS__)
+#define LPGCDLogTrace()            LP_LOG_MAYBE(YES, LP_GCD_LOG_LEVEL_DEF, LPLogFlagVerbose, LPGCDAsyncSocketLoggingContext, nil, __PRETTY_FUNCTION__, @"%@: %@", LP_THIS_FILE, LP_THIS_METHOD)
 
 /**
  * Seeing a return statements within an inner block
@@ -941,7 +895,7 @@ static dispatch_queue_t cfstreamThreadSetupQueue; // setup & teardown
 }
 
 - (void)dealloc {
-  LPGCDLogInfo(@"%@ - %@ (start)", THIS_METHOD, self);
+  LPGCDLogInfo(@"%@ - %@ (start)", LP_THIS_METHOD, self);
 
   // Set dealloc flag.
   // This is used by closeWithError to ensure we don't accidentally retain ourself.
@@ -968,7 +922,7 @@ static dispatch_queue_t cfstreamThreadSetupQueue; // setup & teardown
 #endif
   socketQueue = NULL;
 
-  LPGCDLogInfo(@"%@ - %@ (finish)", THIS_METHOD, self);
+  LPGCDLogInfo(@"%@ - %@ (finish)", LP_THIS_METHOD, self);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -3705,7 +3659,7 @@ static dispatch_queue_t cfstreamThreadSetupQueue; // setup & teardown
 
   if ([self usingCFStreamForTLS]) {
     if ((flags & kSecureSocketHasBytesAvailable) && CFReadStreamHasBytesAvailable(readStream)) {
-      LPGCDLogVerbose(@"%@ - Flushing ssl buffers into prebuffer...", THIS_METHOD);
+      LPGCDLogVerbose(@"%@ - Flushing ssl buffers into prebuffer...", LP_THIS_METHOD);
 
       CFIndex defaultBytesToRead = (1024 * 4);
 
@@ -3714,7 +3668,7 @@ static dispatch_queue_t cfstreamThreadSetupQueue; // setup & teardown
       uint8_t *buffer = [preBuffer writeBuffer];
 
       CFIndex result = CFReadStreamRead(readStream, buffer, defaultBytesToRead);
-      LPGCDLogVerbose(@"%@ - CFReadStreamRead(): result = %i", THIS_METHOD, (int) result);
+      LPGCDLogVerbose(@"%@ - CFReadStreamRead(): result = %i", LP_THIS_METHOD, (int) result);
 
       if (result > 0) {
         [preBuffer didWrite:result];
@@ -3753,11 +3707,11 @@ static dispatch_queue_t cfstreamThreadSetupQueue; // setup & teardown
   updateEstimatedBytesAvailable();
 
   if (estimatedBytesAvailable > 0) {
-    LPGCDLogVerbose(@"%@ - Flushing ssl buffers into prebuffer...", THIS_METHOD);
+    LPGCDLogVerbose(@"%@ - Flushing ssl buffers into prebuffer...", LP_THIS_METHOD);
 
     BOOL done = NO;
     do {
-      LPGCDLogVerbose(@"%@ - estimatedBytesAvailable = %lu", THIS_METHOD, (unsigned long) estimatedBytesAvailable);
+      LPGCDLogVerbose(@"%@ - estimatedBytesAvailable = %lu", LP_THIS_METHOD, (unsigned long) estimatedBytesAvailable);
 
       // Make sure there's enough room in the prebuffer
 
@@ -3769,13 +3723,13 @@ static dispatch_queue_t cfstreamThreadSetupQueue; // setup & teardown
       size_t bytesRead = 0;
 
       OSStatus result = SSLRead(sslContext, buffer, (size_t) estimatedBytesAvailable, &bytesRead);
-      LPGCDLogVerbose(@"%@ - read from secure socket = %u", THIS_METHOD, (unsigned) bytesRead);
+      LPGCDLogVerbose(@"%@ - read from secure socket = %u", LP_THIS_METHOD, (unsigned) bytesRead);
 
       if (bytesRead > 0) {
         [preBuffer didWrite:bytesRead];
       }
 
-      LPGCDLogVerbose(@"%@ - prebuffer.length = %zu", THIS_METHOD, [preBuffer availableBytes]);
+      LPGCDLogVerbose(@"%@ - prebuffer.length = %zu", LP_THIS_METHOD, [preBuffer availableBytes]);
 
       if (result != noErr) {
         done = YES;
@@ -5399,7 +5353,7 @@ static dispatch_queue_t cfstreamThreadSetupQueue; // setup & teardown
   LPGCDLogVerbose(@"sslReadWithBuffer:%p length:%lu", buffer, (unsigned long) *bufferLength);
 
   if ((socketFDBytesAvailable == 0) && ([sslPreBuffer availableBytes] == 0)) {
-    LPGCDLogVerbose(@"%@ - No data available to read...", THIS_METHOD);
+    LPGCDLogVerbose(@"%@ - No data available to read...", LP_THIS_METHOD);
 
     // No data available to read.
     //
@@ -5425,7 +5379,7 @@ static dispatch_queue_t cfstreamThreadSetupQueue; // setup & teardown
   size_t sslPreBufferLength = [sslPreBuffer availableBytes];
 
   if (sslPreBufferLength > 0) {
-    LPGCDLogVerbose(@"%@: Reading from SSL pre buffer...", THIS_METHOD);
+    LPGCDLogVerbose(@"%@: Reading from SSL pre buffer...", LP_THIS_METHOD);
 
     size_t bytesToCopy;
     if (sslPreBufferLength > totalBytesLeftToBeRead)
@@ -5433,19 +5387,19 @@ static dispatch_queue_t cfstreamThreadSetupQueue; // setup & teardown
     else
       bytesToCopy = sslPreBufferLength;
 
-    LPGCDLogVerbose(@"%@: Copying %zu bytes from sslPreBuffer", THIS_METHOD, bytesToCopy);
+    LPGCDLogVerbose(@"%@: Copying %zu bytes from sslPreBuffer", LP_THIS_METHOD, bytesToCopy);
 
     memcpy(buffer, [sslPreBuffer readBuffer], bytesToCopy);
     [sslPreBuffer didRead:bytesToCopy];
 
-    LPGCDLogVerbose(@"%@: sslPreBuffer.length = %zu", THIS_METHOD, [sslPreBuffer availableBytes]);
+    LPGCDLogVerbose(@"%@: sslPreBuffer.length = %zu", LP_THIS_METHOD, [sslPreBuffer availableBytes]);
 
     totalBytesRead += bytesToCopy;
     totalBytesLeftToBeRead -= bytesToCopy;
 
     done = (totalBytesLeftToBeRead == 0);
 
-    if (done) LPGCDLogVerbose(@"%@: Complete", THIS_METHOD);
+    if (done) LPGCDLogVerbose(@"%@: Complete", LP_THIS_METHOD);
   }
 
   //
@@ -5453,7 +5407,7 @@ static dispatch_queue_t cfstreamThreadSetupQueue; // setup & teardown
   //
 
   if (!done && (socketFDBytesAvailable > 0)) {
-    LPGCDLogVerbose(@"%@: Reading from socket...", THIS_METHOD);
+    LPGCDLogVerbose(@"%@: Reading from socket...", LP_THIS_METHOD);
 
     int socketFD = (socket6FD == SOCKET_NULL) ? socket4FD : socket6FD;
 
@@ -5465,7 +5419,7 @@ static dispatch_queue_t cfstreamThreadSetupQueue; // setup & teardown
       // Read all available data from socket into sslPreBuffer.
       // Then copy requested amount into dataBuffer.
 
-      LPGCDLogVerbose(@"%@: Reading into sslPreBuffer...", THIS_METHOD);
+      LPGCDLogVerbose(@"%@: Reading into sslPreBuffer...", LP_THIS_METHOD);
 
       [sslPreBuffer ensureCapacityForWrite:socketFDBytesAvailable];
 
@@ -5476,7 +5430,7 @@ static dispatch_queue_t cfstreamThreadSetupQueue; // setup & teardown
     else {
       // Read available data from socket directly into dataBuffer.
 
-      LPGCDLogVerbose(@"%@: Reading directly into dataBuffer...", THIS_METHOD);
+      LPGCDLogVerbose(@"%@: Reading directly into dataBuffer...", LP_THIS_METHOD);
 
       readIntoPreBuffer = NO;
       bytesToRead = totalBytesLeftToBeRead;
@@ -5484,10 +5438,10 @@ static dispatch_queue_t cfstreamThreadSetupQueue; // setup & teardown
     }
 
     ssize_t result = read(socketFD, buf, bytesToRead);
-    LPGCDLogVerbose(@"%@: read from socket = %zd", THIS_METHOD, result);
+    LPGCDLogVerbose(@"%@: read from socket = %zd", LP_THIS_METHOD, result);
 
     if (result < 0) {
-      LPGCDLogVerbose(@"%@: read errno = %i", THIS_METHOD, errno);
+      LPGCDLogVerbose(@"%@: read errno = %i", LP_THIS_METHOD, errno);
 
       if (errno != EWOULDBLOCK) {
         socketError = YES;
@@ -5496,7 +5450,7 @@ static dispatch_queue_t cfstreamThreadSetupQueue; // setup & teardown
       socketFDBytesAvailable = 0;
     }
     else if (result == 0) {
-      LPGCDLogVerbose(@"%@: read EOF", THIS_METHOD);
+      LPGCDLogVerbose(@"%@: read EOF", LP_THIS_METHOD);
 
       socketError = YES;
       socketFDBytesAvailable = 0;
@@ -5514,7 +5468,7 @@ static dispatch_queue_t cfstreamThreadSetupQueue; // setup & teardown
 
         size_t bytesToCopy = MIN(totalBytesLeftToBeRead, bytesReadFromSocket);
 
-        LPGCDLogVerbose(@"%@: Copying %zu bytes out of sslPreBuffer", THIS_METHOD, bytesToCopy);
+        LPGCDLogVerbose(@"%@: Copying %zu bytes out of sslPreBuffer", LP_THIS_METHOD, bytesToCopy);
 
         memcpy((uint8_t *) buffer + totalBytesRead, [sslPreBuffer readBuffer], bytesToCopy);
         [sslPreBuffer didRead:bytesToCopy];
@@ -5522,7 +5476,7 @@ static dispatch_queue_t cfstreamThreadSetupQueue; // setup & teardown
         totalBytesRead += bytesToCopy;
         totalBytesLeftToBeRead -= bytesToCopy;
 
-        LPGCDLogVerbose(@"%@: sslPreBuffer.length = %zu", THIS_METHOD, [sslPreBuffer availableBytes]);
+        LPGCDLogVerbose(@"%@: sslPreBuffer.length = %zu", LP_THIS_METHOD, [sslPreBuffer availableBytes]);
       }
       else {
         totalBytesRead += bytesReadFromSocket;
@@ -5531,7 +5485,7 @@ static dispatch_queue_t cfstreamThreadSetupQueue; // setup & teardown
 
       done = (totalBytesLeftToBeRead == 0);
 
-      if (done) LPGCDLogVerbose(@"%@: Complete", THIS_METHOD);
+      if (done) LPGCDLogVerbose(@"%@: Complete", LP_THIS_METHOD);
     }
   }
 
@@ -6403,7 +6357,7 @@ static void CFReadStreamCallback(CFReadStreamRef stream, CFStreamEventType type,
       dispatch_async(asyncSocket->socketQueue, ^{
         @autoreleasepool {
 
-          LPGCDLogCVerbose(@"CFReadStreamCallback - HasBytesAvailable");
+          LPGCDLogVerbose(@"CFReadStreamCallback - HasBytesAvailable");
 
           if (asyncSocket->readStream != stream)
             return_from_block;
@@ -6436,7 +6390,7 @@ static void CFReadStreamCallback(CFReadStreamRef stream, CFStreamEventType type,
       dispatch_async(asyncSocket->socketQueue, ^{
         @autoreleasepool {
 
-          LPGCDLogCVerbose(@"CFReadStreamCallback - Other");
+          LPGCDLogVerbose(@"CFReadStreamCallback - Other");
 
           if (asyncSocket->readStream != stream)
             return_from_block;
@@ -6464,7 +6418,7 @@ static void CFWriteStreamCallback(CFWriteStreamRef stream, CFStreamEventType typ
       dispatch_async(asyncSocket->socketQueue, ^{
         @autoreleasepool {
 
-          LPGCDLogCVerbose(@"CFWriteStreamCallback - CanAcceptBytes");
+          LPGCDLogVerbose(@"CFWriteStreamCallback - CanAcceptBytes");
 
           if (asyncSocket->writeStream != stream)
             return_from_block;
@@ -6497,7 +6451,7 @@ static void CFWriteStreamCallback(CFWriteStreamRef stream, CFStreamEventType typ
       dispatch_async(asyncSocket->socketQueue, ^{
         @autoreleasepool {
 
-          LPGCDLogCVerbose(@"CFWriteStreamCallback - Other");
+          LPGCDLogVerbose(@"CFWriteStreamCallback - Other");
 
           if (asyncSocket->writeStream != stream)
             return_from_block;
@@ -6573,7 +6527,7 @@ static void CFWriteStreamCallback(CFWriteStreamRef stream, CFStreamEventType typ
 }
 
 - (BOOL)registerForStreamCallbacksIncludingReadWrite:(BOOL)includeReadWrite {
-  LPGCDLogVerbose(@"%@ %@", THIS_METHOD, (includeReadWrite ? @"YES" : @"NO"));
+  LPGCDLogVerbose(@"%@ %@", LP_THIS_METHOD, (includeReadWrite ? @"YES" : @"NO"));
 
   NSAssert(dispatch_get_specific(IsOnSocketQueueOrTargetQueueKey), @"Must be dispatched on socketQueue");
   NSAssert((readStream != NULL && writeStream != NULL), @"Read/Write stream is null");
@@ -6744,7 +6698,7 @@ static void CFWriteStreamCallback(CFWriteStreamRef stream, CFStreamEventType typ
  **/
 - (int)socketFD {
   if (!dispatch_get_specific(IsOnSocketQueueOrTargetQueueKey)) {
-    LPGCDLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
+    LPGCDLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", LP_THIS_METHOD);
     return SOCKET_NULL;
   }
 
@@ -6759,7 +6713,7 @@ static void CFWriteStreamCallback(CFWriteStreamRef stream, CFStreamEventType typ
  **/
 - (int)socket4FD {
   if (!dispatch_get_specific(IsOnSocketQueueOrTargetQueueKey)) {
-    LPGCDLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
+    LPGCDLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", LP_THIS_METHOD);
     return SOCKET_NULL;
   }
 
@@ -6771,7 +6725,7 @@ static void CFWriteStreamCallback(CFWriteStreamRef stream, CFStreamEventType typ
  **/
 - (int)socket6FD {
   if (!dispatch_get_specific(IsOnSocketQueueOrTargetQueueKey)) {
-    LPGCDLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
+    LPGCDLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", LP_THIS_METHOD);
     return SOCKET_NULL;
   }
 
@@ -6785,7 +6739,7 @@ static void CFWriteStreamCallback(CFWriteStreamRef stream, CFStreamEventType typ
  **/
 - (CFReadStreamRef)readStream {
   if (!dispatch_get_specific(IsOnSocketQueueOrTargetQueueKey)) {
-    LPGCDLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
+    LPGCDLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", LP_THIS_METHOD);
     return NULL;
   }
 
@@ -6800,7 +6754,7 @@ static void CFWriteStreamCallback(CFWriteStreamRef stream, CFStreamEventType typ
  **/
 - (CFWriteStreamRef)writeStream {
   if (!dispatch_get_specific(IsOnSocketQueueOrTargetQueueKey)) {
-    LPGCDLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
+    LPGCDLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", LP_THIS_METHOD);
     return NULL;
   }
 
@@ -6843,7 +6797,7 @@ static void CFWriteStreamCallback(CFWriteStreamRef stream, CFStreamEventType typ
   LPGCDLogTrace();
 
   if (!dispatch_get_specific(IsOnSocketQueueOrTargetQueueKey)) {
-    LPGCDLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
+    LPGCDLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", LP_THIS_METHOD);
     return NO;
   }
 
@@ -6859,7 +6813,7 @@ static void CFWriteStreamCallback(CFWriteStreamRef stream, CFStreamEventType typ
   LPGCDLogTrace();
 
   if (!dispatch_get_specific(IsOnSocketQueueOrTargetQueueKey)) {
-    LPGCDLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
+    LPGCDLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", LP_THIS_METHOD);
     return NO;
   }
 
@@ -6870,7 +6824,7 @@ static void CFWriteStreamCallback(CFWriteStreamRef stream, CFStreamEventType typ
 
 - (SSLContextRef)sslContext {
   if (!dispatch_get_specific(IsOnSocketQueueOrTargetQueueKey)) {
-    LPGCDLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", THIS_METHOD);
+    LPGCDLogWarn(@"%@ - Method only available from within the context of a performBlock: invocation", LP_THIS_METHOD);
     return NULL;
   }
 
