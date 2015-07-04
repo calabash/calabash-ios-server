@@ -20,30 +20,30 @@
 
 - (NSDictionary *) JSONResponseForMethod:(NSString *) method URI:(NSString *) path data:(NSDictionary *) data {
   NSString *originalSelStr = [data objectForKey:@"selector"];
-  NSString *selStr = originalSelStr;
+  NSString *selectorName = originalSelStr;
   if (![originalSelStr hasSuffix:@":"]) {
-    selStr = [selStr stringByAppendingString:@":"];
+    selectorName = [selectorName stringByAppendingString:@":"];
   }
 
-  SEL sel = NSSelectorFromString(selStr);
+  SEL selector = NSSelectorFromString(selectorName);
 
-  if ([[[UIApplication sharedApplication] delegate] respondsToSelector:sel]) {
-    id arg = [data objectForKey:@"arg"];
-    id res = [[[UIApplication sharedApplication] delegate]
-            performSelector:sel withObject:arg];
-    if (!res) {res = [NSNull null];}
-    return [NSDictionary dictionaryWithObjectsAndKeys:res, @"result",
+  if ([[[UIApplication sharedApplication] delegate] respondsToSelector:selector]) {
+    id argument = [data objectForKey:@"arg"];
+    id result = [[[UIApplication sharedApplication] delegate]
+            performSelector:selector withObject:argument];
+    if (!result) {result = [NSNull null];}
+    return [NSDictionary dictionaryWithObjectsAndKeys:result, @"result",
                                                       @"SUCCESS", @"outcome",
                                                       nil];
   } else {
 
     NSString *details = [NSString stringWithFormat:@"you must define the selector '%@' in your UIApplicationDelegate.",
-                                                   selStr];
+                                                   selectorName];
     NSString *exDecl0 = @"// declaration";
-    NSString *exDecl1 = [NSString stringWithFormat:@"-(id)%@ (id)arg;", selStr];
+    NSString *exDecl1 = [NSString stringWithFormat:@"-(id)%@ (id)arg;", selectorName];
     NSString *exImp0 = @"// implementation";
     NSString *exImp1 = [NSString stringWithFormat:@"-(id)%@ (id)anArg {",
-                                                  selStr];
+                                                  selectorName];
     NSString *exImp2 = [NSString stringWithFormat:@"  // do custom stuff"];
     NSString *exImp3 = [NSString stringWithFormat:@"  // return examples"];
     NSString *exImp4 = [NSString stringWithFormat:@"  return @\"OK\";"];
@@ -52,7 +52,7 @@
     NSString *exImp7 = [NSString stringWithFormat:@"}"];
     NSString *usage0 = [NSString stringWithFormat:@"// Ruby usage"];
     NSString *usage1 = [NSString stringWithFormat:@"backdoor('%@', '<arg>')",
-                                                  selStr];
+                                                  selectorName];
 
     NSArray *exArr = [NSArray arrayWithObjects:details, @"\n", exDecl0, exDecl1,
                                                @"\n", exImp0, exImp1, exImp2,
@@ -62,7 +62,7 @@
     NSString *detailsStr = [exArr componentsJoinedByString:@"\n"];
 
     NSString *reasonStr = [NSString stringWithFormat:@"application delegate does not respond to selector '%@'",
-                                                     selStr];
+                                                     selectorName];
     return [NSDictionary dictionaryWithObjectsAndKeys:detailsStr, @"details",
                                                       reasonStr, @"reason",
                                                       @"FAILURE", @"outcome",
