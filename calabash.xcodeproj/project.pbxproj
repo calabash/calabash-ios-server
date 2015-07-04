@@ -31,7 +31,7 @@
 		B15BF99F19ABB1DD00B38577 /* LPHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B814E6565500663205 /* LPHTTPMessage.m */; };
 		B15BF9A019ABB1DD00B38577 /* LPHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9BB14E6565500663205 /* LPHTTPServer.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
 		B15BF9A119ABB1DD00B38577 /* NSData+LPCHSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98414E5215800663205 /* NSData+LPCHSExtensions.m */; };
-		B15BF9A219ABB1DD00B38577 /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* DDNumber.m */; };
+		B15BF9A219ABB1DD00B38577 /* NSNumber+LPCHSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* NSNumber+LPCHSExtensions.m */; };
 		B15BF9A319ABB1DD00B38577 /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98814E5215800663205 /* DDRange.m */; };
 		B15BF9A419ABB1DD00B38577 /* LPHTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C99F14E6564200663205 /* LPHTTPAsyncFileResponse.m */; };
 		B15BF9A519ABB1DD00B38577 /* LPHTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A114E6564200663205 /* LPHTTPDataResponse.m */; };
@@ -112,7 +112,7 @@
 		B1D5BD7C19A23BCE0070E8CE /* LPHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B814E6565500663205 /* LPHTTPMessage.m */; };
 		B1D5BD7D19A23BCE0070E8CE /* LPHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9BB14E6565500663205 /* LPHTTPServer.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
 		B1D5BD7E19A23BCE0070E8CE /* NSData+LPCHSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98414E5215800663205 /* NSData+LPCHSExtensions.m */; };
-		B1D5BD7F19A23BCE0070E8CE /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* DDNumber.m */; };
+		B1D5BD7F19A23BCE0070E8CE /* NSNumber+LPCHSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* NSNumber+LPCHSExtensions.m */; };
 		B1D5BD8019A23BCE0070E8CE /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98814E5215800663205 /* DDRange.m */; };
 		B1D5BD8119A23BCE0070E8CE /* LPHTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C99F14E6564200663205 /* LPHTTPAsyncFileResponse.m */; };
 		B1D5BD8219A23BCE0070E8CE /* LPHTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A114E6564200663205 /* LPHTTPDataResponse.m */; };
@@ -217,7 +217,7 @@
 		F5091BE018C4E1D700C85307 /* LPHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B814E6565500663205 /* LPHTTPMessage.m */; };
 		F5091BE118C4E1D700C85307 /* LPHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9BB14E6565500663205 /* LPHTTPServer.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
 		F5091BE218C4E1D700C85307 /* NSData+LPCHSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98414E5215800663205 /* NSData+LPCHSExtensions.m */; };
-		F5091BE318C4E1D700C85307 /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* DDNumber.m */; };
+		F5091BE318C4E1D700C85307 /* NSNumber+LPCHSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* NSNumber+LPCHSExtensions.m */; };
 		F5091BE418C4E1D700C85307 /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98814E5215800663205 /* DDRange.m */; };
 		F5091BE518C4E1D700C85307 /* LPHTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C99F14E6564200663205 /* LPHTTPAsyncFileResponse.m */; };
 		F5091BE618C4E1D700C85307 /* LPHTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A114E6564200663205 /* LPHTTPDataResponse.m */; };
@@ -296,7 +296,7 @@
 		F50CBF841A040564004AC9DA /* LPHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B814E6565500663205 /* LPHTTPMessage.m */; };
 		F50CBF851A040564004AC9DA /* LPHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9BB14E6565500663205 /* LPHTTPServer.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
 		F50CBF861A040564004AC9DA /* NSData+LPCHSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98414E5215800663205 /* NSData+LPCHSExtensions.m */; };
-		F50CBF871A040564004AC9DA /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* DDNumber.m */; };
+		F50CBF871A040564004AC9DA /* NSNumber+LPCHSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* NSNumber+LPCHSExtensions.m */; };
 		F50CBF881A040564004AC9DA /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98814E5215800663205 /* DDRange.m */; };
 		F50CBF891A04056F004AC9DA /* LPHTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C99F14E6564200663205 /* LPHTTPAsyncFileResponse.m */; };
 		F50CBF8A1A04056F004AC9DA /* LPHTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A114E6564200663205 /* LPHTTPDataResponse.m */; };
@@ -581,8 +581,8 @@
 		B111321614D5837900982BBC /* LPAsyncPlaybackRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPAsyncPlaybackRoute.m; sourceTree = "<group>"; };
 		B116C98314E5215800663205 /* NSData+LPCHSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+LPCHSExtensions.h"; path = "calabash/Classes/CocoaHttpServer/Categories/NSData+LPCHSExtensions.h"; sourceTree = SOURCE_ROOT; };
 		B116C98414E5215800663205 /* NSData+LPCHSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+LPCHSExtensions.m"; path = "calabash/Classes/CocoaHttpServer/Categories/NSData+LPCHSExtensions.m"; sourceTree = SOURCE_ROOT; };
-		B116C98514E5215800663205 /* DDNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDNumber.h; path = calabash/Classes/CocoaHttpServer/Categories/DDNumber.h; sourceTree = SOURCE_ROOT; };
-		B116C98614E5215800663205 /* DDNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDNumber.m; path = calabash/Classes/CocoaHttpServer/Categories/DDNumber.m; sourceTree = SOURCE_ROOT; };
+		B116C98514E5215800663205 /* NSNumber+LPCHSExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSNumber+LPCHSExtensions.h"; path = "calabash/Classes/CocoaHttpServer/Categories/NSNumber+LPCHSExtensions.h"; sourceTree = SOURCE_ROOT; };
+		B116C98614E5215800663205 /* NSNumber+LPCHSExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSNumber+LPCHSExtensions.m"; path = "calabash/Classes/CocoaHttpServer/Categories/NSNumber+LPCHSExtensions.m"; sourceTree = SOURCE_ROOT; };
 		B116C98714E5215800663205 /* DDRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDRange.h; path = calabash/Classes/CocoaHttpServer/Categories/DDRange.h; sourceTree = SOURCE_ROOT; };
 		B116C98814E5215800663205 /* DDRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDRange.m; path = calabash/Classes/CocoaHttpServer/Categories/DDRange.m; sourceTree = SOURCE_ROOT; };
 		B116C99E14E6564200663205 /* LPHTTPAsyncFileResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPHTTPAsyncFileResponse.h; sourceTree = "<group>"; };
@@ -996,8 +996,8 @@
 			children = (
 				B116C98314E5215800663205 /* NSData+LPCHSExtensions.h */,
 				B116C98414E5215800663205 /* NSData+LPCHSExtensions.m */,
-				B116C98514E5215800663205 /* DDNumber.h */,
-				B116C98614E5215800663205 /* DDNumber.m */,
+				B116C98514E5215800663205 /* NSNumber+LPCHSExtensions.h */,
+				B116C98614E5215800663205 /* NSNumber+LPCHSExtensions.m */,
 				B116C98714E5215800663205 /* DDRange.h */,
 				B116C98814E5215800663205 /* DDRange.m */,
 			);
@@ -2038,7 +2038,7 @@
 				B15BF99F19ABB1DD00B38577 /* LPHTTPMessage.m in Sources */,
 				B15BF9A019ABB1DD00B38577 /* LPHTTPServer.m in Sources */,
 				B15BF9A119ABB1DD00B38577 /* NSData+LPCHSExtensions.m in Sources */,
-				B15BF9A219ABB1DD00B38577 /* DDNumber.m in Sources */,
+				B15BF9A219ABB1DD00B38577 /* NSNumber+LPCHSExtensions.m in Sources */,
 				B15BF9A319ABB1DD00B38577 /* DDRange.m in Sources */,
 				F5A8B4AC1B39BFEB00F390CA /* LPTTYLogger.m in Sources */,
 				B15BF9A419ABB1DD00B38577 /* LPHTTPAsyncFileResponse.m in Sources */,
@@ -2147,7 +2147,7 @@
 				B1D5BD7D19A23BCE0070E8CE /* LPHTTPServer.m in Sources */,
 				B1D5BD7E19A23BCE0070E8CE /* NSData+LPCHSExtensions.m in Sources */,
 				B1F772311A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */,
-				B1D5BD7F19A23BCE0070E8CE /* DDNumber.m in Sources */,
+				B1D5BD7F19A23BCE0070E8CE /* NSNumber+LPCHSExtensions.m in Sources */,
 				B1D5BD8019A23BCE0070E8CE /* DDRange.m in Sources */,
 				B1D5BD8119A23BCE0070E8CE /* LPHTTPAsyncFileResponse.m in Sources */,
 				B1D5BD8219A23BCE0070E8CE /* LPHTTPDataResponse.m in Sources */,
@@ -2259,7 +2259,7 @@
 				F5091BE118C4E1D700C85307 /* LPHTTPServer.m in Sources */,
 				F5091BE218C4E1D700C85307 /* NSData+LPCHSExtensions.m in Sources */,
 				B1F7722E1A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */,
-				F5091BE318C4E1D700C85307 /* DDNumber.m in Sources */,
+				F5091BE318C4E1D700C85307 /* NSNumber+LPCHSExtensions.m in Sources */,
 				F5091BE418C4E1D700C85307 /* DDRange.m in Sources */,
 				F5091BE518C4E1D700C85307 /* LPHTTPAsyncFileResponse.m in Sources */,
 				F5091BE618C4E1D700C85307 /* LPHTTPDataResponse.m in Sources */,
@@ -2444,7 +2444,7 @@
 				F5A8B4701B39BFEB00F390CA /* LPMultiFormatter.m in Sources */,
 				F50CBFA31A0405B2004AC9DA /* LPAppPropertyRoute.m in Sources */,
 				F50CBFB41A0405CE004AC9DA /* LPISO8601DateFormatter.m in Sources */,
-				F50CBF871A040564004AC9DA /* DDNumber.m in Sources */,
+				F50CBF871A040564004AC9DA /* NSNumber+LPCHSExtensions.m in Sources */,
 				B1670E341A3248CC00000A62 /* LPSharedUIATextField.m in Sources */,
 				F50CBF851A040564004AC9DA /* LPHTTPServer.m in Sources */,
 				F50CBFAE1A0405B2004AC9DA /* LPNoContentResponse.m in Sources */,

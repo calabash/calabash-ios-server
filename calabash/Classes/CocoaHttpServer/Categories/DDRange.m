@@ -1,5 +1,5 @@
 #import "DDRange.h"
-#import "DDNumber.h"
+#import "NSNumber+LPCHSExtensions.h"
 
 LPDDRange LPDDUnionRange(LPDDRange range1, LPDDRange range2)
 {
