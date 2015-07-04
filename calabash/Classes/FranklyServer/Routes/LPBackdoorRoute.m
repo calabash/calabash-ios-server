@@ -29,15 +29,27 @@
   SEL selector = NSSelectorFromString(selectorName);
   id<UIApplicationDelegate> delegate = [[UIApplication sharedApplication] delegate];
   if ([delegate respondsToSelector:selector]) {
-
     id argument = [data objectForKey:@"arg"];
     id result = nil;
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-      result = [delegate performSelector:selector withObject:argument];
-#pragma clang diagnostic pop
 
-    if (!result) { result = [NSNull null]; }
+    NSMethodSignature *methodSignature;
+    methodSignature = [[delegate class] instanceMethodSignatureForSelector:selector];
+
+    NSInvocation *invocation;
+    invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+
+    [invocation setTarget:delegate];
+    [invocation setSelector:selector];
+    [invocation setArgument:&argument atIndex:2];
+
+    [invocation retainArguments];
+
+    void *buffer;
+    [invocation invoke];
+    [invocation getReturnValue:&buffer];
+    result = (__bridge id)buffer;
+
+    if (!result) {result = [NSNull null];}
     return [NSDictionary dictionaryWithObjectsAndKeys:result, @"result",
                                                       @"SUCCESS", @"outcome",
                                                       nil];
