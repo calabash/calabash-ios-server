@@ -31,7 +31,7 @@
 		B15BF99F19ABB1DD00B38577 /* LPHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B814E6565500663205 /* LPHTTPMessage.m */; };
 		B15BF9A019ABB1DD00B38577 /* LPHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9BB14E6565500663205 /* LPHTTPServer.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
 		B15BF9A119ABB1DD00B38577 /* NSData+LPCHSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98414E5215800663205 /* NSData+LPCHSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		B15BF9A219ABB1DD00B38577 /* NSNumber+LPCHSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* NSNumber+LPCHSExtensions.m */; };
+		B15BF9A219ABB1DD00B38577 /* NSNumber+LPCHSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* NSNumber+LPCHSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9A319ABB1DD00B38577 /* LPDDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98814E5215800663205 /* LPDDRange.m */; };
 		B15BF9A419ABB1DD00B38577 /* LPHTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C99F14E6564200663205 /* LPHTTPAsyncFileResponse.m */; };
 		B15BF9A519ABB1DD00B38577 /* LPHTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A114E6564200663205 /* LPHTTPDataResponse.m */; };
@@ -112,7 +112,7 @@
 		B1D5BD7C19A23BCE0070E8CE /* LPHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B814E6565500663205 /* LPHTTPMessage.m */; };
 		B1D5BD7D19A23BCE0070E8CE /* LPHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9BB14E6565500663205 /* LPHTTPServer.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
 		B1D5BD7E19A23BCE0070E8CE /* NSData+LPCHSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98414E5215800663205 /* NSData+LPCHSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		B1D5BD7F19A23BCE0070E8CE /* NSNumber+LPCHSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* NSNumber+LPCHSExtensions.m */; };
+		B1D5BD7F19A23BCE0070E8CE /* NSNumber+LPCHSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* NSNumber+LPCHSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BD8019A23BCE0070E8CE /* LPDDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98814E5215800663205 /* LPDDRange.m */; };
 		B1D5BD8119A23BCE0070E8CE /* LPHTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C99F14E6564200663205 /* LPHTTPAsyncFileResponse.m */; };
 		B1D5BD8219A23BCE0070E8CE /* LPHTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A114E6564200663205 /* LPHTTPDataResponse.m */; };
@@ -217,7 +217,7 @@
 		F5091BE018C4E1D700C85307 /* LPHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B814E6565500663205 /* LPHTTPMessage.m */; };
 		F5091BE118C4E1D700C85307 /* LPHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9BB14E6565500663205 /* LPHTTPServer.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
 		F5091BE218C4E1D700C85307 /* NSData+LPCHSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98414E5215800663205 /* NSData+LPCHSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5091BE318C4E1D700C85307 /* NSNumber+LPCHSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* NSNumber+LPCHSExtensions.m */; };
+		F5091BE318C4E1D700C85307 /* NSNumber+LPCHSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* NSNumber+LPCHSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091BE418C4E1D700C85307 /* LPDDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98814E5215800663205 /* LPDDRange.m */; };
 		F5091BE518C4E1D700C85307 /* LPHTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C99F14E6564200663205 /* LPHTTPAsyncFileResponse.m */; };
 		F5091BE618C4E1D700C85307 /* LPHTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A114E6564200663205 /* LPHTTPDataResponse.m */; };
@@ -296,7 +296,7 @@
 		F50CBF841A040564004AC9DA /* LPHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B814E6565500663205 /* LPHTTPMessage.m */; };
 		F50CBF851A040564004AC9DA /* LPHTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9BB14E6565500663205 /* LPHTTPServer.m */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
 		F50CBF861A040564004AC9DA /* NSData+LPCHSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98414E5215800663205 /* NSData+LPCHSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F50CBF871A040564004AC9DA /* NSNumber+LPCHSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* NSNumber+LPCHSExtensions.m */; };
+		F50CBF871A040564004AC9DA /* NSNumber+LPCHSExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98614E5215800663205 /* NSNumber+LPCHSExtensions.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBF881A040564004AC9DA /* LPDDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C98814E5215800663205 /* LPDDRange.m */; };
 		F50CBF891A04056F004AC9DA /* LPHTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C99F14E6564200663205 /* LPHTTPAsyncFileResponse.m */; };
 		F50CBF8A1A04056F004AC9DA /* LPHTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A114E6564200663205 /* LPHTTPDataResponse.m */; };
