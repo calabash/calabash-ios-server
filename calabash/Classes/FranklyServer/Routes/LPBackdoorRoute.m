@@ -27,12 +27,17 @@
   }
 
   SEL selector = NSSelectorFromString(selectorName);
+  id<UIApplicationDelegate> delegate = [[UIApplication sharedApplication] delegate];
+  if ([delegate respondsToSelector:selector]) {
 
-  if ([[[UIApplication sharedApplication] delegate] respondsToSelector:selector]) {
     id argument = [data objectForKey:@"arg"];
-    id result = [[[UIApplication sharedApplication] delegate]
-            performSelector:selector withObject:argument];
-    if (!result) {result = [NSNull null];}
+    id result = nil;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+      result = [delegate performSelector:selector withObject:argument];
+#pragma clang diagnostic pop
+
+    if (!result) { result = [NSNull null]; }
     return [NSDictionary dictionaryWithObjectsAndKeys:result, @"result",
                                                       @"SUCCESS", @"outcome",
                                                       nil];
