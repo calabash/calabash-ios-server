@@ -37,7 +37,7 @@
 		B15BF9A519ABB1DD00B38577 /* LPHTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A114E6564200663205 /* LPHTTPDataResponse.m */; };
 		B15BF9A619ABB1DD00B38577 /* LPHTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A314E6564200663205 /* LPHTTPDynamicFileResponse.m */; };
 		B15BF9A719ABB1DD00B38577 /* LPHTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A514E6564200663205 /* LPHTTPFileResponse.m */; };
-		B15BF9A819ABB1DD00B38577 /* LPHTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A714E6564200663205 /* LPHTTPRedirectResponse.m */; };
+		B15BF9A819ABB1DD00B38577 /* LPHTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A714E6564200663205 /* LPHTTPRedirectResponse.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9A919ABB1DD00B38577 /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; };
 		B15BF9AA19ABB1DD00B38577 /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; };
 		B15BF9AB19ABB1DD00B38577 /* LPScrollToMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A718B392370094E71E /* LPScrollToMarkOperation.m */; };
@@ -120,7 +120,7 @@
 		B1D5BD8419A23BCE0070E8CE /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BD8519A23BCE0070E8CE /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A318B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m */; };
 		B1D5BD8619A23BCE0070E8CE /* LPHTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A514E6564200663205 /* LPHTTPFileResponse.m */; };
-		B1D5BD8719A23BCE0070E8CE /* LPHTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A714E6564200663205 /* LPHTTPRedirectResponse.m */; };
+		B1D5BD8719A23BCE0070E8CE /* LPHTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A714E6564200663205 /* LPHTTPRedirectResponse.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BD8819A23BCE0070E8CE /* LPScrollToMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A718B392370094E71E /* LPScrollToMarkOperation.m */; };
 		B1D5BD8919A23BCE0070E8CE /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; };
 		B1D5BD8A19A23BCE0070E8CE /* LPQueryAllOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */; };
@@ -224,7 +224,7 @@
 		F5091BE718C4E1D700C85307 /* LPHTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A314E6564200663205 /* LPHTTPDynamicFileResponse.m */; };
 		F5091BE818C4E1D700C85307 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A318B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m */; };
 		F5091BE918C4E1D700C85307 /* LPHTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A514E6564200663205 /* LPHTTPFileResponse.m */; };
-		F5091BEA18C4E1D700C85307 /* LPHTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A714E6564200663205 /* LPHTTPRedirectResponse.m */; };
+		F5091BEA18C4E1D700C85307 /* LPHTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A714E6564200663205 /* LPHTTPRedirectResponse.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091BEB18C4E1D700C85307 /* LPScrollToMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A718B392370094E71E /* LPScrollToMarkOperation.m */; };
 		F5091BEC18C4E1D700C85307 /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; };
 		F5091BED18C4E1D700C85307 /* LPQueryAllOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */; };
@@ -302,7 +302,7 @@
 		F50CBF8A1A04056F004AC9DA /* LPHTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A114E6564200663205 /* LPHTTPDataResponse.m */; };
 		F50CBF8B1A04056F004AC9DA /* LPHTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A314E6564200663205 /* LPHTTPDynamicFileResponse.m */; };
 		F50CBF8C1A04056F004AC9DA /* LPHTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A514E6564200663205 /* LPHTTPFileResponse.m */; };
-		F50CBF8D1A04056F004AC9DA /* LPHTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A714E6564200663205 /* LPHTTPRedirectResponse.m */; };
+		F50CBF8D1A04056F004AC9DA /* LPHTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A714E6564200663205 /* LPHTTPRedirectResponse.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBF8E1A04058C004AC9DA /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; };
 		F50CBF8F1A04058C004AC9DA /* LPI.mm in Sources */ = {isa = PBXBuildFile; fileRef = B184FDBD14B6DB2B002A744C /* LPI.mm */; };
 		F50CBF901A04058C004AC9DA /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; };
