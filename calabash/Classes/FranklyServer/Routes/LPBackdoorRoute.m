@@ -10,6 +10,7 @@
 #endif
 
 #import "LPBackdoorRoute.h"
+#import "LPCocoaLumberjack.h"
 
 @implementation LPBackdoorRoute
 
