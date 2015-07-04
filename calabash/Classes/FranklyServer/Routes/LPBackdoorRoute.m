@@ -5,6 +5,9 @@
 //  Created by Karl Krukow on 08/04/12.
 //  Copyright (c) 2012 LessPainful. All rights reserved.
 //
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
 
 #import "LPBackdoorRoute.h"
 
