@@ -62,3 +62,8 @@ $ scripts/test/test-make-rules.rb
 # cucumber tests + make rules
 $ scripts/test/run
 ```
+
+### Licenses
+
+Calabash iOS Server uses several third-party sources.  You can find the
+licenses for these sources in the third-party-licenses directory.
