@@ -13,6 +13,7 @@
 #import "LPConditionRoute.h"
 #import "LPOperation.h"
 #import "LPRepeatingTimerProtocol.h"
+#import "LPCocoaLumberjack.h"
 
 #define kLPConditionRouteNoNetworkIndicator @"NO_NETWORK_INDICATOR"
 #define kLPConditionRouteNoneAnimating @"NONE_ANIMATING"
