@@ -911,7 +911,6 @@
 		F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSSKeychain.m; sourceTree = "<group>"; };
 		F5E2D1DB18C9120E00A0D9B6 /* LPSSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPSSKeychainQuery.h; sourceTree = "<group>"; };
 		F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSSKeychainQuery.m; sourceTree = "<group>"; };
-		F5E2D1DD18C9120E00A0D9B6 /* SSKeychain.LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SSKeychain.LICENSE; sourceTree = "<group>"; };
 		F5F2D5DF1ACAC3B60027937B /* LPIsWebViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPIsWebViewTest.m; sourceTree = "<group>"; };
 		F5F2D5E11ACACF2F0027937B /* LPIsWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPIsWebView.h; sourceTree = "<group>"; };
 		F5F2D5E21ACACF2F0027937B /* LPIsWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPIsWebView.m; sourceTree = "<group>"; };
@@ -1710,7 +1709,6 @@
 				F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */,
 				F5E2D1DB18C9120E00A0D9B6 /* LPSSKeychainQuery.h */,
 				F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */,
-				F5E2D1DD18C9120E00A0D9B6 /* SSKeychain.LICENSE */,
 			);
 			path = SSKeychain;
 			sourceTree = "<group>";
