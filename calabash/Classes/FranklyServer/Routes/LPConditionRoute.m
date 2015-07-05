@@ -13,6 +13,7 @@
 #import "LPConditionRoute.h"
 #import "LPOperation.h"
 #import "LPRepeatingTimerProtocol.h"
+#import "LPCocoaLumberjack.h"
 
 #define kLPConditionRouteNoNetworkIndicator @"NO_NETWORK_INDICATOR"
 #define kLPConditionRouteNoneAnimating @"NONE_ANIMATING"
@@ -20,18 +21,18 @@
 
 @interface LPConditionRoute () <LPRepeatingTimerProtocol>
 
-@property(nonatomic, strong) NSTimer *timer;
-@property(nonatomic, assign) NSUInteger maxCount;
-@property(nonatomic, assign) NSUInteger curCount;
-@property(nonatomic, assign) NSUInteger stablePeriod;
-@property(nonatomic, assign) NSUInteger stablePeriodCount;
-@property(nonatomic, assign) NSTimeInterval timerRepeatInterval;
+@property(atomic, assign) NSUInteger maxCount;
+@property(atomic, assign) NSUInteger curCount;
+@property(atomic, assign) NSUInteger stablePeriod;
+@property(atomic, assign) NSUInteger stablePeriodCount;
+@property(atomic, assign) NSTimeInterval timerRepeatInterval;
+@property(atomic, strong) dispatch_source_t repeatingTimer;
 
 @end
 
 @implementation LPConditionRoute
 
-@synthesize timer = _timer;
+@synthesize repeatingTimer = _repeatingTimer;
 
 #pragma mark - Memory Management
 
@@ -41,35 +42,64 @@
 
 - (void) startAndRetainRepeatingTimers {
   [self stopAndReleaseRepeatingTimers];
-  _timer = [NSTimer scheduledTimerWithTimeInterval:self.timerRepeatInterval
-                                            target:self
-                                          selector:@selector(checkConditionWithTimer:)
-                                          userInfo:nil
-                                           repeats:YES];
+
+  NSTimeInterval interval = self.timerRepeatInterval;
+
+  dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+  _repeatingTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+
+  dispatch_time_t startTime = dispatch_time(DISPATCH_TIME_NOW, 0);
+  uint64_t intervalNano = (uint64_t)(interval * NSEC_PER_SEC);
+
+  dispatch_source_set_timer(_repeatingTimer, startTime, intervalNano, 0);
+
+  dispatch_source_set_event_handler(_repeatingTimer, ^{
+    [self checkConditionWithTimer:nil];
+  });
+
+  dispatch_resume(_repeatingTimer);
 }
 
 - (void) stopAndReleaseRepeatingTimers {
-  if (_timer != nil) {
-    [_timer invalidate];
-    _timer = nil;
+  if (_repeatingTimer) {
+    dispatch_source_cancel(_repeatingTimer);
+    _repeatingTimer = nil;
   }
 }
 
-// Should only return YES after the LPHTTPConnection has read all available data.
 - (BOOL) isDone {
-  return !self.timer && [super isDone];
+  return !_repeatingTimer && [super isDone];
 }
 
 - (void) beginOperation {
   self.done = NO;
   NSString *condition = [self.data objectForKey:@"condition"];
   if (!condition) {
-    NSLog(@"condition not specified");
-    [self failWithMessageFormat:@"condition parameter missing" message:nil];
+    LPLogError(@"Condition not specified");
+    [self failWithMessageFormat:@"Condition parameter missing" message:nil];
     return;
   }
-  self.curCount = 0;
 
+  if (!([condition isEqualToString:kLPConditionRouteNoNetworkIndicator] ||
+        [condition isEqualToString:kLPConditionRouteNoneAnimating])) {
+    LPLogError(@"Expected condition: '%@' or '%@'",
+               kLPConditionRouteNoneAnimating, kLPConditionRouteNoNetworkIndicator);
+    LPLogError(@"Found condition: '%@'", condition);
+    [self failWithMessageFormat:@"Unknown condition '%@'" message:condition];
+    return;
+  }
+
+  if ([condition isEqualToString:kLPConditionRouteNoneAnimating]) {
+    id query = [self.data objectForKey:@"query"];
+    if (!query || [query isEqualToString:@""]) {
+      LPLogError(@"Condition received '%@' without a query argument",
+                 kLPConditionRouteNoneAnimating);
+      [self failWithMessageFormat:@"No query specified." message:nil];
+      return;
+    }
+  }
+
+  self.curCount = 0;
 
   NSNumber *timeoutInSecs = [self.data objectForKey:@"timeout"];
   if (!timeoutInSecs) {
@@ -104,9 +134,10 @@
 }
 
 - (void) checkConditionWithTimer:(NSTimer *) aTimer {
-
-  if (!aTimer) { return; }
-  if (!aTimer.isValid) { return; }
+  if (!_repeatingTimer) {
+    LPLogWarn(@"Check condition received a nil timer - returning");
+    return;
+  }
 
   NSString *condition = [self.data objectForKey:@"condition"];
 
@@ -117,37 +148,30 @@
 
   self.curCount += 1;
   if ([condition isEqualToString:kLPConditionRouteNoneAnimating]) {
-
     id query = [self.data objectForKey:@"query"];
-    if (query) {
-      NSArray *result = [LPOperation performQuery:query];
-      for (id v in result) {
-        if ([v isKindOfClass:[UIView class]]) {
-          UIView *view = (UIView *) v;
-          NSArray *animationKeys = [[view.layer animationKeys] copy];
-          for (NSString *key in animationKeys) {
-            CAAnimation *animation = [view.layer animationForKey:key];
-            // Only consider animations with a duration greater than the defined
-            // limit. This is intended to work around the parallax animation
-            // attached to iOS 8 UIAlertViews and UIActionSheets
-            if (animation.duration > kLPConditionRouteAnimationDurationLimit) {
-              self.stablePeriodCount = 0;
-              return;
-            }
+    NSArray *result = [LPOperation performQuery:query];
+    for (id v in result) {
+      if ([v isKindOfClass:[UIView class]]) {
+        UIView *view = (UIView *) v;
+        NSArray *animationKeys = [[view.layer animationKeys] copy];
+        for (NSString *key in animationKeys) {
+          CAAnimation *animation = [view.layer animationForKey:key];
+          // Only consider animations with a duration greater than the defined
+          // limit. This is intended to work around the parallax animation
+          // attached to iOS 8 UIAlertViews and UIActionSheets
+          if (animation.duration > kLPConditionRouteAnimationDurationLimit) {
+            self.stablePeriodCount = 0;
+            return;
           }
         }
       }
-      self.stablePeriodCount += 1;
-      if (self.stablePeriodCount == self.stablePeriod) {
-        [self succeedWithResult:[NSArray array]];
-        return;
-      }
-    } else {
-      [self failWithMessageFormat:@"No query specified." message:nil];
-      return;
     }
 
-    return;
+    self.stablePeriodCount += 1;
+    if (self.stablePeriodCount == self.stablePeriod) {
+      [self succeedWithResult:[NSArray array]];
+      return;
+    }
   } else if ([condition isEqualToString:kLPConditionRouteNoNetworkIndicator]) {
     if ([[UIApplication sharedApplication] isNetworkActivityIndicatorVisible]) {
       self.stablePeriodCount = 0;
@@ -159,23 +183,14 @@
     }
     return;
   }
-  [self failWithMessageFormat:@"Unknown condition %@" message:condition];
 }
 
-
 - (void) failWithMessageFormat:(NSString *) messageFmt message:(NSString *) message {
-  // Prevent accidental double writing of http chunks
-  if (!self.timer) { return; }
-
   [self stopAndReleaseRepeatingTimers];
   [super failWithMessageFormat:messageFmt message:message];
 }
 
-
 - (void) succeedWithResult:(NSArray *) result {
-  // Prevent accidental double writing of http chunks
-  if (!self.timer) { return; }
-
   [self stopAndReleaseRepeatingTimers];
   [super succeedWithResult:result];
 }
