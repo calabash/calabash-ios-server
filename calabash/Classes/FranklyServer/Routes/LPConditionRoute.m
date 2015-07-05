@@ -89,6 +89,16 @@
     return;
   }
 
+  if ([condition isEqualToString:kLPConditionRouteNoneAnimating]) {
+    id query = [self.data objectForKey:@"query"];
+    if (!query || [query isEqualToString:@""]) {
+      LPLogError(@"Condition received '%@' without a query argument",
+                 kLPConditionRouteNoneAnimating);
+      [self failWithMessageFormat:@"No query specified." message:nil];
+      return;
+    }
+  }
+
   self.curCount = 0;
 
   NSNumber *timeoutInSecs = [self.data objectForKey:@"timeout"];
@@ -139,34 +149,29 @@
   self.curCount += 1;
   if ([condition isEqualToString:kLPConditionRouteNoneAnimating]) {
     id query = [self.data objectForKey:@"query"];
-    if (query) {
-      NSArray *result = [LPOperation performQuery:query];
-      for (id v in result) {
-        if ([v isKindOfClass:[UIView class]]) {
-          UIView *view = (UIView *) v;
-          NSArray *animationKeys = [[view.layer animationKeys] copy];
-          for (NSString *key in animationKeys) {
-            CAAnimation *animation = [view.layer animationForKey:key];
-            // Only consider animations with a duration greater than the defined
-            // limit. This is intended to work around the parallax animation
-            // attached to iOS 8 UIAlertViews and UIActionSheets
-            if (animation.duration > kLPConditionRouteAnimationDurationLimit) {
-              self.stablePeriodCount = 0;
-              return;
-            }
+    NSArray *result = [LPOperation performQuery:query];
+    for (id v in result) {
+      if ([v isKindOfClass:[UIView class]]) {
+        UIView *view = (UIView *) v;
+        NSArray *animationKeys = [[view.layer animationKeys] copy];
+        for (NSString *key in animationKeys) {
+          CAAnimation *animation = [view.layer animationForKey:key];
+          // Only consider animations with a duration greater than the defined
+          // limit. This is intended to work around the parallax animation
+          // attached to iOS 8 UIAlertViews and UIActionSheets
+          if (animation.duration > kLPConditionRouteAnimationDurationLimit) {
+            self.stablePeriodCount = 0;
+            return;
           }
         }
       }
-      self.stablePeriodCount += 1;
-      if (self.stablePeriodCount == self.stablePeriod) {
-        [self succeedWithResult:[NSArray array]];
-        return;
-      }
-    } else {
-      [self failWithMessageFormat:@"No query specified." message:nil];
+    }
+
+    self.stablePeriodCount += 1;
+    if (self.stablePeriodCount == self.stablePeriod) {
+      [self succeedWithResult:[NSArray array]];
       return;
     }
-    return;
   } else if ([condition isEqualToString:kLPConditionRouteNoNetworkIndicator]) {
     if ([[UIApplication sharedApplication] isNetworkActivityIndicatorVisible]) {
       self.stablePeriodCount = 0;
@@ -178,7 +183,6 @@
     }
     return;
   }
-  [self failWithMessageFormat:@"Unknown condition %@" message:condition];
 }
 
 - (void) failWithMessageFormat:(NSString *) messageFmt message:(NSString *) message {
