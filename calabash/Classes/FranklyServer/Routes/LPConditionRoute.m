@@ -75,10 +75,20 @@
   self.done = NO;
   NSString *condition = [self.data objectForKey:@"condition"];
   if (!condition) {
-    NSLog(@"condition not specified");
-    [self failWithMessageFormat:@"condition parameter missing" message:nil];
+    LPLogError(@"Condition not specified");
+    [self failWithMessageFormat:@"Condition parameter missing" message:nil];
     return;
   }
+
+  if (!([condition isEqualToString:kLPConditionRouteNoNetworkIndicator] ||
+        [condition isEqualToString:kLPConditionRouteNoneAnimating])) {
+    LPLogError(@"Expected condition: '%@' or '%@'",
+               kLPConditionRouteNoneAnimating, kLPConditionRouteNoNetworkIndicator);
+    LPLogError(@"Found condition: '%@'", condition);
+    [self failWithMessageFormat:@"Unknown condition '%@'" message:condition];
+    return;
+  }
+
   self.curCount = 0;
 
   NSNumber *timeoutInSecs = [self.data objectForKey:@"timeout"];
