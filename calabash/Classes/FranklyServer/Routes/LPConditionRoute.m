@@ -21,11 +21,11 @@
 
 @interface LPConditionRoute () <LPRepeatingTimerProtocol>
 
-@property(nonatomic, assign) NSUInteger maxCount;
-@property(nonatomic, assign) NSUInteger curCount;
-@property(nonatomic, assign) NSUInteger stablePeriod;
-@property(nonatomic, assign) NSUInteger stablePeriodCount;
-@property(nonatomic, assign) NSTimeInterval timerRepeatInterval;
+@property(atomic, assign) NSUInteger maxCount;
+@property(atomic, assign) NSUInteger curCount;
+@property(atomic, assign) NSUInteger stablePeriod;
+@property(atomic, assign) NSUInteger stablePeriodCount;
+@property(atomic, assign) NSTimeInterval timerRepeatInterval;
 @property(atomic, strong) dispatch_source_t repeatingTimer;
 
 @end
