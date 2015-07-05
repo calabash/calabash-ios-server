@@ -23,6 +23,10 @@
   NSString *originalSelStr = [data objectForKey:@"selector"];
   NSString *selectorName = originalSelStr;
   if (![originalSelStr hasSuffix:@":"]) {
+    LPLogWarn(@"Selector name is missing a ':'");
+    LPLogWarn(@"All backdoor methods must take at least one argument.");
+    LPLogWarn(@"Appending a ':' to the selector name.");
+    LPLogWarn(@"This will be an error in the future.");
     selectorName = [selectorName stringByAppendingString:@":"];
   }
 
