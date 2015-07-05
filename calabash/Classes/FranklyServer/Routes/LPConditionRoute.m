@@ -42,17 +42,28 @@
 
 - (void) startAndRetainRepeatingTimers {
   [self stopAndReleaseRepeatingTimers];
-  _timer = [NSTimer scheduledTimerWithTimeInterval:self.timerRepeatInterval
-                                            target:self
-                                          selector:@selector(checkConditionWithTimer:)
-                                          userInfo:nil
-                                           repeats:YES];
+
+  NSTimeInterval interval = self.timerRepeatInterval;
+
+  dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+  _repeatingTimer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+
+  dispatch_time_t startTime = dispatch_time(DISPATCH_TIME_NOW, 0);
+  uint64_t intervalNano = (uint64_t)(interval * NSEC_PER_SEC);
+
+  dispatch_source_set_timer(_repeatingTimer, startTime, intervalNano, 0);
+
+  dispatch_source_set_event_handler(_repeatingTimer, ^{
+    [self checkConditionWithTimer:nil];
+  });
+
+  dispatch_resume(_repeatingTimer);
 }
 
 - (void) stopAndReleaseRepeatingTimers {
-  if (_timer != nil) {
-    [_timer invalidate];
-    _timer = nil;
+  if (_repeatingTimer) {
+    dispatch_source_cancel(_repeatingTimer);
+    _repeatingTimer = nil;
   }
 }
 
@@ -69,7 +80,6 @@
     return;
   }
   self.curCount = 0;
-
 
   NSNumber *timeoutInSecs = [self.data objectForKey:@"timeout"];
   if (!timeoutInSecs) {
@@ -109,7 +119,6 @@
     return;
   }
 
-  LPLogDebug(@"check condition with timer");
   NSString *condition = [self.data objectForKey:@"condition"];
 
   if (self.curCount == self.maxCount) {
@@ -119,7 +128,6 @@
 
   self.curCount += 1;
   if ([condition isEqualToString:kLPConditionRouteNoneAnimating]) {
-
     id query = [self.data objectForKey:@"query"];
     if (query) {
       NSArray *result = [LPOperation performQuery:query];
@@ -148,7 +156,6 @@
       [self failWithMessageFormat:@"No query specified." message:nil];
       return;
     }
-
     return;
   } else if ([condition isEqualToString:kLPConditionRouteNoNetworkIndicator]) {
     if ([[UIApplication sharedApplication] isNetworkActivityIndicatorVisible]) {
