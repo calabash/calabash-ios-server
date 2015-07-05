@@ -21,18 +21,18 @@
 
 @interface LPConditionRoute () <LPRepeatingTimerProtocol>
 
-@property(nonatomic, strong) NSTimer *timer;
 @property(nonatomic, assign) NSUInteger maxCount;
 @property(nonatomic, assign) NSUInteger curCount;
 @property(nonatomic, assign) NSUInteger stablePeriod;
 @property(nonatomic, assign) NSUInteger stablePeriodCount;
 @property(nonatomic, assign) NSTimeInterval timerRepeatInterval;
+@property(atomic, strong) dispatch_source_t repeatingTimer;
 
 @end
 
 @implementation LPConditionRoute
 
-@synthesize timer = _timer;
+@synthesize repeatingTimer = _repeatingTimer;
 
 #pragma mark - Memory Management
 
@@ -56,9 +56,8 @@
   }
 }
 
-// Should only return YES after the LPHTTPConnection has read all available data.
 - (BOOL) isDone {
-  return !self.timer && [super isDone];
+  return !_repeatingTimer && [super isDone];
 }
 
 - (void) beginOperation {
@@ -105,10 +104,12 @@
 }
 
 - (void) checkConditionWithTimer:(NSTimer *) aTimer {
+  if (!_repeatingTimer) {
+    LPLogWarn(@"Check condition received a nil timer - returning");
+    return;
+  }
 
-  if (!aTimer) { return; }
-  if (!aTimer.isValid) { return; }
-
+  LPLogDebug(@"check condition with timer");
   NSString *condition = [self.data objectForKey:@"condition"];
 
   if (self.curCount == self.maxCount) {
@@ -163,20 +164,12 @@
   [self failWithMessageFormat:@"Unknown condition %@" message:condition];
 }
 
-
 - (void) failWithMessageFormat:(NSString *) messageFmt message:(NSString *) message {
-  // Prevent accidental double writing of http chunks
-  if (!self.timer) { return; }
-
   [self stopAndReleaseRepeatingTimers];
   [super failWithMessageFormat:messageFmt message:message];
 }
 
-
 - (void) succeedWithResult:(NSArray *) result {
-  // Prevent accidental double writing of http chunks
-  if (!self.timer) { return; }
-
   [self stopAndReleaseRepeatingTimers];
   [super succeedWithResult:result];
 }
