@@ -18,7 +18,6 @@
   return [method isEqualToString:@"POST"];
 }
 
-
 - (NSDictionary *) JSONResponseForMethod:(NSString *) method URI:(NSString *) path data:(NSDictionary *) data {
   NSString *originalSelStr = [data objectForKey:@"selector"];
   NSString *selectorName = originalSelStr;
@@ -42,19 +41,28 @@
     NSInvocation *invocation;
     invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
 
-    [invocation setTarget:delegate];
     [invocation setSelector:selector];
     [invocation setArgument:&argument atIndex:2];
 
     [invocation retainArguments];
 
     void *buffer;
-    [invocation invoke];
+
+    if ([[NSThread currentThread] isMainThread]) {
+      [invocation invokeWithTarget:delegate];
+    } else {
+      [invocation performSelectorOnMainThread:@selector(invokeWithTarget:)
+                                   withObject:delegate
+                                   waitUntilDone:YES];
+    }
+
     [invocation getReturnValue:&buffer];
+
     result = (__bridge id)buffer;
 
     if (!result) {result = [NSNull null];}
     return  @{ @"result" : result, @"outcome" : @"SUCCESS" };
+
   } else {
 
     NSArray *lines =
