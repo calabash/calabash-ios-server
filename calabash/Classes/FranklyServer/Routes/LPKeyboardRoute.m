@@ -107,7 +107,7 @@
   _playbackDone = NO;
   [[LPRecorder sharedRecorder] load:_events];
   [[LPRecorder sharedRecorder]
-          playbackWithDelegate:self doneSelector:@selector(playbackDone:)];
+          playbackWithCallbackDelegate:self doneSelector:@selector(playbackDone:)];
 }
 
 //-(void) waitUntilPlaybackDone {
