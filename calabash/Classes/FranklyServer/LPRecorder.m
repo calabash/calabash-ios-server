@@ -18,6 +18,11 @@
 @property(strong) id playbackDelegate;
 @property(assign) SEL playbackDoneSelector;
 
+// Passed to private _playbackEvents: method
+// Responsible for calling back to the route that called
+// playbackWithDelegate:doneSelector.
+- (void) finishPlaybackWithDetails:(NSDictionary *) details;
+
 @end
 
 static LPRecorder *sharedRecorder = nil;
@@ -41,7 +46,7 @@ static LPRecorder *sharedRecorder = nil;
 - (id) init {
   self = [super init];
   if (self) {
-    self.eventList = [[NSMutableArray alloc] init];
+    _eventList = [[NSMutableArray alloc] init];
   }
   return self;
 }
@@ -50,6 +55,10 @@ static LPRecorder *sharedRecorder = nil;
 // todo dealloc does not playbackDelegate but it retains it
 - (void) dealloc {
   [_eventList release];
+  if (_playbackDelegate) {
+    [_playbackDelegate release];
+    _playbackDelegate = nil;
+  }
   [super dealloc];
 }
 
@@ -101,8 +110,8 @@ static LPRecorder *sharedRecorder = nil;
 
 
 - (void) playbackWithDelegate:(id) delegate doneSelector:(SEL) doneSelector {
-  _playbackDelegate = [delegate retain];
-  _playbackDoneSelector = doneSelector;
+  self.playbackDelegate = delegate;
+  self.playbackDoneSelector = doneSelector;
 
   LPLogDebug(@"Calling application _playback with [self playbackDone:]");
 
@@ -111,27 +120,25 @@ static LPRecorder *sharedRecorder = nil;
     [[UIApplication sharedApplication] _playbackEvents:_eventList
                                         atPlaybackRate:1.0f
                                        messageWhenDone:self
-                                          withSelector:@selector(playbackDone:)];
+                                          withSelector:@selector(finishPlaybackWithDetails:)];
   } else {
     dispatch_sync(dispatch_get_main_queue(), ^{
       LPLogDebug(@"Is not main thread. :(");
       [[UIApplication sharedApplication] _playbackEvents:_eventList
                                           atPlaybackRate:1.0f
                                          messageWhenDone:self
-                                            withSelector:@selector(playbackDone:)];
+                                            withSelector:@selector(finishPlaybackWithDetails:)];
 
     });
   }
 }
 
-
-- (void) playbackDone:(NSDictionary *) details {
+- (void) finishPlaybackWithDetails:(NSDictionary *)details {
   LPLogDebug(@"calling %@ on %@",
              NSStringFromSelector(_playbackDoneSelector),
              _playbackDelegate);
-  [_playbackDelegate performSelector:_playbackDoneSelector];
-  [_playbackDelegate release];
-  _playbackDelegate = nil;
+
+  [self.playbackDelegate performSelector:self.playbackDoneSelector];
 }
 
 @end
