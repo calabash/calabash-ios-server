@@ -109,8 +109,9 @@ static LPRecorder *sharedRecorder = nil;
 }
 
 
-- (void) playbackWithDelegate:(id) delegate doneSelector:(SEL) doneSelector {
-  self.playbackDelegate = delegate;
+- (void) playbackWithCallbackDelegate:(id) callbackDelegate
+                         doneSelector:(SEL) doneSelector {
+  self.playbackDelegate = callbackDelegate;
   self.playbackDoneSelector = doneSelector;
 
   LPLogDebug(@"Calling application _playback with [self playbackDone:]");

@@ -155,9 +155,10 @@
 
 
 - (void) play:(NSArray *) events {
-  [[LPRecorder sharedRecorder] load:self.events];
-  [[LPRecorder sharedRecorder]
-          playbackWithDelegate:self doneSelector:@selector(playbackDone:)];
+  LPRecorder *recorder = [LPRecorder sharedRecorder];
+  [recorder load:self.events];
+  [recorder playbackWithCallbackDelegate:self
+                            doneSelector:@selector(playbackDone:)];
 }
 
 

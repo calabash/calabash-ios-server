@@ -11,7 +11,8 @@
 - (NSArray *) events;
 - (void) load:(NSArray *) events;
 - (void) loadFromFile:(NSString *) path;
-- (void) playbackWithDelegate:(id) delegate doneSelector:(SEL) selector;
+- (void) playbackWithCallbackDelegate:(id) callbackDelegate
+                         doneSelector:(SEL) selector;
 - (void) stop;
 
 @end
