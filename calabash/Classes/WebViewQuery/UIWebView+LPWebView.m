@@ -7,7 +7,15 @@
 @implementation UIWebView (UIWebView_LPWebView)
 
 - (NSString *) calabashStringByEvaluatingJavaScript:(NSString *) javascript {
-  return [self stringByEvaluatingJavaScriptFromString:javascript];
+  if ([[NSThread currentThread] isMainThread]) {
+    return [self stringByEvaluatingJavaScriptFromString:javascript];
+  } else {
+    __block NSString *result = nil;
+    dispatch_sync(dispatch_get_main_queue(), ^{
+      result = [self stringByEvaluatingJavaScriptFromString:javascript];
+    });
+    return result;
+  }
 }
 
 @end
