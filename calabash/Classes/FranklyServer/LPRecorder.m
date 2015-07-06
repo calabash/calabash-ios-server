@@ -136,11 +136,26 @@ static LPRecorder *sharedRecorder = nil;
 }
 
 - (void) finishPlaybackWithDetails:(NSDictionary *)details {
-  LPLogDebug(@"calling %@ on %@",
-             NSStringFromSelector(_playbackDoneSelector),
-             _playbackDelegate);
+  id delegate = self.playbackDelegate;
+  SEL selector = self.playbackDoneSelector;
 
-  [self.playbackDelegate performSelector:self.playbackDoneSelector];
+  NSInvocation *invocation;
+
+  NSMethodSignature *signature;
+  signature = [[delegate class] instanceMethodSignatureForSelector:selector];
+
+  invocation = [NSInvocation invocationWithMethodSignature:signature];
+
+  [invocation setTarget:delegate];
+  [invocation setSelector:selector];
+  [invocation setArgument:&details atIndex:2];
+  [invocation retainArguments];
+
+  // Has void type.
+  [invocation invoke];
+
+  self.playbackDoneSelector = nil;
+  self.playbackDelegate = nil;
 }
 
 @end
