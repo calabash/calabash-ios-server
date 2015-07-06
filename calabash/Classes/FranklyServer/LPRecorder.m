@@ -64,7 +64,7 @@ static LPRecorder *sharedRecorder = nil;
 
 
 - (NSArray *) events {
-  return _eventList;
+  return [NSArray arrayWithArray:_eventList];
 }
 
 
