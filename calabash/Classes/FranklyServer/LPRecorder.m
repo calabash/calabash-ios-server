@@ -40,9 +40,9 @@ static LPRecorder *sharedRecorder = nil;
 
 - (id) init {
   self = [super init];
-
-  self.eventList = [[NSMutableArray alloc] init];
-
+  if (self) {
+    self.eventList = [[NSMutableArray alloc] init];
+  }
   return self;
 }
 
