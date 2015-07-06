@@ -65,27 +65,24 @@ static LPRecorder *sharedRecorder = nil;
 }
 
 - (void) record {
-  [_eventList removeAllObjects];
+  [self.eventList removeAllObjects];
 
   NSLog(@"Starting recording");
   _isRecording = YES;
   [[UIApplication sharedApplication] _addRecorder:self];
 }
 
-
 - (NSArray *) events {
   return [NSArray arrayWithArray:_eventList];
 }
 
-
 - (void) saveToFile:(NSString *) path {
   NSLog(@"Saving events to file: %@", path);
 
-  if ([_eventList writeToFile:path atomically:YES]) {
+  if ([self.eventList writeToFile:path atomically:YES]) {
     NSLog(@"succeeded");
   }
 }
-
 
 - (void) stop {
   NSLog(@"Stopping recording");
@@ -93,20 +90,18 @@ static LPRecorder *sharedRecorder = nil;
   [[UIApplication sharedApplication] _removeRecorder:self];
 }
 
-
 - (void) recordApplicationEvent:(NSDictionary *) event {
   NSLog(@"Recorded event: %@", event);
-  [_eventList addObject:event];
+  [self.eventList addObject:event];
 }
 
-
 - (void) load:(NSArray *) events {
-  [_eventList setArray:events];
+  [self.eventList setArray:events];
 }
 
 
 - (void) loadFromFile:(NSString *) path {
-  [_eventList setArray:[NSMutableArray arrayWithContentsOfFile:path]];
+  [self.eventList setArray:[NSMutableArray arrayWithContentsOfFile:path]];
 }
 
 // It is tempting to replace this delegate dance with a block.
