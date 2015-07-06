@@ -115,17 +115,13 @@ static LPRecorder *sharedRecorder = nil;
   self.playbackDoneSelector = doneSelector;
   NSArray *events = [self events];
 
-  LPLogDebug(@"Calling application _playback with [self playbackDone:]");
-
   if ([[NSThread currentThread] isMainThread]) {
-    LPLogDebug(@"Is main thread. :)");
     [[UIApplication sharedApplication] _playbackEvents:events
                                         atPlaybackRate:1.0f
                                        messageWhenDone:self
                                           withSelector:@selector(finishPlaybackWithDetails:)];
   } else {
     dispatch_sync(dispatch_get_main_queue(), ^{
-      LPLogDebug(@"Is not main thread. :(");
       [[UIApplication sharedApplication] _playbackEvents:events
                                           atPlaybackRate:1.0f
                                          messageWhenDone:self
