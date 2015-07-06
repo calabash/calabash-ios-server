@@ -87,10 +87,21 @@ static NSString *LPWKWebViewCalabashStringByEvaluatingJavaScriptIMP(id self,
   [invocation setArgument:&javascript atIndex:2];
   [invocation setArgument:&completionHandler atIndex:3];
   [invocation retainArguments];
-  [invocation invoke];
+
+  // Unexpected behavior.
+  //
+  // We are invoking 'evaluateJavaScript:completionHandler' which is an async
+  // method.  We should use 'waitUntilDone:YES', but we should _not_ expect
+  // that the blocking while loop will be skipped.
+  //
+  // Put another way, 'evaluationJavaScript:completionHandler' is
+  // fire-and-forget regardless of whether we pass YES or NO to waitUntilDone.
+  [invocation performSelectorOnMainThread:@selector(invokeWithTarget:)
+                               withObject:self
+                            waitUntilDone:YES];
 
   while(!finish) {
-    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
+    [[NSRunLoop mainRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1]];
   }
 
   NSString *returnValue = nil;
