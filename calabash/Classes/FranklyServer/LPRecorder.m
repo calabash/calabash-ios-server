@@ -1,6 +1,10 @@
 #import "LPRecorder.h"
 #import "LPCocoaLumberjack.h"
 
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
 @interface UIApplication (Recording)
 
 - (void) _addRecorder:(id) recorder;
@@ -34,7 +38,6 @@ static LPRecorder *sharedRecorder = nil;
 @synthesize playbackDoneSelector = _playbackDoneSelector;
 @synthesize isRecording = _isRecording;
 
-
 + (LPRecorder *) sharedRecorder {
   if (sharedRecorder == nil) {
     sharedRecorder = [[super allocWithZone:NULL] init];
@@ -54,14 +57,9 @@ static LPRecorder *sharedRecorder = nil;
 
 // todo dealloc does not playbackDelegate but it retains it
 - (void) dealloc {
-  [_eventList release];
-  if (_playbackDelegate) {
-    [_playbackDelegate release];
-    _playbackDelegate = nil;
-  }
-  [super dealloc];
+  _eventList = nil;
+  _playbackDelegate = nil;
 }
-
 
 - (void) record {
   [_eventList removeAllObjects];
