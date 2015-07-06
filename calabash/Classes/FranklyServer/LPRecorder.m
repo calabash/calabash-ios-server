@@ -4,10 +4,14 @@
 @interface UIApplication (Recording)
 
 - (void) _addRecorder:(id) recorder;
-
 - (void) _removeRecorder:(id) recorder;
+- (void) _playbackEvents:(NSArray *) events
+          atPlaybackRate:(float) playbackRate
+         messageWhenDone:(id) target
+            withSelector:(SEL) selector;
 
-- (void) _playbackEvents:(NSArray *) events atPlaybackRate:(float) playbackRate messageWhenDone:(id) target withSelector:(SEL) selector;
+@end
+
 
 @end
 
