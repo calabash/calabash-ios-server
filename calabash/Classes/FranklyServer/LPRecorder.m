@@ -12,12 +12,21 @@
 
 @end
 
+@interface LPRecorder ()
+
+@property(strong) NSMutableArray *eventList;
+@property(strong) id playbackDelegate;
+@property(assign) SEL playbackDoneSelector;
 
 @end
 
 static LPRecorder *sharedRecorder = nil;
 
 @implementation LPRecorder
+
+@synthesize eventList = _eventList;
+@synthesize playbackDelegate = _playbackDelegate;
+@synthesize playbackDoneSelector = _playbackDoneSelector;
 @synthesize isRecording = _isRecording;
 
 
@@ -32,7 +41,7 @@ static LPRecorder *sharedRecorder = nil;
 - (id) init {
   self = [super init];
 
-  eventList = [[NSMutableArray alloc] init];
+  self.eventList = [[NSMutableArray alloc] init];
 
   return self;
 }
@@ -40,13 +49,13 @@ static LPRecorder *sharedRecorder = nil;
 
 // todo dealloc does not playbackDelegate but it retains it
 - (void) dealloc {
-  [eventList release];
+  [_eventList release];
   [super dealloc];
 }
 
 
 - (void) record {
-  [eventList removeAllObjects];
+  [_eventList removeAllObjects];
 
   NSLog(@"Starting recording");
   _isRecording = YES;
@@ -55,14 +64,14 @@ static LPRecorder *sharedRecorder = nil;
 
 
 - (NSArray *) events {
-  return eventList;
+  return _eventList;
 }
 
 
 - (void) saveToFile:(NSString *) path {
   NSLog(@"Saving events to file: %@", path);
 
-  if ([eventList writeToFile:path atomically:YES]) {
+  if ([_eventList writeToFile:path atomically:YES]) {
     NSLog(@"succeeded");
   }
 }
@@ -77,36 +86,36 @@ static LPRecorder *sharedRecorder = nil;
 
 - (void) recordApplicationEvent:(NSDictionary *) event {
   NSLog(@"Recorded event: %@", event);
-  [eventList addObject:event];
+  [_eventList addObject:event];
 }
 
 
 - (void) load:(NSArray *) events {
-  [eventList setArray:events];
+  [_eventList setArray:events];
 }
 
 
 - (void) loadFromFile:(NSString *) path {
-  [eventList setArray:[NSMutableArray arrayWithContentsOfFile:path]];
+  [_eventList setArray:[NSMutableArray arrayWithContentsOfFile:path]];
 }
 
 
 - (void) playbackWithDelegate:(id) delegate doneSelector:(SEL) doneSelector {
-  playbackDelegate = [delegate retain];
-  playbackDoneSelector = doneSelector;
+  _playbackDelegate = [delegate retain];
+  _playbackDoneSelector = doneSelector;
 
   LPLogDebug(@"Calling application _playback with [self playbackDone:]");
 
   if ([[NSThread currentThread] isMainThread]) {
     LPLogDebug(@"Is main thread. :)");
-    [[UIApplication sharedApplication] _playbackEvents:eventList
+    [[UIApplication sharedApplication] _playbackEvents:_eventList
                                         atPlaybackRate:1.0f
                                        messageWhenDone:self
                                           withSelector:@selector(playbackDone:)];
   } else {
     dispatch_sync(dispatch_get_main_queue(), ^{
       LPLogDebug(@"Is not main thread. :(");
-      [[UIApplication sharedApplication] _playbackEvents:eventList
+      [[UIApplication sharedApplication] _playbackEvents:_eventList
                                           atPlaybackRate:1.0f
                                          messageWhenDone:self
                                             withSelector:@selector(playbackDone:)];
@@ -118,11 +127,11 @@ static LPRecorder *sharedRecorder = nil;
 
 - (void) playbackDone:(NSDictionary *) details {
   LPLogDebug(@"calling %@ on %@",
-             NSStringFromSelector(playbackDoneSelector),
-             playbackDelegate);
-  [playbackDelegate performSelector:playbackDoneSelector];
-  [playbackDelegate release];
-  playbackDelegate = nil;
+             NSStringFromSelector(_playbackDoneSelector),
+             _playbackDelegate);
+  [_playbackDelegate performSelector:_playbackDoneSelector];
+  [_playbackDelegate release];
+  _playbackDelegate = nil;
 }
 
 @end
