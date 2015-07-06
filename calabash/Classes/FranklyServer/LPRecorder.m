@@ -27,26 +27,27 @@
 // playbackWithDelegate:doneSelector.
 - (void) finishPlaybackWithDetails:(NSDictionary *) details;
 
+- (instancetype) init_private;
 @end
 
 static LPRecorder *sharedRecorder = nil;
 
 @implementation LPRecorder
 
+#pragma mark - Memory Management
+
 @synthesize eventList = _eventList;
 @synthesize playbackDelegate = _playbackDelegate;
 @synthesize playbackDoneSelector = _playbackDoneSelector;
 @synthesize isRecording = _isRecording;
 
-+ (LPRecorder *) sharedRecorder {
-  if (sharedRecorder == nil) {
-    sharedRecorder = [[super allocWithZone:NULL] init];
-  }
-  return sharedRecorder;
+- (instancetype) init {
+  @throw [NSException exceptionWithName:@"Cannot call init"
+                                 reason:@"This is a singleton class"
+                               userInfo:nil];
 }
 
-
-- (id) init {
+- (instancetype) init_private {
   self = [super init];
   if (self) {
     _eventList = [[NSMutableArray alloc] init];
@@ -54,11 +55,13 @@ static LPRecorder *sharedRecorder = nil;
   return self;
 }
 
-
-// todo dealloc does not playbackDelegate but it retains it
-- (void) dealloc {
-  _eventList = nil;
-  _playbackDelegate = nil;
++ (LPRecorder *) sharedRecorder {
+  static LPRecorder *shared = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    shared = [[LPRecorder alloc] init_private];
+  });
+  return shared;
 }
 
 - (void) record {
