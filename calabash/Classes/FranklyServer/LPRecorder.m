@@ -1,5 +1,5 @@
 #import "LPRecorder.h"
-
+#import "LPCocoaLumberjack.h"
 
 @interface UIApplication (Recording)
 
@@ -91,13 +91,31 @@ static LPRecorder *sharedRecorder = nil;
   playbackDelegate = [delegate retain];
   playbackDoneSelector = doneSelector;
 
-  [[UIApplication sharedApplication]
-          _playbackEvents:eventList atPlaybackRate:1.0f messageWhenDone:self
-             withSelector:@selector(playbackDone:)];
+  LPLogDebug(@"Calling application _playback with [self playbackDone:]");
+
+  if ([[NSThread currentThread] isMainThread]) {
+    LPLogDebug(@"Is main thread. :)");
+    [[UIApplication sharedApplication] _playbackEvents:eventList
+                                        atPlaybackRate:1.0f
+                                       messageWhenDone:self
+                                          withSelector:@selector(playbackDone:)];
+  } else {
+    dispatch_sync(dispatch_get_main_queue(), ^{
+      LPLogDebug(@"Is not main thread. :(");
+      [[UIApplication sharedApplication] _playbackEvents:eventList
+                                          atPlaybackRate:1.0f
+                                         messageWhenDone:self
+                                            withSelector:@selector(playbackDone:)];
+
+    });
+  }
 }
 
 
 - (void) playbackDone:(NSDictionary *) details {
+  LPLogDebug(@"calling %@ on %@",
+             NSStringFromSelector(playbackDoneSelector),
+             playbackDelegate);
   [playbackDelegate performSelector:playbackDoneSelector];
   [playbackDelegate release];
   playbackDelegate = nil;
