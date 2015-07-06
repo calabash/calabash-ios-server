@@ -109,12 +109,21 @@ static LPRecorder *sharedRecorder = nil;
   [_eventList setArray:[NSMutableArray arrayWithContentsOfFile:path]];
 }
 
+// It is tempting to replace this delegate dance with a block.
+// The private call to _playbackEvents does pass an dictionary of 'details'.
+// However, none of the 'delegates' consumes those details.
 - (void) playbackWithCallbackDelegate:(id) callbackDelegate
                          doneSelector:(SEL) doneSelector {
   self.playbackDelegate = callbackDelegate;
   self.playbackDoneSelector = doneSelector;
   NSArray *events = [self events];
 
+  // It is tempting to remove this check and just call the block.
+  // For some reason, however, it does not work with the pre Jun 2015
+  // CocoaHTTPServer sources.
+  //
+  // It may be safe to remove this branch _after_ the new CocoaHTTPServer
+  // sources are incorporated.
   if ([[NSThread currentThread] isMainThread]) {
     [[UIApplication sharedApplication] _playbackEvents:events
                                         atPlaybackRate:1.0f
