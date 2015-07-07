@@ -10,8 +10,6 @@
   return [NSString stringWithFormat:@"ScrollToRow: %@", _arguments];
 }
 
-
-
 - (BOOL) cell:(UITableViewCell *) aCell contentViewHasSubviewMarked:(NSString *) aMark {
   // check the textLabel first
   if ([self view:aCell.textLabel hasMark:aMark]) {return YES;}
