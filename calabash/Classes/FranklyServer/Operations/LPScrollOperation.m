@@ -30,21 +30,33 @@
     if ([sv isPagingEnabled]) {
       fraction = 1.0;
     }
-    
+
+    CGPoint point;
+
     if ([@"up" isEqualToString:dir]) {
       CGFloat scrollAmount = MIN((size.height)/fraction, offset.y + sv.contentInset.top);
-      [sv setContentOffset:CGPointMake(offset.x, offset.y - scrollAmount) animated:YES];
+      point = CGPointMake(offset.x, offset.y - scrollAmount);
     } else if ([@"down" isEqualToString:dir]) {
       CGFloat scrollAmount = MIN(size.height/fraction, sv.contentSize.height + sv.contentInset.bottom - offset.y - size.height);
-      [sv setContentOffset:CGPointMake(offset.x, offset.y + scrollAmount) animated:YES];
+      point = CGPointMake(offset.x, offset.y + scrollAmount);
     } else if ([@"left" isEqualToString:dir]) {
       CGFloat scrollAmount = MIN(size.width/fraction, offset.x + sv.contentInset.left);
-      [sv setContentOffset:CGPointMake(offset.x - scrollAmount, offset.y) animated:YES];
+      point = CGPointMake(offset.x - scrollAmount, offset.y);
     } else if ([@"right" isEqualToString:dir]) {
       CGFloat scrollAmount = MIN(size.width/fraction, sv.contentSize.width + sv.contentInset.right - offset.x - size.width);
-      [sv setContentOffset:CGPointMake(offset.x + scrollAmount, offset.y) animated:YES];
+      point = CGPointMake(offset.x + scrollAmount, offset.y);
+    } else {
+      point = CGPointZero;
     }
-    
+
+    if ([[NSThread currentThread] isMainThread]) {
+      [sv setContentOffset:point animated:YES];
+    } else {
+      dispatch_sync(dispatch_get_main_queue(), ^{
+        [sv setContentOffset:point animated:YES];
+      });
+    }
+
     return _view;
   } else if ([LPIsWebView isWebView:_view]) {
     UIView<LPWebViewProtocol> *webView = (UIView<LPWebViewProtocol> *)_view;
