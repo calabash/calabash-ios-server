@@ -4,6 +4,7 @@ all:
 	$(MAKE) dylibs
 
 clean:
+	rm -rf bin
 	rm -rf build
 	rm -rf calabash.framework
 	rm -rf libFrankCalabash.a
@@ -52,7 +53,6 @@ test_app:
 xct:
 	scripts/test/xctest.rb
 
-version-tool:
-	rm -rf version
+version:
 	scripts/make-version.sh
-	version --revision ALL
+	bin/version --revision ALL

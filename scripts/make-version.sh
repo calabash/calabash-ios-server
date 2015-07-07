@@ -10,13 +10,23 @@ TARGET_NAME="version"
 XC_PROJECT="calabash.xcodeproj"
 XC_SCHEME="${TARGET_NAME}"
 CAL_BUILD_DIR="${PWD}/build"
+DESTINATION="bin/${TARGET_NAME}"
+
 rm -rf "${CAL_BUILD_DIR}"
 mkdir -p "${CAL_BUILD_DIR}"
 
-if [ -e "${TARGET_NAME}" ]; then
-  echo "INFO: removing ./$TARGET_NAME"
-  rm "${TARGET_NAME}"
+if [ ! -d ./bin ]; then
+  echo "INFO: making a ./bin directory"
+  mkdir ./bin
 fi
+
+if [ -e "${DESTINATION}" ]; then
+  echo "INFO: removing ./$DESTINATION"
+  rm "${DESTINATION}"
+fi
+
+set +o errexit
+
 xcrun xcodebuild \
   -SYMROOT="${CAL_BUILD_DIR}" \
   -derivedDataPath "${CAL_BUILD_DIR}" \
@@ -25,9 +35,20 @@ xcrun xcodebuild \
   -scheme "${TARGET_NAME}" \
   -sdk macosx \
   -configuration "${CAL_BUILD_CONFIG}" \
-  clean build
+  clean build | xcpretty -c
+
+RETVAL=${PIPESTATUS[0]}
+
+set -o errexit
+
+if [ $RETVAL != 0 ]; then
+  echo "FAIL:  could not build"
+  exit $RETVAL
+else
+  echo "INFO: successfully built"
+fi
 
 BINARY="${CAL_BUILD_DIR}/Build/Products/Debug/${TARGET_NAME}"
 
-echo "INFO: moving $TARGET_NAME to ./"
-cp "${BINARY}" ./
+echo "INFO: moving $TARGET_NAME to ${DESTINATION}"
+cp "${BINARY}" ${DESTINATION}

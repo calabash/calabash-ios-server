@@ -30,5 +30,5 @@ calabash-ios
 .irbrc
 Gemfile.lock
 
-# version binary
-version
+# Command line tools
+bin
