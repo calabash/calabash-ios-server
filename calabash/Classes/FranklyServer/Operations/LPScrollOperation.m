@@ -4,6 +4,10 @@
 //  Copyright 2011 LessPainful. All rights reserved.
 //
 
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
 #import "LPScrollOperation.h"
 #import "UIWebView+LPWebView.h"
 #import "LPIsWebView.h"
@@ -15,7 +19,7 @@
 }
 
 
-- (id) performWithTarget:(UIView *) _view error:(NSError **) error {
+- (id) performWithTarget:(UIView *) _view error:(NSError *__autoreleasing*) error {
   NSString *dir = [_arguments objectAtIndex:0];
 
   if ([_view isKindOfClass:[UIScrollView class]]) {
