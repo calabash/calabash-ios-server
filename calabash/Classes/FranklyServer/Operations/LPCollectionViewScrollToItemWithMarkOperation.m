@@ -41,7 +41,6 @@
   return nil;
 }
 
-
 //                 required      optional     optional
 // _arguments ==> [item mark, scroll position, animated]
 - (id) performWithTarget:(UIView *) _view error:(NSError *__autoreleasing*) error {
@@ -81,7 +80,16 @@
     NSString *position = [_arguments objectAtIndex:1];
     
     // avoid a nasty if/else if conditional
-    NSDictionary *opts = @{@"top" : @(UICollectionViewScrollPositionTop), @"center_vertical" : @(UICollectionViewScrollPositionCenteredVertically), @"bottom" : @(UICollectionViewScrollPositionBottom), @"left" : @(UICollectionViewScrollPositionLeft), @"center_horizontal" : @(UICollectionViewScrollPositionCenteredHorizontally), @"right" : @(UICollectionViewScrollPositionRight)};
+    NSDictionary *opts =
+    @{
+      @"top" : @(UICollectionViewScrollPositionTop),
+      @"center_vertical" : @(UICollectionViewScrollPositionCenteredVertically),
+      @"bottom" : @(UICollectionViewScrollPositionBottom),
+      @"left" : @(UICollectionViewScrollPositionLeft),
+      @"center_horizontal" : @(UICollectionViewScrollPositionCenteredHorizontally),
+      @"right" : @(UICollectionViewScrollPositionRight)
+      };
+
     NSNumber *posNum = [opts objectForKey:position];
     
     if (posNum == nil) {
