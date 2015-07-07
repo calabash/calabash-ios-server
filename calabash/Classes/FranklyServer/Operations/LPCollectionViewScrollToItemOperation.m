@@ -1,4 +1,3 @@
-//  Copyright (c) 2011 Xamarin. All rights reserved.
 #import "LPCollectionViewScrollToItemOperation.h"
 
 #if ! __has_feature(objc_arc)
