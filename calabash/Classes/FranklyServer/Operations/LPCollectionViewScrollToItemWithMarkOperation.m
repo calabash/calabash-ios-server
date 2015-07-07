@@ -79,7 +79,6 @@
   if ([_arguments count] > 1) {
     NSString *position = [_arguments objectAtIndex:1];
     
-    // avoid a nasty if/else if conditional
     NSDictionary *opts =
     @{
       @"top" : @(UICollectionViewScrollPositionTop),

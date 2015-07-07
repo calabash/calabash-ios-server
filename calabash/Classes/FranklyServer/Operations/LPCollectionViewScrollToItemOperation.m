@@ -55,8 +55,15 @@
     return nil;
   }
 
-  // avoid a nasty if/else if conditional
-  NSDictionary *opts = @{@"top" : @(UICollectionViewScrollPositionTop), @"center_vertical" : @(UICollectionViewScrollPositionCenteredVertically), @"bottom" : @(UICollectionViewScrollPositionBottom), @"left" : @(UICollectionViewScrollPositionLeft), @"center_horizontal" : @(UICollectionViewScrollPositionCenteredHorizontally), @"right" : @(UICollectionViewScrollPositionRight)};
+  NSDictionary *opts =
+  @{
+    @"top" : @(UICollectionViewScrollPositionTop),
+    @"center_vertical" : @(UICollectionViewScrollPositionCenteredVertically),
+    @"bottom" : @(UICollectionViewScrollPositionBottom),
+    @"left" : @(UICollectionViewScrollPositionLeft),
+    @"center_horizontal" : @(UICollectionViewScrollPositionCenteredHorizontally),
+    @"right" : @(UICollectionViewScrollPositionRight)
+    };
 
   NSString *position = [_arguments objectAtIndex:2];
 
@@ -66,7 +73,6 @@
             position, [opts allKeys]);
     return nil;
   }
-
 
   UICollectionViewScrollPosition scrollPosition = [posNum unsignedIntegerValue];
 
