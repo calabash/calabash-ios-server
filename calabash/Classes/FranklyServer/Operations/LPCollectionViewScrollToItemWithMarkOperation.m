@@ -105,10 +105,19 @@
     NSNumber *ani = [_arguments objectAtIndex:2];
     animate = [ani boolValue];
   }
-  
-  [collection scrollToItemAtIndexPath:path atScrollPosition:scrollPosition
-                             animated:animate];
-  
+
+  if ([[NSThread currentThread] isMainThread]) {
+    [collection scrollToItemAtIndexPath:path
+                       atScrollPosition:scrollPosition
+                               animated:animate];
+  } else {
+    dispatch_sync(dispatch_get_main_queue(), ^{
+      [collection scrollToItemAtIndexPath:path
+                         atScrollPosition:scrollPosition
+                                 animated:animate];
+    });
+  }
+
   return _view;
 }
 
