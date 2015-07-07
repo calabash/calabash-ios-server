@@ -12,6 +12,7 @@
 #import "UIWebView+LPWebView.h"
 #import "LPIsWebView.h"
 #import "LPWebViewProtocol.h"
+#import "LPCocoaLumberjack.h"
 
 @implementation LPScrollOperation
 - (NSString *) description {
@@ -21,6 +22,19 @@
 
 - (id) performWithTarget:(UIView *) _view error:(NSError *__autoreleasing*) error {
   NSString *dir = [_arguments objectAtIndex:0];
+
+  NSArray *allowedDirections = @[@"up", @"down", @"left", @"right"];
+  NSUInteger index = [allowedDirections indexOfObject:dir];
+  if (index == NSNotFound) {
+    LPLogError(@"Expected direction '%@' to be: up, down, left, or right", dir);
+    LPLogError(@"Returning nil");
+    if (error != NULL) {
+      *error = [NSError errorWithDomain:@"Calabash"
+                                   code:1
+                               userInfo:nil];
+    }
+    return nil;
+  }
 
   if ([_view isKindOfClass:[UIScrollView class]]) {
     UIScrollView *sv = (UIScrollView *) _view;
@@ -42,11 +56,9 @@
     } else if ([@"left" isEqualToString:dir]) {
       CGFloat scrollAmount = MIN(size.width/fraction, offset.x + sv.contentInset.left);
       point = CGPointMake(offset.x - scrollAmount, offset.y);
-    } else if ([@"right" isEqualToString:dir]) {
+    } else {
       CGFloat scrollAmount = MIN(size.width/fraction, sv.contentSize.width + sv.contentInset.right - offset.x - size.width);
       point = CGPointMake(offset.x + scrollAmount, offset.y);
-    } else {
-      point = CGPointZero;
     }
 
     if ([[NSThread currentThread] isMainThread]) {
@@ -67,7 +79,7 @@
       scrollJS = [NSString stringWithFormat:scrollJS, @"0", @"100"];
     } else if ([@"left" isEqualToString:dir]) {
       scrollJS = [NSString stringWithFormat:scrollJS, @"-100", @"0"];
-    } else if ([@"right" isEqualToString:dir]) {
+    } else {
       scrollJS = [NSString stringWithFormat:scrollJS, @"100", @"0"];
     }
     NSString *res = [webView calabashStringByEvaluatingJavaScript:scrollJS];
