@@ -52,3 +52,7 @@ test_app:
 xct:
 	scripts/test/xctest.rb
 
+version-tool:
+	rm -rf version
+	scripts/make-version.sh
+	version --revision ALL
