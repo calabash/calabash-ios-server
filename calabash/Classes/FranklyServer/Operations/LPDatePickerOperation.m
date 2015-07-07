@@ -79,17 +79,21 @@
     return nil;
   }
 
-  [picker setDate:date animated:animate];
-
   if (notifyTargets) {
-    UIControlEvents events = [picker allControlEvents];
-    [picker sendActionsForControlEvents:events];
-  }
-
-  if (notifyTargets) {
-    [picker sendActionsForControlEvents:UIControlEventAllEvents];
+    if ([[NSThread currentThread] isMainThread]) {
+      [picker setDate:date animated:animate];
+      UIControlEvents events = [picker allControlEvents];
+      [picker sendActionsForControlEvents:events];
+    } else {
+      dispatch_sync(dispatch_get_main_queue(), ^{
+        [picker setDate:date animated:animate];
+        UIControlEvents events = [picker allControlEvents];
+        [picker sendActionsForControlEvents:events];
+      });
+    }
   }
 
   return _view;
 }
+
 @end
