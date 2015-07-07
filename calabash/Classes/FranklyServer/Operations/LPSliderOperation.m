@@ -58,14 +58,20 @@
             targetValue, [slider minimumValue]);
   }
 
-  [slider setValue:targetValue animated:animate];
-
   if (notifyTargets) {
     UIControlEvents events = [slider allControlEvents];
-    [slider sendActionsForControlEvents:events];
+    if ([[NSThread currentThread] isMainThread]) {
+      [slider setValue:targetValue animated:animate];
+      [slider sendActionsForControlEvents:events];
+    } else {
+      dispatch_sync(dispatch_get_main_queue(), ^{
+        [slider setValue:targetValue animated:animate];
+        [slider sendActionsForControlEvents:events];
+      });
+    }
   }
 
-  return [LPJSONUtils jsonifyObject:_view];
 
+  return [LPJSONUtils jsonifyObject:_view];
 }
 @end
