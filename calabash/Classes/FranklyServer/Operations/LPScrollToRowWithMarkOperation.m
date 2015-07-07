@@ -85,7 +85,14 @@
     animate = [ani boolValue];
   }
 
-  [table scrollToRowAtIndexPath:path atScrollPosition:sp animated:animate];
+  if ([[NSThread currentThread] isMainThread]) {
+    [table scrollToRowAtIndexPath:path atScrollPosition:sp animated:animate];
+  } else {
+    dispatch_sync(dispatch_get_main_queue(), ^{
+      [table scrollToRowAtIndexPath:path atScrollPosition:sp animated:animate];
+    });
+  }
+
   return _view;
 }
 @end
