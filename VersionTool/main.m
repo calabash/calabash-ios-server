@@ -23,8 +23,20 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
 int main(int argc, const char * argv[]) {
 
   @autoreleasepool {
-    NSString *calabashVersion = [kLPCALABASHVERSION componentsSeparatedByString:@" "].lastObject;
-    printf("%s\n", [calabashVersion cStringUsingEncoding:NSASCIIStringEncoding]);
+    NSUserDefaults *standardDefaults = [NSUserDefaults standardUserDefaults];
+    NSString *revision = [standardDefaults stringForKey:@"-revision"];
+
+    if ([revision isEqualToString:@"ALL"]) {
+      printf("%s %s %s\n",
+             [kLPGitRemoteOrigin cStringUsingEncoding:NSASCIIStringEncoding],
+             [kLPGitBranch cStringUsingEncoding:NSASCIIStringEncoding],
+             [kLPGitShortRevision cStringUsingEncoding:NSASCIIStringEncoding]);
+
+    } else {
+      NSString *calabashVersion = [kLPCALABASHVERSION componentsSeparatedByString:@" "].lastObject;
+      printf("%s\n", [calabashVersion cStringUsingEncoding:NSASCIIStringEncoding]);
+
+    }
   }
   return 0;
 }
