@@ -1786,7 +1786,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B15BF99519ABAFD200B38577 /* Build configuration list for PBXNativeTarget "calabash-dylib" */;
 			buildPhases = (
+				F52B40BE1B4BAE0D0022AEC8 /* Run Script git revision 1 of 2 */,
 				B15BF96D19ABAFD200B38577 /* Sources */,
+				F52B40BF1B4BAE2E0022AEC8 /* Run Script git revision 2 of 2 */,
 				B15BF96E19ABAFD200B38577 /* Frameworks */,
 				B15BF96F19ABAFD200B38577 /* Headers */,
 			);
@@ -2016,6 +2018,36 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "sh calabash/gitversioning-after.sh \"calabash/LPGitVersionDefines.h\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F52B40BE1B4BAE0D0022AEC8 /* Run Script git revision 1 of 2 */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script git revision 1 of 2";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "sh calabash/gitversioning-before.sh \"calabash/LPGitVersionDefines.h\"";
+			showEnvVarsInLog = 0;
+		};
+		F52B40BF1B4BAE2E0022AEC8 /* Run Script git revision 2 of 2 */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script git revision 2 of 2";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "sh calabash/gitversioning-after.sh \"calabash/LPGitVersionDefines.h\"";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
