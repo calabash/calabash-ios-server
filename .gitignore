@@ -30,3 +30,5 @@ calabash-ios
 .irbrc
 Gemfile.lock
 
+# Command line tools
+bin
