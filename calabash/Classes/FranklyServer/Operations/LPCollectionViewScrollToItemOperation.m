@@ -1,6 +1,10 @@
 //  Copyright (c) 2011 Xamarin. All rights reserved.
 #import "LPCollectionViewScrollToItemOperation.h"
 
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
 @implementation LPCollectionViewScrollToItemOperation
 
 - (NSString *) description {
@@ -11,7 +15,7 @@
 
 //                 <===               required                ===>
 // _arguments ==> [item_num, section_num, scroll postion, animated]
-- (id) performWithTarget:(UIView *) aView error:(NSError **) aError {
+- (id) performWithTarget:(UIView *) aView error:(NSError *__autoreleasing*) aError {
 
   // UICollectionView appears in iOS 6
   Class clz = NSClassFromString(@"UICollectionView");
