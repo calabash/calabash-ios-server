@@ -6,7 +6,7 @@
 
 #import "LPQueryAllOperation.h"
 #import "LPJSONUtils.h"
-
+#import "LPCocoaLumberjack.h"
 
 @implementation LPQueryAllOperation
 - (NSString *) description {
@@ -109,6 +109,9 @@
 
     const char *type = [[invocation methodSignature] methodReturnType];
     NSString *returnType = [NSString stringWithFormat:@"%s", type];
+
+    LPLogInfo(@"The encoding of the selector is: %@", returnType);
+
     const char *trimmedType = [[returnType substringToIndex:1]
             cStringUsingEncoding:NSASCIIStringEncoding];
     switch (*trimmedType) {
@@ -132,6 +135,7 @@
       case 'd':[invocation getReturnValue:(void **) &doubleValue];
         return [NSNumber numberWithDouble:doubleValue];
       case 'D':[invocation getReturnValue:(void **) &longDoubleValue];
+        LPLogInfo(@"Handling a return value with encoding long double!");
         // http://stackoverflow.com/questions/6488956/store-nsnumber-in-a-long-double-type
         // There is no Objective-C support for encoding a long double as a object
         return [NSNumber numberWithDouble:longDoubleValue];
@@ -190,6 +194,7 @@
           free(buffer);
           return dictionary;
         } else if ([returnType isEqualToString:@"{?=dd}"]) {
+          LPLogInfo(@"Handling the {?=dd} encoding!");
           double *doubles = (double *) buffer;
           double d1 = *doubles;
           doubles++;
@@ -251,6 +256,7 @@
       case 'D': {
         // http://stackoverflow.com/questions/6488956/store-nsnumber-in-a-long-double-type
         // There is no Objective-C support for encoding a long double as a object
+        LPLogInfo(@"Handling an argument with encoding long double!");
         long double longDouble = (long double)[arg doubleValue];
         [invocation setArgument:&longDouble atIndex:i + 2];
         break;
@@ -279,11 +285,16 @@
         } else if ([arg respondsToSelector:@selector(characterAtIndex:)]) {
           chVal = [arg characterAtIndex:0];
         } else {
-          NSLog(@"Cannot coerce '%@' of class '%@' into a unichar",
-                arg, [arg class]);
-          NSLog(@"To avoid crashing, setting char value to UCHAR_MAX: %@",
-                @(UCHAR_MAX));
-          chVal = UCHAR_MAX;
+          NSString *name = @"Argument encoding";
+          NSString *reason;
+          reason =
+          [NSString stringWithFormat:@"Cannot coerce '%@' of class '%@' into a unichar",
+           arg, [arg class]];
+
+          LPLogError(@"%@", reason);
+          @throw [NSException exceptionWithName:name
+                                         reason:reason
+                                       userInfo:nil];
         }
         [invocation setArgument:&chVal atIndex:i + 2];
         break;
@@ -296,11 +307,16 @@
         } else if ([arg respondsToSelector:@selector(characterAtIndex:)]) {
           chVal = (char)[arg characterAtIndex:0];
         } else {
-          NSLog(@"Cannot coerce '%@' of class '%@' into a char",
-                arg, [arg class]);
-          NSLog(@"To avoid crashing, setting char value to CHAR_MAX: %@",
-                @(CHAR_MAX));
-          chVal = CHAR_MAX;
+          NSString *name = @"Argument encoding";
+          NSString *reason;
+          reason =
+          [NSString stringWithFormat:@"Cannot coerce '%@' of class '%@' into a char",
+           arg, [arg class]];
+
+          LPLogError(@"%@", reason);
+          @throw [NSException exceptionWithName:name
+                                         reason:reason
+                                       userInfo:nil];
         }
         [invocation setArgument:&chVal atIndex:i + 2];
         break;
@@ -313,11 +329,17 @@
         } else if ([arg respondsToSelector:@selector(characterAtIndex:)]) {
           SValue = (unsigned short)[arg characterAtIndex:0];
         } else {
-          NSLog(@"Cannot coerce '%@' of class '%@' into an unsigned short",
-                arg, [arg class]);
-          NSLog(@"To avoid crashing, setting short value to USHRT_MAX: %@",
-                @(USHRT_MAX));
-          SValue = USHRT_MAX;
+
+          NSString *name = @"Argument encoding";
+          NSString *reason;
+          reason =
+          [NSString stringWithFormat:@"Cannot coerce '%@' of class '%@' into an unsiged short",
+           arg, [arg class]];
+
+          LPLogError(@"%@", reason);
+          @throw [NSException exceptionWithName:name
+                                         reason:reason
+                                       userInfo:nil];
         }
         [invocation setArgument:&SValue atIndex:i + 2];
         break;
@@ -344,9 +366,6 @@
         break;
       }
       case '{': {
-        NSLog(@"In the struct case! '%@'",
-              [NSString stringWithCString:cType encoding:NSUTF8StringEncoding]);
-
         NSString *structString = [NSString stringWithCString:cType
                                                     encoding:NSUTF8StringEncoding];
         if ([structString rangeOfString:@"{CGPoint"].location == 0) {
@@ -365,7 +384,7 @@
           NSString *name = @"Unsupported argument encoding";
           NSString *reason;
           reason = [NSString stringWithFormat:@"Encoding for struct '%@' is not supported.", structString];
-
+          LPLogError(@"%@", reason);
           @throw [NSException exceptionWithName:name
                                          reason:reason
                                        userInfo:nil];
@@ -373,13 +392,17 @@
       }
     }
   }
+
   [invocation setTarget:target];
+
   @try {
     [invocation invoke];
-  }
-  @catch (NSException *exception) {
-    NSLog(@"Perform %@ with target %@ caught %@: %@", NSStringFromSelector(sel),
-            target, [exception name], [exception reason]);
+  } @catch (NSException *exception) {
+    LPLogWarn(@"Perform %@ with target %@ caught %@: %@",
+              NSStringFromSelector(sel),
+              target,
+              [exception name],
+              [exception reason]);
     return NO;
   }
   return YES;
