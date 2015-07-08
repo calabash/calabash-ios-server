@@ -236,7 +236,20 @@
         break;
       }
       case 'c': {
-        char chVal = [arg charValue];
+        NSLog(@"arg class: %@", [arg class]);
+        NSLog(@"arg value: %@", arg);
+        char chVal;
+        if ([arg respondsToSelector:@selector(charValue)]) {
+          chVal = [arg charValue];
+        } else if ([arg respondsToSelector:@selector(characterAtIndex:)]) {
+          chVal = (char)[arg characterAtIndex:0];
+        } else {
+          NSLog(@"Cannot coerce '%@' of class '%@' into a char",
+                arg, [arg class]);
+          NSLog(@"To avoid crashing, setting char value to CHAR_MAX: %@",
+                @(CHAR_MAX));
+          chVal = CHAR_MAX;
+        }
         [invocation setArgument:&chVal atIndex:i + 2];
         break;
       }
