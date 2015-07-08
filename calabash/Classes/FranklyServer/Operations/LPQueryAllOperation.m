@@ -308,21 +308,33 @@
         break;
       }
       case '{': {
-        //not supported yet
-        if (strcmp(cType, "{CGPoint=ff}") == 0) {
+        NSLog(@"In the struct case! '%@'",
+              [NSString stringWithCString:cType encoding:NSUTF8StringEncoding]);
+
+        NSString *structString = [NSString stringWithCString:cType
+                                                    encoding:NSUTF8StringEncoding];
+        if ([structString rangeOfString:@"{CGPoint"].location == 0) {
+          NSLog(@"In the point case");
           CGPoint point;
           CGPointMakeWithDictionaryRepresentation((CFDictionaryRef) arg,
-                  &point);
+                                                  &point);
           [invocation setArgument:&point atIndex:i + 2];
           break;
-        } else if (strcmp(cType, "{CGRect={CGPoint=ff}{CGSize=ff}}") == 0) {
+        } else if ([structString rangeOfString:@"{CGRect"].location == 0) {
+          NSLog(@"In the rect case");
           CGRect rect;
           CGRectMakeWithDictionaryRepresentation((CFDictionaryRef) arg, &rect);
           [invocation setArgument:&rect atIndex:i + 2];
           break;
+        } else {
+          NSString *name = @"Unsupported argument encoding";
+          NSString *reason;
+          reason = [NSString stringWithFormat:@"Encoding for struct '%@' is not supported.", structString];
+
+          @throw [NSException exceptionWithName:name
+                                         reason:reason
+                                       userInfo:nil];
         }
-        @throw [NSString stringWithFormat:@"not yet support struct args: %@",
-                                          sig];
       }
     }
   }
