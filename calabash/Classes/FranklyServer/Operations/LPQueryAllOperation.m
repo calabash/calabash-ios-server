@@ -13,7 +13,6 @@
   return [NSString stringWithFormat:@"Query All: %@", _arguments];
 }
 
-
 - (SEL) parseValuesFromArray:(NSArray *) arr withArgs:(NSMutableArray *) args {
   NSMutableString *selStr = [NSMutableString stringWithCapacity:32];
   for (NSDictionary *selPart in arr) {
@@ -42,14 +41,26 @@
           }
           NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sig];
 
-          [self invoke:invocation withTarget:asClass args:subArgs selector:sel
+          [self invoke:invocation
+            withTarget:asClass
+                  args:subArgs
+              selector:sel
              signature:sig];
 
           id objValue;
           [invocation getReturnValue:(void **) &objValue];
           tgt = objValue ? objValue : [NSNull null];
         } else {
-          tgt = [asClass performSelector:NSSelectorFromString(tgt)];
+          SEL targetAsSelector = NSSelectorFromString(tgt);
+          if ([[NSThread currentThread] isMainThread]) {
+            tgt = [asClass performSelector:targetAsSelector];
+          } else {
+            __block id strongTarget;
+            dispatch_sync(dispatch_get_main_queue(), ^{
+              strongTarget = [asClass performSelector:targetAsSelector];
+            });
+            tgt = strongTarget;
+          }
         }
       }
     }
@@ -101,11 +112,13 @@
     }
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sig];
 
-    if (![self invoke:invocation withTarget:target args:args selector:sel
+    if (![self invoke:invocation
+           withTarget:target
+                 args:args
+             selector:sel
             signature:sig]) {
       return nil;
     }
-
 
     const char *type = [[invocation methodSignature] methodReturnType];
     NSString *returnType = [NSString stringWithFormat:@"%s", type];
@@ -164,7 +177,6 @@
         NSValue *value = [[NSValue alloc] initWithBytes:buffer
                                                objCType:type];
 
-
         if ([returnType rangeOfString:@"{CGRect"].location == 0) {
           CGRect *rect = (CGRect *) buffer;
 
@@ -219,7 +231,11 @@
 }
 
 
-- (BOOL) invoke:(NSInvocation *) invocation withTarget:(id) target args:(NSMutableArray *) args selector:(SEL) sel signature:(NSMethodSignature *) sig {
+- (BOOL) invoke:(NSInvocation *) invocation
+     withTarget:(id) target
+           args:(NSMutableArray *) args
+       selector:(SEL) sel
+      signature:(NSMethodSignature *) sig {
   [invocation setSelector:sel];
   for (NSInteger i = 0, N = [args count]; i < N; i++) {
     id arg = [args objectAtIndex:i];
@@ -396,7 +412,13 @@
   [invocation setTarget:target];
 
   @try {
-    [invocation invoke];
+    if ([[NSThread currentThread] isMainThread]) {
+      [invocation invoke];
+    } else {
+      [invocation performSelectorOnMainThread:@selector(invokeWithTarget:)
+                                   withObject:target
+                                   waitUntilDone:YES];
+    }
   } @catch (NSException *exception) {
     LPLogWarn(@"Perform %@ with target %@ caught %@: %@",
               NSStringFromSelector(sel),
@@ -407,6 +429,5 @@
   }
   return YES;
 }
-
 
 @end
