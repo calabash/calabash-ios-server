@@ -6,15 +6,14 @@
 
 #import "LPOperation.h"
 #import "LPFlashOperation.h"
-
 #import "LPTouchUtils.h"
-
+#import "LPJSONUtils.h"
 
 @implementation LPFlashOperation
+
 - (NSString *) description {
   return [NSString stringWithFormat:@"Flash: %@", _arguments];
 }
-
 
 - (id) performWithTarget:(UIView *) _view error:(NSError **) error {
 
@@ -25,7 +24,7 @@
       [LPTouchUtils flashView:_view forDuration:2];
     });
   }
-  return _view;
+  return [LPJSONUtils jsonifyObject:_view];
 }
 
 @end
