@@ -314,19 +314,18 @@
         NSString *structString = [NSString stringWithCString:cType
                                                     encoding:NSUTF8StringEncoding];
         if ([structString rangeOfString:@"{CGPoint"].location == 0) {
-          NSLog(@"In the point case");
           CGPoint point;
           CGPointMakeWithDictionaryRepresentation((CFDictionaryRef) arg,
                                                   &point);
           [invocation setArgument:&point atIndex:i + 2];
           break;
         } else if ([structString rangeOfString:@"{CGRect"].location == 0) {
-          NSLog(@"In the rect case");
           CGRect rect;
           CGRectMakeWithDictionaryRepresentation((CFDictionaryRef) arg, &rect);
           [invocation setArgument:&rect atIndex:i + 2];
           break;
         } else {
+          // TODO: Can we support the '{?=dd}' encoding?
           NSString *name = @"Unsupported argument encoding";
           NSString *reason;
           reason = [NSString stringWithFormat:@"Encoding for struct '%@' is not supported.", structString];
