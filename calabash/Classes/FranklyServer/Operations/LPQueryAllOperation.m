@@ -76,6 +76,7 @@
     short shortValue;
     float floatValue;
     double doubleValue;
+    long double longDoubleValue;
     unsigned short SValue;
     BOOL Bvalue;
     unsigned long long Qvalue;
@@ -130,6 +131,10 @@
         return [NSNumber numberWithShort:shortValue];
       case 'd':[invocation getReturnValue:(void **) &doubleValue];
         return [NSNumber numberWithDouble:doubleValue];
+      case 'D':[invocation getReturnValue:(void **) &longDoubleValue];
+        // http://stackoverflow.com/questions/6488956/store-nsnumber-in-a-long-double-type
+        // There is no Objective-C support for encoding a long double as a object
+        return [NSNumber numberWithDouble:longDoubleValue];
       case 'f':[invocation getReturnValue:(void **) &floatValue];
         return [NSNumber numberWithFloat:floatValue];
       case 'l':[invocation getReturnValue:(void **) &longValue];
@@ -220,6 +225,15 @@
         [invocation setArgument:&dbVal atIndex:i + 2];
         break;
       }
+
+      case 'D': {
+        // http://stackoverflow.com/questions/6488956/store-nsnumber-in-a-long-double-type
+        // There is no Objective-C support for encoding a long double as a object
+        long double longDouble = (long double)[arg doubleValue];
+        [invocation setArgument:&longDouble atIndex:i + 2];
+        break;
+      }
+
       case 'f': {
         float fltVal = [arg floatValue];
         [invocation setArgument:&fltVal atIndex:i + 2];
