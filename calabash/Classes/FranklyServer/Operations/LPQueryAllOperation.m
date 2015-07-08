@@ -269,11 +269,24 @@
         [invocation setArgument:&chVal atIndex:i + 2];
         break;
       }
+
       case 'S': {
-        unsigned short SValue = [arg unsignedShortValue];
+        unsigned short SValue;
+        if ([arg respondsToSelector:@selector(unsignedShortValue)]) {
+          SValue = [arg unsignedShortValue];
+        } else if ([arg respondsToSelector:@selector(characterAtIndex:)]) {
+          SValue = (unsigned short)[arg characterAtIndex:0];
+        } else {
+          NSLog(@"Cannot coerce '%@' of class '%@' into an unsigned short",
+                arg, [arg class]);
+          NSLog(@"To avoid crashing, setting short value to USHRT_MAX: %@",
+                @(USHRT_MAX));
+          SValue = USHRT_MAX;
+        }
         [invocation setArgument:&SValue atIndex:i + 2];
         break;
       }
+
       case 'B': {
         _Bool Bvalue = [arg boolValue];
         [invocation setArgument:&Bvalue atIndex:i + 2];
