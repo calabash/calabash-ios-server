@@ -157,23 +157,38 @@
         NSUInteger length = [[invocation methodSignature] methodReturnLength];
         void *buffer = (void *) malloc(length);
         [invocation getReturnValue:buffer];
-        NSValue *value = [[[NSValue alloc] initWithBytes:buffer objCType:type]
-                autorelease];
+        NSValue *value = [[NSValue alloc] initWithBytes:buffer
+                                               objCType:type];
+
 
         if ([returnType rangeOfString:@"{CGRect"].location == 0) {
-          CGRect *rec = (CGRect *) buffer;
-          return [NSDictionary dictionaryWithObjectsAndKeys:[value description], @"description",
-                                                            [NSNumber numberWithFloat:rec->origin.x], @"X",
-                                                            [NSNumber numberWithFloat:rec->origin.y], @"Y",
-                                                            [NSNumber numberWithFloat:rec->size.width], @"Width",
-                                                            [NSNumber numberWithFloat:rec->size.height], @"Height",
-                                                            nil];
+          CGRect *rect = (CGRect *) buffer;
+
+          NSDictionary *dictionary =
+          @{
+            @"description" : [value description],
+            @"X" : @(rect->origin.x),
+            @"Y" : @(rect->origin.y),
+            @"Width" : @(rect->size.width),
+            @"Height" : @(rect->size.height)
+            };
+
+          [value release];
+          free(buffer);
+          return dictionary;
         } else if ([returnType rangeOfString:@"{CGPoint="].location == 0) {
           CGPoint *point = (CGPoint *) buffer;
-          return [NSDictionary dictionaryWithObjectsAndKeys:[value description], @"description",
-                                                            [NSNumber numberWithFloat:point->x], @"X",
-                                                            [NSNumber numberWithFloat:point->y], @"Y",
-                                                            nil];
+
+          NSDictionary *dictionary =
+          @{
+            @"description" : [value description],
+            @"X" : @(point->x),
+            @"Y" : @(point->y),
+            };
+
+          [value release];
+          free(buffer);
+          return dictionary;
         } else if ([returnType isEqualToString:@"{?=dd}"]) {
           double *doubles = (double *) buffer;
           double d1 = *doubles;
@@ -182,7 +197,10 @@
           return [NSArray arrayWithObjects:[NSNumber numberWithDouble:d1],
                                            [NSNumber numberWithDouble:d2], nil];
         } else {
-          return [value description];
+          NSString *description = [value description];
+          [value release];
+          free(buffer);
+          return description;
         }
       }
     }
