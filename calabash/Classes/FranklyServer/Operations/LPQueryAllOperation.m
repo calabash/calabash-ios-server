@@ -194,8 +194,12 @@
           double d1 = *doubles;
           doubles++;
           double d2 = *doubles;
-          return [NSArray arrayWithObjects:[NSNumber numberWithDouble:d1],
-                                           [NSNumber numberWithDouble:d2], nil];
+
+          NSArray *array = @[@(d1), @(d2)];
+
+          [value release];
+          free(buffer);
+          return array;
         } else {
           NSString *description = [value description];
           [value release];
