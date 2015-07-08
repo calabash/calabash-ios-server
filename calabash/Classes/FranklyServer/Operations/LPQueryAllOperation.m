@@ -235,9 +235,25 @@
         [invocation setArgument:&cstringValue atIndex:i + 2];
         break;
       }
+
+      case 'C' : {
+        unichar chVal;
+        if ([arg respondsToSelector:@selector(unsignedCharValue)]) {
+          chVal = [arg unsignedCharValue];
+        } else if ([arg respondsToSelector:@selector(characterAtIndex:)]) {
+          chVal = [arg characterAtIndex:0];
+        } else {
+          NSLog(@"Cannot coerce '%@' of class '%@' into a unichar",
+                arg, [arg class]);
+          NSLog(@"To avoid crashing, setting char value to UCHAR_MAX: %@",
+                @(UCHAR_MAX));
+          chVal = UCHAR_MAX;
+        }
+        [invocation setArgument:&chVal atIndex:i + 2];
+        break;
+      }
+
       case 'c': {
-        NSLog(@"arg class: %@", [arg class]);
-        NSLog(@"arg value: %@", arg);
         char chVal;
         if ([arg respondsToSelector:@selector(charValue)]) {
           chVal = [arg charValue];
