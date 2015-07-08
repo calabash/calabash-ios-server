@@ -1,5 +1,8 @@
-//  Copyright (c) 2011 Xamarin. All rights reserved.
 #import "LPCollectionViewScrollToItemOperation.h"
+
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
 
 @implementation LPCollectionViewScrollToItemOperation
 
@@ -11,7 +14,7 @@
 
 //                 <===               required                ===>
 // _arguments ==> [item_num, section_num, scroll postion, animated]
-- (id) performWithTarget:(UIView *) aView error:(NSError **) aError {
+- (id) performWithTarget:(UIView *) aView error:(NSError *__autoreleasing*) aError {
 
   // UICollectionView appears in iOS 6
   Class clz = NSClassFromString(@"UICollectionView");
@@ -52,8 +55,15 @@
     return nil;
   }
 
-  // avoid a nasty if/else if conditional
-  NSDictionary *opts = @{@"top" : @(UICollectionViewScrollPositionTop), @"center_vertical" : @(UICollectionViewScrollPositionCenteredVertically), @"bottom" : @(UICollectionViewScrollPositionBottom), @"left" : @(UICollectionViewScrollPositionLeft), @"center_horizontal" : @(UICollectionViewScrollPositionCenteredHorizontally), @"right" : @(UICollectionViewScrollPositionRight)};
+  NSDictionary *opts =
+  @{
+    @"top" : @(UICollectionViewScrollPositionTop),
+    @"center_vertical" : @(UICollectionViewScrollPositionCenteredVertically),
+    @"bottom" : @(UICollectionViewScrollPositionBottom),
+    @"left" : @(UICollectionViewScrollPositionLeft),
+    @"center_horizontal" : @(UICollectionViewScrollPositionCenteredHorizontally),
+    @"right" : @(UICollectionViewScrollPositionRight)
+    };
 
   NSString *position = [_arguments objectAtIndex:2];
 
@@ -64,7 +74,6 @@
     return nil;
   }
 
-
   UICollectionViewScrollPosition scrollPosition = [posNum unsignedIntegerValue];
 
   NSNumber *animateNum = [_arguments objectAtIndex:3];
@@ -72,8 +81,17 @@
 
   NSIndexPath *ip = [NSIndexPath indexPathForItem:itemIndex inSection:section];
 
-  [collection scrollToItemAtIndexPath:ip atScrollPosition:scrollPosition
-                             animated:animate];
+  if ([[NSThread currentThread] isMainThread]) {
+    [collection scrollToItemAtIndexPath:ip
+                       atScrollPosition:scrollPosition
+                               animated:animate];
+  } else {
+    dispatch_sync(dispatch_get_main_queue(), ^{
+      [collection scrollToItemAtIndexPath:ip
+                         atScrollPosition:scrollPosition
+                                 animated:animate];
+    });
+  }
 
   return collection;
 }

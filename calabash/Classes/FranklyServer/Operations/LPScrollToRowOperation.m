@@ -6,6 +6,10 @@
 //  Copyright (c) 2011 LessPainful. All rights reserved.
 //
 
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
 #import "LPScrollToRowOperation.h"
 
 @implementation LPScrollToRowOperation
@@ -30,7 +34,7 @@
 }
 
 
-- (id) performWithTarget:(UIView *) _view error:(NSError **) error {
+- (id) performWithTarget:(UIView *) _view error:(NSError *__autoreleasing*) error {
   if ([_view isKindOfClass:[UITableView class]]) {
     UITableView *table = (UITableView *) _view;
     NSNumber *rowNum = [_arguments objectAtIndex:0];
@@ -57,8 +61,18 @@
           animate = [ani boolValue];
         }
 
-        [table scrollToRowAtIndexPath:path atScrollPosition:sp
-                             animated:animate];
+        if ([[NSThread currentThread] isMainThread]) {
+          [table scrollToRowAtIndexPath:path
+                       atScrollPosition:sp
+                               animated:animate];
+
+        } else {
+          dispatch_sync(dispatch_get_main_queue(), ^{
+            [table scrollToRowAtIndexPath:path
+                         atScrollPosition:sp
+                                 animated:animate];
+          });
+        }
         return _view;
       } else {
         NSLog(@"Warning: table doesn't contain indexPath: %@", path);
@@ -70,11 +84,22 @@
       if (!indexPathForRow) {
         return nil;
       }
-      [table scrollToRowAtIndexPath:indexPathForRow
-                   atScrollPosition:UITableViewScrollPositionTop animated:YES];
+
+      if ([[NSThread currentThread] isMainThread]) {
+        [table scrollToRowAtIndexPath:indexPathForRow
+                     atScrollPosition:UITableViewScrollPositionTop
+                             animated:YES];
+      } else {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+          [table scrollToRowAtIndexPath:indexPathForRow
+                       atScrollPosition:UITableViewScrollPositionTop
+                               animated:YES];
+        });
+      }
       return _view;
     }
   }
+
   NSLog(@"Warning view: %@ should be a table view for scrolling to row/cell to make sense",
           _view);
   return nil;

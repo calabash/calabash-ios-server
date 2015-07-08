@@ -1,11 +1,3 @@
-//
-//  ScrollOperation.m
-//  Calabash
-//
-//  Created by Karl Krukow on 18/08/11.
-//  Copyright (c) 2011 LessPainful. All rights reserved.
-//
-
 #if ! __has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
@@ -87,17 +79,21 @@
     return nil;
   }
 
-  [picker setDate:date animated:animate];
-
   if (notifyTargets) {
-    UIControlEvents events = [picker allControlEvents];
-    [picker sendActionsForControlEvents:events];
-  }
-
-  if (notifyTargets) {
-    [picker sendActionsForControlEvents:UIControlEventAllEvents];
+    if ([[NSThread currentThread] isMainThread]) {
+      [picker setDate:date animated:animate];
+      UIControlEvents events = [picker allControlEvents];
+      [picker sendActionsForControlEvents:events];
+    } else {
+      dispatch_sync(dispatch_get_main_queue(), ^{
+        [picker setDate:date animated:animate];
+        UIControlEvents events = [picker allControlEvents];
+        [picker sendActionsForControlEvents:events];
+      });
+    }
   }
 
   return _view;
 }
+
 @end

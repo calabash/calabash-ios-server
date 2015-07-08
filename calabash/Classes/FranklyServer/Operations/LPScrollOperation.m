@@ -4,10 +4,15 @@
 //  Copyright 2011 LessPainful. All rights reserved.
 //
 
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
 #import "LPScrollOperation.h"
 #import "UIWebView+LPWebView.h"
 #import "LPIsWebView.h"
 #import "LPWebViewProtocol.h"
+#import "LPCocoaLumberjack.h"
 
 @implementation LPScrollOperation
 - (NSString *) description {
@@ -15,8 +20,21 @@
 }
 
 
-- (id) performWithTarget:(UIView *) _view error:(NSError **) error {
+- (id) performWithTarget:(UIView *) _view error:(NSError *__autoreleasing*) error {
   NSString *dir = [_arguments objectAtIndex:0];
+
+  NSArray *allowedDirections = @[@"up", @"down", @"left", @"right"];
+  NSUInteger index = [allowedDirections indexOfObject:dir];
+  if (index == NSNotFound) {
+    LPLogError(@"Expected direction '%@' to be: up, down, left, or right", dir);
+    LPLogError(@"Returning nil");
+    if (error != NULL) {
+      *error = [NSError errorWithDomain:@"Calabash"
+                                   code:1
+                               userInfo:nil];
+    }
+    return nil;
+  }
 
   if ([_view isKindOfClass:[UIScrollView class]]) {
     UIScrollView *sv = (UIScrollView *) _view;
@@ -26,21 +44,31 @@
     if ([sv isPagingEnabled]) {
       fraction = 1.0;
     }
-    
+
+    CGPoint point;
+
     if ([@"up" isEqualToString:dir]) {
       CGFloat scrollAmount = MIN((size.height)/fraction, offset.y + sv.contentInset.top);
-      [sv setContentOffset:CGPointMake(offset.x, offset.y - scrollAmount) animated:YES];
+      point = CGPointMake(offset.x, offset.y - scrollAmount);
     } else if ([@"down" isEqualToString:dir]) {
       CGFloat scrollAmount = MIN(size.height/fraction, sv.contentSize.height + sv.contentInset.bottom - offset.y - size.height);
-      [sv setContentOffset:CGPointMake(offset.x, offset.y + scrollAmount) animated:YES];
+      point = CGPointMake(offset.x, offset.y + scrollAmount);
     } else if ([@"left" isEqualToString:dir]) {
       CGFloat scrollAmount = MIN(size.width/fraction, offset.x + sv.contentInset.left);
-      [sv setContentOffset:CGPointMake(offset.x - scrollAmount, offset.y) animated:YES];
-    } else if ([@"right" isEqualToString:dir]) {
+      point = CGPointMake(offset.x - scrollAmount, offset.y);
+    } else {
       CGFloat scrollAmount = MIN(size.width/fraction, sv.contentSize.width + sv.contentInset.right - offset.x - size.width);
-      [sv setContentOffset:CGPointMake(offset.x + scrollAmount, offset.y) animated:YES];
+      point = CGPointMake(offset.x + scrollAmount, offset.y);
     }
-    
+
+    if ([[NSThread currentThread] isMainThread]) {
+      [sv setContentOffset:point animated:YES];
+    } else {
+      dispatch_sync(dispatch_get_main_queue(), ^{
+        [sv setContentOffset:point animated:YES];
+      });
+    }
+
     return _view;
   } else if ([LPIsWebView isWebView:_view]) {
     UIView<LPWebViewProtocol> *webView = (UIView<LPWebViewProtocol> *)_view;
@@ -51,7 +79,7 @@
       scrollJS = [NSString stringWithFormat:scrollJS, @"0", @"100"];
     } else if ([@"left" isEqualToString:dir]) {
       scrollJS = [NSString stringWithFormat:scrollJS, @"-100", @"0"];
-    } else if ([@"right" isEqualToString:dir]) {
+    } else {
       scrollJS = [NSString stringWithFormat:scrollJS, @"100", @"0"];
     }
     NSString *res = [webView calabashStringByEvaluatingJavaScript:scrollJS];

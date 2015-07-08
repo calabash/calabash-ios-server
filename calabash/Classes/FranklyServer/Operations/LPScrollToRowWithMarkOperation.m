@@ -1,10 +1,6 @@
-//
-//  ScrollOperation.m
-//  Calabash
-//
-//  Created by Karl Krukow on 18/08/11.
-//  Copyright (c) 2011 LessPainful. All rights reserved.
-//
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
 
 #import "LPScrollToRowWithMarkOperation.h"
 
@@ -13,8 +9,6 @@
 - (NSString *) description {
   return [NSString stringWithFormat:@"ScrollToRow: %@", _arguments];
 }
-
-
 
 - (BOOL) cell:(UITableViewCell *) aCell contentViewHasSubviewMarked:(NSString *) aMark {
   // check the textLabel first
@@ -49,7 +43,7 @@
 
 //                 required      optional     optional
 // _arguments ==> [row mark, scroll position, animated]
-- (id) performWithTarget:(UIView *) _view error:(NSError **) error {
+- (id) performWithTarget:(UIView *) _view error:(NSError *__autoreleasing*) error {
   if ([_view isKindOfClass:[UITableView class]] == NO) {
     NSLog(@"Warning view: %@ should be a table view for scrolling to row/cell to make sense",
             _view);
@@ -89,7 +83,14 @@
     animate = [ani boolValue];
   }
 
-  [table scrollToRowAtIndexPath:path atScrollPosition:sp animated:animate];
+  if ([[NSThread currentThread] isMainThread]) {
+    [table scrollToRowAtIndexPath:path atScrollPosition:sp animated:animate];
+  } else {
+    dispatch_sync(dispatch_get_main_queue(), ^{
+      [table scrollToRowAtIndexPath:path atScrollPosition:sp animated:animate];
+    });
+  }
+
   return _view;
 }
 @end
