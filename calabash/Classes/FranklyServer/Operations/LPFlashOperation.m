@@ -17,9 +17,15 @@
 
 
 - (id) performWithTarget:(UIView *) _view error:(NSError **) error {
-  [LPTouchUtils flashView:_view forDuration:2];
+
+  if ([[NSThread currentThread] isMainThread]) {
+    [LPTouchUtils flashView:_view forDuration:2];
+  } else {
+    dispatch_sync(dispatch_get_main_queue(), ^{
+      [LPTouchUtils flashView:_view forDuration:2];
+    });
+  }
   return _view;
 }
-
 
 @end
