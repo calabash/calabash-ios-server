@@ -6,13 +6,12 @@
 
 #import "LPQueryAllOperation.h"
 #import "LPJSONUtils.h"
-
+#import "LPCocoaLumberjack.h"
 
 @implementation LPQueryAllOperation
 - (NSString *) description {
   return [NSString stringWithFormat:@"Query All: %@", _arguments];
 }
-
 
 - (SEL) parseValuesFromArray:(NSArray *) arr withArgs:(NSMutableArray *) args {
   NSMutableString *selStr = [NSMutableString stringWithCapacity:32];
@@ -42,14 +41,26 @@
           }
           NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sig];
 
-          [self invoke:invocation withTarget:asClass args:subArgs selector:sel
+          [self invoke:invocation
+            withTarget:asClass
+                  args:subArgs
+              selector:sel
              signature:sig];
 
           id objValue;
           [invocation getReturnValue:(void **) &objValue];
           tgt = objValue ? objValue : [NSNull null];
         } else {
-          tgt = [asClass performSelector:NSSelectorFromString(tgt)];
+          SEL targetAsSelector = NSSelectorFromString(tgt);
+          if ([[NSThread currentThread] isMainThread]) {
+            tgt = [asClass performSelector:targetAsSelector];
+          } else {
+            __block id strongTarget;
+            dispatch_sync(dispatch_get_main_queue(), ^{
+              strongTarget = [asClass performSelector:targetAsSelector];
+            });
+            tgt = strongTarget;
+          }
         }
       }
     }
@@ -76,6 +87,7 @@
     short shortValue;
     float floatValue;
     double doubleValue;
+    long double longDoubleValue;
     unsigned short SValue;
     BOOL Bvalue;
     unsigned long long Qvalue;
@@ -100,14 +112,19 @@
     }
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sig];
 
-    if (![self invoke:invocation withTarget:target args:args selector:sel
+    if (![self invoke:invocation
+           withTarget:target
+                 args:args
+             selector:sel
             signature:sig]) {
       return nil;
     }
 
-
     const char *type = [[invocation methodSignature] methodReturnType];
     NSString *returnType = [NSString stringWithFormat:@"%s", type];
+
+    LPLogInfo(@"The encoding of the selector is: %@", returnType);
+
     const char *trimmedType = [[returnType substringToIndex:1]
             cStringUsingEncoding:NSASCIIStringEncoding];
     switch (*trimmedType) {
@@ -130,6 +147,11 @@
         return [NSNumber numberWithShort:shortValue];
       case 'd':[invocation getReturnValue:(void **) &doubleValue];
         return [NSNumber numberWithDouble:doubleValue];
+      case 'D':[invocation getReturnValue:(void **) &longDoubleValue];
+        LPLogInfo(@"Handling a return value with encoding long double!");
+        // http://stackoverflow.com/questions/6488956/store-nsnumber-in-a-long-double-type
+        // There is no Objective-C support for encoding a long double as a object
+        return [NSNumber numberWithDouble:longDoubleValue];
       case 'f':[invocation getReturnValue:(void **) &floatValue];
         return [NSNumber numberWithFloat:floatValue];
       case 'l':[invocation getReturnValue:(void **) &longValue];
@@ -152,32 +174,54 @@
         NSUInteger length = [[invocation methodSignature] methodReturnLength];
         void *buffer = (void *) malloc(length);
         [invocation getReturnValue:buffer];
-        NSValue *value = [[[NSValue alloc] initWithBytes:buffer objCType:type]
-                autorelease];
+        NSValue *value = [[NSValue alloc] initWithBytes:buffer
+                                               objCType:type];
 
         if ([returnType rangeOfString:@"{CGRect"].location == 0) {
-          CGRect *rec = (CGRect *) buffer;
-          return [NSDictionary dictionaryWithObjectsAndKeys:[value description], @"description",
-                                                            [NSNumber numberWithFloat:rec->origin.x], @"X",
-                                                            [NSNumber numberWithFloat:rec->origin.y], @"Y",
-                                                            [NSNumber numberWithFloat:rec->size.width], @"Width",
-                                                            [NSNumber numberWithFloat:rec->size.height], @"Height",
-                                                            nil];
+          CGRect *rect = (CGRect *) buffer;
+
+          NSDictionary *dictionary =
+          @{
+            @"description" : [value description],
+            @"X" : @(rect->origin.x),
+            @"Y" : @(rect->origin.y),
+            @"Width" : @(rect->size.width),
+            @"Height" : @(rect->size.height)
+            };
+
+          [value release];
+          free(buffer);
+          return dictionary;
         } else if ([returnType rangeOfString:@"{CGPoint="].location == 0) {
           CGPoint *point = (CGPoint *) buffer;
-          return [NSDictionary dictionaryWithObjectsAndKeys:[value description], @"description",
-                                                            [NSNumber numberWithFloat:point->x], @"X",
-                                                            [NSNumber numberWithFloat:point->y], @"Y",
-                                                            nil];
+
+          NSDictionary *dictionary =
+          @{
+            @"description" : [value description],
+            @"X" : @(point->x),
+            @"Y" : @(point->y),
+            };
+
+          [value release];
+          free(buffer);
+          return dictionary;
         } else if ([returnType isEqualToString:@"{?=dd}"]) {
+          LPLogInfo(@"Handling the {?=dd} encoding!");
           double *doubles = (double *) buffer;
           double d1 = *doubles;
           doubles++;
           double d2 = *doubles;
-          return [NSArray arrayWithObjects:[NSNumber numberWithDouble:d1],
-                                           [NSNumber numberWithDouble:d2], nil];
+
+          NSArray *array = @[@(d1), @(d2)];
+
+          [value release];
+          free(buffer);
+          return array;
         } else {
-          return [value description];
+          NSString *description = [value description];
+          [value release];
+          free(buffer);
+          return description;
         }
       }
     }
@@ -187,7 +231,11 @@
 }
 
 
-- (BOOL) invoke:(NSInvocation *) invocation withTarget:(id) target args:(NSMutableArray *) args selector:(SEL) sel signature:(NSMethodSignature *) sig {
+- (BOOL) invoke:(NSInvocation *) invocation
+     withTarget:(id) target
+           args:(NSMutableArray *) args
+       selector:(SEL) sel
+      signature:(NSMethodSignature *) sig {
   [invocation setSelector:sel];
   for (NSInteger i = 0, N = [args count]; i < N; i++) {
     id arg = [args objectAtIndex:i];
@@ -220,6 +268,16 @@
         [invocation setArgument:&dbVal atIndex:i + 2];
         break;
       }
+
+      case 'D': {
+        // http://stackoverflow.com/questions/6488956/store-nsnumber-in-a-long-double-type
+        // There is no Objective-C support for encoding a long double as a object
+        LPLogInfo(@"Handling an argument with encoding long double!");
+        long double longDouble = (long double)[arg doubleValue];
+        [invocation setArgument:&longDouble atIndex:i + 2];
+        break;
+      }
+
       case 'f': {
         float fltVal = [arg floatValue];
         [invocation setArgument:&fltVal atIndex:i + 2];
@@ -235,16 +293,74 @@
         [invocation setArgument:&cstringValue atIndex:i + 2];
         break;
       }
-      case 'c': {
-        char chVal = [arg charValue];
+
+      case 'C' : {
+        unichar chVal;
+        if ([arg respondsToSelector:@selector(unsignedCharValue)]) {
+          chVal = [arg unsignedCharValue];
+        } else if ([arg respondsToSelector:@selector(characterAtIndex:)]) {
+          chVal = [arg characterAtIndex:0];
+        } else {
+          NSString *name = @"Argument encoding";
+          NSString *reason;
+          reason =
+          [NSString stringWithFormat:@"Cannot coerce '%@' of class '%@' into a unichar",
+           arg, [arg class]];
+
+          LPLogError(@"%@", reason);
+          @throw [NSException exceptionWithName:name
+                                         reason:reason
+                                       userInfo:nil];
+        }
         [invocation setArgument:&chVal atIndex:i + 2];
         break;
       }
+
+      case 'c': {
+        char chVal;
+        if ([arg respondsToSelector:@selector(charValue)]) {
+          chVal = [arg charValue];
+        } else if ([arg respondsToSelector:@selector(characterAtIndex:)]) {
+          chVal = (char)[arg characterAtIndex:0];
+        } else {
+          NSString *name = @"Argument encoding";
+          NSString *reason;
+          reason =
+          [NSString stringWithFormat:@"Cannot coerce '%@' of class '%@' into a char",
+           arg, [arg class]];
+
+          LPLogError(@"%@", reason);
+          @throw [NSException exceptionWithName:name
+                                         reason:reason
+                                       userInfo:nil];
+        }
+        [invocation setArgument:&chVal atIndex:i + 2];
+        break;
+      }
+
       case 'S': {
-        unsigned short SValue = [arg unsignedShortValue];
+        unsigned short SValue;
+        if ([arg respondsToSelector:@selector(unsignedShortValue)]) {
+          SValue = [arg unsignedShortValue];
+        } else if ([arg respondsToSelector:@selector(characterAtIndex:)]) {
+          SValue = (unsigned short)[arg characterAtIndex:0];
+        } else {
+
+          NSString *name = @"Argument encoding";
+          NSString *reason;
+          reason =
+          [NSString stringWithFormat:@"Cannot coerce '%@' of class '%@' into an unsiged short",
+           arg, [arg class]];
+
+          LPLogError(@"%@", reason);
+          @throw [NSException exceptionWithName:name
+                                         reason:reason
+                                       userInfo:nil];
+        }
         [invocation setArgument:&SValue atIndex:i + 2];
         break;
       }
+
       case 'B': {
         _Bool Bvalue = [arg boolValue];
         [invocation setArgument:&Bvalue atIndex:i + 2];
@@ -266,35 +382,52 @@
         break;
       }
       case '{': {
-        //not supported yet
-        if (strcmp(cType, "{CGPoint=ff}") == 0) {
+        NSString *structString = [NSString stringWithCString:cType
+                                                    encoding:NSUTF8StringEncoding];
+        if ([structString rangeOfString:@"{CGPoint"].location == 0) {
           CGPoint point;
           CGPointMakeWithDictionaryRepresentation((CFDictionaryRef) arg,
-                  &point);
+                                                  &point);
           [invocation setArgument:&point atIndex:i + 2];
           break;
-        } else if (strcmp(cType, "{CGRect={CGPoint=ff}{CGSize=ff}}") == 0) {
+        } else if ([structString rangeOfString:@"{CGRect"].location == 0) {
           CGRect rect;
           CGRectMakeWithDictionaryRepresentation((CFDictionaryRef) arg, &rect);
           [invocation setArgument:&rect atIndex:i + 2];
           break;
+        } else {
+          // TODO: Can we support the '{?=dd}' encoding?
+          NSString *name = @"Unsupported argument encoding";
+          NSString *reason;
+          reason = [NSString stringWithFormat:@"Encoding for struct '%@' is not supported.", structString];
+          LPLogError(@"%@", reason);
+          @throw [NSException exceptionWithName:name
+                                         reason:reason
+                                       userInfo:nil];
         }
-        @throw [NSString stringWithFormat:@"not yet support struct args: %@",
-                                          sig];
       }
     }
   }
+
   [invocation setTarget:target];
+
   @try {
-    [invocation invoke];
-  }
-  @catch (NSException *exception) {
-    NSLog(@"Perform %@ with target %@ caught %@: %@", NSStringFromSelector(sel),
-            target, [exception name], [exception reason]);
+    if ([[NSThread currentThread] isMainThread]) {
+      [invocation invoke];
+    } else {
+      [invocation performSelectorOnMainThread:@selector(invokeWithTarget:)
+                                   withObject:target
+                                   waitUntilDone:YES];
+    }
+  } @catch (NSException *exception) {
+    LPLogWarn(@"Perform %@ with target %@ caught %@: %@",
+              NSStringFromSelector(sel),
+              target,
+              [exception name],
+              [exception reason]);
     return NO;
   }
   return YES;
 }
-
 
 @end
