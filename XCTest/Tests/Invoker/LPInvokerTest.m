@@ -4,6 +4,7 @@
 
 #import "LPInvoker.h"
 #import "InvokerFactory.h"
+#import "LPCoercion.h"
 
 @interface NSString (LPXCTTEST)
 
