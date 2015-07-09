@@ -106,12 +106,8 @@
 }
 
 - (void) testUnhandledEncodingBitField {
-
-  struct {
-    unsigned int age : 3;
-  } Age;
-
-  NSString *encoding = @(@encode(typeof(Age)));
+  // Don't know how to create a bitfield
+  NSString *encoding = @"b5";
   id mock = [self expectInvokerEncoding:encoding];
   XCTAssertTrue([mock encodingIsUnhandled]);
   [mock verify];
