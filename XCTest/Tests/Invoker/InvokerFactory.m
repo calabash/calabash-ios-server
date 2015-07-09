@@ -76,6 +76,7 @@
     @"unsigned long" : NSStringFromSelector(@selector(selectorThatReturnsUnsignedLong)),
     @"long long" : NSStringFromSelector(@selector(selectorThatReturnsLongLong)),
     @"unsigned long long" : NSStringFromSelector(@selector(selectorThatReturnsUnsignedLongLong)),
+    @"CGPoint" : NSStringFromSelector(@selector(selectorThatReturnsCGPoint))
     };
 
   return _selectorMap;
@@ -150,5 +151,6 @@
 - (unsigned long) selectorThatReturnsUnsignedLong { return (unsigned long)ULONG_MAX; }
 - (long long) selectorThatReturnsLongLong { return (long long)LONG_LONG_MIN; }
 - (unsigned long long) selectorThatReturnsUnsignedLongLong { return (unsigned long long)ULONG_LONG_MAX; }
+- (CGPoint) selectorThatReturnsCGPoint { return CGPointMake(17, 42); }
 
 @end

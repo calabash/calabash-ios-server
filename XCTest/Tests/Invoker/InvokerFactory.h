@@ -40,5 +40,6 @@
 - (unsigned long) selectorThatReturnsUnsignedLong;
 - (long long) selectorThatReturnsLongLong;
 - (unsigned long long) selectorThatReturnsUnsignedLongLong;
+- (CGPoint) selectorThatReturnsCGPoint;
 
 @end

@@ -131,11 +131,11 @@
   [mock verify];
 }
 
-- (void) testUnhandledCGRect {
-  NSString *encoding = @(@encode(typeof(CGRectZero)));
-  id mock = [self expectInvokerEncoding:encoding];
-  XCTAssertFalse([mock encodingIsUnhandled]);
-  [mock verify];
-}
+//- (void) testUnhandledCGRect {
+//  NSString *encoding = @(@encode(typeof(CGRectZero)));
+//  id mock = [self expectInvokerEncoding:encoding];
+//  XCTAssertFalse([mock encodingIsUnhandled]);
+//  [mock verify];
+//}
 
 @end

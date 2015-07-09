@@ -199,3 +199,22 @@
 }
 
 @end
+
+SpecBegin(LPInvokerObjectByCoercingReturnValue)
+
+it(@"CGPoint", ^{
+  LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"CGPoint"];
+  LPCoercion *coercion = [invoker objectByCoercingReturnValue];
+  id value = coercion.value;
+
+  expect([value isKindOfClass:[NSDictionary class]]).to.equal(YES);
+
+  NSDictionary *dictionary = (NSDictionary *)value;
+  expect(dictionary.count).to.equal(3);
+  expect(dictionary[@"X"]).to.equal(@(17.0));
+  expect(dictionary[@"Y"]).to.equal(@(42.0));
+  expect(dictionary[@"description"]).to.equal(@"NSPoint: {17, 42}");
+
+});
+
+SpecEnd

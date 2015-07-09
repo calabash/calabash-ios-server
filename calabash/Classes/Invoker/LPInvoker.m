@@ -174,7 +174,13 @@
 
   // @encode(typeof([NSObject class])) => {NSObject=#}
   // @encode(typeof(Struct)) => {name=type...}
-  if ([encoding hasPrefix:@"{"]) { return YES; }
+  if ([encoding hasPrefix:@"{"]) {
+    if ([encoding rangeOfString:@"{CGPoint"].location == 0) {
+      return NO;
+    } else {
+      return YES;
+    }
+  }
 
   // @encode(typeof(Union)) => (name=type...)
   if ([encoding hasPrefix:@"("]) { return YES; }
@@ -341,6 +347,30 @@
       unsigned long long ref;
       [invocation getReturnValue:(void **) &ref];
       return [LPCoercion coercionWithValue:@((unsigned long long) ref)];
+    }
+
+    case '{' : {
+      if ([encoding rangeOfString:@"{CGPoint="].location == 0) {
+        const char *objCType = [encoding cStringUsingEncoding:NSASCIIStringEncoding];
+        NSUInteger length = [[invocation methodSignature] methodReturnLength];
+        void *buffer = (void *) malloc(length);
+        [invocation getReturnValue:buffer];
+        NSValue *value = [[NSValue alloc] initWithBytes:buffer
+                                               objCType:objCType];
+
+        CGPoint *point = (CGPoint *) buffer;
+
+        NSDictionary *dictionary =
+        @{
+          @"description" : [value description],
+          @"X" : @(point->x),
+          @"Y" : @(point->y),
+          };
+        LPCoercion *coercion = [LPCoercion coercionWithValue:dictionary];
+        free(buffer);
+        return coercion;
+      }
+      break;
     }
 
     default: {
