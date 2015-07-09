@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		89128F951B25DD92008874B0 /* LPIntrospectionTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89128F941B25DD92008874B0 /* LPIntrospectionTestView.m */; };
+		89128F951B25DD92008874B0 /* LPIntrospectionTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89128F941B25DD92008874B0 /* LPIntrospectionTestView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89F2EFE11B2243D500958052 /* LPIntrospectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89F2EFE21B2243D500958052 /* LPIntrospectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89F2EFE41B2243D500958052 /* LPIntrospectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
