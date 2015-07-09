@@ -40,7 +40,7 @@ NSString *const LPUnspecifiedInvocationError = @"*invocation error*";
 }
 
 - (BOOL) wasSuccessful {
-  if (self) {
+  if (self.value) {
     return YES;
   } else {
     return NO;
