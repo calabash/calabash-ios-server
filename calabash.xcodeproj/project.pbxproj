@@ -1453,16 +1453,16 @@
 		F5543F1F1ABF7D7000E1A0BF /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				F5BA6F0E1B4E4D2B00DB898F /* Invoker */,
 				F50CBFD01A040788004AC9DA /* tests.pch */,
 				F514ACCA1B3413D8004ACFEE /* LPiOSVersionInlines.h */,
 				F514ACCB1B341557004ACFEE /* LPiOSVersionInlinesTest.m */,
 				F50CBF761A03F69A004AC9DA /* LPTestToolsStandup.m */,
+				F5BA6F0E1B4E4D2B00DB898F /* Invoker */,
+				F532C1991AFD28970024DA55 /* JSON */,
 				F5C224E41AD47403001DB4FA /* Operations */,
 				F5C224E61AD47403001DB4FA /* Routes */,
-				F532C1991AFD28970024DA55 /* JSON */,
-				F5A33A481AC009B600224639 /* WebViewQuery */,
 				F5543F201ABF7D7000E1A0BF /* Utils */,
+				F5A33A481AC009B600224639 /* WebViewQuery */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
