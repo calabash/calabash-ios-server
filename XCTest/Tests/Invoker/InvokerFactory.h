@@ -41,5 +41,6 @@
 - (long long) selectorThatReturnsLongLong;
 - (unsigned long long) selectorThatReturnsUnsignedLongLong;
 - (CGPoint) selectorThatReturnsCGPoint;
+- (CGRect) selectorThatReturnsCGRect;
 
 @end

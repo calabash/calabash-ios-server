@@ -175,7 +175,8 @@
   // @encode(typeof([NSObject class])) => {NSObject=#}
   // @encode(typeof(Struct)) => {name=type...}
   if ([encoding hasPrefix:@"{"]) {
-    if ([encoding rangeOfString:@"{CGPoint"].location == 0) {
+    if ([encoding rangeOfString:@"{CGPoint"].location == 0 ||
+        [encoding rangeOfString:@"{CGRect"].location == 0) {
       return NO;
     } else {
       return YES;
@@ -350,13 +351,17 @@
     }
 
     case '{' : {
+
+      const char *objCType = [encoding cStringUsingEncoding:NSASCIIStringEncoding];
+      NSUInteger length = [[invocation methodSignature] methodReturnLength];
+      void *buffer = (void *) malloc(length);
+
+      [invocation getReturnValue:buffer];
+
+      NSValue *value = [[NSValue alloc] initWithBytes:buffer
+                                             objCType:objCType];
+
       if ([encoding rangeOfString:@"{CGPoint="].location == 0) {
-        const char *objCType = [encoding cStringUsingEncoding:NSASCIIStringEncoding];
-        NSUInteger length = [[invocation methodSignature] methodReturnLength];
-        void *buffer = (void *) malloc(length);
-        [invocation getReturnValue:buffer];
-        NSValue *value = [[NSValue alloc] initWithBytes:buffer
-                                               objCType:objCType];
 
         CGPoint *point = (CGPoint *) buffer;
 
@@ -367,6 +372,22 @@
           @"Y" : @(point->y),
           };
         LPCoercion *coercion = [LPCoercion coercionWithValue:dictionary];
+        free(buffer);
+        return coercion;
+      } else if ([encoding rangeOfString:@"{CGRect="].location == 0) {
+        CGRect *rect = (CGRect *) buffer;
+
+        NSDictionary *dictionary =
+        @{
+          @"description" : [value description],
+          @"X" : @(rect->origin.x),
+          @"Y" : @(rect->origin.y),
+          @"Width" : @(rect->size.width),
+          @"Height" : @(rect->size.height)
+          };
+
+        LPCoercion *coercion = [LPCoercion coercionWithValue:dictionary];
+
         free(buffer);
         return coercion;
       }

@@ -214,7 +214,23 @@ it(@"CGPoint", ^{
   expect(dictionary[@"X"]).to.equal(@(17.0));
   expect(dictionary[@"Y"]).to.equal(@(42.0));
   expect(dictionary[@"description"]).to.equal(@"NSPoint: {17, 42}");
-
 });
+
+it(@"CGRect", ^{
+  LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"CGRect"];
+  LPCoercion *coercion = [invoker objectByCoercingReturnValue];
+  id value = coercion.value;
+
+  expect([value isKindOfClass:[NSDictionary class]]).to.equal(YES);
+
+  NSDictionary *dictionary = (NSDictionary *)value;
+  expect(dictionary.count).to.equal(5);
+  expect(dictionary[@"X"]).to.equal(@(17.0));
+  expect(dictionary[@"Y"]).to.equal(@(42.0));
+  expect(dictionary[@"Width"]).to.equal(@(11.0));
+  expect(dictionary[@"Height"]).to.equal(@(13.0));
+  expect(dictionary[@"description"]).to.equal(@"NSRect: {{17, 42}, {11, 13}}");
+});
+
 
 SpecEnd
