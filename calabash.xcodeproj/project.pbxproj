@@ -492,6 +492,7 @@
 		F5BA6F1D1B4E4E8200DB898F /* LPCoercion.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BA6F171B4E4E8200DB898F /* LPCoercion.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5BA6F1E1B4E4E8200DB898F /* LPCoercion.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BA6F171B4E4E8200DB898F /* LPCoercion.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5BA6F201B4EC3A700DB898F /* LPInvokerEncodingIsUnhandledTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BA6F1F1B4EC3A700DB898F /* LPInvokerEncodingIsUnhandledTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5BA6F221B4EC8CC00DB898F /* LPInvokerObjectByCoercingReturnValueTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BA6F211B4EC8CC00DB898F /* LPInvokerObjectByCoercingReturnValueTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5C04E251B330F8B00F23526 /* LPDecimalRounderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C04E241B330F8B00F23526 /* LPDecimalRounderTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5C04E2E1B33110B00F23526 /* LPDecimalRounder.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C04E271B33110B00F23526 /* LPDecimalRounder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5C04E2F1B33110B00F23526 /* LPDecimalRounder.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C04E271B33110B00F23526 /* LPDecimalRounder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -896,6 +897,7 @@
 		F5BA6F161B4E4E8200DB898F /* LPCoercion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCoercion.h; sourceTree = "<group>"; };
 		F5BA6F171B4E4E8200DB898F /* LPCoercion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCoercion.m; sourceTree = "<group>"; };
 		F5BA6F1F1B4EC3A700DB898F /* LPInvokerEncodingIsUnhandledTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvokerEncodingIsUnhandledTest.m; sourceTree = "<group>"; };
+		F5BA6F211B4EC8CC00DB898F /* LPInvokerObjectByCoercingReturnValueTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvokerObjectByCoercingReturnValueTest.m; sourceTree = "<group>"; };
 		F5C04E241B330F8B00F23526 /* LPDecimalRounderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDecimalRounderTest.m; sourceTree = "<group>"; };
 		F5C04E261B33110B00F23526 /* LPDecimalRounder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDecimalRounder.h; sourceTree = "<group>"; };
 		F5C04E271B33110B00F23526 /* LPDecimalRounder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDecimalRounder.m; sourceTree = "<group>"; };
@@ -1682,6 +1684,7 @@
 				F5BA6F111B4E4D2B00DB898F /* LPInvokerTest.m */,
 				F5BA6F141B4E4DFD00DB898F /* LPCoercionTest.m */,
 				F5BA6F1F1B4EC3A700DB898F /* LPInvokerEncodingIsUnhandledTest.m */,
+				F5BA6F211B4EC8CC00DB898F /* LPInvokerObjectByCoercingReturnValueTest.m */,
 			);
 			path = Invoker;
 			sourceTree = "<group>";
@@ -2539,6 +2542,7 @@
 				F5C224E21AD473F0001DB4FA /* LPJSONUtilsTest.m in Sources */,
 				89F2EFF01B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */,
 				F50CBFB11A0405B2004AC9DA /* LPBackdoorRoute.m in Sources */,
+				F5BA6F221B4EC8CC00DB898F /* LPInvokerObjectByCoercingReturnValueTest.m in Sources */,
 				F5C224ED1AD4766E001DB4FA /* LPSetTextOperationTest.m in Sources */,
 				F5A8B4771B39BFEB00F390CA /* LPAbstractDatabaseLogger.m in Sources */,
 				F50CBFB01A0405B2004AC9DA /* LPAsyncPlaybackRoute.m in Sources */,
