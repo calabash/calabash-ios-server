@@ -77,7 +77,8 @@
     @"long long" : NSStringFromSelector(@selector(selectorThatReturnsLongLong)),
     @"unsigned long long" : NSStringFromSelector(@selector(selectorThatReturnsUnsignedLongLong)),
     @"CGPoint" : NSStringFromSelector(@selector(selectorThatReturnsCGPoint)),
-    @"CGRect" : NSStringFromSelector(@selector(selectorThatReturnsCGRect))
+    @"CGRect" : NSStringFromSelector(@selector(selectorThatReturnsCGRect)),
+    @"struct" : NSStringFromSelector(@selector(selectorThatReturnsAStruct))
     };
 
   return _selectorMap;
@@ -154,5 +155,10 @@
 - (unsigned long long) selectorThatReturnsUnsignedLongLong { return (unsigned long long)ULONG_LONG_MAX; }
 - (CGPoint) selectorThatReturnsCGPoint { return CGPointMake(17, 42); }
 - (CGRect) selectorThatReturnsCGRect { return CGRectMake(17, 42, 11, 13); }
+- (InvokerFactoryStruct) selectorThatReturnsAStruct {
+  InvokerFactoryStruct factoryStruct;
+  factoryStruct.pillar = 1;
+  return factoryStruct;
+}
 
 @end

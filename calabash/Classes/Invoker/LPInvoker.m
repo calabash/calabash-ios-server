@@ -174,14 +174,7 @@
 
   // @encode(typeof([NSObject class])) => {NSObject=#}
   // @encode(typeof(Struct)) => {name=type...}
-  if ([encoding hasPrefix:@"{"]) {
-    if ([encoding rangeOfString:@"{CGPoint"].location == 0 ||
-        [encoding rangeOfString:@"{CGRect"].location == 0) {
-      return NO;
-    } else {
-      return YES;
-    }
-  }
+  if ([encoding hasPrefix:@"{"]) { return NO; }
 
   // @encode(typeof(Union)) => (name=type...)
   if ([encoding hasPrefix:@"("]) { return YES; }
@@ -388,6 +381,26 @@
 
         LPCoercion *coercion = [LPCoercion coercionWithValue:dictionary];
 
+        free(buffer);
+        return coercion;
+      } else {
+        LPCoercion *coercion;
+
+        // A struct, NSObject class
+        NSArray *tokens = [encoding componentsSeparatedByString:@"="];
+        if (tokens.count == 2) {
+          NSString *name = [tokens[0] stringByReplacingOccurrencesOfString:@"{"
+                                                                withString:@""];
+          NSString *values = [tokens[1] stringByReplacingOccurrencesOfString:@"}"
+                                                                  withString:@""];
+          if ([values isEqualToString:@"#"]) {
+            coercion = [LPCoercion coercionWithValue:values];
+          } else {
+            coercion = [LPCoercion coercionWithValue:name];
+          }
+        } else {
+          coercion = [LPCoercion coercionWithFailureMessage:LPCannotCoerceSelectorReturnValueToObject];
+        }
         free(buffer);
         return coercion;
       }

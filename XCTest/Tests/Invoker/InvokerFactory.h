@@ -3,6 +3,11 @@
 @class Target;
 @class LPInvoker;
 
+typedef struct InvokerFactoryStruct InvokerFactoryStruct;
+ struct InvokerFactoryStruct {
+   NSUInteger pillar;
+};
+
 @interface InvokerFactory : NSObject
 
 + (InvokerFactory *) shared;
@@ -42,5 +47,6 @@
 - (unsigned long long) selectorThatReturnsUnsignedLongLong;
 - (CGPoint) selectorThatReturnsCGPoint;
 - (CGRect) selectorThatReturnsCGRect;
+- (InvokerFactoryStruct) selectorThatReturnsAStruct;
 
 @end

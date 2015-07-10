@@ -73,7 +73,7 @@
   } Struct;
   NSString *encoding = @(@encode(typeof(Struct)));
   id mock = [self expectInvokerEncoding:encoding];
-  XCTAssertTrue([mock encodingIsUnhandled]);
+  XCTAssertFalse([mock encodingIsUnhandled]);
   [mock verify];
 }
 

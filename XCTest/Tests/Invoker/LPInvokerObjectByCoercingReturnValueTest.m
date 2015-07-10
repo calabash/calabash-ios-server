@@ -198,6 +198,13 @@
   XCTAssertEqual([value unsignedLongLongValue], ULONG_LONG_MAX);
 }
 
+- (void) testObjectbyCoercingStruct {
+  LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"struct"];
+  LPCoercion *coercion = [invoker objectByCoercingReturnValue];
+  id value = coercion.value;
+  expect(value).to.equal(@"InvokerFactoryStruct");
+}
+
 @end
 
 SpecBegin(LPInvokerObjectByCoercingReturnValue)
