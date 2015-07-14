@@ -4,7 +4,7 @@
 
 #import "LPInvoker.h"
 #import "LPCoercion.h"
-
+#import "LPCocoaLumberjack.h"
 
 @interface LPInvoker ()
 
@@ -220,7 +220,7 @@
 
   // Guard against invalid access when asking for encoding[0]
   if (!encoding.length >= 1) {
-    NSLog(@"Selector '%@' on '%@' has an invalid encoding; '%@' must have at least one character.",
+    LPLogWarn(@"Selector '%@' on '%@' has an invalid encoding; '%@' must have at least one character.",
           NSStringFromSelector(selector), target, encoding);
     return [LPCoercion coercionWithFailureMessage:LPSelectorHasUnknownEncoding];
   }
@@ -443,7 +443,7 @@
     }
 
     default: {
-      NSLog(@"Unexpected type encoding: '%@'.", encoding);
+      LPLogWarn(@"Unexpected type encoding: '%@'.", encoding);
     }
   }
 
