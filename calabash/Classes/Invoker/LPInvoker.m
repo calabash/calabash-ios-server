@@ -523,4 +523,20 @@
   return YES;
 }
 
+- (BOOL) selectorHasArgumentWithUnhandledEncoding {
+  if (![self selectorHasArguments]) {  return NO; }
+
+  NSUInteger numberOfArguments = [self numberOfArguments];
+  NSMethodSignature *signature = self.signature;
+
+  for (NSUInteger index = 0; index < numberOfArguments; index++) {
+    NSString *encoding = [LPInvoker encodingAtIndex:index + 2
+                                          signature:signature];
+    if (![LPInvoker canHandleArgumentEncoding:encoding]) {
+      return YES;
+    }
+  }
+  return NO;
+}
+
 @end

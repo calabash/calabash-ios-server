@@ -7,17 +7,20 @@
 
 @interface InvokerFactory ()
 
-@property(strong, nonatomic, readonly) NSDictionary *selectorMap;
+@property(strong, nonatomic, readonly) NSDictionary *selectorForReturnTypeMap;
+@property(strong, nonatomic, readonly) NSDictionary *selectorForArgTypeMap;
 
 - (id) init_private;
 - (Target *) instance_targetWithSelectorReturnValue:(NSString *) key;
 - (LPInvoker *) instance_invokerWithSelectorReturnValue:(NSString *) key;
+- (LPInvoker *) instance_invokerWithArgmentValue:(NSString *) key;
 
 @end
 
 @implementation InvokerFactory
 
-@synthesize selectorMap = _selectorMap;
+@synthesize selectorForReturnTypeMap = _selectorForReturnTypeMap;
+@synthesize selectorForArgTypeMap = _selectorForArgTypeMap;
 
 - (id) init {
   NSString *reason = [NSString stringWithFormat:@"%@ is a singleton",
@@ -44,10 +47,10 @@
   return sharedFactory;
 }
 
-- (NSDictionary *) selectorMap {
-  if (_selectorMap) { return _selectorMap; }
+- (NSDictionary *) selectorForReturnTypeMap {
+  if (_selectorForReturnTypeMap) { return _selectorForReturnTypeMap; }
 
-  _selectorMap =
+  _selectorForReturnTypeMap =
   @{
     @"object" : NSStringFromSelector(@selector(object)),
     @"number" : NSStringFromSelector(@selector(number)),
@@ -83,7 +86,50 @@
     @"Location2D" : NSStringFromSelector(@selector(selectorThatReturnsCoreLocation2D))
     };
 
-  return _selectorMap;
+  return _selectorForReturnTypeMap;
+}
+
+- (NSDictionary *) selectorForArgTypeMap {
+  if (_selectorForArgTypeMap) { return _selectorForArgTypeMap; }
+
+  _selectorForArgTypeMap =
+  @{
+
+    // Handled
+    @"BOOL YES" : NSStringFromSelector(@selector(selectorBOOL_YES:)),
+    @"BOOL NO" : NSStringFromSelector(@selector(selectorBOOL_NO:)),
+    @"bool true" : NSStringFromSelector(@selector(selectorBool_true:)),
+    @"bool false" : NSStringFromSelector(@selector(selectorBool_false:)),
+    @"NSInteger" : NSStringFromSelector(@selector(selectorNSInteger:)),
+    @"NSUInteger" : NSStringFromSelector(@selector(selectorNSUInteger:)),
+    @"short" : NSStringFromSelector(@selector(selectorShort:)),
+    @"unsigned short" : NSStringFromSelector(@selector(selectorUnsignedShort:)),
+    @"CGFloat" : NSStringFromSelector(@selector(selectorCGFloat:)),
+    @"double" : NSStringFromSelector(@selector(selectorDouble:)),
+    @"float" : NSStringFromSelector(@selector(selectorFloat:)),
+    @"char" : NSStringFromSelector(@selector(selectorChar:)),
+    @"char *" : NSStringFromSelector(@selector(selectorCharStar:)),
+    @"const char *" : NSStringFromSelector(@selector(selectorConstCharStar:)),
+    @"unsigned char" : NSStringFromSelector(@selector(selectorUnsignedChar:)),
+    @"long" : NSStringFromSelector(@selector(selectorLong:)),
+    @"unsigned long" : NSStringFromSelector(@selector(selectorUnsignedLong:)),
+    @"long long" : NSStringFromSelector(@selector(selectorLongLong:)),
+    @"unsigned long long" : NSStringFromSelector(@selector(selectorUnsignedLongLong:)),
+    @"CGPoint" : NSStringFromSelector(@selector(selectorCGPoint:)),
+    @"CGRect" : NSStringFromSelector(@selector(selectorCGRect:)),
+    @"Class" : NSStringFromSelector(@selector(selectorClass:)),
+
+    // Not handled
+    @"void *" : NSStringFromSelector(@selector(selectorVoidStar:)),
+    @"float *" : NSStringFromSelector(@selector(selectorFloatStar:)),
+    @"NSError **" : NSStringFromSelector(@selector(selectorObjectStarStar:)),
+    @"SEL" : NSStringFromSelector(@selector(selectorSelector:)),
+    @"int []" : NSStringFromSelector(@selector(selectorPrimativeArray:)),
+    @"struct" : NSStringFromSelector(@selector(selectorStruct:))
+
+    };
+
+  return _selectorForArgTypeMap;
 }
 
 + (Target *) targetWithSelectorReturnValue:(NSString *) key {
@@ -91,13 +137,8 @@
   return [factory instance_targetWithSelectorReturnValue:key];
 }
 
-+ (LPInvoker *) invokerWithSelectorReturnValue:(NSString *) key {
-  InvokerFactory *factory = [InvokerFactory shared];
-  return [factory instance_invokerWithSelectorReturnValue:key];
-}
-
 - (Target *) instance_targetWithSelectorReturnValue:(NSString *) key {
-  NSDictionary *map = self.selectorMap;
+  NSDictionary *map = self.selectorForReturnTypeMap;
   NSString *selector = [map objectForKey:key];
   if (!selector) {
     NSString *reason = [NSString stringWithFormat:@"Key '%@' is not one of '%@'",
@@ -112,11 +153,43 @@
   return target;
 }
 
+#pragma mark - Testing Return Types
+
++ (LPInvoker *) invokerWithSelectorReturnValue:(NSString *) key {
+  InvokerFactory *factory = [InvokerFactory shared];
+  return [factory instance_invokerWithSelectorReturnValue:key];
+}
+
 - (LPInvoker *) instance_invokerWithSelectorReturnValue:(NSString *) key {
   Target *target = [self instance_targetWithSelectorReturnValue:key];
   return [[LPInvoker alloc] initWithSelector:target.selector
                                       target:target];
 }
+
+#pragma mark - Testing Argument Types
+
++ (LPInvoker *) invokerWithArgmentValue:(NSString *) key {
+  InvokerFactory *factory = [InvokerFactory shared];
+  return [factory instance_invokerWithArgmentValue:key];
+}
+
+- (LPInvoker *) instance_invokerWithArgmentValue:(NSString *) key {
+  NSDictionary *map = self.selectorForArgTypeMap;
+
+  NSString *selector = [map objectForKey:key];
+  if (!selector) {
+    NSString *reason = [NSString stringWithFormat:@"Key '%@' is not one of '%@'",
+                        key, [map allKeys]];
+    @throw [NSException exceptionWithName:@"LPNoObjectForKey"
+                                   reason:reason
+                                 userInfo:nil];
+  }
+
+  Target *target = [Target new];
+  target.selector = NSSelectorFromString(selector);
+  return [[LPInvoker alloc] initWithSelector:target.selector target:target];
+}
+
 
 @end
 
@@ -167,5 +240,115 @@
   return CLLocationCoordinate2DMake((CLLocationDegrees)56.17216,
                                     (CLLocationDegrees)10.18754);
 }
+
+
+#pragma mark - Handled Argument Types
+
+- (BOOL) selectorBOOL_YES:(BOOL) arg {
+  return arg == YES;
+}
+
+- (BOOL) selectorBOOL_NO:(BOOL) arg {
+  return arg == NO;
+}
+
+- (BOOL) selectorBool_true:(bool) arg {
+  return arg == true;
+}
+
+- (BOOL) selectorBool_false:(bool) arg {
+  return arg == false;
+}
+
+- (BOOL) selectorNSInteger:(NSInteger) arg {
+  return arg == NSIntegerMin;
+}
+
+- (BOOL) selectorNSUInteger:(NSUInteger) arg {
+  return arg = NSNotFound;
+}
+
+- (BOOL) selectorShort:(short) arg {
+  return arg == SHRT_MIN;
+}
+
+- (BOOL) selectorUnsignedShort:(unsigned short) arg {
+  return arg = USHRT_MAX;
+}
+
+- (BOOL) selectorCGFloat:(CGFloat) arg {
+  return arg == CGFLOAT_MAX;
+}
+
+- (BOOL) selectorDouble:(double) arg {
+  return arg == DBL_MAX;
+}
+
+- (BOOL) selectorFloat:(float) arg {
+  return arg == FLT_MAX;
+}
+
+- (BOOL) selectorChar:(char) arg {
+  return arg == CHAR_MIN;
+}
+
+- (BOOL) selectorCharStar:(char *) arg {
+  NSString *argObjC = [NSString stringWithCString:(const char *)arg
+                                        encoding:NSASCIIStringEncoding];
+  return [argObjC isEqualToString:@"char *"];
+}
+
+- (BOOL) selectorConstCharStar:(const char *) arg {
+  NSString *argObjC = [NSString stringWithCString:arg
+                                         encoding:NSASCIIStringEncoding];
+  return [argObjC isEqualToString:@"const char *"];
+}
+
+- (BOOL) selectorUnsignedChar:(unsigned char) arg {
+  return arg == UCHAR_MAX;
+}
+
+- (BOOL) selectorLong:(long) arg {
+  return arg == LONG_MIN;
+}
+
+- (BOOL) selectorUnsignedLong:(unsigned long) arg {
+  return arg == ULONG_MAX;
+}
+
+- (BOOL) selectorLongLong:(long long) arg {
+  return arg == LONG_LONG_MIN;
+}
+
+- (BOOL) selectorUnsignedLongLong:(unsigned long long) arg {
+  return arg = ULONG_LONG_MAX;
+}
+
+- (BOOL) selectorCGPoint:(CGPoint) arg {
+  return arg.x == 1 && arg.y == 2;
+}
+
+- (BOOL) selectorCGRect:(CGRect) arg {
+  return arg.origin.x == 1 && arg.origin.y == 2 && arg.size.width == 3 && arg.size.height == 4;
+}
+
+- (BOOL) selectorClass:(Class) arg {
+  NSString *arrayClassName = NSStringFromClass([NSArray class]);
+  NSString *argClassname = NSStringFromClass(arg);
+  return [arrayClassName isEqualToString:argClassname];
+}
+
+- (BOOL) selectorId:(id) arg {
+  return arg == [InvokerFactory shared];
+}
+
+#pragma mark - Unhandled Argument Types
+
+- (void) selectorVoidStar:(void *) arg { };
+- (void) selectorFloatStar:(float *) arg { };
+- (void) selectorObjectStarStar:(NSError *__autoreleasing*) arg { }
+- (void) selectorSelector:(SEL) arg { }
+- (void) selectorPrimativeArray:(int []) arg { }
+- (void) selectorStruct:(InvokerFactoryStruct) arg { }
 
 @end

@@ -410,6 +410,7 @@
 		F56630981A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F570992C1B5518EF00DB35EC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F570992B1B5518EF00DB35EC /* CoreLocation.framework */; };
 		F570992E1B555C3C00DB35EC /* LPInvokerArgumentEncodingIsHandledTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F570992D1B555C3C00DB35EC /* LPInvokerArgumentEncodingIsHandledTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F57099301B55751200DB35EC /* LPInvokerHasArgumentWithUnhandleEncodingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F570992F1B55751200DB35EC /* LPInvokerHasArgumentWithUnhandleEncodingTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F59741C11AA565190089DC88 /* OCMockitoIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59741BD1AA565190089DC88 /* OCMockitoIOS.framework */; };
 		F59741C21AA565190089DC88 /* OCHamcrestIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59741BE1AA565190089DC88 /* OCHamcrestIOS.framework */; };
 		F59741EE1AA5712F0089DC88 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F59741E31AA5712F0089DC88 /* libOCMock.a */; };
@@ -786,6 +787,7 @@
 		F56CBBB01B451B74002D1DC1 /* VERSION.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = VERSION.md; sourceTree = "<group>"; };
 		F570992B1B5518EF00DB35EC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F570992D1B555C3C00DB35EC /* LPInvokerArgumentEncodingIsHandledTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvokerArgumentEncodingIsHandledTest.m; sourceTree = "<group>"; };
+		F570992F1B55751200DB35EC /* LPInvokerHasArgumentWithUnhandleEncodingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvokerHasArgumentWithUnhandleEncodingTest.m; sourceTree = "<group>"; };
 		F58937E91A9BE0E6007B9A5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		F58B6DE8186847F70042191C /* gitversioning-after.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "gitversioning-after.sh"; sourceTree = "<group>"; };
 		F58B6DE9186847F70042191C /* gitversioning-before.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "gitversioning-before.sh"; sourceTree = "<group>"; };
@@ -1692,6 +1694,7 @@
 				F5BA6F1F1B4EC3A700DB898F /* LPInvokerEncodingIsUnhandledTest.m */,
 				F5BA6F211B4EC8CC00DB898F /* LPInvokerObjectByCoercingReturnValueTest.m */,
 				F570992D1B555C3C00DB35EC /* LPInvokerArgumentEncodingIsHandledTest.m */,
+				F570992F1B55751200DB35EC /* LPInvokerHasArgumentWithUnhandleEncodingTest.m */,
 			);
 			path = Invoker;
 			sourceTree = "<group>";
@@ -2522,6 +2525,7 @@
 				F50CBFA21A0405B2004AC9DA /* LPDebugRoute.m in Sources */,
 				F50CBF951A04058C004AC9DA /* LPFlashOperation.m in Sources */,
 				F50CBF921A04058C004AC9DA /* LPSliderOperation.m in Sources */,
+				F57099301B55751200DB35EC /* LPInvokerHasArgumentWithUnhandleEncodingTest.m in Sources */,
 				F5A8B4581B39BFEB00F390CA /* LPCLIColor.m in Sources */,
 				F50CBF9E1A040599004AC9DA /* LPScrollToRowWithMarkOperation.m in Sources */,
 				F50CBF861A040564004AC9DA /* NSData+LPCHSExtensions.m in Sources */,
