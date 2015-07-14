@@ -4,7 +4,7 @@
 
 #import "LPInvoker.h"
 
-// Testing the #encodingIsUnhandled LPInvoker method.
+// Testing the #selectorReturnTypeEncodingIsUnhandled LPInvoker method.
 
 @interface LPInvokerEncodingIsUnhandledTest : XCTestCase
 
@@ -33,35 +33,35 @@
 - (void) testUnhandledEncodingVoidStar {
   NSString *encoding = @(@encode(void *));
   id mock = [self expectInvokerEncoding:encoding];
-  XCTAssertTrue([mock encodingIsUnhandled]);
+  XCTAssertTrue([mock selectorReturnTypeEncodingIsUnhandled]);
   [mock verify];
 }
 
 - (void) testUnhandledEncodingTypeStar {
   NSString *encoding = @(@encode(float *));
   id mock = [self expectInvokerEncoding:encoding];
-  XCTAssertTrue([mock encodingIsUnhandled]);
+  XCTAssertTrue([mock selectorReturnTypeEncodingIsUnhandled]);
   [mock verify];
 }
 
 - (void) testUnhandledEncodingNSObjectStarStar {
   NSString *encoding = @(@encode(typeof(NSObject **)));
   id mock = [self expectInvokerEncoding:encoding];
-  XCTAssertTrue([mock encodingIsUnhandled]);
+  XCTAssertTrue([mock selectorReturnTypeEncodingIsUnhandled]);
   [mock verify];
 }
 
 - (void) testUnhandledEncodingClassObject {
   NSString *encoding = @(@encode(typeof([NSObject class])));
   id mock = [self expectInvokerEncoding:encoding];
-  XCTAssertFalse([mock encodingIsUnhandled]);
+  XCTAssertFalse([mock selectorReturnTypeEncodingIsUnhandled]);
   [mock verify];
 }
 
 - (void) testUnhandledEncodingClassInstance {
   NSString *encoding = @(@encode(typeof(NSObject)));
   id mock = [self expectInvokerEncoding:encoding];
-  XCTAssertFalse([mock encodingIsUnhandled]);
+  XCTAssertFalse([mock selectorReturnTypeEncodingIsUnhandled]);
   [mock verify];
 }
 
@@ -73,7 +73,7 @@
   } Struct;
   NSString *encoding = @(@encode(typeof(Struct)));
   id mock = [self expectInvokerEncoding:encoding];
-  XCTAssertFalse([mock encodingIsUnhandled]);
+  XCTAssertFalse([mock selectorReturnTypeEncodingIsUnhandled]);
   [mock verify];
 }
 
@@ -81,14 +81,14 @@
   int arr[5] = {1, 2, 3, 4, 5};
   NSString *encoding = @(@encode(typeof(arr)));
   id mock = [self expectInvokerEncoding:encoding];
-  XCTAssertTrue([mock encodingIsUnhandled]);
+  XCTAssertTrue([mock selectorReturnTypeEncodingIsUnhandled]);
   [mock verify];
 }
 
 - (void) testUnhandledEncodingSelector {
   NSString *encoding = @(@encode(typeof(@selector(length))));
   id mock = [self expectInvokerEncoding:encoding];
-  XCTAssertTrue([mock encodingIsUnhandled]);
+  XCTAssertTrue([mock selectorReturnTypeEncodingIsUnhandled]);
   [mock verify];
 }
 
@@ -101,7 +101,7 @@
 
   NSString *encoding = @(@encode(typeof(MyUnion)));
   id mock = [self expectInvokerEncoding:encoding];
-  XCTAssertTrue([mock encodingIsUnhandled]);
+  XCTAssertTrue([mock selectorReturnTypeEncodingIsUnhandled]);
   [mock verify];
 }
 
@@ -109,28 +109,28 @@
   // Don't know how to create a bitfield
   NSString *encoding = @"b5";
   id mock = [self expectInvokerEncoding:encoding];
-  XCTAssertTrue([mock encodingIsUnhandled]);
+  XCTAssertTrue([mock selectorReturnTypeEncodingIsUnhandled]);
   [mock verify];
 }
 
 - (void) testUnhandledUnknown {
   NSString *encoding = @"?";
   id mock = [self expectInvokerEncoding:encoding];
-  XCTAssertTrue([mock encodingIsUnhandled]);
+  XCTAssertTrue([mock selectorReturnTypeEncodingIsUnhandled]);
   [mock verify];
 }
 
 - (void) testUnhandledCGPoint {
   NSString *encoding = @(@encode(typeof(CGPointZero)));
   id mock = [self expectInvokerEncoding:encoding];
-  XCTAssertFalse([mock encodingIsUnhandled]);
+  XCTAssertFalse([mock selectorReturnTypeEncodingIsUnhandled]);
   [mock verify];
 }
 
 - (void) testUnhandledCGRect {
   NSString *encoding = @(@encode(typeof(CGRectZero)));
   id mock = [self expectInvokerEncoding:encoding];
-  XCTAssertFalse([mock encodingIsUnhandled]);
+  XCTAssertFalse([mock selectorReturnTypeEncodingIsUnhandled]);
   [mock verify];
 }
 

@@ -65,7 +65,7 @@
 
   if ([invoker selectorReturnsVoid]) { return [NSNull null]; }
 
-  if ([invoker encodingIsUnhandled]) { return [NSNull null]; }
+  if ([invoker selectorReturnTypeEncodingIsUnhandled]) { return [NSNull null]; }
 
   if ([invoker selectorReturnsObject]) {
     NSInvocation *invocation = invoker.invocation;
@@ -161,7 +161,7 @@
   return _encodingForSelectorReturnType;
 }
 
-- (BOOL) encodingIsUnhandled {
+- (BOOL) selectorReturnTypeEncodingIsUnhandled {
   NSString *encoding = self.encodingForSelectorReturnType;
 
   // @encode(void *) => ^v
@@ -203,7 +203,7 @@
   if (![self targetRespondsToSelector]) { return NO; }
   if ([self selectorReturnsVoid]) { return NO; }
   if ([self selectorReturnsObject]) { return NO; }
-  if ([self encodingIsUnhandled]) { return NO; }
+  if ([self selectorReturnTypeEncodingIsUnhandled]) { return NO; }
   return YES;
 }
 

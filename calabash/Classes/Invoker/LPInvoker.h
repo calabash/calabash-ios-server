@@ -14,6 +14,6 @@
 
 - (BOOL) targetRespondsToSelector;
 - (NSString *) encodingForSelectorReturnType;
-- (BOOL) encodingIsUnhandled;
+- (BOOL) selectorReturnTypeEncodingIsUnhandled;
 
 @end
