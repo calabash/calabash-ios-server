@@ -395,6 +395,20 @@
 
         free(buffer);
         return coercion;
+      } else if ([encoding isEqualToString:@"{?=dd}"]) {
+        // The '?' in this context indicates "unknown type".
+        // A concrete example this encoding is CLLocation2D
+
+        double *doubles = (double *) buffer;
+        double d1 = *doubles;
+        doubles++;
+        double d2 = *doubles;
+
+        NSArray *array = @[@(d1), @(d2)];
+        LPCoercion *coercion = [LPCoercion coercionWithValue:array];
+
+        free(buffer);
+        return coercion;
       } else {
         LPCoercion *coercion;
 

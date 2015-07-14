@@ -79,7 +79,8 @@
     @"CGPoint" : NSStringFromSelector(@selector(selectorThatReturnsCGPoint)),
     @"CGRect" : NSStringFromSelector(@selector(selectorThatReturnsCGRect)),
     @"struct" : NSStringFromSelector(@selector(selectorThatReturnsAStruct)),
-    @"Class" : NSStringFromSelector(@selector(selectorThatReturnsClass))
+    @"Class" : NSStringFromSelector(@selector(selectorThatReturnsClass)),
+    @"Location2D" : NSStringFromSelector(@selector(selectorThatReturnsCoreLocation2D))
     };
 
   return _selectorMap;
@@ -162,5 +163,9 @@
   return factoryStruct;
 }
 - (Class) selectorThatReturnsClass { return [NSArray class]; }
+- (CLLocationCoordinate2D) selectorThatReturnsCoreLocation2D {
+  return CLLocationCoordinate2DMake((CLLocationDegrees)56.17216,
+                                    (CLLocationDegrees)10.18754);
+}
 
 @end

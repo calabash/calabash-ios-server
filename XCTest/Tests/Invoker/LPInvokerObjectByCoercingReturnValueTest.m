@@ -5,7 +5,7 @@
 #import "InvokerFactory.h"
 #import "LPInvoker.h"
 #import "LPCoercion.h"
-
+#import <CoreLocation/CoreLocation.h>
 
 @interface LPInvoker (LPXCTTEST)
 
@@ -210,6 +210,19 @@
   LPCoercion *coercion = [invoker objectByCoercingReturnValue];
   id value = coercion.value;
   expect(value).to.equal(@"NSArray");
+}
+
+- (void) testObjectbyCoercingCoreLocation2D {
+  LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"Location2D"];
+  LPCoercion *coercion = [invoker objectByCoercingReturnValue];
+  id value = coercion.value;
+
+  expect([value isKindOfClass:[NSArray class]]).to.equal(YES);
+
+  NSArray *array = (NSArray *)value;
+  expect(array.count).to.equal(2);
+  expect(array[0]).to.equal(@(56.17216));
+  expect(array[1]).to.equal(@(10.18754));
 }
 
 @end

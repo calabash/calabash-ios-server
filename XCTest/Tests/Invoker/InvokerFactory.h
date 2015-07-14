@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
+#import <CoreLocation/CoreLocation.h>
 
 @class Target;
 @class LPInvoker;
@@ -50,5 +51,6 @@ struct InvokerFactoryStruct {
 - (CGRect) selectorThatReturnsCGRect;
 - (InvokerFactoryStruct) selectorThatReturnsAStruct;
 - (Class) selectorThatReturnsClass;
+- (CLLocationCoordinate2D) selectorThatReturnsCoreLocation2D;
 
 @end
