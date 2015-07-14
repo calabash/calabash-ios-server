@@ -169,13 +169,6 @@
   // @encode(typeof(NSError **))
   if ([encoding isEqualToString:@"^@"]) { return YES; }
 
-  // @encode(NSObject)
-  if ([encoding isEqualToString:@"#"]) { return YES; }
-
-  // @encode(typeof([NSObject class])) => {NSObject=#}
-  // @encode(typeof(Struct)) => {name=type...}
-  if ([encoding hasPrefix:@"{"]) { return NO; }
-
   // @encode(typeof(Union)) => (name=type...)
   if ([encoding hasPrefix:@"("]) { return YES; }
 
@@ -343,6 +336,25 @@
       return [LPCoercion coercionWithValue:@((unsigned long long) ref)];
     }
 
+    // [NSObject class]
+    case '#' : {
+
+      // A malloc here will create an instance of the Class.  For example,
+      // if the Class were, [NSArray class], a malloc would create an empty
+      // NSArray.
+      void *buffer;
+
+      [invocation getReturnValue:&buffer];
+
+      Class klass = (__bridge Class)buffer;
+      NSString *name = [NSString stringWithFormat:@"%@",
+                        NSStringFromClass(klass)];
+
+      // Force this to be collected by ARC.
+      klass = nil;
+      return [LPCoercion coercionWithValue:name];
+    }
+
     case '{' : {
 
       const char *objCType = [encoding cStringUsingEncoding:NSASCIIStringEncoding];
@@ -386,7 +398,7 @@
       } else {
         LPCoercion *coercion;
 
-        // A struct, NSObject class
+        // A struct or NSObject class e.g. {NSObject=#}
         NSArray *tokens = [encoding componentsSeparatedByString:@"="];
         if (tokens.count == 2) {
           NSString *name = [tokens[0] stringByReplacingOccurrencesOfString:@"{"
@@ -394,8 +406,17 @@
           NSString *values = [tokens[1] stringByReplacingOccurrencesOfString:@"}"
                                                                   withString:@""];
           if ([values isEqualToString:@"#"]) {
+            // {NSObject=#}
             coercion = [LPCoercion coercionWithValue:values];
           } else {
+            // typedef struct Face Face;
+            // struct Face {
+            //  NSUInteger eyes;
+            //  short nose;
+            //  float mouthWidth;
+            //};
+            // Encoding => {Face=Isf}
+            // Returns => @"{Face=Isf}
             coercion = [LPCoercion coercionWithValue:name];
           }
         } else {

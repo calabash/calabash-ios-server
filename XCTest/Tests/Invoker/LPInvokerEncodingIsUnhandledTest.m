@@ -52,16 +52,16 @@
 }
 
 - (void) testUnhandledEncodingClassObject {
-  NSString *encoding = @(@encode(typeof(NSObject)));
+  NSString *encoding = @(@encode(typeof([NSObject class])));
   id mock = [self expectInvokerEncoding:encoding];
-  XCTAssertTrue([mock encodingIsUnhandled]);
+  XCTAssertFalse([mock encodingIsUnhandled]);
   [mock verify];
 }
 
 - (void) testUnhandledEncodingClassInstance {
   NSString *encoding = @(@encode(typeof(NSObject)));
   id mock = [self expectInvokerEncoding:encoding];
-  XCTAssertTrue([mock encodingIsUnhandled]);
+  XCTAssertFalse([mock encodingIsUnhandled]);
   [mock verify];
 }
 

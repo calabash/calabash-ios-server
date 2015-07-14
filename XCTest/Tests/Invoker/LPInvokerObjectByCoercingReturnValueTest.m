@@ -205,6 +205,13 @@
   expect(value).to.equal(@"InvokerFactoryStruct");
 }
 
+- (void) testObjectbyCoercingClass {
+  LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"Class"];
+  LPCoercion *coercion = [invoker objectByCoercingReturnValue];
+  id value = coercion.value;
+  expect(value).to.equal(@"NSArray");
+}
+
 @end
 
 SpecBegin(LPInvokerObjectByCoercingReturnValue)

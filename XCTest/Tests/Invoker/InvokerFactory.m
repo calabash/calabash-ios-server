@@ -78,7 +78,8 @@
     @"unsigned long long" : NSStringFromSelector(@selector(selectorThatReturnsUnsignedLongLong)),
     @"CGPoint" : NSStringFromSelector(@selector(selectorThatReturnsCGPoint)),
     @"CGRect" : NSStringFromSelector(@selector(selectorThatReturnsCGRect)),
-    @"struct" : NSStringFromSelector(@selector(selectorThatReturnsAStruct))
+    @"struct" : NSStringFromSelector(@selector(selectorThatReturnsAStruct)),
+    @"Class" : NSStringFromSelector(@selector(selectorThatReturnsClass))
     };
 
   return _selectorMap;
@@ -160,5 +161,6 @@
   factoryStruct.pillar = 1;
   return factoryStruct;
 }
+- (Class) selectorThatReturnsClass { return [NSArray class]; }
 
 @end

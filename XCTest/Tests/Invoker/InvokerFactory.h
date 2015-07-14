@@ -1,10 +1,11 @@
 #import <Foundation/Foundation.h>
+#import <objc/runtime.h>
 
 @class Target;
 @class LPInvoker;
 
 typedef struct InvokerFactoryStruct InvokerFactoryStruct;
- struct InvokerFactoryStruct {
+struct InvokerFactoryStruct {
    NSUInteger pillar;
 };
 
@@ -48,5 +49,6 @@ typedef struct InvokerFactoryStruct InvokerFactoryStruct;
 - (CGPoint) selectorThatReturnsCGPoint;
 - (CGRect) selectorThatReturnsCGRect;
 - (InvokerFactoryStruct) selectorThatReturnsAStruct;
+- (Class) selectorThatReturnsClass;
 
 @end
