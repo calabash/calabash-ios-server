@@ -78,7 +78,6 @@
 }
 
 - (void) testObjectByCoercingReturnValueInvalidEncoding {
-  // space is intential; don't want first char to match
   NSString *encoding = @"";
   id mock = [self expectInvokerEncoding:encoding];
   LPCoercion *coercion = [mock objectByCoercingReturnValue];
