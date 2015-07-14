@@ -20,6 +20,8 @@
 - (LPCoercion *) objectByCoercingReturnValue;
 + (BOOL) isCGRectEncoding:(NSString *) encoding;
 + (BOOL) isCGPointEncoding:(NSString *) encoding;
++ (NSString *) encodingAtIndex:(NSUInteger) index
+                     signature:(NSMethodSignature *) signature;
 
 @end
 
@@ -473,6 +475,15 @@
   }
 
   return [LPCoercion coercionWithFailureMessage:LPSelectorHasUnknownEncoding];
+}
+
+#pragma mark - Argument Encodings
+
++ (NSString *) encodingAtIndex:(NSUInteger) index
+                     signature:(NSMethodSignature *) signature {
+  const char *encodingC = [signature getArgumentTypeAtIndex:index];
+  return [NSString stringWithCString:encodingC
+                            encoding:NSASCIIStringEncoding];
 }
 
 @end

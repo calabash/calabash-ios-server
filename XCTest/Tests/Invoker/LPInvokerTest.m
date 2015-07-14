@@ -32,6 +32,8 @@
 - (BOOL) selectorHasArguments;
 + (BOOL) isCGRectEncoding:(NSString *) encoding;
 + (BOOL) isCGPointEncoding:(NSString *) encoding;
++ (NSString *) encodingAtIndex:(NSUInteger) index
+                     signature:(NSMethodSignature *) signature;
 
 @end
 
@@ -429,6 +431,18 @@
   NSString *encoding = @(@encode(typeof(CGSizeZero)));
   BOOL actual = [LPInvoker isCGPointEncoding:encoding];
   expect(actual).to.equal(NO);
+}
+
+#pragma mark - Argument Encodings
+
+- (void) testEncodingAtIndex {
+  NSMethodSignature *signature;
+  SEL selector = @selector(substringFromIndex:);
+  signature = [[NSString class] instanceMethodSignatureForSelector:selector];
+
+  NSString *encoding = [LPInvoker encodingAtIndex:2
+                                        signature:signature];
+  expect(encoding).to.equal(@"Q");
 }
 
 @end
