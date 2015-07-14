@@ -30,6 +30,8 @@
 - (id) objectByCoercingReturnValue;
 - (NSUInteger) numberOfArguments;
 - (BOOL) selectorHasArguments;
++ (BOOL) isCGRectEncoding:(NSString *) encoding;
++ (BOOL) isCGPointEncoding:(NSString *) encoding;
 
 @end
 
@@ -401,6 +403,32 @@
   id mock = [self stubInvokerEncoding:encoding];
   XCTAssertTrue([mock selectorReturnValueCanBeCoerced]);
   [mock verify];
+}
+
+#pragma mark - Detecting CGRect and CGPoint Encoding
+
+- (void) testIsCGRectEncodingYES {
+  NSString *encoding = @(@encode(typeof(CGRectZero)));
+  BOOL actual = [LPInvoker isCGRectEncoding:encoding];
+  expect(actual).to.equal(YES);
+}
+
+- (void) testIsCGRectEncodingNO {
+  NSString *encoding = @(@encode(typeof(CGSizeZero)));
+  BOOL actual = [LPInvoker isCGRectEncoding:encoding];
+  expect(actual).to.equal(NO);
+}
+
+- (void) testIsCGPointEncodingYES {
+  NSString *encoding = @(@encode(typeof(CGPointZero)));
+  BOOL actual = [LPInvoker isCGPointEncoding:encoding];
+  expect(actual).to.equal(YES);
+}
+
+- (void) testIsCGPointEncodingNO {
+  NSString *encoding = @(@encode(typeof(CGSizeZero)));
+  BOOL actual = [LPInvoker isCGPointEncoding:encoding];
+  expect(actual).to.equal(NO);
 }
 
 @end

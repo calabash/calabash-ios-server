@@ -18,6 +18,8 @@
 - (NSUInteger) numberOfArguments;
 - (BOOL) selectorHasArguments;
 - (LPCoercion *) objectByCoercingReturnValue;
++ (BOOL) isCGRectEncoding:(NSString *) encoding;
++ (BOOL) isCGPointEncoding:(NSString *) encoding;
 
 @end
 
@@ -146,6 +148,14 @@
 
 - (BOOL) selectorHasArguments {
   return [self numberOfArguments] != 0;
+}
+
++ (BOOL) isCGRectEncoding:(NSString *) encoding {
+  return [encoding rangeOfString:@"{CGRect"].location == 0;
+}
+
++ (BOOL) isCGPointEncoding:(NSString *) encoding {
+  return [encoding rangeOfString:@"{CGPoint"].location == 0;
 }
 
 - (NSString *) encodingForSelectorReturnType {
@@ -379,7 +389,7 @@
       NSValue *value = [[NSValue alloc] initWithBytes:buffer
                                              objCType:objCType];
 
-      if ([encoding rangeOfString:@"{CGPoint="].location == 0) {
+      if ([LPInvoker isCGPointEncoding:encoding]) {
 
         CGPoint *point = (CGPoint *) buffer;
 
@@ -392,7 +402,7 @@
         LPCoercion *coercion = [LPCoercion coercionWithValue:dictionary];
         free(buffer);
         return coercion;
-      } else if ([encoding rangeOfString:@"{CGRect="].location == 0) {
+      } else if ([LPInvoker isCGRectEncoding:encoding]) {
         CGRect *rect = (CGRect *) buffer;
 
         NSDictionary *dictionary =
