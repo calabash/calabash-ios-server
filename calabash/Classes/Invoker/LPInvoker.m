@@ -22,6 +22,7 @@
 + (BOOL) isCGPointEncoding:(NSString *) encoding;
 + (NSString *) encodingAtIndex:(NSUInteger) index
                      signature:(NSMethodSignature *) signature;
++ (BOOL) canHandleArgumentEncoding:(NSString *) encoding;
 
 @end
 
@@ -484,6 +485,42 @@
   const char *encodingC = [signature getArgumentTypeAtIndex:index];
   return [NSString stringWithCString:encodingC
                             encoding:NSASCIIStringEncoding];
+}
+
++ (BOOL) canHandleArgumentEncoding:(NSString *) encoding {
+  // @encode(void *) => ^v
+  // @encode(float *) => ^f
+  if ([encoding hasPrefix:@"^"]) { return NO; }
+
+  // @encode(typeof(NSError **))
+  if ([encoding isEqualToString:@"^@"]) { return NO; }
+
+  // @encode(typeof(Union)) => (name=type...)
+  if ([encoding hasPrefix:@"("]) { return NO; }
+
+  // @encode(typeof(@selector(length))) => :
+  if ([encoding isEqualToString:@":"]) { return NO; }
+
+  // @encode(typeof(BitField) => bNUM
+  if ([encoding hasPrefix:@"b"]) { return NO; }
+
+  // int arr[5] = {1, 2, 3, 4, 5}; @encode(typeof(arr)) => [5i]
+  // float arr[3] = {0.1f, 0.2f, 0.3f}; @encode(typeof(arr)) => [3f]
+  if ([encoding hasPrefix:@"["]) { return NO; }
+
+  // unknown - function pointers?
+  if ([encoding isEqualToString:@"?"]) { return NO; }
+
+  // A struct or NSObject class e.g. {NSObject=#}
+  // We only handle CGRect and CGPoint encodings.
+  // TODO: handle CLCoreLocation encoding @"{?=dd}"
+  if ([encoding hasPrefix:@"{"]) {
+    return
+    [LPInvoker isCGRectEncoding:encoding] ||
+    [LPInvoker isCGPointEncoding:encoding];
+  }
+
+  return YES;
 }
 
 @end
