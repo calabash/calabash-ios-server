@@ -158,6 +158,8 @@
   return [encoding rangeOfString:@"{CGPoint"].location == 0;
 }
 
+#pragma mark - Selector Return Type Encoding
+
 - (NSString *) encodingForSelectorReturnType {
   if (_encodingForSelectorReturnType) { return _encodingForSelectorReturnType; }
 
