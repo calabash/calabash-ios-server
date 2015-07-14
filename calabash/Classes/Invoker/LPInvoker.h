@@ -10,7 +10,7 @@
                  target:(id) target;
 
 // Always returns an object.
-+ (id) invokeSelector:(SEL) selector withTarget:(id) receiver;
++ (id) invokeZeroArgumentSelector:(SEL) selector withTarget:(id) receiver;
 
 - (BOOL) targetRespondsToSelector;
 - (NSString *) encoding;

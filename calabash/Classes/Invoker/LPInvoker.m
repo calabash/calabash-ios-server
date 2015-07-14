@@ -54,7 +54,7 @@
   return [self description];
 }
 
-+ (id) invokeSelector:(SEL) selector withTarget:(id) target {
++ (id) invokeZeroArgumentSelector:(SEL) selector withTarget:(id) target {
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
                                                     target:target];
   if (![invoker targetRespondsToSelector]) { return [NSNull null]; }

@@ -134,14 +134,14 @@
 - (void) testInvokeSelectorTargetSelectorHasArguments {
   NSString *target = @"string";
   SEL selector = @selector(substringToIndex:);
-  id actual = [LPInvoker invokeSelector:selector withTarget:target];
+  id actual = [LPInvoker invokeZeroArgumentSelector:selector withTarget:target];
   XCTAssertEqualObjects(actual, [NSNull null]);
 }
 
 - (void) testInvokeSelectorTargetDoesNotRespondToSelector {
   NSString *target = @"string";
   SEL selector = NSSelectorFromString(@"obviouslyUnknownSelector");
-  id actual = [LPInvoker invokeSelector:selector withTarget:target];
+  id actual = [LPInvoker invokeZeroArgumentSelector:selector withTarget:target];
   XCTAssertEqualObjects(actual, [NSNull null]);
 }
 
@@ -150,7 +150,7 @@
   SEL selector = @selector(length);
   @try {
     [self swizzleEncodingWithNewSelector:@selector(encodingSwizzledToVoid)];
-    id actual = [LPInvoker invokeSelector:selector withTarget:target];
+    id actual = [LPInvoker invokeZeroArgumentSelector:selector withTarget:target];
     XCTAssertEqualObjects(actual, [NSNull null]);
   } @finally {
     [self unswizzleEncoding];
@@ -162,7 +162,7 @@
   SEL selector = @selector(length);
   @try {
     [self swizzleEncodingWithNewSelector:@selector(encodingSwizzledToUnknown)];
-    id actual = [LPInvoker invokeSelector:selector withTarget:target];
+    id actual = [LPInvoker invokeZeroArgumentSelector:selector withTarget:target];
     XCTAssertEqualObjects(actual, [NSNull null]);
   } @finally {
     [self unswizzleEncoding];
@@ -172,21 +172,21 @@
 - (void) testInvokeSelectorTargetObject {
   NSString *target = @"target";
   SEL selector = @selector(description);
-  id actual = [LPInvoker invokeSelector:selector withTarget:target];
+  id actual = [LPInvoker invokeZeroArgumentSelector:selector withTarget:target];
   XCTAssertEqualObjects(actual, target);
 }
 
 - (void) testInvokeSelectorTargetNil {
   NSString *target = @"string";
   SEL selector = @selector(returnsNil);
-  id actual = [LPInvoker invokeSelector:selector withTarget:target];
+  id actual = [LPInvoker invokeZeroArgumentSelector:selector withTarget:target];
   XCTAssertEqual(actual, [NSNull null]);
 }
 
 - (void) testInvokeSelectorTargetCoerced {
   NSString *target = @"string";
   SEL selector = @selector(length);
-  id actual = [LPInvoker invokeSelector:selector withTarget:target];
+  id actual = [LPInvoker invokeZeroArgumentSelector:selector withTarget:target];
   XCTAssertEqual([actual unsignedIntegerValue], target.length);
 }
 
