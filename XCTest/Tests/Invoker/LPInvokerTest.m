@@ -49,8 +49,9 @@
 
 - (void)setUp {
   [super setUp];
+  SEL selector = @selector(encodingForSelectorReturnType);
   self.originalEncodingMethod = class_getInstanceMethod([LPInvoker class],
-                                                        @selector(encoding));
+                                                        selector);
 }
 
 - (void)tearDown {
@@ -91,7 +92,7 @@
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:@selector(length)
                                                     target:@"string"];
   id mock = [OCMockObject partialMockForObject:invoker];
-  [[[mock expect] andReturn:mockEncoding] encoding];
+  [[[mock expect] andReturn:mockEncoding] encodingForSelectorReturnType];
   return mock;
 }
 
@@ -99,7 +100,7 @@
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:@selector(length)
                                                     target:@"string"];
   id mock = [OCMockObject partialMockForObject:invoker];
-  [[[mock stub] andReturn:mockEncoding] encoding];
+  [[[mock stub] andReturn:mockEncoding] encodingForSelectorReturnType];
   return mock;
 }
 
@@ -265,7 +266,7 @@
   SEL selector = @selector(length);
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
                                                     target:target];
-  NSString *actual = [invoker encoding];
+  NSString *actual = [invoker encodingForSelectorReturnType];
 #if __LP64__
   XCTAssertEqualObjects(actual, @"Q");
 #else
@@ -278,7 +279,7 @@
   SEL selector = NSSelectorFromString(@"obviouslyUnknownSelector");
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
                                                     target:target];
-  NSString *actual = [invoker encoding];
+  NSString *actual = [invoker encodingForSelectorReturnType];
   XCTAssertEqualObjects(actual, LPTargetDoesNotRespondToSelector);
 }
 

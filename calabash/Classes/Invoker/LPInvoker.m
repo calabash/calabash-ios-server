@@ -8,7 +8,7 @@
 
 @interface LPInvoker ()
 
-@property(strong, nonatomic, readonly) NSString *encoding;
+@property(strong, nonatomic, readonly) NSString *encodingForSelectorReturnType;
 @property(strong, nonatomic, readonly) NSInvocation *invocation;
 @property(strong, nonatomic, readonly) NSMethodSignature *signature;
 
@@ -23,7 +23,7 @@
 
 @implementation LPInvoker
 
-@synthesize encoding = _encoding;
+@synthesize encodingForSelectorReturnType = _encodingForSelectorReturnType;
 @synthesize invocation = _invocation;
 @synthesize signature = _signature;
 
@@ -47,7 +47,9 @@
 
 - (NSString *) description {
   return [NSString stringWithFormat:@"#<LPInvoker '%@' '%@' => '%@'>]",
-          NSStringFromSelector(self.selector), [self.target class], self.encoding];
+          NSStringFromSelector(self.selector),
+          [self.target class],
+          self.encodingForSelectorReturnType];
 }
 
 - (NSString *) debugDescription {
@@ -146,21 +148,21 @@
   return [self numberOfArguments] != 0;
 }
 
-- (NSString *) encoding {
-  if (_encoding) { return _encoding; }
+- (NSString *) encodingForSelectorReturnType {
+  if (_encodingForSelectorReturnType) { return _encodingForSelectorReturnType; }
 
   if (![self targetRespondsToSelector]) {
-    _encoding = LPTargetDoesNotRespondToSelector;
+    _encodingForSelectorReturnType = LPTargetDoesNotRespondToSelector;
   } else {
     NSMethodSignature *signature = self.signature;
-    _encoding = [NSString stringWithCString:[signature methodReturnType]
-                                   encoding:NSASCIIStringEncoding];
+    _encodingForSelectorReturnType = [NSString stringWithCString:[signature methodReturnType]
+                                                        encoding:NSASCIIStringEncoding];
   }
-  return _encoding;
+  return _encodingForSelectorReturnType;
 }
 
 - (BOOL) encodingIsUnhandled {
-  NSString *encoding = self.encoding;
+  NSString *encoding = self.encodingForSelectorReturnType;
 
   // @encode(void *) => ^v
   // @encode(float *) => ^f
@@ -189,12 +191,12 @@
 
 - (BOOL) selectorReturnsObject {
   if (![self targetRespondsToSelector]) { return NO; }
-  return [self.encoding isEqualToString:@"@"];
+  return [self.encodingForSelectorReturnType isEqualToString:@"@"];
 }
 
 - (BOOL) selectorReturnsVoid {
   if (![self targetRespondsToSelector]) { return NO; }
-  return [self.encoding isEqualToString:@"v"];
+  return [self.encodingForSelectorReturnType isEqualToString:@"v"];
 }
 
 - (BOOL) selectorReturnValueCanBeCoerced {
@@ -206,7 +208,7 @@
 }
 
 - (LPCoercion *) objectByCoercingReturnValue {
-  NSString *encoding = self.encoding;
+  NSString *encoding = self.encodingForSelectorReturnType;
   SEL selector = self.selector;
   id target = self.target;
 
@@ -221,7 +223,7 @@
   // Guard against invalid access when asking for encoding[0]
   if (!encoding.length >= 1) {
     LPLogWarn(@"Selector '%@' on '%@' has an invalid encoding; '%@' must have at least one character.",
-          NSStringFromSelector(selector), target, encoding);
+              NSStringFromSelector(selector), target, encoding);
     return [LPCoercion coercionWithFailureMessage:LPSelectorHasUnknownEncoding];
   }
 

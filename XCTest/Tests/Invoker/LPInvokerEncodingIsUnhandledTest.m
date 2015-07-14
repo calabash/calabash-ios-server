@@ -26,7 +26,7 @@
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:@selector(length)
                                                     target:@"string"];
   id mock = [OCMockObject partialMockForObject:invoker];
-  [[[mock expect] andReturn:mockEncoding] encoding];
+  [[[mock expect] andReturn:mockEncoding] encodingForSelectorReturnType];
   return mock;
 }
 

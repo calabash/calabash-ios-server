@@ -13,7 +13,7 @@
 + (id) invokeZeroArgumentSelector:(SEL) selector withTarget:(id) receiver;
 
 - (BOOL) targetRespondsToSelector;
-- (NSString *) encoding;
+- (NSString *) encodingForSelectorReturnType;
 - (BOOL) encodingIsUnhandled;
 
 @end
