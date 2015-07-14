@@ -439,7 +439,7 @@
             //  NSUInteger eyes;
             //  short nose;
             //  float mouthWidth;
-            //};
+            // };
             // Encoding => {Face=Isf}
             // Returns => @"{Face=Isf}
             coercion = [LPCoercion coercionWithValue:name];
