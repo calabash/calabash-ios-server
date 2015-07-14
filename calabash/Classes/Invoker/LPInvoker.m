@@ -226,6 +226,17 @@
   }
 
   NSInvocation *invocation = self.invocation;
+
+  // Without this check, the static analyser complains.
+  // Let's force a crash if we ever find ourselves in this situation.
+  if (!invocation) {
+    LPLogError(@"Expected a non-nil invocation.");
+    NSString *reason = @"self.invocation must not be nil";
+    @throw [NSException exceptionWithName:@"Calabash Server: LPInvoker"
+                                   reason:reason
+                                 userInfo:nil];
+  }
+
   [invocation invoke];
 
   if ([encoding isEqualToString:@"r*"]) {

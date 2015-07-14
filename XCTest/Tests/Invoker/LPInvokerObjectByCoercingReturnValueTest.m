@@ -225,6 +225,16 @@
   expect(array[1]).to.equal(@(10.18754));
 }
 
+- (void) testObjectByCoercingRaisesExceptionWhenInvocationIsNil {
+  LPInvoker *invoker = [InvokerFactory invokerWithSelectorReturnValue:@"char"];
+  id mock = OCMPartialMock(invoker);
+  [[[mock expect] andReturn:nil] invocation];
+
+  expect(^{
+    [mock objectByCoercingReturnValue];
+  }).to.raise(@"Calabash Server: LPInvoker");
+}
+
 @end
 
 SpecBegin(LPInvokerObjectByCoercingReturnValue)
