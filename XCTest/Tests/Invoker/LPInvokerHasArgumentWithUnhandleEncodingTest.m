@@ -157,7 +157,7 @@
 }
 
 - (void) testArgId {
-  self.invoker = [InvokerFactory invokerWithArgmentValue:@"BOOL YES"];
+  self.invoker = [InvokerFactory invokerWithArgmentValue:@"object pointer"];
   BOOL actual = [self.invoker selectorHasArgumentWithUnhandledEncoding];
   expect(actual).to.equal(NO);
 }
