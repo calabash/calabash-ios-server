@@ -239,7 +239,7 @@
   if (!encoding.length >= 1) {
     LPLogWarn(@"Selector '%@' on '%@' has an invalid encoding; '%@' must have at least one character.",
               NSStringFromSelector(selector), target, encoding);
-    return [LPCoercion coercionWithFailureMessage:LPSelectorHasUnknownEncoding];
+    return [LPCoercion coercionWithFailureMessage:LPSelectorHasUnknownReturnTypeEncoding];
   }
 
   NSInvocation *invocation = self.invocation;
@@ -475,7 +475,7 @@
     }
   }
 
-  return [LPCoercion coercionWithFailureMessage:LPSelectorHasUnknownEncoding];
+  return [LPCoercion coercionWithFailureMessage:LPSelectorHasUnknownReturnTypeEncoding];
 }
 
 #pragma mark - Argument Encodings

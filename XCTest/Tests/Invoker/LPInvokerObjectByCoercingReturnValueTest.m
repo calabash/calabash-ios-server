@@ -73,7 +73,7 @@
   NSString *encoding = @" unexpected encoding";
   id mock = [self expectInvokerEncoding:encoding];
   LPCoercion *coercion = [mock objectByCoercingReturnValue];
-  XCTAssertEqualObjects(coercion.failureMessage, LPSelectorHasUnknownEncoding);
+  XCTAssertEqualObjects(coercion.failureMessage, LPSelectorHasUnknownReturnTypeEncoding);
   [mock verify];
 }
 
@@ -81,7 +81,7 @@
   NSString *encoding = @"";
   id mock = [self expectInvokerEncoding:encoding];
   LPCoercion *coercion = [mock objectByCoercingReturnValue];
-  XCTAssertEqualObjects(coercion.failureMessage, LPSelectorHasUnknownEncoding);
+  XCTAssertEqualObjects(coercion.failureMessage, LPSelectorHasUnknownReturnTypeEncoding);
   [mock verify];
 }
 
