@@ -83,10 +83,10 @@
     @try {
       [invocation invoke];
     } @catch (NSException *exception) {
-      NSLog(@"LPInvoker caught an exception: %@", exception);
-      NSLog(@"=== INVOCATION DETAILS ===");
-      NSLog(@"target class = %@", [target class]);
-      NSLog(@"selector = %@", NSStringFromSelector(selector));
+      LPLogError(@"LPInvoker caught an exception: %@", exception);
+      LPLogError(@"=== INVOCATION DETAILS ===");
+      LPLogError(@"target class = %@", [target class]);
+      LPLogError(@"selector = %@", NSStringFromSelector(selector));
     }
     return LPVoidSelectorReturnValue;
   }
@@ -102,12 +102,10 @@
       [invocation getReturnValue:&buffer];
       result = (__bridge id)buffer;
     } @catch (NSException *exception) {
-      NSLog(@"LPInvoker caught an exception: %@", exception);
-      NSLog(@"=== INVOCATION DETAILS ===");
-      NSLog(@"target class = %@", [target class]);
-      NSLog(@"selector = %@", NSStringFromSelector(selector));
-      NSLog(@"target responds to selector: %@", [target respondsToSelector:selector] ? @"YES" : @"NO");
-      result = nil;
+      LPLogError(@"LPInvoker caught an exception: %@", exception);
+      LPLogError(@"=== INVOCATION DETAILS ===");
+      LPLogError(@"target class = %@", [target class]);
+      LPLogError(@"selector = %@", NSStringFromSelector(selector));
     }
 
     if(!result) {
