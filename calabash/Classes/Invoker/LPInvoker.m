@@ -230,6 +230,13 @@
 
   // unknown - function pointers?
   if ([encoding isEqualToString:@"?"]) { return YES; }
+
+  // 'r' means constant.
+  // @encode(typeof(const char *)) => "r*"
+  if ([encoding hasPrefix:@"r"]) {
+    return ![encoding isEqualToString:@"r*"];
+  }
+
   return NO;
 }
 
@@ -540,6 +547,13 @@
   // unknown - function pointers?
   if ([encoding isEqualToString:@"?"]) { return NO; }
 
+  // 'r' means constant
+  // @encode(typeof(const char *))
+  if ([encoding hasPrefix:@"r"]) {
+    // 'const char *' is supported, but nothing else is
+    return [encoding isEqualToString:@"r*"];
+  }
+
   // A struct or NSObject class e.g. {NSObject=#}
   // We only handle CGRect and CGPoint encodings.
   // TODO: handle CLCoreLocation encoding @"{?=dd}"
@@ -692,7 +706,14 @@
         break;
       }
 
+      // Fall through!
+      case 'r':
       case '*': {
+        // 'char *' and 'const char *'
+        if (![encoding isEqualToString:@"r*"] && ![encoding isEqualToString:@"*"]) {
+          NSLog(@"encoding = %@", encoding);
+        }
+
         const char *cstringValue = [argument cStringUsingEncoding:NSUTF8StringEncoding];
         [invocation setArgument:&cstringValue atIndex:invocationArgIndex];
         break;

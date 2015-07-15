@@ -134,4 +134,26 @@
   [mock verify];
 }
 
+- (void) testConstCharStar {
+  NSString *encoding = @(@encode(typeof(const char *)));
+  id mock = [self expectInvokerEncoding:encoding];
+  BOOL actual = [mock selectorReturnTypeEncodingIsUnhandled];
+  expect(actual).to.equal(NO);
+  [mock verify];
+}
+
+- (void) testConst {
+  NSString *encoding = @"r";
+  id mock = [self expectInvokerEncoding:encoding];
+  BOOL actual = [mock selectorReturnTypeEncodingIsUnhandled];
+  expect(actual).to.equal(YES);
+  [mock verify];
+
+  encoding = @"r?";
+  mock = [self expectInvokerEncoding:encoding];
+  actual = [mock selectorReturnTypeEncodingIsUnhandled];
+  expect(actual).to.equal(YES);
+  [mock verify];
+}
+
 @end

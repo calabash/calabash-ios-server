@@ -116,4 +116,20 @@
   expect(actual).to.equal(YES);
 }
 
+- (void) testConstCharStar {
+  NSString *encoding = @(@encode(typeof(const char *)));
+  BOOL actual = [LPInvoker canHandleArgumentEncoding:encoding];
+  expect(actual).to.equal(YES);
+}
+
+- (void) testConstEncoding {
+  NSString *encoding = @"r";
+  BOOL actual = [LPInvoker canHandleArgumentEncoding:encoding];
+  expect(actual).to.equal(NO);
+
+  encoding = @"r?";
+  actual = [LPInvoker canHandleArgumentEncoding:encoding];
+  expect(actual).to.equal(NO);
+}
+
 @end
