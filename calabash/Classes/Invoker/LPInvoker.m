@@ -64,13 +64,20 @@
 + (id) invokeZeroArgumentSelector:(SEL) selector withTarget:(id) target {
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
                                                     target:target];
-  if (![invoker targetRespondsToSelector]) { return [NSNull null]; }
+
+
+  if (![invoker targetRespondsToSelector]) {
+    LPLogWarn(@"Target '%@' does not respond to selector '%@'",
+              [invoker.target class], NSStringFromSelector(invoker.selector));
+
+    return LPTargetDoesNotRespondToSelector;
+  }
 
   if ([invoker selectorHasArguments]) { return [NSNull null]; }
 
-  if ([invoker selectorReturnsVoid]) { return [NSNull null]; }
-
   if ([invoker selectorReturnTypeEncodingIsUnhandled]) { return [NSNull null]; }
+
+  if ([invoker selectorReturnsVoid]) { return [NSNull null]; }
 
   if ([invoker selectorReturnsObject]) {
     NSInvocation *invocation = invoker.invocation;
