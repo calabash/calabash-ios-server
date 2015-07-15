@@ -77,7 +77,19 @@
 
   if ([invoker selectorReturnTypeEncodingIsUnhandled]) { return [NSNull null]; }
 
-  if ([invoker selectorReturnsVoid]) { return [NSNull null]; }
+  if ([invoker selectorReturnsVoid]) {
+    NSInvocation *invocation = invoker.invocation;
+
+    @try {
+      [invocation invoke];
+    } @catch (NSException *exception) {
+      NSLog(@"LPInvoker caught an exception: %@", exception);
+      NSLog(@"=== INVOCATION DETAILS ===");
+      NSLog(@"target class = %@", [target class]);
+      NSLog(@"selector = %@", NSStringFromSelector(selector));
+    }
+    return LPVoidSelectorReturnValue;
+  }
 
   if ([invoker selectorReturnsObject]) {
     NSInvocation *invocation = invoker.invocation;

@@ -156,7 +156,7 @@
   @try {
     [self swizzleEncodingWithNewSelector:@selector(encodingSwizzledToVoid)];
     id actual = [LPInvoker invokeZeroArgumentSelector:selector withTarget:target];
-    XCTAssertEqualObjects(actual, [NSNull null]);
+    XCTAssertEqualObjects(actual, LPVoidSelectorReturnValue);
   } @finally {
     [self unswizzleEncoding];
   }
