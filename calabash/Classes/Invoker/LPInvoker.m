@@ -81,7 +81,13 @@
     return LPIncorrectNumberOfArgumentsProvidedToSelector;
   }
 
-  if ([invoker selectorReturnTypeEncodingIsUnhandled]) { return [NSNull null]; }
+  if ([invoker selectorReturnTypeEncodingIsUnhandled]) {
+    LPLogWarn(@"Return type encoding '%@' for selector '%@' on target '%@' is unhandled.",
+              [invoker encodingForSelectorReturnType],
+              NSStringFromSelector(invoker.selector),
+              [invoker.target class]);
+    return LPSelectorHasUnknownReturnTypeEncoding;
+  }
 
   if ([invoker selectorReturnsVoid]) {
     NSInvocation *invocation = invoker.invocation;

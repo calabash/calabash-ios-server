@@ -168,7 +168,7 @@
   @try {
     [self swizzleEncodingWithNewSelector:@selector(encodingSwizzledToUnknown)];
     id actual = [LPInvoker invokeZeroArgumentSelector:selector withTarget:target];
-    XCTAssertEqualObjects(actual, [NSNull null]);
+    XCTAssertEqualObjects(actual, LPSelectorHasUnknownReturnTypeEncoding);
   } @finally {
     [self unswizzleEncoding];
   }
