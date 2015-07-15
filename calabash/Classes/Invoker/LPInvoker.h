@@ -51,5 +51,6 @@
 - (NSString *) encodingForSelectorReturnType;
 - (BOOL) selectorReturnTypeEncodingIsUnhandled;
 - (BOOL) selectorHasArgumentWithUnhandledEncoding;
+- (BOOL) selectorArgumentCountMatchesArgumentsCount:(NSArray *) arguments;
 
 @end

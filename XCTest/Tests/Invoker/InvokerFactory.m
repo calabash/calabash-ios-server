@@ -118,6 +118,7 @@
     @"CGPoint" : NSStringFromSelector(@selector(selectorCGPoint:)),
     @"CGRect" : NSStringFromSelector(@selector(selectorCGRect:)),
     @"Class" : NSStringFromSelector(@selector(selectorClass:)),
+    @"object pointer" : NSStringFromSelector(@selector(selectorObjectPointer:)),
 
     // Not handled
     @"void *" : NSStringFromSelector(@selector(selectorVoidStar:)),
@@ -338,7 +339,7 @@
   return [arrayClassName isEqualToString:argClassname];
 }
 
-- (BOOL) selectorId:(id) arg {
+- (BOOL) selectorObjectPointer:(id) arg {
   return arg == [InvokerFactory shared];
 }
 

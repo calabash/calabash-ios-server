@@ -556,4 +556,9 @@
   return NO;
 }
 
+- (BOOL) selectorArgumentCountMatchesArgumentsCount:(NSArray *) arguments {
+  NSUInteger numberOfArguments = [self numberOfArguments];
+  return numberOfArguments == arguments.count;
+}
+
 @end

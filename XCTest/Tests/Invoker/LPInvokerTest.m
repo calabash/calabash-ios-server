@@ -445,4 +445,21 @@
   expect(encoding).to.equal(@"Q");
 }
 
+- (void) testSelectorArgumentCountMatchesArgumentCountYES {
+  LPInvoker *invocation = [InvokerFactory invokerWithArgmentValue:@"object pointer"];
+  BOOL actual = [invocation selectorArgumentCountMatchesArgumentsCount:@[@(1)]];
+  expect(actual).to.equal(YES);
+}
+
+- (void) testSelectorArgumentCountMatchesArgumentCountNO {
+  LPInvoker *invocation = [InvokerFactory invokerWithArgmentValue:@"object pointer"];
+  NSArray *arguments = @[@(1), @(2)];
+  BOOL actual = [invocation selectorArgumentCountMatchesArgumentsCount:arguments];
+  expect(actual).to.equal(NO);
+
+  arguments = @[];
+  actual = [invocation selectorArgumentCountMatchesArgumentsCount:arguments];
+  expect(actual).to.equal(NO);
+}
+
 @end
