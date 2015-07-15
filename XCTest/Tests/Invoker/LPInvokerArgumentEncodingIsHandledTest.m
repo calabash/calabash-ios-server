@@ -67,7 +67,7 @@
 }
 
 - (void) testCArray {
-  int arr[5] = {1, 2, 3, 4, 5};
+  int __unused arr[5] = {1, 2, 3, 4, 5};
   NSString *encoding = @(@encode(typeof(arr)));
   BOOL actual = [LPInvoker canHandleArgumentEncoding:encoding];
   expect(actual).to.equal(NO);

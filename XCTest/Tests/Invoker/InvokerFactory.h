@@ -84,7 +84,7 @@ struct InvokerFactoryStruct {
 
 - (void) selectorVoidStar:(void *) arg;
 - (void) selectorFloatStar:(float *) arg;
-- (void) selectorObjectStarStar:(NSError *__autoreleasing*) arg;
+- (BOOL) selectorObjectStarStar:(NSError *__autoreleasing*) arg;
 - (void) selectorSelector:(SEL) arg;
 - (void) selectorPrimativeArray:(int []) arg;
 - (void) selectorStruct:(InvokerFactoryStruct) arg;
