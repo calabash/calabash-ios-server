@@ -73,7 +73,13 @@
     return LPTargetDoesNotRespondToSelector;
   }
 
-  if ([invoker selectorHasArguments]) { return [NSNull null]; }
+  if ([invoker selectorHasArguments]) {
+    LPLogWarn(@"Selector '%@' on target '%@' requires %@ arguments but was provided with none.",
+              NSStringFromSelector(invoker.selector),
+              [invoker.target class],
+              @([invoker numberOfArguments]));
+    return LPIncorrectNumberOfArgumentsProvidedToSelector;
+  }
 
   if ([invoker selectorReturnTypeEncodingIsUnhandled]) { return [NSNull null]; }
 

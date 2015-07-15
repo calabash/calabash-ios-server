@@ -27,14 +27,17 @@
  4. One or more selector arguments are not supported, like unions or bitfields.
     => Error: selector has arguments that are not handled
 
- 5. Selector has a void return value.
+ 5. An incorrect number of arguments were provided to the selector.
+    => Error: incorrect number of arguments provided for selector
+
+ 6. Selector has a void return value.
     => <VOID>
 
- 6. The invocation throws an exception.
+ 7. The invocation throws an exception.
     => Error: invoking selector on target raised an exception
 
 
- In cases 1 - 4, the selector will not be invoked.
+ In cases 1 - 5, the selector will not be invoked.
 
  In case 5, the selector will be invoked.  If the invocation raises an
  exception is raised, 'Error: exception raised' will be returned.

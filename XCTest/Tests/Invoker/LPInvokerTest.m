@@ -140,7 +140,7 @@
   NSString *target = @"string";
   SEL selector = @selector(substringToIndex:);
   id actual = [LPInvoker invokeZeroArgumentSelector:selector withTarget:target];
-  XCTAssertEqualObjects(actual, [NSNull null]);
+  XCTAssertEqualObjects(actual, LPIncorrectNumberOfArgumentsProvidedToSelector);
 }
 
 - (void) testInvokeSelectorTargetDoesNotRespondToSelector {
