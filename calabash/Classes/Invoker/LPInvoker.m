@@ -624,4 +624,200 @@
   return nil;
 }
 
+- (void) populateInvocationWithArguments:(NSArray *) arguments {
+
+  NSUInteger numberOfArguments = [self numberOfArguments];
+  NSMethodSignature *signature = self.signature;
+  NSInvocation *invocation = self.invocation;
+
+  for (NSUInteger index = 0; index < numberOfArguments; index++) {
+    id argument = arguments[index];
+    NSUInteger invocationArgIndex = index + 2;
+
+    NSString *encoding = [LPInvoker encodingAtIndex:invocationArgIndex
+                                          signature:signature];
+    char char_encoding = [encoding cStringUsingEncoding:NSASCIIStringEncoding][0];
+
+    switch (char_encoding) {
+
+      case '@': {
+        if ([argument isEqual:@"__self__"]) {
+          argument = self.target;
+        }
+        [invocation setArgument:&argument atIndex:invocationArgIndex];
+        break;
+      }
+
+      case 'i': {
+        NSInteger intVal = [argument integerValue];
+        [invocation setArgument:&intVal atIndex:invocationArgIndex];
+        break;
+      }
+
+      case 'I': {
+        NSInteger uIntVal = [argument unsignedIntegerValue];
+        [invocation setArgument:&uIntVal atIndex:invocationArgIndex];
+        break;
+      }
+      case 's': {
+        short shVal = [argument shortValue];
+        [invocation setArgument:&shVal atIndex:invocationArgIndex];
+        break;
+      }
+
+      case 'd': {
+        double dbVal = [argument doubleValue];
+        [invocation setArgument:&dbVal atIndex:invocationArgIndex];
+        break;
+      }
+
+      case 'D': {
+        // http://stackoverflow.com/questions/6488956/store-nsnumber-in-a-long-double-type
+        // There is no Objective-C support for encoding a long double as a object
+        LPLogInfo(@"Handling an argument with encoding long double!");
+        long double longDouble = (long double)[argument doubleValue];
+        [invocation setArgument:&longDouble atIndex:invocationArgIndex];
+        break;
+      }
+
+      case 'f': {
+        float fltVal = [argument floatValue];
+        [invocation setArgument:&fltVal atIndex:invocationArgIndex];
+        break;
+      }
+
+      case 'l': {
+        long lngVal = [argument longValue];
+        [invocation setArgument:&lngVal atIndex:invocationArgIndex];
+        break;
+      }
+
+      case '*': {
+        const char *cstringValue = [argument cStringUsingEncoding:NSUTF8StringEncoding];
+        [invocation setArgument:&cstringValue atIndex:invocationArgIndex];
+        break;
+      }
+
+      case 'C' : {
+        unichar chVal;
+        if ([argument respondsToSelector:@selector(unsignedCharValue)]) {
+          chVal = [argument unsignedCharValue];
+        } else if ([argument respondsToSelector:@selector(characterAtIndex:)]) {
+          chVal = [argument characterAtIndex:0];
+        } else {
+          NSString *name = @"Argument encoding";
+          NSString *reason;
+          reason =
+          [NSString stringWithFormat:@"Cannot coerce '%@' of class '%@' into a unichar",
+           argument, [argument class]];
+
+          LPLogError(@"%@", reason);
+          @throw [NSException exceptionWithName:name
+                                         reason:reason
+                                       userInfo:nil];
+        }
+
+        [invocation setArgument:&chVal atIndex:invocationArgIndex];
+        break;
+      }
+
+      case 'c': {
+        char chVal;
+        if ([argument respondsToSelector:@selector(charValue)]) {
+          chVal = [argument charValue];
+        } else if ([argument respondsToSelector:@selector(characterAtIndex:)]) {
+          chVal = (char)[argument characterAtIndex:0];
+        } else {
+          NSString *name = @"Argument encoding";
+          NSString *reason;
+          reason =
+          [NSString stringWithFormat:@"Cannot coerce '%@' of class '%@' into a char",
+           argument, [argument class]];
+
+          LPLogError(@"%@", reason);
+          @throw [NSException exceptionWithName:name
+                                         reason:reason
+                                       userInfo:nil];
+        }
+
+        [invocation setArgument:&chVal atIndex:invocationArgIndex];
+        break;
+      }
+
+      case 'S': {
+        unsigned short SValue;
+        if ([argument respondsToSelector:@selector(unsignedShortValue)]) {
+          SValue = [argument unsignedShortValue];
+        } else if ([argument respondsToSelector:@selector(characterAtIndex:)]) {
+          SValue = (unsigned short)[argument characterAtIndex:0];
+        } else {
+
+          NSString *name = @"Argument encoding";
+          NSString *reason;
+          reason =
+          [NSString stringWithFormat:@"Cannot coerce '%@' of class '%@' into an unsiged short",
+           argument, [argument class]];
+
+          LPLogError(@"%@", reason);
+          @throw [NSException exceptionWithName:name
+                                         reason:reason
+                                       userInfo:nil];
+        }
+
+        [invocation setArgument:&SValue atIndex:invocationArgIndex];
+        break;
+      }
+
+      case 'B': {
+        _Bool Bvalue = [argument boolValue];
+        [invocation setArgument:&Bvalue atIndex:invocationArgIndex];
+        break;
+      }
+
+      case 'Q': {
+        unsigned long long Qvalue = [argument unsignedLongLongValue];
+        [invocation setArgument:&Qvalue atIndex:invocationArgIndex];
+        break;
+      }
+
+      case 'q': {
+        long long qvalue = [argument longLongValue];
+        [invocation setArgument:&qvalue atIndex:invocationArgIndex];
+        break;
+      }
+
+      case 'L': {
+        unsigned long Lvalue = [argument unsignedLongValue];
+        [invocation setArgument:&Lvalue atIndex:invocationArgIndex];
+        break;
+      }
+
+      case '{': {
+        if ([encoding rangeOfString:@"{CGPoint"].location == 0) {
+          CGPoint point;
+          CGPointMakeWithDictionaryRepresentation((CFDictionaryRef) argument,
+                                                  &point);
+          [invocation setArgument:&point atIndex:invocationArgIndex];
+          break;
+        } else if ([encoding rangeOfString:@"{CGRect"].location == 0) {
+          CGRect rect;
+          CGRectMakeWithDictionaryRepresentation((CFDictionaryRef) argument, &rect);
+          [invocation setArgument:&rect atIndex:invocationArgIndex];
+          break;
+        } else {
+          // TODO: Can we support the '{?=dd}' encoding?
+          NSString *name = @"Unsupported argument encoding";
+          NSString *reason;
+          reason = [NSString stringWithFormat:@"Encoding for '%@' struct  is not supported.",
+                    encoding];
+          LPLogError(@"%@", reason);
+          @throw [NSException exceptionWithName:name
+                                         reason:reason
+                                       userInfo:nil];
+        }
+      }
+    }
+  }
+}
+
 @end
