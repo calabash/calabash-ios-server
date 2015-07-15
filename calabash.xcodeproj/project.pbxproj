@@ -494,7 +494,7 @@
 		F5BA6F1C1B4E4E8200DB898F /* LPCoercion.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BA6F171B4E4E8200DB898F /* LPCoercion.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5BA6F1D1B4E4E8200DB898F /* LPCoercion.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BA6F171B4E4E8200DB898F /* LPCoercion.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5BA6F1E1B4E4E8200DB898F /* LPCoercion.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BA6F171B4E4E8200DB898F /* LPCoercion.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5BA6F201B4EC3A700DB898F /* LPInvokerEncodingIsUnhandledTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BA6F1F1B4EC3A700DB898F /* LPInvokerEncodingIsUnhandledTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5BA6F201B4EC3A700DB898F /* LPInvokerSelectorReturnTypeEncodingIsUnhandledTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BA6F1F1B4EC3A700DB898F /* LPInvokerSelectorReturnTypeEncodingIsUnhandledTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5BA6F221B4EC8CC00DB898F /* LPInvokerObjectByCoercingReturnValueTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5BA6F211B4EC8CC00DB898F /* LPInvokerObjectByCoercingReturnValueTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5C04E251B330F8B00F23526 /* LPDecimalRounderTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C04E241B330F8B00F23526 /* LPDecimalRounderTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5C04E2E1B33110B00F23526 /* LPDecimalRounder.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C04E271B33110B00F23526 /* LPDecimalRounder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -902,7 +902,7 @@
 		F5BA6F141B4E4DFD00DB898F /* LPCoercionTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCoercionTest.m; sourceTree = "<group>"; };
 		F5BA6F161B4E4E8200DB898F /* LPCoercion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCoercion.h; sourceTree = "<group>"; };
 		F5BA6F171B4E4E8200DB898F /* LPCoercion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCoercion.m; sourceTree = "<group>"; };
-		F5BA6F1F1B4EC3A700DB898F /* LPInvokerEncodingIsUnhandledTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvokerEncodingIsUnhandledTest.m; sourceTree = "<group>"; };
+		F5BA6F1F1B4EC3A700DB898F /* LPInvokerSelectorReturnTypeEncodingIsUnhandledTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvokerSelectorReturnTypeEncodingIsUnhandledTest.m; sourceTree = "<group>"; };
 		F5BA6F211B4EC8CC00DB898F /* LPInvokerObjectByCoercingReturnValueTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvokerObjectByCoercingReturnValueTest.m; sourceTree = "<group>"; };
 		F5C04E241B330F8B00F23526 /* LPDecimalRounderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDecimalRounderTest.m; sourceTree = "<group>"; };
 		F5C04E261B33110B00F23526 /* LPDecimalRounder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDecimalRounder.h; sourceTree = "<group>"; };
@@ -1691,7 +1691,7 @@
 				F5BA6F101B4E4D2B00DB898F /* InvokerFactory.m */,
 				F5BA6F111B4E4D2B00DB898F /* LPInvokerTest.m */,
 				F5BA6F141B4E4DFD00DB898F /* LPCoercionTest.m */,
-				F5BA6F1F1B4EC3A700DB898F /* LPInvokerEncodingIsUnhandledTest.m */,
+				F5BA6F1F1B4EC3A700DB898F /* LPInvokerSelectorReturnTypeEncodingIsUnhandledTest.m */,
 				F5BA6F211B4EC8CC00DB898F /* LPInvokerObjectByCoercingReturnValueTest.m */,
 				F570992D1B555C3C00DB35EC /* LPInvokerArgumentEncodingIsHandledTest.m */,
 				F570992F1B55751200DB35EC /* LPInvokerHasArgumentWithUnhandleEncodingTest.m */,
@@ -2592,7 +2592,7 @@
 				F5BA6F0A1B4E4B8200DB898F /* LPInvoker.m in Sources */,
 				F50CBFC81A0405E9004AC9DA /* LPReflectUtils.m in Sources */,
 				F5C224EB1AD47403001DB4FA /* LPVersionRouteTest.m in Sources */,
-				F5BA6F201B4EC3A700DB898F /* LPInvokerEncodingIsUnhandledTest.m in Sources */,
+				F5BA6F201B4EC3A700DB898F /* LPInvokerSelectorReturnTypeEncodingIsUnhandledTest.m in Sources */,
 				F50CBF931A04058C004AC9DA /* LPDatePickerOperation.m in Sources */,
 				F50CBFC51A0405E9004AC9DA /* LPDevice.m in Sources */,
 				F5A8B4851B39BFEB00F390CA /* LPASLLogger.m in Sources */,
