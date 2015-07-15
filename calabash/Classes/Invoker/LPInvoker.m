@@ -23,6 +23,7 @@
 + (NSString *) encodingAtIndex:(NSUInteger) index
                      signature:(NSMethodSignature *) signature;
 + (BOOL) canHandleArgumentEncoding:(NSString *) encoding;
+- (void) populateInvocationWithArguments:(NSArray *) arguments;
 
 @end
 
@@ -64,7 +65,6 @@
 + (id) invokeZeroArgumentSelector:(SEL) selector withTarget:(id) target {
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
                                                     target:target];
-
 
   if (![invoker targetRespondsToSelector]) {
     LPLogWarn(@"Target '%@' does not respond to selector '%@'",
@@ -571,6 +571,57 @@
 - (BOOL) selectorArgumentCountMatchesArgumentsCount:(NSArray *) arguments {
   NSUInteger numberOfArguments = [self numberOfArguments];
   return numberOfArguments == arguments.count;
+}
+
++ (id) invokeSelector:(SEL) selector
+           withTarget:(id) receiver
+            arguments:(NSArray *) arguments {
+
+  LPInvoker *invoker = [[LPInvoker alloc]
+                        initWithSelector:selector target:receiver];
+
+  if (![invoker targetRespondsToSelector]) {
+    LPLogWarn(@"Target '%@' does not respond to selector '%@'",
+              [invoker.target class], NSStringFromSelector(invoker.selector));
+
+    return LPTargetDoesNotRespondToSelector;
+  }
+
+  if (![invoker selectorArgumentCountMatchesArgumentsCount:arguments]) {
+    LPLogWarn(@"Selector '%@' on target '%@' requires %@ arguments but was provided with %@.",
+              NSStringFromSelector(invoker.selector),
+              [invoker.target class],
+              @([invoker numberOfArguments]),
+              @(arguments.count));
+    return LPIncorrectNumberOfArgumentsProvidedToSelector;
+  }
+
+  if ([invoker selectorReturnTypeEncodingIsUnhandled]) {
+    LPLogWarn(@"Return type encoding '%@' for selector '%@' on target '%@' is unhandled.",
+              [invoker encodingForSelectorReturnType],
+              NSStringFromSelector(invoker.selector),
+              [invoker.target class]);
+    return LPSelectorHasUnknownReturnTypeEncoding;
+  }
+
+  if ([invoker selectorHasArgumentWithUnhandledEncoding]) {
+    LPLogWarn(@"Selector '%@' on target '%@' has at least one argument with an encoding that is not handled",
+              NSStringFromSelector(invoker.selector),
+              [invoker.target class]);
+    return LPSelectorHasArgumentsWhoseTypeCannotBeHandled;
+  }
+
+  @try {
+    [invoker populateInvocationWithArguments:arguments];
+  } @catch (NSException *exception) {
+    LPLogError(@"Could not populate the arguments of the invocation.");
+    LPLogError(@"  target  => %@", [receiver class]);
+    LPLogError(@"selector  => %@", NSStringFromSelector(selector));
+    LPLogError(@"arguments => %@", arguments);
+    return LPSelectorHasArgumentsWhoseTypeCannotBeHandled;
+  }
+
+  return nil;
 }
 
 @end

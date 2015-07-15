@@ -52,6 +52,7 @@
 
   _selectorForReturnTypeMap =
   @{
+    // Handled
     @"object" : NSStringFromSelector(@selector(object)),
     @"number" : NSStringFromSelector(@selector(number)),
     @"array" : NSStringFromSelector(@selector(array)),
@@ -83,7 +84,10 @@
     @"CGRect" : NSStringFromSelector(@selector(selectorThatReturnsCGRect)),
     @"struct" : NSStringFromSelector(@selector(selectorThatReturnsAStruct)),
     @"Class" : NSStringFromSelector(@selector(selectorThatReturnsClass)),
-    @"Location2D" : NSStringFromSelector(@selector(selectorThatReturnsCoreLocation2D))
+    @"Location2D" : NSStringFromSelector(@selector(selectorThatReturnsCoreLocation2D)),
+
+    // Not handled
+    @"void *" : NSStringFromSelector(@selector(selectorThatReturnsVoidStar))
     };
 
   return _selectorForReturnTypeMap;
@@ -209,6 +213,8 @@
   return self;
 }
 
+// Handled
+
 - (void) selectorThatReturnsVoid { return; }
 - (BOOL) selectorThatReturnsBOOL_YES { return YES; }
 - (BOOL) selectorThatReturnsBOOL_NO { return NO; }
@@ -240,6 +246,12 @@
 - (CLLocationCoordinate2D) selectorThatReturnsCoreLocation2D {
   return CLLocationCoordinate2DMake((CLLocationDegrees)56.17216,
                                     (CLLocationDegrees)10.18754);
+}
+
+// Not handled
+- (void *) selectorThatReturnsVoidStar {
+  void *buffer = malloc(8);
+  return buffer;
 }
 
 

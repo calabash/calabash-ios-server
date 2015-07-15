@@ -28,6 +28,10 @@ struct InvokerFactoryStruct {
 @property(copy, nonatomic, readonly) NSDictionary *dictionary;
 @property(strong, nonatomic, readonly) id idType;
 
+#pragma mark - Selector Return Types
+
+// Handled
+
 - (void) selectorThatReturnsVoid;
 - (BOOL) selectorThatReturnsBOOL_YES;
 - (BOOL) selectorThatReturnsBOOL_NO;
@@ -53,6 +57,11 @@ struct InvokerFactoryStruct {
 - (InvokerFactoryStruct) selectorThatReturnsAStruct;
 - (Class) selectorThatReturnsClass;
 - (CLLocationCoordinate2D) selectorThatReturnsCoreLocation2D;
+
+// Not handled
+- (void *) selectorThatReturnsVoidStar;
+
+#pragma mark - Argument Return Types
 
 // Handled
 
