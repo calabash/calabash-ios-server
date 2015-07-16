@@ -10,9 +10,10 @@
                  target:(id) target;
 
 /*
- Always returns an object.
+ Always returns an object.  Will never return nil.  If the selector returns
+ nil, [NSNull null] will be returned.
 
- This method handles exceptional cases by returning a constant string.
+ These methods handle exceptional cases by returning a constant string.
 
  1. Target does not respond to selector.
     => *****

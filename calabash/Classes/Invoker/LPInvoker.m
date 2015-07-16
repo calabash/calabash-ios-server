@@ -4,6 +4,7 @@
 
 #import "LPInvoker.h"
 #import "LPCoercion.h"
+#import <objc/runtime.h>
 #import "LPCocoaLumberjack.h"
 
 @interface LPInvoker ()
@@ -24,6 +25,7 @@
                      signature:(NSMethodSignature *) signature;
 + (BOOL) canHandleArgumentEncoding:(NSString *) encoding;
 - (void) populateInvocationWithArguments:(NSArray *) arguments;
+- (id) invokeAndCoerce;
 
 @end
 
@@ -89,54 +91,8 @@
     return LPSelectorHasUnknownReturnTypeEncoding;
   }
 
-  if ([invoker selectorReturnsVoid]) {
-    NSInvocation *invocation = invoker.invocation;
-
-    @try {
-      [invocation invoke];
-    } @catch (NSException *exception) {
-      LPLogError(@"LPInvoker caught an exception: %@", exception);
-      LPLogError(@"=== INVOCATION DETAILS ===");
-      LPLogError(@"target class = %@", [target class]);
-      LPLogError(@"selector = %@", NSStringFromSelector(selector));
-    }
-    return LPVoidSelectorReturnValue;
-  }
-
-  if ([invoker selectorReturnsObject]) {
-    NSInvocation *invocation = invoker.invocation;
-
-    id result = nil;
-
-    @try {
-      void *buffer;
-      [invocation invoke];
-      [invocation getReturnValue:&buffer];
-      result = (__bridge id)buffer;
-    } @catch (NSException *exception) {
-      LPLogError(@"LPInvoker caught an exception: %@", exception);
-      LPLogError(@"=== INVOCATION DETAILS ===");
-      LPLogError(@"target class = %@", [target class]);
-      LPLogError(@"selector = %@", NSStringFromSelector(selector));
-    }
-
-    if(!result) {
-      return [NSNull null];
-    } else {
-      return result;
-    }
-  }
-
-  if ([invoker selectorReturnValueCanBeCoerced]) {
-    LPCoercion *coercion = [invoker objectByCoercingReturnValue];
-    if ([coercion wasSuccessful]) {
-      return coercion.value;
-    } else {
-      return [NSNull null];
-    }
-  }
-
-  return [NSNull null];
+  // Always returns an object.
+  return [invoker invokeAndCoerce];
 }
 
 - (NSInvocation *) invocation {
@@ -635,7 +591,7 @@
     return LPSelectorHasArgumentsWhoseTypeCannotBeHandled;
   }
 
-  return nil;
+  return [invoker invokeAndCoerce];
 }
 
 - (void) populateInvocationWithArguments:(NSArray *) arguments {
@@ -711,7 +667,15 @@
       case '*': {
         // 'char *' and 'const char *'
         if (![encoding isEqualToString:@"r*"] && ![encoding isEqualToString:@"*"]) {
-          NSLog(@"encoding = %@", encoding);
+          NSString *name = @"Argument encoding";
+          NSString *reason;
+          reason =
+          [NSString stringWithFormat:@"Unhandled encoding '%@'", encoding];
+
+          LPLogError(@"%@", reason);
+          @throw [NSException exceptionWithName:name
+                                         reason:reason
+                                       userInfo:nil];
         }
 
         const char *cstringValue = [argument cStringUsingEncoding:NSUTF8StringEncoding];
@@ -813,6 +777,29 @@
         break;
       }
 
+      case '#': {
+        Class klass = nil;
+        if ([argument isKindOfClass:[NSString class]]) {
+          klass = NSClassFromString(argument);
+        } else if (class_isMetaClass(object_getClass(argument))) {
+          klass = argument;
+        } else {
+          NSString *name = @"Argument encoding";
+          NSString *reason;
+          reason =
+          [NSString stringWithFormat:@"Cannot coerce '%@' of class '%@' into Class",
+           argument, [argument class]];
+
+          LPLogError(@"%@", reason);
+          @throw [NSException exceptionWithName:name
+                                         reason:reason
+                                       userInfo:nil];
+
+        }
+        [invocation setArgument:&klass atIndex:invocationArgIndex];
+        break;
+      }
+
       case '{': {
         if ([encoding rangeOfString:@"{CGPoint"].location == 0) {
           CGPoint point;
@@ -838,7 +825,62 @@
         }
       }
     }
+
+    [invocation retainArguments];
   }
+}
+
+#pragma mark - Invoke and Coerce
+
+- (id) invokeAndCoerce {
+  if ([self selectorReturnsObject]) {
+    NSInvocation *invocation = self.invocation;
+
+    id result = nil;
+
+    @try {
+      void *buffer;
+      [invocation invoke];
+      [invocation getReturnValue:&buffer];
+      result = (__bridge id)buffer;
+    } @catch (NSException *exception) {
+      LPLogError(@"LPInvoker caught an exception: %@", exception);
+      LPLogError(@"=== INVOCATION DETAILS ===");
+      LPLogError(@"target class = %@", [self.target class]);
+      LPLogError(@"selector = %@", NSStringFromSelector(self.selector));
+    }
+
+    if(!result) {
+      return [NSNull null];
+    } else {
+      return result;
+    }
+  }
+
+  if ([self selectorReturnsVoid]) {
+    NSInvocation *invocation = self.invocation;
+
+    @try {
+      [invocation invoke];
+    } @catch (NSException *exception) {
+      LPLogError(@"LPInvoker caught an exception: %@", exception);
+      LPLogError(@"=== INVOCATION DETAILS ===");
+      LPLogError(@"target class = %@", [self.target class]);
+      LPLogError(@"selector = %@", NSStringFromSelector(self.selector));
+    }
+    return LPVoidSelectorReturnValue;
+  }
+
+  if ([self selectorReturnValueCanBeCoerced]) {
+    LPCoercion *coercion = [self objectByCoercingReturnValue];
+    if ([coercion wasSuccessful]) {
+      return coercion.value;
+    } else {
+      return [NSNull null];
+    }
+  }
+
+  return [NSNull null];
 }
 
 @end

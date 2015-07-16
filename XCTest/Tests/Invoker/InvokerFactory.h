@@ -16,6 +16,7 @@ struct InvokerFactoryStruct {
 + (Target *) targetWithSelectorReturnValue:(NSString *) key;
 + (LPInvoker *) invokerWithSelectorReturnValue:(NSString *) key;
 + (LPInvoker *) invokerWithArgmentValue:(NSString *) key;
++ (SEL) selectorForArgumentType:(NSString *) key;
 
 @end
 

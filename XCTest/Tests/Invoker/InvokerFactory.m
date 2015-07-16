@@ -158,6 +158,20 @@
   return target;
 }
 
++ (SEL) selectorForArgumentType:(NSString *) key {
+  InvokerFactory *factory = [InvokerFactory shared];
+  NSDictionary *map = factory.selectorForArgTypeMap;
+  NSString *selector = [map objectForKey:key];
+  if (!selector) {
+    NSString *reason = [NSString stringWithFormat:@"Key '%@' is not one of '%@'",
+                        key, [map allKeys]];
+    @throw [NSException exceptionWithName:@"LPNoObjectForKey"
+                                   reason:reason
+                                 userInfo:nil];
+  }
+  return NSSelectorFromString(selector);
+}
+
 #pragma mark - Testing Return Types
 
 + (LPInvoker *) invokerWithSelectorReturnValue:(NSString *) key {
