@@ -232,6 +232,24 @@
   expect(actual).to.equal(YES);
 }
 
+- (void) testArgCGPointWith_xy_Dictionary {
+  NSDictionary *point = @{@"x" : @(1), @"y" : @(2)};
+  SEL selector = [InvokerFactory selectorForArgumentType:@"CGPoint"];
+  id actual =  [LPInvoker invokeSelector:selector
+                              withTarget:self.target
+                               arguments:@[point]];
+  expect(actual).to.equal(YES);
+}
+
+- (void) testArgCGPointWith_XY_Dictionary {
+  NSDictionary *point = @{@"X" : @(1), @"Y" : @(2)};
+  SEL selector = [InvokerFactory selectorForArgumentType:@"CGPoint"];
+  id actual =  [LPInvoker invokeSelector:selector
+                              withTarget:self.target
+                               arguments:@[point]];
+  expect(actual).to.equal(YES);
+}
+
 - (void) testArgCGRectWithCGRectCreate {
   CGRect rect = CGRectMake(1, 2, 3, 4);
 
@@ -244,6 +262,55 @@
                                arguments:@[dict]];
   expect(actual).to.equal(YES);
 }
+
+- (void) testArgCGRectWith_xy_Dictionary {
+  NSDictionary *rect =
+  @{
+    @"x" : @(1),
+    @"y" : @(2),
+    @"width" : @(3),
+    @"height" : @(4)
+    };
+  SEL selector = [InvokerFactory selectorForArgumentType:@"CGRect"];
+  id actual =  [LPInvoker invokeSelector:selector
+                              withTarget:self.target
+                               arguments:@[rect]];
+  expect(actual).to.equal(YES);
+}
+
+- (void) testArgCGRectWith_XY_Dictionary {
+  NSDictionary *rect =
+  @{
+    @"X" : @(1),
+    @"Y" : @(2),
+    @"Width" : @(3),
+    @"Height" : @(4)
+    };
+  SEL selector = [InvokerFactory selectorForArgumentType:@"CGRect"];
+  id actual =  [LPInvoker invokeSelector:selector
+                              withTarget:self.target
+                               arguments:@[rect]];
+  expect(actual).to.equal(YES);
+}
+
+- (void) testIsPointRaisesIfNotDictionary {
+  SEL selector = [InvokerFactory selectorForArgumentType:@"CGPoint"];
+
+  id actual = [LPInvoker invokeSelector:selector
+                             withTarget:self.target
+                              arguments:@[@"not a dictionary"]];
+  expect(actual).to.equal(LPSelectorHasArgumentsWhoseTypeCannotBeHandled);
+}
+
+- (void) testIsRectRaisesIfNotDictionary {
+  SEL selector = [InvokerFactory selectorForArgumentType:@"CGRect"];
+
+  id actual = [LPInvoker invokeSelector:selector
+                             withTarget:self.target
+                              arguments:@[@"not a dictionary"]];
+  expect(actual).to.equal(LPSelectorHasArgumentsWhoseTypeCannotBeHandled);
+}
+
 
 - (void) testArgClassWithClass {
   SEL selector = [InvokerFactory selectorForArgumentType:@"Class"];

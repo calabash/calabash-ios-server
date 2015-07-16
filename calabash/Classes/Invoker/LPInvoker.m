@@ -801,15 +801,34 @@
       }
 
       case '{': {
-        if ([encoding rangeOfString:@"{CGPoint"].location == 0) {
-          CGPoint point;
-          CGPointMakeWithDictionaryRepresentation((CFDictionaryRef) argument,
-                                                  &point);
+        BOOL isPointEncoding = [LPInvoker isCGPointEncoding:encoding];
+        BOOL isRectEncoding = [LPInvoker isCGRectEncoding:encoding];
+        BOOL argumentIsDictionary = [argument isKindOfClass:[NSDictionary class]];
+
+        if ((isPointEncoding || isRectEncoding) && !argumentIsDictionary) {
+          NSString *name = @"Argument encoding";
+          NSString *reason;
+          if (isPointEncoding) {
+            reason =
+            [NSString stringWithFormat:@"Cannot coerce '%@' of class '%@' into CGPoint",
+             argument, [argument class]];
+          } else {
+            reason =
+            [NSString stringWithFormat:@"Cannot coerce '%@' of class '%@' into CGRect",
+             argument, [argument class]];
+          }
+          LPLogError(@"%@", reason);
+          @throw [NSException exceptionWithName:name
+                                         reason:reason
+                                       userInfo:nil];
+        }
+
+        if (isPointEncoding) {
+          CGPoint point = [self pointFromDictonary:argument];
           [invocation setArgument:&point atIndex:invocationArgIndex];
           break;
-        } else if ([encoding rangeOfString:@"{CGRect"].location == 0) {
-          CGRect rect;
-          CGRectMakeWithDictionaryRepresentation((CFDictionaryRef) argument, &rect);
+        } else if (isRectEncoding) {
+          CGRect rect = [self rectFromDictionary:argument];
           [invocation setArgument:&rect atIndex:invocationArgIndex];
           break;
         } else {
@@ -881,6 +900,64 @@
   }
 
   return [NSNull null];
+}
+
+#pragma mark - Convert Dictionaries to CGPoint and CGRect
+
+- (CGPoint) pointFromDictonary:(NSDictionary *) dictionary {
+  if ((dictionary[@"x"] || dictionary[@"X"]) &&
+      (dictionary[@"y"] || dictionary[@"Y"])) {
+    NSNumber *x = dictionary[@"x"];
+    if (!x) { x = dictionary[@"X"]; }
+
+    NSNumber *y = dictionary[@"y"];
+    if (!y) { y = dictionary[@"Y"]; }
+
+    CGPoint point;
+#if CGFLOAT_IS_DOUBLE
+    point = CGPointMake([x doubleValue], [y doubleValue]);
+#else
+    point = CGPointMake([x floatValue], [y floatValue]);
+#endif
+    return point;
+  } else {
+    CGPoint point;
+    CGPointMakeWithDictionaryRepresentation((CFDictionaryRef)dictionary, &point);
+    return point;
+  }
+}
+
+- (CGRect) rectFromDictionary:(NSDictionary *) dictionary {
+  if ((dictionary[@"x"] || dictionary[@"X"]) &&
+      (dictionary[@"y"] || dictionary[@"Y"]) &&
+      (dictionary[@"width"] || dictionary[@"Width"]) &&
+      (dictionary[@"height"] || dictionary[@"Height"])) {
+    NSNumber *x = dictionary[@"x"];
+    if (!x) { x = dictionary[@"X"]; }
+
+    NSNumber *y = dictionary[@"y"];
+    if (!y) { y = dictionary[@"Y"]; }
+
+    NSNumber *width = dictionary[@"width"];
+    if (!width) { width = dictionary[@"Width"]; }
+
+    NSNumber *height = dictionary[@"height"];
+    if (!height) { height = dictionary[@"Height"]; }
+
+    CGRect rect;
+#if CGFLOAT_IS_DOUBLE
+    rect = CGRectMake([x doubleValue], [y doubleValue],
+                      [width doubleValue], [height doubleValue]);
+#else
+    rect = CGRectMake([x floatValue], [y floatValue],
+                      [width floatValue], [height floatValue]);
+#endif
+    return rect;
+  } else {
+    CGRect rect;
+    CGRectMakeWithDictionaryRepresentation((CFDictionaryRef)dictionary, &rect);
+    return rect;
+  }
 }
 
 @end
