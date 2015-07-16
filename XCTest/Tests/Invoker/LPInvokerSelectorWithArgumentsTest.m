@@ -311,7 +311,6 @@
   expect(actual).to.equal(LPSelectorHasArgumentsWhoseTypeCannotBeHandled);
 }
 
-
 - (void) testArgClassWithClass {
   SEL selector = [InvokerFactory selectorForArgumentType:@"Class"];
   id actual =  [LPInvoker invokeSelector:selector
@@ -333,6 +332,14 @@
   id actual =  [LPInvoker invokeSelector:selector
                               withTarget:self.target
                                arguments:@[[InvokerFactory shared]]];
+  expect(actual).to.equal(YES);
+}
+
+- (void) testSelfArg {
+  SEL selector = [InvokerFactory selectorForArgumentType:@"self"];
+  id actual =  [LPInvoker invokeSelector:selector
+                              withTarget:self.target
+                               arguments:@[@"__self__"]];
   expect(actual).to.equal(YES);
 }
 

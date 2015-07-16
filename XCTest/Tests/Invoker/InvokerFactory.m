@@ -123,6 +123,7 @@
     @"CGRect" : NSStringFromSelector(@selector(selectorCGRect:)),
     @"Class" : NSStringFromSelector(@selector(selectorClass:)),
     @"object pointer" : NSStringFromSelector(@selector(selectorObjectPointer:)),
+    @"self" : NSStringFromSelector(@selector(selectorArgumentIsSelf:)),
 
     // Not handled
     @"void *" : NSStringFromSelector(@selector(selectorVoidStar:)),
@@ -367,6 +368,10 @@
 
 - (BOOL) selectorObjectPointer:(id) arg {
   return arg == [InvokerFactory shared];
+}
+
+- (BOOL) selectorArgumentIsSelf:(id) arg {
+  return arg == self;
 }
 
 #pragma mark - Unhandled Argument Types

@@ -89,6 +89,7 @@ struct InvokerFactoryStruct {
 - (BOOL) selectorCGRect:(CGRect) arg;
 - (BOOL) selectorClass:(Class) arg;
 - (BOOL) selectorObjectPointer:(id) arg;
+- (BOOL) selectorArgumentIsSelf:(id) arg;
 
 // Not Handled
 
