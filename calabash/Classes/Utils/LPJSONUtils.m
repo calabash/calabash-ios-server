@@ -49,7 +49,7 @@
          whenTarget:(id) target
          respondsTo:(SEL) selector {
   if ([target respondsToSelector:selector]) {
-    id value = [LPInvoker invokeSelector:selector withTarget:target];
+    id value = [LPInvoker invokeZeroArgumentSelector:selector withTarget:target];
     [dictionary setObject:value forKey:key];
   }
 }
@@ -59,7 +59,7 @@
          withTarget:(id) target
            selector:(SEL) selector {
   if ([target respondsToSelector:selector]) {
-    id value = [LPInvoker invokeSelector:selector withTarget:target];
+    id value = [LPInvoker invokeZeroArgumentSelector:selector withTarget:target];
     [dictionary setObject:value forKey:key];
   } else {
     [dictionary setObject:[NSNull null] forKey:key];

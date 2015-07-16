@@ -42,8 +42,8 @@
   SEL selector = NSSelectorFromString(@"postDataAsString");
 
   if ([connection respondsToSelector:selector]) {
-    id connectionData = [LPInvoker invokeSelector:selector
-                                       withTarget:connection];
+    id connectionData = [LPInvoker invokeZeroArgumentSelector:selector
+                                                   withTarget:connection];
     NSDictionary *data = [LPJSONUtils deserializeDictionary:connectionData];
 
     response = [self JSONResponseForMethod:@"POST"
