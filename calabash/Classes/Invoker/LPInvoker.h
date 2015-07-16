@@ -54,6 +54,10 @@
 + (id) invokeOnMainThreadZeroArgumentSelector:(SEL) selector
                                    withTarget:(id) target;
 
++ (id) invokeOnMainThreadSelector:(SEL) selector
+                       withTarget:(id) target
+                         argments:(NSArray *) arguments;
+
 - (BOOL) targetRespondsToSelector;
 - (NSString *) encodingForSelectorReturnType;
 - (BOOL) selectorReturnTypeEncodingIsUnhandled;

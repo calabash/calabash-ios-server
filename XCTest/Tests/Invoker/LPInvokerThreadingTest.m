@@ -19,6 +19,8 @@
   [super tearDown];
 }
 
+#pragma mark - Zero Arg Selectors
+
 - (void) testZeroArgOnMainThread {
   expect([[NSThread currentThread] isMainThread]).to.equal(YES);
 
@@ -68,6 +70,130 @@
                                                        withTarget:target];
 
     expect(result).to.equal(@"last");
+    [expectation fulfill];
+  });
+
+  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *error) {
+    if (error) { XCTFail(@"Expectation Failed with error: %@", error); }
+  }];
+}
+
+#pragma mark - Selectors with Arguments
+
+- (void) testOnMainThread {
+  expect([[NSThread currentThread] isMainThread]).to.equal(YES);
+
+  Target *target = [Target new];
+  SEL selector = @selector(selectorDouble:);
+
+  id result = [LPInvoker invokeOnMainThreadSelector:selector
+                                         withTarget:target
+                                         argments:@[@(DBL_MAX)]];
+  expect(result).to.equal(@(YES));
+}
+
+- (void) testPrimativeArgCalledOffMainThread {
+  expect([[NSThread currentThread] isMainThread]).to.equal(YES);
+
+  XCTestExpectation *expectation = [self expectationWithDescription:@"Async"];
+
+  Target *target = [Target new];
+  SEL selector = @selector(selectorDouble:);
+  NSArray *arguments = @[@(DBL_MAX)];
+
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    expect([[NSThread currentThread] isMainThread]).to.equal(NO);
+
+
+    id result = [LPInvoker invokeOnMainThreadSelector:selector
+                                           withTarget:target
+                                             argments:arguments];
+
+    expect(result).to.equal(@(YES));
+    [expectation fulfill];
+  });
+
+  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *error) {
+    if (error) { XCTFail(@"Expectation Failed with error: %@", error); }
+  }];
+}
+
+- (void) testPrimativeArgWithAllVariablesCreatedOffMainThread {
+  expect([[NSThread currentThread] isMainThread]).to.equal(YES);
+
+  XCTestExpectation *expectation = [self expectationWithDescription:@"Populate"];
+
+  __block Target *target;
+  __block NSArray *arguments;
+
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    expect([[NSThread currentThread] isMainThread]).to.equal(NO);
+
+    target = [Target new];
+    arguments = @[@(DBL_MAX)];
+
+    [expectation fulfill];
+  });
+
+  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *error) {
+    if (error) { XCTFail(@"Expectation Failed with error: %@", error); }
+  }];
+
+  expectation = [self expectationWithDescription:@"Test"];
+
+  SEL selector = @selector(selectorDouble:);
+
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    expect([[NSThread currentThread] isMainThread]).to.equal(NO);
+
+
+    id result = [LPInvoker invokeOnMainThreadSelector:selector
+                                           withTarget:target
+                                             argments:arguments];
+
+    expect(result).to.equal(@(YES));
+    [expectation fulfill];
+  });
+
+  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *error) {
+    if (error) { XCTFail(@"Expectation Failed with error: %@", error); }
+  }];
+}
+
+- (void) testPointerArgWithAllVariablesCreatedOffMainThread {
+  expect([[NSThread currentThread] isMainThread]).to.equal(YES);
+
+  XCTestExpectation *expectation = [self expectationWithDescription:@"Populate"];
+
+  __block NSString *target;
+  __block NSArray *arguments;
+
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    expect([[NSThread currentThread] isMainThread]).to.equal(NO);
+
+    target = @"A string";
+    arguments = @[@": appended"];
+
+    [expectation fulfill];
+  });
+
+  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *error) {
+    if (error) { XCTFail(@"Expectation Failed with error: %@", error); }
+  }];
+
+  expectation = [self expectationWithDescription:@"Test"];
+
+  SEL selector = @selector(stringByAppendingString:);
+
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    expect([[NSThread currentThread] isMainThread]).to.equal(NO);
+
+
+    id result = [LPInvoker invokeOnMainThreadSelector:selector
+                                           withTarget:target
+                                             argments:arguments];
+
+    expect(result).to.equal(@"A string: appended");
     [expectation fulfill];
   });
 
