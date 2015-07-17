@@ -892,40 +892,44 @@
   if ([self selectorReturnsObject]) {
     NSInvocation *invocation = self.invocation;
 
-    id result = nil;
-
+    id invocationResult = nil;
+    LPInvocationResult *result = nil;
     @try {
       void *buffer;
       [invocation invoke];
       [invocation getReturnValue:&buffer];
-      result = (__bridge id)buffer;
+      invocationResult = (__bridge id)buffer;
+      result = [LPInvocationResult resultWithValue:invocationResult];
     } @catch (NSException *exception) {
       LPLogError(@"LPInvoker caught an exception: %@", exception);
       LPLogError(@"=== INVOCATION DETAILS ===");
       LPLogError(@"target class = %@", [self.target class]);
       LPLogError(@"selector = %@", NSStringFromSelector(self.selector));
+      result = [LPInvocationError invokingSelectorOnTargetRaisedAnException];
     }
 
-    return [LPInvocationResult resultWithValue:result];
+    return result;
   }
 
   if ([self selectorReturnsVoid]) {
     NSInvocation *invocation = self.invocation;
 
+    LPInvocationResult *result = nil;
     @try {
       [invocation invoke];
+      result = [LPInvocationResult resultWithValue:LPVoidSelectorReturnValue];
     } @catch (NSException *exception) {
       LPLogError(@"LPInvoker caught an exception: %@", exception);
       LPLogError(@"=== INVOCATION DETAILS ===");
       LPLogError(@"target class = %@", [self.target class]);
       LPLogError(@"selector = %@", NSStringFromSelector(self.selector));
+      result = [LPInvocationError invokingSelectorOnTargetRaisedAnException];
     }
-    return [LPInvocationResult resultWithValue:LPVoidSelectorReturnValue];
+    return result;
   }
 
   if ([self selectorReturnValueCanBeCoerced]) {
-    LPInvocationResult *result = [self resultByCoercingReturnValue];
-    return result;
+    return [self resultByCoercingReturnValue];
   }
 
   return [LPInvocationError unspecifiedInvocationError];

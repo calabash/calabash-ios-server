@@ -18,8 +18,11 @@ NSString *const LPSelectorHasArgumentsWhoseTypeCannotBeHandled =
 NSString *const LPIncorrectNumberOfArgumentsProvidedToSelector =
 @"Error: incorrect number of arguments provided for selector";
 
-NSString *const LPUnspecifiedInvocationError =
+NSString *const LPInvokingSelectorOnTargetRaisedAnException =
 @"Error: invoking selector on target raised an exception";
+
+NSString *const LPUnspecifiedInvocationError =
+@"Error: invoking selector on target could not be performed";
 
 @interface LPInvocationError ()
 
@@ -61,6 +64,10 @@ NSString *const LPUnspecifiedInvocationError =
   return [[LPInvocationError alloc] initWithType:LPInvocationErrorIncorrectNumberOfArgumentsProvidedToSelector];
 }
 
++ (LPInvocationError *) invokingSelectorOnTargetRaisedAnException {
+  return [[LPInvocationError alloc] initWithType:LPInvocationErrorInvokingSelectorOnTargetRaisedAnException];
+}
+
 + (LPInvocationError *) unspecifiedInvocationError {
   return [[LPInvocationError alloc] initWithType:LPInvocationErrorUnspecifiedInvocationError];
 }
@@ -95,6 +102,9 @@ NSString *const LPUnspecifiedInvocationError =
       return LPIncorrectNumberOfArgumentsProvidedToSelector;
     }
 
+    case LPInvocationErrorInvokingSelectorOnTargetRaisedAnException: {
+      return LPInvokingSelectorOnTargetRaisedAnException;
+    }
     case LPInvocationErrorUnspecifiedInvocationError: {
       return LPUnspecifiedInvocationError;
     }

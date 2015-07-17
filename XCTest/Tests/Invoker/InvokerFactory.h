@@ -34,6 +34,8 @@ struct InvokerFactoryStruct {
 // Handled
 
 - (void) selectorThatReturnsVoid;
+- (void) selectorThatReturnsVoidAndRaises;
+- (id) selectorThatReturnsPointerAndRaises;
 - (BOOL) selectorThatReturnsBOOL_YES;
 - (BOOL) selectorThatReturnsBOOL_NO;
 - (bool) selectorThatReturnsBool_true;

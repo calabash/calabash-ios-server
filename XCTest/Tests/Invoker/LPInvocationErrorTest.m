@@ -48,6 +48,9 @@
   error = [LPInvocationError incorectNumberOfArgumentsProvided];
   expect(error.type).to.equal(LPInvocationErrorIncorrectNumberOfArgumentsProvidedToSelector);
 
+  error = [LPInvocationError invokingSelectorOnTargetRaisedAnException];
+  expect(error.type).to.equal(LPInvocationErrorInvokingSelectorOnTargetRaisedAnException);
+
   error = [LPInvocationError unspecifiedInvocationError];
   expect(error.type).to.equal(LPInvocationErrorUnspecifiedInvocationError);
 }
@@ -86,6 +89,9 @@
 
   error = [LPInvocationError incorectNumberOfArgumentsProvided];
   expect([error description]).to.equal(LPIncorrectNumberOfArgumentsProvidedToSelector);
+
+  error = [LPInvocationError invokingSelectorOnTargetRaisedAnException];
+  expect([error description]).to.equal(LPInvokingSelectorOnTargetRaisedAnException);
 
   error = [LPInvocationError unspecifiedInvocationError];
   expect([error description]).to.equal(LPUnspecifiedInvocationError);

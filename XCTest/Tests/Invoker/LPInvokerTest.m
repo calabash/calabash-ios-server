@@ -478,4 +478,28 @@
   expect(actual).to.equal(NO);
 }
 
+#pragma mark - Handling Selectors that Raise Exceptions
+
+- (void) testSelectorReturnsObjectButRaises {
+  Target *target = [Target new];
+  SEL selector = @selector(selectorThatReturnsPointerAndRaises);
+  LPInvocationResult *result;
+  result = [LPInvoker invokeZeroArgumentSelector:selector
+                                      withTarget:target];
+
+  expect([result isError]).to.equal(YES);
+  expect([result description]).to.equal(LPInvokingSelectorOnTargetRaisedAnException);
+}
+
+- (void) testSelectorReturnsVoidButRaises {
+  Target *target = [Target new];
+  SEL selector = @selector(selectorThatReturnsVoidAndRaises);
+  LPInvocationResult *result;
+  result = [LPInvoker invokeZeroArgumentSelector:selector
+                                      withTarget:target];
+
+  expect([result isError]).to.equal(YES);
+  expect([result description]).to.equal(LPInvokingSelectorOnTargetRaisedAnException);
+}
+
 @end

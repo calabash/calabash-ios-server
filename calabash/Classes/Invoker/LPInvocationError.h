@@ -6,6 +6,7 @@ extern NSString *const LPCannotCoerceSelectorReturnValueToObject;
 extern NSString *const LPSelectorHasUnknownReturnTypeEncoding;
 extern NSString *const LPSelectorHasArgumentsWhoseTypeCannotBeHandled;
 extern NSString *const LPIncorrectNumberOfArgumentsProvidedToSelector;
+extern NSString *const LPInvokingSelectorOnTargetRaisedAnException;
 extern NSString *const LPUnspecifiedInvocationError;
 
 typedef enum : NSUInteger {
@@ -14,6 +15,7 @@ typedef enum : NSUInteger {
   LPInvocationErrorSelectorHasUnknownReturnTypeEncoding,
   LPInvocationErrorSelectorHasArgumentsWhoseTypeCannotBeHandled,
   LPInvocationErrorIncorrectNumberOfArgumentsProvidedToSelector,
+  LPInvocationErrorInvokingSelectorOnTargetRaisedAnException,
   LPInvocationErrorUnspecifiedInvocationError
 } LPInvocationErrorType;
 
@@ -26,6 +28,7 @@ typedef enum : NSUInteger {
 + (LPInvocationError *) hasUnknownReturnTypeEncoding;
 + (LPInvocationError *) hasAnArgumentTypeEncodingThatCannotBeHandled;
 + (LPInvocationError *) incorectNumberOfArgumentsProvided;
++ (LPInvocationError *) invokingSelectorOnTargetRaisedAnException;
 + (LPInvocationError *) unspecifiedInvocationError;
 
 @end
