@@ -417,6 +417,11 @@
 		F59741C21AA565190089DC88 /* OCHamcrestIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59741BE1AA565190089DC88 /* OCHamcrestIOS.framework */; };
 		F59741EE1AA5712F0089DC88 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F59741E31AA5712F0089DC88 /* libOCMock.a */; };
 		F59742181AA571A90089DC88 /* libExpecta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F59742171AA571A90089DC88 /* libExpecta.a */; };
+		F5986B161B58F57600CCB142 /* LPInvocationErrorTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5986B151B58F57600CCB142 /* LPInvocationErrorTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5986B1C1B58F5C700CCB142 /* LPInvocationError.m in Sources */ = {isa = PBXBuildFile; fileRef = F5986B181B58F5C700CCB142 /* LPInvocationError.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5986B1D1B58F5C700CCB142 /* LPInvocationError.m in Sources */ = {isa = PBXBuildFile; fileRef = F5986B181B58F5C700CCB142 /* LPInvocationError.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5986B1E1B58F5C700CCB142 /* LPInvocationError.m in Sources */ = {isa = PBXBuildFile; fileRef = F5986B181B58F5C700CCB142 /* LPInvocationError.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5986B1F1B58F5C700CCB142 /* LPInvocationError.m in Sources */ = {isa = PBXBuildFile; fileRef = F5986B181B58F5C700CCB142 /* LPInvocationError.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F59C5CF818E0BB1A0087B51D /* LPRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDBE14B6DB2B002A744C /* LPRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F59C5CF918E0BB290087B51D /* LPRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDBF14B6DB2B002A744C /* LPRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F59C5CFA18E0BBAE0087B51D /* LPHTTPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B116C9B914E6565500663205 /* LPHTTPResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -846,6 +851,9 @@
 		F59742151AA571A90089DC88 /* NSObject+Expecta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Expecta.h"; sourceTree = "<group>"; };
 		F59742161AA571A90089DC88 /* NSValue+Expecta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSValue+Expecta.h"; sourceTree = "<group>"; };
 		F59742171AA571A90089DC88 /* libExpecta.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libExpecta.a; sourceTree = "<group>"; };
+		F5986B151B58F57600CCB142 /* LPInvocationErrorTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvocationErrorTest.m; sourceTree = "<group>"; };
+		F5986B171B58F5C700CCB142 /* LPInvocationError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPInvocationError.h; sourceTree = "<group>"; };
+		F5986B181B58F5C700CCB142 /* LPInvocationError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvocationError.m; sourceTree = "<group>"; };
 		F59CA46D1A82EF40007A2F38 /* LPTestTarget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LPTestTarget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F59CA4701A82EF40007A2F38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F59CA4711A82EF40007A2F38 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1684,6 +1692,8 @@
 				F5BA6F061B4E4B8200DB898F /* LPInvoker.m */,
 				F5BA6F161B4E4E8200DB898F /* LPCoercion.h */,
 				F5BA6F171B4E4E8200DB898F /* LPCoercion.m */,
+				F5986B171B58F5C700CCB142 /* LPInvocationError.h */,
+				F5986B181B58F5C700CCB142 /* LPInvocationError.m */,
 			);
 			path = Invoker;
 			sourceTree = "<group>";
@@ -1701,6 +1711,7 @@
 				F570992F1B55751200DB35EC /* LPInvokerHasArgumentWithUnhandleEncodingTest.m */,
 				F56B4EF31B56FC3600E7EA23 /* LPInvokerSelectorWithArgumentsTest.m */,
 				F56B4EF51B57E04E00E7EA23 /* LPInvokerThreadingTest.m */,
+				F5986B151B58F57600CCB142 /* LPInvocationErrorTest.m */,
 			);
 			path = Invoker;
 			sourceTree = "<group>";
@@ -2249,6 +2260,7 @@
 				B15BF9E419ABB1DE00B38577 /* LPLogger.m in Sources */,
 				B15BF9E519ABB1DE00B38577 /* LPCDataScanner.m in Sources */,
 				89F2EFE51B2243D500958052 /* LPIntrospectionRoute.m in Sources */,
+				F5986B1F1B58F5C700CCB142 /* LPInvocationError.m in Sources */,
 				B15BF9E619ABB1DE00B38577 /* CalabashServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2269,6 +2281,7 @@
 				B1D5BD8019A23BCE0070E8CE /* LPDDRange.m in Sources */,
 				B1D5BD8119A23BCE0070E8CE /* LPHTTPAsyncFileResponse.m in Sources */,
 				B1D5BD8219A23BCE0070E8CE /* LPHTTPDataResponse.m in Sources */,
+				F5986B1E1B58F5C700CCB142 /* LPInvocationError.m in Sources */,
 				B1D5BD8319A23BCE0070E8CE /* LPHTTPDynamicFileResponse.m in Sources */,
 				F5A8B4AB1B39BFEB00F390CA /* LPTTYLogger.m in Sources */,
 				B1D5BD8419A23BCE0070E8CE /* LPSSKeychainQuery.m in Sources */,
@@ -2474,6 +2487,7 @@
 				F5091C2518C4E1D700C85307 /* LPOrientationOperation.m in Sources */,
 				F5F53D6B18C619CB00BD9731 /* LPCORSResponse.m in Sources */,
 				89F2EFE21B2243D500958052 /* LPIntrospectionRoute.m in Sources */,
+				F5986B1D1B58F5C700CCB142 /* LPInvocationError.m in Sources */,
 				F5091C2618C4E1D700C85307 /* LPDatePickerOperation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2504,6 +2518,7 @@
 				F50CBFBB1A0405CE004AC9DA /* UIScriptASTPredicate.m in Sources */,
 				F5C0945A1A97B7CB00AE5991 /* LPWebQuery.m in Sources */,
 				F5F2D5EF1ACACF2F0027937B /* LPIsWebView.m in Sources */,
+				F5986B161B58F57600CCB142 /* LPInvocationErrorTest.m in Sources */,
 				F5BA6F131B4E4D2B00DB898F /* LPInvokerTest.m in Sources */,
 				F50CBFBE1A0405CE004AC9DA /* UIScriptASTClassName.m in Sources */,
 				F5A33A5D1AC00D1300224639 /* UIWebView+LPWebView.m in Sources */,
@@ -2554,6 +2569,7 @@
 				F50CBF841A040564004AC9DA /* LPHTTPMessage.m in Sources */,
 				F5C224E91AD47403001DB4FA /* LPScrollOperationTest.m in Sources */,
 				F50CBF9A1A04058C004AC9DA /* LPScrollToRowOperation.m in Sources */,
+				F5986B1C1B58F5C700CCB142 /* LPInvocationError.m in Sources */,
 				F5C04E251B330F8B00F23526 /* LPDecimalRounderTest.m in Sources */,
 				F50CBF8F1A04058C004AC9DA /* LPI.mm in Sources */,
 				B15369FB1A325E510093923F /* LPUIARouteOverSharedElement.m in Sources */,
