@@ -52,4 +52,31 @@
   expect(error.type).to.equal(LPInvocationErrorUnspecifiedInvocationError);
 }
 
+- (void) testDebugDescription {
+  LPInvocationError *error;
+
+  error = [LPInvocationError targetDoesNotRespondToSelector];
+
+  expect([error debugDescription]).to.equal([error description]);
+}
+
+- (void) testDescription {
+  LPInvocationError *error;
+
+  error = [LPInvocationError targetDoesNotRespondToSelector];
+  expect([error description]).to.equal(LPTargetDoesNotRespondToSelector);
+
+  error = [LPInvocationError cannotCoerceReturnValueToObject];
+  expect([error description]).to.equal(LPCannotCoerceSelectorReturnValueToObject);
+
+  error = [LPInvocationError hasAnArgumentTypeEncodingThatCannotBeHandled];
+  expect([error description]).to.equal(LPSelectorHasArgumentsWhoseTypeCannotBeHandled);
+
+  error = [LPInvocationError incorectNumberOfArgumentsProvided];
+  expect([error description]).to.equal(LPIncorrectNumberOfArgumentsProvidedToSelector);
+
+  error = [LPInvocationError unspecifiedInvocationError];
+  expect([error description]).to.equal(LPUnspecifiedInvocationError);
+}
+
 @end

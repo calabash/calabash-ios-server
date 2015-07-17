@@ -64,4 +64,36 @@ NSString *const LPUnspecifiedInvocationError =
   return [[LPInvocationError alloc] initWithType:LPInvocationErrorUnspecifiedInvocationError];
 }
 
+- (NSString *) description {
+  switch (self.type) {
+    case LPInvocationErrorTargetDoesNotRespondToSelector: {
+      return LPTargetDoesNotRespondToSelector;
+    }
+
+    case LPInvocationErrorCannotCoerceSelectorReturnValueToObject: {
+      return LPCannotCoerceSelectorReturnValueToObject;
+    }
+
+    case LPInvocationErrorSelectorHasUnknownReturnTypeEncoding: {
+      return LPSelectorHasUnknownReturnTypeEncoding;
+    }
+
+    case LPInvocationErrorSelectorHasArgumentsWhoseTypeCannotBeHandled: {
+      return LPSelectorHasArgumentsWhoseTypeCannotBeHandled;
+    }
+
+    case LPInvocationErrorIncorrectNumberOfArgumentsProvidedToSelector: {
+      return LPIncorrectNumberOfArgumentsProvidedToSelector;
+    }
+
+    case LPInvocationErrorUnspecifiedInvocationError: {
+      return LPUnspecifiedInvocationError;
+    }
+  }
+}
+
+- (NSString *) debugDescription {
+  return [self description];
+}
+
 @end
