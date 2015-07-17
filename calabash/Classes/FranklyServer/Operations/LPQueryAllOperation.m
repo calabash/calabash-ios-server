@@ -6,64 +6,67 @@
 
 #import "LPQueryAllOperation.h"
 #import "LPJSONUtils.h"
+#import "LPInvoker.h"
 #import "LPCocoaLumberjack.h"
 
 @implementation LPQueryAllOperation
 
-- (SEL) parseValuesFromArray:(NSArray *) arr withArgs:(NSMutableArray *) args {
-  NSMutableString *selStr = [NSMutableString stringWithCapacity:32];
-  for (NSDictionary *selPart in arr) {
-    NSString *as = [selPart objectForKey:@"as"];
+- (SEL) parseValuesFromArray:(NSArray *) array withArgs:(NSMutableArray *) arguments {
+
+  NSMutableString *selectorName = [NSMutableString stringWithCapacity:32];
+  for (NSDictionary *selectorPart in array) {
+    NSString *as = [selectorPart objectForKey:@"as"];
     if (as) {
-      NSMutableDictionary *mdict = [[selPart mutableCopy] autorelease];
-      [mdict removeObjectForKey:@"as"];
-      selPart = mdict;
+      NSMutableDictionary *dictionary = [[selectorPart mutableCopy] autorelease];
+      [dictionary removeObjectForKey:@"as"];
+      selectorPart = dictionary;
     }
 
-    NSString *key = [[selPart keyEnumerator] nextObject];
+    NSString *key = [[selectorPart keyEnumerator] nextObject];
 
-    [selStr appendFormat:@"%@:", key];
-    id tgt = [selPart objectForKey:key];
+    [selectorName appendFormat:@"%@:", key];
+
+    id target = [selectorPart objectForKey:key];
+
     if (as) {
-      Class asClass = NSClassFromString(as);
-      if (asClass) {
-        if ([tgt isKindOfClass:[NSArray class]]) {
-          NSMutableArray *subArgs = [NSMutableArray array];
-          SEL sel = [self parseValuesFromArray:tgt withArgs:subArgs];
+      Class theClassOfAs = NSClassFromString(as);
+      if (theClassOfAs) {
+        if ([target isKindOfClass:[NSArray class]]) {
+          NSMutableArray *innerArguments = [NSMutableArray array];
+          SEL selector = [self parseValuesFromArray:target withArgs:innerArguments];
 
-          NSMethodSignature *sig = [asClass methodSignatureForSelector:sel];
-          if (!sig || ![asClass respondsToSelector:sel]) {
+          NSMethodSignature *methodSignature = [theClassOfAs methodSignatureForSelector:selector];
+
+          if (!methodSignature || ![theClassOfAs respondsToSelector:selector]) {
             NSLog(@"*****");
             return nil;
           }
-          NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sig];
+
+          NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
 
           [self invoke:invocation
-            withTarget:asClass
-                  args:subArgs
-              selector:sel
-             signature:sig];
+            withTarget:theClassOfAs
+                  args:innerArguments
+              selector:selector
+             signature:methodSignature];
 
-          id objValue;
-          [invocation getReturnValue:(void **) &objValue];
-          tgt = objValue ? objValue : [NSNull null];
-        } else {
-          SEL targetAsSelector = NSSelectorFromString(tgt);
-          if ([[NSThread currentThread] isMainThread]) {
-            tgt = [asClass performSelector:targetAsSelector];
+          id objectReturnedByInvocation;
+          [invocation getReturnValue:(void **) &objectReturnedByInvocation];
+
+          if (objectReturnedByInvocation) {
+            target = objectReturnedByInvocation;
           } else {
-            __block id strongTarget;
-            dispatch_sync(dispatch_get_main_queue(), ^{
-              strongTarget = [asClass performSelector:targetAsSelector];
-            });
-            tgt = strongTarget;
+            target = [NSNull null];
           }
+        } else {
+          SEL targetAsSelector = NSSelectorFromString(target);
+          target = [theClassOfAs performSelector:targetAsSelector];
         }
       }
     }
-    [args addObject:tgt];
+    [arguments addObject:target];
   }
-  return NSSelectorFromString(selStr);
+  return NSSelectorFromString(selectorName);
 }
 
 
