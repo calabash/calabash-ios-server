@@ -69,7 +69,6 @@
   return NSSelectorFromString(selectorName);
 }
 
-
 - (id) performWithTarget:(id) target error:(NSError **) error {
 
   NSArray *arguments = self.arguments;
@@ -77,8 +76,8 @@
   if ([arguments count] <= 0) {
     return [LPJSONUtils jsonifyObject:target];
   }
-  for (NSInteger i = 0; i < [arguments count]; i++) {
-    id selObj = [arguments objectAtIndex:i];
+  for (NSInteger index = 0; index < [arguments count]; index++) {
+    id selectorArgumentForIndex = [arguments objectAtIndex:index];
     id objValue;
     int intValue;
     unsigned int uintValue;
@@ -94,30 +93,30 @@
     unsigned long long Qvalue;
     long long qvalue;
     unsigned long Lvalue;
-    SEL sel = nil;
+    SEL selector = nil;
 
-    NSMutableArray *args = [NSMutableArray array];
+    NSMutableArray *selectorArguments = [NSMutableArray array];
 
-    if ([selObj isKindOfClass:[NSString class]]) {
-      sel = NSSelectorFromString(selObj);
-    } else if ([selObj isKindOfClass:[NSDictionary class]]) {
-      sel = [self parseValuesFromArray:[NSArray arrayWithObject:selObj]
-                              withArgs:args];
-    } else if ([selObj isKindOfClass:[NSArray class]]) {
-      sel = [self parseValuesFromArray:selObj withArgs:args];
+    if ([selectorArgumentForIndex isKindOfClass:[NSString class]]) {
+      selector = NSSelectorFromString(selectorArgumentForIndex);
+    } else if ([selectorArgumentForIndex isKindOfClass:[NSDictionary class]]) {
+      selector = [self parseValuesFromArray:[NSArray arrayWithObject:selectorArgumentForIndex]
+                              withArgs:selectorArguments];
+    } else if ([selectorArgumentForIndex isKindOfClass:[NSArray class]]) {
+      selector = [self parseValuesFromArray:selectorArgumentForIndex withArgs:selectorArguments];
     }
 
-    NSMethodSignature *sig = [target methodSignatureForSelector:sel];
-    if (!sig || ![target respondsToSelector:sel]) {
+    NSMethodSignature *signature = [target methodSignatureForSelector:selector];
+    if (!signature || ![target respondsToSelector:selector]) {
       return @"*****";
     }
-    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:sig];
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
 
     if (![self invoke:invocation
            withTarget:target
-                 args:args
-             selector:sel
-            signature:sig]) {
+                 args:selectorArguments
+             selector:selector
+            signature:signature]) {
       return nil;
     }
 
@@ -133,7 +132,7 @@
         if (objValue == nil) {
           return nil;
         } else {
-          if (i == [arguments count] - 1) {
+          if (index == [arguments count] - 1) {
             return [LPJSONUtils jsonifyObject:objValue];
           } else {
             target = objValue;
