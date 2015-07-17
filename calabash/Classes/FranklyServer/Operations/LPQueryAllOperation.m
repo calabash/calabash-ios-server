@@ -9,10 +9,16 @@
 #import "LPInvoker.h"
 #import "LPCocoaLumberjack.h"
 
+@interface LPQueryAllOperation ()
+
+- (SEL) selectorByParsingValuesFromArray:(NSArray *) array
+                               arguments:(NSMutableArray *) arguments;
+@end
+
 @implementation LPQueryAllOperation
 
-- (SEL) parseValuesFromArray:(NSArray *) array withArgs:(NSMutableArray *) arguments {
-
+- (SEL) selectorByParsingValuesFromArray:(NSArray *) array
+                               arguments:(NSMutableArray *) arguments {
   NSMutableString *selectorName = [NSMutableString stringWithCapacity:32];
   for (NSDictionary *selectorPart in array) {
     NSString *as = [selectorPart objectForKey:@"as"];
@@ -33,7 +39,8 @@
       if (theClassOfAs) {
         if ([target isKindOfClass:[NSArray class]]) {
           NSMutableArray *innerArguments = [NSMutableArray array];
-          SEL selector = [self parseValuesFromArray:target withArgs:innerArguments];
+          SEL selector = [self selectorByParsingValuesFromArray:target
+                                                      arguments:innerArguments];
 
           NSMethodSignature *methodSignature = [theClassOfAs methodSignatureForSelector:selector];
 
@@ -100,10 +107,11 @@
     if ([selectorArgumentForIndex isKindOfClass:[NSString class]]) {
       selector = NSSelectorFromString(selectorArgumentForIndex);
     } else if ([selectorArgumentForIndex isKindOfClass:[NSDictionary class]]) {
-      selector = [self parseValuesFromArray:[NSArray arrayWithObject:selectorArgumentForIndex]
-                              withArgs:selectorArguments];
+      selector = [self selectorByParsingValuesFromArray:@[selectorArgumentForIndex]
+                                              arguments:selectorArguments];
     } else if ([selectorArgumentForIndex isKindOfClass:[NSArray class]]) {
-      selector = [self parseValuesFromArray:selectorArgumentForIndex withArgs:selectorArguments];
+      selector = [self selectorByParsingValuesFromArray:selectorArgumentForIndex
+                                              arguments:selectorArguments];
     }
 
     NSMethodSignature *signature = [target methodSignatureForSelector:selector];
