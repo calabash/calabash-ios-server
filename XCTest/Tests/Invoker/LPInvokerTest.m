@@ -4,7 +4,7 @@
 
 #import "LPInvoker.h"
 #import "InvokerFactory.h"
-#import "LPCoercion.h"
+#import "LPInvocationResult.h"
 #import "LPInvocationError.h"
 
 @interface NSString (LPXCTTEST)
@@ -28,7 +28,7 @@
 - (BOOL) selectorReturnsObject;
 - (BOOL) selectorReturnsVoid;
 - (BOOL) selectorReturnValueCanBeCoerced;
-- (id) objectByCoercingReturnValue;
+- (id) resultByCoercingReturnValue;
 - (NSUInteger) numberOfArguments;
 - (BOOL) selectorHasArguments;
 + (BOOL) isCGRectEncoding:(NSString *) encoding;
@@ -140,15 +140,22 @@
 - (void) testInvokeSelectorTargetSelectorHasArguments {
   NSString *target = @"string";
   SEL selector = @selector(substringToIndex:);
-  id actual = [LPInvoker invokeZeroArgumentSelector:selector withTarget:target];
-  XCTAssertEqualObjects(actual, LPIncorrectNumberOfArgumentsProvidedToSelector);
+  LPInvocationResult *actual = [LPInvoker invokeZeroArgumentSelector:selector
+                                                          withTarget:target];
+
+  expect([actual isError]).to.equal(YES);
+  expect([actual description]).to.equal(LPIncorrectNumberOfArgumentsProvidedToSelector);
+  expect(actual.value).to.equal([NSNull null]);
 }
 
 - (void) testInvokeSelectorTargetDoesNotRespondToSelector {
   NSString *target = @"string";
   SEL selector = NSSelectorFromString(@"obviouslyUnknownSelector");
-  id actual = [LPInvoker invokeZeroArgumentSelector:selector withTarget:target];
-  XCTAssertEqualObjects(actual, LPTargetDoesNotRespondToSelector);
+  LPInvocationResult *actual = [LPInvoker invokeZeroArgumentSelector:selector
+                                                          withTarget:target];
+  expect([actual isError]).to.equal(YES);
+  expect([actual description]).to.equal(LPTargetDoesNotRespondToSelector);
+  expect(actual.value).to.equal([NSNull null]);
 }
 
 - (void) testInvokeSelectorTargetVoid {
@@ -156,8 +163,9 @@
   SEL selector = @selector(length);
   @try {
     [self swizzleEncodingWithNewSelector:@selector(encodingSwizzledToVoid)];
-    id actual = [LPInvoker invokeZeroArgumentSelector:selector withTarget:target];
-    XCTAssertEqualObjects(actual, LPVoidSelectorReturnValue);
+    LPInvocationResult *actual = [LPInvoker invokeZeroArgumentSelector:selector
+                                                            withTarget:target];
+    expect(actual.value).to.equal(LPVoidSelectorReturnValue);
   } @finally {
     [self unswizzleEncoding];
   }
@@ -168,8 +176,11 @@
   SEL selector = @selector(length);
   @try {
     [self swizzleEncodingWithNewSelector:@selector(encodingSwizzledToUnknown)];
-    id actual = [LPInvoker invokeZeroArgumentSelector:selector withTarget:target];
-    XCTAssertEqualObjects(actual, LPSelectorHasUnknownReturnTypeEncoding);
+    LPInvocationResult *actual = [LPInvoker invokeZeroArgumentSelector:selector
+                                                            withTarget:target];
+    expect([actual isError]).to.equal(YES);
+    expect([actual description]).to.equal(LPCannotCoerceSelectorReturnValueToObject);
+    expect(actual.value).to.equal([NSNull null]);
   } @finally {
     [self unswizzleEncoding];
   }
@@ -178,22 +189,26 @@
 - (void) testInvokeSelectorTargetObject {
   NSString *target = @"target";
   SEL selector = @selector(description);
-  id actual = [LPInvoker invokeZeroArgumentSelector:selector withTarget:target];
-  XCTAssertEqualObjects(actual, target);
+  LPInvocationResult *actual = [LPInvoker invokeZeroArgumentSelector:selector
+                                                          withTarget:target];
+  expect(actual.value).to.equal(target);
 }
 
 - (void) testInvokeSelectorTargetNil {
   NSString *target = @"string";
   SEL selector = @selector(returnsNil);
-  id actual = [LPInvoker invokeZeroArgumentSelector:selector withTarget:target];
-  XCTAssertEqual(actual, [NSNull null]);
+  LPInvocationResult *actual = [LPInvoker invokeZeroArgumentSelector:selector
+                                                          withTarget:target];
+  expect([actual isError]).to.equal(NO);
+  expect(actual.value).to.equal([NSNull null]);
 }
 
 - (void) testInvokeSelectorTargetCoerced {
   NSString *target = @"string";
   SEL selector = @selector(length);
-  id actual = [LPInvoker invokeZeroArgumentSelector:selector withTarget:target];
-  XCTAssertEqual([actual unsignedIntegerValue], target.length);
+  LPInvocationResult *actual = [LPInvoker invokeZeroArgumentSelector:selector
+                                                          withTarget:target];
+  expect([actual.value unsignedIntegerValue]).to.equal(target.length);
 }
 
 #pragma mark - invocation

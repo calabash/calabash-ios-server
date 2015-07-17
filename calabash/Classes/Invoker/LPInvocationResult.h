@@ -6,6 +6,7 @@ extern NSString *const LPVoidSelectorReturnValue;
 
 @property(nonatomic, strong, readonly) id value;
 
++ (LPInvocationResult *) resultWithValue:(id) value;
 - (id) initWithValue:(id) value;
 
 - (BOOL) isError;

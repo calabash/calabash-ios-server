@@ -12,6 +12,10 @@ NSString *const LPVoidSelectorReturnValue = @"<VOID>";
 
 @synthesize value = _value;
 
++ (LPInvocationResult *) resultWithValue:(id) value {
+  return [[LPInvocationResult alloc] initWithValue:value];
+}
+
 - (id) initWithValue:(id) value {
   self = [super init];
   if (self) {

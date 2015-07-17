@@ -3,8 +3,8 @@
 #endif
 
 #import "LPInvoker.h"
-#import "LPCoercion.h"
 #import "InvokerFactory.h"
+#import "LPInvocationResult.h"
 #import "LPInvocationError.h"
 
 @interface LPInvokerSelectorWithArgumentsTest : XCTestCase
@@ -30,39 +30,45 @@
 - (void) testTargetDoesNotRespondToSelector {
   SEL selector = NSSelectorFromString(@"unknownSelector:");
   NSString *string = @"target";
-  id actual = [LPInvoker invokeSelector:selector
-                             withTarget:string
-                              arguments:@[@(1)]];
-
-  expect(actual).to.equal(LPTargetDoesNotRespondToSelector);
+  LPInvocationResult *actual = [LPInvoker invokeSelector:selector
+                                              withTarget:string
+                                               arguments:@[@(1)]];
+  expect([actual isError]).to.equal(YES);
+  expect([actual description]).to.equal(LPTargetDoesNotRespondToSelector);
+  expect(actual.value).to.equal([NSNull null]);
 }
 
 - (void) testArgumentCountDoesNotMatch {
   SEL selector = @selector(substringFromIndex:);
   NSString *string = @"target";
-  id actual = [LPInvoker invokeSelector:selector
-                             withTarget:string
-                              arguments:@[]];
-
-  expect(actual).to.equal(LPIncorrectNumberOfArgumentsProvidedToSelector);
+  LPInvocationResult *actual = [LPInvoker invokeSelector:selector
+                                              withTarget:string
+                                               arguments:@[]];
+  expect([actual isError]).to.equal(YES);
+  expect([actual description]).to.equal(LPIncorrectNumberOfArgumentsProvidedToSelector);
+  expect(actual.value).to.equal([NSNull null]);
 }
 
 - (void) testReturnTypeEncodingNotHandled {
   SEL selector = @selector(selectorThatReturnsVoidStar);
 
-  id actual = [LPInvoker invokeSelector:selector
-                             withTarget:self.target
-                              arguments:@[]];
-  expect(actual).to.equal(LPSelectorHasUnknownReturnTypeEncoding);
+  LPInvocationResult *actual = [LPInvoker invokeSelector:selector
+                                              withTarget:self.target
+                                               arguments:@[]];
+  expect([actual isError]).to.equal(YES);
+  expect([actual description]).to.equal(LPCannotCoerceSelectorReturnValueToObject);
+  expect(actual.value).to.equal([NSNull null]);
 }
 
 - (void) testSelectorHasArgumentWithUnhandledEncoding {
   SEL selector = @selector(selectorVoidStar:);
 
-  id actual = [LPInvoker invokeSelector:selector
-                             withTarget:self.target
-                              arguments:@[@(1)]];
-  expect(actual).to.equal(LPSelectorHasArgumentsWhoseTypeCannotBeHandled);
+  LPInvocationResult *actual = [LPInvoker invokeSelector:selector
+                                              withTarget:self.target
+                                               arguments:@[@(1)]];
+  expect([actual isError]).to.equal(YES);
+  expect([actual description]).to.equal(LPSelectorHasArgumentsWhoseTypeCannotBeHandled);
+  expect(actual.value).to.equal([NSNull null]);
 }
 
 #pragma mark - Handled Cases
@@ -70,154 +76,154 @@
 - (void) testArgBOOL_YES {
   SEL selector = [InvokerFactory selectorForArgumentType:@"BOOL YES"];
 
-  id actual = [LPInvoker invokeSelector:selector
-                             withTarget:self.target
-                              arguments:@[@(YES)]];
-  expect(actual).to.equal(@(YES));
+  LPInvocationResult *actual = [LPInvoker invokeSelector:selector
+                                              withTarget:self.target
+                                               arguments:@[@(YES)]];
+  expect(actual.value).to.equal(@(YES));
 }
 
 - (void) testArgBOOL_NO {
   SEL selector = [InvokerFactory selectorForArgumentType:@"BOOL NO"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[@(NO)]];
-  expect(actual).to.equal(@(YES));
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[@(NO)]];
+  expect(actual.value).to.equal(@(YES));
 }
 
 - (void) testArgBool_true {
   SEL selector = [InvokerFactory selectorForArgumentType:@"bool true"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[@(true)]];
-  expect(actual).to.equal(@(YES));
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[@(true)]];
+  expect(actual.value).to.equal(@(YES));
 }
 
 - (void) testArgBool_false {
   SEL selector = [InvokerFactory selectorForArgumentType:@"bool false"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[@(false)]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[@(false)]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgNSInteger {
   SEL selector = [InvokerFactory selectorForArgumentType:@"NSInteger"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[@(NSIntegerMin)]];
-  expect(actual).to.equal(@(YES));
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[@(NSIntegerMin)]];
+  expect(actual.value).to.equal(@(YES));
 }
 
 - (void) testArgNSUInteger {
   SEL selector = [InvokerFactory selectorForArgumentType:@"NSUInteger"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[@(NSNotFound)]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[@(NSNotFound)]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgShort {
   SEL selector = [InvokerFactory selectorForArgumentType:@"short"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[@(SHRT_MIN)]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[@(SHRT_MIN)]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgUnsignedShort {
   SEL selector = [InvokerFactory selectorForArgumentType:@"unsigned short"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[@(USHRT_MAX)]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[@(USHRT_MAX)]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgCGFloat {
   SEL selector = [InvokerFactory selectorForArgumentType:@"CGFloat"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[@(CGFLOAT_MAX)]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[@(CGFLOAT_MAX)]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgDouble {
   SEL selector = [InvokerFactory selectorForArgumentType:@"double"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[@(DBL_MAX)]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[@(DBL_MAX)]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgFloat {
   SEL selector = [InvokerFactory selectorForArgumentType:@"float"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[@(FLT_MAX)]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[@(FLT_MAX)]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgChar {
   SEL selector = [InvokerFactory selectorForArgumentType:@"char"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[@(CHAR_MIN)]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[@(CHAR_MIN)]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgCharStar {
   SEL selector = [InvokerFactory selectorForArgumentType:@"char *"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[@"char *"]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[@"char *"]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgConstCharStar {
   SEL selector = [InvokerFactory selectorForArgumentType:@"const char *"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[@"const char *"]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[@"const char *"]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgUnsignedChar {
   SEL selector = [InvokerFactory selectorForArgumentType:@"unsigned char"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[@(UCHAR_MAX)]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[@(UCHAR_MAX)]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgLong {
   SEL selector = [InvokerFactory selectorForArgumentType:@"long"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[@(LONG_MIN)]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[@(LONG_MIN)]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgUnsignedLong {
   SEL selector = [InvokerFactory selectorForArgumentType:@"unsigned long"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[@(ULONG_MAX)]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[@(ULONG_MAX)]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgLongLong {
   SEL selector = [InvokerFactory selectorForArgumentType:@"long long"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[@(LONG_LONG_MIN)]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[@(LONG_LONG_MIN)]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgUnsignedLongLong {
   SEL selector = [InvokerFactory selectorForArgumentType:@"unsigned long long"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[@(ULONG_LONG_MAX)]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[@(ULONG_LONG_MAX)]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgCGPointWithCGRectCreate {
@@ -226,28 +232,28 @@
   dict = (__bridge_transfer NSDictionary *)CGPointCreateDictionaryRepresentation(point);
 
   SEL selector = [InvokerFactory selectorForArgumentType:@"CGPoint"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[dict]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[dict]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgCGPointWith_xy_Dictionary {
   NSDictionary *point = @{@"x" : @(1), @"y" : @(2)};
   SEL selector = [InvokerFactory selectorForArgumentType:@"CGPoint"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[point]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[point]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgCGPointWith_XY_Dictionary {
   NSDictionary *point = @{@"X" : @(1), @"Y" : @(2)};
   SEL selector = [InvokerFactory selectorForArgumentType:@"CGPoint"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[point]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[point]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgCGRectWithCGRectCreate {
@@ -257,10 +263,10 @@
   dict = (__bridge_transfer NSDictionary *)CGRectCreateDictionaryRepresentation(rect);
 
   SEL selector = [InvokerFactory selectorForArgumentType:@"CGRect"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[dict]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[dict]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgCGRectWith_xy_Dictionary {
@@ -272,10 +278,10 @@
     @"height" : @(4)
     };
   SEL selector = [InvokerFactory selectorForArgumentType:@"CGRect"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[rect]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[rect]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgCGRectWith_XY_Dictionary {
@@ -287,60 +293,64 @@
     @"Height" : @(4)
     };
   SEL selector = [InvokerFactory selectorForArgumentType:@"CGRect"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[rect]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[rect]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testIsPointRaisesIfNotDictionary {
   SEL selector = [InvokerFactory selectorForArgumentType:@"CGPoint"];
 
-  id actual = [LPInvoker invokeSelector:selector
-                             withTarget:self.target
-                              arguments:@[@"not a dictionary"]];
-  expect(actual).to.equal(LPSelectorHasArgumentsWhoseTypeCannotBeHandled);
+  LPInvocationResult *actual = [LPInvoker invokeSelector:selector
+                                              withTarget:self.target
+                                               arguments:@[@"not a dictionary"]];
+  expect([actual isError]).to.equal(YES);
+  expect([actual description]).to.equal(LPSelectorHasArgumentsWhoseTypeCannotBeHandled);
+  expect(actual.value).to.equal([NSNull null]);
 }
 
 - (void) testIsRectRaisesIfNotDictionary {
   SEL selector = [InvokerFactory selectorForArgumentType:@"CGRect"];
 
-  id actual = [LPInvoker invokeSelector:selector
-                             withTarget:self.target
-                              arguments:@[@"not a dictionary"]];
-  expect(actual).to.equal(LPSelectorHasArgumentsWhoseTypeCannotBeHandled);
+  LPInvocationResult *actual = [LPInvoker invokeSelector:selector
+                                              withTarget:self.target
+                                               arguments:@[@"not a dictionary"]];
+  expect([actual isError]).to.equal(YES);
+  expect([actual description]).to.equal(LPSelectorHasArgumentsWhoseTypeCannotBeHandled);
+  expect(actual.value).to.equal([NSNull null]);
 }
 
 - (void) testArgClassWithClass {
   SEL selector = [InvokerFactory selectorForArgumentType:@"Class"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[[NSArray class]]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[[NSArray class]]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgClassWithString {
   SEL selector = [InvokerFactory selectorForArgumentType:@"Class"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[@"NSArray"]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[@"NSArray"]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testArgId {
   SEL selector = [InvokerFactory selectorForArgumentType:@"object pointer"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[[InvokerFactory shared]]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[[InvokerFactory shared]]];
+  expect(actual.value).to.equal(YES);
 }
 
 - (void) testSelfArg {
   SEL selector = [InvokerFactory selectorForArgumentType:@"self"];
-  id actual =  [LPInvoker invokeSelector:selector
-                              withTarget:self.target
-                               arguments:@[@"__self__"]];
-  expect(actual).to.equal(YES);
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[@"__self__"]];
+  expect(actual.value).to.equal(YES);
 }
 
 @end

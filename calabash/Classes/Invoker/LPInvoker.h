@@ -1,5 +1,7 @@
 #import <Foundation/Foundation.h>
 
+@class LPInvocationResult;
+
 @interface LPInvoker : NSObject
 
 @property(assign, nonatomic, readonly) SEL selector;
@@ -45,18 +47,19 @@
 
  It is the responsibility of the caller to understand these rules.
 */
-+ (id) invokeZeroArgumentSelector:(SEL) selector withTarget:(id) receiver;
++ (LPInvocationResult *) invokeZeroArgumentSelector:(SEL) selector
+                                         withTarget:(id) target;
 
-+ (id) invokeSelector:(SEL) selector
-           withTarget:(id) receiver
-            arguments:(NSArray *) arguments;
++ (LPInvocationResult *) invokeSelector:(SEL) selector
+                             withTarget:(id) receiver
+                              arguments:(NSArray *) arguments;
 
-+ (id) invokeOnMainThreadZeroArgumentSelector:(SEL) selector
-                                   withTarget:(id) target;
++ (LPInvocationResult *) invokeOnMainThreadZeroArgumentSelector:(SEL) selector
+                                                     withTarget:(id) target;
 
-+ (id) invokeOnMainThreadSelector:(SEL) selector
-                       withTarget:(id) target
-                         argments:(NSArray *) arguments;
++ (LPInvocationResult *) invokeOnMainThreadSelector:(SEL) selector
+                                         withTarget:(id) target
+                                           argments:(NSArray *) arguments;
 
 - (BOOL) targetRespondsToSelector;
 - (NSString *) encodingForSelectorReturnType;
