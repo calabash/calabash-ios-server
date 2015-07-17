@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import "LPCocoaLumberjack.h"
+#import "LPInvocationResult.h"
 
 extern NSString *const LPTargetDoesNotRespondToSelector;
 extern NSString *const LPCannotCoerceSelectorReturnValueToObject;
@@ -17,11 +17,9 @@ typedef enum : NSUInteger {
   LPInvocationErrorUnspecifiedInvocationError
 } LPInvocationErrorType;
 
-@interface LPInvocationError : NSObject
+@interface LPInvocationError : LPInvocationResult
 
 @property(nonatomic, assign, readonly) LPInvocationErrorType type;
-
-+ (BOOL) isInvocationError:(id) object;
 
 - (instancetype) initWithType:(LPInvocationErrorType) type;
 

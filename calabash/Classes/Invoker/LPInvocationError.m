@@ -3,7 +3,6 @@
 #endif
 
 #import "LPInvocationError.h"
-#import "LPCocoaLumberjack.h"
 
 NSString *const LPTargetDoesNotRespondToSelector = @"*****";
 
@@ -25,10 +24,6 @@ NSString *const LPUnspecifiedInvocationError =
 @implementation LPInvocationError
 
 @synthesize type = _type;
-
-+ (BOOL) isInvocationError:(id) object {
-  return [object isKindOfClass:[LPInvocationError class]];
-}
 
 #pragma mark - Memory Management
 
@@ -63,6 +58,8 @@ NSString *const LPUnspecifiedInvocationError =
 + (LPInvocationError *) unspecifiedInvocationError {
   return [[LPInvocationError alloc] initWithType:LPInvocationErrorUnspecifiedInvocationError];
 }
+
+- (BOOL) isError { return YES; }
 
 - (NSString *) description {
   switch (self.type) {

@@ -18,14 +18,9 @@
   [super tearDown];
 }
 
-- (void) testIsInvocationError {
+- (void) testIsError {
   LPInvocationError *error = [LPInvocationError new];
-
-  expect([LPInvocationError isInvocationError:error]).to.equal(YES);
-
-  NSObject *object = [NSObject new];
-
-  expect([LPInvocationError isInvocationError:object]).to.equal(NO);
+  expect([error isError]).to.equal(YES);
 }
 
 - (void) testInitWithType {
