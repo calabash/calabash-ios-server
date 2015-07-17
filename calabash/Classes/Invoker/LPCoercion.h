@@ -1,7 +1,5 @@
 #import <Foundation/Foundation.h>
 
-extern NSString *const LPVoidSelectorReturnValue;
-
 @interface LPCoercion : NSObject
 
 @property(strong, nonatomic, readonly) id value;

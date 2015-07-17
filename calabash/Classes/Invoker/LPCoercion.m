@@ -4,8 +4,6 @@
 
 #import "LPCoercion.h"
 
-NSString *const LPVoidSelectorReturnValue = @"<VOID>";
-
 @interface LPCoercion ()
 
 - (id) initWithValue:(id) value

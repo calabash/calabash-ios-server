@@ -4,6 +4,8 @@
 
 #import "LPInvocationResult.h"
 
+NSString *const LPVoidSelectorReturnValue = @"<VOID>";
+
 @implementation LPInvocationResult
 
 - (BOOL) isError { return NO; }
