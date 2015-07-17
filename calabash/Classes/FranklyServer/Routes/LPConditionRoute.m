@@ -30,6 +30,8 @@
 @property(atomic, copy, readonly) NSString *condition;
 @property(atomic, strong, readonly) id query;
 
+- (NSArray *) performQueryOnMainThread;
+
 @end
 
 @implementation LPConditionRoute
@@ -152,6 +154,21 @@
   [self startAndRetainRepeatingTimers];
 }
 
+- (NSArray *) performQueryOnMainThread {
+  id query = self.query;
+  if ([[NSThread currentThread] isMainThread]) {
+    return [LPOperation performQuery:query];
+  } else {
+    __block NSArray *result = @[];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+      result = [LPOperation performQuery:query];
+    });
+    return result;
+  }
+}
+
+#pragma mark - Timer Selector
+
 - (void) checkConditionWithTimer:(NSTimer *) aTimer {
   if (!_repeatingTimer) {
     LPLogWarn(@"Check condition received a nil timer - returning");
@@ -167,8 +184,7 @@
 
   self.curCount += 1;
   if ([condition isEqualToString:kLPConditionRouteNoneAnimating]) {
-    id query = [self.data objectForKey:@"query"];
-    NSArray *result = [LPOperation performQuery:query];
+    NSArray *result = [self performQueryOnMainThread];
     for (id v in result) {
       if ([v isKindOfClass:[UIView class]]) {
         UIView *view = (UIView *) v;
