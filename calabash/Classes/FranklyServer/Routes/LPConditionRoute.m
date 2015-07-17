@@ -31,6 +31,7 @@
 @property(atomic, strong, readonly) id query;
 
 - (NSArray *) performQueryOnMainThread;
+- (BOOL) checkNetworkIndicatorOnMainThread;
 
 @end
 
@@ -167,6 +168,18 @@
   }
 }
 
+- (BOOL) checkNetworkIndicatorOnMainThread {
+  if ([[NSThread currentThread] isMainThread]) {
+    return [[UIApplication sharedApplication] isNetworkActivityIndicatorVisible];
+  } else {
+    __block BOOL result = NO;
+    dispatch_sync(dispatch_get_main_queue(), ^{
+      result = [[UIApplication sharedApplication] isNetworkActivityIndicatorVisible];
+    });
+    return result;
+  }
+}
+
 #pragma mark - Timer Selector
 
 - (void) checkConditionWithTimer:(NSTimer *) aTimer {
@@ -208,7 +221,7 @@
       return;
     }
   } else if ([condition isEqualToString:kLPConditionRouteNoNetworkIndicator]) {
-    if ([[UIApplication sharedApplication] isNetworkActivityIndicatorVisible]) {
+    if ([self checkNetworkIndicatorOnMainThread]) {
       self.stablePeriodCount = 0;
       return;
     }
