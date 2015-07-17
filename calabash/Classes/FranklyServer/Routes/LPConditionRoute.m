@@ -27,14 +27,19 @@
 @property(atomic, assign) NSUInteger stablePeriodCount;
 @property(atomic, assign) NSTimeInterval timerRepeatInterval;
 @property(atomic, strong) dispatch_source_t repeatingTimer;
+@property(atomic, copy, readonly) NSString *condition;
+@property(atomic, strong, readonly) id query;
 
 @end
 
 @implementation LPConditionRoute
 
-@synthesize repeatingTimer = _repeatingTimer;
-
 #pragma mark - Memory Management
+
+@synthesize repeatingTimer = _repeatingTimer;
+@synthesize condition = _condition;
+@synthesize query = _query;
+
 
 - (void) dealloc {
   [self stopAndReleaseRepeatingTimers];
@@ -67,13 +72,27 @@
   }
 }
 
+- (NSString *) condition {
+  if (_condition) { return _condition; }
+  _condition = [self.data objectForKey:@"condition"];
+  return _condition;
+}
+
+- (id) query {
+  if (_query) { return _query; }
+  _query = [self.data objectForKey:@"query"];
+  return _query;
+}
+
+#pragma mark - Condition Handling
+
 - (BOOL) isDone {
   return !_repeatingTimer && [super isDone];
 }
 
 - (void) beginOperation {
   self.done = NO;
-  NSString *condition = [self.data objectForKey:@"condition"];
+  NSString *condition = self.condition;
   if (!condition) {
     LPLogError(@"Condition not specified");
     [self failWithMessageFormat:@"Condition parameter missing" message:nil];
@@ -90,7 +109,7 @@
   }
 
   if ([condition isEqualToString:kLPConditionRouteNoneAnimating]) {
-    id query = [self.data objectForKey:@"query"];
+    id query = self.query;
     if (!query || [query isEqualToString:@""]) {
       LPLogError(@"Condition received '%@' without a query argument",
                  kLPConditionRouteNoneAnimating);
