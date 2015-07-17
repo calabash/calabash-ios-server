@@ -32,6 +32,7 @@
 
 - (NSArray *) performQueryOnMainThread;
 - (BOOL) checkNetworkIndicatorOnMainThread;
+- (void) checkCondition;
 
 @end
 
@@ -62,7 +63,7 @@
   dispatch_source_set_timer(_repeatingTimer, startTime, intervalNano, 0);
 
   dispatch_source_set_event_handler(_repeatingTimer, ^{
-    [self checkConditionWithTimer:nil];
+    [self checkCondition];
   });
 
   dispatch_resume(_repeatingTimer);
@@ -180,9 +181,10 @@
   }
 }
 
-#pragma mark - Timer Selector
+#pragma mark - Called by timer
 
-- (void) checkConditionWithTimer:(NSTimer *) aTimer {
+- (void) checkCondition {
+
   if (!_repeatingTimer) {
     LPLogWarn(@"Check condition received a nil timer - returning");
     return;
