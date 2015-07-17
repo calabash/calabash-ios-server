@@ -14,6 +14,8 @@
 #import "LPDevice.h"
 #import "LPOrientationOperation.h"
 #import "LPInvoker.h"
+#import "LPInvocationResult.h"
+#import "LPInvocationError.h"
 #import <math.h>
 #import "LPDecimalRounder.h"
 
@@ -49,9 +51,11 @@
          whenTarget:(id) target
          respondsTo:(SEL) selector {
   if ([target respondsToSelector:selector]) {
-    id value = [LPInvoker invokeOnMainThreadZeroArgumentSelector:selector
-                                                      withTarget:target];
-    [dictionary setObject:value forKey:key];
+    LPInvocationResult *result;
+    result = [LPInvoker invokeOnMainThreadZeroArgumentSelector:selector
+                                                    withTarget:target];
+
+    [dictionary setObject:result.value forKey:key];
   }
 }
 
@@ -60,9 +64,10 @@
          withTarget:(id) target
            selector:(SEL) selector {
   if ([target respondsToSelector:selector]) {
-    id value = [LPInvoker invokeOnMainThreadZeroArgumentSelector:selector
-                                                      withTarget:target];
-    [dictionary setObject:value forKey:key];
+    LPInvocationResult *result;
+    result = [LPInvoker invokeOnMainThreadZeroArgumentSelector:selector
+                                                    withTarget:target];
+    [dictionary setObject:result.value forKey:key];
   } else {
     [dictionary setObject:[NSNull null] forKey:key];
   }

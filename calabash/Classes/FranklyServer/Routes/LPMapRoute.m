@@ -15,6 +15,8 @@
 #import "LPHTTPDataResponse.h"
 #import "LPDevice.h"
 #import "LPInvoker.h"
+#import "LPInvocationResult.h"
+#import "LPCocoaLumberjack.h"
 
 @implementation LPMapRoute
 
@@ -42,8 +44,18 @@
   SEL selector = NSSelectorFromString(@"postDataAsString");
 
   if ([connection respondsToSelector:selector]) {
-    id connectionData = [LPInvoker invokeOnMainThreadZeroArgumentSelector:selector
-                                                               withTarget:connection];
+    LPInvocationResult *result;
+    result = [LPInvoker invokeOnMainThreadZeroArgumentSelector:selector
+                                                    withTarget:connection];
+
+    id connectionData = nil;
+
+    if ([result isError]) {
+      connectionData = [result description];
+    } else {
+      connectionData = result.value;
+    }
+
     NSDictionary *data = [LPJSONUtils deserializeDictionary:connectionData];
 
     response = [self JSONResponseForMethod:@"POST"

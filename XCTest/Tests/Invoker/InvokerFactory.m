@@ -85,6 +85,8 @@
     @"struct" : NSStringFromSelector(@selector(selectorThatReturnsAStruct)),
     @"Class" : NSStringFromSelector(@selector(selectorThatReturnsClass)),
     @"Location2D" : NSStringFromSelector(@selector(selectorThatReturnsCoreLocation2D)),
+    @"void raises" : NSStringFromSelector(@selector(selectorThatReturnsVoidAndRaises)),
+    @"pointer raises" : NSStringFromSelector(@selector(selectorThatReturnsPointerAndRaises)),
 
     // Not handled
     @"void *" : NSStringFromSelector(@selector(selectorThatReturnsVoidStar))
@@ -231,6 +233,16 @@
 // Handled
 
 - (void) selectorThatReturnsVoid { return; }
+- (void) selectorThatReturnsVoidAndRaises {
+  @throw [NSException exceptionWithName:@"Exceptional"
+                                 reason:@"Just because"
+                               userInfo:nil];
+}
+- (id) selectorThatReturnsPointerAndRaises {
+  @throw [NSException exceptionWithName:@"Exceptional"
+                                 reason:@"Just because"
+                               userInfo:nil];
+}
 - (BOOL) selectorThatReturnsBOOL_YES { return YES; }
 - (BOOL) selectorThatReturnsBOOL_NO { return NO; }
 - (bool) selectorThatReturnsBool_true { return true; }

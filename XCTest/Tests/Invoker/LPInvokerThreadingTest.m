@@ -4,6 +4,8 @@
 
 #import "LPInvoker.h"
 #import "InvokerFactory.h"
+#import "LPInvocationResult.h"
+#import "LPInvocationError.h"
 
 @interface LPInvokerThreadingTest : XCTestCase
 
@@ -27,9 +29,9 @@
   Target *target = [Target new];
   SEL selector = @selector(selectorThatReturnsDouble);
 
-  id result = [LPInvoker invokeOnMainThreadZeroArgumentSelector:selector
+  LPInvocationResult *result = [LPInvoker invokeOnMainThreadZeroArgumentSelector:selector
                                                      withTarget:target];
-  expect(result).to.equal(@(DBL_MAX));
+  expect(result.value).to.equal(@(DBL_MAX));
 }
 
 - (void) testZeroArgPrimativeOffMainThread {
@@ -43,10 +45,10 @@
     Target *target = [Target new];
     SEL selector = @selector(selectorThatReturnsDouble);
 
-    id result = [LPInvoker invokeOnMainThreadZeroArgumentSelector:selector
+    LPInvocationResult *result = [LPInvoker invokeOnMainThreadZeroArgumentSelector:selector
                                                        withTarget:target];
 
-    expect(result).to.equal(@(DBL_MAX));
+    expect(result.value).to.equal(@(DBL_MAX));
     [expectation fulfill];
   });
 
@@ -66,10 +68,10 @@
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     expect([[NSThread currentThread] isMainThread]).to.equal(NO);
 
-    id result = [LPInvoker invokeOnMainThreadZeroArgumentSelector:selector
+    LPInvocationResult *result = [LPInvoker invokeOnMainThreadZeroArgumentSelector:selector
                                                        withTarget:target];
 
-    expect(result).to.equal(@"last");
+    expect(result.value).to.equal(@"last");
     [expectation fulfill];
   });
 
@@ -86,10 +88,10 @@
   Target *target = [Target new];
   SEL selector = @selector(selectorDouble:);
 
-  id result = [LPInvoker invokeOnMainThreadSelector:selector
+  LPInvocationResult *result = [LPInvoker invokeOnMainThreadSelector:selector
                                          withTarget:target
                                          argments:@[@(DBL_MAX)]];
-  expect(result).to.equal(@(YES));
+  expect(result.value).to.equal(@(YES));
 }
 
 - (void) testPrimativeArgCalledOffMainThread {
@@ -105,11 +107,11 @@
     expect([[NSThread currentThread] isMainThread]).to.equal(NO);
 
 
-    id result = [LPInvoker invokeOnMainThreadSelector:selector
+    LPInvocationResult *result = [LPInvoker invokeOnMainThreadSelector:selector
                                            withTarget:target
                                              argments:arguments];
 
-    expect(result).to.equal(@(YES));
+    expect(result.value).to.equal(@(YES));
     [expectation fulfill];
   });
 
@@ -147,11 +149,11 @@
     expect([[NSThread currentThread] isMainThread]).to.equal(NO);
 
 
-    id result = [LPInvoker invokeOnMainThreadSelector:selector
+    LPInvocationResult *result = [LPInvoker invokeOnMainThreadSelector:selector
                                            withTarget:target
                                              argments:arguments];
 
-    expect(result).to.equal(@(YES));
+    expect(result.value).to.equal(@(YES));
     [expectation fulfill];
   });
 
@@ -189,11 +191,11 @@
     expect([[NSThread currentThread] isMainThread]).to.equal(NO);
 
 
-    id result = [LPInvoker invokeOnMainThreadSelector:selector
+    LPInvocationResult *result = [LPInvoker invokeOnMainThreadSelector:selector
                                            withTarget:target
                                              argments:arguments];
 
-    expect(result).to.equal(@"A string: appended");
+    expect(result.value).to.equal(@"A string: appended");
     [expectation fulfill];
   });
 
