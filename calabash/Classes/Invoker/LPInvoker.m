@@ -64,6 +64,37 @@
   return [self description];
 }
 
++ (id) invokeOnMainThreadZeroArgumentSelector:(SEL) selector
+                                   withTarget:(id) target {
+  if ([[NSThread currentThread] isMainThread]) {
+    return [LPInvoker invokeZeroArgumentSelector:selector withTarget:target];
+  } else {
+    __block id result = [NSNull null];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+      result = [LPInvoker invokeZeroArgumentSelector:selector withTarget:target];
+    });
+    return result;
+  }
+}
+
++ (id) invokeOnMainThreadSelector:(SEL) selector
+                       withTarget:(id) target
+                         argments:(NSArray *) arguments {
+  if ([[NSThread currentThread] isMainThread]) {
+    return [LPInvoker invokeSelector:selector
+                          withTarget:target
+                           arguments:arguments];
+  } else {
+    __block id result = [NSNull null];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+      result = [LPInvoker invokeSelector:selector
+                              withTarget:target
+                               arguments:arguments];
+    });
+    return result;
+  }
+}
+
 + (id) invokeZeroArgumentSelector:(SEL) selector withTarget:(id) target {
   LPInvoker *invoker = [[LPInvoker alloc] initWithSelector:selector
                                                     target:target];
