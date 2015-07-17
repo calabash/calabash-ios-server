@@ -23,4 +23,27 @@
   expect([result isError]).to.equal(NO);
 }
 
+- (void) testInitWithValue {
+  LPInvocationResult *result;
+  id value;
+
+  value = @[];
+  result = [[LPInvocationResult alloc] initWithValue:value];
+  expect(result.value).to.equal(value);
+
+  value = nil;
+  result = [[LPInvocationResult alloc] initWithValue:value];
+  expect(result.value).to.equal([NSNull null]);
+}
+
+- (void) testIsNSNull {
+  LPInvocationResult *result;
+
+  result = [[LPInvocationResult alloc] initWithValue:@[]];
+  expect([result isNSNull]).to.equal(NO);
+
+  result = [[LPInvocationResult alloc] initWithValue:nil];
+  expect([result isNSNull]).to.equal(YES);
+}
+
 @end

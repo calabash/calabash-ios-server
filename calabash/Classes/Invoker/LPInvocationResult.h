@@ -4,6 +4,11 @@ extern NSString *const LPVoidSelectorReturnValue;
 
 @interface LPInvocationResult : NSObject
 
+@property(nonatomic, strong, readonly) id value;
+
+- (id) initWithValue:(id) value;
+
 - (BOOL) isError;
+- (BOOL) isNSNull;
 
 @end
