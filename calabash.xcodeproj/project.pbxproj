@@ -1885,6 +1885,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F50CBF661A03F222004AC9DA /* Build configuration list for PBXNativeTarget "XCTest" */;
 			buildPhases = (
+				F5986B141B5802F100CCB142 /* ShellScript */,
 				F50CBF5A1A03F222004AC9DA /* Sources */,
 				F50CBF5B1A03F222004AC9DA /* Frameworks */,
 				F50CBF5C1A03F222004AC9DA /* Resources */,
@@ -2090,6 +2091,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "sh calabash/gitversioning-after.sh \"calabash/LPGitVersionDefines.h\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F5986B141B5802F100CCB142 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "calabash/clean-coverage-files.sh\n";
 			showEnvVarsInLog = 0;
 		};
 		F5BA6EFE1B4BB95700DB898F /* Run Script git versioning 1 of 2 */ = {
