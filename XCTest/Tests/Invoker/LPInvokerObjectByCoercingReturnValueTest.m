@@ -5,6 +5,7 @@
 #import "InvokerFactory.h"
 #import "LPInvoker.h"
 #import "LPCoercion.h"
+#import "LPInvocationError.h"
 #import <CoreLocation/CoreLocation.h>
 
 @interface LPInvoker (LPXCTTEST)

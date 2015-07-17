@@ -3,6 +3,7 @@
 #endif
 
 #import "LPInvoker.h"
+#import "LPInvocationError.h"
 #import "LPCoercion.h"
 #import <objc/runtime.h>
 #import "LPCocoaLumberjack.h"

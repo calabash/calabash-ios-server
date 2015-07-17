@@ -4,23 +4,7 @@
 
 #import "LPCoercion.h"
 
-NSString *const LPTargetDoesNotRespondToSelector = @"*****";
-
-NSString *const LPCannotCoerceSelectorReturnValueToObject =
-@"Error: cannot coerce returned value to an object";
-
-NSString *const LPSelectorHasUnknownReturnTypeEncoding =
-@"Error: selector returns an unknown encoding";
-
-NSString *const LPSelectorHasArgumentsWhoseTypeCannotBeHandled =
-@"Error: selector has arguments that are not handled";
-
-NSString *const LPIncorrectNumberOfArgumentsProvidedToSelector =
-@"Error: incorrect number of arguments provided for selector";
-
 NSString *const LPVoidSelectorReturnValue = @"<VOID>";
-NSString *const LPUnspecifiedInvocationError =
-@"Error: invoking selector on target raised an exception";
 
 @interface LPCoercion ()
 

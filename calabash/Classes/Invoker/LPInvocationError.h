@@ -1,6 +1,13 @@
 #import <Foundation/Foundation.h>
 #import "LPCocoaLumberjack.h"
 
+extern NSString *const LPTargetDoesNotRespondToSelector;
+extern NSString *const LPCannotCoerceSelectorReturnValueToObject;
+extern NSString *const LPSelectorHasUnknownReturnTypeEncoding;
+extern NSString *const LPSelectorHasArgumentsWhoseTypeCannotBeHandled;
+extern NSString *const LPIncorrectNumberOfArgumentsProvidedToSelector;
+extern NSString *const LPUnspecifiedInvocationError;
+
 typedef enum : NSUInteger {
   LPInvocationErrorTargetDoesNotRespondToSelector = 0,
   LPInvocationErrorCannotCoerceSelectorReturnValueToObject,

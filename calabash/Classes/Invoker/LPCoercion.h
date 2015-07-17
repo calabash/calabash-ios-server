@@ -1,12 +1,6 @@
 #import <Foundation/Foundation.h>
 
-extern NSString *const LPTargetDoesNotRespondToSelector;
-extern NSString *const LPCannotCoerceSelectorReturnValueToObject;
-extern NSString *const LPSelectorHasUnknownReturnTypeEncoding;
-extern NSString *const LPSelectorHasArgumentsWhoseTypeCannotBeHandled;
-extern NSString *const LPIncorrectNumberOfArgumentsProvidedToSelector;
 extern NSString *const LPVoidSelectorReturnValue;
-extern NSString *const LPUnspecifiedInvocationError;
 
 @interface LPCoercion : NSObject
 

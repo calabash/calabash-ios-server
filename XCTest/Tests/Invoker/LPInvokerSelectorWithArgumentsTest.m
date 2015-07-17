@@ -5,7 +5,7 @@
 #import "LPInvoker.h"
 #import "LPCoercion.h"
 #import "InvokerFactory.h"
-
+#import "LPInvocationError.h"
 
 @interface LPInvokerSelectorWithArgumentsTest : XCTestCase
 
