@@ -30,7 +30,7 @@
 @property(atomic, copy, readonly) NSString *condition;
 @property(atomic, strong, readonly) id query;
 
-- (NSArray *) performQueryOnMainThread;
+- (BOOL) atLeastOneAnimatingOnMainThreadWithQuery:(id) query;
 - (BOOL) checkNetworkIndicatorOnMainThread;
 - (void) checkCondition;
 
@@ -88,7 +88,7 @@
   return _query;
 }
 
-#pragma mark - Condition Handling
+#pragma mark - Override Superclass Methods
 
 - (BOOL) isDone {
   return !_repeatingTimer && [super isDone];
@@ -156,16 +156,48 @@
   [self startAndRetainRepeatingTimers];
 }
 
-- (NSArray *) performQueryOnMainThread {
-  id query = self.query;
+#pragma mark - Condition Checks
+
+- (BOOL) atLeastOneAnimatingOnMainThreadWithQuery:(id) query {
+
+  // Only consider animations with a duration greater than the defined
+  // limit. This is intended to work around the parallax animation
+  // attached to iOS 8 UIAlertViews and UIActionSheets
+
   if ([[NSThread currentThread] isMainThread]) {
-    return [LPOperation performQuery:query];
+    NSArray *matches = [LPOperation performQuery:query];
+    for (id match in matches) {
+      if ([match isKindOfClass:[UIView class]]) {
+        UIView *view = (UIView *)match;
+        NSArray *animationKeys = [[view.layer animationKeys] copy];
+        for (NSString *key in animationKeys) {
+          CAAnimation *animation = [view.layer animationForKey:key];
+          return animation.duration > kLPConditionRouteAnimationDurationLimit;
+        }
+      }
+    }
+    return NO;
   } else {
-    __block NSArray *result = @[];
+    __block BOOL atLeastOneAnimating = NO;
     dispatch_sync(dispatch_get_main_queue(), ^{
-      result = [LPOperation performQuery:query];
+      NSArray *matches = [LPOperation performQuery:query];
+      for (id match in matches) {
+        if ([match isKindOfClass:[UIView class]]) {
+          UIView *view = (UIView *)match;
+          NSArray *animationKeys = [[view.layer animationKeys] copy];
+          [animationKeys enumerateObjectsUsingBlock:^(NSString *key,
+                                                      NSUInteger idx,
+                                                      BOOL *stop) {
+            CAAnimation *animation = [view.layer animationForKey:key];
+            if (animation.duration > kLPConditionRouteAnimationDurationLimit) {
+              atLeastOneAnimating = YES;
+              *stop = YES;
+            }
+          }];
+        }
+      }
     });
-    return result;
+    return atLeastOneAnimating;
   }
 }
 
@@ -199,22 +231,8 @@
 
   self.curCount += 1;
   if ([condition isEqualToString:kLPConditionRouteNoneAnimating]) {
-    NSArray *result = [self performQueryOnMainThread];
-    for (id v in result) {
-      if ([v isKindOfClass:[UIView class]]) {
-        UIView *view = (UIView *) v;
-        NSArray *animationKeys = [[view.layer animationKeys] copy];
-        for (NSString *key in animationKeys) {
-          CAAnimation *animation = [view.layer animationForKey:key];
-          // Only consider animations with a duration greater than the defined
-          // limit. This is intended to work around the parallax animation
-          // attached to iOS 8 UIAlertViews and UIActionSheets
-          if (animation.duration > kLPConditionRouteAnimationDurationLimit) {
-            self.stablePeriodCount = 0;
-            return;
-          }
-        }
-      }
+    if ([self atLeastOneAnimatingOnMainThreadWithQuery:self.query]) {
+      self.stablePeriodCount = 0;
     }
 
     self.stablePeriodCount += 1;
