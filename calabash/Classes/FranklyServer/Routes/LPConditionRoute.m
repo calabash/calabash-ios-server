@@ -30,6 +30,7 @@
 @property(atomic, copy, readonly) NSString *condition;
 @property(atomic, strong, readonly) id query;
 
+- (NSNumber *) defaultTimeoutForCondition:(NSString *)condition;
 - (BOOL) atLeastOneAnimatingOnMainThreadWithQuery:(id) query;
 - (BOOL) checkNetworkIndicatorOnMainThread;
 - (void) checkCondition;
@@ -86,6 +87,15 @@
   if (_query) { return _query; }
   _query = [self.data objectForKey:@"query"];
   return _query;
+}
+
+- (NSNumber *) defaultTimeoutForCondition:(NSString *)condition {
+  if ([kLPConditionRouteNoneAnimating isEqualToString:condition]) {
+    return [NSNumber numberWithUnsignedInteger:6];
+  } else if ([kLPConditionRouteNoNetworkIndicator isEqualToString:condition]) {
+    return [NSNumber numberWithUnsignedInteger:30];
+  }
+  return [NSNumber numberWithUnsignedInteger:30];
 }
 
 #pragma mark - Override Superclass Methods
@@ -253,6 +263,8 @@
   }
 }
 
+#pragma mark - Success and Failure
+
 - (void) failWithMessageFormat:(NSString *) messageFmt message:(NSString *) message {
   [self stopAndReleaseRepeatingTimers];
   [super failWithMessageFormat:messageFmt message:message];
@@ -261,15 +273,6 @@
 - (void) succeedWithResult:(NSArray *) result {
   [self stopAndReleaseRepeatingTimers];
   [super succeedWithResult:result];
-}
-
-- (NSNumber *) defaultTimeoutForCondition:(NSString *)condition {
-  if ([kLPConditionRouteNoneAnimating isEqualToString:condition]) {
-    return [NSNumber numberWithUnsignedInteger:6];
-  } else if ([kLPConditionRouteNoNetworkIndicator isEqualToString:condition]) {
-    return [NSNumber numberWithUnsignedInteger:30];
-  }
-  return [NSNumber numberWithUnsignedInteger:30];
 }
 
 @end
