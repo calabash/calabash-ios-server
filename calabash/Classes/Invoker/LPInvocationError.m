@@ -21,6 +21,12 @@ NSString *const LPIncorrectNumberOfArgumentsProvidedToSelector =
 NSString *const LPUnspecifiedInvocationError =
 @"Error: invoking selector on target raised an exception";
 
+@interface LPInvocationError ()
+
+- (id) initWithType:(LPInvocationErrorType) type;
+
+@end
+
 @implementation LPInvocationError
 
 @synthesize type = _type;
@@ -28,7 +34,7 @@ NSString *const LPUnspecifiedInvocationError =
 #pragma mark - Memory Management
 
 - (instancetype) initWithType:(LPInvocationErrorType) type {
-  self = [super init];
+  self = [super initWithValue:nil];
   if (self) {
     _type = type;
   }
@@ -59,7 +65,13 @@ NSString *const LPUnspecifiedInvocationError =
   return [[LPInvocationError alloc] initWithType:LPInvocationErrorUnspecifiedInvocationError];
 }
 
+#pragma mark - State
+
 - (BOOL) isError { return YES; }
+
+- (BOOL) isNSNull { return YES; }
+
+#pragma mark - Description
 
 - (NSString *) description {
   switch (self.type) {

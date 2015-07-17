@@ -4,6 +4,12 @@
 
 #import "LPInvocationError.h"
 
+@interface LPInvocationError (LPXCTEST)
+
+- (id) initWithType:(LPInvocationErrorType) type;
+
+@end
+
 @interface LPInvocationErrorTest : XCTestCase
 
 @end
@@ -18,14 +24,13 @@
   [super tearDown];
 }
 
-- (void) testIsError {
-  LPInvocationError *error = [LPInvocationError new];
-  expect([error isError]).to.equal(YES);
-}
+
+#pragma mark - Initializers
 
 - (void) testInitWithType {
   LPInvocationError *error = [[LPInvocationError alloc] initWithType:LPInvocationErrorCannotCoerceSelectorReturnValueToObject];
   expect(error.type).to.equal(LPInvocationErrorCannotCoerceSelectorReturnValueToObject);
+  expect(error.value).to.equal([NSNull null]);
 }
 
 - (void) testConvenienceInitializers {
@@ -45,6 +50,18 @@
 
   error = [LPInvocationError unspecifiedInvocationError];
   expect(error.type).to.equal(LPInvocationErrorUnspecifiedInvocationError);
+}
+
+#pragma mark - State
+
+- (void) testIsError {
+  LPInvocationError *error = [LPInvocationError new];
+  expect([error isError]).to.equal(YES);
+}
+
+- (void) testIsNSNull {
+  LPInvocationError *error = [LPInvocationError new];
+  expect([error isNSNull]).to.equal(YES);
 }
 
 - (void) testDebugDescription {

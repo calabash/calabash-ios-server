@@ -21,8 +21,6 @@ typedef enum : NSUInteger {
 
 @property(nonatomic, assign, readonly) LPInvocationErrorType type;
 
-- (instancetype) initWithType:(LPInvocationErrorType) type;
-
 + (LPInvocationError *) targetDoesNotRespondToSelector;
 + (LPInvocationError *) cannotCoerceReturnValueToObject;
 + (LPInvocationError *) hasUnknownReturnTypeEncoding;
