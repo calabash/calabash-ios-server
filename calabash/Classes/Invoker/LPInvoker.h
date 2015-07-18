@@ -18,26 +18,26 @@
  These methods handle exceptional cases by returning a constant string.
 
  1. Target does not respond to selector.
-    => *****
+ => *****
 
  2. Selector returns an type that cannot be coerced into an object, like a
-    union or a bitfield.
-    => Error: cannot coerce returned value to an object
+ union or a bitfield.
+ => Error: cannot coerce returned value to an object
 
  3. Selector returns a type with an unknown encoding.
-    => Error: selector returns an unknown encoding
+ => Error: selector returns an unknown encoding
 
  4. One or more selector arguments are not supported, like unions or bitfields.
-    => Error: selector has arguments that are not handled
+ => Error: selector has arguments that are not handled
 
  5. An incorrect number of arguments were provided to the selector.
-    => Error: incorrect number of arguments provided for selector
+ => Error: incorrect number of arguments provided for selector
 
  6. Selector has a void return value.
-    => <VOID>
+ => <VOID>
 
  7. The invocation throws an exception.
-    => Error: invoking selector on target raised an exception
+ => Error: invoking selector on target raised an exception
 
 
  In cases 1 - 5, the selector will not be invoked.
@@ -46,7 +46,7 @@
  exception is raised, 'Error: exception raised' will be returned.
 
  It is the responsibility of the caller to understand these rules.
-*/
+ */
 + (LPInvocationResult *) invokeZeroArgumentSelector:(SEL) selector
                                          withTarget:(id) target;
 
@@ -59,7 +59,7 @@
 
 + (LPInvocationResult *) invokeOnMainThreadSelector:(SEL) selector
                                          withTarget:(id) target
-                                           argments:(NSArray *) arguments;
+                                          arguments:(NSArray *) arguments;
 
 - (BOOL) targetRespondsToSelector;
 - (NSString *) encodingForSelectorReturnType;

@@ -30,7 +30,7 @@
   SEL selector = @selector(selectorThatReturnsDouble);
 
   LPInvocationResult *result = [LPInvoker invokeOnMainThreadZeroArgumentSelector:selector
-                                                     withTarget:target];
+                                                                      withTarget:target];
   expect(result.value).to.equal(@(DBL_MAX));
 }
 
@@ -46,7 +46,7 @@
     SEL selector = @selector(selectorThatReturnsDouble);
 
     LPInvocationResult *result = [LPInvoker invokeOnMainThreadZeroArgumentSelector:selector
-                                                       withTarget:target];
+                                                                        withTarget:target];
 
     expect(result.value).to.equal(@(DBL_MAX));
     [expectation fulfill];
@@ -69,7 +69,7 @@
     expect([[NSThread currentThread] isMainThread]).to.equal(NO);
 
     LPInvocationResult *result = [LPInvoker invokeOnMainThreadZeroArgumentSelector:selector
-                                                       withTarget:target];
+                                                                        withTarget:target];
 
     expect(result.value).to.equal(@"last");
     [expectation fulfill];
@@ -89,8 +89,8 @@
   SEL selector = @selector(selectorDouble:);
 
   LPInvocationResult *result = [LPInvoker invokeOnMainThreadSelector:selector
-                                         withTarget:target
-                                         argments:@[@(DBL_MAX)]];
+                                                          withTarget:target
+                                                           arguments:@[@(DBL_MAX)]];
   expect(result.value).to.equal(@(YES));
 }
 
@@ -108,8 +108,8 @@
 
 
     LPInvocationResult *result = [LPInvoker invokeOnMainThreadSelector:selector
-                                           withTarget:target
-                                             argments:arguments];
+                                                            withTarget:target
+                                                             arguments:arguments];
 
     expect(result.value).to.equal(@(YES));
     [expectation fulfill];
@@ -150,8 +150,8 @@
 
 
     LPInvocationResult *result = [LPInvoker invokeOnMainThreadSelector:selector
-                                           withTarget:target
-                                             argments:arguments];
+                                                            withTarget:target
+                                                             arguments:arguments];
 
     expect(result.value).to.equal(@(YES));
     [expectation fulfill];
@@ -192,8 +192,8 @@
 
 
     LPInvocationResult *result = [LPInvoker invokeOnMainThreadSelector:selector
-                                           withTarget:target
-                                             argments:arguments];
+                                                            withTarget:target
+                                                             arguments:arguments];
 
     expect(result.value).to.equal(@"A string: appended");
     [expectation fulfill];
