@@ -49,7 +49,7 @@
 		B15BF9B119ABB1DD00B38577 /* LPOrientationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F591380317C39128007B2BE4 /* LPOrientationOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9B219ABB1DD00B38577 /* LPFlashOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B19440431725C70A00EE1B25 /* LPFlashOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9B319ABB1DD00B38577 /* LPQueryAllOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */; };
-		B15BF9B419ABB1DD00B38577 /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; };
+		B15BF9B419ABB1DD00B38577 /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9B519ABB1DD00B38577 /* LPQueryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC514B6DB2B002A744C /* LPQueryOperation.m */; };
 		B15BF9B619ABB1DD00B38577 /* LPScrollOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC714B6DB2B002A744C /* LPScrollOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9B719ABB1DD00B38577 /* LPScrollToRowOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -124,7 +124,7 @@
 		B1D5BD8819A23BCE0070E8CE /* LPScrollToMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A718B392370094E71E /* LPScrollToMarkOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BD8919A23BCE0070E8CE /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; };
 		B1D5BD8A19A23BCE0070E8CE /* LPQueryAllOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */; };
-		B1D5BD8B19A23BCE0070E8CE /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; };
+		B1D5BD8B19A23BCE0070E8CE /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BD8C19A23BCE0070E8CE /* LPQueryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC514B6DB2B002A744C /* LPQueryOperation.m */; };
 		B1D5BD8D19A23BCE0070E8CE /* LPScrollOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC714B6DB2B002A744C /* LPScrollOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BD8E19A23BCE0070E8CE /* LPUIATapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B164575518FDCE4900CAA25A /* LPUIATapRoute.m */; };
@@ -227,7 +227,7 @@
 		F5091BEB18C4E1D700C85307 /* LPScrollToMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A718B392370094E71E /* LPScrollToMarkOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091BEC18C4E1D700C85307 /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; };
 		F5091BED18C4E1D700C85307 /* LPQueryAllOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */; };
-		F5091BEE18C4E1D700C85307 /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; };
+		F5091BEE18C4E1D700C85307 /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091BEF18C4E1D700C85307 /* LPQueryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC514B6DB2B002A744C /* LPQueryOperation.m */; };
 		F5091BF018C4E1D700C85307 /* LPScrollOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC714B6DB2B002A744C /* LPScrollOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091BF118C4E1D700C85307 /* LPScrollToRowOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -311,7 +311,7 @@
 		F50CBF941A04058C004AC9DA /* LPOrientationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F591380317C39128007B2BE4 /* LPOrientationOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBF951A04058C004AC9DA /* LPFlashOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B19440431725C70A00EE1B25 /* LPFlashOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBF961A04058C004AC9DA /* LPQueryAllOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */; };
-		F50CBF971A04058C004AC9DA /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; };
+		F50CBF971A04058C004AC9DA /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBF981A04058C004AC9DA /* LPQueryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC514B6DB2B002A744C /* LPQueryOperation.m */; };
 		F50CBF991A04058C004AC9DA /* LPScrollOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC714B6DB2B002A744C /* LPScrollOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBF9A1A04058C004AC9DA /* LPScrollToRowOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC914B6DB2B002A744C /* LPScrollToRowOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };

@@ -1,3 +1,7 @@
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
 //
 //  Operation.m
 //  Created by Karl Krukow on 14/08/11.
@@ -30,17 +34,11 @@
 @synthesize arguments = _arguments;
 @synthesize done = _done;
 
-- (void) dealloc {
-  [_arguments release];
-  _arguments = nil;
-  [super dealloc];
-}
-
 - (id) initWithOperation:(NSDictionary *) operation {
   self = [super init];
   if (self != nil) {
     _selector = NSSelectorFromString([operation objectForKey:@"method_name"]);
-    _arguments = [[operation objectForKey:@"arguments"] retain];
+    _arguments = [operation objectForKey:@"arguments"];
     _done = NO;
   }
   return self;
@@ -48,36 +46,36 @@
 
 + (id) operationFromDictionary:(NSDictionary *) dictionary {
   NSString *opName = [dictionary valueForKey:@"method_name"];
-  LPOperation *op = nil;
+  LPOperation *operation = nil;
   if ([opName isEqualToString:@"scrollToRow"]) {
-    op = [[LPScrollToRowOperation alloc] initWithOperation:dictionary];
+    operation = [[LPScrollToRowOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"collectionViewScrollToItemWithMark"]) {
-    op = [[LPCollectionViewScrollToItemWithMarkOperation alloc] initWithOperation:dictionary];
+    operation = [[LPCollectionViewScrollToItemWithMarkOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"scrollToRowWithMark"]) {
-    op = [[LPScrollToRowWithMarkOperation alloc] initWithOperation:dictionary];
+    operation = [[LPScrollToRowWithMarkOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"scroll"]) {
-    op = [[LPScrollOperation alloc] initWithOperation:dictionary];
+    operation = [[LPScrollOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"query"]) {
-    op = [[LPQueryOperation alloc] initWithOperation:dictionary];
+    operation = [[LPQueryOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"query_all"]) {
-    op = [[LPQueryAllOperation alloc] initWithOperation:dictionary];
+    operation = [[LPQueryAllOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"setText"]) {
-    op = [[LPSetTextOperation alloc] initWithOperation:dictionary];
+    operation = [[LPSetTextOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"flash"]) {
-    op = [[LPFlashOperation alloc] initWithOperation:dictionary];
+    operation = [[LPFlashOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"orientation"]) {
-    op = [[LPOrientationOperation alloc] initWithOperation:dictionary];
+    operation = [[LPOrientationOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"changeDatePickerDate"]) {
-    op = [[LPDatePickerOperation alloc] initWithOperation:dictionary];
+    operation = [[LPDatePickerOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"changeSlider"]) {
-    op = [[LPSliderOperation alloc] initWithOperation:dictionary];
+    operation = [[LPSliderOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"collectionViewScroll"]) {
-    op = [[LPCollectionViewScrollToItemOperation alloc]
+    operation = [[LPCollectionViewScrollToItemOperation alloc]
             initWithOperation:dictionary];
   } else {
-    op = [[LPOperation alloc] initWithOperation:dictionary];
+    operation = [[LPOperation alloc] initWithOperation:dictionary];
   }
-  return [op autorelease];
+  return operation;
 }
 
 - (NSString *) description {
@@ -101,7 +99,6 @@
   NSArray *allWindows = [LPTouchUtils applicationWindows];
   
   NSArray *result = [parser evalWith:allWindows];
-  [parser release];
 
   return result;
 }
