@@ -16,9 +16,6 @@
 @end
 
 @implementation LPSetTextOperation
-- (NSString *) description {
-  return [NSString stringWithFormat:@"Text: %@", _arguments];
-}
 
 - (NSString *) stringValueForArgument:(id) argument {
   if ([argument isKindOfClass:[NSString class]]) {
@@ -31,7 +28,8 @@
 }
 
 - (id) performWithTarget:(id) target error:(NSError * __autoreleasing *) error {
-  if (!_arguments || [_arguments count] == 0) {
+  NSArray *arguments = self.arguments;
+  if (!arguments || [arguments count] == 0) {
     NSLog(@"Missing the 'text' argument @ index 0 of arguments; nothing to do - returning nil");
     return nil;
   }
@@ -59,14 +57,14 @@
     }
 
     UIView<LPWebViewProtocol> *webView = (UIView<LPWebViewProtocol> *)webViewValue;
-    NSString *text = [self stringValueForArgument:[_arguments objectAtIndex:0]];
+    NSString *text = [self stringValueForArgument:[arguments objectAtIndex:0]];
     NSString *javascript = [NSString stringWithFormat:LP_SET_TEXT_JS,
                             json, text];
     return [webView calabashStringByEvaluatingJavaScript:javascript];
   }
 
   if ([target respondsToSelector:@selector(setText:)]) {
-    NSString *text = [self stringValueForArgument:[_arguments objectAtIndex:0]];
+    NSString *text = [self stringValueForArgument:[arguments objectAtIndex:0]];
     [target performSelector:@selector(setText:) withObject:text];
     return target;
   }

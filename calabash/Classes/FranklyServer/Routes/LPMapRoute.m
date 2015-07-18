@@ -101,6 +101,13 @@
   } else {
     for (id view in views) {
       NSError *err = nil;
+      // TODO: Do nothing on error?
+      //
+      // It is hard to capture the error with the current method signature
+      // because nil is a valid response. How would you know if there was an
+      // error?
+      //
+      // What should be done if one view generates and another does not?
       id val = [op performWithTarget:view error:&err];
       if (err) {continue;}
       if (val == nil) {

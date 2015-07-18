@@ -14,11 +14,6 @@
 
 @implementation LPScrollToRowOperation
 
-- (NSString *) description {
-  return [NSString stringWithFormat:@"ScrollToRow: %@", _arguments];
-}
-
-
 - (NSIndexPath *) indexPathForRow:(NSUInteger) row inTable:(UITableView *) table {
   NSInteger numberOfSections = [table numberOfSections];
   NSInteger i = 0;
@@ -34,20 +29,22 @@
 }
 
 
-- (id) performWithTarget:(UIView *) _view error:(NSError *__autoreleasing*) error {
-  if ([_view isKindOfClass:[UITableView class]]) {
-    UITableView *table = (UITableView *) _view;
-    NSNumber *rowNum = [_arguments objectAtIndex:0];
-    if ([_arguments count] >= 2) {
+- (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
+  NSArray *arguments = self.arguments;
+
+  if ([target isKindOfClass:[UITableView class]]) {
+    UITableView *table = (UITableView *) target;
+    NSNumber *rowNum = [arguments objectAtIndex:0];
+    if ([arguments count] >= 2) {
       NSInteger row = [rowNum integerValue];
-      NSInteger sec = [[_arguments objectAtIndex:1] integerValue];
+      NSInteger sec = [[arguments objectAtIndex:1] integerValue];
       NSIndexPath *path = [NSIndexPath indexPathForRow:row inSection:sec];
 
       if ((sec >= 0 && sec < [table numberOfSections]) && (row >= 0 && row < [table numberOfRowsInSection:sec])) {
         UITableViewScrollPosition sp = UITableViewScrollPositionTop;
         BOOL animate = YES;
-        if ([_arguments count] >= 3) {
-          NSString *pos = [_arguments objectAtIndex:2];
+        if ([arguments count] >= 3) {
+          NSString *pos = [arguments objectAtIndex:2];
           if ([@"middle" isEqualToString:pos]) {
             sp = UITableViewScrollPositionMiddle;
           } else if ([@"bottom" isEqualToString:pos]) {
@@ -56,8 +53,8 @@
             sp = UITableViewScrollPositionNone;
           }
         }
-        if ([_arguments count] >= 4) {
-          NSNumber *ani = [_arguments objectAtIndex:3];
+        if ([arguments count] >= 4) {
+          NSNumber *ani = [arguments objectAtIndex:3];
           animate = [ani boolValue];
         }
 
@@ -73,7 +70,7 @@
                                  animated:animate];
           });
         }
-        return _view;
+        return target;
       } else {
         NSLog(@"Warning: table doesn't contain indexPath: %@", path);
         return nil;
@@ -96,12 +93,12 @@
                                animated:YES];
         });
       }
-      return _view;
+      return target;
     }
   }
 
   NSLog(@"Warning view: %@ should be a table view for scrolling to row/cell to make sense",
-          _view);
+          target);
   return nil;
 }
 @end

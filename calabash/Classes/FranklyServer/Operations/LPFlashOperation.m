@@ -15,20 +15,16 @@
 
 @implementation LPFlashOperation
 
-- (NSString *) description {
-  return [NSString stringWithFormat:@"Flash: %@", _arguments];
-}
-
-- (id) performWithTarget:(UIView *) _view error:(NSError *__autoreleasing*) error {
+- (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
 
   if ([[NSThread currentThread] isMainThread]) {
-    [LPTouchUtils flashView:_view forDuration:2];
+    [LPTouchUtils flashView:target forDuration:2];
   } else {
     dispatch_sync(dispatch_get_main_queue(), ^{
-      [LPTouchUtils flashView:_view forDuration:2];
+      [LPTouchUtils flashView:target forDuration:2];
     });
   }
-  return [LPJSONUtils jsonifyObject:_view];
+  return [LPJSONUtils jsonifyObject:target];
 }
 
 @end
