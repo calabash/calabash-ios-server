@@ -30,6 +30,22 @@
 @synthesize arguments = _arguments;
 @synthesize done = _done;
 
+- (void) dealloc {
+  [_arguments release];
+  _arguments = nil;
+  [super dealloc];
+}
+
+- (id) initWithOperation:(NSDictionary *) operation {
+  self = [super init];
+  if (self != nil) {
+    _selector = NSSelectorFromString([operation objectForKey:@"method_name"]);
+    _arguments = [[operation objectForKey:@"arguments"] retain];
+    _done = NO;
+  }
+  return self;
+}
+
 + (id) operationFromDictionary:(NSDictionary *) dictionary {
   NSString *opName = [dictionary valueForKey:@"method_name"];
   LPOperation *op = nil;
@@ -84,31 +100,11 @@
   return result;
 }
 
-
-- (id) initWithOperation:(NSDictionary *) operation {
-  self = [super init];
-  if (self != nil) {
-    _selector = NSSelectorFromString([operation objectForKey:@"method_name"]);
-    _arguments = [[operation objectForKey:@"arguments"] retain];
-    _done = NO;
-  }
-  return self;
-}
-
-
-- (void) dealloc {
-  [_arguments release];
-  _arguments = nil;
-  [super dealloc];
-}
-
-
 - (NSString *) description {
   return [NSString stringWithFormat:@"Operation<SEL=%@,Args=%@>",
                                     NSStringFromSelector(_selector),
                                     _arguments];
 }
-
 
 - (id) performWithTarget:(UIView *) target error:(NSError **) error {
   NSMethodSignature *tSig = [target methodSignatureForSelector:_selector];
