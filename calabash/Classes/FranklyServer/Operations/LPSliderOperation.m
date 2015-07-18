@@ -14,13 +14,13 @@
 
 //    required =========> |     optional
 // _arguments ==> [value_st,  notify targets, animate]
-- (id) performWithTarget:(UIView *) _view error:(NSError * __autoreleasing *) error {
-  if ([_view isKindOfClass:[UISlider class]] == NO) {
-    NSLog(@"Warning view: %@ should be a UISlier", _view);
+- (id) performWithTarget:(UIView *) view error:(NSError * __autoreleasing *) error {
+  if ([view isKindOfClass:[UISlider class]] == NO) {
+    NSLog(@"Warning view: %@ should be a UISlier", view);
     return nil;
   }
 
-  UISlider *slider = (UISlider *) _view;
+  UISlider *slider = (UISlider *) view;
 
   NSArray *arguments = self.arguments;
 
@@ -69,6 +69,6 @@
   }
 
 
-  return [LPJSONUtils jsonifyObject:_view];
+  return [LPJSONUtils jsonifyObject:view];
 }
 @end

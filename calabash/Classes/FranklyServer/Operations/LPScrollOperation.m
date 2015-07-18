@@ -16,7 +16,7 @@
 
 @implementation LPScrollOperation
 
-- (id) performWithTarget:(UIView *) _view error:(NSError *__autoreleasing*) error {
+- (id) performWithTarget:(UIView *) view error:(NSError *__autoreleasing*) error {
 
   NSString *dir = [self.arguments objectAtIndex:0];
 
@@ -33,8 +33,8 @@
     return nil;
   }
 
-  if ([_view isKindOfClass:[UIScrollView class]]) {
-    UIScrollView *sv = (UIScrollView *) _view;
+  if ([view isKindOfClass:[UIScrollView class]]) {
+    UIScrollView *sv = (UIScrollView *) view;
     CGSize size = sv.bounds.size;
     CGPoint offset = sv.contentOffset;
     CGFloat fraction = 2.0;
@@ -66,9 +66,9 @@
       });
     }
 
-    return _view;
-  } else if ([LPIsWebView isWebView:_view]) {
-    UIView<LPWebViewProtocol> *webView = (UIView<LPWebViewProtocol> *)_view;
+    return view;
+  } else if ([LPIsWebView isWebView:view]) {
+    UIView<LPWebViewProtocol> *webView = (UIView<LPWebViewProtocol> *)view;
     NSString *scrollJS = @"window.scrollBy(%@,%@);";
     if ([@"up" isEqualToString:dir]) {
       scrollJS = [NSString stringWithFormat:scrollJS, @"0", @"-100"];
@@ -81,7 +81,7 @@
     }
     NSString *res = [webView calabashStringByEvaluatingJavaScript:scrollJS];
     NSLog(@"RES:%@", res);
-    return _view;
+    return view;
   }
   return nil;
 }

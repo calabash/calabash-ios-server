@@ -29,11 +29,11 @@
 }
 
 
-- (id) performWithTarget:(UIView *) _view error:(NSError *__autoreleasing*) error {
+- (id) performWithTarget:(UIView *) view error:(NSError *__autoreleasing*) error {
   NSArray *arguments = self.arguments;
 
-  if ([_view isKindOfClass:[UITableView class]]) {
-    UITableView *table = (UITableView *) _view;
+  if ([view isKindOfClass:[UITableView class]]) {
+    UITableView *table = (UITableView *) view;
     NSNumber *rowNum = [arguments objectAtIndex:0];
     if ([arguments count] >= 2) {
       NSInteger row = [rowNum integerValue];
@@ -70,7 +70,7 @@
                                  animated:animate];
           });
         }
-        return _view;
+        return view;
       } else {
         NSLog(@"Warning: table doesn't contain indexPath: %@", path);
         return nil;
@@ -93,12 +93,12 @@
                                animated:YES];
         });
       }
-      return _view;
+      return view;
     }
   }
 
   NSLog(@"Warning view: %@ should be a table view for scrolling to row/cell to make sense",
-          _view);
+          view);
   return nil;
 }
 @end

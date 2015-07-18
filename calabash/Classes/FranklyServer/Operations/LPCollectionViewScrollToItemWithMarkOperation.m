@@ -38,7 +38,7 @@
 
 //                 required      optional     optional
 // _arguments ==> [item mark, scroll position, animated]
-- (id) performWithTarget:(UIView *) _view error:(NSError *__autoreleasing*) error {
+- (id) performWithTarget:(UIView *) view error:(NSError *__autoreleasing*) error {
   
   // UICollectionView appears in iOS 6
   Class clz = NSClassFromString(@"UICollectionView");
@@ -48,15 +48,15 @@
     return nil;
   }
 
-  if ([_view isKindOfClass:[UICollectionView class]] == NO) {
+  if ([view isKindOfClass:[UICollectionView class]] == NO) {
     NSLog(@"Warning view: %@ should be a collection view for scrolling to item/cell to make sense",
-          _view);
+          view);
     return nil;
   }
 
   NSArray *arguments = self.arguments;
 
-  UICollectionView *collection = (UICollectionView *) _view;  
+  UICollectionView *collection = (UICollectionView *) view;
   NSString *itemId = [arguments objectAtIndex:0];
   if (itemId == nil || [itemId length] == 0) {
     NSLog(@"Warning: item id: '%@' should be non-nil and non-empty", itemId);
@@ -114,7 +114,7 @@
     });
   }
 
-  return _view;
+  return view;
 }
 
 @end

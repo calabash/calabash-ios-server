@@ -9,8 +9,8 @@
 
 @implementation LPQueryOperation
 
-- (id) performWithTarget:(UIView *) _view error:(NSError **) error {
-  return [super performWithTarget:_view error:error];
+- (id) performWithTarget:(UIView *) view error:(NSError **) error {
+  return [super performWithTarget:view error:error];
 }
 
 
