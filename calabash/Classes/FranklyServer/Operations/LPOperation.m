@@ -80,6 +80,12 @@
   return [op autorelease];
 }
 
+- (NSString *) description {
+  NSString *className = NSStringFromClass([self class]);
+  return [NSString stringWithFormat:@"<%@ '%@' with arguments '%@'>",
+          className, NSStringFromSelector(_selector),
+          [_arguments componentsJoinedByString:@", "]];
+}
 
 + (NSArray *) performQuery:(id) query {
   UIScriptParser *parser = nil;
@@ -98,12 +104,6 @@
   [parser release];
 
   return result;
-}
-
-- (NSString *) description {
-  return [NSString stringWithFormat:@"Operation<SEL=%@,Args=%@>",
-                                    NSStringFromSelector(_selector),
-                                    _arguments];
 }
 
 - (id) performWithTarget:(UIView *) target error:(NSError **) error {
