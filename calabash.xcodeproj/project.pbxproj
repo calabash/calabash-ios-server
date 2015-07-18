@@ -1225,7 +1225,8 @@
 		B184FDC114B6DB2B002A744C /* Operations */ = {
 			isa = PBXGroup;
 			children = (
-				F52149EE18B50A1C005BB4F3 /* Scrolling */,
+				B184FDC214B6DB2B002A744C /* LPOperation.h */,
+				B184FE9214B6DDA1002A744C /* LPOperation.m */,
 				F5CAC06A180D499600E23F03 /* LPSliderOperation.h */,
 				F5CAC06B180D499600E23F03 /* LPSliderOperation.m */,
 				F55A350F17CF8F8F0001E8B4 /* LPDatePickerOperation.h */,
@@ -1236,12 +1237,11 @@
 				B19440431725C70A00EE1B25 /* LPFlashOperation.m */,
 				B15DA5E315C5D80A009E6CFE /* LPQueryAllOperation.h */,
 				B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */,
-				B184FDC214B6DB2B002A744C /* LPOperation.h */,
-				B184FE9214B6DDA1002A744C /* LPOperation.m */,
 				B184FDC414B6DB2B002A744C /* LPQueryOperation.h */,
 				B184FDC514B6DB2B002A744C /* LPQueryOperation.m */,
 				B184FDCA14B6DB2B002A744C /* LPSetTextOperation.h */,
 				B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */,
+				F52149EE18B50A1C005BB4F3 /* Scrolling */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
