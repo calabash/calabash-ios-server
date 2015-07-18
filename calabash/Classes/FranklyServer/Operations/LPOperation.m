@@ -21,6 +21,11 @@
 #import "LPTouchUtils.h"
 #import "LPSliderOperation.h"
 #import "LPCollectionViewScrollToItemOperation.h"
+#import "LPInvoker.h"
+#import "LPInvocationResult.h"
+#import "LPInvocationError.h"
+#import "LPCocoaLumberjack.h"
+#import "LPJSONUtils.h"
 
 @interface LPOperation ()
 
@@ -103,65 +108,49 @@
   return result;
 }
 
-// map("textField", :delegate) will call this method because the :delegate
-// key does not map to a known operation (see operationFromDictionary:).
-// This method has problems. :(
-- (id) performWithTarget:(id) target error:(NSError **) error {
-  NSMethodSignature *tSig = [target methodSignatureForSelector:_selector];
-  NSUInteger argc = tSig.numberOfArguments - 2;
-  if (argc != [_arguments count] && *error != NULL) {
-    *error = [NSError errorWithDomain:@"CalabashServer" code:1
-                             userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Arity mismatch", @"reason",
-                                       [NSString stringWithFormat:@"%@ applied to selector %@ with %@ args",
-                                        self,
-                                        NSStringFromSelector(
-                                                             _selector),
-                                        @(argc)], @"details",
-                                                                                 nil]];
-    return nil;
-  }
+/*
+ Examples:
 
-  NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:tSig];
-  [invocation setSelector:_selector];
+ # Calls this method, because :text is not a defined operation.
+ > map("textField", :text)
 
-  NSInteger index = 2;
-  for (NSObject *arg in _arguments) {
-    [invocation setArgument:&arg atIndex:index++];
-  }
+ # Does not call this method because :setText is a defined operation -
+ # see operationFromDictionary:
+ > map("textField", :setText, 'new text')
 
-  [invocation invokeWithTarget:target];
+ The map function is the only caller I have found.
 
+ This method has problems. :(
+ */
+- (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
+  LPInvocationResult *invocationResult;
+  invocationResult = [LPInvoker invokeOnMainThreadSelector:self.selector
+                                                withTarget:target
+                                                 arguments:self.arguments];
+  id returnValue = nil;
 
-  const char *returnType = tSig.methodReturnType;
-
-  id returnValue;
-  if (!strcmp(returnType, @encode(void))) {
-    returnValue = nil;
-  } else if (!strcmp(returnType,
-          @encode(id))) // retval is an objective c object
-  {
-    [invocation getReturnValue:&returnValue];
-  } else {
-    // handle primitive c types by wrapping them in an NSValue
-
-    NSUInteger length = [tSig methodReturnLength];
-    void *buffer = (void *) malloc(length);
-    [invocation getReturnValue:buffer];
-
-    // for some reason using [NSValue valueWithBytes:returnType] is creating instances of NSConcreteValue rather than NSValue, so
-    //I'm fudging it here with case-by-case logic
-    if (!strcmp(returnType, @encode(BOOL))) {
-      returnValue = [NSNumber numberWithBool:*((BOOL *) buffer)];
-    } else if (!strcmp(returnType, @encode(NSInteger))) {
-      returnValue = [NSNumber numberWithInteger:*((NSInteger *) buffer)];
-    } else if (!strcmp(returnType, @encode(float))) {
-      returnValue = [NSNumber numberWithFloat:*((float *) buffer)];
-    } else {
-      returnValue = [[[NSValue valueWithBytes:buffer objCType:returnType] copy]
-              autorelease];
+  if ([invocationResult isError]) {
+    NSString *description = [invocationResult description];
+    if (error) {
+      NSDictionary *userInfo =
+      @{
+        NSLocalizedDescriptionKey : description
+        };
+      *error = [NSError errorWithDomain:@"CalabashServer"
+                                   code:1
+                               userInfo:userInfo];
     }
-    free(buffer);//memory leak here, but apparently NSValue doesn't copy the passed buffer, it just stores the pointer
+    LPLogError(@"Could not call selector '%@' on target '%@' - %@",
+               NSStringFromSelector(self.selector), target, description);
+    returnValue = description;
+  } else {
+    if ([invocationResult isNSNull]) {
+      returnValue = nil;
+    } else {
+      returnValue = invocationResult.value;
+    }
   }
+
   return returnValue;
 }
 
