@@ -1,3 +1,7 @@
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
 //
 //  LPOrientationOperation.m
 //  Calabash
@@ -92,7 +96,7 @@ static NSString *const kFaceUp = @"face up";
 
 
 // _arguments ==> {'device' | 'status_bar'}
-- (id) performWithTarget:(UIView *) view error:(NSError **) error {
+- (id) performWithTarget:(UIView *) view error:(NSError *__autoreleasing*) error {
 
   NSUInteger argCount = [_arguments count];
   if (argCount == 0) {
