@@ -15,15 +15,15 @@
 
 //                        required =========> |     optional
 // _arguments ==> [target date str, format str, notify targets, animated]
-- (id) performWithTarget:(UIView *) view error:(NSError *__autoreleasing*) error {
-  if ([view isKindOfClass:[UIDatePicker class]] == NO) {
-    NSLog(@"Warning view: %@ should be a date picker", view);
+- (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
+  if ([target isKindOfClass:[UIDatePicker class]] == NO) {
+    NSLog(@"Warning view: %@ should be a date picker", target);
     return nil;
   }
 
   NSArray *arguments = self.arguments;
 
-  UIDatePicker *picker = (UIDatePicker *) view;
+  UIDatePicker *picker = (UIDatePicker *) target;
 
   NSString *dateStr = arguments[0];
   if (dateStr == nil || [dateStr length] == 0) {
@@ -91,7 +91,7 @@
     }
   }
 
-  return view;
+  return target;
 }
 
 @end

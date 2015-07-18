@@ -106,8 +106,8 @@
   return result;
 }
 
-- (id) performWithTarget:(UIView *) view error:(NSError **) error {
-  NSMethodSignature *tSig = [view methodSignatureForSelector:_selector];
+- (id) performWithTarget:(id) target error:(NSError **) error {
+  NSMethodSignature *tSig = [target methodSignatureForSelector:_selector];
   NSUInteger argc = tSig.numberOfArguments - 2;
   if (argc != [_arguments count] && *error != NULL) {
     *error = [NSError errorWithDomain:@"CalabashServer" code:1
@@ -129,7 +129,7 @@
     [invocation setArgument:&arg atIndex:index++];
   }
 
-  [invocation invokeWithTarget:view];
+  [invocation invokeWithTarget:target];
 
 
   const char *returnType = tSig.methodReturnType;

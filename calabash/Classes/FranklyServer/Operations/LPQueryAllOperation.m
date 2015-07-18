@@ -67,13 +67,12 @@
 }
 
 
-- (id) performWithTarget:(UIView *) view error:(NSError **) error {
-  id target = view;
+- (id) performWithTarget:(id) target error:(NSError **) error {
 
   NSArray *arguments = self.arguments;
 
   if ([arguments count] <= 0) {
-    return [LPJSONUtils jsonifyObject:view];
+    return [LPJSONUtils jsonifyObject:target];
   }
   for (NSInteger i = 0; i < [arguments count]; i++) {
     id selObj = [arguments objectAtIndex:i];

@@ -8,7 +8,7 @@
 
 //                 <===               required                ===>
 // _arguments ==> [item_num, section_num, scroll postion, animated]
-- (id) performWithTarget:(UIView *) view error:(NSError *__autoreleasing*) error {
+- (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
 
   // UICollectionView appears in iOS 6
   Class clz = NSClassFromString(@"UICollectionView");
@@ -18,13 +18,13 @@
     return nil;
   }
 
-  if ([view isKindOfClass:[UICollectionView class]] == NO) {
+  if ([target isKindOfClass:[UICollectionView class]] == NO) {
     NSLog(@"Warning view: %@ should be an instance of UICollectionView but found '%@'",
-            view, view == nil ? nil : [view class]);
+            target, target == nil ? nil : [target class]);
     return nil;
   }
 
-  UICollectionView *collection = (UICollectionView *) view;
+  UICollectionView *collection = (UICollectionView *) target;
 
   NSArray *arguments = self.arguments;
 

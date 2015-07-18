@@ -19,6 +19,6 @@
 
 - (id) initWithOperation:(NSDictionary *) operation;
 
-- (id) performWithTarget:(UIView *) view error:(NSError **) error;
+- (id) performWithTarget:(id) target error:(NSError **) error;
 
 @end

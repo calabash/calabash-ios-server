@@ -39,16 +39,16 @@
 
 //                 required      optional     optional
 // _arguments ==> [row mark, scroll position, animated]
-- (id) performWithTarget:(UIView *) view error:(NSError *__autoreleasing*) error {
-  if ([view isKindOfClass:[UITableView class]] == NO) {
+- (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
+  if ([target isKindOfClass:[UITableView class]] == NO) {
     NSLog(@"Warning view: %@ should be a table view for scrolling to row/cell to make sense",
-            view);
+            target);
     return nil;
   }
 
   NSArray *arguments = self.arguments;
 
-  UITableView *table = (UITableView *) view;
+  UITableView *table = (UITableView *) target;
   NSString *rowId = [arguments objectAtIndex:0];
   if (rowId == nil || [rowId length] == 0) {
     NSLog(@"Warning: row id: '%@' should be non-nil and non-empty", rowId);
@@ -89,6 +89,6 @@
     });
   }
 
-  return view;
+  return target;
 }
 @end

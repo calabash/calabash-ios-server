@@ -15,16 +15,16 @@
 
 @implementation LPFlashOperation
 
-- (id) performWithTarget:(UIView *) view error:(NSError *__autoreleasing*) error {
+- (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
 
   if ([[NSThread currentThread] isMainThread]) {
-    [LPTouchUtils flashView:view forDuration:2];
+    [LPTouchUtils flashView:target forDuration:2];
   } else {
     dispatch_sync(dispatch_get_main_queue(), ^{
-      [LPTouchUtils flashView:view forDuration:2];
+      [LPTouchUtils flashView:target forDuration:2];
     });
   }
-  return [LPJSONUtils jsonifyObject:view];
+  return [LPJSONUtils jsonifyObject:target];
 }
 
 @end
