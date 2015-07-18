@@ -20,14 +20,30 @@
 
 @interface LPOperation ()
 
-- (NSArray *) arguments;
-
 @end
 
 @implementation LPOperation
 
-- (NSArray *) arguments {
-  return _arguments;
+#pragma mark - Memory Management
+
+@synthesize selector = _selector;
+@synthesize arguments = _arguments;
+@synthesize done = _done;
+
+- (void) dealloc {
+  [_arguments release];
+  _arguments = nil;
+  [super dealloc];
+}
+
+- (id) initWithOperation:(NSDictionary *) operation {
+  self = [super init];
+  if (self != nil) {
+    _selector = NSSelectorFromString([operation objectForKey:@"method_name"]);
+    _arguments = [[operation objectForKey:@"arguments"] retain];
+    _done = NO;
+  }
+  return self;
 }
 
 + (id) operationFromDictionary:(NSDictionary *) dictionary {
@@ -64,6 +80,12 @@
   return [op autorelease];
 }
 
+- (NSString *) description {
+  NSString *className = NSStringFromClass([self class]);
+  return [NSString stringWithFormat:@"<%@ '%@' with arguments '%@'>",
+          className, NSStringFromSelector(_selector),
+          [_arguments componentsJoinedByString:@", "]];
+}
 
 + (NSArray *) performQuery:(id) query {
   UIScriptParser *parser = nil;
@@ -84,32 +106,10 @@
   return result;
 }
 
-
-- (id) initWithOperation:(NSDictionary *) operation {
-  self = [super init];
-  if (self != nil) {
-    _selector = NSSelectorFromString([operation objectForKey:@"method_name"]);
-    _arguments = [[operation objectForKey:@"arguments"] retain];
-  }
-  return self;
-}
-
-
-- (void) dealloc {
-  [_arguments release];
-  _arguments = nil;
-  [super dealloc];
-}
-
-
-- (NSString *) description {
-  return [NSString stringWithFormat:@"Operation<SEL=%@,Args=%@>",
-                                    NSStringFromSelector(_selector),
-                                    _arguments];
-}
-
-
-- (id) performWithTarget:(UIView *) target error:(NSError **) error {
+// map("textField", :delegate) will call this method because the :delegate
+// key does not map to a known operation (see operationFromDictionary:).
+// This method has problems. :(
+- (id) performWithTarget:(id) target error:(NSError **) error {
   NSMethodSignature *tSig = [target methodSignatureForSelector:_selector];
   NSUInteger argc = tSig.numberOfArguments - 2;
   if (argc != [_arguments count] && *error != NULL) {

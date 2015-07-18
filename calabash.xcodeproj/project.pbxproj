@@ -427,6 +427,7 @@
 		F5986B281B5907E100CCB142 /* LPInvocationResult.m in Sources */ = {isa = PBXBuildFile; fileRef = F5986B231B5907E100CCB142 /* LPInvocationResult.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5986B291B5907E100CCB142 /* LPInvocationResult.m in Sources */ = {isa = PBXBuildFile; fileRef = F5986B231B5907E100CCB142 /* LPInvocationResult.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5986B2A1B5907E100CCB142 /* LPInvocationResult.m in Sources */ = {isa = PBXBuildFile; fileRef = F5986B231B5907E100CCB142 /* LPInvocationResult.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5986B301B5A327500CCB142 /* LPOperationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5986B2F1B5A327500CCB142 /* LPOperationTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F59C5CF818E0BB1A0087B51D /* LPRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDBE14B6DB2B002A744C /* LPRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F59C5CF918E0BB290087B51D /* LPRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDBF14B6DB2B002A744C /* LPRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F59C5CFA18E0BBAE0087B51D /* LPHTTPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B116C9B914E6565500663205 /* LPHTTPResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -857,6 +858,7 @@
 		F5986B201B5907A600CCB142 /* LPInvocationResultTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvocationResultTest.m; sourceTree = "<group>"; };
 		F5986B221B5907E100CCB142 /* LPInvocationResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPInvocationResult.h; sourceTree = "<group>"; };
 		F5986B231B5907E100CCB142 /* LPInvocationResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvocationResult.m; sourceTree = "<group>"; };
+		F5986B2F1B5A327500CCB142 /* LPOperationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPOperationTest.m; sourceTree = "<group>"; };
 		F59CA46D1A82EF40007A2F38 /* LPTestTarget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LPTestTarget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F59CA4701A82EF40007A2F38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F59CA4711A82EF40007A2F38 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1223,7 +1225,8 @@
 		B184FDC114B6DB2B002A744C /* Operations */ = {
 			isa = PBXGroup;
 			children = (
-				F52149EE18B50A1C005BB4F3 /* Scrolling */,
+				B184FDC214B6DB2B002A744C /* LPOperation.h */,
+				B184FE9214B6DDA1002A744C /* LPOperation.m */,
 				F5CAC06A180D499600E23F03 /* LPSliderOperation.h */,
 				F5CAC06B180D499600E23F03 /* LPSliderOperation.m */,
 				F55A350F17CF8F8F0001E8B4 /* LPDatePickerOperation.h */,
@@ -1234,12 +1237,11 @@
 				B19440431725C70A00EE1B25 /* LPFlashOperation.m */,
 				B15DA5E315C5D80A009E6CFE /* LPQueryAllOperation.h */,
 				B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */,
-				B184FDC214B6DB2B002A744C /* LPOperation.h */,
-				B184FE9214B6DDA1002A744C /* LPOperation.m */,
 				B184FDC414B6DB2B002A744C /* LPQueryOperation.h */,
 				B184FDC514B6DB2B002A744C /* LPQueryOperation.m */,
 				B184FDCA14B6DB2B002A744C /* LPSetTextOperation.h */,
 				B184FDCB14B6DB2B002A744C /* LPSetTextOperation.m */,
+				F52149EE18B50A1C005BB4F3 /* Scrolling */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -1737,6 +1739,7 @@
 			children = (
 				F5C224EC1AD4766E001DB4FA /* LPSetTextOperationTest.m */,
 				F5C224E51AD47403001DB4FA /* LPScrollOperationTest.m */,
+				F5986B2F1B5A327500CCB142 /* LPOperationTest.m */,
 			);
 			path = Operations;
 			sourceTree = "<group>";
@@ -2581,6 +2584,7 @@
 				F50CBFBC1A0405CE004AC9DA /* UIScriptAST.m in Sources */,
 				F50CBFB21A0405B2004AC9DA /* LPExitRoute.m in Sources */,
 				F5A8B4701B39BFEB00F390CA /* LPMultiFormatter.m in Sources */,
+				F5986B301B5A327500CCB142 /* LPOperationTest.m in Sources */,
 				F50CBFA31A0405B2004AC9DA /* LPAppPropertyRoute.m in Sources */,
 				F50CBFB41A0405CE004AC9DA /* LPISO8601DateFormatter.m in Sources */,
 				F50CBF871A040564004AC9DA /* NSNumber+LPCHSExtensions.m in Sources */,

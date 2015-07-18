@@ -7,17 +7,18 @@
 #import <Foundation/Foundation.h>
 #import "UIScriptParser.h"
 
-@interface LPOperation : NSObject {
-  SEL _selector;
-  NSArray *_arguments;
-  BOOL _done;
-}
+@interface LPOperation : NSObject
+
+@property(nonatomic, assign, readonly) SEL selector;
+@property(nonatomic, copy, readonly) NSArray *arguments;
+@property(nonatomic, assign) BOOL done;
+
 + (id) operationFromDictionary:(NSDictionary *) dictionary;
 
 + (NSArray *) performQuery:(id) query;
 
 - (id) initWithOperation:(NSDictionary *) operation;
 
-- (id) performWithTarget:(UIView *) view error:(NSError **) error;
+- (id) performWithTarget:(id) target error:(NSError **) error;
 
 @end

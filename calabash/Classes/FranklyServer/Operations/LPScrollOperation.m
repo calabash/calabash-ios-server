@@ -15,13 +15,10 @@
 #import "LPCocoaLumberjack.h"
 
 @implementation LPScrollOperation
-- (NSString *) description {
-  return [NSString stringWithFormat:@"Scroll: %@", _arguments];
-}
 
+- (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
 
-- (id) performWithTarget:(UIView *) _view error:(NSError *__autoreleasing*) error {
-  NSString *dir = [_arguments objectAtIndex:0];
+  NSString *dir = [self.arguments objectAtIndex:0];
 
   NSArray *allowedDirections = @[@"up", @"down", @"left", @"right"];
   NSUInteger index = [allowedDirections indexOfObject:dir];
@@ -36,8 +33,8 @@
     return nil;
   }
 
-  if ([_view isKindOfClass:[UIScrollView class]]) {
-    UIScrollView *sv = (UIScrollView *) _view;
+  if ([target isKindOfClass:[UIScrollView class]]) {
+    UIScrollView *sv = (UIScrollView *) target;
     CGSize size = sv.bounds.size;
     CGPoint offset = sv.contentOffset;
     CGFloat fraction = 2.0;
@@ -69,9 +66,9 @@
       });
     }
 
-    return _view;
-  } else if ([LPIsWebView isWebView:_view]) {
-    UIView<LPWebViewProtocol> *webView = (UIView<LPWebViewProtocol> *)_view;
+    return target;
+  } else if ([LPIsWebView isWebView:target]) {
+    UIView<LPWebViewProtocol> *webView = (UIView<LPWebViewProtocol> *)target;
     NSString *scrollJS = @"window.scrollBy(%@,%@);";
     if ([@"up" isEqualToString:dir]) {
       scrollJS = [NSString stringWithFormat:scrollJS, @"0", @"-100"];
@@ -84,7 +81,7 @@
     }
     NSString *res = [webView calabashStringByEvaluatingJavaScript:scrollJS];
     NSLog(@"RES:%@", res);
-    return _view;
+    return target;
   }
   return nil;
 }
