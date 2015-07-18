@@ -113,14 +113,20 @@
 
  # Calls this method, because :text is not a defined operation.
  > map("textField", :text)
+ => [ "old text" ]
 
- # Does not call this method because :setText is a defined operation -
+ # Does not call this method, because :setText is a defined operation -
  # see operationFromDictionary:
  > map("textField", :setText, 'new text')
+ => [ <UITextField ... > ]
 
- The map function is the only caller I have found.
+ # Calls this method, because 'setText:' is not a defined operation.
+ > map("textField", 'setText:', 'newer text')
+ => [ "<VOID>" ]
 
- This method has problems. :(
+ The map function is the only caller I have found.  My guess is that this is
+ legacy code that is not expected to be hit by casual users.  Most arbritary
+ invocations pass through `query` and not map.
  */
 - (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
   LPInvocationResult *invocationResult;
