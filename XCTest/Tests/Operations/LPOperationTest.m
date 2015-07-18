@@ -30,4 +30,32 @@
   expect(actual).to.equal(expected);
 }
 
+- (void) testPerformSelectorNoArguments {
+  NSDictionary *dictionary = @{@"method_name" : @"length",
+                               @"arguments" : @[]};
+
+  LPOperation *operation = [[LPOperation alloc] initWithOperation:dictionary];
+  NSError *error = nil;
+  id actual = [operation performWithTarget:@"string" error:&error];
+
+  expect(actual).to.equal(@(@"string".length));
+  expect(error).to.equal(nil);
+}
+
+- (void) testPerformSelectorOneArgument {
+  NSDictionary *dictionary = @{@"method_name" : @"addObject:",
+                               @"arguments" : @[@"arg!"]};
+
+  LPOperation *operation = [[LPOperation alloc] initWithOperation:dictionary];
+  NSError *error = nil;
+
+  NSMutableArray *array = [@[] mutableCopy];
+  id actual = [operation performWithTarget:array error:&error];
+
+  //expect(actual).to.equal(@(@"string".length));
+  expect(error).to.equal(nil);
+  expect(actual).to.equal(@"<VOID>");
+  expect(array[0]).to.equal(@"arg!");
+}
+
 @end
