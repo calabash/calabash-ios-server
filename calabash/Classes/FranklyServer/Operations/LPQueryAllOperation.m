@@ -420,13 +420,7 @@
   [invocation setTarget:target];
 
   @try {
-    if ([[NSThread currentThread] isMainThread]) {
-      [invocation invoke];
-    } else {
-      [invocation performSelectorOnMainThread:@selector(invokeWithTarget:)
-                                   withObject:target
-                                   waitUntilDone:YES];
-    }
+    [invocation invoke];
   } @catch (NSException *exception) {
     LPLogWarn(@"Perform %@ with target %@ caught %@: %@",
               NSStringFromSelector(sel),
