@@ -12,6 +12,11 @@
   NSArray *_arguments;
   BOOL _done;
 }
+
+@property(nonatomic, assign, readonly) SEL selector;
+@property(nonatomic, copy, readonly) NSArray *arguments;
+@property(nonatomic, assign) BOOL done;
+
 + (id) operationFromDictionary:(NSDictionary *) dictionary;
 
 + (NSArray *) performQuery:(id) query;

@@ -20,15 +20,15 @@
 
 @interface LPOperation ()
 
-- (NSArray *) arguments;
-
 @end
 
 @implementation LPOperation
 
-- (NSArray *) arguments {
-  return _arguments;
-}
+#pragma mark - Memory Management
+
+@synthesize selector = _selector;
+@synthesize arguments = _arguments;
+@synthesize done = _done;
 
 + (id) operationFromDictionary:(NSDictionary *) dictionary {
   NSString *opName = [dictionary valueForKey:@"method_name"];
@@ -90,6 +90,7 @@
   if (self != nil) {
     _selector = NSSelectorFromString([operation objectForKey:@"method_name"]);
     _arguments = [[operation objectForKey:@"arguments"] retain];
+    _done = NO;
   }
   return self;
 }
