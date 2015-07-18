@@ -15,13 +15,10 @@
 #import "LPCocoaLumberjack.h"
 
 @implementation LPScrollOperation
-- (NSString *) description {
-  return [NSString stringWithFormat:@"Scroll: %@", _arguments];
-}
-
 
 - (id) performWithTarget:(UIView *) _view error:(NSError *__autoreleasing*) error {
-  NSString *dir = [_arguments objectAtIndex:0];
+
+  NSString *dir = [self.arguments objectAtIndex:0];
 
   NSArray *allowedDirections = @[@"up", @"down", @"left", @"right"];
   NSUInteger index = [allowedDirections indexOfObject:dir];

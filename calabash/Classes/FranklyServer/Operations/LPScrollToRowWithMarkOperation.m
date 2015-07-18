@@ -6,10 +6,6 @@
 
 @implementation LPScrollToRowWithMarkOperation
 
-- (NSString *) description {
-  return [NSString stringWithFormat:@"ScrollToRow: %@", _arguments];
-}
-
 - (BOOL) cell:(UITableViewCell *) aCell contentViewHasSubviewMarked:(NSString *) aMark {
   // check the textLabel first
   if ([self view:aCell.textLabel hasMark:aMark]) {return YES;}
@@ -50,8 +46,10 @@
     return nil;
   }
 
+  NSArray *arguments = self.arguments;
+
   UITableView *table = (UITableView *) _view;
-  NSString *rowId = [_arguments objectAtIndex:0];
+  NSString *rowId = [arguments objectAtIndex:0];
   if (rowId == nil || [rowId length] == 0) {
     NSLog(@"Warning: row id: '%@' should be non-nil and non-empty", rowId);
     return nil;
@@ -67,8 +65,8 @@
   BOOL animate = YES;
 
 
-  if ([_arguments count] > 1) {
-    NSString *scrollPositionArg = [_arguments objectAtIndex:1];
+  if ([arguments count] > 1) {
+    NSString *scrollPositionArg = [arguments objectAtIndex:1];
     if ([@"middle" isEqualToString:scrollPositionArg]) {
       sp = UITableViewScrollPositionMiddle;
     } else if ([@"bottom" isEqualToString:scrollPositionArg]) {
@@ -78,8 +76,8 @@
     }
   }
 
-  if ([_arguments count] > 2) {
-    NSNumber *ani = [_arguments objectAtIndex:2];
+  if ([arguments count] > 2) {
+    NSNumber *ani = [arguments objectAtIndex:2];
     animate = [ani boolValue];
   }
 

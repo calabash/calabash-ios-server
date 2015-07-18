@@ -6,10 +6,6 @@
 
 @implementation LPDatePickerOperation
 
-- (NSString *) description {
-  return [NSString stringWithFormat:@"DatePicker: %@", _arguments];
-}
-
 /*
  args << options[:is_timer] || false
  args << options[:notify_targets] || true
@@ -25,19 +21,21 @@
     return nil;
   }
 
+  NSArray *arguments = self.arguments;
+
   UIDatePicker *picker = (UIDatePicker *) _view;
 
-  NSString *dateStr = _arguments[0];
+  NSString *dateStr = arguments[0];
   if (dateStr == nil || [dateStr length] == 0) {
     NSLog(@"Warning: date str: '%@' should be non-nil and non-empty", dateStr);
     return nil;
   }
 
-  NSUInteger argcount = [_arguments count];
+  NSUInteger argcount = [arguments count];
 
   NSString *dateFormat = nil;
   if (argcount > 1) {
-    dateFormat = _arguments[1];
+    dateFormat = arguments[1];
   } else {
     NSLog(@"Warning: date format is required as the second argument");
     return nil;
@@ -46,12 +44,12 @@
 
   BOOL notifyTargets = YES;
   if (argcount > 2) {
-    notifyTargets = [_arguments[2] boolValue];
+    notifyTargets = [arguments[2] boolValue];
   }
 
   BOOL animate = YES;
   if (argcount > 3) {
-    animate = [_arguments[3] boolValue];
+    animate = [arguments[3] boolValue];
   }
 
   NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

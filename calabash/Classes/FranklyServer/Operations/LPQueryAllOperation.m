@@ -9,9 +9,6 @@
 #import "LPCocoaLumberjack.h"
 
 @implementation LPQueryAllOperation
-- (NSString *) description {
-  return [NSString stringWithFormat:@"Query All: %@", _arguments];
-}
 
 - (SEL) parseValuesFromArray:(NSArray *) arr withArgs:(NSMutableArray *) args {
   NSMutableString *selStr = [NSMutableString stringWithCapacity:32];
@@ -73,11 +70,13 @@
 - (id) performWithTarget:(UIView *) _view error:(NSError **) error {
   id target = _view;
 
-  if ([_arguments count] <= 0) {
+  NSArray *arguments = self.arguments;
+
+  if ([arguments count] <= 0) {
     return [LPJSONUtils jsonifyObject:_view];
   }
-  for (NSInteger i = 0; i < [_arguments count]; i++) {
-    id selObj = [_arguments objectAtIndex:i];
+  for (NSInteger i = 0; i < [arguments count]; i++) {
+    id selObj = [arguments objectAtIndex:i];
     id objValue;
     int intValue;
     unsigned int uintValue;
@@ -132,7 +131,7 @@
         if (objValue == nil) {
           return nil;
         } else {
-          if (i == [_arguments count] - 1) {
+          if (i == [arguments count] - 1) {
             return [LPJSONUtils jsonifyObject:objValue];
           } else {
             target = objValue;

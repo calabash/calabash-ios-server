@@ -7,15 +7,10 @@
 
 @implementation LPSliderOperation
 
-- (NSString *) description {
-  return [NSString stringWithFormat:@"Slider: %@", _arguments];
-}
-
 /*
  args << options[:notify_targets] || true
  args << options[:animate] || true
  */
-
 
 //    required =========> |     optional
 // _arguments ==> [value_st,  notify targets, animate]
@@ -27,7 +22,9 @@
 
   UISlider *slider = (UISlider *) _view;
 
-  NSString *valueStr = _arguments[0];
+  NSArray *arguments = self.arguments;
+
+  NSString *valueStr = arguments[0];
   if (valueStr == nil || [valueStr length] == 0) {
     NSLog(@"Warning: value str: '%@' should be non-nil and non-empty",
             valueStr);
@@ -36,16 +33,16 @@
 
   CGFloat targetValue = [valueStr floatValue];
 
-  NSUInteger argcount = [_arguments count];
+  NSUInteger argcount = [arguments count];
 
   BOOL notifyTargets = YES;
   if (argcount > 1) {
-    notifyTargets = [_arguments[1] boolValue];
+    notifyTargets = [arguments[1] boolValue];
   }
 
   BOOL animate = YES;
   if (argcount > 2) {
-    animate = [_arguments[2] boolValue];
+    animate = [arguments[2] boolValue];
   }
 
   if (targetValue > [slider maximumValue]) {

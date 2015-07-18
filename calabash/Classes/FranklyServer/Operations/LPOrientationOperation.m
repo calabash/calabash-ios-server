@@ -19,11 +19,6 @@ static NSString *const kFaceUp = @"face up";
 
 @implementation LPOrientationOperation
 
-- (NSString *) description {
-  return [NSString stringWithFormat:@"Orientation: %@", _arguments];
-}
-
-
 + (NSString *) deviceOrientation {
 
   [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
@@ -94,7 +89,9 @@ static NSString *const kFaceUp = @"face up";
 // _arguments ==> {'device' | 'status_bar'}
 - (id) performWithTarget:(UIView *) view error:(NSError **) error {
 
-  NSUInteger argCount = [_arguments count];
+  NSArray *argument = self.arguments;
+
+  NSUInteger argCount = [argument count];
   if (argCount == 0) {
     NSLog(@"Warning: requires exactly one argument: {'%@' | '%@'} found none",
             kDevice, kStatusBar);
@@ -103,11 +100,11 @@ static NSString *const kFaceUp = @"face up";
 
   if (argCount > 1) {
     NSLog(@"Warning: argument should be {'%@' | '%@'} - found '[%@']", kDevice,
-            kStatusBar, [_arguments componentsJoinedByString:@", "]);
+            kStatusBar, [argument componentsJoinedByString:@", "]);
     return nil;
   }
 
-  NSString *firstArg = [_arguments objectAtIndex:0];
+  NSString *firstArg = [argument objectAtIndex:0];
   if ([@[kDevice, kStatusBar] containsObject:firstArg] == NO) {
     NSLog(@"Warning: argument should be {'%@' | '%@'} - found '%@'", kDevice,
             kStatusBar, firstArg);
@@ -119,7 +116,7 @@ static NSString *const kFaceUp = @"face up";
     return [LPOrientationOperation statusBarOrientation];
   } else {
     NSLog(@"Warning: fell through conditions for arguments: '[%@]'",
-            [_arguments componentsJoinedByString:@", "]);
+            [argument componentsJoinedByString:@", "]);
     return nil;
   }
 }

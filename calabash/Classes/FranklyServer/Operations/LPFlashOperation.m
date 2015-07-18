@@ -15,10 +15,6 @@
 
 @implementation LPFlashOperation
 
-- (NSString *) description {
-  return [NSString stringWithFormat:@"Flash: %@", _arguments];
-}
-
 - (id) performWithTarget:(UIView *) _view error:(NSError *__autoreleasing*) error {
 
   if ([[NSThread currentThread] isMainThread]) {

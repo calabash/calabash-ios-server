@@ -8,10 +8,6 @@
 
 
 @implementation LPQueryOperation
-- (NSString *) description {
-  return [NSString stringWithFormat:@"Query: %@", _arguments];
-}
-
 
 - (id) performWithTarget:(UIView *) _view error:(NSError **) error {
   return [super performWithTarget:_view error:error];

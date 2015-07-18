@@ -7,11 +7,7 @@
 #import <Foundation/Foundation.h>
 #import "UIScriptParser.h"
 
-@interface LPOperation : NSObject {
-  SEL _selector;
-  NSArray *_arguments;
-  BOOL _done;
-}
+@interface LPOperation : NSObject
 
 @property(nonatomic, assign, readonly) SEL selector;
 @property(nonatomic, copy, readonly) NSArray *arguments;
