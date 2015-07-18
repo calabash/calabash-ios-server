@@ -106,6 +106,9 @@
   return result;
 }
 
+// map("textField", :delegate) will call this method because the :delegate
+// key does not map to a known operation (see operationFromDictionary:).
+// This method has problems. :(
 - (id) performWithTarget:(id) target error:(NSError **) error {
   NSMethodSignature *tSig = [target methodSignatureForSelector:_selector];
   NSUInteger argc = tSig.numberOfArguments - 2;
