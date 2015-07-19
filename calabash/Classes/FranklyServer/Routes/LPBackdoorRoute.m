@@ -22,7 +22,9 @@
   return [method isEqualToString:@"POST"];
 }
 
-- (NSDictionary *) JSONResponseForMethod:(NSString *) method URI:(NSString *) path data:(NSDictionary *) data {
+- (NSDictionary *) JSONResponseForMethod:(NSString *) method
+                                     URI:(NSString *) path
+                                    data:(NSDictionary *) data {
   NSString *originalSelStr = [data objectForKey:@"selector"];
   NSString *selectorName = originalSelStr;
   if (![originalSelStr hasSuffix:@":"]) {
