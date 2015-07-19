@@ -39,7 +39,7 @@
 		B15BF9A719ABB1DD00B38577 /* LPHTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A514E6564200663205 /* LPHTTPFileResponse.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9A819ABB1DD00B38577 /* LPHTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A714E6564200663205 /* LPHTTPRedirectResponse.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9A919ABB1DD00B38577 /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; };
-		B15BF9AA19ABB1DD00B38577 /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; };
+		B15BF9AA19ABB1DD00B38577 /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9AB19ABB1DD00B38577 /* LPScrollToMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A718B392370094E71E /* LPScrollToMarkOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9AC19ABB1DD00B38577 /* LPScrollToRowWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9AD19ABB1DD00B38577 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A318B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -122,7 +122,7 @@
 		B1D5BD8619A23BCE0070E8CE /* LPHTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A514E6564200663205 /* LPHTTPFileResponse.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BD8719A23BCE0070E8CE /* LPHTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A714E6564200663205 /* LPHTTPRedirectResponse.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BD8819A23BCE0070E8CE /* LPScrollToMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A718B392370094E71E /* LPScrollToMarkOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		B1D5BD8919A23BCE0070E8CE /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; };
+		B1D5BD8919A23BCE0070E8CE /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BD8A19A23BCE0070E8CE /* LPQueryAllOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */; };
 		B1D5BD8B19A23BCE0070E8CE /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BD8C19A23BCE0070E8CE /* LPQueryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC514B6DB2B002A744C /* LPQueryOperation.m */; };
@@ -225,7 +225,7 @@
 		F5091BE918C4E1D700C85307 /* LPHTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A514E6564200663205 /* LPHTTPFileResponse.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091BEA18C4E1D700C85307 /* LPHTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A714E6564200663205 /* LPHTTPRedirectResponse.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091BEB18C4E1D700C85307 /* LPScrollToMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A718B392370094E71E /* LPScrollToMarkOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5091BEC18C4E1D700C85307 /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; };
+		F5091BEC18C4E1D700C85307 /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091BED18C4E1D700C85307 /* LPQueryAllOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B15DA5E415C5D80A009E6CFE /* LPQueryAllOperation.m */; };
 		F5091BEE18C4E1D700C85307 /* LPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9214B6DDA1002A744C /* LPOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091BEF18C4E1D700C85307 /* LPQueryOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC514B6DB2B002A744C /* LPQueryOperation.m */; };
@@ -304,7 +304,7 @@
 		F50CBF8D1A04056F004AC9DA /* LPHTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A714E6564200663205 /* LPHTTPRedirectResponse.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBF8E1A04058C004AC9DA /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; };
 		F50CBF8F1A04058C004AC9DA /* LPI.mm in Sources */ = {isa = PBXBuildFile; fileRef = B184FDBD14B6DB2B002A744C /* LPI.mm */; };
-		F50CBF901A04058C004AC9DA /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; };
+		F50CBF901A04058C004AC9DA /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBF911A04058C004AC9DA /* LPCollectionViewScrollToItemOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C3A62E18A2EA0800DB7E42 /* LPCollectionViewScrollToItemOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBF921A04058C004AC9DA /* LPSliderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5CAC06B180D499600E23F03 /* LPSliderOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBF931A04058C004AC9DA /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -379,6 +379,7 @@
 		F537399B18E6E0BE004133FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F537399918E6E0BE004133FA /* main.m */; };
 		F5396A721AA6056D00D75E78 /* lp-simple-example.html in Resources */ = {isa = PBXBuildFile; fileRef = F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */; };
 		F5419F0D1AF3D37000EAAA66 /* LPJSONUtils_AccessibilityElementTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5419F0C1AF3D37000EAAA66 /* LPJSONUtils_AccessibilityElementTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F54EFE8D1B5B88D500F8D665 /* LPRouterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F54EFE8C1B5B88D500F8D665 /* LPRouterTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F55185571AC3866300CE06DC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A33A721AC01E8E00224639 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F55185581AC3875200CE06DC /* LPWebViewProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A601AC01A9F00224639 /* LPWebViewProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F55185591AC3875900CE06DC /* UIWebView+LPWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = F5A33A4F1AC00D1300224639 /* UIWebView+LPWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -783,6 +784,7 @@
 		F537399918E6E0BE004133FA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "lp-simple-example.html"; sourceTree = "<group>"; };
 		F5419F0C1AF3D37000EAAA66 /* LPJSONUtils_AccessibilityElementTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPJSONUtils_AccessibilityElementTest.m; sourceTree = "<group>"; };
+		F54EFE8C1B5B88D500F8D665 /* LPRouterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPRouterTest.m; sourceTree = "<group>"; };
 		F5543F211ABF7D7000E1A0BF /* LPPluginLoaderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPluginLoaderTest.m; sourceTree = "<group>"; };
 		F5543F231ABF7DE900E1A0BF /* LPPluginLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPPluginLoader.h; sourceTree = "<group>"; };
 		F5543F241ABF7DE900E1A0BF /* LPPluginLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPluginLoader.m; sourceTree = "<group>"; };
@@ -1755,6 +1757,7 @@
 				89F2EFE71B22462700958052 /* LPIntrospectionRouteTest.m */,
 				89128F931B25DD92008874B0 /* LPIntrospectionTestView.h */,
 				89128F941B25DD92008874B0 /* LPIntrospectionTestView.m */,
+				F54EFE8C1B5B88D500F8D665 /* LPRouterTest.m */,
 			);
 			path = Routes;
 			sourceTree = "<group>";
@@ -2631,6 +2634,7 @@
 				F50CBF961A04058C004AC9DA /* LPQueryAllOperation.m in Sources */,
 				B15369FD1A327A400093923F /* LPUIATapRouteOverSharedElement.m in Sources */,
 				F5C224E01AD473F0001DB4FA /* LPDeviceTest.m in Sources */,
+				F54EFE8D1B5B88D500F8D665 /* LPRouterTest.m in Sources */,
 				F50CBF7D1A040564004AC9DA /* LPSSKeychainQuery.m in Sources */,
 				F50CBF9C1A04058C004AC9DA /* LPRecorder.m in Sources */,
 				F50CBF7C1A040564004AC9DA /* LPSSKeychain.m in Sources */,
