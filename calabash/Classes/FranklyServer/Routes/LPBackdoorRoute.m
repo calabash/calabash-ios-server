@@ -12,6 +12,9 @@
 #import <UIKit/UIKit.h>
 #import "LPBackdoorRoute.h"
 #import "LPCocoaLumberjack.h"
+#import "LPInvoker.h"
+#import "LPInvocationResult.h"
+#import "LPInvocationError.h"
 
 @implementation LPBackdoorRoute
 
@@ -45,43 +48,26 @@
   SEL selector = NSSelectorFromString(selectorName);
   id<UIApplicationDelegate> delegate = [[UIApplication sharedApplication] delegate];
   if ([delegate respondsToSelector:selector]) {
-    id result = nil;
-
-    NSMethodSignature *methodSignature;
-    methodSignature = [[delegate class] instanceMethodSignatureForSelector:selector];
-
-    NSInvocation *invocation;
-    invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
-
-    [invocation setSelector:selector];
-    [invocation setArgument:&argument atIndex:2];
-
-    [invocation retainArguments];
-
-    if ([[NSThread currentThread] isMainThread]) {
-      [invocation invokeWithTarget:delegate];
+    LPInvocationResult *invocationResult;
+    invocationResult = [LPInvoker invokeSelector:selector
+                                      withTarget:delegate
+                                       arguments:@[argument]];
+    if ([invocationResult isError]) {
+      NSString *reason = [NSString stringWithFormat:@"Invoking backdoor resulted in error: %@",
+                          [invocationResult description]];
+      NSString *details = [NSString stringWithFormat:@"Invoking backdoor selector '%@' with argument '%@' could not be completed because '%@'",
+                           selectorName, argument, [invocationResult description]];
+      return @{ @"details" : details, @"reason" : reason, @"outcome" : @"FAILURE" };
     } else {
-      [invocation performSelectorOnMainThread:@selector(invokeWithTarget:)
-                                   withObject:delegate
-                                   waitUntilDone:YES];
+      return
+      @{
+        @"results": invocationResult.value,
+        // Legacy API:  Starting in Calabash 2.0 and Calabash 0.15.0, the 'result'
+        // key will be dropped.
+        @"result" : invocationResult.value,
+        @"outcome" : @"SUCCESS"
+        };
     }
-
-    void *buffer;
-
-    [invocation getReturnValue:&buffer];
-
-    result = (__bridge id)buffer;
-
-    if (!result) {result = [NSNull null];}
-    return
-    @{
-      @"results": result,
-      // Legacy API:  Starting in Calabash 2.0 and Calabash 0.15.0, the 'result'
-      // key will be dropped.
-      @"result" : result,
-      @"outcome" : @"SUCCESS"
-      };
-
   } else {
 
     NSArray *lines =
