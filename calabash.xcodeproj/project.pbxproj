@@ -403,6 +403,7 @@
 		F5543F2E1ABF7DE900E1A0BF /* LPPluginLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5543F241ABF7DE900E1A0BF /* LPPluginLoader.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5543F2F1ABF7DE900E1A0BF /* LPPluginLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5543F241ABF7DE900E1A0BF /* LPPluginLoader.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5543F311ABF7DF500E1A0BF /* LPPluginLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5543F241ABF7DE900E1A0BF /* LPPluginLoader.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F55A248C1B5A7F8300251DD4 /* LPQueryAllOperationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F55A248B1B5A7F8300251DD4 /* LPQueryAllOperationTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F55D412418C9130100813F78 /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; };
 		F56630921A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F56630951A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -785,6 +786,7 @@
 		F5543F211ABF7D7000E1A0BF /* LPPluginLoaderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPluginLoaderTest.m; sourceTree = "<group>"; };
 		F5543F231ABF7DE900E1A0BF /* LPPluginLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPPluginLoader.h; sourceTree = "<group>"; };
 		F5543F241ABF7DE900E1A0BF /* LPPluginLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPluginLoader.m; sourceTree = "<group>"; };
+		F55A248B1B5A7F8300251DD4 /* LPQueryAllOperationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPQueryAllOperationTest.m; sourceTree = "<group>"; };
 		F55A350F17CF8F8F0001E8B4 /* LPDatePickerOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDatePickerOperation.h; sourceTree = "<group>"; };
 		F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDatePickerOperation.m; sourceTree = "<group>"; };
 		F55D412018C9130100813F78 /* LPKeychainRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPKeychainRoute.h; sourceTree = "<group>"; };
@@ -1737,6 +1739,7 @@
 		F5C224E41AD47403001DB4FA /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				F55A248B1B5A7F8300251DD4 /* LPQueryAllOperationTest.m */,
 				F5C224EC1AD4766E001DB4FA /* LPSetTextOperationTest.m */,
 				F5C224E51AD47403001DB4FA /* LPScrollOperationTest.m */,
 				F5986B2F1B5A327500CCB142 /* LPOperationTest.m */,
@@ -2613,6 +2616,7 @@
 				F50CBF941A04058C004AC9DA /* LPOrientationOperation.m in Sources */,
 				F50CBFC71A0405E9004AC9DA /* LPJSONUtils.m in Sources */,
 				F50CBF911A04058C004AC9DA /* LPCollectionViewScrollToItemOperation.m in Sources */,
+				F55A248C1B5A7F8300251DD4 /* LPQueryAllOperationTest.m in Sources */,
 				F5A8B47E1B39BFEB00F390CA /* LPASLLogCapture.m in Sources */,
 				F50CBF9F1A040599004AC9DA /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
 				F50CBFB81A0405CE004AC9DA /* LPCJSONSerializer.m in Sources */,
