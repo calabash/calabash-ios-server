@@ -131,8 +131,6 @@
     const char *type = [[invocation methodSignature] methodReturnType];
     NSString *returnType = [NSString stringWithFormat:@"%s", type];
 
-    LPLogInfo(@"The encoding of the selector is: %@", returnType);
-
     const char *trimmedType = [[returnType substringToIndex:1]
             cStringUsingEncoding:NSASCIIStringEncoding];
     switch (*trimmedType) {
@@ -422,7 +420,7 @@
   @try {
     [invocation invoke];
   } @catch (NSException *exception) {
-    LPLogWarn(@"Perform %@ with target %@ caught %@: %@",
+    LPLogError(@"Perform %@ with target %@ caught %@: %@",
               NSStringFromSelector(sel),
               target,
               [exception name],
