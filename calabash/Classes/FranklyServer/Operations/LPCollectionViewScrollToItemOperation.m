@@ -77,18 +77,9 @@
 
   NSIndexPath *ip = [NSIndexPath indexPathForItem:itemIndex inSection:section];
 
-  if ([[NSThread currentThread] isMainThread]) {
-    [collection scrollToItemAtIndexPath:ip
-                       atScrollPosition:scrollPosition
-                               animated:animate];
-  } else {
-    dispatch_sync(dispatch_get_main_queue(), ^{
-      [collection scrollToItemAtIndexPath:ip
-                         atScrollPosition:scrollPosition
-                                 animated:animate];
-    });
-  }
-
+  [collection scrollToItemAtIndexPath:ip
+                     atScrollPosition:scrollPosition
+                             animated:animate];
   return collection;
 }
 
