@@ -30,10 +30,21 @@
     selectorName = [selectorName stringByAppendingString:@":"];
   }
 
+  id argument = [data objectForKey:@"arg"];
+  if (!argument) {
+    LPLogError(@"Expected data dictionary to contain an 'arg' key");
+    LPLogError(@"data = '%@'", data);
+    NSString *details = [NSString stringWithFormat:@"Expected backdoor selector '%@' to have an argument, but found no 'arg' key in data '%@'",
+                         selectorName, data];
+
+    NSString *reason = [NSString stringWithFormat:@"Missing argument for selector: '%@'",
+                        selectorName];
+    return @{ @"details" : details, @"reason" : reason, @"outcome" : @"FAILURE" };
+  }
+
   SEL selector = NSSelectorFromString(selectorName);
   id<UIApplicationDelegate> delegate = [[UIApplication sharedApplication] delegate];
   if ([delegate respondsToSelector:selector]) {
-    id argument = [data objectForKey:@"arg"];
     id result = nil;
 
     NSMethodSignature *methodSignature;
@@ -47,8 +58,6 @@
 
     [invocation retainArguments];
 
-    void *buffer;
-
     if ([[NSThread currentThread] isMainThread]) {
       [invocation invokeWithTarget:delegate];
     } else {
@@ -56,6 +65,8 @@
                                    withObject:delegate
                                    waitUntilDone:YES];
     }
+
+    void *buffer;
 
     [invocation getReturnValue:&buffer];
 
