@@ -18,6 +18,8 @@
 
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path;
 
-- (NSDictionary *) JSONResponseForMethod:(NSString *) method URI:(NSString *) path data:(NSDictionary *) data;
+- (NSDictionary *) JSONResponseForMethod:(NSString *) method
+                                     URI:(NSString *) path
+                                    data:(NSDictionary *) data;
 
 @end

@@ -16,56 +16,114 @@
 #import "LPInvocationError.h"
 #import "LPCocoaLumberjack.h"
 
+@interface LPRouterDictionary : NSObject
+
+@property(atomic, strong, readonly) NSMutableDictionary *routes;
+
++ (LPRouterDictionary *) shared;
+- (id) init_private;
+
+@end
+
+@implementation LPRouterDictionary
+
+#pragma mark - Memory Management
+
+@synthesize routes = _routes;
+
+- (id) init {
+  NSString *reason;
+  reason = [NSString stringWithFormat:@"%@ does not respond to 'init' selector",
+            [self class]];
+  @throw [NSException exceptionWithName:@"Singleton Pattern"
+                                 reason:reason
+                               userInfo:nil];
+}
+
++ (LPRouterDictionary *) shared {
+  static LPRouterDictionary *sharedDictionary = nil;
+  static dispatch_once_t onceToken;
+  dispatch_once(&onceToken, ^{
+    sharedDictionary = [[LPRouterDictionary alloc] init_private];
+  });
+  return sharedDictionary;
+}
+
+- (id) init_private {
+  self = [super init];
+  if (self) {
+    _routes = [[NSMutableDictionary alloc] initWithCapacity:32];
+  }
+  return self;
+}
+
+@end
+
+
 @interface LPRouter ()
 
 @property(nonatomic, retain, readonly) NSMutableData *mutablePostData;
+
+- (NSObject <LPHTTPResponse> *) httpResponseOnMainThreadForMethod:(NSString *) method
+                                                              URI:(NSString *) path;
 
 @end
 
 @implementation LPRouter
 
+#pragma mark - Adding and Fetching Routes
+
++ (void) addRoute:(id <LPRoute>) route forPath:(NSString *) path {
+  LPRouterDictionary *shared = [LPRouterDictionary shared];
+  [shared.routes setObject:route forKey:path];
+}
+
++ (id<LPRoute>) routeForKey:(NSString *) key {
+  LPRouterDictionary *shared = [LPRouterDictionary shared];
+  return [shared.routes objectForKey:key];
+}
+
 #pragma mark - Memory Management
 
 @synthesize mutablePostData = _mutablePostData;
-
-static NSMutableDictionary *routes = nil;
 
 - (NSData *) postData {
   return [NSData dataWithData:self.mutablePostData];
 }
 
-+ (void) initialize {
-  static BOOL initialized = NO;
-  if (!initialized) {
-    // Initialize class variables
-    routes = [[NSMutableDictionary alloc] initWithCapacity:16];
-    initialized = YES;
+- (NSMutableData *) mutablePostData {
+  if (_mutablePostData) {
+    LPLogDebug(@"mutable post data already set: %@",
+               [[NSString alloc] initWithData:_mutablePostData
+                                     encoding:NSUTF8StringEncoding]);
+    return _mutablePostData;
   }
-}
 
-+ (void) addRoute:(id <LPRoute>) route forPath:(NSString *) path {
-  [routes setObject:route forKey:path];
+  LPLogDebug(@"mutable post data nil, creating an new data object");
+  _mutablePostData = [[NSMutableData alloc] initWithData:[NSData data]];
+  return _mutablePostData;
 }
 
 - (void) processBodyData:(NSData *) postDataChunk {
-  if (_mutablePostData == nil) {
-    _mutablePostData = [[NSMutableData alloc] initWithData:postDataChunk];
-  } else {
-    [_mutablePostData appendData:postDataChunk];
-  }
+  LPLogDebug(@"Calling process body data!");
+  LPLogDebug(@"data = %@",
+             [[NSString alloc] initWithData:postDataChunk
+                                   encoding:NSUTF8StringEncoding]);
+  [self.mutablePostData appendData:postDataChunk];
 }
 
 - (NSObject <LPHTTPResponse> *) responseForJSON:(NSDictionary *) json {
   if (json == nil) {
-    json = [NSDictionary dictionaryWithObjectsAndKeys:[NSArray array], @"results",
-                                                      @"SUCCESS", @"outcome",
-                                                      nil];
+    json =
+    @{
+      @"results" : @[],
+      @"outcome" : @"SUCCESS"
+    };
   }
   NSString *serialized = [LPJSONUtils serializeDictionary:json];
   NSData *data = [serialized dataUsingEncoding:NSUTF8StringEncoding];
   return [[LPCORSResponse alloc] initWithData:data];
 }
-
 
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
   if ([method isEqualToString: @"OPTIONS"]) {
@@ -130,6 +188,9 @@ static NSMutableDictionary *routes = nil;
       LPLogDebug(@"Making a raw call to route with:");
       LPLogDebug(@"selector:  %@", NSStringFromSelector(raw));
       LPLogDebug(@"  target:  %@", NSStringFromClass([route class]));
+      LPLogDebug(@"  method:  %@", method);
+      LPLogDebug(@"    path:  %@", path);
+
       NSArray *arguments = @[method, path];
       LPInvocationResult *invocationResult;
       invocationResult = [LPInvoker invokeSelector:raw
@@ -160,13 +221,14 @@ static NSMutableDictionary *routes = nil;
                                                   URI:(NSString *) path {
 
   if ([[NSThread currentThread] isMainThread]) {
+    LPLogDebug(@"Handling response for: '%@' on current thread which is the main thread", method);
     return [self httpResponseOnMainThreadForMethod:method URI:path];
   } else {
+    LPLogDebug(@"Forcing handling response for: '%@' on the main thread", method);
     __weak typeof(self) wself = self;
     __block NSObject<LPHTTPResponse> *result = nil;
     dispatch_sync(dispatch_get_main_queue(), ^{
-      result = [wself httpResponseOnMainThreadForMethod:method
-                                                    URI:path];
+      result = [wself httpResponseOnMainThreadForMethod:method URI:path];
     });
     return result;
   }
