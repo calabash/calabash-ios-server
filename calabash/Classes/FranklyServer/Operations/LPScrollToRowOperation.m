@@ -58,18 +58,10 @@
           animate = [ani boolValue];
         }
 
-        if ([[NSThread currentThread] isMainThread]) {
-          [table scrollToRowAtIndexPath:path
-                       atScrollPosition:sp
-                               animated:animate];
+        [table scrollToRowAtIndexPath:path
+                     atScrollPosition:sp
+                             animated:animate];
 
-        } else {
-          dispatch_sync(dispatch_get_main_queue(), ^{
-            [table scrollToRowAtIndexPath:path
-                         atScrollPosition:sp
-                                 animated:animate];
-          });
-        }
         return target;
       } else {
         NSLog(@"Warning: table doesn't contain indexPath: %@", path);
@@ -78,21 +70,11 @@
     } else {
       NSIndexPath *indexPathForRow = [self indexPathForRow:[rowNum unsignedIntegerValue]
                                                    inTable:table];
-      if (!indexPathForRow) {
-        return nil;
-      }
+      if (!indexPathForRow) { return nil;  }
 
-      if ([[NSThread currentThread] isMainThread]) {
-        [table scrollToRowAtIndexPath:indexPathForRow
-                     atScrollPosition:UITableViewScrollPositionTop
-                             animated:YES];
-      } else {
-        dispatch_sync(dispatch_get_main_queue(), ^{
-          [table scrollToRowAtIndexPath:indexPathForRow
-                       atScrollPosition:UITableViewScrollPositionTop
-                               animated:YES];
-        });
-      }
+      [table scrollToRowAtIndexPath:indexPathForRow
+                   atScrollPosition:UITableViewScrollPositionTop
+                           animated:YES];
       return target;
     }
   }
