@@ -16,11 +16,23 @@
 #import "LPInvocationError.h"
 #import "LPCocoaLumberjack.h"
 
+@interface LPRouter ()
+
+@property(nonatomic, retain, readonly) NSMutableData *mutablePostData;
+
+@end
+
 @implementation LPRouter
-@synthesize postData = _postData;
+
+#pragma mark - Memory Management
+
+@synthesize mutablePostData = _mutablePostData;
 
 static NSMutableDictionary *routes = nil;
 
+- (NSData *) postData {
+  return [NSData dataWithData:self.mutablePostData];
+}
 
 + (void) initialize {
   static BOOL initialized = NO;
@@ -31,17 +43,15 @@ static NSMutableDictionary *routes = nil;
   }
 }
 
-
 + (void) addRoute:(id <LPRoute>) route forPath:(NSString *) path {
   [routes setObject:route forKey:path];
 }
 
-
 - (void) processBodyData:(NSData *) postDataChunk {
-  if (_postData == nil) {
-    _postData = [[NSMutableData alloc] initWithData:postDataChunk];
+  if (_mutablePostData == nil) {
+    _mutablePostData = [[NSMutableData alloc] initWithData:postDataChunk];
   } else {
-    [_postData appendData:postDataChunk];
+    [_mutablePostData appendData:postDataChunk];
   }
 }
 
@@ -66,7 +76,7 @@ static NSMutableDictionary *routes = nil;
           componentsSeparatedByString:@"/"];
   NSString *lastSegment = [pathComponents lastObject];
 
-  id <LPRoute> route = [routes objectForKey:lastSegment];
+  id <LPRoute> route = [LPRouter routeForKey:lastSegment];
   BOOL supported = [route supportsMethod:method atPath:lastSegment];
 
   return supported;
@@ -75,8 +85,7 @@ static NSMutableDictionary *routes = nil;
 - (NSObject <LPHTTPResponse> *) httpResponseOnMainThreadForMethod:(NSString *) method
                                                               URI:(NSString *) path {
   if ([method isEqualToString: @"OPTIONS"]) {
-    LPCORSResponse *rsp = [[LPCORSResponse alloc] initWithData:[NSData data]];
-    return rsp;
+    return [[LPCORSResponse alloc] initWithData:[NSData data]];
   }
 
   NSArray *components = [path componentsSeparatedByString:@"?"];
@@ -84,20 +93,27 @@ static NSMutableDictionary *routes = nil;
                              componentsSeparatedByString:@"/"];
   NSString *lastSegment = [pathComponents lastObject];
 
-  id <LPRoute> route = [routes objectForKey:lastSegment];
+
+  id <LPRoute> route = [LPRouter routeForKey:lastSegment];
 
   if ([route supportsMethod:method atPath:path]) {
     NSDictionary *params = nil;
     if ([method isEqualToString:@"GET"]) {
       params = [super parseGetParams];
     }
+
     if ([method isEqualToString:@"POST"]) {
-      if (_postData != nil && [_postData length] > 0) {
+      NSData *postData = [self postData];
+      if (postData && [postData length] > 0) {
         NSString *postDataAsString;
-        postDataAsString = [[NSString alloc] initWithBytes:[_postData bytes]
-                                                    length:[_postData length]
+        postDataAsString = [[NSString alloc] initWithBytes:[postData bytes]
+                                                    length:[postData length]
                                                   encoding:NSUTF8StringEncoding];
         params = [LPJSONUtils deserializeDictionary:postDataAsString];
+
+        // UNEXPECTED
+        // After the POST data is parsed we need to unset it.
+        _mutablePostData = nil;
       }
     }
 
@@ -111,7 +127,9 @@ static NSMutableDictionary *routes = nil;
 
     SEL raw = @selector(httpResponseForMethod:URI:);
     if ([route respondsToSelector:raw]) {
-      LPLogDebug(@"Making a raw call to route!");
+      LPLogDebug(@"Making a raw call to route with:");
+      LPLogDebug(@"selector:  %@", NSStringFromSelector(raw));
+      LPLogDebug(@"  target:  %@", NSStringFromClass([route class]));
       NSArray *arguments = @[method, path];
       LPInvocationResult *invocationResult;
       invocationResult = [LPInvoker invokeSelector:raw
