@@ -52,8 +52,8 @@
          respondsTo:(SEL) selector {
   if ([target respondsToSelector:selector]) {
     LPInvocationResult *result;
-    result = [LPInvoker invokeOnMainThreadZeroArgumentSelector:selector
-                                                    withTarget:target];
+    result = [LPInvoker invokeZeroArgumentSelector:selector
+                                        withTarget:target];
 
     [dictionary setObject:result.value forKey:key];
   }
@@ -65,8 +65,8 @@
            selector:(SEL) selector {
   if ([target respondsToSelector:selector]) {
     LPInvocationResult *result;
-    result = [LPInvoker invokeOnMainThreadZeroArgumentSelector:selector
-                                                    withTarget:target];
+    result = [LPInvoker invokeZeroArgumentSelector:selector
+                                        withTarget:target];
     [dictionary setObject:result.value forKey:key];
   } else {
     [dictionary setObject:[NSNull null] forKey:key];

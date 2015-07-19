@@ -130,9 +130,9 @@
  */
 - (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
   LPInvocationResult *invocationResult;
-  invocationResult = [LPInvoker invokeOnMainThreadSelector:self.selector
-                                                withTarget:target
-                                                 arguments:self.arguments];
+  invocationResult = [LPInvoker invokeSelector:self.selector
+                                    withTarget:target
+                                     arguments:self.arguments];
   id returnValue = nil;
 
   if ([invocationResult isError]) {

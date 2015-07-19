@@ -78,17 +78,8 @@
   }
 
   if (notifyTargets) {
-    if ([[NSThread currentThread] isMainThread]) {
-      [picker setDate:date animated:animate];
-      UIControlEvents events = [picker allControlEvents];
-      [picker sendActionsForControlEvents:events];
-    } else {
-      dispatch_sync(dispatch_get_main_queue(), ^{
-        [picker setDate:date animated:animate];
-        UIControlEvents events = [picker allControlEvents];
-        [picker sendActionsForControlEvents:events];
-      });
-    }
+    UIControlEvents events = [picker allControlEvents];
+    [picker sendActionsForControlEvents:events];
   }
 
   return target;

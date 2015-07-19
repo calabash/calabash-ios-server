@@ -16,14 +16,7 @@
 @implementation LPFlashOperation
 
 - (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
-
-  if ([[NSThread currentThread] isMainThread]) {
-    [LPTouchUtils flashView:target forDuration:2];
-  } else {
-    dispatch_sync(dispatch_get_main_queue(), ^{
-      [LPTouchUtils flashView:target forDuration:2];
-    });
-  }
+  [LPTouchUtils flashView:target forDuration:2];
   return [LPJSONUtils jsonifyObject:target];
 }
 

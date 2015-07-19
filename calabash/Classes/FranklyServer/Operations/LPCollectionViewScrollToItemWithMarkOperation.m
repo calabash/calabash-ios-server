@@ -102,18 +102,9 @@
     animate = [ani boolValue];
   }
 
-  if ([[NSThread currentThread] isMainThread]) {
-    [collection scrollToItemAtIndexPath:path
-                       atScrollPosition:scrollPosition
-                               animated:animate];
-  } else {
-    dispatch_sync(dispatch_get_main_queue(), ^{
-      [collection scrollToItemAtIndexPath:path
-                         atScrollPosition:scrollPosition
-                                 animated:animate];
-    });
-  }
-
+  [collection scrollToItemAtIndexPath:path
+                     atScrollPosition:scrollPosition
+                             animated:animate];
   return target;
 }
 

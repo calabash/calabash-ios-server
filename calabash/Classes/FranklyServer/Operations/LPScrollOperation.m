@@ -58,13 +58,7 @@
       point = CGPointMake(offset.x + scrollAmount, offset.y);
     }
 
-    if ([[NSThread currentThread] isMainThread]) {
-      [sv setContentOffset:point animated:YES];
-    } else {
-      dispatch_sync(dispatch_get_main_queue(), ^{
-        [sv setContentOffset:point animated:YES];
-      });
-    }
+    [sv setContentOffset:point animated:YES];
 
     return target;
   } else if ([LPIsWebView isWebView:target]) {
