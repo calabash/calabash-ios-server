@@ -92,23 +92,12 @@
 }
 
 - (NSMutableData *) mutablePostData {
-  if (_mutablePostData) {
-    LPLogDebug(@"mutable post data already set: %@",
-               [[NSString alloc] initWithData:_mutablePostData
-                                     encoding:NSUTF8StringEncoding]);
-    return _mutablePostData;
-  }
-
-  LPLogDebug(@"mutable post data nil, creating an new data object");
+  if (_mutablePostData) { return _mutablePostData;  }
   _mutablePostData = [[NSMutableData alloc] initWithData:[NSData data]];
   return _mutablePostData;
 }
 
 - (void) processBodyData:(NSData *) postDataChunk {
-  LPLogDebug(@"Calling process body data!");
-  LPLogDebug(@"data = %@",
-             [[NSString alloc] initWithData:postDataChunk
-                                   encoding:NSUTF8StringEncoding]);
   [self.mutablePostData appendData:postDataChunk];
 }
 
@@ -185,12 +174,6 @@
 
     SEL raw = @selector(httpResponseForMethod:URI:);
     if ([route respondsToSelector:raw]) {
-      LPLogDebug(@"Making a raw call to route with:");
-      LPLogDebug(@"selector:  %@", NSStringFromSelector(raw));
-      LPLogDebug(@"  target:  %@", NSStringFromClass([route class]));
-      LPLogDebug(@"  method:  %@", method);
-      LPLogDebug(@"    path:  %@", path);
-
       NSArray *arguments = @[method, path];
       LPInvocationResult *invocationResult;
       invocationResult = [LPInvoker invokeSelector:raw
@@ -221,10 +204,8 @@
                                                   URI:(NSString *) path {
 
   if ([[NSThread currentThread] isMainThread]) {
-    LPLogDebug(@"Handling response for: '%@' on current thread which is the main thread", method);
     return [self httpResponseOnMainThreadForMethod:method URI:path];
   } else {
-    LPLogDebug(@"Forcing handling response for: '%@' on the main thread", method);
     __weak typeof(self) wself = self;
     __block NSObject<LPHTTPResponse> *result = nil;
     dispatch_sync(dispatch_get_main_queue(), ^{
