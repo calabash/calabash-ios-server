@@ -8,6 +8,7 @@
 #import "LPSetTextOperation.h"
 #import "LPJSONUtils.h"
 #import "LPWebViewProtocol.h"
+#import "LPCocoaLumberjack.h"
 
 @interface LPSetTextOperation ()
 
@@ -52,7 +53,7 @@
 
     NSString *json = [LPJSONUtils serializeDictionary:mdict];
     if (!json) {
-      NSLog(@"Could serialize %@ to JSON; nothing to do - returning nil", mdict);
+      LPLogDebug(@"Could not '%@' to JSON; nothing to do - returning nil", mdict);
       return nil;
     }
 
