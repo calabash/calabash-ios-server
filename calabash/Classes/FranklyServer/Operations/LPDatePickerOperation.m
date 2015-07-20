@@ -77,6 +77,8 @@
     return nil;
   }
 
+  [picker setDate:date animated:animate];
+
   if (notifyTargets) {
     UIControlEvents events = [picker allControlEvents];
     [picker sendActionsForControlEvents:events];
