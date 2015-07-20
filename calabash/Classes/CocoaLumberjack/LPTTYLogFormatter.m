@@ -1,9 +1,13 @@
-#import "LPLogFormatter.h"
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
+#import "LPTTYLogFormatter.h"
 #import <libkern/OSAtomic.h>
 
 static NSString *const CalLogFormatterDateFormat = @"yyyy-MM-dd HH:mm:ss.SSS";
 static NSString *const CalLogFormatterDateFormatterKey = @"sh.calaba.CalSSO-CalLogFormatter-NSDateFormatter";
-@interface LPLogFormatter () {
+@interface LPTTYLogFormatter () {
   int32_t atomicLoggerCount;
   NSDateFormatter *threadUnsafeDateFormatter;
 }
@@ -12,7 +16,7 @@ static NSString *const CalLogFormatterDateFormatterKey = @"sh.calaba.CalSSO-CalL
 
 @end
 
-@implementation LPLogFormatter
+@implementation LPTTYLogFormatter
 
 - (NSString *)stringFromDate:(NSDate *)date {
   int32_t loggerCount = OSAtomicAdd32(0, &atomicLoggerCount);
@@ -58,8 +62,7 @@ static NSString *const CalLogFormatterDateFormatterKey = @"sh.calaba.CalSSO-CalL
 
   NSString *filenameAndNumber = [NSString stringWithFormat:@"%@:%@",
                                  logMessage->_fileName, @(logMessage->_line)];
-
-  return [NSString stringWithFormat:@"%@ %@ %@ | %@\n",
+  return [NSString stringWithFormat:@"%@ %@ %@ | %@",
           dateAndTime,
           logLevel,
           filenameAndNumber,
