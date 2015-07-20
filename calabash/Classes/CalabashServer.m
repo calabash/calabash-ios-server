@@ -35,7 +35,8 @@
 #import "LPPluginLoader.h"
 #import "LPWKWebViewRuntimeLoader.h"
 #import "LPCocoaLumberjack.h"
-#import "LPLogFormatter.h"
+#import "LPTTYLogFormatter.h"
+#import "LPASLLogFormatter.h"
 
 @interface CalabashServer ()
 - (void) start;
@@ -197,12 +198,16 @@
 
     [_httpServer setTXTRecordDictionary:capabilities];
 
-    LPLogFormatter *logFormatter = [LPLogFormatter new];
-    [[LPASLLogger sharedInstance] setLogFormatter:logFormatter];
-    [[LPTTYLogger sharedInstance] setLogFormatter:logFormatter];
-    [LPLog addLogger:[LPASLLogger sharedInstance]];
+    LPTTYLogFormatter *TTYLogFormatter = [LPTTYLogFormatter new];
+    [[LPTTYLogger sharedInstance] setLogFormatter:TTYLogFormatter];
     [LPLog addLogger:[LPTTYLogger sharedInstance]];
-    [logFormatter release];
+    [TTYLogFormatter release];
+
+
+    LPASLLogFormatter *ASLLogFormatter = [LPASLLogFormatter new];
+    [[LPASLLogger sharedInstance] setLogFormatter:ASLLogFormatter];
+    [LPLog addLogger:[LPASLLogger sharedInstance]];
+    [ASLLogFormatter release];
 
     LPLogDebug(@"Creating the server: %@", _httpServer);
     LPLogDebug(@"Calabash iOS server version: %@", kLPCALABASHVERSION);
