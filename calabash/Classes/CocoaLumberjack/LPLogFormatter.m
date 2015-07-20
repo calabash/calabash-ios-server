@@ -58,8 +58,7 @@ static NSString *const CalLogFormatterDateFormatterKey = @"sh.calaba.CalSSO-CalL
 
   NSString *filenameAndNumber = [NSString stringWithFormat:@"%@:%@",
                                  logMessage->_fileName, @(logMessage->_line)];
-
-  return [NSString stringWithFormat:@"%@ %@ %@ | %@\n",
+  return [NSString stringWithFormat:@"%@ %@ %@ | %@",
           dateAndTime,
           logLevel,
           filenameAndNumber,
