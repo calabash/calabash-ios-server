@@ -844,7 +844,7 @@ static NSMutableArray *recentNonces;
   if (lpHTTPLogLevel == LPLogLevelVerbose) {
     NSData *tempData = [request messageData];
 
-    NSString *tempStr = [[NSString alloc] initWithData:tempData encoding:NSUTF8StringEncoding];
+    NSString *__unused tempStr = [[NSString alloc] initWithData:tempData encoding:NSUTF8StringEncoding];
     LPHTTPLogVerbose(@"%@[%p]: Received HTTP request:\n%@", LP_THIS_FILE, self, tempStr);
   }
 
