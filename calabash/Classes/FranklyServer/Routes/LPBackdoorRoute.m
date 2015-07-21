@@ -61,7 +61,14 @@
     result = (__bridge id)buffer;
 
     if (!result) {result = [NSNull null];}
-    return  @{ @"result" : result, @"outcome" : @"SUCCESS" };
+    return
+    @{
+      @"results": result,
+      // Legacy API:  Starting in Calabash 2.0 and Calabash 0.15.0, the 'result'
+      // key will be dropped.
+      @"result" : result,
+      @"outcome" : @"SUCCESS"
+      };
 
   } else {
 
