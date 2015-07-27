@@ -15,6 +15,9 @@
 #import "LPInvocationResult.h"
 #import "LPInvocationError.h"
 
+const static NSString *ARG_KEY = @"arg";  /* for backwards compatibility */
+const static NSString *ARGUMENTS_KEY = @"arguments";
+
 @implementation LPBackdoorRoute
 
 - (NSDictionary *)failureWithReason:(NSString *)reason details:(NSString *)details {
@@ -35,18 +38,18 @@
                            details:[NSString stringWithFormat:@"Expected selector name to be provided for backdoor, but no 'selector' key in data '%@'", data]];
   }
 
-  if (data[@"arg"] && data[@"args"]) {
-    LPLogError(@"Expected data dictionary to contain 'arg' XOR 'args'.\nData = %@", data);
+  if (data[ARG_KEY] && data[ARGUMENTS_KEY]) {
+    LPLogError(@"Expected data dictionary to contain '%@' XOR '%@'.\nData = %@", ARG_KEY, ARGUMENTS_KEY, data);
     return [self failureWithReason:@"Missing selector name."
-                           details:[NSString stringWithFormat:@"Expected 'arg' OR 'args' key in data, not both. Data: '%@'", data]];
-  } else if (!(data[@"arg"] || data[@"args"])) {
-    LPLogError(@"Expected data dictionary to contain an 'arg' or 'args' key.\nData = %@", data);
+                           details:[NSString stringWithFormat:@"Expected '%@' OR '%@' key in data, not both. Data: '%@'", ARG_KEY, ARGUMENTS_KEY, data]];
+  } else if (!(data[ARG_KEY] || data[ARGUMENTS_KEY])) {
+    LPLogError(@"Expected data dictionary to contain an '%@' or '%@' key.\nData = %@", ARG_KEY, ARGUMENTS_KEY, data);
     return [self failureWithReason:[NSString stringWithFormat:@"Missing argument(s) for selector: '%@'",
                                     selectorName]
-                           details:[NSString stringWithFormat:@"Expected backdoor selector '%@' to have an argument(s), but found no 'arg' or 'args' key in data '%@'", selectorName, data]];
+                           details:[NSString stringWithFormat:@"Expected backdoor selector '%@' to have an argument(s), but found no '%@' or '%@' key in data '%@'", ARG_KEY, ARGUMENTS_KEY, selectorName, data]];
   }
   
-  id arguments = data[@"arg"] ? @[data[@"arg"]] : data[@"args"];
+  id arguments = data[ARG_KEY] ? @[data[ARG_KEY]] : data[ARGUMENTS_KEY];
 
   SEL selector = NSSelectorFromString(selectorName);
   id<UIApplicationDelegate> delegate = [[UIApplication sharedApplication] delegate];
