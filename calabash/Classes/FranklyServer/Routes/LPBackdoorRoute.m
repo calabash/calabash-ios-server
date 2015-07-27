@@ -17,6 +17,10 @@
 
 @implementation LPBackdoorRoute
 
+- (NSDictionary *)failureWithReason:(NSString *)reason details:(NSString *)details {
+  return @{ @"details" : details, @"reason" : reason, @"outcome" : @"FAILURE" };
+}
+
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
   return [method isEqualToString:@"POST"];
 }
@@ -24,27 +28,25 @@
 - (NSDictionary *) JSONResponseForMethod:(NSString *) method
                                      URI:(NSString *) path
                                     data:(NSDictionary *) data {
-  NSString *originalSelStr = [data objectForKey:@"selector"];
-  NSString *selectorName = originalSelStr;
-  if (![originalSelStr hasSuffix:@":"]) {
-    LPLogWarn(@"Selector name is missing a ':'");
-    LPLogWarn(@"All backdoor methods must take at least one argument.");
-    LPLogWarn(@"Appending a ':' to the selector name.");
-    LPLogWarn(@"This will be an error in the future.");
-    selectorName = [selectorName stringByAppendingString:@":"];
+  NSString *selectorName = data[@"selector"];
+  if (!selectorName) {
+    LPLogError(@"Expected data dictionary to contain a 'selector' key.\nData = %@", data);
+    return [self failureWithReason:@"Missing selector name."
+                           details:[NSString stringWithFormat:@"Expected selector name to be provided for backdoor, but no 'selector' key in data '%@'", data]];
   }
 
-  id argument = [data objectForKey:@"arg"];
-  if (!argument) {
-    LPLogError(@"Expected data dictionary to contain an 'arg' key");
-    LPLogError(@"data = '%@'", data);
-    NSString *details = [NSString stringWithFormat:@"Expected backdoor selector '%@' to have an argument, but found no 'arg' key in data '%@'",
-                         selectorName, data];
-
-    NSString *reason = [NSString stringWithFormat:@"Missing argument for selector: '%@'",
-                        selectorName];
-    return @{ @"details" : details, @"reason" : reason, @"outcome" : @"FAILURE" };
+  if (data[@"arg"] && data[@"args"]) {
+    LPLogError(@"Expected data dictionary to contain 'arg' XOR 'args'.\nData = %@", data);
+    return [self failureWithReason:@"Missing selector name."
+                           details:[NSString stringWithFormat:@"Expected 'arg' OR 'args' key in data, not both. Data: '%@'", data]];
+  } else if (!(data[@"arg"] || data[@"args"])) {
+    LPLogError(@"Expected data dictionary to contain an 'arg' or 'args' key.\nData = %@", data);
+    return [self failureWithReason:[NSString stringWithFormat:@"Missing argument(s) for selector: '%@'",
+                                    selectorName]
+                           details:[NSString stringWithFormat:@"Expected backdoor selector '%@' to have an argument(s), but found no 'arg' or 'args' key in data '%@'", selectorName, data]];
   }
+  
+  id arguments = data[@"arg"] ? @[data[@"arg"]] : data[@"args"];
 
   SEL selector = NSSelectorFromString(selectorName);
   id<UIApplicationDelegate> delegate = [[UIApplication sharedApplication] delegate];
@@ -52,13 +54,12 @@
     LPInvocationResult *invocationResult;
     invocationResult = [LPInvoker invokeSelector:selector
                                       withTarget:delegate
-                                       arguments:@[argument]];
+                                       arguments:arguments];
     if ([invocationResult isError]) {
-      NSString *reason = [NSString stringWithFormat:@"Invoking backdoor resulted in error: %@",
-                          [invocationResult description]];
-      NSString *details = [NSString stringWithFormat:@"Invoking backdoor selector '%@' with argument '%@' could not be completed because '%@'",
-                           selectorName, argument, [invocationResult description]];
-      return @{ @"details" : details, @"reason" : reason, @"outcome" : @"FAILURE" };
+      return [self failureWithReason:[NSString stringWithFormat:@"Invoking backdoor resulted in error: %@",
+                                      [invocationResult description]]
+                             details:[NSString stringWithFormat:@"Invoking backdoor selector '%@' with arguments '%@' could not be completed because '%@'",
+                                      selectorName, arguments, [invocationResult description]]];
     } else {
       return
       @{

@@ -650,6 +650,8 @@
       case '@': {
         if ([argument isEqual:@"__self__"]) {
           argument = self.target;
+        } else if ([argument isEqualToString:@"__nil__"]) {
+          argument = nil;
         }
         [invocation setArgument:&argument atIndex:invocationArgIndex];
         break;
