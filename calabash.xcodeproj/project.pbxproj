@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2286A6A71B69482500A4CF24 /* LPKeyboardLanguageRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F689D11B683F4000C099AD /* LPKeyboardLanguageRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		2286A6A81B69485000A4CF24 /* LPKeyboardLanguageRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F689D11B683F4000C099AD /* LPKeyboardLanguageRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		22F689D21B683F4000C099AD /* LPKeyboardLanguageRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 22F689D01B683F4000C099AD /* LPKeyboardLanguageRoute.h */; };
+		22F689D31B683F4000C099AD /* LPKeyboardLanguageRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F689D11B683F4000C099AD /* LPKeyboardLanguageRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		22F689D51B68415A00C099AD /* LPKeyboardLanguageRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F689D11B683F4000C099AD /* LPKeyboardLanguageRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89128F951B25DD92008874B0 /* LPIntrospectionTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89128F941B25DD92008874B0 /* LPIntrospectionTestView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89F2EFE11B2243D500958052 /* LPIntrospectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89F2EFE21B2243D500958052 /* LPIntrospectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -587,6 +592,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		22F689D01B683F4000C099AD /* LPKeyboardLanguageRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPKeyboardLanguageRoute.h; sourceTree = "<group>"; };
+		22F689D11B683F4000C099AD /* LPKeyboardLanguageRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPKeyboardLanguageRoute.m; sourceTree = "<group>"; };
 		5BFF97A218B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCollectionViewScrollToItemWithMarkOperation.h; sourceTree = "<group>"; };
 		5BFF97A318B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCollectionViewScrollToItemWithMarkOperation.m; sourceTree = "<group>"; };
 		5BFF97A618B392370094E71E /* LPScrollToMarkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPScrollToMarkOperation.h; sourceTree = "<group>"; };
@@ -1245,6 +1252,8 @@
 			children = (
 				B184FDC214B6DB2B002A744C /* LPOperation.h */,
 				B184FE9214B6DDA1002A744C /* LPOperation.m */,
+				22F689D01B683F4000C099AD /* LPKeyboardLanguageRoute.h */,
+				22F689D11B683F4000C099AD /* LPKeyboardLanguageRoute.m */,
 				F5CAC06A180D499600E23F03 /* LPSliderOperation.h */,
 				F5CAC06B180D499600E23F03 /* LPSliderOperation.m */,
 				F55A350F17CF8F8F0001E8B4 /* LPDatePickerOperation.h */,
@@ -1840,6 +1849,8 @@
 			files = (
 				F5091C2F18C4E1D700C85307 /* CalabashServer.h in Headers */,
 				F55185711AC389CD00CE06DC /* LPCORSResponse.h in Headers */,
+				22F689D21B683F4000C099AD /* LPKeyboardLanguageRoute.h in Headers */,
+				F59C5CFA18E0BBAE0087B51D /* LPHTTPResponse.h in Headers */,
 				F59C5CFB18E0BBAE0087B51D /* LPHTTPAsyncFileResponse.h in Headers */,
 				F59C5CFC18E0BBAE0087B51D /* LPHTTPDataResponse.h in Headers */,
 				F59C5CFD18E0BBAE0087B51D /* LPHTTPDynamicFileResponse.h in Headers */,
@@ -2180,6 +2191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2286A6A81B69485000A4CF24 /* LPKeyboardLanguageRoute.m in Sources */,
 				B15BF9E719ABB1EB00B38577 /* LPI.mm in Sources */,
 				B15BF99A19ABB1DD00B38577 /* LPSSKeychain.m in Sources */,
 				B15BF99B19ABB1DD00B38577 /* LPSSKeychainQuery.m in Sources */,
@@ -2296,6 +2308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2286A6A71B69482500A4CF24 /* LPKeyboardLanguageRoute.m in Sources */,
 				B1D5BD7919A23BCE0070E8CE /* LPGCDAsyncSocket.m in Sources */,
 				B1D5BD7A19A23BCE0070E8CE /* LPHTTPAuthenticationRequest.m in Sources */,
 				B1D5BD7B19A23BCE0070E8CE /* LPHTTPConnection.m in Sources */,
@@ -2417,6 +2430,7 @@
 				F5A8B4591B39BFEB00F390CA /* LPCLIColor.m in Sources */,
 				F5091BE018C4E1D700C85307 /* LPHTTPMessage.m in Sources */,
 				F5091BE118C4E1D700C85307 /* LPHTTPServer.m in Sources */,
+				22F689D31B683F4000C099AD /* LPKeyboardLanguageRoute.m in Sources */,
 				F5091BE218C4E1D700C85307 /* NSData+LPCHSExtensions.m in Sources */,
 				B1F7722E1A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */,
 				F5091BE318C4E1D700C85307 /* NSNumber+LPCHSExtensions.m in Sources */,
@@ -2527,6 +2541,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22F689D51B68415A00C099AD /* LPKeyboardLanguageRoute.m in Sources */,
 				F50CBF991A04058C004AC9DA /* LPScrollOperation.m in Sources */,
 				F50CBF9B1A04058C004AC9DA /* LPSetTextOperation.m in Sources */,
 				F50CBFA91A0405B2004AC9DA /* LPGenericAsyncRoute.m in Sources */,

@@ -30,6 +30,7 @@
 #import "LPLocationRoute.h"
 #import "LPDebugRoute.h"
 #import "LPDumpRoute.h"
+#import "LPKeyboardLanguageRoute.h"
 #import <dlfcn.h>
 #import "LPInfoPlist.h"
 #import "LPPluginLoader.h"
@@ -143,6 +144,10 @@
     LPKeyboardRoute *keyboard = [LPKeyboardRoute new];
     [LPRouter addRoute:keyboard forPath:@"keyboard"];
     [keyboard release];
+
+    LPKeyboardLanguageRoute *keyboard_language = [LPKeyboardLanguageRoute new];
+    [LPRouter addRoute:keyboard_language forPath:@"keyboard-language"];
+    [keyboard_language release];
 
     LPUIARouteOverUserPrefs *uiaUsingUserPrefs = [LPUIARouteOverUserPrefs new];
     [LPRouter addRoute:uiaUsingUserPrefs forPath:@"uia"];
