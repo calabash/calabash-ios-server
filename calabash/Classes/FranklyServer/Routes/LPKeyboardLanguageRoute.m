@@ -23,10 +23,11 @@
                                     data:(NSDictionary *) data {
   UIWindow *keyboardWindow = [self findKeyboardWindow];
   UIView *keyboardView = [self findKeyboardViewWith:keyboardWindow];
+  NSString *languageCode = [self primaryLanguageFromKeyboardView:keyboardView];
 
   NSDictionary *response = nil;
 
-  if(!keyboardView.textInputMode.primaryLanguage){
+  if(!languageCode) {
     response =
     @{
       @"outcome" : @"FAILURE",
@@ -37,7 +38,7 @@
     response =
     @{
       @"outcome" : @"SUCCESS",
-      @"results" : @{@"input_mode" : keyboardView.textInputMode.primaryLanguage},
+      @"results" : @{@"input_mode" : languageCode}
       };
   }
 
@@ -61,6 +62,16 @@
   return [UIScriptParser findViewByClass:@"UIKBKeyplaneView"
                                 fromView:aWindow];
 
+}
+
+- (NSString *) primaryLanguageFromKeyboardView:(UIView *) keyboardView {
+  SEL selector = @selector(textInputMode);
+
+  if (![keyboardView respondsToSelector:selector]) {
+    return nil;
+  }
+
+  return keyboardView.textInputMode.primaryLanguage;
 }
 
 @end

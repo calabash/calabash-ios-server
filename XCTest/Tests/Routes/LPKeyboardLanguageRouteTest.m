@@ -2,8 +2,17 @@
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
 
-#import <UIKit/UIKit.h>
-#import <XCTest/XCTest.h>
+#import "LPKeyboardLanguageRoute.h"
+
+@interface LPKeyboardLanguageRoute (LPXCTEST)
+
+- (BOOL) canHandlePostForPath:(NSArray *) path;
+- (UIWindow *) findKeyboardWindow;
+- (UIView *) findKeyboardViewWith:(UIWindow *) window;
+- (NSString *) primaryLanguageFromKeyboardView:(UIView *) keyboardView;
+
+@end
+
 
 @interface LPKeyboardLanguageRouteTest : XCTestCase
 
@@ -12,25 +21,59 @@
 @implementation LPKeyboardLanguageRouteTest
 
 - (void)setUp {
-    [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+  [super setUp];
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
+  [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+- (void) testCanHandlePostForPath {
+  LPKeyboardLanguageRoute *route = [LPKeyboardLanguageRoute new];
+  NSArray *path = @[@"cannot-handle"];
+  expect([route canHandlePostForPath:path]).to.equal(NO);
+
+  path = @[@"keyboard-language"];
+  expect([route canHandlePostForPath:path]).to.equal(YES);
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void) testJSONResponseForMethodFailure {
+  LPKeyboardLanguageRoute *route = [LPKeyboardLanguageRoute new];
+
+  id mock = OCMPartialMock(route);
+  [[[mock expect] andReturn:nil] findKeyboardWindow];
+
+  NSDictionary *response;
+  response = [mock JSONResponseForMethod:nil URI:nil data:nil];
+
+  expect([response count]).to.equal(3);
+  expect(response[@"outcome"]).to.equal(@"FAILURE");
+  expect(response[@"details"]).notTo.equal(nil);
+  expect(response[@"reason"]).notTo.equal(nil);
+  [mock verify];
 }
+
+- (void) testJSONResponseForMethodSuccess {
+  LPKeyboardLanguageRoute *route = [LPKeyboardLanguageRoute new];
+
+  id mock = OCMPartialMock(route);
+  UIWindow *window = [[UIWindow alloc] initWithFrame:CGRectZero];
+  [[[mock expect] andReturn:window] findKeyboardWindow];
+
+  UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
+  [[[mock expect] andReturn:view] findKeyboardViewWith:window];
+
+  [[[mock expect] andReturn:@"en"] primaryLanguageFromKeyboardView:view];
+
+
+  NSDictionary *response;
+  response = [mock JSONResponseForMethod:nil URI:nil data:nil];
+
+  expect([response count]).to.equal(2);
+  expect(response[@"outcome"]).to.equal(@"SUCCESS");
+  expect(response[@"results"][@"input_mode"]).to.equal(@"en");
+  [mock verify];
+}
+
 
 @end
