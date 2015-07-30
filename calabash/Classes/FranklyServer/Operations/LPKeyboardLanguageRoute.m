@@ -29,10 +29,10 @@
 
   if(!keyboardView.textInputMode.primaryLanguage){
     results = @{@"input_mode": [NSNull null]};
-    outcome = @"failure";
+    outcome = @"FAILURE";
   } else {
     results = @{@"input_mode": keyboardView.textInputMode.primaryLanguage};
-    outcome = @"success";
+    outcome = @"SUCCESS";
   }
 
   return @{@"outcome": outcome, @"results": results};
