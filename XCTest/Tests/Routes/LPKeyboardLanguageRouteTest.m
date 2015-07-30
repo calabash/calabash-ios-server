@@ -8,7 +8,7 @@
 
 - (BOOL) canHandlePostForPath:(NSArray *) path;
 - (UIWindow *) findKeyboardWindow;
-- (UIView *) findKeyboardViewWith:(UIWindow *) window;
+- (UIView *) findKeyboardViewWithWindow:(UIWindow *) window;
 - (NSString *) primaryLanguageFromKeyboardView:(UIView *) keyboardView;
 
 @end
@@ -61,7 +61,7 @@
   [[[mock expect] andReturn:window] findKeyboardWindow];
 
   UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
-  [[[mock expect] andReturn:view] findKeyboardViewWith:window];
+  [[[mock expect] andReturn:view] findKeyboardViewWithWindow:window];
 
   [[[mock expect] andReturn:@"en"] primaryLanguageFromKeyboardView:view];
 

@@ -22,7 +22,7 @@
                                      URI:(NSString *) path
                                     data:(NSDictionary *) data {
   UIWindow *keyboardWindow = [self findKeyboardWindow];
-  UIView *keyboardView = [self findKeyboardViewWith:keyboardWindow];
+  UIView *keyboardView = [self findKeyboardViewWithWindow:keyboardWindow];
   NSString *languageCode = [self primaryLanguageFromKeyboardView:keyboardView];
 
   NSDictionary *response = nil;
@@ -45,7 +45,7 @@
   return response;
 }
 
-- (UIWindow *) findKeyboardWindow{
+- (UIWindow *) findKeyboardWindow {
   UIWindow *keyboardWindow = nil;
 
   for (UIWindow *window in [LPTouchUtils applicationWindows]) {
@@ -57,10 +57,10 @@
   return keyboardWindow;
 }
 
-- (UIView *) findKeyboardViewWith: (UIWindow *)aWindow{
+- (UIView *) findKeyboardViewWithWindow:(UIWindow *) window{
 
   return [UIScriptParser findViewByClass:@"UIKBKeyplaneView"
-                                fromView:aWindow];
+                                fromView:window];
 
 }
 
