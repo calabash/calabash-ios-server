@@ -415,6 +415,7 @@
 		F56592671B47E76C00C044C8 /* LPWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F56592621B47E76C00C044C8 /* LPWebSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F56592681B47E76C00C044C8 /* LPWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F56592621B47E76C00C044C8 /* LPWebSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F56592691B47E76C00C044C8 /* LPWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F56592621B47E76C00C044C8 /* LPWebSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F565B48B1B6A33600039ACFF /* LPKeyboardLanguageRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F565B48A1B6A33600039ACFF /* LPKeyboardLanguageRouteTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F56630921A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F56630951A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F56630961A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -811,6 +812,7 @@
 		F56592601B4713FE00C044C8 /* LPRepeatingTimerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LPRepeatingTimerProtocol.h; sourceTree = "<group>"; };
 		F56592611B47E76C00C044C8 /* LPWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPWebSocket.h; sourceTree = "<group>"; };
 		F56592621B47E76C00C044C8 /* LPWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPWebSocket.m; sourceTree = "<group>"; };
+		F565B48A1B6A33600039ACFF /* LPKeyboardLanguageRouteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPKeyboardLanguageRouteTest.m; sourceTree = "<group>"; };
 		F566308A1A39B09C00DEA0C0 /* LPInfoPlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPInfoPlist.h; sourceTree = "<group>"; };
 		F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInfoPlist.m; sourceTree = "<group>"; };
 		F56B4EF31B56FC3600E7EA23 /* LPInvokerSelectorWithArgumentsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvokerSelectorWithArgumentsTest.m; sourceTree = "<group>"; };
@@ -1783,6 +1785,7 @@
 				89128F931B25DD92008874B0 /* LPIntrospectionTestView.h */,
 				89128F941B25DD92008874B0 /* LPIntrospectionTestView.m */,
 				F54EFE8C1B5B88D500F8D665 /* LPRouterTest.m */,
+				F565B48A1B6A33600039ACFF /* LPKeyboardLanguageRouteTest.m */,
 			);
 			path = Routes;
 			sourceTree = "<group>";
@@ -2681,6 +2684,7 @@
 				F50CBF821A040564004AC9DA /* LPHTTPAuthenticationRequest.m in Sources */,
 				F5BA6F0A1B4E4B8200DB898F /* LPInvoker.m in Sources */,
 				F50CBFC81A0405E9004AC9DA /* LPReflectUtils.m in Sources */,
+				F565B48B1B6A33600039ACFF /* LPKeyboardLanguageRouteTest.m in Sources */,
 				F5C224EB1AD47403001DB4FA /* LPVersionRouteTest.m in Sources */,
 				F5BA6F201B4EC3A700DB898F /* LPInvokerSelectorReturnTypeEncodingIsUnhandledTest.m in Sources */,
 				F50CBF931A04058C004AC9DA /* LPDatePickerOperation.m in Sources */,
