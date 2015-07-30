@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		2286A6A71B69482500A4CF24 /* LPKeyboardLanguageRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F689D11B683F4000C099AD /* LPKeyboardLanguageRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		2286A6A81B69485000A4CF24 /* LPKeyboardLanguageRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F689D11B683F4000C099AD /* LPKeyboardLanguageRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		22F689D21B683F4000C099AD /* LPKeyboardLanguageRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = 22F689D01B683F4000C099AD /* LPKeyboardLanguageRoute.h */; };
 		22F689D31B683F4000C099AD /* LPKeyboardLanguageRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F689D11B683F4000C099AD /* LPKeyboardLanguageRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		22F689D51B68415A00C099AD /* LPKeyboardLanguageRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F689D11B683F4000C099AD /* LPKeyboardLanguageRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89128F951B25DD92008874B0 /* LPIntrospectionTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89128F941B25DD92008874B0 /* LPIntrospectionTestView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -290,6 +289,7 @@
 		F5091C2F18C4E1D700C85307 /* CalabashServer.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8814B6DAE1002A744C /* CalabashServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5091C3F18C4E1D700C85307 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E757A15D434D00066550B /* CFNetwork.framework */; };
 		F5091C4018C4E1D700C85307 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
+		F5097CEB1B6A34D800326D6A /* LPHTTPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B116C9B914E6565500663205 /* LPHTTPResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F50CBF771A03F69A004AC9DA /* LPTestToolsStandup.m in Sources */ = {isa = PBXBuildFile; fileRef = F50CBF761A03F69A004AC9DA /* LPTestToolsStandup.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBF7A1A040511004AC9DA /* LPTouchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */; };
 		F50CBF7C1A040564004AC9DA /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -442,7 +442,6 @@
 		F5986B301B5A327500CCB142 /* LPOperationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5986B2F1B5A327500CCB142 /* LPOperationTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F59C5CF818E0BB1A0087B51D /* LPRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDBE14B6DB2B002A744C /* LPRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F59C5CF918E0BB290087B51D /* LPRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDBF14B6DB2B002A744C /* LPRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F59C5CFA18E0BBAE0087B51D /* LPHTTPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B116C9B914E6565500663205 /* LPHTTPResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F59C5CFB18E0BBAE0087B51D /* LPHTTPAsyncFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B116C99E14E6564200663205 /* LPHTTPAsyncFileResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F59C5CFC18E0BBAE0087B51D /* LPHTTPDataResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B116C9A014E6564200663205 /* LPHTTPDataResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F59C5CFD18E0BBAE0087B51D /* LPHTTPDynamicFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B116C9A214E6564200663205 /* LPHTTPDynamicFileResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1852,13 +1851,11 @@
 			files = (
 				F5091C2F18C4E1D700C85307 /* CalabashServer.h in Headers */,
 				F55185711AC389CD00CE06DC /* LPCORSResponse.h in Headers */,
-				22F689D21B683F4000C099AD /* LPKeyboardLanguageRoute.h in Headers */,
-				F59C5CFA18E0BBAE0087B51D /* LPHTTPResponse.h in Headers */,
 				F59C5CFB18E0BBAE0087B51D /* LPHTTPAsyncFileResponse.h in Headers */,
 				F59C5CFC18E0BBAE0087B51D /* LPHTTPDataResponse.h in Headers */,
 				F59C5CFD18E0BBAE0087B51D /* LPHTTPDynamicFileResponse.h in Headers */,
 				F59C5CFE18E0BBAE0087B51D /* LPHTTPFileResponse.h in Headers */,
-				F59C5CFA18E0BBAE0087B51D /* LPHTTPResponse.h in Headers */,
+				F5097CEB1B6A34D800326D6A /* LPHTTPResponse.h in Headers */,
 				F5F2D5E31ACACF2F0027937B /* LPIsWebView.h in Headers */,
 				F59C5CF818E0BB1A0087B51D /* LPRoute.h in Headers */,
 				F59C5CF918E0BB290087B51D /* LPRouter.h in Headers */,
