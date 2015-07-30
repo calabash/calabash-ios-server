@@ -24,35 +24,29 @@
   UIWindow *keyboardWindow = [self findKeyboardWindow];
   UIView *keyboardView = [self findKeyboardViewWith:keyboardWindow];
 
-  NSDictionary *results;
-  NSString *outcome;
-  
-  if(!keyboardView){
-    results = @{@"input_mode": [NSNull null]};
-    outcome = @"failure";
-  }
-  else{
-    results = @{@"input_mode": keyboardView.textInputMode.primaryLanguage};
-    outcome = @"success";
+  NSDictionary *response = nil;
+
+  if(!keyboardView.textInputMode.primaryLanguage){
+    response =
+    @{
+      @"outcome" : @"FAILURE",
+      @"details" : @"The keyboard must be visible.",
+      @"reason" : @"Could not find the keyboard view."
+      };
+  } else {
+    response =
+    @{
+      @"outcome" : @"SUCCESS",
+      @"results" : @{@"input_mode" : keyboardView.textInputMode.primaryLanguage},
+      };
   }
 
-  return @{@"outcome": outcome, @"results": results};
-}
-
-- (void)handleCurrentInputModeDidChangeNotificationWith: (NSNotification*)notification{
-
-  NSLog(@"Inside notification %@", notification);
-  id obj = [notification object];
-  NSLog(@"Inside notification %@", obj);
-  if ([obj respondsToSelector:@selector(primaryLanguage)]) {
-    id mode = [obj performSelector:@selector(primaryLanguage)];
-    NSLog(@"MODE: %@", mode);
-  }
+  return response;
 }
 
 - (UIWindow *) findKeyboardWindow{
   UIWindow *keyboardWindow = nil;
-  
+
   for (UIWindow *window in [LPTouchUtils applicationWindows]) {
     if ([NSStringFromClass([window class]) isEqual:@"UITextEffectsWindow"]) {
       keyboardWindow = window;
@@ -63,18 +57,10 @@
 }
 
 - (UIView *) findKeyboardViewWith: (UIWindow *)aWindow{
-  
+
   return [UIScriptParser findViewByClass:@"UIKBKeyplaneView"
                                 fromView:aWindow];
-  
+
 }
-
-
-
-
-
-
-
-
 
 @end
