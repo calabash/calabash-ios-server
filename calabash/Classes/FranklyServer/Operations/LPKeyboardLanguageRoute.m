@@ -24,18 +24,24 @@
   UIWindow *keyboardWindow = [self findKeyboardWindow];
   UIView *keyboardView = [self findKeyboardViewWith:keyboardWindow];
 
-  NSDictionary *results;
-  NSString *outcome;
+  NSDictionary *response = nil;
 
   if(!keyboardView.textInputMode.primaryLanguage){
-    results = @{@"input_mode": [NSNull null]};
-    outcome = @"FAILURE";
+    response =
+    @{
+      @"outcome" : @"FAILURE",
+      @"details" : @"The keyboard must be visible.",
+      @"reason" : @"Could not find the keyboard view."
+      };
   } else {
-    results = @{@"input_mode": keyboardView.textInputMode.primaryLanguage};
-    outcome = @"SUCCESS";
+    response =
+    @{
+      @"outcome" : @"SUCCESS",
+      @"results" : @{@"input_mode" : keyboardView.textInputMode.primaryLanguage},
+      };
   }
 
-  return @{@"outcome": outcome, @"results": results};
+  return response;
 }
 
 - (UIWindow *) findKeyboardWindow{
