@@ -285,6 +285,11 @@
 		F5091C2F18C4E1D700C85307 /* CalabashServer.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8814B6DAE1002A744C /* CalabashServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5091C3F18C4E1D700C85307 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B17E757A15D434D00066550B /* CFNetwork.framework */; };
 		F5091C4018C4E1D700C85307 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
+		F5097CEB1B6A34D800326D6A /* LPHTTPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B116C9B914E6565500663205 /* LPHTTPResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F5097CFA1B6A377E00326D6A /* LPKeyboardLanguageRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F5097CF61B6A377E00326D6A /* LPKeyboardLanguageRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5097CFB1B6A377E00326D6A /* LPKeyboardLanguageRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F5097CF61B6A377E00326D6A /* LPKeyboardLanguageRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5097CFC1B6A377E00326D6A /* LPKeyboardLanguageRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F5097CF61B6A377E00326D6A /* LPKeyboardLanguageRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5097CFD1B6A377E00326D6A /* LPKeyboardLanguageRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F5097CF61B6A377E00326D6A /* LPKeyboardLanguageRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBF771A03F69A004AC9DA /* LPTestToolsStandup.m in Sources */ = {isa = PBXBuildFile; fileRef = F50CBF761A03F69A004AC9DA /* LPTestToolsStandup.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBF7A1A040511004AC9DA /* LPTouchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */; };
 		F50CBF7C1A040564004AC9DA /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -410,6 +415,7 @@
 		F56592671B47E76C00C044C8 /* LPWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F56592621B47E76C00C044C8 /* LPWebSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F56592681B47E76C00C044C8 /* LPWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F56592621B47E76C00C044C8 /* LPWebSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F56592691B47E76C00C044C8 /* LPWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F56592621B47E76C00C044C8 /* LPWebSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F565B48B1B6A33600039ACFF /* LPKeyboardLanguageRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F565B48A1B6A33600039ACFF /* LPKeyboardLanguageRouteTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F56630921A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F56630951A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F56630961A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -436,7 +442,6 @@
 		F5986B301B5A327500CCB142 /* LPOperationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5986B2F1B5A327500CCB142 /* LPOperationTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F59C5CF818E0BB1A0087B51D /* LPRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDBE14B6DB2B002A744C /* LPRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F59C5CF918E0BB290087B51D /* LPRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDBF14B6DB2B002A744C /* LPRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F59C5CFA18E0BBAE0087B51D /* LPHTTPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B116C9B914E6565500663205 /* LPHTTPResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F59C5CFB18E0BBAE0087B51D /* LPHTTPAsyncFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B116C99E14E6564200663205 /* LPHTTPAsyncFileResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F59C5CFC18E0BBAE0087B51D /* LPHTTPDataResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B116C9A014E6564200663205 /* LPHTTPDataResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F59C5CFD18E0BBAE0087B51D /* LPHTTPDynamicFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B116C9A214E6564200663205 /* LPHTTPDynamicFileResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -767,6 +772,8 @@
 		B1FBBC5A19D0070000EE03CE /* LPDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDevice.h; sourceTree = "<group>"; };
 		F500459D17D249D000B72386 /* LPGitVersionDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPGitVersionDefines.h; sourceTree = "<group>"; };
 		F5091C4618C4E1D700C85307 /* libcalabash.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcalabash.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5097CF51B6A377E00326D6A /* LPKeyboardLanguageRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPKeyboardLanguageRoute.h; sourceTree = "<group>"; };
+		F5097CF61B6A377E00326D6A /* LPKeyboardLanguageRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPKeyboardLanguageRoute.m; sourceTree = "<group>"; };
 		F50CBF5E1A03F222004AC9DA /* XCTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = XCTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F50CBF611A03F222004AC9DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F50CBF761A03F69A004AC9DA /* LPTestToolsStandup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPTestToolsStandup.m; path = ../LPTestToolsStandup.m; sourceTree = "<group>"; };
@@ -804,6 +811,7 @@
 		F56592601B4713FE00C044C8 /* LPRepeatingTimerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LPRepeatingTimerProtocol.h; sourceTree = "<group>"; };
 		F56592611B47E76C00C044C8 /* LPWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPWebSocket.h; sourceTree = "<group>"; };
 		F56592621B47E76C00C044C8 /* LPWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPWebSocket.m; sourceTree = "<group>"; };
+		F565B48A1B6A33600039ACFF /* LPKeyboardLanguageRouteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPKeyboardLanguageRouteTest.m; sourceTree = "<group>"; };
 		F566308A1A39B09C00DEA0C0 /* LPInfoPlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPInfoPlist.h; sourceTree = "<group>"; };
 		F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInfoPlist.m; sourceTree = "<group>"; };
 		F56B4EF31B56FC3600E7EA23 /* LPInvokerSelectorWithArgumentsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvokerSelectorWithArgumentsTest.m; sourceTree = "<group>"; };
@@ -1315,6 +1323,8 @@
 				B153F55B15949F3D00867E12 /* LPVersionRoute.m */,
 				89F2EFDA1B2243D500958052 /* LPIntrospectionRoute.h */,
 				89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */,
+				F5097CF51B6A377E00326D6A /* LPKeyboardLanguageRoute.h */,
+				F5097CF61B6A377E00326D6A /* LPKeyboardLanguageRoute.m */,
 			);
 			path = Routes;
 			sourceTree = "<group>";
@@ -1774,6 +1784,7 @@
 				89128F931B25DD92008874B0 /* LPIntrospectionTestView.h */,
 				89128F941B25DD92008874B0 /* LPIntrospectionTestView.m */,
 				F54EFE8C1B5B88D500F8D665 /* LPRouterTest.m */,
+				F565B48A1B6A33600039ACFF /* LPKeyboardLanguageRouteTest.m */,
 			);
 			path = Routes;
 			sourceTree = "<group>";
@@ -1844,7 +1855,7 @@
 				F59C5CFC18E0BBAE0087B51D /* LPHTTPDataResponse.h in Headers */,
 				F59C5CFD18E0BBAE0087B51D /* LPHTTPDynamicFileResponse.h in Headers */,
 				F59C5CFE18E0BBAE0087B51D /* LPHTTPFileResponse.h in Headers */,
-				F59C5CFA18E0BBAE0087B51D /* LPHTTPResponse.h in Headers */,
+				F5097CEB1B6A34D800326D6A /* LPHTTPResponse.h in Headers */,
 				F5F2D5E31ACACF2F0027937B /* LPIsWebView.h in Headers */,
 				F59C5CF818E0BB1A0087B51D /* LPRoute.h in Headers */,
 				F59C5CF918E0BB290087B51D /* LPRouter.h in Headers */,
@@ -2228,6 +2239,7 @@
 				B15BF9BB19ABB1DD00B38577 /* LPKeychainRoute.m in Sources */,
 				B15BF9BC19ABB1DD00B38577 /* LPDebugRoute.m in Sources */,
 				B15BF9BD19ABB1DE00B38577 /* LPAppPropertyRoute.m in Sources */,
+				F5097CFD1B6A377E00326D6A /* LPKeyboardLanguageRoute.m in Sources */,
 				B15BF9BE19ABB1DE00B38577 /* LPQueryLogRoute.m in Sources */,
 				F5C04E331B33110B00F23526 /* LPDecimalRounder.m in Sources */,
 				F56592691B47E76C00C044C8 /* LPWebSocket.m in Sources */,
@@ -2342,6 +2354,7 @@
 				B1D5BD9919A23BCE0070E8CE /* LPInterpolateRoute.m in Sources */,
 				F5C094561A979CC200AE5991 /* LPWebQuery.m in Sources */,
 				B1D5BD9A19A23BCE0070E8CE /* LPRecordRoute.m in Sources */,
+				F5097CFC1B6A377E00326D6A /* LPKeyboardLanguageRoute.m in Sources */,
 				B1D5BD9B19A23BCE0070E8CE /* LPMapRoute.m in Sources */,
 				B1D5BD9C19A23BCE0070E8CE /* LPNoContentResponse.m in Sources */,
 				B1D5BD9D19A23BCE0070E8CE /* LPScreenshotRoute.m in Sources */,
@@ -2459,6 +2472,7 @@
 				F5091BFC18C4E1D700C85307 /* LPMapRoute.m in Sources */,
 				F5091BFD18C4E1D700C85307 /* LPNoContentResponse.m in Sources */,
 				F5091BFE18C4E1D700C85307 /* LPScreenshotRoute.m in Sources */,
+				F5097CFB1B6A377E00326D6A /* LPKeyboardLanguageRoute.m in Sources */,
 				F5091BFF18C4E1D700C85307 /* LPAsyncPlaybackRoute.m in Sources */,
 				F5C04E2F1B33110B00F23526 /* LPDecimalRounder.m in Sources */,
 				F56592671B47E76C00C044C8 /* LPWebSocket.m in Sources */,
@@ -2593,6 +2607,7 @@
 				F50CBFA61A0405B2004AC9DA /* LPLocationRoute.m in Sources */,
 				F50CBFBF1A0405CE004AC9DA /* UIScriptASTDirection.m in Sources */,
 				F50CBFA21A0405B2004AC9DA /* LPDebugRoute.m in Sources */,
+				F5097CFA1B6A377E00326D6A /* LPKeyboardLanguageRoute.m in Sources */,
 				F50CBF951A04058C004AC9DA /* LPFlashOperation.m in Sources */,
 				F50CBF921A04058C004AC9DA /* LPSliderOperation.m in Sources */,
 				F57099301B55751200DB35EC /* LPInvokerHasArgumentWithUnhandleEncodingTest.m in Sources */,
@@ -2666,6 +2681,7 @@
 				F50CBF821A040564004AC9DA /* LPHTTPAuthenticationRequest.m in Sources */,
 				F5BA6F0A1B4E4B8200DB898F /* LPInvoker.m in Sources */,
 				F50CBFC81A0405E9004AC9DA /* LPReflectUtils.m in Sources */,
+				F565B48B1B6A33600039ACFF /* LPKeyboardLanguageRouteTest.m in Sources */,
 				F5C224EB1AD47403001DB4FA /* LPVersionRouteTest.m in Sources */,
 				F5BA6F201B4EC3A700DB898F /* LPInvokerSelectorReturnTypeEncodingIsUnhandledTest.m in Sources */,
 				F50CBF931A04058C004AC9DA /* LPDatePickerOperation.m in Sources */,
