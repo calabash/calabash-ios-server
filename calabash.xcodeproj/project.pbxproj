@@ -426,6 +426,7 @@
 		F570992E1B555C3C00DB35EC /* LPInvokerArgumentEncodingIsHandledTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F570992D1B555C3C00DB35EC /* LPInvokerArgumentEncodingIsHandledTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F57099301B55751200DB35EC /* LPInvokerHasArgumentWithUnhandleEncodingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F570992F1B55751200DB35EC /* LPInvokerHasArgumentWithUnhandleEncodingTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F58C9F501B6F79BA007D307B /* CocoaLumberjack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F58C9F4F1B6F79BA007D307B /* CocoaLumberjack.a */; };
+		F58C9F571B6F7EB9007D307B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F561B6F7EB9007D307B /* GCDAsyncSocket.m */; };
 		F59741C11AA565190089DC88 /* OCMockitoIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59741BD1AA565190089DC88 /* OCMockitoIOS.framework */; };
 		F59741C21AA565190089DC88 /* OCHamcrestIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59741BE1AA565190089DC88 /* OCHamcrestIOS.framework */; };
 		F59741EE1AA5712F0089DC88 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F59741E31AA5712F0089DC88 /* libOCMock.a */; };
@@ -839,6 +840,8 @@
 		F58C9F4D1B6F79BA007D307B /* DDMultiFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDMultiFormatter.h; sourceTree = "<group>"; };
 		F58C9F4E1B6F79BA007D307B /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
 		F58C9F4F1B6F79BA007D307B /* CocoaLumberjack.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = CocoaLumberjack.a; sourceTree = "<group>"; };
+		F58C9F551B6F7EB9007D307B /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		F58C9F561B6F7EB9007D307B /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		F591380217C39128007B2BE4 /* LPOrientationOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPOrientationOperation.h; sourceTree = "<group>"; };
 		F591380317C39128007B2BE4 /* LPOrientationOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPOrientationOperation.m; sourceTree = "<group>"; };
 		F59741BD1AA565190089DC88 /* OCMockitoIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCMockitoIOS.framework; sourceTree = "<group>"; };
@@ -1590,6 +1593,15 @@
 			path = CocoaLumberjack;
 			sourceTree = "<group>";
 		};
+		F58C9F541B6F7EB9007D307B /* CocoaAsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				F58C9F551B6F7EB9007D307B /* GCDAsyncSocket.h */,
+				F58C9F561B6F7EB9007D307B /* GCDAsyncSocket.m */,
+			);
+			path = CocoaAsyncSocket;
+			sourceTree = "<group>";
+		};
 		F59741E21AA5712F0089DC88 /* OCMock */ = {
 			isa = PBXGroup;
 			children = (
@@ -1670,6 +1682,7 @@
 		F59CA46E1A82EF40007A2F38 /* LPTestTarget */ = {
 			isa = PBXGroup;
 			children = (
+				F58C9F541B6F7EB9007D307B /* CocoaAsyncSocket */,
 				F58C9F3F1B6F79BA007D307B /* CocoaLumberjack */,
 				F532C1E51AFF6A2D0024DA55 /* LPServerEntity.h */,
 				F532C1E61AFF6A2D0024DA55 /* LPServerEntity.m */,
@@ -2750,6 +2763,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F58C9F571B6F7EB9007D307B /* GCDAsyncSocket.m in Sources */,
 				F59CA47B1A82EF40007A2F38 /* SecondViewController.m in Sources */,
 				F532C1E31AFF4F250024DA55 /* LPCoreDataStack.m in Sources */,
 				F59CA4751A82EF40007A2F38 /* AppDelegate.m in Sources */,
