@@ -425,6 +425,7 @@
 		F570992C1B5518EF00DB35EC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F570992B1B5518EF00DB35EC /* CoreLocation.framework */; };
 		F570992E1B555C3C00DB35EC /* LPInvokerArgumentEncodingIsHandledTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F570992D1B555C3C00DB35EC /* LPInvokerArgumentEncodingIsHandledTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F57099301B55751200DB35EC /* LPInvokerHasArgumentWithUnhandleEncodingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F570992F1B55751200DB35EC /* LPInvokerHasArgumentWithUnhandleEncodingTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F58C9F501B6F79BA007D307B /* CocoaLumberjack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F58C9F4F1B6F79BA007D307B /* CocoaLumberjack.a */; };
 		F59741C11AA565190089DC88 /* OCMockitoIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59741BD1AA565190089DC88 /* OCMockitoIOS.framework */; };
 		F59741C21AA565190089DC88 /* OCHamcrestIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59741BE1AA565190089DC88 /* OCHamcrestIOS.framework */; };
 		F59741EE1AA5712F0089DC88 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F59741E31AA5712F0089DC88 /* libOCMock.a */; };
@@ -823,6 +824,21 @@
 		F58937E91A9BE0E6007B9A5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		F58B6DE8186847F70042191C /* gitversioning-after.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "gitversioning-after.sh"; sourceTree = "<group>"; };
 		F58B6DE9186847F70042191C /* gitversioning-before.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "gitversioning-before.sh"; sourceTree = "<group>"; };
+		F58C9F411B6F79BA007D307B /* CocoaLumberjack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocoaLumberjack.h; sourceTree = "<group>"; };
+		F58C9F421B6F79BA007D307B /* DDAbstractDatabaseLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAbstractDatabaseLogger.h; sourceTree = "<group>"; };
+		F58C9F431B6F79BA007D307B /* DDASLLogCapture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogCapture.h; sourceTree = "<group>"; };
+		F58C9F441B6F79BA007D307B /* DDASLLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDASLLogger.h; sourceTree = "<group>"; };
+		F58C9F451B6F79BA007D307B /* DDAssertMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDAssertMacros.h; sourceTree = "<group>"; };
+		F58C9F461B6F79BA007D307B /* DDContextFilterLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDContextFilterLogFormatter.h; sourceTree = "<group>"; };
+		F58C9F471B6F79BA007D307B /* DDDispatchQueueLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDDispatchQueueLogFormatter.h; sourceTree = "<group>"; };
+		F58C9F481B6F79BA007D307B /* DDFileLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFileLogger.h; sourceTree = "<group>"; };
+		F58C9F491B6F79BA007D307B /* DDLegacyMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLegacyMacros.h; sourceTree = "<group>"; };
+		F58C9F4A1B6F79BA007D307B /* DDLog+LOGV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DDLog+LOGV.h"; sourceTree = "<group>"; };
+		F58C9F4B1B6F79BA007D307B /* DDLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLog.h; sourceTree = "<group>"; };
+		F58C9F4C1B6F79BA007D307B /* DDLogMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDLogMacros.h; sourceTree = "<group>"; };
+		F58C9F4D1B6F79BA007D307B /* DDMultiFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDMultiFormatter.h; sourceTree = "<group>"; };
+		F58C9F4E1B6F79BA007D307B /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDTTYLogger.h; sourceTree = "<group>"; };
+		F58C9F4F1B6F79BA007D307B /* CocoaLumberjack.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = CocoaLumberjack.a; sourceTree = "<group>"; };
 		F591380217C39128007B2BE4 /* LPOrientationOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPOrientationOperation.h; sourceTree = "<group>"; };
 		F591380317C39128007B2BE4 /* LPOrientationOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPOrientationOperation.m; sourceTree = "<group>"; };
 		F59741BD1AA565190089DC88 /* OCMockitoIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OCMockitoIOS.framework; sourceTree = "<group>"; };
@@ -1031,6 +1047,7 @@
 			files = (
 				F532C1DE1AFF4F080024DA55 /* CoreData.framework in Frameworks */,
 				F55185571AC3866300CE06DC /* WebKit.framework in Frameworks */,
+				F58C9F501B6F79BA007D307B /* CocoaLumberjack.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1543,6 +1560,36 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		F58C9F3F1B6F79BA007D307B /* CocoaLumberjack */ = {
+			isa = PBXGroup;
+			children = (
+				F58C9F401B6F79BA007D307B /* CocoaLumberjack */,
+				F58C9F4F1B6F79BA007D307B /* CocoaLumberjack.a */,
+			);
+			path = CocoaLumberjack;
+			sourceTree = "<group>";
+		};
+		F58C9F401B6F79BA007D307B /* CocoaLumberjack */ = {
+			isa = PBXGroup;
+			children = (
+				F58C9F411B6F79BA007D307B /* CocoaLumberjack.h */,
+				F58C9F421B6F79BA007D307B /* DDAbstractDatabaseLogger.h */,
+				F58C9F431B6F79BA007D307B /* DDASLLogCapture.h */,
+				F58C9F441B6F79BA007D307B /* DDASLLogger.h */,
+				F58C9F451B6F79BA007D307B /* DDAssertMacros.h */,
+				F58C9F461B6F79BA007D307B /* DDContextFilterLogFormatter.h */,
+				F58C9F471B6F79BA007D307B /* DDDispatchQueueLogFormatter.h */,
+				F58C9F481B6F79BA007D307B /* DDFileLogger.h */,
+				F58C9F491B6F79BA007D307B /* DDLegacyMacros.h */,
+				F58C9F4A1B6F79BA007D307B /* DDLog+LOGV.h */,
+				F58C9F4B1B6F79BA007D307B /* DDLog.h */,
+				F58C9F4C1B6F79BA007D307B /* DDLogMacros.h */,
+				F58C9F4D1B6F79BA007D307B /* DDMultiFormatter.h */,
+				F58C9F4E1B6F79BA007D307B /* DDTTYLogger.h */,
+			);
+			path = CocoaLumberjack;
+			sourceTree = "<group>";
+		};
 		F59741E21AA5712F0089DC88 /* OCMock */ = {
 			isa = PBXGroup;
 			children = (
@@ -1623,6 +1670,7 @@
 		F59CA46E1A82EF40007A2F38 /* LPTestTarget */ = {
 			isa = PBXGroup;
 			children = (
+				F58C9F3F1B6F79BA007D307B /* CocoaLumberjack */,
 				F532C1E51AFF6A2D0024DA55 /* LPServerEntity.h */,
 				F532C1E61AFF6A2D0024DA55 /* LPServerEntity.m */,
 				F532C1DF1AFF4F240024DA55 /* LPCoreDataStack.h */,
@@ -3343,10 +3391,18 @@
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Xcode/6.4/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/LPTestTarget/CocoaLumberjack/CocoaLumberjack",
+				);
 				INFOPLIST_FILE = LPTestTarget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LPTestTarget/CocoaLumberjack",
+				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xamarin.$(PRODUCT_NAME:rfc1034identifier)";
@@ -3381,10 +3437,18 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Xcode/6.4/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(PROJECT_DIR)/LPTestTarget/CocoaLumberjack/CocoaLumberjack",
+				);
 				INFOPLIST_FILE = LPTestTarget/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LPTestTarget/CocoaLumberjack",
+				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xamarin.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
