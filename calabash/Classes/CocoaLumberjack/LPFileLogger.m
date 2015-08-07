@@ -41,7 +41,7 @@
 
 
 #if TARGET_OS_IPHONE
-BOOL doesAppRunInBackground(void);
+BOOL lpDoesAppRunInBackground(void);
 #endif
 
 unsigned long long const kLPDefaultLogMaxFileSize      = 1024 * 1024;      // 1 MB
@@ -509,7 +509,7 @@ unsigned long long const kLPDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 20
             // NSFileProtectionCompleteUntilFirstUserAuthentication.
 
             NSString *key = _defaultFileProtectionLevel ? :
-                (doesAppRunInBackground() ? NSFileProtectionCompleteUntilFirstUserAuthentication : NSFileProtectionCompleteUnlessOpen);
+                (lpDoesAppRunInBackground() ? NSFileProtectionCompleteUntilFirstUserAuthentication : NSFileProtectionCompleteUnlessOpen);
 
             attributes = @{
                 NSFileProtectionKey: key
@@ -950,7 +950,7 @@ unsigned long long const kLPDefaultLogFilesDiskQuota   = 20 * 1024 * 1024; // 20
             //
             // If user has owerwritten to NSFileProtectionNone there is no neeed to create a new one.
 
-            if (!_doNotReuseLogFiles && doesAppRunInBackground()) {
+            if (!_doNotReuseLogFiles && lpDoesAppRunInBackground()) {
                 NSString *key = mostRecentLogFileInfo.fileAttributes[NSFileProtectionKey];
 
                 if ([key length] > 0 && !([key isEqualToString:NSFileProtectionCompleteUntilFirstUserAuthentication] || [key isEqualToString:NSFileProtectionNone])) {
@@ -1507,7 +1507,7 @@ static int exception_count = 0;
  * want (even if device is locked). Thats why that attribute have to be changed to
  * NSFileProtectionCompleteUntilFirstUserAuthentication.
  */
-BOOL doesAppRunInBackground() {
+BOOL lpDoesAppRunInBackground() {
     BOOL answer = NO;
 
     NSArray *backgroundModes = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"UIBackgroundModes"];
