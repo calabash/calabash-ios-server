@@ -218,7 +218,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 * This method is called by the HTTPConnection it is spawned from.
 **/
 - (void)start {
-  // This method is not exactly designed to be overriden.
+  // This method is not exactly designed to be overridden.
   // Subclasses are encouraged to override the didOpen method instead.
 
   dispatch_async(websocketQueue, ^{
@@ -243,7 +243,7 @@ static inline NSUInteger WS_PAYLOAD_LENGTH(UInt8 frame) {
 * The server, in turn, invokes stop on each LPWebSocket instance.
 **/
 - (void)stop {
-  // This method is not exactly designed to be overriden.
+  // This method is not exactly designed to be overridden.
   // Subclasses are encouraged to override the didClose method instead.
 
   dispatch_async(websocketQueue, ^{
