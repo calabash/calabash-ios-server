@@ -484,7 +484,7 @@ typedef NS_OPTIONS(NSInteger, LPLogMessageOptions) {
                            line:(NSUInteger)line
                             tag:(id)tag
                         options:(LPLogMessageOptions)options
-                      timestamp:(NSDate *)timestamp NS_DESIGNATED_INITIALIZER;
+                      timestamp:(NSDate *)timestamp;
 
 /**
  * Read-only properties
