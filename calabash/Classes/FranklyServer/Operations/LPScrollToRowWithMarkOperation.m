@@ -16,6 +16,9 @@
 
 - (NSIndexPath *) indexPathForRowWithMark:(NSString *) aMark inTable:(UITableView *) aTable {
   NSUInteger numberOfSections = [aTable numberOfSections];
+
+  id<UITableViewDataSource> dataSource = aTable.dataSource;
+
   for (NSUInteger section = 0; section < numberOfSections; section++) {
     NSUInteger numberOfRows = [aTable numberOfRowsInSection:section];
     for (NSUInteger row = 0; row < numberOfRows; row++) {
@@ -24,7 +27,7 @@
       UITableViewCell *cell = [aTable cellForRowAtIndexPath:path];
       if (cell == nil) {
         // ask the dataSource for the cell
-        cell = [aTable.dataSource tableView:aTable cellForRowAtIndexPath:path];
+        cell = [dataSource tableView:aTable cellForRowAtIndexPath:path];
       }
 
       // is the cell itself marked?

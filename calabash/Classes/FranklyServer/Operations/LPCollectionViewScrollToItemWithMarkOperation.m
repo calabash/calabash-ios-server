@@ -16,6 +16,9 @@
 
 - (NSIndexPath *) indexPathForItemWithMark:(NSString *) aMark inCollection:(UICollectionView *) aCollection {
   NSUInteger numberOfSections = [aCollection numberOfSections];
+
+  id<UICollectionViewDataSource> dataSource = aCollection.dataSource;
+
   for (NSUInteger section = 0; section < numberOfSections; section++) {
     NSUInteger numberOfItems = [aCollection numberOfItemsInSection:section];
     for (NSUInteger item = 0; item < numberOfItems; item++) {
@@ -24,7 +27,7 @@
       UICollectionViewCell *cell = [aCollection cellForItemAtIndexPath:path];
       if (cell == nil) {
         // ask the dataSource for the cell
-        cell = [aCollection.dataSource collectionView:aCollection cellForItemAtIndexPath:path];
+        cell = [dataSource collectionView:aCollection cellForItemAtIndexPath:path];
       }
       
       // is the cell itself marked?
