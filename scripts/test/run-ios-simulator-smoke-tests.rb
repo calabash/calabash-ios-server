@@ -77,7 +77,8 @@ Dir.chdir smoke_test_working_dir do
     file.write("source 'https://rubygems.org'\n")
     file.write("gem 'run_loop', :github => 'calabash/run_loop', :branch => 'develop'\n")
     file.write("gem 'calabash-cucumber', :github => 'calabash/calabash-ios', :branch => 'develop'\n")
-    file.write("gem 'rspec'\n")
+    file.write("gem 'rspec', '~> 3.0'\n")
+    file.write("gem 'chronic', '>= 0.10.2', '< 1.0'\n")
     file.write("gem 'pry'\n")
     file.write("gem 'xcpretty', '~> 0.1'\n")
   end
