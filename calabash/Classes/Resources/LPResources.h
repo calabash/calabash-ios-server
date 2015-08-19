@@ -4,10 +4,9 @@
 //  Copyright 2011 LessPainful. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface LPResources : NSObject
-
 
 + (NSArray *) eventsFromEncoding:(NSString *) encoded;
 + (NSArray *) transformEvents:(NSArray *) eventsRecord toPoint:(CGPoint) viewCenter;
