@@ -2971,14 +2971,23 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
+				WARNING_CFLAGS = (
+					"-Wunreachable-code",
+					"-fcolor-diagnostics",
+					"-Warc-retain-cycles",
+					"-Wno-objc-designated-initializers",
+				);
 			};
 			name = Debug;
 		};
@@ -3003,15 +3012,24 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
+				WARNING_CFLAGS = (
+					"-Wunreachable-code",
+					"-fcolor-diagnostics",
+					"-Warc-retain-cycles",
+					"-Wno-objc-designated-initializers",
+				);
 			};
 			name = Release;
 		};
@@ -3151,7 +3169,7 @@
 				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_SHADOW = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
@@ -3169,6 +3187,7 @@
 					"-Wunreachable-code",
 					"-fcolor-diagnostics",
 					"-Warc-retain-cycles",
+					"-Wno-objc-designated-initializers",
 				);
 			};
 			name = Debug;
@@ -3209,7 +3228,7 @@
 				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_SHADOW = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
@@ -3227,6 +3246,7 @@
 					"-Wunreachable-code",
 					"-fcolor-diagnostics",
 					"-Warc-retain-cycles",
+					"-Wno-objc-designated-initializers",
 				);
 			};
 			name = Release;
@@ -3267,7 +3287,7 @@
 				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_SHADOW = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
@@ -3285,6 +3305,7 @@
 					"-Wunreachable-code",
 					"-fcolor-diagnostics",
 					"-Warc-retain-cycles",
+					"-Wno-objc-designated-initializers",
 				);
 			};
 			name = Debug;
@@ -3325,7 +3346,7 @@
 				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
 				GCC_WARN_NON_VIRTUAL_DESTRUCTOR = YES;
 				GCC_WARN_SHADOW = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_LABEL = YES;
 				GCC_WARN_UNUSED_PARAMETER = NO;
@@ -3343,6 +3364,7 @@
 					"-Wunreachable-code",
 					"-fcolor-diagnostics",
 					"-Warc-retain-cycles",
+					"-Wno-objc-designated-initializers",
 				);
 			};
 			name = Release;
@@ -3407,6 +3429,7 @@
 					"-Wunreachable-code",
 					"-fcolor-diagnostics",
 					"-Warc-retain-cycles",
+					"-Wno-objc-designated-initializers",
 				);
 			};
 			name = Debug;
@@ -3468,6 +3491,7 @@
 					"-Wunreachable-code",
 					"-fcolor-diagnostics",
 					"-Warc-retain-cycles",
+					"-Wno-objc-designated-initializers",
 				);
 			};
 			name = Release;
@@ -3566,6 +3590,7 @@
 					"-Wunreachable-code",
 					"-fcolor-diagnostics",
 					"-Warc-retain-cycles",
+					"-Wno-objc-designated-initializers",
 				);
 			};
 			name = Debug;
@@ -3610,6 +3635,7 @@
 					"-Wunreachable-code",
 					"-fcolor-diagnostics",
 					"-Warc-retain-cycles",
+					"-Wno-objc-designated-initializers",
 				);
 			};
 			name = Release;
