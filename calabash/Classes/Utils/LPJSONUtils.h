@@ -4,6 +4,8 @@
 //  Copyright 2011 LessPainful. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 @interface LPJSONUtils : NSObject
 
 + (NSString *) serializeDictionary:(NSDictionary *) dictionary;
