@@ -14,7 +14,10 @@
 #import "LPDevice.h"
 #import "LPOrientationOperation.h"
 #import "LPInvoker.h"
+#import "LPInvocationResult.h"
+#import "LPInvocationError.h"
 #import <math.h>
+#import "LPDecimalRounder.h"
 
 @interface LPJSONUtils ()
 
@@ -36,6 +39,9 @@
 
 + (void) insertHitPointIntoMutableDictionary:(NSMutableDictionary *) dictionary;
 
++ (NSMutableDictionary*)serializeRect:(CGRect)rect;
++ (NSNumber*)normalizeFloat:(CGFloat) x;
+
 @end
 
 @implementation LPJSONUtils
@@ -45,8 +51,11 @@
          whenTarget:(id) target
          respondsTo:(SEL) selector {
   if ([target respondsToSelector:selector]) {
-    id value = [LPInvoker invokeSelector:selector withTarget:target];
-    [dictionary setObject:value forKey:key];
+    LPInvocationResult *result;
+    result = [LPInvoker invokeZeroArgumentSelector:selector
+                                        withTarget:target];
+
+    [dictionary setObject:result.value forKey:key];
   }
 }
 
@@ -55,8 +64,10 @@
          withTarget:(id) target
            selector:(SEL) selector {
   if ([target respondsToSelector:selector]) {
-    id value = [LPInvoker invokeSelector:selector withTarget:target];
-    [dictionary setObject:value forKey:key];
+    LPInvocationResult *result;
+    result = [LPInvoker invokeZeroArgumentSelector:selector
+                                        withTarget:target];
+    [dictionary setObject:result.value forKey:key];
   } else {
     [dictionary setObject:[NSNull null] forKey:key];
   }
@@ -295,30 +306,33 @@
   return result;
 }
 
-+(NSMutableDictionary*)serializeRect:(CGRect)rect {
++ (NSMutableDictionary*)serializeRect:(CGRect)rect {
   CGFloat x = rect.origin.x;
   CGFloat y = rect.origin.y;
   CGFloat width = rect.size.width;
   CGFloat height = rect.size.height;
 
-
-  return [NSMutableDictionary dictionaryWithObjectsAndKeys:
-            [self normalizeFloat:x],      @"x",
-            [self normalizeFloat:y],      @"y",
-            [self normalizeFloat:width],  @"width",
-            [self normalizeFloat:height], @"height",
-          nil];
-
+  return
+  [@{
+     @"x" : [self normalizeFloat:x],
+     @"y" : [self normalizeFloat:y],
+     @"width" : [self normalizeFloat:width],
+     @"height" : [self normalizeFloat:height]
+     } mutableCopy];
 }
 
-+(NSNumber*)normalizeFloat:(CGFloat) x {
-  if (isfinite(x)) {
-    return @(x);
-  }
++ (NSNumber*)normalizeFloat:(CGFloat) x {
   if (isinf(x)) {
     return (x == INFINITY ? @(CGFLOAT_MAX) : @(CGFLOAT_MIN));
+  } else if (x == CGFLOAT_MIN) {
+    return @(CGFLOAT_MIN);
+  } else if (x == CGFLOAT_MAX) {
+    return @(CGFLOAT_MAX);
+  } else {
+    LPDecimalRounder *rounder = [LPDecimalRounder new];
+    CGFloat rounded = [rounder round:x];
+    return @(rounded);
   }
-  return @(CGFLOAT_MAX);
 }
 
 +(NSMutableDictionary*)jsonifyAccessibilityElement:(id)object {

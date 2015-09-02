@@ -1,3 +1,7 @@
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
 //
 //  Operation.m
 //  Created by Karl Krukow on 14/08/11.
@@ -17,53 +21,74 @@
 #import "LPTouchUtils.h"
 #import "LPSliderOperation.h"
 #import "LPCollectionViewScrollToItemOperation.h"
+#import "LPInvoker.h"
+#import "LPInvocationResult.h"
+#import "LPInvocationError.h"
+#import "LPCocoaLumberjack.h"
+#import "LPJSONUtils.h"
 
 @interface LPOperation ()
-
-- (NSArray *) arguments;
 
 @end
 
 @implementation LPOperation
 
-- (NSArray *) arguments {
-  return _arguments;
+#pragma mark - Memory Management
+
+@synthesize selector = _selector;
+@synthesize arguments = _arguments;
+@synthesize done = _done;
+
+- (id) initWithOperation:(NSDictionary *) operation {
+  self = [super init];
+  if (self != nil) {
+    _selector = NSSelectorFromString([operation objectForKey:@"method_name"]);
+    _arguments = [operation objectForKey:@"arguments"];
+    _done = NO;
+  }
+  return self;
 }
 
 + (id) operationFromDictionary:(NSDictionary *) dictionary {
   NSString *opName = [dictionary valueForKey:@"method_name"];
-  LPOperation *op = nil;
+  LPOperation *operation = nil;
   if ([opName isEqualToString:@"scrollToRow"]) {
-    op = [[LPScrollToRowOperation alloc] initWithOperation:dictionary];
+    operation = [[LPScrollToRowOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"collectionViewScrollToItemWithMark"]) {
-    op = [[LPCollectionViewScrollToItemWithMarkOperation alloc] initWithOperation:dictionary];
+    operation = [[LPCollectionViewScrollToItemWithMarkOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"scrollToRowWithMark"]) {
-    op = [[LPScrollToRowWithMarkOperation alloc] initWithOperation:dictionary];
+    operation = [[LPScrollToRowWithMarkOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"scroll"]) {
-    op = [[LPScrollOperation alloc] initWithOperation:dictionary];
+    operation = [[LPScrollOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"query"]) {
-    op = [[LPQueryOperation alloc] initWithOperation:dictionary];
+    operation = [[LPQueryOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"query_all"]) {
-    op = [[LPQueryAllOperation alloc] initWithOperation:dictionary];
+    operation = [[LPQueryAllOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"setText"]) {
-    op = [[LPSetTextOperation alloc] initWithOperation:dictionary];
+    operation = [[LPSetTextOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"flash"]) {
-    op = [[LPFlashOperation alloc] initWithOperation:dictionary];
+    operation = [[LPFlashOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"orientation"]) {
-    op = [[LPOrientationOperation alloc] initWithOperation:dictionary];
+    operation = [[LPOrientationOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"changeDatePickerDate"]) {
-    op = [[LPDatePickerOperation alloc] initWithOperation:dictionary];
+    operation = [[LPDatePickerOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"changeSlider"]) {
-    op = [[LPSliderOperation alloc] initWithOperation:dictionary];
+    operation = [[LPSliderOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"collectionViewScroll"]) {
-    op = [[LPCollectionViewScrollToItemOperation alloc]
+    operation = [[LPCollectionViewScrollToItemOperation alloc]
             initWithOperation:dictionary];
   } else {
-    op = [[LPOperation alloc] initWithOperation:dictionary];
+    operation = [[LPOperation alloc] initWithOperation:dictionary];
   }
-  return [op autorelease];
+  return operation;
 }
 
+- (NSString *) description {
+  NSString *className = NSStringFromClass([self class]);
+  return [NSString stringWithFormat:@"<%@ '%@' with arguments '%@'>",
+          className, NSStringFromSelector(_selector),
+          [_arguments componentsJoinedByString:@", "]];
+}
 
 + (NSArray *) performQuery:(id) query {
   UIScriptParser *parser = nil;
@@ -79,92 +104,59 @@
   NSArray *allWindows = [LPTouchUtils applicationWindows];
   
   NSArray *result = [parser evalWith:allWindows];
-  [parser release];
 
   return result;
 }
 
+/*
+ Examples:
 
-- (id) initWithOperation:(NSDictionary *) operation {
-  self = [super init];
-  if (self != nil) {
-    _selector = NSSelectorFromString([operation objectForKey:@"method_name"]);
-    _arguments = [[operation objectForKey:@"arguments"] retain];
-  }
-  return self;
-}
+ # Calls this method, because :text is not a defined operation.
+ > map("textField", :text)
+ => [ "old text" ]
 
+ # Does not call this method, because :setText is a defined operation -
+ # see operationFromDictionary:
+ > map("textField", :setText, 'new text')
+ => [ <UITextField ... > ]
 
-- (void) dealloc {
-  [_arguments release];
-  _arguments = nil;
-  [super dealloc];
-}
+ # Calls this method, because 'setText:' is not a defined operation.
+ > map("textField", 'setText:', 'newer text')
+ => [ "<VOID>" ]
 
+ The map function is the only caller I have found.  My guess is that this is
+ legacy code that is not expected to be hit by casual users.  Most arbritary
+ invocations pass through `query` and not map.
+ */
+- (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
+  LPInvocationResult *invocationResult;
+  invocationResult = [LPInvoker invokeSelector:self.selector
+                                    withTarget:target
+                                     arguments:self.arguments];
+  id returnValue = nil;
 
-- (NSString *) description {
-  return [NSString stringWithFormat:@"Operation<SEL=%@,Args=%@>",
-                                    NSStringFromSelector(_selector),
-                                    _arguments];
-}
-
-
-- (id) performWithTarget:(UIView *) target error:(NSError **) error {
-  NSMethodSignature *tSig = [target methodSignatureForSelector:_selector];
-  NSUInteger argc = tSig.numberOfArguments - 2;
-  if (argc != [_arguments count] && *error != NULL) {
-    *error = [NSError errorWithDomain:@"CalabashServer" code:1
-                             userInfo:[NSDictionary dictionaryWithObjectsAndKeys:@"Arity mismatch", @"reason",
-                                       [NSString stringWithFormat:@"%@ applied to selector %@ with %@ args",
-                                        self,
-                                        NSStringFromSelector(
-                                                             _selector),
-                                        @(argc)], @"details",
-                                                                                 nil]];
-    return nil;
-  }
-
-  NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:tSig];
-  [invocation setSelector:_selector];
-
-  NSInteger index = 2;
-  for (NSObject *arg in _arguments) {
-    [invocation setArgument:&arg atIndex:index++];
-  }
-
-  [invocation invokeWithTarget:target];
-
-
-  const char *returnType = tSig.methodReturnType;
-
-  id returnValue;
-  if (!strcmp(returnType, @encode(void))) {
-    returnValue = nil;
-  } else if (!strcmp(returnType,
-          @encode(id))) // retval is an objective c object
-  {
-    [invocation getReturnValue:&returnValue];
-  } else {
-    // handle primitive c types by wrapping them in an NSValue
-
-    NSUInteger length = [tSig methodReturnLength];
-    void *buffer = (void *) malloc(length);
-    [invocation getReturnValue:buffer];
-
-    // for some reason using [NSValue valueWithBytes:returnType] is creating instances of NSConcreteValue rather than NSValue, so
-    //I'm fudging it here with case-by-case logic
-    if (!strcmp(returnType, @encode(BOOL))) {
-      returnValue = [NSNumber numberWithBool:*((BOOL *) buffer)];
-    } else if (!strcmp(returnType, @encode(NSInteger))) {
-      returnValue = [NSNumber numberWithInteger:*((NSInteger *) buffer)];
-    } else if (!strcmp(returnType, @encode(float))) {
-      returnValue = [NSNumber numberWithFloat:*((float *) buffer)];
-    } else {
-      returnValue = [[[NSValue valueWithBytes:buffer objCType:returnType] copy]
-              autorelease];
+  if ([invocationResult isError]) {
+    NSString *description = [invocationResult description];
+    if (error) {
+      NSDictionary *userInfo =
+      @{
+        NSLocalizedDescriptionKey : description
+        };
+      *error = [NSError errorWithDomain:@"CalabashServer"
+                                   code:1
+                               userInfo:userInfo];
     }
-    free(buffer);//memory leak here, but apparently NSValue doesn't copy the passed buffer, it just stores the pointer
+    LPLogError(@"Could not call selector '%@' on target '%@' - %@",
+               NSStringFromSelector(self.selector), target, description);
+    returnValue = description;
+  } else {
+    if ([invocationResult isNSNull]) {
+      returnValue = nil;
+    } else {
+      returnValue = invocationResult.value;
+    }
   }
+
   return returnValue;
 }
 

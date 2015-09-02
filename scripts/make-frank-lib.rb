@@ -10,12 +10,12 @@ end
 
 xcpretty_available = `gem list xcpretty -i`.chomp == 'true'
 
+target_arg = 'calabash-plugin-for-frank'
+
 if target == 'sim'
-  target_arg = 'frank-calabash-simulator'
   sdk = 'iphonesimulator'
   arches = 'i386 x86_64'
 else
-  target_arg = 'frank-calabash-device'
   sdk = 'iphoneos'
   arches = 'armv7 armv7s arm64'
 end
@@ -31,8 +31,11 @@ args =
             "VALID_ARCHS=\"#{arches}\"",
             'ONLY_ACTIVE_ARCH=NO',
             "-sdk #{sdk}",
-            'IPHONEOS_DEPLOYMENT_TARGET=5.1.1',
+            # Minimum version for ENABLE_BITCODE
+            'IPHONEOS_DEPLOYMENT_TARGET=6.0',
             'GCC_TREAT_WARNINGS_AS_ERRORS=YES',
+            'GCC_GENERATE_TEST_COVERAGE_FILES=NO',
+            'GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=NO',
             xcpretty_available ? '| xcpretty -c' : ''
       ].join(' ')
 

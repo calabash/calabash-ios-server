@@ -6,7 +6,7 @@
 //
 
 #import "LPUIASharedElementChannel.h"
-#import "LPLog.h"
+#import "LPLogger.h"
 #import "LPJSONUtils.h"
 
 @implementation LPUIASharedElementChannel {
@@ -44,12 +44,12 @@
 - (void) runAutomationCommand:(NSString *) command then:(UIACommandHandler) resultHandler {
   if ([self initializeSharedTextField]) {
     dispatch_async(_uiaQueue, ^{
-      [LPLog debug: @"Waiting for synchronization with UIAutomation..."];
+      [LPLogger debug: @"Waiting for synchronization with UIAutomation..."];
       LPSharedUIATextField *sharedElement = [LPSharedUIATextField sharedTextField];
       while (!sharedElement.isSynchronized) {
         [NSThread sleepForTimeInterval:0.1];
       }
-      [LPLog debug:@"LPUIASharedElementChannel synchronized..."];
+      [LPLogger debug:@"LPUIASharedElementChannel synchronized..."];
       dispatch_async(dispatch_get_main_queue(), ^{
         [self doRunAutomationCommand:command then:resultHandler];
       });
@@ -63,9 +63,9 @@
 -(void)doRunAutomationCommand:(NSString*)command then:(UIACommandHandler) resultHandler {
   self.currentHandler = resultHandler;
   dispatch_async(_uiaQueue, ^{
-    [LPLog debug: @"LPUIASharedElementChannel request execution of command: %@", command];
+    [LPLogger debug: @"LPUIASharedElementChannel request execution of command: %@", command];
     [self requestExecutionOf:command];
-    [LPLog debug: @"LPUIASharedElementChannel requested execution of command: %@... Awaiting response", command];
+    [LPLogger debug: @"LPUIASharedElementChannel requested execution of command: %@... Awaiting response", command];
   });
 }
 
@@ -84,14 +84,14 @@
 -(void)sharedUIATextField:(LPSharedUIATextField*) uiaTextField
     didReceiveUIAResponse:(NSDictionary*)uiaResponse {
   dispatch_async(_uiaQueue, ^{
-    [LPLog debug: @"LPUIASharedElementChannel sharedUIATextField:didReceiveUIAResponse: %@", uiaResponse];
+    [LPLogger debug: @"LPUIASharedElementChannel sharedUIATextField:didReceiveUIAResponse: %@", uiaResponse];
     if (uiaResponse) {
       _scriptIndex++;
     }
     else {
-      [LPLog error: @"Error did not get a response at index %@", @(_scriptIndex)];
-      [LPLog error: @"Server current index: %lu",(unsigned long) _scriptIndex];
-      [LPLog error: @"Current shared element data: %@", [self rawSharedElementData]];
+      [LPLogger error: @"Error did not get a response at index %@", @(_scriptIndex)];
+      [LPLogger error: @"Server current index: %lu",(unsigned long) _scriptIndex];
+      [LPLogger error: @"Current shared element data: %@", [self rawSharedElementData]];
     }
     dispatch_async(dispatch_get_main_queue(), ^{
       self.currentHandler(uiaResponse);

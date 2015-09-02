@@ -1,6 +1,7 @@
 calabash.xcodeproj/project.xcworkspace/xcuserdata
 calabash.xcodeproj/xcuserdata/
 *.xccheckout
+*.xcscmblueprint
 Markdown.pl
 build
 calabash.framework
@@ -8,6 +9,10 @@ libFrankCalabash.a
 calabash-dylibs
 *.app
 *.ipa
+
+# Code coverage and profiling.
+*.gcda
+*.gcno
 
 !scripts/test/build
 
@@ -25,3 +30,5 @@ calabash-ios
 .irbrc
 Gemfile.lock
 
+# Command line tools
+bin

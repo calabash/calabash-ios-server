@@ -20,6 +20,7 @@
 #import "LPBackdoorRoute.h"
 #import "LPExitRoute.h"
 #import "LPVersionRoute.h"
+#import "LPIntrospectionRoute.h"
 #import "LPConditionRoute.h"
 #import "LPUIARouteOverUserPrefs.h"
 #import "LPUIARouteOverSharedElement.h"
@@ -29,10 +30,14 @@
 #import "LPLocationRoute.h"
 #import "LPDebugRoute.h"
 #import "LPDumpRoute.h"
+#import "LPKeyboardLanguageRoute.h"
 #import <dlfcn.h>
 #import "LPInfoPlist.h"
 #import "LPPluginLoader.h"
 #import "LPWKWebViewRuntimeLoader.h"
+#import "LPCocoaLumberjack.h"
+#import "LPTTYLogFormatter.h"
+#import "LPASLLogFormatter.h"
 
 @interface CalabashServer ()
 - (void) start;
@@ -65,8 +70,8 @@
   error = dlerror();
 
   if (error) {
-    NSLog(@"Warning: Could not load private UIAutomation.framework.");
-    NSLog(@"Warning: %@", [NSString stringWithUTF8String:error]);
+    LPLogWarn(@"Could not load private UIAutomation.framework.");
+    LPLogWarn(@"%@", [NSString stringWithUTF8String:error]);
   }
 
   LPPluginLoader *loader = [LPPluginLoader new];
@@ -140,6 +145,10 @@
     [LPRouter addRoute:keyboard forPath:@"keyboard"];
     [keyboard release];
 
+    LPKeyboardLanguageRoute *keyboard_language = [LPKeyboardLanguageRoute new];
+    [LPRouter addRoute:keyboard_language forPath:@"keyboard-language"];
+    [keyboard_language release];
+
     LPUIARouteOverUserPrefs *uiaUsingUserPrefs = [LPUIARouteOverUserPrefs new];
     [LPRouter addRoute:uiaUsingUserPrefs forPath:@"uia"];
     [uiaUsingUserPrefs release];
@@ -168,6 +177,10 @@
     [LPRouter addRoute:dumpRoute forPath:@"dump"];
     [dumpRoute release];
 
+    LPIntrospectionRoute *introspectionRoute = [LPIntrospectionRoute new];
+    [LPRouter addRoute:introspectionRoute forPath:@"introspection"];
+    [introspectionRoute release];
+
     _httpServer = [[[LPHTTPServer alloc] init] retain];
 
     [_httpServer setName:@"Calabash Server"];
@@ -190,11 +203,22 @@
 
     [_httpServer setTXTRecordDictionary:capabilities];
 
-    NSLog(@"Creating the server: %@", _httpServer);
-    NSLog(@"Calabash iOS server version: %@", kLPCALABASHVERSION);
+    LPTTYLogFormatter *TTYLogFormatter = [LPTTYLogFormatter new];
+    [[LPTTYLogger sharedInstance] setLogFormatter:TTYLogFormatter];
+    [LPLog addLogger:[LPTTYLogger sharedInstance]];
+    [TTYLogFormatter release];
+
+
+    LPASLLogFormatter *ASLLogFormatter = [LPASLLogFormatter new];
+    [[LPASLLogger sharedInstance] setLogFormatter:ASLLogFormatter];
+    [LPLog addLogger:[LPASLLogger sharedInstance]];
+    [ASLLogFormatter release];
+
+    LPLogDebug(@"Creating the server: %@", _httpServer);
+    LPLogDebug(@"Calabash iOS server version: %@", kLPCALABASHVERSION);
 
     NSString *dtSdkName = [infoPlist stringForDTSDKName];
-    NSLog(@"App Base SDK: %@", dtSdkName);
+    LPLogDebug(@"App Base SDK: %@", dtSdkName);
 
     [infoPlist release];
   }
@@ -208,10 +232,9 @@
 
   NSError *error = nil;
   if (![_httpServer start:&error]) {
-    NSLog(@"Error starting Calabash LPHTTP Server: %@", error);// %@", error);
+    LPLogError(@"Error starting Calabash HTTP Server: %@", error);
   }
 }
-
 
 - (void) enableAccessibility {
   // Approach described at:
@@ -223,15 +246,14 @@
   // If we're on the simulator, make sure we're using the sim's copy of AppSupport
   NSDictionary *environment = [[NSProcessInfo processInfo] environment];
   NSString *simulatorRoot = [environment objectForKey:@"IPHONE_SIMULATOR_ROOT"];
-  NSLog(@"simroot: %@", simulatorRoot);
+  LPLogDebug(@"IPHONE_SIMULATOR_ROOT: %@", simulatorRoot);
   if (simulatorRoot) {
     appSupportPath = [simulatorRoot stringByAppendingString:appSupportPath];
   }
 
-  void *appSupport = dlopen(
-                            [appSupportPath fileSystemRepresentation], RTLD_LAZY);
+  void *appSupport = dlopen([appSupportPath fileSystemRepresentation], RTLD_LAZY);
   if (!appSupport) {
-    NSLog(@"ERROR: Unable to dlopen AppSupport. Cannot automatically enable accessibility.");
+    LPLogError(@"Unable to dlopen AppSupport. Cannot automatically enable accessibility.");
     return;
   }
 
@@ -239,19 +261,20 @@
                                                                CFStringRef domain) = dlsym(appSupport,
                                                                                            "CPCopySharedResourcesPreferencesDomainForDomain");
   if (!copySharedResourcesPreferencesDomainForDomain) {
-    NSLog(@"ERROR: Unable to dlsym CPCopySharedResourcesPreferencesDomainForDomain. "
-          "Cannot automatically enable accessibility.");
+    LPLogError(@"Unable to dlsym CPCopySharedResourcesPreferencesDomainForDomain. Cannot automatically enable accessibility.");
     return;
   }
 
   CFStringRef accessibilityDomain = copySharedResourcesPreferencesDomainForDomain(CFSTR("com.apple.Accessibility"));
   if (!accessibilityDomain) {
-    NSLog(@"ERROR: Unable to cop accessibility preferences. Cannot automatically enable accessibility.");
+    LPLogError(@"Unable to cop accessibility preferences. Cannot automatically enable accessibility.");
     return;
   }
 
   CFPreferencesSetValue(CFSTR("ApplicationAccessibilityEnabled"),
-                        kCFBooleanTrue, accessibilityDomain, kCFPreferencesAnyUser,
+                        kCFBooleanTrue,
+                        accessibilityDomain,
+                        kCFPreferencesAnyUser,
                         kCFPreferencesAnyHost);
   CFRelease(accessibilityDomain);
 
@@ -263,5 +286,5 @@
   [super dealloc];
 }
 
-
 @end
+

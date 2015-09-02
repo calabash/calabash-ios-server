@@ -2,6 +2,7 @@
 
 require 'fileutils'
 require 'open3'
+require 'openssl'
 
 # to be run after +make+
 # 1. combines the Debug-iphoneos and Debug-iphonesimulator libs into a FAT lib
@@ -44,7 +45,7 @@ end
 # @param [Hash] opts directory and lib name options
 def path_to_device_lib(opts = {})
   default_opts = {:directory => './build/Debug-iphoneos',
-                  :lib_name => 'libcalabash-device.a'}
+                  :lib_name => 'libcalabash.a'}
   merged = default_opts.merge(opts)
   path_to_lib(merged[:directory], merged[:lib_name])
 end
@@ -53,7 +54,7 @@ end
 # @param [Hash] opts directory and lib name options
 def path_to_simulator_lib(opts = {})
   default_opts = {:directory => './build/Debug-iphonesimulator',
-                  :lib_name => 'libcalabash-simulator.a'}
+                  :lib_name => 'libcalabash.a'}
   merged = default_opts.merge(opts)
 
   path_to_lib(merged[:directory], merged[:lib_name])
@@ -63,7 +64,7 @@ end
 # @param [Hash] opts directory and lib name options
 def path_to_device_frank_lib(opts = {})
   default_opts = {:directory => './build/Debug-iphoneos',
-                  :lib_name => 'libFrankCalabashDevice.a'}
+                  :lib_name => 'libcalabash-plugin-for-frank.a'}
   merged = default_opts.merge(opts)
   path_to_lib(merged[:directory], merged[:lib_name])
 end
@@ -72,7 +73,7 @@ end
 # @param [Hash] opts directory and lib name options
 def path_to_simulator_frank_lib(opts = {})
   default_opts = {:directory => './build/Debug-iphonesimulator',
-                  :lib_name => 'libFrankCalabash.a'}
+                  :lib_name => 'libcalabash-plugin-for-frank.a'}
   merged = default_opts.merge(opts)
 
   path_to_lib(merged[:directory], merged[:lib_name])
@@ -317,8 +318,8 @@ end
 # @param [Hash] opts :device and :sim dylib paths
 # @return [Boolean] true if both device and sim dylibs are built
 def dylibs_built?(opts = {})
-  default_opts = {:device => './build/Debug-iphoneos/libCalabashDyn.dylib',
-                  :sim => './build/Debug-iphonesimulator/libCalabashDynSim.dylib'}
+  default_opts = {:device => './build/Debug-iphoneos/calabash-dylib.dylib',
+                  :sim => './build/Debug-iphonesimulator/calabash-dylib.dylib'}
   merged = default_opts.merge(opts)
   File.exist?(merged[:device]) && File.exist?(merged[:sim])
 end
@@ -327,7 +328,7 @@ end
 # @param [Hash] opts directory and lib name options
 def path_to_device_dylib(opts = {})
   default_opts = {:directory => './build/Debug-iphoneos',
-                  :lib_name => 'libCalabashDyn.dylib'}
+                  :lib_name => 'calabash-dylib.dylib'}
   merged = default_opts.merge(opts)
   path_to_lib(merged[:directory], merged[:lib_name])
 end
@@ -336,7 +337,7 @@ end
 # @param [Hash] opts directory and lib name options
 def path_to_simulator_dylib(opts = {})
   default_opts = {:directory => './build/Debug-iphonesimulator',
-                  :lib_name => 'libCalabashDynSim.dylib'}
+                  :lib_name => 'calabash-dylib.dylib'}
   merged = default_opts.merge(opts)
 
   path_to_lib(merged[:directory], merged[:lib_name])
@@ -376,11 +377,60 @@ def stage_dylibs
 
   FileUtils.mkdir target_dir
 
-  puts "INFO: staging '#{device_dylib}' to ./calabash-dylibs"
-  FileUtils.cp(device_dylib, target_dir)
+  puts "INFO: staging '#{device_dylib}' to ./calabash-dylibs/libCalabashDyn.dylib"
+  FileUtils.cp(device_dylib, File.join(target_dir, 'libCalabashDyn.dylib'))
 
-  puts "INFO: staging '#{simulator_dylib}' to ./calabash-dylibs"
-  FileUtils.cp(simulator_dylib, target_dir)
+  puts "INFO: staging '#{simulator_dylib}' to ./calabash-dylibs/libCalabashDynSim.dylib"
+  FileUtils.cp(simulator_dylib, File.join(target_dir, 'libCalabashDynSim.dylib'))
+end
+
+def sign_dylibs
+  keychain_tool = File.expand_path("~/.calabash/calabash-codesign/ios/create-keychain.rb")
+  resign_tool = File.expand_path("~/.calabash/calabash-codesign/ios/resign-dylib.rb")
+  cert = File.expand_path("~/.calabash/calabash-codesign/ios/certs/developer.p12")
+
+  if !File.exists?(keychain_tool) && !File.exists?(resign_tool)
+    puts "WARN: Skipping dylib codesigning"
+    puts "WARN: If you are a maintainer, this you should be resigning!"
+    puts "WARN: If you are not a maintainer, you can ignore this message."
+    puts "WARN: See: https://github.com/calabash/calabash-codesign"
+    return
+  end
+
+  expected_sum = ENV['CERT_CHECKSUM']
+
+  sha = OpenSSL::Digest::SHA256.new
+  sha << File.read(cert)
+  actual_sum = sha.hexdigest
+
+  if expected_sum == actual_sum
+    puts "INFO: Expected cert checksum:  #{expected_sum}"
+    puts "INFO:   Actual cert checksum:  #{actual_sum}"
+  else
+    puts "FAIL: Expected cert checksum:  #{expected_sum}"
+    puts "FAIL:   Actual cert checksum:  #{actual_sum}"
+    puts "FAIL: You must update your local code signing tool"
+    puts "FAIL: $ cd ~/.calabash/calabash-codesign/"
+    puts "FAIL: $ git checkout master"
+    puts "FAIL: $ git pull"
+    exit 1
+  end
+
+  device_dylib = path_to_device_dylib
+  simulator_dylib = path_to_simulator_dylib
+  unless dylibs_built?({:sim => simulator_dylib, :device => device_dylib})
+    puts 'FAIL:  the dylibs have not been built. Did you forget to run `make dylibs`?'
+    exit 1
+  end
+
+  puts "INFO: Creating the Calabash.keychain for signing."
+  system(keychain_tool)
+
+  puts "INFO: signing the simulator dylib"
+  system(resign_tool, simulator_dylib)
+
+  puts "INFO: signing the device dylib"
+  system(resign_tool, device_dylib)
 end
 
 if ARGV[0] == 'verify-framework'
@@ -399,6 +449,9 @@ end
 if ARGV[0] == 'verify-dylibs'
   verify_dylibs
   stage_dylibs
+  sign_dylibs
+
+  puts "INFO: Done."
   exit 0
 end
 

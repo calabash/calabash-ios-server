@@ -1,17 +1,14 @@
-//  Copyright (c) 2011 Xamarin. All rights reserved.
 #import "LPCollectionViewScrollToItemOperation.h"
+
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
 
 @implementation LPCollectionViewScrollToItemOperation
 
-- (NSString *) description {
-  return [NSString stringWithFormat:@"CollectionViewScrollToRow: %@",
-                                    _arguments];
-}
-
-
 //                 <===               required                ===>
 // _arguments ==> [item_num, section_num, scroll postion, animated]
-- (id) performWithTarget:(UIView *) aView error:(NSError **) aError {
+- (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
 
   // UICollectionView appears in iOS 6
   Class clz = NSClassFromString(@"UICollectionView");
@@ -21,22 +18,24 @@
     return nil;
   }
 
-  if ([aView isKindOfClass:[UICollectionView class]] == NO) {
+  if ([target isKindOfClass:[UICollectionView class]] == NO) {
     NSLog(@"Warning view: %@ should be an instance of UICollectionView but found '%@'",
-            aView, aView == nil ? nil : [aView class]);
+            target, target == nil ? nil : [target class]);
     return nil;
   }
 
-  UICollectionView *collection = (UICollectionView *) aView;
+  UICollectionView *collection = (UICollectionView *) target;
 
-  if ([_arguments count] != 4) {
+  NSArray *arguments = self.arguments;
+
+  if ([arguments count] != 4) {
     NSLog(@"Warning:  required 4 args but found only '%@' - %@",
-            @([_arguments count]), _arguments);
+            @([arguments count]), arguments);
     return nil;
   }
 
-  NSInteger itemIndex = [[_arguments objectAtIndex:0] integerValue];
-  NSInteger section = [[_arguments objectAtIndex:1] integerValue];
+  NSInteger itemIndex = [[arguments objectAtIndex:0] integerValue];
+  NSInteger section = [[arguments objectAtIndex:1] integerValue];
 
   NSInteger numSections = [collection numberOfSections];
   if (section >= numSections) {
@@ -52,10 +51,17 @@
     return nil;
   }
 
-  // avoid a nasty if/else if conditional
-  NSDictionary *opts = @{@"top" : @(UICollectionViewScrollPositionTop), @"center_vertical" : @(UICollectionViewScrollPositionCenteredVertically), @"bottom" : @(UICollectionViewScrollPositionBottom), @"left" : @(UICollectionViewScrollPositionLeft), @"center_horizontal" : @(UICollectionViewScrollPositionCenteredHorizontally), @"right" : @(UICollectionViewScrollPositionRight)};
+  NSDictionary *opts =
+  @{
+    @"top" : @(UICollectionViewScrollPositionTop),
+    @"center_vertical" : @(UICollectionViewScrollPositionCenteredVertically),
+    @"bottom" : @(UICollectionViewScrollPositionBottom),
+    @"left" : @(UICollectionViewScrollPositionLeft),
+    @"center_horizontal" : @(UICollectionViewScrollPositionCenteredHorizontally),
+    @"right" : @(UICollectionViewScrollPositionRight)
+    };
 
-  NSString *position = [_arguments objectAtIndex:2];
+  NSString *position = [arguments objectAtIndex:2];
 
   NSNumber *posNum = [opts objectForKey:position];
   if (posNum == nil) {
@@ -64,17 +70,16 @@
     return nil;
   }
 
-
   UICollectionViewScrollPosition scrollPosition = [posNum unsignedIntegerValue];
 
-  NSNumber *animateNum = [_arguments objectAtIndex:3];
+  NSNumber *animateNum = [arguments objectAtIndex:3];
   BOOL animate = [animateNum boolValue];
 
   NSIndexPath *ip = [NSIndexPath indexPathForItem:itemIndex inSection:section];
 
-  [collection scrollToItemAtIndexPath:ip atScrollPosition:scrollPosition
+  [collection scrollToItemAtIndexPath:ip
+                     atScrollPosition:scrollPosition
                              animated:animate];
-
   return collection;
 }
 

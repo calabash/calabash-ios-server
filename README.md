@@ -32,6 +32,13 @@ Requires Xcode 6 or greater.
 make dylibs
 ```
 
+**NOTE**
+
+If you are a maintainer, you _must_ install the codesign tool
+if you are planning on making a Calabash iOS gem release.
+
+* https://github.com/calabash/calabash-codesign
+
 ### Building to embed in Calabash gem
 
 See the calabash-ios/calabash-cucumber/Rakefile for more details.
@@ -55,3 +62,8 @@ $ scripts/test/test-make-rules.rb
 # cucumber tests + make rules
 $ scripts/test/run
 ```
+
+### Licenses
+
+Calabash iOS Server uses several third-party sources.  You can find the
+licenses for these sources in the third-party-licenses directory.

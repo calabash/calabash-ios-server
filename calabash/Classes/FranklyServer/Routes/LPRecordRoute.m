@@ -64,10 +64,10 @@
 
   NSString *error = nil;
 
-  NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:[[LPRecorder sharedRecorder]
-          events]
-                                                                 format:NSPropertyListXMLFormat_v1_0
-                                                       errorDescription:&error];
+  NSData *plistData = [NSPropertyListSerialization
+                       dataFromPropertyList:[[LPRecorder sharedRecorder] events]
+                       format:NSPropertyListXMLFormat_v1_0
+                       errorDescription:&error];
   if (error) {
     NSLog(@"error getting plist data: %@", error);
     return nil;

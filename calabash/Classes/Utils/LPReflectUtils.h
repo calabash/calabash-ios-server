@@ -4,7 +4,7 @@
 //  Copyright 2012 LessPainful. All rights reserved.
 //
 
-
+#import <Foundation/Foundation.h>
 
 @interface LPReflectUtils : NSObject
 

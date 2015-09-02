@@ -7,27 +7,24 @@
 
 @implementation LPSliderOperation
 
-- (NSString *) description {
-  return [NSString stringWithFormat:@"Slider: %@", _arguments];
-}
-
 /*
  args << options[:notify_targets] || true
  args << options[:animate] || true
  */
 
-
-//    required =========> |     optional
-// _arguments ==> [value_st,  notify targets, animate]
-- (id) performWithTarget:(UIView *) _view error:(NSError * __autoreleasing *) error {
-  if ([_view isKindOfClass:[UISlider class]] == NO) {
-    NSLog(@"Warning view: %@ should be a UISlier", _view);
+//    required ===========> |     optional
+//  _arguments => [value_str,  notify targets, animate]
+- (id) performWithTarget:(id) target error:(NSError * __autoreleasing *) error {
+  if ([target isKindOfClass:[UISlider class]] == NO) {
+    NSLog(@"Warning view: %@ should be a UISlier", target);
     return nil;
   }
 
-  UISlider *slider = (UISlider *) _view;
+  UISlider *slider = (UISlider *) target;
 
-  NSString *valueStr = _arguments[0];
+  NSArray *arguments = self.arguments;
+
+  NSString *valueStr = arguments[0];
   if (valueStr == nil || [valueStr length] == 0) {
     NSLog(@"Warning: value str: '%@' should be non-nil and non-empty",
             valueStr);
@@ -36,16 +33,16 @@
 
   CGFloat targetValue = [valueStr floatValue];
 
-  NSUInteger argcount = [_arguments count];
+  NSUInteger argcount = [arguments count];
 
   BOOL notifyTargets = YES;
   if (argcount > 1) {
-    notifyTargets = [_arguments[1] boolValue];
+    notifyTargets = [arguments[1] boolValue];
   }
 
   BOOL animate = YES;
   if (argcount > 2) {
-    animate = [_arguments[2] boolValue];
+    animate = [arguments[2] boolValue];
   }
 
   if (targetValue > [slider maximumValue]) {
@@ -58,14 +55,12 @@
             targetValue, [slider minimumValue]);
   }
 
-  [slider setValue:targetValue animated:animate];
-
   if (notifyTargets) {
     UIControlEvents events = [slider allControlEvents];
+    [slider setValue:targetValue animated:animate];
     [slider sendActionsForControlEvents:events];
   }
 
-  return [LPJSONUtils jsonifyObject:_view];
-
+  return [LPJSONUtils jsonifyObject:target];
 }
 @end

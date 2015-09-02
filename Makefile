@@ -4,6 +4,7 @@ all:
 	$(MAKE) dylibs
 
 clean:
+	rm -rf bin
 	rm -rf build
 	rm -rf calabash.framework
 	rm -rf libFrankCalabash.a
@@ -29,7 +30,8 @@ dylibs:
 	rm -rf calabash-dylibs
 	scripts/make-calabash-dylib.rb sim
 	scripts/make-calabash-dylib.rb device
-	scripts/make-libraries.rb verify-dylibs
+	CERT_CHECKSUM=337976ad9ace375ac06cd8fea2edb0c7276dec2a72d005ca5559a8bbf09c8841 \
+								scripts/make-libraries.rb verify-dylibs
 
 dylib_sim:
 	rm -rf build
@@ -51,3 +53,6 @@ test_app:
 xct:
 	scripts/test/xctest.rb
 
+version:
+	scripts/make-version.sh
+	bin/version --revision ALL

@@ -1,20 +1,10 @@
-//
-//  ScrollOperation.m
-//  Calabash
-//
-//  Created by Karl Krukow on 18/08/11.
-//  Copyright (c) 2011 LessPainful. All rights reserved.
-//
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
 
 #import "LPScrollToRowWithMarkOperation.h"
 
 @implementation LPScrollToRowWithMarkOperation
-
-- (NSString *) description {
-  return [NSString stringWithFormat:@"ScrollToRow: %@", _arguments];
-}
-
-
 
 - (BOOL) cell:(UITableViewCell *) aCell contentViewHasSubviewMarked:(NSString *) aMark {
   // check the textLabel first
@@ -26,6 +16,9 @@
 
 - (NSIndexPath *) indexPathForRowWithMark:(NSString *) aMark inTable:(UITableView *) aTable {
   NSUInteger numberOfSections = [aTable numberOfSections];
+
+  id<UITableViewDataSource> dataSource = aTable.dataSource;
+
   for (NSUInteger section = 0; section < numberOfSections; section++) {
     NSUInteger numberOfRows = [aTable numberOfRowsInSection:section];
     for (NSUInteger row = 0; row < numberOfRows; row++) {
@@ -34,7 +27,7 @@
       UITableViewCell *cell = [aTable cellForRowAtIndexPath:path];
       if (cell == nil) {
         // ask the dataSource for the cell
-        cell = [aTable.dataSource tableView:aTable cellForRowAtIndexPath:path];
+        cell = [dataSource tableView:aTable cellForRowAtIndexPath:path];
       }
 
       // is the cell itself marked?
@@ -49,15 +42,17 @@
 
 //                 required      optional     optional
 // _arguments ==> [row mark, scroll position, animated]
-- (id) performWithTarget:(UIView *) _view error:(NSError **) error {
-  if ([_view isKindOfClass:[UITableView class]] == NO) {
+- (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
+  if ([target isKindOfClass:[UITableView class]] == NO) {
     NSLog(@"Warning view: %@ should be a table view for scrolling to row/cell to make sense",
-            _view);
+            target);
     return nil;
   }
 
-  UITableView *table = (UITableView *) _view;
-  NSString *rowId = [_arguments objectAtIndex:0];
+  NSArray *arguments = self.arguments;
+
+  UITableView *table = (UITableView *) target;
+  NSString *rowId = [arguments objectAtIndex:0];
   if (rowId == nil || [rowId length] == 0) {
     NSLog(@"Warning: row id: '%@' should be non-nil and non-empty", rowId);
     return nil;
@@ -73,8 +68,8 @@
   BOOL animate = YES;
 
 
-  if ([_arguments count] > 1) {
-    NSString *scrollPositionArg = [_arguments objectAtIndex:1];
+  if ([arguments count] > 1) {
+    NSString *scrollPositionArg = [arguments objectAtIndex:1];
     if ([@"middle" isEqualToString:scrollPositionArg]) {
       sp = UITableViewScrollPositionMiddle;
     } else if ([@"bottom" isEqualToString:scrollPositionArg]) {
@@ -84,12 +79,13 @@
     }
   }
 
-  if ([_arguments count] > 2) {
-    NSNumber *ani = [_arguments objectAtIndex:2];
+  if ([arguments count] > 2) {
+    NSNumber *ani = [arguments objectAtIndex:2];
     animate = [ani boolValue];
   }
 
   [table scrollToRowAtIndexPath:path atScrollPosition:sp animated:animate];
-  return _view;
+
+  return target;
 }
 @end

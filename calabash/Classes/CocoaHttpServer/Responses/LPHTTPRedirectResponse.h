@@ -2,9 +2,8 @@
 #import "LPHTTPResponse.h"
 
 
-@interface LPHTTPRedirectResponse : NSObject <LPHTTPResponse>
-{
-	NSString *redirectPath;
+@interface LPHTTPRedirectResponse : NSObject <LPHTTPResponse> {
+  NSString *redirectPath;
 }
 
 - (id)initWithPath:(NSString *)redirectPath;

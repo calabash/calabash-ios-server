@@ -1,3 +1,7 @@
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
 //
 //  LPOrientationOperation.m
 //  Calabash
@@ -18,11 +22,6 @@ static NSString *const kFaceDown = @"face down";
 static NSString *const kFaceUp = @"face up";
 
 @implementation LPOrientationOperation
-
-- (NSString *) description {
-  return [NSString stringWithFormat:@"Orientation: %@", _arguments];
-}
-
 
 + (NSString *) deviceOrientation {
 
@@ -92,9 +91,11 @@ static NSString *const kFaceUp = @"face up";
 
 
 // _arguments ==> {'device' | 'status_bar'}
-- (id) performWithTarget:(UIView *) _view error:(NSError **) error {
+- (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
 
-  NSUInteger argCount = [_arguments count];
+  NSArray *argument = self.arguments;
+
+  NSUInteger argCount = [argument count];
   if (argCount == 0) {
     NSLog(@"Warning: requires exactly one argument: {'%@' | '%@'} found none",
             kDevice, kStatusBar);
@@ -103,11 +104,11 @@ static NSString *const kFaceUp = @"face up";
 
   if (argCount > 1) {
     NSLog(@"Warning: argument should be {'%@' | '%@'} - found '[%@']", kDevice,
-            kStatusBar, [_arguments componentsJoinedByString:@", "]);
+            kStatusBar, [argument componentsJoinedByString:@", "]);
     return nil;
   }
 
-  NSString *firstArg = [_arguments objectAtIndex:0];
+  NSString *firstArg = [argument objectAtIndex:0];
   if ([@[kDevice, kStatusBar] containsObject:firstArg] == NO) {
     NSLog(@"Warning: argument should be {'%@' | '%@'} - found '%@'", kDevice,
             kStatusBar, firstArg);
@@ -118,8 +119,8 @@ static NSString *const kFaceUp = @"face up";
   } else if ([kStatusBar isEqualToString:firstArg]) {
     return [LPOrientationOperation statusBarOrientation];
   } else {
-    NSLog(@"Warning: feel through conditional for arguments: '[%@]'",
-            [_arguments componentsJoinedByString:@", "]);
+    NSLog(@"Warning: fell through conditions for arguments: '[%@]'",
+            [argument componentsJoinedByString:@", "]);
     return nil;
   }
 }

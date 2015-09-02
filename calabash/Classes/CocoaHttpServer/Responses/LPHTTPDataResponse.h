@@ -2,10 +2,9 @@
 #import "LPHTTPResponse.h"
 
 
-@interface LPHTTPDataResponse : NSObject <LPHTTPResponse>
-{
-	NSUInteger offset;
-	NSData *data;
+@interface LPHTTPDataResponse : NSObject <LPHTTPResponse> {
+  NSUInteger offset;
+  NSData *data;
 }
 
 - (id)initWithData:(NSData *)data;

@@ -1,6 +1,9 @@
 #import "AppDelegate.h"
 #import <CoreData/CoreData.h>
 #import "LPCoreDataStack.h"
+#import "CocoaLumberjack.h"
+
+static const DDLogLevel ddLogLevel = DDLogLevelDebug;
 
 @interface AppDelegate ()
 
@@ -17,6 +20,11 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+
+  [DDLog addLogger:[DDTTYLogger sharedInstance]];
+  [DDLog addLogger:[DDASLLogger sharedInstance]];
+  DDLogDebug(@"Configured CocoaLumberjack!");
+
   return YES;
 }
 

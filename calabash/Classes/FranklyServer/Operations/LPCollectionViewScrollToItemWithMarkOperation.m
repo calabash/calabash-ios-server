@@ -6,17 +6,19 @@
 //  Copyright (c) 2014 Xamarin. All rights reserved.
 //
 
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
 #import "LPCollectionViewScrollToItemWithMarkOperation.h"
 
 @implementation LPCollectionViewScrollToItemWithMarkOperation
 
-- (NSString *) description {
-  return [NSString stringWithFormat:@"CollectionViewScrollToItem: %@",
-          _arguments];
-}
-
 - (NSIndexPath *) indexPathForItemWithMark:(NSString *) aMark inCollection:(UICollectionView *) aCollection {
   NSUInteger numberOfSections = [aCollection numberOfSections];
+
+  id<UICollectionViewDataSource> dataSource = aCollection.dataSource;
+
   for (NSUInteger section = 0; section < numberOfSections; section++) {
     NSUInteger numberOfItems = [aCollection numberOfItemsInSection:section];
     for (NSUInteger item = 0; item < numberOfItems; item++) {
@@ -25,7 +27,7 @@
       UICollectionViewCell *cell = [aCollection cellForItemAtIndexPath:path];
       if (cell == nil) {
         // ask the dataSource for the cell
-        cell = [aCollection.dataSource collectionView:aCollection cellForItemAtIndexPath:path];
+        cell = [dataSource collectionView:aCollection cellForItemAtIndexPath:path];
       }
       
       // is the cell itself marked?
@@ -37,10 +39,9 @@
   return nil;
 }
 
-
 //                 required      optional     optional
 // _arguments ==> [item mark, scroll position, animated]
-- (id) performWithTarget:(UIView *) _view error:(NSError **) error {
+- (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
   
   // UICollectionView appears in iOS 6
   Class clz = NSClassFromString(@"UICollectionView");
@@ -50,14 +51,16 @@
     return nil;
   }
 
-  if ([_view isKindOfClass:[UICollectionView class]] == NO) {
+  if ([target isKindOfClass:[UICollectionView class]] == NO) {
     NSLog(@"Warning view: %@ should be a collection view for scrolling to item/cell to make sense",
-          _view);
+          target);
     return nil;
   }
-  
-  UICollectionView *collection = (UICollectionView *) _view;  
-  NSString *itemId = [_arguments objectAtIndex:0];
+
+  NSArray *arguments = self.arguments;
+
+  UICollectionView *collection = (UICollectionView *) target;
+  NSString *itemId = [arguments objectAtIndex:0];
   if (itemId == nil || [itemId length] == 0) {
     NSLog(@"Warning: item id: '%@' should be non-nil and non-empty", itemId);
     return nil;
@@ -73,11 +76,19 @@
   BOOL animate = YES;
   
   
-  if ([_arguments count] > 1) {
-    NSString *position = [_arguments objectAtIndex:1];
+  if ([arguments count] > 1) {
+    NSString *position = [arguments objectAtIndex:1];
     
-    // avoid a nasty if/else if conditional
-    NSDictionary *opts = @{@"top" : @(UICollectionViewScrollPositionTop), @"center_vertical" : @(UICollectionViewScrollPositionCenteredVertically), @"bottom" : @(UICollectionViewScrollPositionBottom), @"left" : @(UICollectionViewScrollPositionLeft), @"center_horizontal" : @(UICollectionViewScrollPositionCenteredHorizontally), @"right" : @(UICollectionViewScrollPositionRight)};
+    NSDictionary *opts =
+    @{
+      @"top" : @(UICollectionViewScrollPositionTop),
+      @"center_vertical" : @(UICollectionViewScrollPositionCenteredVertically),
+      @"bottom" : @(UICollectionViewScrollPositionBottom),
+      @"left" : @(UICollectionViewScrollPositionLeft),
+      @"center_horizontal" : @(UICollectionViewScrollPositionCenteredHorizontally),
+      @"right" : @(UICollectionViewScrollPositionRight)
+      };
+
     NSNumber *posNum = [opts objectForKey:position];
     
     if (posNum == nil) {
@@ -89,15 +100,15 @@
     scrollPosition = [posNum unsignedIntegerValue];
   }
   
-  if ([_arguments count] > 2) {
-    NSNumber *ani = [_arguments objectAtIndex:2];
+  if ([arguments count] > 2) {
+    NSNumber *ani = [arguments objectAtIndex:2];
     animate = [ani boolValue];
   }
-  
-  [collection scrollToItemAtIndexPath:path atScrollPosition:scrollPosition
+
+  [collection scrollToItemAtIndexPath:path
+                     atScrollPosition:scrollPosition
                              animated:animate];
-  
-  return _view;
+  return target;
 }
 
 @end

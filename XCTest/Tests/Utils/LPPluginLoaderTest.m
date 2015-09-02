@@ -3,6 +3,7 @@
 #endif
 
 #import "LPPluginLoader.h"
+#import "LPDevice.h"
 
 @interface LPPluginLoader (LPXCTEST)
 
@@ -81,17 +82,25 @@ describe(@"LPPluginLoader", ^{
     });
 
     it(@"returns true when dylib is loaded", ^{
-      NSBundle *main = [NSBundle mainBundle];
-      NSString *path = [main pathForResource:@"examplePlugin" ofType:@"dylib"];
-      expect(path).notTo.equal(nil);
-      expect([loader loadDylibAtPath:path]).to.equal(YES);
+      if ([[LPDevice sharedDevice] simulator]) {
+        NSBundle *main = [NSBundle mainBundle];
+        NSString *path = [main pathForResource:@"examplePlugin" ofType:@"dylib"];
+        expect(path).notTo.equal(nil);
+        expect([loader loadDylibAtPath:path]).to.equal(YES);
+      } else {
+        // nop for devices because the dylibs are not signed.
+      }
     });
   });
 
   describe(@"#loadCalabashPlugins", ^{
     it(@"returns true if all plug-ins were loaded", ^{
-      LPPluginLoader *loader = [LPPluginLoader new];
-      expect([loader loadCalabashPlugins]).to.equal(YES);
+      if ([[LPDevice sharedDevice] simulator]) {
+        LPPluginLoader *loader = [LPPluginLoader new];
+        expect([loader loadCalabashPlugins]).to.equal(YES);
+      } else {
+        // nop for devices because the dylibs are not signed.
+      }
     });
 
     it(@"returns false if a plug fails to load", ^{
