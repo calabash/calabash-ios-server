@@ -4,6 +4,7 @@
 //  Copyright 2012 LessPainful. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "LPReflectUtils.h"
 
 @implementation LPReflectUtils

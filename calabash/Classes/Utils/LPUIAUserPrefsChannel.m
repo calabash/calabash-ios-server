@@ -25,6 +25,7 @@
 //  Nov 2013 Modified to fit with Calabash
 //  by Karl Krukow <karl.krukow@xamarin.com>
 
+#import <UIKit/UIKit.h>
 #import "LPUIAUserPrefsChannel.h"
 
 const static NSString *LPUIAChannelUIAPrefsRequestKey = @"__calabashRequest";

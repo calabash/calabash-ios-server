@@ -1,3 +1,4 @@
+#import <UIKit/UIKit.h>
 #import "LPRecorder.h"
 #import "LPCocoaLumberjack.h"
 

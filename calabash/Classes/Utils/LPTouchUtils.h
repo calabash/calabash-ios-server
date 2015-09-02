@@ -4,7 +4,7 @@
 //  Copyright 2011 LessPainful. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #define LPiPHONE4INCHOFFSET 44
 

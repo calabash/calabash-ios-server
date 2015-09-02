@@ -6,6 +6,7 @@
 //  Copyright (c) 2012 LessPainful.
 //
 
+#import <UIKit/UIKit.h>
 #import "LPAppPropertyRoute.h"
 
 @implementation LPAppPropertyRoute
