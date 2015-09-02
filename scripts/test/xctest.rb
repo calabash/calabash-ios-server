@@ -81,8 +81,10 @@ Dir.chdir(working_dir) do
                            :fail_msg => 'XCTests failed',
                            :exit_on_nonzero_status => false})
     # At some point I will figure out what the correct exit code for "could not
-    # launch the simulator.
-    if exit_code != 0
+    # launch the simulator."
+    #
+    # Exit code 65 means some tests failed?
+    if exit_code != 0 && exit_code != 65
       log_fail "XCTest exited '#{exit_code}' - did we fail because the Simulator did not launch?"
       raise XCTestFailedError, 'XCTest failed.'
     else
@@ -90,3 +92,4 @@ Dir.chdir(working_dir) do
     end
   end
 end
+
