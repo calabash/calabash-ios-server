@@ -1,5 +1,11 @@
 #import <Foundation/Foundation.h>
 
+/*
+ Reference material for Objective-C type encodings.
+ * https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/ObjCRuntimeGuide/Articles/ocrtTypeEncodings.html
+ * http://nshipster.com/type-encodings/
+ */
+
 @class LPInvocationResult;
 
 @interface LPInvoker : NSObject
