@@ -1,5 +1,18 @@
-### 0.15.0 WIP
+### 0.15.0
 
+* LPQueryAllOperation needs some TLC #204
+* Convert many project files to ARC
+* Xcode 7: remove prefix header from libraries #227
+* Xcode 7: resolve new warnings #225
+* New route to lookup the current keyboard's l10n #221 @svevang
+* Backdoor route should return a 'results' key #219
+* Update CocoaHTTPServer 2.3 #216
+* Expand the features of LPInvoker
+* Version tool can return git revision #201
+* Fixup memory leak in LPConditionRoute #193
+* Updates GCDAsyncSocket to 7.4.1
+* Adds CocoaLumberjack logging via LPCocoaLumberjack
+* MapKit categories were part of no target #180 @nalbion
 * When checking for no animation, ignore animations with trivially short
   durations #142 @JoeSzymanski
 * LPIntrospectionRoute: a server route for object introspection #178
