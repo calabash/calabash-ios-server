@@ -38,80 +38,64 @@ $ git co -b feature/my-new-feature
 $ git push -u origin feature/my-new-feature
 ```
 
+**Contributors should not change the version.**
+
 ## Testing
 
 ```
+# Objective-C Unit tests.
+$ make xct
+
+# Building libraries.
+$ make all
+
+# Integration tests.
 $ scripts/test/run
-$ scripts/ci/travis/local-run-as-travis.rb
 ```
 
 ## Releasing
 
-### Create the release branch
+After the release branch is created:
+
+* No more features can be added.
+* All in-progress features and un-merged pull-requests must wait for the next release.
+* You can, and should, make changes to the documentation.
+* You must bump the version in LPVersionRoute.h.  See [VERSIONING.md](VERSIONING.md]).
+
+The release pull request ***must*** be made against the _master_ branch.
+
+Be sure to check CI.
+
+* https://travis-ci.org/calabash/calabash\_ios\_server
+* http://ci.endoftheworl.de:8080/  # Briar jobs.
 
 ```
-$ git co develop
+$ git co -b release/1.5.0
+
+1. Update the CHANGELOG.md.
+2. Bump the version in calabash/Classes/FranklyServer/Routes/LPVersionRoute.h
+3. **IMPORTANT** Bump the version in the README.md badge.
+3. Have a look at the README.md to see if it can be updated.
+
+$ git push -u origin release/1.5.0
+
+**IMPORTANT**
+
+1. Make a pull request on GitHub on the master branch.
+2. Wait for CI to finish.
+3. Merge pull request.
+
+$ git co master
 $ git pull
-$ git checkout -b release/< next version>
-```
 
-No more features can be added.  All in-progress features and un-merged pull-requests must wait for the next release.
+$ git tag -a 1.5.0 -m"release/1.5.0"
+$ git push origin 1.5.0
 
-You can, and should, make changes to the documentation.  You can bump the server version.
-
-### Create a pull request for the release branch
-
-Do this very soon after you make the release branch to notify the team that you are planning a release.
-
-```
-$ git push -u origin release/< next version >
-```
-
-Again, no more features can be added to this pull request.  Only changes to documentation are allowed.  You can bump the server version.
-
-### Cut a new release
-
-```
-# Make sure all pull requests have been merged to `develop`
-# Check CI!
-# * https://travis-ci.org/calabash/calabash-ios-server
-# * https://travis-ci.org/calabash/calabash-ios
-# * http://ci.endoftheworl.de:8080/ # Briar jobs.
-
-# Get the latest develop.
-
-$ git fetch
 $ git co develop
-$ git pull origin develop
-
-# Get the latest master. If all is well, there should be no changes in master!
-
-$ git fetch
-$ git co master
-$ git pull origin master
-
-# Get the latest release.
-
-$ git fetch
-$ git co -t origin/release/< next version >
-
-# Merge release into master, run the tests and push.
-$ git co master
-$ git merge release/< next version >
-$ script/test/run
+$ git merge --no-ff release/1.5.0
 $ git push
 
-# Merge release into develop, run the tests and push.
-$ git co develop
-$ git merge release/< next version >
-$ script/text/run
-$ git push
+$ git branch -d release/1.5.0
 
-
-# Delete the release branch
-$ git push origin :release/< next version >
-$ git br -d release/< next version >
-
-# All is well!
-You are done!
+Announce the release on the public channels.
 ```
