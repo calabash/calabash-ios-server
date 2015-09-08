@@ -76,10 +76,11 @@
     operation = [[LPSliderOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"collectionViewScroll"]) {
     operation = [[LPCollectionViewScrollToItemOperation alloc]
-            initWithOperation:dictionary];
+                 initWithOperation:dictionary];
   } else {
     operation = [[LPOperation alloc] initWithOperation:dictionary];
   }
+
   return operation;
 }
 
