@@ -1,3 +1,10 @@
+### 0.16.0
+
+This release contains no code-level changes.  It is being made
+so we can tag and distribute libraries that have been compiled
+with Xcode 7.  This is necessary because of the new bit code
+settings in Xcode 7.
+
 ### 0.15.0
 
 * LPQueryAllOperation needs some TLC #204
