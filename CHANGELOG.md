@@ -1,7 +1,7 @@
-### 0.16.0
+### 0.16.0 and 0.16.1
 
-This release contains no code-level changes.  It is being made
-so we can tag and distribute libraries that have been compiled
+These releases contains no code-level changes.  They have been
+made so we can tag and distribute libraries that have been compiled
 with Xcode 7.  This is necessary because of the new bit code
 settings in Xcode 7.
 

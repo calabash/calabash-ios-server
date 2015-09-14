@@ -6,6 +6,9 @@ The Calabash iOS Toolchain uses git-flow.
 
 See these links for information about git-flow and git best practices.
 
+Please see this [post](http://chris.beams.io/posts/git-commit/) for tips
+on how to make a good commit messages.
+
 ##### Git Flow Step-by-Step guide
 
 * https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
