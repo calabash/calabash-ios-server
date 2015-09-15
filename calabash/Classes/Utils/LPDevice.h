@@ -25,5 +25,7 @@ extern NSString *const LPDeviceSimKeyVersionInfo;
 - (BOOL) isIPhone6;
 - (BOOL) isIPhone6Plus;
 - (BOOL) isIPad;
+- (BOOL) isIPhone4Like;
+- (BOOL) isIPhone5Like;
 
 @end
