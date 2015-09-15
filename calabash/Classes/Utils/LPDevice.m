@@ -295,6 +295,10 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   return [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
 }
 
+- (BOOL) isIPadPro {
+  return [[self formFactor] isEqualToString:@"ipad pro"];
+}
+
 - (BOOL) isIPhone4Like {
   return [[self formFactor] isEqualToString:@"iphone 3.5in"];
 }

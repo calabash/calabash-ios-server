@@ -260,6 +260,24 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   OCMVerifyAll(mock);
 }
 
+- (void) testIsIPadProYES {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock formFactor]).andReturn(@"ipad pro");
+
+  expect([mock isIPadPro]).to.equal(YES);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testIsIPadProNO {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock formFactor]).andReturn(@"garbage");
+
+  expect([mock isIPadPro]).to.equal(NO);
+
+  OCMVerifyAll(mock);
+}
+
 @end
 
 SpecBegin(LPDevice)
