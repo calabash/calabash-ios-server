@@ -150,6 +150,22 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   OCMVerify([mock simulatorModelIdentfier]);
 }
 
+- (void) testIPadYES {
+  id mock = OCMPartialMock([UIDevice currentDevice]);
+  BOOL ipadIdiom = UIUserInterfaceIdiomPad;
+  [[[mock stub] andReturnValue:OCMOCK_VALUE(ipadIdiom)] userInterfaceIdiom];
+
+  expect([self.device iPad]).to.equal(YES);
+}
+
+- (void) testIPadNO {
+  id mock = OCMPartialMock([UIDevice currentDevice]);
+  BOOL ipadIdiom = UIUserInterfaceIdiomPhone;
+  [[[mock stub] andReturnValue:OCMOCK_VALUE(ipadIdiom)] userInterfaceIdiom];
+
+  expect([self.device iPad]).to.equal(NO);
+}
+
 - (void) testSystemSimulator {
   id mock = OCMPartialMock(self.device);
   OCMExpect([mock simulator]).andReturn(YES);
