@@ -156,7 +156,7 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   BOOL ipadIdiom = UIUserInterfaceIdiomPad;
   [[[mock stub] andReturnValue:OCMOCK_VALUE(ipadIdiom)] userInterfaceIdiom];
 
-  expect([self.device iPad]).to.equal(YES);
+  expect([self.device isIPad]).to.equal(YES);
 }
 
 - (void) testIPadNO {
@@ -164,7 +164,7 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   BOOL ipadIdiom = UIUserInterfaceIdiomPhone;
   [[[mock stub] andReturnValue:OCMOCK_VALUE(ipadIdiom)] userInterfaceIdiom];
 
-  expect([self.device iPad]).to.equal(NO);
+  expect([self.device isIPad]).to.equal(NO);
 }
 
 - (void) testSystemSimulator {
@@ -189,7 +189,7 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
 
 - (void) testFormFactorIpad {
   id mock = OCMPartialMock(self.device);
-  OCMExpect([mock iPad]).andReturn(YES);
+  OCMExpect([mock isIPad]).andReturn(YES);
   OCMExpect([mock formFactorMap]).andReturn(@{});
 
   expect([mock formFactor]).to.equal(@"ipad");
@@ -209,7 +209,7 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
 - (void) testFormFactorUnknown {
   id mock = OCMPartialMock(self.device);
   OCMExpect([mock system]).andReturn(@"iPhone30,30");
-  OCMExpect([mock iPad]).andReturn(NO);
+  OCMExpect([mock isIPad]).andReturn(NO);
   OCMExpect([mock formFactorMap]).andReturn(@{});
 
   expect([mock formFactor]).to.equal(@"iPhone30,30");

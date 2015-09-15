@@ -233,7 +233,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   if (value) {
     _formFactor = value;
   } else {
-    if ([self iPad]) {
+    if ([self isIPad]) {
       _formFactor = @"ipad";
     } else {
       _formFactor = modelIdentifier;
@@ -291,7 +291,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   }
 }
 
-- (BOOL) iPad {
+- (BOOL) isIPad {
   return [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
 }
 
