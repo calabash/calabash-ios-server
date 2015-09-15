@@ -28,5 +28,6 @@ extern NSString *const LPDeviceSimKeyVersionInfo;
 - (BOOL) isIPadPro;
 - (BOOL) isIPhone4Like;
 - (BOOL) isIPhone5Like;
+- (BOOL) isLetterBox;
 
 @end

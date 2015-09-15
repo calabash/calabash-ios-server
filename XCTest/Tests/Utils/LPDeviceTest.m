@@ -14,6 +14,12 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
 @interface LPDevice (LPXCTEST)
 
 - (id) init_private;
+
+- (UIScreen *) mainScreen;
+- (UIScreenMode *) currentScreenMode;
+- (CGSize) sizeForCurrentScreenMode;
+- (CGFloat) scaleForMainScreen;
+- (CGFloat) heightForMainScreenBounds;
 - (NSString *) physicalDeviceModelIdentifier;
 - (NSPredicate *) iPhone6SimPredicate;
 - (NSPredicate *) iPhone6PlusSimPredicate;
@@ -310,6 +316,60 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   OCMExpect([mock formFactor]).andReturn(@"garbage");
 
   expect([mock isIPhone6PlusLike]).to.equal(NO);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testIsLetterBoxNoBecauseIpad {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock isIPad]).andReturn(YES);
+
+  expect([mock isLetterBox]).to.equal(NO);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testIsLetterBoxNoBecauseIPhone4Like {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock isIPad]).andReturn(NO);
+  OCMExpect([mock isIPhone4Like]).andReturn(YES);
+
+  expect([mock isLetterBox]).to.equal(NO);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testIsLetterBoxNoScaleIsWrong {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock isIPad]).andReturn(NO);
+  OCMExpect([mock isIPhone4Like]).andReturn(NO);
+  OCMExpect([mock scaleForMainScreen]).andReturn(2.0);
+
+  expect([mock isLetterBox]).to.equal(NO);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testIsLetterBoxNoHeightIsWrong {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock isIPad]).andReturn(NO);
+  OCMExpect([mock isIPhone4Like]).andReturn(NO);
+  OCMExpect([mock scaleForMainScreen]).andReturn(2.0);
+  OCMExpect([mock heightForMainScreenBounds]).andReturn(10);
+
+  expect([mock isLetterBox]).to.equal(NO);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testIsLetterBoxYES {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock isIPad]).andReturn(NO);
+  OCMExpect([mock isIPhone4Like]).andReturn(NO);
+  OCMExpect([mock scaleForMainScreen]).andReturn(2.0);
+  OCMExpect([mock heightForMainScreenBounds]).andReturn(480);
+
+  expect([mock isLetterBox]).to.equal(YES);
 
   OCMVerifyAll(mock);
 }

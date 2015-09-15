@@ -22,6 +22,13 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 @property(strong, nonatomic) NSDictionary *formFactorMap;
 
 - (id) init_private;
+
+- (UIScreen *) mainScreen;
+- (UIScreenMode *) currentScreenMode;
+- (CGSize) sizeForCurrentScreenMode;
+- (CGFloat) scaleForMainScreen;
+- (CGFloat) heightForMainScreenBounds;
+
 - (NSString *) physicalDeviceModelIdentifier;
 - (NSString *) simulatorModelIdentfier;
 - (NSString *) simulatorVersionInfo;
@@ -61,6 +68,30 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   }
   return self;
 }
+
+#pragma mark - Convenience Methods for Testing
+
+- (UIScreen *) mainScreen {
+  return [UIScreen mainScreen];
+}
+
+- (UIScreenMode *) currentScreenMode {
+  return [[self mainScreen] currentMode];
+}
+
+- (CGSize) sizeForCurrentScreenMode {
+  return [self currentScreenMode].size;
+}
+
+- (CGFloat) scaleForMainScreen {
+  return [[self mainScreen] scale];
+}
+
+- (CGFloat) heightForMainScreenBounds {
+  return [[self mainScreen] bounds].size.height;
+}
+
+#pragma mark - iPhone 6 and 6 Plus Support
 
 // http://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions
 // Thanks for the inspiration for iPhone 6 form factor sample.
@@ -270,6 +301,15 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 
 - (BOOL) isIPhone5Like {
   return [[self formFactor] isEqualToString:@"iphone 4in"];
+}
+
+- (BOOL) isLetterBox {
+  CGFloat scale = [self scaleForMainScreen];
+  if ([self isIPad] || [self isIPhone4Like] || scale != 2.0) {
+    return NO;
+  } else {
+    return [self heightForMainScreenBounds] * scale == 960;
+  }
 }
 
 @end
