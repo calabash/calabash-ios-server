@@ -176,6 +176,10 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   return [self simulatorModelIdentfier] != nil;
 }
 
+- (BOOL) physicalDevice {
+  return ![self simulator];
+}
+
 - (NSPredicate *) iPhone6SimPredicate {
   if (_iPhone6SimPredicate) { return _iPhone6SimPredicate; }
   NSString *key = @"SIMULATOR_VERSION_INFO";
