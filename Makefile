@@ -32,6 +32,7 @@ dylibs:
 	scripts/make-calabash-dylib.rb device
 	CERT_CHECKSUM=337976ad9ace375ac06cd8fea2edb0c7276dec2a72d005ca5559a8bbf09c8841 \
 								scripts/make-libraries.rb verify-dylibs
+	xcrun codesign --display --verbose=4 calabash-dylibs/libCalabashDyn.dylib
 
 dylib_sim:
 	rm -rf build
