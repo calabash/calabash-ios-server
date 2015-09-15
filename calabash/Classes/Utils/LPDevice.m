@@ -142,6 +142,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   return _screenDimensions;
 }
 
+// http://www.everyi.com/by-identifier/ipod-iphone-ipad-specs-by-model-identifier.html
 - (NSDictionary *) formFactorMap {
   if (_formFactorMap) { return _formFactorMap; }
 
@@ -149,10 +150,13 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 
   @{
 
-    // iPhone 4s
+    // iPhone 4/4s and iPod 4th
+    @"iPhone3,1" : @"iphone 3.5in",
+    @"iPhone3,3" : @"iphone 3.5in",
     @"iPhone4,1" : @"iphone 3.5in",
+    @"iPod4,1"   : @"iphone 3.5in",
 
-    // iPhone 5/5c/5s
+    // iPhone 5/5c/5s and iPod 5th + 6th
     @"iPhone5,1" : @"iphone 4in",
     @"iPhone5,2" : @"iphone 4in",
     @"iPhone5,3" : @"iphone 4in",
@@ -161,6 +165,8 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     @"iPhone6,2" : @"iphone 4in",
     @"iPhone6,3" : @"iphone 4in",
     @"iPhone6,4" : @"iphone 4in",
+    @"iPod5,1"   : @"iphone 4in",
+    @"iPod6,1"   : @"iphone 4in",
 
     // iPhone 6/6s
     @"iPhone7,2" : @"iphone 6",
@@ -221,19 +227,18 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 - (NSString *) formFactor {
   if (_formFactor) { return _formFactor; }
 
-  NSString *factor = @"unknown";
-  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-    factor = @"ipad";
-  } else if ([LPTouchUtils is4InchDevice]) {
-    factor = @"iphone 4in";
-  } else if ([LPTouchUtils isThreeAndAHalfInchDevice]) {
-    factor = @"iphone 3.5in";
-  } else if ([self iPhone6]) {
-    return @"iphone 6";
-  } else if ([self iPhone6Plus]) {
-    return @"iphone 6+";
+  NSString *modelIdentifier = [self system];
+  NSString *value = [self.formFactorMap objectForKey:modelIdentifier];
+
+  if (value) {
+    _formFactor = value;
+  } else {
+    if ([self iPad]) {
+      _formFactor = @"ipad";
+    } else {
+      _formFactor = modelIdentifier;
+    }
   }
-  _formFactor = factor;
   return _formFactor;
 }
 

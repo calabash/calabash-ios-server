@@ -187,6 +187,45 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   OCMVerifyAll(mock);
 }
 
+- (void) testFormFactorIpad {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock iPad]).andReturn(YES);
+  OCMExpect([mock formFactorMap]).andReturn(@{});
+
+  expect([mock formFactor]).to.equal(@"ipad");
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testFormFactorIpadPro {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock system]).andReturn(@"iPad6,8");
+
+  expect([mock formFactor]).to.equal(@"ipad pro");
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testFormFactorUnknown {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock system]).andReturn(@"iPhone30,30");
+  OCMExpect([mock iPad]).andReturn(NO);
+  OCMExpect([mock formFactorMap]).andReturn(@{});
+
+  expect([mock formFactor]).to.equal(@"iPhone30,30");
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testFormFactorHasValueInMap {
+  NSString *modelIdentifier = [self.device system];
+  NSString *actual = [self.device formFactor];
+
+  expect(actual).notTo.equal(modelIdentifier);
+}
+
+
+
 @end
 
 SpecBegin(LPDevice)
@@ -223,85 +262,6 @@ describe(@"LPDevice", ^{
   it(@"#model", ^{
     LPDevice *device = [[LPDevice alloc] init_private];
     expect([device model]).notTo.beNil();
-  });
-
-  describe(@"#formFactor", ^{
-    __block id currentDevice;
-
-    UIUserInterfaceIdiom iphoneIdiom = UIUserInterfaceIdiomPhone;
-    UIUserInterfaceIdiom ipadIdiom = UIUserInterfaceIdiomPad;
-
-    beforeEach(^{
-      currentDevice = OCMPartialMock([UIDevice currentDevice]);
-    });
-
-    afterEach(^{
-      [currentDevice stopMocking];
-    });
-
-    it(@"iPad", ^{
-      [[[currentDevice stub] andReturnValue:OCMOCK_VALUE(ipadIdiom)] userInterfaceIdiom];
-      LPDevice *device = [[LPDevice alloc] init_private];
-      expect(device.formFactor).to.equal(@"ipad");
-    });
-
-    describe(@"iPhone form factors", ^{
-
-      __block id touchMock;
-      __block id mockDevice;
-
-      beforeEach(^{
-        [[[currentDevice stub] andReturnValue:OCMOCK_VALUE(iphoneIdiom)] userInterfaceIdiom];
-        touchMock = OCMStrictClassMock([LPTouchUtils class]);
-        mockDevice = OCMPartialMock([[LPDevice alloc] init_private]);
-      });
-
-      afterEach(^{
-        [touchMock stopMocking];
-      });
-
-      it(@"iPhone 4in", ^{
-        [[[touchMock stub] andReturnValue:OCMOCK_VALUE(yes)] is4InchDevice];
-        [[[touchMock stub] andReturnValue:OCMOCK_VALUE(no)] isThreeAndAHalfInchDevice];
-        [[[mockDevice stub] andReturnValue:OCMOCK_VALUE(no)] iPhone6];
-        [[[mockDevice stub] andReturnValue:OCMOCK_VALUE(no)] iPhone6Plus];
-        LPDevice *device = [[LPDevice alloc] init_private];
-        expect(device.formFactor).to.equal(@"iphone 4in");
-      });
-
-      it(@"iPhone 3.5in", ^{
-        [[[touchMock stub] andReturnValue:OCMOCK_VALUE(no)] is4InchDevice];
-        [[[touchMock stub] andReturnValue:OCMOCK_VALUE(yes)] isThreeAndAHalfInchDevice];
-        [[[mockDevice stub] andReturnValue:OCMOCK_VALUE(no)] iPhone6];
-        [[[mockDevice stub] andReturnValue:OCMOCK_VALUE(no)] iPhone6Plus];
-        LPDevice *device = [[LPDevice alloc] init_private];
-        expect(device.formFactor).to.equal(@"iphone 3.5in");
-      });
-
-      it(@"iPhone 6", ^{
-        [[[touchMock stub] andReturnValue:OCMOCK_VALUE(no)] is4InchDevice];
-        [[[touchMock stub] andReturnValue:OCMOCK_VALUE(no)] isThreeAndAHalfInchDevice];
-        [[[mockDevice stub] andReturnValue:OCMOCK_VALUE(yes)] iPhone6];
-        [[[mockDevice stub] andReturnValue:OCMOCK_VALUE(no)] iPhone6Plus];
-        expect([mockDevice formFactor]).to.equal(@"iphone 6");
-      });
-
-      it(@"iPhone 6+", ^{
-        [[[touchMock stub] andReturnValue:OCMOCK_VALUE(no)] is4InchDevice];
-        [[[touchMock stub] andReturnValue:OCMOCK_VALUE(no)] isThreeAndAHalfInchDevice];
-        [[[mockDevice stub] andReturnValue:OCMOCK_VALUE(no)] iPhone6];
-        [[[mockDevice stub] andReturnValue:OCMOCK_VALUE(yes)] iPhone6Plus];
-        expect([mockDevice formFactor]).to.equal(@"iphone 6+");
-      });
-
-      it(@"returns the empty string otherwise", ^{
-        [[[touchMock stub] andReturnValue:OCMOCK_VALUE(no)] is4InchDevice];
-        [[[touchMock stub] andReturnValue:OCMOCK_VALUE(no)] isThreeAndAHalfInchDevice];
-        [[[mockDevice stub] andReturnValue:OCMOCK_VALUE(no)] iPhone6];
-        [[[mockDevice stub] andReturnValue:OCMOCK_VALUE(no)] iPhone6Plus];
-        expect([mockDevice formFactor]).to.equal(@"unknown");
-      });
-    });
   });
 
   it(@"#iPhone6SimPredicate", ^{
