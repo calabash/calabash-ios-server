@@ -18,8 +18,6 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 
 @interface LPDevice ()
 
-@property(strong, nonatomic) NSPredicate *iPhone6SimPredicate;
-@property(strong, nonatomic) NSPredicate *iPhone6PlusSimPredicate;
 @property(strong, nonatomic) NSDictionary *processEnvironment;
 @property(strong, nonatomic) NSDictionary *formFactorMap;
 
@@ -90,14 +88,14 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   UIScreenMode *screenMode = [screen currentMode];
   CGSize size = screenMode.size;
 
-  if ([self isIPhone6Plus]) {
+  if ([self isIPhone6PlusLike]) {
     if (size.width < IPHONE6PLUS.width && size.height < IPHONE6PLUS.height) {
       _sampleFactor = (IPHONE6PLUS.width / size.width);
       _sampleFactor = (IPHONE6PLUS.height / size.height);
     } else {
       _sampleFactor = IPHONE6PLUS_SAMPLE;
     }
-  } else if ([self isIPhone6]) {
+  } else if ([self isIPhone6Like]) {
     if (CGSizeEqualToSize(size, IPHONE6)) {
       _sampleFactor = IPHONE6_SAMPLE;
     } else {
@@ -105,14 +103,14 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     }
   } else {
     if ([self isSimulator]) {
-      if ([self isIPhone6Plus]) {
+      if ([self isIPhone6PlusLike]) {
         if (size.width < IPHONE6PLUS.width && size.height < IPHONE6PLUS.height) {
           _sampleFactor = (IPHONE6PLUS.width / size.width);
           _sampleFactor = (IPHONE6PLUS.height / size.height);
         } else {
           _sampleFactor = IPHONE6PLUS_SAMPLE;
         }
-      } else if ([self isIPhone6]) {
+      } else if ([self isIPhone6Like]) {
         if (CGSizeEqualToSize(size, IPHONE6)) {
           _sampleFactor = IPHONE6_SAMPLE;
         } else {
@@ -250,45 +248,12 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   return ![self isSimulator];
 }
 
-- (NSPredicate *) iPhone6SimPredicate {
-  if (_iPhone6SimPredicate) { return _iPhone6SimPredicate; }
-  NSString *key = @"SIMULATOR_VERSION_INFO";
-  NSString *value = @"*iPhone 6*";
-  NSPredicate *likePredicate = [NSPredicate predicateWithFormat:@"%K LIKE %@",
-                                key, value];
-  NSPredicate *iPhone6PlusPred = self.iPhone6PlusSimPredicate;
-  NSPredicate *notLikePredicate;
-  notLikePredicate = [NSCompoundPredicate notPredicateWithSubpredicate:iPhone6PlusPred];
-  NSArray *array = @[likePredicate, notLikePredicate];
-  _iPhone6SimPredicate = [NSCompoundPredicate andPredicateWithSubpredicates:array];
-  return _iPhone6SimPredicate;
+- (BOOL) isIPhone6Like {
+  return [[self formFactor] isEqualToString:@"iphone 6"];
 }
 
-- (NSPredicate *) iPhone6PlusSimPredicate {
-  if (_iPhone6PlusSimPredicate) { return _iPhone6PlusSimPredicate; }
-  NSString *key = @"SIMULATOR_VERSION_INFO";
-  NSString *value = @"*iPhone 6*Plus*";
-  _iPhone6PlusSimPredicate = [NSPredicate predicateWithFormat:@"%K LIKE %@",
-                           key, value];
-  return _iPhone6PlusSimPredicate;
-}
-
-- (BOOL) isIPhone6 {
-  if ([self isSimulator]) {
-    NSDictionary *env = [[NSProcessInfo processInfo] environment];
-    return [self.iPhone6SimPredicate evaluateWithObject:env];
-  } else {
-    return [[self system] isEqualToString:@"iPhone7,2"];
-  }
-}
-
-- (BOOL) isIPhone6Plus {
-  if ([self isSimulator]) {
-    NSDictionary *env = [[NSProcessInfo processInfo] environment];
-    return [self.iPhone6PlusSimPredicate evaluateWithObject:env];
-  } else {
-    return [[self system] isEqualToString:@"iPhone7,1"];
-  }
+- (BOOL) isIPhone6PlusLike {
+  return [[self formFactor] isEqualToString:@"iphone 6+"];
 }
 
 - (BOOL) isIPad {

@@ -69,11 +69,11 @@
 }
 
 - (BOOL) isIphone6 {
-  return [[LPDevice sharedDevice] isIPhone6];
+  return [[LPDevice sharedDevice] isIPhone6Like];
 }
 
 - (BOOL) isIphone6Plus {
-  return [[LPDevice sharedDevice] isIPhone6Plus];
+  return [[LPDevice sharedDevice] isIPhone6PlusLike];
 }
 
 - (BOOL) isIphone4in {
