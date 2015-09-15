@@ -22,8 +22,8 @@ extern NSString *const LPDeviceSimKeyVersionInfo;
 
 - (BOOL) isSimulator;
 - (BOOL) isPhysicalDevice;
-- (BOOL) iPhone6;
-- (BOOL) iPhone6Plus;
+- (BOOL) isIPhone6;
+- (BOOL) isIPhone6Plus;
 - (BOOL) iPad;
 
 @end

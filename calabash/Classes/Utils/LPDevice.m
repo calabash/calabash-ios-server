@@ -90,14 +90,14 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   UIScreenMode *screenMode = [screen currentMode];
   CGSize size = screenMode.size;
 
-  if ([self iPhone6Plus]) {
+  if ([self isIPhone6Plus]) {
     if (size.width < IPHONE6PLUS.width && size.height < IPHONE6PLUS.height) {
       _sampleFactor = (IPHONE6PLUS.width / size.width);
       _sampleFactor = (IPHONE6PLUS.height / size.height);
     } else {
       _sampleFactor = IPHONE6PLUS_SAMPLE;
     }
-  } else if ([self iPhone6]) {
+  } else if ([self isIPhone6]) {
     if (CGSizeEqualToSize(size, IPHONE6)) {
       _sampleFactor = IPHONE6_SAMPLE;
     } else {
@@ -105,14 +105,14 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     }
   } else {
     if ([self isSimulator]) {
-      if ([self iPhone6Plus]) {
+      if ([self isIPhone6Plus]) {
         if (size.width < IPHONE6PLUS.width && size.height < IPHONE6PLUS.height) {
           _sampleFactor = (IPHONE6PLUS.width / size.width);
           _sampleFactor = (IPHONE6PLUS.height / size.height);
         } else {
           _sampleFactor = IPHONE6PLUS_SAMPLE;
         }
-      } else if ([self iPhone6]) {
+      } else if ([self isIPhone6]) {
         if (CGSizeEqualToSize(size, IPHONE6)) {
           _sampleFactor = IPHONE6_SAMPLE;
         } else {
@@ -273,7 +273,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   return _iPhone6PlusSimPredicate;
 }
 
-- (BOOL) iPhone6 {
+- (BOOL) isIPhone6 {
   if ([self isSimulator]) {
     NSDictionary *env = [[NSProcessInfo processInfo] environment];
     return [self.iPhone6SimPredicate evaluateWithObject:env];
@@ -282,7 +282,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   }
 }
 
-- (BOOL) iPhone6Plus {
+- (BOOL) isIPhone6Plus {
   if ([self isSimulator]) {
     NSDictionary *env = [[NSProcessInfo processInfo] environment];
     return [self.iPhone6PlusSimPredicate evaluateWithObject:env];
