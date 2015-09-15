@@ -104,7 +104,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
       _sampleFactor = IPHONE6_DISPLAY_ZOOM_SAMPLE;
     }
   } else {
-    if ([self simulator]) {
+    if ([self isSimulator]) {
       if ([self iPhone6Plus]) {
         if (size.width < IPHONE6PLUS.width && size.height < IPHONE6PLUS.height) {
           _sampleFactor = (IPHONE6PLUS.width / size.width);
@@ -209,7 +209,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 // TODO refactor rename to to modelIdentifier
 - (NSString *) system {
   if (_system) { return _system; }
-  if ([self simulator]) {
+  if ([self isSimulator]) {
     _system = [self simulatorModelIdentfier];
   } else {
     _system = [self physicalDeviceModelIdentifier];
@@ -242,12 +242,12 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   return _formFactor;
 }
 
-- (BOOL) simulator {
+- (BOOL) isSimulator {
   return [self simulatorModelIdentfier] != nil;
 }
 
 - (BOOL) physicalDevice {
-  return ![self simulator];
+  return ![self isSimulator];
 }
 
 - (NSPredicate *) iPhone6SimPredicate {
@@ -274,7 +274,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 }
 
 - (BOOL) iPhone6 {
-  if ([self simulator]) {
+  if ([self isSimulator]) {
     NSDictionary *env = [[NSProcessInfo processInfo] environment];
     return [self.iPhone6SimPredicate evaluateWithObject:env];
   } else {
@@ -283,7 +283,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 }
 
 - (BOOL) iPhone6Plus {
-  if ([self simulator]) {
+  if ([self isSimulator]) {
     NSDictionary *env = [[NSProcessInfo processInfo] environment];
     return [self.iPhone6PlusSimPredicate evaluateWithObject:env];
   } else {

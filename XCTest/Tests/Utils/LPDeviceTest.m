@@ -53,7 +53,7 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
 }
 
 - (void) testSimulator {
-  expect([self.device simulator]).to.equal(YES);
+  expect([self.device isSimulator]).to.equal(YES);
 }
 
 - (void) testPhysicalDevice {
@@ -137,7 +137,7 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   id mock = OCMPartialMock(self.device);
   OCMStub([mock simulatorModelIdentfier]).andReturn(@"anything");
 
-  expect([self.device simulator]).to.equal(YES);
+  expect([self.device isSimulator]).to.equal(YES);
 
   OCMVerify([mock simulatorModelIdentfier]);
 }
@@ -146,7 +146,7 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   id mock = OCMPartialMock(self.device);
   OCMStub([mock simulatorModelIdentfier]).andReturn(nil);
 
-  expect([self.device simulator]).to.equal(NO);
+  expect([self.device isSimulator]).to.equal(NO);
 
   OCMVerify([mock simulatorModelIdentfier]);
 }
@@ -169,7 +169,7 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
 
 - (void) testSystemSimulator {
   id mock = OCMPartialMock(self.device);
-  OCMExpect([mock simulator]).andReturn(YES);
+  OCMExpect([mock isSimulator]).andReturn(YES);
   OCMExpect([mock simulatorModelIdentfier]).andReturn(@"simulator");
 
   expect([mock system]).to.equal(@"simulator");
@@ -179,7 +179,7 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
 
 - (void) testSystemPhysicalDevice {
   id mock = OCMPartialMock(self.device);
-  OCMExpect([mock simulator]).andReturn(NO);
+  OCMExpect([mock isSimulator]).andReturn(NO);
   OCMExpect([mock physicalDeviceModelIdentifier]).andReturn(@"physical device");
 
   expect([mock system]).to.equal(@"physical device");
@@ -287,7 +287,7 @@ describe(@"LPDevice", ^{
       beforeEach(^{
         device = [[LPDevice alloc] init_private];
         mockDevice = OCMPartialMock(device);
-        [[[mockDevice expect] andReturnValue:OCMOCK_VALUE(yes)] simulator];
+        [[[mockDevice expect] andReturnValue:OCMOCK_VALUE(yes)] isSimulator];
 
         processInfo = OCMPartialMock([NSProcessInfo processInfo]);
       });
@@ -333,7 +333,7 @@ describe(@"LPDevice", ^{
       beforeEach(^{
         device = [[LPDevice alloc] init_private];
         mockDevice = OCMPartialMock(device);
-        [[[mockDevice expect] andReturnValue:OCMOCK_VALUE(no)] simulator];
+        [[[mockDevice expect] andReturnValue:OCMOCK_VALUE(no)] isSimulator];
       });
 
       it(@"returns NO", ^{
@@ -359,7 +359,7 @@ describe(@"LPDevice", ^{
       beforeEach(^{
         device = [[LPDevice alloc] init_private];
         mockDevice = OCMPartialMock(device);
-        [[[mockDevice expect] andReturnValue:OCMOCK_VALUE(yes)] simulator];
+        [[[mockDevice expect] andReturnValue:OCMOCK_VALUE(yes)] isSimulator];
 
         processInfo = OCMPartialMock([NSProcessInfo processInfo]);
       });
@@ -405,7 +405,7 @@ describe(@"LPDevice", ^{
       beforeEach(^{
         device = [[LPDevice alloc] init_private];
         mockDevice = OCMPartialMock(device);
-        [[[mockDevice expect] andReturnValue:OCMOCK_VALUE(no)] simulator];
+        [[[mockDevice expect] andReturnValue:OCMOCK_VALUE(no)] isSimulator];
       });
 
       it(@"returns NO", ^{
