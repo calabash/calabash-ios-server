@@ -57,7 +57,7 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
 }
 
 - (void) testPhysicalDevice {
-  expect([self.device physicalDevice]).to.equal(NO);
+  expect([self.device isPhysicalDevice]).to.equal(NO);
 }
 
 #else

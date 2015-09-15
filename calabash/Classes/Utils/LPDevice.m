@@ -246,7 +246,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   return [self simulatorModelIdentfier] != nil;
 }
 
-- (BOOL) physicalDevice {
+- (BOOL) isPhysicalDevice {
   return ![self isSimulator];
 }
 

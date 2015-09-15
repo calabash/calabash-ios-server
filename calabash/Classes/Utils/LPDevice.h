@@ -21,7 +21,7 @@ extern NSString *const LPDeviceSimKeyVersionInfo;
 + (LPDevice *) sharedDevice;
 
 - (BOOL) isSimulator;
-- (BOOL) physicalDevice;
+- (BOOL) isPhysicalDevice;
 - (BOOL) iPhone6;
 - (BOOL) iPhone6Plus;
 - (BOOL) iPad;
