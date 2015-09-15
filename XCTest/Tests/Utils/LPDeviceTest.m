@@ -16,6 +16,34 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
 - (id) init_private;
 - (NSPredicate *) iPhone6SimPredicate;
 - (NSPredicate *) iPhone6PlusSimPredicate;
+- (NSDictionary *) processEnvironment;
+
+@end
+
+@interface LPDeviceTest : XCTestCase
+
+@property(nonatomic, strong) LPDevice *device;
+
+@end
+
+@implementation LPDeviceTest
+
+- (void)setUp {
+  [super setUp];
+  self.device = [LPDevice sharedDevice];
+}
+
+- (void)tearDown {
+  [super tearDown];
+  self.device = nil;
+}
+
+- (void) testProcessEnvironment {
+  NSDictionary *dictionary = [self.device processEnvironment];
+  expect([dictionary count]).notTo.equal(0);
+  NSDictionary *memomized = [self.device processEnvironment];
+  XCTAssertEqual(dictionary, memomized);
+}
 
 @end
 

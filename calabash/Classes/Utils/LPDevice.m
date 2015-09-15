@@ -17,6 +17,7 @@
 
 @property(strong, nonatomic) NSPredicate *iPhone6SimPredicate;
 @property(strong, nonatomic) NSPredicate *iPhone6PlusSimPredicate;
+@property(strong, nonatomic) NSDictionary *processEnvironment;
 
 - (id) init_private;
 
@@ -29,6 +30,7 @@
 @synthesize system = _system;
 @synthesize model = _model;
 @synthesize formFactor = _formFactor;
+@synthesize processEnvironment = _processEnvironment;
 
 - (id) init {
   @throw [NSException exceptionWithName:@"Cannot call init"
@@ -115,6 +117,12 @@
                           @"sample" : [NSNumber numberWithFloat:_sampleFactor]};
   }
   return self;
+}
+
+- (NSDictionary *) processEnvironment {
+  if (_processEnvironment) { return _processEnvironment; }
+  _processEnvironment = [[NSProcessInfo processInfo] environment];
+  return _processEnvironment;
 }
 
 - (NSString *) system {
