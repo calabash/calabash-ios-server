@@ -7,6 +7,9 @@
 //
 #import <UIKit/UIKit.h>
 
+extern NSString *const LPDeviceSimKeyModelIdentifier;
+extern NSString *const LPDeviceSimKeyVersionInfo;
+
 @interface LPDevice : NSObject
 
 @property(strong, nonatomic, readonly) NSDictionary *screenDimensions;

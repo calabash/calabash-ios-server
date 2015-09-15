@@ -17,6 +17,8 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
 - (NSPredicate *) iPhone6SimPredicate;
 - (NSPredicate *) iPhone6PlusSimPredicate;
 - (NSDictionary *) processEnvironment;
+- (NSString *) simulatorModelIdentfier;
+- (NSString *) simulatorVersionInfo;
 
 @end
 
@@ -43,6 +45,46 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   expect([dictionary count]).notTo.equal(0);
   NSDictionary *memomized = [self.device processEnvironment];
   XCTAssertEqual(dictionary, memomized);
+}
+
+- (void) testSimulatorModelIdentifierKeyFound {
+  NSDictionary *env = @{LPDeviceSimKeyModelIdentifier : @"apples"};
+  id mock = OCMPartialMock(self.device);
+  [[[mock expect] andReturn:env] processEnvironment];
+
+  expect([self.device simulatorModelIdentfier]).to.equal(@"apples");
+
+  [mock verify];
+}
+
+- (void) testSimulatorModelIdentifierKeyNotFound {
+  NSDictionary *env = @{};
+  id mock = OCMPartialMock(self.device);
+  [[[mock expect] andReturn:env] processEnvironment];
+
+  expect([self.device simulatorModelIdentfier]).to.equal(nil);
+
+  [mock verify];
+}
+
+- (void) testSimulatorVersionInfoKeyFound {
+  NSDictionary *env = @{LPDeviceSimKeyVersionInfo : @"oranges"};
+  id mock = OCMPartialMock(self.device);
+  [[[mock expect] andReturn:env] processEnvironment];
+
+  expect([self.device simulatorVersionInfo]).to.equal(@"oranges");
+
+  [mock verify];
+}
+
+- (void) testSimulatorVersionInfoKeyNotFound {
+  NSDictionary *env = @{};
+  id mock = OCMPartialMock(self.device);
+  [[[mock expect] andReturn:env] processEnvironment];
+
+  expect([self.device simulatorVersionInfo]).to.equal(nil);
+
+  [mock verify];
 }
 
 @end

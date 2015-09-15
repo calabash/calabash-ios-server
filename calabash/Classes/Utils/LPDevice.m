@@ -13,6 +13,9 @@
 #import "LPTouchUtils.h"
 #import <sys/utsname.h>
 
+NSString *const LPDeviceSimKeyModelIdentifier = @"SIMULATOR_MODEL_IDENTIFIER";
+NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
+
 @interface LPDevice ()
 
 @property(strong, nonatomic) NSPredicate *iPhone6SimPredicate;
@@ -20,6 +23,8 @@
 @property(strong, nonatomic) NSDictionary *processEnvironment;
 
 - (id) init_private;
+- (NSString *) simulatorModelIdentfier;
+- (NSString *) simulatorVersionInfo;
 
 @end
 
@@ -123,6 +128,14 @@
   if (_processEnvironment) { return _processEnvironment; }
   _processEnvironment = [[NSProcessInfo processInfo] environment];
   return _processEnvironment;
+}
+
+- (NSString *) simulatorModelIdentfier {
+  return [self.processEnvironment objectForKey:LPDeviceSimKeyModelIdentifier];
+}
+
+- (NSString *) simulatorVersionInfo {
+  return [self.processEnvironment objectForKey:LPDeviceSimKeyVersionInfo];
 }
 
 - (NSString *) system {
