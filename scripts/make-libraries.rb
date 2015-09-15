@@ -446,8 +446,8 @@ end
 
 if ARGV[0] == 'verify-dylibs'
   verify_dylibs
-  stage_dylibs
   sign_dylibs
+  stage_dylibs
 
   puts "INFO: Done."
   exit 0
