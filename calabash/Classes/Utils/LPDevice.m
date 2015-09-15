@@ -56,73 +56,90 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 - (id) init_private {
   self = [super init];
   if (self) {
+    // For memoizing.
+    _sampleFactor = CGFLOAT_MAX;
+  }
+  return self;
+}
 
-    // http://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions
-    // Thanks for the inspiration for iPhone 6 form factor sample.
+// http://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions
+// Thanks for the inspiration for iPhone 6 form factor sample.
+- (CGFloat) sampleFactor {
+  if (_sampleFactor != CGFLOAT_MAX) { return _sampleFactor; }
 
-    CGFloat scale = [UIScreen mainScreen].scale;
+  _sampleFactor = 1.0f;
 
-    const CGSize IPHONE6_TARGET_SPACE = CGSizeMake(375.0f, 667.0f);
+  CGFloat scale = [UIScreen mainScreen].scale;
 
-    const CGSize IPHONE6PLUS_TARGET_SPACE = CGSizeMake(414.0f, 736.0f);
+  const CGSize IPHONE6_TARGET_SPACE = CGSizeMake(375.0f, 667.0f);
+  const CGSize IPHONE6PLUS_TARGET_SPACE = CGSizeMake(414.0f, 736.0f);
 
-    const CGSize IPHONE6PLUS = CGSizeMake(IPHONE6PLUS_TARGET_SPACE.width*scale,
-                                          IPHONE6PLUS_TARGET_SPACE.height*scale);
+  const CGSize IPHONE6PLUS = CGSizeMake(IPHONE6PLUS_TARGET_SPACE.width * scale,
+                                        IPHONE6PLUS_TARGET_SPACE.height * scale);
 
+  CGSize IPHONE6 = CGSizeMake(IPHONE6_TARGET_SPACE.width * scale,
+                              IPHONE6_TARGET_SPACE.height * scale);
 
-    CGSize IPHONE6 = CGSizeMake(IPHONE6_TARGET_SPACE.width*scale,
-                                IPHONE6_TARGET_SPACE.height*scale);
+  const CGFloat IPHONE6_SAMPLE = 1.0f;
+  const CGFloat IPHONE6PLUS_SAMPLE = 1.0f;
+  const CGFloat IPHONE6_DISPLAY_ZOOM_SAMPLE = 1.171875f;
 
+  UIScreen *screen = [UIScreen mainScreen];
+  UIScreenMode *screenMode = [screen currentMode];
+  CGSize size = screenMode.size;
 
-    const CGFloat IPHONE6_SAMPLE = 1.0f;
-    const CGFloat IPHONE6PLUS_SAMPLE = 1.0f;
-    const CGFloat IPHONE6_DISPLAY_ZOOM_SAMPLE = 1.171875f;
-
-    UIScreen *s = [UIScreen mainScreen];    
-    UIScreenMode *sm = [s currentMode];
-    CGSize size = sm.size;
-
-    _sampleFactor = 1.0f;
-    _screenDimensions = nil;
-
-    if ([self iPhone6Plus]) {
-      if (size.width < IPHONE6PLUS.width && size.height < IPHONE6PLUS.height) {
-        _sampleFactor = (IPHONE6PLUS.width / size.width);
-        _sampleFactor = (IPHONE6PLUS.height / size.height);
-      } else {
-        _sampleFactor = IPHONE6PLUS_SAMPLE;
-      }
-    } else if ([self iPhone6]) {
-      if (CGSizeEqualToSize(size, IPHONE6)) {
-        _sampleFactor = IPHONE6_SAMPLE;
-      } else {
-        _sampleFactor = IPHONE6_DISPLAY_ZOOM_SAMPLE;
-      }
+  if ([self iPhone6Plus]) {
+    if (size.width < IPHONE6PLUS.width && size.height < IPHONE6PLUS.height) {
+      _sampleFactor = (IPHONE6PLUS.width / size.width);
+      _sampleFactor = (IPHONE6PLUS.height / size.height);
     } else {
-      if ([self simulator]) {
-        if ([self iPhone6Plus]) {
-          if (size.width < IPHONE6PLUS.width && size.height < IPHONE6PLUS.height) {
-            _sampleFactor = (IPHONE6PLUS.width / size.width);
-            _sampleFactor = (IPHONE6PLUS.height / size.height);
-          } else {
-            _sampleFactor = IPHONE6PLUS_SAMPLE;
-          }
-        } else if ([self iPhone6]) {
-          if (CGSizeEqualToSize(size, IPHONE6)) {
-            _sampleFactor = IPHONE6_SAMPLE;
-          } else {
-            _sampleFactor = IPHONE6_DISPLAY_ZOOM_SAMPLE;
-          }
+      _sampleFactor = IPHONE6PLUS_SAMPLE;
+    }
+  } else if ([self iPhone6]) {
+    if (CGSizeEqualToSize(size, IPHONE6)) {
+      _sampleFactor = IPHONE6_SAMPLE;
+    } else {
+      _sampleFactor = IPHONE6_DISPLAY_ZOOM_SAMPLE;
+    }
+  } else {
+    if ([self simulator]) {
+      if ([self iPhone6Plus]) {
+        if (size.width < IPHONE6PLUS.width && size.height < IPHONE6PLUS.height) {
+          _sampleFactor = (IPHONE6PLUS.width / size.width);
+          _sampleFactor = (IPHONE6PLUS.height / size.height);
+        } else {
+          _sampleFactor = IPHONE6PLUS_SAMPLE;
+        }
+      } else if ([self iPhone6]) {
+        if (CGSizeEqualToSize(size, IPHONE6)) {
+          _sampleFactor = IPHONE6_SAMPLE;
+        } else {
+          _sampleFactor = IPHONE6_DISPLAY_ZOOM_SAMPLE;
         }
       }
     }
-
-    _screenDimensions = @{@"height" : [NSNumber numberWithFloat:size.height],
-                          @"width" : [NSNumber numberWithFloat:size.width],
-                          @"scale" : [NSNumber numberWithFloat:scale],
-                          @"sample" : [NSNumber numberWithFloat:_sampleFactor]};
   }
-  return self;
+  return _sampleFactor;
+}
+
+- (NSDictionary *) screenDimensions {
+  if (_screenDimensions) { return _screenDimensions; }
+
+  UIScreen *screen = [UIScreen mainScreen];
+  UIScreenMode *screenMode = [screen currentMode];
+  CGSize size = screenMode.size;
+  CGFloat scale = screen.scale;
+
+  _screenDimensions = @{
+                        @"height" : @(size.height),
+                        @"width" : @(size.width),
+                        @"scale" : @(scale),
+                        @"sample" : @([self sampleFactor])
+                        };
+
+  return _screenDimensions;
+}
+
 }
 
 - (NSDictionary *) processEnvironment {
