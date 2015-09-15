@@ -173,7 +173,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 }
 
 - (BOOL) simulator {
-  return [self.model isEqualToString:@"iPhone Simulator"];
+  return [self simulatorModelIdentfier] != nil;
 }
 
 - (NSPredicate *) iPhone6SimPredicate {
