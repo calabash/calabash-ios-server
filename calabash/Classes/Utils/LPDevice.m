@@ -21,6 +21,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 @property(strong, nonatomic) NSPredicate *iPhone6SimPredicate;
 @property(strong, nonatomic) NSPredicate *iPhone6PlusSimPredicate;
 @property(strong, nonatomic) NSDictionary *processEnvironment;
+@property(strong, nonatomic) NSDictionary *formFactorMap;
 
 - (id) init_private;
 - (NSString *) physicalDeviceModelIdentifier;
@@ -37,6 +38,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 @synthesize model = _model;
 @synthesize formFactor = _formFactor;
 @synthesize processEnvironment = _processEnvironment;
+@synthesize formFactorMap = _formFactorMap;
 
 - (id) init {
   @throw [NSException exceptionWithName:@"Cannot call init"
@@ -140,6 +142,40 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   return _screenDimensions;
 }
 
+- (NSDictionary *) formFactorMap {
+  if (_formFactorMap) { return _formFactorMap; }
+
+  _formFactorMap =
+
+  @{
+
+    // iPhone 4s
+    @"iPhone4,1" : @"iphone 3.5in",
+
+    // iPhone 5/5c/5s
+    @"iPhone5,1" : @"iphone 4in",
+    @"iPhone5,2" : @"iphone 4in",
+    @"iPhone5,3" : @"iphone 4in",
+    @"iPhone5,4" : @"iphone 4in",
+    @"iPhone6,1" : @"iphone 4in",
+    @"iPhone6,2" : @"iphone 4in",
+    @"iPhone6,3" : @"iphone 4in",
+    @"iPhone6,4" : @"iphone 4in",
+
+    // iPhone 6/6s
+    @"iPhone7,2" : @"iphone 6",
+    @"iPhone8,1" : @"iphone 6",
+
+    // iPhone 6+
+    @"iPhone7,1" : @"iphone 6+",
+    @"iPhone8,2" : @"iphone 6+",
+
+    // iPad Pro
+    @"iPad6,8" : @"ipad pro"
+
+    };
+
+  return _formFactorMap;
 }
 
 - (NSDictionary *) processEnvironment {

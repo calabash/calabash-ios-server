@@ -20,6 +20,7 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
 - (NSDictionary *) processEnvironment;
 - (NSString *) simulatorModelIdentfier;
 - (NSString *) simulatorVersionInfo;
+- (NSDictionary *) formFactorMap;
 
 @end
 
