@@ -14,6 +14,7 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
 @interface LPDevice (LPXCTEST)
 
 - (id) init_private;
+- (NSString *) physicalDeviceModelIdentifier;
 - (NSPredicate *) iPhone6SimPredicate;
 - (NSPredicate *) iPhone6PlusSimPredicate;
 - (NSDictionary *) processEnvironment;
@@ -32,7 +33,7 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
 
 - (void)setUp {
   [super setUp];
-  self.device = [LPDevice sharedDevice];
+  self.device = [[LPDevice alloc] init_private];
 }
 
 - (void)tearDown {
@@ -74,6 +75,12 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
 
 - (void) testPhysicalDevice {
   expect([self.device physicalDevice]).to.equal(YES);
+}
+
+- (void) testPhysicalDeviceHardwareNameReturnsSomething {
+  NSString *actual = [self.device physicalDeviceModelIdentifier];
+  expect(actual).notTo.equal(nil);
+  expect(actual).notTo.equal(@"");
 }
 
 #endif
@@ -141,6 +148,26 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   expect([self.device simulator]).to.equal(NO);
 
   OCMVerify([mock simulatorModelIdentfier]);
+}
+
+- (void) testSystemSimulator {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock simulator]).andReturn(YES);
+  OCMExpect([mock simulatorModelIdentfier]).andReturn(@"simulator");
+
+  expect([mock system]).to.equal(@"simulator");
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testSystemPhysicalDevice {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock simulator]).andReturn(NO);
+  OCMExpect([mock physicalDeviceModelIdentifier]).andReturn(@"physical device");
+
+  expect([mock system]).to.equal(@"physical device");
+
+  OCMVerifyAll(mock);
 }
 
 @end

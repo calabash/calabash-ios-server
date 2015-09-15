@@ -23,6 +23,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 @property(strong, nonatomic) NSDictionary *processEnvironment;
 
 - (id) init_private;
+- (NSString *) physicalDeviceModelIdentifier;
 - (NSString *) simulatorModelIdentfier;
 - (NSString *) simulatorVersionInfo;
 
@@ -138,11 +139,22 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   return [self.processEnvironment objectForKey:LPDeviceSimKeyVersionInfo];
 }
 
-- (NSString *) system {
-  if (_system) { return _system; }
+- (NSString *) physicalDeviceModelIdentifier {
   struct utsname systemInfo;
   uname(&systemInfo);
-  _system = @(systemInfo.machine);
+  return @(systemInfo.machine);
+}
+
+// The hardware name of the device.
+// http://www.everyi.com/by-identifier/ipod-iphone-ipad-specs-by-model-identifier.html
+// TODO refactor rename to to modelIdentifier
+- (NSString *) system {
+  if (_system) { return _system; }
+  if ([self simulator]) {
+    _system = [self simulatorModelIdentfier];
+  } else {
+    _system = [self physicalDeviceModelIdentifier];
+  }
   return _system;
 }
 
