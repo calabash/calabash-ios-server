@@ -11,7 +11,8 @@ xcpretty_available = `gem list xcpretty -i`.chomp == 'true'
 xcode = RunLoop::Xcode.new
 
 if xcode.version_gte_7?
-  target_simulator_name = 'iPhone 6'
+  # Not ready yet for iPhone 6
+  target_simulator_name = 'iPhone 5s'
 else
   target_simulator_name = 'iPhone 5s'
 end
