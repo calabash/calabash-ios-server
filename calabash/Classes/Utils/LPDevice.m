@@ -46,6 +46,8 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
 @synthesize deviceFamily = _deviceFamily;
 @synthesize name = _name;
 @synthesize iOSVersion = _iOSVersion;
+@synthesize physicalDeviceModelIdentifier = _physicalDeviceModelIdentifier;
+
 
 - (id) init {
   @throw [NSException exceptionWithName:@"Cannot call init"
@@ -230,9 +232,11 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
 }
 
 - (NSString *) physicalDeviceModelIdentifier {
+  if (_physicalDeviceModelIdentifier) { return _physicalDeviceModelIdentifier; }
   struct utsname systemInfo;
   uname(&systemInfo);
-  return @(systemInfo.machine);
+  _physicalDeviceModelIdentifier = @(systemInfo.machine);
+  return _physicalDeviceModelIdentifier;
 }
 
 - (NSString *) deviceFamily {
@@ -256,6 +260,11 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
 // Required for clients < 0.16.2 - @see LPVersionRoute
 - (NSString *) LEGACY_iPhoneSimulatorDevice {
   return [self.processEnvironment objectForKey:LPDeviceSimKeyIphoneSimulatorDevice_LEGACY];
+}
+
+// Required for clients < 0.16.2 - @see LPVersionRoute
+- (NSString *) LEGACY_systemFromUname {
+  return [self physicalDeviceModelIdentifier];
 }
 
 // The hardware name of the device.
