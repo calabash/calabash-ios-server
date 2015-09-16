@@ -38,6 +38,7 @@
 #import "LPCocoaLumberjack.h"
 #import "LPTTYLogFormatter.h"
 #import "LPASLLogFormatter.h"
+#import "LPProcessInfoRoute.h"
 
 @interface CalabashServer ()
 - (void) start;
@@ -180,6 +181,10 @@
     LPIntrospectionRoute *introspectionRoute = [LPIntrospectionRoute new];
     [LPRouter addRoute:introspectionRoute forPath:@"introspection"];
     [introspectionRoute release];
+
+    LPProcessInfoRoute *processInfoRoute = [LPProcessInfoRoute new];
+    [LPRouter addRoute:processInfoRoute forPath:@"process-info"];
+    [processInfoRoute release];
 
     _httpServer = [[[LPHTTPServer alloc] init] retain];
 
