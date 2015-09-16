@@ -138,6 +138,9 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
   NSString *iOSVersion = [device iOSVersion];
   if (!iOSVersion) { iOSVersion = @""; }
 
+  NSString *LEGACY_iphoneSimulatorDevice = [device LEGACY_iPhoneSimulatorDevice];
+  if (!LEGACY_iphoneSimulatorDevice) { LEGACY_iphoneSimulatorDevice = @""; }
+
   NSDictionary *git =
   @{
     @"revision" : kLPGitShortRevision,
@@ -174,7 +177,7 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
     @"server_port" : @([infoPlist serverPort]),
     @"short_version_string" : [infoPlist stringForShortVersion],
     @"simulator" : simulatorInfo,
-    @"simulator_device" : formFactor,     // deprecated 0.16.2 replaced with device_family
+    @"simulator_device" : LEGACY_iphoneSimulatorDevice, // deprecate 0.16.2 replaced with device_family
     @"system" : [self LEGACY_deviceSystem], // deprecated 0.16.2, no replacement
     @"version" : calabashVersion
 
