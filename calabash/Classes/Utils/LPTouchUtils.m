@@ -5,90 +5,11 @@
 //
 #import <sys/utsname.h>
 #import <math.h>
-
-
-
 #import "LPTouchUtils.h"
 #import "LPDevice.h"
 
 
 @implementation LPTouchUtils
-
-+ (NSString *) stringForSystemName {
-  struct utsname systemInfo;
-  uname(&systemInfo);
-  return [NSString stringWithCString:systemInfo.machine
-                            encoding:NSUTF8StringEncoding];
-}
-
-+ (BOOL) isThreeAndAHalfInchDevice {
-  UIDevice *device = [UIDevice currentDevice];
-  NSString *system = [LPTouchUtils stringForSystemName];
-  NSDictionary *env = [[NSProcessInfo processInfo] environment];
-
-  BOOL iphone5Like = NO;
-  if ([@"iPhone Simulator" isEqualToString:[device model]]) {
-
-    NSPredicate *inch5PhonePred = [NSPredicate predicateWithFormat:@"IPHONE_SIMULATOR_VERSIONS LIKE '*iPhone*Retina*4-inch*'"];
-    iphone5Like = [inch5PhonePred evaluateWithObject:env];
-    
-    if (!iphone5Like) {
-      inch5PhonePred = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone 5*'"];
-      iphone5Like = [inch5PhonePred evaluateWithObject:env];
-      inch5PhonePred = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone 6*'"];
-      iphone5Like =  iphone5Like || [inch5PhonePred evaluateWithObject:env];
-    }
-  } else if ([[device model] hasPrefix:@"iPhone"]) {
-    iphone5Like = [system hasPrefix:@"iPhone5"] || [system hasPrefix:@"iPhone6"] || [system hasPrefix:@"iPhone7,2"] || [system hasPrefix:@"iPhone7,1"];
-  } else if ([[device model] hasPrefix:@"iPod"]) {
-    iphone5Like = [system hasPrefix:@"iPod5"];
-  }
-  return !iphone5Like;
-}
-
-+ (BOOL) is4InchDevice {
-
-  if ([@"iPhone Simulator" isEqualToString:[[UIDevice currentDevice] model]]) {
-    NSDictionary *env = [[NSProcessInfo processInfo] environment];
-
-    NSPredicate *xCode6Predicate, *xCode5Predicate, *predicate;
-    xCode6Predicate = [NSPredicate predicateWithFormat:@"SIMULATOR_VERSION_INFO LIKE '*iPhone 5*'"];
-    xCode5Predicate = [NSPredicate predicateWithFormat:@"IPHONE_SIMULATOR_VERSIONS LIKE '*iPhone*Retina*4-inch*'"];
-    predicate = [NSCompoundPredicate orPredicateWithSubpredicates:@[xCode5Predicate, xCode6Predicate]];
-    return [predicate evaluateWithObject:env];
-  } else { // Device, not simulator
-    NSString *systemName = [LPTouchUtils stringForSystemName];
-    __block BOOL is4Inch = NO;
-
-    [@[@"iPhone5", @"iPhone6", @"iPod5"] enumerateObjectsUsingBlock:^(NSString *prefix,
-                                                                      NSUInteger idx,
-                                                                      BOOL *stop) {
-      if ([systemName hasPrefix:prefix]) {
-        is4Inch = YES;
-        *stop = YES;
-      }
-    }];
-    return is4Inch;
-  }
-}
-
-+ (BOOL) isLetterBox {
-  if (UI_USER_INTERFACE_IDIOM() != UIUserInterfaceIdiomPhone) {
-    return NO;
-  }
-
-  if ([LPTouchUtils isThreeAndAHalfInchDevice]) {
-    return NO;
-  }
-
-  CGFloat scale = [UIScreen mainScreen].scale;
-  if (scale != 2.0f) {
-    return NO;
-  }
-
-  CGSize screenBounds = [[UIScreen mainScreen] bounds].size;
-  return screenBounds.height * scale == 960;
-}
 
 + (CGPoint) translateToScreenCoords:(CGPoint) point sampleFactor:(CGFloat)sampleFactor{
   UIScreen *s = [UIScreen mainScreen];
@@ -99,8 +20,9 @@
   UIDeviceOrientation o = [[UIDevice currentDevice] orientation];
 
   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    if ([self isLetterBox]) {
-      return CGPointMake(point.x * sampleFactor, (point.y + LPiPHONE4INCHOFFSET)*sampleFactor);
+    if ([[LPDevice sharedDevice] isLetterBox]) {
+      return CGPointMake(point.x * sampleFactor,
+                         (point.y + LPiPHONE4INCHOFFSET)*sampleFactor);
     }
     return CGPointMake(point.x*sampleFactor,point.y*sampleFactor);
   }
@@ -312,7 +234,7 @@
     CGFloat x = (rect.origin.x + 0.5 * rect.size.width) * sampleFactor;
     CGFloat y = (rect.origin.y + 0.5 * rect.size.height) * sampleFactor;
     
-    if ([LPTouchUtils isLetterBox]) {
+    if ([[LPDevice sharedDevice] isLetterBox]) {
       UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
       if (UIInterfaceOrientationIsPortrait(orientation)) {
         y += LPiPHONE4INCHOFFSET*sampleFactor;
@@ -355,7 +277,7 @@
     rect = [window convertRect:rect toCoordinateSpace:frontWindow];
     CGFloat x = rect.origin.x;
     CGFloat y = rect.origin.y;
-    if ([LPTouchUtils isLetterBox]) {
+    if ([[LPDevice sharedDevice] isLetterBox]) {
       UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
       if (UIInterfaceOrientationIsPortrait(orientation)) {
         y += LPiPHONE4INCHOFFSET*sampleFactor;

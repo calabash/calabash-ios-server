@@ -77,15 +77,15 @@
 }
 
 - (BOOL) isIphone4in {
-  return [LPTouchUtils is4InchDevice];
+  return [[LPDevice sharedDevice] isIPhone5Like];
 }
 
 - (BOOL) isIphone35in {
-  return [LPTouchUtils isThreeAndAHalfInchDevice];
+  return [[LPDevice sharedDevice] isIPhone4Like];
 }
 
 - (BOOL) isIpad {
-  return [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
+  return [[LPDevice sharedDevice] isIPad];
 }
 
 #pragma mark - dictionary:setObject:forKey:whenTarget:respondsTo:
