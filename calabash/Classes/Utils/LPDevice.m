@@ -15,6 +15,7 @@
 
 NSString *const LPDeviceSimKeyModelIdentifier = @"SIMULATOR_MODEL_IDENTIFIER";
 NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
+NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_DEVICE";
 
 @interface LPDevice ()
 
@@ -250,6 +251,11 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   if (_iOSVersion) { return _iOSVersion; }
   _iOSVersion = [[UIDevice currentDevice] systemVersion];
   return _iOSVersion;
+}
+
+// Required for clients < 0.16.2 - @see LPVersionRoute
+- (NSString *) LEGACY_iPhoneSimulatorDevice {
+  return [self.processEnvironment objectForKey:LPDeviceSimKeyIphoneSimulatorDevice_LEGACY];
 }
 
 // The hardware name of the device.

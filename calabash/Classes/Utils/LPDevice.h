@@ -9,6 +9,7 @@
 
 extern NSString *const LPDeviceSimKeyModelIdentifier;
 extern NSString *const LPDeviceSimKeyVersionInfo;
+extern NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY;
 
 @interface LPDevice : NSObject
 
@@ -23,6 +24,9 @@ extern NSString *const LPDeviceSimKeyVersionInfo;
 + (LPDevice *) sharedDevice;
 
 - (NSString *) simulatorVersionInfo;
+
+// Required for clients < 0.16.2 - @see LPVersionRoute
+- (NSString *) LEGACY_iPhoneSimulatorDevice;
 
 - (BOOL) isSimulator;
 - (BOOL) isPhysicalDevice;
