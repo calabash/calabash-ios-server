@@ -14,11 +14,14 @@ extern NSString *const LPDeviceSimKeyVersionInfo;
 
 @property(strong, nonatomic, readonly) NSDictionary *screenDimensions;
 @property(assign, nonatomic, readonly) CGFloat sampleFactor;
-@property(copy, nonatomic, readonly) NSString *system;
-@property(copy, nonatomic, readonly) NSString *model;
+@property(copy, nonatomic, readonly) NSString *modelIdentifier;
 @property(copy, nonatomic, readonly) NSString *formFactor;
+@property(copy, nonatomic, readonly) NSString *deviceFamily;
+@property(copy, nonatomic, readonly) NSString *name;
 
 + (LPDevice *) sharedDevice;
+
+- (NSString *) simulatorVersionInfo;
 
 - (BOOL) isSimulator;
 - (BOOL) isPhysicalDevice;

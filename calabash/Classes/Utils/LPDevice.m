@@ -31,7 +31,6 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 
 - (NSString *) physicalDeviceModelIdentifier;
 - (NSString *) simulatorModelIdentfier;
-- (NSString *) simulatorVersionInfo;
 
 @end
 
@@ -39,11 +38,12 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 
 @synthesize screenDimensions = _screenDimensions;
 @synthesize sampleFactor = _sampleFactor;
-@synthesize system = _system;
-@synthesize model = _model;
+@synthesize modelIdentifier = _modelIdentifier;
 @synthesize formFactor = _formFactor;
 @synthesize processEnvironment = _processEnvironment;
 @synthesize formFactorMap = _formFactorMap;
+@synthesize deviceFamily = _deviceFamily;
+@synthesize name = _name;
 
 - (id) init {
   @throw [NSException exceptionWithName:@"Cannot call init"
@@ -233,30 +233,33 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   return @(systemInfo.machine);
 }
 
-// The hardware name of the device.
-// http://www.everyi.com/by-identifier/ipod-iphone-ipad-specs-by-model-identifier.html
-// TODO refactor rename to to modelIdentifier
-- (NSString *) system {
-  if (_system) { return _system; }
-  if ([self isSimulator]) {
-    _system = [self simulatorModelIdentfier];
-  } else {
-    _system = [self physicalDeviceModelIdentifier];
-  }
-  return _system;
+- (NSString *) deviceFamily {
+  if (_deviceFamily) { return _deviceFamily; }
+  _deviceFamily = [[UIDevice currentDevice] model];
+  return _deviceFamily;
 }
 
-- (NSString *) model {
-  if (_model) { return _model; }
-  UIDevice *device = [UIDevice currentDevice];
-  _model = [device model];
-  return _model;
+- (NSString *) name {
+  if (_name) { return _name; }
+  _name = [[UIDevice currentDevice] name];
+  return _name;
+}
+
+// The hardware name of the device.
+- (NSString *) modelIdentifier {
+  if (_modelIdentifier) { return _modelIdentifier; }
+  if ([self isSimulator]) {
+    _modelIdentifier = [self simulatorModelIdentfier];
+  } else {
+    _modelIdentifier = [self physicalDeviceModelIdentifier];
+  }
+  return _modelIdentifier;
 }
 
 - (NSString *) formFactor {
   if (_formFactor) { return _formFactor; }
 
-  NSString *modelIdentifier = [self system];
+  NSString *modelIdentifier = [self modelIdentifier];
   NSString *value = [self.formFactorMap objectForKey:modelIdentifier];
 
   if (value) {
