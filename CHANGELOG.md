@@ -1,3 +1,7 @@
+### 0.16.2
+
+* Detect and identify Xcode 7 simulators #242
+
 ### 0.16.0 and 0.16.1
 
 These releases contains no code-level changes.  They have been
