@@ -64,32 +64,14 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
 
 - (BOOL) isIPhoneAppEmulatedOnIPad;
 
-@property(copy, nonatomic, readonly) NSString *LEGACY_deviceSystem;
-
 @end
 
 @implementation LPVersionRoute
-
-@synthesize LEGACY_deviceSystem = _LEGACY_deviceSystem;
 
 - (BOOL) isIPhoneAppEmulatedOnIPad {
   UIUserInterfaceIdiom idiom = UI_USER_INTERFACE_IDIOM();
   NSString *model = [[UIDevice currentDevice] model];
   return idiom == UIUserInterfaceIdiomPhone && [model hasPrefix:@"iPad"];
-}
-
-// Required for backward compatibility for 'system' key.
-// Added 0.16.2.  Replaces [device system].
-- (NSString *) LEGACY_deviceSystem {
-  if (_LEGACY_deviceSystem) { return _LEGACY_deviceSystem; }
-  struct utsname systemInfo;
-  uname(&systemInfo);
-  _LEGACY_deviceSystem = @(systemInfo.machine);
-
-  if (!_LEGACY_deviceSystem) {
-    _LEGACY_deviceSystem = @"";
-  }
-  return _LEGACY_deviceSystem;
 }
 
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
@@ -178,7 +160,7 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
     @"short_version_string" : [infoPlist stringForShortVersion],
     @"simulator" : simulatorInfo,
     @"simulator_device" : LEGACY_iphoneSimulatorDevice, // deprecate 0.16.2 replaced with device_family
-    @"system" : [self LEGACY_deviceSystem], // deprecated 0.16.2, no replacement
+    @"system" : [device LEGACY_systemFromUname],        // deprecated 0.16.2, replaced with model identifer
     @"version" : calabashVersion
 
     };
