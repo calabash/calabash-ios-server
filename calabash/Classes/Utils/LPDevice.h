@@ -18,6 +18,7 @@ extern NSString *const LPDeviceSimKeyVersionInfo;
 @property(copy, nonatomic, readonly) NSString *formFactor;
 @property(copy, nonatomic, readonly) NSString *deviceFamily;
 @property(copy, nonatomic, readonly) NSString *name;
+@property(copy, nonatomic, readonly) NSString *iOSVersion;
 
 + (LPDevice *) sharedDevice;
 

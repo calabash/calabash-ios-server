@@ -44,6 +44,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 @synthesize formFactorMap = _formFactorMap;
 @synthesize deviceFamily = _deviceFamily;
 @synthesize name = _name;
+@synthesize iOSVersion = _iOSVersion;
 
 - (id) init {
   @throw [NSException exceptionWithName:@"Cannot call init"
@@ -243,6 +244,12 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   if (_name) { return _name; }
   _name = [[UIDevice currentDevice] name];
   return _name;
+}
+
+- (NSString *) iOSVersion {
+  if (_iOSVersion) { return _iOSVersion; }
+  _iOSVersion = [[UIDevice currentDevice] systemVersion];
+  return _iOSVersion;
 }
 
 // The hardware name of the device.

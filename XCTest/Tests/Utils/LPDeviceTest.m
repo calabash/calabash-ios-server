@@ -50,7 +50,7 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
 
 #if TARGET_IPHONE_SIMULATOR
 
-- (void) testModelIdentiferReturnsSomething {
+- (void) testSimulatorModelIdentiferReturnsSomething {
   expect([self.device simulatorModelIdentfier]).notTo.equal(nil);
 }
 
@@ -84,13 +84,19 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   expect([self.device isPhysicalDevice]).to.equal(YES);
 }
 
-- (void) testPhysicalDeviceHardwareNameReturnsSomething {
+- (void) testPhysicalDeviceModelIdentifierReturnsSomething {
   NSString *actual = [self.device physicalDeviceModelIdentifier];
   expect(actual).notTo.equal(nil);
   expect(actual).notTo.equal(@"");
 }
 
 #endif
+
+- (void) testiOSVersionReturnsSomething {
+  NSString *actual = [self.device iOSVersion];
+  expect(actual).notTo.equal(nil);
+  expect(actual).notTo.equal(@"");
+}
 
 - (void) testProcessEnvironment {
   NSDictionary *dictionary = [self.device processEnvironment];
