@@ -64,14 +64,32 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
 
 - (BOOL) isIPhoneAppEmulatedOnIPad;
 
+@property(copy, nonatomic, readonly) NSString *LEGACY_deviceSystem;
+
 @end
 
 @implementation LPVersionRoute
+
+@synthesize LEGACY_deviceSystem = _LEGACY_deviceSystem;
 
 - (BOOL) isIPhoneAppEmulatedOnIPad {
   UIUserInterfaceIdiom idiom = UI_USER_INTERFACE_IDIOM();
   NSString *model = [[UIDevice currentDevice] model];
   return idiom == UIUserInterfaceIdiomPhone && [model hasPrefix:@"iPad"];
+}
+
+// Required for backward compatibility for 'system' key.
+// Added 0.16.2.  Replaces [device system].
+- (NSString *) LEGACY_deviceSystem {
+  if (_LEGACY_deviceSystem) { return _LEGACY_deviceSystem; }
+  struct utsname systemInfo;
+  uname(&systemInfo);
+  _LEGACY_deviceSystem = @(systemInfo.machine);
+
+  if (!_LEGACY_deviceSystem) {
+    _LEGACY_deviceSystem = @"";
+  }
+  return _LEGACY_deviceSystem;
 }
 
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
@@ -117,6 +135,9 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
   NSString *deviceName = [device name];
   if (!deviceName) { deviceName = @""; }
 
+  NSString *iOSVersion = [device iOSVersion];
+  if (!iOSVersion) { iOSVersion = @""; }
+
   NSDictionary *git =
   @{
     @"revision" : kLPGitShortRevision,
@@ -142,8 +163,9 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
     @"device_family" : deviceFamily,
     @"device_name" : deviceName,
     @"form_factor" : formFactor,
-    @"git": git,
-    @"iOS_version" : [[UIDevice currentDevice] systemVersion],
+    @"git" : git,
+    @"iOS_version" : iOSVersion, // deprecated 0.16.2 replaced with ios_version
+    @"ios_version" : iOSVersion,
     @"iphone_app_emulated_on_ipad" : @(isIphoneAppEmulated),
     @"model_identifier" : modelIdentifier,
     @"device_name" : deviceName,
@@ -152,8 +174,8 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
     @"server_port" : @([infoPlist serverPort]),
     @"short_version_string" : [infoPlist stringForShortVersion],
     @"simulator" : simulatorInfo,
-    @"simulator_device" : formFactor, // deprecated 0.16.2 replaced with device_family
-    @"system" : modelIdentifier,      // deprecated 0.16.2 replaced with model_identifier
+    @"simulator_device" : formFactor,     // deprecated 0.16.2 replaced with device_family
+    @"system" : [self LEGACY_deviceSystem], // deprecated 0.16.2, no replacement
     @"version" : calabashVersion
 
     };
