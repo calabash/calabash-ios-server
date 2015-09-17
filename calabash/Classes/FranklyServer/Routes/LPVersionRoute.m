@@ -99,23 +99,29 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
                                     data:(NSDictionary *) data {
 
   LPDevice *device = [LPDevice sharedDevice];
-  NSString *system = [device system];
-  if (!system) { system = @""; }
+  NSString *modelIdentifier = [device modelIdentifier];
+  if (!modelIdentifier) { modelIdentifier = @""; }
 
   NSString *formFactor = [device formFactor];
   if (!formFactor) { formFactor = @""; }
 
-  NSDictionary *env = [[NSProcessInfo processInfo] environment];
-
-  BOOL is4inDevice = [LPTouchUtils is4InchDevice];
-
-  NSString *dev = env[@"IPHONE_SIMULATOR_DEVICE"];
-  if (!dev) {  dev = @"";  }
-
-  NSString *sim = env[@"IPHONE_SIMULATOR_VERSIONS"];
-  if (!sim) {  sim = @"";  }
-
+  BOOL is4inDevice = [device isIPhone5Like];
   BOOL isIphoneAppEmulated = [self isIPhoneAppEmulatedOnIPad];
+
+  NSString *deviceFamily = [device deviceFamily];
+  if (!deviceFamily) { deviceFamily = @""; }
+
+  NSString *simulatorInfo = [device simulatorVersionInfo];
+  if (!simulatorInfo) { simulatorInfo = @""; }
+
+  NSString *deviceName = [device name];
+  if (!deviceName) { deviceName = @""; }
+
+  NSString *iOSVersion = [device iOSVersion];
+  if (!iOSVersion) { iOSVersion = @""; }
+
+  NSString *LEGACY_iphoneSimulatorDevice = [device LEGACY_iPhoneSimulatorDevice];
+  if (!LEGACY_iphoneSimulatorDevice) { LEGACY_iphoneSimulatorDevice = @""; }
 
   NSDictionary *git =
   @{
@@ -134,23 +140,29 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
 
   @{
 
-    @"version": calabashVersion,
-    @"app_id": [infoPlist stringForIdentifier],
-    @"iOS_version": [[UIDevice currentDevice] systemVersion],
-    @"app_name": [infoPlist stringForDisplayName],
-    @"screen_dimensions": [[LPDevice sharedDevice] screenDimensions],
-    @"system": system,
     @"4inch": @(is4inDevice),
-    @"simulator_device": dev,
-    @"simulator": sim,
-    @"app_version": [infoPlist stringForVersion],
-    @"short_version_string": [infoPlist stringForShortVersion],
-    @"outcome": @"SUCCESS",
-    @"iphone_app_emulated_on_ipad": @(isIphoneAppEmulated),
-    @"git": git,
-    @"server_port" : @([infoPlist serverPort]),
     @"app_base_sdk" : [infoPlist stringForDTSDKName],
-    @"form_factor" : formFactor
+    @"app_id" : [infoPlist stringForIdentifier],
+    @"app_name" : [infoPlist stringForDisplayName],
+    @"app_version": [infoPlist stringForVersion],
+    @"device_family" : deviceFamily,
+    @"device_name" : deviceName,
+    @"form_factor" : formFactor,
+    @"git" : git,
+    @"iOS_version" : iOSVersion, // deprecated 0.16.2 replaced with ios_version
+    @"ios_version" : iOSVersion,
+    @"iphone_app_emulated_on_ipad" : @(isIphoneAppEmulated),
+    @"model_identifier" : modelIdentifier,
+    @"device_name" : deviceName,
+    @"outcome" : @"SUCCESS",
+    @"screen_dimensions" : [[LPDevice sharedDevice] screenDimensions],
+    @"server_port" : @([infoPlist serverPort]),
+    @"short_version_string" : [infoPlist stringForShortVersion],
+    @"simulator" : simulatorInfo,
+    @"simulator_device" : LEGACY_iphoneSimulatorDevice, // deprecate 0.16.2 replaced with device_family
+    @"system" : [device LEGACY_systemFromUname],        // deprecated 0.16.2, replaced with model identifer
+    @"version" : calabashVersion
+
     };
 }
 

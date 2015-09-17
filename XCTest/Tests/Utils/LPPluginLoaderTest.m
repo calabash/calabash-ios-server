@@ -82,7 +82,7 @@ describe(@"LPPluginLoader", ^{
     });
 
     it(@"returns true when dylib is loaded", ^{
-      if ([[LPDevice sharedDevice] simulator]) {
+      if ([[LPDevice sharedDevice] isSimulator]) {
         NSBundle *main = [NSBundle mainBundle];
         NSString *path = [main pathForResource:@"examplePlugin" ofType:@"dylib"];
         expect(path).notTo.equal(nil);
@@ -95,7 +95,7 @@ describe(@"LPPluginLoader", ^{
 
   describe(@"#loadCalabashPlugins", ^{
     it(@"returns true if all plug-ins were loaded", ^{
-      if ([[LPDevice sharedDevice] simulator]) {
+      if ([[LPDevice sharedDevice] isSimulator]) {
         LPPluginLoader *loader = [LPPluginLoader new];
         expect([loader loadCalabashPlugins]).to.equal(YES);
       } else {

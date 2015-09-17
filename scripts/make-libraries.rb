@@ -426,9 +426,7 @@ def sign_dylibs
   puts "INFO: Creating the Calabash.keychain for signing."
   system(keychain_tool)
 
-  puts "INFO: signing the simulator dylib"
-  system(resign_tool, simulator_dylib)
-
+  # Don't sign the simulator dylib
   puts "INFO: signing the device dylib"
   system(resign_tool, device_dylib)
 end
@@ -448,8 +446,8 @@ end
 
 if ARGV[0] == 'verify-dylibs'
   verify_dylibs
-  stage_dylibs
   sign_dylibs
+  stage_dylibs
 
   puts "INFO: Done."
   exit 0

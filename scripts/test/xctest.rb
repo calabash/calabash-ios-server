@@ -8,9 +8,11 @@ working_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
 
 xcpretty_available = `gem list xcpretty -i`.chomp == 'true'
 
-XCODE_MAJOR_VERSION=`xcrun -k xcodebuild -version | tr -d "\n" | cut -c 7`.chomp
-if XCODE_MAJOR_VERSION == '5'
-  target_simulator_name = 'iPhone Retina (4-inch)'
+xcode = RunLoop::Xcode.new
+
+if xcode.version_gte_7?
+  # Not ready yet for iPhone 6
+  target_simulator_name = 'iPhone 5s'
 else
   target_simulator_name = 'iPhone 5s'
 end
