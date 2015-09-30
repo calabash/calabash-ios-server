@@ -116,7 +116,7 @@ banner "Building ARM Library"
 ARM_LIBRARY_XC7="${ARM_BUILD_DIR}/Build/Intermediates/ArchiveIntermediates/calabash-dylib/InstallationBuildProductsLocation/usr/local/lib/${LIBRARY_NAME}"
 rm -rf "${ARM_LIBRARY_XC7}"
 
-ARM_LIBRARY_XC6="${ARM_BUILD_DIR}/Build/Intermediates/UninstalledProducts/${LIBRARY_NAME}"
+ARM_LIBRARY_XC6="${ARM_BUILD_DIR}/Build/Products/${XC_BUILD_CONFIG}-iphoneos/${LIBRARY_NAME}"
 rm -rf "${ARM_LIBRARY_XC6}"
 
 xcrun xcodebuild install \
