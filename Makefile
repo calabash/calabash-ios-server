@@ -11,15 +11,15 @@ clean:
 	rm -rf calabash-dylibs
 
 framework:
-	bin/make/make-framework.sh
+	bin/make/framework.sh
 
 frank:
-	bin/make/make-frank-plugin.sh
+	bin/make/frank-plugin.sh
 
 dylibs:
 	# The argument is the sha of the developer.p12 used to resign the dylib.
 	# See https://github.com/calabash/calabash-codesign for details.
-	bin/make/make-calabash-dylibs.sh 337976ad9ace375ac06cd8fea2edb0c7276dec2a72d005ca5559a8bbf09c8841
+	bin/make/dylibs.sh 337976ad9ace375ac06cd8fea2edb0c7276dec2a72d005ca5559a8bbf09c8841
 
 install_test_binaries:
 	$(MAKE) framework
