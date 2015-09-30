@@ -10,6 +10,10 @@ The companion of the calabash-ios gem:  https://github.com/calabash/calabash-ios
 
 ### Building the Framework
 
+Requires Xcode 6 or Xcode 7.
+
+Xcode 6.4 is actively tested.  Older versions of Xcode 6 are not.
+
 ```
 $ git clone --recursive git@github.com:calabash/calabash-ios-server.git
 $ cd calabash-ios-server
