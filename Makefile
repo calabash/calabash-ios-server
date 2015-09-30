@@ -17,13 +17,10 @@ frank:
 	bin/make/make-frank-plugin.sh
 
 dylibs:
-	rm -rf build
-	rm -rf calabash-dylibs
-	scripts/make-calabash-dylib.rb sim
-	scripts/make-calabash-dylib.rb device
-	CERT_CHECKSUM=337976ad9ace375ac06cd8fea2edb0c7276dec2a72d005ca5559a8bbf09c8841 \
-								scripts/make-libraries.rb verify-dylibs
-	xcrun codesign --display --verbose=4 calabash-dylibs/libCalabashDyn.dylib
+	# The argument is the sha of the developer.p12 used to resign the dylib.
+	# See https://github.com/calabash/calabash-codesign for details.
+	bin/make/make-calabash-dylibs.sh 337976ad9ace375ac06cd8fea2edb0c7276dec2a72d005ca5559a8bbf09c8841
+
 
 dylib_sim:
 	rm -rf build
