@@ -10,12 +10,6 @@ script:
   - make clean
   - make framework
   - make frank
-  # Dylib creation is allowed by Xcode 6, but it requires
-  # code-signing for the on-device library, which is not easy
-  # to set up on Travis CI.
-  #- make dylibs
-  #- make all
-  - make dylib_sim
   - scripts/test/xctest.rb
   - scripts/test/run-ios-simulator-smoke-tests.rb
 

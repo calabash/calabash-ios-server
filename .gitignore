@@ -4,6 +4,7 @@ calabash.xcodeproj/xcuserdata/
 *.xcscmblueprint
 Markdown.pl
 build
+Products
 calabash.framework
 libFrankCalabash.a
 calabash-dylibs
@@ -30,5 +31,6 @@ calabash-ios
 .irbrc
 Gemfile.lock
 
-# Command line tools
-bin
+# Legacy. Remove this once the scripts/ dir is moved to bin/
+scripts/version
+
