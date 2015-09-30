@@ -14,11 +14,7 @@ framework:
 	bin/make/make-framework.sh
 
 frank:
-	rm -rf build
-	rm -rf libFrankCalabash.a
-	scripts/make-frank-lib.rb sim
-	scripts/make-frank-lib.rb device
-	scripts/make-libraries.rb verify-frank
+	bin/make/make-frank-plugin.sh
 
 dylibs:
 	rm -rf build
