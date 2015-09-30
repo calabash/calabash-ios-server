@@ -2245,7 +2245,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		B1D5BD7619A23BCE0070E8CE /* Run Script - git versioning 1 of 2 */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -2260,7 +2260,7 @@
 		};
 		B1D5BDC719A23BCE0070E8CE /* Run Script - git versioning 2 of 2 */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -2275,7 +2275,7 @@
 		};
 		F5091BDA18C4E1D700C85307 /* Run Script - git versioning 1 of 2 */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -2290,7 +2290,7 @@
 		};
 		F5091C2718C4E1D700C85307 /* Run Script - git versioning 2 of 2 */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -2349,7 +2349,7 @@
 		};
 		F5BA6EFE1B4BB95700DB898F /* Run Script git versioning 1 of 2 */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -2364,7 +2364,7 @@
 		};
 		F5BA6EFF1B4BB97000DB898F /* Run Script git versioning 2 of 2 */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
