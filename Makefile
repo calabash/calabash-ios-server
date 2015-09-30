@@ -21,13 +21,6 @@ dylibs:
 	# See https://github.com/calabash/calabash-codesign for details.
 	bin/make/make-calabash-dylibs.sh 337976ad9ace375ac06cd8fea2edb0c7276dec2a72d005ca5559a8bbf09c8841
 
-
-dylib_sim:
-	rm -rf build
-	rm -rf calabash-dylibs
-	scripts/make-calabash-dylib.rb sim
-	scripts/make-libraries.rb verify-sim-dylib
-
 install_test_binaries:
 	$(MAKE) framework
 	$(MAKE) dylibs
