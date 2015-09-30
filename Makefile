@@ -4,41 +4,22 @@ all:
 	$(MAKE) dylibs
 
 clean:
-	rm -rf bin
 	rm -rf build
+	rm -rf Products
 	rm -rf calabash.framework
 	rm -rf libFrankCalabash.a
 	rm -rf calabash-dylibs
 
 framework:
-	rm -rf build
-	rm -rf calabash.framework
-	scripts/make-calabash-lib.rb sim
-	scripts/make-calabash-lib.rb device
-	scripts/make-calabash-lib.rb version
-	scripts/make-libraries.rb verify-framework
+	bin/make/framework.sh
 
 frank:
-	rm -rf build
-	rm -rf libFrankCalabash.a
-	scripts/make-frank-lib.rb sim
-	scripts/make-frank-lib.rb device
-	scripts/make-libraries.rb verify-frank
+	bin/make/frank-plugin.sh
 
 dylibs:
-	rm -rf build
-	rm -rf calabash-dylibs
-	scripts/make-calabash-dylib.rb sim
-	scripts/make-calabash-dylib.rb device
-	CERT_CHECKSUM=337976ad9ace375ac06cd8fea2edb0c7276dec2a72d005ca5559a8bbf09c8841 \
-								scripts/make-libraries.rb verify-dylibs
-	xcrun codesign --display --verbose=4 calabash-dylibs/libCalabashDyn.dylib
-
-dylib_sim:
-	rm -rf build
-	rm -rf calabash-dylibs
-	scripts/make-calabash-dylib.rb sim
-	scripts/make-libraries.rb verify-sim-dylib
+	# The argument is the sha of the developer.p12 used to resign the dylib.
+	# See https://github.com/calabash/calabash-codesign for details.
+	bin/make/dylibs.sh 337976ad9ace375ac06cd8fea2edb0c7276dec2a72d005ca5559a8bbf09c8841
 
 install_test_binaries:
 	$(MAKE) framework
