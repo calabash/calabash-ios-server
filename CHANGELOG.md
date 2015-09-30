@@ -1,4 +1,8 @@
-### 0.16.2
+### 0.16.4
+
+* New build system for libraries: responding Xcode 7.0.1 bitcode changes #256
+
+## 0.16.2
 
 * Detect and identify Xcode 7 simulators #242
 
