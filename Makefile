@@ -4,19 +4,14 @@ all:
 	$(MAKE) dylibs
 
 clean:
-	rm -rf bin
 	rm -rf build
+	rm -rf Products
 	rm -rf calabash.framework
 	rm -rf libFrankCalabash.a
 	rm -rf calabash-dylibs
 
 framework:
-	rm -rf build
-	rm -rf calabash.framework
-	scripts/make-calabash-lib.rb sim
-	scripts/make-calabash-lib.rb device
-	scripts/make-calabash-lib.rb version
-	scripts/make-libraries.rb verify-framework
+	bin/make/make-framework.sh
 
 frank:
 	rm -rf build

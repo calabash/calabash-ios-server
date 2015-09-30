@@ -4,6 +4,7 @@ calabash.xcodeproj/xcuserdata/
 *.xcscmblueprint
 Markdown.pl
 build
+Products
 calabash.framework
 libFrankCalabash.a
 calabash-dylibs
