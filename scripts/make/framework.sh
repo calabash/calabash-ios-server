@@ -97,7 +97,7 @@ EXIT_CODE=${PIPESTATUS[0]}
 
 if [ $EXIT_CODE != 0 ]; then
   error "Building simulator library for framework failed."
-  exit $RETVAL
+  exit $EXIT_CODE
 else
   info "Building simulator library for framework succeeded."
 fi
