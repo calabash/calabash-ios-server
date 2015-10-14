@@ -149,7 +149,7 @@ ditto_or_exit "${ARM_LIBRARY}" "${ARM_PRODUCTS_DIR}/${LIBRARY_NAME}"
 
 banner "Build Version Tool"
 
-VTOOL=${VTOOL_BUILD_DIR}/Build/Products/Debug/version
+VTOOL="${VTOOL_BUILD_DIR}/Build/Products/${XC_BUILD_CONFIG}/version"
 
 rm -rf "${VTOOL}"
 
@@ -158,7 +158,7 @@ xcrun xcodebuild build \
   -scheme "version" \
   -SYMROOT="${VTOOL_BUILD_DIR}" \
   -derivedDataPath "${VTOOL_BUILD_DIR}" \
-  -configuration Debug \
+  -configuration "${XC_BUILD_CONFIG}" \
   -sdk macosx \
   GCC_TREAT_WARNINGS_AS_ERRORS=YES | $XC_PIPE
 
