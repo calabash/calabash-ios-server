@@ -18,50 +18,19 @@ Dir.chdir working_dir do
 
   do_system('git clone --depth 1 --recursive https://github.com/calabash/ios-smoke-test-app.git')
 
-  # if calabash.framework exists, it was built in another step
+  do_system('rm -rf run_loop')
+
+  do_system("git clone --depth 1 --recursive https://github.com/calabash/run_loop")
+
   unless File.exist?('calabash.framework')
+    do_system("make clean")
     do_system('make framework')
   end
-
 end
 
 calabash_gem_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'calabash-ios'))
+run_loop_gem_dir = File.expand_path(File.join(File.dirname(__FILE__), "..", "..", "run_loop"))
 calabash_framework = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'calabash.framework'))
-
-Dir.chdir calabash_gem_dir do
-
-  # The name of the CI script that builds the libraries that are included in
-  # the calabash-ios gem has changed in the master branch; install-static-libs
-  # is the old name.
-  if File.exist? 'script/ci/travis/install-static-libs.rb'
-    do_system('script/ci/travis/install-static-libs.rb',
-              {:pass_msg => 'CalSmokeTest - installed static libs',
-               :fail_msg => 'CalSmokeTest - could not install static libs'})
-  else
-    do_system('script/ci/travis/install-gem-libs.rb',
-              {:pass_msg => 'CalSmokeTest - installed gem libraries',
-               :fail_msg => 'CalSmokeTest - could not install gem libraries'})
-  end
-
-
-  uninstall_gem('run_loop')
-  do_system('rm -rf run_loop')
-  do_system('git clone --depth 1 --branch develop --recursive https://github.com/calabash/run_loop')
-  run_loop_gem_dir = File.expand_path(File.join(calabash_gem_dir, 'run_loop'))
-  Dir.chdir run_loop_gem_dir do
-    do_system('bundle install')
-    do_system('rake install')
-  end
-
-  do_system('script/ci/travis/bundle-install.rb',
-            {:pass_msg => 'CalSmokeTest - bundle install worked',
-             :fail_msg => 'CalSmokeTest - could not bundle install'})
-
-  do_system('script/ci/travis/install-gem-ci.rb',
-            {:pass_msg => 'CalSmokeTest - installing the gem',
-             :fail_msg => 'CalSmokeTest - could not install the gem'})
-
-end
 
 smoke_test_working_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'ios-smoke-test-app/CalSmokeApp'))
 
@@ -73,15 +42,15 @@ Dir.chdir smoke_test_working_dir do
   do_system('rm -rf Gemfile*')
   do_system('rm -rf .bundle')
 
+  other_gems = File.join("config", "xtc-other-gems.rb")
+
   File.open('Gemfile', 'w') do |file|
     file.write("source 'https://rubygems.org'\n")
     file.write("gem 'run_loop', :github => 'calabash/run_loop', :branch => 'develop'\n")
     file.write("gem 'calabash-cucumber', :github => 'calabash/calabash-ios', :branch => 'develop'\n")
-    file.write("gem 'rspec', '~> 3.0'\n")
-    file.write("gem 'chronic', '>= 0.10.2', '< 1.0'\n")
-    file.write("gem 'pry'\n")
-    file.write("gem 'pry-nav'\n")
-    file.write("gem 'xcpretty', '~> 0.1'\n")
+    File.readlines(other_gems).each do |line|
+      file.write(line)
+    end
   end
 
   FileUtils.mkdir_p('.bundle')
@@ -89,14 +58,13 @@ Dir.chdir smoke_test_working_dir do
   File.open('.bundle/config', 'w') do |file|
     file.write("---\n")
     file.write("BUNDLE_LOCAL__CALABASH-CUCUMBER: \"#{calabash_gem_dir}\"\n")
+    file.write("BUNDLE_LOCAL__RUN_LOOP: \"#{run_loop_gem_dir}\"\n")
   end
 end
 
-animated_happiness_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'ios-smoke-test-app'))
+smoke_test_root = File.expand_path(File.join(File.dirname(__FILE__), '..', '..', 'ios-smoke-test-app'))
 
-Dir.chdir animated_happiness_dir do
-
-  install_gem('luffa')
-  do_system('script/ci/travis/build-and-stage-app.sh')
-  do_system('script/ci/travis/cucumber-ci.rb --tags @travis')
+Dir.chdir smoke_test_root do
+  do_system("script/ci/travis/run.rb --tags @travis")
 end
+
