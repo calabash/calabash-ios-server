@@ -35,6 +35,8 @@ test_app:
 xct:
 	scripts/test/xctest.rb
 
+# For developers only.  This script is not part of the library
+# build process.
 version:
-	scripts/make-version.sh
-	bin/version --revision ALL
+	bin/make/version.sh
+
