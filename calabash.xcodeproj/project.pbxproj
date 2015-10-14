@@ -430,6 +430,11 @@
 		F570992C1B5518EF00DB35EC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F570992B1B5518EF00DB35EC /* CoreLocation.framework */; };
 		F570992E1B555C3C00DB35EC /* LPInvokerArgumentEncodingIsHandledTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F570992D1B555C3C00DB35EC /* LPInvokerArgumentEncodingIsHandledTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F57099301B55751200DB35EC /* LPInvokerHasArgumentWithUnhandleEncodingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F570992F1B55751200DB35EC /* LPInvokerHasArgumentWithUnhandleEncodingTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F57605191BCE767000E89C97 /* LPSuspendAppRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605181BCE767000E89C97 /* LPSuspendAppRouteTest.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F576058C1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F576058D1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F576058E1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F576058F1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F58C9F501B6F79BA007D307B /* CocoaLumberjack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F58C9F4F1B6F79BA007D307B /* CocoaLumberjack.a */; };
 		F58C9F571B6F7EB9007D307B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F561B6F7EB9007D307B /* GCDAsyncSocket.m */; };
 		F58C9F801B6F802D007D307B /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F5B1B6F802D007D307B /* DDData.m */; };
@@ -846,6 +851,9 @@
 		F570992B1B5518EF00DB35EC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F570992D1B555C3C00DB35EC /* LPInvokerArgumentEncodingIsHandledTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvokerArgumentEncodingIsHandledTest.m; sourceTree = "<group>"; };
 		F570992F1B55751200DB35EC /* LPInvokerHasArgumentWithUnhandleEncodingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvokerHasArgumentWithUnhandleEncodingTest.m; sourceTree = "<group>"; };
+		F57605181BCE767000E89C97 /* LPSuspendAppRouteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSuspendAppRouteTest.m; sourceTree = "<group>"; };
+		F57605871BCE77F000E89C97 /* LPSuspendAppRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPSuspendAppRoute.h; sourceTree = "<group>"; };
+		F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSuspendAppRoute.m; sourceTree = "<group>"; };
 		F58937E91A9BE0E6007B9A5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		F58B6DE8186847F70042191C /* gitversioning-after.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "gitversioning-after.sh"; sourceTree = "<group>"; };
 		F58B6DE9186847F70042191C /* gitversioning-before.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "gitversioning-before.sh"; sourceTree = "<group>"; };
@@ -1352,6 +1360,8 @@
 		B184FDD014B6DB2B002A744C /* Routes */ = {
 			isa = PBXGroup;
 			children = (
+				F57605871BCE77F000E89C97 /* LPSuspendAppRoute.h */,
+				F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */,
 				B13B7FBD1A31FE560054FFB1 /* LPDumpRoute.h */,
 				B13B7FBE1A31FE560054FFB1 /* LPDumpRoute.m */,
 				B1F771FC1A22A35A009A2336 /* LPUIARouteOverSharedElement.h */,
@@ -1976,6 +1986,7 @@
 				89128F941B25DD92008874B0 /* LPIntrospectionTestView.m */,
 				F54EFE8C1B5B88D500F8D665 /* LPRouterTest.m */,
 				F565B48A1B6A33600039ACFF /* LPKeyboardLanguageRouteTest.m */,
+				F57605181BCE767000E89C97 /* LPSuspendAppRouteTest.m */,
 			);
 			path = Routes;
 			sourceTree = "<group>";
@@ -2459,6 +2470,7 @@
 				B15BF9CF19ABB1DE00B38577 /* LPCDataScanner_Extensions.m in Sources */,
 				B1670E2C1A32410F00000A62 /* LPDumpRoute.m in Sources */,
 				B15BF9D019ABB1DE00B38577 /* LPCJSONDeserializer.m in Sources */,
+				F576058F1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */,
 				B15BF9D119ABB1DE00B38577 /* LPCJSONScanner.m in Sources */,
 				B15BF9D219ABB1DE00B38577 /* LPCJSONSerializer.m in Sources */,
 				B15BF9D319ABB1DE00B38577 /* LPResources.m in Sources */,
@@ -2535,6 +2547,7 @@
 				B1D5BD9219A23BCE0070E8CE /* LPRecorder.m in Sources */,
 				B1D5BD9319A23BCE0070E8CE /* CalabashServer.m in Sources */,
 				B1D5BD9419A23BCE0070E8CE /* LPUIARouteOverUserPrefs.m in Sources */,
+				F576058E1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */,
 				B1D5BD9519A23BCE0070E8CE /* LPUserPrefRoute.m in Sources */,
 				F56630951A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */,
 				B1D5BD9619A23BCE0070E8CE /* LPKeyboardRoute.m in Sources */,
@@ -2694,6 +2707,7 @@
 				F5091C1018C4E1D700C85307 /* LPEnv.m in Sources */,
 				B13B7FC01A31FE560054FFB1 /* LPDumpRoute.m in Sources */,
 				F5091C1118C4E1D700C85307 /* UIScriptASTWith.m in Sources */,
+				F576058D1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */,
 				F5E2D1E018C9120E00A0D9B6 /* LPSSKeychain.m in Sources */,
 				F5091C1218C4E1D700C85307 /* UIScriptParser.m in Sources */,
 				F5091C1318C4E1D700C85307 /* LPJSONUtils.m in Sources */,
@@ -2751,6 +2765,7 @@
 				F50CBFB51A0405CE004AC9DA /* LPCDataScanner_Extensions.m in Sources */,
 				F50CBFC21A0405CE004AC9DA /* UIScriptASTLast.m in Sources */,
 				F50CBF891A04056F004AC9DA /* LPHTTPAsyncFileResponse.m in Sources */,
+				F57605191BCE767000E89C97 /* LPSuspendAppRouteTest.m in Sources */,
 				F50CBFAB1A0405B2004AC9DA /* LPInterpolateRoute.m in Sources */,
 				89128F951B25DD92008874B0 /* LPIntrospectionTestView.m in Sources */,
 				F5543F221ABF7D7000E1A0BF /* LPPluginLoaderTest.m in Sources */,
@@ -2797,6 +2812,8 @@
 				F50CBFA51A0405B2004AC9DA /* LPUIATapRoute.m in Sources */,
 				F50CBFA41A0405B2004AC9DA /* LPQueryLogRoute.m in Sources */,
 				F50CBFC11A0405CE004AC9DA /* UIScriptASTIndex.m in Sources */,
+				F576058C1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */,
+				F50CBFCB1A0405E9004AC9DA /* LPCDataScanner.m in Sources */,
 				F5A33A711AC01BC400224639 /* WKWebView+LPWebViewTest.m in Sources */,
 				F5F2D5E01ACAC3B60027937B /* LPIsWebViewTest.m in Sources */,
 				F5C224EA1AD47403001DB4FA /* LPScreenshotRouteTest.m in Sources */,
