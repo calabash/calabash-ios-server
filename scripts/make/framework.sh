@@ -207,12 +207,18 @@ cd Versions
 ln -sfh A Current
 ln -sfh A `./A/Resources/version | tr -d '\n'`
 
-info "Installing to ${PWD}/${INSTALLED_FRAMEWORK}"
-
 cd "${WORKING_DIR}"
+
+info "Installing FAT framework to ${PWD}/${INSTALLED_FRAMEWORK}"
+
 ditto_or_exit "${FRAMEWORK}" "${PWD}/${INSTALLED_FRAMEWORK}"
 
 banner "Framework Info"
+
+if [ -n `which tree` ]; then
+  tree calabash.framework
+fi
+
 echo "Built version: `./${INSTALLED_FRAMEWORK}/Resources/version | tr -d '\n'`"
 lipo -info "${INSTALLED_FRAMEWORK}/calabash"
 
