@@ -73,7 +73,7 @@ else
   XC_PIPE='cat'
 fi
 
-banner "Building Simulator Library"
+banner "Building Framework Simulator Library"
 
 SIM_LIBRARY="${SIM_BUILD_DIR}/Build/Products/${XC_BUILD_CONFIG}-iphonesimulator/${LIBRARY_NAME}"
 rm -rf "${SIM_LIBRARY}"
@@ -107,7 +107,7 @@ ditto_or_exit "${SIM_LIBRARY}" "${SIM_PRODUCTS_DIR}/${LIBRARY_NAME}"
 HEADERS="${SIM_BUILD_DIR}/Build/Products/Debug-iphonesimulator/calabashHeaders"
 ditto_or_exit "${HEADERS}" "${FAT_PRODUCTS_DIR}/Headers"
 
-banner "Building ARM Library"
+banner "Building Framework ARM Library"
 
 ARM_LIBRARY_XC7="${ARM_BUILD_DIR}/Build/Intermediates/ArchiveIntermediates/${XC_TARGET}/IntermediateBuildFilesPath/UninstalledProducts/${LIBRARY_NAME}"
 rm -rf "${ARM_LIBRARY_XC7}"
@@ -212,7 +212,7 @@ info "Installing to ${PWD}/${INSTALLED_FRAMEWORK}"
 cd "${WORKING_DIR}"
 ditto_or_exit "${FRAMEWORK}" "${PWD}/${INSTALLED_FRAMEWORK}"
 
-banner "Info"
+banner "Framework Info"
 echo "Built version: `./${INSTALLED_FRAMEWORK}/Resources/version | tr -d '\n'`"
 lipo -info "${INSTALLED_FRAMEWORK}/calabash"
 
