@@ -664,7 +664,6 @@
 		B121E79714B6D9FB0034C6A9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B121E79B14B6D9FB0034C6A9 /* calabash-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "calabash-Info.plist"; sourceTree = "<group>"; };
 		B121E79D14B6D9FB0034C6A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		B121E79F14B6D9FB0034C6A9 /* calabash-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "calabash-Prefix.pch"; sourceTree = "<group>"; };
 		B1296FBF15DC1F4B005DDF5C /* LPReflectUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPReflectUtils.h; sourceTree = "<group>"; };
 		B1296FC215DC1F5B005DDF5C /* LPReflectUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPReflectUtils.m; sourceTree = "<group>"; };
 		B12A04001511546F002FA032 /* LPInterpolateRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPInterpolateRoute.h; sourceTree = "<group>"; };
@@ -1199,7 +1198,6 @@
 				F58B6DE9186847F70042191C /* gitversioning-before.sh */,
 				B121E79B14B6D9FB0034C6A9 /* calabash-Info.plist */,
 				B121E79C14B6D9FB0034C6A9 /* InfoPlist.strings */,
-				B121E79F14B6D9FB0034C6A9 /* calabash-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
