@@ -1,8 +1,9 @@
 source 'https://rubygems.org'
 
-gem 'calabash-cucumber', '~> 0.13'
-gem 'run_loop', '~> 1.2'
+gem 'calabash-cucumber', '~> 0.16'
+gem 'run_loop', '~> 1.5'
 gem 'rspec', '~> 3.0'
 gem 'chronic', '>= 0.10.2', '< 1.0'
 gem 'pry'
 gem 'pry-nav'
+
