@@ -27,6 +27,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LPUIAUserPrefsChannel.h"
+#import "LPiOSVersionInlines.h"
 #import "LPCocoaLumberjack.h"
 
 const static NSString *LPUIAChannelUIAPrefsRequestKey = @"__calabashRequest";
@@ -149,8 +150,7 @@ const static NSInteger LPUIAChannelMaximumLoopCount = 1200;
   // files. (>_>)
   NSString *preferencesPlist = [self simulatorPreferencesPath];
   NSMutableDictionary *preferences;
-  NSString *systemVersion = [[UIDevice currentDevice] systemVersion];
-  if ([systemVersion compare:@"8.1" options:NSNumericSearch] != NSOrderedAscending) {
+  if (lp_ios_version_gte(@"8.1")) {
     NSLog(@"iOS >= 8.1 detected; assuming Xcode >= 6.1");
     NSInteger i = 0;
     while (i < LPUIAChannelMaximumLoopCount) {
@@ -290,8 +290,7 @@ const static NSInteger LPUIAChannelMaximumLoopCount = 1200;
        at runtime and choose the correct plist.
       */
 
-      NSString *systemVersion = [[UIDevice currentDevice] systemVersion];
-      if ([systemVersion compare:@"8.1" options:NSNumericSearch] != NSOrderedAscending) {
+      if (lp_ios_version_gte(@"8.1")) {
         NSString *relativePlistPath = [NSString stringWithFormat:@"Preferences/%@", plistName];
         NSString *unsanitizedPlistPath = [userLibraryPath stringByAppendingPathComponent:relativePlistPath];
         path = [[unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] copy];
