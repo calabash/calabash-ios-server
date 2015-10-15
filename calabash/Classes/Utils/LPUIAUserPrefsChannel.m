@@ -30,12 +30,12 @@
 #import "LPiOSVersionInlines.h"
 #import "LPCocoaLumberjack.h"
 
-const static NSString *LPUIAChannelUIAPrefsRequestKey = @"__calabashRequest";
-const static NSString *LPUIAChannelUIAPrefsResponseKey = @"__calabashResponse";
-const static NSString *LPUIAChannelUIAPrefsIndexKey = @"index";
-const static NSString *LPUIAChannelUIAPrefsCommandKey = @"command";
-const static NSTimeInterval LPUIAChannelUIADelay = 0.1;
-const static NSInteger LPUIAChannelMaximumLoopCount = 1200;
+static NSString *const LPUIAChannelUIAPrefsRequestKey = @"__calabashRequest";
+static NSString *const LPUIAChannelUIAPrefsResponseKey = @"__calabashResponse";
+static NSString *const LPUIAChannelUIAPrefsIndexKey = @"index";
+static NSString *const LPUIAChannelUIAPrefsCommandKey = @"command";
+static NSTimeInterval const LPUIAChannelUIADelay = 0.1;
+static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
 
 @implementation LPUIAUserPrefsChannel {
   dispatch_queue_t _uiaQueue;
@@ -205,10 +205,10 @@ const static NSInteger LPUIAChannelMaximumLoopCount = 1200;
     NSDictionary *uiaRequest = [self requestForCommand:command];
 
     [defaults setObject:uiaRequest
-                 forKey:(NSString *) LPUIAChannelUIAPrefsRequestKey];
+                 forKey:LPUIAChannelUIAPrefsRequestKey];
     [defaults synchronize];
 
-    if ([self validateRequestWritten: uiaRequest]) {
+    if ([self validateRequestWritten:uiaRequest]) {
       return;
     }
     else {
@@ -222,7 +222,7 @@ const static NSInteger LPUIAChannelMaximumLoopCount = 1200;
 -(BOOL)validateRequestWritten:(NSDictionary*)uiaRequest {
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
   [defaults synchronize];
-  NSDictionary *written = [defaults objectForKey:(NSString*)LPUIAChannelUIAPrefsRequestKey];
+  NSDictionary *written = [defaults objectForKey:LPUIAChannelUIAPrefsRequestKey];
   if (!written) {
     return NO;
   }
