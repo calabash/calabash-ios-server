@@ -39,6 +39,7 @@
 #import "LPTTYLogFormatter.h"
 #import "LPASLLogFormatter.h"
 #import "LPProcessInfoRoute.h"
+#import "LPDevice.h"
 
 @interface CalabashServer ()
 - (void) start;
@@ -238,6 +239,10 @@
   NSError *error = nil;
   if (![_httpServer start:&error]) {
     LPLogError(@"Error starting Calabash HTTP Server: %@", error);
+  } else {
+    LPLogDebug(@"Calabash iOS server is listening on: %@ port %@",
+               [[LPDevice sharedDevice] getIPAddress:YES],
+               @([_httpServer port]));
   }
 }
 
