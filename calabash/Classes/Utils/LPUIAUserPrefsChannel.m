@@ -83,8 +83,7 @@ const static NSInteger LPUIAChannelMaximumLoopCount = 1200;
     NSDictionary *result = nil;
     NSUInteger loopCount = 0;
     while (1) {//Loop waiting for response
-      [[NSUserDefaults standardUserDefaults] synchronize];
-      NSDictionary *resultPrefs = [self userPreferences];
+      NSDictionary *resultPrefs = [self dictionaryFromUserDefaults];
       NSDictionary *currentResponse = [resultPrefs objectForKey:LPUIAChannelUIAPrefsResponseKey];
 
       NSLog(@"Current request: %@", [resultPrefs objectForKey:LPUIAChannelUIAPrefsRequestKey]);
@@ -104,7 +103,7 @@ const static NSInteger LPUIAChannelMaximumLoopCount = 1200;
       if (loopCount >= LPUIAChannelMaximumLoopCount) {
         NSLog(@"Timed out running command %@", command);
         NSLog(@"Server current index: %lu",(unsigned long) _scriptIndex);
-        NSDictionary *prefs = [self userPreferences];
+        NSDictionary *prefs = [self dictionaryFromUserDefaults];
         NSLog(@"Current request: %@", [prefs objectForKey:LPUIAChannelUIAPrefsRequestKey]);
         NSLog(@"Current response: %@", [prefs objectForKey:LPUIAChannelUIAPrefsRequestKey]);
         result = nil;
@@ -127,14 +126,18 @@ const static NSInteger LPUIAChannelMaximumLoopCount = 1200;
 #endif
 }
 
-- (NSDictionary *) userPreferences {
+- (NSDictionary *) dictionaryFromUserDefaults {
+  [[NSUserDefaults standardUserDefaults] synchronize];
+
   NSDictionary *prefs = nil;
 #if TARGET_IPHONE_SIMULATOR
-  prefs = [NSDictionary dictionaryWithContentsOfFile:[self simulatorPreferencesPath]];
+  if (lp_ios_version_gte(@"9.0")) {
+    prefs = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation];
+  } else {
+    prefs = [NSDictionary dictionaryWithContentsOfFile:[self simulatorPreferencesPath]];
+  }
 #else
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults synchronize];
-  prefs = [defaults dictionaryRepresentation];
+  prefs = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation];
 #endif
   return prefs;
 }
