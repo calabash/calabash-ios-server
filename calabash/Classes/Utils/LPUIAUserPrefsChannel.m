@@ -153,23 +153,11 @@ const static NSInteger LPUIAChannelMaximumLoopCount = 1200;
     NSLog(@"iOS >= 8.1 detected; assuming Xcode >= 6.1");
     NSInteger i = 0;
     while (i < LPUIAChannelMaximumLoopCount) {
-      [[NSUserDefaults standardUserDefaults] synchronize];
-      preferences  = [NSMutableDictionary dictionaryWithContentsOfFile:preferencesPlist];
-      if (!preferences) {
-        preferences = [NSMutableDictionary dictionary];
-        NSLog(@"Empty preferences... resetting");
-      }
-
       NSDictionary *uiaRequest   = [self requestForCommand:command];
-      [preferences setObject:uiaRequest forKey:LPUIAChannelUIAPrefsRequestKey];
-      BOOL writeSuccess = [preferences writeToFile:preferencesPlist
-                                        atomically:YES];
-
-      if (!writeSuccess) {
-        NSLog(@"Preparing for retry of simulatorRequestExecutionOf:");
-      }
-
-      if ([self validateRequestWritten:uiaRequest]) {
+      [[NSUserDefaults standardUserDefaults] setObject:uiaRequest forKey:(NSString *)LPUIAChannelUIAPrefsRequestKey];
+      [[NSUserDefaults standardUserDefaults] synchronize];
+      
+      if ([self validateRequestWritten:uiaRequest] ) {
         return;
       } else {
         i++;
