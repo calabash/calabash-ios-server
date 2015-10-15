@@ -291,11 +291,11 @@
   XCTAssertEqualObjects(dict[@"rect"][@"height"], @(CGRectGetHeight([view frame])));
 
   if ([self isIphone6Plus]) {
-    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(82.93, 0.001);
-    XCTAssertEqualObjects(dict[@"rect"][@"center_y"], @(138.32));
+    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(106.75, 0.001);
   } else if ([self isIphone6]) {
-    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(75.0, 0.001);
-    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(125.1, 0.001);
+    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64.0, 0.001);
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(106.75, 0.001);
   } else if ([self isIphone4in] || [self isIphone35in] || [self isIpad]) {
     XCTAssertEqualObjects(dict[@"rect"][@"center_x"], @(CGRectGetMidX([view frame])));
     expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(106.75, 0.001);
@@ -344,11 +344,11 @@
   XCTAssertEqualObjects(dict[@"rect"][@"height"], @(CGRectGetHeight([view frame])));
 
   if ([self isIphone6Plus]) {
-    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(82.93, 0.001);
-    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(112.41, 0.001);
+    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64.0, 0.001);
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(86.75, 0.001);
   } else if ([self isIphone6]) {
-    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(75.0, 0.001);
-    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(101.66, 0.001);
+    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64.0, 0.001);
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(86.75, 0.001);
   } else if ([self isIphone4in] || [self isIphone35in] || [self isIpad]) {
     XCTAssertEqualObjects(dict[@"rect"][@"center_x"], @(CGRectGetMidX([view frame])));
     XCTAssertEqualObjects(dict[@"rect"][@"center_y"], @(CGRectGetMidY([view frame])));
