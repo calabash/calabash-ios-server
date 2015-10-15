@@ -23,6 +23,7 @@ calabash-dylibs
 # CI pulls down these two repos from github
 ios-smoke-test-app
 calabash-ios
+run_loop
 
 .ruby-version
 
