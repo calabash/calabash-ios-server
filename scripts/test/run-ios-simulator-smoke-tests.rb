@@ -1,12 +1,15 @@
 #!/usr/bin/env ruby
+
+
 require 'fileutils'
 
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'test-helpers'))
 
+install_gem('luffa')
+
 working_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
 
 uninstall_gem('calabash-cucumber')
-
 
 Dir.chdir working_dir do
 
