@@ -27,6 +27,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LPUIAUserPrefsChannel.h"
+#import "LPCocoaLumberjack.h"
 
 const static NSString *LPUIAChannelUIAPrefsRequestKey = @"__calabashRequest";
 const static NSString *LPUIAChannelUIAPrefsResponseKey = @"__calabashResponse";
