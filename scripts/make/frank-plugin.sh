@@ -70,7 +70,7 @@ else
   XC_PIPE='cat'
 fi
 
-banner "Building Simulator Library"
+banner "Building Frank Plug-in Simulator Library"
 
 SIM_LIBRARY="${SIM_BUILD_DIR}/Build/Products/${XC_BUILD_CONFIG}-iphonesimulator/${LIBRARY_NAME}"
 rm -rf "${SIM_LIBRARY}"
@@ -101,7 +101,7 @@ fi
 
 ditto_or_exit "${SIM_LIBRARY}" "${SIM_PRODUCTS_DIR}/${LIBRARY_NAME}"
 
-banner "Building ARM Library"
+banner "Building Frank Plug-in ARM Library"
 
 ARM_LIBRARY_XC7="${ARM_BUILD_DIR}/Build/Intermediates/ArchiveIntermediates/${XC_TARGET}/IntermediateBuildFilesPath/UninstalledProducts/${LIBRARY_NAME}"
 rm -rf "${ARM_LIBRARY_XC7}"
@@ -141,7 +141,7 @@ fi
 
 ditto_or_exit "${ARM_LIBRARY}" "${ARM_PRODUCTS_DIR}/${LIBRARY_NAME}"
 
-banner "Installing"
+banner "Installing Frank Plug-in"
 
 FAT_LIBRARY="${FAT_PRODUCTS_DIR}/${INSTALLED_LIBRARY}"
 
@@ -154,7 +154,7 @@ info "Installing to ${PWD}/${INSTALLED_LIBRARY}"
 
 ditto_or_exit "${FAT_LIBRARY}" "${PWD}/${INSTALLED_LIBRARY}"
 
-banner "Info"
+banner "Frank Plug-in Info"
 
 VERSION=`xcrun strings "${INSTALLED_LIBRARY}" | grep -E 'CALABASH VERSION' | head -1 | grep -oEe '\d+\.\d+\.\d+' | tr -d '\n'`
 echo "Built version:  $VERSION"

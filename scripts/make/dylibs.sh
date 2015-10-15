@@ -73,7 +73,7 @@ else
   XC_PIPE='cat'
 fi
 
-banner "Building Simulator Library"
+banner "Building Dylib Simulator Library"
 
 SIM_LIBRARY="${SIM_BUILD_DIR}/Build/Products/${XC_BUILD_CONFIG}-iphonesimulator/${LIBRARY_NAME}"
 rm -rf "${SIM_LIBRARY}"
@@ -111,7 +111,7 @@ ditto_or_exit "${SIM_LIBRARY}" "${SIM_PRODUCTS_DIR}/${LIBRARY_NAME}"
 
 HEADERS="${SIM_BUILD_DIR}/Build/Products/Debug-iphonesimulator/usr/local/include"
 
-banner "Building ARM Library"
+banner "Building Dylib ARM Library"
 
 ARM_LIBRARY_XC7="${ARM_BUILD_DIR}/Build/Intermediates/ArchiveIntermediates/calabash-dylib/InstallationBuildProductsLocation/usr/local/lib/${LIBRARY_NAME}"
 rm -rf "${ARM_LIBRARY_XC7}"
@@ -151,7 +151,7 @@ fi
 
 ditto_or_exit "${ARM_LIBRARY}" "${ARM_PRODUCTS_DIR}/${LIBRARY_NAME}"
 
-banner "Installing"
+banner "Installing Dylibs"
 
 FAT_LIBRARY="${FAT_PRODUCTS_DIR}/libCalabashDynFAT.dylib"
 
@@ -176,7 +176,7 @@ info "Installing Headers to ${PWD}/${INSTALL_DIR}"
 ditto_or_exit "${HEADERS}" "${INSTALL_DIR}/Headers"
 
 
-banner "Code Signing"
+banner "Dylib Code Signing"
 
 KEYCHAIN_TOOL="${HOME}/.calabash/calabash-codesign/ios/create-keychain.sh"
 RESIGN_TOOL="${HOME}/.calabash/calabash-codesign/ios/resign-dylib.rb"
@@ -221,7 +221,7 @@ else
   xcrun codesign --display --verbose=2 ${INSTALL_DIR}/libCalabashDyn.dylib
 fi
 
-banner "Info"
+banner "Dylib Info"
 
 VERSION=`xcrun strings "${INSTALL_DIR}/libCalabashDynSim.dylib" | grep -E 'CALABASH VERSION' | head -1 | grep -oEe '\d+\.\d+\.\d+' | tr -d '\n'`
 echo "Built version:  $VERSION"
