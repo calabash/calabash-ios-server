@@ -392,4 +392,9 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   OCMVerifyAll(mock);
 }
 
+- (void) testGetIPAddressIPv4 {
+  NSString *ip = [self.device getIPAddress:YES];
+  expect(ip).notTo.equal(nil);
+}
+
 @end
