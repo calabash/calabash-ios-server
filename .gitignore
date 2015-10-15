@@ -23,13 +23,14 @@ calabash-dylibs
 # CI pulls down these two repos from github
 ios-smoke-test-app
 calabash-ios
+run_loop
 
 .ruby-version
+.bundle
 
 .env
 .irb-history
 .irbrc
-Gemfile.lock
 
 # Legacy. Remove this once the scripts/ dir is moved to bin/
 scripts/version

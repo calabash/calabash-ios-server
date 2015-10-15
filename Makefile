@@ -33,7 +33,7 @@ test_app:
 	scripts/make-lp-test-app.rb
 
 xct:
-	scripts/test/xctest.rb
+	bundle exec bin/test/xctest.rb
 
 # For developers only.  This script is not part of the library
 # build process.
