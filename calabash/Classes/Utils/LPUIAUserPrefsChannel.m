@@ -37,11 +37,17 @@ static NSString *const LPUIAChannelUIAPrefsCommandKey = @"command";
 static NSTimeInterval const LPUIAChannelUIADelay = 0.1;
 static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
 
-@implementation LPUIAUserPrefsChannel {
-  dispatch_queue_t _uiaQueue;
-  NSUInteger _scriptIndex;
-  BOOL _scriptLoggingEnabled;
-}
+@interface LPUIAUserPrefsChannel ()
+
+@property(nonatomic, assign) NSUInteger scriptIndex;
+@property(nonatomic, strong) dispatch_queue_t uiaQueue;
+
+@end
+
+@implementation LPUIAUserPrefsChannel
+
+@synthesize scriptIndex = _scriptIndex;
+@synthesize uiaQueue = _uiaQueue;
 
 + (LPUIAUserPrefsChannel *) sharedChannel {
   static LPUIAUserPrefsChannel *sharedChannel = nil;
