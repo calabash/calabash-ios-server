@@ -807,13 +807,13 @@
 		F50E42761AA86D36003DB030 /* SPTSharedExampleGroups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTSharedExampleGroups.h; sourceTree = "<group>"; };
 		F50E42771AA86D36003DB030 /* SPTSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTSpec.h; sourceTree = "<group>"; };
 		F50E42781AA86D36003DB030 /* XCTestCase+Specta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTestCase+Specta.h"; sourceTree = "<group>"; };
-		F514ACCA1B3413D8004ACFEE /* LPiOSVersionInlines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPiOSVersionInlines.h; sourceTree = "<group>"; };
 		F514ACCB1B341557004ACFEE /* LPiOSVersionInlinesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPiOSVersionInlinesTest.m; sourceTree = "<group>"; };
 		F52427DF1BA841B300B7678F /* LPProcessInfoRouteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPProcessInfoRouteTest.m; path = ../Operations/LPProcessInfoRouteTest.m; sourceTree = "<group>"; };
 		F52427E11BA8457D00B7678F /* LPProcessInfoRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPProcessInfoRoute.h; sourceTree = "<group>"; };
 		F52427E21BA8457D00B7678F /* LPProcessInfoRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPProcessInfoRoute.m; sourceTree = "<group>"; };
 		F52A26511BD02D0400AD0E36 /* LPCDataScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCDataScanner.m; sourceTree = "<group>"; };
 		F52A26521BD02D0400AD0E36 /* LPCDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCDataScanner.h; sourceTree = "<group>"; };
+		F52A264D1BD02B7B00AD0E36 /* LPiOSVersionInlines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPiOSVersionInlines.h; sourceTree = "<group>"; };
 		F532C19A1AFD28970024DA55 /* LPCJSONSerializerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCJSONSerializerTest.m; sourceTree = "<group>"; };
 		F532C1DD1AFF4F080024DA55 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F532C1DF1AFF4F240024DA55 /* LPCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCoreDataStack.h; sourceTree = "<group>"; };
@@ -1254,6 +1254,7 @@
 				B184FDF814B6DB2B002A744C /* UISpec */,
 				F5BA6F041B4E4B8200DB898F /* Invoker */,
 				B184FE0B14B6DB2B002A744C /* Utils */,
+				F52A264D1BD02B7B00AD0E36 /* LPiOSVersionInlines.h */,
 				B184FD8814B6DAE1002A744C /* CalabashServer.h */,
 				B184FD8714B6DAE1002A744C /* CalabashServer.m */,
 			);
@@ -1597,7 +1598,6 @@
 			isa = PBXGroup;
 			children = (
 				F50CBFD01A040788004AC9DA /* tests.pch */,
-				F514ACCA1B3413D8004ACFEE /* LPiOSVersionInlines.h */,
 				F514ACCB1B341557004ACFEE /* LPiOSVersionInlinesTest.m */,
 				F50CBF761A03F69A004AC9DA /* LPTestToolsStandup.m */,
 				F5BA6F0E1B4E4D2B00DB898F /* Invoker */,
