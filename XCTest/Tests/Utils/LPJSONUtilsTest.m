@@ -554,12 +554,6 @@
   XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
   XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
 
-  if (lp_ios_version_gte(@"9.0")) {
-    XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
-  } else {
-    XCTAssertEqualObjects(dict[@"label"], @"Empty list");
-  }
-
   XCTAssertEqualObjects(dict[@"visible"], @(1));
   XCTAssertEqual([dict count], 10);
 }
