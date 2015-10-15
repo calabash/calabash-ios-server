@@ -185,14 +185,6 @@
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
   XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
-  NSLog(@"access label: %@", [view accessibilityLabel]);
-
-  // Surprise!  iOS 9 will not keep the accessibilityLabel
-  if (lp_ios_version_gte(@"9.0")) {
-    XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
-  } else {
-    XCTAssertEqualObjects(dict[@"label"], text);
-  }
 
   XCTAssertEqualObjects(dict[@"selected"], @(0));
   XCTAssertEqualObjects(dict[@"text"], text);
