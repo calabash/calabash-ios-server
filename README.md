@@ -63,6 +63,10 @@ $ make all
 $ scripts/test/run
 ```
 
+If you are running the XCTests from Xcode, you might see failures in
+`LPJSONUtilsTest`.  If you do, clean (Shift + Option + Command + K)
+and rerun.
+
 ### Contributing
 
 * The Calabash iOS Toolchain uses git-flow.
