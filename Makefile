@@ -33,7 +33,7 @@ test_app:
 	scripts/make-lp-test-app.rb
 
 xct:
-	scripts/test/xctest.rb
+	bundle exec bin/test/xctest.rb
 
 version:
 	scripts/make-version.sh
