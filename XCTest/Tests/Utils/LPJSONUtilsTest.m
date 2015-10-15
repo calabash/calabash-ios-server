@@ -175,11 +175,6 @@
 
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
-  if (lp_ios_version_lte(@"8.0")) {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
-  } else {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
-  }
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
@@ -450,12 +445,6 @@
   UITextView *view = [[UITextView alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
-  if (lp_ios_version_gte(@"9.0")) {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
-  } else {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
-  }
-
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
@@ -477,12 +466,6 @@
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UISlider *view = [[UISlider alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
-
-  if (lp_ios_version_lte(@"8.0")) {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
-  } else {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
-  }
 
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
@@ -506,12 +489,6 @@
   UISwitch *view = [[UISwitch alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
-  if (lp_ios_version_gte(@"9.0")) {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
-  } else {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
-  }
-
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
@@ -532,12 +509,6 @@
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UIButton *view = [[UIButton alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
-
-  if (lp_ios_version_gte(@"9.0")) {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
-  } else {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
-  }
 
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
@@ -579,12 +550,6 @@
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UITableView *view = [[UITableView alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
-
-  if (lp_ios_version_gte(@"9.0")) {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
-  } else {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
-  }
 
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
