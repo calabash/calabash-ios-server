@@ -52,7 +52,6 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
   return sharedChannel;
 }
 
-
 - (id) init {
   self = [super init];
   if (self) {
@@ -66,33 +65,34 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
   [super dealloc];
 }
 
-
-+ (void) runAutomationCommand:(NSString *) command then:(void (^)(NSDictionary *result)) resultHandler {
-
++ (void) runAutomationCommand:(NSString *) command
+                         then:(void (^)(NSDictionary *result)) resultHandler {
   [[LPUIAUserPrefsChannel sharedChannel]
    runAutomationCommand:command then:resultHandler];
 }
 
-
-- (void) runAutomationCommand:(NSString *) command then:(void (^)(NSDictionary *)) resultHandler {
-
+- (void) runAutomationCommand:(NSString *) command
+                         then:(void (^)(NSDictionary *)) resultHandler {
   dispatch_async(_uiaQueue, ^{
     [self requestExecutionOf:command];
     NSLog(@"requested execution of command: %@", command);
 
     NSDictionary *result = nil;
     NSUInteger loopCount = 0;
-    while (1) {//Loop waiting for response
+    while (1) { //Loop waiting for response
       NSDictionary *resultPrefs = [self dictionaryFromUserDefaults];
       NSDictionary *currentResponse = [resultPrefs objectForKey:LPUIAChannelUIAPrefsResponseKey];
 
       NSLog(@"Current request: %@", [resultPrefs objectForKey:LPUIAChannelUIAPrefsRequestKey]);
 
       if (currentResponse) {
-        NSUInteger responseIndex = [(NSNumber *) [currentResponse objectForKey:LPUIAChannelUIAPrefsIndexKey] unsignedIntegerValue];
+        NSNumber *number = [currentResponse objectForKey:LPUIAChannelUIAPrefsIndexKey];
+        NSUInteger responseIndex = [number unsignedIntegerValue];
+
         NSLog(@"Current response: %@", currentResponse);
         NSLog(@"Server current index: %lu",(unsigned long) _scriptIndex);
         NSLog(@"response current index: %lu",(unsigned long) responseIndex);
+
         if (responseIndex == _scriptIndex) {
           result = currentResponse;
           break;
@@ -101,9 +101,12 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
       [NSThread sleepForTimeInterval:LPUIAChannelUIADelay];
       loopCount++;
       if (loopCount >= LPUIAChannelMaximumLoopCount) {
+
         NSLog(@"Timed out running command %@", command);
         NSLog(@"Server current index: %lu",(unsigned long) _scriptIndex);
+
         NSDictionary *prefs = [self dictionaryFromUserDefaults];
+
         NSLog(@"Current request: %@", [prefs objectForKey:LPUIAChannelUIAPrefsRequestKey]);
         NSLog(@"Current response: %@", [prefs objectForKey:LPUIAChannelUIAPrefsRequestKey]);
         result = nil;
@@ -143,7 +146,7 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
 }
 
 #if TARGET_IPHONE_SIMULATOR
--(void)simulatorRequestExecutionOf:(NSString *)command {
+- (void) simulatorRequestExecutionOf:(NSString *) command {
   // In Xcode 6.1 and iOS 8.1, there is synchronization problem between IO
   // performed by NSUserDefaults and the UIAutomation preferences API.  The
   // if condition detects iOS 8.1 which is a proxy for Xcode 6.1 detection.
@@ -164,7 +167,7 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
         NSLog(@"Empty preferences... resetting");
       }
 
-      NSDictionary *uiaRequest   = [self requestForCommand:command];
+      NSDictionary *uiaRequest = [self requestForCommand:command];
       [preferences setObject:uiaRequest forKey:LPUIAChannelUIAPrefsRequestKey];
       BOOL writeSuccess = [preferences writeToFile:preferencesPlist
                                         atomically:YES];
@@ -199,8 +202,8 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
 #endif // TARGET_IPHONE_SIMULATOR
 
 - (void) deviceRequestExecutionOf:(NSString *) command {
-  NSInteger i=0;
-  while (i<LPUIAChannelMaximumLoopCount) {
+  NSInteger i = 0;
+  while (i < LPUIAChannelMaximumLoopCount) {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *uiaRequest = [self requestForCommand:command];
 
@@ -210,12 +213,10 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
 
     if ([self validateRequestWritten:uiaRequest]) {
       return;
-    }
-    else {
+    } else {
       [NSThread sleepForTimeInterval:LPUIAChannelUIADelay];
       i++;
     }
-
   }
 }
 
@@ -226,7 +227,7 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
   if (!written) {
     return NO;
   }
-  id indexWritten =[written objectForKey:LPUIAChannelUIAPrefsIndexKey];
+  id indexWritten = [written objectForKey:LPUIAChannelUIAPrefsIndexKey];
   if (!indexWritten) {
     return NO;
   }
@@ -235,9 +236,8 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
 
 
 - (NSDictionary *) requestForCommand:(NSString *) command {
-  return [NSDictionary dictionaryWithObjectsAndKeys:@(_scriptIndex), LPUIAChannelUIAPrefsIndexKey,
-          command, LPUIAChannelUIAPrefsCommandKey,
-          nil];
+  return @{LPUIAChannelUIAPrefsCommandKey : command,
+           LPUIAChannelUIAPrefsIndexKey : @(_scriptIndex)};
 }
 
 #pragma mark - Communication
@@ -261,10 +261,12 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
 
-    NSString *plistName = [NSString stringWithFormat:@"%@.plist", [[NSBundle mainBundle] bundleIdentifier]];
+    NSString *plistName = [NSString stringWithFormat:@"%@.plist",
+                           [[NSBundle mainBundle] bundleIdentifier]];
 
     // 1. Find the app's Library directory so we can deduce the plist path.
-    NSArray *userLibDirURLs = [[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory inDomains:NSUserDomainMask];
+    NSArray *userLibDirURLs = [[NSFileManager defaultManager] URLsForDirectory:NSLibraryDirectory
+                                                                     inDomains:NSUserDomainMask];
     NSURL *userLibraryURL = [userLibDirURLs lastObject];
     NSString *userLibraryPath = [userLibraryURL path];
 
