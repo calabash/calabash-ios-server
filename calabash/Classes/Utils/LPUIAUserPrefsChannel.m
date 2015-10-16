@@ -1,3 +1,7 @@
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
 //
 //  LPUIAChannel.m
 //
@@ -64,11 +68,6 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
     _uiaQueue = dispatch_queue_create("calabash.uia_queue", DISPATCH_QUEUE_SERIAL);
   }
   return self;
-}
-
-- (void) dealloc {
-  dispatch_release(_uiaQueue);
-  [super dealloc];
 }
 
 + (void) runAutomationCommand:(NSString *) command
