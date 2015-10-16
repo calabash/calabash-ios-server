@@ -68,7 +68,7 @@
 
       NSString *bundleIdentifier = [[LPInfoPlist new] stringForIdentifier];
 
-      LPLogDebug(@"%@ is relaunching %@",
+      LPLogDebug(@"%@ is bringing %@ to the foreground",
                  NSStringFromClass([LPSuspendAppRoute class]),
                  bundleIdentifier);
 
