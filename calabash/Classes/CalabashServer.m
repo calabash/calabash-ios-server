@@ -40,6 +40,7 @@
 #import "LPASLLogFormatter.h"
 #import "LPProcessInfoRoute.h"
 #import "LPDevice.h"
+#import "LPSuspendAppRoute.h"
 
 @interface CalabashServer ()
 - (void) start;
@@ -186,6 +187,10 @@
     LPProcessInfoRoute *processInfoRoute = [LPProcessInfoRoute new];
     [LPRouter addRoute:processInfoRoute forPath:@"process-info"];
     [processInfoRoute release];
+
+    LPSuspendAppRoute *suspendAppRoute = [LPSuspendAppRoute new];
+    [LPRouter addRoute:suspendAppRoute forPath:@"suspend"];
+    [suspendAppRoute release];
 
     _httpServer = [[[LPHTTPServer alloc] init] retain];
 
