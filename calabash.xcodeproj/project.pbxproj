@@ -379,6 +379,7 @@
 		F52A26541BD02D0400AD0E36 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = F52A26511BD02D0400AD0E36 /* LPCDataScanner.m */; settings = {ASSET_TAGS = (); }; };
 		F52A26551BD02D0400AD0E36 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = F52A26511BD02D0400AD0E36 /* LPCDataScanner.m */; settings = {ASSET_TAGS = (); }; };
 		F52A26561BD02D0400AD0E36 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = F52A26511BD02D0400AD0E36 /* LPCDataScanner.m */; settings = {ASSET_TAGS = (); }; };
+		F52A266F1BD113FC00AD0E36 /* LPUIAUserPreferencesChannelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F52A266E1BD113FC00AD0E36 /* LPUIAUserPreferencesChannelTest.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F532C19B1AFD28970024DA55 /* LPCJSONSerializerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F532C19A1AFD28970024DA55 /* LPCJSONSerializerTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F532C1DE1AFF4F080024DA55 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F532C1DD1AFF4F080024DA55 /* CoreData.framework */; };
 		F532C1E31AFF4F250024DA55 /* LPCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = F532C1E01AFF4F240024DA55 /* LPCoreDataStack.m */; };
@@ -814,6 +815,7 @@
 		F52A264D1BD02B7B00AD0E36 /* LPiOSVersionInlines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPiOSVersionInlines.h; sourceTree = "<group>"; };
 		F52A26511BD02D0400AD0E36 /* LPCDataScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCDataScanner.m; sourceTree = "<group>"; };
 		F52A26521BD02D0400AD0E36 /* LPCDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCDataScanner.h; sourceTree = "<group>"; };
+		F52A266E1BD113FC00AD0E36 /* LPUIAUserPreferencesChannelTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUIAUserPreferencesChannelTest.m; sourceTree = "<group>"; };
 		F532C19A1AFD28970024DA55 /* LPCJSONSerializerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCJSONSerializerTest.m; sourceTree = "<group>"; };
 		F532C1DD1AFF4F080024DA55 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		F532C1DF1AFF4F240024DA55 /* LPCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCoreDataStack.h; sourceTree = "<group>"; };
@@ -1620,6 +1622,7 @@
 				F5543F211ABF7D7000E1A0BF /* LPPluginLoaderTest.m */,
 				F5419F0C1AF3D37000EAAA66 /* LPJSONUtils_AccessibilityElementTest.m */,
 				F5C04E241B330F8B00F23526 /* LPDecimalRounderTest.m */,
+				F52A266E1BD113FC00AD0E36 /* LPUIAUserPreferencesChannelTest.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2744,6 +2747,7 @@
 				F50CBFB31A0405B2004AC9DA /* LPVersionRoute.m in Sources */,
 				F5543F311ABF7DF500E1A0BF /* LPPluginLoader.m in Sources */,
 				F50CBFA71A0405B2004AC9DA /* LPUserPrefRoute.m in Sources */,
+				F52A266F1BD113FC00AD0E36 /* LPUIAUserPreferencesChannelTest.m in Sources */,
 				F5986B211B5907A600CCB142 /* LPInvocationResultTest.m in Sources */,
 				F5C04E2E1B33110B00F23526 /* LPDecimalRounder.m in Sources */,
 				F50CBFAA1A0405B2004AC9DA /* LPConditionRoute.m in Sources */,
