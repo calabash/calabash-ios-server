@@ -370,7 +370,6 @@
 		F50CBFCF1A040707004AC9DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		F50E42791AA86D36003DB030 /* libSpecta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F50E42711AA86D36003DB030 /* libSpecta.a */; };
 		F514ACCC1B341557004ACFEE /* LPiOSVersionInlinesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F514ACCB1B341557004ACFEE /* LPiOSVersionInlinesTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F52427E01BA841B300B7678F /* LPProcessInfoRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F52427DF1BA841B300B7678F /* LPProcessInfoRouteTest.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F52427E61BA8457D00B7678F /* LPProcessInfoRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F52427E21BA8457D00B7678F /* LPProcessInfoRoute.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F52427E71BA8457D00B7678F /* LPProcessInfoRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F52427E21BA8457D00B7678F /* LPProcessInfoRoute.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F52427E81BA8457D00B7678F /* LPProcessInfoRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F52427E21BA8457D00B7678F /* LPProcessInfoRoute.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -491,6 +490,7 @@
 		F5A33A5F1AC0172A00224639 /* UIWebView+LPWebViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A33A5E1AC0172A00224639 /* UIWebView+LPWebViewTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5A33A711AC01BC400224639 /* WKWebView+LPWebViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A33A701AC01BC400224639 /* WKWebView+LPWebViewTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5A33A791AC01EC400224639 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A33A721AC01E8E00224639 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		F5A6B9751BD15877009FD08B /* LPProcessInfoRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6B9741BD15877009FD08B /* LPProcessInfoRouteTest.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5A8B4581B39BFEB00F390CA /* LPCLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B43E1B39BFEB00F390CA /* LPCLIColor.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5A8B4591B39BFEB00F390CA /* LPCLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B43E1B39BFEB00F390CA /* LPCLIColor.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5A8B45A1B39BFEB00F390CA /* LPCLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B43E1B39BFEB00F390CA /* LPCLIColor.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -809,7 +809,6 @@
 		F50E42771AA86D36003DB030 /* SPTSpec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPTSpec.h; sourceTree = "<group>"; };
 		F50E42781AA86D36003DB030 /* XCTestCase+Specta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "XCTestCase+Specta.h"; sourceTree = "<group>"; };
 		F514ACCB1B341557004ACFEE /* LPiOSVersionInlinesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPiOSVersionInlinesTest.m; sourceTree = "<group>"; };
-		F52427DF1BA841B300B7678F /* LPProcessInfoRouteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LPProcessInfoRouteTest.m; path = ../Operations/LPProcessInfoRouteTest.m; sourceTree = "<group>"; };
 		F52427E11BA8457D00B7678F /* LPProcessInfoRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPProcessInfoRoute.h; sourceTree = "<group>"; };
 		F52427E21BA8457D00B7678F /* LPProcessInfoRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPProcessInfoRoute.m; sourceTree = "<group>"; };
 		F52A264D1BD02B7B00AD0E36 /* LPiOSVersionInlines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPiOSVersionInlines.h; sourceTree = "<group>"; };
@@ -987,6 +986,7 @@
 		F5A33A601AC01A9F00224639 /* LPWebViewProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LPWebViewProtocol.h; sourceTree = "<group>"; };
 		F5A33A701AC01BC400224639 /* WKWebView+LPWebViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+LPWebViewTest.m"; sourceTree = "<group>"; };
 		F5A33A721AC01E8E00224639 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		F5A6B9741BD15877009FD08B /* LPProcessInfoRouteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPProcessInfoRouteTest.m; sourceTree = "<group>"; };
 		F5A8B43E1B39BFEB00F390CA /* LPCLIColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCLIColor.m; sourceTree = "<group>"; };
 		F5A8B43F1B39BFEB00F390CA /* LPCLIColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCLIColor.h; sourceTree = "<group>"; };
 		F5A8B4411B39BFEB00F390CA /* LPContextFilterLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPContextFilterLogFormatter.h; sourceTree = "<group>"; };
@@ -1971,7 +1971,7 @@
 		F5C224E61AD47403001DB4FA /* Routes */ = {
 			isa = PBXGroup;
 			children = (
-				F52427DF1BA841B300B7678F /* LPProcessInfoRouteTest.m */,
+				F5A6B9741BD15877009FD08B /* LPProcessInfoRouteTest.m */,
 				F5C224E71AD47403001DB4FA /* LPScreenshotRouteTest.m */,
 				F5C224E81AD47403001DB4FA /* LPVersionRouteTest.m */,
 				89F2EFE71B22462700958052 /* LPIntrospectionRouteTest.m */,
@@ -2761,6 +2761,7 @@
 				F50CBFA01A0405B2004AC9DA /* LPUIARouteOverUserPrefs.m in Sources */,
 				F5A33A5F1AC0172A00224639 /* UIWebView+LPWebViewTest.m in Sources */,
 				F50CBFBB1A0405CE004AC9DA /* UIScriptASTPredicate.m in Sources */,
+				F5A6B9751BD15877009FD08B /* LPProcessInfoRouteTest.m in Sources */,
 				F5C0945A1A97B7CB00AE5991 /* LPWebQuery.m in Sources */,
 				F5F2D5EF1ACACF2F0027937B /* LPIsWebView.m in Sources */,
 				F5986B161B58F57600CCB142 /* LPInvocationErrorTest.m in Sources */,
@@ -2787,7 +2788,6 @@
 				F50CBF9D1A040599004AC9DA /* LPScrollToMarkOperation.m in Sources */,
 				B15369FC1A32620A0093923F /* LPUIASharedElementChannel.m in Sources */,
 				F56B4EF41B56FC3600E7EA23 /* LPInvokerSelectorWithArgumentsTest.m in Sources */,
-				F52427E01BA841B300B7678F /* LPProcessInfoRouteTest.m in Sources */,
 				F50CBFCA1A0405E9004AC9DA /* LPLogger.m in Sources */,
 				F52A26531BD02D0400AD0E36 /* LPCDataScanner.m in Sources */,
 				F5B6B3E01B5CC9A7006B2CC1 /* LPASLLogFormatter.m in Sources */,
