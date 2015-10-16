@@ -82,7 +82,7 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
                          then:(void (^)(NSDictionary *)) resultHandler {
   dispatch_async(_uiaQueue, ^{
     [self requestExecutionOf:command];
-    NSLog(@"requested execution of command: %@", command);
+    LPLogDebug(@"requested execution of command: %@", command);
 
     NSDictionary *result = nil;
     NSUInteger loopCount = 0;
@@ -90,15 +90,15 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
       NSDictionary *resultPrefs = [self dictionaryFromUserDefaults];
       NSDictionary *currentResponse = [resultPrefs objectForKey:LPUIAChannelUIAPrefsResponseKey];
 
-      NSLog(@"Current request: %@", [resultPrefs objectForKey:LPUIAChannelUIAPrefsRequestKey]);
+      LPLogDebug(@"Current request: %@", [resultPrefs objectForKey:LPUIAChannelUIAPrefsRequestKey]);
 
       if (currentResponse) {
         NSNumber *number = [currentResponse objectForKey:LPUIAChannelUIAPrefsIndexKey];
         NSUInteger responseIndex = [number unsignedIntegerValue];
 
-        NSLog(@"Current response: %@", currentResponse);
-        NSLog(@"Server current index: %lu",(unsigned long) _scriptIndex);
-        NSLog(@"response current index: %lu",(unsigned long) responseIndex);
+        LPLogDebug(@"Current response: %@", currentResponse);
+        LPLogDebug(@"Server current index: %lu",(unsigned long) _scriptIndex);
+        LPLogDebug(@"response current index: %lu",(unsigned long) responseIndex);
 
         if (responseIndex == _scriptIndex) {
           result = currentResponse;
@@ -109,13 +109,13 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
       loopCount++;
       if (loopCount >= LPUIAChannelMaximumLoopCount) {
 
-        NSLog(@"Timed out running command %@", command);
-        NSLog(@"Server current index: %lu",(unsigned long) _scriptIndex);
+        LPLogDebug(@"Timed out running command %@", command);
+        LPLogDebug(@"Server current index: %lu",(unsigned long) _scriptIndex);
 
         NSDictionary *prefs = [self dictionaryFromUserDefaults];
 
-        NSLog(@"Current request: %@", [prefs objectForKey:LPUIAChannelUIAPrefsRequestKey]);
-        NSLog(@"Current response: %@", [prefs objectForKey:LPUIAChannelUIAPrefsRequestKey]);
+        LPLogDebug(@"Current request: %@", [prefs objectForKey:LPUIAChannelUIAPrefsRequestKey]);
+        LPLogDebug(@"Current response: %@", [prefs objectForKey:LPUIAChannelUIAPrefsRequestKey]);
         result = nil;
         break;
       }
@@ -168,14 +168,14 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
   NSString *preferencesPlist = [self simulatorPreferencesPath];
   NSMutableDictionary *preferences;
   if (lp_ios_version_gte(@"8.1")) {
-    NSLog(@"iOS >= 8.1 detected; assuming Xcode >= 6.1");
+    LPLogDebug(@"iOS >= 8.1 detected; assuming Xcode >= 6.1");
     NSInteger i = 0;
     while (i < LPUIAChannelMaximumLoopCount) {
       [[NSUserDefaults standardUserDefaults] synchronize];
       preferences  = [NSMutableDictionary dictionaryWithContentsOfFile:preferencesPlist];
       if (!preferences) {
         preferences = [NSMutableDictionary dictionary];
-        NSLog(@"Empty preferences... resetting");
+        LPLogDebug(@"Empty preferences... resetting");
       }
 
       NSDictionary *uiaRequest = [self requestForCommand:command];
@@ -184,25 +184,25 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
                                         atomically:YES];
 
       if (!writeSuccess) {
-        NSLog(@"Preparing for retry of simulatorRequestExecutionOf:");
+        LPLogDebug(@"Preparing for retry of simulatorRequestExecutionOf:");
       }
 
       if ([self validateRequestWritten:uiaRequest]) {
         return;
       } else {
         i++;
-        NSLog(@"Validation of request failed... Retrying - %@ of %@",
+        LPLogDebug(@"Validation of request failed... Retrying - %@ of %@",
               @(i), @(LPUIAChannelMaximumLoopCount));
         [NSThread sleepForTimeInterval:LPUIAChannelUIADelay];
       }
     }
   } else {
-    NSLog(@"iOS < 8.1 detected; assuming Xcode < 6.1");
+    LPLogDebug(@"iOS < 8.1 detected; assuming Xcode < 6.1");
     preferences = [NSMutableDictionary dictionaryWithContentsOfFile:preferencesPlist];
 
     if (!preferences) {
       preferences = [NSMutableDictionary dictionary];
-      NSLog(@"Empty preferences... resetting");
+      LPLogDebug(@"Empty preferences... resetting");
     }
     NSDictionary *uiaRequest   = [self requestForCommand:command];
 
