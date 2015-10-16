@@ -52,7 +52,7 @@
     [expectation fulfill];
   });
 
-  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *error) {
+  [self waitForExpectationsWithTimeout:0.5 handler:^(NSError *error) {
     if (error) { XCTFail(@"Expectation Failed with error: %@", error); }
   }];
 }
@@ -75,7 +75,7 @@
     [expectation fulfill];
   });
 
-  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *error) {
+  [self waitForExpectationsWithTimeout:0.5 handler:^(NSError *error) {
     if (error) { XCTFail(@"Expectation Failed with error: %@", error); }
   }];
 }
@@ -115,7 +115,7 @@
     [expectation fulfill];
   });
 
-  [self waitForExpectationsWithTimeout:0.1 handler:^(NSError *error) {
+  [self waitForExpectationsWithTimeout:0.5 handler:^(NSError *error) {
     if (error) { XCTFail(@"Expectation Failed with error: %@", error); }
   }];
 }
