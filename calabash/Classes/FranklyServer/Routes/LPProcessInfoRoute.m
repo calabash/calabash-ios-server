@@ -32,7 +32,13 @@
                                      URI:(NSString *) path
                                     data:(NSDictionary *) data {
 
-  return [[NSProcessInfo processInfo] environment];
+  NSArray *arguments = [[NSProcessInfo processInfo] arguments];
+  NSDictionary *environment = [[NSProcessInfo processInfo] environment];
+
+  NSDictionary *info = @{@"arguments" : arguments,
+                         @"environment" : environment};
+
+  return info;
 }
 
 @end
