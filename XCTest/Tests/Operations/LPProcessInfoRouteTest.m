@@ -30,4 +30,12 @@
   expect([self.route supportsMethod:@"POST" atPath:nil]).to.equal(NO);
 }
 
+- (void) testJSONResponseForMethod {
+  NSDictionary *info = [self.route JSONResponseForMethod:nil
+                                                     URI:nil
+                                                     data:nil];
+  expect(info[@"arguments"]).notTo.equal(nil);
+  expect(info[@"environment"]).notTo.equal(nil);
+}
+
 @end
