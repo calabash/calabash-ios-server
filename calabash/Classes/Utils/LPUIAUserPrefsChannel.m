@@ -97,10 +97,10 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
         NSUInteger responseIndex = [number unsignedIntegerValue];
 
         LPLogDebug(@"Current response: %@", currentResponse);
-        LPLogDebug(@"Server current index: %lu",(unsigned long) _scriptIndex);
-        LPLogDebug(@"response current index: %lu",(unsigned long) responseIndex);
+        LPLogDebug(@"Server current index: %@", @(self.scriptIndex));
+        LPLogDebug(@"response current index: %@", @(responseIndex));
 
-        if (responseIndex == _scriptIndex) {
+        if (responseIndex == self.scriptIndex) {
           result = currentResponse;
           break;
         }
@@ -110,7 +110,7 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
       if (loopCount >= LPUIAChannelMaximumLoopCount) {
 
         LPLogDebug(@"Timed out running command %@", command);
-        LPLogDebug(@"Server current index: %lu",(unsigned long) _scriptIndex);
+        LPLogDebug(@"Server current index: %@", @(self.scriptIndex));
 
         NSDictionary *prefs = [self dictionaryFromUserDefaults];
 
@@ -120,7 +120,7 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
         break;
       }
     }
-    _scriptIndex++;
+    self.scriptIndex++;
 
     dispatch_async(dispatch_get_main_queue(), ^{
       resultHandler(result);
