@@ -129,7 +129,11 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
 
 - (void) requestExecutionOf:(NSString *) command {
 #if TARGET_IPHONE_SIMULATOR
-  [self simulatorRequestExecutionOf:command];
+  if (lp_ios_version_gte(@"9.0")) {
+    [self deviceRequestExecutionOf:command];
+  } else {
+    [self simulatorRequestExecutionOf:command];
+  }
 #else
   [self deviceRequestExecutionOf:command];
 #endif
