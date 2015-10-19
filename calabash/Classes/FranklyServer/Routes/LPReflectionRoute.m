@@ -22,7 +22,10 @@
                                      URI:(NSString *) path
                                     data:(NSDictionary *) data {
 
-  return nil;
+  return @{
+           @"libraries" : [self libraryNames],
+           @"classes" : [self classNames]
+           };
 }
 
 - (NSArray *) libraryNames {

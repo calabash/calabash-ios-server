@@ -50,4 +50,23 @@
   expect([classNames count]).to.beGreaterThan(0);
 }
 
+- (void) testJSONResponseForMethod {
+  NSDictionary *dictionary = [self.route JSONResponseForMethod:nil
+                                                           URI:nil
+                                                          data:nil];
+  expect(dictionary).notTo.equal(nil);
+
+  NSArray *libriaries = dictionary[@"libraries"];
+  NSArray *classes = dictionary[@"classes"];
+
+  expect(libriaries).notTo.equal(nil);
+  expect([libriaries isKindOfClass:[NSArray class]]).to.equal(YES);
+  expect([libriaries count]).to.beGreaterThan(0);
+
+
+  expect(classes).notTo.equal(nil);
+  expect([classes isKindOfClass:[NSArray class]]).to.equal(YES);
+  expect([classes count]).to.beGreaterThan(0);
+}
+
 @end
