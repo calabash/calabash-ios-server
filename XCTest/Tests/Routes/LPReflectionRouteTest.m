@@ -7,6 +7,8 @@
 
 @interface LPReflectionRoute (LPXCTEST)
 
+- (NSArray *) libraryNames;
+
 @end
 
 @interface LPReflectionRouteTest : XCTestCase
@@ -33,6 +35,12 @@
 
 - (void) testSupportsMethodAnythingButGET {
   expect([self.route supportsMethod:@"POST" atPath:nil]).to.equal(NO);
+}
+
+- (void) testImageNames {
+  NSArray *imageNames = [self.route libraryNames];
+  expect(imageNames).notTo.equal(nil);
+  expect([imageNames count]).to.beGreaterThan(0);
 }
 
 @end
