@@ -1,3 +1,9 @@
+# emacs
+(.*/)?\#[^/]*\#$
+
+# vim
+*.swp
+
 calabash.xcodeproj/project.xcworkspace/xcuserdata
 calabash.xcodeproj/xcuserdata/
 *.xccheckout
