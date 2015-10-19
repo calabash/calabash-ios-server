@@ -41,6 +41,7 @@
 #import "LPProcessInfoRoute.h"
 #import "LPDevice.h"
 #import "LPSuspendAppRoute.h"
+#import "LPReflectionRoute.h"
 
 @interface CalabashServer ()
 - (void) start;
@@ -191,6 +192,10 @@
     LPSuspendAppRoute *suspendAppRoute = [LPSuspendAppRoute new];
     [LPRouter addRoute:suspendAppRoute forPath:@"suspend"];
     [suspendAppRoute release];
+
+    LPReflectionRoute *reflectionRoute = [LPReflectionRoute new];
+    [LPRouter addRoute:reflectionRoute forPath:@"reflection"];
+    [reflectionRoute release];
 
     _httpServer = [[[LPHTTPServer alloc] init] retain];
 
