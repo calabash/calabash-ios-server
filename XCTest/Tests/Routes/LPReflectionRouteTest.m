@@ -8,6 +8,7 @@
 @interface LPReflectionRoute (LPXCTEST)
 
 - (NSArray *) libraryNames;
+- (NSArray *) classNames;
 
 @end
 
@@ -41,6 +42,12 @@
   NSArray *imageNames = [self.route libraryNames];
   expect(imageNames).notTo.equal(nil);
   expect([imageNames count]).to.beGreaterThan(0);
+}
+
+- (void) testClassNames {
+  NSArray *classNames = [self.route classNames];
+  expect(classNames).notTo.equal(nil);
+  expect([classNames count]).to.beGreaterThan(0);
 }
 
 @end

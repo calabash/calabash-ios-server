@@ -8,6 +8,7 @@
 @interface LPReflectionRoute ()
 
 - (NSArray *) libraryNames;
+- (NSArray *) classNames;
 
 @end
 
@@ -39,6 +40,24 @@
   SEL sorter = @selector(localizedCaseInsensitiveCompare:);
   NSArray *sorted = [array sortedArrayUsingSelector:sorter];
   free(names);
+  return sorted;
+}
+
+- (NSArray *) classNames {
+  unsigned int number = 0;
+
+  Class *classes = objc_copyClassList(&number);
+
+  NSMutableArray *array = [NSMutableArray arrayWithCapacity:number];
+  for (unsigned int index = 0; index < number; index++) {
+    Class class = classes[index];
+    NSString *name = NSStringFromClass(class);
+    [array addObject:name];
+  }
+
+  SEL sorter = @selector(localizedCaseInsensitiveCompare:);
+  NSArray *sorted = [array sortedArrayUsingSelector:sorter];
+  free(classes);
   return sorted;
 }
 
