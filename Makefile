@@ -21,11 +21,6 @@ dylibs:
 	# See https://github.com/calabash/calabash-codesign for details.
 	bin/make/dylibs.sh 337976ad9ace375ac06cd8fea2edb0c7276dec2a72d005ca5559a8bbf09c8841
 
-install_test_binaries:
-	$(MAKE) framework
-	$(MAKE) dylibs
-	./scripts/install-test-binaries.rb
-
 webquery_headers:
 	bundle exec bin/insert-js-into-webquery-headers.rb
 
