@@ -43,7 +43,7 @@ Dir.chdir(working_dir) do
   interval = 5
 
   on_retry = Proc.new do |_, try, elapsed_time, next_interval|
-    log_fail "XCTest: attempt #{try} failed in '#{elapsed_time}'; will retry in '#{next_interval}'"
+    Luffa.log_fail "XCTest: attempt #{try} failed in '#{elapsed_time}'; will retry in '#{next_interval}'"
     RunLoop::CoreSimulator.quit_simulator
     core_sim.launch_simulator
   end
@@ -66,7 +66,7 @@ Dir.chdir(working_dir) do
                                     :exit_on_nonzero_status => false})
     if Luffa::Environment.travis_ci?
       if exit_code != 0
-        log_fail "XCTest exited '#{exit_code}' - did we fail because the Simulator did not launch?"
+        Luffa.log_fail "XCTest exited '#{exit_code}' - did we fail because the Simulator did not launch?"
         raise XCTestFailedError, 'XCTest failed.'
       end
     else
