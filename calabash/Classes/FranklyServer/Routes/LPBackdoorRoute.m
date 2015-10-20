@@ -120,7 +120,7 @@ static NSString *const ARGUMENTS_KEY = @"arguments";
 
     NSString *details = [lines componentsJoinedByString:@"\n"];
 
-    NSString *reason = [NSString stringWithFormat:@"The backdoor: '%@' is undefined.",
+    NSString *reason = [NSString stringWithFormat:@"The backdoor: '%@' is undefined",
                         selectorName];
     return  @{ @"details" : details, @"reason" : reason, @"outcome" : @"FAILURE" };
   }

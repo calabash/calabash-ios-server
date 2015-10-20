@@ -96,4 +96,23 @@
   expect(actual[@"outcome"]).to.equal(@"FAILURE");
 }
 
+- (void) testUnknownSelector {
+
+  NSDictionary *data =
+  @{
+    @"selector" : @"unknownSelector",
+    @"arguments" : @[]
+    };
+
+
+  NSDictionary *actual = [self.route JSONResponseForMethod:nil
+                                                       URI:nil
+                                                      data:data];
+
+  expect([actual count]).to.equal(3);
+  expect(actual[@"reason"]).to.equal(@"The backdoor: 'unknownSelector' is undefined");
+  expect(actual[@"details"]).notTo.equal(nil);
+  expect(actual[@"outcome"]).to.equal(@"FAILURE");
+}
+
 @end
