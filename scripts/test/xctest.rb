@@ -23,7 +23,6 @@ target_simulator_name = default_sim.name
 
 args =
       [
-            'clean',
             'test',
             '-SYMROOT=build',
             '-derivedDataPath build',
