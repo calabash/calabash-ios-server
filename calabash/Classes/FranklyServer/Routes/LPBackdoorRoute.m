@@ -16,8 +16,8 @@
 #import "LPInvocationResult.h"
 #import "LPInvocationError.h"
 
-const static NSString *ARG_KEY = @"arg";  /* for backwards compatibility */
-const static NSString *ARGUMENTS_KEY = @"arguments";
+static NSString *const ARG_KEY = @"arg";  /* for backwards compatibility */
+static NSString *const ARGUMENTS_KEY = @"arguments";
 
 @implementation LPBackdoorRoute
 
