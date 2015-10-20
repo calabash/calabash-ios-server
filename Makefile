@@ -22,7 +22,7 @@ dylibs:
 	bin/make/dylibs.sh 337976ad9ace375ac06cd8fea2edb0c7276dec2a72d005ca5559a8bbf09c8841
 
 webquery_headers:
-	bundle exec bin/insert-js-into-webquery-headers.rb
+	bundle exec bin/make/insert-js-into-webquery-headers.rb
 
 xct:
 	bundle exec bin/test/xctest.rb

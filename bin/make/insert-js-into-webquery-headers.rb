@@ -4,7 +4,7 @@ require 'open3'
 require "luffa"
 
 this_dir = File.dirname(__FILE__)
-calabash_js_dir = File.expand_path(File.join(this_dir, '..', 'calabash-js'))
+calabash_js_dir = File.expand_path(File.join(this_dir, '..', '..', 'calabash-js'))
 
 Dir.chdir(calabash_js_dir) do
   build_js_script = File.expand_path('./build.sh')
