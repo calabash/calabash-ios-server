@@ -651,8 +651,12 @@ static NSString *const LPInvokerNilReference = @"__nil__";
     switch (char_encoding) {
 
       case '@': {
-        if ([argument isEqual:@"__self__"]) {
-          argument = self.target;
+        if ([argument isKindOfClass:[NSString class]]) {
+          if ([argument isEqualToString:LPInvokerSelfReference]) {
+            argument = self.target;
+          } else if ([argument isEqualToString:LPInvokerNilReference]) {
+            argument = nil;
+          }
         }
         [invocation setArgument:&argument atIndex:invocationArgIndex];
         break;
