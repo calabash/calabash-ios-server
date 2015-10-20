@@ -134,7 +134,7 @@ static NSString *const LPInvokerNilReference = @"__nil__";
 - (NSInvocation *) invocation {
   if (_invocation) { return _invocation; }
   if (![self targetRespondsToSelector]) {
-    NSLog(@"Target '%@' does not respond to selector '%@'; cannot create invocation.",
+    LPLogError(@"Target '%@' does not respond to selector '%@'; cannot create invocation.",
           self.target, NSStringFromSelector(self.selector));
     return nil;
   }
@@ -151,7 +151,7 @@ static NSString *const LPInvokerNilReference = @"__nil__";
   if (_signature) { return _signature; }
   _signature = [[self.target class] instanceMethodSignatureForSelector:self.selector];
   if (!_signature) {
-    NSLog(@"Cannot create signature; target '%@' does not respond to selector '%@'",
+    LPLogError(@"Cannot create signature; target '%@' does not respond to selector '%@'",
           self.target, NSStringFromSelector(self.selector));
   }
   return _signature;
