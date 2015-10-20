@@ -6,6 +6,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LPReflectUtils.h"
+#import "LPCocoaLumberjack.h"
 
 @implementation LPReflectUtils
 
@@ -25,9 +26,9 @@
     }
 
     if (!val) {
-      NSLog(@"Expected spec '%@' to an array or dictionary",
+      LPLogError(@"Expected spec '%@' to an array or dictionary",
             NSStringFromClass([spec class]));
-      NSLog(@"Appending selStr with '%@' key, but adding NSNull to args", key);
+      LPLogError(@"Appending selStr with '%@' key, but adding NSNull to args", key);
       [selStr appendFormat:@"%@:", key];
       [args addObject:[NSNull null]];
     }
@@ -129,9 +130,9 @@
     [invocation invoke];
   }
   @catch (NSException *exception) {
-    NSLog(@"Perform %@ with target %@ caught %@: %@", selObj, target,
+    LPLogError(@"Perform %@ with target %@ caught %@: %@", selObj, target,
             [exception name], [exception reason]);
-    NSLog(@"not supported");
+    LPLogError(@"not supported");
     return nil;
   }
 

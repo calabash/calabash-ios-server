@@ -4,6 +4,7 @@
 
 #import "LPPluginLoader.h"
 #import <dlfcn.h>
+#import "LPCocoaLumberjack.h"
 
 @interface LPPluginLoader ()
 
@@ -47,16 +48,16 @@
   }
 
   NSString *pluginName = [path lastPathComponent];
-  NSLog(@"Loading Calabash plugin: %@", pluginName);
+  LPLogDebug(@"Loading Calabash plugin: %@", pluginName);
 
   dlopen(cFileSystemRep, RTLD_LOCAL);
   error = dlerror();
   if (error) {
-    NSLog(@"Warning: Could not load Calabash plugin %@.", pluginName);
-    NSLog(@"Warning: %@", [NSString stringWithUTF8String:error]);
+    LPLogError(@"Warning: Could not load Calabash plugin %@.", pluginName);
+    LPLogError(@"Warning: %@", [NSString stringWithUTF8String:error]);
     return NO;
   } else {
-    NSLog(@"Loaded Calabash plugin: %@", pluginName);
+    LPLogDebug(@"Loaded Calabash plugin: %@", pluginName);
     return YES;
   }
 }

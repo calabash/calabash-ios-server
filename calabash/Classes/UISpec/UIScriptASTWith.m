@@ -9,6 +9,7 @@
 #import "LPReflectUtils.h"
 #import "LPWebQuery.h"
 #import "LPIsWebView.h"
+#import "LPCocoaLumberjack.h"
 
 @implementation UIScriptASTWith
 @synthesize selectorName = _selectorName;
@@ -79,7 +80,7 @@
 
 - (NSArray *) handleWebView:(UIView<LPWebViewProtocol> *) webView visibility:(UIScriptASTVisibilityType) visibility {
   if (!self.selectorName) {
-    NSLog(@"WebView only supports css/xpath selectors");
+    LPLogError(@"WebView only supports css/xpath selectors");
     return [NSMutableArray array];
   }
 
@@ -98,7 +99,7 @@
                                       webView:webView
                              includeInvisible:visibility == UIScriptASTVisibilityTypeAll];
   } else {
-    NSLog(@"Attempting to look for non string in web view");
+    LPLogError(@"Attempting to look for non string in web view");
     return [NSMutableArray array];
   }
 }
@@ -184,7 +185,7 @@
               [invocation invoke];
             }
             @catch (NSException *exception) {
-              NSLog(@"Perform %@ with target %@ caught %@: %@", _selectorName,v, [exception name], [exception reason]);
+              LPLogError(@"Perform %@ with target %@ caught %@: %@", _selectorName,v, [exception name], [exception reason]);
               break;
             }
             [invocation getReturnValue:(void **) &Bvalue];

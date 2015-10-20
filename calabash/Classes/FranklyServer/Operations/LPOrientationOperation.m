@@ -10,6 +10,7 @@
 //
 
 #import "LPOrientationOperation.h"
+#import "LPCocoaLumberjack.h"
 
 static NSString *const kDevice = @"device";
 static NSString *const kStatusBar = @"status_bar";
@@ -97,20 +98,20 @@ static NSString *const kFaceUp = @"face up";
 
   NSUInteger argCount = [argument count];
   if (argCount == 0) {
-    NSLog(@"Warning: requires exactly one argument: {'%@' | '%@'} found none",
+    LPLogWarn(@"Requires exactly one argument: {'%@' | '%@'} found none",
             kDevice, kStatusBar);
     return nil;
   }
 
   if (argCount > 1) {
-    NSLog(@"Warning: argument should be {'%@' | '%@'} - found '[%@']", kDevice,
+    LPLogWarn(@"Argument should be {'%@' | '%@'} - found '[%@']", kDevice,
             kStatusBar, [argument componentsJoinedByString:@", "]);
     return nil;
   }
 
   NSString *firstArg = [argument objectAtIndex:0];
   if ([@[kDevice, kStatusBar] containsObject:firstArg] == NO) {
-    NSLog(@"Warning: argument should be {'%@' | '%@'} - found '%@'", kDevice,
+    LPLogWarn(@"Argument should be {'%@' | '%@'} - found '%@'", kDevice,
             kStatusBar, firstArg);
   }
 
@@ -119,7 +120,7 @@ static NSString *const kFaceUp = @"face up";
   } else if ([kStatusBar isEqualToString:firstArg]) {
     return [LPOrientationOperation statusBarOrientation];
   } else {
-    NSLog(@"Warning: fell through conditions for arguments: '[%@]'",
+    LPLogWarn(@"Fell through conditions for arguments: '[%@]'",
             [argument componentsJoinedByString:@", "]);
     return nil;
   }

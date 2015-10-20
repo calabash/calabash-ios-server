@@ -8,6 +8,7 @@
 #import "LPHTTPDataResponse.h"
 #import "LPRecorder.h"
 #import "LPNoContentResponse.h"
+#import "LPCocoaLumberjack.h"
 
 @interface LPRecordRoute ()
 - (void) startRecording;
@@ -69,7 +70,7 @@
                        format:NSPropertyListXMLFormat_v1_0
                        errorDescription:&error];
   if (error) {
-    NSLog(@"error getting plist data: %@", error);
+    LPLogError(@"error getting plist data: %@", error);
     return nil;
   } else {
     return plistData;

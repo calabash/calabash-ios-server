@@ -68,7 +68,7 @@ static LPRecorder *sharedRecorder = nil;
 - (void) record {
   [self.eventList removeAllObjects];
 
-  NSLog(@"Starting recording");
+  LPLogDebug(@"Starting recording");
   _isRecording = YES;
   [[UIApplication sharedApplication] _addRecorder:self];
 }
@@ -78,21 +78,21 @@ static LPRecorder *sharedRecorder = nil;
 }
 
 - (void) saveToFile:(NSString *) path {
-  NSLog(@"Saving events to file: %@", path);
+  LPLogDebug(@"Saving events to file: %@", path);
 
   if ([self.eventList writeToFile:path atomically:YES]) {
-    NSLog(@"succeeded");
+    LPLogDebug(@"succeeded");
   }
 }
 
 - (void) stop {
-  NSLog(@"Stopping recording");
+  LPLogDebug(@"Stopping recording");
   _isRecording = NO;
   [[UIApplication sharedApplication] _removeRecorder:self];
 }
 
 - (void) recordApplicationEvent:(NSDictionary *) event {
-  NSLog(@"Recorded event: %@", event);
+  LPLogDebug(@"Recorded event: %@", event);
   [self.eventList addObject:event];
 }
 

@@ -31,7 +31,7 @@
 - (id) performWithTarget:(id) target error:(NSError * __autoreleasing *) error {
   NSArray *arguments = self.arguments;
   if (!arguments || [arguments count] == 0) {
-    NSLog(@"Missing the 'text' argument @ index 0 of arguments; nothing to do - returning nil");
+    LPLogWarn(@"Missing the 'text' argument @ index 0 of arguments; nothing to do - returning nil");
     return nil;
   }
 
@@ -41,12 +41,12 @@
 
     id webViewValue = [mdict valueForKey:@"webView"];
     if (!webViewValue) {
-      NSLog(@"Missing value for 'webView' key in target; nothing to do - returning nil");
+      LPLogWarn(@"Missing value for 'webView' key in target; nothing to do - returning nil");
       return nil;
     }
 
     if (![webViewValue conformsToProtocol:@protocol(LPWebViewProtocol)]) {
-      NSLog(@"Expected 'webView' => UIView<LPWebViewProtocol>, found %@; nothing to do - returning nil",
+      LPLogWarn(@"Expected 'webView' => UIView<LPWebViewProtocol>, found %@; nothing to do - returning nil",
               webViewValue);
       return nil;
     }
