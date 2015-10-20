@@ -27,7 +27,7 @@ install_test_binaries:
 	./scripts/install-test-binaries.rb
 
 webquery_headers:
-	scripts/insert-js-into-webquery-headers.rb
+	bundle exec bin/insert-js-into-webquery-headers.rb
 
 test_app:
 	scripts/make-lp-test-app.rb
