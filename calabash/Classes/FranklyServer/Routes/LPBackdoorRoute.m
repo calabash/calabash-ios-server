@@ -19,9 +19,16 @@
 static NSString *const ARG_KEY = @"arg";  /* for backwards compatibility */
 static NSString *const ARGUMENTS_KEY = @"arguments";
 
+@interface LPBackdoorRoute ()
+
+- (NSDictionary *) failureWithReason:(NSString *) reason
+                             details:(NSString *) details;
+@end
+
 @implementation LPBackdoorRoute
 
-- (NSDictionary *)failureWithReason:(NSString *)reason details:(NSString *)details {
+- (NSDictionary *) failureWithReason:(NSString *) reason
+                             details:(NSString *) details {
   return @{ @"details" : details, @"reason" : reason, @"outcome" : @"FAILURE" };
 }
 
