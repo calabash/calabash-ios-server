@@ -49,4 +49,51 @@
   expect(dictionary[@"outcome"]).to.equal(@"FAILURE");
 }
 
+- (void) testMissingSelector {
+  NSDictionary *data = @{};
+
+  NSDictionary *actual = [self.route JSONResponseForMethod:nil
+                                                       URI:nil
+                                                      data:data];
+
+  expect([actual count]).to.equal(3);
+  expect(actual[@"reason"]).to.equal(@"Missing selector name");
+  expect(actual[@"details"]).notTo.equal(nil);
+  expect(actual[@"outcome"]).to.equal(@"FAILURE");
+}
+
+- (void) testArgAndArgumentsKey {
+  NSDictionary *data =
+  @{
+    @"arg" : @"an arg",
+    @"arguments" : @[@"a", @"b", @"c"],
+    @"selector" : @"selector:"
+    };
+
+  NSDictionary *actual = [self.route JSONResponseForMethod:nil
+                                                       URI:nil
+                                                      data:data];
+
+  expect([actual count]).to.equal(3);
+  expect(actual[@"reason"]).to.equal(@"Incompatible keys: 'arg' and 'arguments'");
+  expect(actual[@"details"]).notTo.equal(nil);
+  expect(actual[@"outcome"]).to.equal(@"FAILURE");
+}
+
+- (void) testMissingArgOrArgumentsKey {
+  NSDictionary *data =
+  @{
+    @"selector" : @"selector:"
+    };
+
+  NSDictionary *actual = [self.route JSONResponseForMethod:nil
+                                                       URI:nil
+                                                      data:data];
+
+  expect([actual count]).to.equal(3);
+  expect(actual[@"reason"]).to.equal(@"Missing argument(s) for selector");
+  expect(actual[@"details"]).notTo.equal(nil);
+  expect(actual[@"outcome"]).to.equal(@"FAILURE");
+}
+
 @end

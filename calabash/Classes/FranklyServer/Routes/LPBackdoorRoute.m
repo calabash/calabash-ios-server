@@ -46,7 +46,7 @@ static NSString *const ARGUMENTS_KEY = @"arguments";
     NSString *details;
     details = [NSString stringWithFormat:@"No selector key found in route arguments: '%@'",
                data];
-    return [self failureWithReason:@"Missing selector name."
+    return [self failureWithReason:@"Missing selector name"
                            details:details];
   }
 
@@ -57,18 +57,16 @@ static NSString *const ARGUMENTS_KEY = @"arguments";
     NSString *details;
     details = [NSString stringWithFormat:@"Expected '%@' OR '%@' key in data, not both. Data: '%@'",
                ARG_KEY, ARGUMENTS_KEY, data];
-    return [self failureWithReason:@"Missing selector name."
+    return [self failureWithReason:@"Incompatible keys: 'arg' and 'arguments'"
                            details:details];
 
   } else if (!(data[ARG_KEY] || data[ARGUMENTS_KEY])) {
     LPLogError(@"Expected data dictionary to contain an '%@' or '%@' key.\nData = %@",
                ARG_KEY, ARGUMENTS_KEY, data);
-    NSString *reason, *details;
-    reason = [NSString stringWithFormat:@"Missing argument(s) for selector: '%@'",
-              selectorName];
+    NSString *details;
     details = [NSString stringWithFormat:@"Expected backdoor selector '%@' to have an argument(s), but found no '%@' or '%@' key in data '%@'",
                ARG_KEY, ARGUMENTS_KEY, selectorName, data];
-    return [self failureWithReason:reason
+    return [self failureWithReason:@"Missing argument(s) for selector"
                            details:details];
   }
 
