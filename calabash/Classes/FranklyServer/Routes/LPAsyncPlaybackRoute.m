@@ -13,6 +13,7 @@
 #import "LPTouchUtils.h"
 #import "LPOperation.h"
 #import "UIAutomation.h"
+#import "LPCocoaLumberjack.h"
 
 @class UIDevice;
 
@@ -60,7 +61,7 @@
       self.events = [LPResources transformEvents:baseEvents toPoint:CGPointMake(
               center.x + offsetPoint.x, center.y + offsetPoint.y)];
     } else {
-      NSLog(@"query %@ found no views. NO-OP.", query);
+      LPLogDebug(@"query %@ found no views. NO-OP.", query);
       self.done = YES;
       self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"query %@ found no views. Is accessibility enabled?",
                                                                                                 query], @"reason",
@@ -79,7 +80,7 @@
     CGPoint offsetPoint = CGPointMake([x floatValue], [y floatValue]);
     self.events = [LPResources eventsFromEncoding:base64Events];
     if (!self.events || [self.events count] < 1) {
-      NSLog(@"BAD EVENTS: %@", base64Events);
+      LPLogDebug(@"BAD EVENTS: %@", base64Events);
       self.done = YES;
       self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Bad events %@",
                                                                                                 base64Events], @"reason",
@@ -93,7 +94,7 @@
       NSDictionary *windowLoc = [firstEvent valueForKey:@"WindowLocation"];
       if (windowLoc == nil || [[firstEvent valueForKey:@"Type"]
               integerValue] == 50) {
-        NSLog(@"Offset for non window located event: %@", firstEvent);
+        LPLogDebug(@"Offset for non window located event: %@", firstEvent);
         self.done = YES;
         self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"Offset for non window located event: %@",
                                                                                                   firstEvent], @"reason",
@@ -116,7 +117,7 @@
   if ([self.data objectForKey:@"reverse"]) {
     self.events = [[_events reverseObjectEnumerator] allObjects];
   }
-  //NSLog(@"PLAY Events:\n%@",self.events);
+  //LPLogDebug(@"PLAY Events:\n%@",self.events);
   NSDictionary *firstEvent = [self.events objectAtIndex:0];
   NSDictionary *windowLoc = [firstEvent valueForKey:@"WindowLocation"];
 
@@ -136,7 +137,7 @@
 //    if (base64Prototype) {
 //        NSArray* protoEvents = [LPResources eventsFromEncoding:base64Prototype];
 //
-//        NSLog(@"Prototype Events\n%@",protoEvents);
+//        LPLogDebug(@"Prototype Events\n%@",protoEvents);
 //
 //    }
 

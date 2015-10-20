@@ -13,6 +13,7 @@
 #import "UIScriptParser.h"
 #import "LPTouchUtils.h"
 #import "LPInterpolateRoute.h"
+#import "LPCocoaLumberjack.h"
 
 
 @implementation LPInterpolateRoute
@@ -100,7 +101,7 @@
   self.events = [LPResources interpolateEvents:baseEvents fromPoint:centerStart
                                        toPoint:centerEnd];
 
-  //NSLog(@"PLAY Events:\n%@",self.events);
+  //LPLogDebug(@"PLAY Events:\n%@",self.events);
 
   [self play:self.events];
   NSArray *resultArray = nil;

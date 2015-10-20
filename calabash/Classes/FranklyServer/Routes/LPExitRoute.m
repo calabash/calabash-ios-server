@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "LPExitRoute.h"
+#import "LPCocoaLumberjack.h"
 
 @implementation LPExitRoute
 
@@ -54,7 +55,7 @@
  exit(3) => "exited abnormally with exit status 3"
  exit(0) => < no output >
 */
-  NSLog(@"Received http exit.");
+  LPLogDebug(@"Received http exit.");
 
   // See discussion above.
   int exitCode = 0;
@@ -90,28 +91,28 @@
 
   id<UIApplicationDelegate>appDelegate = [shared delegate];
   if ([appDelegate respondsToSelector:applicationWillResignActive]) {
-    NSLog(@"Calling [[UIApplication delegate] applicationWillResignActive] after a delay of %@ s",
+    LPLogDebug(@"Calling [[UIApplication delegate] applicationWillResignActive] after a delay of %@ s",
     @(postWillTerminateDelay));
     [appDelegate applicationWillResignActive:shared];
   } else {
-    NSLog(@"Application delegate does not respond to selector '%@'; skipping.",
+    LPLogDebug(@"Application delegate does not respond to selector '%@'; skipping.",
           NSStringFromSelector(applicationWillResignActive));
   }
 
   if ([shared respondsToSelector:willTerminate]) {
-    NSLog(@"Calling [UIApplication willTerminate].");
+    LPLogDebug(@"Calling [UIApplication willTerminate].");
     [shared performSelector:willTerminate withObject:nil afterDelay:postResignActiveDelay];
   } else {
-    NSLog(@"UIApplication does not respond to selector '%@'; skipping.",
+    LPLogDebug(@"UIApplication does not respond to selector '%@'; skipping.",
     NSStringFromSelector(willTerminate));
   }
 
   if ([shared respondsToSelector:terminateWithSuccess]) {
-    NSLog(@"Calling [UIApplication terminateWithSuccess] after a delay of %@ s", @(postWillTerminateDelay));
+    LPLogDebug(@"Calling [UIApplication terminateWithSuccess] after a delay of %@ s", @(postWillTerminateDelay));
     [shared performSelector:terminateWithSuccess withObject:nil afterDelay:defaultDelay];
   } else {
-    NSLog(@"UIApplication does not respond to selector '%@'", NSStringFromSelector(terminateWithSuccess));
-    NSLog(@"Exiting with code %@", @(exitCode));
+    LPLogDebug(@"UIApplication does not respond to selector '%@'", NSStringFromSelector(terminateWithSuccess));
+    LPLogDebug(@"Exiting with code %@", @(exitCode));
     exit(exitCode);
   }
 
