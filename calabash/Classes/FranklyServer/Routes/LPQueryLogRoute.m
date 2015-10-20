@@ -13,13 +13,14 @@
 #import "asl.h"
 
 @implementation LPQueryLogRoute
+
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
   return [method isEqualToString:@"GET"];
 }
 
-
-- (NSDictionary *) JSONResponseForMethod:(NSString *) method URI:(NSString *) path data:(NSDictionary *) data {
-
+- (NSDictionary *) JSONResponseForMethod:(NSString *) method
+                                     URI:(NSString *) path
+                                    data:(NSDictionary *) data {
   int count = 0;
 
   //Build a query message containing all our criteria.
