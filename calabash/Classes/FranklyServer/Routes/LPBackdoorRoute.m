@@ -34,22 +34,37 @@ const static NSString *ARGUMENTS_KEY = @"arguments";
                                     data:(NSDictionary *) data {
   NSString *selectorName = data[@"selector"];
   if (!selectorName) {
-    LPLogError(@"Expected data dictionary to contain a 'selector' key.\nData = %@", data);
+    LPLogError(@"Expected data dictionary to contain a 'selector' key.\nData = %@",
+               data);
+    NSString *details;
+    details = [NSString stringWithFormat:@"No selector key found in route arguments: '%@'",
+               data];
     return [self failureWithReason:@"Missing selector name."
-                           details:[NSString stringWithFormat:@"Expected selector name to be provided for backdoor, but no 'selector' key in data '%@'", data]];
+                           details:details];
   }
 
   if (data[ARG_KEY] && data[ARGUMENTS_KEY]) {
-    LPLogError(@"Expected data dictionary to contain '%@' XOR '%@'.\nData = %@", ARG_KEY, ARGUMENTS_KEY, data);
+    LPLogError(@"Expected data dictionary to contain '%@' XOR '%@'.\nData = %@",
+               ARG_KEY, ARGUMENTS_KEY, data);
+
+    NSString *details;
+    details = [NSString stringWithFormat:@"Expected '%@' OR '%@' key in data, not both. Data: '%@'",
+               ARG_KEY, ARGUMENTS_KEY, data];
     return [self failureWithReason:@"Missing selector name."
-                           details:[NSString stringWithFormat:@"Expected '%@' OR '%@' key in data, not both. Data: '%@'", ARG_KEY, ARGUMENTS_KEY, data]];
+                           details:details];
+
   } else if (!(data[ARG_KEY] || data[ARGUMENTS_KEY])) {
-    LPLogError(@"Expected data dictionary to contain an '%@' or '%@' key.\nData = %@", ARG_KEY, ARGUMENTS_KEY, data);
-    return [self failureWithReason:[NSString stringWithFormat:@"Missing argument(s) for selector: '%@'",
-                                    selectorName]
-                           details:[NSString stringWithFormat:@"Expected backdoor selector '%@' to have an argument(s), but found no '%@' or '%@' key in data '%@'", ARG_KEY, ARGUMENTS_KEY, selectorName, data]];
+    LPLogError(@"Expected data dictionary to contain an '%@' or '%@' key.\nData = %@",
+               ARG_KEY, ARGUMENTS_KEY, data);
+    NSString *reason, *details;
+    reason = [NSString stringWithFormat:@"Missing argument(s) for selector: '%@'",
+              selectorName];
+    details = [NSString stringWithFormat:@"Expected backdoor selector '%@' to have an argument(s), but found no '%@' or '%@' key in data '%@'",
+               ARG_KEY, ARGUMENTS_KEY, selectorName, data];
+    return [self failureWithReason:reason
+                           details:details];
   }
-  
+
   id arguments = data[ARG_KEY] ? @[data[ARG_KEY]] : data[ARGUMENTS_KEY];
 
   SEL selector = NSSelectorFromString(selectorName);
@@ -60,10 +75,14 @@ const static NSString *ARGUMENTS_KEY = @"arguments";
                                       withTarget:delegate
                                        arguments:arguments];
     if ([invocationResult isError]) {
-      return [self failureWithReason:[NSString stringWithFormat:@"Invoking backdoor resulted in error: %@",
-                                      [invocationResult description]]
-                             details:[NSString stringWithFormat:@"Invoking backdoor selector '%@' with arguments '%@' could not be completed because '%@'",
-                                      selectorName, arguments, [invocationResult description]]];
+      NSString *reason, *details;
+      reason = [NSString stringWithFormat:@"Invoking backdoor resulted in error: %@",
+                [invocationResult description]];
+      details = [NSString stringWithFormat:@"Invoking backdoor selector '%@' with arguments '%@' could not be completed because '%@'",
+                 selectorName, arguments, [invocationResult description]];
+      return [self failureWithReason:reason
+                             details:details];
+
     } else {
       return
       @{
