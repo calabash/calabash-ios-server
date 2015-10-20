@@ -8,6 +8,9 @@
 #import <objc/runtime.h>
 #import "LPCocoaLumberjack.h"
 
+static NSString *const LPInvokerSelfReference = @"__self__";
+static NSString *const LPInvokerNilReference = @"__nil__";
+
 @interface LPInvoker ()
 
 @property(strong, nonatomic, readonly) NSString *encodingForSelectorReturnType;
