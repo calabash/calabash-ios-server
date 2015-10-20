@@ -24,9 +24,6 @@ dylibs:
 webquery_headers:
 	bundle exec bin/insert-js-into-webquery-headers.rb
 
-test_app:
-	scripts/make-lp-test-app.rb
-
 xct:
 	bundle exec bin/test/xctest.rb
 
