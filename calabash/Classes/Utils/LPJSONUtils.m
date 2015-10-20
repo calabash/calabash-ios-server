@@ -18,6 +18,7 @@
 #import "LPInvocationError.h"
 #import <math.h>
 #import "LPDecimalRounder.h"
+#import "LPCocoaLumberjack.h"
 
 @interface LPJSONUtils ()
 
@@ -84,7 +85,7 @@
   NSDictionary *res = [ds deserializeAsDictionary:[string dataUsingEncoding:NSUTF8StringEncoding]
                                             error:&error];
   if (error) {
-    NSLog(@"Unable to deserialize  %@", string);
+    LPLogDebug(@"Unable to deserialize  %@", string);
   }
   return res;
 }
@@ -100,7 +101,7 @@
   NSArray *res = [ds deserializeAsArray:[string dataUsingEncoding:NSUTF8StringEncoding]
                                   error:&error];
   if (error) {
-    NSLog(@"Unable to deserialize  %@", string);
+    LPLogDebug(@"Unable to deserialize  %@", string);
   }
   return res;
 }
@@ -400,10 +401,10 @@
       tmp[@"center_y"] = [self normalizeFloat:center.y];
       frameDictionary = [NSDictionary dictionaryWithDictionary:tmp];
     } @catch (NSException *exception) {
-      NSLog(@"LPJSONUtils caught an exception in jsonifyAccessibilityElement:");
-      NSLog(@"%@", exception);
-      NSLog(@"while trying to find the accessibilityFrame of this object:");
-      NSLog(@"%@", object);
+      LPLogError(@"LPJSONUtils caught an exception in jsonifyAccessibilityElement:");
+      LPLogError(@"%@", exception);
+      LPLogError(@"while trying to find the accessibilityFrame of this object:");
+      LPLogError(@"%@", object);
     }
   }
 
