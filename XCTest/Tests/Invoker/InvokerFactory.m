@@ -126,6 +126,7 @@
     @"Class" : NSStringFromSelector(@selector(selectorClass:)),
     @"object pointer" : NSStringFromSelector(@selector(selectorObjectPointer:)),
     @"self" : NSStringFromSelector(@selector(selectorArgumentIsSelf:)),
+    @"self" : NSStringFromSelector(@selector(selectorArgumentIsNil:)),
 
     // Not handled
     @"void *" : NSStringFromSelector(@selector(selectorVoidStar:)),
@@ -384,6 +385,10 @@
 
 - (BOOL) selectorArgumentIsSelf:(id) arg {
   return arg == self;
+}
+
+- (BOOL) selectorArgumentIsNil:(id) arg {
+  return arg == nil;
 }
 
 #pragma mark - Unhandled Argument Types
