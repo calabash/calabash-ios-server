@@ -3,6 +3,7 @@
 #endif
 
 #import "LPDatePickerOperation.h"
+#import "LPCocoaLumberjack.h"
 
 @implementation LPDatePickerOperation
 
@@ -17,7 +18,7 @@
 // _arguments ==> [target date str, format str, notify targets, animated]
 - (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
   if ([target isKindOfClass:[UIDatePicker class]] == NO) {
-    NSLog(@"Warning view: %@ should be a date picker", target);
+    LPLogWarn(@"View: %@ should be a date picker", target);
     return nil;
   }
 
@@ -27,7 +28,7 @@
 
   NSString *dateStr = arguments[0];
   if (dateStr == nil || [dateStr length] == 0) {
-    NSLog(@"Warning: date str: '%@' should be non-nil and non-empty", dateStr);
+    LPLogWarn(@"Date str: '%@' should be non-nil and non-empty", dateStr);
     return nil;
   }
 
@@ -37,7 +38,7 @@
   if (argcount > 1) {
     dateFormat = arguments[1];
   } else {
-    NSLog(@"Warning: date format is required as the second argument");
+    LPLogWarn(@"Date format is required as the second argument");
     return nil;
   }
 
@@ -56,14 +57,14 @@
   [formatter setDateFormat:dateFormat];
   NSDate *date = [formatter dateFromString:dateStr];
   if (date == nil) {
-    NSLog(@"Warning: could not create date from '%@' and format '%@'", dateStr,
+    LPLogWarn(@"Could not create date from '%@' and format '%@'", dateStr,
             dateFormat);
     return nil;
   }
 
   NSDate *minDate = picker.minimumDate;
   if (minDate != nil && [date compare:minDate] == NSOrderedAscending) {
-    NSLog(@"Warning: could not set the date to '%@' because is earlier than the minimum date '%@'",
+    LPLogWarn(@"Could not set the date to '%@' because is earlier than the minimum date '%@'",
             date,
             [minDate descriptionWithLocale:[NSLocale autoupdatingCurrentLocale]]);
     return nil;
@@ -71,7 +72,7 @@
 
   NSDate *maxDate = picker.maximumDate;
   if (maxDate != nil && [date compare:maxDate] == NSOrderedDescending) {
-    NSLog(@"Warning: could not set the date to '%@' because is later than the maximum date '%@'",
+    LPLogWarn(@"Could not set the date to '%@' because is later than the maximum date '%@'",
             date,
             [maxDate descriptionWithLocale:[NSLocale autoupdatingCurrentLocale]]);
     return nil;

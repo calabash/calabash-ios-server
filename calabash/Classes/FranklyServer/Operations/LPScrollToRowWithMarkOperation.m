@@ -3,6 +3,7 @@
 #endif
 
 #import "LPScrollToRowWithMarkOperation.h"
+#import "LPCocoaLumberjack.h"
 
 @implementation LPScrollToRowWithMarkOperation
 
@@ -44,7 +45,7 @@
 // _arguments ==> [row mark, scroll position, animated]
 - (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
   if ([target isKindOfClass:[UITableView class]] == NO) {
-    NSLog(@"Warning view: %@ should be a table view for scrolling to row/cell to make sense",
+    LPLogWarn(@"View %@ should be a table view for scrolling to row/cell to make sense",
             target);
     return nil;
   }
@@ -54,13 +55,13 @@
   UITableView *table = (UITableView *) target;
   NSString *rowId = [arguments objectAtIndex:0];
   if (rowId == nil || [rowId length] == 0) {
-    NSLog(@"Warning: row id: '%@' should be non-nil and non-empty", rowId);
+    LPLogWarn(@"Row id: '%@' should be non-nil and non-empty", rowId);
     return nil;
   }
 
   NSIndexPath *path = [self indexPathForRowWithMark:rowId inTable:table];
   if (path == nil) {
-    NSLog(@"Warning: table doesn't contain row with id '%@'", rowId);
+    LPLogWarn(@"Table doesn't contain row with id '%@'", rowId);
     return nil;
   }
 

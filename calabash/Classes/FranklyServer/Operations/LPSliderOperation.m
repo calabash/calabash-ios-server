@@ -4,6 +4,7 @@
 
 #import "LPSliderOperation.h"
 #import "LPJSONUtils.h"
+#import "LPCocoaLumberjack.h"
 
 @implementation LPSliderOperation
 
@@ -16,7 +17,7 @@
 //  _arguments => [value_str,  notify targets, animate]
 - (id) performWithTarget:(id) target error:(NSError * __autoreleasing *) error {
   if ([target isKindOfClass:[UISlider class]] == NO) {
-    NSLog(@"Warning view: %@ should be a UISlier", target);
+    LPLogWarn(@"View %@ should be a UISlier", target);
     return nil;
   }
 
@@ -26,7 +27,7 @@
 
   NSString *valueStr = arguments[0];
   if (valueStr == nil || [valueStr length] == 0) {
-    NSLog(@"Warning: value str: '%@' should be non-nil and non-empty",
+    LPLogWarn(@"Value str: '%@' should be non-nil and non-empty",
             valueStr);
     return nil;
   }
@@ -46,12 +47,12 @@
   }
 
   if (targetValue > [slider maximumValue]) {
-    NSLog(@"Warning: target value '%.2f' is greater than slider max value '%.2f' - will slide to max value",
+    LPLogWarn(@"Target value '%.2f' is greater than slider max value '%.2f' - will slide to max value",
             targetValue, [slider maximumValue]);
   }
 
   if (targetValue < [slider minimumValue]) {
-    NSLog(@"Warning: target value '%.2f' is less than slider min value '%.2f' - will slide to min value",
+    LPLogWarn(@"Target value '%.2f' is less than slider min value '%.2f' - will slide to min value",
             targetValue, [slider minimumValue]);
   }
 

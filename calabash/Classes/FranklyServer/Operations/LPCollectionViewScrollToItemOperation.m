@@ -1,4 +1,5 @@
 #import "LPCollectionViewScrollToItemOperation.h"
+#import "LPCocoaLumberjack.h"
 
 #if ! __has_feature(objc_arc)
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
@@ -13,13 +14,13 @@
   // UICollectionView appears in iOS 6
   Class clz = NSClassFromString(@"UICollectionView");
   if (clz == nil) {
-    NSLog(@"Warning UICollectionView is not supported on this version of iOS:  '%@'",
+    LPLogWarn(@"UICollectionView is not supported on this version of iOS:  '%@'",
             [[UIDevice currentDevice] systemVersion]);
     return nil;
   }
 
   if ([target isKindOfClass:[UICollectionView class]] == NO) {
-    NSLog(@"Warning view: %@ should be an instance of UICollectionView but found '%@'",
+    LPLogWarn(@"View: %@ should be an instance of UICollectionView but found '%@'",
             target, target == nil ? nil : [target class]);
     return nil;
   }
@@ -29,7 +30,7 @@
   NSArray *arguments = self.arguments;
 
   if ([arguments count] != 4) {
-    NSLog(@"Warning:  required 4 args but found only '%@' - %@",
+    LPLogWarn(@"Required 4 args but found only '%@' - %@",
             @([arguments count]), arguments);
     return nil;
   }
@@ -39,14 +40,14 @@
 
   NSInteger numSections = [collection numberOfSections];
   if (section >= numSections) {
-    NSLog(@"Warning:  requested to scroll to section '%@' but view only has '%@' sections",
+    LPLogWarn(@"Requested to scroll to section '%@' but view only has '%@' sections",
             @(section), @(numSections));
     return nil;
   }
 
   NSInteger numItemInSection = [collection numberOfItemsInSection:section];
   if (itemIndex >= numItemInSection) {
-    NSLog(@"Warning:  requested to scroll to item '%@' in section '%@' but that section on has '%@' items",
+    LPLogWarn(@"Requested to scroll to item '%@' in section '%@' but that section on has '%@' items",
             @(itemIndex), @(section), @(numItemInSection));
     return nil;
   }
@@ -65,7 +66,7 @@
 
   NSNumber *posNum = [opts objectForKey:position];
   if (posNum == nil) {
-    NSLog(@"Warning:  requesting to scroll to position '%@' but that is not one of these valid positions: '%@'",
+    LPLogWarn(@"Requesting to scroll to position '%@' but that is not one of these valid positions: '%@'",
             position, [opts allKeys]);
     return nil;
   }
