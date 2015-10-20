@@ -66,7 +66,7 @@ Dir.chdir(working_dir) do
                                     :exit_on_nonzero_status => false})
     if Luffa::Environment.travis_ci?
       if exit_code != 0
-        Luffa.log_fail "XCTest exited '#{exit_code}' - did we fail because the Simulator did not launch?"
+        Luffa.log_fail "XCTest exited '#{exit_code}' - did a test fail or did the tests not start?"
         raise XCTestFailedError, 'XCTest failed.'
       end
     else
