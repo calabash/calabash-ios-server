@@ -101,9 +101,11 @@
 
   NSArray *results = [NSArray arrayWithArray:messages];
 
-  return [NSDictionary dictionaryWithObjectsAndKeys:results, @"results",
-                                                    @"SUCCESS", @"outcome",
-                                                    nil];
+  return
+  @{
+    @"results" : results,
+    @"outcome" : @"SUCCESS",
+    };
 }
 
 @end
