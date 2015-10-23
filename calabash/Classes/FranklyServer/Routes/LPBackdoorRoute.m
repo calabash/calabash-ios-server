@@ -12,65 +12,92 @@
 #import <UIKit/UIKit.h>
 #import "LPBackdoorRoute.h"
 #import "LPCocoaLumberjack.h"
+#import "LPInvoker.h"
+#import "LPInvocationResult.h"
+#import "LPInvocationError.h"
+
+static NSString *const ARG_KEY = @"arg";  /* for backwards compatibility */
+static NSString *const ARGUMENTS_KEY = @"arguments";
+
+@interface LPBackdoorRoute ()
+
+- (NSDictionary *) failureWithReason:(NSString *) reason
+                             details:(NSString *) details;
+@end
 
 @implementation LPBackdoorRoute
+
+- (NSDictionary *) failureWithReason:(NSString *) reason
+                             details:(NSString *) details {
+  return @{ @"details" : details, @"reason" : reason, @"outcome" : @"FAILURE" };
+}
 
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
   return [method isEqualToString:@"POST"];
 }
 
-- (NSDictionary *) JSONResponseForMethod:(NSString *) method URI:(NSString *) path data:(NSDictionary *) data {
-  NSString *originalSelStr = [data objectForKey:@"selector"];
-  NSString *selectorName = originalSelStr;
-  if (![originalSelStr hasSuffix:@":"]) {
-    LPLogWarn(@"Selector name is missing a ':'");
-    LPLogWarn(@"All backdoor methods must take at least one argument.");
-    LPLogWarn(@"Appending a ':' to the selector name.");
-    LPLogWarn(@"This will be an error in the future.");
-    selectorName = [selectorName stringByAppendingString:@":"];
+- (NSDictionary *) JSONResponseForMethod:(NSString *) method
+                                     URI:(NSString *) path
+                                    data:(NSDictionary *) data {
+  NSString *selectorName = data[@"selector"];
+  if (!selectorName) {
+    LPLogError(@"Expected data dictionary to contain a 'selector' key.\nData = %@",
+               data);
+    NSString *details;
+    details = [NSString stringWithFormat:@"No selector key found in route arguments: '%@'",
+               data];
+    return [self failureWithReason:@"Missing selector name"
+                           details:details];
   }
+
+  if (data[ARG_KEY] && data[ARGUMENTS_KEY]) {
+    LPLogError(@"Expected data dictionary to contain '%@' XOR '%@'.\nData = %@",
+               ARG_KEY, ARGUMENTS_KEY, data);
+
+    NSString *details;
+    details = [NSString stringWithFormat:@"Expected '%@' OR '%@' key in data, not both. Data: '%@'",
+               ARG_KEY, ARGUMENTS_KEY, data];
+    return [self failureWithReason:@"Incompatible keys: 'arg' and 'arguments'"
+                           details:details];
+
+  } else if (!(data[ARG_KEY] || data[ARGUMENTS_KEY])) {
+    LPLogError(@"Expected data dictionary to contain an '%@' or '%@' key.\nData = %@",
+               ARG_KEY, ARGUMENTS_KEY, data);
+    NSString *details;
+    details = [NSString stringWithFormat:@"Expected backdoor selector '%@' to have an argument(s), but found no '%@' or '%@' key in data '%@'",
+               ARG_KEY, ARGUMENTS_KEY, selectorName, data];
+    return [self failureWithReason:@"Missing argument(s) for selector"
+                           details:details];
+  }
+
+  id arguments = data[ARG_KEY] ? @[data[ARG_KEY]] : data[ARGUMENTS_KEY];
 
   SEL selector = NSSelectorFromString(selectorName);
   id<UIApplicationDelegate> delegate = [[UIApplication sharedApplication] delegate];
   if ([delegate respondsToSelector:selector]) {
-    id argument = [data objectForKey:@"arg"];
-    id result = nil;
+    LPInvocationResult *invocationResult;
+    invocationResult = [LPInvoker invokeSelector:selector
+                                      withTarget:delegate
+                                       arguments:arguments];
+    if ([invocationResult isError]) {
+      NSString *reason, *details;
+      reason = [NSString stringWithFormat:@"Invoking backdoor resulted in error: %@",
+                [invocationResult description]];
+      details = [NSString stringWithFormat:@"Invoking backdoor selector '%@' with arguments '%@' could not be completed because '%@'",
+                 selectorName, arguments, [invocationResult description]];
+      return [self failureWithReason:reason
+                             details:details];
 
-    NSMethodSignature *methodSignature;
-    methodSignature = [[delegate class] instanceMethodSignatureForSelector:selector];
-
-    NSInvocation *invocation;
-    invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
-
-    [invocation setSelector:selector];
-    [invocation setArgument:&argument atIndex:2];
-
-    [invocation retainArguments];
-
-    void *buffer;
-
-    if ([[NSThread currentThread] isMainThread]) {
-      [invocation invokeWithTarget:delegate];
     } else {
-      [invocation performSelectorOnMainThread:@selector(invokeWithTarget:)
-                                   withObject:delegate
-                                   waitUntilDone:YES];
+      return
+      @{
+        @"results": invocationResult.value,
+        // Legacy API:  Starting in Calabash 2.0 and Calabash 0.15.0, the 'result'
+        // key will be dropped.
+        @"result" : invocationResult.value,
+        @"outcome" : @"SUCCESS"
+        };
     }
-
-    [invocation getReturnValue:&buffer];
-
-    result = (__bridge id)buffer;
-
-    if (!result) {result = [NSNull null];}
-    return
-    @{
-      @"results": result,
-      // Legacy API:  Starting in Calabash 2.0 and Calabash 0.15.0, the 'result'
-      // key will be dropped.
-      @"result" : result,
-      @"outcome" : @"SUCCESS"
-      };
-
   } else {
 
     NSArray *lines =
@@ -93,7 +120,7 @@
 
     NSString *details = [lines componentsJoinedByString:@"\n"];
 
-    NSString *reason = [NSString stringWithFormat:@"The backdoor: '%@' is undefined.",
+    NSString *reason = [NSString stringWithFormat:@"The backdoor: '%@' is undefined",
                         selectorName];
     return  @{ @"details" : details, @"reason" : reason, @"outcome" : @"FAILURE" };
   }
