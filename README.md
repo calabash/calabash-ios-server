@@ -86,6 +86,22 @@ If you are running the XCTests from Xcode, you might see failures in
 `LPJSONUtilsTest`.  If you do, clean (Shift + Option + Command + K)
 and rerun.
 
+### xcpretty
+
+https://github.com/supermarin/xcpretty
+
+We use xcpretty to make builds faster and to reduce the amount of
+logging.  Travis CI, for example, has a limit on the number of lines of
+logging that can be generated; xcodebuild breaks this limit.
+
+The only problem with xcpretty is that it does not report build errors
+very well.  If you encounter an issue with any of the make rules, run
+without xcpretty:
+
+```
+$ XCPRETTY=0 make ipa
+```
+
 ### Contributing
 
 * The Calabash iOS Toolchain uses git-flow.
