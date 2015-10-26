@@ -27,6 +27,9 @@ webquery_headers:
 xct:
 	bundle exec bin/test/xctest.rb
 
+test-target-app:
+	bin/make/test-target-app.sh
+
 # For developers only.  This script is not part of the library
 # build process.
 version:
