@@ -25,13 +25,13 @@ args =
       [
             'test',
             '-SYMROOT=build',
-            '-derivedDataPath build',
+            '-derivedDataPath build/xctest',
             '-project calabash.xcodeproj',
             '-scheme XCTest',
             "-destination 'platform=iOS Simulator,name=#{target_simulator_name},OS=latest'",
             '-sdk iphonesimulator',
             '-configuration Debug',
-            use_xcpretty ? '| xcpretty -tc && exit ${PIPESTATUS[0]}' : ''
+            use_xcpretty ? '| xcpretty -tc --report junit && exit ${PIPESTATUS[0]}' : ''
       ]
 
 Dir.chdir(working_dir) do
