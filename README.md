@@ -8,16 +8,35 @@ http://calaba.sh
 
 The companion of the calabash-ios gem:  https://github.com/calabash/calabash-ios
 
-### Building the Framework
+### Building
 
 Requires Xcode 6 or Xcode 7.
 
-Xcode 6.4 is actively tested.  Older versions of Xcode 6 are not.
+Xcode 6.4 is actively tested. Older versions of Xcode 6 are not.
+
+Requires ruby >= 2.0.  The latest ruby release is preferred.
 
 ```
 $ git clone --recursive git@github.com:calabash/calabash-ios-server.git
 $ cd calabash-ios-server
-$ make framework
+$ bundle
+```
+
+To build with an alternative Xcode:
+
+```
+$ DEVELOPER_DIR=/Xcode/7.1b5/Xcode-beta.app make < rule >
+```
+
+If you have build errors, see the xcpretty section.
+
+Maintainers must install the calabash/calabash-resign private repo.
+Details are below.
+
+### Building the Framework
+
+```
+make framework
 ```
 
 ### Building the frank plugin
