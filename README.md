@@ -109,6 +109,9 @@ $ XCPRETTY=0 make ipa
 * See the [CONTRIBUTING.md](CONTRIBUTING.md) guide.
 * There is a style guide: [STYLE\_GUIDE.md](STYLE\_GUIDE.md).
 * Pull-requests with unit tests will be merged faster.
+* Pull-requests with integration tests will be merged even faster.
+  - Use the calabash/calabash-ios-smoke-test-app and write some
+    cucumbers.
 
 ### Releasing
 
