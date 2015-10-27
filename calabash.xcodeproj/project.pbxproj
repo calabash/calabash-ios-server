@@ -370,15 +370,15 @@
 		F50CBFCF1A040707004AC9DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		F50E42791AA86D36003DB030 /* libSpecta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F50E42711AA86D36003DB030 /* libSpecta.a */; };
 		F514ACCC1B341557004ACFEE /* LPiOSVersionInlinesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F514ACCB1B341557004ACFEE /* LPiOSVersionInlinesTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F52427E61BA8457D00B7678F /* LPProcessInfoRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F52427E21BA8457D00B7678F /* LPProcessInfoRoute.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F52427E71BA8457D00B7678F /* LPProcessInfoRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F52427E21BA8457D00B7678F /* LPProcessInfoRoute.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F52427E81BA8457D00B7678F /* LPProcessInfoRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F52427E21BA8457D00B7678F /* LPProcessInfoRoute.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F52427E91BA8457D00B7678F /* LPProcessInfoRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F52427E21BA8457D00B7678F /* LPProcessInfoRoute.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F52A26531BD02D0400AD0E36 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = F52A26511BD02D0400AD0E36 /* LPCDataScanner.m */; settings = {ASSET_TAGS = (); }; };
-		F52A26541BD02D0400AD0E36 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = F52A26511BD02D0400AD0E36 /* LPCDataScanner.m */; settings = {ASSET_TAGS = (); }; };
-		F52A26551BD02D0400AD0E36 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = F52A26511BD02D0400AD0E36 /* LPCDataScanner.m */; settings = {ASSET_TAGS = (); }; };
-		F52A26561BD02D0400AD0E36 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = F52A26511BD02D0400AD0E36 /* LPCDataScanner.m */; settings = {ASSET_TAGS = (); }; };
-		F52A266F1BD113FC00AD0E36 /* LPUIAUserPreferencesChannelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F52A266E1BD113FC00AD0E36 /* LPUIAUserPreferencesChannelTest.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F52427E61BA8457D00B7678F /* LPProcessInfoRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F52427E21BA8457D00B7678F /* LPProcessInfoRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F52427E71BA8457D00B7678F /* LPProcessInfoRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F52427E21BA8457D00B7678F /* LPProcessInfoRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F52427E81BA8457D00B7678F /* LPProcessInfoRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F52427E21BA8457D00B7678F /* LPProcessInfoRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F52427E91BA8457D00B7678F /* LPProcessInfoRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F52427E21BA8457D00B7678F /* LPProcessInfoRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F52A26531BD02D0400AD0E36 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = F52A26511BD02D0400AD0E36 /* LPCDataScanner.m */; };
+		F52A26541BD02D0400AD0E36 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = F52A26511BD02D0400AD0E36 /* LPCDataScanner.m */; };
+		F52A26551BD02D0400AD0E36 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = F52A26511BD02D0400AD0E36 /* LPCDataScanner.m */; };
+		F52A26561BD02D0400AD0E36 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = F52A26511BD02D0400AD0E36 /* LPCDataScanner.m */; };
+		F52A266F1BD113FC00AD0E36 /* LPUIAUserPreferencesChannelTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F52A266E1BD113FC00AD0E36 /* LPUIAUserPreferencesChannelTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F532C19B1AFD28970024DA55 /* LPCJSONSerializerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F532C19A1AFD28970024DA55 /* LPCJSONSerializerTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F532C1DE1AFF4F080024DA55 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F532C1DD1AFF4F080024DA55 /* CoreData.framework */; };
 		F532C1E31AFF4F250024DA55 /* LPCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = F532C1E01AFF4F240024DA55 /* LPCoreDataStack.m */; };
@@ -430,11 +430,11 @@
 		F570992C1B5518EF00DB35EC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F570992B1B5518EF00DB35EC /* CoreLocation.framework */; };
 		F570992E1B555C3C00DB35EC /* LPInvokerArgumentEncodingIsHandledTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F570992D1B555C3C00DB35EC /* LPInvokerArgumentEncodingIsHandledTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F57099301B55751200DB35EC /* LPInvokerHasArgumentWithUnhandleEncodingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F570992F1B55751200DB35EC /* LPInvokerHasArgumentWithUnhandleEncodingTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F57605191BCE767000E89C97 /* LPSuspendAppRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605181BCE767000E89C97 /* LPSuspendAppRouteTest.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F576058C1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F576058D1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F576058E1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F576058F1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F57605191BCE767000E89C97 /* LPSuspendAppRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605181BCE767000E89C97 /* LPSuspendAppRouteTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F576058C1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F576058D1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F576058E1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F576058F1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F58C9F501B6F79BA007D307B /* CocoaLumberjack.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F58C9F4F1B6F79BA007D307B /* CocoaLumberjack.a */; };
 		F58C9F571B6F7EB9007D307B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F561B6F7EB9007D307B /* GCDAsyncSocket.m */; };
 		F58C9F801B6F802D007D307B /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F5B1B6F802D007D307B /* DDData.m */; };
@@ -454,7 +454,7 @@
 		F58C9F8E1B6F802D007D307B /* HTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F7B1B6F802D007D307B /* HTTPFileResponse.m */; };
 		F58C9F8F1B6F802D007D307B /* HTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F7D1B6F802D007D307B /* HTTPRedirectResponse.m */; };
 		F58C9F901B6F802D007D307B /* WebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F7F1B6F802D007D307B /* WebSocket.m */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code -Wno-unused-function"; }; };
-		F58CE49E1BD6757A0025BE67 /* LPBackdoorRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F58CE49D1BD6757A0025BE67 /* LPBackdoorRouteTest.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F58CE49E1BD6757A0025BE67 /* LPBackdoorRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F58CE49D1BD6757A0025BE67 /* LPBackdoorRouteTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F59741C11AA565190089DC88 /* OCMockitoIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59741BD1AA565190089DC88 /* OCMockitoIOS.framework */; };
 		F59741C21AA565190089DC88 /* OCHamcrestIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59741BE1AA565190089DC88 /* OCHamcrestIOS.framework */; };
 		F59741EE1AA5712F0089DC88 /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F59741E31AA5712F0089DC88 /* libOCMock.a */; };
@@ -496,12 +496,12 @@
 		F5A33A5F1AC0172A00224639 /* UIWebView+LPWebViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A33A5E1AC0172A00224639 /* UIWebView+LPWebViewTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5A33A711AC01BC400224639 /* WKWebView+LPWebViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A33A701AC01BC400224639 /* WKWebView+LPWebViewTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5A33A791AC01EC400224639 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A33A721AC01E8E00224639 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		F5A6B96D1BD14E96009FD08B /* LPReflectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6B9691BD14E96009FD08B /* LPReflectionRoute.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5A6B96E1BD14E96009FD08B /* LPReflectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6B9691BD14E96009FD08B /* LPReflectionRoute.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5A6B96F1BD14E96009FD08B /* LPReflectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6B9691BD14E96009FD08B /* LPReflectionRoute.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5A6B9701BD14E96009FD08B /* LPReflectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6B9691BD14E96009FD08B /* LPReflectionRoute.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5A6B9721BD14EE2009FD08B /* LPReflectionRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6B9711BD14EE2009FD08B /* LPReflectionRouteTest.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5A6B9751BD15877009FD08B /* LPProcessInfoRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6B9741BD15877009FD08B /* LPProcessInfoRouteTest.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A6B96D1BD14E96009FD08B /* LPReflectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6B9691BD14E96009FD08B /* LPReflectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A6B96E1BD14E96009FD08B /* LPReflectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6B9691BD14E96009FD08B /* LPReflectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A6B96F1BD14E96009FD08B /* LPReflectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6B9691BD14E96009FD08B /* LPReflectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A6B9701BD14E96009FD08B /* LPReflectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6B9691BD14E96009FD08B /* LPReflectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A6B9721BD14EE2009FD08B /* LPReflectionRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6B9711BD14EE2009FD08B /* LPReflectionRouteTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5A6B9751BD15877009FD08B /* LPProcessInfoRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6B9741BD15877009FD08B /* LPProcessInfoRouteTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5A8B4581B39BFEB00F390CA /* LPCLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B43E1B39BFEB00F390CA /* LPCLIColor.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5A8B4591B39BFEB00F390CA /* LPCLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B43E1B39BFEB00F390CA /* LPCLIColor.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5A8B45A1B39BFEB00F390CA /* LPCLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A8B43E1B39BFEB00F390CA /* LPCLIColor.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -2208,7 +2208,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = LP;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Calabash;
 				TargetAttributes = {
 					F50CBF5D1A03F222004AC9DA = {
