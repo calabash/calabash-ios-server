@@ -27,8 +27,14 @@ webquery_headers:
 xct:
 	bundle exec bin/test/xctest.rb
 
-test-target-app:
-	bin/make/test-target-app.sh
+# Makes the LPTestTarget.app without Calabash linked.
+# This target is suitable for testing dylib injection.
+app:
+	bin/make/app.sh
+
+# Makes the LPTestTarget with Calabash linked.
+app-cal:
+	bin/make/app-cal.sh
 
 # For developers only.  This script is not part of the library
 # build process.

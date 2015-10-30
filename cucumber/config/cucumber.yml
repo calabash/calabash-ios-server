@@ -1,0 +1,112 @@
+<%
+
+require 'run_loop'
+
+date = Time.now.strftime('%Y-%m-%d-%H%M-%S')
+
+FileUtils.mkdir("./screenshots") unless File.exists?("./screenshots")
+FileUtils.mkdir("./reports") unless File.exists?("./reports")
+
+calabash_dir = "#{ENV['HOME']}/.calabash"
+
+devices = {}
+
+device_list = ['neptune', 'venus', 'earp', 'mars', 'saturn', 'pegasi', 'hat', 'erik', 'denis', 'uranus']
+
+device_list.each do |device|
+  dir = "#{calabash_dir}/devices/#{device}"
+  ip = IO.read("#{dir}/ip") if File.exists?("#{dir}/ip")
+  udid = IO.read("#{dir}/udid") if File.exists?("#{dir}/udid")
+  report = "./reports/#{device}/#{date}-#{device}.html"
+  ss_path = "./reports/#{device}/screenshots/"
+  ht = {:dir => dir,
+        :ip => ip,
+        :udid => udid,
+        :report => report,
+        :ss_path => ss_path}
+  devices[device.to_sym] = ht
+
+  FileUtils.mkdir("./reports/#{device}") unless File.exists?("./reports/#{device}")
+  FileUtils.mkdir("./reports/#{device}/screenshots") unless File.exists?("./reports/#{device}/screenshots")
+end
+
+default_report = "./reports/calabash-#{date}.html"
+ss_path = "./screenshots/"
+
+if ENV["USER"] == "jenkins"
+  formatter = "progress"
+  keep_sim_open_after = "0"
+else
+  formatter = "Slowhandcuke::Formatter"
+  keep_sim_open_after = "1"
+end
+
+default_app = "../Products/test-target/app-cal/LPTestTarget.app"
+app = ENV["APP"] || ENV["APP_BUNDLE_PATH"] || default_app
+
+if File.exist?(app)
+  RunLoop.log_debug("app => #{app}")
+else
+  raise RuntimeError, "Could not find app at path: #{app}"
+end
+
+%>
+
+verbose: CALABASH_FULL_CONSOLE_OUTPUT=1 DEBUG=1
+common: -f <%= formatter %>
+
+ss_path: SCREENSHOT_PATH=<%= ss_path %>
+
+html_report:  -f 'Calabash::Formatters::Html' -o <%= default_report %>
+neptune_html: -f 'Calabash::Formatters::Html' -o <%= devices[:neptune][:report] %>
+venus_html:   -f 'Calabash::Formatters::Html' -o <%= devices[:venus][:report] %>
+earp_html:    -f 'Calabash::Formatters::Html' -o <%= devices[:earp][:report] %>
+mars_html:    -f 'Calabash::Formatters::Html' -o <%= devices[:mars][:report] %>
+saturn_html:  -f 'Calabash::Formatters::Html' -o <%= devices[:saturn][:report] %>
+pegasi_html:  -f 'Calabash::Formatters::Html' -o <%= devices[:pegasi][:report] %>
+
+neptune_ss: SCREENSHOT_PATH=<%= devices[:neptune][:ss_path] %>
+venus_ss:   SCREENSHOT_PATH=<%= devices[:venus][:ss_path] %>
+earp_ss:    SCREENSHOT_PATH=<%= devices[:earp][:ss_path] %>
+mars_ss:    SCREENSHOT_PATH=<%= devices[:mars][:ss_path] %>
+saturn_ss:  SCREENSHOT_PATH=<%= devices[:saturn][:ss_path] %>
+pegasi_ss:  SCREENSHOT_PATH=<%= devices[:pegasi][:ss_path] %>
+
+reset_btw:    RESET_BETWEEN_SCENARIOS=1
+
+app:          APP=<%= app %>
+
+simulator:     -p app -p common -p ss_path -p html_report --tags ~@device_only --tags ~@device NO_STOP=<%= keep_sim_open_after %>
+default:       -p simulator
+
+# required only for devices
+bundle_id:    BUNDLE_ID=sh.calaba.LPTestTarget
+
+device_common:  -p common -p bundle_id --tags ~@simulator --tags ~@simulator_only
+
+neptune_common: DEVICE_TARGET=<%= devices[:neptune][:udid] %> DEVICE_ENDPOINT=<%= devices[:neptune][:ip] %> -p device_common  -p neptune_html -p neptune_ss
+
+# cannot test email views without launching on iOS 6
+neptune:           -p neptune_common
+neptune_no_launch: -p neptune_common -p no_launch --tags ~@email
+
+venus_common:   DEVICE_TARGET=<%= devices[:venus][:udid] %>   DEVICE_ENDPOINT=<%= devices[:venus][:ip] %> -p device_common
+venus:          -p venus_common
+
+earp_common:   DEVICE_TARGET=<%= devices[:earp][:udid] %> DEVICE_ENDPOINT=<%= devices[:earp][:ip] %> -p device_common  -p earp_html -p earp_ss
+earp:          -p earp_common
+
+mars_common:   DEVICE_TARGET=<%= devices[:mars][:udid] %> DEVICE_ENDPOINT=<%= devices[:mars][:ip] %> -p device_common  -p mars_html -p mars_ss
+mars:          -p mars_common
+
+saturn_common:   DEVICE_TARGET=<%= devices[:saturn][:udid] %> DEVICE_ENDPOINT=<%= devices[:saturn][:ip] %> -p device_common  -p saturn_html -p saturn_ss
+saturn:          -p saturn_common
+
+pegasi_common:   DEVICE_TARGET=<%= devices[:pegasi][:udid] %> DEVICE_ENDPOINT=<%= devices[:pegasi][:ip] %> -p device_common  -p pegasi_html -p pegasi_ss
+pegasi:          -p pegasi_common
+
+hatp:   DEVICE_TARGET=<%= devices[:hat][:udid] %> DEVICE_ENDPOINT=<%= devices[:hat][:ip] %> -p device_common
+erik:   DEVICE_TARGET=<%= devices[:erik][:udid] %> DEVICE_ENDPOINT=<%= devices[:erik][:ip] %> -p device_common
+denis: DEVICE_TARGET=<%= devices[:denis][:udid] %> DEVICE_ENDPOINT=<%= devices[:denis][:ip] %> -p device_common
+uranus: DEVICE_TARGET=<%= devices[:uranus][:udid] %> DEVICE_ENDPOINT=<%= devices[:uranus][:ip] %> -p device_common
+

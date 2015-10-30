@@ -28,7 +28,7 @@ To build with an alternative Xcode:
 $ DEVELOPER_DIR=/Xcode/7.1b5/Xcode-beta.app make < rule >
 ```
 
-If you have build errors, see the xcpretty section.
+If you have build errors, see the xcpretty section below.
 
 Maintainers must install the calabash/calabash-resign private repo.
 Details are below.
@@ -78,13 +78,30 @@ $ make xct
 # Building libraries.
 $ make all
 
-# Integration tests.
-$ scripts/test/run
+# Integration tests
+$ make framework
+$ make app-cal
+$ cd cucumber
+$ bundle update
+$ bundle exec cucumber
 ```
 
 If you are running the XCTests from Xcode, you might see failures in
 `LPJSONUtilsTest`.  If you do, clean (Shift + Option + Command + K)
 and rerun.
+
+### Contributing
+
+* The Calabash iOS Toolchain uses git-flow.
+* Contributors should not bump the version.
+* See the [CONTRIBUTING.md](CONTRIBUTING.md) guide.
+* There is a style guide: [STYLE\_GUIDE.md](STYLE\_GUIDE.md).
+* Pull-requests with unit tests will be merged faster.
+* Pull-requests with Cucumber integration tests will be merged even faster.
+
+### Releasing
+
+See the [CONTRIBUTING.md](CONTRIBUTING.md) document for instructions.
 
 ### xcpretty
 
@@ -101,21 +118,6 @@ without xcpretty:
 ```
 $ XCPRETTY=0 make ipa
 ```
-
-### Contributing
-
-* The Calabash iOS Toolchain uses git-flow.
-* Contributors should not bump the version.
-* See the [CONTRIBUTING.md](CONTRIBUTING.md) guide.
-* There is a style guide: [STYLE\_GUIDE.md](STYLE\_GUIDE.md).
-* Pull-requests with unit tests will be merged faster.
-* Pull-requests with integration tests will be merged even faster.
-  - Use the calabash/calabash-ios-smoke-test-app and write some
-    cucumbers.
-
-### Releasing
-
-See the [CONTRIBUTING.md](CONTRIBUTING.md) document for instructions.
 
 ### Licenses
 

@@ -4,60 +4,33 @@ require "luffa"
 require "run_loop"
 require "fileutils"
 require "tmpdir"
+require "bundler"
 
-cucumber_args = "#{ARGV.join(' ')}"
+cucumber_args = "#{ARGV.join(" ")}"
 
-server_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
+server_dir = File.expand_path(File.join(File.dirname(__FILE__), "..", ".."))
 calabash_framework = File.join(server_dir, 'calabash.framework')
 
 # If calabash.framework was built by a previous step, use it.
 unless File.exist?(calabash_framework)
   Dir.chdir server_dir do
-    Luffa.unix_command('make framework')
+    Luffa.unix_command("make framework")
   end
 end
 
-working_dir = Dir.mktmpdir
+app = File.join(server_dir, "Products", "test-target", "app-cal", "LPTestTarget.app")
 
-Dir.chdir working_dir do
-
-  Luffa.unix_command('git clone --depth 1 --branch develop --recursive https://github.com/calabash/calabash-ios')
-  Luffa.unix_command('git clone --depth 1 --recursive https://github.com/calabash/ios-smoke-test-app.git')
-  Luffa.unix_command("git clone --depth 1 --recursive https://github.com/calabash/run_loop")
-
+unless File.exist?(app)
+  Dir.chdir server_dir do
+    Luffa.unix_command("make app-cal")
+  end
 end
 
-calabash_gem_dir = File.join(working_dir, 'calabash-ios')
-run_loop_gem_dir = File.join(working_dir, "run_loop")
-smoke_test_working_dir = File.join(working_dir, "ios-smoke-test-app", "CalSmokeApp")
+working_dir = File.join(server_dir, "cucumber")
 
-Luffa.unix_command("rm -rf #{smoke_test_working_dir}/calabash.framework")
-Luffa.unix_command("ditto #{calabash_framework} #{smoke_test_working_dir}/calabash.framework")
-
-Bundler.with_clean_env do
-  Dir.chdir smoke_test_working_dir do
-
-    Luffa.unix_command('rm -rf Gemfile*')
-    Luffa.unix_command('rm -rf .bundle')
-
-    other_gems = File.join("config", "xtc-other-gems.rb")
-
-    File.open('Gemfile', 'w') do |file|
-      file.write("source 'https://rubygems.org'\n")
-      file.write("gem 'run_loop', :path => \"#{run_loop_gem_dir}\"\n")
-      file.write("gem 'calabash-cucumber', :path => \"#{calabash_gem_dir}\"\n")
-      File.readlines(other_gems).each do |line|
-        file.write(line)
-      end
-    end
-
-    Luffa.unix_command("bundle install",
-                       {:pass_msg => 'bundled',
-                        :fail_msg => 'could not bundle'})
-
-    Luffa.unix_command('make app-cal',
-                       {:pass_msg => 'built app',
-                        :fail_msg => 'could not build app'})
+Dir.chdir working_dir do
+  Bundler.with_clean_env do
+    Luffa.unix_command("bundle update")
 
     xcode = RunLoop::Xcode.new
     xcode_version = xcode.version
@@ -87,7 +60,7 @@ Bundler.with_clean_env do
         sim.name == name && sim.version == sim_version
       end
 
-      env_vars = {'DEVICE_TARGET' => match.udid}
+      env_vars = {"DEVICE_TARGET" => match.udid}
 
       exit_code = Luffa.unix_command(cucumber_cmd, {:exit_on_nonzero_status => false,
                                                     :env_vars => env_vars})

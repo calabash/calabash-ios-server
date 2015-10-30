@@ -29,7 +29,14 @@ function ditto_or_exit {
   fi
 }
 
-banner "Preparing"
+# Command line builds alway make a fresh framework
+banner "Ensure the calabash.framework"
+
+FRAMEWORK="calabash.framework"
+rm -rf "${FRAMEWORK}"
+make framework
+
+banner "Preparing to build LPTestTarget"
 
 if [ "${XCPRETTY}" = "0" ]; then
   USE_XCPRETTY=
@@ -43,13 +50,14 @@ else
   XC_PIPE='cat'
 fi
 
+info "Configured xcodebuild pipes"
+
 XC_TARGET="LPTestTarget"
 XC_PROJECT="calabash.xcodeproj"
 XC_SCHEME="${XC_TARGET}"
-XC_CONFIG="Debug"
-XC_BUILD_DIR="build/test-target-app"
-INSTALL_DIR="Products/test-target-app"
-
+XC_CONFIG="CalabashApp"
+XC_BUILD_DIR="build/test-target/app-cal"
+INSTALL_DIR="Products/test-target/app-cal"
 
 APP="${XC_TARGET}.app"
 DSYM="${APP}.dSYM"

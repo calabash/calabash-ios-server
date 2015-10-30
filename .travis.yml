@@ -8,7 +8,7 @@ script:
   - make framework
   - make frank
   - bundle exec bin/test/xctest.rb
-  - bundle exec bin/test/run-ios-simulator-smoke-tests.rb --tags @travis
+  - bundle exec bin/test/cucumber.rb
 
 notifications:
   email:
