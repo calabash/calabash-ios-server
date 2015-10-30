@@ -2188,6 +2188,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F59CA4941A82EF40007A2F38 /* Build configuration list for PBXNativeTarget "LPTestTarget" */;
 			buildPhases = (
+				F596A20C1BE3950900E4E35B /* Run Script ensure calabash.framework */,
 				F59CA4691A82EF40007A2F38 /* Sources */,
 				F59CA46A1A82EF40007A2F38 /* Frameworks */,
 				F59CA46B1A82EF40007A2F38 /* Resources */,
@@ -2373,6 +2374,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "bin/xcode-build-phase/stage-LPTestTarget-products.sh";
+			showEnvVarsInLog = 0;
+		};
+		F596A20C1BE3950900E4E35B /* Run Script ensure calabash.framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script ensure calabash.framework";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bin/xcode-build-phase/ensure-framework.sh";
 			showEnvVarsInLog = 0;
 		};
 		F5986B141B5802F100CCB142 /* ShellScript */ = {
