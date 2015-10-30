@@ -21,8 +21,6 @@ calabash-dylibs
 *.gcda
 *.gcno
 
-!scripts/test/build
-
 # AppCode
 .idea
 
@@ -34,9 +32,12 @@ run_loop
 .ruby-version
 .bundle
 
+# Cucumber
 .env
 .irb-history
-.irbrc
+.pry-history
+cucumber/reports
+cucumber/screenshots
 
 # The version tool which is staged to bin as part
 # of the build process.
