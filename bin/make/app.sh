@@ -47,8 +47,8 @@ XC_TARGET="LPTestTarget"
 XC_PROJECT="calabash.xcodeproj"
 XC_SCHEME="${XC_TARGET}"
 XC_CONFIG="Debug"
-XC_BUILD_DIR="build/test-target-app"
-INSTALL_DIR="Products/test-target-app"
+XC_BUILD_DIR="build/test-target/app"
+INSTALL_DIR="Products/test-target/app"
 
 
 APP="${XC_TARGET}.app"
