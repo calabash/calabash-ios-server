@@ -2191,6 +2191,7 @@
 				F59CA4691A82EF40007A2F38 /* Sources */,
 				F59CA46A1A82EF40007A2F38 /* Frameworks */,
 				F59CA46B1A82EF40007A2F38 /* Resources */,
+				F596A20B1BE3930B00E4E35B /* Run Script stage binaries to ./Products */,
 			);
 			buildRules = (
 			);
@@ -2357,6 +2358,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "sh calabash/gitversioning-after.sh \"calabash/LPGitVersionDefines.h\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F596A20B1BE3930B00E4E35B /* Run Script stage binaries to ./Products */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script stage binaries to ./Products";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bin/xcode-build-phase/stage-LPTestTarget-products.sh";
 			showEnvVarsInLog = 0;
 		};
 		F5986B141B5802F100CCB142 /* ShellScript */ = {
