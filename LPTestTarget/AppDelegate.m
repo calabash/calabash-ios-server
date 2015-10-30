@@ -11,6 +11,11 @@ static const DDLogLevel ddLogLevel = DDLogLevelDebug;
 
 @implementation AppDelegate
 
+// Calabash backdoors
+-(void) methodThatReturnsVoid {
+  DDLogDebug(@"Method that returns void");
+}
+
 @synthesize managedObjectContext = _managedObjectContext;
 
 - (NSManagedObjectContext *) managedObjectContext {
