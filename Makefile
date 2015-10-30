@@ -29,9 +29,12 @@ xct:
 
 # Makes the LPTestTarget.app without Calabash linked.
 # This target is suitable for testing dylib injection.
-# This target is not suitable for the Xamarin Test Cloud.
 app:
 	bin/make/app.sh
+
+# Makes the LPTestTarget with Calabash linked.
+app-cal:
+	bin/make/app-cal.sh
 
 # For developers only.  This script is not part of the library
 # build process.

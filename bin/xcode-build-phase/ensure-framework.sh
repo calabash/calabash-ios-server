@@ -4,15 +4,10 @@ function info {
   echo "INFO: $1"
 }
 
-function error {
-  echo "ERROR: $1"
-}
-
-function banner {
-  echo ""
-  echo "######## $1 #######"
-  echo ""
-}
+# Command line builds are responsible for ensuring framework
+if [ ! -z $COMMAND_LINE_BUILD ]; then
+  exit 0
+fi
 
 # Ignore all configurations but CalabashApp
 if [ "${CONFIGURATION}" != "CalabashApp" ]; then
