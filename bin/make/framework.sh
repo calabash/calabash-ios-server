@@ -109,6 +109,9 @@ ditto_or_exit "${HEADERS}" "${FAT_PRODUCTS_DIR}/Headers"
 
 banner "Building Framework ARM Library"
 
+ARM_LIBRARY_XC71="${ARM_BUILD_DIR}/Build/Intermediates/ArchiveIntermediates/${XC_TARGET}/IntermediateBuildFilesPath/UninstalledProducts/iphoneos/${LIBRARY_NAME}"
+rm -rf "${ARM_LIBRARY_XC71}"
+
 ARM_LIBRARY_XC7="${ARM_BUILD_DIR}/Build/Intermediates/ArchiveIntermediates/${XC_TARGET}/IntermediateBuildFilesPath/UninstalledProducts/${LIBRARY_NAME}"
 rm -rf "${ARM_LIBRARY_XC7}"
 
@@ -139,7 +142,9 @@ else
   info "Building ARM library for framework succeeded."
 fi
 
-if [ -e "${ARM_LIBRARY_XC7}" ]; then
+if [ -e "${ARM_LIBRARY_XC71}" ]; then
+  ARM_LIBRARY="${ARM_LIBRARY_XC71}"
+elif [ -e "${ARM_LIBRARY_XC7}" ]; then
   ARM_LIBRARY="${ARM_LIBRARY_XC7}"
 else
   ARM_LIBRARY="${ARM_LIBRARY_XC6}"

@@ -25,7 +25,7 @@ static NSString *const selectorName = @"calabash_uispec";
 +(void)load{
   LPCalabashFrankRegistrar *calabashUIQuerySelector = [self new];
   [SelectorEngineRegistry registerSelectorEngine:calabashUIQuerySelector WithName:selectorName];
-  g(@"Registered Calabash selector engine registered with Frank under name '%@'", selectorName);
+  LPLogDebug(@"Registered Calabash selector engine registered with Frank under name '%@'", selectorName);
   [calabashUIQuerySelector release];
   LPLogDebug(@"About to create route...");
   Class c = NSClassFromString(@"RequestRouter");
