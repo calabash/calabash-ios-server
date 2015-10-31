@@ -31,6 +31,7 @@ args =
             "-destination 'platform=iOS Simulator,name=#{target_simulator_name},OS=latest'",
             '-sdk iphonesimulator',
             '-configuration Debug',
+            "GCC_TREAT_WARNINGS_AS_ERRORS=YES",
             use_xcpretty ? '| xcpretty -tc --report junit && exit ${PIPESTATUS[0]}' : ''
       ]
 

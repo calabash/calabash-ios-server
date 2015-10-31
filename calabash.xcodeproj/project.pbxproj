@@ -211,7 +211,7 @@
 		E2F8025C1BE207670000A0E4 /* LPShakeAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025A1BE207670000A0E4 /* LPShakeAppRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		E2F8025D1BE207670000A0E4 /* LPShakeAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025A1BE207670000A0E4 /* LPShakeAppRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		E2F8025E1BE207670000A0E4 /* LPShakeAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025A1BE207670000A0E4 /* LPShakeAppRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		E2F802601BE21C690000A0E4 /* LPShakeAppRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025F1BE21C690000A0E4 /* LPShakeAppRouteTest.m */; };
+		E2F802601BE21C690000A0E4 /* LPShakeAppRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025F1BE21C690000A0E4 /* LPShakeAppRouteTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50292971ACAD4FE00D07D31 /* LPIsWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = F5F2D5E11ACACF2F0027937B /* LPIsWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5091BDD18C4E1D700C85307 /* LPGCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* LPGCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091BDE18C4E1D700C85307 /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
