@@ -60,5 +60,4 @@
   expect(actual).to.equal(expected);
 }
 
-
 @end
