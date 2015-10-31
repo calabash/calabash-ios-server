@@ -6,11 +6,11 @@
 
 @implementation FirstViewController
 
-- (void)didReceiveMemoryWarning {
+- (void) didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
 }
 
-- (void)viewDidLoad {
+- (void) viewDidLoad {
   [super viewDidLoad];
 }
 
@@ -21,8 +21,7 @@
   [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
 }
 
-- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
-{
+- (void) motionBegan:(UIEventSubtype) motion withEvent:(UIEvent *) event {
 
   if (motion == UIEventSubtypeMotionShake) {
     [self showAlertWithMessage:@"shake detected!"];
@@ -33,7 +32,7 @@
 
 #pragma mark - Alert messages
 
-- (void)showAlertWithMessage:(NSString *)message {
+- (void) showAlertWithMessage:(NSString *) message {
   UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
                                                       message:message
                                                      delegate:nil
