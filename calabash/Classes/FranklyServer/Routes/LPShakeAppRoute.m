@@ -39,7 +39,7 @@
 
   CGFloat duration = [self durationWithDictionary:data];
 
-  LPLogDebug(@"Shaking device for %f seconds.", duration);
+  LPLogDebug(@"Shaking device for %@ seconds.", @(duration));
 
   UIEvent *m = [[NSClassFromString(@"UIMotionEvent") alloc] init];
   [m setValue:[NSNumber numberWithInt:UIEventSubtypeMotionShake] forKey:@"_subtype"];
