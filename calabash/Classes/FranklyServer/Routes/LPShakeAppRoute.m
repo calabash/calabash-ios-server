@@ -45,14 +45,16 @@
   [m setValue:[NSNumber numberWithInt:UIEventSubtypeMotionShake] forKey:@"_subtype"];
 
   [[UIApplication sharedApplication] sendEvent:m];
-  [[UIApplication sharedApplication].keyWindow motionBegan:UIEventSubtypeMotionShake withEvent:m];
+  [[UIApplication sharedApplication].keyWindow
+   motionBegan:UIEventSubtypeMotionShake withEvent:m];
 
   dispatch_time_t when = dispatch_time(DISPATCH_TIME_NOW,
                                        (int64_t)(duration * NSEC_PER_SEC));
   dispatch_queue_t queue = dispatch_get_main_queue();
 
   dispatch_after(when, queue, ^{
-    [[UIApplication sharedApplication].keyWindow motionEnded:UIEventSubtypeMotionShake withEvent:m];
+    [[UIApplication sharedApplication].keyWindow
+     motionEnded:UIEventSubtypeMotionShake withEvent:m];
   });
 
   return @{@"outcome" : @"SUCCESS", @"duration": @(duration)};
