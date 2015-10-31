@@ -21,4 +21,26 @@
   [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
 }
 
+- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+
+  if (motion == UIEventSubtypeMotionShake) {
+    [self showAlertWithMessage:@"shake detected!"];
+  }
+  [super motionBegan:motion withEvent:event];
+}
+
+
+#pragma mark - Alert messages
+
+- (void)showAlertWithMessage:(NSString *)message {
+  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+                                                      message:message
+                                                     delegate:nil
+                                            cancelButtonTitle:nil
+                                            otherButtonTitles:@"OK", nil];
+
+  [alertView show];
+}
+
 @end

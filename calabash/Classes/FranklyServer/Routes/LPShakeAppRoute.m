@@ -6,7 +6,7 @@
 #import "LPShakeAppRoute.h"
 #import "LPCocoaLumberjack.h"
 
-@interface UIApplication (LP_SUSPEND_APP_CATEGORY)
+@interface UIApplication (LP_SHAKE_APP_CATEGORY)
 
 - (void) shake;
 
@@ -39,7 +39,7 @@
 
   CGFloat duration = [self durationWithDictionary:data];
 
-  LPLogDebug(@"Shaking device for %d seconds.", duration);
+  LPLogDebug(@"Shaking device for %f seconds.", duration);
 
   UIEvent *m = [[NSClassFromString(@"UIMotionEvent") alloc] init];
   [m setValue:[NSNumber numberWithInt:UIEventSubtypeMotionShake] forKey:@"_subtype"];
