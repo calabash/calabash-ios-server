@@ -16,6 +16,7 @@ libFrankCalabash.a
 calabash-dylibs
 *.app
 *.ipa
+tmp
 
 # Code coverage and profiling.
 *.gcda
