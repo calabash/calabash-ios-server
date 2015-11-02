@@ -18,17 +18,41 @@ module Calabash::Launcher
   end
 end
 
+Before("@no_relaunch") do
+  @no_relaunch = true
+end
+
 Before do |scenario|
   launcher = Calabash::Launcher.launcher
   options = {
     # Add launch options here.
   }
 
-  launcher.relaunch(options)
-  launcher.calabash_notify(self)
+  relaunch = true
+
+  if @no_relaunch
+    begin
+      launcher.ping_app
+      attach_options = options.dup
+      attach_options[:timeout] = 1
+      launcher.attach(attach_options)
+      relaunch = launcher.device == nil
+    rescue => e
+      RunLoop.log_info2("Tag says: don't relaunch, but cannot attach to the app.")
+      RunLoop.log_info2("#{e.class}: #{e.message}")
+      RunLoop.log_info2("The app probably needs to be launched!")
+    end
+  end
+
+  if relaunch
+    launcher.relaunch(options)
+    launcher.calabash_notify(self)
+  end
 end
 
 After do |scenario|
+  @no_relaunch = false
+
   # Calabash can shutdown the app cleanly by calling the app life cycle methods
   # in the UIApplicationDelegate.  This is really nice for CI environments, but
   # not so good for local development.
