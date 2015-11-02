@@ -155,7 +155,7 @@ if [ ! -e "${XTC_DOTENV}" ]; then
   exit 0
 fi
 
-XTC_DIR="tmp/xtc-submit"
+XTC_DIR="${HOME}/.calabash/xtc/calabash-ios-server/submit"
 rm -rf "${XTC_DIR}"
 mkdir -p "${XTC_DIR}"
 

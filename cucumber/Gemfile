@@ -9,6 +9,7 @@ gem "rspec", "~> 3.0"
 gem "pry"
 gem "pry-nav"
 
-# For `briar xtc submit < device set > [profile]
+# Submit develop versions of calabash-cucumber and run-loop to XTCj
 gem "briar", ">= 1.4.2", "< 2.0"
+gem "luffa"
 
