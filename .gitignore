@@ -36,6 +36,7 @@ run_loop
 .env
 .irb-history
 .pry-history
+cucumber/Gemfile.lock
 cucumber/reports
 cucumber/screenshots
 
