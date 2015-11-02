@@ -36,6 +36,10 @@ app:
 app-cal:
 	bin/make/app-cal.sh
 
+# Make the LPTestTarget with Calabash linked
+ipa-cal:
+	bin/make/ipa-cal.sh
+
 # For developers only.  This script is not part of the library
 # build process.
 version:
