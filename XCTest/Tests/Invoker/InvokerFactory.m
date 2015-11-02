@@ -306,7 +306,7 @@
 }
 
 - (BOOL) selectorNSUInteger:(NSUInteger) arg {
-  return arg = NSNotFound;
+  return arg == NSNotFound;
 }
 
 - (BOOL) selectorShort:(short) arg {
@@ -314,7 +314,7 @@
 }
 
 - (BOOL) selectorUnsignedShort:(unsigned short) arg {
-  return arg = USHRT_MAX;
+  return arg == USHRT_MAX;
 }
 
 - (BOOL) selectorCGFloat:(CGFloat) arg {
@@ -362,7 +362,7 @@
 }
 
 - (BOOL) selectorUnsignedLongLong:(unsigned long long) arg {
-  return arg = ULONG_LONG_MAX;
+  return arg == ULONG_LONG_MAX;
 }
 
 - (BOOL) selectorCGPoint:(CGPoint) arg {
