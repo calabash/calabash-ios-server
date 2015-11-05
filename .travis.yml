@@ -2,6 +2,7 @@ language: objective-c
 
 before_script:
   - bin/ci/travis/instruments-auth.sh
+  - bin/ci/travis/install-keychain.sh
 
 script:
   - bundle install
@@ -9,6 +10,8 @@ script:
   - make frank
   - bundle exec bin/test/xctest.rb
   - bundle exec bin/test/cucumber.rb
+  - bin/ci/travis/make-ipa.sh
+  - bundle exec bin/test/test-cloud.rb
 
 notifications:
   email:
