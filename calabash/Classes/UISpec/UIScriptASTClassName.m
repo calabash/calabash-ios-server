@@ -7,12 +7,22 @@
 #import "UIScriptASTClassName.h"
 #import "LPTouchUtils.h"
 
+@interface UIScriptASTClassName ()
+@property (nonatomic) SubclassMatchMode matchMode;
+@end
 
 @implementation UIScriptASTClassName
 @synthesize className = _className;
 
++ (SubclassMatchMode)matchModeFromString:(NSString *)matchMode {
+  if ([matchMode isEqualToString:@"ignore_subclasses"]) {
+    return kSubclassMatchModeIgnoreSubclasses;
+  }
+  /* Default mode matches subclasses, for backwards compat */
+  return kSubclassMatchModeMatchSubclasses;
+}
 
-- (id) initWithClassName:(NSString *) className {
+- (id) initWithClassName:(NSString *) className subclassMatchMode:(NSString *)matchModeString {
   self = [super init];
   if (self) {
     if ([@"*" isEqualToString:className]) {
@@ -20,6 +30,7 @@
     }
     self.className = [[className copy] autorelease];
     _class = NSClassFromString(self.className);
+    _matchMode = [UIScriptASTClassName matchModeFromString:matchModeString];
   }
   return self;
 }
@@ -75,6 +86,17 @@ static NSInteger sortFunction(UIView *v1, UIView *v2, void *ctx) {
   }
 }
 
+- (BOOL)classMembershipTest:(UIView *)view {
+  switch (self.matchMode) {
+    case kSubclassMatchModeIgnoreSubclasses:
+      return [view isMemberOfClass:_class];
+      
+    case kSubclassMatchModeMatchSubclasses:
+    default:
+      return [view isKindOfClass:_class];
+  }
+}
+
 
 - (void) addView:(UIView *) view toArray:(NSMutableArray *) res ifMatchesVisibility:(UIScriptASTVisibilityType) visibility {
   if (visibility == UIScriptASTVisibilityTypeAll || [LPTouchUtils isViewVisible:view]) {
@@ -90,7 +112,7 @@ static NSInteger sortFunction(UIView *v1, UIView *v2, void *ctx) {
 
 
 - (void) evalDescWith:(UIView *) view result:(NSMutableArray *) res visibility:(UIScriptASTVisibilityType) visibility {
-  if ([view isKindOfClass:_class]) {
+  if ([self classMembershipTest:view]) {
     [self addView:view toArray:res ifMatchesVisibility:visibility];
   }
 
@@ -103,12 +125,11 @@ static NSInteger sortFunction(UIView *v1, UIView *v2, void *ctx) {
 
 - (void) evalChildWith:(UIView *) view result:(NSMutableArray *) res visibility:(UIScriptASTVisibilityType) visibility {
   for (UIView *childView in [view subviews]) {
-    if ([childView isKindOfClass:_class]) {
+    if ([self classMembershipTest:childView]) {
       [self addView:childView toArray:res ifMatchesVisibility:visibility];
     }
   }
 }
-
 
 - (void) evalParentsWith:(UIView *) view result:(NSMutableArray *) res visibility:(UIScriptASTVisibilityType) visibility {
 //    if ([view isKindOfClass:_class]) {
@@ -116,7 +137,7 @@ static NSInteger sortFunction(UIView *v1, UIView *v2, void *ctx) {
 //    }
   //I guess view itself isnt part of parents.
   UIView *parentView = [view superview];
-  if ([parentView isKindOfClass:_class]) {
+  if ([self classMembershipTest:parentView]) {
     [self addView:parentView toArray:res ifMatchesVisibility:visibility];
   }
 
@@ -130,7 +151,7 @@ static NSInteger sortFunction(UIView *v1, UIView *v2, void *ctx) {
   UIView *parentView = [view superview];
   NSArray *children = [parentView subviews];
   for (UIView *siblingOrSelf in children) {
-    if (siblingOrSelf != view && [siblingOrSelf isKindOfClass:_class]) {
+    if (siblingOrSelf != view && [self classMembershipTest:siblingOrSelf]) {
       [self addView:siblingOrSelf toArray:res ifMatchesVisibility:visibility];
     }
   }
@@ -170,7 +191,7 @@ static NSInteger sortFunction(UIView *v1, UIView *v2, void *ctx) {
 }
 
 -(BOOL)accessibilityMatch:(id)view {
-  if ([view isKindOfClass:_class]) {
+  if ([self classMembershipTest:view]) {
     return true;
   }
   if (![view isAccessibilityElement]) {

@@ -15,6 +15,8 @@
 @property(nonatomic, retain) NSArray *arrayQuery;
 
 + (UIScriptParser *) scriptParserWithObject:(id) obj;
++ (UIScriptParser *) scriptParserWithObject:(id) obj options:(NSDictionary *)parsingOptions;
+
 + (UIView *) findViewByClass:(NSString *) className fromView:(UIView *) parent;
 - (id) initWithUIScript:(NSString *) script;
 - (id) initWithQuery:(NSArray *) aq;
