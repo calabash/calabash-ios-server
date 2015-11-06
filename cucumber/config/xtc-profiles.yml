@@ -1,0 +1,18 @@
+# Careful using the @not_xtc tag; don't skip tests!
+not_xtc:     --tags ~@not_xtc
+not_sim:     --tags ~@simulator --tags ~@simulator_only
+no_launch:   --tags ~@no_launch
+iphone_only: --tags ~@ipad --tags ~@ipad_only
+ipad_only:   --tags ~@iphone --tags ~@iphone_only
+
+args:         --expand --backtrace --no-multiline
+tags:        -p not_xtc -p not_sim -p no_launch
+
+default:     -p tags -p args
+
+wip:         -p tags -p args --tags @wip
+flicker:     -p tags -p args --tags @flickering
+iphone:      -p tags -p args -p iphone_only
+ipad:        -p tags -p args -p ipad_only
+crash:       -p tags -p args --tags @expect_crash
+

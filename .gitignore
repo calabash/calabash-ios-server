@@ -16,6 +16,7 @@ libFrankCalabash.a
 calabash-dylibs
 *.app
 *.ipa
+tmp
 
 # Code coverage and profiling.
 *.gcda
@@ -36,6 +37,7 @@ run_loop
 .env
 .irb-history
 .pry-history
+cucumber/Gemfile.lock
 cucumber/reports
 cucumber/screenshots
 

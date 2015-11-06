@@ -3,9 +3,13 @@ source "https://rubygems.org"
 gem "calabash-cucumber", :github => "calabash/calabash-ios", :branch => "develop"
 gem "run_loop", :github => "calabash/run_loop", :branch => "develop"
 
-# For easy expections; no screenshots
+# Easy expections; no screenshots
 gem "rspec", "~> 3.0"
 
 gem "pry"
 gem "pry-nav"
+
+# Submit develop versions of calabash-cucumber and run-loop to XTCj
+gem "briar", ">= 1.4.2", "< 2.0"
+gem "luffa"
 

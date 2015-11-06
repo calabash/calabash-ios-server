@@ -2,13 +2,17 @@ language: objective-c
 
 before_script:
   - bin/ci/travis/instruments-auth.sh
+  - bin/ci/travis/install-keychain.sh
 
 script:
   - bundle install
   - make framework
   - make frank
+  - bin/ci/travis/make-dylibs.sh
   - bundle exec bin/test/xctest.rb
   - bundle exec bin/test/cucumber.rb
+  - bin/ci/travis/make-ipa.sh
+  - bundle exec bin/test/test-cloud.rb
 
 notifications:
   email:
