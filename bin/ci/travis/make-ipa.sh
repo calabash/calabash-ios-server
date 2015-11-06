@@ -12,7 +12,7 @@ fi
 
 bin/ci/travis/install-keychain.sh
 
-CODE_SIGN_DIR="${HOME}/.calabash/calabash-codesign/ios"
+CODE_SIGN_DIR="${HOME}/.calabash/calabash-codesign"
 KEYCHAIN="${CODE_SIGN_DIR}/ios/Calabash.keychain"
 
 # cucumber/.env must exist or "make ipa-cal" will not stage for submit
