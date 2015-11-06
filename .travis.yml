@@ -8,6 +8,7 @@ script:
   - bundle install
   - make framework
   - make frank
+  - bin/ci/travis/make-dylibs.sh
   - bundle exec bin/test/xctest.rb
   - bundle exec bin/test/cucumber.rb
   - bin/ci/travis/make-ipa.sh
