@@ -94,8 +94,12 @@ typedef struct {
 - (BOOL) backdoorWithNSUInteger:(NSUInteger) arg { return arg == 17; }
 - (BOOL) backdoorWithShort:(short) arg { return arg == -1; }
 - (BOOL) backdoorWithUShort:(unsigned short) arg { return arg == 1; }
-- (BOOL) backdoorWithCGFloat:(CGFloat) arg { return arg == 54.46; }
-- (BOOL) backdoorWithDouble:(double) arg { return arg == 54.46; }
+- (BOOL) backdoorWithCGFloat:(CGFloat) arg {
+  return arg < 54.47 && arg > 54.45;
+}
+- (BOOL) backdoorWithDouble:(double) arg {
+  return arg < 54.47 && arg > 54.45;
+}
 - (BOOL) backdoorWithFloat:(float) arg {
   return arg < 0.3141 && arg > 0.3140;
 }
