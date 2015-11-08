@@ -4,6 +4,9 @@
 # vim
 *.swp
 
+# MacOS
+.DS_Store
+
 calabash.xcodeproj/project.xcworkspace/xcuserdata
 calabash.xcodeproj/xcuserdata/
 *.xccheckout
