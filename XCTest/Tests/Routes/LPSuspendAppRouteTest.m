@@ -29,13 +29,13 @@
   self.route = nil;
 }
 
-- (void) testSupportsMethodGET {
-  BOOL actual = [self.route supportsMethod:@"GET" atPath:nil];
+- (void) testSupportsMethodPOST {
+  BOOL actual = [self.route supportsMethod:@"POST" atPath:nil];
   expect(actual).to.equal(YES);
 }
 
 - (void) testSupportsNoOtherMethod {
-  BOOL actual = [self.route supportsMethod:@"POST" atPath:nil];
+  BOOL actual = [self.route supportsMethod:@"GET" atPath:nil];
   expect(actual).to.equal(NO);
 
   actual = [self.route supportsMethod:@"FOO" atPath:nil];
@@ -52,7 +52,7 @@
 }
 
 - (void) testDurationWithDictionaryDurationKey {
-  NSDictionary *dictionary = @{@"duration" : @(5.0)};
+  NSDictionary *dictionary = @{ @"duration" : @(5.0) };
 
   CGFloat expected = 5.0;
   CGFloat actual = [self.route durationWithDictionary:dictionary];

@@ -23,7 +23,7 @@
 @implementation LPSuspendAppRoute
 
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
-  return [method isEqualToString:@"GET"];
+  return [method isEqualToString:@"POST"];
 }
 
 - (CGFloat) durationWithDictionary:(NSDictionary *) arguments {
