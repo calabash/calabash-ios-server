@@ -8,6 +8,7 @@
 @interface LPSuspendAppRoute (LPXCTEST)
 
 - (CGFloat) durationWithDictionary:(NSDictionary *) arguments;
+- (NSString *) stringForApplicationState:(UIApplicationState) state;
 
 @end
 
@@ -29,16 +30,18 @@
   self.route = nil;
 }
 
+- (void) testSupportsMethodPOST {
+  BOOL actual = [self.route supportsMethod:@"POST" atPath:nil];
+  expect(actual).to.equal(YES);
+}
+
 - (void) testSupportsMethodGET {
   BOOL actual = [self.route supportsMethod:@"GET" atPath:nil];
   expect(actual).to.equal(YES);
 }
 
 - (void) testSupportsNoOtherMethod {
-  BOOL actual = [self.route supportsMethod:@"POST" atPath:nil];
-  expect(actual).to.equal(NO);
-
-  actual = [self.route supportsMethod:@"FOO" atPath:nil];
+  BOOL actual = [self.route supportsMethod:@"FOO" atPath:nil];
   expect(actual).to.equal(NO);
 }
 
@@ -52,12 +55,28 @@
 }
 
 - (void) testDurationWithDictionaryDurationKey {
-  NSDictionary *dictionary = @{@"duration" : @(5.0)};
+  NSDictionary *dictionary = @{ @"duration" : @(5.0) };
 
   CGFloat expected = 5.0;
   CGFloat actual = [self.route durationWithDictionary:dictionary];
 
   expect(actual).to.equal(expected);
+}
+
+- (void) stringForApplicationState {
+  NSString *actual;
+
+  actual = [self.route stringForApplicationState:UIApplicationStateActive];
+  expect(actual).to.equal(@"active");
+
+  actual = [self.route stringForApplicationState:UIApplicationStateInactive];
+  expect(actual).to.equal(@"inactive");
+
+  actual = [self.route stringForApplicationState:UIApplicationStateBackground];
+  expect(actual).to.equal(@"background");
+
+  actual = [self.route stringForApplicationState:(UIApplicationState)NSNotFound];
+  expect(actual).to.equal(@"unknown");
 }
 
 @end
