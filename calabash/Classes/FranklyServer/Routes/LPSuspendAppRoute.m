@@ -37,10 +37,9 @@
 
 - (NSDictionary *) JSONResponseForMethod:(NSString *) method
                                      URI:(NSString *) path
-                                     data:(NSDictionary *) data {
+                                    data:(NSDictionary *) data {
 
   CGFloat duration = [self durationWithDictionary:data];
-
 
   UIBackgroundTaskIdentifier __block task;
 
@@ -91,7 +90,11 @@
              @(duration));
   [[UIApplication sharedApplication] suspend];
 
-  return @{@"duration" : @(duration)};
+  return
+  @{
+    @"outcome" : @"SUCCESS",
+    @"results" : @{ @"duration" : @(duration)}
+    };
 }
 
 @end
