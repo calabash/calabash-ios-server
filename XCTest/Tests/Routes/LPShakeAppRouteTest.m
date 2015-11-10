@@ -31,14 +31,16 @@
 
 - (void) testSupportsMethodGET {
   BOOL actual = [self.route supportsMethod:@"GET" atPath:nil];
+  expect(actual).to.equal(NO);
+}
+
+- (void) testSupportsMethodPOST {
+  BOOL actual = [self.route supportsMethod:@"POST" atPath:nil];
   expect(actual).to.equal(YES);
 }
 
 - (void) testSupportsNoOtherMethod {
-  BOOL actual = [self.route supportsMethod:@"POST" atPath:nil];
-  expect(actual).to.equal(NO);
-
-  actual = [self.route supportsMethod:@"FOO" atPath:nil];
+  BOOL actual = [self.route supportsMethod:@"FOO" atPath:nil];
   expect(actual).to.equal(NO);
 }
 

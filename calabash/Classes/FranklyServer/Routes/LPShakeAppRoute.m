@@ -21,7 +21,7 @@
 @implementation LPShakeAppRoute
 
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
-  return [method isEqualToString:@"GET"];
+  return [method isEqualToString:@"POST"];
 }
 
 - (CGFloat) durationWithDictionary:(NSDictionary *) arguments {
@@ -35,7 +35,7 @@
 
 - (NSDictionary *) JSONResponseForMethod:(NSString *) method
                                      URI:(NSString *) path
-                                     data:(NSDictionary *) data {
+                                    data:(NSDictionary *) data {
 
   CGFloat duration = [self durationWithDictionary:data];
 
@@ -57,7 +57,11 @@
      motionEnded:UIEventSubtypeMotionShake withEvent:m];
   });
 
-  return @{@"outcome" : @"SUCCESS", @"duration": @(duration)};
+  return
+  @{
+    @"outcome" : @"SUCCESS",
+    @"results" : @{ @"duration": @(duration)}
+    };
 }
 
 @end
