@@ -8,6 +8,7 @@
 @interface LPSuspendAppRoute (LPXCTEST)
 
 - (CGFloat) durationWithDictionary:(NSDictionary *) arguments;
+- (NSString *) stringForApplicationState:(UIApplicationState) state;
 
 @end
 
@@ -34,11 +35,13 @@
   expect(actual).to.equal(YES);
 }
 
-- (void) testSupportsNoOtherMethod {
+- (void) testSupportsMethodGET {
   BOOL actual = [self.route supportsMethod:@"GET" atPath:nil];
-  expect(actual).to.equal(NO);
+  expect(actual).to.equal(YES);
+}
 
-  actual = [self.route supportsMethod:@"FOO" atPath:nil];
+- (void) testSupportsNoOtherMethod {
+  BOOL actual = [self.route supportsMethod:@"FOO" atPath:nil];
   expect(actual).to.equal(NO);
 }
 
@@ -58,6 +61,22 @@
   CGFloat actual = [self.route durationWithDictionary:dictionary];
 
   expect(actual).to.equal(expected);
+}
+
+- (void) stringForApplicationState {
+  NSString *actual;
+
+  actual = [self.route stringForApplicationState:UIApplicationStateActive];
+  expect(actual).to.equal(@"active");
+
+  actual = [self.route stringForApplicationState:UIApplicationStateInactive];
+  expect(actual).to.equal(@"inactive");
+
+  actual = [self.route stringForApplicationState:UIApplicationStateBackground];
+  expect(actual).to.equal(@"background");
+
+  actual = [self.route stringForApplicationState:(UIApplicationState)NSNotFound];
+  expect(actual).to.equal(@"unknown");
 }
 
 @end
