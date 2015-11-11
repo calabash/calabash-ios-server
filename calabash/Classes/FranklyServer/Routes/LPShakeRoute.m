@@ -3,7 +3,7 @@
 #endif
 
 #import <UIKit/UIKit.h>
-#import "LPShakeAppRoute.h"
+#import "LPShakeRoute.h"
 #import "LPCocoaLumberjack.h"
 
 @interface UIApplication (LP_SHAKE_APP_CATEGORY)
@@ -12,13 +12,13 @@
 
 @end
 
-@interface LPShakeAppRoute ()
+@interface LPShakeRoute ()
 
 - (CGFloat) durationWithDictionary:(NSDictionary *) arguments;
 
 @end
 
-@implementation LPShakeAppRoute
+@implementation LPShakeRoute
 
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
   return [method isEqualToString:@"POST"];

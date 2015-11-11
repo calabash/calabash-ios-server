@@ -3,25 +3,25 @@
 #endif
 
 #import <XCTest/XCTest.h>
-#import "LPShakeAppRoute.h"
+#import "LPShakeRoute.h"
 
-@interface LPShakeAppRoute (LPXCTEST)
+@interface LPShakeRoute (LPXCTEST)
 
 - (CGFloat) durationWithDictionary:(NSDictionary *) arguments;
 
 @end
 
-@interface LPShakeAppRouteTest : XCTestCase
+@interface LPShakeRouteTest : XCTestCase
 
-@property (nonatomic, strong) LPShakeAppRoute *route;
+@property (nonatomic, strong) LPShakeRoute *route;
 
 @end
 
-@implementation LPShakeAppRouteTest
+@implementation LPShakeRouteTest
 
 - (void)setUp {
   [super setUp];
-  self.route = [LPShakeAppRoute new];
+  self.route = [LPShakeRoute new];
 }
 
 - (void)tearDown {

@@ -207,11 +207,11 @@
 		B1FBBC5B19D0070000EE03CE /* LPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FBBC5919D0070000EE03CE /* LPDevice.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1FBBC5E19D0070000EE03CE /* LPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FBBC5919D0070000EE03CE /* LPDevice.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1FBBC5F19D0070000EE03CE /* LPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FBBC5919D0070000EE03CE /* LPDevice.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		E2F8025B1BE207670000A0E4 /* LPShakeAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025A1BE207670000A0E4 /* LPShakeAppRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		E2F8025C1BE207670000A0E4 /* LPShakeAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025A1BE207670000A0E4 /* LPShakeAppRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		E2F8025D1BE207670000A0E4 /* LPShakeAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025A1BE207670000A0E4 /* LPShakeAppRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		E2F8025E1BE207670000A0E4 /* LPShakeAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025A1BE207670000A0E4 /* LPShakeAppRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		E2F802601BE21C690000A0E4 /* LPShakeAppRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025F1BE21C690000A0E4 /* LPShakeAppRouteTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		E2F8025B1BE207670000A0E4 /* LPShakeRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025A1BE207670000A0E4 /* LPShakeRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		E2F8025C1BE207670000A0E4 /* LPShakeRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025A1BE207670000A0E4 /* LPShakeRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		E2F8025D1BE207670000A0E4 /* LPShakeRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025A1BE207670000A0E4 /* LPShakeRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		E2F8025E1BE207670000A0E4 /* LPShakeRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025A1BE207670000A0E4 /* LPShakeRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		E2F802601BE21C690000A0E4 /* LPShakeRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025F1BE21C690000A0E4 /* LPShakeRouteTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50292971ACAD4FE00D07D31 /* LPIsWebView.h in Headers */ = {isa = PBXBuildFile; fileRef = F5F2D5E11ACACF2F0027937B /* LPIsWebView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5091BDD18C4E1D700C85307 /* LPGCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* LPGCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091BDE18C4E1D700C85307 /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -808,9 +808,9 @@
 		B1F7721B1A22A398009A2336 /* LPUIASharedElementChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUIASharedElementChannel.m; sourceTree = "<group>"; };
 		B1FBBC5919D0070000EE03CE /* LPDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPDevice.m; sourceTree = "<group>"; };
 		B1FBBC5A19D0070000EE03CE /* LPDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPDevice.h; sourceTree = "<group>"; };
-		E2F802591BE207570000A0E4 /* LPShakeAppRoute.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LPShakeAppRoute.h; sourceTree = "<group>"; };
-		E2F8025A1BE207670000A0E4 /* LPShakeAppRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPShakeAppRoute.m; sourceTree = "<group>"; };
-		E2F8025F1BE21C690000A0E4 /* LPShakeAppRouteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPShakeAppRouteTest.m; sourceTree = "<group>"; };
+		E2F802591BE207570000A0E4 /* LPShakeRoute.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LPShakeRoute.h; sourceTree = "<group>"; };
+		E2F8025A1BE207670000A0E4 /* LPShakeRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPShakeRoute.m; sourceTree = "<group>"; };
+		E2F8025F1BE21C690000A0E4 /* LPShakeRouteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPShakeRouteTest.m; sourceTree = "<group>"; };
 		F500459D17D249D000B72386 /* LPGitVersionDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPGitVersionDefines.h; sourceTree = "<group>"; };
 		F5091C4618C4E1D700C85307 /* libcalabash.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcalabash.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5097CF51B6A377E00326D6A /* LPKeyboardLanguageRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPKeyboardLanguageRoute.h; sourceTree = "<group>"; };
@@ -1381,8 +1381,8 @@
 		B184FDD014B6DB2B002A744C /* Routes */ = {
 			isa = PBXGroup;
 			children = (
-				E2F802591BE207570000A0E4 /* LPShakeAppRoute.h */,
-				E2F8025A1BE207670000A0E4 /* LPShakeAppRoute.m */,
+				E2F802591BE207570000A0E4 /* LPShakeRoute.h */,
+				E2F8025A1BE207670000A0E4 /* LPShakeRoute.m */,
 				F57605871BCE77F000E89C97 /* LPSuspendAppRoute.h */,
 				F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */,
 				B13B7FBD1A31FE560054FFB1 /* LPDumpRoute.h */,
@@ -2012,7 +2012,7 @@
 				F54EFE8C1B5B88D500F8D665 /* LPRouterTest.m */,
 				F565B48A1B6A33600039ACFF /* LPKeyboardLanguageRouteTest.m */,
 				F57605181BCE767000E89C97 /* LPSuspendAppRouteTest.m */,
-				E2F8025F1BE21C690000A0E4 /* LPShakeAppRouteTest.m */,
+				E2F8025F1BE21C690000A0E4 /* LPShakeRouteTest.m */,
 				F5A6B9711BD14EE2009FD08B /* LPReflectionRouteTest.m */,
 				F58CE49D1BD6757A0025BE67 /* LPBackdoorRouteTest.m */,
 			);
@@ -2469,7 +2469,7 @@
 				F52A26561BD02D0400AD0E36 /* LPCDataScanner.m in Sources */,
 				B15BF9A319ABB1DD00B38577 /* LPDDRange.m in Sources */,
 				F5A8B4AC1B39BFEB00F390CA /* LPTTYLogger.m in Sources */,
-				E2F8025E1BE207670000A0E4 /* LPShakeAppRoute.m in Sources */,
+				E2F8025E1BE207670000A0E4 /* LPShakeRoute.m in Sources */,
 				B15BF9A419ABB1DD00B38577 /* LPHTTPAsyncFileResponse.m in Sources */,
 				B15BF9A519ABB1DD00B38577 /* LPHTTPDataResponse.m in Sources */,
 				B15BF9A619ABB1DD00B38577 /* LPHTTPDynamicFileResponse.m in Sources */,
@@ -2628,7 +2628,7 @@
 				B1D5BD9D19A23BCE0070E8CE /* LPScreenshotRoute.m in Sources */,
 				F5C04E321B33110B00F23526 /* LPDecimalRounder.m in Sources */,
 				F56592681B47E76C00C044C8 /* LPWebSocket.m in Sources */,
-				E2F8025D1BE207670000A0E4 /* LPShakeAppRoute.m in Sources */,
+				E2F8025D1BE207670000A0E4 /* LPShakeRoute.m in Sources */,
 				F5F2D5EC1ACACF2F0027937B /* LPIsWebView.m in Sources */,
 				F5BA6F0C1B4E4B8200DB898F /* LPInvoker.m in Sources */,
 				B1D5BD9E19A23BCE0070E8CE /* LPAsyncPlaybackRoute.m in Sources */,
@@ -2710,7 +2710,7 @@
 				F52A26541BD02D0400AD0E36 /* LPCDataScanner.m in Sources */,
 				F5091BE718C4E1D700C85307 /* LPHTTPDynamicFileResponse.m in Sources */,
 				F5A8B4AA1B39BFEB00F390CA /* LPTTYLogger.m in Sources */,
-				E2F8025C1BE207670000A0E4 /* LPShakeAppRoute.m in Sources */,
+				E2F8025C1BE207670000A0E4 /* LPShakeRoute.m in Sources */,
 				F5E2D1E418C9120E00A0D9B6 /* LPSSKeychainQuery.m in Sources */,
 				F5091BE818C4E1D700C85307 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
 				F5091BE918C4E1D700C85307 /* LPHTTPFileResponse.m in Sources */,
@@ -2947,7 +2947,7 @@
 				F5419F0D1AF3D37000EAAA66 /* LPJSONUtils_AccessibilityElementTest.m in Sources */,
 				F50CBF7A1A040511004AC9DA /* LPTouchUtils.m in Sources */,
 				F50CBFAC1A0405B2004AC9DA /* LPMapRoute.m in Sources */,
-				E2F802601BE21C690000A0E4 /* LPShakeAppRouteTest.m in Sources */,
+				E2F802601BE21C690000A0E4 /* LPShakeRouteTest.m in Sources */,
 				F50CBFC01A0405CE004AC9DA /* UIScriptASTFirst.m in Sources */,
 				F50CBFBD1A0405CE004AC9DA /* UIScriptASTALL.m in Sources */,
 				F50CBF811A040564004AC9DA /* LPGCDAsyncSocket.m in Sources */,
@@ -2957,7 +2957,7 @@
 				B15369FD1A327A400093923F /* LPUIATapRouteOverSharedElement.m in Sources */,
 				F5C224E01AD473F0001DB4FA /* LPDeviceTest.m in Sources */,
 				F54EFE8D1B5B88D500F8D665 /* LPRouterTest.m in Sources */,
-				E2F8025B1BE207670000A0E4 /* LPShakeAppRoute.m in Sources */,
+				E2F8025B1BE207670000A0E4 /* LPShakeRoute.m in Sources */,
 				F50CBF7D1A040564004AC9DA /* LPSSKeychainQuery.m in Sources */,
 				F50CBF9C1A04058C004AC9DA /* LPRecorder.m in Sources */,
 				F50CBF7C1A040564004AC9DA /* LPSSKeychain.m in Sources */,
