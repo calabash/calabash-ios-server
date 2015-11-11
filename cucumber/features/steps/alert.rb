@@ -136,9 +136,9 @@ end
 
 World(LPTestTarget::Alert)
 
-Then(/^I see the "([^"]*)" alert$/) do |message|
+Then(/^I see the shake detected alert$/) do
   wait_for_alert
-  expect(alert_message).to be == message
+  expect(alert_title).to be == "Shaking"
 end
 
 Then(/^I dismiss the alert by tapping the OK button$/) do
