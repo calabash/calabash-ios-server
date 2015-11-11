@@ -3,7 +3,7 @@
 #endif
 
 #import <UIKit/UIKit.h>
-#import "LPShakeAppRoute.h"
+#import "LPShakeRoute.h"
 #import "LPCocoaLumberjack.h"
 
 @interface UIApplication (LP_SHAKE_APP_CATEGORY)
@@ -12,16 +12,16 @@
 
 @end
 
-@interface LPShakeAppRoute ()
+@interface LPShakeRoute ()
 
 - (CGFloat) durationWithDictionary:(NSDictionary *) arguments;
 
 @end
 
-@implementation LPShakeAppRoute
+@implementation LPShakeRoute
 
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
-  return [method isEqualToString:@"GET"];
+  return [method isEqualToString:@"POST"];
 }
 
 - (CGFloat) durationWithDictionary:(NSDictionary *) arguments {
@@ -35,7 +35,7 @@
 
 - (NSDictionary *) JSONResponseForMethod:(NSString *) method
                                      URI:(NSString *) path
-                                     data:(NSDictionary *) data {
+                                    data:(NSDictionary *) data {
 
   CGFloat duration = [self durationWithDictionary:data];
 
@@ -57,7 +57,11 @@
      motionEnded:UIEventSubtypeMotionShake withEvent:m];
   });
 
-  return @{@"outcome" : @"SUCCESS", @"duration": @(duration)};
+  return
+  @{
+    @"outcome" : @"SUCCESS",
+    @"results" : @{ @"duration": @(duration)}
+    };
 }
 
 @end

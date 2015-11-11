@@ -2,6 +2,8 @@
 
 @interface FirstViewController ()
 
+- (void) showShakeAlert;
+
 @end
 
 @implementation FirstViewController
@@ -24,7 +26,7 @@
 - (void) motionBegan:(UIEventSubtype) motion withEvent:(UIEvent *) event {
 
   if (motion == UIEventSubtypeMotionShake) {
-    [self showAlertWithMessage:@"shake detected!"];
+    [self showShakeAlert];
   }
   [super motionBegan:motion withEvent:event];
 }
@@ -32,12 +34,18 @@
 
 #pragma mark - Alert messages
 
-- (void) showAlertWithMessage:(NSString *) message {
-  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@""
+- (void) showShakeAlert {
+  NSString *title = NSLocalizedString(@"Shaking",
+                                      "Title of alert when the app detects a shake.");
+  NSString *ok = NSLocalizedString(@"OK",
+                                   @"Title of button that dismisses an alert.");
+  NSString *message = NSLocalizedString(@"shake detected!",
+                                        @"Message of the alert when the app dectects a shake.");
+  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
                                                       message:message
                                                      delegate:nil
                                             cancelButtonTitle:nil
-                                            otherButtonTitles:@"OK", nil];
+                                            otherButtonTitles:ok, nil];
 
   [alertView show];
 }

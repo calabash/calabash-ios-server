@@ -40,7 +40,7 @@
 #import "LPASLLogFormatter.h"
 #import "LPProcessInfoRoute.h"
 #import "LPDevice.h"
-#import "LPShakeAppRoute.h"
+#import "LPShakeRoute.h"
 #import "LPSuspendAppRoute.h"
 #import "LPReflectionRoute.h"
 
@@ -190,7 +190,7 @@
     [LPRouter addRoute:processInfoRoute forPath:@"process-info"];
     [processInfoRoute release];
 
-    LPShakeAppRoute *shakeAppRoute = [LPShakeAppRoute new];
+    LPShakeRoute *shakeAppRoute = [LPShakeRoute new];
     [LPRouter addRoute:shakeAppRoute forPath:@"shake"];
     [shakeAppRoute release];
 

@@ -1,6 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "LPRoute.h"
 
-@interface LPShakeAppRoute : NSObject <LPRoute>
+@interface LPShakeRoute : NSObject <LPRoute>
 
 @end

@@ -3,25 +3,25 @@
 #endif
 
 #import <XCTest/XCTest.h>
-#import "LPShakeAppRoute.h"
+#import "LPShakeRoute.h"
 
-@interface LPShakeAppRoute (LPXCTEST)
+@interface LPShakeRoute (LPXCTEST)
 
 - (CGFloat) durationWithDictionary:(NSDictionary *) arguments;
 
 @end
 
-@interface LPShakeAppRouteTest : XCTestCase
+@interface LPShakeRouteTest : XCTestCase
 
-@property (nonatomic, strong) LPShakeAppRoute *route;
+@property (nonatomic, strong) LPShakeRoute *route;
 
 @end
 
-@implementation LPShakeAppRouteTest
+@implementation LPShakeRouteTest
 
 - (void)setUp {
   [super setUp];
-  self.route = [LPShakeAppRoute new];
+  self.route = [LPShakeRoute new];
 }
 
 - (void)tearDown {
@@ -31,14 +31,16 @@
 
 - (void) testSupportsMethodGET {
   BOOL actual = [self.route supportsMethod:@"GET" atPath:nil];
+  expect(actual).to.equal(NO);
+}
+
+- (void) testSupportsMethodPOST {
+  BOOL actual = [self.route supportsMethod:@"POST" atPath:nil];
   expect(actual).to.equal(YES);
 }
 
 - (void) testSupportsNoOtherMethod {
-  BOOL actual = [self.route supportsMethod:@"POST" atPath:nil];
-  expect(actual).to.equal(NO);
-
-  actual = [self.route supportsMethod:@"FOO" atPath:nil];
+  BOOL actual = [self.route supportsMethod:@"FOO" atPath:nil];
   expect(actual).to.equal(NO);
 }
 
