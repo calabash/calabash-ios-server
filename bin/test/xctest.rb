@@ -19,7 +19,7 @@ end
 core_sim = RunLoop::CoreSimulator.new(default_sim, nil, {:xcode => xcode})
 core_sim.launch_simulator
 
-target_simulator_name = default_sim.name
+sim_udid = default_sim.udid
 
 args =
       [
@@ -28,7 +28,7 @@ args =
             '-derivedDataPath build/xctest',
             '-project calabash.xcodeproj',
             '-scheme XCTest',
-            "-destination 'platform=iOS Simulator,name=#{target_simulator_name},OS=latest'",
+            "-destination 'platform=iOS Simulator,id=#{sim_udid}'",
             '-sdk iphonesimulator',
             '-configuration Debug',
             "GCC_TREAT_WARNINGS_AS_ERRORS=YES",
