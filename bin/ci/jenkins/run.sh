@@ -22,9 +22,9 @@ bin/ci/jenkins/install-keychain.sh
 bundle install
 make framework
 
-#make frank
-#bin/ci/jenkins/make-dylibs
-#
+make frank
+bin/ci/jenkins/make-dylibs.sh
+
 #banner "Submit to Test Cloud"
 #bin/ci/jenkins/make-ipa.sh
 #bundle exec bin/test/test-cloud.rb
