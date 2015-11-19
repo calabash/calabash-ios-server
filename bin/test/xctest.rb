@@ -59,10 +59,13 @@ Dir.chdir(working_dir) do
       :on => [XCTestFailedError]
   }
 
+  env = { "COMMAND_LINE_BUILD" => "1" }
+
   Retriable.retriable(options) do
     exit_code = Luffa.unix_command(cmd,
                                    {:pass_msg => 'XCTests passed',
                                     :fail_msg => 'XCTests failed',
+                                    :env_vars => env,
                                     :exit_on_nonzero_status => false})
     if Luffa::Environment.travis_ci?
       if exit_code != 0
