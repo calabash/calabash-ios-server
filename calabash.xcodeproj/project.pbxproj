@@ -2413,7 +2413,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "calabash/clean-coverage-files.sh\n";
+			shellScript = "bin/xcode-build-phase/clean-coverage-files.sh\n";
 			showEnvVarsInLog = 0;
 		};
 		F5BA6EFE1B4BB95700DB898F /* Run Script git versioning 1 of 2 */ = {
