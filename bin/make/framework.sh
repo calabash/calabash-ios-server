@@ -75,8 +75,8 @@ fi
 
 banner "Building Framework Simulator Library"
 
-SIM_LIBRARY="${SIM_BUILD_DIR}/Build/Products/${XC_BUILD_CONFIG}-iphonesimulator/${LIBRARY_NAME}"
-rm -rf "${SIM_LIBRARY}"
+SEARCH_PATH="${SIM_BUILD_DIR}/Build/Products"
+rm -rf "${SEARCH_PATH}"
 
 xcrun xcodebuild build \
   -project ${XC_PROJECT} \
@@ -101,6 +101,8 @@ if [ $EXIT_CODE != 0 ]; then
 else
   info "Building simulator library for framework succeeded."
 fi
+
+SIM_LIBRARY=`find "${SEARCH_PATH}" -name "libcalabash.a" -type f -print0`
 
 ditto_or_exit "${SIM_LIBRARY}" "${SIM_PRODUCTS_DIR}/${LIBRARY_NAME}"
 
