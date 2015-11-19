@@ -106,7 +106,7 @@ SIM_LIBRARY=`find "${SEARCH_PATH}" -name "libcalabash.a" -type f -print0`
 
 ditto_or_exit "${SIM_LIBRARY}" "${SIM_PRODUCTS_DIR}/${LIBRARY_NAME}"
 
-HEADERS="${SIM_BUILD_DIR}/Build/Products/Debug-iphonesimulator/calabashHeaders"
+HEADERS=`find "${SEARCH_PATH}" -name "calabashHeaders" -type d -print0`
 ditto_or_exit "${HEADERS}" "${FAT_PRODUCTS_DIR}/Headers"
 
 banner "Building Framework ARM Library"
