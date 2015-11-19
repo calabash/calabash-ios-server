@@ -6,5 +6,5 @@
 INTERMEDIATES_DIR="${BUILD_DIR}/../Intermediates"
 
 if [ -e "${INTERMEDIATES_DIR}" ]; then
-  find ${INTERMEDIATES_DIR} -type f -name "*.gcda" -exec rm -rf {} \;
+  find "${INTERMEDIATES_DIR}" -type f -name "*.gcda" -exec rm -rf {} \;
 fi
