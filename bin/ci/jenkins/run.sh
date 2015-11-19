@@ -29,7 +29,7 @@ bin/ci/jenkins/make-dylibs.sh
 #bin/ci/jenkins/make-ipa.sh
 #bundle exec bin/test/test-cloud.rb
 #
-#banner "Run Tests"
-#bundle exec bin/test/xctest.rb
+banner "Run Tests"
+bundle exec bin/test/xctest.rb
 #bundle exec bin/test/cucumber.rb
-#
+
