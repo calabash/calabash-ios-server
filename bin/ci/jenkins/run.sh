@@ -14,19 +14,22 @@ function banner {
   echo ""
 }
 
+make clean
+
 banner "Install Code Signing Keychain"
 bin/ci/jenkins/install-keychain.sh
 
 bundle install
 make framework
-make frank
-bin/ci/jenkins/make-dylibs
 
-banner "Submit to Test Cloud"
-bin/ci/jenkins/make-ipa.sh
-bundle exec bin/test/test-cloud.rb
-
-banner "Run Tests"
-bundle exec bin/test/xctest.rb
-bundle exec bin/test/cucumber.rb
-
+#make frank
+#bin/ci/jenkins/make-dylibs
+#
+#banner "Submit to Test Cloud"
+#bin/ci/jenkins/make-ipa.sh
+#bundle exec bin/test/test-cloud.rb
+#
+#banner "Run Tests"
+#bundle exec bin/test/xctest.rb
+#bundle exec bin/test/cucumber.rb
+#
