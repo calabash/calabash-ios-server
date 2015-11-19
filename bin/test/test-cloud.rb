@@ -23,9 +23,7 @@ if !Luffa::Environment.travis_ci? && !Luffa::Environment.jenkins_ci?
       Luffa.unix_command("bundle exec briar xtc #{device_set}")
     end
   end
-elsif Luffa::Environment.jenkins_ci?
-  # Not yet.
-elsif Luffa::Environment.travis_ci?
+else
 
   # Only maintainers can submit XTC tests.
   if ENV["TRAVIS_SECURE_ENV_VARS"] != "true"

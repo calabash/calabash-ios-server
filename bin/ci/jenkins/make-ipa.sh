@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+echo "JENKINS_HOME = ${JENKINS_HOME}"
+
 if [ -z "${JENKINS_HOME}" ]; then
   echo "FAIL: only run this script on Jenkins"
   exit 1
