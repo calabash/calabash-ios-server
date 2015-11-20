@@ -25,9 +25,8 @@ make framework
 make frank
 bin/ci/jenkins/make-dylibs.sh
 
-#banner "Submit to Test Cloud"
-#bin/ci/jenkins/make-ipa.sh
-#bundle exec bin/test/test-cloud.rb
+bin/ci/jenkins/make-ipa.sh
+bundle exec bin/test/test-cloud.rb
 
 banner "Run Tests"
 bundle exec bin/test/xctest.rb

@@ -26,7 +26,7 @@ if !Luffa::Environment.travis_ci? && !Luffa::Environment.jenkins_ci?
 else
 
   # Only maintainers can submit XTC tests.
-  if ENV["TRAVIS_SECURE_ENV_VARS"] != "true"
+  if Luffa::Environment.travis_ci? && ENV["TRAVIS_SECURE_ENV_VARS"] != "true"
     Luffa.log_info("Skipping XTC submission; non-maintainer activity")
     exit 0
   end
