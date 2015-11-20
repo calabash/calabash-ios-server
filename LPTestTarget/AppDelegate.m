@@ -1,7 +1,7 @@
 #import "AppDelegate.h"
 #import <CoreData/CoreData.h>
 #import "LPCoreDataStack.h"
-#import "CocoaLumberjack.h"
+#import "CocoaLumberjack/CocoaLumberjack.h"
 
 static const DDLogLevel ddLogLevel = DDLogLevelDebug;
 

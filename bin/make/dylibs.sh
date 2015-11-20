@@ -178,15 +178,15 @@ ditto_or_exit "${HEADERS}" "${INSTALL_DIR}/Headers"
 
 banner "Dylib Code Signing"
 
-KEYCHAIN_TOOL="${HOME}/.calabash/calabash-codesign/ios/create-keychain.sh"
-RESIGN_TOOL="${HOME}/.calabash/calabash-codesign/ios/resign-dylib.rb"
-SHA_TOOL="${HOME}/.calabash/calabash-codesign/sha256"
+CODE_SIGN_DIR="${HOME}/.calabash/calabash-codesign"
+RESIGN_TOOL="${CODE_SIGN_DIR}/ios/resign-dylib.rb"
+SHA_TOOL="${CODE_SIGN_DIR}/sha256"
 
-CERT="${HOME}/.calabash/calabash-codesign/ios/certs/developer.p12"
+CERT="${CODE_SIGN_DIR}/ios/certs/developer.p12"
 
 echo ${KEYCHAIN_TOOL}
 
-if [ ! -e ${KEYCHAIN_TOOL} ]; then
+if [ ! -e ${CODE_SIGN_DIR} ]; then
   warn "Skipping dylib codesiging!"
   warn "If you are not a maintainer, you can ignore this warning"
   warn "If you are maintainer, you should be resigning!"
@@ -210,7 +210,7 @@ else
   fi
 
   info "Creating the Calabash.keychain"
-  $KEYCHAIN_TOOL
+  (cd "${CODE_SIGN_DIR}" && ios/create-keychain.sh)
 
   info "Resiging the device dylib"
   $RESIGN_TOOL "${INSTALL_DIR}/libCalabashDyn.dylib"
