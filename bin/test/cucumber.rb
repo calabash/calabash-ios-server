@@ -50,6 +50,8 @@ Dir.chdir working_dir do
       :iphone6plus => 'iPhone 6 Plus'
     }
 
+    RunLoop::CoreSimulator.terminate_core_simulator_processes
+
     simulators = RunLoop::SimControl.new.simulators
 
     env_vars = {}
@@ -64,6 +66,9 @@ Dir.chdir working_dir do
       end
 
       env_vars = {"DEVICE_TARGET" => match.udid}
+
+
+      RunLoop::CoreSimulator.terminate_core_simulator_processes
 
       exit_code = Luffa.unix_command(cucumber_cmd, {:exit_on_nonzero_status => false,
                                                     :env_vars => env_vars})
