@@ -69,9 +69,12 @@
 }
 
 #if NEEDS_DISPATCH_RETAIN_RELEASE
+/*
+ Guard is not work on Xcode 6
 - (void)dealloc {
     dispatch_release(_queue);
 }
+*/
 
 #endif
 
