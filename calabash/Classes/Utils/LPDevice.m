@@ -220,6 +220,7 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
     @"iPhone8,2" : @"iphone 6+",
 
     // iPad Pro
+    @"iPad6,7" : @"ipad pro",
     @"iPad6,8" : @"ipad pro"
 
     };
