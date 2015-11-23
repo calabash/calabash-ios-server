@@ -128,6 +128,9 @@ xcrun xcodebuild install \
   ARCHS="armv7 armv7s arm64" \
   VALID_ARCHS="armv7 armv7s arm64" \
   ONLY_ACTIVE_ARCH=NO \
+  OTHER_CFLAGS="-fembed-bitcode" \
+  DEPLOYMENT_POSTPROCESSING=YES \
+  ENABLE_BITCODE=YES \
   -sdk iphoneos \
   IPHONE_DEPLOYMENT_TARGET=6.0 \
   GCC_TREAT_WARNINGS_AS_ERRORS=YES \
