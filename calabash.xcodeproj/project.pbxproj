@@ -3256,7 +3256,6 @@
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
-				"OTHER_CFLAGS[sdk=iphoneos9.0]" = "-fembed-bitcode";
 				PRODUCT_NAME = "calabash-dylib";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
@@ -3366,7 +3365,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_CFLAGS = "";
-				"OTHER_CFLAGS[sdk=iphoneos9.0]" = "-fembed-bitcode";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "calabash-plugin-for-frank";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
@@ -3489,7 +3487,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_CFLAGS = "";
-				"OTHER_CFLAGS[sdk=iphoneos9.0]" = "-fembed-bitcode";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = calabash;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
@@ -3905,7 +3902,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_CFLAGS = "";
-				"OTHER_CFLAGS[sdk=iphoneos9.0]" = "-fembed-bitcode";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = calabash;
 				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
@@ -3967,7 +3963,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_CFLAGS = "";
-				"OTHER_CFLAGS[sdk=iphoneos9.0]" = "-fembed-bitcode";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "calabash-plugin-for-frank";
 				PUBLIC_HEADERS_FOLDER_PATH = "$(PROJECT_NAME)Headers";
@@ -4020,7 +4015,6 @@
 				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
-				"OTHER_CFLAGS[sdk=iphoneos9.0]" = "-fembed-bitcode";
 				PRODUCT_NAME = "calabash-dylib";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
