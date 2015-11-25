@@ -20,13 +20,17 @@ banner "Install Code Signing Keychain"
 bin/ci/jenkins/install-keychain.sh
 
 bundle install
-make framework
 
+# Make libraries
+make framework
 make frank
 bin/ci/jenkins/make-dylibs.sh
 
 bin/ci/jenkins/make-ipa.sh
 bundle exec bin/test/test-cloud.rb
+
+# Restart CoreSimulator processes
+bundle exec run-loop simctl manage-processes
 
 banner "Run Tests"
 bundle exec bin/test/xctest.rb
