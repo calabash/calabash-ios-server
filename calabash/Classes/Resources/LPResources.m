@@ -33,7 +33,7 @@
 */
 
 #import "LPResources.h"
-
+#import "LPCocoaLumberjack.h"
 
 @implementation LPResources
 
@@ -171,7 +171,7 @@ static const short _base64DecodingTable[256] = {-2, -2, -2, -2, -2, -2, -2, -2, 
     [data getBytes:y_buf range:yRange];
 //        [data getBytes:ios_buf   range:iosRange];
 //        NSData *iosData = [[NSData alloc] initWithBytes:ios_buf length:4];
-//        NSLog(@"iosData: %@",iosData);
+//        LPLogDebug(@"iosData: %@",iosData);
 //        [iosData release];
 
     NSMutableDictionary *newD = [NSMutableDictionary dictionaryWithDictionary:d];
@@ -243,10 +243,10 @@ static const short _base64DecodingTable[256] = {-2, -2, -2, -2, -2, -2, -2, -2, 
 //    CGPoint should_be_endAt = CGPointApplyAffineTransform(r, interpolate);
 //
 //
-//    NSLog(@"should_be_start_at = [ %@]", CGPointCreateDictionaryRepresentation(should_be_startAt));
+//    LPLogDebug(@"should_be_start_at = [ %@]", CGPointCreateDictionaryRepresentation(should_be_startAt));
 //
-//    NSLog(@"should_be_center_at = [ %@]", CGPointCreateDictionaryRepresentation(should_be_centerAt));
-//    NSLog(@"should_be_should_be_endAt = [ %@]", CGPointCreateDictionaryRepresentation(should_be_endAt));
+//    LPLogDebug(@"should_be_center_at = [ %@]", CGPointCreateDictionaryRepresentation(should_be_centerAt));
+//    LPLogDebug(@"should_be_should_be_endAt = [ %@]", CGPointCreateDictionaryRepresentation(should_be_endAt));
 
 
   NSRange xRange = NSMakeRange(48, 4);
@@ -289,7 +289,7 @@ static const short _base64DecodingTable[256] = {-2, -2, -2, -2, -2, -2, -2, -2, 
     [data getBytes:y_buf range:yRange];
     //        [data getBytes:ios_buf   range:iosRange];
     //        NSData *iosData = [[NSData alloc] initWithBytes:ios_buf length:4];
-    //        NSLog(@"iosData: %@",iosData);
+    //        LPLogDebug(@"iosData: %@",iosData);
     //        [iosData release];
 
     NSMutableDictionary *newD = [NSMutableDictionary dictionaryWithDictionary:d];

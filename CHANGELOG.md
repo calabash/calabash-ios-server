@@ -1,3 +1,28 @@
+### 0.17.0
+
+* Libs: should not generate code coverage files #296
+* Version tool is emitting profiling info #295
+* ARM builds are forced to emit bitcode #294
+* Standup Jenkins: take 2 #293
+* LPDevice: add missing iPadPro identifier #291
+* LPShakeRoute needs to respond to POST and include :results key in JSON
+  response #288
+* LPSuspendAppRoute returns correct keys in response #287
+* Travis CI should build the dylibs and submit a Test Cloud job #286
+* Cucumbers for expanded backdoor capabilities #284
+* Fix and/or update build system for Xcode 7.1 #282 @stopiccot
+* Add 'shake' route to programmatically shake device #280 @tommeier
+* Replace deprecated methods in LPQueryLog route #275
+* Replace NSLog calls with LPLog\* calls #273
+* LPInvoker handles __self__ and __nil__ tokens in arguments #270
+* Reflection route #269
+* Improve the LPProcessInfoRoute #268
+* Fix :preferences strategy for iOS 9 #267
+* Server logs IP address at launch #265 @Oddj0b
+* Add 'suspend' route to suspend and resume app #261
+* Expand backdoor route to handle arbitrary method signatures #220
+  @sapieneptus
+
 ### 0.16.4
 
 * New build system for libraries: responding Xcode 7.0.1 bitcode changes #256

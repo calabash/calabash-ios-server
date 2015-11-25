@@ -13,13 +13,14 @@
 #import "asl.h"
 
 @implementation LPQueryLogRoute
+
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
-  return [method isEqualToString:@"GET"];
+  return [method isEqualToString:@"POST"];
 }
 
-
-- (NSDictionary *) JSONResponseForMethod:(NSString *) method URI:(NSString *) path data:(NSDictionary *) data {
-
+- (NSDictionary *) JSONResponseForMethod:(NSString *) method
+                                     URI:(NSString *) path
+                                    data:(NSDictionary *) data {
   int count = 0;
 
   //Build a query message containing all our criteria.
@@ -85,9 +86,7 @@
   NSMutableArray *messages = [[NSMutableArray alloc] init];
   aslmsg msg;
 
-  // todo aslresponse_next is deprecated iOS 7
-  // https://github.com/calabash/calabash-ios/issues/719
-  while ((msg = aslresponse_next(response)) && count-- > 0) {
+  while ((msg = asl_next(response)) && count-- > 0) {
     //Load all the key/value pairs from the message into a dictionary.
     const char *k;
     NSMutableDictionary *msgDict = [[NSMutableDictionary alloc] init];
@@ -99,15 +98,15 @@
     [messages addObject:msgDict];
   }
 
-  // todo alsresponse_free is deprecated iOS 7
-  // https://github.com/calabash/calabash-ios/issues/719
-  aslresponse_free(response);  //Also frees the messages used in the above loop.
+  asl_release(response);
 
   NSArray *results = [NSArray arrayWithArray:messages];
 
-  return [NSDictionary dictionaryWithObjectsAndKeys:results, @"results",
-                                                    @"SUCCESS", @"outcome",
-                                                    nil];
+  return
+  @{
+    @"results" : results,
+    @"outcome" : @"SUCCESS",
+    };
 }
 
 @end

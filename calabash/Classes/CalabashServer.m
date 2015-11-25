@@ -39,6 +39,10 @@
 #import "LPTTYLogFormatter.h"
 #import "LPASLLogFormatter.h"
 #import "LPProcessInfoRoute.h"
+#import "LPDevice.h"
+#import "LPShakeRoute.h"
+#import "LPSuspendAppRoute.h"
+#import "LPReflectionRoute.h"
 
 @interface CalabashServer ()
 - (void) start;
@@ -186,6 +190,18 @@
     [LPRouter addRoute:processInfoRoute forPath:@"process-info"];
     [processInfoRoute release];
 
+    LPShakeRoute *shakeAppRoute = [LPShakeRoute new];
+    [LPRouter addRoute:shakeAppRoute forPath:@"shake"];
+    [shakeAppRoute release];
+
+    LPSuspendAppRoute *suspendAppRoute = [LPSuspendAppRoute new];
+    [LPRouter addRoute:suspendAppRoute forPath:@"suspend"];
+    [suspendAppRoute release];
+
+    LPReflectionRoute *reflectionRoute = [LPReflectionRoute new];
+    [LPRouter addRoute:reflectionRoute forPath:@"reflection"];
+    [reflectionRoute release];
+
     _httpServer = [[[LPHTTPServer alloc] init] retain];
 
     [_httpServer setName:@"Calabash Server"];
@@ -238,6 +254,10 @@
   NSError *error = nil;
   if (![_httpServer start:&error]) {
     LPLogError(@"Error starting Calabash HTTP Server: %@", error);
+  } else {
+    LPLogDebug(@"Calabash iOS server is listening on: %@ port %@",
+               [[LPDevice sharedDevice] getIPAddress:YES],
+               @([_httpServer port]));
   }
 }
 

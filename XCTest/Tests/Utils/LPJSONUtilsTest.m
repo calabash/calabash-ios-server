@@ -175,11 +175,6 @@
 
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
-  if (lp_ios_version_lte(@"8.0")) {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
-  } else {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
-  }
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
@@ -190,14 +185,6 @@
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
   XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
-  NSLog(@"access label: %@", [view accessibilityLabel]);
-
-  // Surprise!  iOS 9 will not keep the accessibilityLabel
-  if (lp_ios_version_gte(@"9.0")) {
-    XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
-  } else {
-    XCTAssertEqualObjects(dict[@"label"], text);
-  }
 
   XCTAssertEqualObjects(dict[@"selected"], @(0));
   XCTAssertEqualObjects(dict[@"text"], text);
@@ -304,11 +291,11 @@
   XCTAssertEqualObjects(dict[@"rect"][@"height"], @(CGRectGetHeight([view frame])));
 
   if ([self isIphone6Plus]) {
-    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(82.93, 0.001);
-    XCTAssertEqualObjects(dict[@"rect"][@"center_y"], @(138.32));
+    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(106.75, 0.001);
   } else if ([self isIphone6]) {
-    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(75.0, 0.001);
-    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(125.1, 0.001);
+    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64.0, 0.001);
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(106.75, 0.001);
   } else if ([self isIphone4in] || [self isIphone35in] || [self isIpad]) {
     XCTAssertEqualObjects(dict[@"rect"][@"center_x"], @(CGRectGetMidX([view frame])));
     expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(106.75, 0.001);
@@ -357,11 +344,11 @@
   XCTAssertEqualObjects(dict[@"rect"][@"height"], @(CGRectGetHeight([view frame])));
 
   if ([self isIphone6Plus]) {
-    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(82.93, 0.001);
-    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(112.41, 0.001);
+    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64.0, 0.001);
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(86.75, 0.001);
   } else if ([self isIphone6]) {
-    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(75.0, 0.001);
-    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(101.66, 0.001);
+    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64.0, 0.001);
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(86.75, 0.001);
   } else if ([self isIphone4in] || [self isIphone35in] || [self isIpad]) {
     XCTAssertEqualObjects(dict[@"rect"][@"center_x"], @(CGRectGetMidX([view frame])));
     XCTAssertEqualObjects(dict[@"rect"][@"center_y"], @(CGRectGetMidY([view frame])));
@@ -450,12 +437,6 @@
   UITextView *view = [[UITextView alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
-  if (lp_ios_version_gte(@"9.0")) {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
-  } else {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
-  }
-
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
@@ -477,12 +458,6 @@
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UISlider *view = [[UISlider alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
-
-  if (lp_ios_version_lte(@"8.0")) {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
-  } else {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
-  }
 
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
@@ -506,12 +481,6 @@
   UISwitch *view = [[UISwitch alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
-  if (lp_ios_version_gte(@"9.0")) {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
-  } else {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
-  }
-
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
@@ -532,12 +501,6 @@
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UIButton *view = [[UIButton alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
-
-  if (lp_ios_version_gte(@"9.0")) {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
-  } else {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
-  }
 
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
@@ -580,12 +543,6 @@
   UITableView *view = [[UITableView alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
-  if (lp_ios_version_gte(@"9.0")) {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
-  } else {
-    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
-  }
-
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
@@ -596,12 +553,6 @@
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
   XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
-
-  if (lp_ios_version_gte(@"9.0")) {
-    XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
-  } else {
-    XCTAssertEqualObjects(dict[@"label"], @"Empty list");
-  }
 
   XCTAssertEqualObjects(dict[@"visible"], @(1));
   XCTAssertEqual([dict count], 10);

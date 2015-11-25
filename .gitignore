@@ -1,3 +1,12 @@
+# emacs
+(.*/)?\#[^/]*\#$
+
+# vim
+*.swp
+
+# MacOS
+.DS_Store
+
 calabash.xcodeproj/project.xcworkspace/xcuserdata
 calabash.xcodeproj/xcuserdata/
 *.xccheckout
@@ -10,12 +19,11 @@ libFrankCalabash.a
 calabash-dylibs
 *.app
 *.ipa
+tmp
 
 # Code coverage and profiling.
 *.gcda
 *.gcno
-
-!scripts/test/build
 
 # AppCode
 .idea
@@ -23,14 +31,20 @@ calabash-dylibs
 # CI pulls down these two repos from github
 ios-smoke-test-app
 calabash-ios
+run_loop
 
 .ruby-version
+.bundle
 
+# Cucumber
 .env
 .irb-history
-.irbrc
-Gemfile.lock
+.pry-history
+cucumber/Gemfile.lock
+cucumber/reports
+cucumber/screenshots
 
-# Legacy. Remove this once the scripts/ dir is moved to bin/
-scripts/version
+# The version tool which is staged to bin as part
+# of the build process.
+bin/version
 

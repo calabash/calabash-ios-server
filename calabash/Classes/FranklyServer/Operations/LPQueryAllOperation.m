@@ -45,7 +45,6 @@
           NSMethodSignature *methodSignature = [theClassOfAs methodSignatureForSelector:selector];
 
           if (!methodSignature || ![theClassOfAs respondsToSelector:selector]) {
-            NSLog(@"*****");
             return nil;
           }
 

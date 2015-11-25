@@ -8,6 +8,9 @@
 #import <objc/runtime.h>
 #import "LPCocoaLumberjack.h"
 
+static NSString *const LPInvokerSelfReference = @"__self__";
+static NSString *const LPInvokerNilReference = @"__nil__";
+
 @interface LPInvoker ()
 
 @property(strong, nonatomic, readonly) NSString *encodingForSelectorReturnType;
@@ -131,7 +134,7 @@
 - (NSInvocation *) invocation {
   if (_invocation) { return _invocation; }
   if (![self targetRespondsToSelector]) {
-    NSLog(@"Target '%@' does not respond to selector '%@'; cannot create invocation.",
+    LPLogError(@"Target '%@' does not respond to selector '%@'; cannot create invocation.",
           self.target, NSStringFromSelector(self.selector));
     return nil;
   }
@@ -148,7 +151,7 @@
   if (_signature) { return _signature; }
   _signature = [[self.target class] instanceMethodSignatureForSelector:self.selector];
   if (!_signature) {
-    NSLog(@"Cannot create signature; target '%@' does not respond to selector '%@'",
+    LPLogError(@"Cannot create signature; target '%@' does not respond to selector '%@'",
           self.target, NSStringFromSelector(self.selector));
   }
   return _signature;
@@ -648,8 +651,12 @@
     switch (char_encoding) {
 
       case '@': {
-        if ([argument isEqual:@"__self__"]) {
-          argument = self.target;
+        if ([argument isKindOfClass:[NSString class]]) {
+          if ([argument isEqualToString:LPInvokerSelfReference]) {
+            argument = self.target;
+          } else if ([argument isEqualToString:LPInvokerNilReference]) {
+            argument = nil;
+          }
         }
         [invocation setArgument:&argument atIndex:invocationArgIndex];
         break;

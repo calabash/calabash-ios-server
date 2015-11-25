@@ -8,16 +8,35 @@ http://calaba.sh
 
 The companion of the calabash-ios gem:  https://github.com/calabash/calabash-ios
 
-### Building the Framework
+### Building
 
 Requires Xcode 6 or Xcode 7.
 
-Xcode 6.4 is actively tested.  Older versions of Xcode 6 are not.
+Xcode 6.4 is actively tested. Older versions of Xcode 6 are not.
+
+Requires ruby >= 2.0.  The latest ruby release is preferred.
 
 ```
 $ git clone --recursive git@github.com:calabash/calabash-ios-server.git
 $ cd calabash-ios-server
-$ make framework
+$ bundle
+```
+
+To build with an alternative Xcode:
+
+```
+$ DEVELOPER_DIR=/Xcode/7.1b5/Xcode-beta.app make < rule >
+```
+
+If you have build errors, see the xcpretty section below.
+
+Maintainers must install the calabash/calabash-resign private repo.
+Details are below.
+
+### Building the Framework
+
+```
+make framework
 ```
 
 ### Building the frank plugin
@@ -59,9 +78,17 @@ $ make xct
 # Building libraries.
 $ make all
 
-# Integration tests.
-$ scripts/test/run
+# Integration tests
+$ make framework
+$ make app-cal
+$ cd cucumber
+$ bundle update
+$ bundle exec cucumber
 ```
+
+If you are running the XCTests from Xcode, you might see failures in
+`LPJSONUtilsTest`.  If you do, clean (Shift + Option + Command + K)
+and rerun.
 
 ### Contributing
 
@@ -70,10 +97,27 @@ $ scripts/test/run
 * See the [CONTRIBUTING.md](CONTRIBUTING.md) guide.
 * There is a style guide: [STYLE\_GUIDE.md](STYLE\_GUIDE.md).
 * Pull-requests with unit tests will be merged faster.
+* Pull-requests with Cucumber integration tests will be merged even faster.
 
 ### Releasing
 
 See the [CONTRIBUTING.md](CONTRIBUTING.md) document for instructions.
+
+### xcpretty
+
+https://github.com/supermarin/xcpretty
+
+We use xcpretty to make builds faster and to reduce the amount of
+logging.  Travis CI, for example, has a limit on the number of lines of
+logging that can be generated; xcodebuild breaks this limit.
+
+The only problem with xcpretty is that it does not report build errors
+very well.  If you encounter an issue with any of the make rules, run
+without xcpretty:
+
+```
+$ XCPRETTY=0 make ipa
+```
 
 ### Licenses
 

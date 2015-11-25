@@ -12,6 +12,21 @@
   return [method isEqualToString:@"GET"];
 }
 
+- (NSDictionary *) JSONResponseForMethod:(NSString *) method
+                                     URI:(NSString *) path
+                                    data:(NSDictionary *) data {
+
+  NSArray *arguments = [[NSProcessInfo processInfo] arguments];
+  NSDictionary *environment = [[NSProcessInfo processInfo] environment];
+
+  NSDictionary *info = @{@"arguments" : arguments,
+                         @"environment" : environment};
+
+  return info;
+}
+
+#pragma mark - Plug-in for Frank
+
 - (BOOL) canHandlePostForPath:(NSArray *) path {
   return [@"process-info" isEqualToString:[path lastObject]];
 }
@@ -26,13 +41,6 @@
                       dataUsingEncoding:NSUTF8StringEncoding];
 
   return [[LPHTTPDataResponse alloc] initWithData:jsonData];
-}
-
-- (NSDictionary *) JSONResponseForMethod:(NSString *) method
-                                     URI:(NSString *) path
-                                    data:(NSDictionary *) data {
-
-  return [[NSProcessInfo processInfo] environment];
 }
 
 @end

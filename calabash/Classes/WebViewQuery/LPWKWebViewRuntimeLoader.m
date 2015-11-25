@@ -6,6 +6,7 @@
 #import "LPJSONUtils.h"
 #import "LPWebViewProtocol.h"
 #import <objc/runtime.h>
+#import "LPCocoaLumberjack.h"
 
 NSString *const LPWKWebViewISO8601DateFormat = @"yyyy-MM-dd HH:mm:ss Z";
 
@@ -60,8 +61,8 @@ static NSString *LPWKWebViewCalabashStringByEvaluatingJavaScriptIMP(id self,
   void (^completionHandler)(id result, NSError *error) = ^void(id result, NSError *error) {
     if (error) {
       NSString *localizedDescription = [error localizedDescription];
-      NSLog(@"Error evaluating JavaScript: '%@'", javascript);
-      NSLog(@"Error was: '%@'", localizedDescription);
+      LPLogError(@"Error evaluating JavaScript: '%@'", javascript);
+      LPLogError(@"Error was: '%@'", localizedDescription);
       NSDictionary *errorDict =
       @{
         @"error" : localizedDescription ? localizedDescription : [NSNull null],
@@ -175,7 +176,7 @@ static NSString *LPWKWebViewCalabashStringByEvaluatingJavaScriptIMP(id self,
   if (self.state == LPWKWebViewHaveNotTriedToImplementProtocol) {
     [self setState:[[self class] implementLPWebViewProtocolOnWKWebView]];
   } else {
-    NSLog(@"Tried to load WKWebView LPWebViewProtocl implemention again; not allowed");
+    LPLogError(@"Tried to load WKWebView LPWebViewProtocl implemention again; not allowed");
   }
   return self.state;
 }
@@ -188,36 +189,36 @@ static NSString *LPWKWebViewCalabashStringByEvaluatingJavaScriptIMP(id self,
 
   Class LPWKWebViewClass = [[self class] lpClassForWKWebView];
   if (!LPWKWebViewClass) {
-    NSLog(@"WKWebView is not available");
+    LPLogDebug(@"WKWebView is not available");
     return LPWKWebViewNotAvailable;
   }
 
   if (![[self class] addLPWebViewProtocol:LPWKWebViewClass]) {
-    NSLog(@"Failed to add LPWebViewProtocol to WKWebView");
+    LPLogError(@"Failed to add LPWebViewProtocol to WKWebView");
     return LPWKWebViewFailedToImplementProtocol;
   }
 
   if (![[self class] addWithDateMethod:LPWKWebViewClass]) {
-    NSLog(@"Failed to add lpStringWithDate: to WKWebView");
+    LPLogError(@"Failed to add lpStringWithDate: to WKWebView");
     return LPWKWebViewFailedToImplementProtocol;
   }
 
   if (![[self class] addWithDictionaryMethod:LPWKWebViewClass]) {
-    NSLog(@"Failed to add lpStringWithDictionary: to WKWebView");
+    LPLogError(@"Failed to add lpStringWithDictionary: to WKWebView");
     return LPWKWebViewFailedToImplementProtocol;
   }
 
   if (![[self class] addWithArrayMethod:LPWKWebViewClass]) {
-    NSLog(@"Failed to add lpStringWithArray: to WKWebView");
+    LPLogError(@"Failed to add lpStringWithArray: to WKWebView");
     return LPWKWebViewFailedToImplementProtocol;
   }
 
   if (![[self class] addEvaluateJavaScriptMethod:LPWKWebViewClass]) {
-    NSLog(@"Failed to add calabashStringByEvaluatingJavaScript: to WKWebView");
+    LPLogError(@"Failed to add calabashStringByEvaluatingJavaScript: to WKWebView");
     return LPWKWebViewFailedToImplementProtocol;
   }
 
-  NSLog(@"WKWebView successfully implemented LPWebViewProtocol");
+  LPLogDebug(@"WKWebView successfully implemented LPWebViewProtocol");
   return LPWKWebViewDidImplementProtocol;
 }
 

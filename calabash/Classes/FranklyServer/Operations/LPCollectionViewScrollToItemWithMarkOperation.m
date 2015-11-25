@@ -11,6 +11,7 @@
 #endif
 
 #import "LPCollectionViewScrollToItemWithMarkOperation.h"
+#import "LPCocoaLumberjack.h"
 
 @implementation LPCollectionViewScrollToItemWithMarkOperation
 
@@ -46,13 +47,13 @@
   // UICollectionView appears in iOS 6
   Class clz = NSClassFromString(@"UICollectionView");
   if (clz == nil) {
-    NSLog(@"Warning UICollectionView is not supported on this version of iOS:  '%@'",
+    LPLogWarn(@"UICollectionView is not supported on this version of iOS:  '%@'",
           [[UIDevice currentDevice] systemVersion]);
     return nil;
   }
 
   if ([target isKindOfClass:[UICollectionView class]] == NO) {
-    NSLog(@"Warning view: %@ should be a collection view for scrolling to item/cell to make sense",
+    LPLogWarn(@"View: %@ should be a collection view for scrolling to item/cell to make sense",
           target);
     return nil;
   }
@@ -62,13 +63,13 @@
   UICollectionView *collection = (UICollectionView *) target;
   NSString *itemId = [arguments objectAtIndex:0];
   if (itemId == nil || [itemId length] == 0) {
-    NSLog(@"Warning: item id: '%@' should be non-nil and non-empty", itemId);
+    LPLogWarn(@"Item id: '%@' should be non-nil and non-empty", itemId);
     return nil;
   }
   
   NSIndexPath *path = [self indexPathForItemWithMark:itemId inCollection:collection];
   if (path == nil) {
-    NSLog(@"Warning: collection doesn't contain item with id '%@'", itemId);
+    LPLogWarn(@"Collection doesn't contain item with id '%@'", itemId);
     return nil;
   }
   
@@ -92,7 +93,7 @@
     NSNumber *posNum = [opts objectForKey:position];
     
     if (posNum == nil) {
-      NSLog(@"Warning:  requesting to scroll to position '%@' but that is not one of these valid positions: '%@'",
+      LPLogWarn(@"Requesting to scroll to position '%@' but that is not one of these valid positions: '%@'",
             position, [opts allKeys]);
       return nil;
     }

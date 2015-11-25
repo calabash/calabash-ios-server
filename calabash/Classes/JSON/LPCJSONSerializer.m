@@ -31,6 +31,7 @@
 #import "LPISO8601DateFormatter.h"
 #import "LPJSONRepresentation.h"
 #import <objc/runtime.h>
+#import "LPCocoaLumberjack.h"
 
 NSString *const LPJSONSerializerNSManageObjectDescriptionFaultFormatString = @"Calling 'description' on '%@' (an instance of NSManagedObject) caused a fault - this is probably a bug in your application.";
 NSString *const LPJSONSerializerDoesNotRespondToDescriptionFormatString = @"'%@': does not respond to selector 'description' - this is probably a bug in your application.";
@@ -433,9 +434,9 @@ static NSData *kTrue = NULL;
     }
     @catch (NSException *exception) {
       NSString *className = NSStringFromClass([object class]);
-      NSLog(@"Calling 'description' on an NSManagedObject instance of '%@' raised an exception:",
+      LPLogError(@"Calling 'description' on an NSManagedObject instance of '%@' raised an exception:",
             className);
-      NSLog(@"%@", exception);
+      LPLogError(@"%@", exception);
       str = [NSString stringWithFormat:LPJSONSerializerNSManageObjectDescriptionFaultFormatString,
              className];
 
@@ -464,7 +465,7 @@ static NSData *kTrue = NULL;
 - (NSString *) stringByEnsuringSerializationOfDictionary:(NSDictionary *) dictionary {
   if (![dictionary isKindOfClass:[NSDictionary class]]) {
     NSString *className = NSStringFromClass([dictionary class]);
-    NSLog(@"Expected NSDictionary but found instance of '%@'.\nCannot serialize object.",
+    LPLogError(@"Expected NSDictionary but found instance of '%@'.\nCannot serialize object.",
           className);
     NSString *json = [NSString stringWithFormat:@"Cannot serialize instance of '%@' as a dictionary.",
                       className];
@@ -479,9 +480,9 @@ static NSData *kTrue = NULL;
 
   NSString *className = NSStringFromClass([dictionary class]);
   if (error) {
-    NSLog(@"Unable to serialize dictionary '%@'.\n%@", className, error);
+    LPLogError(@"Unable to serialize dictionary '%@'.\n%@", className, error);
   } else {
-    NSLog(@"Unable to serialize dictionary '%@'", className);
+    LPLogError(@"Unable to serialize dictionary '%@'", className);
   }
   data = [[NSString stringWithFormat:@"Invalid JSON for '%@' instance.", className]
           dataUsingEncoding:NSUTF8StringEncoding];
@@ -492,7 +493,7 @@ static NSData *kTrue = NULL;
 - (NSString *) stringByEnsuringSerializationOfArray:(NSArray *) array {
   if (![array isKindOfClass:[NSArray class]]) {
     NSString *className = NSStringFromClass([array class]);
-    NSLog(@"Expected NSArray but found instance of '%@'.\nCannot serialize object.",
+    LPLogError(@"Expected NSArray but found instance of '%@'.\nCannot serialize object.",
           className);
     NSString *json = [NSString stringWithFormat:@"Cannot serialize instance of '%@' as an array.",
                       className];
@@ -507,9 +508,9 @@ static NSData *kTrue = NULL;
 
   NSString *className = NSStringFromClass([array class]);
   if (error) {
-    NSLog(@"Unable to serialize array '%@'.\n%@", className, error);
+    LPLogError(@"Unable to serialize array '%@'.\n%@", className, error);
   } else {
-    NSLog(@"Unable to serialize array '%@'", className);
+    LPLogError(@"Unable to serialize array '%@'", className);
   }
   data = [[NSString stringWithFormat:@"Invalid JSON for '%@' instance.", className]
           dataUsingEncoding:NSUTF8StringEncoding];
@@ -530,9 +531,9 @@ static NSData *kTrue = NULL;
 
   NSString *className = NSStringFromClass([object class]);
   if (error) {
-    NSLog(@"Unable to serialize object '%@'.\n%@", className, error);
+    LPLogError(@"Unable to serialize object '%@'.\n%@", className, error);
   } else {
-    NSLog(@"Unable to serialize object '%@'", className);
+    LPLogError(@"Unable to serialize object '%@'", className);
   }
   data = [[NSString stringWithFormat:@"Invalid JSON for '%@' instance.", className]
           dataUsingEncoding:NSUTF8StringEncoding];

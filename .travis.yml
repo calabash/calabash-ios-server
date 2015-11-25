@@ -1,22 +1,23 @@
 language: objective-c
 
 before_script:
-  - scripts/ci/travis/instruments-auth.sh
-  - gem install xcpretty --no-document
-  - gem install run_loop --no-document
-  - gem install retriable --no-document
+  - bin/ci/travis/instruments-auth.sh
+  - bin/ci/travis/install-keychain.sh
 
 script:
-  - make clean
+  - bundle install
   - make framework
   - make frank
-  - scripts/test/xctest.rb
-  - scripts/test/run-ios-simulator-smoke-tests.rb
+  - bin/ci/travis/make-dylibs.sh
+  - bundle exec bin/test/xctest.rb
+  - bundle exec bin/test/cucumber.rb
+  - bin/ci/travis/make-ipa.sh
+  - bundle exec bin/test/test-cloud.rb
 
 notifications:
   email:
     recipients:
       - joshuajmoody@gmail.com
-      - karl.krukow@xamarin.com
+      - chris.fuentes@xamarin.com
     on_success: change
     on_failure: always

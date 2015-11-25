@@ -126,6 +126,7 @@
     @"Class" : NSStringFromSelector(@selector(selectorClass:)),
     @"object pointer" : NSStringFromSelector(@selector(selectorObjectPointer:)),
     @"self" : NSStringFromSelector(@selector(selectorArgumentIsSelf:)),
+    @"self" : NSStringFromSelector(@selector(selectorArgumentIsNil:)),
 
     // Not handled
     @"void *" : NSStringFromSelector(@selector(selectorVoidStar:)),
@@ -305,7 +306,7 @@
 }
 
 - (BOOL) selectorNSUInteger:(NSUInteger) arg {
-  return arg = NSNotFound;
+  return arg == NSNotFound;
 }
 
 - (BOOL) selectorShort:(short) arg {
@@ -313,7 +314,7 @@
 }
 
 - (BOOL) selectorUnsignedShort:(unsigned short) arg {
-  return arg = USHRT_MAX;
+  return arg == USHRT_MAX;
 }
 
 - (BOOL) selectorCGFloat:(CGFloat) arg {
@@ -361,7 +362,7 @@
 }
 
 - (BOOL) selectorUnsignedLongLong:(unsigned long long) arg {
-  return arg = ULONG_LONG_MAX;
+  return arg == ULONG_LONG_MAX;
 }
 
 - (BOOL) selectorCGPoint:(CGPoint) arg {
@@ -384,6 +385,10 @@
 
 - (BOOL) selectorArgumentIsSelf:(id) arg {
   return arg == self;
+}
+
+- (BOOL) selectorArgumentIsNil:(id) arg {
+  return arg == nil;
 }
 
 #pragma mark - Unhandled Argument Types

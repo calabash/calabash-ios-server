@@ -342,6 +342,7 @@
   LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
                                                withTarget:self.target
                                                 arguments:@[[InvokerFactory shared]]];
+
   expect(actual.value).to.equal(YES);
 }
 
@@ -350,6 +351,14 @@
   LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
                                                withTarget:self.target
                                                 arguments:@[@"__self__"]];
+  expect(actual.value).to.equal(YES);
+}
+
+- (void) selfNilArg {
+  SEL selector = [InvokerFactory selectorForArgumentType:@"nil"];
+  LPInvocationResult *actual =  [LPInvoker invokeSelector:selector
+                                               withTarget:self.target
+                                                arguments:@[@"__nil__"]];
   expect(actual.value).to.equal(YES);
 }
 

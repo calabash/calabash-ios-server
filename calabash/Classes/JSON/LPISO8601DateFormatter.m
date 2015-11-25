@@ -6,6 +6,7 @@
 
 #import <Foundation/Foundation.h>
 #import "LPISO8601DateFormatter.h"
+#import "LPCocoaLumberjack.h"
 
 #ifndef DEFAULT_TIME_SEPARATOR
 #	define DEFAULT_TIME_SEPARATOR ':'
@@ -364,7 +365,7 @@ static BOOL is_leap_year(NSUInteger year);
 								} else {
 									//Get month and/or date.
 									segment = read_segment_4digits(ch, &ch, &num_digits);
-									NSLog(@"(%@) parsing month; segment is %lu and ch is %s", string, (unsigned long)segment, ch);
+									LPLogDebug(@"(%@) parsing month; segment is %lu and ch is %s", string, (unsigned long)segment, ch);
 									switch(num_digits) {
 										case 4: //YY-MMDD
 											day = segment % 100U;
@@ -421,7 +422,7 @@ static BOOL is_leap_year(NSUInteger year);
 							break;
 
 						case 1:; //-YY; -YY-MM (implicit century)
-							NSLog(@"(%@) found %lu digits and one hyphen, so this is either -YY or -YY-MM; segment (year) is %lu", string, (unsigned long)num_digits, (unsigned long)segment);
+							LPLogDebug(@"(%@) found %lu digits and one hyphen, so this is either -YY or -YY-MM; segment (year) is %lu", string, (unsigned long)num_digits, (unsigned long)segment);
 							NSUInteger current_year = nowComponents.year;
 							NSUInteger current_century = (current_year % 100U);
 							year = segment + (current_year - current_century);
@@ -431,7 +432,7 @@ static BOOL is_leap_year(NSUInteger year);
 							if (*ch == '-') {
 								++ch;
 								month_or_week = read_segment_2digits(ch, &ch);
-								NSLog(@"(%@) month is %lu", string, (unsigned long)month_or_week);
+								LPLogDebug(@"(%@) month is %lu", string, (unsigned long)month_or_week);
 							}
 
 							day = 1U;

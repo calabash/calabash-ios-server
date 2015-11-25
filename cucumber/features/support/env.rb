@@ -1,38 +1,14 @@
 require 'calabash-cucumber/wait_helpers'
 require 'calabash-cucumber/operations'
-
 World(Calabash::Cucumber::Operations)
 
-module Calabash
-  module Cucumber
-    module ServerTestExtensions
-      def with_env(var_name, new_value, &block)
-        original_value = ENV[var_name]
-        begin
-          ENV[var_name] = new_value
-          block.call
-        ensure
-          ENV[var_name] = original_value
-        end
-      end
-    end
-  end
-end
+require 'rspec'
 
-World(Calabash::Cucumber::ServerTestExtensions)
-
-if ENV['XAMARIN_TEST_CLOUD'] != '1'
+# Pry is not allowed on the Xamarin Test Cloud.  This will force a validation
+# error if you mistakenly submit a binding.pry to the Test Cloud.
+if !ENV['XAMARIN_TEST_CLOUD']
   require 'pry'
+  Pry.config.history.file = '.pry-history'
+  require 'pry-nav'
 end
 
-# override cucumber `pending` on the XTC
-if ENV['XAMARIN_TEST_CLOUD'] == '1'
-  module Cucumber
-    module RbSupport
-      def pending(message = 'TODO')
-        raise "PENDING: #{message}"
-      end
-    end
-  end
-  World(Cucumber::RbSupport)
-end

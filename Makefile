@@ -21,20 +21,27 @@ dylibs:
 	# See https://github.com/calabash/calabash-codesign for details.
 	bin/make/dylibs.sh 337976ad9ace375ac06cd8fea2edb0c7276dec2a72d005ca5559a8bbf09c8841
 
-install_test_binaries:
-	$(MAKE) framework
-	$(MAKE) dylibs
-	./scripts/install-test-binaries.rb
-
 webquery_headers:
-	scripts/insert-js-into-webquery-headers.rb
-
-test_app:
-	scripts/make-lp-test-app.rb
+	bundle exec bin/make/insert-js-into-webquery-headers.rb
 
 xct:
-	scripts/test/xctest.rb
+	bundle exec bin/test/xctest.rb
 
+# Makes the LPTestTarget.app without Calabash linked.
+# This target is suitable for testing dylib injection.
+app:
+	bin/make/app.sh
+
+# Makes the LPTestTarget with Calabash linked.
+app-cal:
+	bin/make/app-cal.sh
+
+# Make the LPTestTarget with Calabash linked
+ipa-cal:
+	bin/make/ipa-cal.sh
+
+# For developers only.  This script is not part of the library
+# build process.
 version:
-	scripts/make-version.sh
-	bin/version --revision ALL
+	bin/make/version.sh
+

@@ -4,6 +4,7 @@
 
 #import "LPJSONUtils+Introspection.h"
 #import <objc/runtime.h>
+#import "LPCocoaLumberjack.h"
 
 @interface LPJSONUtils ()
 @end
@@ -57,7 +58,7 @@ static NSUInteger const LPJSONUtilsIntrospectionMethodDescriptionBufferLength = 
       if ([object respondsToSelector:method]) {
         [customAccessors[@"methods"] addObject:methodName];
       } else {
-        NSLog(@"Object doesn't respond to method: ");
+        LPLogDebug(@"Object doesn't respond to method: ");
       }
     }
     free(methods);

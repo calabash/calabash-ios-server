@@ -11,6 +11,7 @@
 #endif
 
 #import "LPScrollToRowOperation.h"
+#import "LPCocoaLumberjack.h"
 
 @implementation LPScrollToRowOperation
 
@@ -64,7 +65,7 @@
 
         return target;
       } else {
-        NSLog(@"Warning: table doesn't contain indexPath: %@", path);
+        LPLogWarn(@"Table doesn't contain indexPath: %@", path);
         return nil;
       }
     } else {
@@ -79,7 +80,7 @@
     }
   }
 
-  NSLog(@"Warning view: %@ should be a table view for scrolling to row/cell to make sense",
+ LPLogWarn(@"View %@ should be a table view for scrolling to row/cell to make sense",
           target);
   return nil;
 }

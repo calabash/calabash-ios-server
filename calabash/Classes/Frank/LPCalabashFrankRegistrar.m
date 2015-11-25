@@ -13,6 +13,7 @@
 #import "LPVersionRoute.h"
 #import "LPJSONUtils.h"
 #import "LPMapRoute.h"
+#import "LPCocoaLumberjack.h"
 
 #define MAKE_CATEGORIES_LOADABLE(UNIQUE_NAME) @interface FORCELOAD_##UNIQUE_NAME : NSObject @end @implementation FORCELOAD_##UNIQUE_NAME @end
 
@@ -24,15 +25,15 @@ static NSString *const selectorName = @"calabash_uispec";
 +(void)load{
   LPCalabashFrankRegistrar *calabashUIQuerySelector = [self new];
   [SelectorEngineRegistry registerSelectorEngine:calabashUIQuerySelector WithName:selectorName];
-  NSLog(@"Registered Calabash selector engine registered with Frank under name '%@'", selectorName);
+  LPLogDebug(@"Registered Calabash selector engine registered with Frank under name '%@'", selectorName);
   [calabashUIQuerySelector release];
-  NSLog(@"About to create route...");
+  LPLogDebug(@"About to create route...");
   Class c = NSClassFromString(@"RequestRouter");
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wundeclared-selector"
 #pragma clang diagnostic ignored "-Wobjc-method-access"
   id frankRouter = [c performSelector:@selector(singleton)];
-  NSLog(@"Router: %@", frankRouter);
+  LPLogDebug(@"Router: %@", frankRouter);
 
   LPUIARouteOverUserPrefs *uiaUsingUserPrefs = [LPUIARouteOverUserPrefs new];
   [frankRouter registerRoute:uiaUsingUserPrefs];

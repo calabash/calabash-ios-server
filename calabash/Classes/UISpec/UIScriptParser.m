@@ -13,6 +13,7 @@
 #import "UIScriptASTDirection.h"
 #import "UIScriptASTVisibility.h"
 #import "UIScriptASTPredicate.h"
+#import "LPCocoaLumberjack.h"
 
 #define CALABASH_TYPE_KEY @"_calabash-type"
 
@@ -184,7 +185,7 @@ static NSCharacterSet *curlyBrackets = nil;
             w.objectValue = [NSIndexPath indexPathForRow:[i1 integerValue]
                                                inSection:[i2 integerValue]];
           } else {
-            NSLog(@"Unknown value type %@", val);
+            LPLogDebug(@"Unknown value type %@", val);
           }
           [_res addObject:w];
         }
@@ -212,7 +213,7 @@ static NSCharacterSet *curlyBrackets = nil;
           w.objectValue = [NSIndexPath indexPathForRow:[i1 integerValue]
                                              inSection:[i2 integerValue]];
         } else {
-          NSLog(@"Unknown value type %@", val);
+          LPLogDebug(@"Unknown value type %@", val);
         }
 
         [_res addObject:w];
@@ -413,7 +414,7 @@ static NSCharacterSet *curlyBrackets = nil;
     }
     return [res stringByReplacingOccurrencesOfString:@"\\'" withString:@"'"];
   } else if ([firstChar isEqualToString:@"}"]) {
-    NSLog(@"Illegal unbalanced [] found %@", _script);
+    LPLogError(@"Illegal unbalanced [] found %@", _script);
     return nil;
   } else if ([firstChar isEqualToString:@"{"]) {
     NSRange endBrack = [_script rangeOfString:@"}" options:NSLiteralSearch
@@ -546,7 +547,7 @@ static NSCharacterSet *curlyBrackets = nil;
   if ([colonSep count] < 2) {
 
 
-    NSLog(@"Warning: token %@ has no : separator", token);
+    LPLogDebug(@"Warning: token %@ has no : separator", token);
     return nil;
   }
 

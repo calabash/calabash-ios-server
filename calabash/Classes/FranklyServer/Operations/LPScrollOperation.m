@@ -62,7 +62,6 @@
 
     return target;
   } else if ([LPIsWebView isWebView:target]) {
-    UIView<LPWebViewProtocol> *webView = (UIView<LPWebViewProtocol> *)target;
     NSString *scrollJS = @"window.scrollBy(%@,%@);";
     if ([@"up" isEqualToString:dir]) {
       scrollJS = [NSString stringWithFormat:scrollJS, @"0", @"-100"];
@@ -73,8 +72,6 @@
     } else {
       scrollJS = [NSString stringWithFormat:scrollJS, @"100", @"0"];
     }
-    NSString *res = [webView calabashStringByEvaluatingJavaScript:scrollJS];
-    NSLog(@"RES:%@", res);
     return target;
   }
   return nil;
