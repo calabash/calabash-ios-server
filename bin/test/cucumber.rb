@@ -42,13 +42,19 @@ Dir.chdir working_dir do
 
     sim_version = RunLoop::Version.new("#{sim_major}.#{sim_minor}")
 
-    devices = {
-      :air => 'iPad Air',
-      :iphone4s => 'iPhone 4s',
-      :iphone5s => 'iPhone 5s',
-      :iphone6 => 'iPhone 6',
-      :iphone6plus => 'iPhone 6 Plus'
-    }
+    if ENV["JENKINS_HOME"]
+      devices = {
+        :iphone6sPlus => 'iPhone 6s Plus',
+      }
+    else
+      devices = {
+        :air => 'iPad Air',
+        :iphone4s => 'iPhone 4s',
+        :iphone5s => 'iPhone 5s',
+        :iphone6 => 'iPhone 6',
+        :iphone6plus => 'iPhone 6 Plus'
+      }
+    end
 
     RunLoop::CoreSimulator.terminate_core_simulator_processes
 
