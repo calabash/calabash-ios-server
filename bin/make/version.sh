@@ -30,7 +30,7 @@ function ditto_or_exit {
 }
 
 XC_PROJECT=calabash.xcodeproj
-XC_BUILD_CONFIG=Debug
+XC_BUILD_CONFIG=Release
 
 VTOOL_BUILD_DIR=build/version-tool
 mkdir -p "${VTOOL_BUILD_DIR}"
