@@ -2,23 +2,24 @@
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
 
-#import "LPIsWebView.h"
+#import "LPWebViewUtils.h"
+#import "LPConstants.h"
 #import <objc/runtime.h>
 
-@interface LPIsWebView ()
+@interface LPWebViewUtils ()
 
 + (Class) classForWKWebView;
 
 @end
 
-@implementation LPIsWebView
+@implementation LPWebViewUtils
 
 + (Class) classForWKWebView {
   return objc_getClass("WKWebView");
 }
 
 + (BOOL) isWebView:(id) object {
-  Class klass = [LPIsWebView classForWKWebView];
+  Class klass = [LPWebViewUtils classForWKWebView];
   if (klass) {
     return
     [object isKindOfClass:[UIWebView class]] ||
@@ -26,6 +27,10 @@
   } else {
     return [object isKindOfClass:[UIWebView class]];
   }
+}
+
++ (BOOL) isIFrameResult:(NSDictionary *)result {
+  return result[IFRAME_INFO_KEY] != nil;
 }
 
 @end

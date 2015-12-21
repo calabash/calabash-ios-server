@@ -5,6 +5,7 @@
 #import "LPWebQuery.h"
 #import "LPTouchUtils.h"
 #import "LPWebQueryResult.h"
+#import "LPConstants.h"
 
 @interface LPWebQuery (LPXCTTEST)
 
@@ -131,7 +132,7 @@
 }
 
 
-#pragma mark - arrayByEvaluatingQuery:Type:webView:includeInvisible:
+#pragma mark - arrayByEvaluatingQuery:frameSelector:Type:webView:includeInvisible:
 
 - (id) mockForEvaluatingJavaScriptInWebView:(UIWebView *) webView
                                     evalsTo:(NSString *) result {
@@ -167,6 +168,7 @@
 
 - (void) testArrayByEvaluatingQueryUnknownType {
   NSArray *actual = [LPWebQuery arrayByEvaluatingQuery:nil
+                                         frameSelector:WEBVIEW_DOCUMENT_FRAME_SELECTOR
                                                   type:NSNotFound
                                                webView:nil
                                       includeInvisible:NO];
@@ -202,6 +204,7 @@
      pointInside:CGPointMake(112, 373.4375 + 120) withEvent:nil];
 
     NSArray *results = [LPWebQuery arrayByEvaluatingQuery:query
+                                            frameSelector:WEBVIEW_DOCUMENT_FRAME_SELECTOR
                                                      type:type
                                                   webView:mockWebView
                                          includeInvisible:NO];
@@ -243,6 +246,7 @@
      pointInside:CGPointZero withEvent:nil];
 
     NSArray *results = [LPWebQuery arrayByEvaluatingQuery:query
+                                            frameSelector:WEBVIEW_DOCUMENT_FRAME_SELECTOR
                                                      type:type
                                                   webView:mockWebView
                                          includeInvisible:NO];
@@ -279,6 +283,7 @@
                                                             forWebView:mockWebView];
 
     NSArray *results = [LPWebQuery arrayByEvaluatingQuery:query
+                                            frameSelector:WEBVIEW_DOCUMENT_FRAME_SELECTOR
                                                      type:type
                                                   webView:mockWebView
                                          includeInvisible:YES];
