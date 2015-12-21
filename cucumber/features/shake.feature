@@ -1,3 +1,4 @@
+@quarantine
 @shake
 Feature: Shake
 
