@@ -2262,7 +2262,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = LP;
-				LastUpgradeCheck = 0710;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = Calabash;
 				TargetAttributes = {
 					F50CBF5D1A03F222004AC9DA = {

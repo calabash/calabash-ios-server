@@ -90,14 +90,15 @@ SEARCH_PATH="${SIM_BUILD_DIR}/Build/Products"
 rm -rf "${SEARCH_PATH}"
 
 xcrun xcodebuild build \
-  -project ${XC_PROJECT} \
-  -scheme ${XC_SCHEME} \
   -SYMROOT="${SIM_BUILD_DIR}" \
   -derivedDataPath "${SIM_BUILD_DIR}" \
+  -project ${XC_PROJECT} \
+  -scheme ${XC_SCHEME} \
   -configuration "${XC_BUILD_CONFIG}" \
   ARCHS="i386 x86_64" \
   VALID_ARCHS="i386 x86_64" \
   ONLY_ACTIVE_ARCH=NO \
+  EFFECTIVE_PLATFORM_NAME="-iphonesimulator" \
   -sdk iphonesimulator \
   IPHONEOS_DEPLOYMENT_TARGET=6.0 \
   GCC_TREAT_WARNINGS_AS_ERRORS=YES \

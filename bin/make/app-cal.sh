@@ -83,6 +83,7 @@ banner "Building ${APP}"
 
 if [ -z "${CODE_SIGN_IDENTITY}" ]; then
   COMMAND_LINE_BUILD=1 xcrun xcodebuild \
+    EFFECTIVE_PLATFORM_NAME="-iphonesimulator" \
     -SYMROOT="${XC_BUILD_DIR}" \
     -derivedDataPath "${XC_BUILD_DIR}" \
     -project "${XC_PROJECT}" \
@@ -96,6 +97,7 @@ if [ -z "${CODE_SIGN_IDENTITY}" ]; then
 else
   COMMAND_LINE_BUILD=1 xcrun xcodebuild \
     CODE_SIGN_IDENTITY="${CODE_SIGN_IDENTITY}" \
+    EFFECTIVE_PLATFORM_NAME="-iphonesimulator" \
     -SYMROOT="${XC_BUILD_DIR}" \
     -derivedDataPath "${XC_BUILD_DIR}" \
     -project "${XC_PROJECT}" \

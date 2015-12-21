@@ -86,13 +86,14 @@ fi
 
 banner "Building Dylib Simulator Library"
 
-SIM_LIBRARY="${SIM_BUILD_DIR}/Build/Products/${XC_BUILD_CONFIG}-iphonesimulator/${LIBRARY_NAME}"
+SIM_BUILD_PRODUCTS_DIR="${SIM_BUILD_DIR}/Build/Products/${XC_BUILD_CONFIG}-iphonesimulator"
+SIM_LIBRARY="${SIM_BUILD_PRODUCTS_DIR}/${LIBRARY_NAME}"
 rm -rf "${SIM_LIBRARY}"
 
 # Xcode issues non-fatal warnings re: this directory is missing.
 # Xcode will eventually create the directory, but if we create it
 # ourselves, we can suppress the warnings.
-mkdir -p "${SIM_BUILD_DIR}/Build/Products/${XC_BUILD_CONFIG}-iphonesimulator"
+mkdir -p "${SIM_BUILD_PRODUCTS_DIR}"
 
 xcrun xcodebuild build \
   -project ${XC_PROJECT} \
@@ -103,6 +104,7 @@ xcrun xcodebuild build \
   ARCHS="i386 x86_64" \
   VALID_ARCHS="i386 x86_64" \
   ONLY_ACTIVE_ARCH=NO \
+  EFFECTIVE_PLATFORM_NAME="-iphonesimulator" \
   -sdk iphonesimulator \
   IPHONEOS_DEPLOYMENT_TARGET=6.0 \
   GCC_TREAT_WARNINGS_AS_ERRORS=YES \
