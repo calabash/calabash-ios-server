@@ -629,17 +629,14 @@ static NSCharacterSet *curlyBrackets = nil;
 
 - (NSArray *) evalWith:(NSArray *) views {
   if ([_res count] == 0) {return nil;}
-  NSUInteger index = 0;
   UIScriptASTDirectionType dir = UIScriptASTDirectionTypeDescendant;
   UIScriptASTVisibilityType visibility = UIScriptASTVisibilityTypeVisible;
-
 
   //index and first match first = [res objectAtIndex:index];
   //dir is direction or default direction
   NSArray *res = views;
-  NSUInteger N = [_res count];
-  while (index < N) {
-    UIScriptAST *cur = [_res objectAtIndex:index++];
+  
+  for (UIScriptAST *cur in _res) {
     if ([cur isKindOfClass:[UIScriptASTDirection class]]) {
       dir = [(UIScriptASTDirection *) cur directionType];
     } else if ([cur isKindOfClass:[UIScriptASTVisibility class]]) {

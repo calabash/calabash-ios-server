@@ -2,10 +2,10 @@
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
 
-#import "LPIsWebView.h"
+#import "LPWebViewUtils.h"
 #import "LPDevice.h"
 
-@interface LPIsWebView (LPXCTEST)
+@interface LPWebViewUtils (LPXCTEST)
 
 + (Class) classForWKWebView;
 
@@ -22,12 +22,12 @@ describe(@".isWebView", ^{
     describe(@"returns true when", ^{
       it(@"a UIWebView", ^{
         UIWebView *view = [[UIWebView alloc] initWithFrame:CGRectZero];
-        expect([LPIsWebView isWebView:view]).to.equal(YES);
+        expect([LPWebViewUtils isWebView:view]).to.equal(YES);
       });
 
       it(@"a subclass of UIWebView", ^{
         MyUIWebView *view = [[MyUIWebView alloc] initWithFrame:CGRectZero];
-        expect([LPIsWebView isWebView:view]).to.equal(YES);
+        expect([LPWebViewUtils isWebView:view]).to.equal(YES);
       });
 
       it(@"is a WKWebView", ^{
@@ -36,7 +36,7 @@ describe(@".isWebView", ^{
         } else {
           Class klass = objc_getClass("WKWebView");
           id obj = [[klass alloc] initWithFrame:CGRectZero];
-          expect([LPIsWebView isWebView:obj]).to.equal(YES);
+          expect([LPWebViewUtils isWebView:obj]).to.equal(YES);
         }
       });
 
@@ -47,17 +47,17 @@ describe(@".isWebView", ^{
           Class klass = objc_getClass("WKWebView");
           Class subclass = objc_allocateClassPair(klass, "MyWKWebView", 0);
           id obj = [[subclass alloc] initWithFrame:CGRectZero];
-          expect([LPIsWebView isWebView:obj]).to.equal(YES);
+          expect([LPWebViewUtils isWebView:obj]).to.equal(YES);
         }
       });
     });
 
     it(@"returns false otherwise", ^{
       UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
-      expect([LPIsWebView isWebView:view]).to.equal(NO);
+      expect([LPWebViewUtils isWebView:view]).to.equal(NO);
 
       NSObject *obj = [NSObject new];
-      expect([LPIsWebView isWebView:obj]).to.equal(NO);
+      expect([LPWebViewUtils isWebView:obj]).to.equal(NO);
     });
   });
 
@@ -65,32 +65,32 @@ describe(@".isWebView", ^{
     describe(@"returns true when", ^{
       it(@"a UIWebView", ^{
         UIWebView *view = [[UIWebView alloc] initWithFrame:CGRectZero];
-        id mock = [OCMockObject mockForClass:[LPIsWebView class]];
+        id mock = [OCMockObject mockForClass:[LPWebViewUtils class]];
         [[[mock expect] andReturn:nil] classForWKWebView];
-        expect([LPIsWebView isWebView:view]).to.equal(YES);
+        expect([LPWebViewUtils isWebView:view]).to.equal(YES);
         [mock verify];
       });
 
       it(@"a subclass of UIWebView", ^{
         MyUIWebView *view = [[MyUIWebView alloc] initWithFrame:CGRectZero];
-        id mock = [OCMockObject mockForClass:[LPIsWebView class]];
+        id mock = [OCMockObject mockForClass:[LPWebViewUtils class]];
         [[[mock expect] andReturn:nil] classForWKWebView];
-        expect([LPIsWebView isWebView:view]).to.equal(YES);
+        expect([LPWebViewUtils isWebView:view]).to.equal(YES);
         [mock verify];
       });
     });
 
     it(@"returns false otherwise", ^{
-      id mock = [OCMockObject mockForClass:[LPIsWebView class]];
+      id mock = [OCMockObject mockForClass:[LPWebViewUtils class]];
       [[[mock expect] andReturn:nil] classForWKWebView];
 
       UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
-      expect([LPIsWebView isWebView:view]).to.equal(NO);
+      expect([LPWebViewUtils isWebView:view]).to.equal(NO);
       [mock verify];
 
       [[[mock expect] andReturn:nil] classForWKWebView];
       NSObject *obj = [NSObject new];
-      expect([LPIsWebView isWebView:obj]).to.equal(NO);
+      expect([LPWebViewUtils isWebView:obj]).to.equal(NO);
       [mock verify];
     });
   });

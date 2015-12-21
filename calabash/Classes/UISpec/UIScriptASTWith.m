@@ -8,8 +8,9 @@
 #import "LPWebQuery.h"
 #import "LPReflectUtils.h"
 #import "LPWebQuery.h"
-#import "LPIsWebView.h"
+#import "LPWebViewUtils.h"
 #import "LPCocoaLumberjack.h"
+#import "LPConstants.h"
 
 @implementation UIScriptASTWith
 @synthesize selectorName = _selectorName;
@@ -77,6 +78,28 @@
   }
 }
 
+- (NSArray<NSDictionary *>*)handleIFrameQueryFromIFrameResult:(NSDictionary *)iFrameResult {
+  NSDictionary *iframeInfo = iFrameResult[IFRAME_INFO_KEY];
+  
+  LPWebQueryType queryType = [iframeInfo[QUERY_TYPE_KEY] unsignedIntegerValue];
+  UIView<LPWebViewProtocol> *webView = iFrameResult[WEBVIEW_KEY];
+  NSString *iframeSelector = iframeInfo[QUERY_KEY];
+  
+  if (iframeSelector == nil) {
+    LPLogError(@"Missing query string for IFrame Query");
+    return [NSArray array];
+  } else if (webView == nil) {
+    LPLogError(@"Missing webview for IFrame query");
+    return [NSArray array];
+  }
+  
+  return [LPWebQuery arrayByEvaluatingQuery:(NSString *)self.objectValue
+                              frameSelector:iframeSelector
+                                       type:queryType
+                                    webView:webView
+                           includeInvisible:YES];
+}
+
 
 - (NSArray *) handleWebView:(UIView<LPWebViewProtocol> *) webView visibility:(UIScriptASTVisibilityType) visibility {
   if (!self.selectorName) {
@@ -95,6 +118,7 @@
     }
 
     return [LPWebQuery arrayByEvaluatingQuery:(NSString *) self.objectValue
+                                frameSelector:WEBVIEW_DOCUMENT_FRAME_SELECTOR
                                          type:type
                                       webView:webView
                              includeInvisible:visibility == UIScriptASTVisibilityTypeAll];
@@ -109,15 +133,17 @@
 
   NSMutableArray *res = [NSMutableArray arrayWithCapacity:8];
 
-  for (UIView *v in views) {
-    if ([v isKindOfClass:[NSDictionary class]]) {
-      NSDictionary *dict = (NSDictionary *) v;
+  for (id result in views) {
+    if ([result isKindOfClass:[NSDictionary class]]) {
       NSString *key = NSStringFromSelector(self.selector);
-      if ([[dict valueForKey:key] isEqual:self.objectValue]) {
-        [res addObject:dict];
+      if ([result[key] isEqual:self.objectValue]) {
+        [res addObject:result];
+      } else if ([LPWebViewUtils isIFrameResult:result]) {
+        [res addObject:[self handleIFrameQueryFromIFrameResult:result]];
       }
     } else {
-      if ([LPIsWebView isWebView:v]) {
+      UIView *v = (UIView *)result;
+      if ([LPWebViewUtils isWebView:v]) {
         [res addObjectsFromArray:[self handleWebView:(UIView<LPWebViewProtocol> *) v
                                           visibility:visibility]];
         continue;
