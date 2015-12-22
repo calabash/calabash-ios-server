@@ -54,9 +54,8 @@ info "Configured xcodebuild pipes"
 
 XC_TARGET="LPTestTarget"
 XC_PROJECT="calabash.xcodeproj"
-XC_SCHEME="${XC_TARGET}"
 XC_CONFIG="CalabashApp"
-XC_BUILD_DIR="build/test-target/app-cal"
+XC_BUILD_DIR="${PWD}/build/test-target/app-cal"
 INSTALL_DIR="Products/test-target/app-cal"
 
 APP="${XC_TARGET}.app"
@@ -74,6 +73,8 @@ BUILD_PRODUCTS_DIR="${XC_BUILD_DIR}/Build/Products/${XC_CONFIG}-iphonesimulator"
 BUILD_PRODUCTS_APP="${BUILD_PRODUCTS_DIR}/${APP}"
 BUILD_PRODUCTS_DSYM="${BUILD_PRODUCTS_DIR}/${DSYM}"
 
+OBJECT_ROOT_DIR="${XC_BUILD_DIR}/Build/Intermediates/${XC_CONFIG}-iphonesimulator"
+
 rm -rf "${BUILD_PRODUCTS_APP}"
 rm -rf "${BUILD_PRODUCTS_DSYM}"
 
@@ -81,36 +82,26 @@ info "Prepared archive directory"
 
 banner "Building ${APP}"
 
-if [ -z "${CODE_SIGN_IDENTITY}" ]; then
-  COMMAND_LINE_BUILD=1 xcrun xcodebuild \
-    EFFECTIVE_PLATFORM_NAME="-iphonesimulator" \
-    -SYMROOT="${XC_BUILD_DIR}" \
-    -derivedDataPath "${XC_BUILD_DIR}" \
-    -project "${XC_PROJECT}" \
-    -scheme "${XC_TARGET}" \
-    -configuration "${XC_CONFIG}" \
-    -sdk iphonesimulator \
-    ARCHS="i386 x86_64" \
-    VALID_ARCHS="i386 x86_64" \
-    ONLY_ACTIVE_ARCH=NO \
-    build | $XC_PIPE
-else
-  COMMAND_LINE_BUILD=1 xcrun xcodebuild \
-    CODE_SIGN_IDENTITY="${CODE_SIGN_IDENTITY}" \
-    EFFECTIVE_PLATFORM_NAME="-iphonesimulator" \
-    -SYMROOT="${XC_BUILD_DIR}" \
-    -derivedDataPath "${XC_BUILD_DIR}" \
-    -project "${XC_PROJECT}" \
-    -scheme "${XC_TARGET}" \
-    -configuration "${XC_CONFIG}" \
-    -sdk iphonesimulator \
-    ARCHS="i386 x86_64" \
-    VALID_ARCHS="i386 x86_64" \
-    ONLY_ACTIVE_ARCH=NO \
-    build | $XC_PIPE
-fi
+COMMAND_LINE_BUILD=1 xcrun xcodebuild \
+  -SYMROOT="${XC_BUILD_DIR}" \
+  OBJROOT="${OBJECT_ROOT_DIR}" \
+  BUILT_PRODUCTS_DIR="${BUILD_PRODUCTS_DIR}" \
+  TARGET_BUILD_DIR="${BUILD_PRODUCTS_DIR}" \
+  DWARF_DSYM_FOLDER_PATH="${BUILD_PRODUCTS_DIR}" \
+  -project "${XC_PROJECT}" \
+  -target "${XC_TARGET}" \
+  -configuration "${XC_CONFIG}" \
+  -sdk iphonesimulator \
+  ARCHS="i386 x86_64" \
+  VALID_ARCHS="i386 x86_64" \
+  ONLY_ACTIVE_ARCH=NO \
+  build | $XC_PIPE
 
-EXIT_CODE=${PIPESTATUS[0]}
+if [ ! -z ${USE_XCPRETTY} ]; then
+  EXIT_CODE=${PIPESTATUS[0]}
+else
+  EXIT_CODE=$?
+fi
 
 if [ $EXIT_CODE != 0 ]; then
   error "Building app failed."
