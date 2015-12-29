@@ -139,7 +139,7 @@
       if ([result[key] isEqual:self.objectValue]) {
         [res addObject:result];
       } else if ([LPWebViewUtils isIFrameResult:result]) {
-        [res addObject:[self handleIFrameQueryFromIFrameResult:result]];
+        [res addObjectsFromArray:[self handleIFrameQueryFromIFrameResult:result]];
       }
     } else {
       UIView *v = (UIView *)result;
