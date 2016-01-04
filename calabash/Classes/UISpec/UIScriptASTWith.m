@@ -78,7 +78,7 @@
   }
 }
 
-- (NSArray<NSDictionary *>*)handleIFrameQueryFromIFrameResult:(NSDictionary *)iFrameResult {
+- (NSArray *)handleIFrameQueryFromIFrameResult:(NSDictionary *)iFrameResult {
   NSDictionary *iframeInfo = iFrameResult[IFRAME_INFO_KEY];
   
   LPWebQueryType queryType = [iframeInfo[QUERY_TYPE_KEY] unsignedIntegerValue];
