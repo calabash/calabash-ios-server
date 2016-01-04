@@ -93,11 +93,38 @@
     return [NSArray array];
   }
   
-  return [LPWebQuery arrayByEvaluatingQuery:(NSString *)self.objectValue
-                              frameSelector:iframeSelector
-                                       type:queryType
-                                    webView:webView
-                           includeInvisible:YES];
+  NSArray *results = [LPWebQuery arrayByEvaluatingQuery:(NSString *)self.objectValue
+                                          frameSelector:iframeSelector
+                                                   type:queryType
+                                                webView:webView
+                                       includeInvisible:YES];
+  /*
+   *  And now we must offset the iframe query results by the frame (left, top) of the original 
+   *  iframe.
+   */
+  NSMutableArray *ret = [NSMutableArray arrayWithCapacity:results.count];
+  
+  NSDictionary *iFrameRect = iFrameResult[@"rect"];
+  float xOffset, yOffset;
+  
+  xOffset = [iFrameRect[@"left"] floatValue];
+  yOffset = [iFrameRect[@"top"] floatValue];
+  
+  for (NSDictionary *result in results) {
+    NSMutableDictionary *mResult = [result mutableCopy];
+    
+    NSMutableDictionary *mRect = [mResult[@"rect"] mutableCopy];
+    mRect[@"x"] = @([mRect[@"x"] floatValue] + xOffset);
+    mRect[@"left"] = @([mRect[@"left"] floatValue] + xOffset);
+    mRect[@"center_x"] = @([mRect[@"center_x"] floatValue] + xOffset);
+    mRect[@"y"] = @([mRect[@"y"] floatValue] + yOffset);
+    mRect[@"top"] = @([mRect[@"top"] floatValue] + yOffset);
+    mRect[@"center_y"] = @([mRect[@"center_y"] floatValue] + yOffset);
+    
+    mResult[@"rect"] = mRect;
+    [ret addObject:mResult];
+  }
+  return ret;
 }
 
 
