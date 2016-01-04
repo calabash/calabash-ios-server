@@ -42,6 +42,3 @@ DEPENDENCIES
   retriable (~> 2.0)
   run_loop!
   xcpretty
-
-BUNDLED WITH
-   1.10.6
