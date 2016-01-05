@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
-require 'fileutils'
-require "luffa"
+require "fileutils"
+require "command_runner"
 
 module Calabash
 
@@ -87,6 +87,8 @@ module Calabash
   end
 end
 
+MINIFY_BUILD_TIMEOUT = 10
+
 this_dir = File.dirname(__FILE__)
 
 calabash_js_dir = File.expand_path(File.join(this_dir, '..', '..', 'calabash-js'))
@@ -104,12 +106,14 @@ Dir.chdir(calabash_js_dir) do
     exit(1)
   end
 
-  options = {
-    :pass_msg => "Built minified JavaScript for Calabash iOS headers",
-    :fail_msg => "Could not build minified JavaScript for Calabash iOS headers"
-  }
+  command_output = CommandRunner.run([build_js_script], timeout: MINIFY_BUILD_TIMEOUT)
 
-  exit_code = Luffa.unix_command(build_js_script, options)
+  exit_code = command_output[:status].exitstatus
+
+  out = command_output[:out]
+  if Calabash.debug?
+    puts out
+  end
 
   if exit_code != 0
     Calabash.log_error("Expect build script to exit 0, but exited #{exit_code}")
