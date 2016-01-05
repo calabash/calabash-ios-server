@@ -51,7 +51,7 @@ module Calabash
   end
 
   def self.log_info(string)
-    puts self.green("INFO:  #{string}")
+    puts self.green("INFO: #{string}")
   end
 
   def self.log_error(string)
@@ -106,6 +106,10 @@ Dir.chdir(calabash_js_dir) do
     exit(1)
   end
 
+  Calabash.log_banner("Minifying JavaScript")
+
+  Calabash.log_unix_command(build_js_script)
+
   command_output = CommandRunner.run([build_js_script], timeout: MINIFY_BUILD_TIMEOUT)
 
   exit_code = command_output[:status].exitstatus
@@ -129,6 +133,10 @@ Dir.chdir(calabash_js_dir) do
     Calabash.log_error("Expected #{mini_set_text_js} to exist")
     exit(1)
   end
+
+  Calabash.log_info("Created:")
+  Calabash.log_info("  #{mini_calabash_js}")
+  Calabash.log_info("  #{mini_set_text_js}")
 end
 
 Calabash.write_header(webquery_header, "LP_QUERY_JS", mini_calabash_js)
