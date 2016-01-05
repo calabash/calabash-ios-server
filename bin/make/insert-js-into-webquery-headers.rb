@@ -142,3 +142,6 @@ end
 Calabash.write_header(webquery_header, "LP_QUERY_JS", mini_calabash_js)
 Calabash.write_header(settext_header, "LP_SET_TEXT_JS", mini_set_text_js)
 
+puts ""
+Calabash.log_info("Done!")
+
