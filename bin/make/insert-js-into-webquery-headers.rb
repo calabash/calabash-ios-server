@@ -10,6 +10,7 @@ module Calabash
 
     IO.read(header_file).force_encoding("utf-8").each_line do |line|
       if /#{constant_name}/.match(line)
+        puts "Found match for #{constant_name}"
         line.strip!
         new_js = IO.read(minified_js_file).force_encoding("utf-8").strip
         header_lines << %Q[static NSString *#{constant_name} = @"#{new_js}";]
@@ -62,3 +63,5 @@ Dir.chdir(calabash_js_dir) do
 end
 
 Calabash.write_header(webquery_header, "LP_QUERY_JS", mini_calabash_js)
+Calabash.write_header(settext_header, "LP_SET_TEXT_JS", mini_set_text_js)
+
