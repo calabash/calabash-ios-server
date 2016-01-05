@@ -3,6 +3,27 @@
 require 'fileutils'
 require "luffa"
 
+module Calabash
+
+  def self.write_header(header_file, constant_name, minified_js_file)
+    header_lines = []
+
+    IO.read(header_file).force_encoding("utf-8").each_line do |line|
+      if /#{constant_name}/.match(line)
+        line.strip!
+        new_js = IO.read(minified_js_file).force_encoding("utf-8").strip
+        header_lines << %Q[static NSString *#{constant_name} = @"#{new_js}";]
+      else
+        header_lines << line
+      end
+    end
+
+    File.open(header_file, "w:UTF-8") do |f|
+      f.puts(header_lines)
+    end
+  end
+end
+
 this_dir = File.dirname(__FILE__)
 
 calabash_js_dir = File.expand_path(File.join(this_dir, '..', '..', 'calabash-js'))
@@ -40,21 +61,4 @@ Dir.chdir(calabash_js_dir) do
   end
 end
 
-new_lines = []
-
-IO.read(webquery_header).force_encoding("utf-8").each_line do |line|
-  if /LP_QUERY_JS/.match(line)
-    line = line.strip
-    new_js = IO.read(mini_calabash_js).force_encoding("utf-8").strip
-    new_lines << %Q[static NSString *LP_QUERY_JS = @"#{new_js}";]
-  else
-    new_lines << line
-  end
-end
-
-File.open(webquery_header, "w:UTF-8") do |f|
-  f.puts(new_lines)
-end
-
-puts "Done."
-
+Calabash.write_header(webquery_header, "LP_QUERY_JS", mini_calabash_js)
