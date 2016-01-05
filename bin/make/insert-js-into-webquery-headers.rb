@@ -4,9 +4,14 @@ require 'fileutils'
 require "luffa"
 
 this_dir = File.dirname(__FILE__)
+
 calabash_js_dir = File.expand_path(File.join(this_dir, '..', '..', 'calabash-js'))
 mini_calabash_js = File.join(calabash_js_dir, "build", "calabash-min.js")
-webquery_header = File.expand_path(File.join(".", "calabash", "Classes", "WebViewQuery", "LPWebQuery.h"))
+mini_set_text_js = File.join(calabash_js_dir, "build", "set_text-min.js")
+
+classes_dir = File.expand_path(File.join(".", "calabash", "Classes"))
+webquery_header = File.expand_path(File.join(classes_dir, "WebViewQuery", "LPWebQuery.h"))
+settext_header = File.expand_path(File.join(classes_dir, "FranklyServer", "Operations", "LPSetTextOperation.h"))
 
 Dir.chdir(calabash_js_dir) do
   build_js_script = File.expand_path('./build.sh')
@@ -16,8 +21,8 @@ Dir.chdir(calabash_js_dir) do
   end
 
   options = {
-    :pass_msg => "Built #{mini_calabash_js}",
-    :fail_msg => "Could not build #{mini_calabash_js}"
+    :pass_msg => "Built minified JavaScript for Calabash iOS headers",
+    :fail_msg => "Could not build minified JavaScript for Calabash iOS headers"
   }
 
   exit_code = Luffa.unix_command(build_js_script, options)
@@ -28,6 +33,10 @@ Dir.chdir(calabash_js_dir) do
 
   if !File.exist?(mini_calabash_js)
     Luffa.log_fail("Expected #{mini_calabash_js} to exist")
+  end
+
+  if !File.exist?(mini_set_text_js)
+    Luffa.log_fail("Expected #{mini_set_text_js} to exist")
   end
 end
 
