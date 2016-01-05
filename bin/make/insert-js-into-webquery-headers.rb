@@ -100,8 +100,8 @@ settext_header = File.expand_path(File.join(classes_dir, "FranklyServer", "Opera
 Dir.chdir(calabash_js_dir) do
   build_js_script = File.expand_path('./build.sh')
   unless File.exist?(build_js_script)
-    Luffa.log_fail("FAIL: expected '#{build_js_script}' to exist")
-    exit 1
+    Calabash.log_error("Expected '#{build_js_script}' to exist")
+    exit(1)
   end
 
   options = {
@@ -112,15 +112,18 @@ Dir.chdir(calabash_js_dir) do
   exit_code = Luffa.unix_command(build_js_script, options)
 
   if exit_code != 0
+    Calabash.log_error("Expect build script to exit 0, but exited #{exit_code}")
     exit(exit_code)
   end
 
   if !File.exist?(mini_calabash_js)
-    Luffa.log_fail("Expected #{mini_calabash_js} to exist")
+    Calabash.log_error("Expected #{mini_calabash_js} to exist")
+    exit(1)
   end
 
   if !File.exist?(mini_set_text_js)
-    Luffa.log_fail("Expected #{mini_set_text_js} to exist")
+    Calabash.log_error("Expected #{mini_set_text_js} to exist")
+    exit(1)
   end
 end
 
