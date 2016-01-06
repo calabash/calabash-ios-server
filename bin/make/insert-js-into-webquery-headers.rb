@@ -18,7 +18,7 @@ module Calabash
         match_found = true
         line.strip!
         new_js = IO.read(minified_js_file).force_encoding("utf-8").strip
-        header_lines << %Q[static NSString *#{constant_name} = @"#{new_js}";]
+        header_lines << %Q[static NSString *const #{constant_name} = @"#{new_js}";]
       else
         header_lines << line
       end
