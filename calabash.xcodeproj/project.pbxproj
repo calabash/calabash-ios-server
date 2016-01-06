@@ -10,10 +10,10 @@
 		89043ABF1C289A5D0067E22F /* LPConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 89043ABD1C289A5D0067E22F /* LPConstants.h */; };
 		89043AC01C289A5D0067E22F /* LPConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 89043ABD1C289A5D0067E22F /* LPConstants.h */; };
 		89043AC11C289A5D0067E22F /* LPConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 89043ABD1C289A5D0067E22F /* LPConstants.h */; };
-		89043AC21C289A5D0067E22F /* LPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 89043ABE1C289A5D0067E22F /* LPConstants.m */; };
-		89043AC31C289A5D0067E22F /* LPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 89043ABE1C289A5D0067E22F /* LPConstants.m */; };
-		89043AC41C289A5D0067E22F /* LPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 89043ABE1C289A5D0067E22F /* LPConstants.m */; };
-		89043AC51C289A5D0067E22F /* LPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 89043ABE1C289A5D0067E22F /* LPConstants.m */; };
+		89043AC21C289A5D0067E22F /* LPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 89043ABE1C289A5D0067E22F /* LPConstants.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		89043AC31C289A5D0067E22F /* LPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 89043ABE1C289A5D0067E22F /* LPConstants.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		89043AC41C289A5D0067E22F /* LPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 89043ABE1C289A5D0067E22F /* LPConstants.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		89043AC51C289A5D0067E22F /* LPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 89043ABE1C289A5D0067E22F /* LPConstants.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89128F951B25DD92008874B0 /* LPIntrospectionTestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 89128F941B25DD92008874B0 /* LPIntrospectionTestView.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89F2EFE11B2243D500958052 /* LPIntrospectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89F2EFE21B2243D500958052 /* LPIntrospectionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 89F2EFDB1B2243D500958052 /* LPIntrospectionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
