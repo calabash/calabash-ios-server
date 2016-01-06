@@ -19,7 +19,7 @@ frank:
 dylibs:
 	# The argument is the sha of the developer.p12 used to resign the dylib.
 	# See https://github.com/calabash/calabash-codesign for details.
-	bin/make/dylibs.sh 337976ad9ace375ac06cd8fea2edb0c7276dec2a72d005ca5559a8bbf09c8841
+	bin/make/dylibs.sh 9e7be7fd966ed49fab7f0335e148421ca05165a804928529dda17e1031ab5a4a
 
 webquery_header:
 	bundle exec bin/make/insert-js-into-webquery-header.rb
