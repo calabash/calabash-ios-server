@@ -25,6 +25,9 @@ webquery_header:
 	bundle exec bin/make/insert-js-into-webquery-header.rb
 
 xct:
+	$(MAKE) xctests
+
+xctests:
 	bundle exec bin/test/xctest.rb
 
 # Makes the LPTestTarget.app without Calabash linked.
