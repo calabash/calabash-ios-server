@@ -11,11 +11,11 @@
 
 #import "LPConstants.h"
 
-const NSString *NODE_NAME_KEY = @"nodeName";
-const NSString *IFRAME_KEY = @"IFRAME";
-const NSString *WEBVIEW_KEY = @"webView";
-const NSString *QUERY_KEY = @"iframe_query";
-const NSString *QUERY_TYPE_KEY = @"iframe_query_type";
-const NSString *IFRAME_INFO_KEY = @"iframe_info";
+NSString *const NODE_NAME_KEY = @"nodeName";
+NSString *const IFRAME_KEY = @"IFRAME";
+NSString *const WEBVIEW_KEY = @"webView";
+NSString *const QUERY_KEY = @"iframe_query";
+NSString *const QUERY_TYPE_KEY = @"iframe_query_type";
+NSString *const IFRAME_INFO_KEY = @"iframe_info";
 
-const NSString *WEBVIEW_DOCUMENT_FRAME_SELECTOR = nil;
+NSString *const WEBVIEW_DOCUMENT_FRAME_SELECTOR = nil;
