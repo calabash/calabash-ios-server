@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString *NODE_NAME_KEY;
-extern NSString *IFRAME_KEY;
-extern NSString *WEBVIEW_KEY;
-extern NSString *QUERY_KEY;
-extern NSString *QUERY_TYPE_KEY;
-extern NSString *IFRAME_INFO_KEY;
+extern NSString *const NODE_NAME_KEY;
+extern NSString *const IFRAME_KEY;
+extern NSString *const WEBVIEW_KEY;
+extern NSString *const QUERY_KEY;
+extern NSString *const QUERY_TYPE_KEY;
+extern NSString *const IFRAME_INFO_KEY;
 
-extern NSString *WEBVIEW_DOCUMENT_FRAME_SELECTOR;
+extern NSString *const WEBVIEW_DOCUMENT_FRAME_SELECTOR;
