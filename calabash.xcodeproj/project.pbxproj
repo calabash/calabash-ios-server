@@ -605,7 +605,7 @@
 		F5E2A5EE1BFEF8590068DFAD /* change-sha.plist in Resources */ = {isa = PBXBuildFile; fileRef = F5E2A5ED1BFEF8590068DFAD /* change-sha.plist */; };
 		F5E2D1E018C9120E00A0D9B6 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5E2D1E418C9120E00A0D9B6 /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5F2D5E01ACAC3B60027937B /* LPIsWebViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F2D5DF1ACAC3B60027937B /* LPIsWebViewTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5F2D5E01ACAC3B60027937B /* LPWebViewUtilsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F2D5DF1ACAC3B60027937B /* LPWebViewUtilsTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5F2D5E31ACACF2F0027937B /* LPWebViewUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F5F2D5E11ACACF2F0027937B /* LPWebViewUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5F2D5E61ACACF2F0027937B /* LPWebViewUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F5F2D5E11ACACF2F0027937B /* LPWebViewUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5F2D5E91ACACF2F0027937B /* LPWebViewUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F2D5E21ACACF2F0027937B /* LPWebViewUtils.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -1102,7 +1102,7 @@
 		F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSSKeychain.m; sourceTree = "<group>"; };
 		F5E2D1DB18C9120E00A0D9B6 /* LPSSKeychainQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPSSKeychainQuery.h; sourceTree = "<group>"; };
 		F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSSKeychainQuery.m; sourceTree = "<group>"; };
-		F5F2D5DF1ACAC3B60027937B /* LPIsWebViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPIsWebViewTest.m; sourceTree = "<group>"; };
+		F5F2D5DF1ACAC3B60027937B /* LPWebViewUtilsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPWebViewUtilsTest.m; sourceTree = "<group>"; };
 		F5F2D5E11ACACF2F0027937B /* LPWebViewUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPWebViewUtils.h; sourceTree = "<group>"; };
 		F5F2D5E21ACACF2F0027937B /* LPWebViewUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPWebViewUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1931,7 +1931,7 @@
 				F5A33A4B1AC009B600224639 /* LPWebQueryTest.m */,
 				F5A33A5E1AC0172A00224639 /* UIWebView+LPWebViewTest.m */,
 				F5A33A701AC01BC400224639 /* WKWebView+LPWebViewTest.m */,
-				F5F2D5DF1ACAC3B60027937B /* LPIsWebViewTest.m */,
+				F5F2D5DF1ACAC3B60027937B /* LPWebViewUtilsTest.m */,
 				F5C224CE1ACDFF38001DB4FA /* LPWKWebViewRuntimeLoaderTest.m */,
 			);
 			path = WebViewQuery;
@@ -2966,7 +2966,7 @@
 				F50CBFC11A0405CE004AC9DA /* UIScriptASTIndex.m in Sources */,
 				F576058C1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */,
 				F5A33A711AC01BC400224639 /* WKWebView+LPWebViewTest.m in Sources */,
-				F5F2D5E01ACAC3B60027937B /* LPIsWebViewTest.m in Sources */,
+				F5F2D5E01ACAC3B60027937B /* LPWebViewUtilsTest.m in Sources */,
 				F5C224EA1AD47403001DB4FA /* LPScreenshotRouteTest.m in Sources */,
 				F50CBFA61A0405B2004AC9DA /* LPLocationRoute.m in Sources */,
 				F50CBFBF1A0405CE004AC9DA /* UIScriptASTDirection.m in Sources */,
