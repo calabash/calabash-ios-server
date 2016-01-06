@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		89043ABF1C289A5D0067E22F /* LPConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 89043ABD1C289A5D0067E22F /* LPConstants.h */; };
-		89043AC01C289A5D0067E22F /* LPConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 89043ABD1C289A5D0067E22F /* LPConstants.h */; };
-		89043AC11C289A5D0067E22F /* LPConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 89043ABD1C289A5D0067E22F /* LPConstants.h */; };
 		89043AC21C289A5D0067E22F /* LPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 89043ABE1C289A5D0067E22F /* LPConstants.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89043AC31C289A5D0067E22F /* LPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 89043ABE1C289A5D0067E22F /* LPConstants.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89043AC41C289A5D0067E22F /* LPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 89043ABE1C289A5D0067E22F /* LPConstants.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -2097,7 +2094,6 @@
 				F50292971ACAD4FE00D07D31 /* LPWebViewUtils.h in Headers */,
 				F551857A1AC38A5200CE06DC /* LPRoute.h in Headers */,
 				F551857B1AC38A5200CE06DC /* LPRouter.h in Headers */,
-				89043AC11C289A5D0067E22F /* LPConstants.h in Headers */,
 				F551857C1AC38A5200CE06DC /* LPVersionRoute.h in Headers */,
 				F5C094511A979CC200AE5991 /* LPWebQuery.h in Headers */,
 				F55185641AC3879D00CE06DC /* LPWebViewProtocol.h in Headers */,
@@ -2119,7 +2115,6 @@
 				F5F2D5E61ACACF2F0027937B /* LPWebViewUtils.h in Headers */,
 				B1D5BDCA19A23BCE0070E8CE /* LPRoute.h in Headers */,
 				B1D5BDCB19A23BCE0070E8CE /* LPRouter.h in Headers */,
-				89043AC01C289A5D0067E22F /* LPConstants.h in Headers */,
 				B1D5BDD119A23BCE0070E8CE /* LPVersionRoute.h in Headers */,
 				F5C094501A979CC200AE5991 /* LPWebQuery.h in Headers */,
 				F55185611AC3878D00CE06DC /* LPWebViewProtocol.h in Headers */,
@@ -2141,7 +2136,6 @@
 				F5F2D5E31ACACF2F0027937B /* LPWebViewUtils.h in Headers */,
 				F59C5CF818E0BB1A0087B51D /* LPRoute.h in Headers */,
 				F59C5CF918E0BB290087B51D /* LPRouter.h in Headers */,
-				89043ABF1C289A5D0067E22F /* LPConstants.h in Headers */,
 				F537397418E52014004133FA /* LPVersionRoute.h in Headers */,
 				F5C0944D1A979CC200AE5991 /* LPWebQuery.h in Headers */,
 				F55185581AC3875200CE06DC /* LPWebViewProtocol.h in Headers */,
