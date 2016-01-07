@@ -21,3 +21,7 @@ notifications:
       - chris.fuentes@xamarin.com
     on_success: change
     on_failure: always
+  slack:
+    rooms:
+      secure: HTR+rM1Eva7zZOvxRxyVfU/b1qEMEjJxkg2aPdXtch33SzEbD375Yn/PB3M15mKvOBvPkN+X5FHcYdFLsqncddN5L0uNv6PYgUpXzVAd82Gq2Ga1HNWl1m8e6x2RiFaDE7Kf5UKUtyVprSBNB2CxlMMJ40N4P5ymZTtgbm7hrQg=
+
