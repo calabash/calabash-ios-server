@@ -13,6 +13,7 @@
 #import "LPIsWebView.h"
 #import "LPWebViewProtocol.h"
 #import "LPCocoaLumberjack.h"
+#import "LPJSONUtils.h"
 
 @implementation LPScrollOperation
 
@@ -60,7 +61,7 @@
 
     [sv setContentOffset:point animated:YES];
 
-    return target;
+    return [LPJSONUtils jsonifyObject:target];
   } else if ([LPIsWebView isWebView:target]) {
     NSString *scrollJS = @"window.scrollBy(%@,%@);";
     if ([@"up" isEqualToString:dir]) {
@@ -74,7 +75,8 @@
     }
 
     [target calabashStringByEvaluatingJavaScript:scrollJS];
-    return target;
+
+    return [LPJSONUtils jsonifyObject:target];
   }
   return nil;
 }
