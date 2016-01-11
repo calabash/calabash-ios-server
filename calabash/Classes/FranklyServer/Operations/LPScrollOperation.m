@@ -72,6 +72,8 @@
     } else {
       scrollJS = [NSString stringWithFormat:scrollJS, @"100", @"0"];
     }
+
+    [target calabashStringByEvaluatingJavaScript:scrollJS];
     return target;
   }
   return nil;
