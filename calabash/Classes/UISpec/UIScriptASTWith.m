@@ -123,6 +123,9 @@
     
     mResult[@"rect"] = mRect;
     [ret addObject:mResult];
+
+    [mResult release];
+    [mRect release];
   }
   return ret;
 }
