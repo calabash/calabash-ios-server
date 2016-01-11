@@ -21,8 +21,8 @@ dylibs:
 	# See https://github.com/calabash/calabash-codesign for details.
 	bin/make/dylibs.sh 9e7be7fd966ed49fab7f0335e148421ca05165a804928529dda17e1031ab5a4a
 
-webquery_header:
-	bundle exec bin/make/insert-js-into-webquery-header.rb
+webquery_headers:
+	bundle exec bin/make/insert-js-into-webquery-headers.rb
 
 xct:
 	$(MAKE) xctests
