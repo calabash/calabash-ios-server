@@ -53,7 +53,7 @@ end
 %>
 
 verbose: CALABASH_FULL_CONSOLE_OUTPUT=1 DEBUG=1
-common: -f <%= formatter %>
+common: -f <%= formatter %> --tags ~@quarantine
 
 ss_path: SCREENSHOT_PATH=<%= ss_path %>
 
