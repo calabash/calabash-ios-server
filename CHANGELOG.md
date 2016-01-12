@@ -1,3 +1,17 @@
+### 0.17.1
+
+This is a patch release which fixes scroll on UIWebView and WKWebView.
+
+* Fix LPScrollOperation for WebView #321
+* Travis: add slack notifications #318
+* Make: update the cert fingerprint for dylib signing #317
+* Fix JavaScript insertion into LPSetTextOperation.h #312
+* Fix JavaScript insertion into LPWebQuery.h #310
+* Update LPTestTarget build scripts for Xcode 7.2 #309
+* Cucumber: add @shake feature to quarantine #307
+* Version tool: turn off legacy coverage build option #306 @kaorijp
+* Update build scripts for Xcode 7.2 #305
+
 ### 0.17.0
 
 * Libs: should not generate code coverage files #296
