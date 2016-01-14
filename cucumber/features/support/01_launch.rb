@@ -22,12 +22,31 @@ Before("@no_relaunch") do
   @no_relaunch = true
 end
 
+Before("@german") do
+  if !xamarin_test_cloud?
+    target = ENV["DEVICE_TARGET"] || RunLoop::Core.default_simulator
+
+    simulator = RunLoop::Device.device_with_identifier(target)
+
+    RunLoop::CoreSimulator.erase(simulator)
+    RunLoop::CoreSimulator.set_locale(simulator, "de")
+    RunLoop::CoreSimulator.set_language(simulator, "de")
+
+    @args = ["-AppleLanguages", "(de)", "-AppleLocale", "de"]
+  end
+end
+
 Before do |scenario|
   launcher = Calabash::Launcher.launcher
   options = {
     # Add launch options here.
     :uia_strategy => :preferences
   }
+
+  if @args
+    options[:args] = @args.dup
+    @args = nil
+  end
 
   relaunch = true
 
