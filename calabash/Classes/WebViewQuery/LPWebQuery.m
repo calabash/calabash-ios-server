@@ -13,6 +13,7 @@
 #import "LPWebQuery.h"
 #import "LPJSONUtils.h"
 #import "LPTouchUtils.h"
+#import "LPConstants.h"
 
 @interface LPWebQuery ()
 
@@ -36,22 +37,24 @@
 }
 
 + (NSArray *) arrayByEvaluatingQuery:(NSString *) query
+                       frameSelector:(NSString *) frameSelector
                                 type:(LPWebQueryType) type
                              webView:(UIView<LPWebViewProtocol> *) webView
                     includeInvisible:(BOOL) includeInvisible {
+  frameSelector = frameSelector ?: @"";
   NSString *jsString = nil;
   switch (type) {
     case LPWebQueryTypeCSS:
-      jsString = [NSString stringWithFormat:LP_QUERY_JS,query,@"css", @""];
+      jsString = [NSString stringWithFormat:LP_QUERY_JS,query,@"css", @"", frameSelector];
       break;
 
     case LPWebQueryTypeXPATH:
-      jsString = [NSString stringWithFormat:LP_QUERY_JS,query,@"xpath",@""];
+      jsString = [NSString stringWithFormat:LP_QUERY_JS,query,@"xpath",@"", frameSelector];
       break;
     case LPWebQueryTypeFreeText:
       jsString = [NSString stringWithFormat:LP_QUERY_JS,
                   [NSString stringWithFormat:@"//node()[contains(text(),\\\"%@\\\")]", query],
-                  @"xpath",@""];
+                  @"xpath", @"", @""];
       break;
     default:
       return nil;
@@ -86,6 +89,20 @@
       [dres setValue:[NSNumber numberWithFloat:finalCenter.y] forKeyPath:@"rect.center_y"];
       [dres setValue:[NSNumber numberWithFloat:finalCenter.x] forKeyPath:@"rect.x"];
       [dres setValue:[NSNumber numberWithFloat:finalCenter.y] forKeyPath:@"rect.y"];
+      
+      /*
+       When doing iframe queries, we need to store all of the information needed to
+       recreate the iframe query in case subsequent tokens from the original
+       query string need to traverse further into the iframe.
+       
+       E.g., UIWebView css:'iframe' css:'#myElement'
+       */
+      if ([dres[NODE_NAME_KEY] isEqualToString:IFRAME_KEY]) {
+        dres[IFRAME_INFO_KEY] = @{
+                                  QUERY_KEY : query,
+                                  QUERY_TYPE_KEY : @(type)
+                                  };
+      }
 
       [result addObject:dres];
     }
@@ -94,7 +111,7 @@
 }
 
 + (NSDictionary *) dictionaryOfViewsInWebView:(UIView<LPWebViewProtocol> *) webView {
-  NSString *jsString = [NSString stringWithFormat:LP_QUERY_JS,@"",@"dump", @""];
+  NSString *jsString = [NSString stringWithFormat:LP_QUERY_JS,@"",@"dump", @"", @""];
 
   NSString *output = [webView calabashStringByEvaluatingJavaScript:jsString];
   NSDictionary *dumpResult = [LPJSONUtils deserializeDictionary:output];

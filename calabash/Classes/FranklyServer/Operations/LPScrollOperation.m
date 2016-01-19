@@ -10,7 +10,7 @@
 
 #import "LPScrollOperation.h"
 #import "UIWebView+LPWebView.h"
-#import "LPIsWebView.h"
+#import "LPWebViewUtils.h"
 #import "LPWebViewProtocol.h"
 #import "LPCocoaLumberjack.h"
 #import "LPJSONUtils.h"
@@ -60,9 +60,9 @@
     }
 
     [sv setContentOffset:point animated:YES];
-
     return [LPJSONUtils jsonifyObject:target];
-  } else if ([LPIsWebView isWebView:target]) {
+
+  } else if ([LPWebViewUtils isWebView:target]) {
     NSString *scrollJS = @"window.scrollBy(%@,%@);";
     if ([@"up" isEqualToString:dir]) {
       scrollJS = [NSString stringWithFormat:scrollJS, @"0", @"-100"];
