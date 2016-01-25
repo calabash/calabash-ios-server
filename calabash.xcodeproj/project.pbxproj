@@ -1068,6 +1068,8 @@
 		F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScrollToRowWithMarkOperation.m; sourceTree = "<group>"; };
 		F5B6B3DB1B5CC9A7006B2CC1 /* LPASLLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPASLLogFormatter.h; sourceTree = "<group>"; };
 		F5B6B3DC1B5CC9A7006B2CC1 /* LPASLLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPASLLogFormatter.m; sourceTree = "<group>"; };
+		F5B853991C47D0AB00436327 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		F5B8539A1C47D0AB00436327 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F5BA6F051B4E4B8200DB898F /* LPInvoker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPInvoker.h; sourceTree = "<group>"; };
 		F5BA6F061B4E4B8200DB898F /* LPInvoker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvoker.m; sourceTree = "<group>"; };
 		F5BA6F0F1B4E4D2B00DB898F /* InvokerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InvokerFactory.h; sourceTree = "<group>"; };
@@ -2289,6 +2291,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = B121E78614B6D9FB0034C6A9;
 			productRefGroup = B121E79514B6D9FB0034C6A9 /* Products */;
@@ -3123,6 +3126,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				B121E79D14B6D9FB0034C6A9 /* en */,
+				F5B8539A1C47D0AB00436327 /* de */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -3132,6 +3136,7 @@
 			children = (
 				F59CA47D1A82EF40007A2F38 /* Base */,
 				F58937E91A9BE0E6007B9A5B /* en */,
+				F5B853991C47D0AB00436327 /* de */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
