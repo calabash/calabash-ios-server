@@ -90,6 +90,22 @@ If you are running the XCTests from Xcode, you might see failures in
 `LPJSONUtilsTest`.  If you do, clean (Shift + Option + Command + K)
 and rerun.
 
+If you want to test the LPTestTarget on device and are having problems
+in Xcode or the command line with messages like this:
+
+```
+iPhone Developer: ambiguous matches
+```
+
+then you must either:
+
+1. `$ CODE_SIGN_IDENTITY="< cert name >" make ipa-cal` (preferred)
+2. Update the Xcode project with a specific Code Signing entity.  **DO
+   NOT CHECK THESE CHANGES INTO GIT.**
+
+Maintainers should be using the Calabash.keychain
+(calabash/calabash-codesign).
+
 ### Contributing
 
 * The Calabash iOS Toolchain uses git-flow.
