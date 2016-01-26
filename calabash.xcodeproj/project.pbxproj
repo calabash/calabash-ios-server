@@ -2253,6 +2253,7 @@
 				F59CA4691A82EF40007A2F38 /* Sources */,
 				F59CA46A1A82EF40007A2F38 /* Frameworks */,
 				F59CA46B1A82EF40007A2F38 /* Resources */,
+				F563A5461C57BF60005EE33F /* Run Script Sign Embedded Dylibs */,
 				F596A20B1BE3930B00E4E35B /* Run Script stage binaries to ./Products */,
 				F5E2A5EF1BFF090F0068DFAD /* Run Script  Checkout LPTestTarget/change-sha.plist */,
 			);
@@ -2438,6 +2439,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "sh calabash/gitversioning-after.sh \"calabash/LPGitVersionDefines.h\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F563A5461C57BF60005EE33F /* Run Script Sign Embedded Dylibs */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script Sign Embedded Dylibs";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bin/xcode-build-phase/lptesttarget-sign-dylibs.sh";
 			showEnvVarsInLog = 0;
 		};
 		F596A20B1BE3930B00E4E35B /* Run Script stage binaries to ./Products */ = {
