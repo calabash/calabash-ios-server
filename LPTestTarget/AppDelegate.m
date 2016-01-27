@@ -2,6 +2,8 @@
 #import <CoreData/CoreData.h>
 #import "LPCoreDataStack.h"
 #import "CocoaLumberjack/CocoaLumberjack.h"
+#import "FirstViewController.h"
+#import "SecondViewController.h"
 
 static const DDLogLevel ddLogLevel = DDLogLevelDebug;
 
@@ -164,11 +166,25 @@ typedef struct {
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
   [DDLog addLogger:[DDTTYLogger sharedInstance]];
   [DDLog addLogger:[DDASLLogger sharedInstance]];
   DDLogDebug(@"Configured CocoaLumberjack!");
 
+  UIViewController *firstController, *secondController;
+
+  firstController = [FirstViewController new];
+
+  secondController = [[SecondViewController alloc]
+                      initWithNibName:@"SecondViewController"
+                      bundle:nil];
+  UITabBarController *tabController = [UITabBarController new];
+  tabController.tabBar.translucent = NO;
+  tabController.viewControllers = @[firstController, secondController];
+
+  self.window.rootViewController = tabController;
+  [self.window makeKeyAndVisible];
   return YES;
 }
 

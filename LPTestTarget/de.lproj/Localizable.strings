@@ -1,0 +1,14 @@
+/* title of first tab bar */
+"First" = "Erste";
+
+/* Title of button that dismisses an alert. */
+"OK" = "OK";
+
+/* title of second tab bar */
+"Second" = "Zweite";
+
+/* Message of the alert when the app dectects a shake. */
+"shake detected!" = "erkannt schütteln";
+
+/* Title of alert when the app detects a shake. */
+"Shaking" = "Rüttelei";

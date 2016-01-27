@@ -488,6 +488,8 @@
 		F5986B291B5907E100CCB142 /* LPInvocationResult.m in Sources */ = {isa = PBXBuildFile; fileRef = F5986B231B5907E100CCB142 /* LPInvocationResult.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5986B2A1B5907E100CCB142 /* LPInvocationResult.m in Sources */ = {isa = PBXBuildFile; fileRef = F5986B231B5907E100CCB142 /* LPInvocationResult.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5986B301B5A327500CCB142 /* LPOperationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5986B2F1B5A327500CCB142 /* LPOperationTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F59B4B961C57C49A00A658D0 /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = F59B4B941C57C49A00A658D0 /* SecondViewController.xib */; };
+		F59B4BB01C57CC1400A658D0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F59B4BAE1C57CC1400A658D0 /* LaunchScreen.xib */; };
 		F59C5CF818E0BB1A0087B51D /* LPRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDBE14B6DB2B002A744C /* LPRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F59C5CF918E0BB290087B51D /* LPRouter.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDBF14B6DB2B002A744C /* LPRouter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F59C5CFB18E0BBAE0087B51D /* LPHTTPAsyncFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = B116C99E14E6564200663205 /* LPHTTPAsyncFileResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -498,7 +500,6 @@
 		F59CA4751A82EF40007A2F38 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F59CA4741A82EF40007A2F38 /* AppDelegate.m */; };
 		F59CA4781A82EF40007A2F38 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F59CA4771A82EF40007A2F38 /* FirstViewController.m */; };
 		F59CA47B1A82EF40007A2F38 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F59CA47A1A82EF40007A2F38 /* SecondViewController.m */; };
-		F59CA47E1A82EF40007A2F38 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F59CA47C1A82EF40007A2F38 /* Main.storyboard */; };
 		F59CA4801A82EF40007A2F38 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F59CA47F1A82EF40007A2F38 /* Images.xcassets */; };
 		F5A33A411ABFAD8D00224639 /* examplePlugin.dylib in Resources */ = {isa = PBXBuildFile; fileRef = F5A33A391ABFAD7600224639 /* examplePlugin.dylib */; };
 		F5A33A421ABFAD9100224639 /* examplePluginCalabash.dylib in Resources */ = {isa = PBXBuildFile; fileRef = F5A33A3A1ABFAD7600224639 /* examplePluginCalabash.dylib */; };
@@ -602,6 +603,7 @@
 		F5C276261B39C27800DF63FA /* LPTTYLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C276211B39C27800DF63FA /* LPTTYLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5C276271B39C27800DF63FA /* LPTTYLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C276211B39C27800DF63FA /* LPTTYLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5C276281B39C27800DF63FA /* LPTTYLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C276211B39C27800DF63FA /* LPTTYLogFormatter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F5CF1EC81C59055900801918 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F5CF1EC61C59055900801918 /* Localizable.strings */; };
 		F5E2A5EE1BFEF8590068DFAD /* change-sha.plist in Resources */ = {isa = PBXBuildFile; fileRef = F5E2A5ED1BFEF8590068DFAD /* change-sha.plist */; };
 		F5E2D1E018C9120E00A0D9B6 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5E2D1E418C9120E00A0D9B6 /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -910,7 +912,6 @@
 		F57605181BCE767000E89C97 /* LPSuspendAppRouteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSuspendAppRouteTest.m; sourceTree = "<group>"; };
 		F57605871BCE77F000E89C97 /* LPSuspendAppRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPSuspendAppRoute.h; sourceTree = "<group>"; };
 		F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSuspendAppRoute.m; sourceTree = "<group>"; };
-		F58937E91A9BE0E6007B9A5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		F58B6DE8186847F70042191C /* gitversioning-after.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "gitversioning-after.sh"; sourceTree = "<group>"; };
 		F58B6DE9186847F70042191C /* gitversioning-before.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "gitversioning-before.sh"; sourceTree = "<group>"; };
 		F58C9F551B6F7EB9007D307B /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
@@ -1010,6 +1011,10 @@
 		F5986B221B5907E100CCB142 /* LPInvocationResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPInvocationResult.h; sourceTree = "<group>"; };
 		F5986B231B5907E100CCB142 /* LPInvocationResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvocationResult.m; sourceTree = "<group>"; };
 		F5986B2F1B5A327500CCB142 /* LPOperationTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPOperationTest.m; sourceTree = "<group>"; };
+		F59B4B951C57C49A00A658D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/SecondViewController.xib; sourceTree = "<group>"; };
+		F59B4BAF1C57CC1400A658D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		F59B4BB21C57CC1800A658D0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		F59B4BB41C57CC1900A658D0 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		F59CA46D1A82EF40007A2F38 /* LPTestTarget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LPTestTarget.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F59CA4701A82EF40007A2F38 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F59CA4711A82EF40007A2F38 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1019,7 +1024,6 @@
 		F59CA4771A82EF40007A2F38 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		F59CA4791A82EF40007A2F38 /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
 		F59CA47A1A82EF40007A2F38 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
-		F59CA47D1A82EF40007A2F38 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F59CA47F1A82EF40007A2F38 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		F5A33A391ABFAD7600224639 /* examplePlugin.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = examplePlugin.dylib; sourceTree = "<group>"; };
 		F5A33A3A1ABFAD7600224639 /* examplePluginCalabash.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = examplePluginCalabash.dylib; sourceTree = "<group>"; };
@@ -1068,7 +1072,6 @@
 		F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPScrollToRowWithMarkOperation.m; sourceTree = "<group>"; };
 		F5B6B3DB1B5CC9A7006B2CC1 /* LPASLLogFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPASLLogFormatter.h; sourceTree = "<group>"; };
 		F5B6B3DC1B5CC9A7006B2CC1 /* LPASLLogFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPASLLogFormatter.m; sourceTree = "<group>"; };
-		F5B853991C47D0AB00436327 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		F5B8539A1C47D0AB00436327 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F5BA6F051B4E4B8200DB898F /* LPInvoker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPInvoker.h; sourceTree = "<group>"; };
 		F5BA6F061B4E4B8200DB898F /* LPInvoker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvoker.m; sourceTree = "<group>"; };
@@ -1099,6 +1102,11 @@
 		F5C3A62E18A2EA0800DB7E42 /* LPCollectionViewScrollToItemOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCollectionViewScrollToItemOperation.m; sourceTree = "<group>"; tabWidth = 4; };
 		F5CAC06A180D499600E23F03 /* LPSliderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPSliderOperation.h; sourceTree = "<group>"; };
 		F5CAC06B180D499600E23F03 /* LPSliderOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSliderOperation.m; sourceTree = "<group>"; };
+		F5CF1EC31C5902B100801918 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SecondViewController.strings; sourceTree = "<group>"; };
+		F5CF1EC51C5902B200801918 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/SecondViewController.strings; sourceTree = "<group>"; };
+		F5CF1EC71C59055900801918 /* Base */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F5CF1EC91C59056900801918 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F5CF1ECA1C59056B00801918 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F5E2A5ED1BFEF8590068DFAD /* change-sha.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "change-sha.plist"; sourceTree = "<group>"; };
 		F5E2D1D918C9120E00A0D9B6 /* LPSSKeychain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPSSKeychain.h; sourceTree = "<group>"; };
 		F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSSKeychain.m; sourceTree = "<group>"; };
@@ -1890,9 +1898,20 @@
 			path = Expecta;
 			sourceTree = "<group>";
 		};
+		F59B4B971C57C4A200A658D0 /* XIB */ = {
+			isa = PBXGroup;
+			children = (
+				F5CF1EC61C59055900801918 /* Localizable.strings */,
+				F59B4BAE1C57CC1400A658D0 /* LaunchScreen.xib */,
+				F59B4B941C57C49A00A658D0 /* SecondViewController.xib */,
+			);
+			name = XIB;
+			sourceTree = "<group>";
+		};
 		F59CA46E1A82EF40007A2F38 /* LPTestTarget */ = {
 			isa = PBXGroup;
 			children = (
+				F59B4B971C57C4A200A658D0 /* XIB */,
 				F58C9F581B6F802D007D307B /* CocoaHTTPServer */,
 				F58C9F541B6F7EB9007D307B /* CocoaAsyncSocket */,
 				F58C9F3F1B6F79BA007D307B /* CocoaLumberjack */,
@@ -1908,7 +1927,6 @@
 				F59CA4771A82EF40007A2F38 /* FirstViewController.m */,
 				F59CA4791A82EF40007A2F38 /* SecondViewController.h */,
 				F59CA47A1A82EF40007A2F38 /* SecondViewController.m */,
-				F59CA47C1A82EF40007A2F38 /* Main.storyboard */,
 				F59CA47F1A82EF40007A2F38 /* Images.xcassets */,
 				F59CA46F1A82EF40007A2F38 /* Supporting Files */,
 			);
@@ -2322,13 +2340,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5E2A5EE1BFEF8590068DFAD /* change-sha.plist in Resources */,
-				F59CA47E1A82EF40007A2F38 /* Main.storyboard in Resources */,
 				F5396A721AA6056D00D75E78 /* lp-simple-example.html in Resources */,
+				F5CF1EC81C59055900801918 /* Localizable.strings in Resources */,
 				F59CA4801A82EF40007A2F38 /* Images.xcassets in Resources */,
 				F5A33A411ABFAD8D00224639 /* examplePlugin.dylib in Resources */,
 				F5A33A421ABFAD9100224639 /* examplePluginCalabash.dylib in Resources */,
 				F5A33A431ABFAD9400224639 /* memoryPlugin.dylib in Resources */,
+				F59B4B961C57C49A00A658D0 /* SecondViewController.xib in Resources */,
 				F5A33A441ABFAD9700224639 /* memoryPluginCalabash.dylib in Resources */,
+				F59B4BB01C57CC1400A658D0 /* LaunchScreen.xib in Resources */,
 				F5A33A471ABFB0BD00224639 /* badPlugin.dylib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3147,14 +3167,34 @@
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		F59CA47C1A82EF40007A2F38 /* Main.storyboard */ = {
+		F59B4B941C57C49A00A658D0 /* SecondViewController.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				F59CA47D1A82EF40007A2F38 /* Base */,
-				F58937E91A9BE0E6007B9A5B /* en */,
-				F5B853991C47D0AB00436327 /* de */,
+				F59B4B951C57C49A00A658D0 /* Base */,
+				F5CF1EC31C5902B100801918 /* en */,
+				F5CF1EC51C5902B200801918 /* de */,
 			);
-			name = Main.storyboard;
+			name = SecondViewController.xib;
+			sourceTree = "<group>";
+		};
+		F59B4BAE1C57CC1400A658D0 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F59B4BAF1C57CC1400A658D0 /* Base */,
+				F59B4BB21C57CC1800A658D0 /* en */,
+				F59B4BB41C57CC1900A658D0 /* de */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		F5CF1EC61C59055900801918 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F5CF1EC71C59055900801918 /* Base */,
+				F5CF1EC91C59056900801918 /* en */,
+				F5CF1ECA1C59056B00801918 /* de */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

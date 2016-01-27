@@ -1,0 +1,6 @@
+
+/* Class = "UILabel"; text = "Second View"; ObjectID = "CAn-6g-s4q"; */
+"CAn-6g-s4q.text" = "Zweite View";
+
+/* Class = "UILabel"; text = "Loaded by SecondViewController"; ObjectID = "iws-4D-UFH"; */
+"iws-4D-UFH.text" = "Von SecondViewController geladen";

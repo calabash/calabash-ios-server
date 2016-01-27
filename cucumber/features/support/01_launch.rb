@@ -70,6 +70,18 @@ Before do |scenario|
   end
 end
 
+After("@german") do
+  if !xamarin_test_cloud?
+    target = ENV["DEVICE_TARGET"] || RunLoop::Core.default_simulator
+
+    simulator = RunLoop::Device.device_with_identifier(target)
+
+    RunLoop::CoreSimulator.erase(simulator)
+    RunLoop::CoreSimulator.set_locale(simulator, "en_US")
+    RunLoop::CoreSimulator.set_language(simulator, "en-US")
+  end
+end
+
 After do |scenario|
   @no_relaunch = false
 
