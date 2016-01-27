@@ -1,3 +1,13 @@
+### 0.18.0
+
+This release expands support for interacting with iFrames using the css
+selector: `query("webView css:'iframe' css:'h1'")`.
+
+*  LPTestTarget: replace Storyboard with XIBs #328
+* LPTestTarget: resign embedded dylibs #327
+* Add DE localization to LPTestTarget #326
+* Expand iFrame support using css:'iframe' queries #308
+
 ### 0.17.1
 
 This is a patch release which fixes scroll on UIWebView and WKWebView.
