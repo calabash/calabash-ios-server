@@ -2,6 +2,4 @@
 
 @interface FirstViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
-
 @end
