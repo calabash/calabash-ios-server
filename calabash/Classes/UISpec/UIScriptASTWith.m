@@ -8,8 +8,9 @@
 #import "LPWebQuery.h"
 #import "LPReflectUtils.h"
 #import "LPWebQuery.h"
-#import "LPIsWebView.h"
+#import "LPWebViewUtils.h"
 #import "LPCocoaLumberjack.h"
+#import "LPConstants.h"
 
 @implementation UIScriptASTWith
 @synthesize selectorName = _selectorName;
@@ -77,6 +78,58 @@
   }
 }
 
+- (NSArray *)handleIFrameQueryFromIFrameResult:(NSDictionary *)iFrameResult {
+  NSDictionary *iframeInfo = iFrameResult[IFRAME_INFO_KEY];
+  
+  LPWebQueryType queryType = [iframeInfo[QUERY_TYPE_KEY] unsignedIntegerValue];
+  UIView<LPWebViewProtocol> *webView = iFrameResult[WEBVIEW_KEY];
+  NSString *iframeSelector = iframeInfo[QUERY_KEY];
+  
+  if (iframeSelector == nil) {
+    LPLogError(@"Missing query string for IFrame Query");
+    return [NSArray array];
+  } else if (webView == nil) {
+    LPLogError(@"Missing webview for IFrame query");
+    return [NSArray array];
+  }
+  
+  NSArray *results = [LPWebQuery arrayByEvaluatingQuery:(NSString *)self.objectValue
+                                          frameSelector:iframeSelector
+                                                   type:queryType
+                                                webView:webView
+                                       includeInvisible:YES];
+  /*
+   *  And now we must offset the iframe query results by the frame (left, top) of the original 
+   *  iframe.
+   */
+  NSMutableArray *ret = [NSMutableArray arrayWithCapacity:results.count];
+  
+  NSDictionary *iFrameRect = iFrameResult[@"rect"];
+  float xOffset, yOffset;
+  
+  xOffset = [iFrameRect[@"left"] floatValue];
+  yOffset = [iFrameRect[@"top"] floatValue];
+  
+  for (NSDictionary *result in results) {
+    NSMutableDictionary *mResult = [result mutableCopy];
+    
+    NSMutableDictionary *mRect = [mResult[@"rect"] mutableCopy];
+    mRect[@"x"] = @([mRect[@"x"] floatValue] + xOffset);
+    mRect[@"left"] = @([mRect[@"left"] floatValue] + xOffset);
+    mRect[@"center_x"] = @([mRect[@"center_x"] floatValue] + xOffset);
+    mRect[@"y"] = @([mRect[@"y"] floatValue] + yOffset);
+    mRect[@"top"] = @([mRect[@"top"] floatValue] + yOffset);
+    mRect[@"center_y"] = @([mRect[@"center_y"] floatValue] + yOffset);
+    
+    mResult[@"rect"] = mRect;
+    [ret addObject:mResult];
+
+    [mResult release];
+    [mRect release];
+  }
+  return ret;
+}
+
 
 - (NSArray *) handleWebView:(UIView<LPWebViewProtocol> *) webView visibility:(UIScriptASTVisibilityType) visibility {
   if (!self.selectorName) {
@@ -95,6 +148,7 @@
     }
 
     return [LPWebQuery arrayByEvaluatingQuery:(NSString *) self.objectValue
+                                frameSelector:WEBVIEW_DOCUMENT_FRAME_SELECTOR
                                          type:type
                                       webView:webView
                              includeInvisible:visibility == UIScriptASTVisibilityTypeAll];
@@ -109,15 +163,17 @@
 
   NSMutableArray *res = [NSMutableArray arrayWithCapacity:8];
 
-  for (UIView *v in views) {
-    if ([v isKindOfClass:[NSDictionary class]]) {
-      NSDictionary *dict = (NSDictionary *) v;
+  for (id result in views) {
+    if ([result isKindOfClass:[NSDictionary class]]) {
       NSString *key = NSStringFromSelector(self.selector);
-      if ([[dict valueForKey:key] isEqual:self.objectValue]) {
-        [res addObject:dict];
+      if ([result[key] isEqual:self.objectValue]) {
+        [res addObject:result];
+      } else if ([LPWebViewUtils isIFrameResult:result]) {
+        [res addObjectsFromArray:[self handleIFrameQueryFromIFrameResult:result]];
       }
     } else {
-      if ([LPIsWebView isWebView:v]) {
+      UIView *v = (UIView *)result;
+      if ([LPWebViewUtils isWebView:v]) {
         [res addObjectsFromArray:[self handleWebView:(UIView<LPWebViewProtocol> *) v
                                           visibility:visibility]];
         continue;
