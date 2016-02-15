@@ -40,7 +40,8 @@ Before do |scenario|
   launcher = Calabash::Launcher.launcher
   options = {
     # Add launch options here.
-    :uia_strategy => :preferences
+    # Stick with defaults; preferences on device is not stable
+    # :uia_strategy => :preferences
   }
 
   if @args
