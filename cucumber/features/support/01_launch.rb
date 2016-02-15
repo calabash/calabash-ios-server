@@ -96,6 +96,7 @@ After do |scenario|
   # http://calabashapi.xamarin.com/ios/Calabash/Cucumber/Core.html#console_attach-instance_method
   unless launcher.calabash_no_stop?
     calabash_exit
+    sleep 1.0
   end
 end
 
