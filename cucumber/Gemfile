@@ -9,7 +9,7 @@ gem "rspec", "~> 3.0"
 gem "pry"
 gem "pry-nav"
 
-# Submit develop versions of calabash-cucumber and run-loop to XTCj
+# Submit develop versions of calabash-cucumber and run-loop to XTC
 gem "briar", ">= 1.4.2", "< 2.0"
 gem "luffa"
 
