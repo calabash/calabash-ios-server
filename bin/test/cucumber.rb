@@ -31,6 +31,7 @@ working_dir = File.join(server_dir, "cucumber")
 Dir.chdir working_dir do
   Bundler.with_clean_env do
 
+    FileUtils.rm_rf("reports")
     FileUtils.mkdir_p("reports")
 
     Luffa.unix_command("bundle update")

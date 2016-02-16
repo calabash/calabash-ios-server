@@ -1,9 +1,15 @@
+### 0.18.1
+
+This release has no new features.
+
+* Stabilize tests for Xcode 7.3 beta 3
+
 ### 0.18.0
 
 This release expands support for interacting with iFrames using the css
 selector: `query("webView css:'iframe' css:'h1'")`.
 
-*  LPTestTarget: replace Storyboard with XIBs #328
+* LPTestTarget: replace Storyboard with XIBs #328
 * LPTestTarget: resign embedded dylibs #327
 * Add DE localization to LPTestTarget #326
 * Expand iFrame support using css:'iframe' queries #308
