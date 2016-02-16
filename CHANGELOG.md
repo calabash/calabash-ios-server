@@ -1,3 +1,9 @@
+### 0.18.1
+
+This release has no new features.
+
+* Stabilize tests for Xcode 7.3 beta 3
+
 ### 0.18.0
 
 This release expands support for interacting with iFrames using the css
