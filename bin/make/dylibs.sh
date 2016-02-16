@@ -198,7 +198,7 @@ CODE_SIGN_DIR="${HOME}/.calabash/calabash-codesign"
 RESIGN_TOOL="${CODE_SIGN_DIR}/ios/resign-dylib.rb"
 SHA_TOOL="${CODE_SIGN_DIR}/sha256"
 
-CERT="${CODE_SIGN_DIR}/ios/certs/developer.p12"
+CERT="${CODE_SIGN_DIR}/ios/certs/calabash-developer.p12"
 
 echo ${KEYCHAIN_TOOL}
 
