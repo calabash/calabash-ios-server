@@ -81,6 +81,14 @@
 
   for (NSDictionary *d in queryResult) {
     NSMutableDictionary *dres = [NSMutableDictionary dictionaryWithDictionary:d];
+    
+    if (dres[@"rect"] && [dres[@"rect"]isEqual:[NSNull null]]){
+      if (includeInvisible){
+        [result addObject:dres];
+      }
+      continue;
+    }
+    
     CGFloat center_x = [[dres valueForKeyPath:@"rect.x"] floatValue];
     CGFloat center_y = [[dres valueForKeyPath:@"rect.y"] floatValue];
 

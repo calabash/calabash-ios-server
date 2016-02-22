@@ -117,19 +117,21 @@
   for (NSDictionary *result in results) {
     NSMutableDictionary *mResult = [result mutableCopy];
     
-    NSMutableDictionary *mRect = [mResult[@"rect"] mutableCopy];
-    mRect[@"x"] = @([mRect[@"x"] floatValue] + xOffset);
-    mRect[@"left"] = @([mRect[@"left"] floatValue] + xOffset);
-    mRect[@"center_x"] = @([mRect[@"center_x"] floatValue] + xOffset);
-    mRect[@"y"] = @([mRect[@"y"] floatValue] + yOffset);
-    mRect[@"top"] = @([mRect[@"top"] floatValue] + yOffset);
-    mRect[@"center_y"] = @([mRect[@"center_y"] floatValue] + yOffset);
-    
-    mResult[@"rect"] = mRect;
+    if (mResult[@"rect"] && ![mResult[@"rect"] isEqual:[NSNull null]]) {
+      NSMutableDictionary *mRect = [mResult[@"rect"] mutableCopy];
+      mRect[@"x"] = @([mRect[@"x"] floatValue] + xOffset);
+      mRect[@"left"] = @([mRect[@"left"] floatValue] + xOffset);
+      mRect[@"center_x"] = @([mRect[@"center_x"] floatValue] + xOffset);
+      mRect[@"y"] = @([mRect[@"y"] floatValue] + yOffset);
+      mRect[@"top"] = @([mRect[@"top"] floatValue] + yOffset);
+      mRect[@"center_y"] = @([mRect[@"center_y"] floatValue] + yOffset);
+      
+      mResult[@"rect"] = mRect;
+      [mRect release];
+    }
     [ret addObject:mResult];
 
     [mResult release];
-    [mRect release];
   }
   return ret;
 }
