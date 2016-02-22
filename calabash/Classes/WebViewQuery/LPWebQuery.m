@@ -56,6 +56,10 @@
                   [NSString stringWithFormat:@"//node()[contains(text(),\\\"%@\\\")]", query],
                   @"xpath", @"", @""];
       break;
+      
+    case LPWebQueryTypeJob:
+      jsString = [NSString stringWithFormat:LP_QUERY_JS,query,@"job",@"", frameSelector];
+      break;
     default:
       return nil;
   }
@@ -64,6 +68,11 @@
 
   NSString *output = [webView calabashStringByEvaluatingJavaScript:jsString];
 
+  NSDictionary *queryDictionary = [LPJSONUtils deserializeDictionary:output];
+  if (queryDictionary != NULL && queryDictionary != nil && queryDictionary[@"job"] != nil) {
+    return @[queryDictionary];
+  }
+  
   NSArray *queryResult = [LPJSONUtils deserializeArray:output];
 
   UIWindow *window = [LPTouchUtils windowForView:webView];

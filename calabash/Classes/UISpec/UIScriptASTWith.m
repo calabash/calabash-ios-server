@@ -85,6 +85,10 @@
   UIView<LPWebViewProtocol> *webView = iFrameResult[WEBVIEW_KEY];
   NSString *iframeSelector = iframeInfo[QUERY_KEY];
   
+  if ([self.selectorName isEqualToString:@"job"]){
+    queryType = LPWebQueryTypeJob;
+  }
+  
   if (iframeSelector == nil) {
     LPLogError(@"Missing query string for IFrame Query");
     return [NSArray array];
@@ -145,6 +149,8 @@
       type = LPWebQueryTypeXPATH;
     } else if ([[self selectorName] isEqualToString:@"css"]) {
       type = LPWebQueryTypeCSS;
+    } else if ([[self selectorName] isEqualToString:@"job"]) {
+      type = LPWebQueryTypeJob;
     }
 
     return [LPWebQuery arrayByEvaluatingQuery:(NSString *) self.objectValue
