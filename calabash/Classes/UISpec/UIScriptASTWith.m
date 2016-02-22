@@ -145,7 +145,7 @@
 
   if (self.valueType == UIScriptLiteralTypeString) {
     LPWebQueryType type = LPWebQueryTypeCSS;
-    if ([[self selectorName] isEqualToString:@"marked"]) {
+    if ([[self selectorName] isEqualToString:@"text"]) {
       type = LPWebQueryTypeFreeText;
     } else if ([[self selectorName] isEqualToString:@"xpath"]) {
       type = LPWebQueryTypeXPATH;
@@ -181,11 +181,6 @@
       }
     } else {
       UIView *v = (UIView *)result;
-      if ([LPWebViewUtils isWebView:v]) {
-        [res addObjectsFromArray:[self handleWebView:(UIView<LPWebViewProtocol> *) v
-                                          visibility:visibility]];
-        continue;
-      }
       if ([self.selectorName isEqualToString:@"marked"]) {
         NSString *val = nil;
         if ([v respondsToSelector:@selector(accessibilityIdentifier)]) {
@@ -227,6 +222,12 @@
           }
         }
         continue;
+      }
+        
+      if ([LPWebViewUtils isWebView:v]) {
+          [res addObjectsFromArray:[self handleWebView:(UIView<LPWebViewProtocol> *) v
+                                              visibility:visibility]];
+          continue;
       }
 
       if (self.selectorName) {
