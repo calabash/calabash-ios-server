@@ -41,3 +41,12 @@ And(/^I go to the second tab$/) do
   wait_for_none_animating
 end
 
+And(/^I go to the first tab$/) do
+  wait_for do
+    !query("UITabBarButton").empty?
+  end
+
+  touch("UITabBarButton index:0")
+  wait_for_none_animating
+end
+
