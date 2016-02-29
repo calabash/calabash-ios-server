@@ -7,7 +7,6 @@ I want a Background API
 Background: Launch the app
   Given the app has launched
 
-@wip
 Scenario: Simulate touching the home button
   Then backgrounding the app for less than one second raises an error
   And I can send the app to the background for 1 second
