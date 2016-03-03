@@ -32,7 +32,14 @@
 
 - (NSData *) takeScreenshot {
 
-  CGSize imageSize = [[UIScreen mainScreen] bounds].size;
+
+  // Available on iOS >= 7
+  SEL selector = @selector(drawViewHierarchyInRect:afterScreenUpdates:);
+  UIView *view = [[UIView alloc] initWithFrame:CGRectZero];
+  BOOL drawViewHierarchy = [view respondsToSelector:selector];
+
+  CGRect bounds = [[UIScreen mainScreen] bounds];
+  CGSize imageSize = bounds.size;
   UIGraphicsBeginImageContextWithOptions(imageSize, NO, 0);
 
   CGContextRef context = UIGraphicsGetCurrentContext();
@@ -52,8 +59,12 @@
                             -[window bounds].size.width * [[window layer] anchorPoint].x,
                             -[window bounds].size.height * [[window layer] anchorPoint].y);
 
-      // Render the layer hierarchy to the current context
-      [[window layer] renderInContext:context];
+      if (drawViewHierarchy) {
+        [window drawViewHierarchyInRect:bounds afterScreenUpdates:YES];
+      } else {
+        // Render the layer hierarchy to the current context
+        [[window layer] renderInContext:context];
+      }
 
       // Restore the context
       CGContextRestoreGState(context);

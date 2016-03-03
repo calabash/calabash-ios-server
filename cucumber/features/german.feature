@@ -1,4 +1,3 @@
-@wip
 @localization
 @simulator
 Feature: Can launch a simulator in German

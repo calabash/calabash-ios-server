@@ -12,4 +12,6 @@ Scenario: Simulate touching the home button
   And I can send the app to the background for 1 second
   And I can send the app to the background for 10 seconds
   And I can send the app to the background for a long time
+  Then I go to the second tab
+  And I go to the first tab
 
