@@ -204,7 +204,11 @@
 
     _httpServer = [[[LPHTTPServer alloc] init] retain];
 
-    [_httpServer setName:@"Calabash Server"];
+    NSString *uuid = [[NSProcessInfo processInfo] globallyUniqueString];
+    NSString *token = [uuid componentsSeparatedByString:@"-"][0];
+    NSString *serverName = [NSString stringWithFormat:@"CalabashServer-%@", token];
+    [_httpServer setName:serverName];
+
     [_httpServer setType:@"_http._tcp."];
     [_httpServer setConnectionClass:[LPRouter class]];
 
