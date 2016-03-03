@@ -1,3 +1,10 @@
+### 0.18.2
+
+Thanks @MortenGregersen and @kaorijp for testing #334
+
+* Screenshot: use drawViewHierarchy when possible #334
+* Bonjour: create a unique service instance name #332
+
 ### 0.18.1
 
 This release has no new features.
