@@ -11,7 +11,7 @@ GIT
 
 GIT
   remote: git://github.com/calabash/run_loop.git
-  revision: 9abb0b931039acef14c50d14eb30d78f6c7c70f1
+  revision: 3d50c1a6038d152364d8cfad944a26c3f0b7ed7e
   branch: develop
   specs:
     run_loop (2.0.7)
