@@ -105,7 +105,7 @@ saturn:          -p saturn_common
 pegasi_common:   DEVICE_TARGET=<%= devices[:pegasi][:udid] %> DEVICE_ENDPOINT=<%= devices[:pegasi][:ip] %> -p device_common  -p pegasi_html -p pegasi_ss
 pegasi:          -p pegasi_common
 
-hatp:   DEVICE_TARGET=<%= devices[:hat][:udid] %> DEVICE_ENDPOINT=<%= devices[:hat][:ip] %> -p device_common
+hat:   DEVICE_TARGET=<%= devices[:hat][:udid] %> DEVICE_ENDPOINT=<%= devices[:hat][:ip] %> -p device_common
 erik:   DEVICE_TARGET=<%= devices[:erik][:udid] %> DEVICE_ENDPOINT=<%= devices[:erik][:ip] %> -p device_common
 denis: DEVICE_TARGET=<%= devices[:denis][:udid] %> DEVICE_ENDPOINT=<%= devices[:denis][:ip] %> -p device_common
 uranus: DEVICE_TARGET=<%= devices[:uranus][:udid] %> DEVICE_ENDPOINT=<%= devices[:uranus][:ip] %> -p device_common
