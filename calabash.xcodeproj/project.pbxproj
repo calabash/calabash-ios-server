@@ -406,7 +406,6 @@
 		F537397418E52014004133FA /* LPVersionRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B153F55A15949F3D00867E12 /* LPVersionRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F537398D18E5253B004133FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
 		F537399B18E6E0BE004133FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F537399918E6E0BE004133FA /* main.m */; };
-		F5396A721AA6056D00D75E78 /* lp-simple-example.html in Resources */ = {isa = PBXBuildFile; fileRef = F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */; };
 		F5419F0D1AF3D37000EAAA66 /* LPJSONUtils_AccessibilityElementTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5419F0C1AF3D37000EAAA66 /* LPJSONUtils_AccessibilityElementTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F54EFE8D1B5B88D500F8D665 /* LPRouterTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F54EFE8C1B5B88D500F8D665 /* LPRouterTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F55185571AC3866300CE06DC /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5A33A721AC01E8E00224639 /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -886,7 +885,6 @@
 		F532C1E61AFF6A2D0024DA55 /* LPServerEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPServerEntity.m; sourceTree = "<group>"; };
 		F537398C18E5253B004133FA /* version */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = version; sourceTree = BUILT_PRODUCTS_DIR; };
 		F537399918E6E0BE004133FA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = "lp-simple-example.html"; sourceTree = "<group>"; };
 		F5419F0C1AF3D37000EAAA66 /* LPJSONUtils_AccessibilityElementTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPJSONUtils_AccessibilityElementTest.m; sourceTree = "<group>"; };
 		F54EFE8C1B5B88D500F8D665 /* LPRouterTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPRouterTest.m; sourceTree = "<group>"; };
 		F5543F211ABF7D7000E1A0BF /* LPPluginLoaderTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPPluginLoaderTest.m; sourceTree = "<group>"; };
@@ -1683,7 +1681,6 @@
 				F5A33A3A1ABFAD7600224639 /* examplePluginCalabash.dylib */,
 				F5A33A3B1ABFAD7600224639 /* memoryPlugin.dylib */,
 				F5A33A3C1ABFAD7600224639 /* memoryPluginCalabash.dylib */,
-				F5396A6F1AA6056D00D75E78 /* lp-simple-example.html */,
 			);
 			path = TestResources;
 			sourceTree = "<group>";
@@ -2340,7 +2337,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5E2A5EE1BFEF8590068DFAD /* change-sha.plist in Resources */,
-				F5396A721AA6056D00D75E78 /* lp-simple-example.html in Resources */,
 				F5CF1EC81C59055900801918 /* Localizable.strings in Resources */,
 				F59CA4801A82EF40007A2F38 /* Images.xcassets in Resources */,
 				F5A33A411ABFAD8D00224639 /* examplePlugin.dylib in Resources */,

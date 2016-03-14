@@ -51,11 +51,6 @@
     case LPWebQueryTypeXPATH:
       jsString = [NSString stringWithFormat:LP_QUERY_JS,query,@"xpath",@"", frameSelector];
       break;
-    case LPWebQueryTypeFreeText:
-      jsString = [NSString stringWithFormat:LP_QUERY_JS,
-                  [NSString stringWithFormat:@"//node()[contains(text(),\\\"%@\\\")]", query],
-                  @"xpath", @"", @""];
-      break;
     default:
       return nil;
   }
