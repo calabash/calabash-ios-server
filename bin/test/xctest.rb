@@ -11,10 +11,7 @@ use_xcpretty = ENV["XCPRETTY"] != "0"
 xcode = RunLoop::Xcode.new
 
 default_sim_name = RunLoop::Core.default_simulator
-
-default_sim = RunLoop::SimControl.new.simulators.find do |sim|
-  sim.instruments_identifier(xcode) == default_sim_name
-end
+default_sim = RunLoop::Device.device_with_identifier(default_sim_name)
 
 core_sim = RunLoop::CoreSimulator.new(default_sim, nil, {:xcode => xcode})
 core_sim.launch_simulator
