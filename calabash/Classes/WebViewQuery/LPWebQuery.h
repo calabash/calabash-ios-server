@@ -16,8 +16,7 @@ static NSString *const LP_QUERY_JS = @"(function(){function isHostMethod(object,
 
 typedef enum : NSUInteger {
   LPWebQueryTypeCSS = 0,
-  LPWebQueryTypeXPATH,
-  LPWebQueryTypeFreeText
+  LPWebQueryTypeXPATH
 } LPWebQueryType;
 
 @interface LPWebQuery : NSObject
