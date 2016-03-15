@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Helvetica.ttc">
@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SecondViewController">
             <connections>
+                <outlet property="secretButton" destination="jzm-In-K7d" id="qLj-q7-blG"/>
                 <outlet property="view" destination="iN0-l3-epB" id="x4C-57-ETm"/>
             </connections>
         </placeholder>
@@ -36,14 +37,34 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jzm-In-K7d" userLabel="Secret button">
+                    <rect key="frame" x="88" y="88" width="2" height="2"/>
+                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <accessibility key="accessibilityConfiguration" label="Secret button"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="2" id="WQd-E1-jaj"/>
+                        <constraint firstAttribute="height" constant="2" id="XTX-Tm-pzY"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="2"/>
+                    <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="secret button"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="buttonTouchedSecret:" destination="-1" eventType="touchUpInside" id="IH8-LN-IEt"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="jzm-In-K7d" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="88" id="3Es-zi-RDD"/>
                 <constraint firstItem="iws-4D-UFH" firstAttribute="top" secondItem="CAn-6g-s4q" secondAttribute="bottom" constant="17" id="Ejz-JI-ocY"/>
                 <constraint firstItem="CAn-6g-s4q" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="GY3-Qo-CEm"/>
                 <constraint firstItem="CAn-6g-s4q" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="XT8-MF-SE0"/>
                 <constraint firstItem="iws-4D-UFH" firstAttribute="centerX" secondItem="CAn-6g-s4q" secondAttribute="centerX" id="gNe-yr-g5W"/>
+                <constraint firstItem="jzm-In-K7d" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="88" id="kwl-Cs-eEF"/>
             </constraints>
+            <point key="canvasLocation" x="437" y="252"/>
         </view>
     </objects>
 </document>

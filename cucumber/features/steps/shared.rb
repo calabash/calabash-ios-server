@@ -50,3 +50,18 @@ And(/^I go to the first tab$/) do
   wait_for_none_animating
 end
 
+And(/^I touch the secret button$/) do
+  qstr = "view marked:'secret button'"
+  wait_for do
+    !query(qstr).empty?
+  end
+
+  touch(qstr)
+end
+
+Then(/^the secret button title changes to Found me$/) do
+  qstr = "view marked:'secret button'"
+  title = query(qstr, {:titleForState => 0}).first
+  expect(title).to be == "Found me!"
+end
+

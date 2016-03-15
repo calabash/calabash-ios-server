@@ -2,6 +2,9 @@
 
 @interface SecondViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *secretButton;
+- (IBAction)buttonTouchedSecret:(id)sender;
+
 @end
 
 @implementation SecondViewController
@@ -24,8 +27,18 @@
   [super viewDidLoad];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
+  [self.secretButton setTitle:@"Hidden" forState:UIControlStateNormal];
+}
+
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
+}
+
+- (IBAction)buttonTouchedSecret:(id)sender {
+  NSLog(@"Secret button touched");
+  [self.secretButton setTitle:@"Found me!" forState:UIControlStateNormal];
 }
 
 @end
