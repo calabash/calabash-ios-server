@@ -11,6 +11,7 @@
 
 #import "LPDevice.h"
 #import "LPTouchUtils.h"
+#import "LPCocoaLumberjack.h"
 #import <sys/utsname.h>
 #include <ifaddrs.h>
 #include <arpa/inet.h>
@@ -114,56 +115,51 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
 
   _sampleFactor = 1.0f;
 
-  CGFloat scale = [UIScreen mainScreen].scale;
-
-  const CGSize IPHONE6_TARGET_SPACE = CGSizeMake(375.0f, 667.0f);
-  const CGSize IPHONE6PLUS_TARGET_SPACE = CGSizeMake(414.0f, 736.0f);
-
-  const CGSize IPHONE6PLUS = CGSizeMake(IPHONE6PLUS_TARGET_SPACE.width * scale,
-                                        IPHONE6PLUS_TARGET_SPACE.height * scale);
-
-  CGSize IPHONE6 = CGSizeMake(IPHONE6_TARGET_SPACE.width * scale,
-                              IPHONE6_TARGET_SPACE.height * scale);
-
-  const CGFloat IPHONE6_SAMPLE = 1.0f;
-  const CGFloat IPHONE6PLUS_SAMPLE = 1.0f;
-  const CGFloat IPHONE6_DISPLAY_ZOOM_SAMPLE = 1.171875f;
-
   UIScreen *screen = [UIScreen mainScreen];
+  CGSize screenSize = screen.bounds.size;
+  CGFloat screenHeight = MAX(screenSize.height, screenSize.width);
+  CGFloat scale = screen.scale;
+
+  CGFloat nativeScale = scale;
+  if ([screen respondsToSelector:@selector(nativeScale)]) {
+    nativeScale = screen.nativeScale;
+  }
+
+
+  //CGSize iphone6_size = CGSizeMake(375.0 * scale, 667.0 * scale);
+  //CGSize iphone6p_size = CGSizeMake(414.0 * scale, 736.0 * scale);
+
+  CGFloat iphone6_zoom_sample = 1.171875f;
+  CGFloat iphone6p_zoom_sample = 0.96f;
+
   UIScreenMode *screenMode = [screen currentMode];
-  CGSize size = screenMode.size;
+  CGSize screenSizeForMode = screenMode.size;
+  CGFloat pixelAspectRatio = screenMode.pixelAspectRatio;
+
+  LPLogDebug(@"         Form factor: %@", [self formFactor]);
+  LPLogDebug(@" Current screen mode: %@", screenMode);
+  LPLogDebug(@"Screen size for mode: %@", NSStringFromCGSize(screenSizeForMode));
+  LPLogDebug(@"       Screen height: %@", @(screenHeight));
+  LPLogDebug(@"        Screen scale: %@", @(scale));
+  LPLogDebug(@" Screen native scale: %@", @(nativeScale));
+  LPLogDebug(@"Pixel Aspect Ratio: %@", @(pixelAspectRatio));
 
   if ([self isIPhone6PlusLike]) {
-    if (size.width < IPHONE6PLUS.width && size.height < IPHONE6PLUS.height) {
-      _sampleFactor = (IPHONE6PLUS.width / size.width);
-      _sampleFactor = (IPHONE6PLUS.height / size.height);
-    } else {
-      _sampleFactor = IPHONE6PLUS_SAMPLE;
+    if (screenHeight == 568.0 && nativeScale > scale) {
+      LPLogDebug(@"iPhone 6 Plus: application is not optimized for screen size - adjusting sampleFactor");
+      _sampleFactor = iphone6p_zoom_sample;
+    } else if (screenHeight == 667.0 && nativeScale <= scale) {
+      LPLogDebug(@"iPhone 6 Plus: Zoomed display mode - sampleFactor remains the same");
     }
   } else if ([self isIPhone6Like]) {
-    if (CGSizeEqualToSize(size, IPHONE6)) {
-      _sampleFactor = IPHONE6_SAMPLE;
-    } else {
-      _sampleFactor = IPHONE6_DISPLAY_ZOOM_SAMPLE;
-    }
-  } else {
-    if ([self isSimulator]) {
-      if ([self isIPhone6PlusLike]) {
-        if (size.width < IPHONE6PLUS.width && size.height < IPHONE6PLUS.height) {
-          _sampleFactor = (IPHONE6PLUS.width / size.width);
-          _sampleFactor = (IPHONE6PLUS.height / size.height);
-        } else {
-          _sampleFactor = IPHONE6PLUS_SAMPLE;
-        }
-      } else if ([self isIPhone6Like]) {
-        if (CGSizeEqualToSize(size, IPHONE6)) {
-          _sampleFactor = IPHONE6_SAMPLE;
-        } else {
-          _sampleFactor = IPHONE6_DISPLAY_ZOOM_SAMPLE;
-        }
-      }
+    if (screenHeight == 568.0 && nativeScale <= scale) {
+      LPLogDebug(@"iPhone 6: application not optimized for screen size - adjusting sampleFactor");
+      _sampleFactor = iphone6_zoom_sample;
+    } else if (screenHeight == 568.0 && nativeScale > scale) {
+      LPLogDebug(@"iPhone 6: Zoomed display mode - sampleFactor remains the same");
     }
   }
+
   return _sampleFactor;
 }
 
@@ -175,11 +171,17 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
   CGSize size = screenMode.size;
   CGFloat scale = screen.scale;
 
+  CGFloat nativeScale = scale;
+  if ([screen respondsToSelector:@selector(nativeScale)]) {
+    nativeScale = screen.nativeScale;
+  }
+
   _screenDimensions = @{
                         @"height" : @(size.height),
                         @"width" : @(size.width),
                         @"scale" : @(scale),
-                        @"sample" : @([self sampleFactor])
+                        @"sample" : @([self sampleFactor]),
+                        @"native_scale" : @(nativeScale)
                         };
 
   return _screenDimensions;
