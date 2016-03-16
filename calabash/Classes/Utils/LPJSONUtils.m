@@ -20,6 +20,9 @@
 #import "LPDecimalRounder.h"
 #import "LPCocoaLumberjack.h"
 
+CGFloat LP_MAX_FLOAT = INT32_MAX * 1.0;
+CGFloat LP_MIN_FLOAT = INT32_MIN * 1.0;
+
 @interface LPJSONUtils ()
 
 // If the target responds to the selector, invoke the selector on the target and
@@ -324,11 +327,15 @@
 
 + (NSNumber*)normalizeFloat:(CGFloat) x {
   if (isinf(x)) {
-    return (x == INFINITY ? @(CGFLOAT_MAX) : @(CGFLOAT_MIN));
+    return (x == INFINITY ? @(LP_MAX_FLOAT) : @(LP_MIN_FLOAT));
   } else if (x == CGFLOAT_MIN) {
-    return @(CGFLOAT_MIN);
+    return @(LP_MIN_FLOAT);
   } else if (x == CGFLOAT_MAX) {
-    return @(CGFLOAT_MAX);
+    return @(LP_MAX_FLOAT);
+  } else if (x > LP_MAX_FLOAT) {
+    return @(LP_MAX_FLOAT);
+  } else if (x < LP_MIN_FLOAT) {
+    return @(LP_MIN_FLOAT);
   } else {
     LPDecimalRounder *rounder = [LPDecimalRounder new];
     CGFloat rounded = [rounder round:x];

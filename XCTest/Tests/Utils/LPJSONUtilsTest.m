@@ -776,10 +776,10 @@
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
   XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
-  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGFLOAT_MIN));
-  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGFLOAT_MAX));
-  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGFLOAT_MAX));
-  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGFLOAT_MIN));
+  XCTAssertEqualObjects(dict[@"frame"][@"x"], @(LP_MIN_FLOAT));
+  XCTAssertEqualObjects(dict[@"frame"][@"y"], @(LP_MAX_FLOAT));
+  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(LP_MAX_FLOAT));
+  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(LP_MIN_FLOAT));
 
 
   XCTAssertEqualObjects(dict[@"visible"], @(0));
@@ -891,25 +891,25 @@ describe(@"LPJSONUtils", ^{
     it(@"returns CGFLOAT_MAX if infinite and INFINITY", ^{
       CGFloat value = INFINITY;
       NSNumber *number = [LPJSONUtils normalizeFloat:value];
-      expect(number).to.equal(@(CGFLOAT_MAX));
+      expect(number).to.equal(@(LP_MAX_FLOAT));
     });
 
     it(@"returns CGFLOAT_MIN if infinite and -INFINITY", ^{
       CGFloat value = -INFINITY;
       NSNumber *number = [LPJSONUtils normalizeFloat:value];
-      expect(number).to.equal(@(CGFLOAT_MIN));
+      expect(number).to.equal(@(LP_MIN_FLOAT));
     });
 
     it(@"returns CGFLOAT_MAX if it is float max", ^{
       CGFloat value = CGFLOAT_MAX;
       NSNumber *number = [LPJSONUtils normalizeFloat:value];
-      expect(number).to.equal(@(CGFLOAT_MAX));
+      expect(number).to.equal(@(LP_MAX_FLOAT));
     });
 
     it(@"returns CGFLOAT_MIN if it is float min", ^{
       CGFloat value = CGFLOAT_MIN;
       NSNumber *number = [LPJSONUtils normalizeFloat:value];
-      expect(number).to.equal(@(CGFLOAT_MIN));
+      expect(number).to.equal(@(LP_MIN_FLOAT));
     });
   });
 });
