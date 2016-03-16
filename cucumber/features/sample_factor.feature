@@ -11,9 +11,9 @@ sample factor must change.
 
 The LPTestTarget is _optimized_ for the larger screen sizes; it has the correct
 launch images, the correct app icons, and image assets in @3x sizes.  This
-Scenario tests that the scale factor is correct in Zoomed and Standard view
-modes.  There is a 2x2 point button that, when touched, changes its title from
-"Hidden" to "Found me!".
+Scenario tests that the sample factor is correct in Zoomed and Standard display
+modes.  There are a series of 2x2 point buttons that, when touched, change title
+from "Hidden" to "Found me!".
 
 There are six tests to run:
 
@@ -30,9 +30,15 @@ Display & Brightness > Display Zoom > Standard | Zoomed > Set
 
 On iOS Simulators, there is no Zoomed or Standard mode.
 
-Scenario: Touch a small button
+Scenario: Touch small buttons
 Given the app has launched
 And I go to the second tab
-And I touch the secret button
-Then the secret button title changes to Found me
+Then touching the top left button changes the title
+Then touching the top middle button changes the title
+Then touching the top right button changes the title
+Then touching the middle left button changes the title
+Then touching the middle right button changes the title
+Then touching the bottom left button changes the title
+Then touching the bottom middle button changes the title
+Then touching the bottom right button changes the title
 
