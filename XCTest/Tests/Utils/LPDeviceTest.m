@@ -401,7 +401,7 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
 }
 
 - (void) testGetIPAddressIPv4 {
-  NSString *ip = [self.device getIPAddress:YES];
+  NSString *ip = [self.device getIPAddress];
   expect(ip).notTo.equal(nil);
 }
 

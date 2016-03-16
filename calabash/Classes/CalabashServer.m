@@ -260,7 +260,7 @@
     LPLogError(@"Error starting Calabash HTTP Server: %@", error);
   } else {
     LPLogDebug(@"Calabash iOS server is listening on: %@ port %@",
-               [[LPDevice sharedDevice] getIPAddress:YES],
+               [[LPDevice sharedDevice] getIPAddress],
                @([_httpServer port]));
   }
 }
