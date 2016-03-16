@@ -2,6 +2,16 @@
 
 @interface SecondViewController ()
 
+@property (weak, nonatomic) IBOutlet UIButton *topLeftButton;
+@property (weak, nonatomic) IBOutlet UIButton *topRightButton;
+@property (weak, nonatomic) IBOutlet UIButton *bottomLeftButton;
+@property (weak, nonatomic) IBOutlet UIButton *bottomRightButton;
+@property (weak, nonatomic) IBOutlet UIButton *middleLeftButton;
+@property (weak, nonatomic) IBOutlet UIButton *middleRightButton;
+@property (weak, nonatomic) IBOutlet UIButton *topMiddleButton;
+@property (weak, nonatomic) IBOutlet UIButton *bottomMiddleButton;
+- (IBAction)buttonTouchedSecret:(UIButton *)sender;
+
 @end
 
 @implementation SecondViewController
@@ -24,8 +34,23 @@
   [super viewDidLoad];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
+  NSArray *subviews = [self.view subviews];
+  for (UIView *subView in subviews) {
+    if ([subView isKindOfClass:[UIButton class]]) {
+      UIButton *button = (UIButton *)subView;
+      [button setTitle:@"Hidden" forState:UIControlStateNormal];
+    }
+  }
+}
+
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
+}
+
+- (IBAction)buttonTouchedSecret:(UIButton *)sender {
+  [sender setTitle:@"Found me!" forState:UIControlStateNormal];
 }
 
 @end

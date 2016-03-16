@@ -50,3 +50,31 @@ And(/^I go to the first tab$/) do
   wait_for_none_animating
 end
 
+Then(/^touching the (top|middle|bottom) (left|middle|right) button changes the title$/) do |y_id, x_id|
+  mark = "#{y_id} #{x_id}"
+  qstr = "view marked:'#{mark}'"
+  timeout = 8
+  message = "Timed out waiting after #{timeout} seconds for #{qstr}"
+  options = {
+    :timeout => timeout,
+    :timeout_message => message
+  }
+
+  wait_for(options) do
+    !query(qstr).empty?
+  end
+
+  title = query(qstr, {:titleForState => 0}).first
+  expect(title).to be == "Hidden"
+
+  touch(qstr)
+
+  expected = "Found me!"
+  message = "Timed out waiting after #{timeout} seconds for title to change to '#{expected}'"
+  options[:timeout_message] = message
+
+  wait_for(options) do
+    query(qstr, {:titleForState => 0}).first == expected
+  end
+end
+

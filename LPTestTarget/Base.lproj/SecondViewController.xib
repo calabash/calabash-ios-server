@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="14F1605" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Helvetica.ttc">
@@ -12,6 +12,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SecondViewController">
             <connections>
+                <outlet property="bottomLeftButton" destination="E97-Ev-Naf" id="kpQ-kw-ZxD"/>
+                <outlet property="bottomMiddleButton" destination="kQ7-aQ-y9t" id="gNM-De-Meb"/>
+                <outlet property="bottomRightButton" destination="riB-gt-Sac" id="Q3I-QP-MZs"/>
+                <outlet property="middleLeftButton" destination="IPw-wV-LhW" id="bYc-20-dyp"/>
+                <outlet property="middleRightButton" destination="LN3-eY-EpV" id="17z-a4-5Xm"/>
+                <outlet property="topLeftButton" destination="jzm-In-K7d" id="Aki-GD-tvT"/>
+                <outlet property="topMiddleButton" destination="yta-BF-vuM" id="Ppw-T2-4a6"/>
+                <outlet property="topRightButton" destination="sE7-18-fNc" id="Dwr-Gf-WlT"/>
                 <outlet property="view" destination="iN0-l3-epB" id="x4C-57-ETm"/>
             </connections>
         </placeholder>
@@ -36,14 +44,167 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jzm-In-K7d" userLabel="top left">
+                    <rect key="frame" x="88" y="88" width="2" height="2"/>
+                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <accessibility key="accessibilityConfiguration" label="Secret button"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="2" id="WQd-E1-jaj"/>
+                        <constraint firstAttribute="height" constant="2" id="XTX-Tm-pzY"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="2"/>
+                    <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="top left"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="buttonTouchedSecret:" destination="-1" eventType="touchUpInside" id="IH8-LN-IEt"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sE7-18-fNc" userLabel="top right">
+                    <rect key="frame" x="510" y="88" width="2" height="2"/>
+                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <accessibility key="accessibilityConfiguration" label="Secret button"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="fF0-Lk-854"/>
+                        <constraint firstAttribute="width" constant="2" id="ud6-on-vnK"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="2"/>
+                    <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="top right"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="buttonTouchedSecret:" destination="-1" eventType="touchUpInside" id="o5Y-Y1-9if"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E97-Ev-Naf" userLabel="bottom left">
+                    <rect key="frame" x="88" y="510" width="2" height="2"/>
+                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <accessibility key="accessibilityConfiguration" label="Secret button"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="Jdc-5U-4jp"/>
+                        <constraint firstAttribute="width" constant="2" id="PgP-NF-jg3"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="2"/>
+                    <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="bottom left"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="buttonTouchedSecret:" destination="-1" eventType="touchUpInside" id="vQQ-RN-gv3"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="riB-gt-Sac" userLabel="bottom right">
+                    <rect key="frame" x="510" y="510" width="2" height="2"/>
+                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <accessibility key="accessibilityConfiguration" label="Secret button"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="AOH-Kl-NBW"/>
+                        <constraint firstAttribute="width" constant="2" id="xeY-gz-eXb"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="2"/>
+                    <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="bottom right"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="buttonTouchedSecret:" destination="-1" eventType="touchUpInside" id="maP-AM-hdv"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IPw-wV-LhW" userLabel="middle left">
+                    <rect key="frame" x="10" y="299" width="2" height="2"/>
+                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <accessibility key="accessibilityConfiguration" label="Secret button"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="2" id="kuX-Hm-wLg"/>
+                        <constraint firstAttribute="height" constant="2" id="ppa-cr-KKJ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="2"/>
+                    <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="middle left"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="buttonTouchedSecret:" destination="-1" eventType="touchUpInside" id="P9y-h5-b1a"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LN3-eY-EpV" userLabel="middle right">
+                    <rect key="frame" x="588" y="299" width="2" height="2"/>
+                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <accessibility key="accessibilityConfiguration" label="Secret button"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="YqU-Za-rYp"/>
+                        <constraint firstAttribute="width" constant="2" id="gdW-6i-mFS"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="2"/>
+                    <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="middle right"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="buttonTouchedSecret:" destination="-1" eventType="touchUpInside" id="Xrk-Gy-uIq"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yta-BF-vuM" userLabel="top middle">
+                    <rect key="frame" x="299" y="88" width="2" height="2"/>
+                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <accessibility key="accessibilityConfiguration" label="Secret button"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="2" id="4Oy-Xw-FaC"/>
+                        <constraint firstAttribute="height" constant="2" id="byE-ML-4VX"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="2"/>
+                    <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="top middle"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="buttonTouchedSecret:" destination="-1" eventType="touchUpInside" id="9V6-Rd-HmJ"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kQ7-aQ-y9t" userLabel="bottom middle">
+                    <rect key="frame" x="299" y="510" width="2" height="2"/>
+                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <accessibility key="accessibilityConfiguration" label="Secret button"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="mra-M2-32k"/>
+                        <constraint firstAttribute="width" constant="2" id="y2O-o4-z84"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="2"/>
+                    <color key="tintColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="accessibilityIdentifier" value="bottom middle"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="buttonTouchedSecret:" destination="-1" eventType="touchUpInside" id="su2-CS-LNj"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="jzm-In-K7d" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="88" id="3Es-zi-RDD"/>
+                <constraint firstItem="sE7-18-fNc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="88" id="4vB-G5-hNe"/>
+                <constraint firstItem="E97-Ev-Naf" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="88" id="60W-Hb-GZd"/>
+                <constraint firstAttribute="bottom" secondItem="E97-Ev-Naf" secondAttribute="bottom" constant="88" id="EK3-wf-c8u"/>
                 <constraint firstItem="iws-4D-UFH" firstAttribute="top" secondItem="CAn-6g-s4q" secondAttribute="bottom" constant="17" id="Ejz-JI-ocY"/>
                 <constraint firstItem="CAn-6g-s4q" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="GY3-Qo-CEm"/>
+                <constraint firstItem="IPw-wV-LhW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="HpX-Hb-SNP"/>
+                <constraint firstItem="IPw-wV-LhW" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="OjF-Hz-Xaf"/>
+                <constraint firstItem="yta-BF-vuM" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="RRw-3k-srC"/>
+                <constraint firstAttribute="bottom" secondItem="kQ7-aQ-y9t" secondAttribute="bottom" constant="88" id="UIY-A5-4E7"/>
+                <constraint firstItem="kQ7-aQ-y9t" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="WTG-oA-KgD"/>
+                <constraint firstItem="yta-BF-vuM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="88" id="WUZ-XS-Ia9"/>
                 <constraint firstItem="CAn-6g-s4q" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="XT8-MF-SE0"/>
+                <constraint firstAttribute="trailing" secondItem="sE7-18-fNc" secondAttribute="trailing" constant="88" id="aYO-Lc-orO"/>
+                <constraint firstAttribute="trailing" secondItem="riB-gt-Sac" secondAttribute="trailing" constant="88" id="dZl-Y6-W1a"/>
                 <constraint firstItem="iws-4D-UFH" firstAttribute="centerX" secondItem="CAn-6g-s4q" secondAttribute="centerX" id="gNe-yr-g5W"/>
+                <constraint firstItem="jzm-In-K7d" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="88" id="kwl-Cs-eEF"/>
+                <constraint firstAttribute="bottom" secondItem="riB-gt-Sac" secondAttribute="bottom" constant="88" id="pOm-kE-2pE"/>
+                <constraint firstItem="LN3-eY-EpV" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="wrW-nf-hx1"/>
+                <constraint firstAttribute="trailing" secondItem="LN3-eY-EpV" secondAttribute="trailing" constant="10" id="xKI-YV-edl"/>
             </constraints>
+            <point key="canvasLocation" x="437" y="252"/>
         </view>
     </objects>
 </document>
