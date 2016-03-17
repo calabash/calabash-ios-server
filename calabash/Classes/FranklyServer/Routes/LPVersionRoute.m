@@ -78,15 +78,17 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
   return [method isEqualToString:@"GET"];
 }
 
+// Frank support
 - (BOOL)canHandlePostForPath:(NSArray *)path {
-  return [@"calabash_version" isEqualToString:[path lastObject]];
+  return [@"version" isEqualToString:[path lastObject]];
 }
 
+// Frank support
 - (id)handleRequestForPath:(NSArray *)path withConnection:(id)connection {
   if (![self canHandlePostForPath:path]) {  return nil;  }
 
   NSDictionary *version = [self JSONResponseForMethod:@"GET"
-                                                  URI:@"calabash_version"
+                                                  URI:@"version"
                                                  data:nil];
   NSData *jsonData = [[LPJSONUtils serializeDictionary:version]
                       dataUsingEncoding:NSUTF8StringEncoding];
