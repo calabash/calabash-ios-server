@@ -9,19 +9,89 @@
 //  Copyright (c) 2014 Xamarin. All rights reserved.
 //
 
+/*
+https://github.com/facebook/WebDriverAgent/blob/master/LICENSE
+
+UIDevice + Wifi Address
+ BSD License
+
+ For WebDriverAgent software
+
+ Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+
+ Redistribution and use in source and binary forms, with or without modification,
+ are permitted provided that the following conditions are met:
+
+ * Redistributions of source code must retain the above copyright notice, this
+ list of conditions and the following disclaimer.
+
+ * Redistributions in binary form must reproduce the above copyright notice,
+ this list of conditions and the following disclaimer in the documentation
+ and/or other materials provided with the distribution.
+
+ * Neither the name Facebook nor the names of its contributors may be used to
+ endorse or promote products derived from this software without specific
+ prior written permission.
+
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+ ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+*/
+
 #import "LPDevice.h"
 #import "LPTouchUtils.h"
 #import "LPCocoaLumberjack.h"
 #import <sys/utsname.h>
-#include <ifaddrs.h>
-#include <arpa/inet.h>
-#include <net/if.h>
+#import <arpa/inet.h>
+#import <ifaddrs.h>
 
-#define IOS_CELLULAR    @"pdp_ip0"
-#define IOS_WIFI        @"en0"
-#define IOS_VPN         @"utun0"
-#define IP_ADDR_IPv4    @"ipv4"
-#define IP_ADDR_IPv6    @"ipv6"
+#pragma mark - IP Address
+
+@interface UIDevice (LPDEVICE_WIFI)
+
+- (NSString *) LPWifiIPAddress;
+
+@end
+
+@implementation UIDevice (LPDEVICE_WIFI)
+
+- (NSString *) LPWifiIPAddress {
+  struct ifaddrs *interfaces = NULL;
+  struct ifaddrs *temp_addr = NULL;
+  int success = getifaddrs(&interfaces);
+  if (success != 0) {
+    freeifaddrs(interfaces);
+    return nil;
+  }
+
+  NSString *address;
+  temp_addr = interfaces;
+  while(temp_addr != NULL) {
+    if(temp_addr->ifa_addr->sa_family != AF_INET) {
+      temp_addr = temp_addr->ifa_next;
+      continue;
+    }
+    NSString *interfaceName = [NSString stringWithUTF8String:temp_addr->ifa_name];
+    if([interfaceName rangeOfString:@"en"].location == NSNotFound) {
+      temp_addr = temp_addr->ifa_next;
+      continue;
+    }
+    address = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)];
+    break;
+  }
+  freeifaddrs(interfaces);
+  return address;
+}
+
+@end
 
 NSString *const LPDeviceSimKeyModelIdentifier = @"SIMULATOR_MODEL_IDENTIFIER";
 NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
@@ -31,6 +101,7 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
 
 @property(strong, nonatomic) NSDictionary *processEnvironment;
 @property(strong, nonatomic) NSDictionary *formFactorMap;
+@property(copy, nonatomic) NSString *ipAddress;
 
 - (id) init_private;
 
@@ -42,7 +113,6 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
 
 - (NSString *) physicalDeviceModelIdentifier;
 - (NSString *) simulatorModelIdentfier;
-- (NSDictionary *) getIPAddresses;
 
 @end
 
@@ -58,6 +128,7 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
 @synthesize name = _name;
 @synthesize iOSVersion = _iOSVersion;
 @synthesize physicalDeviceModelIdentifier = _physicalDeviceModelIdentifier;
+@synthesize ipAddress = _ipAddress;
 
 
 - (id) init {
@@ -348,63 +419,12 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
   }
 }
 
-#pragma mark - IP Address
+- (NSString *) getIPAddress {
+  if (_ipAddress) { return _ipAddress; }
 
-// http://stackoverflow.com/questions/7072989/iphone-ipad-osx-how-to-get-my-ip-address-programmatically
-
-- (NSString *) getIPAddress:(BOOL) preferIPv4 {
-  NSArray *searchArray = preferIPv4 ?
-  @[ IOS_VPN @"/" IP_ADDR_IPv4, IOS_VPN @"/" IP_ADDR_IPv6, IOS_WIFI @"/" IP_ADDR_IPv4, IOS_WIFI @"/" IP_ADDR_IPv6, IOS_CELLULAR @"/" IP_ADDR_IPv4, IOS_CELLULAR @"/" IP_ADDR_IPv6 ] :
-  @[ IOS_VPN @"/" IP_ADDR_IPv6, IOS_VPN @"/" IP_ADDR_IPv4, IOS_WIFI @"/" IP_ADDR_IPv6, IOS_WIFI @"/" IP_ADDR_IPv4, IOS_CELLULAR @"/" IP_ADDR_IPv6, IOS_CELLULAR @"/" IP_ADDR_IPv4 ] ;
-
-  NSDictionary *addresses = [self getIPAddresses];
-
-  __block NSString *address;
-  [searchArray enumerateObjectsUsingBlock:^(NSString *key, NSUInteger idx, BOOL *stop)
-   {
-     address = addresses[key];
-     if(address) *stop = YES;
-   } ];
-  return address ? address : @"0.0.0.0";
-}
-
-- (NSDictionary *) getIPAddresses {
-  NSMutableDictionary *addresses = [NSMutableDictionary dictionaryWithCapacity:8];
-
-  // retrieve the current interfaces - returns 0 on success
-  struct ifaddrs *interfaces;
-  if(!getifaddrs(&interfaces)) {
-    // Loop through linked list of interfaces
-    struct ifaddrs *interface;
-    for(interface=interfaces; interface; interface=interface->ifa_next) {
-      if(!(interface->ifa_flags & IFF_UP) /* || (interface->ifa_flags & IFF_LOOPBACK) */ ) {
-        continue; // deeply nested code harder to read
-      }
-      const struct sockaddr_in *addr = (const struct sockaddr_in*)interface->ifa_addr;
-      char addrBuf[ MAX(INET_ADDRSTRLEN, INET6_ADDRSTRLEN) ];
-      if(addr && (addr->sin_family==AF_INET || addr->sin_family==AF_INET6)) {
-        NSString *name = [NSString stringWithUTF8String:interface->ifa_name];
-        NSString *type;
-        if(addr->sin_family == AF_INET) {
-          if(inet_ntop(AF_INET, &addr->sin_addr, addrBuf, INET_ADDRSTRLEN)) {
-            type = IP_ADDR_IPv4;
-          }
-        } else {
-          const struct sockaddr_in6 *addr6 = (const struct sockaddr_in6*)interface->ifa_addr;
-          if(inet_ntop(AF_INET6, &addr6->sin6_addr, addrBuf, INET6_ADDRSTRLEN)) {
-            type = IP_ADDR_IPv6;
-          }
-        }
-        if(type) {
-          NSString *key = [NSString stringWithFormat:@"%@/%@", name, type];
-          addresses[key] = [NSString stringWithUTF8String:addrBuf];
-        }
-      }
-    }
-    // Free memory
-    freeifaddrs(interfaces);
-  }
-  return [addresses count] ? addresses : nil;
+  _ipAddress = [[UIDevice currentDevice] LPWifiIPAddress];
+  return _ipAddress;
 }
 
 @end
+
