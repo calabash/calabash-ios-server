@@ -18,6 +18,14 @@ core_sim.launch_simulator
 
 sim_udid = default_sim.udid
 
+xcode = RunLoop::Xcode.new
+
+if xcode.version_gte_7?
+  warnings_as_errors="GCC_TREAT_WARNINGS_AS_ERRORS=YES"
+else
+  warnings_as_errors="GCC_TREAT_WARNINGS_AS_ERRORS=NO"
+end
+
 args =
       [
             'test',
@@ -28,7 +36,7 @@ args =
             "-destination 'platform=iOS Simulator,id=#{sim_udid}'",
             '-sdk iphonesimulator',
             '-configuration Debug',
-            "GCC_TREAT_WARNINGS_AS_ERRORS=YES",
+            warnings_as_errors,
             use_xcpretty ? '| xcpretty -tc --report junit && exit ${PIPESTATUS[0]}' : ''
       ]
 
