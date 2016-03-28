@@ -139,9 +139,7 @@
 
   if (self.valueType == UIScriptLiteralTypeString) {
     LPWebQueryType type = LPWebQueryTypeCSS;
-    if ([[self selectorName] isEqualToString:@"marked"]) {
-      type = LPWebQueryTypeFreeText;
-    } else if ([[self selectorName] isEqualToString:@"xpath"]) {
+    if ([[self selectorName] isEqualToString:@"xpath"]) {
       type = LPWebQueryTypeXPATH;
     } else if ([[self selectorName] isEqualToString:@"css"]) {
       type = LPWebQueryTypeCSS;

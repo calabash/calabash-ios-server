@@ -11,10 +11,10 @@ GIT
 
 GIT
   remote: git://github.com/calabash/run_loop.git
-  revision: 9abb0b931039acef14c50d14eb30d78f6c7c70f1
+  revision: 68b5953e88a272ef143c4d20b919a14d6759bd64
   branch: develop
   specs:
-    run_loop (2.0.7)
+    run_loop (2.1.0.pre1)
       CFPropertyList (~> 2.2)
       awesome_print (~> 1.2)
       command_runner_ng (>= 0.0.2)

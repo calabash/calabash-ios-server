@@ -56,6 +56,7 @@ typedef enum : NSUInteger {
 
   view.tag = kTagView;
   view.accessibilityIdentifier = @"root";
+  view.accessibilityLabel = @"Root";
 
   view.backgroundColor = [UIColor whiteColor];
   view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -79,9 +80,8 @@ typedef enum : NSUInteger {
     UIWebView *webView = self.webView;
     [self.view addSubview:webView];
 
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"lp-simple-example"
-                                                     ofType:@"html"];
-    NSURL *url = [NSURL fileURLWithPath:path];
+    NSString *page = @"https://calabash-ci.macminicolo.net/CalWebViewApp/page.html";
+    NSURL *url = [NSURL URLWithString:page];
     [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
   }
   [super viewDidAppear:animated];

@@ -1,3 +1,18 @@
+### 0.19.0
+
+This release removes support for "marked" as a free text matcher on
+WebViews. See this issue for details:
+
+https://github.com/calabash/calabash-ios/issues/735
+
+* Update Objective-C test stack #343
+* LPVersionRoute: remove reference to calabash\_version #342
+* LPDevice: fix ip address reporting #340
+* Fix touch coordinates for Zoomed display mode and apps that are not
+  optimized for iPhone 6 screen sizes #339
+* LPJSONUtils: set max and min float to avoid JSON parse errors #338
+* Remove special :marked handling from WebView queries #337
+
 ### 0.18.2
 
 Thanks @MortenGregersen and @kaorijp for testing #334
