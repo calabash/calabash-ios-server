@@ -221,7 +221,7 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   OCMVerifyAll(mock);
 }
 
-- (void) testFormFactorIpadPro {
+- (void) testFormFactorIpadPro13in {
   id mock = OCMPartialMock(self.device);
   OCMExpect([mock modelIdentifier]).andReturn(@"iPad6,7");
 
@@ -230,11 +230,37 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   OCMVerifyAll(mock);
 }
 
-- (void) testFormFactorIpadProCellular {
+- (void) testFormFactorIpadPro13inCellular {
   id mock = OCMPartialMock(self.device);
   OCMExpect([mock modelIdentifier]).andReturn(@"iPad6,8");
 
   expect([mock formFactor]).to.equal(@"ipad pro");
+  OCMVerifyAll(mock);
+}
+
+- (void) testFormFactoryIpadPro9in {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock modelIdentifier]).andReturn(@"iPad6,3");
+
+  expect([mock formFactor]).to.equal(@"ipad pro");
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testFormFactoryIpadPro9inCellular {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock modelIdentifier]).andReturn(@"iPad6,4");
+
+  expect([mock formFactor]).to.equal(@"ipad pro");
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testFormFactorIphone6se {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock modelIdentifier]).andReturn(@"iPhone8,4");
+
+  expect([mock formFactor]).to.equal(@"iphone 4in");
   OCMVerifyAll(mock);
 }
 
