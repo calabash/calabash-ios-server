@@ -67,7 +67,6 @@ Before do |scenario|
 
   if relaunch
     launcher.relaunch(options)
-    launcher.calabash_notify(self)
   end
 end
 
