@@ -32,6 +32,8 @@ end
 
 default_report = "./reports/calabash-#{date}.html"
 ss_path = "./screenshots/"
+FileUtils.rm_rf(ss_path)
+FileUtils.mkdir(ss_path)
 
 if ENV["USER"] == "jenkins"
   formatter = "pretty"
