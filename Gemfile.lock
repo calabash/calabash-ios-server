@@ -11,10 +11,10 @@ GIT
 
 GIT
   remote: git://github.com/calabash/run_loop.git
-  revision: 68b5953e88a272ef143c4d20b919a14d6759bd64
+  revision: 8ad697025a2dd40fdf35c4238f232299cd426541
   branch: develop
   specs:
-    run_loop (2.1.0.pre1)
+    run_loop (2.1.1)
       CFPropertyList (~> 2.2)
       awesome_print (~> 1.2)
       command_runner_ng (>= 0.0.2)
@@ -45,11 +45,11 @@ GEM
       net-http-persistent (>= 2.7)
       net-http-pipeline
     highline (1.7.8)
-    httpclient (2.7.1)
+    httpclient (2.8.0)
     json (1.8.3)
     launchy (2.4.3)
       addressable (~> 2.3)
-    multi_json (1.11.2)
+    multi_json (1.11.3)
     multipart-post (2.0.0)
     net-http-persistent (2.9.4)
     net-http-pipeline (1.0.1)
@@ -70,7 +70,7 @@ GEM
       typhoeus (~> 0.6, >= 0.6.8)
     typhoeus (0.8.0)
       ethon (>= 0.8.0)
-    websocket (1.2.2)
+    websocket (1.2.3)
     xcpretty (0.2.2)
       rouge (~> 1.8)
 
