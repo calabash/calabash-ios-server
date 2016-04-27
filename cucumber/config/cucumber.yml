@@ -32,6 +32,8 @@ end
 
 default_report = "./reports/calabash-#{date}.html"
 ss_path = "./screenshots/"
+FileUtils.rm_rf(ss_path)
+FileUtils.mkdir(ss_path)
 
 if ENV["USER"] == "jenkins"
   formatter = "pretty"
@@ -82,7 +84,7 @@ default:       -p simulator
 # required only for devices
 bundle_id:    BUNDLE_ID=sh.calaba.LPTestTarget
 
-device_common:  -p common -p bundle_id --tags ~@simulator --tags ~@simulator_only
+device_common:  -p common -p bundle_id -p ss_path --tags ~@simulator --tags ~@simulator_only
 
 neptune_common: DEVICE_TARGET=<%= devices[:neptune][:udid] %> DEVICE_ENDPOINT=<%= devices[:neptune][:ip] %> -p device_common  -p neptune_html -p neptune_ss
 
