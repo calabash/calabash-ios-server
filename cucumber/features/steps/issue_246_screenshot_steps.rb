@@ -2,7 +2,16 @@ module CalSmokeApp
   module ScreenshotEmbed
 
     def screenshot_count
-      Dir.glob("./screenshots/*.png").count
+      screenshot_dir = ENV["SCREENSHOT_PATH"]
+      if !screenshot_dir
+        screenshot_dir = "./screenshots"
+      end
+
+      unless File.exist?(screenshot_dir)
+        FileUtils.mkdir_p(screenshot_dir)
+      end
+
+      Dir.glob("#{screenshot_dir}/*.png").count
     end
 
     def log_screenshot_context(kontext, e)
@@ -10,6 +19,13 @@ module CalSmokeApp
       $stdout.flush
     end
 
+    def expect_screenshot_count(expected)
+      if Calabash::Cucumber::Environment.xtc?
+        # Skip this test on the XTC.
+      else
+        expect(screenshot_count).to be == expected
+      end
+    end
   end
 end
 
@@ -23,7 +39,7 @@ When(/^I use screenshot_and_raise in the context of cucumber$/) do
   rescue => e
     @screenshot_and_raise_error = e
     log_screenshot_context("Cucumber", e)
-    expect(screenshot_count).to be == last_count + 1
+    expect_screenshot_count(last_count + 1)
   end
 end
 
@@ -35,7 +51,7 @@ When(/I screenshot_and_raise in a page that does not inherit from IBase$/) do
   rescue => e
     log_screenshot_context("NotPOM", e)
     @screenshot_and_raise_error = e
-    expect(screenshot_count).to be == last_count + 1
+    expect_screenshot_count(last_count + 1)
   end
 end
 
@@ -47,7 +63,7 @@ When(/I screenshot_and_raise in a page that does inherit from IBase$/) do
   rescue => e
     log_screenshot_context("POM", e)
     @screenshot_and_raise_error = e
-    expect(screenshot_count).to be == last_count + 1
+    expect_screenshot_count(last_count + 1)
   end
 end
 
