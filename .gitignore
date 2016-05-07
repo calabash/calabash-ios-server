@@ -21,6 +21,9 @@ calabash-dylibs
 *.ipa
 tmp
 
+# Versioning info
+LPTestTarget/InfoPlist.h
+
 # Code coverage and profiling.
 *.gcda
 *.gcno
