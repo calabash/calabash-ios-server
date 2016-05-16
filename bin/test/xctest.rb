@@ -33,7 +33,7 @@ args =
             '-derivedDataPath build/xctest',
             '-project calabash.xcodeproj',
             '-scheme XCTest',
-            "-destination 'platform=iOS Simulator,id=#{sim_udid}'",
+            "-destination id=#{sim_udid}",
             '-sdk iphonesimulator',
             '-configuration Debug',
             warnings_as_errors,
