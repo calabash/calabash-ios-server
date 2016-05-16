@@ -46,12 +46,13 @@ Dir.chdir working_dir do
     if ENV["JENKINS_HOME"]
       devices = {
         :iphone6sPlus => 'iPhone 6s Plus',
-      }
-    else
-      devices = {
         :air => 'iPad Air',
         :iphone4s => 'iPhone 4s',
         :iphone5s => 'iPhone 5s',
+        :iphone6plus => 'iPhone 6 Plus'
+      }
+    else
+      devices = {
         :iphone6 => 'iPhone 6',
         :iphone6plus => 'iPhone 6 Plus'
       }
