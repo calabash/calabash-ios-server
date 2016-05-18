@@ -40,6 +40,8 @@ typedef enum : NSUInteger {
                             self.view.bounds.size.width,
                             self.view.bounds.size.height - 20);
   _webView = [[UIWebView alloc] initWithFrame:frame];
+  _webView.accessibilityLabel = @"Landing page";
+  _webView.accessibilityIdentifier = @"landing page";
   _webView.tag = kTagWebView;
   return _webView;
 }
