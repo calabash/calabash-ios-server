@@ -171,11 +171,6 @@
       }
     } else {
       UIView *v = (UIView *)result;
-      if ([LPWebViewUtils isWebView:v]) {
-        [res addObjectsFromArray:[self handleWebView:(UIView<LPWebViewProtocol> *) v
-                                          visibility:visibility]];
-        continue;
-      }
       if ([self.selectorName isEqualToString:@"marked"]) {
         NSString *val = nil;
         if ([v respondsToSelector:@selector(accessibilityIdentifier)]) {
@@ -216,6 +211,12 @@
             [res addObject:cell];
           }
         }
+        continue;
+      }
+
+      if ([LPWebViewUtils isWebView:v]) {
+        [res addObjectsFromArray:[self handleWebView:(UIView<LPWebViewProtocol> *) v
+                                          visibility:visibility]];
         continue;
       }
 

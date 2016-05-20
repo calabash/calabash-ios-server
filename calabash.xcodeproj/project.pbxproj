@@ -6,6 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		F5DDE54D1CDE4AB000E0E187 /* LPTestTargetBuildNumber */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = F5DDE54E1CDE4AB000E0E187 /* Build configuration list for PBXAggregateTarget "LPTestTargetBuildNumber" */;
+			buildPhases = (
+				F5DDE5521CDE4AB600E0E187 /* Run Script Increment Build Number */,
+			);
+			dependencies = (
+			);
+			name = LPTestTargetBuildNumber;
+			productName = BuildNumber;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		89043AC21C289A5D0067E22F /* LPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 89043ABE1C289A5D0067E22F /* LPConstants.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89043AC31C289A5D0067E22F /* LPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 89043ABE1C289A5D0067E22F /* LPConstants.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -42,7 +56,7 @@
 		B15BF9A619ABB1DD00B38577 /* LPHTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A314E6564200663205 /* LPHTTPDynamicFileResponse.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9A719ABB1DD00B38577 /* LPHTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A514E6564200663205 /* LPHTTPFileResponse.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9A819ABB1DD00B38577 /* LPHTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A714E6564200663205 /* LPHTTPRedirectResponse.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		B15BF9A919ABB1DD00B38577 /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; };
+		B15BF9A919ABB1DD00B38577 /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9AA19ABB1DD00B38577 /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9AB19ABB1DD00B38577 /* LPScrollToMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5BFF97A718B392370094E71E /* LPScrollToMarkOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9AC19ABB1DD00B38577 /* LPScrollToRowWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -182,7 +196,7 @@
 		B1D5BDC219A23BCE0070E8CE /* LPFlashOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B19440431725C70A00EE1B25 /* LPFlashOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BDC319A23BCE0070E8CE /* LPScrollToRowWithMarkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5AE0BC5174F58A5006E4050 /* LPScrollToRowWithMarkOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BDC419A23BCE0070E8CE /* LPOrientationOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F591380317C39128007B2BE4 /* LPOrientationOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		B1D5BDC519A23BCE0070E8CE /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; };
+		B1D5BDC519A23BCE0070E8CE /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BDC619A23BCE0070E8CE /* LPDatePickerOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F55A351017CF8F8F0001E8B4 /* LPDatePickerOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BDC919A23BCE0070E8CE /* CalabashServer.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FD8814B6DAE1002A744C /* CalabashServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B1D5BDCA19A23BCE0070E8CE /* LPRoute.h in Headers */ = {isa = PBXBuildFile; fileRef = B184FDBE14B6DB2B002A744C /* LPRoute.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -313,7 +327,7 @@
 		F50CBF8B1A04056F004AC9DA /* LPHTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A314E6564200663205 /* LPHTTPDynamicFileResponse.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBF8C1A04056F004AC9DA /* LPHTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A514E6564200663205 /* LPHTTPFileResponse.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBF8D1A04056F004AC9DA /* LPHTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9A714E6564200663205 /* LPHTTPRedirectResponse.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F50CBF8E1A04058C004AC9DA /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; };
+		F50CBF8E1A04058C004AC9DA /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBF8F1A04058C004AC9DA /* LPI.mm in Sources */ = {isa = PBXBuildFile; fileRef = B184FDBD14B6DB2B002A744C /* LPI.mm */; };
 		F50CBF901A04058C004AC9DA /* LPRouter.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDC014B6DB2B002A744C /* LPRouter.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBF911A04058C004AC9DA /* LPCollectionViewScrollToItemOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C3A62E18A2EA0800DB7E42 /* LPCollectionViewScrollToItemOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -613,7 +627,7 @@
 		F5F2D5EC1ACACF2F0027937B /* LPWebViewUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F2D5E21ACACF2F0027937B /* LPWebViewUtils.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5F2D5ED1ACACF2F0027937B /* LPWebViewUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F2D5E21ACACF2F0027937B /* LPWebViewUtils.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5F2D5EF1ACACF2F0027937B /* LPWebViewUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F2D5E21ACACF2F0027937B /* LPWebViewUtils.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5F53D6B18C619CB00BD9731 /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; };
+		F5F53D6B18C619CB00BD9731 /* LPCORSResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = B1059F0418C546EB005A0262 /* LPCORSResponse.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -623,6 +637,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = F59CA46C1A82EF40007A2F38;
 			remoteInfo = LPTestTarget;
+		};
+		F5DDE5531CDE4B0700E0E187 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B121E78814B6D9FB0034C6A9 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F5DDE54D1CDE4AB000E0E187;
+			remoteInfo = BuildNumber;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -2275,6 +2296,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F5DDE5541CDE4B0700E0E187 /* PBXTargetDependency */,
 			);
 			name = LPTestTarget;
 			productName = LPTestTarget;
@@ -2298,6 +2320,9 @@
 					F59CA46C1A82EF40007A2F38 = {
 						CreatedOnToolsVersion = 6.2;
 					};
+					F5DDE54D1CDE4AB000E0E187 = {
+						CreatedOnToolsVersion = 7.3;
+					};
 				};
 			};
 			buildConfigurationList = B121E78B14B6D9FB0034C6A9 /* Build configuration list for PBXProject "calabash" */;
@@ -2320,6 +2345,7 @@
 				B15BF97019ABAFD200B38577 /* calabash-dylib */,
 				F59CA46C1A82EF40007A2F38 /* LPTestTarget */,
 				F537398B18E5253B004133FA /* version */,
+				F5DDE54D1CDE4AB000E0E187 /* LPTestTargetBuildNumber */,
 			);
 		};
 /* End PBXProject section */
@@ -2544,6 +2570,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "sh calabash/gitversioning-after.sh \"calabash/LPGitVersionDefines.h\"";
+			showEnvVarsInLog = 0;
+		};
+		F5DDE5521CDE4AB600E0E187 /* Run Script Increment Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script Increment Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "bin/xcode-build-phase/increment-build-number.sh";
 			showEnvVarsInLog = 0;
 		};
 		F5E2A5EF1BFF090F0068DFAD /* Run Script  Checkout LPTestTarget/change-sha.plist */ = {
@@ -3150,6 +3191,11 @@
 			isa = PBXTargetDependency;
 			target = F59CA46C1A82EF40007A2F38 /* LPTestTarget */;
 			targetProxy = F59CA4961A82F2BF007A2F38 /* PBXContainerItemProxy */;
+		};
+		F5DDE5541CDE4B0700E0E187 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F5DDE54D1CDE4AB000E0E187 /* LPTestTargetBuildNumber */;
+			targetProxy = F5DDE5531CDE4B0700E0E187 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -4152,7 +4198,9 @@
 					"$(inherited)",
 					/Xcode/6.4/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				INFOPLIST_FILE = LPTestTarget/Info.plist;
+				INFOPLIST_FILE = "${PRODUCT_NAME}/Info.plist";
+				INFOPLIST_PREFIX_HEADER = "${PRODUCT_NAME}/InfoPlist.h";
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
@@ -4232,7 +4280,9 @@
 					"$(inherited)",
 					/Xcode/6.4/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				INFOPLIST_FILE = LPTestTarget/Info.plist;
+				INFOPLIST_FILE = "${PRODUCT_NAME}/Info.plist";
+				INFOPLIST_PREFIX_HEADER = "${PRODUCT_NAME}/InfoPlist.h";
+				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
@@ -4278,7 +4328,9 @@
 					"$(inherited)",
 					/Xcode/6.4/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				INFOPLIST_FILE = LPTestTarget/Info.plist;
+				INFOPLIST_FILE = "${PRODUCT_NAME}/Info.plist";
+				INFOPLIST_PREFIX_HEADER = "";
+				INFOPLIST_PREPROCESS = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "";
@@ -4294,6 +4346,36 @@
 					"-Warc-retain-cycles",
 					"-Wno-objc-designated-initializers",
 				);
+			};
+			name = Release;
+		};
+		F5DDE54F1CDE4AB000E0E187 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
+				INFOPLIST_FILE = "${PRODUCT_NAME}/Info.plist";
+				INFOPLIST_PREFIX_HEADER = "${PRODUCT_NAME}/InfoPlist.h";
+				PRODUCT_NAME = LPTestTarget;
+			};
+			name = Debug;
+		};
+		F5DDE5501CDE4AB000E0E187 /* CalabashApp */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
+				INFOPLIST_FILE = "${PRODUCT_NAME}/Info.plist";
+				INFOPLIST_PREFIX_HEADER = "${PRODUCT_NAME}/InfoPlist.h";
+				PRODUCT_NAME = LPTestTarget;
+			};
+			name = CalabashApp;
+		};
+		F5DDE5511CDE4AB000E0E187 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
+				INFOPLIST_FILE = "${PRODUCT_NAME}/Info.plist";
+				INFOPLIST_PREFIX_HEADER = "${PRODUCT_NAME}/InfoPlist.h";
+				PRODUCT_NAME = LPTestTarget;
 			};
 			name = Release;
 		};
@@ -4369,6 +4451,15 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
+		};
+		F5DDE54E1CDE4AB000E0E187 /* Build configuration list for PBXAggregateTarget "LPTestTargetBuildNumber" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5DDE54F1CDE4AB000E0E187 /* Debug */,
+				F5DDE5501CDE4AB000E0E187 /* CalabashApp */,
+				F5DDE5511CDE4AB000E0E187 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 

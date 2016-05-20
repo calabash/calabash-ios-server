@@ -10,6 +10,8 @@
 - (NSObject <LPHTTPResponse> *) httpResponseForMethod:(NSString *) method
                                                   URI:(NSString *) path;
 - (NSData *) takeScreenshot;
+- (NSData *) takeScreenshotUsingSnapshotAPI;
+- (NSData *) takeScreenshotUsingRenderInContext;
 
 @end
 
@@ -44,6 +46,29 @@ describe(@"LPScreenshotRoute", ^{
       XCTAssertNotNil(result);
       expect(result).to.conformTo(@protocol(LPHTTPResponse));
       OCMVerify([mock takeScreenshot]);
+    });
+  });
+
+  describe(@"#takeScreenshot", ^{
+    it(@"uses snapshot api", ^{
+      NSData *expected = [NSData data];
+      id mock = OCMPartialMock(route);
+      OCMExpect([mock takeScreenshotUsingSnapshotAPI]).andReturn(expected);
+
+      NSData *actual = [mock takeScreenshot];
+      expect(actual).to.equal(expected);
+      OCMVerifyAll(mock);
+    });
+
+    it(@"falls back to render in context on exception", ^{
+      NSData *expected = [NSData data];
+      id mock = OCMPartialMock(route);
+      OCMStub([mock takeScreenshotUsingSnapshotAPI]).andThrow([NSException new]);
+      OCMExpect([mock takeScreenshotUsingRenderInContext]).andReturn(expected);
+
+      NSData *actual = [mock takeScreenshot];
+      expect(actual).to.equal(expected);
+      OCMVerifyAll(mock);
     });
   });
 });

@@ -270,7 +270,7 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
     @"iPhone4,1" : @"iphone 3.5in",
     @"iPod4,1"   : @"iphone 3.5in",
 
-    // iPhone 5/5c/5s and iPod 5th + 6th
+    // iPhone 5/5c/5s, iPod 5th + 6th, and 6se
     @"iPhone5,1" : @"iphone 4in",
     @"iPhone5,2" : @"iphone 4in",
     @"iPhone5,3" : @"iphone 4in",
@@ -281,6 +281,7 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
     @"iPhone6,4" : @"iphone 4in",
     @"iPod5,1"   : @"iphone 4in",
     @"iPod6,1"   : @"iphone 4in",
+    @"iPhone8,4" : @"iphone 4in",
 
     // iPhone 6/6s
     @"iPhone7,2" : @"iphone 6",
@@ -290,9 +291,13 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
     @"iPhone7,1" : @"iphone 6+",
     @"iPhone8,2" : @"iphone 6+",
 
-    // iPad Pro
+    // iPad Pro 13in
     @"iPad6,7" : @"ipad pro",
-    @"iPad6,8" : @"ipad pro"
+    @"iPad6,8" : @"ipad pro",
+
+    // iPad Pro 9in
+    @"iPad6,3" : @"ipad pro",
+    @"iPad6,4" : @"ipad pro"
 
     };
 

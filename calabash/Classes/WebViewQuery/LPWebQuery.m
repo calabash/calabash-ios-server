@@ -67,6 +67,8 @@
 
   for (NSDictionary *d in queryResult) {
     NSMutableDictionary *dres = [NSMutableDictionary dictionaryWithDictionary:d];
+
+    // Inexplicably, rect.x and rect.y are the _center_.
     CGFloat center_x = [[dres valueForKeyPath:@"rect.x"] floatValue];
     CGFloat center_y = [[dres valueForKeyPath:@"rect.y"] floatValue];
 
@@ -82,9 +84,9 @@
 
       [dres setValue:[NSNumber numberWithFloat:finalCenter.x] forKeyPath:@"rect.center_x"];
       [dres setValue:[NSNumber numberWithFloat:finalCenter.y] forKeyPath:@"rect.center_y"];
-      [dres setValue:[NSNumber numberWithFloat:finalCenter.x] forKeyPath:@"rect.x"];
-      [dres setValue:[NSNumber numberWithFloat:finalCenter.y] forKeyPath:@"rect.y"];
-      
+      [dres setValue:[dres valueForKeyPath:@"rect.left"] forKeyPath:@"rect.x"];
+      [dres setValue:[dres valueForKeyPath:@"rect.top"] forKeyPath:@"rect.y"];
+
       /*
        When doing iframe queries, we need to store all of the information needed to
        recreate the iframe query in case subsequent tokens from the original

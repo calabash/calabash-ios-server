@@ -1,3 +1,7 @@
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
 //
 //  LPCORSResponse.m
 //  LPSimpleExample
@@ -18,13 +22,14 @@
     static NSDictionary *sharedHeaders = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedHeaders = [[NSDictionary alloc] initWithObjectsAndKeys:
-                            @"GET, POST, PUT, DELETE, OPTIONS", @"Access-Control-Allow-Methods",
-                            @"*",    @"Access-Control-Allow-Origin",
-                            @"true", @"Access-Control-Allow-Credentials",
-                            @"3000", @"Access-Control-Max-Age",
-                         
-                         nil];
+      sharedHeaders =
+      @{
+        @"Access-Control-Allow-Methods" : @"GET, POST, PUT, DELETE, OPTIONS",
+        @"Access-Control-Allow-Origin" : @"*",
+        @"Access-Control-Allow-Credentials" : @"true",
+        @"Access-Control-Max-Age" : @"3000",
+        @"Content-Type" : @"application/json; charset=utf-8"
+        };
     });
     return sharedHeaders;
 }
