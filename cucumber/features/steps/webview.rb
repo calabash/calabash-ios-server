@@ -7,10 +7,10 @@ And(/^the web page has loaded$/) do
 end
 
 Then(/^I can query the webview by accessibility id$/) do
-  expect(query("view marked:'root'")[0]).to be_truthy
+  expect(query("* marked:'landing page'")[0]).to be_truthy
 end
 
 Then(/^I can query the webview by accessibility label$/) do
-  expect(query("view marked:'Root'")[0]).to be_truthy
+  expect(query("* marked:'Landing page'")[0]).to be_truthy
 end
 
