@@ -85,6 +85,10 @@
   UIView<LPWebViewProtocol> *webView = iFrameResult[WEBVIEW_KEY];
   NSString *iframeSelector = iframeInfo[QUERY_KEY];
   
+  if ([self.selectorName isEqualToString:@"job"]){
+    queryType = LPWebQueryTypeJob;
+  }
+  
   if (iframeSelector == nil) {
     LPLogError(@"Missing query string for IFrame Query");
     return [NSArray array];
@@ -113,19 +117,21 @@
   for (NSDictionary *result in results) {
     NSMutableDictionary *mResult = [result mutableCopy];
     
-    NSMutableDictionary *mRect = [mResult[@"rect"] mutableCopy];
-    mRect[@"x"] = @([mRect[@"x"] floatValue] + xOffset);
-    mRect[@"left"] = @([mRect[@"left"] floatValue] + xOffset);
-    mRect[@"center_x"] = @([mRect[@"center_x"] floatValue] + xOffset);
-    mRect[@"y"] = @([mRect[@"y"] floatValue] + yOffset);
-    mRect[@"top"] = @([mRect[@"top"] floatValue] + yOffset);
-    mRect[@"center_y"] = @([mRect[@"center_y"] floatValue] + yOffset);
-    
-    mResult[@"rect"] = mRect;
+    if (mResult[@"rect"] && ![mResult[@"rect"] isEqual:[NSNull null]]) {
+      NSMutableDictionary *mRect = [mResult[@"rect"] mutableCopy];
+      mRect[@"x"] = @([mRect[@"x"] floatValue] + xOffset);
+      mRect[@"left"] = @([mRect[@"left"] floatValue] + xOffset);
+      mRect[@"center_x"] = @([mRect[@"center_x"] floatValue] + xOffset);
+      mRect[@"y"] = @([mRect[@"y"] floatValue] + yOffset);
+      mRect[@"top"] = @([mRect[@"top"] floatValue] + yOffset);
+      mRect[@"center_y"] = @([mRect[@"center_y"] floatValue] + yOffset);
+      
+      mResult[@"rect"] = mRect;
+      [mRect release];
+    }
     [ret addObject:mResult];
 
     [mResult release];
-    [mRect release];
   }
   return ret;
 }
@@ -139,12 +145,14 @@
 
   if (self.valueType == UIScriptLiteralTypeString) {
     LPWebQueryType type = LPWebQueryTypeCSS;
-    if ([[self selectorName] isEqualToString:@"marked"]) {
+    if ([[self selectorName] isEqualToString:@"text"]) {
       type = LPWebQueryTypeFreeText;
     } else if ([[self selectorName] isEqualToString:@"xpath"]) {
       type = LPWebQueryTypeXPATH;
     } else if ([[self selectorName] isEqualToString:@"css"]) {
       type = LPWebQueryTypeCSS;
+    } else if ([[self selectorName] isEqualToString:@"job"]) {
+      type = LPWebQueryTypeJob;
     }
 
     return [LPWebQuery arrayByEvaluatingQuery:(NSString *) self.objectValue
@@ -173,11 +181,6 @@
       }
     } else {
       UIView *v = (UIView *)result;
-      if ([LPWebViewUtils isWebView:v]) {
-        [res addObjectsFromArray:[self handleWebView:(UIView<LPWebViewProtocol> *) v
-                                          visibility:visibility]];
-        continue;
-      }
       if ([self.selectorName isEqualToString:@"marked"]) {
         NSString *val = nil;
         if ([v respondsToSelector:@selector(accessibilityIdentifier)]) {
@@ -219,6 +222,12 @@
           }
         }
         continue;
+      }
+        
+      if ([LPWebViewUtils isWebView:v]) {
+          [res addObjectsFromArray:[self handleWebView:(UIView<LPWebViewProtocol> *) v
+                                              visibility:visibility]];
+          continue;
       }
 
       if (self.selectorName) {

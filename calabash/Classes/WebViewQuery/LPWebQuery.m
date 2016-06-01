@@ -56,6 +56,10 @@
                   [NSString stringWithFormat:@"//node()[contains(text(),\\\"%@\\\")]", query],
                   @"xpath", @"", @""];
       break;
+      
+    case LPWebQueryTypeJob:
+      jsString = [NSString stringWithFormat:LP_QUERY_JS,query,@"job",@"", frameSelector];
+      break;
     default:
       return nil;
   }
@@ -64,6 +68,11 @@
 
   NSString *output = [webView calabashStringByEvaluatingJavaScript:jsString];
 
+  NSDictionary *queryDictionary = [LPJSONUtils deserializeDictionary:output];
+  if (queryDictionary != NULL && queryDictionary != nil && queryDictionary[@"job"] != nil) {
+    return @[queryDictionary];
+  }
+  
   NSArray *queryResult = [LPJSONUtils deserializeArray:output];
 
   UIWindow *window = [LPTouchUtils windowForView:webView];
@@ -72,6 +81,14 @@
 
   for (NSDictionary *d in queryResult) {
     NSMutableDictionary *dres = [NSMutableDictionary dictionaryWithDictionary:d];
+    
+    if (dres[@"rect"] && [dres[@"rect"]isEqual:[NSNull null]]){
+      if (includeInvisible){
+        [result addObject:dres];
+      }
+      continue;
+    }
+    
     CGFloat center_x = [[dres valueForKeyPath:@"rect.x"] floatValue];
     CGFloat center_y = [[dres valueForKeyPath:@"rect.y"] floatValue];
 
