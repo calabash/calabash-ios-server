@@ -37,5 +37,5 @@ bundle exec bin/test/xctest.rb
 bundle exec bin/test/cucumber.rb
 
 banner "Test iPhone 6+ touch coordinates"
-bin/test/acquaint.sh
+bundle exec bin/test/acquaint.rb
 
