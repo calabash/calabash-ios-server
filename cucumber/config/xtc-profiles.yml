@@ -8,7 +8,7 @@ ipad_only:       --tags ~@iphone --tags ~@iphone_only
 args:        --expand --backtrace --no-multiline
 tags:        -p not_quarantine -p not_xtc -p not_sim -p no_launch
 
-default:     -p tags -p args
+default:     -p tags -p args --tags ~@acquaint
 
 wip:         -p tags -p args --tags @wip
 flicker:     -p tags -p args --tags @flickering
