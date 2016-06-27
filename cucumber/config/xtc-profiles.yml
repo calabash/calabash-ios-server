@@ -15,4 +15,5 @@ flicker:     -p tags -p args --tags @flickering
 iphone:      -p tags -p args -p iphone_only
 ipad:        -p tags -p args -p ipad_only
 crash:       -p tags -p args --tags @expect_crash
+acquaint:    -p tags -p args --tags @acquaint
 
