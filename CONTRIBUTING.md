@@ -70,17 +70,17 @@ The release pull request ***must*** be made against the _master_ branch.
 Be sure to check CI.
 
 * https://travis-ci.org/calabash/calabash\_ios\_server
-* http://ci.endoftheworl.de:8080/  # Briar jobs.
+* http://calabash-ci.macminicolo.net:8080/  # Briar jobs.
 
 ```
-$ git co -b release/1.5.0
+$ git co -b release/0.19.2
 
 1. Update the CHANGELOG.md.
 2. Bump the version in calabash/Classes/FranklyServer/Routes/LPVersionRoute.h
 3. **IMPORTANT** Bump the version in the README.md badge.
 3. Have a look at the README.md to see if it can be updated.
 
-$ git push -u origin release/1.5.0
+$ git push -u origin release/0.19.2
 
 **IMPORTANT**
 
@@ -91,14 +91,14 @@ $ git push -u origin release/1.5.0
 $ git co master
 $ git pull
 
-$ git tag -a 1.5.0 -m"release/1.5.0"
-$ git push origin 1.5.0
+$ git tag -a 0.19.2 -m"release/0.19.2"
+$ git push origin 0.19.2
 
 $ git co develop
-$ git merge --no-ff release/1.5.0
+$ git merge --no-ff release/0.19.2
 $ git push
 
-$ git branch -d release/1.5.0
+$ git branch -d release/0.19.2
 
 Announce the release on the public channels.
 ```

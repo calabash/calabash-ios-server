@@ -196,8 +196,14 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
     nativeScale = screen.nativeScale;
   }
 
+  // Never used, but we should keep this magic number around because at one
+  // point we thought it was useful (see the Paint Code URL above).
+  // CGFloat iphone6p_zoom_sample = 0.96;
+
   CGFloat iphone6_zoom_sample = 1.171875;
-  CGFloat iphone6p_zoom_sample = 0.96;
+  // This was derived by trial and error.
+  // This is sufficient for touching a 2x2 pixel button.
+  CGFloat iphone6p_legacy_app_sample = 1.3;
 
   UIScreenMode *screenMode = [screen currentMode];
   CGSize screenSizeForMode = screenMode.size;
@@ -212,23 +218,38 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
   LPLogDebug(@"Pixel Aspect Ratio: %@", @(pixelAspectRatio));
 
   if ([self isIPhone6PlusLike]) {
-    if (screenHeight == 568.0 && nativeScale > scale) { // native => 2.88
-      LPLogDebug(@"iPhone 6 Plus: Zoom display mode and app is not optimized for screen size - adjusting sampleFactor");
-      _sampleFactor = iphone6p_zoom_sample;
-    } else if (screenHeight == 667.0 && nativeScale <= scale) { // native => ???
-      LPLogDebug(@"iPhone 6 Plus: Zoomed display mode - sampleFactor remains the same");
-    } else if (screenHeight == 736 && nativeScale < scale) { // native => 2.61
-      LPLogDebug(@"iPhone 6 Plus: Standard Display and app is not optimized for screen size - sampleFactor remains the same");
+    if (screenHeight == 568.0) {
+      if (nativeScale > scale) {
+        LPLogDebug(@"iPhone 6 Plus: Zoom display and app is not optimized for screen size - adjusting sampleFactor");
+        // native => 2.88
+        // Displayed with iPhone _6_ zoom sample
+        _sampleFactor = iphone6_zoom_sample;
+      } else {
+        LPLogDebug(@"iPhone 6 Plus: Standard display and app is not optimized for screen size - adjusting sampleFactor");
+        // native == scale == 3.0
+        _sampleFactor = iphone6p_legacy_app_sample;
+      }
+    } else if (screenHeight == 667.0 && nativeScale <= scale) {
+      // native => ???
+      LPLogDebug(@"iPhone 6 Plus: Zoomed display - sampleFactor remains the same");
+    } else if (screenHeight == 736 && nativeScale < scale) {
+      // native => 2.61
+      LPLogDebug(@"iPhone 6 Plus: Standard display and app is not optimized for screen size - sampleFactor remains the same");
+    } else {
+      LPLogDebug(@"iPhone 6 Plus: Standard display and app is optimized for screen size");
     }
   } else if ([self isIPhone6Like]) {
     if (screenHeight == 568.0 && nativeScale <= scale) {
-      LPLogDebug(@"iPhone 6: application not optimized for screen size - adjusting sampleFactor");
+      LPLogDebug(@"iPhone 6: Standard display and app not optimized for screen size - adjusting sampleFactor");
       _sampleFactor = iphone6_zoom_sample;
     } else if (screenHeight == 568.0 && nativeScale > scale) {
       LPLogDebug(@"iPhone 6: Zoomed display mode - sampleFactor remains the same");
+    } else {
+      LPLogDebug(@"iPhone 6: Standard display and app optimized for screen size - sampleFactor remains the same");
     }
   }
 
+  LPLogDebug(@"sampleFactor = %@", @(_sampleFactor));
   return _sampleFactor;
 }
 
