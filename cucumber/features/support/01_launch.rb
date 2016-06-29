@@ -22,6 +22,12 @@ Before("@no_relaunch") do
   @no_relaunch = true
 end
 
+Before("@acquaint") do
+  if !xamarin_test_cloud?
+    @acquaint_options = Acquaint.sim_options
+  end
+end
+
 Before("@german") do
   if !xamarin_test_cloud?
     target = ENV["DEVICE_TARGET"] || RunLoop::Core.default_simulator
@@ -38,11 +44,16 @@ end
 
 Before do |scenario|
   launcher = Calabash::Launcher.launcher
-  options = {
-    # Add launch options here.
-    # Stick with defaults; preferences on device is not stable
-    # :uia_strategy => :preferences
-  }
+
+  if @acquaint_options
+    options = @acquaint_options
+  else
+    options = {
+      # Add launch options here.
+      # Stick with defaults; preferences on device is not stable
+      # :uia_strategy => :preferences
+    }
+  end
 
   if @args
     options[:args] = @args.dup
@@ -84,16 +95,17 @@ end
 
 After do |scenario|
   @no_relaunch = false
+  @acquaint_options = nil
 
   # Calabash can shutdown the app cleanly by calling the app life cycle methods
   # in the UIApplicationDelegate.  This is really nice for CI environments, but
   # not so good for local development.
   #
-  # See the documentation for NO_STOP for a nice debugging workflow
+  # See the documentation for QUIT_APP_AFTER_SCENARIO for a nice debugging workflow
   #
-  # http://calabashapi.xamarin.com/ios/file.ENVIRONMENT_VARIABLES.html#label-NO_STOP
+  # http://calabashapi.xamarin.com/ios/file.ENVIRONMENT_VARIABLES.html#label-QUIT_APP_AFTER_SCENARIO
   # http://calabashapi.xamarin.com/ios/Calabash/Cucumber/Core.html#console_attach-instance_method
-  unless launcher.calabash_no_stop?
+  if launcher.quit_app_after_scenario?
     calabash_exit
     sleep 1.0
   end

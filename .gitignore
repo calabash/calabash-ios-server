@@ -46,6 +46,10 @@ run_loop
 cucumber/Gemfile.lock
 cucumber/reports
 cucumber/screenshots
+cucumber/xtc-submit-acquaint
+!cucumber/acquaint/AcquaintNativeiOS.app
+!cucumber/acquaint/AcquaintNativeiOS.app.dSYM
+!cucumber/acquaint/AcquaintNativeiOS.ipa
 
 # The version tool which is staged to bin as part
 # of the build process.
