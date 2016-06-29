@@ -196,8 +196,11 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
     nativeScale = screen.nativeScale;
   }
 
+  // Never used, but we should keep this magic number around because at one
+  // point we thought it was useful (see the Paint Code URL above).
+  // CGFloat iphone6p_zoom_sample = 0.96;
+
   CGFloat iphone6_zoom_sample = 1.171875;
-  CGFloat iphone6p_zoom_sample = 0.96;
   // This was derived by trial and error.
   // This is sufficient for touching a 2x2 pixel button.
   CGFloat iphone6p_legacy_app_sample = 1.3;
@@ -219,7 +222,8 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
       if (nativeScale > scale) {
         LPLogDebug(@"iPhone 6 Plus: Zoom display and app is not optimized for screen size - adjusting sampleFactor");
         // native => 2.88
-        _sampleFactor = iphone6p_zoom_sample;
+        // Displayed with iPhone _6_ zoom sample
+        _sampleFactor = iphone6_zoom_sample;
       } else {
         LPLogDebug(@"iPhone 6 Plus: Standard display and app is not optimized for screen size - adjusting sampleFactor");
         // native == scale == 3.0
@@ -245,6 +249,7 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
     }
   }
 
+  LPLogDebug(@"sampleFactor = %@", @(_sampleFactor));
   return _sampleFactor;
 }
 
