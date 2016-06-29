@@ -1,3 +1,8 @@
+### 0.19.2
+
+* LPDevice: fix sampleFactor for legacy apps in zoomed mode on iphone 6+ #360
+* Detect legacy apps and used the scaleFactor for iPhone 6 Plus devices #358
+
 ### 0.19.1
 
 This release _really_ removes support form "marked" as a free text
