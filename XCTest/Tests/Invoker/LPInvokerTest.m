@@ -458,7 +458,12 @@
 
   NSString *encoding = [LPInvoker encodingAtIndex:2
                                         signature:signature];
-  expect(encoding).to.equal(@"Q");
+
+  if (sizeof(void*) == 4) {
+    expect(encoding).to.equal(@"I");
+  } else if (sizeof(void*) == 8) {
+    expect(encoding).to.equal(@"Q");
+  }
 }
 
 - (void) testSelectorArgumentCountMatchesArgumentCountYES {
