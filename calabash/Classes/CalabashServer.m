@@ -43,6 +43,7 @@
 #import "LPShakeRoute.h"
 #import "LPSuspendAppRoute.h"
 #import "LPReflectionRoute.h"
+#import "LPSetDeviceOrientationRoute.h"
 
 @interface CalabashServer ()
 - (void) start;
@@ -201,6 +202,10 @@
     LPReflectionRoute *reflectionRoute = [LPReflectionRoute new];
     [LPRouter addRoute:reflectionRoute forPath:@"reflection"];
     [reflectionRoute release];
+
+    LPSetDeviceOrientationRoute *orientationRoute = [LPSetDeviceOrientationRoute new];
+    [LPRouter addRoute:orientationRoute forPath:@"setDeviceOrientation"];
+    [orientationRoute release];
 
     _httpServer = [[[LPHTTPServer alloc] init] retain];
 
