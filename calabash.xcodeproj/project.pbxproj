@@ -407,6 +407,11 @@
 		F52427E71BA8457D00B7678F /* LPProcessInfoRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F52427E21BA8457D00B7678F /* LPProcessInfoRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F52427E81BA8457D00B7678F /* LPProcessInfoRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F52427E21BA8457D00B7678F /* LPProcessInfoRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F52427E91BA8457D00B7678F /* LPProcessInfoRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F52427E21BA8457D00B7678F /* LPProcessInfoRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F52975C51D4FBA29009094D5 /* LPSetDeviceOrientationRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F52975C11D4FBA29009094D5 /* LPSetDeviceOrientationRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F52975C61D4FBA29009094D5 /* LPSetDeviceOrientationRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F52975C11D4FBA29009094D5 /* LPSetDeviceOrientationRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F52975C71D4FBA29009094D5 /* LPSetDeviceOrientationRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F52975C11D4FBA29009094D5 /* LPSetDeviceOrientationRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F52975C81D4FBA29009094D5 /* LPSetDeviceOrientationRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F52975C11D4FBA29009094D5 /* LPSetDeviceOrientationRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F52975CA1D4FC5DB009094D5 /* LPSetDeviceOrientationRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F52975C91D4FC5DB009094D5 /* LPSetDeviceOrientationRouteTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F52A26531BD02D0400AD0E36 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = F52A26511BD02D0400AD0E36 /* LPCDataScanner.m */; };
 		F52A26541BD02D0400AD0E36 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = F52A26511BD02D0400AD0E36 /* LPCDataScanner.m */; };
 		F52A26551BD02D0400AD0E36 /* LPCDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = F52A26511BD02D0400AD0E36 /* LPCDataScanner.m */; };
@@ -893,6 +898,9 @@
 		F514ACCB1B341557004ACFEE /* LPiOSVersionInlinesTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPiOSVersionInlinesTest.m; sourceTree = "<group>"; };
 		F52427E11BA8457D00B7678F /* LPProcessInfoRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPProcessInfoRoute.h; sourceTree = "<group>"; };
 		F52427E21BA8457D00B7678F /* LPProcessInfoRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPProcessInfoRoute.m; sourceTree = "<group>"; };
+		F52975C01D4FBA29009094D5 /* LPSetDeviceOrientationRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPSetDeviceOrientationRoute.h; sourceTree = "<group>"; };
+		F52975C11D4FBA29009094D5 /* LPSetDeviceOrientationRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSetDeviceOrientationRoute.m; sourceTree = "<group>"; };
+		F52975C91D4FC5DB009094D5 /* LPSetDeviceOrientationRouteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSetDeviceOrientationRouteTest.m; sourceTree = "<group>"; };
 		F52A264D1BD02B7B00AD0E36 /* LPiOSVersionInlines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPiOSVersionInlines.h; sourceTree = "<group>"; };
 		F52A26511BD02D0400AD0E36 /* LPCDataScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCDataScanner.m; sourceTree = "<group>"; };
 		F52A26521BD02D0400AD0E36 /* LPCDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCDataScanner.h; sourceTree = "<group>"; };
@@ -1438,6 +1446,8 @@
 		B184FDD014B6DB2B002A744C /* Routes */ = {
 			isa = PBXGroup;
 			children = (
+				F52975C01D4FBA29009094D5 /* LPSetDeviceOrientationRoute.h */,
+				F52975C11D4FBA29009094D5 /* LPSetDeviceOrientationRoute.m */,
 				E2F802591BE207570000A0E4 /* LPShakeRoute.h */,
 				E2F8025A1BE207670000A0E4 /* LPShakeRoute.m */,
 				F57605871BCE77F000E89C97 /* LPSuspendAppRoute.h */,
@@ -2100,6 +2110,7 @@
 				E2F8025F1BE21C690000A0E4 /* LPShakeRouteTest.m */,
 				F5A6B9711BD14EE2009FD08B /* LPReflectionRouteTest.m */,
 				F58CE49D1BD6757A0025BE67 /* LPBackdoorRouteTest.m */,
+				F52975C91D4FC5DB009094D5 /* LPSetDeviceOrientationRouteTest.m */,
 			);
 			path = Routes;
 			sourceTree = "<group>";
@@ -2616,6 +2627,7 @@
 				B15BF99C19ABB1DD00B38577 /* LPGCDAsyncSocket.m in Sources */,
 				B15BF99D19ABB1DD00B38577 /* LPHTTPAuthenticationRequest.m in Sources */,
 				B15BF99E19ABB1DD00B38577 /* LPHTTPConnection.m in Sources */,
+				F52975C81D4FBA29009094D5 /* LPSetDeviceOrientationRoute.m in Sources */,
 				B1F772321A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */,
 				B15BF99F19ABB1DD00B38577 /* LPHTTPMessage.m in Sources */,
 				B15BF9A019ABB1DD00B38577 /* LPHTTPServer.m in Sources */,
@@ -2753,6 +2765,7 @@
 				B1D5BD8719A23BCE0070E8CE /* LPHTTPRedirectResponse.m in Sources */,
 				B1D5BD8819A23BCE0070E8CE /* LPScrollToMarkOperation.m in Sources */,
 				B1D5BD8919A23BCE0070E8CE /* LPRouter.m in Sources */,
+				F52975C71D4FBA29009094D5 /* LPSetDeviceOrientationRoute.m in Sources */,
 				F5A6B96F1BD14E96009FD08B /* LPReflectionRoute.m in Sources */,
 				B1D5BD8A19A23BCE0070E8CE /* LPQueryAllOperation.m in Sources */,
 				B1D5BD8B19A23BCE0070E8CE /* LPOperation.m in Sources */,
@@ -2859,6 +2872,7 @@
 				F5091BE018C4E1D700C85307 /* LPHTTPMessage.m in Sources */,
 				F5091BE118C4E1D700C85307 /* LPHTTPServer.m in Sources */,
 				F5091BE218C4E1D700C85307 /* NSData+LPCHSExtensions.m in Sources */,
+				F52975C61D4FBA29009094D5 /* LPSetDeviceOrientationRoute.m in Sources */,
 				B1F7722E1A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */,
 				F5091BE318C4E1D700C85307 /* NSNumber+LPCHSExtensions.m in Sources */,
 				F5091BE418C4E1D700C85307 /* LPDDRange.m in Sources */,
@@ -2978,6 +2992,7 @@
 				F50CBF9B1A04058C004AC9DA /* LPSetTextOperation.m in Sources */,
 				F50CBFA91A0405B2004AC9DA /* LPGenericAsyncRoute.m in Sources */,
 				F514ACCC1B341557004ACFEE /* LPiOSVersionInlinesTest.m in Sources */,
+				F52975CA1D4FC5DB009094D5 /* LPSetDeviceOrientationRouteTest.m in Sources */,
 				F5A6B96D1BD14E96009FD08B /* LPReflectionRoute.m in Sources */,
 				F50CBF8D1A04056F004AC9DA /* LPHTTPRedirectResponse.m in Sources */,
 				F52427E61BA8457D00B7678F /* LPProcessInfoRoute.m in Sources */,
@@ -3071,6 +3086,7 @@
 				F5A8B4701B39BFEB00F390CA /* LPMultiFormatter.m in Sources */,
 				F5986B301B5A327500CCB142 /* LPOperationTest.m in Sources */,
 				F50CBFA31A0405B2004AC9DA /* LPAppPropertyRoute.m in Sources */,
+				F52975C51D4FBA29009094D5 /* LPSetDeviceOrientationRoute.m in Sources */,
 				F50CBFB41A0405CE004AC9DA /* LPISO8601DateFormatter.m in Sources */,
 				F50CBF871A040564004AC9DA /* NSNumber+LPCHSExtensions.m in Sources */,
 				B1670E341A3248CC00000A62 /* LPSharedUIATextField.m in Sources */,
@@ -4460,6 +4476,7 @@
 				F5DDE5511CDE4AB000E0E187 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 
