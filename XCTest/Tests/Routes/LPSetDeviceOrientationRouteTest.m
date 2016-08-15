@@ -147,7 +147,7 @@
   expect(actual).to.equal(expected);
 }
 
-- (void)testJSONResponsForMethod {
+- (void)testJSONResponseForMethod {
   id klassMock = OCMClassMock([LPOrientationOperation class]);
   OCMExpect([klassMock statusBarOrientation]).andReturn(@"status bar orientation");
   OCMExpect([klassMock deviceOrientation]).andReturn(@"device orientation");
