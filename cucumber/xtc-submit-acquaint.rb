@@ -3,8 +3,10 @@
 require "run_loop"
 require "bundler"
 
-XTC_API_TOKEN=ENV["XTC_API_TOKEN"] || ARGV[0]
-XTC_ACCOUNT=ENV["XTC_ACCOUNT"] || ARGV[1]
+# ACQ_* are defined in Jenkins.
+XTC_API_TOKEN=ENV["ACQ_XTC_API_TOKEN"] || ENV["XTC_API_TOKEN"] || ARGV[0]
+XTC_ACCOUNT=ENV["ACQ_XTC_ACCOUNT"] || ENV["XTC_ACCOUNT"] || ARGV[1]
+
 DEVICE_SET = ARGV[2] || ["0adda5bd", "553e29d2", "b4fbb17e"].sample
 
 WORKING_DIR=File.expand_path("xtc-submit-acquaint")
