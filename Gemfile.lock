@@ -11,14 +11,15 @@ GIT
 
 GIT
   remote: git://github.com/calabash/run_loop.git
-  revision: be9b402989777befc1eb26fceca7ee5f4ffa5fae
+  revision: 04164fa1f74f7435eabba892d3e6ab6a28fe59fe
   branch: develop
   specs:
-    run_loop (2.1.1)
+    run_loop (2.1.7)
       CFPropertyList (~> 2.2)
       awesome_print (~> 1.2)
       command_runner_ng (>= 0.0.2)
       httpclient (~> 2.6)
+      i18n (>= 0.7.0, < 1.0)
       json (~> 1.8)
       thor (>= 0.18.1, < 1.0)
 
@@ -27,7 +28,7 @@ GEM
   specs:
     CFPropertyList (2.3.2)
     addressable (2.4.0)
-    awesome_print (1.6.1)
+    awesome_print (1.7.0)
     backports (3.6.8)
     command_runner_ng (0.1.0)
     ethon (0.9.0)
@@ -36,7 +37,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.10.0)
       faraday (>= 0.7.4, < 0.10)
-    ffi (1.9.10)
+    ffi (1.9.14)
     gh (0.14.0)
       addressable
       backports
@@ -45,11 +46,12 @@ GEM
       net-http-persistent (>= 2.7)
       net-http-pipeline
     highline (1.7.8)
-    httpclient (2.8.0)
+    httpclient (2.8.2)
+    i18n (0.7.0)
     json (1.8.3)
     launchy (2.4.3)
       addressable (~> 2.3)
-    multi_json (1.12.0)
+    multi_json (1.12.1)
     multipart-post (2.0.0)
     net-http-persistent (2.9.4)
     net-http-pipeline (1.0.1)
@@ -57,7 +59,7 @@ GEM
       json
       websocket (~> 1.0)
     retriable (2.0.2)
-    rouge (1.10.1)
+    rouge (1.11.1)
     thor (0.19.1)
     travis (1.8.2)
       backports
@@ -85,4 +87,4 @@ DEPENDENCIES
   xcpretty
 
 BUNDLED WITH
-   1.12.3
+   1.12.5
