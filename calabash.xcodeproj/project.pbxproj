@@ -2344,6 +2344,8 @@
 					};
 					F59CA46C1A82EF40007A2F38 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = FYD86LA7RE;
+						ProvisioningStyle = Manual;
 					};
 					F5DDE54D1CDE4AB000E0E187 = {
 						CreatedOnToolsVersion = 7.3;
@@ -4222,6 +4224,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = FYD86LA7RE;
 				ENABLE_BITCODE = YES;
 				ENABLE_ONLY_ACTIVE_RESOURCES = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -4253,8 +4256,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = sh.calaba.LPTestTarget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "49fc8ecd-d772-432c-adc3-25e7db53b847";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE_SPECIFIER = CalabashWildcard;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = (
 					"-Wunreachable-code",
@@ -4307,6 +4311,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = FYD86LA7RE;
 				ENABLE_BITCODE = YES;
 				ENABLE_ONLY_ACTIVE_RESOURCES = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -4329,8 +4334,9 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = sh.calaba.LPTestTarget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "49fc8ecd-d772-432c-adc3-25e7db53b847";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				PROVISIONING_PROFILE_SPECIFIER = CalabashWildcard;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = (
 					"-Wunreachable-code",
@@ -4354,7 +4360,9 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = FYD86LA7RE;
 				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_ONLY_ACTIVE_RESOURCES = NO;
@@ -4376,7 +4384,8 @@
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = sh.calaba.LPTestTarget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "49fc8ecd-d772-432c-adc3-25e7db53b847";
+				PROVISIONING_PROFILE_SPECIFIER = CalabashWildcard;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WARNING_CFLAGS = (
 					"-Wunreachable-code",
