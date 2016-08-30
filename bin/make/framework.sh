@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 function info {
   echo "$(tput setaf 2)INFO: $1$(tput sgr0)"
 }
@@ -249,7 +251,7 @@ lipo -info "${INSTALLED_FRAMEWORK}/calabash"
 
 if [ "${XC_GTE_7}"  = "true" ]; then
 
-  xcrun otool -arch arm64 -l calabash.framework/calabash | grep -q bitcode
+  xcrun otool-classic -arch arm64 -l calabash.framework/calabash | grep -q bitcode
   if [ $? -eq 0 ]; then
     echo "calabash.framework/calabash contains bitcode for arm64"
   else
@@ -257,7 +259,7 @@ if [ "${XC_GTE_7}"  = "true" ]; then
     exit 1
   fi
 
-  xcrun otool -arch armv7s -l calabash.framework/calabash | grep -q bitcode
+  xcrun otool-classic -arch armv7s -l calabash.framework/calabash | grep -q bitcode
   if [ $? -eq 0 ]; then
     echo "calabash.framework/calabash contains bitcode for armv7s"
   else
@@ -265,7 +267,7 @@ if [ "${XC_GTE_7}"  = "true" ]; then
     exit 1
   fi
 
-  xcrun otool -arch armv7 -l calabash.framework/calabash | grep -q bitcode
+  xcrun otool-classic -arch armv7 -l calabash.framework/calabash | grep -q bitcode
   if [ $? -eq 0 ]; then
     echo "calabash.framework/calabash contains bitcode for armv7"
   else

@@ -281,7 +281,14 @@ describe(@"WKWebView+LPWebView", ^{
           [[[viewMock stub] andCall:mockSel onObject:evaluator]
            evaluateJavaScript:OCMOCK_ANY completionHandler:OCMOCK_ANY];
           NSString *actual = [viewMock calabashStringByEvaluatingJavaScript:@""];
-          NSUInteger idx = [actual rangeOfString:@"UIDeviceWhiteColorSpace"].location;
+
+          NSString *colorSpace;
+          if (lp_ios_version_gte(@"10.0")) {
+            colorSpace = @"UIExtendedGrayColorSpace 1 1";
+          } else {
+            colorSpace = @"UIDeviceWhiteColorSpace 1 1";
+          }
+          NSUInteger idx = [actual rangeOfString:colorSpace].location;
           expect(idx).notTo.equal(NSNotFound);
         });
       });
