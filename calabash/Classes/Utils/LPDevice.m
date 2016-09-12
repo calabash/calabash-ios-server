@@ -203,7 +203,7 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
   CGFloat iphone6_zoom_sample = 1.171875;
   // This was derived by trial and error.
   // This is sufficient for touching a 2x2 pixel button.
-  CGFloat iphone6p_legacy_app_sample = 1.3;
+  CGFloat iphone6p_legacy_app_sample = 1.296917;
 
   UIScreenMode *screenMode = [screen currentMode];
   CGSize screenSizeForMode = screenMode.size;
@@ -304,13 +304,17 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
     @"iPod6,1"   : @"iphone 4in",
     @"iPhone8,4" : @"iphone 4in",
 
-    // iPhone 6/6s
+    // iPhone 6/6+ - pattern looks wrong, but it is correct
     @"iPhone7,2" : @"iphone 6",
-    @"iPhone8,1" : @"iphone 6",
-
-    // iPhone 6+
     @"iPhone7,1" : @"iphone 6+",
+
+    // iPhone 6s/6s+
+    @"iPhone8,1" : @"iphone 6",
     @"iPhone8,2" : @"iphone 6+",
+
+    // iPhone 7/7+
+    @"iPhone9,1" : @"iphone 6",
+    @"iPhone9,2" : @"iphone 6+",
 
     // iPad Pro 13in
     @"iPad6,7" : @"ipad pro",
