@@ -208,7 +208,13 @@
 
 + (CGPoint) centerOfFrame:(CGRect) rect shouldTranslate:(BOOL) shouldTranslate {
   CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
-  CGPoint translated = shouldTranslate ? [self translateToScreenCoords:rect.origin sampleFactor:sampleFactor] : rect.origin;
+  CGPoint translated;
+  if (shouldTranslate) {
+    translated = [self translateToScreenCoords:rect.origin
+                                  sampleFactor:sampleFactor];
+  } else {
+   translated = rect.origin;
+  }
   
   return CGPointMake(translated.x + 0.5 * rect.size.width * sampleFactor,
                      translated.y + 0.5 * rect.size.height * sampleFactor);
