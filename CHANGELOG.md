@@ -1,3 +1,10 @@
+### 0.20.0
+
+* Update for Xcode 8 GM and iPhone 7/7+ #364
+* Update CLI build scripts for Xcode 8 #363
+* Server: implement statusBar route #362
+* Server: add set device orientation route #361
+
 ### 0.19.2
 
 * LPDevice: fix sampleFactor for legacy apps in zoomed mode on iphone 6+ #360

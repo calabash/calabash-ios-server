@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 function info {
   echo "$(tput setaf 2)INFO: $1$(tput sgr0)"
 }
@@ -189,7 +191,7 @@ lipo -info "${INSTALLED_LIBRARY}"
 
 if [ "${XC_GTE_7}"  = "true" ]; then
 
-  xcrun otool -arch arm64 -l "${INSTALLED_LIBRARY}" | grep -q bitcode
+  xcrun otool-classic -arch arm64 -l "${INSTALLED_LIBRARY}" | grep -q bitcode
   if [ $? -eq 0 ]; then
     echo "${LIBRARY_NAME} contains bitcode for arm64"
   else
@@ -197,7 +199,7 @@ if [ "${XC_GTE_7}"  = "true" ]; then
     exit 1
   fi
 
-  xcrun otool -arch armv7s -l "${INSTALLED_LIBRARY}" | grep -q bitcode
+  xcrun otool-classic -arch armv7s -l "${INSTALLED_LIBRARY}" | grep -q bitcode
   if [ $? -eq 0 ]; then
     echo "${LIBRARY_NAME} contains bitcode for armv7s"
   else
@@ -205,7 +207,7 @@ if [ "${XC_GTE_7}"  = "true" ]; then
     exit 1
   fi
 
-  xcrun otool -arch armv7s -l "${INSTALLED_LIBRARY}" | grep -q bitcode
+  xcrun otool-classic -arch armv7s -l "${INSTALLED_LIBRARY}" | grep -q bitcode
   if [ $? -eq 0 ]; then
     echo "${LIBRARY_NAME} contains bitcode for armv7"
   else

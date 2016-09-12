@@ -41,7 +41,11 @@ describe(@"LPSetTextOperation", ^{
     it(@"argument does not respond to stringValue", ^{
       argument = [UIColor whiteColor];
       expect([argument respondsToSelector:@selector(stringValue)]).to.equal(NO);
-      expect([operation stringValueForArgument:argument]).to.equal(@"UIDeviceWhiteColorSpace 1 1");
+      if (lp_ios_version_gte(@"10.0")) {
+        expect([operation stringValueForArgument:argument]).to.equal(@"UIExtendedGrayColorSpace 1 1");
+      } else {
+        expect([operation stringValueForArgument:argument]).to.equal(@"UIDeviceWhiteColorSpace 1 1");
+      }
     });
   });
 

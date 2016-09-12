@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e
+
 function info {
   echo "$(tput setaf 2)INFO: $1$(tput sgr0)"
 }
@@ -195,10 +197,10 @@ ditto_or_exit "${HEADERS}" "${INSTALL_DIR}/Headers"
 banner "Dylib Code Signing"
 
 CODE_SIGN_DIR="${HOME}/.calabash/calabash-codesign"
-RESIGN_TOOL="${CODE_SIGN_DIR}/ios/resign-dylib.rb"
+RESIGN_TOOL="${CODE_SIGN_DIR}/apple/resign-ios-dylib.rb"
 SHA_TOOL="${CODE_SIGN_DIR}/sha256"
 
-CERT="${CODE_SIGN_DIR}/ios/certs/calabash-developer.p12"
+CERT="${CODE_SIGN_DIR}/apple/certs/calabash-developer.p12"
 
 echo ${KEYCHAIN_TOOL}
 
@@ -226,7 +228,7 @@ else
   fi
 
   info "Creating the Calabash.keychain"
-  (cd "${CODE_SIGN_DIR}" && ios/create-keychain.sh)
+  (cd "${CODE_SIGN_DIR}" && apple/create-keychain.sh)
 
   info "Resiging the device dylib"
   $RESIGN_TOOL "${INSTALL_DIR}/libCalabashDyn.dylib"
@@ -248,7 +250,7 @@ lipo -info "${INSTALL_DIR}/libCalabashDynFAT.dylib"
 
 if [ "${XC_GTE_7}"  = "true" ]; then
 
-  xcrun otool -arch arm64 -l "${INSTALL_DIR}/libCalabashDyn.dylib" | grep -q LLVM
+  xcrun otool-classic -arch arm64 -l "${INSTALL_DIR}/libCalabashDyn.dylib" | grep -q LLVM
   if [ $? -eq 0 ]; then
     echo "libCalabashDyn.dylib contains bitcode for arm64"
   else
@@ -256,7 +258,7 @@ if [ "${XC_GTE_7}"  = "true" ]; then
     exit 1
   fi
 
-  xcrun otool -arch armv7s -l "${INSTALL_DIR}/libCalabashDyn.dylib" | grep -q LLVM
+  xcrun otool-classic -arch armv7s -l "${INSTALL_DIR}/libCalabashDyn.dylib" | grep -q LLVM
   if [ $? -eq 0 ]; then
     echo "libCalabashDyn.dylib contains bitcode for armv7s"
   else
@@ -264,7 +266,7 @@ if [ "${XC_GTE_7}"  = "true" ]; then
     exit 1
   fi
 
-  xcrun otool -arch armv7 -l "${INSTALL_DIR}/libCalabashDyn.dylib" | grep -q LLVM
+  xcrun otool-classic -arch armv7 -l "${INSTALL_DIR}/libCalabashDyn.dylib" | grep -q LLVM
   if [ $? -eq 0 ]; then
     echo "libCalabashDyn.dylib contains bitcode for armv7"
   else
