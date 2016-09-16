@@ -1,3 +1,8 @@
+### 0.20.1
+
+This release contains no server changes.  The version has been bumped to keep
+Xamarin.TestCloud.Agent and calabash-cucumber gem versions in sync.
+
 ### 0.20.0
 
 * Update for Xcode 8 GM and iPhone 7/7+ #364
