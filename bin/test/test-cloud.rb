@@ -2,7 +2,6 @@
 
 require "luffa"
 require "bundler"
-require "run_loop"
 
 device_set = ENV["XTC_DEVICE_SET"]
 
@@ -39,6 +38,8 @@ else
   Dir.chdir("cucumber") do
     Bundler.with_clean_env do
       Luffa.unix_command("bundle update")
+
+      require "run_loop"
 
       # rake install must succeed
       calabash_gem = `bundle show calabash-cucumber`.strip
