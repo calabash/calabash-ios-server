@@ -5,6 +5,8 @@ osx_image: xcode7.3
 before_script:
   - bin/ci/travis/instruments-auth.sh
   - bin/ci/travis/install-keychain.sh
+  - brew update
+  - brew outdated tree || brew upgrade tree || brew install tree
 
 script:
   - bundle install
