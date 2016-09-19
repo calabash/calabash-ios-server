@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
 require "luffa"
-require "run_loop"
 require "fileutils"
 require "tmpdir"
 require "bundler"
@@ -35,6 +34,8 @@ Dir.chdir working_dir do
     FileUtils.mkdir_p("reports")
 
     Luffa.unix_command("bundle update")
+
+    require "run_loop"
 
     xcode = RunLoop::Xcode.new
     xcode_version = xcode.version

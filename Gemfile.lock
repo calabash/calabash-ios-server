@@ -20,7 +20,7 @@ GEM
     json (1.8.3)
     retriable (2.0.2)
     rouge (1.11.1)
-    run_loop (2.1.11)
+    run_loop (2.2.0)
       CFPropertyList (~> 2.2)
       awesome_print (~> 1.2)
       command_runner_ng (>= 0.0.2)
@@ -42,4 +42,4 @@ DEPENDENCIES
   xcpretty
 
 BUNDLED WITH
-   1.12.5
+   1.13.1
