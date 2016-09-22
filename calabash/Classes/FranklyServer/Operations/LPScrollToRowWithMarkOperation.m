@@ -7,46 +7,43 @@
 
 @implementation LPScrollToRowWithMarkOperation
 
-- (BOOL) cell:(UITableViewCell *) aCell contentViewHasSubviewMarked:(NSString *) aMark {
-  // check the textLabel first
-  if ([self view:aCell.textLabel hasMark:aMark]) {return YES;}
-
-  return [super cell:aCell contentViewHasSubviewMarked:aMark];
-}
-
-
 - (NSIndexPath *) indexPathForRowWithMark:(NSString *) aMark inTable:(UITableView *) aTable {
   NSUInteger numberOfSections = [aTable numberOfSections];
 
   id<UITableViewDataSource> dataSource = aTable.dataSource;
 
+  NSIndexPath *path = nil;
+  UITableViewCell *cell = nil;
+
   for (NSUInteger section = 0; section < numberOfSections; section++) {
     NSUInteger numberOfRows = [aTable numberOfRowsInSection:section];
     for (NSUInteger row = 0; row < numberOfRows; row++) {
-      NSIndexPath *path = [NSIndexPath indexPathForRow:row inSection:section];
-      // only returns visible cells
-      UITableViewCell *cell = [aTable cellForRowAtIndexPath:path];
-      if (cell == nil) {
-        // ask the dataSource for the cell
-        cell = [dataSource tableView:aTable cellForRowAtIndexPath:path];
-      }
+      path = [NSIndexPath indexPathForRow:row inSection:section];
 
-      // is the cell itself marked?
-      if ([self view:cell hasMark:aMark]) {return path;}
-      // are any of it's subviews marked?
-      if ([self cell:cell contentViewHasSubviewMarked:aMark]) {return path;}
+      cell = [dataSource tableView:aTable cellForRowAtIndexPath:path];
+
+      if ([self view:cell hasMark:aMark]) { return path; }
+      if ([self view:cell.textLabel hasMark:aMark]) { return path; }
+      if ([self view:cell.detailTextLabel hasMark:aMark]) { return path; }
+      if ([self view:cell hasSubviewWithMark:aMark]) { return path; }
+      if ([self view:cell.contentView hasSubviewWithMark:aMark]) { return path; }
     }
   }
   return nil;
 }
 
-
 //                 required      optional     optional
 // _arguments ==> [row mark, scroll position, animated]
 - (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
-  if ([target isKindOfClass:[UITableView class]] == NO) {
-    LPLogWarn(@"View %@ should be a table view for scrolling to row/cell to make sense",
-            target);
+
+  if (!target) {
+    LPLogWarn(@"Cannot perform operation on nil target");
+    return nil;
+  }
+
+  if (![[target class] isSubclassOfClass:[UITableView class]]) {
+    LPLogWarn(@"View: %@ should be an instance of UITableView but found '%@'",
+              target, NSStringFromClass([target class]));
     return nil;
   }
 
@@ -89,4 +86,5 @@
 
   return target;
 }
+
 @end
