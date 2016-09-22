@@ -9,6 +9,7 @@
 //
 
 #import "LPOperation.h"
+#import "LPScrollToMarkOperation.h"
 #import "LPScrollToRowOperation.h"
 #import "LPScrollToRowWithMarkOperation.h"
 #import "LPCollectionViewScrollToItemWithMarkOperation.h"
@@ -58,6 +59,8 @@
     operation = [[LPCollectionViewScrollToItemWithMarkOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"scrollToRowWithMark"]) {
     operation = [[LPScrollToRowWithMarkOperation alloc] initWithOperation:dictionary];
+  } else if ([opName isEqualToString:@"scrollToMark"]) {
+    operation = [[LPScrollToMarkOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"scroll"]) {
     operation = [[LPScrollOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"query"]) {
