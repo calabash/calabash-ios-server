@@ -73,7 +73,7 @@
 
 - (UIView *)view:(UIView *) aView subviewWithMark:(NSString *) aMark {
   UIView *result = nil;
-  
+
   if (!aView) {
     return nil;
   } else {
@@ -85,7 +85,7 @@
       if (result) { break; }
     }
   }
-  
+
   return result;
 }
 
@@ -175,8 +175,7 @@
   UIView *subview = [self view:scrollView subviewWithMark:mark];
 
   if (subview) {
-    [scrollView setContentOffset:[subview frame].origin];
-  
+    [scrollView setContentOffset:[subview frame].origin animated:animate];
     return subview;
   } else {
     LPLogWarn(@"ScrollView doesn't contain a subview with mark '%@'", mark);
