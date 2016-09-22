@@ -11,17 +11,14 @@
 // _arguments ==> [item_num, section_num, scroll postion, animated]
 - (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
 
-  // UICollectionView appears in iOS 6
-  Class clz = NSClassFromString(@"UICollectionView");
-  if (clz == nil) {
-    LPLogWarn(@"UICollectionView is not supported on this version of iOS:  '%@'",
-            [[UIDevice currentDevice] systemVersion]);
+  if (!target) {
+    LPLogWarn(@"Cannot perform operation on nil target");
     return nil;
   }
 
-  if ([target isKindOfClass:[UICollectionView class]] == NO) {
+  if (![[target class] isSubclassOfClass:[UICollectionView class]]) {
     LPLogWarn(@"View: %@ should be an instance of UICollectionView but found '%@'",
-            target, target == nil ? nil : [target class]);
+              target, NSStringFromClass([target class]));
     return nil;
   }
 
