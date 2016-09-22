@@ -15,26 +15,24 @@
 
 @implementation LPCollectionViewScrollToItemWithMarkOperation
 
-- (NSIndexPath *) indexPathForItemWithMark:(NSString *) aMark inCollection:(UICollectionView *) aCollection {
+- (NSIndexPath *) indexPathForItemWithMark:(NSString *) aMark
+                              inCollection:(UICollectionView *) aCollection {
   NSUInteger numberOfSections = [aCollection numberOfSections];
 
   id<UICollectionViewDataSource> dataSource = aCollection.dataSource;
 
+  NSIndexPath *path = nil;
+  UICollectionViewCell *cell = nil;
+
   for (NSUInteger section = 0; section < numberOfSections; section++) {
     NSUInteger numberOfItems = [aCollection numberOfItemsInSection:section];
     for (NSUInteger item = 0; item < numberOfItems; item++) {
-      NSIndexPath *path = [NSIndexPath indexPathForItem:item inSection:section];
-      // only returns visible cells
-      UICollectionViewCell *cell = [aCollection cellForItemAtIndexPath:path];
-      if (cell == nil) {
-        // ask the dataSource for the cell
-        cell = [dataSource collectionView:aCollection cellForItemAtIndexPath:path];
-      }
-      
-      // is the cell itself marked?
-      if ([self view:cell hasMark:aMark]) {return path;}
-      // are any of it's subviews marked?
-      if ([self cell:cell contentViewHasSubviewMarked:aMark]) {return path;}
+      path = [NSIndexPath indexPathForItem:item inSection:section];
+      cell = [dataSource collectionView:aCollection cellForItemAtIndexPath:path];
+
+      if ([self view:cell hasMark:aMark]) { return path; }
+      if ([self view:cell hasSubviewWithMark:aMark]) { return path; }
+      if ([self view:cell.contentView hasSubviewWithMark:aMark]) { return path; }
     }
   }
   return nil;
@@ -43,18 +41,15 @@
 //                 required      optional     optional
 // _arguments ==> [item mark, scroll position, animated]
 - (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
-  
-  // UICollectionView appears in iOS 6
-  Class clz = NSClassFromString(@"UICollectionView");
-  if (clz == nil) {
-    LPLogWarn(@"UICollectionView is not supported on this version of iOS:  '%@'",
-          [[UIDevice currentDevice] systemVersion]);
+
+  if (!target) {
+    LPLogWarn(@"Cannot perform operation on nil target");
     return nil;
   }
 
-  if ([target isKindOfClass:[UICollectionView class]] == NO) {
-    LPLogWarn(@"View: %@ should be a collection view for scrolling to item/cell to make sense",
-          target);
+  if (![[target class] isSubclassOfClass:[UICollectionView class]]) {
+    LPLogWarn(@"View: %@ should be an instance of UICollectionView but found '%@'",
+              target, NSStringFromClass([target class]));
     return nil;
   }
 
@@ -92,7 +87,7 @@
 
     NSNumber *posNum = [opts objectForKey:position];
     
-    if (posNum == nil) {
+    if (!posNum) {
       LPLogWarn(@"Requesting to scroll to position '%@' but that is not one of these valid positions: '%@'",
             position, [opts allKeys]);
       return nil;
