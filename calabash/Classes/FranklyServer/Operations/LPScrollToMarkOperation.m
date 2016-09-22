@@ -13,10 +13,15 @@
 #import "LPScrollToMarkOperation.h"
 #import "LPInvoker.h"
 #import "LPInvocationResult.h"
+#import "LPScrollToRowWithMarkOperation.h"
+#import "LPCollectionViewScrollToItemWithMarkOperation.h"
+#import "LPTouchUtils.h"
+#import "LPCocoaLumberjack.h"
 
 @interface LPScrollToMarkOperation ()
 
 - (BOOL) view:(UIView *) aView hasTextMatchingMark:(NSString *) aMark;
+- (NSDictionary *)operationDictionary;
 
 @end
 
@@ -64,6 +69,143 @@
     }
   }
   return result;
+}
+
+- (UIView *)view:(UIView *) aView subviewWithMark:(NSString *) aMark {
+  UIView *result = nil;
+
+  if ([self view:aView hasMark:aMark]) {
+    result = aView;
+  } else if ([[aView subviews] count] == 0) {
+    result = nil;
+  } else {
+    for (UIView *subView in [aView subviews]) {
+      if ([self view:subView hasSubviewWithMark:aMark]) {
+        result = subView;
+        break;
+      }
+    }
+  }
+  return result;
+}
+
+- (NSDictionary *)operationDictionary {
+  return @{
+           @"method_name" : NSStringFromSelector(self.selector),
+           @"arguments" : self.arguments
+           };
+}
+
+//                 required, optional
+// _arguments ==>   [mark,  animated]
+- (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
+
+  if (!target) {
+    LPLogWarn(@"Cannot perform operation on nil target");
+    return nil;
+  }
+
+  Class targetClass = [target class];
+  if (![targetClass isSubclassOfClass:[UIScrollView class]]) {
+    LPLogWarn(@"View %@ should be a UIScrollView or subclass but found '%@'",
+    target, NSStringFromClass(targetClass));
+    return nil;
+  }
+
+  NSString *mark = [self.arguments objectAtIndex:0];
+  if (!mark || [mark length] == 0) {
+    LPLogWarn(@"Mark: '%@' should be non-nil and non-empty", mark);
+    return nil;
+  }
+
+  Class UITableViewWrapperClass = NSClassFromString(@"UITableViewWrapperView");
+
+  if ([targetClass isSubclassOfClass:UITableViewWrapperClass]) {
+    LPLogDebug(@"View is UITableViewWrapperView - skipping");
+    return nil;
+  }
+
+  if ([targetClass isSubclassOfClass:[UITableView class]]) {
+    LPLogDebug(@"Target is a UITableView: %@", target);
+
+    NSMutableDictionary *dictionary = [[self operationDictionary] mutableCopy];
+    NSMutableArray *arguments = [dictionary[@"arguments"] mutableCopy];
+    
+    // Table view operation requires scroll position
+    // mark and animate are the arguments passed to this method.
+    // Table view operation expects scroll position at index 1 and animate at
+    // index 2.
+    [arguments insertObject:@"middle" atIndex:1];
+    dictionary[@"arguments"] = [NSArray arrayWithArray:arguments];
+
+    LPScrollToRowWithMarkOperation *operation;
+    operation = [[LPScrollToRowWithMarkOperation alloc]
+                 initWithOperation:[NSDictionary dictionaryWithDictionary:dictionary]];
+    return [operation performWithTarget:target error:error];
+  }
+
+  if ([targetClass isSubclassOfClass:[UICollectionView class]]) {
+    LPLogDebug(@"Target is a UICollectionView: %@", target);
+
+    NSMutableDictionary *dictionary = [[self operationDictionary] mutableCopy];
+    NSMutableArray *arguments = [dictionary[@"arguments"] mutableCopy];
+
+    // Collection view operation requires scroll position
+    // mark and animate are the arguments passed to this method.
+    // Collection view operation expects scroll position at index 1 and animate
+    // at index 2.
+    [arguments insertObject:@"center_vertical" atIndex:1];
+    dictionary[@"arguments"] = [NSArray arrayWithArray:arguments];
+
+    LPCollectionViewScrollToItemWithMarkOperation *operation;
+    operation = [[LPCollectionViewScrollToItemWithMarkOperation alloc]
+                 initWithOperation:[NSDictionary dictionaryWithDictionary:dictionary]];
+    return [operation performWithTarget:target error:error];
+  }
+
+  LPLogDebug(@"Target is not a UITableView or UICollectionView: %@",
+             NSStringFromClass(targetClass));
+
+  BOOL animate = YES;
+  if ([self.arguments count] == 2) {
+    animate = [self.arguments[1] boolValue];
+  }
+
+  UIScrollView *scrollView = (UIScrollView *)target;
+  UIView *subview = [self view:scrollView subviewWithMark:mark];
+
+  if (subview) {
+    CGPoint translated = [subview.superview convertPoint:subview.center toView:scrollView];
+    LPLogDebug(@"subview center = %@", NSStringFromCGPoint(subview.center));
+    LPLogDebug(@"subview translated = %@", NSStringFromCGPoint(translated));
+
+    UIWindow *window = [LPTouchUtils windowForView:scrollView];
+
+    CGPoint center = [LPTouchUtils centerOfView:subview];
+    LPLogDebug(@"subview center: %@", NSStringFromCGPoint(center));
+
+    CGRect rect = [window convertRect:subview.bounds fromView:subview];
+
+    UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+    if ([frontWindow respondsToSelector:@selector(convertRect:toCoordinateSpace:)]) {
+      rect = [frontWindow convertRect:rect toCoordinateSpace:frontWindow];
+    } else {
+      rect = [frontWindow convertRect:rect fromWindow:window];
+    }
+#else
+    rect = [frontWindow convertRect:rect fromWindow:window];
+#endif
+
+    LPLogDebug(@"coverted rect: %@", NSStringFromCGRect(rect));
+
+    [scrollView setContentOffset:translated animated:animate];
+    return subview;
+  } else {
+    LPLogWarn(@"ScrollView doesn't contain a subview with mark '%@'", mark);
+    return nil;
+  }
 }
 
 @end
