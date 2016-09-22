@@ -175,7 +175,7 @@
   UIView *subview = [self view:scrollView subviewWithMark:mark];
 
   if (subview) {
-    [scrollView setContentOffset:[subview frame].origin animated:animate];
+    [scrollView scrollRectToVisible:[subview frame] animated:animate];
     return subview;
   } else {
     LPLogWarn(@"ScrollView doesn't contain a subview with mark '%@'", mark);
