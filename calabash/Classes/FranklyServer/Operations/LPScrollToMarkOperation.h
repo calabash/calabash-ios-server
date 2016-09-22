@@ -12,6 +12,5 @@
 
 - (BOOL) view:(UIView *) aView hasMark:(NSString *) aMark;
 - (BOOL) view:(UIView *) aView hasSubviewWithMark:(NSString *) aMark;
-- (BOOL) cell:(UIView *) aCell contentViewHasSubviewMarked:(NSString *) aMark;
 
 @end

@@ -66,14 +66,4 @@
   return result;
 }
 
-- (BOOL) cell:(UIView *) aCell contentViewHasSubviewMarked:(NSString *) aMark {
-  if ([aCell respondsToSelector: @selector(contentView)]){
-    UIView *contentView = [aCell valueForKey:@"contentView"];
-    for (UIView *subview in [contentView subviews]) {
-      if ([self view:subview hasMark:aMark]) { return YES; }
-    }
-  }
-  return NO;
-}
-
 @end
