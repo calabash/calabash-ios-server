@@ -1,3 +1,9 @@
+### 0.20.2
+
+* scrollToMark: a generic operation for scrolling to a mark in any
+  UIScrollView #368
+* Scroll to marked operations should descend to depth N #367 @JoeSSS
+
 ### 0.20.1
 
 This release contains no server changes.  The version has been bumped to keep
