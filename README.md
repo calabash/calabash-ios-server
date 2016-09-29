@@ -68,7 +68,7 @@ See the calabash-ios/calabash-cucumber/Rakefile for more details.
 
 ```
 $ cd path/to/calabash-ios/calabash-cucumber
-$ be rake build\_server
+$ be rake build_server
 ```
 
 ### Testing
