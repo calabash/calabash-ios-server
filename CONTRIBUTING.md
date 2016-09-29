@@ -1,47 +1,43 @@
 ## Contributing
 
-***All pull requests should be based off the `develop` branch.***
+To avoid duplicates, please search existing issues before reporting a
+new one.
+
+Github Issues is intended for reporting bugs and feature suggestions. If
+you have a question or need support, please use [Stack
+Overflow](https://stackoverflow.com/questions/tagged/calabash) or join
+the conversation on [Gitter](https://gitter.im/calabash/calabash0x?utm_source=share-link&utm_medium=link&utm_campaign=share-link).
+
+## How to Contribute
 
 The Calabash iOS Toolchain uses git-flow.
 
-See these links for information about git-flow and git best practices.
+* All pull requests should be based off the `develop` branch.
+* Contributors should never change the version of the product.
+* Contributors should never commit code signing changes.
 
-Please see this [post](http://chris.beams.io/posts/git-commit/) for tips
-on how to make a good commit messages.
+### Best Practices
 
-##### Git Flow Step-by-Step guide
+* [Good commit messages](http://chris.beams.io/posts/git-commit/)
+* [Git Flow:  Step-by-Step](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow)
+* [Git Best Practices](http://justinhileman.info/article/changing-history/)
 
-* https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
+## Etiquette and Code of Conduct
 
-##### Git Best Practices
+All contributors must adhere to the [Microsoft Open Source Code of
+Conduct](https://opensource.microsoft.com/codeofconduct/). For more
+information see the [Code of Conduct
+FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact
+opencode@microsoft.com with any additional questions or comments.
 
-* http://justinhileman.info/article/changing-history/
+## Legal
 
-##### git-flow command line tool
+Users who wish to contribute will be prompted to sign a Microsoft
+Contributor License Agreement (CLA). A copy of the CLA can be found at
+https://cla.microsoft.com/cladoc/microsoft-contribution-license-agreement.pdf.
 
-We don't use the git-flow tools, but this is useful anyway.
-
-* http://danielkummer.github.io/git-flow-cheatsheet/
-
-## Start a Feature
-
-Start your work on a feature branch based off develop.
-
-```
-# If you don't already have the develop branch
-$ git fetch origin
-$ git co -t origin/develop
-
-# If you already have the develop branch
-$ git co develop
-$ git pull origin develop
-$ git co -b feature/my-new-feature
-
-# Publish your branch and make a pull-request on `develop`
-$ git push -u origin feature/my-new-feature
-```
-
-**Contributors should not change the version.**
+Please consult the LICENSE file in this project for copyright and
+license details.
 
 ## Testing
 
@@ -51,6 +47,11 @@ $ make xct
 
 # Building libraries.
 $ make all
+
+# Cucumber
+$ make app-cal
+$ cd cucumber
+$ be cucumber
 
 # Integration tests.
 $ scripts/test/run
@@ -67,10 +68,6 @@ After the release branch is created:
 
 The release pull request ***must*** be made against the _master_ branch.
 
-Be sure to check CI.
-
-* https://travis-ci.org/calabash/calabash\_ios\_server
-* http://calabash-ci.macminicolo.net:8080/  # Briar jobs.
 
 ```
 $ git co -b release/0.19.2
@@ -78,7 +75,7 @@ $ git co -b release/0.19.2
 1. Update the CHANGELOG.md.
 2. Bump the version in calabash/Classes/FranklyServer/Routes/LPVersionRoute.h
 3. **IMPORTANT** Bump the version in the README.md badge.
-3. Have a look at the README.md to see if it can be updated.
+4. Have a look at the README.md to see if it can be updated.
 
 $ git push -u origin release/0.19.2
 
