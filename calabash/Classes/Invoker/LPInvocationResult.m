@@ -32,4 +32,13 @@ NSString *const LPVoidSelectorReturnValue = @"<VOID>";
 
 - (BOOL) isNSNull { return self.value == [NSNull null]; }
 
+- (NSString *) description {
+  NSString *className = NSStringFromClass([LPInvocationResult class]);
+  if ([self isNSNull]) {
+    return [NSString stringWithFormat:@"#<%@ : NSNull>", className];
+  } else {
+    return [NSString stringWithFormat:@"#<%@ : '%@'>", className, self.value];
+  }
+}
+
 @end
