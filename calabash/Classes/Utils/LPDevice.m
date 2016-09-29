@@ -314,7 +314,9 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
 
     // iPhone 7/7+
     @"iPhone9,1" : @"iphone 6",
+    @"iPhone9,3" : @"iphone 6",
     @"iPhone9,2" : @"iphone 6+",
+    @"iPhone9,4" : @"iphone 6+",
 
     // iPad Pro 13in
     @"iPad6,7" : @"ipad pro",
