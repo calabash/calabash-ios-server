@@ -27,7 +27,7 @@ $ bundle
 To build with an alternative Xcode:
 
 ```
-$ DEVELOPER_DIR=/Xcode/8.0/Xcode-beta.app make < rule >
+$ DEVELOPER_DIR=/Xcode/8.1/Xcode-beta.app make < rule >
 ```
 
 If you have build errors, see the xcpretty section below.
