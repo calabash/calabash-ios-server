@@ -1,3 +1,7 @@
+### 0.20.3
+
+* Update form factor table with latest iphone 7 device model info #370
+
 ### 0.20.2
 
 * scrollToMark: a generic operation for scrolling to a mark in any
