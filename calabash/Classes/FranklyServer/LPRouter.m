@@ -157,7 +157,7 @@
                                                     length:[postData length]
                                                   encoding:NSUTF8StringEncoding];
         params = [LPJSONUtils deserializeDictionary:postDataAsString];
-
+        LPLogInfo(@"POST: [%@] %@", NSStringFromClass([route class]), params);
         // UNEXPECTED
         // After the POST data is parsed we need to unset it.
         _mutablePostData = nil;
