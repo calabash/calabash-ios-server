@@ -1,3 +1,7 @@
+### 0.20.4
+
+* Log POST requests with body #372
+
 ### 0.20.3
 
 * Update form factor table with latest iphone 7 device model info #370
