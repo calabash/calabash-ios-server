@@ -464,6 +464,10 @@
 		F56630981A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */ = {isa = PBXBuildFile; fileRef = F566308B1A39B09C00DEA0C0 /* LPInfoPlist.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F56B4EF41B56FC3600E7EA23 /* LPInvokerSelectorWithArgumentsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F56B4EF31B56FC3600E7EA23 /* LPInvokerSelectorWithArgumentsTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F56B4EF61B57E04E00E7EA23 /* LPInvokerThreadingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F56B4EF51B57E04E00E7EA23 /* LPInvokerThreadingTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F56F12281E1796C5005946FF /* LPTypeStringOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F56F12261E1796C5005946FF /* LPTypeStringOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F56F12291E1796EC005946FF /* LPTypeStringOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F56F12261E1796C5005946FF /* LPTypeStringOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F56F122A1E1796ED005946FF /* LPTypeStringOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F56F12261E1796C5005946FF /* LPTypeStringOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F56F122B1E1796EE005946FF /* LPTypeStringOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = F56F12261E1796C5005946FF /* LPTypeStringOperation.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F570992C1B5518EF00DB35EC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F570992B1B5518EF00DB35EC /* CoreLocation.framework */; };
 		F570992E1B555C3C00DB35EC /* LPInvokerArgumentEncodingIsHandledTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F570992D1B555C3C00DB35EC /* LPInvokerArgumentEncodingIsHandledTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F57099301B55751200DB35EC /* LPInvokerHasArgumentWithUnhandleEncodingTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F570992F1B55751200DB35EC /* LPInvokerHasArgumentWithUnhandleEncodingTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -938,6 +942,8 @@
 		F56B4EF31B56FC3600E7EA23 /* LPInvokerSelectorWithArgumentsTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvokerSelectorWithArgumentsTest.m; sourceTree = "<group>"; };
 		F56B4EF51B57E04E00E7EA23 /* LPInvokerThreadingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvokerThreadingTest.m; sourceTree = "<group>"; };
 		F56CBBB01B451B74002D1DC1 /* VERSION.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = VERSION.md; sourceTree = "<group>"; };
+		F56F12251E1796C5005946FF /* LPTypeStringOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPTypeStringOperation.h; sourceTree = "<group>"; };
+		F56F12261E1796C5005946FF /* LPTypeStringOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPTypeStringOperation.m; sourceTree = "<group>"; };
 		F570992B1B5518EF00DB35EC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F570992D1B555C3C00DB35EC /* LPInvokerArgumentEncodingIsHandledTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvokerArgumentEncodingIsHandledTest.m; sourceTree = "<group>"; };
 		F570992F1B55751200DB35EC /* LPInvokerHasArgumentWithUnhandleEncodingTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPInvokerHasArgumentWithUnhandleEncodingTest.m; sourceTree = "<group>"; };
@@ -1430,6 +1436,8 @@
 		B184FDC114B6DB2B002A744C /* Operations */ = {
 			isa = PBXGroup;
 			children = (
+				F56F12251E1796C5005946FF /* LPTypeStringOperation.h */,
+				F56F12261E1796C5005946FF /* LPTypeStringOperation.m */,
 				B184FDC214B6DB2B002A744C /* LPOperation.h */,
 				B184FE9214B6DDA1002A744C /* LPOperation.m */,
 				F5CAC06A180D499600E23F03 /* LPSliderOperation.h */,
@@ -2677,6 +2685,7 @@
 				B15BF9B419ABB1DD00B38577 /* LPOperation.m in Sources */,
 				B15BF9B519ABB1DD00B38577 /* LPQueryOperation.m in Sources */,
 				B15BF9B619ABB1DD00B38577 /* LPScrollOperation.m in Sources */,
+				F56F122B1E1796EE005946FF /* LPTypeStringOperation.m in Sources */,
 				F56630961A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */,
 				B15BF9B719ABB1DD00B38577 /* LPScrollToRowOperation.m in Sources */,
 				B1F772161A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */,
@@ -2809,6 +2818,7 @@
 				B1D5BD9919A23BCE0070E8CE /* LPInterpolateRoute.m in Sources */,
 				F5C094561A979CC200AE5991 /* LPWebQuery.m in Sources */,
 				B1D5BD9A19A23BCE0070E8CE /* LPRecordRoute.m in Sources */,
+				F56F122A1E1796ED005946FF /* LPTypeStringOperation.m in Sources */,
 				F5097CFC1B6A377E00326D6A /* LPKeyboardLanguageRoute.m in Sources */,
 				B1D5BD9B19A23BCE0070E8CE /* LPMapRoute.m in Sources */,
 				B1D5BD9C19A23BCE0070E8CE /* LPNoContentResponse.m in Sources */,
@@ -2924,6 +2934,7 @@
 				F5091BF518C4E1D700C85307 /* LPUIARouteOverUserPrefs.m in Sources */,
 				F5091BF618C4E1D700C85307 /* LPUserPrefRoute.m in Sources */,
 				F5091BF718C4E1D700C85307 /* LPKeyboardRoute.m in Sources */,
+				F56F12281E1796C5005946FF /* LPTypeStringOperation.m in Sources */,
 				F56630921A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */,
 				F5091BF818C4E1D700C85307 /* LPGenericAsyncRoute.m in Sources */,
 				B1F772121A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */,
@@ -3092,6 +3103,7 @@
 				F50CBF841A040564004AC9DA /* LPHTTPMessage.m in Sources */,
 				F5C224E91AD47403001DB4FA /* LPScrollOperationTest.m in Sources */,
 				F50CBF9A1A04058C004AC9DA /* LPScrollToRowOperation.m in Sources */,
+				F56F12291E1796EC005946FF /* LPTypeStringOperation.m in Sources */,
 				F5986B1C1B58F5C700CCB142 /* LPInvocationError.m in Sources */,
 				F5C04E251B330F8B00F23526 /* LPDecimalRounderTest.m in Sources */,
 				F50CBF8F1A04058C004AC9DA /* LPI.mm in Sources */,

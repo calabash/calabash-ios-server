@@ -27,6 +27,10 @@
 #import "LPInvocationError.h"
 #import "LPCocoaLumberjack.h"
 #import "LPJSONUtils.h"
+#import "LPTypeStringOperation.h"
+#import "CocoaLumberjack.h"
+
+NSString const *kLPServerOperationErrorToken = @"LPOperationErrorToken";
 
 @interface LPOperation ()
 
@@ -79,7 +83,9 @@
     operation = [[LPSliderOperation alloc] initWithOperation:dictionary];
   } else if ([opName isEqualToString:@"collectionViewScroll"]) {
     operation = [[LPCollectionViewScrollToItemOperation alloc]
-                 initWithOperation:dictionary];
+                                                        initWithOperation:dictionary];
+  } else if ([opName isEqualToString:@"typeString"]) {
+    operation = [[LPTypeStringOperation alloc] initWithOperation:dictionary];
   } else {
     operation = [[LPOperation alloc] initWithOperation:dictionary];
   }
