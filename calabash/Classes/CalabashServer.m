@@ -45,6 +45,7 @@
 #import "LPReflectionRoute.h"
 #import "LPSetDeviceOrientationRoute.h"
 #import "LPStatusBarRoute.h"
+#import "LPTypeStringRoute.h"
 
 @interface CalabashServer ()
 - (void) start;
@@ -211,6 +212,10 @@
     LPStatusBarRoute *statusBarRoute = [LPStatusBarRoute new];
     [LPRouter addRoute:statusBarRoute forPath:@"statusBar"];
     [statusBarRoute release];
+
+    LPTypeStringRoute *typeStringRoute = [LPTypeStringRoute new];
+    [LPRouter addRoute:typeStringRoute forPath:@"typeString"];
+    [typeStringRoute release];
 
     _httpServer = [[[LPHTTPServer alloc] init] retain];
 

@@ -2,93 +2,125 @@
 #warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
 #endif
 
-#import "LPTypeStringOperation.h"
+#import "LPTypeStringRoute.h"
 #import "LPJSONUtils.h"
 #import "LPInvoker.h"
 #import "LPInvocationResult.h"
+#import "UIScriptParser.h"
 #import "LPCocoaLumberjack.h"
+#import "LPTouchUtils.h"
+
+static NSString const *LPTypeStringFirstResponderQuery = @"* isFirstResponder:1 index:0";
 
 static CFTimeInterval const LPTypeStringPostKeyDelay = 0.1;
 
-@interface LPTypeStringOperation ()
+@interface LPTypeStringRoute ()
 
 @property(assign) CFTimeInterval postKeyDelay;
 
 @end
 
-@implementation LPTypeStringOperation
+@implementation LPTypeStringRoute
 
-- (id) initWithOperation:(NSDictionary *) operation {
-  self = [super initWithOperation:operation];
+- (instancetype)init {
+  self = [super init];
   if (self) {
     _postKeyDelay = LPTypeStringPostKeyDelay;
   }
   return self;
 }
 
-//  required =========>  |     optional
-// _arguments ==> [string, post_key_delay]
-- (id) performWithTarget:(id) target error:(NSError *__autoreleasing*) error {
+- (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
+  return [method isEqualToString:@"POST"];
+}
+
+- (NSError *)errorWithDescription:(NSString *)description {
+  return [NSError errorWithDomain:@"sh.calaba.LPServer"
+                             code:1
+                         userInfo:@{ NSLocalizedDescriptionKey : description }];
+}
+
+- (NSDictionary *)failureResponseWithReason:(NSString *)reason {
+  return @{
+      @"outcome" : @"FAILURE",
+      @"reason" : reason,
+      @"details" : @""
+  };
+}
+
+- (NSDictionary *)successResponseWithResult:(id)result {
+  return @{
+      @"outcome" : @"SUCCESS",
+      @"results" : @[result]
+  };
+}
+
+- (id)firstResponder {
+  NSString *query = @"* isFirstResponder:1 index:0";
+  UIScriptParser *parser = [[UIScriptParser alloc] initWithUIScript:query];
+  [parser parse];
+  NSArray *allWindows = [LPTouchUtils applicationWindows];
+  NSArray *results = [parser evalWith:allWindows];
+  if (!results || results.count == 0) {
+     return nil;
+  } else {
+     return results[0];
+  }
+}
+
+// post_key_delay =>
+// string =>
+- (NSDictionary *) JSONResponseForMethod:(NSString *) method
+                                     URI:(NSString *) path
+                                    data:(NSDictionary *) data {
+
+  LPLogDebug(@"data: %@", data);
+
+  if (data[@"post_key_delay"]) {
+    self.postKeyDelay = (CFTimeInterval)[data[@"post_key_delay"] floatValue];
+  }
+
+  LPLogDebug(@"LPTypeString post key delay = %@", @(self.postKeyDelay));
+
+  NSString *reason = @"";
+
+  id target = [self firstResponder];
+  if (!target) {
+    reason = [NSString stringWithFormat:@"Cannot type text because no view "
+                                            " is first responder with query: '%@'",
+                                        LPTypeStringFirstResponderQuery];
+    LPLogError(@"%@", reason);
+    return [self failureResponseWithReason:reason];
+  }
+
+  NSString *textToType = data[@"string"];
+  if (!textToType) {
+    reason = [NSString stringWithFormat:@"Request is missing value for 'string' key"];
+    LPLogError(@"%@", reason);
+    return [self failureResponseWithReason:reason];
+  }
+
 
   if (![target conformsToProtocol:@protocol(UITextInputTraits)]) {
-    [self getError:error
-      formatString:@"View: %@ should conform to UITextInputTraits", target];
-    return kLPServerOperationErrorToken;
+    reason = [NSString stringWithFormat:@"View: %@ should conform to UITextInputTraits",
+                       target];
+    return [self failureResponseWithReason:reason];
   }
 
   if (![target respondsToSelector:@selector(isFirstResponder)]) {
-    [self getError:error
-      formatString:@"Target %@ does not respond to 'isFirstResponder' selector", target];
-    return kLPServerOperationErrorToken;
+    reason = [NSString stringWithFormat:@"Target %@ does not respond to "
+                                            "'isFirstResponder' selector", target];
+    return [self failureResponseWithReason:reason];
   }
 
-  if (![target isFirstResponder]) {
-    [self getError:error
-      formatString:@"Target %@ is not first responder which implies no keyboard "
-                       "is showing.", target];
-    return kLPServerOperationErrorToken;
-  }
-
-  NSArray *arguments = self.arguments;
-
-  if (arguments.count == 0) {
-    [self getError:error
-      formatString:@"Required string argument is missing"];
-    return kLPServerOperationErrorToken;
-  }
-
-  if (arguments.count > 2) {
-    [self getError:error
-      formatString:@"Expected 2 arguments, found %@ arguments: %@",
-          @(arguments.count), arguments];
-    return kLPServerOperationErrorToken;
-  }
-
-  id stringValue = arguments[0];
-  if (![stringValue isKindOfClass:[NSString class]]) {
-    [self getError:error
-      formatString:@"Required string argument is not an NSString, "
-                       "it is a %@", [stringValue class]];
-    return kLPServerOperationErrorToken;
-  }
-
-  if (arguments.count == 2) {
-    self.postKeyDelay = (CFTimeInterval)[arguments[1] floatValue];
-  }
-
-  LPLogDebug(@"TypeString post key delay = %@", @(self.postKeyDelay));
-
-  NSString *textToType = (NSString *)stringValue;
-
-  NSError *innerError = nil;
+  NSError *error = nil;
   if ([target isKindOfClass:[UITextField class]]) {
     BOOL endsWithNewline;
     textToType = [self stringByRemovingTrailingNewline:textToType
                                     hadTrailingNewline:&endsWithNewline
-                                                 error:&innerError];
+                                                 error:&error];
     if (!textToType) {
-      if (error) { *error = innerError; }
-      return kLPServerOperationErrorToken;
+      return [self failureResponseWithReason:[error localizedDescription]];
     }
     [self textField:(UITextField *)target typeText:textToType resignAfter:endsWithNewline];
   } else if ([target isKindOfClass:[UITextView class]]) {
@@ -97,35 +129,32 @@ static CFTimeInterval const LPTypeStringPostKeyDelay = 0.1;
     BOOL endsWithNewline;
     textToType = [self stringByRemovingTrailingNewline:textToType
                                     hadTrailingNewline:&endsWithNewline
-                                                 error:&innerError];
+                                                 error:&error];
     if (!textToType) {
-      if (error) { *error = innerError; }
-      return kLPServerOperationErrorToken;
+      return [self failureResponseWithReason:[error localizedDescription]];
     }
     [self searchBar:(UISearchBar *)target typeText:textToType resignAfter:endsWithNewline];
   } else {
     LPLogDebug(@"Target class %@ is not a UITextField, UITextView, UISearchBar",
                NSStringFromClass([target class]));
     if (![target conformsToProtocol:@protocol(UIKeyInput)]) {
-      [self getError:error
-        formatString:@"Target class %@ does not conform to UIKeyInput protocol",
-            [target class]];
-      return kLPServerOperationErrorToken;
+      reason = [NSString stringWithFormat:@"Target class %@ does not conform to "
+                                              "UIKeyInput protocol", [target class]];
+      return [self failureResponseWithReason:reason];
     }
 
     BOOL endsWithNewline;
     textToType = [self stringByRemovingTrailingNewline:textToType
                                     hadTrailingNewline:&endsWithNewline
-                                                 error:&innerError];
+                                                 error:&error];
     if (!textToType) {
-      if (error) { *error = innerError; }
-      return kLPServerOperationErrorToken;
+      return [self failureResponseWithReason:[error localizedDescription]];
     }
 
     [self keyInput:(id<UIKeyInput>)target typeText:textToType resignAfter:endsWithNewline];
   }
 
-  return [LPJSONUtils jsonifyObject:target];
+  return [self successResponseWithResult:[LPJSONUtils jsonifyObject:target]];
 }
 
 - (NSString *)stringByRemovingTrailingNewline:(NSString *)string
@@ -140,12 +169,14 @@ static CFTimeInterval const LPTypeStringPostKeyDelay = 0.1;
     if ([replaced length] != [string length] - 1) {
       message = [NSString stringWithFormat:@"Cannot type multiple newlines in a UITextField. "
                  "Any newline must be the last character."];
+      LPLogError(@"%@", message);
       innerError = [self errorWithDescription:message];
       if (error) { *error = innerError; }
       return nil;
     } else if ([string characterAtIndex:[string length] - 1] != 10) {
       message = [NSString stringWithFormat:@"Cannot type a newline in a UITextField "
                  "unless it is the last character"];
+      LPLogError(@"%@", message);
       innerError = [self errorWithDescription:message];
       if (error) { *error = innerError; }
       return nil;
