@@ -13,6 +13,7 @@ xcode = RunLoop::Xcode.new
 default_sim_name = RunLoop::Core.default_simulator
 default_sim = RunLoop::Device.device_with_identifier(default_sim_name)
 
+RunLoop::CoreSimulator.terminate_core_simulator_processes
 core_sim = RunLoop::CoreSimulator.new(default_sim, nil, {:xcode => xcode})
 core_sim.launch_simulator
 
