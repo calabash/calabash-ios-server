@@ -29,7 +29,7 @@ end
 args =
       [
             'test',
-            '-SYMROOT=build',
+            '-SYMROOT=build/xctest',
             '-derivedDataPath build/xctest',
             '-project calabash.xcodeproj',
             '-scheme XCTest',
@@ -41,6 +41,8 @@ args =
       ]
 
 Dir.chdir(working_dir) do
+
+  FileUtils.rm_rf(File.join(working_dir, "build/xctest"))
 
   cmd = "xcrun xcodebuild #{args.join(' ')}"
 
