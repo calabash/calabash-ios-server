@@ -29,7 +29,7 @@ end
 args =
       [
             'test',
-            '-SYMROOT=build',
+            '-SYMROOT=build/xctest',
             '-derivedDataPath build/xctest',
             '-project calabash.xcodeproj',
             '-scheme XCTest',
@@ -41,6 +41,8 @@ args =
       ]
 
 Dir.chdir(working_dir) do
+
+  FileUtils.rm_rf(File.join(working_dir, "build/xctest"))
 
   cmd = "xcrun xcodebuild #{args.join(' ')}"
 
@@ -72,13 +74,9 @@ Dir.chdir(working_dir) do
                                     :fail_msg => 'XCTests failed',
                                     :env_vars => env,
                                     :exit_on_nonzero_status => false})
-    if Luffa::Environment.travis_ci?
-      if exit_code != 0
-        Luffa.log_fail "XCTest exited '#{exit_code}' - did a test fail or did the tests not start?"
-        raise XCTestFailedError, 'XCTest failed.'
-      end
-    else
-      exit(exit_code)
+    if exit_code != 0
+      Luffa.log_fail "XCTest exited '#{exit_code}' - did a test fail or did the tests not start?"
+      raise XCTestFailedError, 'XCTest failed.'
     end
   end
 end

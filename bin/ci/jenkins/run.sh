@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 
+set +e
+
+# Force Xcode 7 CoreSimulator env to be loaded so xcodebuild does not fail.
+export DEVELOPER_DIR=/Xcode/7.3.1/Xcode.app/Contents/Developer
+
+for try in {1..4}; do
+  xcrun simctl help &>/dev/null
+  sleep 1.0
+done
+
+set -e
+
 function info {
   echo "$(tput setaf 2)INFO: $1$(tput sgr0)"
 }
@@ -30,8 +42,7 @@ bin/ci/jenkins/make-ipa.sh
 bundle exec bin/test/test-cloud.rb
 
 # Restart CoreSimulator processes
-bundle update
-bundle exec run-loop simctl manage-processes
+bundle install
 
 banner "Run Tests"
 bundle exec bin/test/xctest.rb
