@@ -42,8 +42,7 @@ bin/ci/jenkins/make-ipa.sh
 bundle exec bin/test/test-cloud.rb
 
 # Restart CoreSimulator processes
-bundle update
-bundle exec run-loop simctl manage-processes
+bundle install
 
 banner "Run Tests"
 bundle exec bin/test/xctest.rb
