@@ -21,6 +21,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		429CD6921EAFBC2800E7CA85 /* LPClearTextRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 429CD6911EAFBC2800E7CA85 /* LPClearTextRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		429CD6931EAFBD2800E7CA85 /* LPClearTextRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 429CD6911EAFBC2800E7CA85 /* LPClearTextRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		429CD6941EAFBD2900E7CA85 /* LPClearTextRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 429CD6911EAFBC2800E7CA85 /* LPClearTextRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		429CD6951EAFBD2900E7CA85 /* LPClearTextRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 429CD6911EAFBC2800E7CA85 /* LPClearTextRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89043AC21C289A5D0067E22F /* LPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 89043ABE1C289A5D0067E22F /* LPConstants.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89043AC31C289A5D0067E22F /* LPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 89043ABE1C289A5D0067E22F /* LPConstants.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89043AC41C289A5D0067E22F /* LPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 89043ABE1C289A5D0067E22F /* LPConstants.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -679,6 +683,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		429CD6901EAFBC1800E7CA85 /* LPClearTextRoute.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LPClearTextRoute.h; sourceTree = "<group>"; };
+		429CD6911EAFBC2800E7CA85 /* LPClearTextRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPClearTextRoute.m; sourceTree = "<group>"; };
 		5BFF97A218B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCollectionViewScrollToItemWithMarkOperation.h; sourceTree = "<group>"; };
 		5BFF97A318B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCollectionViewScrollToItemWithMarkOperation.m; sourceTree = "<group>"; };
 		5BFF97A618B392370094E71E /* LPScrollToMarkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPScrollToMarkOperation.h; sourceTree = "<group>"; };
@@ -1516,6 +1522,8 @@
 				F5A6B9691BD14E96009FD08B /* LPReflectionRoute.m */,
 				F5963ECD1D626368002F9304 /* LPStatusBarRoute.h */,
 				F5963ECE1D626368002F9304 /* LPStatusBarRoute.m */,
+				429CD6901EAFBC1800E7CA85 /* LPClearTextRoute.h */,
+				429CD6911EAFBC2800E7CA85 /* LPClearTextRoute.m */,
 			);
 			path = Routes;
 			sourceTree = "<group>";
@@ -2716,6 +2724,7 @@
 				B15BF9CE19ABB1DE00B38577 /* LPISO8601DateFormatter.m in Sources */,
 				B15BF9CF19ABB1DE00B38577 /* LPCDataScanner_Extensions.m in Sources */,
 				B1670E2C1A32410F00000A62 /* LPDumpRoute.m in Sources */,
+				429CD6951EAFBD2900E7CA85 /* LPClearTextRoute.m in Sources */,
 				B15BF9D019ABB1DE00B38577 /* LPCJSONDeserializer.m in Sources */,
 				F576058F1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */,
 				B15BF9D119ABB1DE00B38577 /* LPCJSONScanner.m in Sources */,
@@ -2788,6 +2797,7 @@
 				B1D5BD8B19A23BCE0070E8CE /* LPOperation.m in Sources */,
 				F5A8B4641B39BFEB00F390CA /* LPContextFilterLogFormatter.m in Sources */,
 				B1D5BD8C19A23BCE0070E8CE /* LPQueryOperation.m in Sources */,
+				429CD6941EAFBD2900E7CA85 /* LPClearTextRoute.m in Sources */,
 				B1D5BDDA19A23BE00070E8CE /* LPCalabashFrankRegistrar.m in Sources */,
 				B1D5BD8D19A23BCE0070E8CE /* LPScrollOperation.m in Sources */,
 				B1D5BD8E19A23BCE0070E8CE /* LPUIATapRoute.m in Sources */,
@@ -2963,6 +2973,7 @@
 				F5091C0F18C4E1D700C85307 /* UIScriptASTLast.m in Sources */,
 				F5091C1018C4E1D700C85307 /* LPEnv.m in Sources */,
 				B13B7FC01A31FE560054FFB1 /* LPDumpRoute.m in Sources */,
+				429CD6921EAFBC2800E7CA85 /* LPClearTextRoute.m in Sources */,
 				F5091C1118C4E1D700C85307 /* UIScriptASTWith.m in Sources */,
 				F576058D1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */,
 				F5E2D1E018C9120E00A0D9B6 /* LPSSKeychain.m in Sources */,
@@ -3104,6 +3115,7 @@
 				F5A6B9721BD14EE2009FD08B /* LPReflectionRouteTest.m in Sources */,
 				F50CBFB21A0405B2004AC9DA /* LPExitRoute.m in Sources */,
 				F5A8B4701B39BFEB00F390CA /* LPMultiFormatter.m in Sources */,
+				429CD6931EAFBD2800E7CA85 /* LPClearTextRoute.m in Sources */,
 				F5986B301B5A327500CCB142 /* LPOperationTest.m in Sources */,
 				F50CBFA31A0405B2004AC9DA /* LPAppPropertyRoute.m in Sources */,
 				F52975C51D4FBA29009094D5 /* LPSetDeviceOrientationRoute.m in Sources */,
