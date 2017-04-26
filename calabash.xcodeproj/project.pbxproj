@@ -21,6 +21,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		42069AFD1EB1035B00C1F0A5 /* LPMachClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 42069AFC1EB1035B00C1F0A5 /* LPMachClock.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		42069AFE1EB103C100C1F0A5 /* LPMachClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 42069AFC1EB1035B00C1F0A5 /* LPMachClock.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		42069AFF1EB103C200C1F0A5 /* LPMachClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 42069AFC1EB1035B00C1F0A5 /* LPMachClock.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		42069B001EB103C200C1F0A5 /* LPMachClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 42069AFC1EB1035B00C1F0A5 /* LPMachClock.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		429CD6921EAFBC2800E7CA85 /* LPClearTextRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 429CD6911EAFBC2800E7CA85 /* LPClearTextRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		429CD6931EAFBD2800E7CA85 /* LPClearTextRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 429CD6911EAFBC2800E7CA85 /* LPClearTextRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		429CD6941EAFBD2900E7CA85 /* LPClearTextRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 429CD6911EAFBC2800E7CA85 /* LPClearTextRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -683,6 +687,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		42069AFB1EB1034600C1F0A5 /* LPMachClock.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LPMachClock.h; sourceTree = "<group>"; };
+		42069AFC1EB1035B00C1F0A5 /* LPMachClock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPMachClock.m; sourceTree = "<group>"; };
 		429CD6901EAFBC1800E7CA85 /* LPClearTextRoute.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LPClearTextRoute.h; sourceTree = "<group>"; };
 		429CD6911EAFBC2800E7CA85 /* LPClearTextRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPClearTextRoute.m; sourceTree = "<group>"; };
 		5BFF97A218B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCollectionViewScrollToItemWithMarkOperation.h; sourceTree = "<group>"; };
@@ -1617,6 +1623,8 @@
 				F5C04E261B33110B00F23526 /* LPDecimalRounder.h */,
 				F5C04E271B33110B00F23526 /* LPDecimalRounder.m */,
 				F56592601B4713FE00C044C8 /* LPRepeatingTimerProtocol.h */,
+				42069AFB1EB1034600C1F0A5 /* LPMachClock.h */,
+				42069AFC1EB1035B00C1F0A5 /* LPMachClock.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -2672,6 +2680,7 @@
 				B15BF9A919ABB1DD00B38577 /* LPCORSResponse.m in Sources */,
 				B15BF9AA19ABB1DD00B38577 /* LPRouter.m in Sources */,
 				B15BF9AB19ABB1DD00B38577 /* LPScrollToMarkOperation.m in Sources */,
+				42069B001EB103C200C1F0A5 /* LPMachClock.m in Sources */,
 				F5A8B4651B39BFEB00F390CA /* LPContextFilterLogFormatter.m in Sources */,
 				B15BF9AC19ABB1DD00B38577 /* LPScrollToRowWithMarkOperation.m in Sources */,
 				B15BF9AD19ABB1DD00B38577 /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
@@ -2786,6 +2795,7 @@
 				B1D5BD8319A23BCE0070E8CE /* LPHTTPDynamicFileResponse.m in Sources */,
 				F5A8B4AB1B39BFEB00F390CA /* LPTTYLogger.m in Sources */,
 				B1D5BD8419A23BCE0070E8CE /* LPSSKeychainQuery.m in Sources */,
+				42069AFF1EB103C200C1F0A5 /* LPMachClock.m in Sources */,
 				B1D5BD8519A23BCE0070E8CE /* LPCollectionViewScrollToItemWithMarkOperation.m in Sources */,
 				B1D5BD8619A23BCE0070E8CE /* LPHTTPFileResponse.m in Sources */,
 				B1D5BD8719A23BCE0070E8CE /* LPHTTPRedirectResponse.m in Sources */,
@@ -2921,6 +2931,7 @@
 				F5091BEC18C4E1D700C85307 /* LPRouter.m in Sources */,
 				F5091BED18C4E1D700C85307 /* LPQueryAllOperation.m in Sources */,
 				F5091BEE18C4E1D700C85307 /* LPOperation.m in Sources */,
+				42069AFD1EB1035B00C1F0A5 /* LPMachClock.m in Sources */,
 				F5A8B4631B39BFEB00F390CA /* LPContextFilterLogFormatter.m in Sources */,
 				F5091BEF18C4E1D700C85307 /* LPQueryOperation.m in Sources */,
 				F5091BF018C4E1D700C85307 /* LPScrollOperation.m in Sources */,
@@ -3165,6 +3176,7 @@
 				B15369FD1A327A400093923F /* LPUIATapRouteOverSharedElement.m in Sources */,
 				F5C224E01AD473F0001DB4FA /* LPDeviceTest.m in Sources */,
 				F54EFE8D1B5B88D500F8D665 /* LPRouterTest.m in Sources */,
+				42069AFE1EB103C100C1F0A5 /* LPMachClock.m in Sources */,
 				89043AC21C289A5D0067E22F /* LPConstants.m in Sources */,
 				E2F8025B1BE207670000A0E4 /* LPShakeRoute.m in Sources */,
 				F50CBF7D1A040564004AC9DA /* LPSSKeychainQuery.m in Sources */,

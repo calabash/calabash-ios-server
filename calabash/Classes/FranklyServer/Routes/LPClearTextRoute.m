@@ -7,6 +7,7 @@
 #import "LPTouchUtils.h"
 #import "LPCocoaLumberjack.h"
 #import "LPJSONUtils.h"
+#import "LPMachClock.h"
 
 @implementation LPClearTextRoute
 
@@ -83,8 +84,16 @@
     LPLogDebug(@"Target class %@ does not respond to setText checking UIKeyInput", target);
     if ([target conformsToProtocol:@protocol(UIKeyInput)]) {
       LPLogDebug(@"Attempting to clearText with deleteBackward");
-      while ([target hasText]) {
+      NSTimeInterval startTime = [[LPMachClock sharedClock] absoluteTime];
+      NSTimeInterval endTime = startTime + 20.0; // Timeout after 20s
+      while ([target hasText] && [[LPMachClock sharedClock] absoluteTime] < endTime) {
         [target deleteBackward];
+        CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.1, false);
+      }
+      if ([target hasText]) {
+        reason = [NSString stringWithFormat:@"Timed out clearing text from UIKeyInput"];
+        LPLogError(@"%@", reason);
+        return [self failureResponseWithReason:reason];
       }
     } else {
       reason = [NSString stringWithFormat:@"Target %@ does not respond to setText nor deleteBackward", target];
@@ -92,7 +101,7 @@
     }
   }
 
-  [self fireTextChangeMethodsWithDelegate:delegate withTarget:target];
+  [self postTextChangedNotificationAndCallDelegateMethodsOnTarget:target delegate:delegate];
 
   return [self successResponseWithResult:[LPJSONUtils jsonifyObject:target]];
 }
@@ -116,7 +125,7 @@
   return YES;
 }
 
-- (void)fireTextChangeMethodsWithDelegate:(id)delegate withTarget:(id)target {
+-(void)postTextChangedNotificationAndCallDelegateMethodsOnTarget:(id)target delegate:(id)delegate {
   if ([target isKindOfClass:[UITextField class]]) {
     [[NSNotificationCenter defaultCenter] postNotificationName:UITextFieldTextDidChangeNotification object:target];
   } else if ([target isKindOfClass:[UITextView class]]) {
