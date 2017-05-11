@@ -128,7 +128,7 @@
   NSArray *result = nil;
   if ([NSNull null] != scriptObj) {
 
-    self.parser = [UIScriptParser scriptParserWithObject:scriptObj];
+    self.parser = [UIScriptParser scriptParserWithObject:scriptObj options:data[@"parse_options"]];
     [self.parser parse];
     NSArray *tokens = [self.parser parsedTokens];
     LPLogDebug(@"Map %@, %@ Parsed UIScript as\n%@", method, path, tokens);

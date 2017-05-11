@@ -6,6 +6,11 @@
 
 #import "UIScriptAST.h"
 
+typedef NS_ENUM(short, SubclassMatchMode) {
+  kSubclassMatchModeMatchSubclasses = 0,
+  kSubclassMatchModeIgnoreSubclasses
+};
+
 @interface UIScriptASTClassName : UIScriptAST {
   NSString *_className;
   Class _class;
@@ -13,6 +18,6 @@
 
 @property(nonatomic, retain) NSString *className;
 
-- (id) initWithClassName:(NSString *) className;
+- (id) initWithClassName:(NSString *) className subclassMatchMode:(NSString *)matchModeString;
 
 @end

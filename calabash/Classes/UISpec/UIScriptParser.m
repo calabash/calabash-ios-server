@@ -26,10 +26,18 @@
 - (UIScriptASTDirection *) parseDirectionIfPresent:(NSString *) token;
 - (NSString *) findNextToken:(NSUInteger *) index;
 
+@property (nonatomic, retain) NSDictionary *parsingOptions;
+
 @end
 
 @implementation UIScriptParser
 @synthesize script = _script;
+
++ (UIScriptParser *) scriptParserWithObject:(id) obj options:(NSDictionary *)parsingOptions {
+  UIScriptParser *ret = [self scriptParserWithObject:obj];
+  ret.parsingOptions = parsingOptions;
+  return ret;
+}
 
 
 + (UIScriptParser *) scriptParserWithObject:(id) obj {
@@ -128,8 +136,8 @@ static NSCharacterSet *curlyBrackets = nil;
         [_res addObject:direction];
       } else {// default is descendant
         //should be a classname
-        UIScriptASTClassName *cn = [[[UIScriptASTClassName alloc]
-                initWithClassName:token] autorelease];
+        UIScriptASTClassName *cn = [[[UIScriptASTClassName alloc] initWithClassName:token
+                                                                  subclassMatchMode:_parsingOptions[@"subclass_match_mode"]] autorelease];
         [_res addObject:cn];
       }
     } else if ([obj isKindOfClass:[NSDictionary class]]) {//NSDictionary
