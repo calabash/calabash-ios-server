@@ -142,22 +142,22 @@ ditto_or_exit "${ARM_LIBRARY}" "${ARM_PRODUCTS_DIR}/${LIBRARY_NAME}"
 
 banner "Installing Dylibs"
 
-FAT_LIBRARY="${FAT_PRODUCTS_DIR}/libCalabashDynFAT.dylib"
+FAT_LIBRARY="${FAT_PRODUCTS_DIR}/libCalabashFAT.dylib"
 
 xcrun lipo -create \
   "${SIM_PRODUCTS_DIR}/${LIBRARY_NAME}" \
   "${ARM_PRODUCTS_DIR}/${LIBRARY_NAME}" \
   -o "${FAT_LIBRARY}"
 
-TARGET_LIB="${PWD}/${INSTALL_DIR}/libCalabashDynFAT.dylib"
+TARGET_LIB="${PWD}/${INSTALL_DIR}/libCalabashFAT.dylib"
 info "Installing FAT library to ${TARGET_LIB}"
 ditto_or_exit "${FAT_LIBRARY}" "${TARGET_LIB}"
 
-TARGET_LIB="${PWD}/${INSTALL_DIR}/libCalabashDynSim.dylib"
+TARGET_LIB="${PWD}/${INSTALL_DIR}/libCalabashSim.dylib"
 info "Installing simulator library to ${TARGET_LIB}"
 ditto_or_exit "${SIM_PRODUCTS_DIR}/${LIBRARY_NAME}" "${TARGET_LIB}"
 
-TARGET_LIB="${PWD}/${INSTALL_DIR}/libCalabashDyn.dylib"
+TARGET_LIB="${PWD}/${INSTALL_DIR}/libCalabashARM.dylib"
 info "Installing ARM library to ${TARGET_LIB}"
 ditto_or_exit "${ARM_PRODUCTS_DIR}/${LIBRARY_NAME}" "${TARGET_LIB}"
 
@@ -202,46 +202,50 @@ else
   (cd "${CODE_SIGN_DIR}" && apple/create-keychain.sh)
 
   info "Resiging the device dylib"
-  $RESIGN_TOOL "${INSTALL_DIR}/libCalabashDyn.dylib"
+  $RESIGN_TOOL "${INSTALL_DIR}/libCalabashARM.dylib"
 
   info "Resiging the FAT dylib"
-  $RESIGN_TOOL "${INSTALL_DIR}/libCalabashDynFAT.dylib"
+  $RESIGN_TOOL "${INSTALL_DIR}/libCalabashFAT.dylib"
 
-  xcrun codesign --display --verbose=2 ${INSTALL_DIR}/libCalabashDyn.dylib
+  xcrun codesign --display --verbose=2\
+    ${INSTALL_DIR}/libCalabashARM.dylib
 fi
 
 banner "Dylib Info"
 
-VERSION=`xcrun strings "${INSTALL_DIR}/libCalabashDynSim.dylib" | grep -E 'CALABASH VERSION' | head -1 | grep -oEe '\d+\.\d+\.\d+' | tr -d '\n'`
+VERSION=`xcrun strings "${INSTALL_DIR}/libCalabashSim.dylib" | grep -E 'CALABASH VERSION' | head -1 | grep -oEe '\d+\.\d+\.\d+' | tr -d '\n'`
 echo "Built version:  $VERSION"
 
-lipo -info "${INSTALL_DIR}/libCalabashDyn.dylib"
-lipo -info "${INSTALL_DIR}/libCalabashDynSim.dylib"
-lipo -info "${INSTALL_DIR}/libCalabashDynFAT.dylib"
+lipo -info "${INSTALL_DIR}/libCalabashARM.dylib"
+lipo -info "${INSTALL_DIR}/libCalabashSim.dylib"
+lipo -info "${INSTALL_DIR}/libCalabashFAT.dylib"
 
 if [ "${XC_GTE_7}"  = "true" ]; then
 
-  xcrun otool-classic -arch arm64 -l "${INSTALL_DIR}/libCalabashDyn.dylib" | grep -q LLVM
+  xcrun otool-classic -arch arm64 -l \
+    "${INSTALL_DIR}/libCalabashARM.dylib" | grep -q LLVM
   if [ $? -eq 0 ]; then
-    echo "libCalabashDyn.dylib contains bitcode for arm64"
+    echo "libCalabashARM.dylib contains bitcode for arm64"
   else
-    echo "libCalabashDyn.dylib does not contain bitcode for arm64"
+    echo "libCalabashARM.dylib does not contain bitcode for arm64"
     exit 1
   fi
 
-  xcrun otool-classic -arch armv7s -l "${INSTALL_DIR}/libCalabashDyn.dylib" | grep -q LLVM
+  xcrun otool-classic -arch armv7s -l \
+    "${INSTALL_DIR}/libCalabashARM.dylib" | grep -q LLVM
   if [ $? -eq 0 ]; then
-    echo "libCalabashDyn.dylib contains bitcode for armv7s"
+    echo "libCalabashARM.dylib contains bitcode for armv7s"
   else
-    echo "libCalabashDyn.dylib does not contain bitcode for armv7s"
+    echo "libCalabashARM.dylib does not contain bitcode for armv7s"
     exit 1
   fi
 
-  xcrun otool-classic -arch armv7 -l "${INSTALL_DIR}/libCalabashDyn.dylib" | grep -q LLVM
+  xcrun otool-classic -arch armv7 -l \
+    "${INSTALL_DIR}/libCalabashARM.dylib" | grep -q LLVM
   if [ $? -eq 0 ]; then
-    echo "libCalabashDyn.dylib contains bitcode for armv7"
+    echo "libCalabashARM.dylib contains bitcode for armv7"
   else
-    echo "libCalabashDyn.dylib does not contain bitcode for armv7"
+    echo "libCalabashARM.dylib does not contain bitcode for armv7"
     exit 1
   fi
 fi
