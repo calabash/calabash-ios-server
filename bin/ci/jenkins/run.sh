@@ -41,7 +41,6 @@ bin/ci/jenkins/make-dylibs.sh
 bin/ci/jenkins/make-ipa.sh
 bundle exec bin/test/test-cloud.rb
 
-# Restart CoreSimulator processes
 bundle install
 
 banner "Run Tests"
@@ -51,3 +50,5 @@ bundle exec bin/test/cucumber.rb
 banner "Test iPhone 6+ touch coordinates"
 bundle exec bin/test/acquaint.rb
 
+# Skip s3 upload with --dry-run until S3 credentials are available
+bin/ci/jenkins/s3-publish.sh --dry-run
