@@ -250,3 +250,11 @@ if [ "${XC_GTE_7}"  = "true" ]; then
   fi
 fi
 
+# Legacy.  Can be changed once calabash-ios gem is updated.
+ditto_or_exit \
+  "${INSTALL_DIR}/libCalabashARM.dylib" \
+  "${INSTALL_DIR}/libCalabashDyn.dylib"
+
+ditto_or_exit \
+  "${INSTALL_DIR}/libCalabashSim.dylib" \
+  "${INSTALL_DIR}/libCalabashDynSim.dylib"
