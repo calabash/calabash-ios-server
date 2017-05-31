@@ -46,6 +46,7 @@ run_loop
 cucumber/Gemfile.lock
 cucumber/reports
 cucumber/screenshots
+cucumber/*.png
 cucumber/xtc-submit-acquaint
 !cucumber/acquaint/AcquaintNativeiOS.app
 !cucumber/acquaint/AcquaintNativeiOS.app.dSYM
