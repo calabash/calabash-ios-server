@@ -9,6 +9,11 @@
 #import "LPJSONUtils.h"
 #import "LPMachClock.h"
 
+// TODO We might need to implement something to handle target/action pairs.
+// [textField addTarget:self
+//               action:@selector(myTextChangedMethod:)
+//     forControlEvents:UIControlEventEditingChanged];
+
 @implementation LPClearTextRoute
 
 - (BOOL) supportsMethod:(NSString *) method atPath:(NSString *) path {
