@@ -51,6 +51,10 @@ cucumber/xtc-submit-acquaint
 !cucumber/acquaint/AcquaintNativeiOS.app
 !cucumber/acquaint/AcquaintNativeiOS.app.dSYM
 !cucumber/acquaint/AcquaintNativeiOS.ipa
+cucumber/xtc-submit-device-agent-test-app
+!cucumber/device-agent-test-app/TestApp.app
+!cucumber/device-agent-test-app/TestApp.app.dSYM
+!cucumber/device-agent-test-app/TestApp.app
 
 # The version tool which is staged to bin as part
 # of the build process.
