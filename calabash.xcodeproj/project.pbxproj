@@ -472,6 +472,10 @@
 		F576058D1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F576058E1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F576058F1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F580A0F01E1CC927005882CA /* LPTypeStringRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F580A0EE1E1CC927005882CA /* LPTypeStringRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F580A0F11E1CCC31005882CA /* LPTypeStringRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F580A0EE1E1CC927005882CA /* LPTypeStringRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F580A0F21E1CCC33005882CA /* LPTypeStringRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F580A0EE1E1CC927005882CA /* LPTypeStringRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F580A0F31E1CCC34005882CA /* LPTypeStringRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F580A0EE1E1CC927005882CA /* LPTypeStringRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F58C9F571B6F7EB9007D307B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F561B6F7EB9007D307B /* GCDAsyncSocket.m */; };
 		F58C9F801B6F802D007D307B /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F5B1B6F802D007D307B /* DDData.m */; };
 		F58C9F811B6F802D007D307B /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F5D1B6F802D007D307B /* DDNumber.m */; };
@@ -944,6 +948,8 @@
 		F57605181BCE767000E89C97 /* LPSuspendAppRouteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSuspendAppRouteTest.m; sourceTree = "<group>"; };
 		F57605871BCE77F000E89C97 /* LPSuspendAppRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPSuspendAppRoute.h; sourceTree = "<group>"; };
 		F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPSuspendAppRoute.m; sourceTree = "<group>"; };
+		F580A0ED1E1CC927005882CA /* LPTypeStringRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPTypeStringRoute.h; sourceTree = "<group>"; };
+		F580A0EE1E1CC927005882CA /* LPTypeStringRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPTypeStringRoute.m; sourceTree = "<group>"; };
 		F58B6DE8186847F70042191C /* gitversioning-after.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "gitversioning-after.sh"; sourceTree = "<group>"; };
 		F58B6DE9186847F70042191C /* gitversioning-before.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "gitversioning-before.sh"; sourceTree = "<group>"; };
 		F58C9F551B6F7EB9007D307B /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
@@ -1454,6 +1460,8 @@
 		B184FDD014B6DB2B002A744C /* Routes */ = {
 			isa = PBXGroup;
 			children = (
+				F580A0ED1E1CC927005882CA /* LPTypeStringRoute.h */,
+				F580A0EE1E1CC927005882CA /* LPTypeStringRoute.m */,
 				F52975C01D4FBA29009094D5 /* LPSetDeviceOrientationRoute.h */,
 				F52975C11D4FBA29009094D5 /* LPSetDeviceOrientationRoute.m */,
 				E2F802591BE207570000A0E4 /* LPShakeRoute.h */,
@@ -2658,6 +2666,7 @@
 				B15BF9A419ABB1DD00B38577 /* LPHTTPAsyncFileResponse.m in Sources */,
 				B15BF9A519ABB1DD00B38577 /* LPHTTPDataResponse.m in Sources */,
 				B15BF9A619ABB1DD00B38577 /* LPHTTPDynamicFileResponse.m in Sources */,
+				F580A0F21E1CCC33005882CA /* LPTypeStringRoute.m in Sources */,
 				B15BF9A719ABB1DD00B38577 /* LPHTTPFileResponse.m in Sources */,
 				F5A6B9701BD14E96009FD08B /* LPReflectionRoute.m in Sources */,
 				B15BF9A819ABB1DD00B38577 /* LPHTTPRedirectResponse.m in Sources */,
@@ -2869,6 +2878,7 @@
 				B1D5BDC019A23BCE0070E8CE /* LPQueryLogRoute.m in Sources */,
 				B1D5BDC119A23BCE0070E8CE /* LPLocationRoute.m in Sources */,
 				B1D5BDC219A23BCE0070E8CE /* LPFlashOperation.m in Sources */,
+				F580A0F11E1CCC31005882CA /* LPTypeStringRoute.m in Sources */,
 				B1D5BDC319A23BCE0070E8CE /* LPScrollToRowWithMarkOperation.m in Sources */,
 				B1D5BDC419A23BCE0070E8CE /* LPOrientationOperation.m in Sources */,
 				B1D5BDC519A23BCE0070E8CE /* LPCORSResponse.m in Sources */,
@@ -2947,6 +2957,7 @@
 				F5091C0318C4E1D700C85307 /* LPCJSONDeserializer.m in Sources */,
 				F5091C0418C4E1D700C85307 /* LPCJSONScanner.m in Sources */,
 				F5091C0518C4E1D700C85307 /* LPCJSONSerializer.m in Sources */,
+				F580A0F01E1CC927005882CA /* LPTypeStringRoute.m in Sources */,
 				F5091C0618C4E1D700C85307 /* LPResources.m in Sources */,
 				F5091C0718C4E1D700C85307 /* UIScriptASTPredicate.m in Sources */,
 				F5091C0818C4E1D700C85307 /* UIScriptAST.m in Sources */,
@@ -3071,6 +3082,7 @@
 				F5C276251B39C27800DF63FA /* LPTTYLogFormatter.m in Sources */,
 				F5963ED71D626407002F9304 /* LPStatusBarRouteTest.m in Sources */,
 				89F2EFE11B2243D500958052 /* LPIntrospectionRoute.m in Sources */,
+				F580A0F31E1CCC34005882CA /* LPTypeStringRoute.m in Sources */,
 				F570992E1B555C3C00DB35EC /* LPInvokerArgumentEncodingIsHandledTest.m in Sources */,
 				F50CBFA51A0405B2004AC9DA /* LPUIATapRoute.m in Sources */,
 				F50CBFA41A0405B2004AC9DA /* LPQueryLogRoute.m in Sources */,
