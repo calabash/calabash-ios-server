@@ -21,18 +21,18 @@
 }
 
 - (NSDictionary *)failureResponseWithReason:(NSString *)reason {
-    return @{
-        @"outcome" : @"FAILURE",
-        @"reason" : reason,
-        @"details" : @""
-    };
+  return @{
+           @"outcome" : @"FAILURE",
+           @"reason" : reason,
+           @"details" : @""
+           };
 }
 
 - (NSDictionary *)successResponseWithResult:(id)result {
-    return @{
-       @"outcome" : @"SUCCESS",
-       @"results" : @[result]
-    };
+  return @{
+           @"outcome" : @"SUCCESS",
+           @"results" : @[result]
+           };
 }
 
 - (id)firstResponder {
@@ -49,8 +49,8 @@
 }
 
 - (NSDictionary *)JSONResponseForMethod:(NSString *) method
-                                     URI:(NSString *) path
-                                    data:(NSDictionary *) data {
+                                    URI:(NSString *) path
+                                   data:(NSDictionary *) data {
   NSString *reason = @"";
   id target = [self firstResponder];
   if (!target) {
