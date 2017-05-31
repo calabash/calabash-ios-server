@@ -80,7 +80,7 @@
 
   NSRange textRange = NSRangeFromString(existingText);
   if ([target respondsToSelector:@selector(setText:)]) {
-    shouldClearText = [self shouldClearTextInRange:textRange WithDelegate:delegate withTarget:target];
+    shouldClearText = [self shouldClearTextInRange:textRange delegate:delegate target:target];
     if (shouldClearText) {
       [target performSelector:@selector(setText:) withObject:@""];
     }
@@ -111,7 +111,7 @@
   return [self successResponseWithResult:[LPJSONUtils jsonifyObject:target]];
 }
 
-- (BOOL)shouldClearTextInRange:(NSRange)range WithDelegate:(id)delegate withTarget:(id)target {
+- (BOOL)shouldClearTextInRange:(NSRange)range delegate:(id)delegate target:(id)target {
   if (!delegate) { return YES; }
 
   if ([target isKindOfClass:[UITextField class]]) {
