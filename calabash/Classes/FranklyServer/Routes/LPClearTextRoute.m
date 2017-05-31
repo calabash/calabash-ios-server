@@ -60,7 +60,8 @@
   }
 
   if (![target respondsToSelector:@selector(isFirstResponder)]) {
-    reason = [NSString stringWithFormat:@"Target %@ does not respond to 'isFirstResponder'", target];
+    reason = [NSString stringWithFormat:@"Target %@ does not respond to 'isFirstResponder'",
+              target];
     return [self failureResponseWithReason:reason];
   }
 
@@ -80,13 +81,16 @@
 
   NSRange textRange = NSRangeFromString(existingText);
   if ([target respondsToSelector:@selector(setText:)]) {
-    shouldClearText = [self shouldClearTextInRange:textRange delegate:delegate target:target];
+    shouldClearText = [self shouldClearTextInRange:textRange
+                                          delegate:delegate
+                                            target:target];
     if (shouldClearText) {
       [target performSelector:@selector(setText:) withObject:@""];
     }
   } else {
     // Check if it's UIKeyInput protocol
-    LPLogDebug(@"Target class %@ does not respond to setText checking UIKeyInput", target);
+    LPLogDebug(@"Target class %@ does not respond to setText; checking UIKeyInput",
+               target);
     if ([target conformsToProtocol:@protocol(UIKeyInput)]) {
       LPLogDebug(@"Attempting to clearText with deleteBackward");
       NSTimeInterval startTime = [[LPMachClock sharedClock] absoluteTime];
@@ -101,38 +105,52 @@
         return [self failureResponseWithReason:reason];
       }
     } else {
-      reason = [NSString stringWithFormat:@"Target %@ does not respond to setText nor deleteBackward", target];
+      reason = [NSString stringWithFormat:@"Target %@ does not respond to setText nor deleteBackward",
+                target];
       return [self failureResponseWithReason:reason];
     }
   }
 
-  [self postTextChangedNotificationAndCallDelegateMethodsOnTarget:target delegate:delegate];
+  [self postTextChangedNotificationAndCallDelegateMethodsOnTarget:target
+                                                         delegate:delegate];
 
   return [self successResponseWithResult:[LPJSONUtils jsonifyObject:target]];
 }
 
-- (BOOL)shouldClearTextInRange:(NSRange)range delegate:(id)delegate target:(id)target {
+- (BOOL)shouldClearTextInRange:(NSRange)range
+                      delegate:(id)delegate
+                        target:(id)target {
   if (!delegate) { return YES; }
 
   if ([target isKindOfClass:[UITextField class]]) {
-    if ([delegate respondsToSelector:@selector(textField:shouldChangeCharactersInRange:replacementString:)]) {
-      return [delegate textField:target shouldChangeCharactersInRange:range replacementString:@""];
+    SEL selector = @selector(textField:shouldChangeCharactersInRange:replacementString:);
+    if ([delegate respondsToSelector:selector]) {
+      return [delegate textField:target
+   shouldChangeCharactersInRange:range
+               replacementString:@""];
     }
     if ([delegate respondsToSelector:@selector(textFieldShouldClear:)]) {
       return [delegate textFieldShouldClear:target];
     }
   } else if ([target isKindOfClass:[UITextView class]]) {
-    return [delegate textView:target shouldChangeTextInRange:range replacementText:@""];
+    return [delegate textView:target
+      shouldChangeTextInRange:range
+              replacementText:@""];
   } else if ([target isKindOfClass:[UISearchBar class]]) {
-    return [delegate searchBar:target shouldChangeTextInRange:range replacementText:@""];
+    return [delegate searchBar:target
+       shouldChangeTextInRange:range
+               replacementText:@""];
   }
 
   return YES;
 }
 
--(void)postTextChangedNotificationAndCallDelegateMethodsOnTarget:(id)target delegate:(id)delegate {
+- (void)postTextChangedNotificationAndCallDelegateMethodsOnTarget:(id)target
+                                                         delegate:(id)delegate {
   if ([target isKindOfClass:[UITextField class]]) {
-    [[NSNotificationCenter defaultCenter] postNotificationName:UITextFieldTextDidChangeNotification object:target];
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:UITextFieldTextDidChangeNotification
+     object:target];
   } else if ([target isKindOfClass:[UITextView class]]) {
     if (delegate) {
       if ([delegate respondsToSelector:@selector(textViewDidChangeSelection:)]) {
@@ -143,7 +161,9 @@
         [delegate textViewDidChange:target];
       }
     }
-    [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification object:target];
+    [[NSNotificationCenter defaultCenter]
+     postNotificationName:UITextViewTextDidChangeNotification
+     object:target];
   } else if ([target isKindOfClass:[UISearchBar class]]) {
     if (delegate && [delegate respondsToSelector:@selector(searchBar:textDidChange:)]) {
       [delegate searchBar:target textDidChange:@""];
