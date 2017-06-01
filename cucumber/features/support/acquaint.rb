@@ -49,7 +49,7 @@ module Acquaint
     lib
   end
 
-  def self.sim_options
+  def self.options
     if RunLoop::Environment.device_target
       device = RunLoop::Environment.device_target
       inject = nil

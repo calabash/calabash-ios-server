@@ -7,7 +7,7 @@ if [ -z "${JENKINS_HOME}" ]; then
   exit 1
 fi
 
-bin/ci/travis/install-keychain.sh
+bin/ci/jenkins/install-keychain.sh
 
 CODE_SIGN_DIR="${HOME}/.calabash/calabash-codesign"
 KEYCHAIN="${CODE_SIGN_DIR}/ios/Calabash.keychain"

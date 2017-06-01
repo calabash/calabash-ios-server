@@ -80,6 +80,7 @@
     if ([self view:aView hasMark:aMark]) {
       result = aView;
     }
+    if (result) { return result; }
     for (UIView* subView in [aView subviews]) {
       result = [self view:subView subviewWithMark:aMark];
       if (result) { break; }

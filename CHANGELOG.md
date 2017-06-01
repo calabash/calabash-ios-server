@@ -1,3 +1,12 @@
+### 0.20.6
+
+* Prepare for Jenkins to stage artifacts to S3 #383
+* GET /clearText: call delegate methods and post notifications after
+  removing text from first responder #382
+* Jenkins: force Xcode 7 CoreSimulatorService to load #380
+* Fix: subviewWithMark only returns a match if the last subview has the mark #379
+* Update shasum of the cert used to sign the calabash dylibs #376
+
 ### 0.20.4
 
 * Log POST requests with body #372
