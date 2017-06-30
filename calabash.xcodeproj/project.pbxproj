@@ -3799,7 +3799,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					/Xcode/6.1/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(PROJECT_DIR)/XCTest/OCMock",
 					"$(PROJECT_DIR)/XCTest/Specta",
 					"$(PROJECT_DIR)/XCTest/Expecta",
@@ -3865,7 +3864,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					/Xcode/6.1/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(PROJECT_DIR)/XCTest/OCMock",
 					"$(PROJECT_DIR)/XCTest/Specta",
 					"$(PROJECT_DIR)/XCTest/Expecta",
@@ -4042,7 +4040,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
-					/Xcode/6.1/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(PROJECT_DIR)/XCTest/OCMock",
 					"$(PROJECT_DIR)/XCTest/Specta",
 					"$(PROJECT_DIR)/XCTest/Expecta",
