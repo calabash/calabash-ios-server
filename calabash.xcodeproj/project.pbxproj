@@ -2353,6 +2353,7 @@
 				TargetAttributes = {
 					B15BF97019ABAFD200B38577 = {
 						DevelopmentTeam = FYD86LA7RE;
+						ProvisioningStyle = Manual;
 					};
 					F50CBF5D1A03F222004AC9DA = {
 						CreatedOnToolsVersion = 6.1;
@@ -3419,6 +3420,7 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = FYD86LA7RE;
@@ -3441,6 +3443,7 @@
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "calabash-dylib";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
@@ -3494,6 +3497,7 @@
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "calabash-dylib";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
@@ -4226,6 +4230,7 @@
 				OTHER_CFLAGS = "";
 				PRODUCT_NAME = "calabash-dylib";
 				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
