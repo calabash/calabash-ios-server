@@ -6,7 +6,9 @@ There are dylibs for the latest successful build of develop and master.
 
 Here is an example URL that points information about the latest successful build of the develop branch.
 
+```
 http://calabash-ci.macminicolo.net:8080/job/Calabash%20iOS%20Server%20develop/lastSuccessfulBuild/artifact/Products/s3/s3.json
+```
 
 If you want the master branch, change `develop` to `master`.
 
