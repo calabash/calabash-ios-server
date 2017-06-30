@@ -27,8 +27,3 @@ echo "XTC_WAIT_FOR_RESULTS=0" >> "${DOTENV}"
 echo "XTC_LOCALE=en_US" >> "${DOTENV}"
 echo "XTC_ACCOUNT=calabash-ios-ci" >> "${DOTENV}"
 echo "XTC_USER=joshua.moody@xamarin.com" >> "${DOTENV}"
-
-OUT=`xcrun security find-identity -p codesigning -v "${KEYCHAIN}"`
-IDENTITY=`echo $OUT | awk -F'"' '{print $2}' | tr -d '\n'`
-CODE_SIGN_IDENTITY="${IDENTITY}" make ipa-cal
-
