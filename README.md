@@ -68,7 +68,8 @@ See the calabash-ios/calabash-cucumber/Rakefile for more details.
 
 ```
 $ cd path/to/calabash-ios/calabash-cucumber
-$ be rake build_server
+$ bundle update
+$ rake build_server
 ```
 
 ### Testing
