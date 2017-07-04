@@ -454,9 +454,10 @@ static NSString *const LPInvokerNilReference = @"__nil__";
 
         free(buffer);
         return result;
-      } else if ([encoding isEqualToString:@"{?=dd}"]) {
+      } else if ([encoding containsString:@"=dd}"]) {
         // The '?' in this context indicates "unknown type".
         // A concrete example this encoding is CLLocation2D
+        // => {CLLocationCoordinate2D=dd}
 
         double *doubles = (double *) buffer;
         double d1 = *doubles;
