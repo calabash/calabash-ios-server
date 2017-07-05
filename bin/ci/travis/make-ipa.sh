@@ -13,7 +13,7 @@ fi
 bin/ci/travis/install-keychain.sh
 
 CODE_SIGN_DIR="${HOME}/.calabash/calabash-codesign"
-KEYCHAIN="${CODE_SIGN_DIR}/ios/Calabash.keychain"
+KEYCHAIN="${CODE_SIGN_DIR}/apple/Calabash.keychain"
 
 # cucumber/.env must exist or "make ipa-cal" will not stage for submit
 DOTENV="cucumber/.env"
@@ -31,7 +31,4 @@ echo "XTC_LOCALE=en_US" >> "${DOTENV}"
 echo "XTC_ACCOUNT=calabash-ios-ci" >> "${DOTENV}"
 echo "XTC_USER=joshua.moody@xamarin.com" >> "${DOTENV}"
 
-OUT=`xcrun security find-identity -p codesigning -v "${KEYCHAIN}"`
-IDENTITY=`echo $OUT | awk -F'"' '{print $2}' | tr -d '\n'`
-CODE_SIGN_IDENTITY="${IDENTITY}" make ipa-cal
-
+make ipa-cal
