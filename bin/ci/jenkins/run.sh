@@ -44,8 +44,12 @@ banner "Run Tests"
 bundle exec bin/test/xctest.rb
 bundle exec bin/test/cucumber.rb
 
+
 banner "Test iPhone 6+ touch coordinates"
-bundle exec bin/test/acquaint.rb
+
+info "Skipping Acquaint tests cannot be run because dylib injection is failing"
+info "on macOS Sierra and Xcode 8.3.3."
+#bundle exec bin/test/acquaint.rb
 
 # Skip s3 upload with --dry-run until S3 credentials are available
 bin/ci/jenkins/s3-publish.sh --dry-run
