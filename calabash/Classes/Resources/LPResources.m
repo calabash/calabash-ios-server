@@ -112,12 +112,16 @@ static const short _base64DecodingTable[256] = {-2, -2, -2, -2, -2, -2, -2, -2, 
 
 + (NSArray *) eventsFromEncoding:(NSString *) encoded {
   NSData *data = [self decodeBase64WithString:encoded];
-  NSString *err = nil;
+  NSError *err = nil;
   NSPropertyListFormat format;
-  return [NSPropertyListSerialization propertyListFromData:data
-                                          mutabilityOption:NSPropertyListImmutable
+  return [NSPropertyListSerialization propertyListWithData:data
+                                                   options:NSPropertyListImmutable
                                                     format:&format
-                                          errorDescription:&err];
+                                                     error:&err];
+//  return [NSPropertyListSerialization propertyListFromData:data
+//                                          mutabilityOption:NSPropertyListImmutable
+//                                                    format:&format
+//                                          errorDescription:&err];
 }
 
 

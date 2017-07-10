@@ -63,12 +63,12 @@
 - (NSData *) stopRecording {
   [[LPRecorder sharedRecorder] stop];
 
-  NSString *error = nil;
-
-  NSData *plistData = [NSPropertyListSerialization
-                       dataFromPropertyList:[[LPRecorder sharedRecorder] events]
-                       format:NSPropertyListXMLFormat_v1_0
-                       errorDescription:&error];
+  NSError *error = nil;
+  NSArray *events = [[LPRecorder sharedRecorder] events];
+  NSData *plistData = [NSPropertyListSerialization dataWithPropertyList:events
+                                                                 format:NSPropertyListXMLFormat_v1_0
+                                                                options:0
+                                                                  error:&error];
   if (error) {
     LPLogError(@"error getting plist data: %@", error);
     return nil;

@@ -4,6 +4,7 @@
 
 #import "LPWebViewUtils.h"
 #import "LPDevice.h"
+#import <WebKit/WebKit.h>
 
 @interface LPWebViewUtils (LPXCTEST)
 
@@ -13,6 +14,9 @@
 
 @interface MyUIWebView : UIWebView @end
 @implementation MyUIWebView @end
+
+@interface MyWKWebView : WKWebView @end
+@implementation MyWKWebView @end
 
 SpecBegin(LPIsWebView)
 
@@ -92,24 +96,14 @@ describe(@".isWebView", ^{
       });
 
       it(@"is a WKWebView", ^{
-        if (lp_ios_version_lt(@"8.0")) {
-          // nop for iOS < 8.0
-        } else {
-          Class klass = objc_getClass("WKWebView");
-          id obj = [[klass alloc] initWithFrame:CGRectZero];
-          expect([LPWebViewUtils isWebView:obj]).to.equal(YES);
-        }
+        Class klass = objc_getClass("WKWebView");
+        id obj = [[klass alloc] initWithFrame:CGRectZero];
+        expect([LPWebViewUtils isWebView:obj]).to.equal(YES);
       });
 
       it(@"is a subclass of WKWebView", ^{
-        if (lp_ios_version_lt(@"8.0")) {
-          // nop for iOS < 8.0
-        } else {
-          Class klass = objc_getClass("WKWebView");
-          Class subclass = objc_allocateClassPair(klass, "MyWKWebView", 0);
-          id obj = [[subclass alloc] initWithFrame:CGRectZero];
-          expect([LPWebViewUtils isWebView:obj]).to.equal(YES);
-        }
+        MyWKWebView *view = [[MyWKWebView alloc] initWithFrame:CGRectZero];
+        expect([LPWebViewUtils isWebView:view]).to.equal(YES);
       });
     });
 
