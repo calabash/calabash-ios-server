@@ -324,7 +324,15 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
 
     // iPad Pro 9in
     @"iPad6,3" : @"ipad pro",
-    @"iPad6,4" : @"ipad pro"
+    @"iPad6,4" : @"ipad pro",
+    @"iPad6,11" : @"ipad pro",
+    @"iPad6,12" : @"ipad pro",
+
+    // iPad Pro 10.5in
+    @"iPad7,4" : @"ipad pro",
+    @"iPad7,3" : @"ipad pro",
+    @"iPad7,2" : @"ipad pro",
+    @"iPad7,1" : @"ipad pro"
 
     };
 
