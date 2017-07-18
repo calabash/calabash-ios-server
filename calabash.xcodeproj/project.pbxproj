@@ -239,6 +239,8 @@
 		E2F8025E1BE207670000A0E4 /* LPShakeRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025A1BE207670000A0E4 /* LPShakeRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		E2F802601BE21C690000A0E4 /* LPShakeRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025F1BE21C690000A0E4 /* LPShakeRouteTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50292971ACAD4FE00D07D31 /* LPWebViewUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F5F2D5E11ACACF2F0027937B /* LPWebViewUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F502B7B81F1E2813002D430F /* MBFingerTipWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = F502B7B61F1E2813002D430F /* MBFingerTipWindow.m */; };
+		F502B7B91F1E2888002D430F /* Fingertips.LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = F502B7B41F1E2813002D430F /* Fingertips.LICENSE */; };
 		F5091BDD18C4E1D700C85307 /* LPGCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD9114B6DB2B002A744C /* LPGCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091BDE18C4E1D700C85307 /* LPHTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B314E6565500663205 /* LPHTTPAuthenticationRequest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091BDF18C4E1D700C85307 /* LPHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = B116C9B514E6565500663205 /* LPHTTPConnection.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -872,6 +874,9 @@
 		E2F8025A1BE207670000A0E4 /* LPShakeRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPShakeRoute.m; sourceTree = "<group>"; };
 		E2F8025F1BE21C690000A0E4 /* LPShakeRouteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPShakeRouteTest.m; sourceTree = "<group>"; };
 		F500459D17D249D000B72386 /* LPGitVersionDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPGitVersionDefines.h; sourceTree = "<group>"; };
+		F502B7B41F1E2813002D430F /* Fingertips.LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Fingertips.LICENSE; sourceTree = "<group>"; };
+		F502B7B51F1E2813002D430F /* MBFingerTipWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBFingerTipWindow.h; sourceTree = "<group>"; };
+		F502B7B61F1E2813002D430F /* MBFingerTipWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBFingerTipWindow.m; sourceTree = "<group>"; };
 		F5091C4618C4E1D700C85307 /* libcalabash.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcalabash.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5097CF51B6A377E00326D6A /* LPKeyboardLanguageRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPKeyboardLanguageRoute.h; sourceTree = "<group>"; };
 		F5097CF61B6A377E00326D6A /* LPKeyboardLanguageRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPKeyboardLanguageRoute.m; sourceTree = "<group>"; };
@@ -1629,6 +1634,17 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		F502B7B31F1E2813002D430F /* Fingertips */ = {
+			isa = PBXGroup;
+			children = (
+				F502B7B41F1E2813002D430F /* Fingertips.LICENSE */,
+				F502B7B51F1E2813002D430F /* MBFingerTipWindow.h */,
+				F502B7B61F1E2813002D430F /* MBFingerTipWindow.m */,
+			);
+			name = Fingertips;
+			path = Vendor/Fingertips;
+			sourceTree = SOURCE_ROOT;
+		};
 		F50CBF5F1A03F222004AC9DA /* XCTest */ = {
 			isa = PBXGroup;
 			children = (
@@ -1969,6 +1985,7 @@
 				F58C9F581B6F802D007D307B /* CocoaHTTPServer */,
 				F58C9F541B6F7EB9007D307B /* CocoaAsyncSocket */,
 				F58C9F3F1B6F79BA007D307B /* CocoaLumberjack */,
+				F502B7B31F1E2813002D430F /* Fingertips */,
 				F532C1E51AFF6A2D0024DA55 /* LPServerEntity.h */,
 				F532C1E61AFF6A2D0024DA55 /* LPServerEntity.m */,
 				F532C1DF1AFF4F240024DA55 /* LPCoreDataStack.h */,
@@ -2412,6 +2429,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F502B7B91F1E2888002D430F /* Fingertips.LICENSE in Resources */,
 				F5E2A5EE1BFEF8590068DFAD /* change-sha.plist in Resources */,
 				F5CF1EC81C59055900801918 /* Localizable.strings in Resources */,
 				F59CA4801A82EF40007A2F38 /* Images.xcassets in Resources */,
@@ -3215,6 +3233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F58C9F571B6F7EB9007D307B /* GCDAsyncSocket.m in Sources */,
+				F502B7B81F1E2813002D430F /* MBFingerTipWindow.m in Sources */,
 				F58C9F901B6F802D007D307B /* WebSocket.m in Sources */,
 				F58C9F871B6F802D007D307B /* MultipartFormDataParser.m in Sources */,
 				F50E87651BFEEAAB002F0E8D /* DDContextFilterLogFormatter.m in Sources */,
