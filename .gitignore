@@ -12,7 +12,7 @@ calabash.xcodeproj/xcuserdata/
 *.xccheckout
 *.xcscmblueprint
 Markdown.pl
-build
+build/*
 Products
 calabash.framework
 libFrankCalabash.a
@@ -20,6 +20,16 @@ calabash-dylibs
 *.app
 *.ipa
 tmp
+
+Carthage/Checkouts
+Carthage/Build/tvOS
+Carthage/Build/watchOS
+Carthage/Build/Mac
+Carthage/Build/**/*.version
+Carthage/Build/**/*.bcsymbolmap
+!Carthage/Build/iOS/Expecta.framework*
+!Carthage/Build/iOS/Specta.framework*
+!Carthage/Build/iOS/OCMock.framework*
 
 # Versioning info
 LPTestTarget/InfoPlist.h
