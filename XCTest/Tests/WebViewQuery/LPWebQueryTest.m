@@ -124,7 +124,7 @@
 
 - (void) testArrayByEvaluatingNoVisibleCenterNotZeroZeroButPointInsideNO {
   if (lp_ios_version_gte(@"9.0")) {
-    NSLog(@"WARNING: SKIPPING WebView Test on iOS 9");
+    NSLog(@"WARNING: SKIPPING WebView Test on iOS >= 9.0");
   } else {
     NSString *query = @"a";
     LPWebQueryType type = LPWebQueryTypeCSS;
@@ -165,7 +165,7 @@
 
 - (void) testArrayByEvaluatingNoVisibleCenterIsZeroZeroButInsideYES {
   if (lp_ios_version_gte(@"9.0")) {
-    NSLog(@"WARNING: SKIPPING WebView Test on iOS 9");
+    NSLog(@"WARNING: SKIPPING WebView Test on iOS >= 9.0");
   } else {
 
     NSString *query = @"a";
@@ -208,7 +208,7 @@
 - (void) testArrayByEvaluatingQueryCss {
 
   if (lp_ios_version_gte(@"9.0")) {
-    NSLog(@"WARNING: SKIPPING WebView Test on iOS 9");
+    NSLog(@"WARNING: SKIPPING WebView Test on iOS >= 9.0");
   } else {
     NSString *query = @"a";
     LPWebQueryType type = LPWebQueryTypeCSS;
