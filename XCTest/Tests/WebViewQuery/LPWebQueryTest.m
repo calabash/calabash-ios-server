@@ -44,23 +44,6 @@
   return [[UIWebView alloc] initWithFrame:frame];
 }
 
-#pragma mark - Mocking
-
-- (id) webViewMockWithScrollViewOffset:(CGPoint) scrollViewOffset
-                           pageYOffset:(NSString *) pageViewOffset {
-  UIWebView *webView = [self webviewWithFrame:[self iphone4sFrame]];
-
-  id mockedScrollView = [OCMockObject partialMockForObject:webView.scrollView];
-  CGPoint mockedOffest = scrollViewOffset;
-  [[[mockedScrollView expect] andReturnValue:OCMOCK_VALUE(mockedOffest)] contentOffset];
-
-  id mockedWebView = [OCMockObject partialMockForObject:webView];
-  [[[mockedWebView expect] andReturn:mockedScrollView] scrollView];
-  [[[mockedWebView expect] andReturn:pageViewOffset] stringByEvaluatingJavaScriptFromString:@"window.pageYOffset"];
-
-  return mockedWebView;
-}
-
 #pragma mark - point:isVisibleInWebView:
 
 - (void) testPointIsVisibleInWebViewYES {
@@ -95,42 +78,6 @@
   XCTAssertFalse([LPWebQuery point:center isVisibleInWebview:webView]);
   [mock verify];
 }
-
-#pragma mark - pointByAdjustingOffsetForScrollPostionOfWebView:
-
-- (void) testPointByAdjustingOffsetForScrollPositionOfWebViewHappyPath {
-  CGFloat scrollViewYOffset = 20;
-  CGPoint scrollViewOffset = CGPointMake(0, scrollViewYOffset);
-
-  CGFloat pageYOffsetFloat = 200;
-  NSString *pageYOffset = [NSString stringWithFormat:@"%@", @(pageYOffsetFloat)];
-
-  id webView = [self webViewMockWithScrollViewOffset:scrollViewOffset
-                                         pageYOffset:pageYOffset];
-
-  CGPoint actual = [LPWebQuery pointByAdjustingOffsetForScrollPostionOfWebView:webView];
-  CGPoint expected = CGPointMake(0, pageYOffsetFloat - scrollViewYOffset);
-  XCTAssertEqualObjects(NSStringFromCGPoint(actual),
-                        NSStringFromCGPoint(expected));
-  [webView verify];
-}
-
-- (void) testPointByAdjustingOffsetForScrollPositionOfWebViewJavaScriptEvalsNonFloat {
-  CGFloat scrollViewYOffset = 20;
-  CGPoint scrollViewOffset = CGPointMake(0, scrollViewYOffset);
-
-  NSString *pageYOffset = @"not a number";
-
-  id webView = [self webViewMockWithScrollViewOffset:scrollViewOffset
-                                         pageYOffset:pageYOffset];
-
-  CGPoint actual = [LPWebQuery pointByAdjustingOffsetForScrollPostionOfWebView:webView];
-  CGPoint expected = CGPointMake(0, (-1.0 * scrollViewYOffset));
-  XCTAssertEqualObjects(NSStringFromCGPoint(actual),
-                        NSStringFromCGPoint(expected));
-  [webView verify];
-}
-
 
 #pragma mark - arrayByEvaluatingQuery:frameSelector:Type:webView:includeInvisible:
 
