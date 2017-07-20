@@ -16,30 +16,12 @@
 
 #import <Foundation/Foundation.h>
 
-@class OCMLocation;
-@class OCMRecorder;
-@class OCMStubRecorder;
-@class OCMockObject;
+
+#if defined(__cplusplus)
+#define OCMOCK_EXTERN extern "C"
+#else
+#define OCMOCK_EXTERN extern
+#endif
 
 
-@interface OCMMacroState : NSObject
-{
-    OCMRecorder *recorder;
-}
-
-+ (void)beginStubMacro;
-+ (OCMStubRecorder *)endStubMacro;
-
-+ (void)beginExpectMacro;
-+ (OCMStubRecorder *)endExpectMacro;
-
-+ (void)beginVerifyMacroAtLocation:(OCMLocation *)aLocation;
-+ (void)endVerifyMacro;
-
-+ (OCMMacroState *)globalState;
-
-- (OCMRecorder *)recorder;
-
-- (void)switchToClassMethod;
-
-@end
+OCMOCK_EXTERN BOOL OCMIsObjectType(const char *objCType);

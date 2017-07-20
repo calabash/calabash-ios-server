@@ -24,20 +24,6 @@
   XCTAssertEqualObjects(actual, @"megamock", @"Should have returned stubbed value.");
 }
 
-- (void)testHamcrestIsWorking {
-  assertThat(@"a", equalTo(@"a"));
-}
-
-- (void) testOCMockitoIsWorking {
-  NSMutableArray *mockArray = mock([NSMutableArray class]);
-
-  [mockArray addObject:@"one"];
-  [mockArray removeAllObjects];
-
-  [MKTVerify(mockArray) addObject:@"one"];
-  [MKTVerify(mockArray) removeAllObjects];
-}
-
 @end
 
 SpecBegin(LPToolsStandup)
@@ -53,5 +39,3 @@ describe(@"Specta is working", ^{
 });
 
 SpecEnd
-
-
