@@ -1,4 +1,5 @@
 #import "AppDelegate.h"
+#import "MBFingerTipWindow.h"
 #import <CoreData/CoreData.h>
 #import "LPCoreDataStack.h"
 #import "CocoaLumberjack/CocoaLumberjack.h"
@@ -18,6 +19,16 @@ typedef struct {
 @end
 
 @implementation AppDelegate
+
+- (UIWindow *)window {
+    if (!_window) {
+        MBFingerTipWindow *ftWindow = [[MBFingerTipWindow alloc]
+                                       initWithFrame:[[UIScreen mainScreen] bounds]];
+        ftWindow.alwaysShowTouches = YES;
+        _window = ftWindow;
+    }
+    return _window;
+}
 
 // Calabash backdoors
 - (void) backdoorThatReturnsVoid { DDLogDebug(@"Method that returns void"); }
@@ -166,7 +177,6 @@ typedef struct {
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
   [DDLog addLogger:[DDTTYLogger sharedInstance]];
   [DDLog addLogger:[DDASLLogger sharedInstance]];

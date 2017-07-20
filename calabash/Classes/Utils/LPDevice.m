@@ -205,6 +205,8 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
   // This is sufficient for touching a 2x2 pixel button.
   CGFloat iphone6p_legacy_app_sample = 1.296917;
 
+  CGFloat ipad_pro_10dot5_sample = 1.0859375;
+
   UIScreenMode *screenMode = [screen currentMode];
   CGSize screenSizeForMode = screenMode.size;
   CGFloat pixelAspectRatio = screenMode.pixelAspectRatio;
@@ -246,6 +248,13 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
       LPLogDebug(@"iPhone 6: Zoomed display mode - sampleFactor remains the same");
     } else {
       LPLogDebug(@"iPhone 6: Standard display and app optimized for screen size - sampleFactor remains the same");
+    }
+  } else if ([self isIPadPro10point5inch]) {
+    if (screenHeight == 1024) {
+      LPLogDebug(@"iPad 10.5 inch: app is not optimized for screen size - adjusting sampleFactor");
+      _sampleFactor = ipad_pro_10dot5_sample;
+    } else {
+      LPLogDebug(@"iPad 10.5 inch: app is optimized for screen size");
     }
   }
 
@@ -324,7 +333,15 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
 
     // iPad Pro 9in
     @"iPad6,3" : @"ipad pro",
-    @"iPad6,4" : @"ipad pro"
+    @"iPad6,4" : @"ipad pro",
+    @"iPad6,11" : @"ipad pro",
+    @"iPad6,12" : @"ipad pro",
+
+    // iPad Pro 10.5in
+    @"iPad7,4" : @"ipad pro",
+    @"iPad7,3" : @"ipad pro",
+    @"iPad7,2" : @"ipad pro",
+    @"iPad7,1" : @"ipad pro"
 
     };
 
@@ -432,6 +449,10 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
 
 - (BOOL) isIPadPro {
   return [[self formFactor] isEqualToString:@"ipad pro"];
+}
+
+- (BOOL) isIPadPro10point5inch {
+  return [[self modelIdentifier] containsString:@"iPad7"];
 }
 
 - (BOOL) isIPhone4Like {

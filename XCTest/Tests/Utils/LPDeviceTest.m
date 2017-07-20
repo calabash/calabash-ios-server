@@ -66,10 +66,6 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   expect([self.device isPhysicalDevice]).to.equal(NO);
 }
 
-- (void) testLEGACY_iPhoneSimulatorDeviceReturnsSomething {
-  expect([self.device LEGACY_iPhoneSimulatorDevice]).notTo.equal(nil);
-}
-
 #else
 
 - (void) testSimulatorModelIdentiferReturnsNothing {
@@ -332,6 +328,24 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   OCMExpect([mock formFactor]).andReturn(@"garbage");
 
   expect([mock isIPadPro]).to.equal(NO);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testIsIpadPro10point5inchYES {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock modelIdentifier]).andReturn(@"iPad7");
+
+  expect([mock isIPadPro10point5inch]).to.equal(YES);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testIsIpadPro10point5inchNO {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock modelIdentifier]).andReturn(@"iPad");
+
+  expect([mock isIPadPro10point5inch]).to.equal(NO);
 
   OCMVerifyAll(mock);
 }

@@ -1,0 +1,28 @@
+language: objective-c
+osx_image: xcode8.3
+
+before_script:
+  - bin/ci/travis/instruments-auth.sh
+  - bin/ci/travis/install-keychain.sh
+
+script:
+  - bundle install
+  - make framework
+  - make frank
+  - bin/ci/travis/make-dylibs.sh
+  - bundle exec bin/test/xctest.rb
+  - bundle exec bin/test/cucumber.rb
+  - bundle exec bin/test/acquaint.rb
+  - bin/ci/travis/make-ipa.sh
+  - bundle exec bin/test/test-cloud.rb
+
+notifications:
+  email:
+    recipients:
+      - josmoo@microsoft.com
+    on_success: change
+    on_failure: always
+  slack:
+    rooms:
+      secure: HTR+rM1Eva7zZOvxRxyVfU/b1qEMEjJxkg2aPdXtch33SzEbD375Yn/PB3M15mKvOBvPkN+X5FHcYdFLsqncddN5L0uNv6PYgUpXzVAd82Gq2Ga1HNWl1m8e6x2RiFaDE7Kf5UKUtyVprSBNB2CxlMMJ40N4P5ymZTtgbm7hrQg=
+

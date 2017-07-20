@@ -37,6 +37,7 @@ extern NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY;
 - (BOOL) isIPhone6PlusLike;
 - (BOOL) isIPad;
 - (BOOL) isIPadPro;
+- (BOOL) isIPadPro10point5inch;
 - (BOOL) isIPhone4Like;
 - (BOOL) isIPhone5Like;
 - (BOOL) isLetterBox;

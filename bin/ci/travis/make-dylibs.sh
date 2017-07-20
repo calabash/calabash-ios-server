@@ -11,4 +11,3 @@ if [ "${TRAVIS_SECURE_ENV_VARS}" != "true" ]; then
 fi
 
 make dylibs
-

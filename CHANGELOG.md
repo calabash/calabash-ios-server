@@ -1,3 +1,10 @@
+### 0.20.7
+
+* Update for Xcode 9 #391
+* Fix iPad Pro 10.5 touch coordinates for non-optimized apps #390
+* LPDevice: add new iPad models for June 2017 #389
+* Can specify suiteName when making changes to user preferences endpoint #386
+
 ### 0.20.6
 
 * Prepare for Jenkins to stage artifacts to S3 #383

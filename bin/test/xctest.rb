@@ -10,6 +10,13 @@ use_xcpretty = ENV["XCPRETTY"] != "0"
 
 xcode = RunLoop::Xcode.new
 
+args = ["killall", "-TERM", "xcodebuild"]
+RunLoop::Shell.run_shell_command(args)
+sleep(2.0)
+args = ["killall", "-KILL", "xcodebuild"]
+RunLoop::Shell.run_shell_command(args)
+sleep(2.0)
+
 default_sim_name = RunLoop::Core.default_simulator
 default_sim = RunLoop::Device.device_with_identifier(default_sim_name)
 
@@ -46,7 +53,7 @@ Dir.chdir(working_dir) do
 
   cmd = "xcrun xcodebuild #{args.join(' ')}"
 
-  tries = Luffa::Environment.travis_ci? ? 3 : 1
+  tries = Luffa::Environment.ci? ? 3 : 1
   interval = 5
 
   on_retry = Proc.new do |_, try, elapsed_time, next_interval|

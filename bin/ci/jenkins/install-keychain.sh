@@ -22,10 +22,9 @@ else
     "${CODE_SIGN_DIR}"
 fi
 
-(cd "${CODE_SIGN_DIR}" && ios/create-keychain.sh)
-(cd "${CODE_SIGN_DIR}" && ios/import-profiles.sh)
+(cd "${CODE_SIGN_DIR}" && apple/create-keychain.sh)
 
-API_TOKEN=`${CODE_SIGN_DIR}/ios/find-xtc-credential.sh api-token | tr -d '\n'`
+API_TOKEN=`${CODE_SIGN_DIR}/apple/find-xtc-credential.sh api-token | tr -d '\n'`
 
 # Install the API token where briar can find it.
 mkdir -p "${HOME}/.calabash/test-cloud"
@@ -36,4 +35,3 @@ ln -s "${HOME}/.calabash" "${HOME}/.xamarin"
 
 # Bug in Briar. :(
 touch "${HOME}/.calabash/test-cloud/ios-sets.csv"
-

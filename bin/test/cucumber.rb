@@ -46,20 +46,19 @@ Dir.chdir working_dir do
 
     if ENV["JENKINS_HOME"]
       devices = {
-        :iphone6sPlus => 'iPhone 6s Plus',
-        :air => 'iPad Air',
-        :iphone4s => 'iPhone 4s',
-        :iphone5s => 'iPhone 5s',
-        :iphone6plus => 'iPhone 6 Plus'
+        :iphone7Plus => 'iPhone 7 Plus',
+        :air => 'iPad Air 2',
+        :iphoneSE => 'iPhone SE',
+        :iphone7 => 'iPhone 7'
       }
     else
       devices = {
-        :iphone6 => 'iPhone 6',
-        :iphone6plus => 'iPhone 6 Plus'
+        :iphone7 => 'iPhone 7',
+        :iphone7plus => 'iPhone 7 Plus'
       }
     end
 
-    RunLoop::CoreSimulator.terminate_core_simulator_processes
+    RunLoop::CoreSimulator.quit_simulator
 
     simulators = RunLoop::SimControl.new.simulators
 
@@ -74,10 +73,11 @@ Dir.chdir working_dir do
         sim.name == name && sim.version == sim_version
       end
 
+      if !match
+        raise "Could not find a match for simulator with name #{name}"
+      end
+
       env_vars = {"DEVICE_TARGET" => match.udid}
-
-
-      RunLoop::CoreSimulator.terminate_core_simulator_processes
 
       exit_code = Luffa.unix_command(cucumber_cmd, {:exit_on_nonzero_status => false,
                                                     :env_vars => env_vars})
@@ -86,6 +86,9 @@ Dir.chdir working_dir do
       else
         failed_sims << name
       end
+
+      RunLoop::CoreSimulator.quit_simulator
+      sleep(5.0)
     end
 
     Luffa.log_info '=== SUMMARY ==='
