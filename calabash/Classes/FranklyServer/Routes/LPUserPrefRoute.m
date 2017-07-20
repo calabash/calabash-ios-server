@@ -15,7 +15,10 @@
 
 
 - (NSDictionary *) JSONResponseForMethod:(NSString *) method URI:(NSString *) path data:(NSDictionary *) data {
-  NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+  NSString *suiteName = [data valueForKey:@"suiteName"];
+  NSUserDefaults *ud = suiteName == nil ? [NSUserDefaults standardUserDefaults] :
+                                         [[NSUserDefaults alloc] initWithSuiteName:suiteName];
+
   [ud synchronize];
 
   NSString *key = [data valueForKey:@"key"];
