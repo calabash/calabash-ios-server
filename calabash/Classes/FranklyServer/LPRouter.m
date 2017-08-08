@@ -206,11 +206,21 @@
   if ([[NSThread currentThread] isMainThread]) {
     return [self httpResponseOnMainThreadForMethod:method URI:path];
   } else {
-    __weak typeof(self) wself = self;
-    __block NSObject<LPHTTPResponse> *result = nil;
-    dispatch_sync(dispatch_get_main_queue(), ^{
-      result = [wself httpResponseOnMainThreadForMethod:method URI:path];
-    });
+    // Use performSelectorOnMainThread instead of dispatch_sync because using a dispatch method prevents
+    // further blocks from being processed on the main queue until the initial block in which the
+    // httpResponseOnMainThreadForMethod was invoked has completed.
+    // dispatch_sync prevents other blocks being processed in nested calls to NSRunLoop run methods within tests.
+    NSObject<LPHTTPResponse> __unsafe_unretained *result = nil;
+    SEL selector = @selector(httpResponseOnMainThreadForMethod:URI:);
+    NSMethodSignature *methodSignature = [self methodSignatureForSelector:selector];
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+    [invocation setTarget:self];
+    [invocation setSelector:selector];
+    [invocation setArgument:&method atIndex:2];
+    [invocation setArgument:&path atIndex:3];
+    [invocation retainArguments];
+    [invocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:YES];
+    [invocation getReturnValue:&result];
     return result;
   }
 }
