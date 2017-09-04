@@ -106,7 +106,7 @@
 		B15BF9D019ABB1DE00B38577 /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; };
 		B15BF9D119ABB1DE00B38577 /* LPCJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE314B6DB2B002A744C /* LPCJSONScanner.m */; };
 		B15BF9D219ABB1DE00B38577 /* LPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE514B6DB2B002A744C /* LPCJSONSerializer.m */; };
-		B15BF9D319ABB1DE00B38577 /* LPResources.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDF714B6DB2B002A744C /* LPResources.m */; };
+		B15BF9D319ABB1DE00B38577 /* LPQUResources.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDF714B6DB2B002A744C /* LPQUResources.m */; };
 		B15BF9D419ABB1DE00B38577 /* UIScriptASTVisibility.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B19DC716D162CF00D3D80B /* UIScriptASTVisibility.m */; };
 		B15BF9D519ABB1DE00B38577 /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; };
 		B15BF9D619ABB1DE00B38577 /* UIScriptAST.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFA14B6DB2B002A744C /* UIScriptAST.m */; };
@@ -174,7 +174,7 @@
 		B1D5BDA219A23BCE0070E8CE /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; };
 		B1D5BDA319A23BCE0070E8CE /* LPCJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE314B6DB2B002A744C /* LPCJSONScanner.m */; };
 		B1D5BDA419A23BCE0070E8CE /* LPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE514B6DB2B002A744C /* LPCJSONSerializer.m */; };
-		B1D5BDA519A23BCE0070E8CE /* LPResources.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDF714B6DB2B002A744C /* LPResources.m */; };
+		B1D5BDA519A23BCE0070E8CE /* LPQUResources.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDF714B6DB2B002A744C /* LPQUResources.m */; };
 		B1D5BDA619A23BCE0070E8CE /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; };
 		B1D5BDA719A23BCE0070E8CE /* UIScriptAST.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFA14B6DB2B002A744C /* UIScriptAST.m */; };
 		B1D5BDA819A23BCE0070E8CE /* LPDebugRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DCD84189A997B00F8DF87 /* LPDebugRoute.m */; };
@@ -282,7 +282,7 @@
 		F5091C0318C4E1D700C85307 /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; };
 		F5091C0418C4E1D700C85307 /* LPCJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE314B6DB2B002A744C /* LPCJSONScanner.m */; };
 		F5091C0518C4E1D700C85307 /* LPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE514B6DB2B002A744C /* LPCJSONSerializer.m */; };
-		F5091C0618C4E1D700C85307 /* LPResources.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDF714B6DB2B002A744C /* LPResources.m */; };
+		F5091C0618C4E1D700C85307 /* LPQUResources.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDF714B6DB2B002A744C /* LPQUResources.m */; };
 		F5091C0718C4E1D700C85307 /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; };
 		F5091C0818C4E1D700C85307 /* UIScriptAST.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFA14B6DB2B002A744C /* UIScriptAST.m */; };
 		F5091C0918C4E1D700C85307 /* LPDebugRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DCD84189A997B00F8DF87 /* LPDebugRoute.m */; };
@@ -380,7 +380,7 @@
 		F50CBFB61A0405CE004AC9DA /* LPCJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE9614B6F64A002A744C /* LPCJSONDeserializer.m */; };
 		F50CBFB71A0405CE004AC9DA /* LPCJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE314B6DB2B002A744C /* LPCJSONScanner.m */; };
 		F50CBFB81A0405CE004AC9DA /* LPCJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDE514B6DB2B002A744C /* LPCJSONSerializer.m */; };
-		F50CBFB91A0405CE004AC9DA /* LPResources.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDF714B6DB2B002A744C /* LPResources.m */; };
+		F50CBFB91A0405CE004AC9DA /* LPQUResources.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDF714B6DB2B002A744C /* LPQUResources.m */; };
 		F50CBFBA1A0405CE004AC9DA /* UIScriptASTVisibility.m in Sources */ = {isa = PBXBuildFile; fileRef = B1B19DC716D162CF00D3D80B /* UIScriptASTVisibility.m */; };
 		F50CBFBB1A0405CE004AC9DA /* UIScriptASTPredicate.m in Sources */ = {isa = PBXBuildFile; fileRef = B1E3603914D9F4B30087D8D9 /* UIScriptASTPredicate.m */; };
 		F50CBFBC1A0405CE004AC9DA /* UIScriptAST.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FDFA14B6DB2B002A744C /* UIScriptAST.m */; };
@@ -823,8 +823,8 @@
 		B184FDE414B6DB2B002A744C /* LPCJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPCJSONSerializer.h; sourceTree = "<group>"; };
 		B184FDE514B6DB2B002A744C /* LPCJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPCJSONSerializer.m; sourceTree = "<group>"; };
 		B184FDE614B6DB2B002A744C /* LPJSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPJSONRepresentation.h; sourceTree = "<group>"; };
-		B184FDF614B6DB2B002A744C /* LPResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPResources.h; sourceTree = "<group>"; };
-		B184FDF714B6DB2B002A744C /* LPResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPResources.m; sourceTree = "<group>"; };
+		B184FDF614B6DB2B002A744C /* LPQUResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPQUResources.h; sourceTree = "<group>"; };
+		B184FDF714B6DB2B002A744C /* LPQUResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPQUResources.m; sourceTree = "<group>"; };
 		B184FDF914B6DB2B002A744C /* UIScriptAST.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScriptAST.h; sourceTree = "<group>"; };
 		B184FDFA14B6DB2B002A744C /* UIScriptAST.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIScriptAST.m; sourceTree = "<group>"; };
 		B184FDFB14B6DB2B002A744C /* UIScriptASTALL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIScriptASTALL.h; sourceTree = "<group>"; };
@@ -1520,8 +1520,8 @@
 		B184FDF514B6DB2B002A744C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B184FDF614B6DB2B002A744C /* LPResources.h */,
-				B184FDF714B6DB2B002A744C /* LPResources.m */,
+				B184FDF614B6DB2B002A744C /* LPQUResources.h */,
+				B184FDF714B6DB2B002A744C /* LPQUResources.m */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -2621,7 +2621,7 @@
 				F576058F1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */,
 				B15BF9D119ABB1DE00B38577 /* LPCJSONScanner.m in Sources */,
 				B15BF9D219ABB1DE00B38577 /* LPCJSONSerializer.m in Sources */,
-				B15BF9D319ABB1DE00B38577 /* LPResources.m in Sources */,
+				B15BF9D319ABB1DE00B38577 /* LPQUResources.m in Sources */,
 				F52427E91BA8457D00B7678F /* LPProcessInfoRoute.m in Sources */,
 				89F2EFF41B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */,
 				B15BF9D419ABB1DE00B38577 /* UIScriptASTVisibility.m in Sources */,
@@ -2728,7 +2728,7 @@
 				B1D5BDA219A23BCE0070E8CE /* LPCJSONDeserializer.m in Sources */,
 				B1D5BDA319A23BCE0070E8CE /* LPCJSONScanner.m in Sources */,
 				B1D5BDA419A23BCE0070E8CE /* LPCJSONSerializer.m in Sources */,
-				B1D5BDA519A23BCE0070E8CE /* LPResources.m in Sources */,
+				B1D5BDA519A23BCE0070E8CE /* LPQUResources.m in Sources */,
 				B1D5BDA619A23BCE0070E8CE /* UIScriptASTPredicate.m in Sources */,
 				F5A8B4A11B39BFEB00F390CA /* LPLog.m in Sources */,
 				89043AC41C289A5D0067E22F /* LPConstants.m in Sources */,
@@ -2851,7 +2851,7 @@
 				F5091C0318C4E1D700C85307 /* LPCJSONDeserializer.m in Sources */,
 				F5091C0418C4E1D700C85307 /* LPCJSONScanner.m in Sources */,
 				F5091C0518C4E1D700C85307 /* LPCJSONSerializer.m in Sources */,
-				F5091C0618C4E1D700C85307 /* LPResources.m in Sources */,
+				F5091C0618C4E1D700C85307 /* LPQUResources.m in Sources */,
 				F5091C0718C4E1D700C85307 /* UIScriptASTPredicate.m in Sources */,
 				F5091C0818C4E1D700C85307 /* UIScriptAST.m in Sources */,
 				F5A8B4A01B39BFEB00F390CA /* LPLog.m in Sources */,
@@ -3019,7 +3019,7 @@
 				F50CBF851A040564004AC9DA /* LPHTTPServer.m in Sources */,
 				F50CBFAE1A0405B2004AC9DA /* LPNoContentResponse.m in Sources */,
 				F50CBF8C1A04056F004AC9DA /* LPHTTPFileResponse.m in Sources */,
-				F50CBFB91A0405CE004AC9DA /* LPResources.m in Sources */,
+				F50CBFB91A0405CE004AC9DA /* LPQUResources.m in Sources */,
 				F50CBF831A040564004AC9DA /* LPHTTPConnection.m in Sources */,
 				F5C224E21AD473F0001DB4FA /* LPJSONUtilsTest.m in Sources */,
 				89F2EFF01B224F6D00958052 /* LPJSONUtils+Introspection.m in Sources */,

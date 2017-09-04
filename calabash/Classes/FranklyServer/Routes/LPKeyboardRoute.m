@@ -8,7 +8,7 @@
 
 #import "LPKeyboardRoute.h"
 #import "LPHTTPConnection.h"
-#import "LPResources.h"
+#import "LPQUResources.h"
 #import "LPRecorder.h"
 #import "UIScriptParser.h"
 #import "LPTouchUtils.h"
@@ -21,7 +21,7 @@
   _playbackDone = NO;
   NSString *characterString = [self.data objectForKey:@"key"];
 
-  NSArray *events = [LPResources eventsFromEncoding:[self.data objectForKey:@"events"]];
+  NSArray *events = [LPQUResources eventsFromEncoding:[self.data objectForKey:@"events"]];
   UIWindow *keyboardWindow = nil;
 
   for (UIWindow *window in [LPTouchUtils applicationWindows]) {
@@ -89,7 +89,7 @@
 
     point = [(UIWindow *) keyboardWindow convertPoint:point toWindow:nil];
     point = [LPTouchUtils translateToScreenCoords:point];
-    _events = [[LPResources transformEvents:events toPoint:point] retain];
+    _events = [[LPQUResources transformEvents:events toPoint:point] retain];
     self.done = YES;
     self.jsonResponse = [NSDictionary dictionaryWithObjectsAndKeys:[NSArray arrayWithObject:v], @"results",
                                                                    @"SUCCESS", @"outcome",
