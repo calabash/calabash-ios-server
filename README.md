@@ -12,11 +12,11 @@ The companion of the calabash-ios gem:  https://github.com/calabash/calabash-ios
 
 Building dylibs now requires a Developer Team.
 
-Requires Xcode 7 or Xcode 8.
+Requires Xcode 8 or Xcode 9.
 
-Xcode 7.3.1 is actively tested. Older versions of Xcode 7 are not.
+Xcode 8.3.3 is actively tested. Older versions of Xcode 8 are not.
 
-Requires ruby >= 2.2.  The latest ruby release is preferred.
+Requires ruby >= 2.2  The latest ruby release is preferred.
 
 ```
 $ git clone --recursive git@github.com:calabash/calabash-ios-server.git
@@ -27,7 +27,7 @@ $ bundle
 To build with an alternative Xcode:
 
 ```
-$ DEVELOPER_DIR=/Xcode/8.1/Xcode-beta.app make < rule >
+$ DEVELOPER_DIR=/Xcode/9.1/Xcode-beta.app make < rule >
 ```
 
 If you have build errors, see the xcpretty section below.
@@ -48,8 +48,6 @@ $ make frank
 ```
 
 ### Building the dylibs
-
-Requires Xcode 6 or greater.
 
 ```
 make dylibs
