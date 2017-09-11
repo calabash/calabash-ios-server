@@ -1,20 +1,19 @@
 #!/usr/bin/env bash
 
-set -e
 
-source bin/log-functions.sh
+source bin/log.sh
 source bin/ditto.sh
+source bin/xcode.sh
+source bin/simctl.sh
 
-function xcode_gte_7 {
- XC_MAJOR=`xcrun xcodebuild -version | awk 'NR==1{print $2}' | awk -v FS="." '{ print $1 }'`
- if [ "${XC_MAJOR}" \> "7" -o "${XC_MAJOR}" = "7" ]; then
-   echo "true"
- else
-   echo "false"
- fi
-}
+banner "Preparing"
 
-XC_GTE_7=$(xcode_gte_7)
+ensure_valid_core_sim_service
+
+set -e -o pipefail
+
+XC_GTE_9=$(xcode_gte_9)
+XC_GTE_8=$(xcode_gte_8)
 
 XC_TARGET=calabash-dylib
 XC_PROJECT=calabash.xcodeproj
@@ -45,17 +44,13 @@ rm -rf "${INSTALL_DIR}"
 
 LIBRARY_NAME=calabash-dylib.dylib
 
-if [ "${XCPRETTY}" = "0" ]; then
-  USE_XCPRETTY=
-else
-  USE_XCPRETTY=`which xcpretty | tr -d '\n'`
-fi
-
-if [ ! -z ${USE_XCPRETTY} ]; then
+hash xcpretty 2>/dev/null
+if [ $? -eq 0 ] && [ "${XCPRETTY}" != "0" ]; then
   XC_PIPE='xcpretty -c'
 else
   XC_PIPE='cat'
 fi
+info "Will pipe xcodebuild to: ${XC_PIPE}"
 
 banner "Building Dylib Simulator Library"
 
@@ -99,15 +94,13 @@ HEADERS="${SIM_BUILD_DIR}/Build/Products/Debug-iphonesimulator/usr/local/include
 
 banner "Building Dylib ARM Library"
 
-ARM_LIBRARY_XC7="${ARM_BUILD_DIR}/Build/Intermediates/ArchiveIntermediates/calabash-dylib/InstallationBuildProductsLocation/usr/local/lib/${LIBRARY_NAME}"
-rm -rf "${ARM_LIBRARY_XC7}"
-
-ARM_LIBRARY_XC6="${ARM_BUILD_DIR}/Build/Products/${XC_BUILD_CONFIG}-iphoneos/${LIBRARY_NAME}"
-rm -rf "${ARM_LIBRARY_XC6}"
-
-if [ "${XC_GTE_7}" = "true" ]; then
-  XC7_FLAGS="OTHER_CFLAGS=\"-fembed-bitcode\" DEPLOYMENT_POSTPROCESSING=YES ENABLE_BITCODE=YES"
+if [ "${XC_GTE_9}" = "true" ]; then
+  ARM_LIBRARY="${ARM_BUILD_DIR}/Build/Intermediates.noindex/ArchiveIntermediates/calabash-dylib/BuildProductsPath/Debug-iphoneos/${LIBRARY_NAME}"
+else
+  ARM_LIBRARY="${ARM_BUILD_DIR}/Build/Intermediates/ArchiveIntermediates/calabash-dylib/InstallationBuildProductsLocation/usr/local/lib/${LIBRARY_NAME}"
 fi
+
+rm -f "${ARM_LIBRARY}"
 
 xcrun xcodebuild install \
   -project "${XC_PROJECT}" \
@@ -117,7 +110,9 @@ xcrun xcodebuild install \
   -configuration "${XC_BUILD_CONFIG}" \
   ARCHS="armv7 armv7s arm64" \
   VALID_ARCHS="armv7 armv7s arm64" \
-  ${XC7_FLAGS} -sdk iphoneos \
+  OTHER_CFLAGS="-fembed-bitcode" \
+  DEPLOYMENT_POSTPROCESSING=YES \
+  ENABLE_BITCODE=YES \
   IPHONE_DEPLOYMENT_TARGET=6.0 \
   GCC_TREAT_WARNINGS_AS_ERRORS=YES \
   GCC_GENERATE_TEST_COVERAGE_FILES=NO \
@@ -127,15 +122,9 @@ EXIT_CODE=${PIPESTATUS[0]}
 
 if [ $EXIT_CODE != 0 ]; then
   error "Building ARM library for framework failed."
-  exit $RETVAL
+  exit $EXIT_CODE
 else
   info "Building ARM library for framework succeeded."
-fi
-
-if [ -e "${ARM_LIBRARY_XC7}" ]; then
-  ARM_LIBRARY="${ARM_LIBRARY_XC7}"
-else
-  ARM_LIBRARY="${ARM_LIBRARY_XC6}"
 fi
 
 ditto_or_exit "${ARM_LIBRARY}" "${ARM_PRODUCTS_DIR}/${LIBRARY_NAME}"
@@ -220,35 +209,27 @@ lipo -info "${INSTALL_DIR}/libCalabashARM.dylib"
 lipo -info "${INSTALL_DIR}/libCalabashSim.dylib"
 lipo -info "${INSTALL_DIR}/libCalabashFAT.dylib"
 
-if [ "${XC_GTE_7}"  = "true" ]; then
-
-  xcrun otool-classic -arch arm64 -l \
-    "${INSTALL_DIR}/libCalabashARM.dylib" | grep -q LLVM
+# For dylibs, search for __LLVM
+# For static libs (.a) search for bitcode
+# Neither is fully reliable because -fembed-bitcode-marker (space for bitcode,
+# but no bitcode) would produce a false positive.
+#
+# If we have trouble with bitcode, we can try:
+#
+# $ xcodebuild archive
+function expect_bitcode {
+  xcrun otool -arch $1 -l "${INSTALL_DIR}/libCalabashFAT.dylib" | grep '__LLVM' &> /dev/null
   if [ $? -eq 0 ]; then
-    echo "libCalabashARM.dylib contains bitcode for arm64"
+    echo "${INSTALL_DIR}/libCalabashFAT.dylib contains bitcode for ${1}"
   else
-    echo "libCalabashARM.dylib does not contain bitcode for arm64"
+    echo "${INSTALL_DIR}/libCalabashFAT.dylib does not contain bitcode for ${1}"
     exit 1
   fi
+}
 
-  xcrun otool-classic -arch armv7s -l \
-    "${INSTALL_DIR}/libCalabashARM.dylib" | grep -q LLVM
-  if [ $? -eq 0 ]; then
-    echo "libCalabashARM.dylib contains bitcode for armv7s"
-  else
-    echo "libCalabashARM.dylib does not contain bitcode for armv7s"
-    exit 1
-  fi
-
-  xcrun otool-classic -arch armv7 -l \
-    "${INSTALL_DIR}/libCalabashARM.dylib" | grep -q LLVM
-  if [ $? -eq 0 ]; then
-    echo "libCalabashARM.dylib contains bitcode for armv7"
-  else
-    echo "libCalabashARM.dylib does not contain bitcode for armv7"
-    exit 1
-  fi
-fi
+expect_bitcode arm64
+expect_bitcode armv7
+expect_bitcode armv7s
 
 # Legacy.  Can be changed once calabash-ios gem is updated.
 ditto_or_exit \

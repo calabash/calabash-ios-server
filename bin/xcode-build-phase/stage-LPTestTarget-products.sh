@@ -1,35 +1,8 @@
 #!/usr/bin/env bash
 
+source bin/log.sh
+
 # Stages binaries built by Xcode to ./Products/
-
-function info {
-  echo "INFO: $1"
-}
-
-function error {
-  echo "ERROR: $1"
-}
-
-function banner {
-  echo ""
-  echo "######## $1 #######"
-  echo ""
-}
-
-function ditto_or_exit {
-  ditto "${1}" "${2}"
-  if [ "$?" != 0 ]; then
-    error "Could not copy:"
-    error "  source: ${1}"
-    error "  target: ${2}"
-    if [ ! -e "${1}" ]; then
-      error "The source file does not exist"
-      error "Did a previous xcodebuild step fail?"
-    fi
-    error "Exiting 1"
-    exit 1
-  fi
-}
 
 # Command line builds already stage binaries to Products/
 if [ ! -z $COMMAND_LINE_BUILD ]; then

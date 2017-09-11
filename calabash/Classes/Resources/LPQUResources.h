@@ -6,7 +6,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LPResources : NSObject
+@interface LPQUResources : NSObject
 
 + (NSArray *) eventsFromEncoding:(NSString *) encoded;
 + (NSArray *) transformEvents:(NSArray *) eventsRecord toPoint:(CGPoint) viewCenter;
