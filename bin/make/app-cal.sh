@@ -38,19 +38,13 @@ make framework
 
 banner "Preparing to build LPTestTarget"
 
-if [ "${XCPRETTY}" = "0" ]; then
-  USE_XCPRETTY=
-else
-  USE_XCPRETTY=`which xcpretty | tr -d '\n'`
-fi
-
-if [ ! -z ${USE_XCPRETTY} ]; then
+hash xcpretty 2>/dev/null
+if [ $? -eq 0 ] && [ "${XCPRETTY}" != "0" ]; then
   XC_PIPE='xcpretty -c'
 else
   XC_PIPE='cat'
 fi
-
-info "Configured xcodebuild pipes"
+info "Will pipe xcodebuild to: ${XC_PIPE}"
 
 XC_TARGET="LPTestTarget"
 XC_PROJECT="calabash.xcodeproj"
@@ -97,12 +91,7 @@ COMMAND_LINE_BUILD=1 xcrun xcodebuild \
   ONLY_ACTIVE_ARCH=NO \
   build | $XC_PIPE
 
-if [ ! -z ${USE_XCPRETTY} ]; then
-  EXIT_CODE=${PIPESTATUS[0]}
-else
-  EXIT_CODE=$?
-fi
-
+EXIT_CODE=${PIPESTATUS[0]}
 if [ $EXIT_CODE != 0 ]; then
   error "Building app failed."
   exit $EXIT_CODE
@@ -118,4 +107,3 @@ info "Installed ${INSTALLED_APP}"
 ditto_or_exit "${BUILD_PRODUCTS_DSYM}" "${INSTALLED_DSYM}"
 info "Installed ${INSTALLED_DSYM}"
 info "Done!"
-

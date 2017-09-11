@@ -47,17 +47,14 @@ rm -rf "${INSTALLED_FRAMEWORK}"
 
 LIBRARY_NAME=libcalabash.a
 
-if [ "${XCPRETTY}" = "0" ]; then
-  USE_XCPRETTY=
-else
-  USE_XCPRETTY=`which xcpretty | tr -d '\n'`
-fi
-
-if [ ! -z ${USE_XCPRETTY} ]; then
+hash xcpretty 2>/dev/null
+if [ $? -eq 0 ] && [ "${XCPRETTY}" != "0" ]; then
   XC_PIPE='xcpretty -c'
 else
   XC_PIPE='cat'
 fi
+
+info "Will pipe xcodebuild to: ${XC_PIPE}"
 
 banner "Building Framework Simulator Library"
 

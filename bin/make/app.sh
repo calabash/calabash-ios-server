@@ -31,17 +31,13 @@ function ditto_or_exit {
 
 banner "Preparing"
 
-if [ "${XCPRETTY}" = "0" ]; then
-  USE_XCPRETTY=
-else
-  USE_XCPRETTY=`which xcpretty | tr -d '\n'`
-fi
-
-if [ ! -z ${USE_XCPRETTY} ]; then
+hash xcpretty 2>/dev/null
+if [ $? -eq 0 ] && [ "${XCPRETTY}" != "0" ]; then
   XC_PIPE='xcpretty -c'
 else
   XC_PIPE='cat'
 fi
+info "Will pipe xcodebuild to: ${XC_PIPE}"
 
 XC_TARGET="LPTestTarget"
 XC_PROJECT="calabash.xcodeproj"
@@ -88,10 +84,12 @@ COMMAND_LINE_BUILD=1 xcrun xcodebuild \
   ONLY_ACTIVE_ARCH=NO \
   build | $XC_PIPE
 
-if [ ! -z ${USE_XCPRETTY} ]; then
-  EXIT_CODE=${PIPESTATUS[0]}
+EXIT_CODE=${PIPESTATUS[0]}
+if [ $EXIT_CODE != 0 ]; then
+  error "Building app failed."
+  exit $EXIT_CODE
 else
-  EXIT_CODE=$?
+  info "Building app succeeded."
 fi
 
 banner "Installing"
@@ -102,4 +100,3 @@ info "Installed ${INSTALLED_APP}"
 ditto_or_exit "${BUILD_PRODUCTS_DSYM}" "${INSTALLED_DSYM}"
 info "Installed ${INSTALLED_DSYM}"
 info "Done!"
-

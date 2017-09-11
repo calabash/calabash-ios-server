@@ -38,17 +38,13 @@ make framework
 
 banner "Preparing to build LPTestTarget"
 
-if [ "${XCPRETTY}" = "0" ]; then
-  USE_XCPRETTY=
-else
-  USE_XCPRETTY=`which xcpretty | tr -d '\n'`
-fi
-
-if [ ! -z ${USE_XCPRETTY} ]; then
+hash xcpretty 2>/dev/null
+if [ $? -eq 0 ] && [ "${XCPRETTY}" != "0" ]; then
   XC_PIPE='xcpretty -c'
 else
   XC_PIPE='cat'
 fi
+info "Will pipe xcodebuild to: ${XC_PIPE}"
 
 XC_TARGET="LPTestTarget"
 XC_PROJECT="calabash.xcodeproj"
