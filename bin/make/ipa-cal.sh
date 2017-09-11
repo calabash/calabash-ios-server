@@ -1,33 +1,11 @@
 #!/usr/bin/env bash
 
-function info {
-  echo "$(tput setaf 2)INFO: $1$(tput sgr0)"
-}
+source bin/log.sh
+source bin/ditto.sh
+source bin/simctl.sh
+ensure_valid_core_sim_service
 
-function error {
-  echo "$(tput setaf 1)ERROR: $1$(tput sgr0)"
-}
-
-function banner {
-  echo ""
-  echo "$(tput setaf 5)######## $1 #######$(tput sgr0)"
-  echo ""
-}
-
-function ditto_or_exit {
-  ditto "${1}" "${2}"
-  if [ "$?" != 0 ]; then
-    error "Could not copy:"
-    error "  source: ${1}"
-    error "  target: ${2}"
-    if [ ! -e "${1}" ]; then
-      error "The source file does not exist"
-      error "Did a previous xcodebuild step fail?"
-    fi
-    error "Exiting 1"
-    exit 1
-  fi
-}
+set -e
 
 # Command line builds alway make a fresh framework
 banner "Ensure the calabash.framework"
@@ -38,17 +16,13 @@ make framework
 
 banner "Preparing to build LPTestTarget"
 
-if [ "${XCPRETTY}" = "0" ]; then
-  USE_XCPRETTY=
-else
-  USE_XCPRETTY=`which xcpretty | tr -d '\n'`
-fi
-
-if [ ! -z ${USE_XCPRETTY} ]; then
+hash xcpretty 2>/dev/null
+if [ $? -eq 0 ] && [ "${XCPRETTY}" != "0" ]; then
   XC_PIPE='xcpretty -c'
 else
   XC_PIPE='cat'
 fi
+info "Will pipe xcodebuild to: ${XC_PIPE}"
 
 XC_TARGET="LPTestTarget"
 XC_PROJECT="calabash.xcodeproj"

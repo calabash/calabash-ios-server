@@ -8,7 +8,7 @@ else
   DRY_RUN="0"
 fi
 
-source bin/log-functions.sh
+source bin/log.sh
 source bin/ditto.sh
 
 DYLIB="calabash-dylibs/libCalabashFAT.dylib"

@@ -4,7 +4,7 @@
 #
 # Usage:
 #
-# source bin/log_functions.sh
+# source bin/log.sh
 
 function info {
   if [ "${TERM}" = "dumb" ]; then

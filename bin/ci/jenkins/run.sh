@@ -1,27 +1,10 @@
 #!/usr/bin/env bash
 
-set +e
-
-for try in {1..4}; do
-  xcrun simctl help &>/dev/null
-  sleep 1.0
-done
+source bin/log.sh
+source bin/simctl.sh
+ensure_valid_core_sim_service
 
 set -e
-
-function info {
-  echo "$(tput setaf 2)INFO: $1$(tput sgr0)"
-}
-
-function error {
-  echo "$(tput setaf 1)ERROR: $1$(tput sgr0)"
-}
-
-function banner {
-  echo ""
-  echo "$(tput setaf 5)######## $1 #######$(tput sgr0)"
-  echo ""
-}
 
 make clean
 
