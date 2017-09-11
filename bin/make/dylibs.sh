@@ -2,7 +2,7 @@
 
 set -e
 
-source bin/log-functions.sh
+source bin/log.sh
 source bin/ditto.sh
 
 function xcode_gte_7 {

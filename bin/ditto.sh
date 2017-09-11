@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source bin/log-functions.sh
+source bin/log.sh
 
 function ditto_or_exit {
   xcrun ditto "${1}" "${2}"
