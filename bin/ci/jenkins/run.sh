@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set +e
+source bin/log.sh
 
 for try in {1..4}; do
   xcrun simctl help &>/dev/null
@@ -8,20 +8,6 @@ for try in {1..4}; do
 done
 
 set -e
-
-function info {
-  echo "$(tput setaf 2)INFO: $1$(tput sgr0)"
-}
-
-function error {
-  echo "$(tput setaf 1)ERROR: $1$(tput sgr0)"
-}
-
-function banner {
-  echo ""
-  echo "$(tput setaf 5)######## $1 #######$(tput sgr0)"
-  echo ""
-}
 
 make clean
 
