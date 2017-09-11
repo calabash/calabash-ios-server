@@ -89,11 +89,10 @@ else
   info "Building simulator library for framework succeeded."
 fi
 
-SIM_LIBRARY=`find "${SEARCH_PATH}" -name "libcalabash.a" -type f -print0`
-
+SIM_LIBRARY=$(find "${SEARCH_PATH}" -name "libcalabash.a" -type f -print | tr -d '\n')
 ditto_or_exit "${SIM_LIBRARY}" "${SIM_PRODUCTS_DIR}/${LIBRARY_NAME}"
 
-HEADERS=`find "${SEARCH_PATH}" -name "calabashHeaders" -type d -print0`
+HEADERS=$(find "${SEARCH_PATH}" -name "calabashHeaders" -type d -print | tr -d '\n')
 ditto_or_exit "${HEADERS}" "${FAT_PRODUCTS_DIR}/Headers"
 
 banner "Building Framework ARM Library"
