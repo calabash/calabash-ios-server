@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
 
 source bin/log.sh
+source bin/ditto.sh
+source bin/simctl.sh
+
+banner "Preparing"
+
+ensure_valid_core_sim_service
 
 XC_PROJECT=calabash.xcodeproj
 XC_BUILD_CONFIG=Release

@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 
 source bin/log.sh
-
-for try in {1..4}; do
-  xcrun simctl help &>/dev/null
-  sleep 1.0
-done
+source bin/simctl.sh
+ensure_valid_core_sim_service
 
 set -e
 

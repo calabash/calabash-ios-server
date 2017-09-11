@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 
-set -e
 
 source bin/log.sh
 source bin/ditto.sh
+source bin/simctl.sh
+
+banner "Preparing"
+
+ensure_valid_core_sim_service
+
+set -e
 
 function xcode_gte_7 {
  XC_MAJOR=`xcrun xcodebuild -version | awk 'NR==1{print $2}' | awk -v FS="." '{ print $1 }'`

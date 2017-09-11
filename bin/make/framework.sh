@@ -1,17 +1,11 @@
 #!/usr/bin/env bash
 
 source bin/log.sh
+source bin/simctl.sh
 
-set -e
+banner "Preparing"
 
-function xcode_gte_7 {
- XC_MAJOR=`xcrun xcodebuild -version | awk 'NR==1{print $2}' | awk -v FS="." '{ print $1 }'`
- if [ "${XC_MAJOR}" \> "7" -o "${XC_MAJOR}" = "7" ]; then
-   echo "true"
- else
-   echo "false"
- fi
-}
+ensure_valid_core_sim_service
 
 XC_GTE_7=$(xcode_gte_7)
 
