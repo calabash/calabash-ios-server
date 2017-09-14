@@ -8,7 +8,7 @@
 
 #import "LPAsyncPlaybackRoute.h"
 #import "LPHTTPConnection.h"
-#import "LPResources.h"
+#import "LPQUResources.h"
 #import "LPRecorder.h"
 #import "UIScriptParser.h"
 #import "LPTouchUtils.h"
@@ -95,10 +95,10 @@
           centerEnd.y + offsetPointEnd.y);
 
 
-  NSArray *baseEvents = [LPResources eventsFromEncoding:base64Events];
+  NSArray *baseEvents = [LPQUResources eventsFromEncoding:base64Events];
 
 
-  self.events = [LPResources interpolateEvents:baseEvents fromPoint:centerStart
+  self.events = [LPQUResources interpolateEvents:baseEvents fromPoint:centerStart
                                        toPoint:centerEnd];
 
   //LPLogDebug(@"PLAY Events:\n%@",self.events);

@@ -8,7 +8,7 @@
 
 #import "LPAsyncPlaybackRoute.h"
 #import "LPHTTPConnection.h"
-#import "LPResources.h"
+#import "LPQUResources.h"
 #import "LPRecorder.h"
 #import "LPTouchUtils.h"
 #import "LPOperation.h"
@@ -55,10 +55,10 @@
 
       targetView = v;
 
-      NSArray *baseEvents = [LPResources eventsFromEncoding:base64Events];
+      NSArray *baseEvents = [LPQUResources eventsFromEncoding:base64Events];
 
 
-      self.events = [LPResources transformEvents:baseEvents toPoint:CGPointMake(
+      self.events = [LPQUResources transformEvents:baseEvents toPoint:CGPointMake(
               center.x + offsetPoint.x, center.y + offsetPoint.y)];
     } else {
       LPLogDebug(@"query %@ found no views. NO-OP.", query);
@@ -78,7 +78,7 @@
     NSNumber *y = [offset valueForKey:@"y"];
 
     CGPoint offsetPoint = CGPointMake([x floatValue], [y floatValue]);
-    self.events = [LPResources eventsFromEncoding:base64Events];
+    self.events = [LPQUResources eventsFromEncoding:base64Events];
     if (!self.events || [self.events count] < 1) {
       LPLogDebug(@"BAD EVENTS: %@", base64Events);
       self.done = YES;
@@ -104,7 +104,7 @@
         return;
       }
 
-      NSArray *transformed = [LPResources transformEvents:self.events
+      NSArray *transformed = [LPQUResources transformEvents:self.events
                                                   toPoint:CGPointMake(
                                                           offsetPoint.x,
                                                           offsetPoint.y)];
@@ -135,7 +135,7 @@
 
 //    NSString *base64Prototype = [self.data objectForKey:@"prototype"];
 //    if (base64Prototype) {
-//        NSArray* protoEvents = [LPResources eventsFromEncoding:base64Prototype];
+//        NSArray* protoEvents = [LPQUResources eventsFromEncoding:base64Prototype];
 //
 //        LPLogDebug(@"Prototype Events\n%@",protoEvents);
 //

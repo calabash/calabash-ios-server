@@ -1,46 +1,18 @@
 #!/usr/bin/env bash
 
-set -e
+source bin/log.sh
+source bin/ditto.sh
+source bin/xcode.sh
+source bin/simctl.sh
 
-function info {
-  echo "$(tput setaf 2)INFO: $1$(tput sgr0)"
-}
+banner "Preparing"
 
-function error {
-  echo "$(tput setaf 1)ERROR: $1$(tput sgr0)"
-}
+ensure_valid_core_sim_service
 
-function banner {
-  echo ""
-  echo "$(tput setaf 5)######## $1 #######$(tput sgr0)"
-  echo ""
-}
+set -e -o pipefail
 
-function ditto_or_exit {
-  ditto "${1}" "${2}"
-  if [ "$?" != 0 ]; then
-    error "Could not copy:"
-    error "  source: ${1}"
-    error "  target: ${2}"
-    if [ ! -e "${1}" ]; then
-      error "The source file does not exist"
-      error "Did a previous xcodebuild step fail?"
-    fi
-    error "Exiting 1"
-    exit 1
-  fi
-}
-
-function xcode_gte_7 {
- XC_MAJOR=`xcrun xcodebuild -version | awk 'NR==1{print $2}' | awk -v FS="." '{ print $1 }'`
- if [ "${XC_MAJOR}" \> "7" -o "${XC_MAJOR}" = "7" ]; then
-   echo "true"
- else
-   echo "false"
- fi
-}
-
-XC_GTE_7=$(xcode_gte_7)
+XC_GTE_9=$(xcode_gte_9)
+XC_GTE_8=$(xcode_gte_8)
 
 XC_TARGET=calabash
 XC_PROJECT=calabash.xcodeproj
@@ -74,17 +46,14 @@ rm -rf "${INSTALLED_FRAMEWORK}"
 
 LIBRARY_NAME=libcalabash.a
 
-if [ "${XCPRETTY}" = "0" ]; then
-  USE_XCPRETTY=
-else
-  USE_XCPRETTY=`which xcpretty | tr -d '\n'`
-fi
-
-if [ ! -z ${USE_XCPRETTY} ]; then
+hash xcpretty 2>/dev/null
+if [ $? -eq 0 ] && [ "${XCPRETTY}" != "0" ]; then
   XC_PIPE='xcpretty -c'
 else
   XC_PIPE='cat'
 fi
+
+info "Will pipe xcodebuild to: ${XC_PIPE}"
 
 banner "Building Framework Simulator Library"
 
@@ -116,27 +85,21 @@ else
   info "Building simulator library for framework succeeded."
 fi
 
-SIM_LIBRARY=`find "${SEARCH_PATH}" -name "libcalabash.a" -type f -print0`
-
+SIM_LIBRARY=$(find "${SEARCH_PATH}" -name "libcalabash.a" -type f -print | tr -d '\n')
 ditto_or_exit "${SIM_LIBRARY}" "${SIM_PRODUCTS_DIR}/${LIBRARY_NAME}"
 
-HEADERS=`find "${SEARCH_PATH}" -name "calabashHeaders" -type d -print0`
+HEADERS=$(find "${SEARCH_PATH}" -name "calabashHeaders" -type d -print | tr -d '\n')
 ditto_or_exit "${HEADERS}" "${FAT_PRODUCTS_DIR}/Headers"
 
 banner "Building Framework ARM Library"
 
-ARM_LIBRARY_XC71="${ARM_BUILD_DIR}/Build/Intermediates/ArchiveIntermediates/${XC_TARGET}/IntermediateBuildFilesPath/UninstalledProducts/iphoneos/${LIBRARY_NAME}"
-rm -rf "${ARM_LIBRARY_XC71}"
-
-ARM_LIBRARY_XC7="${ARM_BUILD_DIR}/Build/Intermediates/ArchiveIntermediates/${XC_TARGET}/IntermediateBuildFilesPath/UninstalledProducts/${LIBRARY_NAME}"
-rm -rf "${ARM_LIBRARY_XC7}"
-
-ARM_LIBRARY_XC6="${ARM_BUILD_DIR}/Build/Intermediates/UninstalledProducts/${LIBRARY_NAME}"
-rm -rf "${ARM_LIBRARY_XC6}"
-
-if [ "${XC_GTE_7}" = "true" ]; then
-  XC7_FLAGS="OTHER_CFLAGS=\"-fembed-bitcode\" DEPLOYMENT_POSTPROCESSING=YES ENABLE_BITCODE=YES"
+if [ "${XC_GTE_9}" = "true" ]; then
+  ARM_LIBRARY="${ARM_BUILD_DIR}/Build/Intermediates.noindex/ArchiveIntermediates/calabash/IntermediateBuildFilesPath/UninstalledProducts/iphoneos/${LIBRARY_NAME}"
+else
+  ARM_LIBRARY="${ARM_BUILD_DIR}/Build/Intermediates/ArchiveIntermediates/${XC_TARGET}/IntermediateBuildFilesPath/UninstalledProducts/iphoneos/${LIBRARY_NAME}"
 fi
+
+rm -f "${ARM_LIBRARY}"
 
 xcrun xcodebuild install \
   -project "${XC_PROJECT}" \
@@ -146,7 +109,9 @@ xcrun xcodebuild install \
   -configuration "${XC_BUILD_CONFIG}" \
   ARCHS="armv7 armv7s arm64" \
   VALID_ARCHS="armv7 armv7s arm64" \
-  ${XC7_FLAGS} -sdk iphoneos \
+  OTHER_CFLAGS="-fembed-bitcode" \
+  DEPLOYMENT_POSTPROCESSING=YES \
+  ENABLE_BITCODE=YES \
   IPHONE_DEPLOYMENT_TARGET=6.0 \
   GCC_TREAT_WARNINGS_AS_ERRORS=YES \
   GCC_GENERATE_TEST_COVERAGE_FILES=NO \
@@ -159,14 +124,6 @@ if [ $EXIT_CODE != 0 ]; then
   exit $RETVAL
 else
   info "Building ARM library for framework succeeded."
-fi
-
-if [ -e "${ARM_LIBRARY_XC71}" ]; then
-  ARM_LIBRARY="${ARM_LIBRARY_XC71}"
-elif [ -e "${ARM_LIBRARY_XC7}" ]; then
-  ARM_LIBRARY="${ARM_LIBRARY_XC7}"
-else
-  ARM_LIBRARY="${ARM_LIBRARY_XC6}"
 fi
 
 ditto_or_exit "${ARM_LIBRARY}" "${ARM_PRODUCTS_DIR}/${LIBRARY_NAME}"
@@ -251,30 +208,24 @@ fi
 echo "Built version: `./${INSTALLED_FRAMEWORK}/Resources/version | tr -d '\n'`"
 lipo -info "${INSTALLED_FRAMEWORK}/calabash"
 
-if [ "${XC_GTE_7}"  = "true" ]; then
-
-  xcrun otool-classic -arch arm64 -l calabash.framework/calabash | grep -q bitcode
+# For dylibs, search for __LLVM
+# For static libs (.a) search for bitcode
+# Neither is fully reliable because -fembed-bitcode-marker (space for bitcode,
+# but no bitcode) would produce a false positive.
+#
+# If we have trouble with bitcode, we can try:
+#
+# $ xcodebuild archive
+function expect_bitcode {
+  xcrun otool -arch $1 -l calabash.framework/calabash | grep 'bitcode' &> /dev/null
   if [ $? -eq 0 ]; then
-    echo "calabash.framework/calabash contains bitcode for arm64"
+    echo "calabash.framework/calabash contains bitcode for ${1}"
   else
-    echo "calabash.framework/calabash does not contain bitcode for arm64"
+    echo "calabash.framework/calabash does not contain bitcode for ${1}"
     exit 1
   fi
+}
 
-  xcrun otool-classic -arch armv7s -l calabash.framework/calabash | grep -q bitcode
-  if [ $? -eq 0 ]; then
-    echo "calabash.framework/calabash contains bitcode for armv7s"
-  else
-    echo "calabash.framework/calabash does not contain bitcode for armv7s"
-    exit 1
-  fi
-
-  xcrun otool-classic -arch armv7 -l calabash.framework/calabash | grep -q bitcode
-  if [ $? -eq 0 ]; then
-    echo "calabash.framework/calabash contains bitcode for armv7"
-  else
-    echo "calabash.framework/calabash does not contain bitcode for armv7"
-    exit 1
-  fi
-fi
-
+expect_bitcode arm64
+expect_bitcode armv7
+expect_bitcode armv7s

@@ -1,3 +1,13 @@
+### 0.21.1
+
+Advancing the version to create a tag from which we can distribute
+libraries built with Xcode 9 GM.
+
+### 0.21.0
+
+* Update build scripts for Xcode 9 #395
+* Server: namespace LPQUResources to avoid conflict with Xcode/LinkPresention.framework #394
+
 ### 0.20.7
 
 * Update for Xcode 9 #391
