@@ -214,12 +214,19 @@
     SEL selector = @selector(httpResponseOnMainThreadForMethod:URI:);
     NSMethodSignature *methodSignature = [self methodSignatureForSelector:selector];
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+
     [invocation setTarget:self];
     [invocation setSelector:selector];
-    [invocation setArgument:&method atIndex:2];
-    [invocation setArgument:&path atIndex:3];
+
     [invocation retainArguments];
-    [invocation performSelectorOnMainThread:@selector(invoke) withObject:nil waitUntilDone:YES];
+    NSString *methodCopy = [NSString stringWithString:method];
+    [invocation setArgument:&methodCopy atIndex:2];
+    NSString *pathCopy = [NSString stringWithString:path];
+    [invocation setArgument:&pathCopy atIndex:3];
+
+    [invocation performSelectorOnMainThread:@selector(invoke)
+                                 withObject:nil
+                              waitUntilDone:YES];
     [invocation getReturnValue:&result];
     return result;
   }
