@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# This is a work in progress.
+# It calls rm -rf.
+# Use at your own risk.
+
 source bin/log.sh
 source bin/ditto.sh
 
