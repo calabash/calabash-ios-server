@@ -210,7 +210,6 @@
     // further blocks from being processed on the main queue until the initial block in which the
     // httpResponseOnMainThreadForMethod was invoked has completed.
     // dispatch_sync prevents other blocks being processed in nested calls to NSRunLoop run methods within tests.
-    NSObject<LPHTTPResponse> __unsafe_unretained *result = nil;
     SEL selector = @selector(httpResponseOnMainThreadForMethod:URI:);
     NSMethodSignature *methodSignature = [self methodSignatureForSelector:selector];
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
@@ -227,8 +226,12 @@
     [invocation performSelectorOnMainThread:@selector(invoke)
                                  withObject:nil
                               waitUntilDone:YES];
-    [invocation getReturnValue:&result];
-    return result;
+
+    NSObject<LPHTTPResponse> *response = nil;
+    void *buffer;
+    [invocation getReturnValue:&buffer];
+    response = (__bridge NSObject<LPHTTPResponse> *)buffer;
+    return response;
   }
 }
 
