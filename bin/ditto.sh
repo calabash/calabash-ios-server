@@ -17,9 +17,23 @@ function ditto_or_exit {
   fi
 }
 
-function ditto_to_zip {
+function install_with_ditto {
+  ditto_or_exit "${1}" "${2}"
+  info "Installed ${2}"
+}
+
+function zip_with_ditto {
   xcrun ditto \
   -ck --rsrc --sequesterRsrc --keepParent \
   "${1}" \
   "${2}"
+  info "Installed ${2}"
+}
+
+function unzip_with_ditto {
+  xcrun ditto \
+  -xk --rsrc --sequesterRsrc \
+  "${1}" \
+  "${2}"
+  info "Installed ${2}"
 }
