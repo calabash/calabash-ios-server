@@ -206,10 +206,6 @@
   if ([[NSThread currentThread] isMainThread]) {
     return [self httpResponseOnMainThreadForMethod:method URI:path];
   } else {
-    // Use performSelectorOnMainThread instead of dispatch_sync because using a dispatch method prevents
-    // further blocks from being processed on the main queue until the initial block in which the
-    // httpResponseOnMainThreadForMethod was invoked has completed.
-    // dispatch_sync prevents other blocks being processed in nested calls to NSRunLoop run methods within tests.
     SEL selector = @selector(httpResponseOnMainThreadForMethod:URI:);
     NSMethodSignature *methodSignature = [self methodSignatureForSelector:selector];
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];

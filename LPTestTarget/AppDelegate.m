@@ -5,6 +5,8 @@
 #import "CocoaLumberjack/CocoaLumberjack.h"
 #import "FirstViewController.h"
 #import "SecondViewController.h"
+#import <mach/mach.h>
+#import <mach/mach_time.h>
 
 static const DDLogLevel ddLogLevel = DDLogLevelDebug;
 
@@ -157,6 +159,38 @@ typedef struct {
 
 - (BOOL) backdoorWithArgNil:(id) arg {
   return !arg;
+}
+
+#pragma mark - Backdoor Execution is non-blocking
+
+- (NSTimeInterval)machAbsoluteToTimeInterval:(uint64_t)machAbsolute {
+  mach_timebase_info_data_t clock_timebase;
+  mach_timebase_info(&clock_timebase);
+  uint64_t nanos = (machAbsolute * clock_timebase.numer) / clock_timebase.denom;
+  return nanos/1.0e9;
+}
+
+- (NSTimeInterval)absoluteTime {
+  uint64_t machTime = mach_absolute_time();
+  return [self machAbsoluteToTimeInterval:machTime];
+}
+
+- (BOOL)backdoorWithDispatchAfter {
+
+  __block BOOL flag = NO;
+  dispatch_after(dispatch_time(DISPATCH_TIME_NOW,
+                               (int64_t)(1 * NSEC_PER_SEC)),
+                 dispatch_get_main_queue(), ^{
+    flag = YES;
+  });
+
+  NSTimeInterval timeout = 10.0;
+  NSTimeInterval startTime = [self absoluteTime];
+  NSTimeInterval endTime = startTime + timeout;
+  while(!flag && [self absoluteTime] < endTime) {
+    CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0.1, false);
+  }
+  return flag;
 }
 
 #pragma mark - Unhandled Argument Types
