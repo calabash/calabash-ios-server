@@ -35,6 +35,19 @@ If you have build errors, see the xcpretty section below.
 Maintainers must install the calabash/calabash-resign private repo.
 Details are below.
 
+Non-maintainers will see code signing errors like:
+
+```
+No certificate matching 'Mac Developer: Karl Krukow (YTTN6Y2QS9)' for
+team 'FYD86LA7RE': Select a different signing certificate for
+CODE_SIGN_IDENTITY, a team that matches your selected certificate, or
+switch to automatic provisioning.
+```
+
+when building - you must edit the code signing settings in the Xcode
+project for the target you are trying to build.  Turning on automatic
+provisioning is usually the easiest solution.
+
 ### Building the Framework
 
 ```
