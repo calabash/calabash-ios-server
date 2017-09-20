@@ -41,6 +41,7 @@ extern NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY;
 - (BOOL) isIPhone4Like;
 - (BOOL) isIPhone5Like;
 - (BOOL) isLetterBox;
+- (BOOL) isIPhone10Like;
 - (NSString *) getIPAddress;
 
 @end
