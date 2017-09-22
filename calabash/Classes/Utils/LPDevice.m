@@ -327,6 +327,11 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
     @"iPhone9,2" : @"iphone 6+",
     @"iPhone9,4" : @"iphone 6+",
 
+    // iPhone 8/8+/X - derived from Simulator
+    @"iPhone10,4" : @"iphone 6",
+    @"iPhone10,5" : @"iphone 6+",
+    @"iPhone10,3" : @"iphone 10",
+
     // iPad Pro 13in
     @"iPad6,7" : @"ipad pro",
     @"iPad6,8" : @"ipad pro",
@@ -461,6 +466,10 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
 
 - (BOOL) isIPhone5Like {
   return [[self formFactor] isEqualToString:@"iphone 4in"];
+}
+
+- (BOOL) isIPhone10Like {
+  return [[self formFactor] isEqualToString:@"iphone 10"];
 }
 
 - (BOOL) isLetterBox {
