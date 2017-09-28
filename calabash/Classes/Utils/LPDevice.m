@@ -186,6 +186,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   UIScreen *screen = [UIScreen mainScreen];
   CGSize screenSize = screen.bounds.size;
   CGFloat screenHeight = MAX(screenSize.height, screenSize.width);
+  CGFloat screenWidth = MIN(screenSize.height, screenSize.width);
   CGFloat scale = screen.scale;
 
   CGFloat nativeScale = scale;
@@ -212,6 +213,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   LPLogDebug(@" Current screen mode: %@", screenMode);
   LPLogDebug(@"Screen size for mode: %@", NSStringFromCGSize(screenSizeForMode));
   LPLogDebug(@"       Screen height: %@", @(screenHeight));
+  LPLogDebug(@"        Screen width: %@", @(screenWidth));
   LPLogDebug(@"        Screen scale: %@", @(scale));
   LPLogDebug(@" Screen native scale: %@", @(nativeScale));
   LPLogDebug(@"Pixel Aspect Ratio: %@", @(pixelAspectRatio));
@@ -270,6 +272,13 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   if (_screenDimensions) { return _screenDimensions; }
 
   UIScreen *screen = [UIScreen mainScreen];
+  CGRect bounds = [screen bounds];
+  NSDictionary *boundsDict = @{
+                               @"x" : @(bounds.origin.x),
+                               @"y" : @(bounds.origin.y),
+                               @"width" : @(bounds.size.width),
+                               @"height" : @(bounds.size.height)
+                               };
   UIScreenMode *screenMode = [screen currentMode];
   CGSize size = screenMode.size;
   CGFloat scale = screen.scale;
@@ -283,6 +292,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
                         @"height" : @(size.height),
                         @"width" : @(size.width),
                         @"scale" : @(scale),
+                        @"bounds" : boundsDict,
                         @"sample" : @([self sampleFactor]),
                         @"native_scale" : @(nativeScale)
                         };
