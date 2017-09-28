@@ -450,6 +450,10 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   return [[self formFactor] isEqualToString:@"iphone 6+"];
 }
 
+- (BOOL) isIPhone {
+  return [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone;
+}
+
 - (BOOL) isIPad {
   return [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
 }
