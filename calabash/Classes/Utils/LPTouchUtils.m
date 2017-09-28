@@ -323,7 +323,7 @@
 
     if (!delegateWindow) {
       NSArray *allWindows = [LPTouchUtils applicationWindows];
-      delegateWindow = [allWindows objectAtIndex:0];
+      delegateWindow = allWindows[0];
     }
   } else {
     delegateWindow = appDelegate.window;

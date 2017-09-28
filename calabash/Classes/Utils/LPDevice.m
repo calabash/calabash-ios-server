@@ -371,7 +371,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 }
 
 - (NSString *) simulatorVersionInfo {
-  return [self.processEnvironment objectForKey:LPDeviceSimKeyVersionInfo];
+  return self.processEnvironment[LPDeviceSimKeyVersionInfo];
 }
 
 - (NSString *) physicalDeviceModelIdentifier {
@@ -415,7 +415,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   if (_formFactor) { return _formFactor; }
 
   NSString *modelIdentifier = [self modelIdentifier];
-  NSString *value = [self.formFactorMap objectForKey:modelIdentifier];
+  NSString *value = self.formFactorMap[modelIdentifier];
 
   if (value) {
     _formFactor = value;
