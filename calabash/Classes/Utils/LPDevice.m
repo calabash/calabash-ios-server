@@ -469,7 +469,9 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 }
 
 - (BOOL) isIPadPro {
-  return [[self formFactor] isEqualToString:@"ipad pro"];
+  return [[self formFactor] containsString:@"ipad pro"];
+}
+
 }
 
 - (BOOL) isIPadPro10point5inch {
