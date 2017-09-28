@@ -102,10 +102,6 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   expect(actual).notTo.equal(@"");
 }
 
-- (void) testLEGACY_systemFromUnameReturnsSomething {
-  expect([self.device LEGACY_systemFromUname]).notTo.equal(nil);
-}
-
 - (void) testProcessEnvironment {
   NSDictionary *dictionary = [self.device processEnvironment];
   expect([dictionary count]).notTo.equal(0);
