@@ -44,10 +44,9 @@ UIDevice + Wifi Address
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-*/
+ */
 
 #import "LPDevice.h"
-#import "LPTouchUtils.h"
 #import "LPCocoaLumberjack.h"
 #import <sys/utsname.h>
 #import <arpa/inet.h>

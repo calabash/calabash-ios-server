@@ -3,7 +3,6 @@
 #endif
 
 #import "LPDevice.h"
-#import "LPTouchUtils.h"
 
 static NSString *const LPiPhone6SimVersionInfo = @"Device: iPhone 6 - Runtime: iOS 8.1 (12B411) - DeviceType: iPhone 6";
 
