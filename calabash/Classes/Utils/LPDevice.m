@@ -413,9 +413,12 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   if (value) {
     _formFactor = value;
   } else {
+    // The model identifier is not recognized; fall back to defaults.
+    // This is a catch all for the iPad, iPad Retina, and iPad Air.
     if ([self isIPad]) {
       _formFactor = @"ipad";
     } else {
+      // A model number as form factor is a signal that our table needs updating.
       _formFactor = modelIdentifier;
     }
   }
