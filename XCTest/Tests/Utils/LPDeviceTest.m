@@ -339,7 +339,7 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
 
 - (void) testIsIpadPro10point5inchYES {
   id mock = OCMPartialMock(self.device);
-  OCMExpect([mock modelIdentifier]).andReturn(@"iPad7");
+  OCMExpect([mock modelIdentifier]).andReturn(@"ipad pro 10.5");
 
   expect([mock isIPadPro10point5inch]).to.equal(YES);
 
@@ -348,7 +348,7 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
 
 - (void) testIsIpadPro10point5inchNO {
   id mock = OCMPartialMock(self.device);
-  OCMExpect([mock modelIdentifier]).andReturn(@"iPad");
+  OCMExpect([mock modelIdentifier]).andReturn(@"garbage");
 
   expect([mock isIPadPro10point5inch]).to.equal(NO);
 

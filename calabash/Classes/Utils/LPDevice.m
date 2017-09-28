@@ -485,7 +485,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 }
 
 - (BOOL) isIPadPro10point5inch {
-  return [[self modelIdentifier] containsString:@"iPad7"];
+  return [[self modelIdentifier] isEqualToString:@"ipad pro 10.5"];
 }
 
 - (BOOL) isIPhone4Like {
