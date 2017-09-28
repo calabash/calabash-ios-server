@@ -23,12 +23,8 @@ extern NSString *const LPDeviceSimKeyVersionInfo;
 
 + (LPDevice *) sharedDevice;
 
-
 - (NSString *) simulatorModelIdentifier;
 - (NSString *) simulatorVersionInfo;
-
-
-
 - (BOOL) isSimulator;
 - (BOOL) isPhysicalDevice;
 - (BOOL) isIPhone6Like;
@@ -44,6 +40,7 @@ extern NSString *const LPDeviceSimKeyVersionInfo;
 - (BOOL) isIPhone5Like;
 - (BOOL) isLetterBox;
 - (BOOL) isIPhone10Like;
+- (BOOL) isIPhone10LetterBox;
 - (NSString *) getIPAddress;
 
 @end

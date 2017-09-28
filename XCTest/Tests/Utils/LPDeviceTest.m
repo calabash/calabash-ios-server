@@ -405,6 +405,58 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   OCMVerifyAll(mock);
 }
 
+- (void) testIsIPhone10LetterBoxNO {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock isIPhone10Like]).andReturn(NO);
+
+  expect([mock isIPhone10LetterBox]).to.equal(NO);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testIsIPhone10LetterBoxScreenHeightIsWrong {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock isIPhone10Like]).andReturn(YES);
+
+  NSDictionary *dimensions = @{@"height" : @(2436)};
+  OCMExpect([mock screenDimensions]).andReturn(dimensions);
+
+  expect([mock isIPhone10LetterBox]).to.equal(NO);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testIsIPhone10LetterBoxScreenBoundsHeightIsWrong {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock isIPhone10Like]).andReturn(YES);
+
+  NSDictionary *dimensions = @{
+                               @"height" : @(2001),
+                               @"bounds_portrait_height" : @(768)
+                               };
+  OCMExpect([mock screenDimensions]).andReturn(dimensions);
+
+  expect([mock isIPhone10LetterBox]).to.equal(NO);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testIsIPhone10LetterBoxYES {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock isIPhone10Like]).andReturn(YES);
+
+  NSDictionary *dimensions = @{
+                               @"height" : @(2001),
+                               @"bounds_portrait_height" : @(667)
+                               };
+  OCMExpect([mock screenDimensions]).andReturn(dimensions);
+
+
+  expect([mock isIPhone10LetterBox]).to.equal(YES);
+
+  OCMVerifyAll(mock);
+}
+
 - (void) testIsLetterBoxNoBecauseIpad {
   id mock = OCMPartialMock(self.device);
   OCMExpect([mock isIPad]).andReturn(YES);

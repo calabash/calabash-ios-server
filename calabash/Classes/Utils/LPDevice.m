@@ -103,12 +103,6 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 
 - (id) init_private;
 
-- (UIScreen *) mainScreen;
-- (UIScreenMode *) currentScreenMode;
-- (CGSize) sizeForCurrentScreenMode;
-- (CGFloat) scaleForMainScreen;
-- (CGFloat) heightForMainScreenBounds;
-
 - (NSString *) physicalDeviceModelIdentifier;
 
 @end
@@ -151,7 +145,6 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   return self;
 }
 
-
 - (UIScreen *) mainScreen {
   return [UIScreen mainScreen];
 }
@@ -165,7 +158,11 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 }
 
 - (CGFloat) scaleForMainScreen {
-  return [[self mainScreen] scale];
+  return [[UIScreen mainScreen] scale];
+}
+
+- (CGRect) mainScreenBounds {
+  return [[self mainScreen] bounds];
 }
 
 - (CGFloat) heightForMainScreenBounds {
@@ -281,6 +278,10 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   CGSize size = screenMode.size;
   CGFloat scale = screen.scale;
 
+  CGSize screenBoundsSize = screen.bounds.size;
+  CGFloat screenBoundsHeight = MAX(screenBoundsSize.height, screenBoundsSize.width);
+  CGFloat screenBoundsWidth = MIN(screenBoundsSize.height, screenBoundsSize.width);
+
   CGFloat nativeScale = scale;
   if ([screen respondsToSelector:@selector(nativeScale)]) {
     nativeScale = screen.nativeScale;
@@ -291,6 +292,8 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
                         @"width" : @(size.width),
                         @"scale" : @(scale),
                         @"bounds" : boundsDict,
+                        @"bounds_portrait_height" : @(screenBoundsHeight),
+                        @"bounds_portrait_width" : @(screenBoundsWidth),
                         @"sample" : @([self sampleFactor]),
                         @"native_scale" : @(nativeScale)
                         };
@@ -512,6 +515,15 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   }
 }
 
+- (BOOL) isIPhone10LetterBox {
+  if (![self isIPhone10Like]) { return NO; }
+  NSDictionary *dimensions = [self screenDimensions];
+  NSInteger screenModeHeight = [dimensions[@"height"] integerValue];
+  NSInteger screenBoundsHeight = [dimensions[@"bounds_portrait_height"] integerValue];
+
+  return screenModeHeight == 2001 && screenBoundsHeight == 667;
+}
+
 - (NSString *) getIPAddress {
   if (_ipAddress) { return _ipAddress; }
 
@@ -520,4 +532,3 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 }
 
 @end
-
