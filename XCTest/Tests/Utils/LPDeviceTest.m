@@ -283,6 +283,60 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   OCMVerifyAll(mock);
 }
 
+- (void) testIsIpadPro12point9inchYES {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock modelIdentifier]).andReturn(@"ipad pro 12.9");
+
+  expect([mock isIPadPro12point9inch]).to.equal(YES);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testIsIpadPro12point9inchNO {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock modelIdentifier]).andReturn(@"garbage");
+
+  expect([mock isIPadPro12point9inch]).to.equal(NO);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testIsIpadPro9point7inchYES {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock modelIdentifier]).andReturn(@"ipad pro 9.7");
+
+  expect([mock isIPadPro9point7inch]).to.equal(YES);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testIsIpadPro9point7inchNO {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock modelIdentifier]).andReturn(@"garbage");
+
+  expect([mock isIPadPro9point7inch]).to.equal(NO);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testIsIpad9point7inchYES {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock modelIdentifier]).andReturn(@"ipad 9.7");
+
+  expect([mock isIPad9point7inch]).to.equal(YES);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testIsIpad9point7inchNO {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock modelIdentifier]).andReturn(@"garbage");
+
+  expect([mock isIPad9point7inch]).to.equal(NO);
+
+  OCMVerifyAll(mock);
+}
+
 - (void) testIsIpadPro10point5inchYES {
   id mock = OCMPartialMock(self.device);
   OCMExpect([mock modelIdentifier]).andReturn(@"iPad7");
