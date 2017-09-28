@@ -396,6 +396,8 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   OCMExpect([mock formFactor]).andReturn(@"iphone 10");
 
   expect([mock isIPhone10Like]).to.equal(YES);
+
+  OCMVerifyAll(mock);
 }
 
 - (void) testIsIPhone10LikeNO {
@@ -403,6 +405,8 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   OCMExpect([mock formFactor]).andReturn(@"garbage");
 
   expect([mock isIPhone10Like]).to.equal(NO);
+
+  OCMVerifyAll(mock);
 }
 
 - (void) testIsLetterBoxNoBecauseIpad {
