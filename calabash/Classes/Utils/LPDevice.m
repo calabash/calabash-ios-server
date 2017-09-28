@@ -110,7 +110,6 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 - (CGFloat) heightForMainScreenBounds;
 
 - (NSString *) physicalDeviceModelIdentifier;
-- (NSString *) simulatorModelIdentfier;
 
 @end
 
@@ -360,8 +359,8 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   return _processEnvironment;
 }
 
-- (NSString *) simulatorModelIdentfier {
-  return [self.processEnvironment objectForKey:LPDeviceSimKeyModelIdentifier];
+- (NSString *)simulatorModelIdentifier {
+  return self.processEnvironment[LPDeviceSimKeyModelIdentifier];
 }
 
 - (NSString *) simulatorVersionInfo {
@@ -398,7 +397,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 - (NSString *) modelIdentifier {
   if (_modelIdentifier) { return _modelIdentifier; }
   if ([self isSimulator]) {
-    _modelIdentifier = [self simulatorModelIdentfier];
+    _modelIdentifier = [self simulatorModelIdentifier];
   } else {
     _modelIdentifier = [self physicalDeviceModelIdentifier];
   }
@@ -424,7 +423,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 }
 
 - (BOOL) isSimulator {
-  return [self simulatorModelIdentfier] != nil;
+  return [self simulatorModelIdentifier] ? YES : NO;
 }
 
 - (BOOL) isPhysicalDevice {

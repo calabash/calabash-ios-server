@@ -23,6 +23,8 @@ extern NSString *const LPDeviceSimKeyVersionInfo;
 
 + (LPDevice *) sharedDevice;
 
+
+- (NSString *) simulatorModelIdentifier;
 - (NSString *) simulatorVersionInfo;
 
 
