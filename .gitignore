@@ -46,6 +46,7 @@ ios-smoke-test-app
 calabash-ios
 run_loop
 
+Gemfile.lock
 .ruby-version
 .bundle
 
