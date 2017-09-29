@@ -137,7 +137,8 @@ CGFloat LP_MIN_FLOAT = INT32_MIN * 1.0;
     }
     return viewJson;
   }
-  else if ([object respondsToSelector:@selector(isAccessibilityElement)] && [object isAccessibilityElement]) {
+  else if ([object respondsToSelector:@selector(isAccessibilityElement)] &&
+      [object isAccessibilityElement]) {
     NSMutableDictionary *viewJson = [self jsonifyAccessibilityElement:object];
     if (dump) {
       [self dumpAccessibilityElement:object toDictionary:viewJson];
