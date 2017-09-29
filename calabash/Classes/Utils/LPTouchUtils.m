@@ -3,7 +3,6 @@
 //  Created by Karl Krukow on 14/08/11.
 //  Copyright 2011 LessPainful. All rights reserved.
 //
-#import <sys/utsname.h>
 #import <math.h>
 #import "LPTouchUtils.h"
 #import "LPDevice.h"
