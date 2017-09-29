@@ -78,7 +78,8 @@
     CGPoint finalCenter = [LPTouchUtils translateToScreenCoords:keyCenter];
 
     if (includeInvisible || [self point:center isVisibleInWebview:webView]) {
-      NSDictionary *centerDict = (__bridge_transfer NSDictionary *)CGPointCreateDictionaryRepresentation(finalCenter);
+      NSDictionary *centerDict;
+      centerDict = (__bridge_transfer NSDictionary *)CGPointCreateDictionaryRepresentation(finalCenter);
       [dres setValue:centerDict forKey:@"center"];
       [dres setValue:webView forKey:@"webView"];
 
@@ -91,7 +92,7 @@
        When doing iframe queries, we need to store all of the information needed to
        recreate the iframe query in case subsequent tokens from the original
        query string need to traverse further into the iframe.
-       
+
        E.g., UIWebView css:'iframe' css:'#myElement'
        */
       if ([dres[NODE_NAME_KEY] isEqualToString:IFRAME_KEY]) {
@@ -146,23 +147,26 @@
                                        domChildRect.size.width,
                                        domChildRect.size.height);
 
-    CGRect translatedRect = [LPTouchUtils translateRect:domChildBounds inView:webView.scrollView];
+    CGRect translatedRect = [LPTouchUtils translateRect:domChildBounds
+                                                 inView:webView.scrollView];
 
     CGFloat center_x = translatedRect.origin.x + translatedRect.size.width/2.0f;
     CGFloat center_y = translatedRect.origin.y + translatedRect.size.height/2.0f;
 
     CGPoint contentOffset = [webView.scrollView contentOffset];
-    CGPoint boundsCenterInScrollView = CGPointMake(contentOffset.x + domChildBounds.origin.x + domChildBounds.size.width/2.0f,
-                                                   contentOffset.y + domChildBounds.origin.y + domChildBounds.size.height/2.0f);
+    CGPoint boundsCenterInScrollView;
+    boundsCenterInScrollView = CGPointMake(contentOffset.x + domChildBounds.origin.x +
+                                           domChildBounds.size.width/2.0f,
+                                           contentOffset.y + domChildBounds.origin.y +
+                                           domChildBounds.size.height/2.0f);
 
-    NSMutableDictionary *rectDict = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-                                     @(center_x), @"center_x",
-                                     @(center_y), @"center_y",
-                                     @(translatedRect.origin.x), @"x",
-                                     @(translatedRect.origin.y), @"y",
-                                     @(translatedRect.size.width), @"width",
-                                     @(translatedRect.size.height), @"height",
-                                     nil];
+    NSMutableDictionary *rectDict = [@{@"center_x": @(center_x),
+                                       @"center_y": @(center_y),
+                                       @"x"       : @(translatedRect.origin.x),
+                                       @"y"       : @(translatedRect.origin.y),
+                                       @"width"   : @(translatedRect.size.width),
+                                       @"height"  : @(translatedRect.size.height)
+                                       } mutableCopy];
 
     NSMutableDictionary *augmentedChild = [NSMutableDictionary dictionaryWithDictionary:domChild];
     augmentedChild[@"rect"] = rectDict;
@@ -171,11 +175,13 @@
       augmentedChild[@"type"] = @"dom";
     }
 
-    if (!CGPointEqualToPoint(CGPointZero, boundsCenterInScrollView) && [webView.scrollView pointInside:boundsCenterInScrollView withEvent:nil]) {
+    if (!CGPointEqualToPoint(CGPointZero, boundsCenterInScrollView) &&
+        [webView.scrollView pointInside:boundsCenterInScrollView withEvent:nil]) {
       [augmentedChild setValue:@(1) forKeyPath:@"visible"];
 
       UIWindow *windowForView = [LPTouchUtils windowForView:webView];
-      CGPoint windowBounds = [windowForView convertPoint:boundsCenterInScrollView fromView:webView.scrollView];
+      CGPoint windowBounds = [windowForView convertPoint:boundsCenterInScrollView
+                                                fromView:webView.scrollView];
       UIView *hitView = [windowForView hitTest:windowBounds withEvent:nil];
       if (![LPTouchUtils canFindView:webView asSubViewInView:hitView]) {
         UIView *hitSuperView = hitView;
