@@ -92,7 +92,7 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
                                                  data:nil];
   NSData *jsonData = [[LPJSONUtils serializeDictionary:version]
                       dataUsingEncoding:NSUTF8StringEncoding];
-  
+
   return [[LPHTTPDataResponse alloc] initWithData:jsonData];
 }
 

@@ -10,9 +10,9 @@
 //
 
 /*
-https://github.com/facebook/WebDriverAgent/blob/master/LICENSE
+ https://github.com/facebook/WebDriverAgent/blob/master/LICENSE
 
-UIDevice + Wifi Address
+ UIDevice + Wifi Address
  BSD License
 
  For WebDriverAgent software
@@ -131,7 +131,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 - (id) init {
   @throw [NSException exceptionWithName:@"Cannot call init"
                                  reason:@"This is a singleton class"
-                                 userInfo:nil];
+                               userInfo:nil];
 }
 
 + (LPDevice *) sharedDevice {
