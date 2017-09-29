@@ -57,9 +57,8 @@
   // in the windows list, but stores it instead in the -keyWindow property. To
   // fix that, check if the array of windows contains the key window, and
   // explicitly add it if needed.
-  //
-  NSMutableArray *allWindows = [[[[UIApplication sharedApplication] windows]
-          mutableCopy] autorelease];
+  NSArray *appWindows = [[UIApplication sharedApplication] windows];
+  NSMutableArray *allWindows = [NSMutableArray arrayWithArray:appWindows];
   UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
   if (keyWindow && ![allWindows containsObject:keyWindow]) {
     [allWindows addObject:keyWindow];
