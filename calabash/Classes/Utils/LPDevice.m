@@ -186,6 +186,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   UIScreen *screen = [UIScreen mainScreen];
   CGSize screenSize = screen.bounds.size;
   CGFloat screenHeight = MAX(screenSize.height, screenSize.width);
+  CGFloat screenWidth = MIN(screenSize.height, screenSize.width);
   CGFloat scale = screen.scale;
 
   CGFloat nativeScale = scale;
@@ -212,6 +213,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   LPLogDebug(@" Current screen mode: %@", screenMode);
   LPLogDebug(@"Screen size for mode: %@", NSStringFromCGSize(screenSizeForMode));
   LPLogDebug(@"       Screen height: %@", @(screenHeight));
+  LPLogDebug(@"        Screen width: %@", @(screenWidth));
   LPLogDebug(@"        Screen scale: %@", @(scale));
   LPLogDebug(@" Screen native scale: %@", @(nativeScale));
   LPLogDebug(@"Pixel Aspect Ratio: %@", @(pixelAspectRatio));
@@ -270,6 +272,13 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   if (_screenDimensions) { return _screenDimensions; }
 
   UIScreen *screen = [UIScreen mainScreen];
+  CGRect bounds = [screen bounds];
+  NSDictionary *boundsDict = @{
+                               @"x" : @(bounds.origin.x),
+                               @"y" : @(bounds.origin.y),
+                               @"width" : @(bounds.size.width),
+                               @"height" : @(bounds.size.height)
+                               };
   UIScreenMode *screenMode = [screen currentMode];
   CGSize size = screenMode.size;
   CGFloat scale = screen.scale;
@@ -283,6 +292,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
                         @"height" : @(size.height),
                         @"width" : @(size.width),
                         @"scale" : @(scale),
+                        @"bounds" : boundsDict,
                         @"sample" : @([self sampleFactor]),
                         @"native_scale" : @(nativeScale)
                         };
@@ -331,7 +341,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     @"iPhone9,2" : @"iphone 6+",
     @"iPhone9,4" : @"iphone 6+",
 
-    // iPhone 8/8+/X - derived from Simulator
+    // iPhone 8/8+/X
     @"iPhone10,1" : @"iphone 6",
     @"iPhone10,4" : @"iphone 6",
     @"iPhone10,5" : @"iphone 6+",
@@ -339,21 +349,23 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     @"iPhone10,3" : @"iphone 10",
     @"iPhone10,6" : @"iphone 10",
 
-    // iPad Pro 13in
-    @"iPad6,7" : @"ipad pro",
-    @"iPad6,8" : @"ipad pro",
+    // iPad Pro 12.9in
+    @"iPad6,7" : @"ipad pro 12.9",
+    @"iPad6,8" : @"ipad pro 12.9",
+    @"iPad7,1" : @"ipad pro 12.9",
+    @"iPad7,2" : @"ipad pro 12.9",
 
-    // iPad Pro 9in
-    @"iPad6,3" : @"ipad pro",
-    @"iPad6,4" : @"ipad pro",
-    @"iPad6,11" : @"ipad pro",
-    @"iPad6,12" : @"ipad pro",
+    // iPad Pro 9.7in
+    @"iPad6,3" : @"ipad pro 9.7",
+    @"iPad6,4" : @"ipad pro 9.7",
+
+    // iPad 9.7 in
+    @"iPad6,11" : @"ipad 9.7",
+    @"iPad6,12" : @"ipad 9.7",
 
     // iPad Pro 10.5in
-    @"iPad7,4" : @"ipad pro",
-    @"iPad7,3" : @"ipad pro",
-    @"iPad7,2" : @"ipad pro",
-    @"iPad7,1" : @"ipad pro"
+    @"iPad7,4" : @"ipad pro 10.5",
+    @"iPad7,3" : @"ipad pro 10.5"
 
     };
 
@@ -448,16 +460,32 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   return [[self formFactor] isEqualToString:@"iphone 6+"];
 }
 
+- (BOOL) isIPhone {
+  return [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone;
+}
+
 - (BOOL) isIPad {
   return [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
 }
 
 - (BOOL) isIPadPro {
-  return [[self formFactor] isEqualToString:@"ipad pro"];
+  return [[self formFactor] containsString:@"ipad pro"];
+}
+
+- (BOOL) isIPadPro12point9inch {
+  return [[self modelIdentifier] isEqualToString:@"ipad pro 12.9"];
+}
+
+- (BOOL) isIPadPro9point7inch {
+  return [[self modelIdentifier] isEqualToString:@"ipad pro 9.7"];
+}
+
+- (BOOL) isIPad9point7inch {
+  return [[self modelIdentifier] isEqualToString:@"ipad 9.7"];
 }
 
 - (BOOL) isIPadPro10point5inch {
-  return [[self modelIdentifier] containsString:@"iPad7"];
+  return [[self modelIdentifier] isEqualToString:@"ipad pro 10.5"];
 }
 
 - (BOOL) isIPhone4Like {
