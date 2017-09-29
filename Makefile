@@ -25,6 +25,9 @@ dylibs:
 webquery_headers:
 	bundle exec bin/make/insert-js-into-webquery-headers.rb
 
+unit-tests:
+	$(MAKE) xctests
+
 xct:
 	$(MAKE) xctests
 
