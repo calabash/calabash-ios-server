@@ -1,4 +1,7 @@
-//
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
 //  LPTouchUtils.m
 //  Created by Karl Krukow on 14/08/11.
 //  Copyright 2011 LessPainful. All rights reserved.
@@ -345,14 +348,14 @@
       [view respondsToSelector:@selector(accessibilityElementAtIndex:)]) {
     NSInteger count = [view accessibilityElementCount];
     if (count == 0 || count == NSNotFound) {
-      return [arr autorelease];
+      return [NSArray arrayWithArray:arr];
     }
     for (NSInteger i=0;i<count;i++) {
       id accEl = [view accessibilityElementAtIndex:i];
       [arr addObject:accEl];
     }
   }
-  return [arr autorelease];
+  return [NSArray arrayWithArray:arr];
 }
 
 
@@ -376,7 +379,7 @@
   if ([viewOrDom isKindOfClass:[UIView class]]) {
     UIView *view = (UIView *) viewOrDom;
 
-    UIColor *originalBackgroundColor = [view.backgroundColor retain];
+    UIColor *originalBackgroundColor = view.backgroundColor;
     CGFloat originalAlpha = view.alpha;
     for (NSUInteger i = 0; i < 5; i++) {
       view.backgroundColor = [UIColor yellowColor];
@@ -392,7 +395,6 @@
     }
     view.alpha = originalAlpha;
     view.backgroundColor = originalBackgroundColor;
-    [originalBackgroundColor release];
   } else {
     //TODO implement flash in JavaScript
   }
