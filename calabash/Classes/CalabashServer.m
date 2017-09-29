@@ -26,7 +26,6 @@
 #import "LPUIARouteOverSharedElement.h"
 #import "LPUIATapRoute.h"
 #import "LPUIATapRouteOverSharedElement.h"
-#import "LPKeyboardRoute.h"
 #import "LPLocationRoute.h"
 #import "LPDebugRoute.h"
 #import "LPDumpRoute.h"
@@ -125,10 +124,6 @@
     [LPRouter addRoute:rr forPath:@"record"];
     [rr release];
 
-    //        LPPlaybackRoute *pr =[LPPlaybackRoute new];
-    //        [LPRouter addRoute:pr forPath:@"/play"];
-    //        [pr release];
-    //
     LPAsyncPlaybackRoute *apr = [LPAsyncPlaybackRoute new];
     [LPRouter addRoute:apr forPath:@"play"];
     [apr release];
@@ -168,10 +163,6 @@
     LPConditionRoute *cond = [LPConditionRoute new];
     [LPRouter addRoute:cond forPath:@"condition"];
     [cond release];
-
-    LPKeyboardRoute *keyboard = [LPKeyboardRoute new];
-    [LPRouter addRoute:keyboard forPath:@"keyboard"];
-    [keyboard release];
 
     LPKeyboardLanguageRoute *keyboard_language = [LPKeyboardLanguageRoute new];
     [LPRouter addRoute:keyboard_language forPath:@"keyboard-language"];

@@ -89,7 +89,6 @@
 		B15BF9BF19ABB1DE00B38577 /* LPUIATapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B164575518FDCE4900CAA25A /* LPUIATapRoute.m */; };
 		B15BF9C019ABB1DE00B38577 /* LPLocationRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1CED0FA183E9551004793B9 /* LPLocationRoute.m */; };
 		B15BF9C119ABB1DE00B38577 /* LPUserPrefRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CC15C06CB500BBE2BE /* LPUserPrefRoute.m */; };
-		B15BF9C219ABB1DE00B38577 /* LPKeyboardRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F715BC200300408364 /* LPKeyboardRoute.m */; };
 		B15BF9C319ABB1DE00B38577 /* LPGenericAsyncRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F315BC1ECD00408364 /* LPGenericAsyncRoute.m */; };
 		B15BF9C419ABB1DE00B38577 /* LPConditionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B163213415BBF13200408364 /* LPConditionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9C519ABB1DE00B38577 /* LPInterpolateRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A04011511546F002FA032 /* LPInterpolateRoute.m */; };
@@ -159,7 +158,6 @@
 		B1D5BD9319A23BCE0070E8CE /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		B1D5BD9419A23BCE0070E8CE /* LPUIARouteOverUserPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CA15C06CB500BBE2BE /* LPUIARouteOverUserPrefs.m */; };
 		B1D5BD9519A23BCE0070E8CE /* LPUserPrefRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CC15C06CB500BBE2BE /* LPUserPrefRoute.m */; };
-		B1D5BD9619A23BCE0070E8CE /* LPKeyboardRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F715BC200300408364 /* LPKeyboardRoute.m */; };
 		B1D5BD9719A23BCE0070E8CE /* LPGenericAsyncRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F315BC1ECD00408364 /* LPGenericAsyncRoute.m */; };
 		B1D5BD9819A23BCE0070E8CE /* LPConditionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B163213415BBF13200408364 /* LPConditionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BD9919A23BCE0070E8CE /* LPInterpolateRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A04011511546F002FA032 /* LPInterpolateRoute.m */; };
@@ -267,7 +265,6 @@
 		F5091BF418C4E1D700C85307 /* LPRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE8714B6DBAC002A744C /* LPRecorder.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091BF518C4E1D700C85307 /* LPUIARouteOverUserPrefs.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CA15C06CB500BBE2BE /* LPUIARouteOverUserPrefs.m */; };
 		F5091BF618C4E1D700C85307 /* LPUserPrefRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CC15C06CB500BBE2BE /* LPUserPrefRoute.m */; };
-		F5091BF718C4E1D700C85307 /* LPKeyboardRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F715BC200300408364 /* LPKeyboardRoute.m */; };
 		F5091BF818C4E1D700C85307 /* LPGenericAsyncRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F315BC1ECD00408364 /* LPGenericAsyncRoute.m */; };
 		F5091BF918C4E1D700C85307 /* LPConditionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B163213415BBF13200408364 /* LPConditionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091BFA18C4E1D700C85307 /* LPInterpolateRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A04011511546F002FA032 /* LPInterpolateRoute.m */; };
@@ -363,7 +360,6 @@
 		F50CBFA51A0405B2004AC9DA /* LPUIATapRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B164575518FDCE4900CAA25A /* LPUIATapRoute.m */; };
 		F50CBFA61A0405B2004AC9DA /* LPLocationRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1CED0FA183E9551004793B9 /* LPLocationRoute.m */; };
 		F50CBFA71A0405B2004AC9DA /* LPUserPrefRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B1DDE6CC15C06CB500BBE2BE /* LPUserPrefRoute.m */; };
-		F50CBFA81A0405B2004AC9DA /* LPKeyboardRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F715BC200300408364 /* LPKeyboardRoute.m */; };
 		F50CBFA91A0405B2004AC9DA /* LPGenericAsyncRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B16321F315BC1ECD00408364 /* LPGenericAsyncRoute.m */; };
 		F50CBFAA1A0405B2004AC9DA /* LPConditionRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B163213415BBF13200408364 /* LPConditionRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBFAB1A0405B2004AC9DA /* LPInterpolateRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = B12A04011511546F002FA032 /* LPInterpolateRoute.m */; };
@@ -781,8 +777,6 @@
 		B163213415BBF13200408364 /* LPConditionRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPConditionRoute.m; sourceTree = "<group>"; };
 		B16321F215BC1ECD00408364 /* LPGenericAsyncRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPGenericAsyncRoute.h; sourceTree = "<group>"; };
 		B16321F315BC1ECD00408364 /* LPGenericAsyncRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPGenericAsyncRoute.m; sourceTree = "<group>"; };
-		B16321F615BC200300408364 /* LPKeyboardRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPKeyboardRoute.h; sourceTree = "<group>"; };
-		B16321F715BC200300408364 /* LPKeyboardRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPKeyboardRoute.m; sourceTree = "<group>"; };
 		B164575518FDCE4900CAA25A /* LPUIATapRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LPUIATapRoute.m; sourceTree = "<group>"; };
 		B164575618FDCE4900CAA25A /* LPUIATapRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LPUIATapRoute.h; sourceTree = "<group>"; };
 		B16C307F15191A8C00DAA3FA /* calabash-min.js */ = {isa = PBXFileReference; fileEncoding = 1; lastKnownFileType = sourcecode.javascript; lineEnding = 0; path = "calabash-min.js"; sourceTree = "<group>"; };
@@ -1457,8 +1451,6 @@
 				B1CED0FA183E9551004793B9 /* LPLocationRoute.m */,
 				B1DDE6CB15C06CB500BBE2BE /* LPUserPrefRoute.h */,
 				B1DDE6CC15C06CB500BBE2BE /* LPUserPrefRoute.m */,
-				B16321F615BC200300408364 /* LPKeyboardRoute.h */,
-				B16321F715BC200300408364 /* LPKeyboardRoute.m */,
 				B16321F215BC1ECD00408364 /* LPGenericAsyncRoute.h */,
 				B16321F315BC1ECD00408364 /* LPGenericAsyncRoute.m */,
 				B163213315BBF13200408364 /* LPConditionRoute.h */,
@@ -2597,7 +2589,6 @@
 				B15BF9BF19ABB1DE00B38577 /* LPUIATapRoute.m in Sources */,
 				B15BF9C019ABB1DE00B38577 /* LPLocationRoute.m in Sources */,
 				B15BF9C119ABB1DE00B38577 /* LPUserPrefRoute.m in Sources */,
-				B15BF9C219ABB1DE00B38577 /* LPKeyboardRoute.m in Sources */,
 				B15BF9C319ABB1DE00B38577 /* LPGenericAsyncRoute.m in Sources */,
 				B15BF9C419ABB1DE00B38577 /* LPConditionRoute.m in Sources */,
 				B15BF9C519ABB1DE00B38577 /* LPInterpolateRoute.m in Sources */,
@@ -2703,7 +2694,6 @@
 				F576058E1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */,
 				B1D5BD9519A23BCE0070E8CE /* LPUserPrefRoute.m in Sources */,
 				F56630951A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */,
-				B1D5BD9619A23BCE0070E8CE /* LPKeyboardRoute.m in Sources */,
 				B1F772151A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */,
 				B1D5BD9719A23BCE0070E8CE /* LPGenericAsyncRoute.m in Sources */,
 				B1F772091A22A35A009A2336 /* LPUIARouteOverSharedElement.m in Sources */,
@@ -2827,7 +2817,6 @@
 				F5B27B9118C5884D0049B5FF /* CalabashServer.m in Sources */,
 				F5091BF518C4E1D700C85307 /* LPUIARouteOverUserPrefs.m in Sources */,
 				F5091BF618C4E1D700C85307 /* LPUserPrefRoute.m in Sources */,
-				F5091BF718C4E1D700C85307 /* LPKeyboardRoute.m in Sources */,
 				F56630921A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */,
 				F5091BF818C4E1D700C85307 /* LPGenericAsyncRoute.m in Sources */,
 				B1F772121A22A35A009A2336 /* LPUIATapRouteOverSharedElement.m in Sources */,
@@ -2956,7 +2945,6 @@
 				F50CBFC91A0405E9004AC9DA /* LPEnv.m in Sources */,
 				F56630981A39B09C00DEA0C0 /* LPInfoPlist.m in Sources */,
 				F5A33A4C1AC009B600224639 /* LPWebQueryResult.m in Sources */,
-				F50CBFA81A0405B2004AC9DA /* LPKeyboardRoute.m in Sources */,
 				F50CBF881A040564004AC9DA /* LPDDRange.m in Sources */,
 				F50CBF771A03F69A004AC9DA /* LPTestToolsStandup.m in Sources */,
 				F5A8B4A91B39BFEB00F390CA /* LPTTYLogger.m in Sources */,
