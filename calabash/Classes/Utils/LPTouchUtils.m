@@ -53,8 +53,9 @@
 }
 
 + (NSArray *) applicationWindows {
-  // iOS flatdacted apparently doesn't list the "real" window containing alerts in the windows list, but stores it
-  // instead in the -keyWindow property. To fix that, check if the array of windows contains the key window, and
+  // iOS flatdacted apparently doesn't list the "real" window containing alerts
+  // in the windows list, but stores it instead in the -keyWindow property. To
+  // fix that, check if the array of windows contains the key window, and
   // explicitly add it if needed.
   //
   NSMutableArray *allWindows = [[[[UIApplication sharedApplication] windows]
@@ -67,7 +68,6 @@
   return allWindows;
 }
 
-
 + (UIWindow *) windowForView:(UIView *) view {
   id v = view;
   while (v && ![v isKindOfClass:[UIWindow class]]) {
@@ -75,7 +75,6 @@
   }
   return v;
 }
-
 
 + (NSInteger) indexOfView:(UIView *) viewToFind asSubViewInView:(UIView *) viewToSearch {
   //Assume viewToFind != viewToSearch
@@ -90,14 +89,12 @@
   return -1;
 }
 
-
 + (BOOL) canFindView:(UIView *) viewToFind asSubViewInView:(UIView *) viewToSearch {
   if (viewToFind == viewToSearch) {return YES;}
   if (viewToFind == nil || viewToSearch == nil) {return NO;}
   NSInteger index = [self indexOfView:viewToFind asSubViewInView:viewToSearch];
   return index != -1;
 }
-
 
 + (BOOL) isViewOrParentsHidden:(UIView *) view {
   if ([view alpha] <= 0.05) {
@@ -113,8 +110,10 @@
   return NO;
 }
 
-
-+ (UIView *) findCommonAncestorForView:(UIView *) viewToCheck andView:(UIView *) otherView firstIndex:(NSInteger *) firstIndexPtr secondIndex:(NSInteger *) secondIndexPtr {
++ (UIView *) findCommonAncestorForView:(UIView *) viewToCheck
+                               andView:(UIView *) otherView
+                            firstIndex:(NSInteger *) firstIndexPtr
+                           secondIndex:(NSInteger *) secondIndexPtr {
   UIView *parent = [otherView superview];
   NSInteger parentIndex = [[parent subviews] indexOfObject:otherView];
   NSInteger viewToCheckIndex = [self indexOfView:viewToCheck
@@ -156,7 +155,8 @@
 
   CGRect viewRect = [view frame];
   if (!(isfinite(viewRect.origin.x) && isfinite(viewRect.origin.y))) {
-    //we don't consider this visible although there is a theorectical infinite view which would be
+    // we don't consider this visible although there is a theoretical infinite
+    // view which would be (visible)
     return NO;
   }
 
@@ -330,7 +330,7 @@
   return delegateWindow;
 }
 
-+(NSArray*)accessibilityChildrenFor:(id)view {
++ (NSArray *) accessibilityChildrenFor:(id) view {
   NSMutableArray *arr = [[NSMutableArray alloc] initWithCapacity:32];
   if ([view respondsToSelector:@selector(subviews)]) {
     [arr addObjectsFromArray:[view subviews]];
@@ -366,8 +366,6 @@
 //  Contribution by kra: https://github.com/calabash/calabash-ios-server/pull/15/files
 //  Modified 22.04.2013 by Karl Krukow, Xamarin (karl.krukow@xamarin.com)
 //      refactor from category method
-//
-
 + (void) flashView:(id) viewOrDom forDuration:(NSUInteger) duration {
   if ([viewOrDom isKindOfClass:[UIView class]]) {
     UIView *view = (UIView *) viewOrDom;
