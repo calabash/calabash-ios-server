@@ -79,9 +79,9 @@
   //Assume viewToFind != viewToSearch
   if (viewToFind == nil || viewToSearch == nil) {return -1;}
   NSArray *subViews = [viewToSearch subviews];
-  for (NSInteger i = 0; i < [subViews count]; i++) {
-    UIView *subView = [subViews objectAtIndex:i];
-    if ([self canFindView:viewToFind asSubViewInView:subView]) {
+  for (NSUInteger i = 0; i < [subViews count]; i++) {
+    UIView *subView = subViews[i];
+    if ([LPTouchUtils canFindView:viewToFind asSubViewInView:subView]) {
       return i;
     }
   }
@@ -91,7 +91,7 @@
 + (BOOL) canFindView:(UIView *) viewToFind asSubViewInView:(UIView *) viewToSearch {
   if (viewToFind == viewToSearch) {return YES;}
   if (viewToFind == nil || viewToSearch == nil) {return NO;}
-  NSInteger index = [self indexOfView:viewToFind asSubViewInView:viewToSearch];
+  NSInteger index = [LPTouchUtils indexOfView:viewToFind asSubViewInView:viewToSearch];
   return index != -1;
 }
 
@@ -115,13 +115,13 @@
                            secondIndex:(NSInteger *) secondIndexPtr {
   UIView *parent = [otherView superview];
   NSInteger parentIndex = [[parent subviews] indexOfObject:otherView];
-  NSInteger viewToCheckIndex = [self indexOfView:viewToCheck
-                                 asSubViewInView:parent];
+  NSInteger viewToCheckIndex = [LPTouchUtils indexOfView:viewToCheck
+                                         asSubViewInView:parent];
   while (parent && (viewToCheckIndex == -1)) {
     UIView *nextParent = [parent superview];
     parentIndex = [[nextParent subviews] indexOfObject:parent];
     parent = nextParent;
-    viewToCheckIndex = [self indexOfView:viewToCheck asSubViewInView:parent];
+    viewToCheckIndex = [LPTouchUtils indexOfView:viewToCheck asSubViewInView:parent];
   }
   if (viewToCheckIndex && parent) {
     *firstIndexPtr = viewToCheckIndex;
@@ -138,18 +138,22 @@
   NSInteger firstIndex = -1;
   NSInteger secondIndex = -1;
 
-  UIView *commonAncestor = [self findCommonAncestorForView:viewToCheck
-                                                   andView:otherView
-                                                firstIndex:&firstIndex
-                                               secondIndex:&secondIndex];
+  UIView *commonAncestor = [LPTouchUtils findCommonAncestorForView:viewToCheck
+                                                           andView:otherView
+                                                        firstIndex:&firstIndex
+                                                       secondIndex:&secondIndex];
   if (!commonAncestor || firstIndex == -1 || secondIndex == -1) {return NO;}
   return firstIndex > secondIndex;
 }
 
 
 + (BOOL) isViewVisible:(UIView *) view {
-  if (![view isKindOfClass:[UIView class]] || [self isViewOrParentsHidden:view]) {return NO;}
-  UIWindow *windowForView = [self windowForView:view];
+  if (![view isKindOfClass:[UIView class]] ||
+      [LPTouchUtils isViewOrParentsHidden:view]) {
+    return NO;
+  }
+
+  UIWindow *windowForView = [LPTouchUtils windowForView:view];
   if (!windowForView) {return YES;/* what can I do?*/}
 
   CGRect viewRect = [view frame];
@@ -159,10 +163,10 @@
     return NO;
   }
 
-  CGPoint center = [self centerOfView:view inWindow:windowForView];
+  CGPoint center = [LPTouchUtils centerOfView:view inWindow:windowForView];
 
   UIView *hitView = [windowForView hitTest:center withEvent:nil];
-  if ([self canFindView:view asSubViewInView:hitView]) {
+  if ([LPTouchUtils canFindView:view asSubViewInView:hitView]) {
     return YES;
   }
   UIView *hitSuperView = hitView;
@@ -177,8 +181,8 @@
   if (![view isKindOfClass:[UIControl class]]) {
     //there may be a case with a non-control (e.g., label)
     //on top of a control visually but not logically
-    UIWindow *viewWin = [self windowForView:view];
-    UIWindow *hitWin = [self windowForView:hitView];
+    UIWindow *viewWin = [LPTouchUtils windowForView:view];
+    UIWindow *hitWin = [LPTouchUtils windowForView:hitView];
     if (viewWin == hitWin)//common window
     {
 
@@ -187,8 +191,8 @@
       CGRect viewBounds = [viewWin convertRect:view.bounds fromView:view];
 
       if (CGRectContainsRect(hitViewBounds, viewBounds) &&
-          [self isView:hitView zIndexAboveView:view] &&
-          ![self isViewTransparent:hitView]) {
+          [LPTouchUtils isView:hitView zIndexAboveView:view] &&
+          ![LPTouchUtils isViewTransparent:hitView]) {
         //In this case the hitView (which we're not asking about)
         //is completely overlapping the view and "above" it in the container.
         return NO;
