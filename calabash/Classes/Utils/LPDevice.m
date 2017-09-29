@@ -152,7 +152,6 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   return self;
 }
 
-#pragma mark - Convenience Methods for Testing
 
 - (UIScreen *) mainScreen {
   return [UIScreen mainScreen];
