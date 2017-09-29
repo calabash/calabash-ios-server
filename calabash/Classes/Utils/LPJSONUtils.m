@@ -138,7 +138,7 @@ CGFloat LP_MIN_FLOAT = INT32_MIN * 1.0;
     return viewJson;
   }
   else if ([object respondsToSelector:@selector(isAccessibilityElement)] &&
-      [object isAccessibilityElement]) {
+           [object isAccessibilityElement]) {
     NSMutableDictionary *viewJson = [self jsonifyAccessibilityElement:object];
     if (dump) {
       [self dumpAccessibilityElement:object toDictionary:viewJson];
@@ -370,7 +370,7 @@ CGFloat LP_MIN_FLOAT = INT32_MIN * 1.0;
   [LPJSONUtils dictionary:result
        ensureObjectForKey:@"hint"
                withTarget:object
-               selector:@selector(accessibilityHint)];
+                 selector:@selector(accessibilityHint)];
 
   [LPJSONUtils dictionary:result
        ensureObjectForKey:@"value"
