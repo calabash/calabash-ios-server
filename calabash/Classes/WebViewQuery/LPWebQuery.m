@@ -112,9 +112,9 @@
 }
 
 
-+ (NSDictionary *) dictionaryByAugmentingDOMElement:(NSDictionary *) domElement
-                                            webView:(UIView<LPWebViewProtocol> *) webView
-                              accumlateInDictionary:(NSMutableDictionary *) accumulator {
++ (NSDictionary *)dictionaryByAugmentingDOMElement:(NSDictionary *)domElement
+                                           webView:(UIView <LPWebViewProtocol> *)webView
+                            accumulateInDictionary:(NSMutableDictionary *) accumulator {
 
   CGPoint webViewPageOffset = [LPWebQuery pointByAdjustingOffsetForScrollPositionOfWebView:webView];
 
@@ -186,16 +186,16 @@
       [augmentedChild setValue:@(0) forKeyPath:@"visible"];
     }
 
-    [self dictionaryByAugmentingDOMElement:domChild
-                                   webView:webView
-                     accumlateInDictionary:augmentedChild];
+    [LPWebQuery dictionaryByAugmentingDOMElement:domChild
+                                         webView:webView
+                          accumulateInDictionary:augmentedChild];
     [children addObject:augmentedChild];
   }
   accumulator[@"children"] = children;
   return accumulator;
 }
 
-+ (CGPoint) pointByAdjustingOffsetForScrollPostionOfWebView:(UIView<LPWebViewProtocol> *) webView {
++ (CGPoint) pointByAdjustingOffsetForScrollPositionOfWebView:(UIView<LPWebViewProtocol> *) webView {
   CGPoint webViewPageOffset = CGPointMake(0, 0);
   if ([webView respondsToSelector:@selector(scrollView)]) {
     id scrollView = [webView performSelector:@selector(scrollView) withObject:nil];
