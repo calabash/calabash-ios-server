@@ -14,6 +14,8 @@
 #import "LPJSONUtils.h"
 #import "LPTouchUtils.h"
 #import "LPConstants.h"
+#import "LPCocoaLumberjack.h"
+#import "LPDevice.h"
 
 @implementation LPWebQuery
 
@@ -136,8 +138,8 @@
                                        domChildRect.size.width,
                                        domChildRect.size.height);
 
-    CGRect translatedRect = [LPTouchUtils translateRect:domChildBounds
-                                                 inView:webView.scrollView];
+    CGRect translatedRect = [LPWebQuery translateRect:domChildBounds
+                                               inView:webView.scrollView];
 
     CGFloat center_x = translatedRect.origin.x + translatedRect.size.width/2.0f;
     CGFloat center_y = translatedRect.origin.y + translatedRect.size.height/2.0f;
@@ -206,6 +208,19 @@
     }
   }
   return webViewPageOffset;
+}
+
++ (CGRect) translateRect:(CGRect)sourceRect inView:(UIView *) view {
+  UIWindow *window = [LPTouchUtils windowForView:view];
+  CGRect bounds = [window convertRect:view.bounds fromView:view];
+  CGRect rect = CGRectMake(bounds.origin.x + sourceRect.origin.x,
+          bounds.origin.y + sourceRect.origin.y,
+          sourceRect.size.width,
+          sourceRect.size.height);
+
+  UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
+  rect = [window convertRect:rect toCoordinateSpace:frontWindow];
+  return [LPTouchUtils rectByApplyingLetterBoxAndSampleFactorToRect:rect];
 }
 
 @end

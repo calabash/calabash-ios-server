@@ -16,7 +16,6 @@
 + (CGRect) rectByApplyingLetterBoxAndSampleFactorToRect:(CGRect) rect;
 + (CGPoint) centerOfView:(UIView *) view;
 + (CGPoint) centerOfView:(UIView *) view shouldTranslate:(BOOL) shouldTranslate;
-+ (CGRect)translateRect:(CGRect)rect inView:(UIView*) view;
 + (CGPoint) centerOfFrame:(CGRect) frame;
 + (CGPoint) centerOfView:(id) view withSuperView:(UIView *) superView inWindow:(id) window;
 + (BOOL) canFindView:(UIView *) viewToFind
