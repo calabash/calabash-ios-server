@@ -9,7 +9,7 @@
 #import <math.h>
 #import "LPTouchUtils.h"
 #import "LPDevice.h"
-
+#import "LPCocoaLumberjack.h"
 
 @implementation LPTouchUtils
 
@@ -87,6 +87,52 @@
   }
 }
 
++ (CGRect) rectByApplyingLetterBoxAndSampleFactorToRect:(CGRect) rect {
+  CGFloat x, y, width, height;
+
+  UIInterfaceOrientation orientation;
+  LPDevice *device = [LPDevice sharedDevice];
+
+  if ([device isIPhone10LetterBox]) {
+    orientation = [[UIApplication sharedApplication] statusBarOrientation];
+
+    CGFloat xOffset = [LPTouchUtils xOffsetForIPhone10LetterBox:orientation];
+    CGFloat yOffset = [LPTouchUtils yOffsetForIPhone10LetterBox:orientation];
+
+    CGFloat xScale = 1.0;
+    CGFloat yScale = 1.0;
+
+    if (UIInterfaceOrientationIsLandscape(orientation)) {
+      xScale = 624.0/667.0;
+      yScale = 350.0/375.0;
+    }
+
+    x = (rect.origin.x * xScale) + xOffset;
+    y = (rect.origin.y * yScale) + yOffset;
+    width = rect.size.width * xScale;
+    height = rect.size.height * yScale;
+  } else {
+    CGFloat sampleFactor = [device sampleFactor];
+    x = rect.origin.x * sampleFactor;
+    y = rect.origin.y * sampleFactor;
+    width = rect.size.width * sampleFactor;
+    height = rect.size.height * sampleFactor;
+
+    if ([device isLetterBox]) {
+      orientation = [[UIApplication sharedApplication] statusBarOrientation];
+      x = x + ([LPTouchUtils xOffsetFor4inchLetterBox:orientation] * sampleFactor);
+      y = y + ([LPTouchUtils yOffsetFor4inchLetterBox:orientation] * sampleFactor);
+    }
+  }
+
+  return CGRectMake(x, y, width, height);
+}
+
++ (CGPoint) centerByApplyingLetterBoxAndSampleFactorToRect:(CGRect) rect {
+  CGRect translated;
+  translated = [LPTouchUtils rectByApplyingLetterBoxAndSampleFactorToRect:rect];
+  return CGPointMake(CGRectGetMidX(translated), CGRectGetMidY(translated));
+}
 
 + (NSArray *) applicationWindows {
   // iOS flatdacted apparently doesn't list the "real" window containing alerts
