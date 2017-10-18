@@ -15,9 +15,6 @@
 + (CGFloat) yOffsetForIPhone10LetterBox:(UIInterfaceOrientation) orientation;
 + (CGRect) rectByApplyingLetterBoxAndSampleFactorToRect:(CGRect) rect;
 + (CGPoint) centerOfView:(UIView *) view;
-+ (CGPoint) centerOfView:(UIView *) view shouldTranslate:(BOOL) shouldTranslate;
-+ (CGPoint) centerOfFrame:(CGRect) frame;
-+ (CGPoint) centerOfView:(id) view withSuperView:(UIView *) superView inWindow:(id) window;
 + (BOOL) canFindView:(UIView *) viewToFind
      asSubViewInView:(UIView *) viewToSearch;
 + (CGPoint) centerOfFrame:(CGRect) frame

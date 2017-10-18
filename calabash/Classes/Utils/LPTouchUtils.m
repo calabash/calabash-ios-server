@@ -251,107 +251,49 @@
   return NO;
 }
 
-
+// Called by JSONUtils when serializing accessibility frames - should translate
+// is YES.  Changing the return value in the shouldTranslate branch will have
+// few consequences.
+//
+// Called by LPTouchUtils to determine visibility - should translate is NO.
+// Changing the !shouldTranslate could be extremely disruptive.
 + (CGPoint) centerOfFrame:(CGRect) rect shouldTranslate:(BOOL) shouldTranslate {
-  CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
-  CGPoint translated;
   if (shouldTranslate) {
-    translated = [self translateToScreenCoords:rect.origin
-                                  sampleFactor:sampleFactor];
+    return [LPTouchUtils centerByApplyingLetterBoxAndSampleFactorToRect:rect];
   } else {
-   translated = rect.origin;
+    LPDevice *device = [LPDevice sharedDevice];
+    CGFloat sampleFactor = [device sampleFactor];
+    CGPoint point = rect.origin;
+    CGFloat x, y;
+    x = point.x + 0.5 * rect.size.width * sampleFactor;
+    y = point.y + 0.5 * rect.size.height * sampleFactor;
+    return CGPointMake(x, y);
   }
-  
-  return CGPointMake(translated.x + 0.5 * rect.size.width * sampleFactor,
-                     translated.y + 0.5 * rect.size.height * sampleFactor);
-  
 }
 
++ (CGPoint) centerOfView:(UIView *) view {
+  UIWindow *window = [LPTouchUtils windowForView:view];
+  LPLogDebug(@"rect before converting: %@", NSStringFromCGRect(view.frame));
 
-+ (CGPoint) centerOfFrame:(CGRect) frame {
-  return [self centerOfFrame:frame shouldTranslate:YES];
-}
-
-
-+ (CGPoint) centerOfView:(UIView *) view shouldTranslate:(BOOL) shouldTranslate {
-  UIWindow *window = [self windowForView:view];
   CGRect rect = [window convertRect:view.bounds fromView:view];
+  LPLogDebug(@"rect after converting: %@", NSStringFromCGRect(rect));
 
   UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
+  rect = [window convertRect:rect toCoordinateSpace:frontWindow];
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-  if ([frontWindow respondsToSelector:@selector(convertPoint:toCoordinateSpace:)]) {
-    CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
-    rect = [window convertRect:rect toCoordinateSpace:frontWindow];
-    CGFloat x = (rect.origin.x + 0.5 * rect.size.width) * sampleFactor;
-    CGFloat y = (rect.origin.y + 0.5 * rect.size.height) * sampleFactor;
-    
-    if ([[LPDevice sharedDevice] isLetterBox]) {
-      UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-      if (UIInterfaceOrientationIsPortrait(orientation)) {
-        y += LPiPHONE4INCHOFFSET*sampleFactor;
-      }
-      else {
-        x += LPiPHONE4INCHOFFSET*sampleFactor;
-      }
-    }
-    return CGPointMake(x,y);
-  } else {
-    rect = [frontWindow convertRect:rect fromWindow:window];
-    return [self centerOfFrame:rect shouldTranslate:shouldTranslate];
-  }
-#else
-  rect = [frontWindow convertRect:rect fromWindow:window];
-  return [self centerOfFrame:rect shouldTranslate:shouldTranslate];
-#endif
+  LPLogDebug(@"rect after convert to coordinate space: %@",
+          NSStringFromCGRect(rect));
+
+  CGPoint point;
+  point = [LPTouchUtils centerByApplyingLetterBoxAndSampleFactorToRect:rect];
+
+  LPLogDebug(@"center of rect: %@", NSStringFromCGPoint(point));
+  return point;
 }
-
 
 + (CGPoint) centerOfView:(UIView *) view inWindow:(UIWindow *) windowForView {
   CGRect bounds = [windowForView convertRect:view.bounds fromView:view];
-  return [self centerOfFrame:bounds shouldTranslate:NO];
-}
-
-+ (CGRect)translateRect:(CGRect)sourceRect inView:(UIView*) view {
-  UIWindow *window = [self windowForView:view];
-  CGRect bounds = [window convertRect:view.bounds fromView:view];
-  CGRect rect = CGRectMake(bounds.origin.x + sourceRect.origin.x,
-                          bounds.origin.y + sourceRect.origin.y,
-                          sourceRect.size.width,
-                          sourceRect.size.height);
-
-
-  UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
-
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-  if ([frontWindow respondsToSelector:@selector(convertPoint:toCoordinateSpace:)]) {
-    CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
-    rect = [window convertRect:rect toCoordinateSpace:frontWindow];
-    CGFloat x = rect.origin.x;
-    CGFloat y = rect.origin.y;
-    if ([[LPDevice sharedDevice] isLetterBox]) {
-      UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-      if (UIInterfaceOrientationIsPortrait(orientation)) {
-        y += LPiPHONE4INCHOFFSET*sampleFactor;
-      }
-      else {
-        x += LPiPHONE4INCHOFFSET*sampleFactor;
-      }
-    }
-    return CGRectMake(x * sampleFactor, y * sampleFactor,
-                      rect.size.width * sampleFactor, rect.size.height * sampleFactor);
-  } else {
-    rect = [frontWindow convertRect:rect fromWindow:window];
-    CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
-    CGPoint translated = [self translateToScreenCoords:rect.origin sampleFactor:sampleFactor];
-    return CGRectMake(translated.x, translated.y, rect.size.width * sampleFactor, rect.size.height * sampleFactor);
-  }
-#else
-  rect = [frontWindow convertRect:rect fromWindow:window];
-  CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
-  CGPoint translated = [self translateToScreenCoords:rect.origin sampleFactor:sampleFactor];
-  return CGRectMake(translated.x, translated.y, rect.size.width * sampleFactor, rect.size.height * sampleFactor);
-#endif
+  return [LPTouchUtils centerOfFrame:bounds shouldTranslate:NO];
 }
 
 + (UIWindow *) appDelegateWindow {
@@ -393,18 +335,6 @@
     }
   }
   return [NSArray arrayWithArray:arr];
-}
-
-
-+ (CGPoint) centerOfView:(UIView *) view {
-  return [self centerOfView:view shouldTranslate:YES];
-}
-
-
-+ (CGPoint) centerOfView:(id) view withSuperView:(UIView *) superView inWindow:(id) window {
-
-  CGRect frameInWindow = [window convertRect:[view frame] fromView:superView];
-  return [self centerOfFrame:frameInWindow shouldTranslate:YES];
 }
 
 //  Created by Olivier Larivain on 3/6/13.
