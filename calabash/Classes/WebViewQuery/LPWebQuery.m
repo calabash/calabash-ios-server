@@ -65,7 +65,7 @@
     CGPoint windowCenter = [window convertPoint:center fromView:webView];
     CGPoint keyCenter = [frontWindow convertPoint:windowCenter
                                        fromWindow:window];
-    CGPoint finalCenter = [LPTouchUtils translateToScreenCoords:keyCenter];
+    CGPoint finalCenter = [LPWebQuery centerByApplyingLetterBoxAndSampleFactorToPoint:keyCenter];
 
     if (includeInvisible || [LPWebQuery point:center
                            isVisibleInWebview:webView]) {
@@ -221,6 +221,60 @@
   UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
   rect = [window convertRect:rect toCoordinateSpace:frontWindow];
   return [LPTouchUtils rectByApplyingLetterBoxAndSampleFactorToRect:rect];
+}
+
++ (CGPoint) centerByApplyingLetterBoxAndSampleFactorToPoint:(CGPoint) point {
+  LPLogDebug(@"Applying letter box and sample factors to point: %@",
+          NSStringFromCGPoint(point));
+
+  CGFloat x, y;
+
+  LPDevice *device = [LPDevice sharedDevice];
+
+  if ([device isIPad]) {
+    LPLogDebug(@"Device is an iPad or iPad Pro; returning the original point");
+    return point;
+  }
+
+  LPLogDebug(@"Device is an iPhone");
+  UIInterfaceOrientation orientation;
+  orientation = [[UIApplication sharedApplication] statusBarOrientation];
+
+  if ([device isIPhone10LetterBox] &&
+          UIInterfaceOrientationIsLandscape(orientation)) {
+    // iPhone 10 Letter Box in portrait just requires an offset on the y
+    // iPhone 10 Letter Box in landscape requires an x and y offset _and_ a scale
+    LPLogError(@"Detected that app is being displayed in letter box on iPhone 10");
+    LPLogError(@"Cannot translate point without access to the containing rect");
+    LPLogError(@"Returning the original point: %@", NSStringFromCGPoint(point));
+    return point;
+  }
+
+  CGFloat xOffset = 0.0;
+  CGFloat yOffset = 0.0;
+
+  if ([device isIPhone10LetterBox]) {
+    LPLogDebug(@"Device is an iPhone 10 in letter box");
+    xOffset = [LPTouchUtils xOffsetForIPhone10LetterBox:orientation];
+    yOffset = [LPTouchUtils yOffsetForIPhone10LetterBox:orientation];
+  } else if ([device isLetterBox]) {
+    LPLogDebug(@"Device is an iPhone 4 inch in letter box");
+    xOffset = [LPTouchUtils xOffsetFor4inchLetterBox:orientation];
+    yOffset = [LPTouchUtils yOffsetFor4inchLetterBox:orientation];
+  } else {
+    LPLogDebug(@"Device is an iPhone");
+  }
+
+  CGFloat sampleFactor = [device sampleFactor];
+
+  x = (point.x + xOffset) * sampleFactor;
+  y = (point.y + yOffset) * sampleFactor;
+
+  CGPoint translated = CGPointMake(x, y);
+  LPLogDebug(@"  original: %@", NSStringFromCGPoint(point));
+  LPLogDebug(@"translated: %@", NSStringFromCGPoint(translated));
+
+  return translated;
 }
 
 @end
