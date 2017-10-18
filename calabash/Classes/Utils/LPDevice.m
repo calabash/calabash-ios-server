@@ -476,19 +476,19 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 }
 
 - (BOOL) isIPadPro12point9inch {
-  return [[self modelIdentifier] isEqualToString:@"ipad pro 12.9"];
+  return [[self formFactor] isEqualToString:@"ipad pro 12.9"];
 }
 
 - (BOOL) isIPadPro9point7inch {
-  return [[self modelIdentifier] isEqualToString:@"ipad pro 9.7"];
+  return [[self formFactor] isEqualToString:@"ipad pro 9.7"];
 }
 
 - (BOOL) isIPad9point7inch {
-  return [[self modelIdentifier] isEqualToString:@"ipad 9.7"];
+  return [[self formFactor] isEqualToString:@"ipad 9.7"];
 }
 
 - (BOOL) isIPadPro10point5inch {
-  return [[self modelIdentifier] isEqualToString:@"ipad pro 10.5"];
+  return [[self formFactor] isEqualToString:@"ipad pro 10.5"];
 }
 
 - (BOOL) isIPhone4Like {
