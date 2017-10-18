@@ -55,6 +55,39 @@
   return [self translateToScreenCoords:point sampleFactor:sampleFactor];
 }
 
++ (CGFloat) xOffsetFor4inchLetterBox:(UIInterfaceOrientation) orientation {
+  if (UIInterfaceOrientationIsPortrait(orientation)) {
+    return 0.0;
+  } else {
+    return 44.0;
+  }
+}
+
++ (CGFloat) yOffsetFor4inchLetterBox:(UIInterfaceOrientation) orientation {
+  if (UIInterfaceOrientationIsPortrait(orientation)) {
+    return 44.0;
+  } else {
+    return 0.0;
+  }
+}
+
++ (CGFloat) xOffsetForIPhone10LetterBox:(UIInterfaceOrientation) orientation {
+  if (UIInterfaceOrientationIsPortrait(orientation)) {
+    return 0.0;
+  } else {
+    return 94.0;
+  }
+}
+
++ (CGFloat) yOffsetForIPhone10LetterBox:(UIInterfaceOrientation) orientation {
+  if (UIInterfaceOrientationIsPortrait(orientation)) {
+    return 72.0;
+  } else {
+    return 4.0;
+  }
+}
+
+
 + (NSArray *) applicationWindows {
   // iOS flatdacted apparently doesn't list the "real" window containing alerts
   // in the windows list, but stores it instead in the -keyWindow property. To

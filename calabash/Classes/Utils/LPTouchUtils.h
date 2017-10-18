@@ -13,6 +13,11 @@
 + (CGPoint) translateToScreenCoords:(CGPoint) point sampleFactor:(CGFloat)sampleFactor;
 + (CGPoint) translateToScreenCoords:(CGPoint) point;
 
++ (CGFloat) xOffsetFor4inchLetterBox:(UIInterfaceOrientation) orientation;
++ (CGFloat) yOffsetFor4inchLetterBox:(UIInterfaceOrientation) orientation;
++ (CGFloat) xOffsetForIPhone10LetterBox:(UIInterfaceOrientation) orientation;
++ (CGFloat) yOffsetForIPhone10LetterBox:(UIInterfaceOrientation) orientation;
++ (CGRect) rectByApplyingLetterBoxAndSampleFactorToRect:(CGRect) rect;
 + (CGPoint) centerOfView:(UIView *) view;
 + (CGPoint) centerOfView:(UIView *) view shouldTranslate:(BOOL) shouldTranslate;
 + (CGRect)translateRect:(CGRect)rect inView:(UIView*) view;
