@@ -75,7 +75,8 @@
   return v;
 }
 
-+ (NSInteger) indexOfView:(UIView *) viewToFind asSubViewInView:(UIView *) viewToSearch {
++ (NSInteger) indexOfView:(UIView *) viewToFind
+          asSubViewInView:(UIView *) viewToSearch {
   //Assume viewToFind != viewToSearch
   if (viewToFind == nil || viewToSearch == nil) {return -1;}
   NSArray *subViews = [viewToSearch subviews];
@@ -88,10 +89,12 @@
   return -1;
 }
 
-+ (BOOL) canFindView:(UIView *) viewToFind asSubViewInView:(UIView *) viewToSearch {
++ (BOOL) canFindView:(UIView *) viewToFind
+     asSubViewInView:(UIView *) viewToSearch {
   if (viewToFind == viewToSearch) {return YES;}
   if (viewToFind == nil || viewToSearch == nil) {return NO;}
-  NSInteger index = [LPTouchUtils indexOfView:viewToFind asSubViewInView:viewToSearch];
+  NSInteger index = [LPTouchUtils indexOfView:viewToFind
+                              asSubViewInView:viewToSearch];
   return index != -1;
 }
 
@@ -121,7 +124,8 @@
     UIView *nextParent = [parent superview];
     parentIndex = [[nextParent subviews] indexOfObject:parent];
     parent = nextParent;
-    viewToCheckIndex = [LPTouchUtils indexOfView:viewToCheck asSubViewInView:parent];
+    viewToCheckIndex = [LPTouchUtils indexOfView:viewToCheck
+                                 asSubViewInView:parent];
   }
   if (viewToCheckIndex && parent) {
     *firstIndexPtr = viewToCheckIndex;
@@ -309,7 +313,6 @@
   return CGRectMake(translated.x, translated.y, rect.size.width * sampleFactor, rect.size.height * sampleFactor);
 #endif
 }
-
 
 + (UIWindow *) appDelegateWindow {
   UIWindow *delegateWindow = nil;
