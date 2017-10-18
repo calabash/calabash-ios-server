@@ -61,11 +61,14 @@
     CGFloat center_x = [[dres valueForKeyPath:@"rect.x"] floatValue];
     CGFloat center_y = [[dres valueForKeyPath:@"rect.y"] floatValue];
 
-    CGPoint center = CGPointMake(webViewPageOffset.x + center_x, webViewPageOffset.y + center_y);
+    CGPoint center = CGPointMake(webViewPageOffset.x + center_x,
+                                 webViewPageOffset.y + center_y);
     CGPoint windowCenter = [window convertPoint:center fromView:webView];
     CGPoint keyCenter = [frontWindow convertPoint:windowCenter
                                        fromWindow:window];
-    CGPoint finalCenter = [LPWebQuery centerByApplyingLetterBoxAndSampleFactorToPoint:keyCenter];
+    CGPoint finalCenter;
+
+    finalCenter = [LPWebQuery centerByApplyingTransformationsToPoint:keyCenter];
 
     if (includeInvisible || [LPWebQuery point:center
                            isVisibleInWebview:webView]) {
@@ -275,6 +278,88 @@
   LPLogDebug(@"translated: %@", NSStringFromCGPoint(translated));
 
   return translated;
+}
+
++ (CGSize) sizeForIPadPro:(LPDevice *)device
+              orientation:(UIInterfaceOrientation)orientation {
+  CGSize size;
+
+  if ([device isIPadPro9point7inch]) {
+    size = CGSizeMake(768, 1024);
+  } else if ([device isIPadPro10point5inch]) {
+    size = CGSizeMake(834, 1112);
+  } else if ([device isIPadPro12point9inch]) {
+    size = CGSizeMake(1024, 1361);
+  } else {
+    LPLogError(@"Device has an unknown iPad Pro form factor: %@", device);
+
+    // Will only be correct _if_ the app is being displayed natively.
+    // Will not be correct if app is scaled, sampled, or zoomed.
+    // Will not be correct if (web) app is being displayed in a 768x1024 rect.
+    // The take-away message is that we need to keep track of new iPad Pro
+    // form factors.
+    NSDictionary *dimensions = [device screenDimensions];
+    size = CGSizeMake([dimensions[@"bounds_portrait_width"] integerValue],
+            [dimensions[@"bounds_portrait_height"] integerValue]);
+    LPLogError(@"Returning %@ as size", NSStringFromCGSize(size));
+    return size;
+  }
+
+  LPLogDebug(@"Native portrait resolution: %@", NSStringFromCGSize(size));
+
+  if (UIInterfaceOrientationIsLandscape(orientation)) {
+    size = CGSizeMake(size.height, size.width);
+    LPLogDebug(@"Interface orientation is landscape; rotating to %@",
+            NSStringFromCGSize(size));
+  }
+  return size;
+}
+
++ (CGPoint) centerByApplyingIPadProScaleToPoint:(CGPoint) point {
+  LPLogDebug(@"Apply iPad Pro scaling to point: %@", NSStringFromCGPoint(point));
+
+  LPDevice *device = [LPDevice sharedDevice];
+  if ([device isIPhone]) {
+    LPLogDebug(@"Device is has an iPhone form factor; returning the original point");
+    return point;
+  }
+
+  if (![device isIPadPro]) {
+    LPLogDebug(@"Device is not an iPad Pro form factor; returning the original point");
+    return point;
+  }
+
+  UIInterfaceOrientation orientation;
+  orientation = [[UIApplication sharedApplication] statusBarOrientation];
+
+  CGSize nativeResolution = [LPWebQuery sizeForIPadPro:device
+                                           orientation:orientation];
+
+  CGSize frameSize = [[UIScreen mainScreen] bounds].size;
+  if (UIInterfaceOrientationIsLandscape(orientation)) {
+    frameSize = CGSizeMake(frameSize.height, frameSize.width);
+  }
+
+  LPLogDebug(@"Main screen bounds has size %@",
+          NSStringFromCGSize(frameSize));
+
+  CGFloat xScale = nativeResolution.width / frameSize.width;
+  CGFloat yScale = nativeResolution.height / frameSize.height;
+
+  LPLogDebug(@"Will scale x by %@", @(xScale));
+  LPLogDebug(@"Will scale y by %@", @(yScale));
+
+  CGPoint translated = CGPointMake(xScale * point.x,
+                                   yScale * point.y);
+
+  LPLogDebug(@"Translated point to %@", NSStringFromCGPoint(translated));
+  return translated;
+}
+
++ (CGPoint)centerByApplyingTransformationsToPoint:(CGPoint)point {
+  CGPoint transformed;
+  transformed = [LPWebQuery centerByApplyingLetterBoxAndSampleFactorToPoint:point];
+  return [LPWebQuery centerByApplyingIPadProScaleToPoint:transformed];
 }
 
 @end
