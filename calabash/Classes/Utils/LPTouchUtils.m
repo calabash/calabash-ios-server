@@ -13,48 +13,6 @@
 
 @implementation LPTouchUtils
 
-+ (CGPoint) translateToScreenCoords:(CGPoint) point sampleFactor:(CGFloat)sampleFactor{
-  UIScreen *s = [UIScreen mainScreen];
-
-  UIScreenMode *sm = [s currentMode];
-  CGRect b = [s bounds];
-  CGSize size = sm.size;
-  UIDeviceOrientation o = [[UIDevice currentDevice] orientation];
-
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    if ([[LPDevice sharedDevice] isLetterBox]) {
-      return CGPointMake(point.x * sampleFactor,
-                         (point.y + LPiPHONE4INCHOFFSET)*sampleFactor);
-    }
-    return CGPointMake(point.x*sampleFactor,point.y*sampleFactor);
-  }
-
-
-  CGRect small_vert = CGRectMake(0, 0, 320, 480);
-  CGRect small_hori = CGRectMake(0, 0, 480, 320);
-  CGSize large_size_vert = CGSizeMake(768, 1024);
-  CGSize large_size_hori = CGSizeMake(1024, 768);
-  CGSize retina_ipad_vert = CGSizeMake(1536, 2048);
-  CGSize retina_ipad_hori = CGSizeMake(2048, 1536);
-
-
-  if ((CGRectEqualToRect(small_vert, b) || CGRectEqualToRect(small_hori,b)) && (CGSizeEqualToSize(large_size_hori, size) || CGSizeEqualToSize(large_size_vert, size) || CGSizeEqualToSize(retina_ipad_hori,size) ||
-      CGSizeEqualToSize(retina_ipad_vert, size))) {
-
-    CGSize orientation_size = UIDeviceOrientationIsPortrait(o) || UIDeviceOrientationFaceUp == o || UIDeviceOrientationUnknown == o ? large_size_vert : large_size_hori;
-    float x_offset = orientation_size.width / 2.0f - b.size.width / 2.0f;
-    float y_offset = orientation_size.height / 2.0f - b.size.height / 2.0f;
-    return CGPointMake(x_offset + point.x, y_offset + point.y);
-  } else {
-    return point;
-  }
-}
-
-+ (CGPoint) translateToScreenCoords:(CGPoint) point{
-  CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
-  return [self translateToScreenCoords:point sampleFactor:sampleFactor];
-}
-
 + (CGFloat) xOffsetFor4inchLetterBox:(UIInterfaceOrientation) orientation {
   if (UIInterfaceOrientationIsPortrait(orientation)) {
     return 0.0;

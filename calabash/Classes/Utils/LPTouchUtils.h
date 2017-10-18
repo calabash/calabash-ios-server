@@ -6,12 +6,8 @@
 
 #import <UIKit/UIKit.h>
 
-#define LPiPHONE4INCHOFFSET 44
 
 @interface LPTouchUtils : NSObject
-
-+ (CGPoint) translateToScreenCoords:(CGPoint) point sampleFactor:(CGFloat)sampleFactor;
-+ (CGPoint) translateToScreenCoords:(CGPoint) point;
 
 + (CGFloat) xOffsetFor4inchLetterBox:(UIInterfaceOrientation) orientation;
 + (CGFloat) yOffsetFor4inchLetterBox:(UIInterfaceOrientation) orientation;
