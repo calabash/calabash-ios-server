@@ -146,7 +146,6 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 - (id) init_private {
   self = [super init];
   if (self) {
-    // For memoizing.
     _sampleFactor = CGFLOAT_MAX;
   }
   return self;
