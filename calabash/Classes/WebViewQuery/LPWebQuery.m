@@ -50,7 +50,7 @@
 
   UIWindow *window = [LPTouchUtils windowForView:webView];
   UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
-  CGPoint webViewPageOffset = [self pointByAdjustingOffsetForScrollPostionOfWebView:webView];
+  CGPoint webViewPageOffset = [LPWebQuery pointByAdjustingOffsetForScrollPositionOfWebView:webView];
 
   for (NSDictionary *d in queryResult) {
     NSMutableDictionary *dres = [NSMutableDictionary dictionaryWithDictionary:d];
@@ -61,10 +61,12 @@
 
     CGPoint center = CGPointMake(webViewPageOffset.x + center_x, webViewPageOffset.y + center_y);
     CGPoint windowCenter = [window convertPoint:center fromView:webView];
-    CGPoint keyCenter = [frontWindow convertPoint:windowCenter fromWindow:window];
+    CGPoint keyCenter = [frontWindow convertPoint:windowCenter
+                                       fromWindow:window];
     CGPoint finalCenter = [LPTouchUtils translateToScreenCoords:keyCenter];
 
-    if (includeInvisible || [self point:center isVisibleInWebview:webView]) {
+    if (includeInvisible || [LPWebQuery point:center
+                           isVisibleInWebview:webView]) {
       NSDictionary *centerDict;
       centerDict = (__bridge_transfer NSDictionary *)CGPointCreateDictionaryRepresentation(finalCenter);
       [dres setValue:centerDict forKey:@"center"];
@@ -104,9 +106,9 @@
   if (!(finalResult[@"type"])) {
     finalResult[@"type"] = @"dom";
   }
-  return [self dictionaryByAugmentingDOMElement:dumpResult
-                                        webView:webView
-                          accumlateInDictionary:finalResult];
+  return [LPWebQuery dictionaryByAugmentingDOMElement:dumpResult
+                                              webView:webView
+                               accumulateInDictionary:finalResult];
 }
 
 
@@ -114,7 +116,7 @@
                                             webView:(UIView<LPWebViewProtocol> *) webView
                               accumlateInDictionary:(NSMutableDictionary *) accumulator {
 
-  CGPoint webViewPageOffset = [self pointByAdjustingOffsetForScrollPostionOfWebView:webView];
+  CGPoint webViewPageOffset = [LPWebQuery pointByAdjustingOffsetForScrollPositionOfWebView:webView];
 
   NSMutableArray *children = [NSMutableArray arrayWithCapacity:8];
 
