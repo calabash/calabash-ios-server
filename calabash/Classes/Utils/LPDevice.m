@@ -404,6 +404,11 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   return _name;
 }
 
+- (NSString *)description {
+  return [NSString stringWithFormat:@"<LPDevice %@ %@ %@ (%@)>",
+          self.name, self.iOSVersion, self.modelIdentifier, self.formFactor];
+}
+
 - (NSString *) iOSVersion {
   if (_iOSVersion) { return _iOSVersion; }
   _iOSVersion = [[UIDevice currentDevice] systemVersion];
