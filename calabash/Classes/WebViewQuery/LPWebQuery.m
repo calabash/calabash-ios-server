@@ -15,19 +15,6 @@
 #import "LPTouchUtils.h"
 #import "LPConstants.h"
 
-@interface LPWebQuery ()
-
-
-+ (NSDictionary *) dictionaryByAugmentingDOMElement:(NSDictionary *) domElement
-                                            webView:(UIView<LPWebViewProtocol> *) webView
-                              accumlateInDictionary:(NSMutableDictionary *) accumulator;
-
-+ (CGPoint) pointByAdjustingOffsetForScrollPostionOfWebView:(UIView<LPWebViewProtocol> *) webView;
-
-+ (BOOL) point:(CGPoint) center isVisibleInWebview:(UIView<LPWebViewProtocol> *) webView;
-
-@end
-
 @implementation LPWebQuery
 
 + (BOOL) point:(CGPoint) center isVisibleInWebview:(UIView<LPWebViewProtocol> *) webView {
