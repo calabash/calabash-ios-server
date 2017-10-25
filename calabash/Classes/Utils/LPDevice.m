@@ -204,6 +204,8 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   CGSize screenSizeForMode = screenMode.size;
   CGFloat pixelAspectRatio = screenMode.pixelAspectRatio;
 
+  CGRect nativeBounds = [screen nativeBounds];
+
   LPLogDebug(@"         Form factor: %@", [self formFactor]);
   LPLogDebug(@" Current screen mode: %@", screenMode);
   LPLogDebug(@"Screen size for mode: %@", NSStringFromCGSize(screenSizeForMode));
@@ -211,7 +213,8 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   LPLogDebug(@"        Screen width: %@", @(screenWidth));
   LPLogDebug(@"        Screen scale: %@", @(scale));
   LPLogDebug(@" Screen native scale: %@", @(nativeScale));
-  LPLogDebug(@"Pixel Aspect Ratio: %@", @(pixelAspectRatio));
+  LPLogDebug(@"  Pixel aspect ratio: %@", @(pixelAspectRatio));
+  LPLogDebug(@"       Native bounds: %@", NSStringFromCGRect(nativeBounds));
 
   if ([self isIPhone6PlusLike]) {
     if (screenHeight == 568.0) {
@@ -274,6 +277,13 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
                                @"width" : @(bounds.size.width),
                                @"height" : @(bounds.size.height)
                                };
+  CGRect nativeBounds = [screen nativeBounds];
+  NSDictionary *nativeBoundsDict = @{
+                                     @"x" : @(nativeBounds.origin.x),
+                                     @"y" : @(nativeBounds.origin.y),
+                                     @"width" : @(nativeBounds.size.width),
+                                     @"height" : @(nativeBounds.size.height)
+                                     };
   UIScreenMode *screenMode = [screen currentMode];
   CGSize size = screenMode.size;
   CGFloat scale = screen.scale;
@@ -294,6 +304,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
                         @"bounds" : boundsDict,
                         @"bounds_portrait_height" : @(screenBoundsHeight),
                         @"bounds_portrait_width" : @(screenBoundsWidth),
+                        @"native_bounds" : nativeBoundsDict,
                         @"sample" : @([self sampleFactor]),
                         @"native_scale" : @(nativeScale)
                         };
