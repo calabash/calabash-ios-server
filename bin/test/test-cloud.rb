@@ -10,7 +10,7 @@ if !device_set || device_set == ""
 end
 
 if !device_set || device_set == ""
-  device_set = ["020e3ee3", "18da1e74", "28846392", "7560bdce"].sample
+  device_set = ["1b98f5d9", "99536756", "8c294161", "ab029afc"].sample
 end
 
 if !Luffa::Environment.travis_ci? && !Luffa::Environment.jenkins_ci?
