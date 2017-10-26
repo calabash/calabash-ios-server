@@ -10,9 +10,9 @@
 //
 
 /*
-https://github.com/facebook/WebDriverAgent/blob/master/LICENSE
+ https://github.com/facebook/WebDriverAgent/blob/master/LICENSE
 
-UIDevice + Wifi Address
+ UIDevice + Wifi Address
  BSD License
 
  For WebDriverAgent software
@@ -44,10 +44,9 @@ UIDevice + Wifi Address
  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-*/
+ */
 
 #import "LPDevice.h"
-#import "LPTouchUtils.h"
 #import "LPCocoaLumberjack.h"
 #import <sys/utsname.h>
 #import <arpa/inet.h>
@@ -95,7 +94,6 @@ UIDevice + Wifi Address
 
 NSString *const LPDeviceSimKeyModelIdentifier = @"SIMULATOR_MODEL_IDENTIFIER";
 NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
-NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_DEVICE";
 
 @interface LPDevice ()
 
@@ -105,14 +103,7 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
 
 - (id) init_private;
 
-- (UIScreen *) mainScreen;
-- (UIScreenMode *) currentScreenMode;
-- (CGSize) sizeForCurrentScreenMode;
-- (CGFloat) scaleForMainScreen;
-- (CGFloat) heightForMainScreenBounds;
-
 - (NSString *) physicalDeviceModelIdentifier;
-- (NSString *) simulatorModelIdentfier;
 
 @end
 
@@ -134,7 +125,7 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
 - (id) init {
   @throw [NSException exceptionWithName:@"Cannot call init"
                                  reason:@"This is a singleton class"
-                                 userInfo:nil];
+                               userInfo:nil];
 }
 
 + (LPDevice *) sharedDevice {
@@ -149,13 +140,10 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
 - (id) init_private {
   self = [super init];
   if (self) {
-    // For memoizing.
     _sampleFactor = CGFLOAT_MAX;
   }
   return self;
 }
-
-#pragma mark - Convenience Methods for Testing
 
 - (UIScreen *) mainScreen {
   return [UIScreen mainScreen];
@@ -170,7 +158,11 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
 }
 
 - (CGFloat) scaleForMainScreen {
-  return [[self mainScreen] scale];
+  return [[UIScreen mainScreen] scale];
+}
+
+- (CGRect) mainScreenBounds {
+  return [[self mainScreen] bounds];
 }
 
 - (CGFloat) heightForMainScreenBounds {
@@ -189,6 +181,7 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
   UIScreen *screen = [UIScreen mainScreen];
   CGSize screenSize = screen.bounds.size;
   CGFloat screenHeight = MAX(screenSize.height, screenSize.width);
+  CGFloat screenWidth = MIN(screenSize.height, screenSize.width);
   CGFloat scale = screen.scale;
 
   CGFloat nativeScale = scale;
@@ -211,23 +204,29 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
   CGSize screenSizeForMode = screenMode.size;
   CGFloat pixelAspectRatio = screenMode.pixelAspectRatio;
 
+  CGRect nativeBounds = [screen nativeBounds];
+
   LPLogDebug(@"         Form factor: %@", [self formFactor]);
   LPLogDebug(@" Current screen mode: %@", screenMode);
   LPLogDebug(@"Screen size for mode: %@", NSStringFromCGSize(screenSizeForMode));
   LPLogDebug(@"       Screen height: %@", @(screenHeight));
+  LPLogDebug(@"        Screen width: %@", @(screenWidth));
   LPLogDebug(@"        Screen scale: %@", @(scale));
   LPLogDebug(@" Screen native scale: %@", @(nativeScale));
-  LPLogDebug(@"Pixel Aspect Ratio: %@", @(pixelAspectRatio));
+  LPLogDebug(@"  Pixel aspect ratio: %@", @(pixelAspectRatio));
+  LPLogDebug(@"       Native bounds: %@", NSStringFromCGRect(nativeBounds));
 
   if ([self isIPhone6PlusLike]) {
     if (screenHeight == 568.0) {
       if (nativeScale > scale) {
-        LPLogDebug(@"iPhone 6 Plus: Zoom display and app is not optimized for screen size - adjusting sampleFactor");
+        LPLogDebug(@"iPhone 6 Plus: Zoom display and app is not optimized for "
+                       "screen size - adjusting sampleFactor");
         // native => 2.88
         // Displayed with iPhone _6_ zoom sample
         _sampleFactor = iphone6_zoom_sample;
       } else {
-        LPLogDebug(@"iPhone 6 Plus: Standard display and app is not optimized for screen size - adjusting sampleFactor");
+        LPLogDebug(@"iPhone 6 Plus: Standard display and app is not optimized "
+                       "for screen size - adjusting sampleFactor");
         // native == scale == 3.0
         _sampleFactor = iphone6p_legacy_app_sample;
       }
@@ -236,22 +235,27 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
       LPLogDebug(@"iPhone 6 Plus: Zoomed display - sampleFactor remains the same");
     } else if (screenHeight == 736 && nativeScale < scale) {
       // native => 2.61
-      LPLogDebug(@"iPhone 6 Plus: Standard display and app is not optimized for screen size - sampleFactor remains the same");
+      LPLogDebug(@"iPhone 6 Plus: Standard display and app is not optimized for "
+                     "screen size - sampleFactor remains the same");
     } else {
-      LPLogDebug(@"iPhone 6 Plus: Standard display and app is optimized for screen size");
+      LPLogDebug(@"iPhone 6 Plus: Standard display and app is optimized for "
+                     "screen size");
     }
   } else if ([self isIPhone6Like]) {
     if (screenHeight == 568.0 && nativeScale <= scale) {
-      LPLogDebug(@"iPhone 6: Standard display and app not optimized for screen size - adjusting sampleFactor");
+      LPLogDebug(@"iPhone 6: Standard display and app not optimized for screen "
+                     "size - adjusting sampleFactor");
       _sampleFactor = iphone6_zoom_sample;
     } else if (screenHeight == 568.0 && nativeScale > scale) {
       LPLogDebug(@"iPhone 6: Zoomed display mode - sampleFactor remains the same");
     } else {
-      LPLogDebug(@"iPhone 6: Standard display and app optimized for screen size - sampleFactor remains the same");
+      LPLogDebug(@"iPhone 6: Standard display and app optimized for screen size "
+                     "- sampleFactor remains the same");
     }
   } else if ([self isIPadPro10point5inch]) {
     if (screenHeight == 1024) {
-      LPLogDebug(@"iPad 10.5 inch: app is not optimized for screen size - adjusting sampleFactor");
+      LPLogDebug(@"iPad 10.5 inch: app is not optimized for screen size - "
+                     "adjusting sampleFactor");
       _sampleFactor = ipad_pro_10dot5_sample;
     } else {
       LPLogDebug(@"iPad 10.5 inch: app is optimized for screen size");
@@ -266,9 +270,27 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
   if (_screenDimensions) { return _screenDimensions; }
 
   UIScreen *screen = [UIScreen mainScreen];
+  CGRect bounds = [screen bounds];
+  NSDictionary *boundsDict = @{
+                               @"x" : @(bounds.origin.x),
+                               @"y" : @(bounds.origin.y),
+                               @"width" : @(bounds.size.width),
+                               @"height" : @(bounds.size.height)
+                               };
+  CGRect nativeBounds = [screen nativeBounds];
+  NSDictionary *nativeBoundsDict = @{
+                                     @"x" : @(nativeBounds.origin.x),
+                                     @"y" : @(nativeBounds.origin.y),
+                                     @"width" : @(nativeBounds.size.width),
+                                     @"height" : @(nativeBounds.size.height)
+                                     };
   UIScreenMode *screenMode = [screen currentMode];
   CGSize size = screenMode.size;
   CGFloat scale = screen.scale;
+
+  CGSize screenBoundsSize = screen.bounds.size;
+  CGFloat screenBoundsHeight = MAX(screenBoundsSize.height, screenBoundsSize.width);
+  CGFloat screenBoundsWidth = MIN(screenBoundsSize.height, screenBoundsSize.width);
 
   CGFloat nativeScale = scale;
   if ([screen respondsToSelector:@selector(nativeScale)]) {
@@ -279,6 +301,10 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
                         @"height" : @(size.height),
                         @"width" : @(size.width),
                         @"scale" : @(scale),
+                        @"bounds" : boundsDict,
+                        @"bounds_portrait_height" : @(screenBoundsHeight),
+                        @"bounds_portrait_width" : @(screenBoundsWidth),
+                        @"native_bounds" : nativeBoundsDict,
                         @"sample" : @([self sampleFactor]),
                         @"native_scale" : @(nativeScale)
                         };
@@ -327,21 +353,31 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
     @"iPhone9,2" : @"iphone 6+",
     @"iPhone9,4" : @"iphone 6+",
 
-    // iPad Pro 13in
-    @"iPad6,7" : @"ipad pro",
-    @"iPad6,8" : @"ipad pro",
+    // iPhone 8/8+/X
+    @"iPhone10,1" : @"iphone 6",
+    @"iPhone10,4" : @"iphone 6",
+    @"iPhone10,5" : @"iphone 6+",
+    @"iPhone10,2" : @"iphone 6+",
+    @"iPhone10,3" : @"iphone 10",
+    @"iPhone10,6" : @"iphone 10",
 
-    // iPad Pro 9in
-    @"iPad6,3" : @"ipad pro",
-    @"iPad6,4" : @"ipad pro",
-    @"iPad6,11" : @"ipad pro",
-    @"iPad6,12" : @"ipad pro",
+    // iPad Pro 12.9in
+    @"iPad6,7" : @"ipad pro 12.9",
+    @"iPad6,8" : @"ipad pro 12.9",
+    @"iPad7,1" : @"ipad pro 12.9",
+    @"iPad7,2" : @"ipad pro 12.9",
+
+    // iPad Pro 9.7in
+    @"iPad6,3" : @"ipad pro 9.7",
+    @"iPad6,4" : @"ipad pro 9.7",
+
+    // iPad 9.7 in
+    @"iPad6,11" : @"ipad 9.7",
+    @"iPad6,12" : @"ipad 9.7",
 
     // iPad Pro 10.5in
-    @"iPad7,4" : @"ipad pro",
-    @"iPad7,3" : @"ipad pro",
-    @"iPad7,2" : @"ipad pro",
-    @"iPad7,1" : @"ipad pro"
+    @"iPad7,4" : @"ipad pro 10.5",
+    @"iPad7,3" : @"ipad pro 10.5"
 
     };
 
@@ -354,12 +390,12 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
   return _processEnvironment;
 }
 
-- (NSString *) simulatorModelIdentfier {
-  return [self.processEnvironment objectForKey:LPDeviceSimKeyModelIdentifier];
+- (NSString *)simulatorModelIdentifier {
+  return self.processEnvironment[LPDeviceSimKeyModelIdentifier];
 }
 
 - (NSString *) simulatorVersionInfo {
-  return [self.processEnvironment objectForKey:LPDeviceSimKeyVersionInfo];
+  return self.processEnvironment[LPDeviceSimKeyVersionInfo];
 }
 
 - (NSString *) physicalDeviceModelIdentifier {
@@ -382,27 +418,22 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
   return _name;
 }
 
+- (NSString *)description {
+  return [NSString stringWithFormat:@"<LPDevice %@ %@ %@ (%@)>",
+          self.name, self.iOSVersion, self.modelIdentifier, self.formFactor];
+}
+
 - (NSString *) iOSVersion {
   if (_iOSVersion) { return _iOSVersion; }
   _iOSVersion = [[UIDevice currentDevice] systemVersion];
   return _iOSVersion;
 }
 
-// Required for clients < 0.16.2 - @see LPVersionRoute
-- (NSString *) LEGACY_iPhoneSimulatorDevice {
-  return [self.processEnvironment objectForKey:LPDeviceSimKeyIphoneSimulatorDevice_LEGACY];
-}
-
-// Required for clients < 0.16.2 - @see LPVersionRoute
-- (NSString *) LEGACY_systemFromUname {
-  return [self physicalDeviceModelIdentifier];
-}
-
 // The hardware name of the device.
 - (NSString *) modelIdentifier {
   if (_modelIdentifier) { return _modelIdentifier; }
   if ([self isSimulator]) {
-    _modelIdentifier = [self simulatorModelIdentfier];
+    _modelIdentifier = [self simulatorModelIdentifier];
   } else {
     _modelIdentifier = [self physicalDeviceModelIdentifier];
   }
@@ -413,14 +444,17 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
   if (_formFactor) { return _formFactor; }
 
   NSString *modelIdentifier = [self modelIdentifier];
-  NSString *value = [self.formFactorMap objectForKey:modelIdentifier];
+  NSString *value = self.formFactorMap[modelIdentifier];
 
   if (value) {
     _formFactor = value;
   } else {
+    // The model identifier is not recognized; fall back to defaults.
+    // This is a catch all for the iPad, iPad Retina, and iPad Air.
     if ([self isIPad]) {
       _formFactor = @"ipad";
     } else {
+      // A model number as form factor is a signal that our table needs updating.
       _formFactor = modelIdentifier;
     }
   }
@@ -428,7 +462,7 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
 }
 
 - (BOOL) isSimulator {
-  return [self simulatorModelIdentfier] != nil;
+  return [self simulatorModelIdentifier] ? YES : NO;
 }
 
 - (BOOL) isPhysicalDevice {
@@ -443,16 +477,32 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
   return [[self formFactor] isEqualToString:@"iphone 6+"];
 }
 
+- (BOOL) isIPhone {
+  return [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone;
+}
+
 - (BOOL) isIPad {
   return [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad;
 }
 
 - (BOOL) isIPadPro {
-  return [[self formFactor] isEqualToString:@"ipad pro"];
+  return [[self formFactor] containsString:@"ipad pro"];
+}
+
+- (BOOL) isIPadPro12point9inch {
+  return [[self formFactor] isEqualToString:@"ipad pro 12.9"];
+}
+
+- (BOOL) isIPadPro9point7inch {
+  return [[self formFactor] isEqualToString:@"ipad pro 9.7"];
+}
+
+- (BOOL) isIPad9point7inch {
+  return [[self formFactor] isEqualToString:@"ipad 9.7"];
 }
 
 - (BOOL) isIPadPro10point5inch {
-  return [[self modelIdentifier] containsString:@"iPad7"];
+  return [[self formFactor] isEqualToString:@"ipad pro 10.5"];
 }
 
 - (BOOL) isIPhone4Like {
@@ -461,6 +511,10 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
 
 - (BOOL) isIPhone5Like {
   return [[self formFactor] isEqualToString:@"iphone 4in"];
+}
+
+- (BOOL) isIPhone10Like {
+  return [[self formFactor] isEqualToString:@"iphone 10"];
 }
 
 - (BOOL) isLetterBox {
@@ -472,6 +526,15 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
   }
 }
 
+- (BOOL) isIPhone10LetterBox {
+  if (![self isIPhone10Like]) { return NO; }
+  NSDictionary *dimensions = [self screenDimensions];
+  NSInteger screenModeHeight = [dimensions[@"height"] integerValue];
+  NSInteger screenBoundsHeight = [dimensions[@"bounds_portrait_height"] integerValue];
+
+  return screenModeHeight == 2001 && screenBoundsHeight == 667;
+}
+
 - (NSString *) getIPAddress {
   if (_ipAddress) { return _ipAddress; }
 
@@ -480,4 +543,3 @@ NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY = @"IPHONE_SIMULATOR_
 }
 
 @end
-

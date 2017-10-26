@@ -220,7 +220,8 @@ And(/^I scroll down to the login portion of the web page$/) do
   else
     expect(query("* css:'input#firstname'").count).to be == 1
   end
-  sleep(0.5)
+  wait_for_none_animating
+  sleep(2.0)
 end
 
 Then(/^I clear text with the DeviceAgent in a Safari Web Controller$/) do

@@ -137,7 +137,8 @@ CGFloat LP_MIN_FLOAT = INT32_MIN * 1.0;
     }
     return viewJson;
   }
-  else if ([object respondsToSelector:@selector(isAccessibilityElement)] && [object isAccessibilityElement]) {
+  else if ([object respondsToSelector:@selector(isAccessibilityElement)] &&
+           [object isAccessibilityElement]) {
     NSMutableDictionary *viewJson = [self jsonifyAccessibilityElement:object];
     if (dump) {
       [self dumpAccessibilityElement:object toDictionary:viewJson];
@@ -283,22 +284,12 @@ CGFloat LP_MIN_FLOAT = INT32_MIN * 1.0;
     UIWindow *window = [LPTouchUtils windowForView:view];
 
     if (window) {
-
       CGPoint center = [LPTouchUtils centerOfView:view];
-
       CGRect rect = [window convertRect:view.bounds fromView:view];
 
       UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-      if ([frontWindow respondsToSelector:@selector(convertRect:toCoordinateSpace:)]) {
-        rect = [frontWindow convertRect:rect toCoordinateSpace:frontWindow];
-      } else {
-        rect = [frontWindow convertRect:rect fromWindow:window];
-      }
-#else
-      rect = [frontWindow convertRect:rect fromWindow:window];
-#endif
+      rect = [frontWindow convertRect:rect toCoordinateSpace:frontWindow];
       NSMutableDictionary *rectDict = [self serializeRect:rect];
       rectDict[@"center_x"] = [self normalizeFloat:center.x];
       rectDict[@"center_y"] = [self normalizeFloat:center.y];
@@ -369,7 +360,7 @@ CGFloat LP_MIN_FLOAT = INT32_MIN * 1.0;
   [LPJSONUtils dictionary:result
        ensureObjectForKey:@"hint"
                withTarget:object
-               selector:@selector(accessibilityHint)];
+                 selector:@selector(accessibilityHint)];
 
   [LPJSONUtils dictionary:result
        ensureObjectForKey:@"value"

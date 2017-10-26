@@ -1,8 +1,22 @@
 
 And(/^the web page has loaded$/) do
-  wait_for do
-    result = query("UIWebView", :isLoading).first
-    result == 0
+  if RunLoop::Environment.xtc?
+    timeout = 240
+  elsif RunLoop::Environment.ci?
+    timeout = 60
+  else
+    timeout = 30
+  end
+
+  message = "Timed out waiting for page to load after #{timeout} seconds"
+  options = {
+    timeout_message: message,
+    timeout: timeout
+  }
+
+  wait_for(options) do
+    result = query("UIWebView", :isLoading)
+    !result.empty? && result.first.to_i == 0
   end
 end
 

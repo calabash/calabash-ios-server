@@ -152,7 +152,7 @@ ditto_or_exit "${ARM_PRODUCTS_DIR}/${LIBRARY_NAME}" "${TARGET_LIB}"
 
 info "Installing Headers to ${PWD}/${INSTALL_DIR}"
 ditto_or_exit "${HEADERS}" "${INSTALL_DIR}/Headers"
-ditto_to_zip "${INSTALL_DIR}/Headers" "${INSTALL_DIR}/Headers.zip"
+zip_with_ditto "${INSTALL_DIR}/Headers" "${INSTALL_DIR}/Headers.zip"
 
 banner "Dylib Code Signing"
 

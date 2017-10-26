@@ -206,12 +206,28 @@
   if ([[NSThread currentThread] isMainThread]) {
     return [self httpResponseOnMainThreadForMethod:method URI:path];
   } else {
-    __weak typeof(self) wself = self;
-    __block NSObject<LPHTTPResponse> *result = nil;
-    dispatch_sync(dispatch_get_main_queue(), ^{
-      result = [wself httpResponseOnMainThreadForMethod:method URI:path];
-    });
-    return result;
+    SEL selector = @selector(httpResponseOnMainThreadForMethod:URI:);
+    NSMethodSignature *methodSignature = [self methodSignatureForSelector:selector];
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:methodSignature];
+
+    [invocation setTarget:self];
+    [invocation setSelector:selector];
+
+    [invocation retainArguments];
+    NSString *methodCopy = [NSString stringWithString:method];
+    [invocation setArgument:&methodCopy atIndex:2];
+    NSString *pathCopy = [NSString stringWithString:path];
+    [invocation setArgument:&pathCopy atIndex:3];
+
+    [invocation performSelectorOnMainThread:@selector(invoke)
+                                 withObject:nil
+                              waitUntilDone:YES];
+
+    NSObject<LPHTTPResponse> *response = nil;
+    void *buffer;
+    [invocation getReturnValue:&buffer];
+    response = (__bridge NSObject<LPHTTPResponse> *)buffer;
+    return response;
   }
 }
 

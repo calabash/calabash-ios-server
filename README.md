@@ -1,6 +1,6 @@
 | master  | develop | [versioning](VERSIONING.md) | [license](LICENSE) | [contributing](CONTRIBUTING.md)|
 |---------|---------|-----------------------------|--------------------|--------------------------------|
-|[![Build Status](https://travis-ci.org/calabash/calabash-ios-server.svg?branch=master)](https://travis-ci.org/calabash/calabash-ios-server)| [![Build Status](https://travis-ci.org/calabash/calabash-ios-server.svg?branch=develop)](https://travis-ci.org/calabash/calabash-ios-server)| [![Version](https://img.shields.io/badge/version-0.21.0-green.svg)](https://img.shields.io/badge/version-0.21.0-green.svg) |[![License](https://img.shields.io/badge/licence-Eclipse-blue.svg)](http://opensource.org/licenses/EPL-1.0) | [![Contributing](https://img.shields.io/badge/contrib-gitflow-orange.svg)](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow/)|
+|[![Build Status](https://travis-ci.org/calabash/calabash-ios-server.svg?branch=master)](https://travis-ci.org/calabash/calabash-ios-server)| [![Build Status](https://travis-ci.org/calabash/calabash-ios-server.svg?branch=develop)](https://travis-ci.org/calabash/calabash-ios-server)| [![Version](https://img.shields.io/badge/version-0.21.2-green.svg)](https://img.shields.io/badge/version-0.21.2-green.svg) |[![License](https://img.shields.io/badge/licence-Eclipse-blue.svg)](http://opensource.org/licenses/EPL-1.0) | [![Contributing](https://img.shields.io/badge/contrib-gitflow-orange.svg)](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow/)|
 
 ## The Calabash iOS Server
 
@@ -34,6 +34,19 @@ If you have build errors, see the xcpretty section below.
 
 Maintainers must install the calabash/calabash-resign private repo.
 Details are below.
+
+Non-maintainers will see code signing errors like:
+
+```
+No certificate matching 'Mac Developer: Karl Krukow (YTTN6Y2QS9)' for
+team 'FYD86LA7RE': Select a different signing certificate for
+CODE_SIGN_IDENTITY, a team that matches your selected certificate, or
+switch to automatic provisioning.
+```
+
+when building - you must edit the code signing settings in the Xcode
+project for the target you are trying to build.  Turning on automatic
+provisioning is usually the easiest solution.
 
 ### Building the Framework
 

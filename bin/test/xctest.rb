@@ -33,6 +33,9 @@ else
   warnings_as_errors="GCC_TREAT_WARNINGS_AS_ERRORS=NO"
 end
 
+xcpretty_cmd = "| xcpretty -tc -r junit -o build/reports/junit.xml && exit ${PIPESTATUS[0]}"
+FileUtils.rm_f "build/reports/junit.xml"
+
 args =
       [
             'test',
@@ -44,7 +47,7 @@ args =
             '-sdk iphonesimulator',
             '-configuration Debug',
             warnings_as_errors,
-            use_xcpretty ? '| xcpretty -tc --report junit && exit ${PIPESTATUS[0]}' : ''
+            use_xcpretty ? xcpretty_cmd : ""
       ]
 
 Dir.chdir(working_dir) do

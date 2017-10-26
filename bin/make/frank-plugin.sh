@@ -1,46 +1,18 @@
 #!/usr/bin/env bash
 
-set -e
+source bin/log.sh
+source bin/ditto.sh
+source bin/xcode.sh
+source bin/simctl.sh
 
-function info {
-  echo "$(tput setaf 2)INFO: $1$(tput sgr0)"
-}
+banner "Preparing"
 
-function error {
-  echo "$(tput setaf 1)ERROR: $1$(tput sgr0)"
-}
+ensure_valid_core_sim_service
 
-function banner {
-  echo ""
-  echo "$(tput setaf 5)######## $1 #######$(tput sgr0)"
-  echo ""
-}
+set -e -o pipefail
 
-function ditto_or_exit {
-  ditto "${1}" "${2}"
-  if [ "$?" != 0 ]; then
-    error "Could not copy:"
-    error "  source: ${1}"
-    error "  target: ${2}"
-    if [ ! -e "${1}" ]; then
-      error "The source file does not exist"
-      error "Did a previous xcodebuild step fail?"
-    fi
-    error "Exiting 1"
-    exit 1
-  fi
-}
-
-function xcode_gte_7 {
- XC_MAJOR=`xcrun xcodebuild -version | awk 'NR==1{print $2}' | awk -v FS="." '{ print $1 }'`
- if [ "${XC_MAJOR}" \> "7" -o "${XC_MAJOR}" = "7" ]; then
-   echo "true"
- else
-   echo "false"
- fi
-}
-
-XC_GTE_7=$(xcode_gte_7)
+XC_GTE_9=$(xcode_gte_9)
+XC_GTE_8=$(xcode_gte_8)
 
 XC_TARGET=calabash-plugin-for-frank
 XC_PROJECT=calabash.xcodeproj
@@ -71,28 +43,19 @@ rm -rf "${INSTALLED_LIBRARY}"
 
 LIBRARY_NAME=libcalabash-plugin-for-frank.a
 
-if [ "${XCPRETTY}" = "0" ]; then
-  USE_XCPRETTY=
-else
-  USE_XCPRETTY=`which xcpretty | tr -d '\n'`
-fi
-
-if [ ! -z ${USE_XCPRETTY} ]; then
+hash xcpretty 2>/dev/null
+if [ $? -eq 0 ] && [ "${XCPRETTY}" != "0" ]; then
   XC_PIPE='xcpretty -c'
 else
   XC_PIPE='cat'
 fi
 
+info "Will pipe xcodebuild to: ${XC_PIPE}"
+
 banner "Building Frank Plug-in Simulator Library"
 
-SIM_BUILD_PRODUCTS_DIR="${SIM_BUILD_DIR}/Build/Products/${XC_BUILD_CONFIG}-iphonesimulator"
-SIM_LIBRARY="${SIM_BUILD_PRODUCTS_DIR}/${LIBRARY_NAME}"
-rm -rf "${SIM_LIBRARY}"
-
-# Xcode issues non-fatal warnings re: this directory is missing.
-# Xcode will eventually create the directory, but if we create it
-# ourselves, we can suppress the warnings.
-mkdir -p "${SIM_BUILD_PRODUCTS_DIR}"
+SEARCH_PATH="${SIM_BUILD_DIR}/Build/Products"
+rm -rf "${SEARCH_PATH}"
 
 xcrun xcodebuild build \
   -project ${XC_PROJECT} \
@@ -119,18 +82,19 @@ else
   info "Building simulator library for frank plug-in succeeded."
 fi
 
+SIM_LIBRARY=$(find "${SEARCH_PATH}" -name "${LIBRARY_NAME}" -type f -print | tr -d '\n')
 ditto_or_exit "${SIM_LIBRARY}" "${SIM_PRODUCTS_DIR}/${LIBRARY_NAME}"
 
 banner "Building Frank Plug-in ARM Library"
 
-ARM_LIBRARY_XC71="${ARM_BUILD_DIR}/Build/Intermediates/ArchiveIntermediates/${XC_TARGET}/IntermediateBuildFilesPath/UninstalledProducts/iphoneos/${LIBRARY_NAME}"
-rm -rf "${ARM_LIBRARY_XC71}"
+if [ "${XC_GTE_9}" = "true" ]; then
+  ARM_LIBRARY="${ARM_BUILD_DIR}/Build/Intermediates.noindex/ArchiveIntermediates/${XC_TARGET}/IntermediateBuildFilesPath/UninstalledProducts/iphoneos/${LIBRARY_NAME}"
+else
+  ARM_LIBRARY="${ARM_BUILD_DIR}/Build/Intermediates/ArchiveIntermediates/${XC_TARGET}/IntermediateBuildFilesPath/UninstalledProducts/iphoneos/${LIBRARY_NAME}"
+fi
 
-ARM_LIBRARY_XC7="${ARM_BUILD_DIR}/Build/Intermediates/ArchiveIntermediates/${XC_TARGET}/IntermediateBuildFilesPath/UninstalledProducts/${LIBRARY_NAME}"
-rm -rf "${ARM_LIBRARY_XC7}"
+rm -f "${ARM_LIBRARY}"
 
-ARM_LIBRARY_XC6="${ARM_BUILD_DIR}/Build/Intermediates/UninstalledProducts/${LIBRARY_NAME}"
-rm -rf "${ARM_LIBRARY_XC6}"
 
 if [ "${XC_GTE_7}" = "true" ]; then
   XC7_FLAGS="OTHER_CFLAGS=\"-fembed-bitcode\" DEPLOYMENT_POSTPROCESSING=YES ENABLE_BITCODE=YES"
@@ -145,7 +109,10 @@ xcrun xcodebuild install \
   ARCHS="armv7 armv7s arm64" \
   VALID_ARCHS="armv7 armv7s arm64" \
   ONLY_ACTIVE_ARCH=NO \
-  ${XC7_FLAGS} -sdk iphoneos \
+  OTHER_CFLAGS="-fembed-bitcode" \
+  DEPLOYMENT_POSTPROCESSING=YES \
+  ENABLE_BITCODE=YES \
+  -sdk iphoneos \
   IPHONE_DEPLOYMENT_TARGET=6.0 \
   GCC_TREAT_WARNINGS_AS_ERRORS=YES \
   GCC_GENERATE_TEST_COVERAGE_FILES=NO \
@@ -158,14 +125,6 @@ if [ $EXIT_CODE != 0 ]; then
   exit $RETVAL
 else
   info "Building ARM library for framework succeeded."
-fi
-
-if [ -e "${ARM_LIBRARY_XC71}" ]; then
-  ARM_LIBRARY="${ARM_LIBRARY_XC71}"
-elif [ -e "${ARM_LIBRARY_XC7}" ]; then
-  ARM_LIBRARY="${ARM_LIBRARY_XC7}"
-else
-  ARM_LIBRARY="${ARM_LIBRARY_XC6}"
 fi
 
 ditto_or_exit "${ARM_LIBRARY}" "${ARM_PRODUCTS_DIR}/${LIBRARY_NAME}"
@@ -189,29 +148,25 @@ VERSION=`xcrun strings "${INSTALLED_LIBRARY}" | grep -E 'CALABASH VERSION' | hea
 echo "Built version:  $VERSION"
 lipo -info "${INSTALLED_LIBRARY}"
 
-if [ "${XC_GTE_7}"  = "true" ]; then
-
-  xcrun otool-classic -arch arm64 -l "${INSTALLED_LIBRARY}" | grep -q bitcode
+# For dylibs, search for __LLVM
+# For static libs (.a) search for bitcode
+# Neither is fully reliable because -fembed-bitcode-marker (space for bitcode,
+# but no bitcode) would produce a false positive.
+#
+# If we have trouble with bitcode, we can try:
+#
+# $ xcodebuild archive
+function expect_bitcode {
+  xcrun otool -arch $1 -l "${INSTALLED_LIBRARY}" | grep 'bitcode' &> /dev/null
   if [ $? -eq 0 ]; then
-    echo "${LIBRARY_NAME} contains bitcode for arm64"
+    echo "${INSTALLED_LIBRARY} contains bitcode for ${1}"
   else
-    echo "${LIBRARY_NAME} does not contain bitcode for arm64"
+    echo "${INSTALLED_LIBRARY} does not contain bitcode for ${1}"
     exit 1
   fi
+}
 
-  xcrun otool-classic -arch armv7s -l "${INSTALLED_LIBRARY}" | grep -q bitcode
-  if [ $? -eq 0 ]; then
-    echo "${LIBRARY_NAME} contains bitcode for armv7s"
-  else
-    echo "calabash.framework/calabash does not contain bitcode for armv7s"
-    exit 1
-  fi
+expect_bitcode arm64
+expect_bitcode armv7
+expect_bitcode armv7s
 
-  xcrun otool-classic -arch armv7s -l "${INSTALLED_LIBRARY}" | grep -q bitcode
-  if [ $? -eq 0 ]; then
-    echo "${LIBRARY_NAME} contains bitcode for armv7"
-  else
-    echo "${LIBRARY_NAME} does not contain bitcode for armv7"
-    exit 1
-  fi
-fi

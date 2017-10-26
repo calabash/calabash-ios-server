@@ -26,7 +26,6 @@
 #import "LPUIARouteOverSharedElement.h"
 #import "LPUIATapRoute.h"
 #import "LPUIATapRouteOverSharedElement.h"
-#import "LPKeyboardRoute.h"
 #import "LPLocationRoute.h"
 #import "LPDebugRoute.h"
 #import "LPDumpRoute.h"
@@ -53,6 +52,26 @@
 
 @implementation CalabashServer
 
++ (void)redirectSimulatorLogsToUserLibraryCoreSimulatorLogs {
+  if ([[LPDevice sharedDevice] isSimulator]) {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,
+                                                         NSUserDomainMask, YES);
+    if (!paths[0]) { return; }
+    NSString *containerLibrary = paths[0];
+    NSArray *tokens = [containerLibrary componentsSeparatedByString:@"data"];
+
+    if (!tokens[0]) { return; }
+    NSString *dataDir = [tokens[0] stringByAppendingPathComponent:@"data"];
+    NSString *libraryDir = [dataDir stringByAppendingPathComponent:@"Library"];
+    NSString *logsDir = [libraryDir stringByAppendingPathComponent:@"Logs"];
+    NSString *sysLog = [logsDir stringByAppendingPathComponent:@"system.log"];
+
+    if (![[NSFileManager defaultManager] fileExistsAtPath:sysLog]) { return; }
+
+    freopen([sysLog fileSystemRepresentation], "a+", stderr);
+    freopen([sysLog fileSystemRepresentation], "a+", stdout);
+  }
+}
 
 + (void) start {
   CalabashServer *server = [[CalabashServer alloc] init];
@@ -105,10 +124,6 @@
     [LPRouter addRoute:rr forPath:@"record"];
     [rr release];
 
-    //        LPPlaybackRoute *pr =[LPPlaybackRoute new];
-    //        [LPRouter addRoute:pr forPath:@"/play"];
-    //        [pr release];
-    //
     LPAsyncPlaybackRoute *apr = [LPAsyncPlaybackRoute new];
     [LPRouter addRoute:apr forPath:@"play"];
     [apr release];
@@ -148,10 +163,6 @@
     LPConditionRoute *cond = [LPConditionRoute new];
     [LPRouter addRoute:cond forPath:@"condition"];
     [cond release];
-
-    LPKeyboardRoute *keyboard = [LPKeyboardRoute new];
-    [LPRouter addRoute:keyboard forPath:@"keyboard"];
-    [keyboard release];
 
     LPKeyboardLanguageRoute *keyboard_language = [LPKeyboardLanguageRoute new];
     [LPRouter addRoute:keyboard_language forPath:@"keyboard-language"];
@@ -267,6 +278,8 @@
 
 
 - (void) start {
+
+  [CalabashServer redirectSimulatorLogsToUserLibraryCoreSimulatorLogs];
 
   [self enableAccessibility];
 

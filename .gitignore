@@ -46,6 +46,7 @@ ios-smoke-test-app
 calabash-ios
 run_loop
 
+Gemfile.lock
 .ruby-version
 .bundle
 
@@ -63,6 +64,8 @@ cucumber/xtc-submit-acquaint
 !cucumber/acquaint/AcquaintNativeiOS.ipa
 cucumber/xtc-submit-device-agent-test-app
 !cucumber/device-agent-test-app/TestApp.app
+!cucumber/device-agent-test-app/TestApp.app.dSYM
+!cucumber/device-agent-test-app/TestApp.ipa
 !cucumber/device-agent-test-app/TestApp.app.dSYM
 !cucumber/device-agent-test-app/TestApp.app
 

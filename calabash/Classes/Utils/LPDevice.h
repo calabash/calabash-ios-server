@@ -9,7 +9,6 @@
 
 extern NSString *const LPDeviceSimKeyModelIdentifier;
 extern NSString *const LPDeviceSimKeyVersionInfo;
-extern NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY;
 
 @interface LPDevice : NSObject
 
@@ -24,23 +23,24 @@ extern NSString *const LPDeviceSimKeyIphoneSimulatorDevice_LEGACY;
 
 + (LPDevice *) sharedDevice;
 
+- (NSString *) simulatorModelIdentifier;
 - (NSString *) simulatorVersionInfo;
-
-// Required for clients < 0.16.2 - @see LPVersionRoute
-- (NSString *) LEGACY_iPhoneSimulatorDevice;
-- (NSString *) LEGACY_systemFromUname;
-
-
 - (BOOL) isSimulator;
 - (BOOL) isPhysicalDevice;
 - (BOOL) isIPhone6Like;
 - (BOOL) isIPhone6PlusLike;
+- (BOOL) isIPhone;
 - (BOOL) isIPad;
 - (BOOL) isIPadPro;
+- (BOOL) isIPadPro12point9inch;
+- (BOOL) isIPadPro9point7inch;
+- (BOOL) isIPad9point7inch;
 - (BOOL) isIPadPro10point5inch;
 - (BOOL) isIPhone4Like;
 - (BOOL) isIPhone5Like;
 - (BOOL) isLetterBox;
+- (BOOL) isIPhone10Like;
+- (BOOL) isIPhone10LetterBox;
 - (NSString *) getIPAddress;
 
 @end

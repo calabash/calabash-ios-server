@@ -92,7 +92,7 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
                                                  data:nil];
   NSData *jsonData = [[LPJSONUtils serializeDictionary:version]
                       dataUsingEncoding:NSUTF8StringEncoding];
-  
+
   return [[LPHTTPDataResponse alloc] initWithData:jsonData];
 }
 
@@ -121,9 +121,6 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
 
   NSString *iOSVersion = [device iOSVersion];
   if (!iOSVersion) { iOSVersion = @""; }
-
-  NSString *LEGACY_iphoneSimulatorDevice = [device LEGACY_iPhoneSimulatorDevice];
-  if (!LEGACY_iphoneSimulatorDevice) { LEGACY_iphoneSimulatorDevice = @""; }
 
   NSDictionary *git =
   @{
@@ -161,8 +158,6 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
     @"server_port" : @([infoPlist serverPort]),
     @"short_version_string" : [infoPlist stringForShortVersion],
     @"simulator" : simulatorInfo,
-    @"simulator_device" : LEGACY_iphoneSimulatorDevice, // deprecate 0.16.2 replaced with device_family
-    @"system" : [device LEGACY_systemFromUname],        // deprecated 0.16.2, replaced with model identifer
     @"version" : calabashVersion
 
     };
