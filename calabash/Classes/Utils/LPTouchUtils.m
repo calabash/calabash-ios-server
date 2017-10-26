@@ -1,4 +1,7 @@
-//
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
+
 //  LPTouchUtils.m
 //  Created by Karl Krukow on 14/08/11.
 //  Copyright 2011 LessPainful. All rights reserved.
@@ -6,50 +9,87 @@
 #import <math.h>
 #import "LPTouchUtils.h"
 #import "LPDevice.h"
-
+#import "LPCocoaLumberjack.h"
 
 @implementation LPTouchUtils
 
-+ (CGPoint) translateToScreenCoords:(CGPoint) point sampleFactor:(CGFloat)sampleFactor{
-  UIScreen *s = [UIScreen mainScreen];
-
-  UIScreenMode *sm = [s currentMode];
-  CGRect b = [s bounds];
-  CGSize size = sm.size;
-  UIDeviceOrientation o = [[UIDevice currentDevice] orientation];
-
-  if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-    if ([[LPDevice sharedDevice] isLetterBox]) {
-      return CGPointMake(point.x * sampleFactor,
-                         (point.y + LPiPHONE4INCHOFFSET)*sampleFactor);
-    }
-    return CGPointMake(point.x*sampleFactor,point.y*sampleFactor);
-  }
-
-
-  CGRect small_vert = CGRectMake(0, 0, 320, 480);
-  CGRect small_hori = CGRectMake(0, 0, 480, 320);
-  CGSize large_size_vert = CGSizeMake(768, 1024);
-  CGSize large_size_hori = CGSizeMake(1024, 768);
-  CGSize retina_ipad_vert = CGSizeMake(1536, 2048);
-  CGSize retina_ipad_hori = CGSizeMake(2048, 1536);
-
-
-  if ((CGRectEqualToRect(small_vert, b) || CGRectEqualToRect(small_hori,b)) && (CGSizeEqualToSize(large_size_hori, size) || CGSizeEqualToSize(large_size_vert, size) || CGSizeEqualToSize(retina_ipad_hori,size) ||
-      CGSizeEqualToSize(retina_ipad_vert, size))) {
-
-    CGSize orientation_size = UIDeviceOrientationIsPortrait(o) || UIDeviceOrientationFaceUp == o || UIDeviceOrientationUnknown == o ? large_size_vert : large_size_hori;
-    float x_offset = orientation_size.width / 2.0f - b.size.width / 2.0f;
-    float y_offset = orientation_size.height / 2.0f - b.size.height / 2.0f;
-    return CGPointMake(x_offset + point.x, y_offset + point.y);
++ (CGFloat) xOffsetFor4inchLetterBox:(UIInterfaceOrientation) orientation {
+  if (UIInterfaceOrientationIsPortrait(orientation)) {
+    return 0.0;
   } else {
-    return point;
+    return 44.0;
   }
 }
 
-+ (CGPoint) translateToScreenCoords:(CGPoint) point{
-  CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
-  return [self translateToScreenCoords:point sampleFactor:sampleFactor];
++ (CGFloat) yOffsetFor4inchLetterBox:(UIInterfaceOrientation) orientation {
+  if (UIInterfaceOrientationIsPortrait(orientation)) {
+    return 44.0;
+  } else {
+    return 0.0;
+  }
+}
+
++ (CGFloat) xOffsetForIPhone10LetterBox:(UIInterfaceOrientation) orientation {
+  if (UIInterfaceOrientationIsPortrait(orientation)) {
+    return 0.0;
+  } else {
+    return 94.0;
+  }
+}
+
++ (CGFloat) yOffsetForIPhone10LetterBox:(UIInterfaceOrientation) orientation {
+  if (UIInterfaceOrientationIsPortrait(orientation)) {
+    return 72.0;
+  } else {
+    return 4.0;
+  }
+}
+
++ (CGRect) rectByApplyingLetterBoxAndSampleFactorToRect:(CGRect) rect {
+  CGFloat x, y, width, height;
+
+  UIInterfaceOrientation orientation;
+  LPDevice *device = [LPDevice sharedDevice];
+
+  if ([device isIPhone10LetterBox]) {
+    orientation = [[UIApplication sharedApplication] statusBarOrientation];
+
+    CGFloat xOffset = [LPTouchUtils xOffsetForIPhone10LetterBox:orientation];
+    CGFloat yOffset = [LPTouchUtils yOffsetForIPhone10LetterBox:orientation];
+
+    CGFloat xScale = 1.0;
+    CGFloat yScale = 1.0;
+
+    if (UIInterfaceOrientationIsLandscape(orientation)) {
+      xScale = 624.0/667.0;
+      yScale = 350.0/375.0;
+    }
+
+    x = (rect.origin.x * xScale) + xOffset;
+    y = (rect.origin.y * yScale) + yOffset;
+    width = rect.size.width * xScale;
+    height = rect.size.height * yScale;
+  } else {
+    CGFloat sampleFactor = [device sampleFactor];
+    x = rect.origin.x * sampleFactor;
+    y = rect.origin.y * sampleFactor;
+    width = rect.size.width * sampleFactor;
+    height = rect.size.height * sampleFactor;
+
+    if ([device isLetterBox]) {
+      orientation = [[UIApplication sharedApplication] statusBarOrientation];
+      x = x + ([LPTouchUtils xOffsetFor4inchLetterBox:orientation] * sampleFactor);
+      y = y + ([LPTouchUtils yOffsetFor4inchLetterBox:orientation] * sampleFactor);
+    }
+  }
+
+  return CGRectMake(x, y, width, height);
+}
+
++ (CGPoint) centerByApplyingLetterBoxAndSampleFactorToRect:(CGRect) rect {
+  CGRect translated;
+  translated = [LPTouchUtils rectByApplyingLetterBoxAndSampleFactorToRect:rect];
+  return CGPointMake(CGRectGetMidX(translated), CGRectGetMidY(translated));
 }
 
 + (NSArray *) applicationWindows {
@@ -211,107 +251,49 @@
   return NO;
 }
 
-
+// Called by JSONUtils when serializing accessibility frames - should translate
+// is YES.  Changing the return value in the shouldTranslate branch will have
+// few consequences.
+//
+// Called by LPTouchUtils to determine visibility - should translate is NO.
+// Changing the !shouldTranslate could be extremely disruptive.
 + (CGPoint) centerOfFrame:(CGRect) rect shouldTranslate:(BOOL) shouldTranslate {
-  CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
-  CGPoint translated;
   if (shouldTranslate) {
-    translated = [self translateToScreenCoords:rect.origin
-                                  sampleFactor:sampleFactor];
+    return [LPTouchUtils centerByApplyingLetterBoxAndSampleFactorToRect:rect];
   } else {
-   translated = rect.origin;
+    LPDevice *device = [LPDevice sharedDevice];
+    CGFloat sampleFactor = [device sampleFactor];
+    CGPoint point = rect.origin;
+    CGFloat x, y;
+    x = point.x + 0.5 * rect.size.width * sampleFactor;
+    y = point.y + 0.5 * rect.size.height * sampleFactor;
+    return CGPointMake(x, y);
   }
-  
-  return CGPointMake(translated.x + 0.5 * rect.size.width * sampleFactor,
-                     translated.y + 0.5 * rect.size.height * sampleFactor);
-  
 }
 
++ (CGPoint) centerOfView:(UIView *) view {
+  UIWindow *window = [LPTouchUtils windowForView:view];
+  LPLogDebug(@"rect before converting: %@", NSStringFromCGRect(view.frame));
 
-+ (CGPoint) centerOfFrame:(CGRect) frame {
-  return [self centerOfFrame:frame shouldTranslate:YES];
-}
-
-
-+ (CGPoint) centerOfView:(UIView *) view shouldTranslate:(BOOL) shouldTranslate {
-  UIWindow *window = [self windowForView:view];
   CGRect rect = [window convertRect:view.bounds fromView:view];
+  LPLogDebug(@"rect after converting: %@", NSStringFromCGRect(rect));
 
   UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
+  rect = [window convertRect:rect toCoordinateSpace:frontWindow];
 
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-  if ([frontWindow respondsToSelector:@selector(convertPoint:toCoordinateSpace:)]) {
-    CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
-    rect = [window convertRect:rect toCoordinateSpace:frontWindow];
-    CGFloat x = (rect.origin.x + 0.5 * rect.size.width) * sampleFactor;
-    CGFloat y = (rect.origin.y + 0.5 * rect.size.height) * sampleFactor;
-    
-    if ([[LPDevice sharedDevice] isLetterBox]) {
-      UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-      if (UIInterfaceOrientationIsPortrait(orientation)) {
-        y += LPiPHONE4INCHOFFSET*sampleFactor;
-      }
-      else {
-        x += LPiPHONE4INCHOFFSET*sampleFactor;
-      }
-    }
-    return CGPointMake(x,y);
-  } else {
-    rect = [frontWindow convertRect:rect fromWindow:window];
-    return [self centerOfFrame:rect shouldTranslate:shouldTranslate];
-  }
-#else
-  rect = [frontWindow convertRect:rect fromWindow:window];
-  return [self centerOfFrame:rect shouldTranslate:shouldTranslate];
-#endif
+  LPLogDebug(@"rect after convert to coordinate space: %@",
+          NSStringFromCGRect(rect));
+
+  CGPoint point;
+  point = [LPTouchUtils centerByApplyingLetterBoxAndSampleFactorToRect:rect];
+
+  LPLogDebug(@"center of rect: %@", NSStringFromCGPoint(point));
+  return point;
 }
-
 
 + (CGPoint) centerOfView:(UIView *) view inWindow:(UIWindow *) windowForView {
   CGRect bounds = [windowForView convertRect:view.bounds fromView:view];
-  return [self centerOfFrame:bounds shouldTranslate:NO];
-}
-
-+ (CGRect)translateRect:(CGRect)sourceRect inView:(UIView*) view {
-  UIWindow *window = [self windowForView:view];
-  CGRect bounds = [window convertRect:view.bounds fromView:view];
-  CGRect rect = CGRectMake(bounds.origin.x + sourceRect.origin.x,
-                          bounds.origin.y + sourceRect.origin.y,
-                          sourceRect.size.width,
-                          sourceRect.size.height);
-
-
-  UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
-
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-  if ([frontWindow respondsToSelector:@selector(convertPoint:toCoordinateSpace:)]) {
-    CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
-    rect = [window convertRect:rect toCoordinateSpace:frontWindow];
-    CGFloat x = rect.origin.x;
-    CGFloat y = rect.origin.y;
-    if ([[LPDevice sharedDevice] isLetterBox]) {
-      UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
-      if (UIInterfaceOrientationIsPortrait(orientation)) {
-        y += LPiPHONE4INCHOFFSET*sampleFactor;
-      }
-      else {
-        x += LPiPHONE4INCHOFFSET*sampleFactor;
-      }
-    }
-    return CGRectMake(x * sampleFactor, y * sampleFactor,
-                      rect.size.width * sampleFactor, rect.size.height * sampleFactor);
-  } else {
-    rect = [frontWindow convertRect:rect fromWindow:window];
-    CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
-    CGPoint translated = [self translateToScreenCoords:rect.origin sampleFactor:sampleFactor];
-    return CGRectMake(translated.x, translated.y, rect.size.width * sampleFactor, rect.size.height * sampleFactor);
-  }
-#else
-  rect = [frontWindow convertRect:rect fromWindow:window];
-  CGFloat sampleFactor = [[LPDevice sharedDevice] sampleFactor];
-  CGPoint translated = [self translateToScreenCoords:rect.origin sampleFactor:sampleFactor];
-  return CGRectMake(translated.x, translated.y, rect.size.width * sampleFactor, rect.size.height * sampleFactor);
-#endif
+  return [LPTouchUtils centerOfFrame:bounds shouldTranslate:NO];
 }
 
 + (UIWindow *) appDelegateWindow {
@@ -345,26 +327,14 @@
       [view respondsToSelector:@selector(accessibilityElementAtIndex:)]) {
     NSInteger count = [view accessibilityElementCount];
     if (count == 0 || count == NSNotFound) {
-      return [arr autorelease];
+      return [NSArray arrayWithArray:arr];
     }
     for (NSInteger i=0;i<count;i++) {
       id accEl = [view accessibilityElementAtIndex:i];
       [arr addObject:accEl];
     }
   }
-  return [arr autorelease];
-}
-
-
-+ (CGPoint) centerOfView:(UIView *) view {
-  return [self centerOfView:view shouldTranslate:YES];
-}
-
-
-+ (CGPoint) centerOfView:(id) view withSuperView:(UIView *) superView inWindow:(id) window {
-
-  CGRect frameInWindow = [window convertRect:[view frame] fromView:superView];
-  return [self centerOfFrame:frameInWindow shouldTranslate:YES];
+  return [NSArray arrayWithArray:arr];
 }
 
 //  Created by Olivier Larivain on 3/6/13.
@@ -376,7 +346,7 @@
   if ([viewOrDom isKindOfClass:[UIView class]]) {
     UIView *view = (UIView *) viewOrDom;
 
-    UIColor *originalBackgroundColor = [view.backgroundColor retain];
+    UIColor *originalBackgroundColor = view.backgroundColor;
     CGFloat originalAlpha = view.alpha;
     for (NSUInteger i = 0; i < 5; i++) {
       view.backgroundColor = [UIColor yellowColor];
@@ -392,7 +362,6 @@
     }
     view.alpha = originalAlpha;
     view.backgroundColor = originalBackgroundColor;
-    [originalBackgroundColor release];
   } else {
     //TODO implement flash in JavaScript
   }
