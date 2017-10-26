@@ -1,3 +1,16 @@
+### 0.21.2
+
+* Jenkins: jobs push calabash artifacts to S3 #406
+* Test: force xcpretty to write build/reports/junit.xml #404
+* Find touch coords for 768x1014 Web Apps displayed on iPad Pro form
+  factors #403
+* Support legacy apps displayed on iPhone X in letter box #402
+* LPDevice: fix iPad Pro and iPad model to form-factor map #401
+* LPDevice: update iPhone 8, 8+, and 10 model numbers #400
+* LPDevice: add iPhone X, 8, 8+ model numbers #399
+* Enable tests to dispatch blocks and wait for their results on the main
+  dispatch queue #393 @Lievesley
+
 ### 0.21.1
 
 Advancing the version to create a tag from which we can distribute
