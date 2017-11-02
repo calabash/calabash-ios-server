@@ -7,8 +7,6 @@ if [ -z "${JENKINS_HOME}" ]; then
   exit 1
 fi
 
-bin/ci/jenkins/install-keychain.sh
-
 CODE_SIGN_DIR="${HOME}/.calabash/calabash-codesign"
 KEYCHAIN="${CODE_SIGN_DIR}/ios/Calabash.keychain"
 
@@ -27,3 +25,5 @@ echo "XTC_WAIT_FOR_RESULTS=0" >> "${DOTENV}"
 echo "XTC_LOCALE=en_US" >> "${DOTENV}"
 echo "XTC_ACCOUNT=calabash-ios-ci" >> "${DOTENV}"
 echo "XTC_USER=joshua.moody@xamarin.com" >> "${DOTENV}"
+
+make ipa-cal
