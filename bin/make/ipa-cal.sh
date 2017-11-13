@@ -146,4 +146,3 @@ ditto_or_exit "${INSTALLED_DSYM}" "${XTC_DIR}/${DSYM}"
 info "Copied ${DSYM} to ${XTC_DIR}/"
 
 info "Done!"
-
