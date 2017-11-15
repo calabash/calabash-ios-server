@@ -2308,7 +2308,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "sh calabash/gitversioning-before.sh \"calabash/LPGitVersionDefines.h\"";
+			shellScript = "bin/xcode-build-phase/gitversioning-before.sh";
 			showEnvVarsInLog = 0;
 		};
 		B1D5BDC719A23BCE0070E8CE /* Run Script - git versioning 2 of 2 */ = {
@@ -2323,7 +2323,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "sh calabash/gitversioning-after.sh \"calabash/LPGitVersionDefines.h\"\n";
+			shellScript = "bin/xcode-build-phase/gitversioning-after.sh";
 			showEnvVarsInLog = 0;
 		};
 		F5091BDA18C4E1D700C85307 /* Run Script - git versioning 1 of 2 */ = {
@@ -2338,7 +2338,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "sh calabash/gitversioning-before.sh \"calabash/LPGitVersionDefines.h\"";
+			shellScript = "bin/xcode-build-phase/gitversioning-before.sh";
 			showEnvVarsInLog = 0;
 		};
 		F5091C2718C4E1D700C85307 /* Run Script - git versioning 2 of 2 */ = {
@@ -2353,7 +2353,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "sh calabash/gitversioning-after.sh \"calabash/LPGitVersionDefines.h\"\n";
+			shellScript = "bin/xcode-build-phase/gitversioning-after.sh";
 			showEnvVarsInLog = 0;
 		};
 		F526C4FC1BF2AA98003D2E43 /* Run Script Force New APP SHA */ = {
@@ -2383,7 +2383,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "sh calabash/gitversioning-before.sh \"calabash/LPGitVersionDefines.h\"";
+			shellScript = "bin/xcode-build-phase/gitversioning-before.sh";
 			showEnvVarsInLog = 0;
 		};
 		F52B40BD1B4BA2970022AEC8 /* Run Script git versioning 2 of 2 */ = {
@@ -2398,7 +2398,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "sh calabash/gitversioning-after.sh \"calabash/LPGitVersionDefines.h\"\n";
+			shellScript = "bin/xcode-build-phase/gitversioning-after.sh";
 			showEnvVarsInLog = 0;
 		};
 		F563A5461C57BF60005EE33F /* Run Script Sign Embedded Dylibs */ = {
@@ -2472,7 +2472,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "sh calabash/gitversioning-before.sh \"calabash/LPGitVersionDefines.h\"";
+			shellScript = "bin/xcode-build-phase/gitversioning-before.sh";
 			showEnvVarsInLog = 0;
 		};
 		F5BA6EFF1B4BB97000DB898F /* Run Script git versioning 2 of 2 */ = {
@@ -2487,7 +2487,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "sh calabash/gitversioning-after.sh \"calabash/LPGitVersionDefines.h\"";
+			shellScript = "bin/xcode-build-phase/gitversioning-after.sh";
 			showEnvVarsInLog = 0;
 		};
 		F5DDE5521CDE4AB600E0E187 /* Run Script Increment Build Number */ = {
