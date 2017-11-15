@@ -15,24 +15,24 @@
 #import "LPHTTPDataResponse.h"
 #import "LPJSONUtils.h"
 #import "LPDevice.h"
-#import <sys/utsname.h>
 #import "LPInfoPlist.h"
 #import "LPGitVersionDefines.h"
+#import "LPCocoaLumberjack.h"
 
 // See the LPGitVersionDefines.h
 //
 // The contents are updated before compile time with the following defines:
 //
-// #define LP_GIT_SHORT_REVISION <rev>
-// #define LP_GIT_BRANCH <branch>
-// #define LP_GIT_REMOTE_ORIGIN <origin>
-// #define LP_SERVER_BUILD_DATE <date in seconds>
+// #define LP_GIT_SHORT_REVISION @"<rev>"
+// #define LP_GIT_BRANCH @"<branch>"
+// #define LP_GIT_REMOTE_ORIGIN @"<origin>"
+// #define LP_SERVER_BUILD_DATE "<date>"
 //
 // # This is one of two values:
 // # 1. If the local git repo is clean, then this value is the commit SHA
 // # 2. If the local git repo is not clean, it is the shasum of a .tar of
 // #    the calabash/ calabash.xcodeproj/project.pbxproj bin/ sources.
-// #define LP_SERVER_ID_KEY_VALUE @"LPSERVERID=<sha>
+// #define LP_SERVER_ID_KEY_VALUE "LPSERVERID=<sha>"
 //
 // After compilation, the contents of this file are reset using:
 //
@@ -64,8 +64,6 @@ static NSString *const kLPGitBranch = @"Unknown LP_GIT_BRANCH";
 static NSString *const kLPGitRemoteOrigin = LP_GIT_REMOTE_ORIGIN;
 #else
 static NSString *const kLPGitRemoteOrigin = @"Unknown LP_GIT_REMOTE_ORIGIN";
-#endif
-
 #endif
 
 @interface LPVersionRoute ()
@@ -102,6 +100,47 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown LP_GIT_REMOTE_ORIGIN";
                       dataUsingEncoding:NSUTF8StringEncoding];
 
   return [[LPHTTPDataResponse alloc] initWithData:jsonData];
+}
+
++ (NSString *)stringFromServerBuildDate {
+#ifdef LP_SERVER_BUILD_DATE
+  return [[NSString alloc] initWithCString:LP_SERVER_BUILD_DATE
+                                  encoding:NSUTF8StringEncoding];
+#else
+  LPLogDebug(@"LP_SERVER_BUILD_DATE is not defined");
+  return @"LP_SERVER_BUILD_DATE is an unknown symbol";
+#endif
+}
+
++ (NSString *)serverIdentifierKeyValue {
+#ifdef LP_SERVER_ID_KEY_VALUE
+  return [[NSString alloc] initWithCString:LP_SERVER_ID_KEY_VALUE
+                                  encoding:NSUTF8StringEncoding];
+#else
+  LPLogDebug(@"LP_SERVER_ID_KEY_VALUE is not defined");
+  return @"LP_SERVER_ID_KEY_VALUE is an unknown symbol";
+#endif
+}
+
++ (NSString *)stringForServerIdentifier {
+  NSString *keyValue = [LPVersionRoute serverIdentifierKeyValue];
+  NSArray *tokens = [keyValue componentsSeparatedByString:@"="];
+  if ([tokens count] == 2) {
+    return tokens[1];
+  } else {
+    LPLogDebug(@"Unexpected LP_SERVER_ID_KEY_VALUE value: %@", keyValue);
+    return @"";
+  }
+}
+
++ (NSString *)stringForServerIdentifierToSkip {
+  NSDictionary *env = [[NSProcessInfo processInfo] environment];
+  NSString *skipToken = env[@"XTC_SKIP_LPSERVER_TOKEN"];
+  if (skipToken) {
+    return skipToken;
+  } else {
+    return @"";
+  }
 }
 
 - (NSDictionary *) JSONResponseForMethod:(NSString *) method
@@ -165,9 +204,12 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown LP_GIT_REMOTE_ORIGIN";
     @"server_port" : @([infoPlist serverPort]),
     @"short_version_string" : [infoPlist stringForShortVersion],
     @"simulator" : simulatorInfo,
-    @"version" : calabashVersion
+    @"version" : calabashVersion,
+    @"build_date" : [LPVersionRoute stringFromServerBuildDate],
+    @"server_identifier" : [LPVersionRoute stringForServerIdentifier],
+    @"server_identifier_to_skip" : [LPVersionRoute stringForServerIdentifierToSkip]
 
-    };
+  };
 }
 
 @end
