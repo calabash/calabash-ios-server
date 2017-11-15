@@ -17,30 +17,36 @@
 #import "LPDevice.h"
 #import <sys/utsname.h>
 #import "LPInfoPlist.h"
-
-@class UIDevice;
-
-
-/*** UNEXPECTED ***
- adds git version and branch information to the server_version route
-
- helps developers know exactly which server framework is installed in an ipa
-
- the two defines:
-
- #define LP_GIT_SHORT_REVISION <rev>  // ex. @"4fdb203"
- #define LP_GIT_BRANCH <branch>       // ex. @"0.9.x"
-
- are generated before compilation and erased after to avoid git conflicts in
- LPGitVersionDefines.h
-
- to see how LPGitVersionDefines.h is managed see:
-
- 1. Run Script - git versioning 1 of 2
- 2. Run Script - git versioning 2 of 2
-
- ******************/
 #import "LPGitVersionDefines.h"
+
+// See the LPGitVersionDefines.h
+//
+// The contents are updated before compile time with the following defines:
+//
+// #define LP_GIT_SHORT_REVISION <rev>
+// #define LP_GIT_BRANCH <branch>
+// #define LP_GIT_REMOTE_ORIGIN <origin>
+// #define LP_SERVER_BUILD_DATE <date in seconds>
+//
+// # This is one of two values:
+// # 1. If the local git repo is clean, then this value is the commit SHA
+// # 2. If the local git repo is not clean, it is the shasum of a .tar of
+// #    the calabash/ calabash.xcodeproj/project.pbxproj bin/ sources.
+// #define LP_SERVER_ID_KEY_VALUE @"LPSERVERID=<sha>
+//
+// After compilation, the contents of this file are reset using:
+//
+// git co -- calabash/LPGitVersionDefines.h
+//
+// To see how this file is managed, navigate to the calabash target and look at:
+//
+// 1. Run Script - git versioning 1 of 2
+// 2. Run Script - git versioning 2 of 2
+//
+// and these scripts:
+//
+// 3. bin/xcode-build-phase/gitversioning-before.sh
+// 4. bin/xcode-build-phase/gitversioning-after.sh
 
 #ifdef LP_GIT_SHORT_REVISION
 static NSString *const kLPGitShortRevision = LP_GIT_SHORT_REVISION;
@@ -161,6 +167,5 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
 
     };
 }
-
 
 @end
