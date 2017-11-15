@@ -148,7 +148,6 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
     @"device_name" : deviceName,
     @"form_factor" : formFactor,
     @"git" : git,
-    @"iOS_version" : iOSVersion, // deprecated 0.16.2 replaced with ios_version
     @"ios_version" : iOSVersion,
     @"iphone_app_emulated_on_ipad" : @(isIphoneAppEmulated),
     @"model_identifier" : modelIdentifier,
