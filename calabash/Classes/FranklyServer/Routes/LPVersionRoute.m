@@ -51,19 +51,21 @@
 #ifdef LP_GIT_SHORT_REVISION
 static NSString *const kLPGitShortRevision = LP_GIT_SHORT_REVISION;
 #else
-static NSString *const kLPGitShortRevision = @"Unknown";
+static NSString *const kLPGitShortRevision = @"Unknown LP_GIT_SHORT_REVISION";
 #endif
 
 #ifdef LP_GIT_BRANCH
 static NSString *const kLPGitBranch = LP_GIT_BRANCH;
 #else
-static NSString *const kLPGitBranch = @"Unknown";
+static NSString *const kLPGitBranch = @"Unknown LP_GIT_BRANCH";
 #endif
 
 #ifdef LP_GIT_REMOTE_ORIGIN
 static NSString *const kLPGitRemoteOrigin = LP_GIT_REMOTE_ORIGIN;
 #else
-static NSString *const kLPGitRemoteOrigin = @"Unknown";
+static NSString *const kLPGitRemoteOrigin = @"Unknown LP_GIT_REMOTE_ORIGIN";
+#endif
+
 #endif
 
 @interface LPVersionRoute ()
