@@ -15,7 +15,7 @@ fi
 
 function install_framework {
   local install_to="${1}/${FRAMEWORK}"
-  if [ -e "${install_to}/calabash" ]; then
+  if [ -e "${install_to}" ]; then
     rm -rf "${install_to}"
   else
     error "Tried to delete the wrong directory"
