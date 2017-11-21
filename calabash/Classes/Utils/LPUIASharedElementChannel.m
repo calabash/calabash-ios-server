@@ -34,6 +34,7 @@
 
 - (void) dealloc {
   dispatch_release(_uiaQueue);
+  [_currentHandler release];
   [super dealloc];
 }
 
