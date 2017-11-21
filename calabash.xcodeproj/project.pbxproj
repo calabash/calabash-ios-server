@@ -116,7 +116,7 @@
 		B15BF9DB19ABB1DE00B38577 /* UIScriptASTIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0414B6DB2B002A744C /* UIScriptASTIndex.m */; };
 		B15BF9DC19ABB1DE00B38577 /* UIScriptASTLast.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0614B6DB2B002A744C /* UIScriptASTLast.m */; };
 		B15BF9DD19ABB1DE00B38577 /* UIScriptASTWith.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0814B6DB2B002A744C /* UIScriptASTWith.m */; };
-		B15BF9DE19ABB1DE00B38577 /* UIScriptParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0A14B6DB2B002A744C /* UIScriptParser.m */; };
+		B15BF9DE19ABB1DE00B38577 /* UIScriptParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0A14B6DB2B002A744C /* UIScriptParser.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9DF19ABB1DE00B38577 /* LPUIAUserPrefsChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F279AE183D5B3000A922BC /* LPUIAUserPrefsChannel.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9E019ABB1DE00B38577 /* LPJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B15BF9E119ABB1DE00B38577 /* LPReflectUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B1296FC215DC1F5B005DDF5C /* LPReflectUtils.m */; };
@@ -185,7 +185,7 @@
 		B1D5BDAF19A23BCE0070E8CE /* LPEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DCD74189A82DF00F8DF87 /* LPEnv.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BDB019A23BCE0070E8CE /* UIScriptASTWith.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0814B6DB2B002A744C /* UIScriptASTWith.m */; };
 		B1D5BDB119A23BCE0070E8CE /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		B1D5BDB219A23BCE0070E8CE /* UIScriptParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0A14B6DB2B002A744C /* UIScriptParser.m */; };
+		B1D5BDB219A23BCE0070E8CE /* UIScriptParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0A14B6DB2B002A744C /* UIScriptParser.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BDB319A23BCE0070E8CE /* LPJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1D5BDB419A23BCE0070E8CE /* LPKeychainRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F55D412118C9130100813F78 /* LPKeychainRoute.m */; };
 		B1D5BDB519A23BCE0070E8CE /* LPTouchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -291,7 +291,7 @@
 		F5091C0F18C4E1D700C85307 /* UIScriptASTLast.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0614B6DB2B002A744C /* UIScriptASTLast.m */; };
 		F5091C1018C4E1D700C85307 /* LPEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = B12DCD74189A82DF00F8DF87 /* LPEnv.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091C1118C4E1D700C85307 /* UIScriptASTWith.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0814B6DB2B002A744C /* UIScriptASTWith.m */; };
-		F5091C1218C4E1D700C85307 /* UIScriptParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0A14B6DB2B002A744C /* UIScriptParser.m */; };
+		F5091C1218C4E1D700C85307 /* UIScriptParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0A14B6DB2B002A744C /* UIScriptParser.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091C1318C4E1D700C85307 /* LPJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091C1418C4E1D700C85307 /* LPTouchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0F14B6DB2B002A744C /* LPTouchUtils.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5091C1718C4E1D700C85307 /* LPI.mm in Sources */ = {isa = PBXBuildFile; fileRef = B184FDBD14B6DB2B002A744C /* LPI.mm */; };
@@ -387,7 +387,7 @@
 		F50CBFC11A0405CE004AC9DA /* UIScriptASTIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0414B6DB2B002A744C /* UIScriptASTIndex.m */; };
 		F50CBFC21A0405CE004AC9DA /* UIScriptASTLast.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0614B6DB2B002A744C /* UIScriptASTLast.m */; };
 		F50CBFC31A0405CE004AC9DA /* UIScriptASTWith.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0814B6DB2B002A744C /* UIScriptASTWith.m */; };
-		F50CBFC41A0405CE004AC9DA /* UIScriptParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0A14B6DB2B002A744C /* UIScriptParser.m */; };
+		F50CBFC41A0405CE004AC9DA /* UIScriptParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0A14B6DB2B002A744C /* UIScriptParser.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBFC51A0405E9004AC9DA /* LPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FBBC5919D0070000EE03CE /* LPDevice.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBFC61A0405E9004AC9DA /* LPUIAUserPrefsChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F279AE183D5B3000A922BC /* LPUIAUserPrefsChannel.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F50CBFC71A0405E9004AC9DA /* LPJSONUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FE0D14B6DB2B002A744C /* LPJSONUtils.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
