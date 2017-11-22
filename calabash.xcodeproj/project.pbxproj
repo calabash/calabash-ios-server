@@ -477,6 +477,7 @@
 		F576058D1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F576058E1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F576058F1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		F57D96CA1FC575C3005A9793 /* libCalabashFAT.dylib in Resources */ = {isa = PBXBuildFile; fileRef = F57D96C81FC5759F005A9793 /* libCalabashFAT.dylib */; };
 		F58C9F571B6F7EB9007D307B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F561B6F7EB9007D307B /* GCDAsyncSocket.m */; };
 		F58C9F801B6F802D007D307B /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F5B1B6F802D007D307B /* DDData.m */; };
 		F58C9F811B6F802D007D307B /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F5D1B6F802D007D307B /* DDNumber.m */; };
@@ -961,6 +962,7 @@
 		F57605181BCE767000E89C97 /* LPSuspendAppRouteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPSuspendAppRouteTest.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
 		F57605871BCE77F000E89C97 /* LPSuspendAppRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LPSuspendAppRoute.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; wrapsLines = 1; };
 		F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPSuspendAppRoute.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; wrapsLines = 1; };
+		F57D96C81FC5759F005A9793 /* libCalabashFAT.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; path = libCalabashFAT.dylib; sourceTree = "<group>"; };
 		F58B6DE8186847F70042191C /* gitversioning-after.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "gitversioning-after.sh"; sourceTree = "<group>"; };
 		F58B6DE9186847F70042191C /* gitversioning-before.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "gitversioning-before.sh"; sourceTree = "<group>"; };
 		F58C9F551B6F7EB9007D307B /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = GCDAsyncSocket.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; wrapsLines = 1; };
@@ -1676,6 +1678,7 @@
 		F5396A6D1AA6056D00D75E78 /* TestResources */ = {
 			isa = PBXGroup;
 			children = (
+				F57D96C81FC5759F005A9793 /* libCalabashFAT.dylib */,
 				F5A33A451ABFB09500224639 /* badPlugin.dylib */,
 				F5A33A391ABFAD7600224639 /* examplePlugin.dylib */,
 				F5A33A3A1ABFAD7600224639 /* examplePluginCalabash.dylib */,
@@ -2290,6 +2293,7 @@
 				F5A33A441ABFAD9700224639 /* memoryPluginCalabash.dylib in Resources */,
 				F59B4BB01C57CC1400A658D0 /* LaunchScreen.xib in Resources */,
 				F5A33A471ABFB0BD00224639 /* badPlugin.dylib in Resources */,
+				F57D96CA1FC575C3005A9793 /* libCalabashFAT.dylib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

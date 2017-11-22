@@ -34,6 +34,39 @@ Before("@device_agent_test_app") do
   end
 end
 
+Before("@skip_embedded_server") do
+  if !xamarin_test_cloud?
+    @relaunch = true
+    @skip_embedded_server_options = {}
+    file = File.join("..",  "Products", "test-target",
+                     "app-cal", "LPTestTarget.app")
+    app = RunLoop::App.new(file)
+    target = ENV["DEVICE_TARGET"] || RunLoop::Core.default_simulator
+    simulator = RunLoop::Device.device_with_identifier(target)
+
+    core_sim = RunLoop::CoreSimulator.new(simulator, app)
+    app_dir = core_sim.send(:installed_app_bundle_dir)
+    app = RunLoop::App.new(app_dir)
+    file = File.join(app.path, app.executable_name)
+
+    strings = RunLoop::Strings.new(file).send(:dump)
+    server_id = strings[/LPSERVERID=.+$/]
+    if !server_id
+      raise %Q[
+Could not find LPSERVERID embedded in app calabash.framework not linked
+]
+      exit 1
+    end
+
+    @skip_embedded_server_options[:env] = {
+      "XTC_SKIP_LPSERVER_TOKEN" => server_id.split("=")[1],
+      "DYLD_INSERT_LIBRARIES" => File.join(app.path, "libCalabashFAT.dylib")
+    }
+
+    @skip_embedded_server_options
+  end
+end
+
 Before("@german") do
   if !xamarin_test_cloud?
     target = ENV["DEVICE_TARGET"] || RunLoop::Core.default_simulator
@@ -55,6 +88,8 @@ Before do |scenario|
     options = @acquaint_options
   elsif @device_agent_test_app_options
     options = @device_agent_test_app_options
+  elsif @skip_embedded_server_options
+    options = @skip_embedded_server_options
   else
     options = {
       # Add launch options here.
@@ -105,7 +140,7 @@ After do |scenario|
   @no_relaunch = false
   @acquaint_options = nil
   @device_agent_test_app_options = nil
-
+  @skip_embedded_server_options = nil
   # Calabash can shutdown the app cleanly by calling the app life cycle methods
   # in the UIApplicationDelegate.  This is really nice for CI environments, but
   # not so good for local development.
