@@ -15,49 +15,55 @@
 #import "LPHTTPDataResponse.h"
 #import "LPJSONUtils.h"
 #import "LPDevice.h"
-#import <sys/utsname.h>
 #import "LPInfoPlist.h"
-
-@class UIDevice;
-
-
-/*** UNEXPECTED ***
- adds git version and branch information to the server_version route
-
- helps developers know exactly which server framework is installed in an ipa
-
- the two defines:
-
- #define LP_GIT_SHORT_REVISION <rev>  // ex. @"4fdb203"
- #define LP_GIT_BRANCH <branch>       // ex. @"0.9.x"
-
- are generated before compilation and erased after to avoid git conflicts in
- LPGitVersionDefines.h
-
- to see how LPGitVersionDefines.h is managed see:
-
- 1. Run Script - git versioning 1 of 2
- 2. Run Script - git versioning 2 of 2
-
- ******************/
 #import "LPGitVersionDefines.h"
+#import "LPCocoaLumberjack.h"
+
+// See the LPGitVersionDefines.h
+//
+// The contents are updated before compile time with the following defines:
+//
+// #define LP_GIT_SHORT_REVISION @"<rev>"
+// #define LP_GIT_BRANCH @"<branch>"
+// #define LP_GIT_REMOTE_ORIGIN @"<origin>"
+// #define LP_SERVER_BUILD_DATE "<date>"
+//
+// # This is one of two values:
+// # 1. If the local git repo is clean, then this value is the commit SHA
+// # 2. If the local git repo is not clean, it is the shasum of a .tar of
+// #    the calabash/ calabash.xcodeproj/project.pbxproj bin/ sources.
+// #define LP_SERVER_ID_KEY_VALUE "LPSERVERID=<sha>"
+//
+// After compilation, the contents of this file are reset using:
+//
+// git co -- calabash/LPGitVersionDefines.h
+//
+// To see how this file is managed, navigate to the calabash target and look at:
+//
+// 1. Run Script - git versioning 1 of 2
+// 2. Run Script - git versioning 2 of 2
+//
+// and these scripts:
+//
+// 3. bin/xcode-build-phase/gitversioning-before.sh
+// 4. bin/xcode-build-phase/gitversioning-after.sh
 
 #ifdef LP_GIT_SHORT_REVISION
 static NSString *const kLPGitShortRevision = LP_GIT_SHORT_REVISION;
 #else
-static NSString *const kLPGitShortRevision = @"Unknown";
+static NSString *const kLPGitShortRevision = @"Unknown LP_GIT_SHORT_REVISION";
 #endif
 
 #ifdef LP_GIT_BRANCH
 static NSString *const kLPGitBranch = LP_GIT_BRANCH;
 #else
-static NSString *const kLPGitBranch = @"Unknown";
+static NSString *const kLPGitBranch = @"Unknown LP_GIT_BRANCH";
 #endif
 
 #ifdef LP_GIT_REMOTE_ORIGIN
 static NSString *const kLPGitRemoteOrigin = LP_GIT_REMOTE_ORIGIN;
 #else
-static NSString *const kLPGitRemoteOrigin = @"Unknown";
+static NSString *const kLPGitRemoteOrigin = @"Unknown LP_GIT_REMOTE_ORIGIN";
 #endif
 
 @interface LPVersionRoute ()
@@ -94,6 +100,47 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
                       dataUsingEncoding:NSUTF8StringEncoding];
 
   return [[LPHTTPDataResponse alloc] initWithData:jsonData];
+}
+
++ (NSString *)stringFromServerBuildDate {
+#ifdef LP_SERVER_BUILD_DATE
+  return [[NSString alloc] initWithCString:LP_SERVER_BUILD_DATE
+                                  encoding:NSUTF8StringEncoding];
+#else
+  LPLogDebug(@"LP_SERVER_BUILD_DATE is not defined");
+  return @"LP_SERVER_BUILD_DATE is an unknown symbol";
+#endif
+}
+
++ (NSString *)serverIdentifierKeyValue {
+#ifdef LP_SERVER_ID_KEY_VALUE
+  return [[NSString alloc] initWithCString:LP_SERVER_ID_KEY_VALUE
+                                  encoding:NSUTF8StringEncoding];
+#else
+  LPLogDebug(@"LP_SERVER_ID_KEY_VALUE is not defined");
+  return @"LP_SERVER_ID_KEY_VALUE is an unknown symbol";
+#endif
+}
+
++ (NSString *)stringForServerIdentifier {
+  NSString *keyValue = [LPVersionRoute serverIdentifierKeyValue];
+  NSArray *tokens = [keyValue componentsSeparatedByString:@"="];
+  if ([tokens count] == 2) {
+    return tokens[1];
+  } else {
+    LPLogDebug(@"Unexpected LP_SERVER_ID_KEY_VALUE value: %@", keyValue);
+    return @"";
+  }
+}
+
++ (NSString *)stringForServerIdentifierToSkip {
+  NSDictionary *env = [[NSProcessInfo processInfo] environment];
+  NSString *skipToken = env[@"XTC_SKIP_LPSERVER_TOKEN"];
+  if (skipToken) {
+    return skipToken;
+  } else {
+    return @"";
+  }
 }
 
 - (NSDictionary *) JSONResponseForMethod:(NSString *) method
@@ -148,7 +195,6 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
     @"device_name" : deviceName,
     @"form_factor" : formFactor,
     @"git" : git,
-    @"iOS_version" : iOSVersion, // deprecated 0.16.2 replaced with ios_version
     @"ios_version" : iOSVersion,
     @"iphone_app_emulated_on_ipad" : @(isIphoneAppEmulated),
     @"model_identifier" : modelIdentifier,
@@ -158,10 +204,12 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown";
     @"server_port" : @([infoPlist serverPort]),
     @"short_version_string" : [infoPlist stringForShortVersion],
     @"simulator" : simulatorInfo,
-    @"version" : calabashVersion
+    @"version" : calabashVersion,
+    @"build_date" : [LPVersionRoute stringFromServerBuildDate],
+    @"server_identifier" : [LPVersionRoute stringForServerIdentifier],
+    @"server_identifier_to_skip" : [LPVersionRoute stringForServerIdentifierToSkip]
 
-    };
+  };
 }
-
 
 @end
