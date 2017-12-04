@@ -1,3 +1,7 @@
+### 0.21.4
+
+* Static initializer can skip loading the embedded LPServer #410
+
 ### 0.21.3
 
 No source code changes.
