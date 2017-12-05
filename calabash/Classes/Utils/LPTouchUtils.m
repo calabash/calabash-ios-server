@@ -273,21 +273,12 @@
 
 + (CGPoint) centerOfView:(UIView *) view {
   UIWindow *window = [LPTouchUtils windowForView:view];
-  LPLogDebug(@"rect before converting: %@", NSStringFromCGRect(view.frame));
-
   CGRect rect = [window convertRect:view.bounds fromView:view];
-  LPLogDebug(@"rect after converting: %@", NSStringFromCGRect(rect));
-
   UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
   rect = [window convertRect:rect toCoordinateSpace:frontWindow];
 
-  LPLogDebug(@"rect after convert to coordinate space: %@",
-          NSStringFromCGRect(rect));
-
   CGPoint point;
   point = [LPTouchUtils centerByApplyingLetterBoxAndSampleFactorToRect:rect];
-
-  LPLogDebug(@"center of rect: %@", NSStringFromCGPoint(point));
   return point;
 }
 

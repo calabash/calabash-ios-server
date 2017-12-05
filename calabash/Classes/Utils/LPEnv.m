@@ -1,3 +1,6 @@
+#if ! __has_feature(objc_arc)
+#warning This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
+#endif
 //
 //  LPEnv.m
 //  calabash
@@ -12,6 +15,7 @@
 @implementation LPEnv {
   NSDictionary *_env;
 }
+
 + (LPEnv *) sharedEnv {
   static LPEnv *sharedEnv = nil;
   static dispatch_once_t onceToken;
@@ -21,22 +25,13 @@
   return sharedEnv;
 }
 
-
 - (id) init {
   self = [super init];
   if (self) {
-    _env = [[[NSProcessInfo processInfo] environment] retain];
+    _env = [[NSProcessInfo processInfo] environment];
   }
   return self;
 }
-
-
-// TODO LPEnv.m [super dealloc] must be called _last_
-- (void) dealloc {
-  [super dealloc];
-  [_env release];
-}
-
 
 - (BOOL) isSet:(NSString *) key {
   return [_env valueForKey:key] != nil;

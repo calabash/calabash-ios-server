@@ -52,7 +52,7 @@
                                      URI:(NSString *) path
                                     data:(NSDictionary *) data {
 
-  NSDictionary *result = @{};
+  NSDictionary *result;
   if ([method isEqualToString:@"GET"]) {
     UIApplicationState state = [[UIApplication sharedApplication] applicationState];
     result =

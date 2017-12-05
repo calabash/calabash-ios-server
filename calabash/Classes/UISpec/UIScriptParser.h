@@ -6,13 +6,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIScriptParser : NSObject {
-  NSMutableArray *_res;
-  NSString *_script;
-}
+@interface UIScriptParser : NSObject
 
-@property(nonatomic, retain) NSString *script;
-@property(nonatomic, retain) NSArray *arrayQuery;
+@property(nonatomic, strong) NSMutableArray *res;
+@property(nonatomic, copy) NSString *script;
+@property(nonatomic, copy) NSArray *arrayQuery;
 
 + (UIScriptParser *) scriptParserWithObject:(id) obj;
 + (UIView *) findViewByClass:(NSString *) className fromView:(UIView *) parent;

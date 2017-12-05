@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 source bin/log.sh
+source bin/ditto.sh
 
 # Stages binaries built by Xcode to ./Products/
 
