@@ -20,7 +20,7 @@ dylibs:
 	# The argument is the sha of the cert used to resign the dylib.
 	# $ cd ~/.calabash/calabash-codesign
 	# $ sha256 apple/certs/calabash-developer.p12
-	bin/make/dylibs.sh cbf0fbb58909be6cdb17d93c4bc089382d84d617815f39a85c70b47280177758
+	bin/make/dylibs.sh 4d5868ea6f8778abaf31b56703ebd8d2f45dfb0aabaf767fa9cbd85203f395c1
 
 webquery_headers:
 	bundle exec bin/make/insert-js-into-webquery-headers.rb
