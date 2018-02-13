@@ -1,4 +1,6 @@
+
 #import "SecondViewController.h"
+#import <objc/runtime.h>
 
 @interface SecondViewController ()
 
@@ -10,6 +12,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *middleRightButton;
 @property (weak, nonatomic) IBOutlet UIButton *topMiddleButton;
 @property (weak, nonatomic) IBOutlet UIButton *bottomMiddleButton;
+@property (weak, nonatomic) IBOutlet UILabel *tomatoJoke;
+@property (weak, nonatomic) IBOutlet UILabel *entitlementInjectorStatus;
+
 - (IBAction)buttonTouchedSecret:(UIButton *)sender;
 
 @end
@@ -34,6 +39,14 @@
   [super viewDidLoad];
 }
 
+- (Class)classForName:(NSString *)name {
+  return objc_getClass([name cStringUsingEncoding:NSUTF8StringEncoding]);
+}
+
+- (BOOL)classAvailable:(NSString *)name {
+  return !![self classForName:name];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
   NSArray *subviews = [self.view subviews];
@@ -42,6 +55,14 @@
       UIButton *button = (UIButton *)subView;
       [button setTitle:@"Hidden" forState:UIControlStateNormal];
     }
+  }
+
+  if ([self classAvailable:@"EntitlementInjector"]) {
+    self.tomatoJoke.text = @"Tomato: promoted to vegetable";
+    self.entitlementInjectorStatus.text = @"EntitlementInjector.dylib was loaded";
+  } else {
+    self.tomatoJoke.text = @"Tomato: still a fruit";
+    self.entitlementInjectorStatus.text = @"EntitlementInjector.dylib was not loaded";
   }
 }
 
