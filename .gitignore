@@ -7,6 +7,9 @@
 # MacOS
 .DS_Store
 
+# App Center/Test Cloud
+.xtc-credentials
+
 calabash.xcodeproj/project.xcworkspace/xcuserdata
 calabash.xcodeproj/xcuserdata/
 *.xccheckout
