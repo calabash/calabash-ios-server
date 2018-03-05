@@ -90,7 +90,7 @@ Given(/^I am looking at the (UIWebView|WKWebView|SafariWebController) page$/) do
 
   if @webview_class == "SafariWebController"
     wait_for do
-      !device_agent.query({marked: "H1 Header!"}).empty?
+      !device_agent.query({id: "H1 Header!", all: true}).empty?
     end
     wait_for_none_animating
     if xamarin_test_cloud?
@@ -215,8 +215,11 @@ And(/^I scroll down to the login portion of the web page$/) do
 
   pan_coordinates(start, finish)
 
+  wait_for_none_animating
+  sleep(0.4)
+
   if @webview_class == "SafariWebController"
-    expect(device_agent.query({marked: "First name:"}).count).to be == 1
+    expect(device_agent.query({id: "First name:", all: true}).count).to be == 1
   else
     expect(query("* css:'input#firstname'").count).to be == 1
   end

@@ -33,7 +33,7 @@ To submit a test to the Xamarin Test Cloud, do the following:
 $ XTC_API_TOKEN=<> XTC_ACCOUNT=<> xtc-submit-acquaint.rb
 $ xtc-submit-acquaint.rb <api token> <account> [device set]
 
-This test is only expected to run and pass on a iPhone 6+.
+This test is only expected to run and pass on a iPhone 6+ form factors.
 
 Then AcquaintNativeiOS app was modified in the follow ways:
 
