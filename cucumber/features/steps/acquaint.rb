@@ -91,6 +91,7 @@ Then(/^I can reveal the easter egg$/) do
 end
 
 And(/^then I can dismiss the easter egg$/) do
+  sleep(0.4)
   touch("* marked:'OK'")
 end
 
