@@ -66,7 +66,7 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
 
 #else
 
-- (void) testSimulatorModelIdentiferReturnsNothing {
+- (void) testSimulatorModelIdentifierReturnsNothing {
   expect([self.device simulatorModelIdentifier]).to.equal(nil);
 }
 
