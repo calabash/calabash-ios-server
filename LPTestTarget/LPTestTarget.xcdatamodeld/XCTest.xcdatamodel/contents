@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14124.1" systemVersion="17E190a" minimumToolsVersion="Xcode 8.0" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Server" representedClassName="LPServerEntity" syncable="YES">
         <attribute name="address" attributeType="String" defaultValueString="localhost" indexed="YES" syncable="YES"/>
-        <attribute name="lastPing" attributeType="Integer 64" defaultValueString="-1" indexed="YES" syncable="YES"/>
+        <attribute name="lastPing" attributeType="Integer 64" defaultValueString="-1" usesScalarValueType="NO" indexed="YES" syncable="YES"/>
         <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
     </entity>
     <elements>
