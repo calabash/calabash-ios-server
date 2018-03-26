@@ -228,6 +228,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
         LPLogDebug(@"iPhone 6 Plus: Standard display and app is not optimized "
                        "for screen size - adjusting sampleFactor");
         // native == scale == 3.0
+        // and after Xcode 9.3, some other compatibility modes.
         _sampleFactor = iphone6p_legacy_app_sample;
       }
     } else if (screenHeight == 667.0 && nativeScale <= scale) {
