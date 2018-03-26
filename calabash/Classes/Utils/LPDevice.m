@@ -261,6 +261,15 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     } else {
       LPLogDebug(@"iPad 10.5 inch: app is optimized for screen size");
     }
+  } else if ([self isIPadPro12point9inch]) {
+    if (screenHeight == 1024) {
+      LPLogDebug(@"iPad 12.9 inch: app is not optimized for screen size - "
+                 "adjusting sampleFactor");
+      // Derived by using DeviceAgent coordinates on a private legacy
+      // application.  It is likely that this sample factor will not
+      // work on other applications.
+      _sampleFactor = 1.3333;
+    }
   }
 
   LPLogDebug(@"sampleFactor = %@", @(_sampleFactor));
