@@ -100,6 +100,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 @property(strong, nonatomic) NSDictionary *processEnvironment;
 @property(strong, nonatomic) NSDictionary *formFactorMap;
 @property(copy, nonatomic) NSString *ipAddress;
+@property(assign, nonatomic) CGPoint sampleFactorsNormalizedForPortrait;
 
 - (id) init_private;
 
@@ -110,7 +111,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 @implementation LPDevice
 
 @synthesize screenDimensions = _screenDimensions;
-@synthesize sampleFactor = _sampleFactor;
+@synthesize sampleFactorsNormalizedForPortrait = _sampleFactorsNormalizedForPortrait;
 @synthesize modelIdentifier = _modelIdentifier;
 @synthesize formFactor = _formFactor;
 @synthesize processEnvironment = _processEnvironment;
@@ -140,7 +141,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 - (id) init_private {
   self = [super init];
   if (self) {
-    _sampleFactor = CGFLOAT_MAX;
+    _sampleFactorsNormalizedForPortrait = CGPointZero;
   }
   return self;
 }
@@ -169,14 +170,38 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   return [[self mainScreen] bounds].size.height;
 }
 
-#pragma mark - iPhone 6 and 6 Plus Support
+#pragma mark - Compatibility Mode Support
+
+- (UIInterfaceOrientation)orientation {
+  return [[UIApplication sharedApplication] statusBarOrientation];
+}
+
+- (CGFloat)sampleFactorForCurrentOrientationX {
+  if (UIInterfaceOrientationIsLandscape(self.orientation)) {
+    return self.sampleFactorsNormalizedForPortrait.y;
+  } else {
+    return self.sampleFactorsNormalizedForPortrait.x;
+  }
+}
+
+- (CGFloat)sampleFactorForCurrentOrientationY {
+  if (UIInterfaceOrientationIsLandscape(self.orientation)) {
+    return self.sampleFactorsNormalizedForPortrait.x;
+  } else {
+    return self.sampleFactorsNormalizedForPortrait.y;
+  }
+}
 
 // http://www.paintcodeapp.com/news/ultimate-guide-to-iphone-resolutions
 // Thanks for the inspiration for iPhone 6 form factor sample.
-- (CGFloat) sampleFactor {
-  if (_sampleFactor != CGFLOAT_MAX) { return _sampleFactor; }
+- (CGPoint)sampleFactorsNormalizedForPortrait {
+  if ((_sampleFactorsNormalizedForPortrait.x != 0) &&
+      (_sampleFactorsNormalizedForPortrait.y != 0)) {
+    return _sampleFactorsNormalizedForPortrait;
+  }
 
-  _sampleFactor = 1.0;
+  CGFloat sampleFactorX = 1.0;
+  CGFloat sampleFactorY = 0.0;
 
   UIScreen *screen = [UIScreen mainScreen];
   CGSize screenSize = screen.bounds.size;
@@ -220,60 +245,78 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     if (screenHeight == 568.0) {
       if (nativeScale > scale) {
         LPLogDebug(@"iPhone 6 Plus: Zoom display and app is not optimized for "
-                       "screen size - adjusting sampleFactor");
+                   "screen size - adjusting sample factors");
         // native => 2.88
         // Displayed with iPhone _6_ zoom sample
-        _sampleFactor = iphone6_zoom_sample;
+        sampleFactorX = iphone6_zoom_sample;
       } else {
         LPLogDebug(@"iPhone 6 Plus: Standard display and app is not optimized "
-                       "for screen size - adjusting sampleFactor");
+                   "for screen size - adjusting sample factors");
         // native == scale == 3.0
         // and after Xcode 9.3, some other compatibility modes.
-        _sampleFactor = iphone6p_legacy_app_sample;
+        sampleFactorX = iphone6p_legacy_app_sample;
       }
     } else if (screenHeight == 667.0 && nativeScale <= scale) {
       // native => ???
-      LPLogDebug(@"iPhone 6 Plus: Zoomed display - sampleFactor remains the same");
+      LPLogDebug(@"iPhone 6 Plus: Zoomed display - sample factors remain the same");
     } else if (screenHeight == 736 && nativeScale < scale) {
       // native => 2.61
       LPLogDebug(@"iPhone 6 Plus: Standard display and app is not optimized for "
-                     "screen size - sampleFactor remains the same");
+                 "screen size - sample factors remain the same");
     } else {
       LPLogDebug(@"iPhone 6 Plus: Standard display and app is optimized for "
-                     "screen size");
+                 "screen size");
     }
   } else if ([self isIPhone6Like]) {
     if (screenHeight == 568.0 && nativeScale <= scale) {
       LPLogDebug(@"iPhone 6: Standard display and app not optimized for screen "
-                     "size - adjusting sampleFactor");
-      _sampleFactor = iphone6_zoom_sample;
+                 "size - adjusting sample factors");
+      sampleFactorX = iphone6_zoom_sample;
     } else if (screenHeight == 568.0 && nativeScale > scale) {
-      LPLogDebug(@"iPhone 6: Zoomed display mode - sampleFactor remains the same");
+      LPLogDebug(@"iPhone 6: Zoomed display mode - sample factors remain the same");
     } else {
       LPLogDebug(@"iPhone 6: Standard display and app optimized for screen size "
-                     "- sampleFactor remains the same");
+                 "- sample factors remain the same");
     }
   } else if ([self isIPadPro10point5inch]) {
     if (screenHeight == 1024) {
       LPLogDebug(@"iPad 10.5 inch: app is not optimized for screen size - "
-                     "adjusting sampleFactor");
-      _sampleFactor = ipad_pro_10dot5_sample;
+                 "adjusting sample factors");
+      sampleFactorX = ipad_pro_10dot5_sample;
     } else {
       LPLogDebug(@"iPad 10.5 inch: app is optimized for screen size");
     }
   } else if ([self isIPadPro12point9inch]) {
     if (screenHeight == 1024) {
       LPLogDebug(@"iPad 12.9 inch: app is not optimized for screen size - "
-                 "adjusting sampleFactor");
+                 "adjusting sample factors");
       // Derived by using DeviceAgent coordinates on a private legacy
       // application.  It is likely that this sample factor will not
       // work on other applications.
-      _sampleFactor = 1.3333;
+      sampleFactorX = 1.3333;
+    }
+  } else if ([self isIPhone10Like]) {
+    if (screenHeight == 568) {
+      LPLogDebug(@"iPhone 10: app is not optimized for screen size - "
+                 "adjusting sample factors");
+      // Derived by using DeviceAgent coordinates on a private legacy
+      // application.  It is likely that this sample factor will not
+      // work on other applications.
+      sampleFactorX = 1.175;
+      sampleFactorY = 1.307;
     }
   }
 
-  LPLogDebug(@"sampleFactor = %@", @(_sampleFactor));
-  return _sampleFactor;
+  if (sampleFactorY == 0.0) {
+    sampleFactorY = sampleFactorX;
+  }
+
+  LPLogDebug(@"sample factor X normalized for portrait: %@", @(sampleFactorX));
+  LPLogDebug(@"sample factor Y normalized for portrait: %@", @(sampleFactorY));
+
+  _sampleFactorsNormalizedForPortrait = CGPointMake(sampleFactorX, sampleFactorY);
+
+  return _sampleFactorsNormalizedForPortrait;
 }
 
 - (NSDictionary *) screenDimensions {
@@ -315,7 +358,10 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
                         @"bounds_portrait_height" : @(screenBoundsHeight),
                         @"bounds_portrait_width" : @(screenBoundsWidth),
                         @"native_bounds" : nativeBoundsDict,
-                        @"sample" : @([self sampleFactor]),
+                        // Deprecated in 0.21.5; replaced by sample_factor_x
+                        @"sample" : @(self.sampleFactorsNormalizedForPortrait.x),
+                        @"sample_factor_x" : @(self.sampleFactorsNormalizedForPortrait.x),
+                        @"sample_factor_y" : @(self.sampleFactorsNormalizedForPortrait.y),
                         @"native_scale" : @(nativeScale)
                         };
 

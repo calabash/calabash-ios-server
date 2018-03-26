@@ -70,16 +70,18 @@
     width = rect.size.width * xScale;
     height = rect.size.height * yScale;
   } else {
-    CGFloat sampleFactor = [device sampleFactor];
-    x = rect.origin.x * sampleFactor;
-    y = rect.origin.y * sampleFactor;
-    width = rect.size.width * sampleFactor;
-    height = rect.size.height * sampleFactor;
+    CGFloat sampleFactorX = [device sampleFactorForCurrentOrientationX];
+    CGFloat sampleFactorY = [device sampleFactorForCurrentOrientationY];
+
+    x = rect.origin.x * sampleFactorX;
+    y = rect.origin.y * sampleFactorY;
+    width = rect.size.width * sampleFactorX;
+    height = rect.size.height * sampleFactorY;
 
     if ([device isLetterBox]) {
       orientation = [[UIApplication sharedApplication] statusBarOrientation];
-      x = x + ([LPTouchUtils xOffsetFor4inchLetterBox:orientation] * sampleFactor);
-      y = y + ([LPTouchUtils yOffsetFor4inchLetterBox:orientation] * sampleFactor);
+      x = x + ([LPTouchUtils xOffsetFor4inchLetterBox:orientation] * sampleFactorX);
+      y = y + ([LPTouchUtils yOffsetFor4inchLetterBox:orientation] * sampleFactorY);
     }
   }
 
@@ -262,11 +264,13 @@
     return [LPTouchUtils centerByApplyingLetterBoxAndSampleFactorToRect:rect];
   } else {
     LPDevice *device = [LPDevice sharedDevice];
-    CGFloat sampleFactor = [device sampleFactor];
+    CGFloat sampleFactorX = [device sampleFactorForCurrentOrientationX];
+    CGFloat sampleFactorY = [device sampleFactorForCurrentOrientationY];
+
     CGPoint point = rect.origin;
     CGFloat x, y;
-    x = point.x + 0.5 * rect.size.width * sampleFactor;
-    y = point.y + 0.5 * rect.size.height * sampleFactor;
+    x = point.x + 0.5 * rect.size.width * sampleFactorX;
+    y = point.y + 0.5 * rect.size.height * sampleFactorY;
     return CGPointMake(x, y);
   }
 }

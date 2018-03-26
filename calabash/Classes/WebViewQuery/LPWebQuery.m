@@ -268,10 +268,11 @@
     LPLogDebug(@"Device is an iPhone");
   }
 
-  CGFloat sampleFactor = [device sampleFactor];
+  CGFloat sampleFactorX = [device sampleFactorForCurrentOrientationX];
+  CGFloat sampleFactorY = [device sampleFactorForCurrentOrientationY];
 
-  x = (point.x + xOffset) * sampleFactor;
-  y = (point.y + yOffset) * sampleFactor;
+  x = (point.x + xOffset) * sampleFactorX;
+  y = (point.y + yOffset) * sampleFactorY;
 
   CGPoint translated = CGPointMake(x, y);
   LPLogDebug(@"  original: %@", NSStringFromCGPoint(point));

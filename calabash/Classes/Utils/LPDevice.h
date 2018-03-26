@@ -13,7 +13,6 @@ extern NSString *const LPDeviceSimKeyVersionInfo;
 @interface LPDevice : NSObject
 
 @property(strong, nonatomic, readonly) NSDictionary *screenDimensions;
-@property(assign, nonatomic, readonly) CGFloat sampleFactor;
 @property(copy, nonatomic, readonly) NSString *modelIdentifier;
 @property(copy, nonatomic, readonly) NSString *formFactor;
 @property(copy, nonatomic, readonly) NSString *deviceFamily;
@@ -42,5 +41,7 @@ extern NSString *const LPDeviceSimKeyVersionInfo;
 - (BOOL) isIPhone10Like;
 - (BOOL) isIPhone10LetterBox;
 - (NSString *) getIPAddress;
+- (CGFloat) sampleFactorForCurrentOrientationX;
+- (CGFloat) sampleFactorForCurrentOrientationY;
 
 @end
