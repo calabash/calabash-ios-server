@@ -397,16 +397,16 @@
 		F50CBFCC1A0405E9004AC9DA /* CalabashServer.m in Sources */ = {isa = PBXBuildFile; fileRef = B184FD8714B6DAE1002A744C /* CalabashServer.m */; };
 		F50CBFCE1A040669004AC9DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F50CBFCD1A040669004AC9DA /* UIKit.framework */; };
 		F50CBFCF1A040707004AC9DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121E79714B6D9FB0034C6A9 /* Foundation.framework */; };
-		F50E87641BFEEAAB002F0E8D /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = F50E87491BFEEAAB002F0E8D /* DDLog.m */; };
-		F50E87651BFEEAAB002F0E8D /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F50E874C1BFEEAAB002F0E8D /* DDContextFilterLogFormatter.m */; };
-		F50E87661BFEEAAB002F0E8D /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F50E874E1BFEEAAB002F0E8D /* DDDispatchQueueLogFormatter.m */; };
-		F50E87671BFEEAAB002F0E8D /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F50E87501BFEEAAB002F0E8D /* DDMultiFormatter.m */; };
+		F50E87641BFEEAAB002F0E8D /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = F50E87491BFEEAAB002F0E8D /* DDLog.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
+		F50E87651BFEEAAB002F0E8D /* DDContextFilterLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F50E874C1BFEEAAB002F0E8D /* DDContextFilterLogFormatter.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
+		F50E87661BFEEAAB002F0E8D /* DDDispatchQueueLogFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F50E874E1BFEEAAB002F0E8D /* DDDispatchQueueLogFormatter.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
+		F50E87671BFEEAAB002F0E8D /* DDMultiFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = F50E87501BFEEAAB002F0E8D /* DDMultiFormatter.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
 		F50E87681BFEEAAB002F0E8D /* CLIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = F50E87531BFEEAAB002F0E8D /* CLIColor.m */; };
-		F50E87691BFEEAAB002F0E8D /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = F50E87561BFEEAAB002F0E8D /* DDASLLogCapture.m */; };
-		F50E876A1BFEEAAB002F0E8D /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F50E87591BFEEAAB002F0E8D /* DDFileLogger.m */; };
-		F50E876B1BFEEAAB002F0E8D /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F50E875C1BFEEAAB002F0E8D /* DDTTYLogger.m */; };
-		F50E876C1BFEEAAB002F0E8D /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F50E875E1BFEEAAB002F0E8D /* DDAbstractDatabaseLogger.m */; };
-		F50E876D1BFEEAAB002F0E8D /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F50E875F1BFEEAAB002F0E8D /* DDASLLogger.m */; };
+		F50E87691BFEEAAB002F0E8D /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = F50E87561BFEEAAB002F0E8D /* DDASLLogCapture.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
+		F50E876A1BFEEAAB002F0E8D /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F50E87591BFEEAAB002F0E8D /* DDFileLogger.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
+		F50E876B1BFEEAAB002F0E8D /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F50E875C1BFEEAAB002F0E8D /* DDTTYLogger.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
+		F50E876C1BFEEAAB002F0E8D /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F50E875E1BFEEAAB002F0E8D /* DDAbstractDatabaseLogger.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
+		F50E876D1BFEEAAB002F0E8D /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = F50E875F1BFEEAAB002F0E8D /* DDASLLogger.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
 		F514ACCC1B341557004ACFEE /* LPiOSVersionInlinesTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F514ACCB1B341557004ACFEE /* LPiOSVersionInlinesTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F52427E61BA8457D00B7678F /* LPProcessInfoRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F52427E21BA8457D00B7678F /* LPProcessInfoRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F52427E71BA8457D00B7678F /* LPProcessInfoRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F52427E21BA8457D00B7678F /* LPProcessInfoRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -478,24 +478,24 @@
 		F576058E1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F576058F1BCE77F000E89C97 /* LPSuspendAppRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F57605881BCE77F000E89C97 /* LPSuspendAppRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F57D96CA1FC575C3005A9793 /* libCalabashFAT.dylib in Resources */ = {isa = PBXBuildFile; fileRef = F57D96C81FC5759F005A9793 /* libCalabashFAT.dylib */; };
-		F58C9F571B6F7EB9007D307B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F561B6F7EB9007D307B /* GCDAsyncSocket.m */; };
-		F58C9F801B6F802D007D307B /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F5B1B6F802D007D307B /* DDData.m */; };
-		F58C9F811B6F802D007D307B /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F5D1B6F802D007D307B /* DDNumber.m */; };
-		F58C9F821B6F802D007D307B /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F5F1B6F802D007D307B /* DDRange.m */; };
-		F58C9F831B6F802D007D307B /* HTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F611B6F802D007D307B /* HTTPAuthenticationRequest.m */; };
-		F58C9F841B6F802D007D307B /* HTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F631B6F802D007D307B /* HTTPConnection.m */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code"; }; };
-		F58C9F851B6F802D007D307B /* HTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F661B6F802D007D307B /* HTTPMessage.m */; };
-		F58C9F861B6F802D007D307B /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F691B6F802D007D307B /* HTTPServer.m */; };
+		F58C9F571B6F7EB9007D307B /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F561B6F7EB9007D307B /* GCDAsyncSocket.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
+		F58C9F801B6F802D007D307B /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F5B1B6F802D007D307B /* DDData.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
+		F58C9F811B6F802D007D307B /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F5D1B6F802D007D307B /* DDNumber.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
+		F58C9F821B6F802D007D307B /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F5F1B6F802D007D307B /* DDRange.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
+		F58C9F831B6F802D007D307B /* HTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F611B6F802D007D307B /* HTTPAuthenticationRequest.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
+		F58C9F841B6F802D007D307B /* HTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F631B6F802D007D307B /* HTTPConnection.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self -Wno-unreachable-code"; }; };
+		F58C9F851B6F802D007D307B /* HTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F661B6F802D007D307B /* HTTPMessage.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
+		F58C9F861B6F802D007D307B /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F691B6F802D007D307B /* HTTPServer.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
 		F58C9F871B6F802D007D307B /* MultipartFormDataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F6C1B6F802D007D307B /* MultipartFormDataParser.m */; };
 		F58C9F881B6F802D007D307B /* MultipartMessageHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F6E1B6F802D007D307B /* MultipartMessageHeader.m */; };
 		F58C9F891B6F802D007D307B /* MultipartMessageHeaderField.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F701B6F802D007D307B /* MultipartMessageHeaderField.m */; };
-		F58C9F8A1B6F802D007D307B /* HTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F731B6F802D007D307B /* HTTPAsyncFileResponse.m */; };
-		F58C9F8B1B6F802D007D307B /* HTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F751B6F802D007D307B /* HTTPDataResponse.m */; };
-		F58C9F8C1B6F802D007D307B /* HTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F771B6F802D007D307B /* HTTPDynamicFileResponse.m */; };
-		F58C9F8D1B6F802D007D307B /* HTTPErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F791B6F802D007D307B /* HTTPErrorResponse.m */; };
-		F58C9F8E1B6F802D007D307B /* HTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F7B1B6F802D007D307B /* HTTPFileResponse.m */; };
-		F58C9F8F1B6F802D007D307B /* HTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F7D1B6F802D007D307B /* HTTPRedirectResponse.m */; };
-		F58C9F901B6F802D007D307B /* WebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F7F1B6F802D007D307B /* WebSocket.m */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code -Wno-unused-function"; }; };
+		F58C9F8A1B6F802D007D307B /* HTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F731B6F802D007D307B /* HTTPAsyncFileResponse.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
+		F58C9F8B1B6F802D007D307B /* HTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F751B6F802D007D307B /* HTTPDataResponse.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
+		F58C9F8C1B6F802D007D307B /* HTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F771B6F802D007D307B /* HTTPDynamicFileResponse.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
+		F58C9F8D1B6F802D007D307B /* HTTPErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F791B6F802D007D307B /* HTTPErrorResponse.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
+		F58C9F8E1B6F802D007D307B /* HTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F7B1B6F802D007D307B /* HTTPFileResponse.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
+		F58C9F8F1B6F802D007D307B /* HTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F7D1B6F802D007D307B /* HTTPRedirectResponse.m */; settings = {COMPILER_FLAGS = "-Wno-implicit-retain-self"; }; };
+		F58C9F901B6F802D007D307B /* WebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = F58C9F7F1B6F802D007D307B /* WebSocket.m */; settings = {COMPILER_FLAGS = "-Wno-unreachable-code -Wno-unused-function -Wno-implicit-retain-self"; }; };
 		F58CE49E1BD6757A0025BE67 /* LPBackdoorRouteTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F58CE49D1BD6757A0025BE67 /* LPBackdoorRouteTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5963ED21D626368002F9304 /* LPStatusBarRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F5963ECE1D626368002F9304 /* LPStatusBarRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5963ED31D626368002F9304 /* LPStatusBarRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = F5963ECE1D626368002F9304 /* LPStatusBarRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -2218,7 +2218,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = LP;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Calabash;
 				TargetAttributes = {
 					B15BF97019ABAFD200B38577 = {
@@ -3188,11 +3188,13 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -3202,6 +3204,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
@@ -3246,11 +3249,13 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -3304,6 +3309,7 @@
 				CLANG_ENABLE_CODE_COVERAGE = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Karl Krukow (YTTN6Y2QS9)";
@@ -3358,6 +3364,7 @@
 				CLANG_ENABLE_CODE_COVERAGE = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Karl Krukow (YTTN6Y2QS9)";
@@ -3413,6 +3420,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_CODE_COVERAGE = NO;
 				CLANG_ENABLE_MODULES = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
@@ -3476,6 +3484,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_CODE_COVERAGE = NO;
 				CLANG_ENABLE_MODULES = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
@@ -3539,6 +3548,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_CODE_COVERAGE = NO;
 				CLANG_ENABLE_MODULES = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
@@ -3602,6 +3612,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_CODE_COVERAGE = NO;
 				CLANG_ENABLE_MODULES = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
@@ -3658,6 +3669,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -3716,6 +3728,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -3834,11 +3847,13 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -3892,6 +3907,7 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
@@ -3957,6 +3973,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_CODE_COVERAGE = NO;
 				CLANG_ENABLE_MODULES = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
@@ -4020,6 +4037,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_CODE_COVERAGE = NO;
 				CLANG_ENABLE_MODULES = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_OBJC_EXPLICIT_OWNERSHIP_TYPE = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
@@ -4082,6 +4100,7 @@
 				CLANG_ENABLE_CODE_COVERAGE = NO;
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Karl Krukow (YTTN6Y2QS9)";
@@ -4147,10 +4166,7 @@
 				);
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Xcode/6.4/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "${PRODUCT_NAME}/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "${PRODUCT_NAME}/InfoPlist.h";
 				INFOPLIST_PREPROCESS = YES;
@@ -4233,10 +4249,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Xcode/6.4/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "${PRODUCT_NAME}/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "${PRODUCT_NAME}/InfoPlist.h";
 				INFOPLIST_PREPROCESS = YES;
@@ -4283,10 +4296,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					/Xcode/6.4/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-				);
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "${PRODUCT_NAME}/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "";
 				INFOPLIST_PREPROCESS = NO;
@@ -4312,6 +4322,7 @@
 		F5DDE54F1CDE4AB000E0E187 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = "${PRODUCT_NAME}/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "${PRODUCT_NAME}/InfoPlist.h";
@@ -4322,6 +4333,7 @@
 		F5DDE5501CDE4AB000E0E187 /* CalabashApp */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = "${PRODUCT_NAME}/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "${PRODUCT_NAME}/InfoPlist.h";
@@ -4332,6 +4344,7 @@
 		F5DDE5511CDE4AB000E0E187 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "";
 				INFOPLIST_FILE = "${PRODUCT_NAME}/Info.plist";
 				INFOPLIST_PREFIX_HEADER = "${PRODUCT_NAME}/InfoPlist.h";

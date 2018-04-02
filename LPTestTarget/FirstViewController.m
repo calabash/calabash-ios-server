@@ -82,7 +82,7 @@ typedef enum : NSUInteger {
     UIWebView *webView = self.webView;
     [self.view addSubview:webView];
 
-    NSString *page = @"https://calabash-ci.macminicolo.net/CalWebViewApp/page.html";
+    NSString *page = @"https://calabash-ci.xyz/CalWebViewApp/page.html";
     NSURL *url = [NSURL URLWithString:page];
     [self.webView loadRequest:[NSURLRequest requestWithURL:url]];
   }

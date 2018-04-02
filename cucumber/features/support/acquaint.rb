@@ -8,7 +8,7 @@ module Acquaint
     sims = simctl.simulators
 
     candidates = sims.select do |sim|
-      sim.name[/iPhone 6 Plus/]
+      sim.name[/iPhone 8 Plus/]
     end
 
     sorted = candidates.sort_by { |sim| sim.version.to_s }.reverse

@@ -1,3 +1,8 @@
+### 0.21.5
+
+* Test: add dylib injection test #413
+* Updates for Xcode 9.3 beta 4 #414
+
 ### 0.21.4
 
 * Static initializer can skip loading the embedded LPServer #410
