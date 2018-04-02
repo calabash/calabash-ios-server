@@ -38,19 +38,14 @@ Before("@skip_embedded_server") do
   if !xamarin_test_cloud?
     @relaunch = true
     @skip_embedded_server_options = {}
-    file = File.join("..",  "Products", "test-target",
-                     "app-cal", "LPTestTarget.app")
-    app = RunLoop::App.new(file)
-    target = ENV["DEVICE_TARGET"] || RunLoop::Core.default_simulator
-    simulator = RunLoop::Device.device_with_identifier(target)
 
-    core_sim = RunLoop::CoreSimulator.new(simulator, app)
-    app_dir = core_sim.send(:installed_app_bundle_dir)
-    app = RunLoop::App.new(app_dir)
-    file = File.join(app.path, app.executable_name)
+    # See features/steps/dylib_injection.rb
+    core_sim = test_target_core_sim
+    core_sim.send(:uninstall_app_with_simctl)
+    core_sim.install
 
-    strings = RunLoop::Strings.new(file).send(:dump)
-    server_id = strings[/LPSERVERID=.+$/]
+    app = installed_test_target_app
+    server_id = lpserver_embedded_version
     if !server_id
       raise %Q[
 Could not find LPSERVERID embedded in app calabash.framework not linked
