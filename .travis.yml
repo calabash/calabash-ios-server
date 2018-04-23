@@ -1,20 +1,17 @@
 language: objective-c
+os: osx
 osx_image: xcode8.3
 
 before_script:
+  - gem update --system
+  - gem install bundler
   - bin/ci/travis/instruments-auth.sh
   - bin/ci/travis/install-keychain.sh
 
 script:
   - bundle install
   - make framework
-  - make frank
-  - bin/ci/travis/make-dylibs.sh
-  - bundle exec bin/test/xctest.rb
-  - bundle exec bin/test/cucumber.rb
-  - bundle exec bin/test/acquaint.rb
   - bin/ci/travis/make-ipa.sh
-  - bundle exec bin/test/test-cloud.rb
 
 notifications:
   email:
