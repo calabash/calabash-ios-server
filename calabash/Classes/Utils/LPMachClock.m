@@ -17,7 +17,7 @@
 
 @implementation LPMachClock
 
-mach_timebase_info_data_t _clock_timebase;
+mach_timebase_info_data_t _lp_clock_timebase;
 
 + (instancetype)sharedClock {
   static LPMachClock *clock;
@@ -31,7 +31,7 @@ mach_timebase_info_data_t _clock_timebase;
 - (instancetype)initPrivate {
   self = [super init];
   if (self) {
-    mach_timebase_info(&_clock_timebase);
+    mach_timebase_info(&_lp_clock_timebase);
   }
   return self;
 }
@@ -43,7 +43,7 @@ mach_timebase_info_data_t _clock_timebase;
 }
 
 - (NSTimeInterval)machAbsoluteToTimeInterval:(uint64_t)machAbsolute {
-  uint64_t nanos = (machAbsolute * _clock_timebase.numer) / _clock_timebase.denom;
+  uint64_t nanos = (machAbsolute * _lp_clock_timebase.numer) / _lp_clock_timebase.denom;
   return nanos/1.0e9;
 }
 
