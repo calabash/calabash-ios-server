@@ -196,17 +196,15 @@ ditto_or_exit "${FRAMEWORK}" "${PWD}/${INSTALLED_FRAMEWORK}"
 
 banner "Framework Info"
 
-if [ -z ${TRAVIS+x} ]; then
-  hash tree 2>/dev/null
-  if [ $? -eq 0 ]; then
-    tree -h calabash.framework
-  else
-    ls -hal calabash.framework
-  fi
+hash tree 2>/dev/null
+if [ $? -eq 0 ]; then
+  tree -h calabash.framework
+else
+  ls -hal calabash.framework
 fi
 
 echo "Built version: `./${INSTALLED_FRAMEWORK}/Resources/version | tr -d '\n'`"
-lipo -info "${INSTALLED_FRAMEWORK}/calabash"
+xcrun lipo -info "${INSTALLED_FRAMEWORK}/calabash"
 
 # For dylibs, search for __LLVM
 # For static libs (.a) search for bitcode
