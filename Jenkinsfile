@@ -32,11 +32,6 @@ pipeline {
             sh 'make dylibs'
           }
         }
-        stage('frank') {
-          steps {
-            sh 'make frank'
-          }
-        }
       }
     }
     stage('prepare') {

@@ -1,20 +1,15 @@
 all:
 	$(MAKE) framework
-	$(MAKE) frank
 	$(MAKE) dylibs
 
 clean:
 	rm -rf build
 	rm -rf Products
 	rm -rf calabash.framework
-	rm -rf libFrankCalabash.a
 	rm -rf calabash-dylibs
 
 framework:
 	bin/make/framework.sh
-
-frank:
-	bin/make/frank-plugin.sh
 
 dylibs:
 	# The argument is the sha of the cert used to resign the dylib.

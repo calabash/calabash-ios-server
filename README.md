@@ -54,12 +54,6 @@ provisioning is usually the easiest solution.
 make framework
 ```
 
-### Building the frank plugin
-
-```
-$ make frank
-```
-
 ### Building the dylibs
 
 ```
