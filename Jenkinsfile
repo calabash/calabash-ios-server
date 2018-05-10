@@ -1,3 +1,4 @@
+#!/usr/bin/env groovy
 String cron_string = BRANCH_NAME == "develop" ? "H H(0-8) * * *" : ""
 
 pipeline {
@@ -9,10 +10,13 @@ pipeline {
     SLACK_COLOR_INFO    = '#6ECADC'
     SLACK_COLOR_WARNING = '#FFC300'
     SLACK_COLOR_GOOD    = '#3EB991'
-
-    PROJECT_NAME = 'Calabash IOS server'
+    PROJECT_NAME = 'calabash-ios-server'
   }
-
+  options {
+    disableConcurrentBuilds()
+    timestamps()
+    buildDiscarder(logRotator(numToKeepStr: '10'))
+  }
   stages {
     stage('announce') {
       steps {
@@ -30,11 +34,6 @@ pipeline {
         stage('dylibs') {
           steps {
             sh 'make dylibs'
-          }
-        }
-        stage('frank') {
-          steps {
-            sh 'make frank'
           }
         }
       }
@@ -73,43 +72,37 @@ pipeline {
             // the CI machine is running Xcode 8.3.3.
             sh 'bundle exec bin/test/xctest.rb'
             sh 'bundle exec bin/test/cucumber.rb'
-
-            // Skipping Acquaint tests because dylib injection with lldb
-            // is flakey on the CI machine. We might consider removing
-            // these tests instead of porting them when the dylib injection
-            // (DYLD_INSERT_LIBRARIES) becomes available.
-            // bundle exec bin/test/acquaint.rb
           }
         }
       }
     }
     stage('publish') {
       steps {
-        sh 'bin/ci/jenkins/s3-publish.sh release '
+        sh 'bin/ci/jenkins/s3-publish.sh release'
       }
     }
   }
   post {
+    always {
+      junit 'cucumber/reports/junit/*.xml'
+    }
+
     aborted {
       echo "Sending 'aborted' message to Slack"
       slackSend (color: "${env.SLACK_COLOR_WARNING}",
-                 message: "${env.PROJECT_NAME} [${env.GIT_BRANCH}] #${env.BUILD_NUMBER} *Aborted* after ${currentBuild.durationString.replace('and counting', '')}(<${env.BUILD_URL}|Open>)")
+               message: "${env.PROJECT_NAME} [${env.GIT_BRANCH}] #${env.BUILD_NUMBER} *Aborted* after ${currentBuild.durationString.replace('and counting', '')}(<${env.BUILD_URL}|Open>)")
     }
 
     failure {
       echo "Sending 'failed' message to Slack"
       slackSend (color: "${env.SLACK_COLOR_DANGER}",
-                 message: "${env.PROJECT_NAME} [${env.GIT_BRANCH}] #${env.BUILD_NUMBER} *Failed* after ${currentBuild.durationString.replace('and counting', '')}(<${env.BUILD_URL}|Open>)")
+               message: "${env.PROJECT_NAME} [${env.GIT_BRANCH}] #${env.BUILD_NUMBER} *Failed* after ${currentBuild.durationString.replace('and counting', '')}(<${env.BUILD_URL}|Open>)")
     }
 
     success {
       echo "Sending 'success' message to Slack"
       slackSend (color: "${env.SLACK_COLOR_GOOD}",
-                 message: "${env.PROJECT_NAME} [${env.GIT_BRANCH}] #${env.BUILD_NUMBER} *Success* after ${currentBuild.durationString.replace('and counting', '')}(<${env.BUILD_URL}|Open>)")
+               message: "${env.PROJECT_NAME} [${env.GIT_BRANCH}] #${env.BUILD_NUMBER} *Success* after ${currentBuild.durationString.replace('and counting', '')}(<${env.BUILD_URL}|Open>)")
     }
-  }
-  options {
-    disableConcurrentBuilds()
-    timestamps()
   }
 }
