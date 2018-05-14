@@ -67,7 +67,7 @@ Dir.chdir working_dir do
     passed_sims = []
     failed_sims = []
     devices.each do |key, name|
-      cucumber_cmd = "bundle exec cucumber -p simulator --tags ~@device_agent_test_app --tags ~@acquaint --format json -o reports/#{key}.json #{cucumber_args}"
+      cucumber_cmd = "bundle exec cucumber -p simulator --format junit -o reports/#{key}.xml #{cucumber_args}"
 
       match = simulators.find do |sim|
         sim.name == name && sim.version == sim_version
