@@ -24,6 +24,27 @@ fi
 source bin/log.sh
 source bin/ditto.sh
 
+KEYCHAIN="${HOME}/.calabash/Calabash.keychain"
+
+if [ ! -e "${KEYCHAIN}" ]; then
+  echo "Cannot find S3 credentials: there is no Calabash.keychain"
+  echo "  ${KEYCHAIN}"
+  exit 1
+fi
+
+if [ ! -e "${HOME}/.calabash/find-keychain-credential.sh" ]; then
+  echo "Cannot find S3 credentials: no find-keychain-credential.sh script"
+  echo "  ${HOME}/.calabash/find-keychain-credential.sh"
+  exit 1
+fi
+
+export AWS_ACCESS_KEY_ID=$(
+"${HOME}/.calabash/find-keychain-credential.sh" s3-access-key
+)
+export AWS_SECRET_ACCESS_KEY=$(
+"${HOME}/.calabash/find-keychain-credential.sh" s3-secret
+)
+
 DYLIB="calabash-dylibs/libCalabashFAT.dylib"
 HEADERS_ZIP="calabash-dylibs/Headers.zip"
 
