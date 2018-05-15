@@ -53,11 +53,6 @@ else
         FileUtils.mv(source, target)
       end
 
-      lib = "libFrankCalabash.a"
-      source = File.join("..", lib)
-      target = File.join(calabash_gem, "staticlib", lib)
-      FileUtils.mv(source, target)
-
       source = File.join("..", "calabash.framework")
       target = File.join(calabash_gem, "staticlib", "calabash.framework.zip")
 
