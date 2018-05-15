@@ -95,9 +95,7 @@ $ make all
 # Integration tests
 $ make framework
 $ make app-cal
-$ cd cucumber
-$ bundle update
-$ bundle exec cucumber
+$ bin/test/cucumber.sh
 ```
 
 If you are running the XCTests from Xcode, you might see failures in

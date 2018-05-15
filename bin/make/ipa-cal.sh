@@ -104,20 +104,9 @@ DETAILS=`xcrun codesign --display --verbose=2 ${INSTALLED_APP} 2>&1`
 
 echo "$(tput setaf 4)$DETAILS$(tput sgr0)"
 
-banner "Preparing for XTC Submit"
+banner "Preparing for AppCenter Submit"
 
-XTC_DOTENV="cucumber/.env"
-
-if [ ! -e "${XTC_DOTENV}" ]; then
-  info "No cucumber/.env file found."
-  info "A .env file is required for submitting to Test Cloud"
-  info "If you are a maintainer, you should have a .env!"
-  info "Ask jmoody for details"
-  info "Done!"
-  exit 0
-fi
-
-XTC_DIR="${HOME}/.calabash/xtc/calabash-ios-server/submit"
+XTC_DIR="testcloud-submit"
 rm -rf "${XTC_DIR}"
 mkdir -p "${XTC_DIR}"
 

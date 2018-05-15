@@ -22,18 +22,6 @@ Before("@no_relaunch") do
   @no_relaunch = true
 end
 
-Before("@acquaint") do
-  if !xamarin_test_cloud?
-    @acquaint_options = Acquaint.options
-  end
-end
-
-Before("@device_agent_test_app") do
-  if !xamarin_test_cloud?
-    @device_agent_test_app_options = TestApp.options
-  end
-end
-
 Before("@skip_embedded_server") do
   if !xamarin_test_cloud?
     @relaunch = true
@@ -79,11 +67,7 @@ end
 Before do |scenario|
   launcher = Calabash::Launcher.launcher
 
-  if @acquaint_options
-    options = @acquaint_options
-  elsif @device_agent_test_app_options
-    options = @device_agent_test_app_options
-  elsif @skip_embedded_server_options
+  if @skip_embedded_server_options
     options = @skip_embedded_server_options
   else
     options = {
@@ -133,8 +117,6 @@ end
 
 After do |scenario|
   @no_relaunch = false
-  @acquaint_options = nil
-  @device_agent_test_app_options = nil
   @skip_embedded_server_options = nil
   # Calabash can shutdown the app cleanly by calling the app life cycle methods
   # in the UIApplicationDelegate.  This is really nice for CI environments, but

@@ -9,6 +9,7 @@
 
 # App Center/Test Cloud
 .xtc-credentials
+.appcenter-credentials
 
 calabash.xcodeproj/project.xcworkspace/xcuserdata
 calabash.xcodeproj/xcuserdata/
@@ -23,6 +24,7 @@ calabash-dylibs
 *.app
 *.ipa
 tmp
+testcloud-submit
 
 Carthage/Checkouts
 Carthage/Build/tvOS
