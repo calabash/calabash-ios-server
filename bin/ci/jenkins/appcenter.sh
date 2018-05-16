@@ -18,21 +18,24 @@ else
   exit 1
 fi
 
-CAL_CODESIGN="${HOME}/.calabash/calabash-codesign"
-if [ -e "${CAL_CODESIGN}" ]; then
-  AC_TOKEN=$("${CAL_CODESIGN}/apple/find-appcenter-credential.sh" api-token)
-else
-  if [ "${AC_TOKEN}" = "" ]; then
-    error "Expected calabash-codesign to be installed to:"
-    error "  ${CAL_CODESIGN}"
-    error "or AC_TOKEN environment variable to be defined."
-    error ""
-    error "Need an AppCenter API Token to proceed"
+if [ "${AC_TOKEN}" = "" ]; then
+  KEYCHAIN="${HOME}/.calabash/Calabash.keychain"
+
+  if [ ! -e "${KEYCHAIN}" ]; then
+    echo "Cannot find AppCenter token: there is no Calabash.keychain"
+    echo "  ${KEYCHAIN}"
     exit 1
   fi
-fi
 
-info "Will use token: ${AC_TOKEN}"
+  if [ ! -e "${HOME}/.calabash/find-keychain-credential.sh" ]; then
+    echo "Cannot find AppCenter token: no find-keychain-credential.sh script"
+    echo "  ${HOME}/.calabash/find-keychain-credential.sh"
+    exit 1
+  fi
+
+  info "Fetching AppCenter token from Calabash.keychain"
+  AC_TOKEN=$("${HOME}/.calabash/find-keychain-credential.sh" api-token)
+fi
 
 WORKSPACE="${HOME}/.calabash/xtc/calabash-ios-server/submit"
 
