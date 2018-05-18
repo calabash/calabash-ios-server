@@ -488,23 +488,17 @@
 - (void) testSelectorReturnsObjectButRaises {
   Target *target = [Target new];
   SEL selector = @selector(selectorThatReturnsPointerAndRaises);
-  LPInvocationResult *result;
-  result = [LPInvoker invokeZeroArgumentSelector:selector
-                                      withTarget:target];
 
-  expect([result isError]).to.equal(YES);
-  expect([result description]).to.equal(LPInvokingSelectorOnTargetRaisedAnException);
+  XCTAssertThrows([LPInvoker invokeZeroArgumentSelector:selector
+                                             withTarget:target]);
 }
 
 - (void) testSelectorReturnsVoidButRaises {
   Target *target = [Target new];
   SEL selector = @selector(selectorThatReturnsVoidAndRaises);
-  LPInvocationResult *result;
-  result = [LPInvoker invokeZeroArgumentSelector:selector
-                                      withTarget:target];
 
-  expect([result isError]).to.equal(YES);
-  expect([result description]).to.equal(LPInvokingSelectorOnTargetRaisedAnException);
+  XCTAssertThrows([LPInvoker invokeZeroArgumentSelector:selector
+                                             withTarget:target]);
 }
 
 @end
