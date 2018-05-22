@@ -913,7 +913,8 @@ static NSString *const LPInvokerNilReference = @"__nil__";
       LPLogError(@"=== INVOCATION DETAILS ===");
       LPLogError(@"target class = %@", [self.target class]);
       LPLogError(@"selector = %@", NSStringFromSelector(self.selector));
-      result = [LPInvocationError invokingSelectorOnTargetRaisedAnException];
+
+      @throw exception;
     }
 
     return result;
@@ -931,7 +932,8 @@ static NSString *const LPInvokerNilReference = @"__nil__";
       LPLogError(@"=== INVOCATION DETAILS ===");
       LPLogError(@"target class = %@", [self.target class]);
       LPLogError(@"selector = %@", NSStringFromSelector(self.selector));
-      result = [LPInvocationError invokingSelectorOnTargetRaisedAnException];
+
+      @throw exception;
     }
     return result;
   }
