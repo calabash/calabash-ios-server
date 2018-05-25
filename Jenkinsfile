@@ -1,9 +1,7 @@
 #!/usr/bin/env groovy
-String cron_string = BRANCH_NAME == "develop" ? "H H(0-8) * * *" : ""
 
 pipeline {
   agent { label 'master' }
-  triggers { cron(cron_string) }
 
   environment {
     SLACK_COLOR_DANGER  = '#E01563'
