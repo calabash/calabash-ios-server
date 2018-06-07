@@ -46,8 +46,7 @@ rm -rf "${INSTALLED_FRAMEWORK}"
 
 LIBRARY_NAME=libcalabash.a
 
-hash xcpretty 2>/dev/null
-if [ $? -eq 0 ] && [ "${XCPRETTY}" != "0" ]; then
+if [ $(gem list -i xcpretty) = "true" ] && [ "${XCPRETTY}" != "0" ]; then
   XC_PIPE='xcpretty -c'
 else
   XC_PIPE='cat'

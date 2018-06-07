@@ -19,8 +19,7 @@ fi
 
 banner "Preparing to build LPTestTarget"
 
-hash xcpretty 2>/dev/null
-if [ $? -eq 0 ] && [ "${XCPRETTY}" != "0" ]; then
+if [ $(gem list -i xcpretty) = "true" ] && [ "${XCPRETTY}" != "0" ]; then
   XC_PIPE='xcpretty -c'
 else
   XC_PIPE='cat'
