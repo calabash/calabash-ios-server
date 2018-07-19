@@ -52,31 +52,6 @@
 
 @implementation CalabashServer
 
-+ (void)redirectSimulatorLogsToUserLibraryCoreSimulatorLogs {
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-
-    if ([[LPDevice sharedDevice] isSimulator]) {
-      NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,
-                                                           NSUserDomainMask, YES);
-      if (!paths[0]) { return; }
-      NSString *containerLibrary = paths[0];
-      NSArray *tokens = [containerLibrary componentsSeparatedByString:@"data"];
-
-      if (!tokens[0]) { return; }
-      NSString *dataDir = [tokens[0] stringByAppendingPathComponent:@"data"];
-      NSString *libraryDir = [dataDir stringByAppendingPathComponent:@"Library"];
-      NSString *logsDir = [libraryDir stringByAppendingPathComponent:@"Logs"];
-      NSString *sysLog = [logsDir stringByAppendingPathComponent:@"system.log"];
-
-      if (![[NSFileManager defaultManager] fileExistsAtPath:sysLog]) { return; }
-
-      freopen([sysLog fileSystemRepresentation], "a+", stderr);
-      freopen([sysLog fileSystemRepresentation], "a+", stdout);
-    }
-  });
-}
-
 + (void) start {
   CalabashServer *server = [[CalabashServer alloc] init];
   [server start];
@@ -282,8 +257,6 @@
 
 
 - (void) start {
-
-  [CalabashServer redirectSimulatorLogsToUserLibraryCoreSimulatorLogs];
 
   [self enableAccessibility];
 
