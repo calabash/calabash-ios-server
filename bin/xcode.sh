@@ -13,7 +13,7 @@ function xcode_version {
 function xcode_version_gte {
   local version=$(xcode_version)
   local major=$(echo $version | cut -d. -f1)
-  if [ "${major}" \> "${1}" -o "${major}" = "${1}" ]; then
+  if (( ${major} >= "${1}" )); then
     echo -n "true"
   else
     echo -n "false"
@@ -36,3 +36,5 @@ function simulator_app_path {
   fi
   echo -n "${dev_dir}/Applications/Simulator.app"
 }
+
+echo $(xcode_gte_9)
