@@ -7,6 +7,7 @@
 #import "LPInvocationError.h"
 #import <objc/runtime.h>
 #import "LPCocoaLumberjack.h"
+#import <UIKit/UIGeometry.h>
 
 static NSString *const LPInvokerSelfReference = @"__self__";
 static NSString *const LPInvokerNilReference = @"__nil__";
