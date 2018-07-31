@@ -68,6 +68,8 @@
       point = CGPointMake(offset.x + scrollAmount, offset.y);
     }
 
+    LPLogDebug(@"Scrolling to offset: %@", NSStringFromCGPoint(point));
+
     [sv setContentOffset:point animated:YES];
     return [LPJSONUtils jsonifyObject:target];
   } else if ([LPWebViewUtils isWebView:target]) {
