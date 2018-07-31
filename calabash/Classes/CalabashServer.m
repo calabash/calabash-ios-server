@@ -7,6 +7,7 @@
 
 #import "CalabashServer.h"
 #import "LPHTTPServer.h"
+#import "LPGitVersionDefines.h"
 #import "LPRouter.h"
 #import "LPScreenshotRoute.h"
 #import "LPMapRoute.h"
@@ -246,6 +247,24 @@
 
     LPLogDebug(@"Creating the server: %@", _httpServer);
     LPLogDebug(@"Calabash iOS server version: %@", kLPCALABASHVERSION);
+
+#ifdef LP_SERVER_ID_VALUE
+    static const char* kLPServerIdentifierValue = LP_SERVER_ID_VALUE;
+#else
+    static const char* kLPServerIdentifierValue = "LP_SERVER_ID_VALUE is an unknown symbol";
+#endif
+
+    char *skipToken = getenv("XTC_SKIP_LPSERVER_TOKEN");
+
+    if (skipToken == NULL) {
+      LPLogDebug(@"XTC_SKIP_LPSERVER_TOKEN is not defined in enviroment");
+      LPLogDebug(@"Embedded (linked) Calabash Server was started.");
+    } else {
+      LPLogDebug(@"XTC_SKIP_LPSERVER_TOKEN is defined in enviroment...");
+      char *identifier = strdup(kLPServerIdentifierValue);
+      LPLogDebug(@"Asked to skip server with id: %s", skipToken);
+      LPLogDebug(@"Id of server that was loaded: %s", identifier);
+    }
 
     NSString *dtSdkName = [infoPlist stringForDTSDKName];
     LPLogDebug(@"App Base SDK: %@", dtSdkName);
