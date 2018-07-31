@@ -25,8 +25,6 @@ core_sim.launch_simulator
 
 sim_udid = default_sim.udid
 
-warnings_as_errors=
-
 xcpretty_cmd = "| xcpretty -tc -r junit -o build/reports/junit.xml && exit ${PIPESTATUS[0]}"
 FileUtils.rm_f "build/reports/junit.xml"
 

@@ -3,8 +3,6 @@
 #endif
 
 #import "LPScrollOperation.h"
-#import "LPInvoker.h"
-#import "LPInvocationResult.h"
 
 static const CGFloat kScrollViewWidth   = 320.f;
 static const CGFloat kScrollViewHeight  = 480.f;
