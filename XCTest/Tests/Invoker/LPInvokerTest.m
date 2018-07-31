@@ -33,6 +33,7 @@
 - (BOOL) selectorHasArguments;
 + (BOOL) isCGRectEncoding:(NSString *) encoding;
 + (BOOL) isCGPointEncoding:(NSString *) encoding;
++ (BOOL) isUIEdgeInsetsEncoding:(NSString *)encoding;
 + (NSString *) encodingAtIndex:(NSUInteger) index
                      signature:(NSMethodSignature *) signature;
 
@@ -446,6 +447,18 @@
 - (void) testIsCGPointEncodingNO {
   NSString *encoding = @(@encode(typeof(CGSizeZero)));
   BOOL actual = [LPInvoker isCGPointEncoding:encoding];
+  expect(actual).to.equal(NO);
+}
+
+- (void) testIsUIEdgeInsetEncodingYES {
+  NSString *encoding = @(@encode(typeof(UIEdgeInsets)));
+  BOOL actual = [LPInvoker isUIEdgeInsetsEncoding:encoding];
+  expect(actual).to.equal(YES);
+}
+
+- (void) testIsUIEdgeInsetEncodingNO {
+  NSString *encoding = @(@encode(typeof(CGSizeZero)));
+  BOOL actual = [LPInvoker isUIEdgeInsetsEncoding:encoding];
   expect(actual).to.equal(NO);
 }
 

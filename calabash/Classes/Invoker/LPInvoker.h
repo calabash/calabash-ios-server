@@ -28,7 +28,7 @@
 
  If the selector returns nil, the value will be NSNull.
 
- LPInvocationResult has two convencience methods:
+ LPInvocationResult has two convenience methods:
 
  1. isNull  #=> true iff the invocation resulted in nil.
  2. isError #=> true iff the invocation resulted in an error.

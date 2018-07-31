@@ -182,6 +182,10 @@ static NSString *const LPInvokerNilReference = @"__nil__";
   return [encoding rangeOfString:@"{CGPoint"].location == 0;
 }
 
++ (BOOL) isUIEdgeInsetsEncoding:(NSString *)encoding {
+  return [encoding rangeOfString:@"{UIEdgeInsets"].location == 0;
+}
+
 #pragma mark - Selector Return Type Encoding
 
 - (NSString *) encodingForSelectorReturnType {
@@ -451,7 +455,19 @@ static NSString *const LPInvokerNilReference = @"__nil__";
           };
 
         LPInvocationResult *result = [LPInvocationResult resultWithValue:dictionary];
+        free(buffer);
+        return result;
+      } else if ([LPInvoker isUIEdgeInsetsEncoding:encoding]) {
+        UIEdgeInsets *insets = (UIEdgeInsets *)buffer;
 
+        NSDictionary *dictionary =
+        @{
+          @"Top" : @(insets->top),
+          @"Bottom" : @(insets->bottom),
+          @"Left" : @(insets->left),
+          @"Right" : @(insets->right)
+          };
+        LPInvocationResult *result = [LPInvocationResult resultWithValue:dictionary];
         free(buffer);
         return result;
       } else if ([encoding containsString:@"=dd}"]) {
@@ -557,7 +573,8 @@ static NSString *const LPInvokerNilReference = @"__nil__";
   if ([encoding hasPrefix:@"{"]) {
     return
     [LPInvoker isCGRectEncoding:encoding] ||
-    [LPInvoker isCGPointEncoding:encoding];
+    [LPInvoker isCGPointEncoding:encoding] ||
+    [LPInvoker isUIEdgeInsetsEncoding:encoding];
   }
 
   return YES;
