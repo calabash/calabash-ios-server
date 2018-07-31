@@ -3,6 +3,8 @@
 #endif
 
 #import "LPScrollOperation.h"
+#import "LPInvoker.h"
+#import "LPInvocationResult.h"
 
 static const CGFloat kScrollViewWidth   = 320.f;
 static const CGFloat kScrollViewHeight  = 480.f;
@@ -20,10 +22,10 @@ static const CGFloat kContentInsetValue = 40.f;
   LPScrollOperation *scrollOperation = [[LPScrollOperation alloc] initWithOperation:@{@"arguments": @[@"down"]}];
   UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScrollViewWidth, kScrollViewHeight)];
   scrollView.contentSize = CGSizeMake(kScrollViewWidth, 2*kScrollViewHeight); //No horizontal scrolling
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.y == kScrollViewHeight/2);
 }
 
@@ -32,10 +34,10 @@ static const CGFloat kContentInsetValue = 40.f;
   UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScrollViewWidth, kScrollViewHeight)];
   scrollView.contentSize = CGSizeMake(kScrollViewWidth, 2*kScrollViewHeight); //No horizontal scrolling
   scrollView.pagingEnabled = YES;
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.y == kScrollViewHeight);
 }
 
@@ -44,11 +46,10 @@ static const CGFloat kContentInsetValue = 40.f;
   UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScrollViewWidth, kScrollViewHeight)];
   scrollView.contentSize = CGSizeMake(kScrollViewWidth, 2*kScrollViewHeight); //No horizontal scrolling
   scrollView.contentOffset = CGPointMake(0, kScrollViewHeight - kScrollViewHeight/5);
-  
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.y == kScrollViewHeight);
 }
 
@@ -58,11 +59,10 @@ static const CGFloat kContentInsetValue = 40.f;
   scrollView.contentInset = UIEdgeInsetsMake(0, 0, kContentInsetValue, 0);
   scrollView.contentSize = CGSizeMake(kScrollViewWidth, 2*kScrollViewHeight); //No horizontal scrolling
   scrollView.contentOffset = CGPointMake(0, kScrollViewHeight - kScrollViewHeight/5);
-  
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.y == kScrollViewHeight + kContentInsetValue);
 }
 
@@ -72,10 +72,10 @@ static const CGFloat kContentInsetValue = 40.f;
   scrollView.contentSize = CGSizeMake(kScrollViewWidth, 2*kScrollViewHeight); //No horizontal scrolling
   scrollView.contentOffset = CGPointMake(0, kScrollViewHeight);
   scrollView.pagingEnabled = YES;
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.y == kScrollViewHeight);
 }
 
@@ -86,10 +86,10 @@ static const CGFloat kContentInsetValue = 40.f;
   scrollView.contentSize = CGSizeMake(kScrollViewWidth, 2*kScrollViewHeight); //No horizontal scrolling
   scrollView.contentOffset = CGPointMake(0, kScrollViewHeight);
   scrollView.pagingEnabled = YES;
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.y == kScrollViewHeight + kContentInsetValue);
 }
 
@@ -100,10 +100,10 @@ static const CGFloat kContentInsetValue = 40.f;
   UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScrollViewWidth, kScrollViewHeight)];
   scrollView.contentSize = CGSizeMake(kScrollViewWidth, 2*kScrollViewHeight); //No horizontal scrolling
   scrollView.contentOffset = CGPointMake(0, kScrollViewHeight);
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.y == kScrollViewHeight/2);
 }
 
@@ -113,10 +113,10 @@ static const CGFloat kContentInsetValue = 40.f;
   scrollView.contentSize = CGSizeMake(kScrollViewWidth, 2*kScrollViewHeight); //No horizontal scrolling
   scrollView.contentOffset = CGPointMake(0, kScrollViewHeight);
   scrollView.pagingEnabled = YES;
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.y == 0);
 }
 
@@ -125,10 +125,10 @@ static const CGFloat kContentInsetValue = 40.f;
   UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScrollViewWidth, kScrollViewHeight)];
   scrollView.contentSize = CGSizeMake(kScrollViewWidth, 2*kScrollViewHeight); //No horizontal scrolling
   scrollView.contentOffset = CGPointMake(0, kScrollViewHeight/4);
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.y == 0);
 }
 
@@ -138,10 +138,10 @@ static const CGFloat kContentInsetValue = 40.f;
   scrollView.contentInset = UIEdgeInsetsMake(kContentInsetValue, 0, 0, 0);
   scrollView.contentSize = CGSizeMake(kScrollViewWidth, 2*kScrollViewHeight); //No horizontal scrolling
   scrollView.contentOffset = CGPointMake(0, kScrollViewHeight/4);
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.y == -kContentInsetValue); //minus top inset
 }
 
@@ -150,10 +150,10 @@ static const CGFloat kContentInsetValue = 40.f;
   UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScrollViewWidth, kScrollViewHeight)];
   scrollView.contentSize = CGSizeMake(kScrollViewWidth, 2*kScrollViewHeight); //No horizontal scrolling
   scrollView.pagingEnabled = YES;
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.y == 0);
 }
 
@@ -163,10 +163,10 @@ static const CGFloat kContentInsetValue = 40.f;
   scrollView.contentInset = UIEdgeInsetsMake(kContentInsetValue, 0, 0, 0);
   scrollView.contentSize = CGSizeMake(kScrollViewWidth, 2*kScrollViewHeight); //No horizontal scrolling
   scrollView.pagingEnabled = YES;
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.y == -kContentInsetValue); //minus top inset
 }
 
@@ -176,10 +176,10 @@ static const CGFloat kContentInsetValue = 40.f;
   LPScrollOperation *scrollOperation = [[LPScrollOperation alloc] initWithOperation:@{@"arguments": @[@"right"]}];
   UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScrollViewWidth, kScrollViewHeight)];
   scrollView.contentSize = CGSizeMake(2*kScrollViewWidth, kScrollViewHeight); //No vertical scrolling
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.x == kScrollViewWidth/2);
 }
 
@@ -188,10 +188,10 @@ static const CGFloat kContentInsetValue = 40.f;
   UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScrollViewWidth, kScrollViewHeight)];
   scrollView.contentSize = CGSizeMake(2*kScrollViewWidth, kScrollViewHeight); //No vertical scrolling
   scrollView.pagingEnabled = YES;
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.x == kScrollViewWidth);
 }
 
@@ -200,10 +200,10 @@ static const CGFloat kContentInsetValue = 40.f;
   UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScrollViewWidth, kScrollViewHeight)];
   scrollView.contentSize = CGSizeMake(2*kScrollViewWidth, kScrollViewHeight); //No vertical scrolling
   scrollView.contentOffset = CGPointMake(kScrollViewWidth - kScrollViewWidth/5, 0);
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.x == kScrollViewWidth);
 }
 
@@ -213,10 +213,10 @@ static const CGFloat kContentInsetValue = 40.f;
   scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, kContentInsetValue);
   scrollView.contentSize = CGSizeMake(2*kScrollViewWidth, kScrollViewHeight); //No vertical scrolling
   scrollView.contentOffset = CGPointMake(kScrollViewWidth - kScrollViewWidth/5, 0);
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.x == kScrollViewWidth + kContentInsetValue);
 }
 
@@ -226,10 +226,10 @@ static const CGFloat kContentInsetValue = 40.f;
   scrollView.contentSize = CGSizeMake(2*kScrollViewWidth, kScrollViewHeight); //No vertical scrolling
   scrollView.contentOffset = CGPointMake(kScrollViewWidth, 0);
   scrollView.pagingEnabled = YES;
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.x == kScrollViewWidth);
 }
 
@@ -240,10 +240,10 @@ static const CGFloat kContentInsetValue = 40.f;
   scrollView.contentSize = CGSizeMake(2*kScrollViewWidth, kScrollViewHeight); //No vertical scrolling
   scrollView.contentOffset = CGPointMake(kScrollViewWidth, 0);
   scrollView.pagingEnabled = YES;
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.x == kScrollViewWidth + kContentInsetValue);
 }
 
@@ -254,10 +254,10 @@ static const CGFloat kContentInsetValue = 40.f;
   UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScrollViewWidth, kScrollViewHeight)];
   scrollView.contentSize = CGSizeMake(2*kScrollViewWidth, kScrollViewHeight); //No vertical scrolling
   scrollView.contentOffset = CGPointMake(kScrollViewWidth, 0);
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.x == kScrollViewWidth/2);
 }
 
@@ -267,10 +267,10 @@ static const CGFloat kContentInsetValue = 40.f;
   scrollView.contentSize = CGSizeMake(2*kScrollViewWidth, kScrollViewHeight); //No vertical scrolling
   scrollView.contentOffset = CGPointMake(kScrollViewWidth, 0);
   scrollView.pagingEnabled = YES;
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.x == 0);
 }
 
@@ -279,10 +279,10 @@ static const CGFloat kContentInsetValue = 40.f;
   UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScrollViewWidth, kScrollViewHeight)];
   scrollView.contentSize = CGSizeMake(2*kScrollViewWidth, kScrollViewHeight); //No vertical scrolling
   scrollView.contentOffset = CGPointMake(kScrollViewWidth/4, 0);
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.x == 0);
 }
 
@@ -292,10 +292,10 @@ static const CGFloat kContentInsetValue = 40.f;
   scrollView.contentInset = UIEdgeInsetsMake(0, kContentInsetValue, 0, 0);
   scrollView.contentSize = CGSizeMake(2*kScrollViewWidth, kScrollViewHeight); //No vertical scrolling
   scrollView.contentOffset = CGPointMake(kScrollViewWidth/4, 0);
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.x == -kContentInsetValue); //minus left inset
 }
 
@@ -304,10 +304,10 @@ static const CGFloat kContentInsetValue = 40.f;
   UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, kScrollViewWidth, kScrollViewHeight)];
   scrollView.contentSize = CGSizeMake(2*kScrollViewWidth, kScrollViewHeight); //No vertical scrolling
   scrollView.pagingEnabled = YES;
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.x == 0);
 }
 
@@ -317,10 +317,10 @@ static const CGFloat kContentInsetValue = 40.f;
   scrollView.contentInset = UIEdgeInsetsMake(0, kContentInsetValue, 0, 0);
   scrollView.contentSize = CGSizeMake(2*kScrollViewWidth, kScrollViewHeight); //No vertical scrolling
   scrollView.pagingEnabled = YES;
-  
+
   NSError *error = nil;
   [scrollOperation performWithTarget:scrollView error:&error];
-  
+
   XCTAssertTrue(scrollView.contentOffset.x == -kContentInsetValue); //minus left inset
 }
 
