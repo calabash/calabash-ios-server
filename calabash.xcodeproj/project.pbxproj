@@ -2105,7 +2105,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "bin/xcode-build-phase/gitversioning-before.sh";
+			shellScript = "bin/xcode-build-phase/gitversioning-before.sh\n";
 			showEnvVarsInLog = 0;
 		};
 		F5091C2718C4E1D700C85307 /* Run Script - git versioning 2 of 2 */ = {
