@@ -60,7 +60,7 @@ Dir.chdir working_dir do
 
     RunLoop::CoreSimulator.quit_simulator
 
-    simulators = RunLoop::SimControl.new.simulators
+    simulators = RunLoop::Simctl.new.simulators
 
     env_vars = {}
 
