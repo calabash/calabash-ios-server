@@ -4,6 +4,9 @@ pipeline {
   agent { label 'master' }
 
   environment {
+    DEVELOPER_DIR='/Xcode/9.4.1/Xcode.app/Contents/Developer'
+    XCPRETTY=0
+
     SLACK_COLOR_DANGER  = '#E01563'
     SLACK_COLOR_INFO    = '#6ECADC'
     SLACK_COLOR_WARNING = '#FFC300'
@@ -14,6 +17,7 @@ pipeline {
     disableConcurrentBuilds()
     timestamps()
     buildDiscarder(logRotator(numToKeepStr: '10'))
+    timeout(time: 60, unit: 'MINUTES')
   }
   stages {
     stage('announce') {
@@ -68,7 +72,7 @@ pipeline {
             // in parallel with the other simulator tests - as long as
             // we control the CalabashServer port.  At the moment the
             // the CI machine is running Xcode 8.3.3.
-            sh 'bundle exec bin/test/xctest.rb'
+            sh 'gtimeout --foreground --signal SIGKILL 74m bundle exec bin/test/xctest.rb'
             sh 'bundle exec bin/test/cucumber.rb'
           }
         }
