@@ -1,3 +1,16 @@
+### 0.21.6
+
+* LPScrollOperation: scroll with adjustedContentInset when available #428
+* Preliminary support for Xcode 10 #427
+* remove log redirect #426 @AlexWellsHS
+* Re-raise exception in LPInvoker #425
+* Bin: respond to changes in Calabash.keychain #424
+* Remove frank target #423
+* Xcode 9.4 beta 2 support #422
+* Jenkins: update to run on Jenkins 2.0 with Blue Ocean pipelines #421
+* Server: namespace LPMachClock constant #420
+* Test: update Specta, Expecta, and OCMock #417
+
 ### 0.21.5
 
 * Test: add dylib injection test #413
