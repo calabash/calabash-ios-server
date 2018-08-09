@@ -17,8 +17,7 @@ mkdir -p "${VTOOL_BUILD_DIR}"
 INSTALL_PATH=bin/version
 rm -rf "${INSTALL_PATH}"
 
-hash xcpretty 2>/dev/null
-if [ $? -eq 0 ] && [ "${XCPRETTY}" != "0" ]; then
+if [ $(gem list -i xcpretty) = "true" ] && [ "${XCPRETTY}" != "0" ]; then
   XC_PIPE='xcpretty -c'
 else
   XC_PIPE='cat'

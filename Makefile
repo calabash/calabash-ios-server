@@ -1,26 +1,18 @@
 all:
 	$(MAKE) framework
-	$(MAKE) frank
 	$(MAKE) dylibs
 
 clean:
 	rm -rf build
 	rm -rf Products
 	rm -rf calabash.framework
-	rm -rf libFrankCalabash.a
 	rm -rf calabash-dylibs
 
 framework:
 	bin/make/framework.sh
 
-frank:
-	bin/make/frank-plugin.sh
-
 dylibs:
-	# The argument is the sha of the cert used to resign the dylib.
-	# $ cd ~/.calabash/calabash-codesign
-	# $ sha256 apple/certs/calabash-developer.p12
-	bin/make/dylibs.sh 4d5868ea6f8778abaf31b56703ebd8d2f45dfb0aabaf767fa9cbd85203f395c1
+	bin/make/dylibs.sh
 
 webquery_headers:
 	bundle exec bin/make/insert-js-into-webquery-headers.rb

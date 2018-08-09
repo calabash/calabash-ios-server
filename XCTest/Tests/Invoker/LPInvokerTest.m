@@ -33,6 +33,7 @@
 - (BOOL) selectorHasArguments;
 + (BOOL) isCGRectEncoding:(NSString *) encoding;
 + (BOOL) isCGPointEncoding:(NSString *) encoding;
++ (BOOL) isUIEdgeInsetsEncoding:(NSString *)encoding;
 + (NSString *) encodingAtIndex:(NSUInteger) index
                      signature:(NSMethodSignature *) signature;
 
@@ -449,6 +450,18 @@
   expect(actual).to.equal(NO);
 }
 
+- (void) testIsUIEdgeInsetEncodingYES {
+  NSString *encoding = @(@encode(typeof(UIEdgeInsets)));
+  BOOL actual = [LPInvoker isUIEdgeInsetsEncoding:encoding];
+  expect(actual).to.equal(YES);
+}
+
+- (void) testIsUIEdgeInsetEncodingNO {
+  NSString *encoding = @(@encode(typeof(CGSizeZero)));
+  BOOL actual = [LPInvoker isUIEdgeInsetsEncoding:encoding];
+  expect(actual).to.equal(NO);
+}
+
 #pragma mark - Argument Encodings
 
 - (void) testEncodingAtIndex {
@@ -488,23 +501,17 @@
 - (void) testSelectorReturnsObjectButRaises {
   Target *target = [Target new];
   SEL selector = @selector(selectorThatReturnsPointerAndRaises);
-  LPInvocationResult *result;
-  result = [LPInvoker invokeZeroArgumentSelector:selector
-                                      withTarget:target];
 
-  expect([result isError]).to.equal(YES);
-  expect([result description]).to.equal(LPInvokingSelectorOnTargetRaisedAnException);
+  XCTAssertThrows([LPInvoker invokeZeroArgumentSelector:selector
+                                             withTarget:target]);
 }
 
 - (void) testSelectorReturnsVoidButRaises {
   Target *target = [Target new];
   SEL selector = @selector(selectorThatReturnsVoidAndRaises);
-  LPInvocationResult *result;
-  result = [LPInvoker invokeZeroArgumentSelector:selector
-                                      withTarget:target];
 
-  expect([result isError]).to.equal(YES);
-  expect([result description]).to.equal(LPInvokingSelectorOnTargetRaisedAnException);
+  XCTAssertThrows([LPInvoker invokeZeroArgumentSelector:selector
+                                             withTarget:target]);
 }
 
 @end

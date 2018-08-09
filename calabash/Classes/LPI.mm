@@ -19,6 +19,11 @@ int ___calabashserverinit();
 
 int ___lesspainfulserver = ___calabashserverinit();
 
+// Starting in Xcode 9, printf has become essentially useless - the output
+// appears no where.
+//
+// Attempts to use NSLog and CocoaLumberjack here have caused compile problems.
+
 int ___calabashserverinit() {
 
   char *skipToken = getenv("XTC_SKIP_LPSERVER_TOKEN");

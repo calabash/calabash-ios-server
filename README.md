@@ -1,6 +1,6 @@
-| master  | develop | [versioning](VERSIONING.md) | [license](LICENSE) | [contributing](CONTRIBUTING.md)|
-|---------|---------|-----------------------------|--------------------|--------------------------------|
-|[![Build Status](https://travis-ci.org/calabash/calabash-ios-server.svg?branch=master)](https://travis-ci.org/calabash/calabash-ios-server)| [![Build Status](https://travis-ci.org/calabash/calabash-ios-server.svg?branch=develop)](https://travis-ci.org/calabash/calabash-ios-server)| [![Version](https://img.shields.io/badge/version-0.21.4-green.svg)](https://img.shields.io/badge/version-0.21.4-green.svg) |[![License](https://img.shields.io/badge/licence-Eclipse-blue.svg)](http://opensource.org/licenses/EPL-1.0) | [![Contributing](https://img.shields.io/badge/contrib-gitflow-orange.svg)](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow/)|
+| [versioning](VERSIONING.md) | [license](LICENSE) | [contributing](CONTRIBUTING.md)|
+|-----------------------------|--------------------|--------------------------------|
+|[![Version](https://img.shields.io/badge/version-0.21.5-green.svg)](https://img.shields.io/badge/version-0.21.5-green.svg) |[![License](https://img.shields.io/badge/licence-Eclipse-blue.svg)](http://opensource.org/licenses/EPL-1.0) | [![Contributing](https://img.shields.io/badge/contrib-gitflow-orange.svg)](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow/)|
 
 ## The Calabash iOS Server
 
@@ -54,12 +54,6 @@ provisioning is usually the easiest solution.
 make framework
 ```
 
-### Building the frank plugin
-
-```
-$ make frank
-```
-
 ### Building the dylibs
 
 ```
@@ -95,9 +89,7 @@ $ make all
 # Integration tests
 $ make framework
 $ make app-cal
-$ cd cucumber
-$ bundle update
-$ bundle exec cucumber
+$ bin/test/cucumber.sh
 ```
 
 If you are running the XCTests from Xcode, you might see failures in

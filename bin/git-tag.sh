@@ -4,9 +4,8 @@ set -e
 
 source bin/log.sh
 
-TAG=$(/usr/libexec/PlistBuddy \
-  -c "Print :CFBundleShortVersionString" \
-  LPTestTarget/Info.plist | tr -d "\n")
+VERSION_ROUTE="calabash/Classes/FranklyServer/Routes/LPVersionRoute.h"
+VERSION=$(grep -o  -E '(\d+\.\d+\.\d+(\.pre\d+)?)' ${VERSION_ROUTE} | tr -d "\n")
 
 BRANCH=$(git rev-parse --symbolic-full-name --abbrev-ref HEAD \
   | tr -d "\n")
@@ -17,7 +16,7 @@ if [ "${BRANCH}" != "master" ]; then
   exit 1
 fi
 
-git tag -a "${TAG}" -m"${TAG}"
-git push origin "${TAG}"
-git branch "tag/${TAG}" "${TAG}"
-git checkout "tag/${TAG}"
+git tag -a "${VERSION}" -m"${VERSION}"
+git push origin "${VERSION}"
+git branch "tag/${VERSION}" "${VERSION}"
+git checkout "tag/${VERSION}"

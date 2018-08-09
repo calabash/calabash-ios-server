@@ -60,14 +60,14 @@ Dir.chdir working_dir do
 
     RunLoop::CoreSimulator.quit_simulator
 
-    simulators = RunLoop::SimControl.new.simulators
+    simulators = RunLoop::Simctl.new.simulators
 
     env_vars = {}
 
     passed_sims = []
     failed_sims = []
     devices.each do |key, name|
-      cucumber_cmd = "bundle exec cucumber -p simulator --tags ~@device_agent_test_app --tags ~@acquaint --format json -o reports/#{key}.json #{cucumber_args}"
+      cucumber_cmd = "bundle exec cucumber -p simulator -f json -o reports/cucumber.json -f junit -o reports/junit #{cucumber_args}"
 
       match = simulators.find do |sim|
         sim.name == name && sim.version == sim_version

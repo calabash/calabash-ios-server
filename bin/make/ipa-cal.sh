@@ -10,14 +10,16 @@ set -e
 # Command line builds alway make a fresh framework
 banner "Ensure the calabash.framework"
 
-FRAMEWORK="calabash.framework"
-rm -rf "${FRAMEWORK}"
-make framework
+
+if [ "${MAKE_FRAMEWORK}" != "0" ]; then
+  FRAMEWORK="calabash.framework"
+  rm -rf "${FRAMEWORK}"
+  make framework
+fi
 
 banner "Preparing to build LPTestTarget"
 
-hash xcpretty 2>/dev/null
-if [ $? -eq 0 ] && [ "${XCPRETTY}" != "0" ]; then
+if [ $(gem list -i xcpretty) = "true" ] && [ "${XCPRETTY}" != "0" ]; then
   XC_PIPE='xcpretty -c'
 else
   XC_PIPE='cat'
@@ -55,32 +57,17 @@ info "Prepared archive directory"
 
 banner "Building ${IPA}"
 
-if [ -z "${CODE_SIGN_IDENTITY}" ]; then
-  COMMAND_LINE_BUILD=1 xcrun xcodebuild \
-    -SYMROOT="${XC_BUILD_DIR}" \
-    -derivedDataPath "${XC_BUILD_DIR}" \
-    -project "${XC_PROJECT}" \
-    -scheme "${XC_TARGET}" \
-    -configuration "${XC_CONFIG}" \
-    -sdk iphoneos \
-    ARCHS="armv7 armv7s arm64" \
-    VALID_ARCHS="armv7 armv7s arm64" \
-    ONLY_ACTIVE_ARCH=NO \
-    build | $XC_PIPE
-else
-  COMMAND_LINE_BUILD=1 xcrun xcodebuild \
-    CODE_SIGN_IDENTITY="${CODE_SIGN_IDENTITY}" \
-    -SYMROOT="${XC_BUILD_DIR}" \
-    -derivedDataPath "${XC_BUILD_DIR}" \
-    -project "${XC_PROJECT}" \
-    -scheme "${XC_TARGET}" \
-    -configuration "${XC_CONFIG}" \
-    -sdk iphoneos \
-    ARCHS="armv7 armv7s arm64" \
-    VALID_ARCHS="armv7 armv7s arm64" \
-    ONLY_ACTIVE_ARCH=NO \
-    build | $XC_PIPE
-fi
+COMMAND_LINE_BUILD=1 xcrun xcodebuild \
+  -SYMROOT="${XC_BUILD_DIR}" \
+  -derivedDataPath "${XC_BUILD_DIR}" \
+  -project "${XC_PROJECT}" \
+  -scheme "${XC_TARGET}" \
+  -configuration "${XC_CONFIG}" \
+  -sdk iphoneos \
+  ARCHS="armv7 armv7s arm64" \
+  VALID_ARCHS="armv7 armv7s arm64" \
+  ONLY_ACTIVE_ARCH=NO \
+  build | $XC_PIPE
 
 EXIT_CODE=${PIPESTATUS[0]}
 
@@ -116,20 +103,9 @@ DETAILS=`xcrun codesign --display --verbose=2 ${INSTALLED_APP} 2>&1`
 
 echo "$(tput setaf 4)$DETAILS$(tput sgr0)"
 
-banner "Preparing for XTC Submit"
+banner "Preparing for AppCenter Submit"
 
-XTC_DOTENV="cucumber/.env"
-
-if [ ! -e "${XTC_DOTENV}" ]; then
-  info "No cucumber/.env file found."
-  info "A .env file is required for submitting to Test Cloud"
-  info "If you are a maintainer, you should have a .env!"
-  info "Ask jmoody for details"
-  info "Done!"
-  exit 0
-fi
-
-XTC_DIR="${HOME}/.calabash/xtc/calabash-ios-server/submit"
+XTC_DIR="testcloud-submit"
 rm -rf "${XTC_DIR}"
 mkdir -p "${XTC_DIR}"
 
@@ -138,6 +114,14 @@ info "Copied features to ${XTC_DIR}/"
 
 ditto_or_exit cucumber/config/xtc-profiles.yml "${XTC_DIR}/cucumber.yml"
 info "Copied cucumber/config/xtc-profiles.yml to ${XTC_DIR}/"
+
+cat >"${XTC_DIR}/Gemfile" <<EOF
+source "https://rubygems.org"
+
+gem "calabash-cucumber"
+gem "rspec", "~> 3.0"
+gem "xamarin-test-cloud"
+EOF
 
 ditto_or_exit "${INSTALLED_IPA}" "${XTC_DIR}/"
 info "Copied ${IPA} to ${XTC_DIR}/"

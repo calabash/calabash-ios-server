@@ -14,6 +14,8 @@
 #import "LPWebViewProtocol.h"
 #import "LPCocoaLumberjack.h"
 #import "LPJSONUtils.h"
+#import "LPInvoker.h"
+#import "LPInvocationResult.h"
 
 @implementation LPScrollOperation
 
@@ -44,24 +46,32 @@
     }
 
     CGPoint point;
+    CGFloat contentInset;
 
     if ([@"up" isEqualToString:dir]) {
-      CGFloat scrollAmount = MIN((size.height)/fraction, offset.y + sv.contentInset.top);
+      contentInset = [self insetForScrollView:sv direction:@"up"];
+      CGFloat scrollAmount = MIN((size.height)/fraction, offset.y + contentInset);
       point = CGPointMake(offset.x, offset.y - scrollAmount);
     } else if ([@"down" isEqualToString:dir]) {
-      CGFloat scrollAmount = MIN(size.height/fraction, sv.contentSize.height + sv.contentInset.bottom - offset.y - size.height);
+      contentInset = [self insetForScrollView:sv direction:@"down"];
+      CGFloat scrollAmount = MIN(size.height/fraction,
+                                 contentInset - offset.y - size.height);
       point = CGPointMake(offset.x, offset.y + scrollAmount);
     } else if ([@"left" isEqualToString:dir]) {
-      CGFloat scrollAmount = MIN(size.width/fraction, offset.x + sv.contentInset.left);
+      contentInset = [self insetForScrollView:sv direction:@"left"];
+      CGFloat scrollAmount = MIN(size.width/fraction, offset.x + contentInset);
       point = CGPointMake(offset.x - scrollAmount, offset.y);
     } else {
-      CGFloat scrollAmount = MIN(size.width/fraction, sv.contentSize.width + sv.contentInset.right - offset.x - size.width);
+      contentInset = [self insetForScrollView:sv direction:@"right"];
+      CGFloat scrollAmount = MIN(size.width/fraction,
+                                 contentInset - offset.x - size.width);
       point = CGPointMake(offset.x + scrollAmount, offset.y);
     }
 
+    LPLogDebug(@"Scrolling to offset: %@", NSStringFromCGPoint(point));
+
     [sv setContentOffset:point animated:YES];
     return [LPJSONUtils jsonifyObject:target];
-
   } else if ([LPWebViewUtils isWebView:target]) {
     NSString *scrollJS = @"window.scrollBy(%@,%@);";
     if ([@"up" isEqualToString:dir]) {
@@ -79,6 +89,63 @@
     return [LPJSONUtils jsonifyObject:target];
   }
   return nil;
+}
+
+- (CGFloat)insetForScrollView:(UIScrollView *)view
+                    direction:(NSString *)direction {
+
+  CGFloat contentInset;
+  SEL selector = NSSelectorFromString(@"adjustedContentInset");
+  if ([@"up" isEqualToString:direction]) {
+    if ([view respondsToSelector:selector]) {
+      contentInset = [self adjustedContentInset:view edge:@"Top"];
+    } else {
+      contentInset = view.contentInset.top;
+    }
+  } else if ([@"down" isEqualToString:direction]) {
+    if ([view respondsToSelector:selector]) {
+      contentInset = [self adjustedContentInset:view edge:@"Bottom"];
+    } else {
+      contentInset = view.contentInset.bottom;
+    }
+    contentInset = contentInset + view.contentSize.height;
+  } else if ([@"left" isEqualToString:direction]) {
+    if ([view respondsToSelector:selector]) {
+      contentInset = [self adjustedContentInset:view edge:@"Left"];
+    } else {
+      contentInset = view.contentInset.left;
+    }
+  } else {
+    if ([view respondsToSelector:selector]) {
+      contentInset = [self adjustedContentInset:view edge:@"Right"];
+    } else {
+      contentInset = view.contentInset.right;
+    }
+    contentInset = contentInset + view.contentSize.width;
+  }
+
+  return contentInset;
+}
+
+- (CGFloat)adjustedContentInset:(UIScrollView *)view
+                           edge:(NSString *)edge {
+  SEL selector = NSSelectorFromString(@"adjustedContentInset");
+  LPInvocationResult *result;
+  result = [LPInvoker invokeOnMainThreadZeroArgumentSelector:selector
+                                                  withTarget:view];
+
+  if ([result isError]) {
+    LPLogError(@"Error finding adjusted content inset: %@", [result description]);
+    LPLogError(@"returning 0.0");
+    return 0.0;
+  } else if ([result isNSNull]) {
+    LPLogError(@"NSNull returned for adjusted content inset");
+    LPLogError(@"returning 0.0");
+    return 0.0;
+  } else {
+    NSDictionary *dict = (NSDictionary *)[result value];
+    return (CGFloat)[dict[edge] floatValue];
+  }
 }
 
 @end

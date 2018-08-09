@@ -44,8 +44,7 @@ rm -rf "${INSTALL_DIR}"
 
 LIBRARY_NAME=calabash-dylib.dylib
 
-hash xcpretty 2>/dev/null
-if [ $? -eq 0 ] && [ "${XCPRETTY}" != "0" ]; then
+if [ $(gem list -i xcpretty) = "true" ] && [ "${XCPRETTY}" != "0" ]; then
   XC_PIPE='xcpretty -c'
 else
   XC_PIPE='cat'
@@ -156,49 +155,58 @@ zip_with_ditto "${INSTALL_DIR}/Headers" "${INSTALL_DIR}/Headers.zip"
 
 banner "Dylib Code Signing"
 
-CODE_SIGN_DIR="${HOME}/.calabash/calabash-codesign"
-RESIGN_TOOL="${CODE_SIGN_DIR}/apple/resign-ios-dylib.rb"
-SHA_TOOL="${CODE_SIGN_DIR}/sha256"
-
-CERT="${CODE_SIGN_DIR}/apple/certs/calabash-developer.p12"
-
-echo ${KEYCHAIN_TOOL}
-
-if [ ! -e ${CODE_SIGN_DIR} ]; then
-  warn "Skipping dylib codesiging!"
-  warn "If you are not a maintainer, you can ignore this warning"
-  warn "If you are maintainer, you should be resigning!"
-  warn "See: https://github.com/calabash/calabash-codesign"
-  exit 0
-
-else
-
-  EXPECTED_SHA=$1
-  ACTUAL_SHA=`$SHA_TOOL $CERT`
-
-  if [ "${EXPECTED_SHA}" != "${ACTUAL_SHA}" ]; then
-    error "Expected cert checksum: ${EXPECTED_SHA}"
-    error "  Actual cert checksum: ${ACTUAL_SHA}"
-    error ""
-    error "You must update your local code signing tool"
-    error "$ cd ~/.calabash/calabash-codesign"
-    error "$ git checkout master"
-    error "$ git pull"
-    exit 1
-  fi
-
-  info "Creating the Calabash.keychain"
-  (cd "${CODE_SIGN_DIR}" && apple/create-keychain.sh)
-
-  info "Resiging the device dylib"
-  $RESIGN_TOOL "${INSTALL_DIR}/libCalabashARM.dylib"
-
-  info "Resiging the FAT dylib"
-  $RESIGN_TOOL "${INSTALL_DIR}/libCalabashFAT.dylib"
-
-  xcrun codesign --display --verbose=2\
-    ${INSTALL_DIR}/libCalabashARM.dylib
+if [ "${KEYCHAIN}" = "" ]; then
+  KEYCHAIN="${HOME}/.calabash/Calabash.keychain"
 fi
+
+if [ -e "${KEYCHAIN}" ]; then
+  info "Will resign with keychain: ${KEYCHAIN}"
+else
+  error "Expected keychain at path:"
+  error "  ${KEYCHAIN}"
+  error "If you are signing with the Calabash.keychain,"
+  error "pull the latest from GitHub and recreate the keychain."
+  exit 1
+fi
+
+if [ "${CODE_SIGN_IDENTITY}" = "" ]; then
+  CODE_SIGN_IDENTITY="iPhone Developer: Karl Krukow (YTTN6Y2QS9)"
+fi
+
+set +e
+xcrun security find-certificate \
+  -Z -c "${CODE_SIGN_IDENTITY}" \
+  "${KEYCHAIN}" > /dev/null
+
+if [ "$?" = "0" ]; then
+  info "Will resign with identity: ${CODE_SIGN_IDENTITY}"
+else
+  error "Expected to find identity in keychain:"
+  error "            KEYCHAIN: ${KEYCHAIN}"
+  error "  CODE_SIGN_IDENTITY: ${CODE_SIGN_IDENTITY}"
+  error ""
+  error "These identities are in the keychain:"
+  xcrun security find-identity -v -p codesigning "${KEYCHAIN}"
+  exit 1
+fi
+set -e
+
+info "Resiging the device dylib"
+
+xcrun codesign \
+  --verbose \
+  --force \
+  --sign "${CODE_SIGN_IDENTITY}" \
+  --keychain "${KEYCHAIN}" \
+  "${INSTALL_DIR}/libCalabashARM.dylib"
+
+info "Resiging the FAT dylib"
+xcrun codesign \
+  --verbose \
+  --force \
+  --sign "${CODE_SIGN_IDENTITY}" \
+  --keychain "${KEYCHAIN}" \
+  "${INSTALL_DIR}/libCalabashFAT.dylib"
 
 banner "Dylib Info"
 
