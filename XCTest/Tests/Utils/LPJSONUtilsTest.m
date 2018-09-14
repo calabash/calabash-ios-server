@@ -52,6 +52,7 @@
 
 - (BOOL) isIphone6;
 - (BOOL) isIphone6Plus;
+- (BOOL) isIphoneXS;
 - (BOOL) isIphone4in;
 - (BOOL) isIphone35in;
 - (BOOL) isIpad;
@@ -74,6 +75,10 @@
 
 - (BOOL) isIphone6Plus {
   return [[LPDevice sharedDevice] isIPhone6PlusLike];
+}
+
+- (BOOL) isIphoneXS {
+  return [[LPDevice sharedDevice] isIPhoneXSLike];
 }
 
 - (BOOL) isIphone4in {
@@ -290,7 +295,10 @@
   XCTAssertEqualObjects(dict[@"rect"][@"width"], @(CGRectGetWidth([view frame])));
   XCTAssertEqualObjects(dict[@"rect"][@"height"], @(CGRectGetHeight([view frame])));
 
-  if ([self isIphone6Plus]) {
+  if ([self isIphoneXS]) {
+    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(130.75, 0.001);
+  } else if ([self isIphone6Plus]) {
     expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
     expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(106.75, 0.001);
   } else if ([self isIphone6]) {
@@ -343,7 +351,10 @@
   XCTAssertEqualObjects(dict[@"rect"][@"width"], @(CGRectGetWidth([view frame])));
   XCTAssertEqualObjects(dict[@"rect"][@"height"], @(CGRectGetHeight([view frame])));
 
-  if ([self isIphone6Plus]) {
+  if ([self isIphoneXS]) {
+    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(86.75, 0.001);
+  } else if ([self isIphone6Plus]) {
     expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64.0, 0.001);
     expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(86.75, 0.001);
   } else if ([self isIphone6]) {
@@ -761,7 +772,6 @@
   XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
-  XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"visible"], @(1));

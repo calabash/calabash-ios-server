@@ -51,7 +51,7 @@
   UIInterfaceOrientation orientation;
   LPDevice *device = [LPDevice sharedDevice];
 
-  if ([device isIPhone10LetterBox]) {
+  if ([device isIPhoneXLetterBox]) {
     orientation = [[UIApplication sharedApplication] statusBarOrientation];
 
     CGFloat xOffset = [LPTouchUtils xOffsetForIPhone10LetterBox:orientation];

@@ -243,7 +243,7 @@
   UIInterfaceOrientation orientation;
   orientation = [[UIApplication sharedApplication] statusBarOrientation];
 
-  if ([device isIPhone10LetterBox] &&
+  if ([device isIPhoneXLetterBox] &&
           UIInterfaceOrientationIsLandscape(orientation)) {
     // iPhone 10 Letter Box in portrait just requires an offset on the y
     // iPhone 10 Letter Box in landscape requires an x and y offset _and_ a scale
@@ -256,7 +256,7 @@
   CGFloat xOffset = 0.0;
   CGFloat yOffset = 0.0;
 
-  if ([device isIPhone10LetterBox]) {
+  if ([device isIPhoneXLetterBox]) {
     LPLogDebug(@"Device is an iPhone 10 in letter box");
     xOffset = [LPTouchUtils xOffsetForIPhone10LetterBox:orientation];
     yOffset = [LPTouchUtils yOffsetForIPhone10LetterBox:orientation];
