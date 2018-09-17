@@ -362,9 +362,9 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     @"iPhone10,6" : @"iphone 10",
 
     // iPhone XS/XS Max/XR - derived from Simulator
-    @"iPhone11,2" : @"iPhone11,2",
-    @"iPhone11,4" : @"iPhone11,4",
-    @"iPhone11,8" : @"iPhone11,8",
+    @"iPhone11,2" : @"iphone 10",
+    @"iPhone11,4" : @"iphone 10s max",
+    @"iPhone11,8" : @"iphone 10r",
 
     // iPad Pro 12.9in
     @"iPad6,7" : @"ipad pro 12.9",
@@ -523,11 +523,11 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 }
 
 - (BOOL) isIPhone10SMaxLike {
-  return [[self formFactor] isEqualToString:@"iPhone11,4"];
+  return [[self formFactor] isEqualToString:@"iphone 10s max"];
 }
 
 - (BOOL) isIPhone10RLike {
-  return [[self formFactor] isEqualToString:@"iPhone11,8"];
+  return [[self formFactor] isEqualToString:@"iphone 10r"];
 }
 
 - (BOOL) isLetterBox {

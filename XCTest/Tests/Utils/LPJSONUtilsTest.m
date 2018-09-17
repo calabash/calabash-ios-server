@@ -50,9 +50,9 @@
 
 @interface LPJSONUtilsTest : XCTestCase
 
+- (BOOL) isIphone10;
 - (BOOL) isIphone6;
 - (BOOL) isIphone6Plus;
-- (BOOL) isIPhone10S;
 - (BOOL) isIphone4in;
 - (BOOL) isIphone35in;
 - (BOOL) isIpad;
@@ -67,6 +67,10 @@
 
 - (void)tearDown {
   [super tearDown];
+}
+
+- (BOOL) isIphone10 {
+  return [[LPDevice sharedDevice] isIPhone10Like];
 }
 
 - (BOOL) isIphone6 {
@@ -291,7 +295,7 @@
   XCTAssertEqualObjects(dict[@"rect"][@"width"], @(CGRectGetWidth([view frame])));
   XCTAssertEqualObjects(dict[@"rect"][@"height"], @(CGRectGetHeight([view frame])));
 
-  if ([self isIPhone10S]) {
+  if ([self isIphone10]) {
     expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
     expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(130.75, 0.001);
   } else if ([self isIphone6Plus]) {
@@ -347,7 +351,7 @@
   XCTAssertEqualObjects(dict[@"rect"][@"width"], @(CGRectGetWidth([view frame])));
   XCTAssertEqualObjects(dict[@"rect"][@"height"], @(CGRectGetHeight([view frame])));
 
-  if ([self isIPhone10S]) {
+  if ([self isIphone10]) {
     expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
     expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(86.75, 0.001);
   } else if ([self isIphone6Plus]) {
