@@ -518,19 +518,15 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   return [[self formFactor] isEqualToString:@"iphone 4in"];
 }
 
-- (BOOL) isIPhoneXLike {
+- (BOOL) isIPhone10Like {
   return [[self formFactor] isEqualToString:@"iphone 10"];
 }
 
-- (BOOL) isIPhoneXSLike {
-  return [[self formFactor] isEqualToString:@"iPhone11,2"];
-}
-
-- (BOOL) isIPhoneXSMaxLike {
+- (BOOL) isIPhone10SMaxLike {
   return [[self formFactor] isEqualToString:@"iPhone11,4"];
 }
 
-- (BOOL) isIPhoneXRLike {
+- (BOOL) isIPhone10RLike {
   return [[self formFactor] isEqualToString:@"iPhone11,8"];
 }
 
@@ -543,8 +539,8 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   }
 }
 
-- (BOOL) isIPhoneXLetterBox {
-  if (![self isIPhoneXLike]) { return NO; }
+- (BOOL) isIPhone10LetterBox {
+  if (![self isIPhone10Like]) { return NO; }
   NSDictionary *dimensions = [self screenDimensions];
   NSInteger screenModeHeight = [dimensions[@"height"] integerValue];
   NSInteger screenBoundsHeight = [dimensions[@"bounds_portrait_height"] integerValue];
