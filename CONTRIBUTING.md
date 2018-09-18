@@ -43,7 +43,7 @@ license details.
 
 ```
 # Objective-C Unit tests.
-$ make xct
+$ make xctests
 
 # Building libraries.
 $ make all
@@ -64,20 +64,19 @@ After the release branch is created:
 * No more features can be added.
 * All in-progress features and un-merged pull-requests must wait for the next release.
 * You can, and should, make changes to the documentation.
-* You must bump the version in LPVersionRoute.h.  See [VERSIONING.md](VERSIONING.md]).
 
 The release pull request ***must*** be made against the _master_ branch.
 
 
 ```
-$ git co -b release/0.19.2
+$ git co -b release/0.21.7
 
 1. Update the CHANGELOG.md.
 2. Bump the version in calabash/Classes/FranklyServer/Routes/LPVersionRoute.h
 3. **IMPORTANT** Bump the version in the README.md badge.
 4. Have a look at the README.md to see if it can be updated.
 
-$ git push -u origin release/0.19.2
+$ git push -u origin release/0.21.7
 
 **IMPORTANT**
 
@@ -87,15 +86,13 @@ $ git push -u origin release/0.19.2
 
 $ git co master
 $ git pull
-
-$ git tag -a 0.19.2 -m"release/0.19.2"
-$ git push origin 0.19.2
+$ bin/git-tag.sh
 
 $ git co develop
-$ git merge --no-ff release/0.19.2
+$ git merge --no-ff release/0.21.7
 $ git push
 
-$ git branch -d release/0.19.2
+$ git branch -d release/0.21.7
 
 Announce the release on the public channels.
 ```
