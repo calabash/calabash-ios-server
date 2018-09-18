@@ -1,3 +1,7 @@
+### 0.21.7
+
+* Adds new form factors for iPhone 10S, iPhone 10S Max, and iPhone 10R #431
+
 ### 0.21.6
 
 * LPScrollOperation: scroll with adjustedContentInset when available #428
