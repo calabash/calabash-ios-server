@@ -119,6 +119,8 @@ cat >"${XTC_DIR}/Gemfile" <<EOF
 source "https://rubygems.org"
 
 gem "calabash-cucumber"
+gem "cucumber", "2.99.0"
+gem "json", "1.8.6"
 gem "rspec", "~> 3.0"
 gem "xamarin-test-cloud"
 EOF
