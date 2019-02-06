@@ -245,12 +245,3 @@ expect_bitcode arm64
 echo "${INSTALL_DIR}/libCalabashFAT.dylib _does not_ contain bitcode for arm64e"
 expect_bitcode armv7
 expect_bitcode armv7s
-
-# Legacy.  Can be changed once calabash-ios gem is updated.
-ditto_or_exit \
-  "${INSTALL_DIR}/libCalabashARM.dylib" \
-  "${INSTALL_DIR}/libCalabashDyn.dylib"
-
-ditto_or_exit \
-  "${INSTALL_DIR}/libCalabashSim.dylib" \
-  "${INSTALL_DIR}/libCalabashDynSim.dylib"
