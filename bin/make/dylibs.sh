@@ -111,9 +111,7 @@ xcrun xcodebuild install \
   -configuration "${XC_BUILD_CONFIG}" \
   ARCHS="${ARCHES}" \
   VALID_ARCHS="${ARCHES}" \
-  OTHER_CFLAGS="-fembed-bitcode" \
   DEPLOYMENT_POSTPROCESSING=YES \
-  ENABLE_BITCODE=YES \
   IPHONE_DEPLOYMENT_TARGET=8.0 \
   GCC_TREAT_WARNINGS_AS_ERRORS=YES \
   GCC_GENERATE_TEST_COVERAGE_FILES=NO \
@@ -218,30 +216,3 @@ echo "Built version:  $VERSION"
 lipo -info "${INSTALL_DIR}/libCalabashARM.dylib"
 lipo -info "${INSTALL_DIR}/libCalabashSim.dylib"
 lipo -info "${INSTALL_DIR}/libCalabashFAT.dylib"
-
-# For dylibs, search for __LLVM
-# For static libs (.a) search for bitcode
-# Neither is fully reliable because -fembed-bitcode-marker (space for bitcode,
-# but no bitcode) would produce a false positive.
-#
-# If we have trouble with bitcode, we can try:
-#
-# $ xcodebuild archive
-function expect_bitcode {
-  set +e
-  xcrun otool -arch $1 -l "${INSTALL_DIR}/libCalabashFAT.dylib" | grep '__LLVM' &> /dev/null
-  if [ $? -eq 0 ]; then
-    echo "${INSTALL_DIR}/libCalabashFAT.dylib contains bitcode for ${1}"
-  else
-    echo "${INSTALL_DIR}/libCalabashFAT.dylib does not contain bitcode for ${1}"
-    exit 1
-  fi
-  set -e
-}
-
-expect_bitcode arm64
-# 64e slice does not contain LLVM segment, I am not sure why not.
-# expect_bitcode arm64e
-echo "${INSTALL_DIR}/libCalabashFAT.dylib _does not_ contain bitcode for arm64e"
-expect_bitcode armv7
-expect_bitcode armv7s
