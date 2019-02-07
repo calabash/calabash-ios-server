@@ -4,7 +4,7 @@ pipeline {
   agent { label 'master' }
 
   environment {
-    DEVELOPER_DIR='/Xcode/9.4.1/Xcode.app/Contents/Developer'
+    DEVELOPER_DIR='/Xcode/10.1/Xcode.app/Contents/Developer'
     XCPRETTY=1
 
     SLACK_COLOR_DANGER  = '#E01563'
