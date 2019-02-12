@@ -57,6 +57,8 @@ info "Prepared archive directory"
 
 banner "Building ${IPA}"
 
+ARCHES="armv7 armv7s arm64 arm64e"
+
 COMMAND_LINE_BUILD=1 xcrun xcodebuild \
   -SYMROOT="${XC_BUILD_DIR}" \
   -derivedDataPath "${XC_BUILD_DIR}" \
@@ -64,9 +66,8 @@ COMMAND_LINE_BUILD=1 xcrun xcodebuild \
   -scheme "${XC_TARGET}" \
   -configuration "${XC_CONFIG}" \
   -sdk iphoneos \
-  ARCHS="armv7 armv7s arm64" \
-  VALID_ARCHS="armv7 armv7s arm64" \
-  ONLY_ACTIVE_ARCH=NO \
+  ARCHS="${ARCHES}" \
+  VALID_ARCHS="${ARCHES}" \
   build | $XC_PIPE
 
 EXIT_CODE=${PIPESTATUS[0]}
