@@ -1,3 +1,9 @@
+### 0.21.8
+
+* Add Spring 2019 iPads to device map #438
+* Include arm64e slice in framework and dylibs #437
+* Update min target version for calabash.framework #433
+
 ### 0.21.7
 
 * Adds new form factors for iPhone 10S, iPhone 10S Max, and iPhone 10R #431
