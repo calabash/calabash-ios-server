@@ -73,7 +73,7 @@ xcrun xcodebuild build \
   ONLY_ACTIVE_ARCH=NO \
   EFFECTIVE_PLATFORM_NAME="-iphonesimulator" \
   -sdk iphonesimulator \
-  IPHONEOS_DEPLOYMENT_TARGET=6.0 \
+  IPHONEOS_DEPLOYMENT_TARGET=8.0 \
   GCC_TREAT_WARNINGS_AS_ERRORS=YES \
   GCC_GENERATE_TEST_COVERAGE_FILES=NO \
   GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=NO | $XC_PIPE
@@ -101,18 +101,18 @@ fi
 
 rm -f "${ARM_LIBRARY}"
 
+ARCHES="armv7 armv7s arm64 arm64e"
+
 xcrun xcodebuild install \
   -project "${XC_PROJECT}" \
   -scheme "${XC_SCHEME}" \
   -SYMROOT="${ARM_BUILD_DIR}" \
   -derivedDataPath "${ARM_BUILD_DIR}" \
   -configuration "${XC_BUILD_CONFIG}" \
-  ARCHS="armv7 armv7s arm64" \
-  VALID_ARCHS="armv7 armv7s arm64" \
-  OTHER_CFLAGS="-fembed-bitcode" \
+  ARCHS="${ARCHES}" \
+  VALID_ARCHS="${ARCHES}" \
   DEPLOYMENT_POSTPROCESSING=YES \
-  ENABLE_BITCODE=YES \
-  IPHONE_DEPLOYMENT_TARGET=6.0 \
+  IPHONE_DEPLOYMENT_TARGET=8.0 \
   GCC_TREAT_WARNINGS_AS_ERRORS=YES \
   GCC_GENERATE_TEST_COVERAGE_FILES=NO \
   GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=NO | $XC_PIPE
@@ -216,34 +216,3 @@ echo "Built version:  $VERSION"
 lipo -info "${INSTALL_DIR}/libCalabashARM.dylib"
 lipo -info "${INSTALL_DIR}/libCalabashSim.dylib"
 lipo -info "${INSTALL_DIR}/libCalabashFAT.dylib"
-
-# For dylibs, search for __LLVM
-# For static libs (.a) search for bitcode
-# Neither is fully reliable because -fembed-bitcode-marker (space for bitcode,
-# but no bitcode) would produce a false positive.
-#
-# If we have trouble with bitcode, we can try:
-#
-# $ xcodebuild archive
-function expect_bitcode {
-  xcrun otool -arch $1 -l "${INSTALL_DIR}/libCalabashFAT.dylib" | grep '__LLVM' &> /dev/null
-  if [ $? -eq 0 ]; then
-    echo "${INSTALL_DIR}/libCalabashFAT.dylib contains bitcode for ${1}"
-  else
-    echo "${INSTALL_DIR}/libCalabashFAT.dylib does not contain bitcode for ${1}"
-    exit 1
-  fi
-}
-
-expect_bitcode arm64
-expect_bitcode armv7
-expect_bitcode armv7s
-
-# Legacy.  Can be changed once calabash-ios gem is updated.
-ditto_or_exit \
-  "${INSTALL_DIR}/libCalabashARM.dylib" \
-  "${INSTALL_DIR}/libCalabashDyn.dylib"
-
-ditto_or_exit \
-  "${INSTALL_DIR}/libCalabashSim.dylib" \
-  "${INSTALL_DIR}/libCalabashDynSim.dylib"

@@ -4,8 +4,8 @@ pipeline {
   agent { label 'master' }
 
   environment {
-    DEVELOPER_DIR='/Xcode/9.4.1/Xcode.app/Contents/Developer'
-    XCPRETTY=0
+    DEVELOPER_DIR='/Xcode/10.1/Xcode.app/Contents/Developer'
+    XCPRETTY=1
 
     SLACK_COLOR_DANGER  = '#E01563'
     SLACK_COLOR_INFO    = '#6ECADC'
@@ -15,7 +15,6 @@ pipeline {
   }
   options {
     disableConcurrentBuilds()
-    timestamps()
     buildDiscarder(logRotator(numToKeepStr: '10'))
     timeout(time: 60, unit: 'MINUTES')
   }

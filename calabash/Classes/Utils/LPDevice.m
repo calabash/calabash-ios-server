@@ -364,6 +364,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     // iPhone XS/XS Max/XR - derived from Simulator
     @"iPhone11,2" : @"iphone 10",
     @"iPhone11,4" : @"iphone 10s max",
+    @"iPhone11,6" : @"iphone 10s max",
     @"iPhone11,8" : @"iphone 10r",
 
     // iPad Pro 12.9in
@@ -371,6 +372,16 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     @"iPad6,8" : @"ipad pro 12.9",
     @"iPad7,1" : @"ipad pro 12.9",
     @"iPad7,2" : @"ipad pro 12.9",
+    @"iPad8,5" : @"ipad pro 12.9",
+    @"iPad8,6" : @"ipad pro 12.9",
+    @"iPad8,7" : @"ipad pro 12.9",
+    @"iPad8,8" : @"ipad pro 12.9",
+
+    // iPad Pro 11in  
+    @"iPad8,1" : @"ipad pro 11",
+    @"iPad8,2" : @"ipad pro 11",
+    @"iPad8,3" : @"ipad pro 11",
+    @"iPad8,4" : @"ipad pro 11",
 
     // iPad Pro 9.7in
     @"iPad6,3" : @"ipad pro 9.7",
@@ -379,6 +390,8 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     // iPad 9.7 in
     @"iPad6,11" : @"ipad 9.7",
     @"iPad6,12" : @"ipad 9.7",
+    @"iPad7,5"  : @"ipad 9.7",
+    @"iPad7,6"  : @"ipad 9.7",
 
     // iPad Pro 10.5in
     @"iPad7,4" : @"ipad pro 10.5",
