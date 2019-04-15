@@ -1,6 +1,6 @@
 | Status | [versioning](VERSIONING.md) | [license](LICENSE) | [contributing](CONTRIBUTING.md)|
 |--------|-----------------------------|--------------------|--------------------------------|
-|[![Build Status](https://calabash-ci.xyz/buildStatus/icon?job=calabash-ios-server/develop)](https://calabash-ci.xyz/job/calabash-ios-server/develop)| [![Version](https://img.shields.io/badge/version-0.21.7-green.svg)](https://img.shields.io/badge/version-0.21.7-green.svg) |[![License](https://img.shields.io/badge/licence-Eclipse-blue.svg)](http://opensource.org/licenses/EPL-1.0) | [![Contributing](https://img.shields.io/badge/contrib-gitflow-orange.svg)](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow/)|
+|[![Build Status](https://calabash-ci.xyz/buildStatus/icon?job=calabash-ios-server/develop)](https://calabash-ci.xyz/job/calabash-ios-server/develop)| [![Version](https://img.shields.io/badge/version-0.21.8-green.svg)](https://img.shields.io/badge/version-0.21.8-green.svg) |[![License](https://img.shields.io/badge/licence-Eclipse-blue.svg)](http://opensource.org/licenses/EPL-1.0) | [![Contributing](https://img.shields.io/badge/contrib-gitflow-orange.svg)](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow/)|
 
 ## The Calabash iOS Server
 
@@ -16,7 +16,7 @@ Requires Xcode 9.4.1 or Xcode 10.
 
 Xcode 9.4.1 is actively tested. Older versions of Xcode 8 are not.
 
-Requires ruby >= 2.3.*.
+Requires ruby >= 2.3.*
 
 ```
 $ git clone --recursive git@github.com:calabash/calabash-ios-server.git
