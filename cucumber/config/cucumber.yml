@@ -7,7 +7,7 @@ date = Time.now.strftime('%Y-%m-%d-%H%M-%S')
 FileUtils.mkdir("./screenshots") unless File.exists?("./screenshots")
 FileUtils.mkdir("./reports") unless File.exists?("./reports")
 
-calabash_dir = "#{ENV['HOME']}/.calabash"
+calabash_dir = "#{ENV['HOME']}/.test-cloud-dev"
 
 devices = {}
 

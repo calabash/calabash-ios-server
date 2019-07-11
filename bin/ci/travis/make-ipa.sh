@@ -12,13 +12,13 @@ fi
 
 bin/ci/travis/install-keychain.sh
 
-CODE_SIGN_DIR="${HOME}/.calabash/calabash-codesign"
-KEYCHAIN="${CODE_SIGN_DIR}/apple/Calabash.keychain"
+CODE_SIGN_DIR="${HOME}/.test-cloud-dev/test-cloud-dev-ios-keychain"
+KEYCHAIN="${CODE_SIGN_DIR}/apple/TestCloudDev.keychain"
 
 # cucumber/.env must exist or "make ipa-cal" will not stage for submit
 DOTENV="cucumber/.env"
 
-STAGING="${HOME}/.calabash/xtc/calabash-ios-server/submit"
+STAGING="${HOME}/.test-cloud-dev/xtc/calabash-ios-server/submit"
 echo "XTC_STAGING_DIR=\"${STAGING}\"" > "${DOTENV}"
 echo "IPA=\"${STAGING}/LPTestTarget.ipa\"" >> "${DOTENV}"
 echo "XTC_OTHER_GEMS_FILE=config/xtc-other-gems" >> "${DOTENV}"

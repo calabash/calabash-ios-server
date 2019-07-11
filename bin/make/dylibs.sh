@@ -156,7 +156,7 @@ zip_with_ditto "${INSTALL_DIR}/Headers" "${INSTALL_DIR}/Headers.zip"
 banner "Dylib Code Signing"
 
 if [ "${KEYCHAIN}" = "" ]; then
-  KEYCHAIN="${HOME}/.calabash/Calabash.keychain"
+  KEYCHAIN="${HOME}/.test-cloud-dev/TestCloudDev.keychain"
 fi
 
 if [ -e "${KEYCHAIN}" ]; then
@@ -164,7 +164,7 @@ if [ -e "${KEYCHAIN}" ]; then
 else
   error "Expected keychain at path:"
   error "  ${KEYCHAIN}"
-  error "If you are signing with the Calabash.keychain,"
+  error "If you are signing with the TestCloudDev.keychain,"
   error "pull the latest from GitHub and recreate the keychain."
   exit 1
 fi

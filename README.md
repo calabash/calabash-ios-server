@@ -109,7 +109,7 @@ then you must either:
 2. Update the Xcode project with a specific Code Signing entity.  **DO
    NOT CHECK THESE CHANGES INTO GIT.**
 
-Maintainers should be using the Calabash.keychain
+Maintainers should be using the TestCloudDev.keychain
 (calabash/calabash-codesign).
 
 ### Contributing
