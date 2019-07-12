@@ -156,7 +156,7 @@ zip_with_ditto "${INSTALL_DIR}/Headers" "${INSTALL_DIR}/Headers.zip"
 banner "Dylib Code Signing"
 
 if [ "${KEYCHAIN}" = "" ]; then
-  KEYCHAIN="${HOME}/.test-cloud-dev/TestCloudDev.keychain"
+  KEYCHAIN="${HOME}/Library/Keychains/test-cloud-dev/TestCloudDev.keychain-db"
 fi
 
 if [ -e "${KEYCHAIN}" ]; then
