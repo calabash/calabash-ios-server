@@ -1,0 +1,54 @@
+jobs:
+
+- job:
+  strategy:
+    matrix:
+      Mojave-Xcode-10.2.1:
+        IMAGE_POOL: 'macOS-10.14'
+        XCODE_VERSION: '10.2.1'
+      Mojave-Xcode-11.0:
+        IMAGE_POOL: 'macOS-10.14'
+        XCODE_VERSION: '11'
+  pool:
+    vmImage: $(IMAGE_POOL)
+  
+  steps:
+
+  - script: sudo xcode-select --switch "/Applications/Xcode_$(XCODE_VERSION).app/Contents/Developer"
+    displayName: "Select Xcode $(XCODE_VERSION)"
+
+  - script: brew install tree
+    displayName: "Install brew dependencies"
+  
+  - script: |
+      set -e
+      git clone https://$(GitHubAccessToken)@github.com/xamarinhq/calabash-codesign.git
+      calabash-codesign/apple/create-keychain.sh
+    displayName: "Download and install keychain"
+
+  - script: make framework
+    displayName: "Make framework"
+
+  - script: make dylibs
+    displayName: "Make dylibs"
+
+  - script: MAKE_FRAMEWORK=0 make ipa-cal
+    displayName: "Make ipa-call"
+
+  - script: MAKE_FRAMEWORK=0 make app-cal
+    displayName: "Make app-call"
+
+  - script: bundle install
+    displayName: "Bundle install"
+
+  - script: bundle exec bin/test/xctest.rb
+    displayName: "Make xctests"
+
+  - script: bundle exec bin/test/cucumber.rb
+    displayName: "exec cucumber"
+
+  - task: PublishTestResults@2
+    displayName: 'Publish Test Results'
+    inputs:
+      testResultsFiles: 'cucumber/reports/junit/*.xml'
+    condition: always()
