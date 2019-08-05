@@ -51,11 +51,6 @@ Dir.chdir working_dir do
     sim_version = RunLoop::Version.new("#{sim_major}.#{sim_minor}")
 
     if RunLoop::Environment.azurepipelines?
-      devices = {
-        :iphoneXs => 'iPhone Xs',
-        :iphoneXsMax => 'iPhone Xs Max'
-      }
-    else
       # we have to add one more if because ios 11 doesn't support iphone X 
       if xcode_version.major < 11
         devices = {
@@ -81,6 +76,11 @@ Dir.chdir working_dir do
           :iPhone8Plus => 'iPhone 8 Plus'
         }
       end
+    else
+      devices = {
+        :iphoneXs => 'iPhone Xs',
+        :iphoneXsMax => 'iPhone Xs Max'
+      }
     end
 
     if !system("bundle", "exec", "run-loop", "simctl", "manage-processes")
