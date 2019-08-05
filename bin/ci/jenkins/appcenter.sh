@@ -58,7 +58,7 @@ appcenter test run calabash \
   --app-path "${WORKSPACE}/LPTestTarget.ipa" \
   --test-series "${SERIES}" \
   --project-dir "${WORKSPACE}" \
-  --config-path "${WORKSPACE}/cucumber.yml" \
+  --config-path "cucumber.yml" \
   --token "${AC_TOKEN}" \
   --dsym-dir "${WORKSPACE}/LPTestTarget.app.dSYM" \
   --async \
