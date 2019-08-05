@@ -37,7 +37,7 @@ if [ "${AC_TOKEN}" = "" ]; then
   AC_TOKEN=$("${HOME}/.calabash/find-keychain-credential.sh" api-token)
 fi
 
-WORKSPACE="${HOME}/.calabash/xtc/calabash-ios-server/submit"
+WORKSPACE="testcloud-submit"
 
 if [ ! -e "${WORKSPACE}" ]; then
   error "Expected this directory to exist:"
