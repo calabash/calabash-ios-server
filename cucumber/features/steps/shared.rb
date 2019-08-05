@@ -37,7 +37,10 @@ And(/^I go to the second tab$/) do
     !query("UITabBarButton").empty?
   end
 
-  touch("UITabBarButton index:1")
+  while query("view marked: 'Second View'").empty?
+    touch("UITabBarButton index:1")
+  end
+
   wait_for_none_animating
 end
 
