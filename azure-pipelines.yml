@@ -25,16 +25,9 @@ jobs:
   - script: |
       set -e
       ruby -v
-      echo -e "install: --no-document --env-shebang\nupdate:  --no-document --env-shebang" > ~/.gemrc
+      echo "install: --no-document --env-shebang\nupdate:  --no-document --env-shebang" > ~/.gemrc
       bundle install
     displayName: "Prepare Ruby Environment"
-
-
-  - script: |
-      cat ~/.gemrc
-      echo ""
-      ls -a ~
-    displayName: "Read gemrc"
 
   - script: brew install tree
     displayName: "Install brew dependencies"
@@ -56,6 +49,9 @@ jobs:
 
   - script: MAKE_FRAMEWORK=0 make app-cal
     displayName: "Make app-call"
+
+  - script: bundle exec bin/ci/jenkins/appcenter.sh
+    displayName: "test appcenter"
 
   - script: bundle exec bin/ci/jenkins/appcenter.sh
     displayName: "test appcenter"
