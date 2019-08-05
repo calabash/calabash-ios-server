@@ -56,10 +56,31 @@ Dir.chdir working_dir do
         :iphoneXsMax => 'iPhone Xs Max'
       }
     else
-      devices = {
-        :iphoneXs => 'iPhone Xs',
-        :iphoneXr => 'iPhone Xʀ'
-      }
+      # we have to add one more if because ios 11 doesn't support iphone X 
+      if xcode_version.major < 11
+        devices = {
+          :iphoneXs => 'iPhone Xs',
+          :iphoneXr => 'iPhone Xʀ',
+          :iPhoneSE => 'iPhone SE',
+          :iPhoneXsMax => 'iPhone Xs Max',
+          :iPadPro97 => 'iPad Pro (9.7 inch)',
+          :iPadPro105 => 'iPad Pro (10.5-inch)',
+          :iPhone8 => 'iPhone 8',
+          :iPhone8Plus => 'iPhone 8 Plus',
+          :iPhoneX => 'iPhone X'
+        }
+      else
+        devices = {
+          :iphoneXs => 'iPhone Xs',
+          :iphoneXr => 'iPhone Xʀ',
+          :iPhoneSE => 'iPhone SE',
+          :iPhoneXsMax => 'iPhone Xs Max',
+          :iPadPro97 => 'iPad Pro (9.7 inch)',
+          :iPadPro105 => 'iPad Pro (10.5-inch)',
+          :iPhone8 => 'iPhone 8',
+          :iPhone8Plus => 'iPhone 8 Plus'
+        }
+      end
     end
 
     if !system("bundle", "exec", "run-loop", "simctl", "manage-processes")
