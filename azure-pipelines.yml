@@ -14,8 +14,20 @@ jobs:
   
   steps:
 
-  - script: sudo xcode-select --switch "/Applications/Xcode_$(XCODE_VERSION).app/Contents/Developer"
+  - script: |
+      set -e
+      sudo xcode-select --switch "/Applications/Xcode_$(XCODE_VERSION).app/Contents/Developer"
+      echo "Xcode version: $(xcrun xcodebuild -version)"
+      echo "Xcode path: $(xcrun -f xcodebuild)"
+      echo "Xcode select path: $(xcode-select --print-path)"
     displayName: "Select Xcode $(XCODE_VERSION)"
+
+  - script: |
+      set -e
+      bundle install
+      ruby -v
+      echo "install: --no-document --env-shebang\nupdate:  --no-document --env-shebang" > ~/.gemrc
+    displayName: "Prepare Ruby Environment"
 
   - script: brew install tree
     displayName: "Install brew dependencies"
@@ -37,9 +49,6 @@ jobs:
 
   - script: MAKE_FRAMEWORK=0 make app-cal
     displayName: "Make app-call"
-
-  - script: bundle install
-    displayName: "Bundle install"
 
   - script: bundle exec bin/test/xctest.rb
     displayName: "Make xctests"
