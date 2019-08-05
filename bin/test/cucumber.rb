@@ -44,22 +44,15 @@ Dir.chdir working_dir do
 
     sim_version = RunLoop::Version.new("#{sim_major}.#{sim_minor}")
 
-    if RunLoop::Environment.jenkins?
-      devices = {
-        :iphone7Plus => 'iPhone 7 Plus',
-        :air => 'iPad Air 2',
-        :iphoneSE => 'iPhone SE',
-        :iphone7 => 'iPhone 7'
-      }
-    elsif RunLoop::Environment.azurepipelines?
+    if RunLoop::Environment.azurepipelines?
       devices = {
         :iphoneXs => 'iPhone Xs',
         :iphoneXsMax => 'iPhone Xs Max'
       }
     else
       devices = {
-        :iphone7 => 'iPhone 7',
-        :iphone7Plus => 'iPhone 7 Plus'
+        :iphoneXs => 'iPhone Xs',
+        :iphoneXr => 'iPhone Xʀ'
       }
     end
 
