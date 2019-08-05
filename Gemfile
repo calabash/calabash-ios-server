@@ -6,3 +6,4 @@ gem "luffa", :github => "calabash/luffa", :branch => "develop"
 
 gem "retriable", "~> 2.0"
 gem "xcpretty"
+gem "xamarin-test-cloud"

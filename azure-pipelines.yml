@@ -53,6 +53,9 @@ jobs:
   - script: bundle exec bin/test/xctest.rb
     displayName: "Make xctests"
 
+  - script: bundle exec bin/ci/jenkins/appcenter.sh
+    displayName: "test appcenter"
+
   - script: bundle exec bin/test/cucumber.rb
     displayName: "exec cucumber"
 
