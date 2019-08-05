@@ -26,6 +26,7 @@ jobs:
       set -e
       ruby -v
       echo "install: --no-document --env-shebang\nupdate:  --no-document --env-shebang" > ~/.gemrc
+      cat ~/.gemrc
       bundle install
     displayName: "Prepare Ruby Environment"
 
