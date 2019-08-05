@@ -58,8 +58,8 @@ Dir.chdir working_dir do
       }
     else
       devices = {
-        :iphone7Plus => 'iPhone 7 Plus',
-        :iphone7 => 'iPhone 7'
+        :iphone7 => 'iPhone 7',
+        :iphone7Plus => 'iPhone 7 Plus'
       }
     end
 
