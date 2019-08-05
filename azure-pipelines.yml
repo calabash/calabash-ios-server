@@ -50,9 +50,6 @@ jobs:
   - script: MAKE_FRAMEWORK=0 make app-cal
     displayName: "Make app-call"
 
-  - script: bundle exec bin/test/xctest.rb
-    displayName: "Make xctests"
-
   - script: bundle exec bin/ci/jenkins/appcenter.sh
     displayName: "test appcenter"
 
