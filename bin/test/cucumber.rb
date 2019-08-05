@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 
-require "luffa"
 require "fileutils"
 require "tmpdir"
 require "bundler"
+require "luffa"
 
 cucumber_args = "#{ARGV.join(" ")}"
 
@@ -13,7 +13,9 @@ calabash_framework = File.join(server_dir, 'calabash.framework')
 # If calabash.framework was built by a previous step, use it.
 unless File.exist?(calabash_framework)
   Dir.chdir server_dir do
-    Luffa.unix_command("make framework")
+    if !system("make", "framework")
+      raise "There was an error while running 'make framework'"
+    end
   end
 end
 
@@ -21,7 +23,9 @@ app = File.join(server_dir, "Products", "test-target", "app-cal", "LPTestTarget.
 
 unless File.exist?(app)
   Dir.chdir server_dir do
-    Luffa.unix_command("make app-cal")
+    if !system("make", "app-cal")
+      raise "There was an error while running 'make app-cal'"
+    end
   end
 end
 
@@ -33,7 +37,9 @@ Dir.chdir working_dir do
     FileUtils.rm_rf("reports")
     FileUtils.mkdir_p("reports")
 
-    Luffa.unix_command("bundle update")
+    if !system("bundle", "update")
+      raise "There was an error while running 'bundle update'"
+    end
 
     require "run_loop"
 
@@ -56,7 +62,9 @@ Dir.chdir working_dir do
       }
     end
 
-    Luffa.unix_command("bundle exec run-loop simctl manage-processes")
+    if !system("bundle", "exec", "run-loop", "simctl", "manage-processes")
+      raise "There was an error while running 'bundle exec run-loop simctl manage-processes'"
+    end
 
     simulators = RunLoop::Simctl.new.simulators
 
@@ -65,9 +73,6 @@ Dir.chdir working_dir do
     passed_sims = []
     failed_sims = []
     devices.each do |key, name|
-      Luffa.unix_command("bundle exec run-loop simctl manage-processes")
-      cucumber_cmd = "bundle exec cucumber -p simulator -f json -o reports/cucumber.json -f junit -o reports/junit #{cucumber_args}"
-
       match = simulators.find do |sim|
         sim.name == name && sim.version == sim_version
       end
@@ -76,17 +81,25 @@ Dir.chdir working_dir do
         raise "Could not find a match for simulator with name #{name}"
       end
 
-      env_vars = {"DEVICE_TARGET" => match.udid}
+      if system({"DEVICE_TARGET" => match.udid},
+          "bundle", "exec", "cucumber",
+           "-p", "simulator",
+           "-f", "json", "-o", "reports/cucumber.json",
+           "-f", "junit", "-o", "reports/junit",
+           "--tags", "~@device",
+           "--tags", "~@device_only",
+           "--tags", "~@xtc",
+           "--tags", "~@xtc_only")
 
-      exit_code = Luffa.unix_command(cucumber_cmd, {:exit_on_nonzero_status => false,
-                                                    :env_vars => env_vars})
-      if exit_code == 0
         passed_sims << name
       else
         failed_sims << name
       end
 
-      Luffa.unix_command("bundle exec run-loop simctl manage-processes")
+      if !system("bundle", "exec", "run-loop", "simctl", "manage-processes")
+        raise "There was an error while running 'bundle exec run-loop simctl manage-processes'"
+      end
+
       sleep(5.0)
     end
 
