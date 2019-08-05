@@ -56,7 +56,7 @@ Dir.chdir working_dir do
       }
     end
 
-    RunLoop::CoreSimulator.terminate_core_simulator_processes
+    Luffa.unix_command("bundle exec run-loop simctl manage-processes")
 
     simulators = RunLoop::Simctl.new.simulators
 
@@ -86,7 +86,7 @@ Dir.chdir working_dir do
         failed_sims << name
       end
 
-      RunLoop::CoreSimulator.terminate_core_simulator_processes
+      Luffa.unix_command("bundle exec run-loop simctl manage-processes")
       sleep(5.0)
     end
 
