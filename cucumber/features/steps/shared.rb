@@ -8,13 +8,6 @@ module LPTestTarget
       body = http({:method => "GET", :path => path}, {})
       response_body_to_hash(body)
     end
-
-    def switch_to_second_tab_retryable(attempt_count)
-      begin
-        touch("UITabBarButton index:1")
-        sleep(0.5)
-      end while attempt_count > 0 && query("view marked: 'Second View'").empty?
-    end
   end
 end
 
@@ -44,7 +37,7 @@ And(/^I go to the second tab$/) do
     !query("UITabBarButton").empty?
   end
 
-  switch_to_second_tab_retryable(5)
+  touch("UITabBarButton index:1")
   wait_for_none_animating
 end
 
