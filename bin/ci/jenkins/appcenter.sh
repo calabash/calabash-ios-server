@@ -54,7 +54,7 @@ fi
 
 appcenter test run calabash \
   --app "App-Center-Test-Cloud/LPTestTarget-iOS" \
-  --devices "App-Center-Test-Cloud/latest-releases-ios" \
+  --devices "App-Center-Test-Cloud/calabash-ios-server" \
   --app-path "${WORKSPACE}/LPTestTarget.ipa" \
   --test-series "${SERIES}" \
   --project-dir "${WORKSPACE}" \
