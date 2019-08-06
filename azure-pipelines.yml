@@ -57,10 +57,10 @@ jobs:
 
   - script: bundle exec bin/ci/jenkins/appcenter.sh
     displayName: "test appcenter"
+    condition: and(succeeded(), eq(variables['Agent.JobName'], variables['mojaveXcode']))
 
   - script: bundle exec bin/test/cucumber.rb
     displayName: "exec cucumber"
-    condition: and(succeeded(), eq(variables['Agent.JobName'], variables['mojaveXcode']))
 
   - task: PublishTestResults@2
     displayName: 'Publish Test Results'
