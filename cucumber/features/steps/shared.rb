@@ -9,11 +9,12 @@ module LPTestTarget
       response_body_to_hash(body)
     end
 
-    def switch_to_second_tab_retryable(attempt_count)
+    def switch_to_second_tab_retryable
+      attempt_count = 1000
       begin
         touch("UITabBarButton index:1")
         attempt_count = attempt_count - 1
-        sleep(1)
+        sleep(0.5)
       end while attempt_count > 0 && query("view marked: 'Second View'").empty?
     end
   end
@@ -45,7 +46,7 @@ And(/^I go to the second tab$/) do
     !query("UITabBarButton").empty?
   end
 
-  switch_to_second_tab_retryable(100)
+  switch_to_second_tab_retryable
   wait_for_none_animating
 end
 
