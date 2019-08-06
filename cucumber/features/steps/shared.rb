@@ -13,7 +13,7 @@ module LPTestTarget
       begin
         touch("UITabBarButton index:1")
         attempt_count = attempt_count - 1
-        sleep(0.5)
+        sleep(1)
       end while attempt_count > 0 && query("view marked: 'Second View'").empty?
     end
   end
@@ -45,7 +45,7 @@ And(/^I go to the second tab$/) do
     !query("UITabBarButton").empty?
   end
 
-  switch_to_second_tab_retryable(20)
+  switch_to_second_tab_retryable(100)
   wait_for_none_animating
 end
 
