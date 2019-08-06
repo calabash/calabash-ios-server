@@ -12,7 +12,7 @@ module LPTestTarget
     def switch_to_second_tab_retryable
       begin
         touch("UITabBarButton index:1")
-      end while attempt_count > 0 && query("view marked: 'Second View'").empty?
+      end while query("view marked: 'Second View'").empty?
     end
   end
 end
