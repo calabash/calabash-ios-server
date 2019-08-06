@@ -45,7 +45,7 @@ And(/^I go to the second tab$/) do
     !query("UITabBarButton").empty?
   end
 
-  switch_to_second_tab_retryable(5)
+  switch_to_second_tab_retryable(20)
   wait_for_none_animating
 end
 
