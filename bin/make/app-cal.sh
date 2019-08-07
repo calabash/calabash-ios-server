@@ -8,9 +8,11 @@ ensure_valid_core_sim_service
 # Command line builds alway make a fresh framework
 banner "Ensure the calabash.framework"
 
-FRAMEWORK="calabash.framework"
-rm -rf "${FRAMEWORK}"
-make framework
+if [ "${MAKE_FRAMEWORK}" != "0" ]; then
+  FRAMEWORK="calabash.framework"
+  rm -rf "${FRAMEWORK}"
+  make framework
+fi
 
 banner "Preparing to build LPTestTarget"
 
