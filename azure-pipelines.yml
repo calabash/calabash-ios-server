@@ -2,6 +2,8 @@ variables:
   # `mainJob` variable points to the matrix case that will be the main case
   # it will run `appcenter-cli` test step and publish artifacts to the Azure Blob
   mainJob: 'Mojave-Xcode-10.2.1'
+  # `PublishFrom` variable points to the matrix case that will publish build artifacts to the blob storage
+  PublishFrom: 'Mojave-Xcode-10.2.1'
 jobs:
 
 - job:
@@ -64,6 +66,16 @@ jobs:
 
   - script: bundle exec bin/test/cucumber.rb
     displayName: "exec cucumber"
+
+  # azureStorage* env vars are defined in the pipeline UI as secret variables
+  - bash: "./bin/ci/az-publish.sh"
+    env:
+      AZURE_STORAGE_ACCOUNT: $(azureStorageAccount)
+      AZURE_STORAGE_KEY: $(azureStorageKey)
+      AZURE_STORAGE_CONNECTION_STRING: $(azureStorageConnectionString)
+      SOURCE_BRANCH: $(Build.SourceBranch)
+    displayName: "Publish to Azure Blob Storage"
+    condition: and(succeeded(), eq(variables['Agent.JobName'], variables['PublishFrom']))
 
   - task: PublishTestResults@2
     displayName: 'Publish Test Results'
