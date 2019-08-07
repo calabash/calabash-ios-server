@@ -1,4 +1,6 @@
 variables:
+  # `mainJob` variable points to the matrix case that will be the main case
+  # it will run `appcenter-cli` test step and publish artifacts to the Azure Blob
   mainJob: 'Mojave-Xcode-10.2.1'
 jobs:
 
