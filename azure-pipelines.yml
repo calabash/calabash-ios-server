@@ -1,5 +1,5 @@
 variables:
-  mojaveXcode: 'Mojave-Xcode-10.2.1'
+  mainJob: 'Mojave-Xcode-10.2.1'
 jobs:
 
 - job:
@@ -8,9 +8,6 @@ jobs:
       Mojave-Xcode-10.2.1:
         IMAGE_POOL: 'macOS-10.14'
         XCODE_VERSION: '10.2.1'
-      Mojave-Xcode-10.3:
-        IMAGE_POOL: 'macOS-10.14'
-        XCODE_VERSION: '10.3'
       Mojave-Xcode-11.0:
         IMAGE_POOL: 'macOS-10.14'
         XCODE_VERSION: '11'
@@ -61,7 +58,7 @@ jobs:
 
   - script: bundle exec bin/ci/jenkins/appcenter.sh
     displayName: "test appcenter"
-    condition: and(succeeded(), eq(variables['Agent.JobName'], variables['mojaveXcode']))
+    condition: and(succeeded(), eq(variables['Agent.JobName'], variables['mainJob']))
 
   - script: bundle exec bin/test/cucumber.rb
     displayName: "exec cucumber"
