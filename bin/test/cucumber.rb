@@ -140,8 +140,7 @@ Dir.chdir working_dir do
     # if none failed then we have success
     exit 0 if failed == 0
 
-    # the travis ci environment is not stable enough to have all tests passing
-    exit failed unless RunLoop::Environment.travis? || RunLoop::Environment.azurepipelines?
+    exit failed unless RunLoop::Environment.azurepipelines?
 
     # we'll take 75% passing as good indicator of health
     expected = 75
