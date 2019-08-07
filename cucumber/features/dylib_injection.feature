@@ -23,7 +23,6 @@ Scenario: Server in the .app bundle is launched
 Given the app has launched
 Then the server identifier is from the embedded dylib
 
-@xtc_only
 Scenario: Entitlement Injector has been loaded
 Given the app has launched
 And I go to the second tab
