@@ -141,7 +141,7 @@ Dir.chdir working_dir do
     exit 0 if failed == 0
 
     # the travis ci environment is not stable enough to have all tests passing
-    exit failed unless Luffa::Environment.travis_ci?
+    exit failed unless RunLoop::Environment.travis? || RunLoop::Environment.azurepipelines?
 
     # we'll take 75% passing as good indicator of health
     expected = 75
