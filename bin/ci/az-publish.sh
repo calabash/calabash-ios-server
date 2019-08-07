@@ -8,11 +8,12 @@ CONFIG=Debug
 # $1 => SOURCE PATH
 # $2 => TARGET NAME
 function azupload {
-az storage blob upload \
-  --container-name ios-test-cloud-agent \
-  --if-none-match "*" \
-  --file "${1}" \
-  --name "${2}"
+    echo "Dry run: ${1} published with name: ${2}"
+# az storage blob upload \
+#   --container-name ios-test-cloud-agent \
+#   --if-none-match "*" \
+#   --file "${1}" \
+#   --name "${2}"
 }
 
 # Pipeline Variables are set through the AzDevOps UI
