@@ -1,6 +1,6 @@
 variables:
   # `mainJob` variable points to the matrix case that will be the main case
-  # it will run `appcenter-cli` test step and publish artifacts to the Azure Blob
+  # it will run `appcenter-cli` test step
   mainJob: 'Mojave-Xcode-10.2.1'
 jobs:
 
@@ -73,7 +73,7 @@ jobs:
       AZURE_STORAGE_CONNECTION_STRING: $(azureStorageConnectionString)
       SOURCE_BRANCH: $(Build.SourceBranch)
     displayName: "Publish to Azure Blob Storage"
-    condition: and(succeeded(), eq(variables['Agent.JobName'], variables['mainJob']))
+    condition: and(succeeded(), eq(variables['XCODE_VERSION'], variables['10.2.1']))
 
   - task: PublishTestResults@2
     displayName: 'Publish Test Results'
