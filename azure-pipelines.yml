@@ -65,6 +65,16 @@ jobs:
   - script: bundle exec bin/test/cucumber.rb
     displayName: "exec cucumber"
 
+  # azureStorage* env vars are defined in the pipeline UI as secret variables
+  - bash: "./bin/ci/az-publish.sh"
+    env:
+      AZURE_STORAGE_ACCOUNT: $(azureStorageAccount)
+      AZURE_STORAGE_KEY: $(azureStorageKey)
+      AZURE_STORAGE_CONNECTION_STRING: $(azureStorageConnectionString)
+      SOURCE_BRANCH: $(Build.SourceBranch)
+    displayName: "Publish to Azure Blob Storage"
+    condition: and(succeeded(), eq(variables['Agent.JobName'], variables['mainJob']), startsWith(variables['Build.SourceBranch'], 'refs/tags/*'))
+
   - task: PublishTestResults@2
     displayName: 'Publish Test Results'
     inputs:
