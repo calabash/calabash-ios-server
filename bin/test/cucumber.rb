@@ -45,10 +45,7 @@ Dir.chdir working_dir do
 
     xcode = RunLoop::Xcode.new
     xcode_version = xcode.version
-    sim_major = xcode_version.major + 2
-    sim_minor = xcode_version.minor
-
-    sim_version = RunLoop::Version.new("#{sim_major}.#{sim_minor}")
+    sim_version = xcode.ios_version
 
     if RunLoop::Environment.azurepipelines?
       # we have to add one more if because ios 11 doesn't support iphone X, SE and iPad Pro (10.5-inch)
@@ -97,7 +94,7 @@ Dir.chdir working_dir do
       end
 
       if !match
-        raise "Could not find a match for simulator with name #{name}"
+        raise "Could not find a match for simulator with name #{name} and version #{sim_version}"
       end
 
       if system({"DEVICE_TARGET" => match.udid},
