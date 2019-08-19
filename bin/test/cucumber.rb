@@ -143,8 +143,8 @@ Dir.chdir working_dir do
     expected = 75
     actual = ((passed.to_f/sims.to_f) * 100).to_i
 
-    print "##vso[task.logissue type=warning;]Cucumber tests - We failed '#{failed}' sims, but passed '#{actual}%' so we say good enough"
-    print "##vso[task.complete result=SucceededWithIssues;]Cucumber test run warning"
+    Luffa.log_info "##vso[task.logissue type=warning;]Cucumber tests - We failed '#{failed}' sims, but passed '#{actual}%' so we say good enough"
+    Luffa.log_info "##vso[task.complete result=SucceededWithIssues;]Cucumber test run warning"
     if actual >= expected
       Luffa.log_pass "We failed '#{failed}' sims, but passed '#{actual}%' so we say good enough"
       
