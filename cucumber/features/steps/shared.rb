@@ -8,22 +8,6 @@ module LPTestTarget
       body = http({:method => "GET", :path => path}, {})
       response_body_to_hash(body)
     end
-
-    def switch_to_second_tab
-      xcode = RunLoop::Xcode.new
-      if xcode.version_gte_110?
-        # Separate case for Xcode 11 beta since it doesn't switch to the second tab sometimes
-        # retry_count = 15 minutes to make sure that simulator has stabilized
-        retry_count = 900
-        begin
-          touch("UITabBarButton index:1")
-          retry_count = retry_count - 1
-          sleep(1)
-        end while retry_count > 0 && query("view marked: 'Second View'").empty?
-      else
-        touch("UITabBarButton index:1")
-      end
-    end
   end
 end
 
@@ -53,7 +37,7 @@ And(/^I go to the second tab$/) do
     !query("UITabBarButton").empty?
   end
 
-  switch_to_second_tab
+  touch("UITabBarButton index:1")
   wait_for_none_animating
 end
 
