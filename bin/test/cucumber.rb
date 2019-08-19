@@ -134,6 +134,9 @@ Dir.chdir working_dir do
     puts ''
     Luffa.log_info "passed on '#{passed}' out of '#{sims}'"
 
+    Luffa.log_info "##vso[task.logissue type=warning;]Cucumber tests - We failed '#{failed}' sims, but passed '#{actual}%' so we say good enough"
+    Luffa.log_info "##vso[task.complete result=SucceededWithIssues;]Cucumber test run warning"
+
     # if none failed then we have success
     exit 0 if failed == 0
 
@@ -143,8 +146,6 @@ Dir.chdir working_dir do
     expected = 75
     actual = ((passed.to_f/sims.to_f) * 100).to_i
 
-    Luffa.log_info "##vso[task.logissue type=warning;]Cucumber tests - We failed '#{failed}' sims, but passed '#{actual}%' so we say good enough"
-    Luffa.log_info "##vso[task.complete result=SucceededWithIssues;]Cucumber test run warning"
     if actual >= expected
       Luffa.log_pass "We failed '#{failed}' sims, but passed '#{actual}%' so we say good enough"
       
