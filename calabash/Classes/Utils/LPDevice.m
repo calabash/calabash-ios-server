@@ -555,6 +555,18 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
   return [[self formFactor] isEqualToString:@"iphone 10r"];
 }
 
+- (BOOL) isIPhone11Like {
+  return [[self formFactor] isEqualToString:@"iphone 11"];
+}
+
+- (BOOL) isIPhone11ProLike {
+  return [[selft formFactor] isEqualToString:@"iphone 11 Pro"];
+}
+
+- (BOOL) isIPhone11ProMaxLike {
+  return [[self formFactor] isEqualToString:@"iphone 11 Pro Max"];
+}
+
 - (BOOL) isLetterBox {
   CGFloat scale = [self scaleForMainScreen];
   if ([self isIPad] || [self isIPhone4Like] || scale != 2.0) {

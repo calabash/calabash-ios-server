@@ -43,6 +43,9 @@ extern NSString *const LPDeviceSimKeyVersionInfo;
 - (BOOL) isIPhone10SMaxLike;
 - (BOOL) isIPhone10RLike;
 - (BOOL) isIPhone10LetterBox;
+- (BOOL) isIPhone11Like;
+- (BOOL) isIPhone11ProLike;
+- (BOOL) isIPhone11ProMaxLike;
 - (NSString *) getIPAddress;
 
 @end
