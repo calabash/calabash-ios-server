@@ -50,7 +50,7 @@
 
 @interface LPJSONUtilsTest : XCTestCase
 
-- (BOOL) isIphone11Pro;
+- (BOOL) isIphone11;
 - (BOOL) isIphone10;
 - (BOOL) isIphone6;
 - (BOOL) isIphone6Plus;
@@ -74,8 +74,8 @@
   return [[LPDevice sharedDevice] isIPhone10Like];
 }
 
-- (BOOL) isIphone11Pro {
-  return [[LPDevice sharedDevice] isIPhone11ProLike];
+- (BOOL) isIphone11 {
+  return [[LPDevice sharedDevice] isIPhone11Like];
 }
 
 - (BOOL) isIphone6 {
@@ -300,7 +300,10 @@
   XCTAssertEqualObjects(dict[@"rect"][@"width"], @(CGRectGetWidth([view frame])));
   XCTAssertEqualObjects(dict[@"rect"][@"height"], @(CGRectGetHeight([view frame])));
 
-  if ([self isIphone10] || [self isIphone11Pro]) {
+  if ([self isIphone11]) {
+    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(130.75, 0.001);
+  } else if ([self isIphone10]) {
     expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
     expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(130.75, 0.001);
   } else if ([self isIphone6Plus]) {
@@ -313,7 +316,7 @@
     XCTAssertEqualObjects(dict[@"rect"][@"center_x"], @(CGRectGetMidX([view frame])));
     expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(106.75, 0.001);
   } else {
-    XCTFail(@"Expected device to be an iPhone 11 Pro, iPhone X, iPhone 6, 6+, 4in, or 3.5in or an iPad");
+    XCTFail(@"Expected device to be an iPhone 11, iPhone X, iPhone 6, 6+, 4in, or 3.5in or an iPad");
   }
 
   XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
@@ -356,7 +359,10 @@
   XCTAssertEqualObjects(dict[@"rect"][@"width"], @(CGRectGetWidth([view frame])));
   XCTAssertEqualObjects(dict[@"rect"][@"height"], @(CGRectGetHeight([view frame])));
 
-  if ([self isIphone10] || [self isIphone11Pro]) {
+  if ([self isIphone11]) {
+    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(86.75, 0.001);
+  } else if ([self isIphone10]) {
     expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
     expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(86.75, 0.001);
   } else if ([self isIphone6Plus]) {
@@ -369,7 +375,7 @@
     XCTAssertEqualObjects(dict[@"rect"][@"center_x"], @(CGRectGetMidX([view frame])));
     XCTAssertEqualObjects(dict[@"rect"][@"center_y"], @(CGRectGetMidY([view frame])));
   } else {
-    XCTFail(@"Expected device to be an iPhone 11 Pro, iPhone X, iPhone 6, 6+, 4in, or 3.5in or an iPad");
+    XCTFail(@"Expected device to be an iPhone 11, iPhone X, iPhone 6, 6+, 4in, or 3.5in or an iPad");
   }
 
   XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
