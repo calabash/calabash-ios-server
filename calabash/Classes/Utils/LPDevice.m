@@ -367,6 +367,11 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     @"iPhone11,6" : @"iphone 10s max",
     @"iPhone11,8" : @"iphone 10r",
 
+    // iPhone 11/11 Pro/11 Pro Max
+    @"iPhone12,1" : @"iphone 10r",
+    @"iPhone12,3" : @"iphone 10",
+    @"iPhone12,5" : @"iphone 10s max",
+
     // iPad Pro 12.9in
     @"iPad6,7" : @"ipad pro 12.9",
     @"iPad6,8" : @"ipad pro 12.9",
@@ -395,8 +400,15 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 
     // iPad Pro 10.5in
     @"iPad7,4" : @"ipad pro 10.5",
-    @"iPad7,3" : @"ipad pro 10.5"
+    @"iPad7,3" : @"ipad pro 10.5",
 
+    // iPad mini 7,9in
+    @"iPad11,1" : @"ipad mini",
+    @"iPad11,2" : @"ipad mini",
+
+    // iPad Air 10.5in
+    @"iPad11,3" : @"ipad air",
+    @"iPad11,4" : @"ipad air",
     };
 
   return _formFactorMap;
@@ -541,6 +553,18 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 
 - (BOOL) isIPhone10RLike {
   return [[self formFactor] isEqualToString:@"iphone 10r"];
+}
+
+- (BOOL) isIPhone11Like {
+  return [[self formFactor] isEqualToString:@"iphone 10r"];
+}
+
+- (BOOL) isIPhone11ProLike {
+  return [[self formFactor] isEqualToString:@"iphone 10"];
+}
+
+- (BOOL) isIPhone11ProMaxLike {
+  return [[self formFactor] isEqualToString:@"iphone 10s max"];
 }
 
 - (BOOL) isLetterBox {

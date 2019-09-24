@@ -63,9 +63,9 @@ Dir.chdir working_dir do
         }
       else
         devices = {
-          :iphoneXs => 'iPhone Xs',
-          :iphoneXr => 'iPhone Xʀ',
-          :iPhoneXsMax => 'iPhone Xs Max',
+          :iphone11 => 'iPhone 11',
+          :iphone11Pro => 'iPhone 11 Pro',
+          :iphone11ProMax => 'iPhone 11 Pro Max',
           :iPadPro97 => 'iPad Pro (9.7-inch)',
           :iPhone8 => 'iPhone 8',
           :iPhone8Plus => 'iPhone 8 Plus'
