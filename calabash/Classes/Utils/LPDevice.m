@@ -560,7 +560,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 }
 
 - (BOOL) isIPhone11ProLike {
-  return [[selft formFactor] isEqualToString:@"iphone 11 Pro"];
+  return [[self formFactor] isEqualToString:@"iphone 11 Pro"];
 }
 
 - (BOOL) isIPhone11ProMaxLike {
