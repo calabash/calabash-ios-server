@@ -32,6 +32,8 @@ if [[ -z "${AZURE_STORAGE_CONNECTION_STRING}" ]]; then
   exit 1
 fi
 
+WORKING_DIR="${BUILD_SOURCESDIRECTORY}"
+
 # Evaluate git-sha value
 GIT_SHA=$(git rev-parse --verify HEAD | tr -d '\n')
 
@@ -41,9 +43,13 @@ VERSION=$(xcrun strings calabash-dylibs/libCalabashFAT.dylib | grep -E "CALABASH
 # Evaluate the Xcode version used to build artifacts
 XC_VERSION=$(xcode_version)
 
-az --version
+# Evaluate calabash.framework SHASUM256
+FRAMEWORK_SHASUM256=$(shasum --algorithm 256 ${WORKING_DIR}/calabash.framework/calabash | cut -d " " -f 1)
 
-WORKING_DIR="${BUILD_SOURCESDIRECTORY}"
+# Evaluate dylibFAT SHASUM256
+DYLIBFAT_SHASUM256=$(shasum --algorithm 256 ${WORKING_DIR}/calabash-dylibs/libCalabashFAT.dylib | cut -d " " -f 1)
+
+az --version
 
 # Upload `calabash.framework.zip`
 CALABASH_FRAMEWORK="${WORKING_DIR}/calabash.framework.zip"
@@ -70,3 +76,26 @@ azupload "${CALABASH_SIM}" "${CALABASH_SIM_NAME}"
 HEADERS_ZIP="${WORKING_DIR}/calabash-dylibs/Headers.zip"
 HEADERS_ZIP_NAME="libCalabash-Headers-${VERSION}-Xcode-${XC_VERSION}-${GIT_SHA}.zip"
 azupload "${HEADERS_ZIP}" "${HEADERS_ZIP_NAME}"
+
+# Create and upload `develop.txt`
+DEVELOP_TXT="${WORKING_DIR}/develop.txt"
+{
+echo "version:$VERSION"
+echo "Xcode_version:$XC_VERSION"
+echo "commit_sha:$GIT_SHA"
+echo "framework_shasum256:$FRAMEWORK_SHASUM256"
+echo "dylibFAT_shasum256:$DYLIBFAT_SHASUM256"
+echo "framework_zip:$CALABASH_FRAMEWORK_NAME"
+echo "dylibFAT_id:$CALABASH_FAT_NAME"
+} > $DEVELOP_TXT
+DEVELOP_TXT_NAME="develop.txt"
+azupload "$DEVELOP_TXT" "$DEVELOP_TXT_NAME"
+
+# Create and upload `develop.json`
+DEVELOP_JSON="${WORKING_DIR}/develop.json"
+echo "[\"$VERSION\", \"$XC_VERSION\", \"$GIT_SHA\", \"$FRAMEWORK_SHASUM256\",
+    \"$DYLIBFAT_SHASUM256\", \"$CALABASH_FRAMEWORK_NAME\", \"$CALABASH_FAT_NAME\"]" |
+jq '. | {version:.[0], Xcode_version:.[1], commit_sha:.[2], framework_shasum256:.[3],
+    dylibFAT_shasum256:.[4], framework_zip:.[5], dylibFAT:.[6]}' > $DEVELOP_JSON
+DEVELOP_JSON_FILE="develop.json"
+azupload "$DEVELOP_JSON" "${DEVELOP_JSON_NAME}"
