@@ -84,7 +84,7 @@ elif [[ $BUILD_SOURCEBRANCH == "develop" ]]; then
   ARTIFACT_NAME="develop"
 fi
 
-if [[ ! -z "${ARTIFACT_NAME}" ]]; then
+if [[ -n "${ARTIFACT_NAME}" ]]; then
   # Create and upload `{develop|release}.txt`
   ARTIFACT_TXT="${WORKING_DIR}/${ARTIFACT_NAME}.txt"
   {
