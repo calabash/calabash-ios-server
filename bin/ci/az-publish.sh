@@ -96,7 +96,8 @@ if [[ -n "${ARTIFACT_NAME}" ]]; then
   # Create and upload `{develop|release}.txt`
   ARTIFACT_TXT="${WORKING_DIR}/${ARTIFACT_NAME}.txt"
   {
-    echo "version:$VERSION"
+    echo "format_version:1.0"
+    echo "product_version:$VERSION"
     echo "Xcode_version:$XC_VERSION"
     echo "commit_sha:$GIT_SHA"
     echo "framework_shasum256:$FRAMEWORK_SHASUM256"
@@ -109,10 +110,10 @@ if [[ -n "${ARTIFACT_NAME}" ]]; then
 
   # Create and upload `{develop|release}.json`
   ARTIFACT_JSON="${WORKING_DIR}/${ARTIFACT_NAME}.json"
-  echo "[\"$VERSION\", \"$XC_VERSION\", \"$GIT_SHA\", \"$FRAMEWORK_SHASUM256\",
+  echo "[\"1.0\", \"$VERSION\", \"$XC_VERSION\", \"$GIT_SHA\", \"$FRAMEWORK_SHASUM256\",
       \"$DYLIBFAT_SHASUM256\", \"$CALABASH_FRAMEWORK_NAME\", \"$CALABASH_FAT_NAME\"]" |
-  jq '. | {version:.[0], Xcode_version:.[1], commit_sha:.[2], framework_shasum256:.[3],
-      dylibFAT_shasum256:.[4], framework_zip:.[5], dylibFAT:.[6]}' > $ARTIFACT_JSON
+  jq '. | {format_version:.[0], product_version:.[1], Xcode_version:.[2], commit_sha:.[3], framework_shasum256:.[4],
+      dylibFAT_shasum256:.[5], framework_zip:.[6], dylibFAT:.[7]}' > $ARTIFACT_JSON
   ARTIFACT_JSON_FILE="${ARTIFACT_NAME}.json"
   azupload "$ARTIFACT_JSON" "$ARTIFACT_JSON_NAME"
 fi
