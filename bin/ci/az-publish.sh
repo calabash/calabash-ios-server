@@ -32,7 +32,15 @@ if [[ -z "${AZURE_STORAGE_CONNECTION_STRING}" ]]; then
   exit 1
 fi
 
-WORKING_DIR="${BUILD_SOURCESDIRECTORY}"
+if [ -e ./.azure-credentials ]; then
+  source ./.azure-credentials
+fi
+
+if [ "${BUILD_SOURCESDIRECTORY}" != "" ]; then
+  WORKING_DIR="${BUILD_SOURCESDIRECTORY}"
+else
+  WORKING_DIR="."
+fi
 
 # Evaluate git-sha value
 GIT_SHA=$(git rev-parse --verify HEAD | tr -d '\n')
