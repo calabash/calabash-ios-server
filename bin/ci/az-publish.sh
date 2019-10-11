@@ -57,8 +57,6 @@ FRAMEWORK_SHASUM256=$(shasum --algorithm 256 ${WORKING_DIR}/calabash.framework/c
 # Evaluate dylibFAT SHASUM256
 DYLIBFAT_SHASUM256=$(shasum --algorithm 256 ${WORKING_DIR}/calabash-dylibs/libCalabashFAT.dylib | cut -d " " -f 1)
 
-az --version
-
 if [[ $BUILD_SOURCEBRANCH == refs/tags/* ]]; then
   # Upload `calabash.framework.zip`
   CALABASH_FRAMEWORK="${WORKING_DIR}/calabash.framework.zip"
