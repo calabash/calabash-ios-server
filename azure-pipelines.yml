@@ -28,6 +28,12 @@ jobs:
       Mojave-Xcode-11.0:
         IMAGE_POOL: 'macOS-10.14'
         XCODE_VERSION: '11'
+      Mojave-Xcode-11.1:
+        IMAGE_POOL: 'macOS-10.14'
+        XCODE_VERSION: '11.1'
+      Mojave-Xcode-11.2:
+        IMAGE_POOL: 'macOS-10.14'
+        XCODE_VERSION: '11.2'
 
   pool:
     vmImage: $(IMAGE_POOL)
