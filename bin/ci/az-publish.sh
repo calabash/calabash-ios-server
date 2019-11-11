@@ -15,8 +15,12 @@ function azupload {
   echo "${1} artifact uploaded with name ${2}"
 }
 
-# Pipeline Variables are set through the AzDevOps UI
-# See also the ./azdevops-pipeline.yml
+# For pushing artifacts locally.
+if [ -e ./.azure-credentials ]; then
+  source ./.azure-credentials
+fi
+
+# In the pipeline, these are provided by a Variable Group attached to a Key Vault
 if [[ -z "${AZURE_STORAGE_ACCOUNT}" ]]; then
   echo "AZURE_STORAGE_ACCOUNT is required"
   exit 1
@@ -30,10 +34,6 @@ fi
 if [[ -z "${AZURE_STORAGE_CONNECTION_STRING}" ]]; then
   echo "AZURE_STORAGE_CONNECTION_STRING is required"
   exit 1
-fi
-
-if [ -e ./.azure-credentials ]; then
-  source ./.azure-credentials
 fi
 
 if [ "${BUILD_SOURCESDIRECTORY}" != "" ]; then
