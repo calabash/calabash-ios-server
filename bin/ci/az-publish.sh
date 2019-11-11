@@ -57,61 +57,65 @@ FRAMEWORK_SHASUM256=$(shasum --algorithm 256 ${WORKING_DIR}/calabash.framework/c
 # Evaluate dylibFAT SHASUM256
 DYLIBFAT_SHASUM256=$(shasum --algorithm 256 ${WORKING_DIR}/calabash-dylibs/libCalabashFAT.dylib | cut -d " " -f 1)
 
+# Upload `calabash.framework.zip`
+CALABASH_FRAMEWORK="${WORKING_DIR}/calabash.framework.zip"
+zip_with_ditto "${WORKING_DIR}/calabash.framework" "${CALABASH_FRAMEWORK}"
+CALABASH_FRAMEWORK_NAME="calabash.framework-${VERSION}-Xcode-${XC_VERSION}-${GIT_SHA}.zip"
+azupload "${CALABASH_FRAMEWORK}" "${CALABASH_FRAMEWORK_NAME}"
+
+# Upload `libCalabashFAT.dylib`
+CALABASH_FAT="${WORKING_DIR}/calabash-dylibs/libCalabashFAT.dylib"
+CALABASH_FAT_NAME="libCalabashFAT-${VERSION}-Xcode-${XC_VERSION}-${GIT_SHA}.dylib"
+azupload "${CALABASH_FAT}" "${CALABASH_FAT_NAME}"
+
+# Upload `libCalabashARM.dylib`
+CALABASH_ARM="${WORKING_DIR}/calabash-dylibs/libCalabashARM.dylib"
+CALABASH_ARM_NAME="libCalabashARM-${VERSION}-Xcode-${XC_VERSION}-${GIT_SHA}.dylib"
+azupload "${CALABASH_ARM}" "${CALABASH_ARM_NAME}"
+
+# Upload `libCalabashSim.dylib`
+CALABASH_SIM="${WORKING_DIR}/calabash-dylibs/libCalabashSim.dylib"
+CALABASH_SIM_NAME="libCalabashSim-${VERSION}-Xcode-${XC_VERSION}-${GIT_SHA}.dylib"
+azupload "${CALABASH_SIM}" "${CALABASH_SIM_NAME}"
+
+# Upload `Headers.zip`
+HEADERS_ZIP="${WORKING_DIR}/calabash-dylibs/Headers.zip"
+HEADERS_ZIP_NAME="libCalabash-Headers-${VERSION}-Xcode-${XC_VERSION}-${GIT_SHA}.zip"
+azupload "${HEADERS_ZIP}" "${HEADERS_ZIP_NAME}"
+
 if [[ $BUILD_SOURCEBRANCH == refs/tags/* ]]; then
-  # Upload `calabash.framework.zip`
-  CALABASH_FRAMEWORK="${WORKING_DIR}/calabash.framework.zip"
-  zip_with_ditto "${WORKING_DIR}/calabash.framework" "${CALABASH_FRAMEWORK}"
-  CALABASH_FRAMEWORK_NAME="calabash.framework-${VERSION}-Xcode-${XC_VERSION}-${GIT_SHA}.zip"
-  azupload "${CALABASH_FRAMEWORK}" "${CALABASH_FRAMEWORK_NAME}"
-
-  # Upload `libCalabashFAT.dylib`
-  CALABASH_FAT="${WORKING_DIR}/calabash-dylibs/libCalabashFAT.dylib"
-  CALABASH_FAT_NAME="libCalabashFAT-${VERSION}-Xcode-${XC_VERSION}-${GIT_SHA}.dylib"
-  azupload "${CALABASH_FAT}" "${CALABASH_FAT_NAME}"
-
-  # Upload `libCalabashARM.dylib`
-  CALABASH_ARM="${WORKING_DIR}/calabash-dylibs/libCalabashARM.dylib"
-  CALABASH_ARM_NAME="libCalabashARM-${VERSION}-Xcode-${XC_VERSION}-${GIT_SHA}.dylib"
-  azupload "${CALABASH_ARM}" "${CALABASH_ARM_NAME}"
-
-  # Upload `libCalabashSim.dylib`
-  CALABASH_SIM="${WORKING_DIR}/calabash-dylibs/libCalabashSim.dylib"
-  CALABASH_SIM_NAME="libCalabashSim-${VERSION}-Xcode-${XC_VERSION}-${GIT_SHA}.dylib"
-  azupload "${CALABASH_SIM}" "${CALABASH_SIM_NAME}"
-
-  # Upload `Headers.zip`
-  HEADERS_ZIP="${WORKING_DIR}/calabash-dylibs/Headers.zip"
-  HEADERS_ZIP_NAME="libCalabash-Headers-${VERSION}-Xcode-${XC_VERSION}-${GIT_SHA}.zip"
-  azupload "${HEADERS_ZIP}" "${HEADERS_ZIP_NAME}"
-
   ARTIFACT_NAME="release"
-
-elif [[ $BUILD_SOURCEBRANCH == "develop" ]]; then
+else
   ARTIFACT_NAME="develop"
 fi
 
-if [[ -n "${ARTIFACT_NAME}" ]]; then
-  # Create and upload `{develop|release}.txt`
-  ARTIFACT_TXT="${WORKING_DIR}/${ARTIFACT_NAME}.txt"
-  {
-    echo "format_version:1.0"
-    echo "product_version:$VERSION"
-    echo "Xcode_version:$XC_VERSION"
-    echo "commit_sha:$GIT_SHA"
-    echo "framework_shasum256:$FRAMEWORK_SHASUM256"
-    echo "dylibFAT_shasum256:$DYLIBFAT_SHASUM256"
-    echo "framework_zip:$CALABASH_FRAMEWORK_NAME"
-    echo "dylibFAT_id:$CALABASH_FAT_NAME"
-  } > $ARTIFACT_TXT
-  ARTIFACT_TXT_NAME="${ARTIFACT_NAME}.txt"
-  azupload "$ARTIFACT_TXT" "$ARTIFACT_TXT_NAME"
+# Create and upload `{develop|release}.txt`
+ARTIFACT_TXT="${WORKING_DIR}/${ARTIFACT_NAME}.txt"
+cat <<EOF >"${ARTIFACT_TXT}"
+format_version:1.0
+product_version:$VERSION
+Xcode_version:$XC_VERSION
+commit_sha:$GIT_SHA
+framework_shasum256:$FRAMEWORK_SHASUM256
+dylibFAT_shasum256:$DYLIBFAT_SHASUM256
+framework_zip:$CALABASH_FRAMEWORK_NAME
+dylibFAT:$CALABASH_FAT_NAME
+EOF
+azupload "$ARTIFACT_TXT" "${ARTIFACT_NAME}.txt"
 
-  # Create and upload `{develop|release}.json`
-  ARTIFACT_JSON="${WORKING_DIR}/${ARTIFACT_NAME}.json"
-  echo "[\"1.0\", \"$VERSION\", \"$XC_VERSION\", \"$GIT_SHA\", \"$FRAMEWORK_SHASUM256\",
-      \"$DYLIBFAT_SHASUM256\", \"$CALABASH_FRAMEWORK_NAME\", \"$CALABASH_FAT_NAME\"]" |
-  jq '. | {format_version:.[0], product_version:.[1], Xcode_version:.[2], commit_sha:.[3], framework_shasum256:.[4],
-      dylibFAT_shasum256:.[5], framework_zip:.[6], dylibFAT:.[7]}' > $ARTIFACT_JSON
-  ARTIFACT_JSON_FILE="${ARTIFACT_NAME}.json"
-  azupload "$ARTIFACT_JSON" "$ARTIFACT_JSON_NAME"
-fi
+# Create and upload `{develop|release}.json`
+ARTIFACT_JSON="${WORKING_DIR}/${ARTIFACT_NAME}.json"
+
+cat <<EOF >"${ARTIFACT_JSON}"
+{
+ "format_version" : "1.0",
+ "product_version": "$VERSION",
+ "Xcode_version" : "$XC_VERSION",
+ "commit_sha" : "$GIT_SHA",
+ "framework_shasum256" : "$FRAMEWORK_SHASUM256",
+ "dylibFAT_shasum256" : "$DYLIBFAT_SHASUM256",
+ "framework_zip" : "$CALABASH_FRAMEWORK_NAME",
+ "dylibFAT" : "$CALABASH_FAT_NAME"
+}
+EOF
+azupload "$ARTIFACT_JSON" "${ARTIFACT_NAME}.json"
