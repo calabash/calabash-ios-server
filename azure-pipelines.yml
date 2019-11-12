@@ -1,0 +1,105 @@
+variables:
+  # `AzurePublishWhen` variable points to the matrix case that will be the main case
+  # it will run `appcenter-cli` test step and publish artifacts to the Azure Blob
+  AzurePublishWhen: 'Mojave-Xcode-11.2'
+
+trigger:
+  tags:
+    include:
+    - '*'
+  branches:
+    include:
+    - master
+    - develop
+pr:
+  branches:
+    include:
+    - master
+    - develop
+
+jobs:
+
+- job:
+  strategy:
+    matrix:
+      Mojave-Xcode-10.3:
+        IMAGE_POOL: 'macOS-10.14'
+        XCODE_VERSION: '10.3'
+      Mojave-Xcode-11.0:
+        IMAGE_POOL: 'macOS-10.14'
+        XCODE_VERSION: '11'
+      Mojave-Xcode-11.1:
+        IMAGE_POOL: 'macOS-10.14'
+        XCODE_VERSION: '11.1'
+      Mojave-Xcode-11.2:
+        IMAGE_POOL: 'macOS-10.14'
+        XCODE_VERSION: '11.2'
+
+  pool:
+    vmImage: $(IMAGE_POOL)
+  variables:
+  - group: XTCRunTimeArtifactsCI
+
+  steps:
+
+  - script: |
+      set -e
+      sudo xcode-select --switch "/Applications/Xcode_$(XCODE_VERSION).app/Contents/Developer"
+      echo "Xcode version: $(xcrun xcodebuild -version)"
+      echo "Xcode path: $(xcrun -f xcodebuild)"
+      echo "Xcode select path: $(xcode-select --print-path)"
+    displayName: "Select Xcode $(XCODE_VERSION)"
+
+  - script: |
+      set -e
+      ruby -v
+      echo -e "install: --no-document --env-shebang\nupdate:  --no-document --env-shebang" > ~/.gemrc
+      bundle install
+    displayName: "Prepare Ruby Environment"
+
+  - script: brew install tree
+    displayName: "Install brew dependencies"
+
+  - script: |
+      set -e
+      git clone https://$(CalabashKeychainGitHubAccessToken)@github.com/xamarinhq/calabash-codesign.git
+      calabash-codesign/apple/create-keychain.sh
+    displayName: "Download and install keychain"
+
+  - script: make framework
+    displayName: "Make framework"
+
+  - script: make dylibs
+    displayName: "Make dylibs"
+
+  - script: MAKE_FRAMEWORK=0 make ipa-cal
+    displayName: "Make ipa-call"
+
+  - script: MAKE_FRAMEWORK=0 make app-cal
+    displayName: "Make app-call"
+
+  - script: bundle exec bin/test/xctest.rb
+    displayName: "Make xctests"
+
+  - script: bundle exec bin/ci/jenkins/appcenter.sh
+    displayName: "test appcenter"
+    condition: and(succeeded(), eq(variables['Agent.JobName'], variables['mainJob']))
+
+  - script: bundle exec bin/test/cucumber.rb
+    displayName: "exec cucumber"
+
+  # azureStorage* env vars are defined in the pipeline UI as secret variables
+  - bash: "./bin/ci/az-publish.sh"
+    env:
+      AZURE_STORAGE_ACCOUNT: $(azureStorageAccount)
+      AZURE_STORAGE_KEY: $(azureStorageKey)
+      AZURE_STORAGE_CONNECTION_STRING: $(azureStorageConnectionString)
+      SOURCE_BRANCH: $(Build.SourceBranch)
+    displayName: "Publish to Azure Blob Storage"
+    condition: and(succeeded(), eq(variables['Agent.JobName'], variables['AzurePublishWhen']), or(startsWith(variables['Build.SourceBranch'], 'refs/tags/'), startsWith(variables['Build.SourceBranch'], 'develop')))
+
+  - task: PublishTestResults@2
+    displayName: 'Publish Test Results'
+    inputs:
+      testResultsFiles: 'cucumber/reports/junit/*.xml'
+    condition: always()

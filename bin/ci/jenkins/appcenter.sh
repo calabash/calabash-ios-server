@@ -37,7 +37,7 @@ if [ "${AC_TOKEN}" = "" ]; then
   AC_TOKEN=$("${HOME}/.calabash/find-keychain-credential.sh" api-token)
 fi
 
-WORKSPACE="${HOME}/.calabash/xtc/calabash-ios-server/submit"
+WORKSPACE="testcloud-submit"
 
 if [ ! -e "${WORKSPACE}" ]; then
   error "Expected this directory to exist:"
@@ -54,11 +54,11 @@ fi
 
 appcenter test run calabash \
   --app "App-Center-Test-Cloud/LPTestTarget-iOS" \
-  --devices "App-Center-Test-Cloud/latest-releases-ios" \
+  --devices "App-Center-Test-Cloud/calabash-ios-server" \
   --app-path "${WORKSPACE}/LPTestTarget.ipa" \
   --test-series "${SERIES}" \
   --project-dir "${WORKSPACE}" \
-  --config-path "${WORKSPACE}/cucumber.yml" \
+  --config-path "cucumber.yml" \
   --token "${AC_TOKEN}" \
   --dsym-dir "${WORKSPACE}/LPTestTarget.app.dSYM" \
   --async \

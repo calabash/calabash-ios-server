@@ -1,9 +1,9 @@
 #!/usr/bin/env ruby
 
-require "luffa"
 require "fileutils"
 require "tmpdir"
 require "bundler"
+require "luffa"
 
 cucumber_args = "#{ARGV.join(" ")}"
 
@@ -13,7 +13,9 @@ calabash_framework = File.join(server_dir, 'calabash.framework')
 # If calabash.framework was built by a previous step, use it.
 unless File.exist?(calabash_framework)
   Dir.chdir server_dir do
-    Luffa.unix_command("make framework")
+    if !system("make", "framework")
+      raise "There was an error while running 'make framework'"
+    end
   end
 end
 
@@ -21,7 +23,9 @@ app = File.join(server_dir, "Products", "test-target", "app-cal", "LPTestTarget.
 
 unless File.exist?(app)
   Dir.chdir server_dir do
-    Luffa.unix_command("make app-cal")
+    if !system("make", "app-cal")
+      raise "There was an error while running 'make app-cal'"
+    end
   end
 end
 
@@ -33,32 +37,50 @@ Dir.chdir working_dir do
     FileUtils.rm_rf("reports")
     FileUtils.mkdir_p("reports")
 
-    Luffa.unix_command("bundle update")
+    if !system("bundle", "update")
+      raise "There was an error while running 'bundle update'"
+    end
 
     require "run_loop"
 
     xcode = RunLoop::Xcode.new
     xcode_version = xcode.version
-    sim_major = xcode_version.major + 2
-    sim_minor = xcode_version.minor
+    sim_version = xcode.ios_version
 
-    sim_version = RunLoop::Version.new("#{sim_major}.#{sim_minor}")
-
-    if ENV["JENKINS_HOME"]
-      devices = {
-        :iphone7Plus => 'iPhone 7 Plus',
-        :air => 'iPad Air 2',
-        :iphoneSE => 'iPhone SE',
-        :iphone7 => 'iPhone 7'
-      }
+    if RunLoop::Environment.azurepipelines?
+      # we have to add one more if because ios 11 doesn't support iphone X, SE and iPad Pro (10.5-inch)
+      if xcode_version.major < 11
+        devices = {
+          :iphoneXs => 'iPhone Xs',
+          :iphoneXr => 'iPhone Xʀ',
+          :iPhoneSE => 'iPhone SE',
+          :iPhoneXsMax => 'iPhone Xs Max',
+          :iPadPro97 => 'iPad Pro (9.7-inch)',
+          :iPadPro105 => 'iPad Pro (10.5-inch)',
+          :iPhone8 => 'iPhone 8',
+          :iPhone8Plus => 'iPhone 8 Plus',
+          :iPhoneX => 'iPhone X'
+        }
+      else
+        devices = {
+          :iphone11 => 'iPhone 11',
+          :iphone11Pro => 'iPhone 11 Pro',
+          :iphone11ProMax => 'iPhone 11 Pro Max',
+          :iPadPro97 => 'iPad Pro (9.7-inch)',
+          :iPhone8 => 'iPhone 8',
+          :iPhone8Plus => 'iPhone 8 Plus'
+        }
+      end
     else
       devices = {
-        :iphone7 => 'iPhone 7',
-        :iphone7plus => 'iPhone 7 Plus'
+        :iphoneXs => 'iPhone Xs',
+        :iphoneXsMax => 'iPhone Xs Max'
       }
     end
 
-    RunLoop::CoreSimulator.quit_simulator
+    if !system("bundle", "exec", "run-loop", "simctl", "manage-processes")
+      raise "There was an error while running 'bundle exec run-loop simctl manage-processes'"
+    end
 
     simulators = RunLoop::Simctl.new.simulators
 
@@ -67,27 +89,33 @@ Dir.chdir working_dir do
     passed_sims = []
     failed_sims = []
     devices.each do |key, name|
-      cucumber_cmd = "bundle exec cucumber -p simulator -f json -o reports/cucumber.json -f junit -o reports/junit #{cucumber_args}"
-
       match = simulators.find do |sim|
         sim.name == name && sim.version == sim_version
       end
 
       if !match
-        raise "Could not find a match for simulator with name #{name}"
+        raise "Could not find a match for simulator with name #{name} and version #{sim_version}"
       end
 
-      env_vars = {"DEVICE_TARGET" => match.udid}
+      if system({"DEVICE_TARGET" => match.udid},
+          "bundle", "exec", "cucumber",
+           "-p", "simulator",
+           "-f", "json", "-o", "reports/cucumber.json",
+           "-f", "junit", "-o", "reports/junit",
+           "--tags", "~@device",
+           "--tags", "~@device_only",
+           "--tags", "~@xtc",
+           "--tags", "~@xtc_only")
 
-      exit_code = Luffa.unix_command(cucumber_cmd, {:exit_on_nonzero_status => false,
-                                                    :env_vars => env_vars})
-      if exit_code == 0
         passed_sims << name
       else
         failed_sims << name
       end
 
-      RunLoop::CoreSimulator.quit_simulator
+      if !system("bundle", "exec", "run-loop", "simctl", "manage-processes")
+        raise "There was an error while running 'bundle exec run-loop simctl manage-processes'"
+      end
+
       sleep(5.0)
     end
 
@@ -109,18 +137,18 @@ Dir.chdir working_dir do
     # if none failed then we have success
     exit 0 if failed == 0
 
-    # the travis ci environment is not stable enough to have all tests passing
-    exit failed unless Luffa::Environment.travis_ci?
+    exit failed unless RunLoop::Environment.azurepipelines?
 
     # we'll take 75% passing as good indicator of health
     expected = 75
     actual = ((passed.to_f/sims.to_f) * 100).to_i
 
     if actual >= expected
-      Luffa.log_pass "We failed '#{failed}' sims, but passed '#{actual}%' so we say good enough"
+      Luffa.log_info "##vso[task.logissue type=warning;]We failed '#{failed}' sims, but passed '#{actual}%' so we say good enough"
+      Luffa.log_info "##vso[task.complete result=SucceededWithIssues;]Cucumber test run warning"
       exit 0
     else
-      Luffa.log_fail "We failed '#{failed}' sims, which is '#{actual}%' and not enough to pass"
+      Luffa.log_info "##vso[task.logissue type=error;]We failed '#{failed}' sims, which is '#{actual}%' and not enough to pass"
       exit 1
     end
   end
