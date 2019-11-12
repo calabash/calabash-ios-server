@@ -1,3 +1,9 @@
+### 0.21.9
+
+Azure DevOps Pipeline now publish dylibs and framework to Azure Blob Storage.
+
+* adds new 2019 hardware to device matrix
+
 ### 0.21.8
 
 * Add Spring 2019 iPads to device map #438

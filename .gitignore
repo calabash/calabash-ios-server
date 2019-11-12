@@ -25,6 +25,7 @@ calabash-dylibs
 *.ipa
 tmp
 testcloud-submit
+.azure-credentials
 
 Carthage/Checkouts
 Carthage/Build/tvOS
