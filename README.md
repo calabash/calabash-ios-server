@@ -4,7 +4,6 @@
 
 ## The Calabash iOS Server
 
-http://calaba.sh
 
 The companion of the calabash-ios gem:  https://github.com/calabash/calabash-ios
 
