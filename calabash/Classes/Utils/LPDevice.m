@@ -372,6 +372,9 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     @"iPhone12,3" : @"iphone 10",
     @"iPhone12,5" : @"iphone 10s max",
 
+    // iPhone SE 2020
+    @"iPhone12,8" : @"iPhone 6",
+
     // iPad Pro 12.9in
     @"iPad6,7" : @"ipad pro 12.9",
     @"iPad6,8" : @"ipad pro 12.9",
