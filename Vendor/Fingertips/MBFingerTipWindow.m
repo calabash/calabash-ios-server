@@ -216,9 +216,6 @@
         {
             switch (touch.phase)
             {
-                case UITouchPhaseRegionExited:
-                case UITouchPhaseRegionEntered:
-                case UITouchPhaseRegionMoved:
                 case UITouchPhaseBegan:
                 case UITouchPhaseMoved:
                 case UITouchPhaseStationary:
@@ -253,6 +250,11 @@
                 {
                     [self removeFingerTipWithHash:touch.hash animated:YES];
                     break;
+                }
+                case UITouchPhaseRegionExited:
+                case UITouchPhaseRegionEntered:
+                case UITouchPhaseRegionMoved: {
+                
                 }
             }
         }
