@@ -211,7 +211,7 @@
     if (self.active)
     {
         NSSet *allTouches = [event allTouches];
-        
+
         for (UITouch *touch in [allTouches allObjects])
         {
             switch (touch.phase)
@@ -251,11 +251,8 @@
                     [self removeFingerTipWithHash:touch.hash animated:YES];
                     break;
                 }
-                case UITouchPhaseRegionExited:
-                case UITouchPhaseRegionEntered:
-                case UITouchPhaseRegionMoved: {
-                
-                }
+                default:
+                    break;
             }
         }
     }
