@@ -210,7 +210,6 @@
               atLeastOneAnimating = YES;
               *stop = YES;
             }
-            
           }];
         }
       }
