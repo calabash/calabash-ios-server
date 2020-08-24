@@ -182,7 +182,7 @@
         UIView *view = (UIView *)match;
         NSArray *animationKeys = [[view.layer animationKeys] copy];
         for (NSString *key in animationKeys) {
-          if ([key  isEqual: @"UITextSelectionViewCaretBlinkAnimation"]) {
+          if ([key isEqual: @"UITextSelectionViewCaretBlinkAnimation"]) {
             return false;
           } else {
             CAAnimation *animation = [view.layer animationForKey:key];
