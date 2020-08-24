@@ -204,7 +204,8 @@
                                                       NSUInteger idx,
                                                       BOOL *stop) {
             CAAnimation *animation = [view.layer animationForKey:key];
-            if ([key  isEqual: @"UITextSelectionViewCaretBlinkAnimation"]) {
+            if (animation.duration > kLPConditionRouteAnimationDurationLimit &&
+               ! [key  isEqual: @"UITextSelectionViewCaretBlinkAnimation"]) { 
               // do nothing
             } else if (animation.duration > kLPConditionRouteAnimationDurationLimit) {
               atLeastOneAnimating = YES;
