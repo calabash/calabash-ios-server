@@ -205,7 +205,7 @@
                                                       BOOL *stop) {
             CAAnimation *animation = [view.layer animationForKey:key];
             if (animation.duration > kLPConditionRouteAnimationDurationLimit &&
-                ! [key  isEqual: @"UITextSelectionViewCaretBlinkAnimation"]) { 
+                ![key  isEqual: @"UITextSelectionViewCaretBlinkAnimation"]) { 
               atLeastOneAnimating = YES;
               *stop = YES;
             }
