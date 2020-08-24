@@ -206,11 +206,8 @@
             CAAnimation *animation = [view.layer animationForKey:key];
             if (animation.duration > kLPConditionRouteAnimationDurationLimit &&
                ! [key  isEqual: @"UITextSelectionViewCaretBlinkAnimation"]) { 
-              // do nothing
-            } else if (animation.duration > kLPConditionRouteAnimationDurationLimit) {
               atLeastOneAnimating = YES;
               *stop = YES;
-            }
           }];
         }
       }
