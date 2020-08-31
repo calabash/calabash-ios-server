@@ -173,7 +173,8 @@
   // Only consider animations with a duration greater than the defined
   // limit. This is intended to work around the parallax animation
   // attached to iOS 8 UIAlertViews and UIActionSheets
-
+  // Skip Text Caret Blink Animation, since it is unrelated to the
+  // application flow
   if ([[NSThread currentThread] isMainThread]) {
     NSArray *matches = [LPOperation performQuery:query];
     for (id match in matches) {
@@ -181,8 +182,12 @@
         UIView *view = (UIView *)match;
         NSArray *animationKeys = [[view.layer animationKeys] copy];
         for (NSString *key in animationKeys) {
-          CAAnimation *animation = [view.layer animationForKey:key];
-          return animation.duration > kLPConditionRouteAnimationDurationLimit;
+          if ([key isEqual: @"UITextSelectionViewCaretBlinkAnimation"]) {
+            return false;
+          } else {
+            CAAnimation *animation = [view.layer animationForKey:key];
+            return animation.duration > kLPConditionRouteAnimationDurationLimit;
+          }
         }
       }
     }
@@ -199,7 +204,8 @@
                                                       NSUInteger idx,
                                                       BOOL *stop) {
             CAAnimation *animation = [view.layer animationForKey:key];
-            if (animation.duration > kLPConditionRouteAnimationDurationLimit) {
+            if (animation.duration > kLPConditionRouteAnimationDurationLimit &&
+                ![key  isEqual: @"UITextSelectionViewCaretBlinkAnimation"]) { 
               atLeastOneAnimating = YES;
               *stop = YES;
             }
