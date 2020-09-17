@@ -217,7 +217,7 @@
 
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
-  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
