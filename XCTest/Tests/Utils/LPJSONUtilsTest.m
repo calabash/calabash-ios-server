@@ -74,6 +74,10 @@
   return [[LPDevice sharedDevice] isIPhone10Like];
 }
 
+- (BOOL) isIphone10SMax {
+  return [[LPDevice sharedDevice] isIPhone10SMaxLike];
+}
+
 - (BOOL) isIphone11 {
   return [[LPDevice sharedDevice] isIPhone11Like];
 }
@@ -301,6 +305,9 @@
   XCTAssertEqualObjects(dict[@"rect"][@"height"], @(CGRectGetHeight([view frame])));
 
   if ([self isIphone11]) {
+    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(134.75, 0.001);
+  } else if ([self isIphone10SMax]){
     expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
     expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(130.75, 0.001);
   } else if ([self isIphone10]) {
