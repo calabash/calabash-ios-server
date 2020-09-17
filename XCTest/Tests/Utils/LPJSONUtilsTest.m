@@ -275,7 +275,7 @@
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UIView *view = [[UIView alloc] initWithFrame:frame];
 
-  CGRect applicationFrame = [[UIScreen mainScreen] applicationFrame];
+  CGRect applicationFrame = [[UIScreen mainScreen] bounds];
   UIWindow *window = [[UIWindow alloc] initWithFrame:applicationFrame];
   [window addSubview:view];
   id mock = [OCMockObject mockForClass:[LPTouchUtils class]];
