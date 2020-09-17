@@ -101,7 +101,7 @@ fi
 
 rm -f "${ARM_LIBRARY}"
 
-ARCHES="armv7 armv7s arm64 arm64e"
+ARCHES="armv7 armv7s arm64e"
 
 xcrun xcodebuild install \
   -project "${XC_PROJECT}" \
