@@ -313,7 +313,7 @@
 
   if ([self isIphone11]) {
     expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
-    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(134.75, 0.001);
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(86.75, 0.001);
   } else if ([self isIphone10SMax]){
     expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
     expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(130.75, 0.001);
