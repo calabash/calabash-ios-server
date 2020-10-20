@@ -57,7 +57,7 @@ info "Prepared archive directory"
 
 banner "Building ${IPA}"
 
-ARCHES="armv7 armv7s arm64 arm64e"
+ARCHES="arm64 arm64e"
 
 COMMAND_LINE_BUILD=1 xcrun xcodebuild \
   -SYMROOT="${XC_BUILD_DIR}" \
