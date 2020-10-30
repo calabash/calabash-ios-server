@@ -74,6 +74,10 @@
   return [[LPDevice sharedDevice] isIPhone10Like];
 }
 
+- (BOOL) isIphone10SMax {
+  return [[LPDevice sharedDevice] isIPhone10SMaxLike];
+}
+
 - (BOOL) isIphone11 {
   return [[LPDevice sharedDevice] isIPhone11Like];
 }
@@ -213,7 +217,14 @@
 
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
-  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  // Apple added new Accessibility features in iOS 14.
+  // One of them is intelligence recognizing key elements displayed on screen and interface controls.
+  // Because of this, the "accessibilityElement" value in iOS 14 should be TRUE. For the older versions it should be FALSE.
+  if (lp_ios_version_gte(@"14.0")) {
+    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
+  } else {
+    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  }
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
@@ -264,7 +275,7 @@
   CGRect frame = CGRectMake(20, 64.5, 88, 44.5);
   UIView *view = [[UIView alloc] initWithFrame:frame];
 
-  CGRect applicationFrame = [[UIScreen mainScreen] applicationFrame];
+  CGRect applicationFrame = [[UIScreen mainScreen] bounds];
   UIWindow *window = [[UIWindow alloc] initWithFrame:applicationFrame];
   [window addSubview:view];
   id mock = [OCMockObject mockForClass:[LPTouchUtils class]];
@@ -301,6 +312,9 @@
   XCTAssertEqualObjects(dict[@"rect"][@"height"], @(CGRectGetHeight([view frame])));
 
   if ([self isIphone11]) {
+    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(86.75, 0.001);
+  } else if ([self isIphone10SMax]){
     expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
     expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(130.75, 0.001);
   } else if ([self isIphone10]) {
@@ -435,7 +449,14 @@
   UITextField *view = [[UITextField alloc] initWithFrame:frame];
   NSDictionary *dict = [LPJSONUtils dictionaryByEncodingView:view];
 
-  XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  // Apple added new Accessibility features in iOS 14.
+  // One of them is intelligence recognizing key elements displayed on screen and interface controls.
+  // Because of this, the "accessibilityElement" value in iOS 14 should be TRUE. For the older versions it should be FALSE.
+  if (lp_ios_version_gte(@"14.0")) {
+    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(1));
+  } else {
+    XCTAssertEqualObjects(dict[@"accessibilityElement"], @(0));
+  }
   XCTAssertEqualObjects(dict[@"alpha"], @(1));
   XCTAssertEqualObjects(dict[@"class"], NSStringFromClass([view class]));
   XCTAssertEqualObjects(dict[@"description"], [view description]);
@@ -738,7 +759,14 @@
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
   XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
-  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  // Apple added new Accessibility features in iOS 14.
+  // One of them is intelligence recognizing key elements displayed on screen and interface controls.
+  // Because of this, the "label" value in iOS 14 should be "Tab Bar". For the older versions it should be NULL.
+  if (lp_ios_version_gte(@"14.0")) {
+    XCTAssertEqualObjects(dict[@"label"], @"Tab Bar");
+  } else {
+    XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  }
   XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"visible"], @(1));
   XCTAssertEqual([dict count], 10);
@@ -783,7 +811,14 @@
   XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
-  XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  // Apple added new Accessibility features in iOS 14.
+  // One of them is intelligence recognizing key elements displayed on screen and interface controls.
+  // Because of this, the "label" value in iOS 14 should be "Toolbar". For the older versions it should be NULL.
+  if (lp_ios_version_gte(@"14.0")) {
+    XCTAssertEqualObjects(dict[@"label"], @"Toolbar");
+  } else {
+    XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
+  }
   XCTAssertEqualObjects(dict[@"value"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"visible"], @(1));
   XCTAssertEqual([dict count], 10);
