@@ -53,7 +53,7 @@ typedef enum : NSUInteger {
 }
 
 - (void) loadView {
-  CGRect frame = [[UIScreen mainScreen] applicationFrame];
+  CGRect frame = [[UIScreen mainScreen] bounds];
   UIView *view = [[UIView alloc] initWithFrame:frame];
 
   view.tag = kTagView;
@@ -109,13 +109,14 @@ typedef enum : NSUInteger {
                                    @"Title of button that dismisses an alert.");
   NSString *message = NSLocalizedString(@"shake detected!",
                                         @"Message of the alert when the app dectects a shake.");
-  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
-                                                      message:message
-                                                     delegate:nil
-                                            cancelButtonTitle:nil
-                                            otherButtonTitles:ok, nil];
-
-  [alertView show];
+  UIAlertController *alertView = [UIAlertController  alertControllerWithTitle:title
+                                                                      message:message
+                                                               preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertAction *okButton = [UIAlertAction actionWithTitle:ok
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction *action) {}];
+  [alertView addAction:okButton];
+  [self presentViewController:alertView animated:YES completion:nil];
 }
 
 @end

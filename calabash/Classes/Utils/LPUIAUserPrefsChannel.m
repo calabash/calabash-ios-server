@@ -288,7 +288,7 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
     NSString *sandboxPath = [userLibraryPath substringToIndex:([userLibraryPath rangeOfString:@"Applications"].location)];
     NSString *relativePlistPath = [NSString stringWithFormat:@"Library/Preferences/%@", plistName];
     NSString *unsanitizedPlistPath = [sandboxPath stringByAppendingPathComponent:relativePlistPath];
-    path = [[unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] copy];
+    path = [[unsanitizedPlistPath stringByRemovingPercentEncoding] copy];
   } else {
 
     /*
@@ -309,13 +309,13 @@ static NSInteger const LPUIAChannelMaximumLoopCount = 1200;
     if (lp_ios_version_gte(@"8.1")) {
       NSString *relativePlistPath = [NSString stringWithFormat:@"Preferences/%@", plistName];
       NSString *unsanitizedPlistPath = [userLibraryPath stringByAppendingPathComponent:relativePlistPath];
-      path = [[unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] copy];
+      path = [[unsanitizedPlistPath stringByRemovingPercentEncoding] copy];
     } else {
       NSRange range = [userLibraryPath rangeOfString:@"data"];
       NSString *simulatorDataPath = [userLibraryPath substringToIndex:range.location + range.length];
       NSString *relativePlistPath = [NSString stringWithFormat:@"Library/Preferences/%@", plistName];
       NSString *unsanitizedPlistPath = [simulatorDataPath stringByAppendingPathComponent:relativePlistPath];
-      path = [[unsanitizedPlistPath stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding] copy];
+      path = [[unsanitizedPlistPath stringByRemovingPercentEncoding] copy];
     }
   }
   _simulatorPreferencesPath = path;

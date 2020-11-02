@@ -65,12 +65,12 @@ xcrun xcodebuild build \
   -project ${XC_PROJECT} \
   -scheme ${XC_SCHEME} \
   -configuration "${XC_BUILD_CONFIG}" \
-  ARCHS="i386 x86_64" \
-  VALID_ARCHS="i386 x86_64" \
+  ARCHS="x86_64" \
+  VALID_ARCHS="x86_64" \
   ONLY_ACTIVE_ARCH=NO \
   EFFECTIVE_PLATFORM_NAME="-iphonesimulator" \
   -sdk iphonesimulator \
-  IPHONEOS_DEPLOYMENT_TARGET=8.0 \
+  IPHONEOS_DEPLOYMENT_TARGET=9.0 \
   GCC_TREAT_WARNINGS_AS_ERRORS=YES \
   GCC_GENERATE_TEST_COVERAGE_FILES=NO \
   GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=NO | $XC_PIPE
@@ -100,7 +100,7 @@ fi
 
 rm -f "${ARM_LIBRARY}"
 
-ARCHES="armv7 armv7s arm64 arm64e"
+ARCHES="arm64 arm64e"
 
 xcrun xcodebuild install \
   -project "${XC_PROJECT}" \
@@ -113,7 +113,7 @@ xcrun xcodebuild install \
   OTHER_CFLAGS="-fembed-bitcode" \
   DEPLOYMENT_POSTPROCESSING=YES \
   ENABLE_BITCODE=YES \
-  IPHONE_DEPLOYMENT_TARGET=8.0 \
+  IPHONE_DEPLOYMENT_TARGET=9.0 \
   GCC_TREAT_WARNINGS_AS_ERRORS=YES \
   GCC_GENERATE_TEST_COVERAGE_FILES=NO \
   GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=NO | $XC_PIPE
@@ -227,5 +227,3 @@ function expect_bitcode {
 
 expect_bitcode arm64
 expect_bitcode arm64e
-expect_bitcode armv7
-expect_bitcode armv7s

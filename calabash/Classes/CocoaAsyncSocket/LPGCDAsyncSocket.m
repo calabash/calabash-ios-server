@@ -26,6 +26,7 @@
 #import <netdb.h>
 #import <netinet/in.h>
 #import <net/if.h>
+#import <PushKit/PushKit.h>
 #import <sys/socket.h>
 #import <sys/types.h>
 #import <sys/ioctl.h>
@@ -6777,8 +6778,8 @@ static void CFWriteStreamCallback(CFWriteStreamRef stream, CFStreamEventType typ
 
   LPGCDLogVerbose(@"Enabling backgrouding on socket");
 
-  r1 = CFReadStreamSetProperty(readStream, kCFStreamNetworkServiceType, kCFStreamNetworkServiceTypeVoIP);
-  r2 = CFWriteStreamSetProperty(writeStream, kCFStreamNetworkServiceType, kCFStreamNetworkServiceTypeVoIP);
+  r1 = CFReadStreamSetProperty(readStream, kCFStreamNetworkServiceType, PKPushTypeVoIP);
+  r2 = CFWriteStreamSetProperty(writeStream, kCFStreamNetworkServiceType, PKPushTypeVoIP);
 
   if (!r1 || !r2) {
     return NO;
