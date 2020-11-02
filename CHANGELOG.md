@@ -1,3 +1,8 @@
+### 0.22.0
+
+Ignore endless caret animation #460
+Support iOS 14 Xcode 12 #461
+
 ### 0.21.9
 
 Azure DevOps Pipeline now publish dylibs and framework to Azure Blob Storage.
