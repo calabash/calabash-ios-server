@@ -375,6 +375,12 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     // iPhone SE 2020
     @"iPhone12,8" : @"iPhone 6",
 
+    // iPhone 12 Mini/12/12 Pro/12 Pro Max
+    @"iPhone13,1" : @"iphone 12 mini",
+    @"iPhone13,2" : @"iphone 12",
+    @"iPhone13,3" : @"iphone 12 pro",
+    @"iPhone13,4" : @"iphone 12 pro max",
+
     // iPad Pro 12.9in
     @"iPad6,7" : @"ipad pro 12.9",
     @"iPad6,8" : @"ipad pro 12.9",
@@ -412,6 +418,10 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     // iPad Air 10.5in
     @"iPad11,3" : @"ipad air",
     @"iPad11,4" : @"ipad air",
+
+    // iPad Air 10.9in
+    @"iPad13,1" : @"ipad air 4th gen",
+    @"iPad13,2" : @"ipad air 4th gen",
     };
 
   return _formFactorMap;
