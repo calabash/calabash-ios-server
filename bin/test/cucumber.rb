@@ -48,19 +48,30 @@ Dir.chdir working_dir do
     sim_version = xcode.ios_version
 
     if RunLoop::Environment.azurepipelines?
-      # we have to add iPhone 12* devices when we'll be working on adding support for Xcode version that support them
-      devices = {
-        :iphone11 => 'iPhone 11',
-        :iphone11Pro => 'iPhone 11 Pro',
-        :iphone11ProMax => 'iPhone 11 Pro Max',
-        :iPadPro97 => 'iPad Pro (9.7-inch)',
-        :iPhone8 => 'iPhone 8',
-        :iPhone8Plus => 'iPhone 8 Plus'
-      }
+      if xcode_version.major >= 12 && xcode_version.minor >= 1
+        devices = {
+          :iphone12mini => 'iPhone 12 mini',
+          :iphone12 => 'iPhone 12',
+          :iphone12Pro => 'iPhone 12 Pro',
+          :iphone12ProMax => 'iPhone 12 Pro Max',
+          :iPadPro97 => 'iPad Pro (9.7-inch)',
+          :iPhone8 => 'iPhone 8',
+          :iPhone8Plus => 'iPhone 8 Plus'
+        }
+      else
+        devices = {
+          :iphone11 => 'iPhone 11',
+          :iphone11Pro => 'iPhone 11 Pro',
+          :iphone11ProMax => 'iPhone 11 Pro Max',
+          :iPadPro97 => 'iPad Pro (9.7-inch)',
+          :iPhone8 => 'iPhone 8',
+          :iPhone8Plus => 'iPhone 8 Plus'
+        }
+      end
     else
       devices = {
-        :iphoneXs => 'iPhone Xs',
-        :iphoneXsMax => 'iPhone Xs Max'
+        :iphoneXs => 'iPhone 12',
+        :iphoneXsMax => 'iPhone 12 Pro Max'
       }
     end
 
