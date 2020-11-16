@@ -1,3 +1,15 @@
+### 0.22.1
+
+Add support for new iPhones:
+* 12 Mini
+* 12
+* 12 Pro
+* 12 Pro Max
+
+And iPads:
+* Air 4th Generation WiFi
+* Air 4th Generation WiFi + Celular
+
 ### 0.22.0
 
 Ignore endless caret animation #460
