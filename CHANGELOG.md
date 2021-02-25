@@ -1,3 +1,7 @@
+### 0.22.2
+
+Update Bundler gem version up to 2.2.11
+
 ### 0.22.1
 
 Add support for new iPhones:
