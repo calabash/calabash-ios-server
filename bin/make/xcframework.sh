@@ -159,8 +159,6 @@ xcrun xcodebuild -create-xcframework \
   -library "${ARM_PRODUCTS_DIR}/${LIBRARY_NAME}" \
   -output "${XCFRAMEWORK}"
 
-cd "${WORKING_DIR}"
-
 info "Installing XCFramework to ${PWD}/${INSTALLED_FRAMEWORK}"
 
 ditto_or_exit "${XCFRAMEWORK}" "${PWD}/${INSTALLED_FRAMEWORK}"

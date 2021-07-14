@@ -18,6 +18,7 @@ calabash.xcodeproj/xcuserdata/
 Markdown.pl
 build/*
 Products/*
+calabash.xcframework
 calabash.framework
 libFrankCalabash.a
 calabash-dylibs
