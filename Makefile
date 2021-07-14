@@ -11,6 +11,9 @@ clean:
 framework:
 	bin/make/framework.sh
 
+xcframework:
+	bin/make/xcframework.sh
+
 dylibs:
 	bin/make/dylibs.sh
 
