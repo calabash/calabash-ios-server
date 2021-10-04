@@ -291,8 +291,8 @@ CGFloat LP_MIN_FLOAT = INT32_MIN * 1.0;
 
       rect = [frontWindow convertRect:rect toCoordinateSpace:frontWindow];
       NSMutableDictionary *rectDict = [self serializeRect:rect];
-      rectDict[@"center_x"] = @(20.0f);//[self normalizeFloat:center.x];
-      rectDict[@"center_y"] = @(20.0f);//[self normalizeFloat:center.y];
+      rectDict[@"center_x"] = [self normalizeFloat:center.x];
+      rectDict[@"center_y"] = [self normalizeFloat:center.y];
 
       result[@"rect"] = rectDict;
     }
