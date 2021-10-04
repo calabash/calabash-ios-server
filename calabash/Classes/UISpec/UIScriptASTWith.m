@@ -116,10 +116,10 @@
     NSMutableDictionary *mRect = [mResult[@"rect"] mutableCopy];
     mRect[@"x"] = @([mRect[@"x"] floatValue] + xOffset);
     mRect[@"left"] = @([mRect[@"left"] floatValue] + xOffset);
-    mRect[@"center_x"] = 10.0f;//@([mRect[@"center_x"] floatValue] + xOffset);
+    mRect[@"center_x"] = @([mRect[@"center_x"] floatValue] + xOffset);
     mRect[@"y"] = @([mRect[@"y"] floatValue] + yOffset);
     mRect[@"top"] = @([mRect[@"top"] floatValue] + yOffset);
-    mRect[@"center_y"] = 10.0f;//@([mRect[@"center_y"] floatValue] + yOffset);
+    mRect[@"center_y"] = @([mRect[@"center_y"] floatValue] + yOffset);
     
     mResult[@"rect"] = mRect;
     [ret addObject:mResult];

@@ -68,8 +68,7 @@
                                        fromWindow:window];
     CGPoint finalCenter;
 
-    // finalCenter = [LPWebQuery centerByApplyingTransformationsToPoint:keyCenter];
-    finalCenter = CGPointMake(40.0f, 40.0f);
+    finalCenter = [LPWebQuery centerByApplyingTransformationsToPoint:keyCenter];
 
     if (includeInvisible || [LPWebQuery point:center
                            isVisibleInWebview:webView]) {
@@ -145,8 +144,8 @@
     CGRect translatedRect = [LPWebQuery translateRect:domChildBounds
                                                inView:webView.scrollView];
 
-    CGFloat center_x = 50.0f;//translatedRect.origin.x + translatedRect.size.width/2.0f;
-    CGFloat center_y = 50.0f;//translatedRect.origin.y + translatedRect.size.height/2.0f;
+    CGFloat center_x = translatedRect.origin.x + translatedRect.size.width/2.0f;
+    CGFloat center_y = translatedRect.origin.y + translatedRect.size.height/2.0f;
 
     CGPoint contentOffset = [webView.scrollView contentOffset];
     CGPoint boundsCenterInScrollView;

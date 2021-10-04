@@ -291,8 +291,8 @@ CGFloat LP_MIN_FLOAT = INT32_MIN * 1.0;
 
       rect = [frontWindow convertRect:rect toCoordinateSpace:frontWindow];
       NSMutableDictionary *rectDict = [self serializeRect:rect];
-      rectDict[@"center_x"] = 20.0f;//[self normalizeFloat:center.x];
-      rectDict[@"center_y"] = 20.0f;//[self normalizeFloat:center.y];
+      rectDict[@"center_x"] = @(20.0f);//[self normalizeFloat:center.x];
+      rectDict[@"center_y"] = @(20.0f);//[self normalizeFloat:center.y];
 
       result[@"rect"] = rectDict;
     }
@@ -395,8 +395,8 @@ CGFloat LP_MIN_FLOAT = INT32_MIN * 1.0;
       CGRect frame = [object accessibilityFrame];
       CGPoint center = [LPTouchUtils centerOfFrame:frame shouldTranslate:YES];
       NSMutableDictionary *tmp = [self serializeRect:frame];
-      tmp[@"center_x"] = 30.0f;//[self normalizeFloat:center.x];
-      tmp[@"center_y"] = 30.0f;//[self normalizeFloat:center.y];
+      tmp[@"center_x"] = [self normalizeFloat:center.x];
+      tmp[@"center_y"] = [self normalizeFloat:center.y];
       frameDictionary = [NSDictionary dictionaryWithDictionary:tmp];
     } @catch (NSException *exception) {
       LPLogError(@"LPJSONUtils caught an exception in jsonifyAccessibilityElement:");
