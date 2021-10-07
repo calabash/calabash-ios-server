@@ -51,6 +51,24 @@ provisioning is usually the easiest solution.
 make framework
 ```
 
+if you add this framework to your project, you should also add this lines to other linker flags:
+-force_load
+$(PROJECT_DIR)/calabash.framework/calabash
+
+### Building the XCFramework
+```
+make xcframework
+```
+
+if you add this xcframework to your project, you should also add this lines to other linker flags:
+if you use an iOS simulator then:
+-force_load
+$(PROJECT_DIR)/calabash.xcframework/ios-arm64_x86_64-simulator/libcalabash.a
+
+if you use a physical iOS device then:
+-force_load
+$(PROJECT_DIR)/calabash.xcframework/ios-arm64_armv7/libcalabash.a
+
 ### Building the dylibs
 
 ```
