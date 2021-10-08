@@ -54,6 +54,9 @@ XC_VERSION=$(xcode_version)
 # Evaluate calabash.framework SHASUM256
 FRAMEWORK_SHASUM256=$(shasum --algorithm 256 ${WORKING_DIR}/calabash.framework/calabash | cut -d " " -f 1)
 
+# Evaluate calabash.xcframework SHASUM256
+XCFRAMEWORK_SHASUM256=$(shasum --algorithm 256 ${WORKING_DIR}/calabash.xcframework | cut -d " " -f 1)
+
 # Evaluate dylibFAT SHASUM256
 DYLIBFAT_SHASUM256=$(shasum --algorithm 256 ${WORKING_DIR}/calabash-dylibs/libCalabashFAT.dylib | cut -d " " -f 1)
 
@@ -62,6 +65,12 @@ CALABASH_FRAMEWORK="${WORKING_DIR}/calabash.framework.zip"
 zip_with_ditto "${WORKING_DIR}/calabash.framework" "${CALABASH_FRAMEWORK}"
 CALABASH_FRAMEWORK_NAME="calabash.framework-${VERSION}-Xcode-${XC_VERSION}-${GIT_SHA}.zip"
 azupload "${CALABASH_FRAMEWORK}" "${CALABASH_FRAMEWORK_NAME}"
+
+# Upload `calabash.framework.zip`
+CALABASH_XCFRAMEWORK="${WORKING_DIR}/calabash.xcframework.zip"
+zip_with_ditto "${WORKING_DIR}/calabash.xcframework" "${CALABASH_XCFRAMEWORK}"
+CALABASH_XCFRAMEWORK_NAME="calabash.framework-${VERSION}-Xcode-${XC_VERSION}-${GIT_SHA}.zip"
+azupload "${CALABASH_XCFRAMEWORK}" "${CALABASH_XCFRAMEWORK_NAME}"
 
 # Upload `libCalabashFAT.dylib`
 CALABASH_FAT="${WORKING_DIR}/calabash-dylibs/libCalabashFAT.dylib"
@@ -97,8 +106,10 @@ product_version:$VERSION
 Xcode_version:$XC_VERSION
 commit_sha:$GIT_SHA
 framework_shasum256:$FRAMEWORK_SHASUM256
+xcframework_shasum256:$XCFRAMEWORK_SHASUM256
 dylibFAT_shasum256:$DYLIBFAT_SHASUM256
 framework_zip:$CALABASH_FRAMEWORK_NAME
+xcframework_zip:$CALABASH_XCFRAMEWORK_NAME
 dylibFAT:$CALABASH_FAT_NAME
 EOF
 azupload "$ARTIFACT_TXT" "${ARTIFACT_NAME}.txt"
@@ -113,8 +124,10 @@ cat <<EOF >"${ARTIFACT_JSON}"
  "Xcode_version" : "$XC_VERSION",
  "commit_sha" : "$GIT_SHA",
  "framework_shasum256" : "$FRAMEWORK_SHASUM256",
+ "xcframework_shasum256" : "$XCFRAMEWORK_SHASUM256",
  "dylibFAT_shasum256" : "$DYLIBFAT_SHASUM256",
  "framework_zip" : "$CALABASH_FRAMEWORK_NAME",
+ "xcframework_zip" : "$CALABASH_XCFRAMEWORK_NAME",
  "dylibFAT" : "$CALABASH_FAT_NAME"
 }
 EOF
