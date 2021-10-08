@@ -2965,6 +2965,7 @@
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
+				SUPPORTS_MACCATALYST = YES;
 				VALID_ARCHS = "arm64e arm64 armv7 armv7s x86_64 i386";
 				WARNING_CFLAGS = (
 					"-Wunreachable-code",
@@ -3016,6 +3017,7 @@
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
+				SUPPORTS_MACCATALYST = YES;
 				VALID_ARCHS = "arm64e arm64 armv7 armv7s x86_64 i386";
 				WARNING_CFLAGS = (
 					"-Wunreachable-code",
@@ -3075,7 +3077,7 @@
 				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				VALID_ARCHS = "arm64e arm64 armv7 armv7s x86_64 i386";
 				WARNING_CFLAGS = (
 					"-Wunreachable-code",
@@ -3135,7 +3137,7 @@
 				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				VALID_ARCHS = "arm64e arm64 armv7 armv7s x86_64 i386";
 				WARNING_CFLAGS = (
 					"-Wunreachable-code",
@@ -3503,7 +3505,7 @@
 				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
-				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MACCATALYST = YES;
 				VALID_ARCHS = "arm64e arm64 armv7 armv7s x86_64 i386";
 				WARNING_CFLAGS = (
 					"-Wunreachable-code",
@@ -3555,6 +3557,7 @@
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
+				SUPPORTS_MACCATALYST = YES;
 				VALID_ARCHS = "arm64e arm64 armv7 armv7s x86_64 i386";
 				WARNING_CFLAGS = (
 					"-Wunreachable-code",
