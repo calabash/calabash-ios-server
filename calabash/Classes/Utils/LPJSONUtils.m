@@ -288,8 +288,10 @@ CGFloat LP_MIN_FLOAT = INT32_MIN * 1.0;
       CGRect rect = [window convertRect:view.bounds fromView:view];
 
       UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
+      UIScreen *mainScreen = [UIScreen mainScreen];
 
-      rect = [frontWindow convertRect:rect toCoordinateSpace:frontWindow];
+      rect = [frontWindow convertRect:rect toCoordinateSpace:mainScreen.fixedCoordinateSpace];
+        
       NSMutableDictionary *rectDict = [self serializeRect:rect];
       rectDict[@"center_x"] = [self normalizeFloat:center.x];
       rectDict[@"center_y"] = [self normalizeFloat:center.y];
