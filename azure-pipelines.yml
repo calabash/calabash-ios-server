@@ -24,7 +24,7 @@ jobs:
     matrix:
       BigSur-Xcode-12.5:
         IMAGE_POOL: 'macOS-11'
-        XCODE_VERSION: '12.5'
+        XCODE_VERSION: '12.5.1'
       BigSur-Xcode-13.0:
         IMAGE_POOL: 'macOS-11'
         XCODE_VERSION: '13.0'
