@@ -75,13 +75,13 @@ jobs:
   - script: MAKE_FRAMEWORK=0 make app-cal
     displayName: "Make app-call"
 
-  - script: bundle exec bin/test/xctest.rb
-    displayName: "Make xctests"
-    condition: and(succeeded(), eq(variables['isRunXCTests'], 'true'))
-
-  - script: bundle exec bin/ci/jenkins/appcenter.sh
-    displayName: "test appcenter"
-    condition: and(succeeded(), eq(variables['Agent.JobName'], variables['mainJob']))
+      #  - script: bundle exec bin/test/xctest.rb
+      #    displayName: "Make xctests"
+      #    condition: and(succeeded(), eq(variables['isRunXCTests'], 'true'))
+      #
+      #  - script: bundle exec bin/ci/jenkins/appcenter.sh
+      #    displayName: "test appcenter"
+      #    condition: and(succeeded(), eq(variables['Agent.JobName'], variables['mainJob']))
 
   - script: bundle exec bin/test/cucumber.rb
     displayName: "exec cucumber"

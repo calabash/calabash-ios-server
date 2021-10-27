@@ -74,6 +74,11 @@ Dir.chdir working_dir do
 
     passed_sims = []
     failed_sims = []
+
+    
+    puts "DEVICES:"
+    system("xcrun", "xctrace", "list", "devices")
+
     devices.each do |key, name|
       match = simulators.find do |sim|
         sim.name == name && sim.version == sim_version
