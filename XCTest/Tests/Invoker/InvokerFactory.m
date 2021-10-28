@@ -126,7 +126,7 @@
     @"Class" : NSStringFromSelector(@selector(selectorClass:)),
     @"object pointer" : NSStringFromSelector(@selector(selectorObjectPointer:)),
     @"self" : NSStringFromSelector(@selector(selectorArgumentIsSelf:)),
-    @"self" : NSStringFromSelector(@selector(selectorArgumentIsNil:)),
+    @"nil" : NSStringFromSelector(@selector(selectorArgumentIsNil:)),
 
     // Not handled
     @"void *" : NSStringFromSelector(@selector(selectorVoidStar:)),
