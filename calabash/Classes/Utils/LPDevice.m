@@ -362,10 +362,10 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     @"iPhone10,6" : @"iphone 10",
 
     // iPhone XS/XS Max/XR - derived from Simulator
-    @"iPhone11,2" : @"iphone 10",
-    @"iPhone11,4" : @"iphone 10s max",
+    @"iPhone11,2" : @"iphone 10", //5.85
+    @"iPhone11,4" : @"iphone 10s max",//6.46
     @"iPhone11,6" : @"iphone 10s max",
-    @"iPhone11,8" : @"iphone 10r",
+    @"iPhone11,8" : @"iphone 10r", //6.06
 
     // iPhone 11/11 Pro/11 Pro Max
     @"iPhone12,1" : @"iphone 10r",
@@ -376,16 +376,16 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     @"iPhone12,8" : @"iPhone 6",
 
     // iPhone 12 Mini/12/12 Pro/12 Pro Max
-    @"iPhone13,1" : @"iphone 12 mini",
-    @"iPhone13,2" : @"iphone 12",
-    @"iPhone13,3" : @"iphone 12 pro",
-    @"iPhone13,4" : @"iphone 12 pro max",
+    @"iPhone13,1" : @"iphone 12 mini", //5.42
+    @"iPhone13,2" : @"iphone 10r",
+    @"iPhone13,3" : @"iphone 10r",
+    @"iPhone13,4" : @"iphone 12 pro max", //6.68
 
     // iPhone 13 Mini Pro/13 Pro Max
-    @"iPhone14,5": @"iphone 13",
-    @"iPhone14,4": @"iphone 13 mini",
-    @"iPhone14,3": @"iphone 13 Pro Max",
-    @"iPhone14,2": @"iphone 13 Pro",
+    @"iPhone14,5": @"iphone 13", //6.1
+    @"iPhone14,4": @"iphone 13 mini", //5.4
+    @"iPhone14,3": @"iphone 13 Pro Max", //6.7
+    @"iPhone14,2": @"iphone 13",
     
     // iPad Pro 12.9in
     @"iPad6,7" : @"ipad pro 12.9",
@@ -606,6 +606,39 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 - (BOOL) isIPhone11ProMaxLike {
   return [[self formFactor] isEqualToString:@"iphone 10s max"];
 }
+
+- (BOOL) isIPhone12Like {
+  return [[self formFactor] isEqualToString:@"iphone 10r"];
+}
+
+- (BOOL) isIPhone12ProLike {
+  return [[self formFactor] isEqualToString:@"iphone 10r"];
+}
+
+- (BOOL) isIPhone12MiniLike {
+  return [[self formFactor] isEqualToString:@"iphone 12 mini"];
+}
+
+- (BOOL) isIPhone12ProMaxLike {
+  return [[self formFactor] isEqualToString:@"iphone 12 pro max"];
+}
+
+- (BOOL) isIPhone13Like {
+  return [[self formFactor] isEqualToString:@"iphone 13"];
+}
+
+- (BOOL) isIPhone13ProLike {
+  return [[self formFactor] isEqualToString:@"iphone 13"];
+}
+
+- (BOOL) isIPhone13MiniLike {
+  return [[self formFactor] isEqualToString:@"iphone 13 mini"];
+}
+
+- (BOOL) isIPhone13ProMaxLike {
+  return [[self formFactor] isEqualToString:@"iphone 13 Pro Max"];
+}
+
 
 - (BOOL) isLetterBox {
   CGFloat scale = [self scaleForMainScreen];

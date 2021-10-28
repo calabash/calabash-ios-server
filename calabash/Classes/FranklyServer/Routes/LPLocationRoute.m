@@ -37,7 +37,7 @@
 #pragma clang diagnostic ignored "-Wundeclared-selector"
     id tgt = [NSClassFromString(@"UIATarget") localTarget];
     if (tgt && [tgt respondsToSelector:@selector(setLocation:)]) {
-      [tgt setLocation:[NSDictionary dictionaryWithObjectsAndKeys:lat, @"latitude",
+      [tgt setLocation:(id)[NSDictionary dictionaryWithObjectsAndKeys:lat, @"latitude",
                                                                   lon, @"longitude",
                                                                   nil]];
       return [NSDictionary dictionaryWithObjectsAndKeys:[NSArray array], @"results",
