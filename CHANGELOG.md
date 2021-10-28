@@ -1,3 +1,7 @@
+### 0.23.1
+
+Fixed unit-tests and warnings for Xcode 13 and iOS 15.
+
 ### 0.23.0
 
 Added support for Xcode 13 and iOS 15.
