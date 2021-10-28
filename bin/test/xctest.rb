@@ -38,7 +38,7 @@ args =
             "-destination id=#{sim_udid}",
             '-sdk iphonesimulator',
             '-configuration Debug',
-            "GCC_TREAT_WARNINGS_AS_ERRORS=NO",
+            "GCC_TREAT_WARNINGS_AS_ERRORS=YES",
             use_xcpretty ? xcpretty_cmd : ""
       ]
 
