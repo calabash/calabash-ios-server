@@ -8,6 +8,22 @@ Added support for Xcode 13 and iOS 15.
 Added XCFramework target for build.
 Fixed issue with coordinates.
 
+### 0.22.2
+
+Update Bundler gem version up to 2.2.11
+
+### 0.22.1
+
+Add support for new iPhones:
+* 12 Mini
+* 12
+* 12 Pro
+* 12 Pro Max
+
+And iPads:
+* Air 4th Generation WiFi
+* Air 4th Generation WiFi + Celular
+
 ### 0.22.0
 
 Ignore endless caret animation #460
