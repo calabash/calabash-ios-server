@@ -1,7 +1,7 @@
 variables:
   # `AzurePublishWhen` variable points to the matrix case that will be the main case
   # it will run `appcenter-cli` test step and publish artifacts to the Azure Blob
-  AzurePublishWhen: 'Mojave-Xcode-11.2'
+  AzurePublishWhen: 'BigSur-Xcode-13.0'
 
 trigger:
   tags:
@@ -22,12 +22,12 @@ jobs:
 - job:
   strategy:
     matrix:
-      Catalina-Xcode-11.7:
-        IMAGE_POOL: 'macOS-10.15'
-        XCODE_VERSION: '11.7'
-      Catalina-Xcode-12.0:
-        IMAGE_POOL: 'macOS-10.15'
-        XCODE_VERSION: '12'
+      BigSur-Xcode-12.5:
+        IMAGE_POOL: 'macOS-11'
+        XCODE_VERSION: '12.5.1'
+      BigSur-Xcode-13.0:
+        IMAGE_POOL: 'macOS-11'
+        XCODE_VERSION: '13.0'
   timeoutInMinutes: 180
   pool:
     vmImage: $(IMAGE_POOL)
@@ -63,6 +63,9 @@ jobs:
   - script: make framework
     displayName: "Make framework"
 
+  - script: make xcframework
+    displayName: "Make xcframework"
+
   - script: make dylibs
     displayName: "Make dylibs"
 
@@ -74,13 +77,15 @@ jobs:
 
   - script: bundle exec bin/test/xctest.rb
     displayName: "Make xctests"
-
+    condition: and(succeeded(), eq(variables['isRunXCTests'], 'true'))
+ 
   - script: bundle exec bin/ci/jenkins/appcenter.sh
     displayName: "test appcenter"
     condition: and(succeeded(), eq(variables['Agent.JobName'], variables['mainJob']))
 
   - script: bundle exec bin/test/cucumber.rb
     displayName: "exec cucumber"
+    condition: and(succeeded(), eq(variables['isRunCucumberTests'], 'true'))
 
   # azureStorage* env vars are defined in the pipeline UI as secret variables
   - bash: "./bin/ci/az-publish.sh"

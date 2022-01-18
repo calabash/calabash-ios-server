@@ -82,6 +82,10 @@
   return [[LPDevice sharedDevice] isIPhone11Like];
 }
 
+- (BOOL) isIphone13 {
+  return [[LPDevice sharedDevice] isIPhone13Like];
+}
+
 - (BOOL) isIphone6 {
   return [[LPDevice sharedDevice] isIPhone6Like];
 }
@@ -310,8 +314,11 @@
 
   XCTAssertEqualObjects(dict[@"rect"][@"width"], @(CGRectGetWidth([view frame])));
   XCTAssertEqualObjects(dict[@"rect"][@"height"], @(CGRectGetHeight([view frame])));
-
-  if ([self isIphone11]) {
+  
+  if ([self isIphone13]) {
+    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(86.75, 0.001);
+  } else if ([self isIphone11]) {
     expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
     expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(86.75, 0.001);
   } else if ([self isIphone10SMax]){
@@ -319,7 +326,7 @@
     expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(130.75, 0.001);
   } else if ([self isIphone10]) {
     expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
-    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(130.75, 0.001);
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(86.75, 0.001);
   } else if ([self isIphone6Plus]) {
     expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
     expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(106.75, 0.001);
@@ -373,7 +380,10 @@
   XCTAssertEqualObjects(dict[@"rect"][@"width"], @(CGRectGetWidth([view frame])));
   XCTAssertEqualObjects(dict[@"rect"][@"height"], @(CGRectGetHeight([view frame])));
 
-  if ([self isIphone11]) {
+  if ([self isIphone13]) {
+    expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
+    expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(86.75, 0.001);
+  } else if ([self isIphone11]) {
     expect(dict[@"rect"][@"center_x"]).to.beCloseToWithin(64, 0.001);
     expect(dict[@"rect"][@"center_y"]).to.beCloseToWithin(86.75, 0.001);
   } else if ([self isIphone10]) {
@@ -732,8 +742,14 @@
   XCTAssertEqual(((NSDictionary *)[dict objectForKey:@"frame"]).count, 4);
   XCTAssertEqualObjects(dict[@"frame"][@"x"], @(CGRectGetMinX([view frame])));
   XCTAssertEqualObjects(dict[@"frame"][@"y"], @(CGRectGetMinY([view frame])));
-  XCTAssertEqualObjects(dict[@"frame"][@"width"], @(CGRectGetWidth([view frame])));
-  XCTAssertEqualObjects(dict[@"frame"][@"height"], @(CGRectGetHeight([view frame])));
+  
+  NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+  formatter.numberStyle = NSNumberFormatterDecimalStyle;
+  formatter.maximumFractionDigits = 2;
+  formatter.roundingMode = NSNumberFormatterRoundHalfEven;
+  
+  XCTAssertEqualObjects([dict[@"frame"][@"width"] stringValue], [formatter stringFromNumber:@(CGRectGetWidth([view frame]))]);
+  XCTAssertEqualObjects([dict[@"frame"][@"height"] stringValue], [formatter stringFromNumber:@(CGRectGetHeight([view frame]))]);
   XCTAssertEqualObjects(dict[@"id"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"label"], [NSNull null]);
   XCTAssertEqualObjects(dict[@"value"], [NSNull null]);

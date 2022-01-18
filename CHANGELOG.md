@@ -1,3 +1,13 @@
+### 0.23.1
+
+Fixed unit-tests and warnings for Xcode 13 and iOS 15.
+
+### 0.23.0
+
+Added support for Xcode 13 and iOS 15.
+Added XCFramework target for build.
+Fixed issue with coordinates.
+
 ### 0.22.2
 
 Update Bundler gem version up to 2.2.11

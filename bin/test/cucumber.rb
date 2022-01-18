@@ -85,6 +85,7 @@ Dir.chdir working_dir do
 
     passed_sims = []
     failed_sims = []
+
     devices.each do |key, name|
       match = simulators.find do |sim|
         sim.name == name && sim.version == sim_version
@@ -99,10 +100,10 @@ Dir.chdir working_dir do
            "-p", "simulator",
            "-f", "json", "-o", "reports/cucumber.json",
            "-f", "junit", "-o", "reports/junit",
-           "--tags", "~@device",
-           "--tags", "~@device_only",
-           "--tags", "~@xtc",
-           "--tags", "~@xtc_only")
+           "--tags", "not @device",
+           "--tags", "not @device_only",
+           "--tags", "not @xtc",
+           "--tags", "not @xtc_only")
 
         passed_sims << name
       else

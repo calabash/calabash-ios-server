@@ -1,6 +1,6 @@
 | Status | [versioning](VERSIONING.md) | [license](LICENSE) | [contributing](CONTRIBUTING.md)|
 |--------|-----------------------------|--------------------|--------------------------------|
-|[![Build Status](https://calabash-ci.xyz/buildStatus/icon?job=calabash-ios-server/develop)](https://calabash-ci.xyz/job/calabash-ios-server/develop)| [![Version](https://img.shields.io/badge/version-0.22.2-green.svg)](https://img.shields.io/badge/version-0.22.2-green.svg) |[![License](https://img.shields.io/badge/licence-Eclipse-blue.svg)](http://opensource.org/licenses/EPL-1.0) | [![Contributing](https://img.shields.io/badge/contrib-gitflow-orange.svg)](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow/)|
+|[![Build Status](https://calabash-ci.xyz/buildStatus/icon?job=calabash-ios-server/develop)](https://calabash-ci.xyz/job/calabash-ios-server/develop)| [![Version](https://img.shields.io/badge/version-0.23.0-green.svg)](https://img.shields.io/badge/version-0.23.0-green.svg) |[![License](https://img.shields.io/badge/licence-Eclipse-blue.svg)](http://opensource.org/licenses/EPL-1.0) | [![Contributing](https://img.shields.io/badge/contrib-gitflow-orange.svg)](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow/)|
 
 ## The Calabash iOS Server
 
@@ -50,6 +50,24 @@ provisioning is usually the easiest solution.
 ```
 make framework
 ```
+
+if you add this framework to your project, you should also add this lines to other linker flags:
+-force_load
+$(PROJECT_DIR)/calabash.framework/calabash
+
+### Building the XCFramework
+```
+make xcframework
+```
+
+if you add this xcframework to your project, you should also add this lines to other linker flags:
+if you use an iOS simulator then:
+-force_load
+$(PROJECT_DIR)/calabash.xcframework/ios-arm64_x86_64-simulator/libcalabash.a
+
+if you use a physical iOS device then:
+-force_load
+$(PROJECT_DIR)/calabash.xcframework/ios-arm64_armv7/libcalabash.a
 
 ### Building the dylibs
 

@@ -198,7 +198,6 @@ static NSString *const kLPGitRemoteOrigin = @"Unknown LP_GIT_REMOTE_ORIGIN";
     @"ios_version" : iOSVersion,
     @"iphone_app_emulated_on_ipad" : @(isIphoneAppEmulated),
     @"model_identifier" : modelIdentifier,
-    @"device_name" : deviceName,
     @"outcome" : @"SUCCESS",
     @"screen_dimensions" : [[LPDevice sharedDevice] screenDimensions],
     @"server_port" : @([infoPlist serverPort]),

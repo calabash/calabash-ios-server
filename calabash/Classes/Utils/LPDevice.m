@@ -362,10 +362,10 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     @"iPhone10,6" : @"iphone 10",
 
     // iPhone XS/XS Max/XR - derived from Simulator
-    @"iPhone11,2" : @"iphone 10",
-    @"iPhone11,4" : @"iphone 10s max",
+    @"iPhone11,2" : @"iphone 10", //5.85
+    @"iPhone11,4" : @"iphone 10s max",//6.46
     @"iPhone11,6" : @"iphone 10s max",
-    @"iPhone11,8" : @"iphone 10r",
+    @"iPhone11,8" : @"iphone 10r", //6.06
 
     // iPhone 11/11 Pro/11 Pro Max
     @"iPhone12,1" : @"iphone 10r",
@@ -376,11 +376,17 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     @"iPhone12,8" : @"iPhone 6",
 
     // iPhone 12 Mini/12/12 Pro/12 Pro Max
-    @"iPhone13,1" : @"iphone 12 mini",
-    @"iPhone13,2" : @"iphone 12",
-    @"iPhone13,3" : @"iphone 12 pro",
-    @"iPhone13,4" : @"iphone 12 pro max",
+    @"iPhone13,1" : @"iphone 12 mini", //5.42
+    @"iPhone13,2" : @"iphone 10r",
+    @"iPhone13,3" : @"iphone 10r",
+    @"iPhone13,4" : @"iphone 12 pro max", //6.68
 
+    // iPhone 13 Mini Pro/13 Pro Max
+    @"iPhone14,5": @"iphone 13", //6.1
+    @"iPhone14,4": @"iphone 13 mini", //5.4
+    @"iPhone14,3": @"iphone 13 Pro Max", //6.7
+    @"iPhone14,2": @"iphone 13",
+    
     // iPad Pro 12.9in
     @"iPad6,7" : @"ipad pro 12.9",
     @"iPad6,8" : @"ipad pro 12.9",
@@ -390,18 +396,28 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     @"iPad8,6" : @"ipad pro 12.9",
     @"iPad8,7" : @"ipad pro 12.9",
     @"iPad8,8" : @"ipad pro 12.9",
+    @"iPad13,8" : @"ipad pro 12.9",
+    @"iPad13,9" : @"ipad pro 12.9",
+    @"iPad13,10" : @"ipad pro 12.9",
+    @"iPad13,11" : @"ipad pro 12.9",
 
     // iPad Pro 11in  
     @"iPad8,1" : @"ipad pro 11",
     @"iPad8,2" : @"ipad pro 11",
     @"iPad8,3" : @"ipad pro 11",
     @"iPad8,4" : @"ipad pro 11",
+    @"iPad8,10" : @"ipad pro 11",
+    @"iPad13,4" : @"ipad pro 11",
+    @"iPad13,5" : @"ipad pro 11",
+    @"iPad13,6" : @"ipad pro 11",
+    @"iPad13,7" : @"ipad pro 11",
 
     // iPad Pro 9.7in
     @"iPad6,3" : @"ipad pro 9.7",
     @"iPad6,4" : @"ipad pro 9.7",
 
     // iPad 9.7 in
+    @"iPad5,4": @"ipad air 2",
     @"iPad6,11" : @"ipad 9.7",
     @"iPad6,12" : @"ipad 9.7",
     @"iPad7,5"  : @"ipad 9.7",
@@ -412,6 +428,7 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     @"iPad7,3" : @"ipad pro 10.5",
 
     // iPad mini 7,9in
+    @"iPad5,2": @"ipad mini",
     @"iPad11,1" : @"ipad mini",
     @"iPad11,2" : @"ipad mini",
 
@@ -422,6 +439,16 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
     // iPad Air 10.9in
     @"iPad13,1" : @"ipad air 4th gen",
     @"iPad13,2" : @"ipad air 4th gen",
+    
+    // iPad 10.2in
+    @"iPad7,12": @"ipad 7th gen",
+    @"iPad11,7": @"ipad 8th gen",
+    
+    //iPad mini 8.3in
+    @"iPad14,1": @"ipad mini 6th gen",
+    @"iPad14,2": @"ipad mini 6th gen",
+    
+    
     };
 
   return _formFactorMap;
@@ -579,6 +606,39 @@ NSString *const LPDeviceSimKeyVersionInfo = @"SIMULATOR_VERSION_INFO";
 - (BOOL) isIPhone11ProMaxLike {
   return [[self formFactor] isEqualToString:@"iphone 10s max"];
 }
+
+- (BOOL) isIPhone12Like {
+  return [[self formFactor] isEqualToString:@"iphone 10r"];
+}
+
+- (BOOL) isIPhone12ProLike {
+  return [[self formFactor] isEqualToString:@"iphone 10r"];
+}
+
+- (BOOL) isIPhone12MiniLike {
+  return [[self formFactor] isEqualToString:@"iphone 12 mini"];
+}
+
+- (BOOL) isIPhone12ProMaxLike {
+  return [[self formFactor] isEqualToString:@"iphone 12 pro max"];
+}
+
+- (BOOL) isIPhone13Like {
+  return [[self formFactor] isEqualToString:@"iphone 13"];
+}
+
+- (BOOL) isIPhone13ProLike {
+  return [[self formFactor] isEqualToString:@"iphone 13"];
+}
+
+- (BOOL) isIPhone13MiniLike {
+  return [[self formFactor] isEqualToString:@"iphone 13 mini"];
+}
+
+- (BOOL) isIPhone13ProMaxLike {
+  return [[self formFactor] isEqualToString:@"iphone 13 Pro Max"];
+}
+
 
 - (BOOL) isLetterBox {
   CGFloat scale = [self scaleForMainScreen];

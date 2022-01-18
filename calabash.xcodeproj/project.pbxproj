@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -27,6 +27,12 @@
 		429CD6921EAFBC2800E7CA85 /* LPClearTextRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 429CD6911EAFBC2800E7CA85 /* LPClearTextRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		429CD6931EAFBD2800E7CA85 /* LPClearTextRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 429CD6911EAFBC2800E7CA85 /* LPClearTextRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		429CD6951EAFBD2900E7CA85 /* LPClearTextRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 429CD6911EAFBC2800E7CA85 /* LPClearTextRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		47DC7731272841DA004F4404 /* OCMock.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 47DC772E272841DA004F4404 /* OCMock.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		47DC7732272841DA004F4404 /* Expecta.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 47DC772F272841DA004F4404 /* Expecta.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		47DC7733272841DA004F4404 /* Specta.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 47DC7730272841DA004F4404 /* Specta.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		47DC7734272841EC004F4404 /* Expecta.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47DC772F272841DA004F4404 /* Expecta.xcframework */; };
+		47DC7735272841F1004F4404 /* OCMock.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47DC772E272841DA004F4404 /* OCMock.xcframework */; };
+		47DC7736272841F5004F4404 /* Specta.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47DC7730272841DA004F4404 /* Specta.xcframework */; };
 		558B0BEC2478093000DE6BEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 558B0BEB2478093000DE6BEA /* LaunchScreen.storyboard */; };
 		89043AC21C289A5D0067E22F /* LPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 89043ABE1C289A5D0067E22F /* LPConstants.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		89043AC31C289A5D0067E22F /* LPConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 89043ABE1C289A5D0067E22F /* LPConstants.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -501,12 +507,6 @@
 		F5E2A5EE1BFEF8590068DFAD /* change-sha.plist in Resources */ = {isa = PBXBuildFile; fileRef = F5E2A5ED1BFEF8590068DFAD /* change-sha.plist */; };
 		F5E2D1E018C9120E00A0D9B6 /* LPSSKeychain.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DA18C9120E00A0D9B6 /* LPSSKeychain.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5E2D1E418C9120E00A0D9B6 /* LPSSKeychainQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = F5E2D1DC18C9120E00A0D9B6 /* LPSSKeychainQuery.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		F5E630241F1F4661000521A5 /* Expecta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5E630201F1F45E7000521A5 /* Expecta.framework */; };
-		F5E630261F1F4661000521A5 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5E6301F1F1F45E6000521A5 /* OCMock.framework */; };
-		F5E630281F1F4661000521A5 /* Specta.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5E630221F1F45E7000521A5 /* Specta.framework */; };
-		F5E6302A1F1F4792000521A5 /* Expecta.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F5E630201F1F45E7000521A5 /* Expecta.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F5E6302C1F1F4792000521A5 /* OCMock.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F5E6301F1F1F45E6000521A5 /* OCMock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F5E6302E1F1F4792000521A5 /* Specta.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = F5E630221F1F45E7000521A5 /* Specta.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F5F2D5E01ACAC3B60027937B /* LPWebViewUtilsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F2D5DF1ACAC3B60027937B /* LPWebViewUtilsTest.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		F5F2D5E31ACACF2F0027937B /* LPWebViewUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = F5F2D5E11ACACF2F0027937B /* LPWebViewUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F5F2D5E91ACACF2F0027937B /* LPWebViewUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F5F2D5E21ACACF2F0027937B /* LPWebViewUtils.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -548,9 +548,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F5E6302A1F1F4792000521A5 /* Expecta.framework in CopyFiles */,
-				F5E6302C1F1F4792000521A5 /* OCMock.framework in CopyFiles */,
-				F5E6302E1F1F4792000521A5 /* Specta.framework in CopyFiles */,
+				47DC7732272841DA004F4404 /* Expecta.xcframework in CopyFiles */,
+				47DC7731272841DA004F4404 /* OCMock.xcframework in CopyFiles */,
+				47DC7733272841DA004F4404 /* Specta.xcframework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,6 +561,9 @@
 		42069AFC1EB1035B00C1F0A5 /* LPMachClock.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPMachClock.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; wrapsLines = 1; };
 		429CD6901EAFBC1800E7CA85 /* LPClearTextRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LPClearTextRoute.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; wrapsLines = 1; };
 		429CD6911EAFBC2800E7CA85 /* LPClearTextRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPClearTextRoute.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; wrapsLines = 1; };
+		47DC772E272841DA004F4404 /* OCMock.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OCMock.xcframework; path = Carthage/Build/iOS/OCMock.xcframework; sourceTree = "<group>"; };
+		47DC772F272841DA004F4404 /* Expecta.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Expecta.xcframework; path = Carthage/Build/iOS/Expecta.xcframework; sourceTree = "<group>"; };
+		47DC7730272841DA004F4404 /* Specta.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Specta.xcframework; path = Carthage/Build/iOS/Specta.xcframework; sourceTree = "<group>"; };
 		558B0BEB2478093000DE6BEA /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5BFF97A218B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LPCollectionViewScrollToItemWithMarkOperation.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; wrapsLines = 1; };
 		5BFF97A318B391810094E71E /* LPCollectionViewScrollToItemWithMarkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPCollectionViewScrollToItemWithMarkOperation.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; wrapsLines = 1; };
@@ -1005,9 +1008,9 @@
 				F50CBFCF1A040707004AC9DA /* Foundation.framework in Frameworks */,
 				F50CBFCE1A040669004AC9DA /* UIKit.framework in Frameworks */,
 				F5A33A791AC01EC400224639 /* WebKit.framework in Frameworks */,
-				F5E630241F1F4661000521A5 /* Expecta.framework in Frameworks */,
-				F5E630261F1F4661000521A5 /* OCMock.framework in Frameworks */,
-				F5E630281F1F4661000521A5 /* Specta.framework in Frameworks */,
+				47DC7734272841EC004F4404 /* Expecta.xcframework in Frameworks */,
+				47DC7735272841F1004F4404 /* OCMock.xcframework in Frameworks */,
+				47DC7736272841F5004F4404 /* Specta.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1048,6 +1051,9 @@
 		B121E78614B6D9FB0034C6A9 = {
 			isa = PBXGroup;
 			children = (
+				47DC772F272841DA004F4404 /* Expecta.xcframework */,
+				47DC772E272841DA004F4404 /* OCMock.xcframework */,
+				47DC7730272841DA004F4404 /* Specta.xcframework */,
 				B16C307C15191A8C00DAA3FA /* calabash-js */,
 				B121E79914B6D9FB0034C6A9 /* calabash */,
 				F50CBF5F1A03F222004AC9DA /* XCTest */,
@@ -2119,7 +2125,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "bin/xcode-build-phase/gitversioning-after.sh";
+			shellScript = "bin/xcode-build-phase/gitversioning-after.sh\n";
 			showEnvVarsInLog = 0;
 		};
 		F526C4FC1BF2AA98003D2E43 /* Run Script Force New APP SHA */ = {
@@ -2134,7 +2140,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# We need to force a new SHA so the app is re-installed\n# on every build.  If the calabash.framework changes, the SHA\n# will not change which makes testing framework changes difficult\nbin/xcode-build-phase/lptesttarget-change-sha-before.sh";
+			shellScript = "# We need to force a new SHA so the app is re-installed\n# on every build.  If the calabash.framework changes, the SHA\n# will not change which makes testing framework changes difficult\nbin/xcode-build-phase/lptesttarget-change-sha-before.sh\n";
 			showEnvVarsInLog = 0;
 		};
 		F52B40BC1B4BA2790022AEC8 /* Run Script git versioning 1 of 2 */ = {
@@ -2209,7 +2215,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "bin/xcode-build-phase/ensure-framework.sh";
+			shellScript = "bin/xcode-build-phase/ensure-framework.sh\n";
 			showEnvVarsInLog = 0;
 		};
 		F5986B141B5802F100CCB142 /* ShellScript */ = {
@@ -2965,6 +2971,7 @@
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
+				SUPPORTS_MACCATALYST = YES;
 				VALID_ARCHS = "arm64e arm64 armv7 armv7s x86_64 i386";
 				WARNING_CFLAGS = (
 					"-Wunreachable-code",
@@ -3016,6 +3023,7 @@
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
+				SUPPORTS_MACCATALYST = YES;
 				VALID_ARCHS = "arm64e arm64 armv7 armv7s x86_64 i386";
 				WARNING_CFLAGS = (
 					"-Wunreachable-code",
@@ -3075,6 +3083,7 @@
 				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
+				SUPPORTS_MACCATALYST = YES;
 				VALID_ARCHS = "arm64e arm64 armv7 armv7s x86_64 i386";
 				WARNING_CFLAGS = (
 					"-Wunreachable-code",
@@ -3134,6 +3143,7 @@
 				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
+				SUPPORTS_MACCATALYST = YES;
 				VALID_ARCHS = "arm64e arm64 armv7 armv7s x86_64 i386";
 				WARNING_CFLAGS = (
 					"-Wunreachable-code",
@@ -3182,7 +3192,11 @@
 				);
 				INFOPLIST_FILE = XCTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = "";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
@@ -3243,7 +3257,11 @@
 				);
 				INFOPLIST_FILE = XCTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				ONLY_ACTIVE_ARCH = NO;
@@ -3429,7 +3447,11 @@
 				);
 				INFOPLIST_FILE = XCTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = "";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
@@ -3501,6 +3523,7 @@
 				SKIP_INSTALL = YES;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
+				SUPPORTS_MACCATALYST = YES;
 				VALID_ARCHS = "arm64e arm64 armv7 armv7s x86_64 i386";
 				WARNING_CFLAGS = (
 					"-Wunreachable-code",
@@ -3552,6 +3575,7 @@
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				STRIP_STYLE = "non-global";
+				SUPPORTS_MACCATALYST = YES;
 				VALID_ARCHS = "arm64e arm64 armv7 armv7s x86_64 i386";
 				WARNING_CFLAGS = (
 					"-Wunreachable-code",
@@ -3593,9 +3617,12 @@
 				INFOPLIST_PREFIX_HEADER = "${PRODUCT_NAME}/InfoPlist.h";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = "";
-				MARKETING_VERSION = 0.23.0;
+				MARKETING_VERSION = 0.23.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
@@ -3679,9 +3706,12 @@
 				INFOPLIST_PREFIX_HEADER = "${PRODUCT_NAME}/InfoPlist.h";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = "";
-				MARKETING_VERSION = 0.23.0;
+				MARKETING_VERSION = 0.23.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
@@ -3727,9 +3757,12 @@
 				INFOPLIST_PREFIX_HEADER = "";
 				INFOPLIST_PREPROCESS = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = "";
-				MARKETING_VERSION = 0.23.0;
+				MARKETING_VERSION = 0.23.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = sh.calaba.LPTestTarget;

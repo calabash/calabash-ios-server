@@ -275,7 +275,8 @@
   UIWindow *window = [LPTouchUtils windowForView:view];
   CGRect rect = [window convertRect:view.bounds fromView:view];
   UIWindow *frontWindow = [[UIApplication sharedApplication] keyWindow];
-  rect = [window convertRect:rect toCoordinateSpace:frontWindow];
+  UIScreen *mainScreen = [UIScreen mainScreen];
+  rect = [frontWindow convertRect:rect toCoordinateSpace:mainScreen.fixedCoordinateSpace];
 
   CGPoint point;
   point = [LPTouchUtils centerByApplyingLetterBoxAndSampleFactorToRect:rect];

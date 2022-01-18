@@ -55,17 +55,17 @@ end
 %>
 
 verbose: CALABASH_FULL_CONSOLE_OUTPUT=1 DEBUG=1
-common: -f <%= formatter %> --tags ~@quarantine
+common: -f <%= formatter %> --tags 'not @quarantine'
 
 ss_path: SCREENSHOT_PATH=<%= ss_path %>
 
-html_report:  -f 'Calabash::Formatters::Html' -o <%= default_report %>
-neptune_html: -f 'Calabash::Formatters::Html' -o <%= devices[:neptune][:report] %>
-venus_html:   -f 'Calabash::Formatters::Html' -o <%= devices[:venus][:report] %>
-earp_html:    -f 'Calabash::Formatters::Html' -o <%= devices[:earp][:report] %>
-mars_html:    -f 'Calabash::Formatters::Html' -o <%= devices[:mars][:report] %>
-saturn_html:  -f 'Calabash::Formatters::Html' -o <%= devices[:saturn][:report] %>
-pegasi_html:  -f 'Calabash::Formatters::Html' -o <%= devices[:pegasi][:report] %>
+html_report:  -f 'Cucumber::Formatter::HTML' -o <%= default_report %>
+neptune_html: -f 'Cucumber::Formatter::HTML' -o <%= devices[:neptune][:report] %>
+venus_html:   -f 'Cucumber::Formatter::HTML' -o <%= devices[:venus][:report] %>
+earp_html:    -f 'Cucumber::Formatter::HTML' -o <%= devices[:earp][:report] %>
+mars_html:    -f 'Cucumber::Formatter::HTML' -o <%= devices[:mars][:report] %>
+saturn_html:  -f 'Cucumber::Formatter::HTML' -o <%= devices[:saturn][:report] %>
+pegasi_html:  -f 'Cucumber::Formatter::HTML' -o <%= devices[:pegasi][:report] %>
 
 neptune_ss: SCREENSHOT_PATH=<%= devices[:neptune][:ss_path] %>
 venus_ss:   SCREENSHOT_PATH=<%= devices[:venus][:ss_path] %>
@@ -78,19 +78,19 @@ reset_btw:    RESET_BETWEEN_SCENARIOS=1
 
 app:          APP=<%= app %>
 
-simulator:     -p app -p common -p ss_path -p html_report --tags ~@device_only --tags ~@device NO_STOP=<%= keep_sim_open_after %>
+simulator:     -p app -p common -p ss_path -p html_report --tags 'not @device_only' --tags 'not @device' NO_STOP=<%= keep_sim_open_after %>
 default:       -p simulator
 
 # required only for devices
 bundle_id:    BUNDLE_ID=sh.calaba.LPTestTarget
 
-device_common:  -p common -p bundle_id -p ss_path --tags ~@simulator --tags ~@simulator_only
+device_common:  -p common -p bundle_id -p ss_path --tags 'not @simulator' --tags 'not @simulator_only'
 
 neptune_common: DEVICE_TARGET=<%= devices[:neptune][:udid] %> DEVICE_ENDPOINT=<%= devices[:neptune][:ip] %> -p device_common  -p neptune_html -p neptune_ss
 
 # cannot test email views without launching on iOS 6
 neptune:           -p neptune_common
-neptune_no_launch: -p neptune_common -p no_launch --tags ~@email
+neptune_no_launch: -p neptune_common -p no_launch --tags 'not @email'
 
 venus_common:   DEVICE_TARGET=<%= devices[:venus][:udid] %>   DEVICE_ENDPOINT=<%= devices[:venus][:ip] %> -p device_common
 venus:          -p venus_common

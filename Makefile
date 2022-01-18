@@ -1,5 +1,6 @@
 all:
 	$(MAKE) framework
+	$(MAKE) xcframework
 	$(MAKE) dylibs
 
 clean:

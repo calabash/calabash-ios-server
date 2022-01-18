@@ -442,6 +442,81 @@ static NSString *const LPiPhone5sSimVersionInfo = @"CoreSimulator 110.4 - Device
   OCMVerifyAll(mock);
 }
 
+
+- (void) testisIphone12LikeYES {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock formFactor]).andReturn(@"iphone 10r");
+
+  expect([mock isIPhone12Like]).to.equal(YES);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testisIphone12ProLikeYES {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock formFactor]).andReturn(@"iphone 10r");
+
+  expect([mock isIPhone12ProLike]).to.equal(YES);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testisIphone12ProMaxLikeYES {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock formFactor]).andReturn(@"iphone 12 pro max");
+
+  expect([mock isIPhone12ProMaxLike]).to.equal(YES);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testisIphone12MiniLikeYES {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock formFactor]).andReturn(@"iphone 12 mini");
+
+  expect([mock isIPhone12MiniLike]).to.equal(YES);
+
+  OCMVerifyAll(mock);
+}
+
+
+- (void) testisIphone13LikeYES {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock formFactor]).andReturn(@"iphone 13");
+
+  expect([mock isIPhone13Like]).to.equal(YES);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testisIphone13ProLikeYES {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock formFactor]).andReturn(@"iphone 13");
+
+  expect([mock isIPhone13ProLike]).to.equal(YES);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testisIphone13ProMaxLikeYES {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock formFactor]).andReturn(@"iphone 13 Pro Max");
+
+  expect([mock isIPhone13ProMaxLike]).to.equal(YES);
+
+  OCMVerifyAll(mock);
+}
+
+- (void) testisIphone13MiniLikeYES {
+  id mock = OCMPartialMock(self.device);
+  OCMExpect([mock formFactor]).andReturn(@"iphone 13 mini");
+
+  expect([mock isIPhone13MiniLike]).to.equal(YES);
+
+  OCMVerifyAll(mock);
+}
+
+
 - (void) testisIPhone10LikeNO {
   id mock = OCMPartialMock(self.device);
   OCMExpect([mock formFactor]).andReturn(@"garbage");

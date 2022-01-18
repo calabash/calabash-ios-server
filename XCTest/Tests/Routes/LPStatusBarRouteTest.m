@@ -61,8 +61,8 @@
   expect(frameDict[@"width"]).to.equal(@(30));
   expect(frameDict[@"height"]).to.equal(@(40));
 
-  OCMVerify(mockApp);
-  OCMVerify(mockOrientationOp);
+  OCMVerify([mockApp statusBarFrame]);
+  OCMVerify([mockApp isStatusBarHidden]);
 }
 
 @end
