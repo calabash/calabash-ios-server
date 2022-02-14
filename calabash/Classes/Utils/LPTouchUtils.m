@@ -192,11 +192,6 @@
 
 
 + (BOOL) isViewVisible:(UIView *) view {
-  // Assuming that SwiftUI accessibility elements are always visible since the AUT wouldn't expose them otherwise.
-  if ([NSStringFromClass([view class]) isEqual: @"SwiftUI.AccessibilityNode"]) {
-    return YES;
-  }
-  
   if (![view isKindOfClass:[UIView class]] ||
       [LPTouchUtils isViewOrParentsHidden:view]) {
     return NO;
