@@ -2,6 +2,7 @@ variables:
   # `AzurePublishWhen` variable points to the matrix case that will be the main case
   # it will run `appcenter-cli` test step and publish artifacts to the Azure Blob
   AzurePublishWhen: 'BigSur-Xcode-13.0'
+  EOCompliance-Mac: true
 
 trigger:
   tags:

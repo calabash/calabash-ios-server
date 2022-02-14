@@ -90,20 +90,22 @@ static NSInteger sortFunction(UIView *v1, UIView *v2, void *ctx) {
 
 
 - (void) evalDescWith:(UIView *) view result:(NSMutableArray *) res visibility:(UIScriptASTVisibilityType) visibility {
-  if ([view isKindOfClass:_class]) {
+  // SwiftUI is not a UIView. Assuming that we are in the right class in case we search for UIView but element is SwiftUI
+  if ([view isKindOfClass:_class] || ([@"UIView" isEqualToString:self.className] && [NSStringFromClass([view class]) isEqual: @"SwiftUI.AccessibilityNode"])) {
     [self addView:view toArray:res ifMatchesVisibility:visibility];
   }
 
-  for (UIView *subview in [[view subviews]
-          sortedArrayUsingFunction:sortFunction context:view]) {
+  for (UIView *subview in [[LPTouchUtils accessibilityChildrenFor: view]
+                           sortedArrayUsingFunction:sortFunction context:view]) {
     [self evalDescWith:subview result:res visibility:visibility];
   }
 }
 
 
 - (void) evalChildWith:(UIView *) view result:(NSMutableArray *) res visibility:(UIScriptASTVisibilityType) visibility {
-  for (UIView *childView in [view subviews]) {
-    if ([childView isKindOfClass:_class]) {
+  for (UIView *childView in [LPTouchUtils accessibilityChildrenFor: view]) {
+    // SwiftUI is not a UIView. Assuming that we are in the right class in case we search for UIView but element is SwiftUI
+    if ([childView isKindOfClass:_class] || ([@"UIView" isEqualToString:self.className] && [NSStringFromClass([childView class]) isEqual: @"SwiftUI.AccessibilityNode"])) {
       [self addView:childView toArray:res ifMatchesVisibility:visibility];
     }
   }
@@ -115,6 +117,12 @@ static NSInteger sortFunction(UIView *v1, UIView *v2, void *ctx) {
 //        [res addObject:view];
 //    }
   //I guess view itself isnt part of parents.
+    
+  if ([NSStringFromClass([view class]) isEqual: @"SwiftUI.AccessibilityNode"]) {
+    // SwiftUI doesn't support superview selector
+    return;
+  }
+    
   UIView *parentView = [view superview];
   if ([parentView isKindOfClass:_class]) {
     [self addView:parentView toArray:res ifMatchesVisibility:visibility];
@@ -127,6 +135,11 @@ static NSInteger sortFunction(UIView *v1, UIView *v2, void *ctx) {
 
 
 - (void) evalSiblingsWith:(UIView *) view result:(NSMutableArray *) res visibility:(UIScriptASTVisibilityType) visibility {
+  if ([NSStringFromClass([view class]) isEqual: @"SwiftUI.AccessibilityNode"]) {
+      // SwiftUI doesn't support superview selector
+      return;
+  }
+    
   UIView *parentView = [view superview];
   NSArray *children = [parentView subviews];
   for (UIView *siblingOrSelf in children) {
@@ -144,7 +157,7 @@ static NSInteger sortFunction(UIView *v1, UIView *v2, void *ctx) {
   }
   
   if ([view respondsToSelector:@selector(subviews)]) {
-    for (UIView *subview in [[view subviews]
+    for (UIView *subview in [[LPTouchUtils accessibilityChildrenFor: view]
                              sortedArrayUsingFunction:sortFunction context:view]) {
       [self evalAccessibilityWith:subview result:res visibility:visibility];
     }
@@ -170,7 +183,7 @@ static NSInteger sortFunction(UIView *v1, UIView *v2, void *ctx) {
 }
 
 -(BOOL)accessibilityMatch:(id)view {
-  if ([view isKindOfClass:_class]) {
+  if ([view isKindOfClass:_class] || ([@"UIView" isEqualToString:self.className] && [NSStringFromClass([view class]) isEqual: @"SwiftUI.AccessibilityNode"])) {
     return true;
   }
   if (![view isAccessibilityElement]) {
