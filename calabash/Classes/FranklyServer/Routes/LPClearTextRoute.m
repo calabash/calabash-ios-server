@@ -132,11 +132,11 @@
     if ([delegate respondsToSelector:@selector(textFieldShouldClear:)]) {
       return [delegate textFieldShouldClear:target];
     }
-  } else if ([target isKindOfClass:[UITextView class]]) {
+  } else if ([target isKindOfClass:[UITextView class]] && [delegate respondsToSelector: @selector(textView:shouldChangeTextInRange:replacementText:)]) {
     return [delegate textView:target
       shouldChangeTextInRange:range
               replacementText:@""];
-  } else if ([target isKindOfClass:[UISearchBar class]]) {
+  } else if ([target isKindOfClass:[UISearchBar class]] && [delegate respondsToSelector: @selector(searchBar:shouldChangeTextInRange:replacementText:)]) {
     return [delegate searchBar:target
        shouldChangeTextInRange:range
                replacementText:@""];
