@@ -8,5 +8,6 @@ PLIST="${SOURCE_ROOT}/LPTestTarget/change-sha.plist"
 
 DATE=`date +%Y%m%d_%H%M%S | tr -d '\n'`
 
+rm "${PLIST}"
 xcrun defaults write "${PLIST}" LPBuildDate $DATE
 
