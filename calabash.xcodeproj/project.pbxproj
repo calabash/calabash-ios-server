@@ -21,9 +21,12 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		1B9B64AE28E588BD00D4661A /* Expecta.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9B64AB28E588BD00D4661A /* Expecta.xcframework */; };
-		1B9B64AF28E588BD00D4661A /* OCMock.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9B64AC28E588BD00D4661A /* OCMock.xcframework */; };
-		1B9B64B028E588BD00D4661A /* Specta.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9B64AD28E588BD00D4661A /* Specta.xcframework */; };
+		1B8A2C9D28F71CC400768F31 /* Expecta.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B8A2C9728F71CA200768F31 /* Expecta.xcframework */; };
+		1B8A2C9E28F71CC400768F31 /* OCMock.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B8A2C9928F71CA200768F31 /* OCMock.xcframework */; };
+		1B8A2C9F28F71CC400768F31 /* Specta.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B8A2C9828F71CA200768F31 /* Specta.xcframework */; };
+		1B8A2CA028F71CE500768F31 /* Expecta.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1B8A2C9728F71CA200768F31 /* Expecta.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1B8A2CA128F71CE500768F31 /* OCMock.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1B8A2C9928F71CA200768F31 /* OCMock.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		1B8A2CA228F71CE500768F31 /* Specta.xcframework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1B8A2C9828F71CA200768F31 /* Specta.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		42069AFD1EB1035B00C1F0A5 /* LPMachClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 42069AFC1EB1035B00C1F0A5 /* LPMachClock.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		42069AFE1EB103C100C1F0A5 /* LPMachClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 42069AFC1EB1035B00C1F0A5 /* LPMachClock.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		42069B001EB103C200C1F0A5 /* LPMachClock.m in Sources */ = {isa = PBXBuildFile; fileRef = 42069AFC1EB1035B00C1F0A5 /* LPMachClock.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -545,15 +548,18 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				1B8A2CA028F71CE500768F31 /* Expecta.xcframework in CopyFiles */,
+				1B8A2CA128F71CE500768F31 /* OCMock.xcframework in CopyFiles */,
+				1B8A2CA228F71CE500768F31 /* Specta.xcframework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1B9B64AB28E588BD00D4661A /* Expecta.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Expecta.xcframework; path = ../DeviceAgent.iOS/Carthage/Build/iOS/Expecta.xcframework; sourceTree = "<group>"; };
-		1B9B64AC28E588BD00D4661A /* OCMock.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = OCMock.xcframework; path = ../DeviceAgent.iOS/Carthage/Build/iOS/OCMock.xcframework; sourceTree = "<group>"; };
-		1B9B64AD28E588BD00D4661A /* Specta.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Specta.xcframework; path = ../DeviceAgent.iOS/Carthage/Build/iOS/Specta.xcframework; sourceTree = "<group>"; };
+		1B8A2C9728F71CA200768F31 /* Expecta.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Expecta.xcframework; sourceTree = "<group>"; };
+		1B8A2C9828F71CA200768F31 /* Specta.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = Specta.xcframework; sourceTree = "<group>"; };
+		1B8A2C9928F71CA200768F31 /* OCMock.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = OCMock.xcframework; sourceTree = "<group>"; };
 		42069AFB1EB1034600C1F0A5 /* LPMachClock.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LPMachClock.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; wrapsLines = 1; };
 		42069AFC1EB1035B00C1F0A5 /* LPMachClock.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPMachClock.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; wrapsLines = 1; };
 		429CD6901EAFBC1800E7CA85 /* LPClearTextRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LPClearTextRoute.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; wrapsLines = 1; };
@@ -998,11 +1004,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B9B64B028E588BD00D4661A /* Specta.xcframework in Frameworks */,
-				1B9B64AE28E588BD00D4661A /* Expecta.xcframework in Frameworks */,
+				1B8A2C9D28F71CC400768F31 /* Expecta.xcframework in Frameworks */,
+				1B8A2C9E28F71CC400768F31 /* OCMock.xcframework in Frameworks */,
+				1B8A2C9F28F71CC400768F31 /* Specta.xcframework in Frameworks */,
 				F570992C1B5518EF00DB35EC /* CoreLocation.framework in Frameworks */,
 				F50CBFCF1A040707004AC9DA /* Foundation.framework in Frameworks */,
-				1B9B64AF28E588BD00D4661A /* OCMock.xcframework in Frameworks */,
 				F50CBFCE1A040669004AC9DA /* UIKit.framework in Frameworks */,
 				F5A33A791AC01EC400224639 /* WebKit.framework in Frameworks */,
 			);
@@ -1045,9 +1051,6 @@
 		B121E78614B6D9FB0034C6A9 = {
 			isa = PBXGroup;
 			children = (
-				1B9B64AB28E588BD00D4661A /* Expecta.xcframework */,
-				1B9B64AC28E588BD00D4661A /* OCMock.xcframework */,
-				1B9B64AD28E588BD00D4661A /* Specta.xcframework */,
 				B16C307C15191A8C00DAA3FA /* calabash-js */,
 				B121E79914B6D9FB0034C6A9 /* calabash */,
 				F50CBF5F1A03F222004AC9DA /* XCTest */,
@@ -1075,6 +1078,9 @@
 		B121E79614B6D9FB0034C6A9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1B8A2C9728F71CA200768F31 /* Expecta.xcframework */,
+				1B8A2C9928F71CA200768F31 /* OCMock.xcframework */,
+				1B8A2C9828F71CA200768F31 /* Specta.xcframework */,
 				F570992B1B5518EF00DB35EC /* CoreLocation.framework */,
 				F532C1DD1AFF4F080024DA55 /* CoreData.framework */,
 				F5A33A721AC01E8E00224639 /* WebKit.framework */,
