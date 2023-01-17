@@ -67,10 +67,10 @@ if [ "${2}" != "" ]; then
   echo "${2}" > .xtc/device-agent-sha
 fi)
 
-S3_ROOT="https://s3-eu-west-1.amazonaws.com/calabash-files/dylibs/to-test-injection"
-LIB_BEETS="${S3_ROOT}/libBetaVulgaris.dylib"
-LIB_CABBAGE="${S3_ROOT}/libBrassica.dylib"
-LIB_CUCUMBER="${S3_ROOT}/libCucurbits.dylib"
+AZURE_ROOT="./files"
+LIB_BEETS="${AZURE_ROOT}/libBetaVulgaris.dylib"
+LIB_CABBAGE="${AZURE_ROOT}/libBrassica.dylib"
+LIB_CUCUMBER="${AZURE_ROOT}/libCucurbits.dylib"
 INJECT="inject=${LIB_BEETS};${LIB_CABBAGE};${LIB_CUCUMBER}"
 APP_ENV="app_env=ARG_FROM_UPLOADER_FOR_AUT=From-the-CLI-uploader!"
 
