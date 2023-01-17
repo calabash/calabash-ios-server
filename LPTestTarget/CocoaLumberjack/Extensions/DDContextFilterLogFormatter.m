@@ -15,6 +15,7 @@
 
 #import "DDContextFilterLogFormatter.h"
 #import <libkern/OSAtomic.h>
+#import <os/lock.h>
 
 #if !__has_feature(objc_arc)
 #error This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
@@ -131,7 +132,8 @@
 
 
 @interface DDLoggingContextSet () {
-    OSSpinLock _lock;
+  os_unfair_lock _lock1;
+  OSSpinLock _lock;
     NSMutableSet *_set;
 }
 
@@ -143,26 +145,28 @@
 - (instancetype)init {
     if ((self = [super init])) {
         _set = [[NSMutableSet alloc] init];
-        _lock = OS_SPINLOCK_INIT;
+        _lock1 = OS_UNFAIR_LOCK_INIT;
     }
 
     return self;
 }
 
-- (void)addToSet:(NSUInteger)loggingContext {
-    OSSpinLockLock(&_lock);
-    {
-        [_set addObject:@(loggingContext)];
-    }
-    OSSpinLockUnlock(&_lock);
+- (void)addToSet:(NSUInteger)loggingContext
+{
+  os_unfair_lock_lock(&_lock1);
+  {
+    [_set addObject:@(loggingContext)];
+  }
+  os_unfair_lock_unlock(&_lock1);
 }
 
-- (void)removeFromSet:(NSUInteger)loggingContext {
-    OSSpinLockLock(&_lock);
-    {
-        [_set removeObject:@(loggingContext)];
-    }
-    OSSpinLockUnlock(&_lock);
+- (void)removeFromSet:(NSUInteger)loggingContext
+{
+  os_unfair_lock_lock(&_lock1);
+  {
+    [_set removeObject:@(loggingContext)];
+  }
+  os_unfair_lock_unlock(&_lock1);
 }
 
 - (NSArray *)currentSet {
