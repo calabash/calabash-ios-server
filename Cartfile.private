@@ -1,4 +1,5 @@
 
 github "specta/expecta" "master"
-github "jmoody/specta" "feature/do-not-create-sharedExampleGroup-instances-in-initialize"
+github "specta/specta" "main"
 github "erikdoe/ocmock" "master"
+github "CocoaLumberjack/CocoaLumberjack"
