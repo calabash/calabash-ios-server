@@ -141,7 +141,7 @@
 		B1F772321A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F7721B1A22A398009A2336 /* LPUIASharedElementChannel.m */; };
 		B1FBBC5B19D0070000EE03CE /* LPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FBBC5919D0070000EE03CE /* LPDevice.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1FBBC5F19D0070000EE03CE /* LPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FBBC5919D0070000EE03CE /* LPDevice.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
-		DDDC692129AAB3A50067E29F /* CocoaLumberjack.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDDC691F29AAB34E0067E29F /* CocoaLumberjack.xcframework */; };
+		DDAC061029AAB7A100886346 /* CocoaLumberjack.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDDC691F29AAB34E0067E29F /* CocoaLumberjack.xcframework */; };
 		E2F8025B1BE207670000A0E4 /* LPShakeRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025A1BE207670000A0E4 /* LPShakeRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		E2F8025C1BE207670000A0E4 /* LPShakeRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025A1BE207670000A0E4 /* LPShakeRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		E2F8025E1BE207670000A0E4 /* LPShakeRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025A1BE207670000A0E4 /* LPShakeRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -693,6 +693,7 @@
 		B1FBBC5919D0070000EE03CE /* LPDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPDevice.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; wrapsLines = 1; };
 		B1FBBC5A19D0070000EE03CE /* LPDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LPDevice.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; wrapsLines = 1; };
 		DDDC691F29AAB34E0067E29F /* CocoaLumberjack.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CocoaLumberjack.xcframework; path = Carthage/Build/CocoaLumberjack.xcframework; sourceTree = "<group>"; };
+		DDDC692229AAB7450067E29F /* CocoaLumberjack.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CocoaLumberjack.xcframework; path = Carthage/Build/CocoaLumberjack.xcframework; sourceTree = "<group>"; };
 		E2F802591BE207570000A0E4 /* LPShakeRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = LPShakeRoute.h; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; wrapsLines = 1; };
 		E2F8025A1BE207670000A0E4 /* LPShakeRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPShakeRoute.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; wrapsLines = 1; };
 		E2F8025F1BE21C690000A0E4 /* LPShakeRouteTest.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 2; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LPShakeRouteTest.m; sourceTree = "<group>"; tabWidth = 2; usesTabs = 0; };
@@ -897,9 +898,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDAC061029AAB7A100886346 /* CocoaLumberjack.xcframework in Frameworks */,
 				F5091C3F18C4E1D700C85307 /* CFNetwork.framework in Frameworks */,
 				F5091C4018C4E1D700C85307 /* Foundation.framework in Frameworks */,
-				DDDC692129AAB3A50067E29F /* CocoaLumberjack.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -955,6 +956,7 @@
 			isa = PBXGroup;
 			children = (
 				47DC772F272841DA004F4404 /* Expecta.xcframework */,
+				DDDC692229AAB7450067E29F /* CocoaLumberjack.xcframework */,
 				47DC772E272841DA004F4404 /* OCMock.xcframework */,
 				47DC7730272841DA004F4404 /* Specta.xcframework */,
 				B16C307C15191A8C00DAA3FA /* calabash-js */,
