@@ -141,6 +141,7 @@
 		B1F772321A22A398009A2336 /* LPUIASharedElementChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = B1F7721B1A22A398009A2336 /* LPUIASharedElementChannel.m */; };
 		B1FBBC5B19D0070000EE03CE /* LPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FBBC5919D0070000EE03CE /* LPDevice.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		B1FBBC5F19D0070000EE03CE /* LPDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B1FBBC5919D0070000EE03CE /* LPDevice.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
+		DD26CDEB29B6D26300883F36 /* CocoaLumberjack.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDDC692229AAB7450067E29F /* CocoaLumberjack.xcframework */; };
 		DDAC061029AAB7A100886346 /* CocoaLumberjack.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDDC691F29AAB34E0067E29F /* CocoaLumberjack.xcframework */; };
 		E2F8025B1BE207670000A0E4 /* LPShakeRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025A1BE207670000A0E4 /* LPShakeRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
 		E2F8025C1BE207670000A0E4 /* LPShakeRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = E2F8025A1BE207670000A0E4 /* LPShakeRoute.m */; settings = {COMPILER_FLAGS = "-fobjc-arc"; }; };
@@ -985,6 +986,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DD26CDEB29B6D26300883F36 /* CocoaLumberjack.xcframework in Frameworks */,
 				F532C1DE1AFF4F080024DA55 /* CoreData.framework in Frameworks */,
 				F55185571AC3866300CE06DC /* WebKit.framework in Frameworks */,
 			);
