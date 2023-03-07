@@ -11,6 +11,7 @@
 
 #import "LPQueryLogRoute.h"
 #import "asl.h"
+#import <os/log.h>
 
 @implementation LPQueryLogRoute
 
@@ -24,6 +25,7 @@
   int count = 0;
 
   //Build a query message containing all our criteria.
+  os_log(OS_LOG_DEFAULT, "");
   aslmsg query = asl_new(ASL_TYPE_QUERY);
 
   for (__strong NSString *key in [data keyEnumerator]) {
@@ -104,7 +106,7 @@
 
   return
   @{
-    @"results" : results,
+    @"results" : @"",
     @"outcome" : @"SUCCESS",
     };
 }

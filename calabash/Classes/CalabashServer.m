@@ -241,8 +241,8 @@
 
 
     LPASLLogFormatter *ASLLogFormatter = [LPASLLogFormatter new];
-    [[LPASLLogger sharedInstance] setLogFormatter:ASLLogFormatter];
-    [LPLog addLogger:[LPASLLogger sharedInstance]];
+    //[[LPASLLogger sharedInstance] setLogFormatter:ASLLogFormatter];
+    //[LPLog addLogger:[LPASLLogger sharedInstance]];
     [ASLLogFormatter release];
 
     LPLogDebug(@"Creating the server: %@", _httpServer);

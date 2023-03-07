@@ -72,10 +72,10 @@
 #import "LPAssertMacros.h"
 
 // Capture ASL
-#import "LPASLLogCapture.h"
+//#import "LPASLLogCapture.h"
 
 // Loggers
 #import "LPTTYLogger.h"
-#import "LPASLLogger.h"
+//#import "LPASLLogger.h"
 #import "LPFileLogger.h"
 
