@@ -213,7 +213,7 @@ typedef struct {
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
   [DDLog addLogger:[DDTTYLogger sharedInstance]];
-  [DDLog addLogger:[DDASLLogger sharedInstance]];
+  [DDLog addLogger:[DDOSLogger sharedInstance]];
   DDLogDebug(@"Configured CocoaLumberjack!");
 
   UIViewController *firstController, *secondController;

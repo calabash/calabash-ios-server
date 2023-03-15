@@ -15,6 +15,8 @@
 
 #import "LPDispatchQueueLogFormatter.h"
 #import <libkern/OSAtomic.h>
+#import <os/lock.h>
+#import <stdatomic.h>
 
 
 #if !__has_feature(objc_arc)
@@ -24,10 +26,10 @@
 @interface LPDispatchQueueLogFormatter () {
     NSString *_dateFormatString;
     
-    int32_t _atomicLoggerCount;
+    atomic_int_fast32_t _atomicLoggerCount;
     NSDateFormatter *_threadUnsafeDateFormatter; // Use [self stringFromDate]
     
-    OSSpinLock _lock;
+    os_unfair_lock _lock;
     
     NSUInteger _minQueueLength;           // _prefix == Only access via atomic property
     NSUInteger _maxQueueLength;           // _prefix == Only access via atomic property
@@ -68,17 +70,17 @@
 - (NSString *)replacementStringForQueueLabel:(NSString *)longLabel {
     NSString *result = nil;
 
-    OSSpinLockLock(&_lock);
+    os_unfair_lock_lock(&_lock);
     {
         result = _replacements[longLabel];
     }
-    OSSpinLockUnlock(&_lock);
+    os_unfair_lock_unlock(&_lock);
 
     return result;
 }
 
 - (void)setReplacementString:(NSString *)shortLabel forQueueLabel:(NSString *)longLabel {
-    OSSpinLockLock(&_lock);
+    os_unfair_lock_lock(&_lock);
     {
         if (shortLabel) {
             _replacements[longLabel] = shortLabel;
@@ -86,7 +88,7 @@
             [_replacements removeObjectForKey:longLabel];
         }
     }
-    OSSpinLockUnlock(&_lock);
+    os_unfair_lock_unlock(&_lock);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -94,7 +96,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 - (NSString *)stringFromDate:(NSDate *)date {
-    int32_t loggerCount = OSAtomicAdd32(0, &_atomicLoggerCount);
+    int32_t loggerCount = atomic_fetch_add_explicit(&_atomicLoggerCount, 0, memory_order_relaxed);
 
     NSString *calendarIdentifier = nil;
 
@@ -185,11 +187,11 @@
             fullLabel = logMessage->_threadName;
         }
 
-        OSSpinLockLock(&_lock);
+        os_unfair_lock_lock(&_lock);
         {
             abrvLabel = _replacements[fullLabel];
         }
-        OSSpinLockUnlock(&_lock);
+        os_unfair_lock_unlock(&_lock);
 
         if (abrvLabel) {
             queueThreadLabel = abrvLabel;
@@ -237,11 +239,11 @@
 }
 
 - (void)didAddToLogger:(id <LPLogger>)logger {
-    OSAtomicIncrement32(&_atomicLoggerCount);
+    atomic_fetch_add_explicit(&_atomicLoggerCount, 1, memory_order_relaxed);
 }
 
 - (void)willRemoveFromLogger:(id <LPLogger>)logger {
-    OSAtomicDecrement32(&_atomicLoggerCount);
+    atomic_fetch_sub_explicit(&_atomicLoggerCount, 1, memory_order_relaxed);
 }
 
 @end

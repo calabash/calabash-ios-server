@@ -15,6 +15,7 @@
 
 #import "LPContextFilterLogFormatter.h"
 #import <libkern/OSAtomic.h>
+#import <os/lock.h>
 
 #if !__has_feature(objc_arc)
 #error This file must be compiled with ARC. Use -fobjc-arc flag (or convert project to ARC).
@@ -131,7 +132,7 @@
 
 
 @interface LPLoggingContextSet () {
-    OSSpinLock _lock;
+    os_unfair_lock _lock;
     NSMutableSet *_set;
 }
 
@@ -149,29 +150,29 @@
 }
 
 - (void)addToSet:(NSUInteger)loggingContext {
-    OSSpinLockLock(&_lock);
+    os_unfair_lock_lock(&_lock);
     {
         [_set addObject:@(loggingContext)];
     }
-    OSSpinLockUnlock(&_lock);
+    os_unfair_lock_unlock(&_lock);
 }
 
 - (void)removeFromSet:(NSUInteger)loggingContext {
-    OSSpinLockLock(&_lock);
+    os_unfair_lock_lock(&_lock);
     {
         [_set removeObject:@(loggingContext)];
     }
-    OSSpinLockUnlock(&_lock);
+    os_unfair_lock_unlock(&_lock);
 }
 
 - (NSArray *)currentSet {
     NSArray *result = nil;
 
-    OSSpinLockLock(&_lock);
+    os_unfair_lock_lock(&_lock);
     {
         result = [_set allObjects];
     }
-    OSSpinLockUnlock(&_lock);
+    os_unfair_lock_unlock(&_lock);
 
     return result;
 }
@@ -179,11 +180,11 @@
 - (BOOL)isInSet:(NSUInteger)loggingContext {
     BOOL result = NO;
 
-    OSSpinLockLock(&_lock);
+    os_unfair_lock_lock(&_lock);
     {
         result = [_set containsObject:@(loggingContext)];
     }
-    OSSpinLockUnlock(&_lock);
+    os_unfair_lock_unlock(&_lock);
 
     return result;
 }

@@ -29,6 +29,9 @@ jobs:
       BigSur-Xcode-13.0:
         IMAGE_POOL: 'macOS-11'
         XCODE_VERSION: '13.0'
+      Monterey-Xcode-14.2:
+        IMAGE_POOL: 'macOS-12'
+        XCODE_VERSION: '14.2'
   timeoutInMinutes: 180
   pool:
     vmImage: $(IMAGE_POOL)

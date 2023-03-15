@@ -3,12 +3,13 @@
 #endif
 
 #import "LPTTYLogFormatter.h"
+#import <stdatomic.h>
 #import <libkern/OSAtomic.h>
 
 static NSString *const CalLogFormatterDateFormat = @"yyyy-MM-dd HH:mm:ss.SSS";
 static NSString *const CalLogFormatterDateFormatterKey = @"sh.calaba.CalSSO-CalLogFormatter-NSDateFormatter";
 @interface LPTTYLogFormatter () {
-  int32_t atomicLoggerCount;
+  atomic_int_fast32_t atomicLoggerCount;
   NSDateFormatter *threadUnsafeDateFormatter;
 }
 
@@ -19,7 +20,7 @@ static NSString *const CalLogFormatterDateFormatterKey = @"sh.calaba.CalSSO-CalL
 @implementation LPTTYLogFormatter
 
 - (NSString *)stringFromDate:(NSDate *)date {
-  int32_t loggerCount = OSAtomicAdd32(0, &atomicLoggerCount);
+  atomic_int_fast32_t loggerCount = atomic_fetch_add_explicit(&atomicLoggerCount, 0, memory_order_relaxed);
 
   if (loggerCount <= 1) {
     // Single-threaded mode.
@@ -70,10 +71,10 @@ static NSString *const CalLogFormatterDateFormatterKey = @"sh.calaba.CalSSO-CalL
 }
 
 - (void)didAddToLogger:(id <LPLogger>)logger {
-  OSAtomicIncrement32(&atomicLoggerCount);
+  atomic_fetch_add_explicit(&atomicLoggerCount, 1, memory_order_relaxed);
 }
 
 - (void)willRemoveFromLogger:(id <LPLogger>)logger {
-  OSAtomicDecrement32(&atomicLoggerCount);
+  atomic_fetch_sub_explicit(&atomicLoggerCount, 1, memory_order_relaxed);
 }
 @end
