@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -2017,6 +2017,7 @@
 			);
 			name = "Run Script - git versioning 1 of 2";
 			outputPaths = (
+				"$(PROJECT_DIR)/calabash/LPGitVersionDefines.h",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2025,6 +2026,7 @@
 		};
 		F5091C2718C4E1D700C85307 /* Run Script - git versioning 2 of 2 */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 12;
 			files = (
 			);
@@ -2062,14 +2064,16 @@
 			);
 			name = "Run Script git versioning 1 of 2";
 			outputPaths = (
+				"$(PROJECT_DIR)/calabash/LPGitVersionDefines.h",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "bin/xcode-build-phase/gitversioning-before.sh";
+			shellScript = "bin/xcode-build-phase/gitversioning-before.sh\n";
 			showEnvVarsInLog = 0;
 		};
 		F52B40BD1B4BA2970022AEC8 /* Run Script git versioning 2 of 2 */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -2080,7 +2084,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "bin/xcode-build-phase/gitversioning-after.sh";
+			shellScript = "bin/xcode-build-phase/gitversioning-after.sh\n";
 			showEnvVarsInLog = 0;
 		};
 		F563A5461C57BF60005EE33F /* Run Script Sign Embedded Dylibs */ = {
@@ -2130,6 +2134,7 @@
 		};
 		F5986B141B5802F100CCB142 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -2151,14 +2156,16 @@
 			);
 			name = "Run Script git versioning 1 of 2";
 			outputPaths = (
+				"$(PROJECT_DIR)/calabash/LPGitVersionDefines.h",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "bin/xcode-build-phase/gitversioning-before.sh";
+			shellScript = "bin/xcode-build-phase/gitversioning-before.sh\n";
 			showEnvVarsInLog = 0;
 		};
 		F5BA6EFF1B4BB97000DB898F /* Run Script git versioning 2 of 2 */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 12;
 			files = (
 			);
@@ -2169,7 +2176,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "bin/xcode-build-phase/gitversioning-after.sh";
+			shellScript = "bin/xcode-build-phase/gitversioning-after.sh\n";
 			showEnvVarsInLog = 0;
 		};
 		F5DDE5521CDE4AB600E0E187 /* Run Script Increment Build Number */ = {
@@ -3185,7 +3192,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3218,7 +3224,6 @@
 				GCC_PREFIX_HEADER = "";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
@@ -3534,7 +3539,6 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
