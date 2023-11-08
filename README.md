@@ -2,7 +2,7 @@
 |--------|-----------------------------|--------------------|--------------------------------|
 |[![Build Status](https://calabash-ci.xyz/buildStatus/icon?job=calabash-ios-server/develop)](https://calabash-ci.xyz/job/calabash-ios-server/develop)| [![Version](https://img.shields.io/badge/version-0.23.4-green.svg)](https://img.shields.io/badge/version-0.23.4-green.svg) |[![License](https://img.shields.io/badge/licence-Eclipse-blue.svg)](http://opensource.org/licenses/EPL-1.0) | [![Contributing](https://img.shields.io/badge/contrib-gitflow-orange.svg)](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow/)|
 
-## The Calabash iOS Server
+### The Calabash iOS Server
 
 
 The companion of the calabash-ios gem:  https://github.com/calabash/calabash-ios
